@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-gray-900 antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  /* ── Buttons ── */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 bg-coffee-700 hover:bg-coffee-800 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 bg-coffee-100 hover:bg-coffee-200 text-coffee-900 font-semibold px-6 py-3 rounded-xl transition-all duration-200;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center gap-2 border-2 border-coffee-700 text-coffee-700 hover:bg-coffee-700 hover:text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200;
+  }
+
+  /* ── Typography ── */
+  .section-label {
+    @apply inline-block text-sm font-semibold text-coffee-600 uppercase tracking-widest mb-3;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight;
+  }
+
+  .section-subtitle {
+    @apply text-lg text-gray-500 leading-relaxed;
+  }
+
+  /* Gradient text: dark-to-medium brown */
+  .gradient-text {
+    @apply bg-gradient-to-r from-coffee-900 to-coffee-500 bg-clip-text text-transparent;
+  }
+
+  /* ── Backgrounds ── */
+  .coffee-gradient {
+    @apply bg-gradient-to-br from-coffee-800 via-coffee-700 to-coffee-600;
+  }
+
+  /* Hero: near-black charcoal → dark brown */
+  .hero-gradient {
+    background: linear-gradient(135deg, #1c1008 0%, #2c1a0e 45%, #4a2d18 100%);
+  }
+
+  /* ── Cards ── */
+  .card {
+    @apply bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-200;
+  }
+
+  .stat-card {
+    @apply bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20;
+  }
+
+  .niche-card {
+    @apply relative overflow-hidden rounded-2xl cursor-pointer;
+  }
+
+  /* ── Prose ── */
+  .prose-datalatte {
+    @apply text-gray-600 leading-relaxed;
+  }
+
+  .prose-datalatte h2 {
+    @apply text-2xl font-bold text-gray-900 mt-10 mb-4;
+  }
+
+  .prose-datalatte h3 {
+    @apply text-xl font-semibold text-gray-800 mt-8 mb-3;
+  }
+
+  .prose-datalatte p {
+    @apply mb-5;
+  }
+
+  .prose-datalatte ul {
+    @apply list-disc list-inside mb-5 space-y-2;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animation-delay-100 { animation-delay: 0.1s; }
+  .animation-delay-200 { animation-delay: 0.2s; }
+  .animation-delay-300 { animation-delay: 0.3s; }
+  .animation-delay-400 { animation-delay: 0.4s; }
+}
