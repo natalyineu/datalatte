@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { execSync } from "child_process";
 
 // ── Paths ────────────────────────────────────────────────────────────────────
 
@@ -367,9 +368,25 @@ Remember: output ONLY the raw MDX — no code fences, start with --- frontmatter
     writeQueue(updated);
   }
 
+  // ── Auto-publish: git commit + push → triggers Vercel deploy ─────────────
+
+  let gitNote = "";
+  try {
+    const cwd = process.cwd();
+    const commitMsg = `Add article: ${entry.title}\n\nAuto-generated via admin panel (~${mdxContent.split(/\s+/).length} words)\nCluster: ${entry.cluster}`;
+    execSync(`git add "${mdxPath}" "${INDEX_PATH}" "${QUEUE_PATH}"`, { cwd, encoding: "utf8" });
+    execSync(`git commit -m ${JSON.stringify(commitMsg)}`, { cwd, encoding: "utf8" });
+    execSync("git push origin main", { cwd, encoding: "utf8", timeout: 30_000 });
+    gitNote = "pushed";
+  } catch (gitErr) {
+    // Non-fatal — article is saved, just not auto-pushed
+    const msg = gitErr instanceof Error ? gitErr.message : String(gitErr);
+    gitNote = `git push skipped: ${msg.slice(0, 120)}`;
+  }
+
   const url = `https://datalatte.pro/blog/${entry.slug}`;
   return NextResponse.json(
-    { success: true, slug: entry.slug, url, wordCount: mdxContent.split(/\s+/).length },
+    { success: true, slug: entry.slug, url, wordCount: mdxContent.split(/\s+/).length, gitNote },
     { status: 200 }
   );
 }
