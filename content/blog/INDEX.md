@@ -1,6 +1,6 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-14
-Total posts: 19
+Total posts: 20
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
@@ -8,6 +8,7 @@ Total posts: 19
 | `email-marketing-ideas-small-business` | Email Marketing Ideas for Small Businesses: 20 Campaigns That Drive Revenue in 2026 | 2026-05-14 | 1738 | email marketing, small business, marketing automation, campaigns, retention |
 | `google-responsive-search-ads-best-practices` | Google Responsive Search Ads: Best Practices for 2026 | 2026-05-14 | 1680 | google ads, responsive search ads, rsa, ppc, best practices |
 | `how-much-do-facebook-ads-cost-small-business` | How Much Do Facebook Ads Cost for Small Businesses in 2026? Real Benchmarks | 2026-05-14 | 1429 | facebook ads, meta ads, advertising costs, small business, budget |
+| `how-much-does-google-ads-cost-for-small-businesses-real-2026-pricing-breakdown` | How Much Does Google Ads Cost for Small Businesses? Real 2026 Pricing Breakdown | 2026-05-14 | 1075 | google ads for small business, google ads cost, small business marketing |
 | `how-to-advertise-dog-grooming-business` | How to Advertise Your Dog Grooming Business: 15 Ideas That Get Bookings in 2026 | 2026-05-14 | 1805 | pet groomers, dog grooming, advertising, local marketing, google ads |
 | `how-to-get-dog-grooming-clients` | How to Get Dog Grooming Clients: The 2026 Growth Playbook | 2026-05-14 | 1728 | pet groomers, dog grooming, client acquisition, local marketing, growth |
 | `how-to-run-facebook-ads-for-local-business` | How to Run Facebook Ads for a Local Business in 2026: The Complete Playbook | 2026-05-14 | 1665 | facebook ads, meta ads, local business, social media, lead generation |
@@ -57,6 +58,14 @@ Total posts: 19
 - **Words**: 1429
 - **Tags**: facebook ads, meta ads, advertising costs, small business, budget
 - **Description**: Real Facebook ads cost benchmarks for small businesses in 2026: cost per click, per lead, per month. Plus whether $5/day or $10/day is actually enough.
+
+### How Much Does Google Ads Cost for Small Businesses? Real 2026 Pricing Breakdown
+- **Slug**: `how-much-does-google-ads-cost-for-small-businesses-real-2026-pricing-breakdown`
+- **URL**: https://datalatte.pro/blog/how-much-does-google-ads-cost-for-small-businesses-real-2026-pricing-breakdown
+- **Date**: 2026-05-14
+- **Words**: 1075
+- **Tags**: google ads for small business, google ads cost, small business marketing
+- **Description**: Discover the real cost of Google Ads for small businesses in 2026. Learn how to budget and get the most out of your Google Ads campaign with DataLatte.
 
 ### How to Advertise Your Dog Grooming Business: 15 Ideas That Get Bookings in 2026
 - **Slug**: `how-to-advertise-dog-grooming-business`
