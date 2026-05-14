@@ -11,6 +11,26 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    title: "What Is the 3-3-3 Rule in Marketing? A Simple Guide for Local Businesses",
+    excerpt:
+      "The 3-3-3 rule breaks every customer interaction into three stages: 3 seconds to capture attention, 3 minutes to build interest, and 3 steps to convert. Here's how to apply it.",
+    slug: "what-is-the-3-3-3-rule-in-marketing",
+    category: "Strategy",
+    date: "May 14, 2026",
+    readTime: "8 min read",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80",
+  },
+  {
+    title: "Influencer Marketing for Salons: How to Get Clients Through Beauty Creators in 2026",
+    excerpt:
+      "Influencer marketing for salons is up 650% in search interest. The full strategy: finding creators, deal structures, content briefs, and tracking results.",
+    slug: "influencer-marketing-for-hair-salons",
+    category: "Hair Salons",
+    date: "May 14, 2026",
+    readTime: "10 min read",
+    image: "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&q=80",
+  },
+  {
     title: "How Coffee Shops Can Dominate Google Maps in Their Neighborhood",
     excerpt:
       "The local map pack gets 44% of clicks for 'near me' searches. Here's exactly how to claim your spot without a big budget.",
