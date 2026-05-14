@@ -1,12 +1,13 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-14
-Total posts: 25
+Total posts: 26
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
 | `best-marketing-automation-tools-small-business` | Best Marketing Automation Tools for Small Businesses in 2026 (Honestly Compared) | 2026-05-14 | 1581 | marketing automation, tools, comparison, small business, crm |
 | `email-marketing-ideas-small-business` | Email Marketing Ideas for Small Businesses: 20 Campaigns That Drive Revenue in 2026 | 2026-05-14 | 1738 | email marketing, small business, marketing automation, campaigns, retention |
 | `google-responsive-search-ads-best-practices` | Google Responsive Search Ads: Best Practices for 2026 | 2026-05-14 | 1680 | google ads, responsive search ads, rsa, ppc, best practices |
+| `how-much-do-facebook-ads-cost-for-small-businesses-2026-benchmarks` | How Much Do Facebook Ads Cost for Small Businesses? 2026 Benchmarks | 2026-05-14 | 1244 | facebook ads for local business, facebook ads cost, small business marketing, local business advertising, facebook ads budget |
 | `how-much-do-facebook-ads-cost-small-business` | How Much Do Facebook Ads Cost for Small Businesses in 2026? Real Benchmarks | 2026-05-14 | 1429 | facebook ads, meta ads, advertising costs, small business, budget |
 | `how-much-does-google-ads-cost-for-small-businesses-real-2026-pricing-breakdown` | How Much Does Google Ads Cost for Small Businesses? Real 2026 Pricing Breakdown | 2026-05-14 | 1075 | google ads for small business, google ads cost, small business marketing |
 | `how-much-does-local-seo-cost-for-a-small-business-honest-pricing-guide` | How Much Does Local SEO Cost for a Small Business? Honest Pricing Guide | 2026-05-14 | 1007 | local seo for small business, seo costs, small business marketing, local seo pricing, seo budget |
@@ -55,6 +56,14 @@ Total posts: 25
 - **Words**: 1680
 - **Tags**: google ads, responsive search ads, rsa, ppc, best practices
 - **Description**: Practical best practices for Google responsive search ads (RSAs) in 2026: headlines, descriptions, pinning, ad strength, and what actually improves performance.
+
+### How Much Do Facebook Ads Cost for Small Businesses? 2026 Benchmarks
+- **Slug**: `how-much-do-facebook-ads-cost-for-small-businesses-2026-benchmarks`
+- **URL**: https://datalatte.pro/blog/how-much-do-facebook-ads-cost-for-small-businesses-2026-benchmarks
+- **Date**: 2026-05-14
+- **Words**: 1244
+- **Tags**: facebook ads for local business, facebook ads cost, small business marketing, local business advertising, facebook ads budget
+- **Description**: Discover the real cost of Facebook ads for small businesses in 2026. Learn how to budget and optimize your Facebook ads for local business with DataLatte's expert guide
 
 ### How Much Do Facebook Ads Cost for Small Businesses in 2026? Real Benchmarks
 - **Slug**: `how-much-do-facebook-ads-cost-small-business`
