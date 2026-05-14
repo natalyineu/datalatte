@@ -1,6 +1,6 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-14
-Total posts: 20
+Total posts: 21
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
@@ -14,6 +14,7 @@ Total posts: 20
 | `how-to-run-facebook-ads-for-local-business` | How to Run Facebook Ads for a Local Business in 2026: The Complete Playbook | 2026-05-14 | 1665 | facebook ads, meta ads, local business, social media, lead generation |
 | `how-to-set-up-google-ads-for-your-small-business-in-2026-step-by-step-with-scree` | How to Set Up Google Ads for Your Small Business in 2026 (Step-by-Step With Screenshots) | 2026-05-14 | 1279 | google ads for small business, small business marketing, digital advertising, google ads setup, small business google ads |
 | `influencer-marketing-for-hair-salons` | Influencer Marketing for Salons: How to Get Clients Through Beauty Creators in 2026 | 2026-05-14 | 1926 | hair salons, influencer marketing, social media, instagram, tiktok |
+| `is-google-ads-worth-it-for-small-businesses-honest-answer-with-real-data` | Is Google Ads Worth It for Small Businesses? Honest Answer With Real Data | 2026-05-14 | 1143 | google ads for small business, small business marketing, local seo, digital marketing |
 | `is-google-ads-worth-it-small-business` | Is Google Ads Worth It for Small Businesses in 2026? Honest Answer | 2026-05-14 | 1469 | google ads, ppc, small business, advertising, roi |
 | `local-seo-checklist` | Local SEO Checklist: 15 Steps to Rank Higher on Google Maps in 2026 | 2026-05-14 | 1673 | local seo, google maps, google business profile, small business, checklist |
 | `what-does-marketing-automation-do` | What Does Marketing Automation Do? A Plain-English Guide for Small Business Owners | 2026-05-14 | 1404 | marketing automation, small business, email marketing, crm, ai agents |
@@ -106,6 +107,14 @@ Total posts: 20
 - **Words**: 1926
 - **Tags**: hair salons, influencer marketing, social media, instagram, tiktok
 - **Description**: Influencer marketing for salons is up 650% in search interest. Here's the complete strategy: how to find local creators, what to offer, what content to request, and how to track results.
+
+### Is Google Ads Worth It for Small Businesses? Honest Answer With Real Data
+- **Slug**: `is-google-ads-worth-it-for-small-businesses-honest-answer-with-real-data`
+- **URL**: https://datalatte.pro/blog/is-google-ads-worth-it-for-small-businesses-honest-answer-with-real-data
+- **Date**: 2026-05-14
+- **Words**: 1143
+- **Tags**: google ads for small business, small business marketing, local seo, digital marketing
+- **Description**: Discover if Google Ads is worth it for small businesses with real data and expert insights, boosting your local marketing strategy
 
 ### Is Google Ads Worth It for Small Businesses in 2026? Honest Answer
 - **Slug**: `is-google-ads-worth-it-small-business`
