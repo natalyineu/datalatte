@@ -1,6 +1,6 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-14
-Total posts: 31
+Total posts: 32
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
@@ -8,6 +8,7 @@ Total posts: 31
 | `best-marketing-automation-tools-small-business` | Best Marketing Automation Tools for Small Businesses in 2026 (Honestly Compared) | 2026-05-14 | 1581 | marketing automation, tools, comparison, small business, crm |
 | `do-facebook-ads-actually-work-for-local-businesses-data-backed-answer` | Do Facebook Ads Actually Work for Local Businesses? Data-Backed Answer | 2026-05-14 | 1108 | facebook ads, local business, digital marketing, small business |
 | `email-marketing-ideas-small-business` | Email Marketing Ideas for Small Businesses: 20 Campaigns That Drive Revenue in 2026 | 2026-05-14 | 1738 | email marketing, small business, marketing automation, campaigns, retention |
+| `google-business-profile-optimization-in-2026-the-complete-guide-25-point-checkli` | Google Business Profile Optimization in 2026: The Complete Guide + 25-Point Checklist | 2026-05-14 | 894 | google business profile optimization, local seo, google my business, small business marketing |
 | `google-responsive-search-ads-best-practices` | Google Responsive Search Ads: Best Practices for 2026 | 2026-05-14 | 1680 | google ads, responsive search ads, rsa, ppc, best practices |
 | `how-much-do-facebook-ads-cost-for-small-businesses-2026-benchmarks` | How Much Do Facebook Ads Cost for Small Businesses? 2026 Benchmarks | 2026-05-14 | 1244 | facebook ads for local business, facebook ads cost, small business marketing, local business advertising, facebook ads budget |
 | `how-much-do-facebook-ads-cost-small-business` | How Much Do Facebook Ads Cost for Small Businesses in 2026? Real Benchmarks | 2026-05-14 | 1429 | facebook ads, meta ads, advertising costs, small business, budget |
@@ -69,6 +70,14 @@ Total posts: 31
 - **Words**: 1738
 - **Tags**: email marketing, small business, marketing automation, campaigns, retention
 - **Description**: 20 proven email marketing ideas for small businesses in 2026: campaigns, automations, and seasonal sends that actually drive bookings and repeat sales.
+
+### Google Business Profile Optimization in 2026: The Complete Guide + 25-Point Checklist
+- **Slug**: `google-business-profile-optimization-in-2026-the-complete-guide-25-point-checkli`
+- **URL**: https://datalatte.pro/blog/google-business-profile-optimization-in-2026-the-complete-guide-25-point-checkli
+- **Date**: 2026-05-14
+- **Words**: 894
+- **Tags**: google business profile optimization, local seo, google my business, small business marketing
+- **Description**: Boost local search rankings with Google Business Profile optimization. Learn how to optimize your profile with our 25-point checklist and expert guide.
 
 ### Google Responsive Search Ads: Best Practices for 2026
 - **Slug**: `google-responsive-search-ads-best-practices`
