@@ -1,9 +1,10 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-14
-Total posts: 29
+Total posts: 30
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
+| `7-best-marketing-automation-platforms-for-small-businesses-in-2026-compared` | 7 Best Marketing Automation Platforms for Small Businesses in 2026 (Compared) | 2026-05-14 | 826 | marketing automation, small business, digital marketing, local business |
 | `best-marketing-automation-tools-small-business` | Best Marketing Automation Tools for Small Businesses in 2026 (Honestly Compared) | 2026-05-14 | 1581 | marketing automation, tools, comparison, small business, crm |
 | `do-facebook-ads-actually-work-for-local-businesses-data-backed-answer` | Do Facebook Ads Actually Work for Local Businesses? Data-Backed Answer | 2026-05-14 | 1108 | facebook ads, local business, digital marketing, small business |
 | `email-marketing-ideas-small-business` | Email Marketing Ideas for Small Businesses: 20 Campaigns That Drive Revenue in 2026 | 2026-05-14 | 1738 | email marketing, small business, marketing automation, campaigns, retention |
@@ -35,6 +36,14 @@ Total posts: 29
 | `local-marketing-budget-guide` | What Does a Good Local Marketing Budget Actually Look Like? | 2026-03-05 | 769 | strategy, google ads, meta ads, budget, local seo |
 
 ## Full Details
+
+### 7 Best Marketing Automation Platforms for Small Businesses in 2026 (Compared)
+- **Slug**: `7-best-marketing-automation-platforms-for-small-businesses-in-2026-compared`
+- **URL**: https://datalatte.pro/blog/7-best-marketing-automation-platforms-for-small-businesses-in-2026-compared
+- **Date**: 2026-05-14
+- **Words**: 826
+- **Tags**: marketing automation, small business, digital marketing, local business
+- **Description**: Discover the top marketing automation platforms for small businesses in 2026, compared and reviewed to help you grow your local business with data-driven digital marketing
 
 ### Best Marketing Automation Tools for Small Businesses in 2026 (Honestly Compared)
 - **Slug**: `best-marketing-automation-tools-small-business`
