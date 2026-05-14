@@ -1,6 +1,6 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-14
-Total posts: 23
+Total posts: 24
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
@@ -9,6 +9,7 @@ Total posts: 23
 | `google-responsive-search-ads-best-practices` | Google Responsive Search Ads: Best Practices for 2026 | 2026-05-14 | 1680 | google ads, responsive search ads, rsa, ppc, best practices |
 | `how-much-do-facebook-ads-cost-small-business` | How Much Do Facebook Ads Cost for Small Businesses in 2026? Real Benchmarks | 2026-05-14 | 1429 | facebook ads, meta ads, advertising costs, small business, budget |
 | `how-much-does-google-ads-cost-for-small-businesses-real-2026-pricing-breakdown` | How Much Does Google Ads Cost for Small Businesses? Real 2026 Pricing Breakdown | 2026-05-14 | 1075 | google ads for small business, google ads cost, small business marketing |
+| `how-much-does-local-seo-cost-for-a-small-business-honest-pricing-guide` | How Much Does Local SEO Cost for a Small Business? Honest Pricing Guide | 2026-05-14 | 1007 | local seo for small business, seo costs, small business marketing, local seo pricing, seo budget |
 | `how-to-advertise-dog-grooming-business` | How to Advertise Your Dog Grooming Business: 15 Ideas That Get Bookings in 2026 | 2026-05-14 | 1805 | pet groomers, dog grooming, advertising, local marketing, google ads |
 | `how-to-get-dog-grooming-clients` | How to Get Dog Grooming Clients: The 2026 Growth Playbook | 2026-05-14 | 1728 | pet groomers, dog grooming, client acquisition, local marketing, growth |
 | `how-to-improve-local-seo-for-your-small-business-15-steps-that-work-in-2026` | How to Improve Local SEO for Your Small Business: 15 Steps That Work in 2026 | 2026-05-14 | 1498 | local seo for small business, small business marketing, seo tips, local search optimization |
@@ -69,6 +70,14 @@ Total posts: 23
 - **Words**: 1075
 - **Tags**: google ads for small business, google ads cost, small business marketing
 - **Description**: Discover the real cost of Google Ads for small businesses in 2026. Learn how to budget and get the most out of your Google Ads campaign with DataLatte.
+
+### How Much Does Local SEO Cost for a Small Business? Honest Pricing Guide
+- **Slug**: `how-much-does-local-seo-cost-for-a-small-business-honest-pricing-guide`
+- **URL**: https://datalatte.pro/blog/how-much-does-local-seo-cost-for-a-small-business-honest-pricing-guide
+- **Date**: 2026-05-14
+- **Words**: 1007
+- **Tags**: local seo for small business, seo costs, small business marketing, local seo pricing, seo budget
+- **Description**: Local SEO for small business pricing guide: learn how much local SEO costs and how to get the best ROI from your SEO budget in 2026
 
 ### How to Advertise Your Dog Grooming Business: 15 Ideas That Get Bookings in 2026
 - **Slug**: `how-to-advertise-dog-grooming-business`
