@@ -588,13 +588,18 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
                     </button>
                   )}
                 </div>
-                <div className="w-full bg-gray-700 rounded-full h-2">
-                  <div
-                    className="bg-blue-500 h-2 rounded-full transition-all duration-500"
-                    style={{
-                      width: `${(batchProgress.results.length / batchProgress.total) * 100}%`,
-                    }}
-                  />
+                <div className="flex items-center gap-3">
+                  <div className="flex-1 bg-gray-700 rounded-full h-2">
+                    <div
+                      className="bg-blue-500 h-2 rounded-full transition-all duration-500"
+                      style={{
+                        width: `${(batchProgress.results.length / batchProgress.total) * 100}%`,
+                      }}
+                    />
+                  </div>
+                  <span className="text-xs font-mono text-gray-400 shrink-0 w-10 text-right">
+                    {Math.round((batchProgress.results.length / batchProgress.total) * 100)}%
+                  </span>
                 </div>
 
                 {/* Per-article results */}
