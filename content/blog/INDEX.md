@@ -1,10 +1,11 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-14
-Total posts: 26
+Total posts: 27
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
 | `best-marketing-automation-tools-small-business` | Best Marketing Automation Tools for Small Businesses in 2026 (Honestly Compared) | 2026-05-14 | 1581 | marketing automation, tools, comparison, small business, crm |
+| `do-facebook-ads-actually-work-for-local-businesses-data-backed-answer` | Do Facebook Ads Actually Work for Local Businesses? Data-Backed Answer | 2026-05-14 | 1108 | facebook ads, local business, digital marketing, small business |
 | `email-marketing-ideas-small-business` | Email Marketing Ideas for Small Businesses: 20 Campaigns That Drive Revenue in 2026 | 2026-05-14 | 1738 | email marketing, small business, marketing automation, campaigns, retention |
 | `google-responsive-search-ads-best-practices` | Google Responsive Search Ads: Best Practices for 2026 | 2026-05-14 | 1680 | google ads, responsive search ads, rsa, ppc, best practices |
 | `how-much-do-facebook-ads-cost-for-small-businesses-2026-benchmarks` | How Much Do Facebook Ads Cost for Small Businesses? 2026 Benchmarks | 2026-05-14 | 1244 | facebook ads for local business, facebook ads cost, small business marketing, local business advertising, facebook ads budget |
@@ -40,6 +41,14 @@ Total posts: 26
 - **Words**: 1581
 - **Tags**: marketing automation, tools, comparison, small business, crm
 - **Description**: Real comparison of the best marketing automation tools for small businesses in 2026: HubSpot, Mailchimp, Klaviyo, ActiveCampaign, Brevo, HighLevel and more.
+
+### Do Facebook Ads Actually Work for Local Businesses? Data-Backed Answer
+- **Slug**: `do-facebook-ads-actually-work-for-local-businesses-data-backed-answer`
+- **URL**: https://datalatte.pro/blog/do-facebook-ads-actually-work-for-local-businesses-data-backed-answer
+- **Date**: 2026-05-14
+- **Words**: 1108
+- **Tags**: facebook ads, local business, digital marketing, small business
+- **Description**: Discover if Facebook ads are effective for local businesses with data-driven insights and expert advice from DataLatte
 
 ### Email Marketing Ideas for Small Businesses: 20 Campaigns That Drive Revenue in 2026
 - **Slug**: `email-marketing-ideas-small-business`
