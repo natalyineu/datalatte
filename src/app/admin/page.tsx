@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -142,6 +142,15 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
   const [genResult, setGenResult]           = useState<GenerateResult | null>(null);
   const [addError, setAddError]             = useState("");
   const [addSuccess, setAddSuccess]         = useState("");
+
+  // Batch generation state
+  const [batchRunning, setBatchRunning]     = useState(false);
+  const [batchProgress, setBatchProgress]   = useState<{
+    current: number;
+    total: number;
+    results: Array<{ title: string; slug: string; success: boolean; error?: string }>;
+  } | null>(null);
+  const cancelBatchRef = useRef(false);
   const [activeTab, setActiveTab]           = useState<"queue" | "articles">("queue");
   const [form, setForm]             = useState({
     title: "",
@@ -255,6 +264,60 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
     setGenerating(false);
     fetchQueue();
     fetchArticles();
+  }
+
+  // ── Generate ALL pending articles sequentially ───────────────────────────
+
+  async function handleGenerateAll() {
+    const pending = queue.filter((e) => e.status === "pending");
+    if (pending.length === 0) return;
+
+    cancelBatchRef.current = false;
+    setBatchRunning(true);
+    setGenResult(null);
+    setBatchProgress({ current: 0, total: pending.length, results: [] });
+
+    for (let i = 0; i < pending.length; i++) {
+      if (cancelBatchRef.current) break;
+
+      const entry = pending[i];
+      setBatchProgress((prev) => prev ? { ...prev, current: i + 1 } : null);
+
+      const res = await authFetch("/api/admin/generate", { method: "POST" }, token);
+      const data = await res.json() as GenerateResult;
+
+      setBatchProgress((prev) => {
+        if (!prev) return null;
+        return {
+          ...prev,
+          results: [
+            ...prev.results,
+            {
+              title: entry.title,
+              slug: entry.slug,
+              success: !!data.success,
+              error: data.error,
+            },
+          ],
+        };
+      });
+
+      // Refresh queue after each article so status updates are visible
+      await fetchQueue();
+      await fetchArticles();
+
+      // Small pause between requests to avoid hammering the API
+      if (i < pending.length - 1 && !cancelBatchRef.current) {
+        await new Promise((r) => setTimeout(r, 1500));
+      }
+    }
+
+    setBatchRunning(false);
+  }
+
+  function handleCancelBatch() {
+    cancelBatchRef.current = true;
+    setBatchRunning(false);
   }
 
   // ── Delete queue entry ────────────────────────────────────────────────────
@@ -462,12 +525,13 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
         {/* ── Queue tab ───────────────────────────────────────────────────── */}
         {activeTab === "queue" && (
           <section className="space-y-4">
-            {/* Generate button */}
-            <div className="flex items-center gap-4 flex-wrap">
+            {/* Generate buttons */}
+            <div className="flex items-center gap-3 flex-wrap">
+              {/* Single */}
               <button
                 onClick={handleGenerate}
-                disabled={generating || pendingCount === 0}
-                className="bg-green-700 hover:bg-green-600 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold rounded-xl px-6 py-2.5 text-sm transition flex items-center gap-2"
+                disabled={generating || batchRunning || pendingCount === 0}
+                className="bg-green-700 hover:bg-green-600 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold rounded-xl px-5 py-2.5 text-sm transition flex items-center gap-2"
               >
                 {generating ? (
                   <>
@@ -475,16 +539,98 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
                     Generating…
                   </>
                 ) : (
-                  <>⚡ Generate Next Article</>
+                  <>⚡ Generate Next</>
                 )}
               </button>
-              {pendingCount === 0 && (
+
+              {/* Batch */}
+              {pendingCount > 1 && !batchRunning && (
+                <button
+                  onClick={handleGenerateAll}
+                  disabled={generating || batchRunning}
+                  className="bg-blue-700 hover:bg-blue-600 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold rounded-xl px-5 py-2.5 text-sm transition flex items-center gap-2"
+                >
+                  🚀 Generate All ({pendingCount} pending)
+                </button>
+              )}
+
+              {/* Cancel batch */}
+              {batchRunning && (
+                <button
+                  onClick={handleCancelBatch}
+                  className="bg-red-700/40 hover:bg-red-700 border border-red-600/50 text-red-300 hover:text-white font-semibold rounded-xl px-5 py-2.5 text-sm transition"
+                >
+                  ✕ Cancel
+                </button>
+              )}
+
+              {pendingCount === 0 && !batchRunning && !batchProgress && (
                 <p className="text-gray-400 text-sm">No pending articles. Add topics above.</p>
               )}
             </div>
 
-            {/* Generation result */}
-            {genResult && (
+            {/* Batch progress */}
+            {batchProgress && (
+              <div className="bg-gray-800 border border-gray-700 rounded-xl p-4 space-y-3">
+                {/* Header + progress bar */}
+                <div className="flex items-center justify-between text-sm">
+                  <span className="font-semibold text-white">
+                    {batchRunning
+                      ? `Generating ${batchProgress.current} of ${batchProgress.total}…`
+                      : `Done — ${batchProgress.results.filter((r) => r.success).length}/${batchProgress.total} succeeded`}
+                  </span>
+                  {!batchRunning && (
+                    <button
+                      onClick={() => setBatchProgress(null)}
+                      className="text-xs text-gray-500 hover:text-white transition"
+                    >
+                      Dismiss
+                    </button>
+                  )}
+                </div>
+                <div className="w-full bg-gray-700 rounded-full h-2">
+                  <div
+                    className="bg-blue-500 h-2 rounded-full transition-all duration-500"
+                    style={{
+                      width: `${(batchProgress.results.length / batchProgress.total) * 100}%`,
+                    }}
+                  />
+                </div>
+
+                {/* Per-article results */}
+                {batchProgress.results.length > 0 && (
+                  <div className="space-y-1.5 max-h-48 overflow-y-auto">
+                    {batchProgress.results.map((r) => (
+                      <div
+                        key={r.slug}
+                        className={`flex items-start gap-2 text-xs rounded-lg px-3 py-2 ${
+                          r.success
+                            ? "bg-green-500/10 text-green-300"
+                            : "bg-red-500/10 text-red-300"
+                        }`}
+                      >
+                        <span>{r.success ? "✅" : "❌"}</span>
+                        <span className="flex-1 min-w-0">
+                          <span className="font-medium">{r.title}</span>
+                          {r.error && (
+                            <span className="block text-red-400 mt-0.5">{r.error}</span>
+                          )}
+                        </span>
+                      </div>
+                    ))}
+                    {batchRunning && batchProgress.current <= batchProgress.total && (
+                      <div className="flex items-center gap-2 text-xs text-gray-400 px-3 py-2">
+                        <span className="inline-block w-3 h-3 border-2 border-gray-400/30 border-t-gray-400 rounded-full animate-spin" />
+                        Working on article {batchProgress.current}…
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Single-article result */}
+            {genResult && !batchProgress && (
               <div className={`rounded-xl p-4 border text-sm ${
                 genResult.success
                   ? "bg-green-500/10 border-green-500/30 text-green-300"
