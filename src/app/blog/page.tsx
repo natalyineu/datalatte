@@ -1,7 +1,46 @@
 import type { Metadata } from "next";
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
 import SectionWrapper from "@/components/SectionWrapper";
 import BlogCard from "@/components/BlogCard";
 import Link from "next/link";
+
+export const revalidate = 86400;
+
+const contentDir = path.join(process.cwd(), "content/blog");
+
+interface PostMeta {
+  title: string;
+  description: string;
+  slug: string;
+  category: string;
+  date: string;
+  readTime: string;
+  image: string;
+  tags: string[];
+}
+
+function getAllPosts(): PostMeta[] {
+  const files = fs.readdirSync(contentDir).filter((f) => f.endsWith(".mdx"));
+  const posts = files.map((file) => {
+    const slug = file.replace(".mdx", "");
+    const raw = fs.readFileSync(path.join(contentDir, file), "utf8");
+    const { data } = matter(raw);
+    return {
+      title: data.title,
+      description: data.description,
+      slug,
+      category: data.category,
+      date: data.date,
+      readTime: data.readTime,
+      image: data.image,
+      tags: data.tags ?? [],
+    } as PostMeta;
+  });
+  // Sort by date descending
+  return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+}
 
 export const metadata: Metadata = {
   title: "Blog | Local Marketing Tips for Coffee Shops, Salons, Pet Groomers & Fitness Studios",
@@ -9,92 +48,11 @@ export const metadata: Metadata = {
     "Data-driven local marketing advice for small business owners. Practical tips on Google Ads, Meta Ads, local SEO, and Google Business Profile — written for owners, not marketers.",
 };
 
-const posts = [
-  {
-    title: "What Is the 3-3-3 Rule in Marketing? A Simple Guide for Local Businesses",
-    excerpt:
-      "The 3-3-3 rule breaks every customer interaction into three stages: 3 seconds to capture attention, 3 minutes to build interest, and 3 steps to convert. Here's how to apply it.",
-    slug: "what-is-the-3-3-3-rule-in-marketing",
-    category: "Strategy",
-    date: "May 14, 2026",
-    readTime: "8 min read",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80",
-  },
-  {
-    title: "Influencer Marketing for Salons: How to Get Clients Through Beauty Creators in 2026",
-    excerpt:
-      "Influencer marketing for salons is up 650% in search interest. The full strategy: finding creators, deal structures, content briefs, and tracking results.",
-    slug: "influencer-marketing-for-hair-salons",
-    category: "Hair Salons",
-    date: "May 14, 2026",
-    readTime: "10 min read",
-    image: "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&q=80",
-  },
-  {
-    title: "How Coffee Shops Can Dominate Google Maps in Their Neighborhood",
-    excerpt:
-      "The local map pack gets 44% of clicks for 'near me' searches. Here's exactly how to claim your spot without a big budget.",
-    slug: "coffee-shops-dominate-google-maps",
-    category: "Coffee Shops",
-    date: "Apr 10, 2026",
-    readTime: "6 min read",
-    image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80",
-  },
-  {
-    title: "The Hair Salon Owner's Guide to Getting More Bookings from Instagram",
-    excerpt:
-      "Meta Ads can feel like throwing money into a black hole — unless you set them up right. Here's what actually works.",
-    slug: "hair-salon-instagram-bookings",
-    category: "Hair Salons",
-    date: "Apr 4, 2026",
-    readTime: "7 min read",
-    image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80",
-  },
-  {
-    title: "5 Google Ads Mistakes Pet Groomers Keep Making (and How to Fix Them)",
-    excerpt:
-      "Most small business Google Ads accounts I audit have at least 3 of these issues. They're all fixable in an afternoon.",
-    slug: "pet-groomer-google-ads-mistakes",
-    category: "Pet Groomers",
-    date: "Mar 28, 2026",
-    readTime: "5 min read",
-    image: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=600&q=80",
-  },
-  {
-    title: "Fitness Studios: How to Fill Classes in January AND July",
-    excerpt:
-      "The fitness industry is notoriously seasonal. Here's how to build a marketing calendar that drives memberships all year.",
-    slug: "fitness-studio-year-round-marketing",
-    category: "Fitness Studios",
-    date: "Mar 20, 2026",
-    readTime: "8 min read",
-    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80",
-  },
-  {
-    title: "Google Business Profile 2026: The Complete Optimization Checklist",
-    excerpt:
-      "Everything you need to optimize your GBP for maximum visibility in the local map pack. Practical, step-by-step.",
-    slug: "google-business-profile-optimization-checklist",
-    category: "Local SEO",
-    date: "Mar 12, 2026",
-    readTime: "10 min read",
-    image: "https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?w=600&q=80",
-  },
-  {
-    title: "What Does a Good Local Marketing Budget Actually Look Like?",
-    excerpt:
-      "Honest breakdown of what local businesses should expect to spend on Google Ads, Meta Ads, and SEO — and what they'll get for it.",
-    slug: "local-marketing-budget-guide",
-    category: "Strategy",
-    date: "Mar 5, 2026",
-    readTime: "6 min read",
-    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80",
-  },
-];
-
 const categories = ["All", "Coffee Shops", "Hair Salons", "Pet Groomers", "Fitness Studios", "Local SEO", "Strategy"];
 
 export default function BlogPage() {
+  const posts = getAllPosts();
+
   return (
     <>
       {/* Hero */}
@@ -131,7 +89,20 @@ export default function BlogPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {posts.map((post) => (
-            <BlogCard key={post.slug} {...post} />
+            <BlogCard
+              key={post.slug}
+              title={post.title}
+              excerpt={post.description}
+              slug={post.slug}
+              category={post.category}
+              date={new Date(post.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })}
+              readTime={post.readTime}
+              image={post.image}
+            />
           ))}
         </div>
 

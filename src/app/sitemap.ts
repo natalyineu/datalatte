@@ -1,42 +1,47 @@
 import type { MetadataRoute } from "next";
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
 
 const baseUrl = "https://datalatte.pro";
+const contentDir = path.join(process.cwd(), "content/blog");
+
+function getBlogRoutes() {
+  return fs
+    .readdirSync(contentDir)
+    .filter((f) => f.endsWith(".mdx"))
+    .map((file) => {
+      const raw = fs.readFileSync(path.join(contentDir, file), "utf8");
+      const { data } = matter(raw);
+      return {
+        url: `${baseUrl}/blog/${file.replace(".mdx", "")}`,
+        lastModified: new Date(data.date as string),
+        changeFrequency: "monthly" as const,
+        priority: 0.6,
+      };
+    });
+}
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
-
-  const routes = [
-    "",
-    "/about",
-    "/contact",
-    "/blog",
-    "/for/coffee-shops",
-    "/for/hair-salons",
-    "/for/pet-groomers",
-    "/for/fitness-studios",
-    "/services/google-ads",
-    "/services/meta-ads",
-    "/services/google-business-profile",
-    "/services/local-seo",
-    "/services/analytics",
-    "/services/ai-agents",
-    "/services/email-sms",
-    "/services/social-media",
-    "/services/website",
-    "/blog/what-is-the-3-3-3-rule-in-marketing",
-    "/blog/influencer-marketing-for-hair-salons",
-    "/blog/coffee-shops-dominate-google-maps",
-    "/blog/hair-salon-instagram-bookings",
-    "/blog/pet-groomer-google-ads-mistakes",
-    "/blog/fitness-studio-year-round-marketing",
-    "/blog/google-business-profile-optimization-checklist",
-    "/blog/local-marketing-budget-guide",
+  const staticRoutes = [
+    { url: baseUrl, changeFrequency: "weekly" as const, priority: 1 },
+    { url: `${baseUrl}/blog`, changeFrequency: "weekly" as const, priority: 0.8 },
+    { url: `${baseUrl}/about`, changeFrequency: "monthly" as const, priority: 0.8 },
+    { url: `${baseUrl}/contact`, changeFrequency: "monthly" as const, priority: 0.8 },
+    { url: `${baseUrl}/for/coffee-shops`, changeFrequency: "monthly" as const, priority: 0.8 },
+    { url: `${baseUrl}/for/hair-salons`, changeFrequency: "monthly" as const, priority: 0.8 },
+    { url: `${baseUrl}/for/pet-groomers`, changeFrequency: "monthly" as const, priority: 0.8 },
+    { url: `${baseUrl}/for/fitness-studios`, changeFrequency: "monthly" as const, priority: 0.8 },
+    { url: `${baseUrl}/services/google-ads`, changeFrequency: "monthly" as const, priority: 0.8 },
+    { url: `${baseUrl}/services/meta-ads`, changeFrequency: "monthly" as const, priority: 0.8 },
+    { url: `${baseUrl}/services/google-business-profile`, changeFrequency: "monthly" as const, priority: 0.8 },
+    { url: `${baseUrl}/services/local-seo`, changeFrequency: "monthly" as const, priority: 0.8 },
+    { url: `${baseUrl}/services/analytics`, changeFrequency: "monthly" as const, priority: 0.8 },
+    { url: `${baseUrl}/services/ai-agents`, changeFrequency: "monthly" as const, priority: 0.8 },
+    { url: `${baseUrl}/services/email-sms`, changeFrequency: "monthly" as const, priority: 0.8 },
+    { url: `${baseUrl}/services/social-media`, changeFrequency: "monthly" as const, priority: 0.8 },
+    { url: `${baseUrl}/services/website`, changeFrequency: "monthly" as const, priority: 0.8 },
   ];
 
-  return routes.map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: now,
-    changeFrequency: route === "" || route === "/blog" ? "weekly" : "monthly",
-    priority: route === "" ? 1 : route.startsWith("/blog/") ? 0.6 : 0.8,
-  }));
+  return [...staticRoutes, ...getBlogRoutes()];
 }
