@@ -1,6 +1,6 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-14
-Total posts: 22
+Total posts: 23
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
@@ -11,6 +11,7 @@ Total posts: 22
 | `how-much-does-google-ads-cost-for-small-businesses-real-2026-pricing-breakdown` | How Much Does Google Ads Cost for Small Businesses? Real 2026 Pricing Breakdown | 2026-05-14 | 1075 | google ads for small business, google ads cost, small business marketing |
 | `how-to-advertise-dog-grooming-business` | How to Advertise Your Dog Grooming Business: 15 Ideas That Get Bookings in 2026 | 2026-05-14 | 1805 | pet groomers, dog grooming, advertising, local marketing, google ads |
 | `how-to-get-dog-grooming-clients` | How to Get Dog Grooming Clients: The 2026 Growth Playbook | 2026-05-14 | 1728 | pet groomers, dog grooming, client acquisition, local marketing, growth |
+| `how-to-improve-local-seo-for-your-small-business-15-steps-that-work-in-2026` | How to Improve Local SEO for Your Small Business: 15 Steps That Work in 2026 | 2026-05-14 | 1498 | local seo for small business, small business marketing, seo tips, local search optimization |
 | `how-to-run-facebook-ads-for-local-business` | How to Run Facebook Ads for a Local Business in 2026: The Complete Playbook | 2026-05-14 | 1665 | facebook ads, meta ads, local business, social media, lead generation |
 | `how-to-set-up-google-ads-for-your-small-business-in-2026-step-by-step-with-scree` | How to Set Up Google Ads for Your Small Business in 2026 (Step-by-Step With Screenshots) | 2026-05-14 | 1279 | google ads for small business, small business marketing, digital advertising, google ads setup, small business google ads |
 | `influencer-marketing-for-hair-salons` | Influencer Marketing for Salons: How to Get Clients Through Beauty Creators in 2026 | 2026-05-14 | 1926 | hair salons, influencer marketing, social media, instagram, tiktok |
@@ -84,6 +85,14 @@ Total posts: 22
 - **Words**: 1728
 - **Tags**: pet groomers, dog grooming, client acquisition, local marketing, growth
 - **Description**: A step-by-step growth playbook for dog groomers in 2026: how to get your first 100 clients, fill your calendar, and build a wait list — without burning out.
+
+### How to Improve Local SEO for Your Small Business: 15 Steps That Work in 2026
+- **Slug**: `how-to-improve-local-seo-for-your-small-business-15-steps-that-work-in-2026`
+- **URL**: https://datalatte.pro/blog/how-to-improve-local-seo-for-your-small-business-15-steps-that-work-in-2026
+- **Date**: 2026-05-14
+- **Words**: 1498
+- **Tags**: local seo for small business, small business marketing, seo tips, local search optimization
+- **Description**: Improve local SEO for your small business with these 15 actionable steps, increasing online visibility and driving more sales in 2026
 
 ### How to Run Facebook Ads for a Local Business in 2026: The Complete Playbook
 - **Slug**: `how-to-run-facebook-ads-for-local-business`
