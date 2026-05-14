@@ -7,7 +7,7 @@ export function localBusinessSchema() {
     logo: "https://datalatte.pro/logo.png",
     description:
       "Freelance local marketing and analytics for coffee shops, hair salons, pet groomers, and fitness studios.",
-    email: "hello@datalatte.pro",
+    email: "hi@datalatte.pro",
     areaServed: {
       "@type": "Country",
       name: "United States",

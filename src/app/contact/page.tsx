@@ -38,7 +38,7 @@ export default function ContactPage() {
               I typically respond within one business day.
             </p>
 
-            <form className="space-y-5" action="#" method="POST">
+            <form className="space-y-5" action="https://formspree.io/f/xqenvpwv" method="POST">
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1.5">
@@ -152,7 +152,7 @@ export default function ContactPage() {
 
               <div className="space-y-4">
                 <a
-                  href="mailto:hello@datalatte.pro"
+                  href="mailto:hi@datalatte.pro"
                   className="flex items-center gap-4 p-5 rounded-xl border border-gray-200 hover:border-coffee-300 hover:bg-coffee-50 transition-all group"
                 >
                   <div className="w-11 h-11 bg-coffee-100 rounded-xl flex items-center justify-center shrink-0">
@@ -162,7 +162,7 @@ export default function ContactPage() {
                     <div className="font-semibold text-gray-900 group-hover:text-coffee-700 transition-colors">
                       Email
                     </div>
-                    <div className="text-sm text-gray-500">hello@datalatte.pro</div>
+                    <div className="text-sm text-gray-500">hi@datalatte.pro</div>
                   </div>
                   <ArrowRight size={16} className="text-gray-400 group-hover:text-coffee-700 ml-auto transition-colors" />
                 </a>

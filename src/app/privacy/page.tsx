@@ -41,8 +41,8 @@ export default function PrivacyPage() {
           <h2>Contact</h2>
           <p>
             Questions? Email us at{" "}
-            <a href="mailto:hello@datalatte.pro" className="text-coffee-700 underline">
-              hello@datalatte.pro
+            <a href="mailto:hi@datalatte.pro" className="text-coffee-700 underline">
+              hi@datalatte.pro
             </a>
             .
           </p>
