@@ -145,6 +145,7 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
 
   // Batch generation state
   const [batchRunning, setBatchRunning]     = useState(false);
+  const [batchCooldown, setBatchCooldown]   = useState(0); // seconds remaining
   const [batchProgress, setBatchProgress]   = useState<{
     current: number;
     total: number;
@@ -306,9 +307,16 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
       await fetchQueue();
       await fetchArticles();
 
-      // Small pause between requests to avoid hammering the API
+      // 20s cooldown between articles — Groq free tier is 12k TPM,
+      // each article uses ~3.4k tokens so max ~3 per minute safely.
       if (i < pending.length - 1 && !cancelBatchRef.current) {
-        await new Promise((r) => setTimeout(r, 1500));
+        const COOLDOWN = 20;
+        for (let s = COOLDOWN; s > 0; s--) {
+          if (cancelBatchRef.current) break;
+          setBatchCooldown(s);
+          await new Promise((r) => setTimeout(r, 1000));
+        }
+        setBatchCooldown(0);
       }
     }
 
@@ -623,10 +631,12 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
                         </span>
                       </div>
                     ))}
-                    {batchRunning && batchProgress.current <= batchProgress.total && (
+                    {batchRunning && (
                       <div className="flex items-center gap-2 text-xs text-gray-400 px-3 py-2">
-                        <span className="inline-block w-3 h-3 border-2 border-gray-400/30 border-t-gray-400 rounded-full animate-spin" />
-                        Working on article {batchProgress.current}…
+                        <span className="inline-block w-3 h-3 border-2 border-gray-400/30 border-t-gray-400 rounded-full animate-spin shrink-0" />
+                        {batchCooldown > 0
+                          ? `Rate-limit cooldown — next article in ${batchCooldown}s…`
+                          : `Generating article ${batchProgress.current} of ${batchProgress.total}…`}
                       </div>
                     )}
                   </div>

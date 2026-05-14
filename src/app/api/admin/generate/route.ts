@@ -189,11 +189,26 @@ function runBuild(): { success: boolean; output: string } {
   }
 }
 
-// ── Groq API call ─────────────────────────────────────────────────────────────
+// ── Groq API call (with auto-retry on 429) ───────────────────────────────────
+// Free tier limit: 12,000 TPM on llama-3.3-70b-versatile.
+// On rate-limit errors, parse the wait time from the message and retry up to 3×.
 
-async function callGroq(systemPrompt: string, userPrompt: string): Promise<string> {
+const GROQ_MODELS = [
+  "llama-3.3-70b-versatile",  // primary — best quality
+  "llama3-70b-8192",           // fallback — same size, separate quota
+  "llama-3.1-8b-instant",      // last resort — faster, lighter
+];
+
+async function callGroq(
+  systemPrompt: string,
+  userPrompt: string,
+  modelIndex = 0,
+  retries = 3
+): Promise<string> {
   const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) throw new Error("GROQ_API_KEY is not set in environment variables");
+
+  const model = GROQ_MODELS[modelIndex] ?? GROQ_MODELS[0];
 
   const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
     method: "POST",
@@ -202,7 +217,7 @@ async function callGroq(systemPrompt: string, userPrompt: string): Promise<strin
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      model: "llama-3.3-70b-versatile",
+      model,
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: userPrompt },
@@ -213,8 +228,21 @@ async function callGroq(systemPrompt: string, userPrompt: string): Promise<strin
   });
 
   if (!res.ok) {
-    const err = await res.text();
-    throw new Error(`Groq API error ${res.status}: ${err.slice(0, 300)}`);
+    const errText = await res.text();
+
+    if (res.status === 429 && retries > 0) {
+      // Parse "Please try again in 7.8s" from the error body
+      const match = errText.match(/try again in ([\d.]+)s/i);
+      const waitMs = match ? Math.ceil(parseFloat(match[1]) * 1000) + 2000 : 20000;
+
+      await new Promise((r) => setTimeout(r, waitMs));
+
+      // If still failing after waiting, try next model
+      const nextModel = retries === 1 ? modelIndex + 1 : modelIndex;
+      return callGroq(systemPrompt, userPrompt, nextModel, retries - 1);
+    }
+
+    throw new Error(`Groq API error ${res.status}: ${errText.slice(0, 300)}`);
   }
 
   const json = (await res.json()) as {
