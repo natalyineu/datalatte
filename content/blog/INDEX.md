@@ -1,6 +1,6 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-14
-Total posts: 28
+Total posts: 29
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
@@ -23,6 +23,7 @@ Total posts: 28
 | `is-google-ads-worth-it-for-small-businesses-honest-answer-with-real-data` | Is Google Ads Worth It for Small Businesses? Honest Answer With Real Data | 2026-05-14 | 1143 | google ads for small business, small business marketing, local seo, digital marketing |
 | `is-google-ads-worth-it-small-business` | Is Google Ads Worth It for Small Businesses in 2026? Honest Answer | 2026-05-14 | 1469 | google ads, ppc, small business, advertising, roi |
 | `local-seo-checklist` | Local SEO Checklist: 15 Steps to Rank Higher on Google Maps in 2026 | 2026-05-14 | 1673 | local seo, google maps, google business profile, small business, checklist |
+| `what-does-marketing-automation-do-plain-english-guide-for-small-business-owners` | What Does Marketing Automation Do? Plain-English Guide for Small Business Owners | 2026-05-14 | 880 | marketing automation small business, small business marketing, local business growth |
 | `what-does-marketing-automation-do` | What Does Marketing Automation Do? A Plain-English Guide for Small Business Owners | 2026-05-14 | 1404 | marketing automation, small business, email marketing, crm, ai agents |
 | `what-is-local-seo-and-why-does-it-matter-plain-english-guide-for-small-businesse` | What Is Local SEO and Why Does It Matter? Plain-English Guide for Small Businesses (2026) | 2026-05-14 | 1156 | local seo for small business, small business marketing, google my business, local search engine optimization |
 | `what-is-the-3-3-3-rule-in-marketing` | What Is the 3-3-3 Rule in Marketing? A Simple Guide for Local Businesses | 2026-05-14 | 1586 | strategy, marketing fundamentals, conversion, google ads, email marketing |
@@ -186,6 +187,14 @@ Total posts: 28
 - **Words**: 1673
 - **Tags**: local seo, google maps, google business profile, small business, checklist
 - **Description**: A practical 15-step local SEO checklist for 2026: Google Business Profile, citations, reviews, on-page, and the steps that actually move the local map pack.
+
+### What Does Marketing Automation Do? Plain-English Guide for Small Business Owners
+- **Slug**: `what-does-marketing-automation-do-plain-english-guide-for-small-business-owners`
+- **URL**: https://datalatte.pro/blog/what-does-marketing-automation-do-plain-english-guide-for-small-business-owners
+- **Date**: 2026-05-14
+- **Words**: 880
+- **Tags**: marketing automation small business, small business marketing, local business growth
+- **Description**: Discover how marketing automation can boost your small business with our plain-English guide, covering benefits, tools, and strategies for local businesses
 
 ### What Does Marketing Automation Do? A Plain-English Guide for Small Business Owners
 - **Slug**: `what-does-marketing-automation-do`
