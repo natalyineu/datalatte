@@ -35,6 +35,15 @@ interface GenerateResult {
   details?: string;
 }
 
+interface Recommendation {
+  title: string;
+  slug: string;
+  primaryKeyword: string;
+  cluster: string;
+  targetWords: number;
+  source: "cluster" | "paa" | "autocomplete";
+}
+
 const STATUS_COLORS: Record<string, string> = {
   pending:   "bg-yellow-500/20 text-yellow-300 border border-yellow-500/30",
   generated: "bg-blue-500/20 text-blue-300 border border-blue-500/30",
@@ -125,13 +134,15 @@ function LoginScreen({ onLogin }: { onLogin: (token: string) => void }) {
 // ── Main Dashboard ────────────────────────────────────────────────────────────
 
 function Dashboard({ token, onLogout }: { token: string; onLogout: () => void }) {
-  const [queue, setQueue]           = useState<QueueEntry[]>([]);
-  const [articles, setArticles]     = useState<Article[]>([]);
-  const [generating, setGenerating] = useState(false);
-  const [genResult, setGenResult]   = useState<GenerateResult | null>(null);
-  const [addError, setAddError]     = useState("");
-  const [addSuccess, setAddSuccess] = useState("");
-  const [activeTab, setActiveTab]   = useState<"queue" | "articles">("queue");
+  const [queue, setQueue]                   = useState<QueueEntry[]>([]);
+  const [articles, setArticles]             = useState<Article[]>([]);
+  const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
+  const [addingRec, setAddingRec]           = useState<string | null>(null);
+  const [generating, setGenerating]         = useState(false);
+  const [genResult, setGenResult]           = useState<GenerateResult | null>(null);
+  const [addError, setAddError]             = useState("");
+  const [addSuccess, setAddSuccess]         = useState("");
+  const [activeTab, setActiveTab]           = useState<"queue" | "articles">("queue");
   const [form, setForm]             = useState({
     title: "",
     slug: "",
@@ -169,10 +180,19 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
     }
   }, [token]);
 
+  const fetchRecommendations = useCallback(async () => {
+    const res = await authFetch("/api/admin/recommendations", {}, token);
+    if (res.ok) {
+      const d = await res.json() as { recommendations: Recommendation[] };
+      setRecommendations(d.recommendations ?? []);
+    }
+  }, [token]);
+
   useEffect(() => {
     fetchQueue();
     fetchArticles();
-  }, [fetchQueue, fetchArticles]);
+    fetchRecommendations();
+  }, [fetchQueue, fetchArticles, fetchRecommendations]);
 
   // ── Add to queue ──────────────────────────────────────────────────────────
 
@@ -196,6 +216,32 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
     } else {
       setAddError(data.error ?? "Failed to add entry");
     }
+  }
+
+  // ── Add recommendation to queue ──────────────────────────────────────────
+
+  async function handleAddRecommendation(rec: Recommendation) {
+    setAddingRec(rec.slug);
+    const res = await authFetch(
+      "/api/admin/queue",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          slug: rec.slug,
+          title: rec.title,
+          primaryKeyword: rec.primaryKeyword,
+          cluster: rec.cluster,
+          targetWords: rec.targetWords,
+        }),
+      },
+      token
+    );
+    if (res.ok) {
+      // Remove from recommendations list and refresh queue
+      setRecommendations((prev) => prev.filter((r) => r.slug !== rec.slug));
+      fetchQueue();
+    }
+    setAddingRec(null);
   }
 
   // ── Generate next ─────────────────────────────────────────────────────────
@@ -346,6 +392,55 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
             </div>
           </form>
         </section>
+
+        {/* ── Recommended Topics ──────────────────────────────────────────── */}
+        {recommendations.length > 0 && (
+          <section className="bg-gray-900 rounded-2xl border border-gray-800 p-6">
+            <div className="flex items-center justify-between mb-5">
+              <h2 className="text-lg font-semibold flex items-center gap-2">
+                <span>📊</span> Recommended Topics
+                <span className="text-xs font-normal text-gray-400 ml-1">
+                  — from SEO research
+                </span>
+              </h2>
+              <span className="text-xs text-gray-500">
+                {recommendations.length} suggestions
+              </span>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {recommendations.map((rec) => (
+                <div
+                  key={rec.slug}
+                  className="bg-gray-800 border border-gray-700 rounded-xl p-4 flex flex-col gap-3"
+                >
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-2 flex-wrap">
+                      <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                        {rec.cluster.split(" — ")[0] ?? rec.cluster}
+                      </span>
+                      <span className="text-xs text-gray-500">
+                        ~{rec.targetWords.toLocaleString()} words
+                      </span>
+                    </div>
+                    <p className="text-sm font-medium text-white leading-snug">
+                      {rec.title}
+                    </p>
+                    <p className="text-xs text-gray-500 mt-1.5 font-mono truncate">
+                      {rec.primaryKeyword}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => handleAddRecommendation(rec)}
+                    disabled={addingRec === rec.slug}
+                    className="w-full text-xs font-semibold bg-amber-600/20 hover:bg-amber-600 border border-amber-600/40 hover:border-amber-500 text-amber-300 hover:text-white rounded-lg py-2 transition disabled:opacity-50"
+                  >
+                    {addingRec === rec.slug ? "Adding…" : "+ Add to Queue"}
+                  </button>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* ── Tabs ────────────────────────────────────────────────────────── */}
         <div className="flex gap-2 border-b border-gray-800">

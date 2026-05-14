@@ -40,8 +40,8 @@ export default function Footer() {
               Brew up better results — without the guesswork.
             </p>
             <div className="space-y-3">
-              <a href="mailto:hello@datalatte.pro" className="flex items-center gap-2 text-sm hover:text-white transition-colors">
-                <Mail size={15} /> hello@datalatte.pro
+              <a href="mailto:hi@datalatte.pro" className="flex items-center gap-2 text-sm hover:text-white transition-colors">
+                <Mail size={15} /> hi@datalatte.pro
               </a>
               <a href="https://wa.me/1234567890" className="flex items-center gap-2 text-sm hover:text-white transition-colors">
                 <MessageCircle size={15} /> WhatsApp / Text
