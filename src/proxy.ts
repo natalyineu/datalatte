@@ -1,13 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const PROTECTED_PREFIXES = ["/admin", "/api/admin"];
-
+// Only API routes are protected at the proxy layer.
+// The /admin page itself loads in the browser and handles auth client-side
+// (stores Bearer token in sessionStorage, attaches it to every API call).
 export function proxy(req: NextRequest): NextResponse {
   const { pathname } = req.nextUrl;
 
-  const isProtected = PROTECTED_PREFIXES.some((prefix) =>
-    pathname.startsWith(prefix)
-  );
+  const isProtected = pathname.startsWith("/api/admin");
 
   if (!isProtected) {
     return NextResponse.next();
@@ -40,5 +39,5 @@ export function proxy(req: NextRequest): NextResponse {
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/api/admin/:path*"],
+  matcher: ["/api/admin/:path*"],
 };
