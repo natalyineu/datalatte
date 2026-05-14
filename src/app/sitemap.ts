@@ -23,6 +23,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/services/email-sms",
     "/services/social-media",
     "/services/website",
+    "/blog/what-is-the-3-3-3-rule-in-marketing",
+    "/blog/influencer-marketing-for-hair-salons",
     "/blog/coffee-shops-dominate-google-maps",
     "/blog/hair-salon-instagram-bookings",
     "/blog/pet-groomer-google-ads-mistakes",
