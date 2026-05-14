@@ -1,6 +1,6 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-14
-Total posts: 18
+Total posts: 19
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
@@ -11,6 +11,7 @@ Total posts: 18
 | `how-to-advertise-dog-grooming-business` | How to Advertise Your Dog Grooming Business: 15 Ideas That Get Bookings in 2026 | 2026-05-14 | 1805 | pet groomers, dog grooming, advertising, local marketing, google ads |
 | `how-to-get-dog-grooming-clients` | How to Get Dog Grooming Clients: The 2026 Growth Playbook | 2026-05-14 | 1728 | pet groomers, dog grooming, client acquisition, local marketing, growth |
 | `how-to-run-facebook-ads-for-local-business` | How to Run Facebook Ads for a Local Business in 2026: The Complete Playbook | 2026-05-14 | 1665 | facebook ads, meta ads, local business, social media, lead generation |
+| `how-to-set-up-google-ads-for-your-small-business-in-2026-step-by-step-with-scree` | How to Set Up Google Ads for Your Small Business in 2026 (Step-by-Step With Screenshots) | 2026-05-14 | 1279 | google ads for small business, small business marketing, digital advertising, google ads setup, small business google ads |
 | `influencer-marketing-for-hair-salons` | Influencer Marketing for Salons: How to Get Clients Through Beauty Creators in 2026 | 2026-05-14 | 1926 | hair salons, influencer marketing, social media, instagram, tiktok |
 | `is-google-ads-worth-it-small-business` | Is Google Ads Worth It for Small Businesses in 2026? Honest Answer | 2026-05-14 | 1469 | google ads, ppc, small business, advertising, roi |
 | `local-seo-checklist` | Local SEO Checklist: 15 Steps to Rank Higher on Google Maps in 2026 | 2026-05-14 | 1673 | local seo, google maps, google business profile, small business, checklist |
@@ -80,6 +81,14 @@ Total posts: 18
 - **Words**: 1665
 - **Tags**: facebook ads, meta ads, local business, social media, lead generation
 - **Description**: Step-by-step guide to running Facebook ads for a local business in 2026. Targeting, budgets, creative, and the campaign structure that actually drives bookings.
+
+### How to Set Up Google Ads for Your Small Business in 2026 (Step-by-Step With Screenshots)
+- **Slug**: `how-to-set-up-google-ads-for-your-small-business-in-2026-step-by-step-with-scree`
+- **URL**: https://datalatte.pro/blog/how-to-set-up-google-ads-for-your-small-business-in-2026-step-by-step-with-scree
+- **Date**: 2026-05-14
+- **Words**: 1279
+- **Tags**: google ads for small business, small business marketing, digital advertising, google ads setup, small business google ads
+- **Description**: Learn how to set up Google Ads for your small business with our step-by-step guide, including screenshots and expert tips to boost your online presence
 
 ### Influencer Marketing for Salons: How to Get Clients Through Beauty Creators in 2026
 - **Slug**: `influencer-marketing-for-hair-salons`
