@@ -1,6 +1,6 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-14
-Total posts: 32
+Total posts: 33
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
@@ -18,6 +18,7 @@ Total posts: 32
 | `how-to-get-dog-grooming-clients` | How to Get Dog Grooming Clients: The 2026 Growth Playbook | 2026-05-14 | 1728 | pet groomers, dog grooming, client acquisition, local marketing, growth |
 | `how-to-improve-local-seo-for-your-small-business-15-steps-that-work-in-2026` | How to Improve Local SEO for Your Small Business: 15 Steps That Work in 2026 | 2026-05-14 | 1498 | local seo for small business, small business marketing, seo tips, local search optimization |
 | `how-to-make-money-running-facebook-ads-for-local-businesses-freelanceagency-guid` | How to Make Money Running Facebook Ads for Local Businesses (Freelance/Agency Guide) | 2026-05-14 | 962 | facebook ads for local business, local business marketing, freelance marketing, agency growth |
+| `how-to-optimize-your-google-business-profile-step-by-step-for-local-businesses` | How to Optimize Your Google Business Profile: Step-by-Step for Local Businesses | 2026-05-14 | 725 | google business profile optimization, local seo, google my business, local business marketing |
 | `how-to-run-facebook-ads-for-a-local-business-in-2026-complete-beginners-playbook` | How to Run Facebook Ads for a Local Business in 2026: Complete Beginner's Playbook | 2026-05-14 | 1451 | facebook ads for local business, local business marketing, facebook ads setup, facebook ads targeting |
 | `how-to-run-facebook-ads-for-local-business` | How to Run Facebook Ads for a Local Business in 2026: The Complete Playbook | 2026-05-14 | 1665 | facebook ads, meta ads, local business, social media, lead generation |
 | `how-to-set-up-google-ads-for-your-small-business-in-2026-step-by-step-with-scree` | How to Set Up Google Ads for Your Small Business in 2026 (Step-by-Step With Screenshots) | 2026-05-14 | 1279 | google ads for small business, small business marketing, digital advertising, google ads setup, small business google ads |
@@ -150,6 +151,14 @@ Total posts: 32
 - **Words**: 962
 - **Tags**: facebook ads for local business, local business marketing, freelance marketing, agency growth
 - **Description**: Learn how to run profitable Facebook ads for local businesses and grow your freelance or agency income with our expert guide
+
+### How to Optimize Your Google Business Profile: Step-by-Step for Local Businesses
+- **Slug**: `how-to-optimize-your-google-business-profile-step-by-step-for-local-businesses`
+- **URL**: https://datalatte.pro/blog/how-to-optimize-your-google-business-profile-step-by-step-for-local-businesses
+- **Date**: 2026-05-14
+- **Words**: 725
+- **Tags**: google business profile optimization, local seo, google my business, local business marketing
+- **Description**: Optimize your Google Business Profile with our step-by-step guide and increase online visibility for local businesses with expert google business profile optimization
 
 ### How to Run Facebook Ads for a Local Business in 2026: Complete Beginner's Playbook
 - **Slug**: `how-to-run-facebook-ads-for-a-local-business-in-2026-complete-beginners-playbook`
