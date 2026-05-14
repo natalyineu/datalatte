@@ -1,6 +1,6 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-14
-Total posts: 24
+Total posts: 25
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
@@ -13,6 +13,7 @@ Total posts: 24
 | `how-to-advertise-dog-grooming-business` | How to Advertise Your Dog Grooming Business: 15 Ideas That Get Bookings in 2026 | 2026-05-14 | 1805 | pet groomers, dog grooming, advertising, local marketing, google ads |
 | `how-to-get-dog-grooming-clients` | How to Get Dog Grooming Clients: The 2026 Growth Playbook | 2026-05-14 | 1728 | pet groomers, dog grooming, client acquisition, local marketing, growth |
 | `how-to-improve-local-seo-for-your-small-business-15-steps-that-work-in-2026` | How to Improve Local SEO for Your Small Business: 15 Steps That Work in 2026 | 2026-05-14 | 1498 | local seo for small business, small business marketing, seo tips, local search optimization |
+| `how-to-run-facebook-ads-for-a-local-business-in-2026-complete-beginners-playbook` | How to Run Facebook Ads for a Local Business in 2026: Complete Beginner's Playbook | 2026-05-14 | 1451 | facebook ads for local business, local business marketing, facebook ads setup, facebook ads targeting |
 | `how-to-run-facebook-ads-for-local-business` | How to Run Facebook Ads for a Local Business in 2026: The Complete Playbook | 2026-05-14 | 1665 | facebook ads, meta ads, local business, social media, lead generation |
 | `how-to-set-up-google-ads-for-your-small-business-in-2026-step-by-step-with-scree` | How to Set Up Google Ads for Your Small Business in 2026 (Step-by-Step With Screenshots) | 2026-05-14 | 1279 | google ads for small business, small business marketing, digital advertising, google ads setup, small business google ads |
 | `influencer-marketing-for-hair-salons` | Influencer Marketing for Salons: How to Get Clients Through Beauty Creators in 2026 | 2026-05-14 | 1926 | hair salons, influencer marketing, social media, instagram, tiktok |
@@ -102,6 +103,14 @@ Total posts: 24
 - **Words**: 1498
 - **Tags**: local seo for small business, small business marketing, seo tips, local search optimization
 - **Description**: Improve local SEO for your small business with these 15 actionable steps, increasing online visibility and driving more sales in 2026
+
+### How to Run Facebook Ads for a Local Business in 2026: Complete Beginner's Playbook
+- **Slug**: `how-to-run-facebook-ads-for-a-local-business-in-2026-complete-beginners-playbook`
+- **URL**: https://datalatte.pro/blog/how-to-run-facebook-ads-for-a-local-business-in-2026-complete-beginners-playbook
+- **Date**: 2026-05-14
+- **Words**: 1451
+- **Tags**: facebook ads for local business, local business marketing, facebook ads setup, facebook ads targeting
+- **Description**: Learn how to run effective Facebook ads for your local business with our complete beginner's playbook, covering setup, targeting, and optimization in 2026
 
 ### How to Run Facebook Ads for a Local Business in 2026: The Complete Playbook
 - **Slug**: `how-to-run-facebook-ads-for-local-business`
