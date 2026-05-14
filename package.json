@@ -6,16 +6,20 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate-index": "node scripts/generate-blog-index.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
+    "gray-matter": "^4.0.3",
     "lucide-react": "^0.469.0",
     "next": "^16.2.6",
+    "next-mdx-remote": "^6.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@types/mdx": "^2.0.13",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
