@@ -1,6 +1,6 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-15
-Total posts: 62
+Total posts: 63
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
@@ -32,6 +32,7 @@ Total posts: 62
 | `tiktok-ads-for-pet-groomers-cute-content-that-converts` | TikTok Ads for Pet Groomers: Cute Content That Converts | 2026-05-15 | 1277 | TikTok, pet grooming, Google Ads, pet grooming marketing |
 | `tiktok-ads-for-small-business-complete-beginners-guide-2026` | TikTok Ads for Small Business: Complete Beginner's Guide (2026) | 2026-05-15 | 896 | TikTok Ads, Small Business, Social Media Marketing, Digital Marketing |
 | `tiktok-ads-vs-facebook-ads-which-is-better-for-local-business` | TikTok Ads vs Facebook Ads: Which Is Better for Local Business? | 2026-05-15 | 1168 | tiktok ads, facebook ads, local business, digital marketing |
+| `youtube-ads-for-small-business-is-it-worth-it-2026` | YouTube Ads for Small Business: Is It Worth It in 2026? | 2026-05-15 | 1632 | YouTube Ads, Google Ads, Local Marketing, Small Business Marketing |
 | `7-best-marketing-automation-platforms-for-small-businesses-in-2026-compared` | 7 Best Marketing Automation Platforms for Small Businesses in 2026 (Compared) | 2026-05-14 | 826 | marketing automation, small business, digital marketing, local business |
 | `best-marketing-automation-tools-small-business` | Best Marketing Automation Tools for Small Businesses in 2026 (Honestly Compared) | 2026-05-14 | 1581 | marketing automation, tools, comparison, small business, crm |
 | `do-facebook-ads-actually-work-for-local-businesses-data-backed-answer` | Do Facebook Ads Actually Work for Local Businesses? Data-Backed Answer | 2026-05-14 | 1108 | facebook ads, local business, digital marketing, small business |
@@ -292,6 +293,14 @@ Total posts: 62
 - **Words**: 1168
 - **Tags**: tiktok ads, facebook ads, local business, digital marketing
 - **Description**: Discover the best ad platform for local businesses: TikTok Ads vs Facebook Ads. Learn which one drives more sales and growth with real examples and data.
+
+### YouTube Ads for Small Business: Is It Worth It in 2026?
+- **Slug**: `youtube-ads-for-small-business-is-it-worth-it-2026`
+- **URL**: https://datalatte.pro/blog/youtube-ads-for-small-business-is-it-worth-it-2026
+- **Date**: 2026-05-15
+- **Words**: 1632
+- **Tags**: YouTube Ads, Google Ads, Local Marketing, Small Business Marketing
+- **Description**: YouTube ads for small business can work  -  if you know the right strategy. Here's how to use YouTube in 2026 to grow your local business.
 
 ### 7 Best Marketing Automation Platforms for Small Businesses in 2026 (Compared)
 - **Slug**: `7-best-marketing-automation-platforms-for-small-businesses-in-2026-compared`
