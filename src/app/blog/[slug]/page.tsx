@@ -9,6 +9,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import CTABanner from "@/components/CTABanner";
+import ReadingProgress from "@/components/ReadingProgress";
 import { articleSchema } from "@/lib/schema";
 
 export const revalidate = 86400;
@@ -127,6 +128,7 @@ export default async function BlogPostPage({
 
   return (
     <>
+      <ReadingProgress />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
