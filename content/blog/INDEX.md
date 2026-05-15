@@ -1,6 +1,6 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-15
-Total posts: 53
+Total posts: 54
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
@@ -15,6 +15,7 @@ Total posts: 53
 | `how-to-advertise-dog-grooming-business-15-ideas-that-actually-get-bookings` | How to Advertise Your Dog Grooming Business: 15 Ideas That Actually Get Bookings | 2026-05-15 | 944 | dog grooming marketing, pet grooming business, local seo, google ads, facebook ads |
 | `how-to-get-dog-grooming-clients-2026-growth-playbook-for-groomers` | How to Get Dog Grooming Clients: The 2026 Growth Playbook for Groomers | 2026-05-15 | 1130 | dog grooming marketing ideas, how to advertise dog grooming business, dog grooming advertising ideas, pet grooming marketing ideas, dog grooming marketing strategy |
 | `how-to-market-a-coffee-shop-the-complete-2026-strategy-guide` | How to Market a Coffee Shop: The Complete 2026 Strategy Guide | 2026-05-15 | 1047 | email marketing for coffee shops, coffee shop marketing ideas, how to market a coffee shop, local SEO, Google Ads |
+| `how-to-run-youtube-ads-for-local-business-step-by-step` | How to Run YouTube Ads for a Local Business (Step-by-Step) | 2026-05-15 | 1529 | youtube ads, local business ads, google ads, video marketing, small business marketing |
 | `how-to-target-local-customers-on-instagram` | How to Target Local Customers on Instagram | 2026-05-15 | 1225 | Instagram Ads, local targeting, geo-targeting, small business marketing |
 | `how-to-target-local-customers-on-tiktok` | How to Target Local Customers on TikTok | 2026-05-15 | 1206 | tiktok local targeting, tiktok advertising, local marketing, small business marketing |
 | `instagram-ads-best-practices-10-rules-for-better-performance` | Instagram Ads Best Practices: 10 Rules for Better Performance | 2026-05-15 | 1620 | instagram ads, instagram marketing, google ads for local businesses, social media advertising |
@@ -147,6 +148,14 @@ Total posts: 53
 - **Words**: 1047
 - **Tags**: email marketing for coffee shops, coffee shop marketing ideas, how to market a coffee shop, local SEO, Google Ads
 - **Description**: Learn how to market a coffee shop with our 2026 strategy guide, covering email marketing, Google Ads, and local SEO to attract 1000s of customers
+
+### How to Run YouTube Ads for a Local Business (Step-by-Step)
+- **Slug**: `how-to-run-youtube-ads-for-local-business-step-by-step`
+- **URL**: https://datalatte.pro/blog/how-to-run-youtube-ads-for-local-business-step-by-step
+- **Date**: 2026-05-15
+- **Words**: 1529
+- **Tags**: youtube ads, local business ads, google ads, video marketing, small business marketing
+- **Description**: Learn how to run YouTube ads for your local business with this step-by-step guide. Get real examples, budget tips, and ad formats that convert for small businesses.
 
 ### How to Target Local Customers on Instagram
 - **Slug**: `how-to-target-local-customers-on-instagram`
