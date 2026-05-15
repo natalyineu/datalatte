@@ -1,6 +1,6 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-15
-Total posts: 58
+Total posts: 59
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
@@ -15,6 +15,7 @@ Total posts: 58
 | `how-to-get-dog-grooming-clients-2026-growth-playbook-for-groomers` | How to Get Dog Grooming Clients: The 2026 Growth Playbook for Groomers | 2026-05-15 | 1130 | dog grooming marketing ideas, how to advertise dog grooming business, dog grooming advertising ideas, pet grooming marketing ideas, dog grooming marketing strategy |
 | `how-to-market-a-coffee-shop-the-complete-2026-strategy-guide` | How to Market a Coffee Shop: The Complete 2026 Strategy Guide | 2026-05-15 | 1047 | email marketing for coffee shops, coffee shop marketing ideas, how to market a coffee shop, local SEO, Google Ads |
 | `how-to-target-local-customers-on-tiktok` | How to Target Local Customers on TikTok | 2026-05-15 | 1206 | tiktok local targeting, tiktok advertising, local marketing, small business marketing |
+| `instagram-ads-for-coffee-shops-step-by-step-playbook` | Instagram Ads for Coffee Shops: A Step-by-Step Playbook | 2026-05-15 | 1280 | Instagram Ads, Coffee Shop Marketing, Social Media Ads, Local Marketing |
 | `instagram-ads-for-local-business-complete-2026-guide` | Instagram Ads for Local Business: Complete 2026 Guide | 2026-05-15 | 1461 | Instagram Ads, Local Business Marketing, Social Media Marketing, Google Ads vs Instagram Ads |
 | `instagram-ads-for-salons-get-more-bookings` | Instagram Story Ads for Salons: Get More Bookings | 2026-05-15 | 1247 | instagram ads for salons, salon marketing, local ads, bookings |
 | `instagram-reels-ads-how-to-use-them-for-local-business-growth` | Instagram Reels Ads: How to Use Them for Local Business Growth | 2026-05-15 | 1045 | instagram reels ads, local marketing, Google Ads, digital advertising |
@@ -152,6 +153,14 @@ Total posts: 58
 - **Words**: 1206
 - **Tags**: tiktok local targeting, tiktok advertising, local marketing, small business marketing
 - **Description**: Learn how to use TikTok's local targeting features to reach nearby customers. Real examples, ad settings, and tips for small businesses using TikTok ads.
+
+### Instagram Ads for Coffee Shops: A Step-by-Step Playbook
+- **Slug**: `instagram-ads-for-coffee-shops-step-by-step-playbook`
+- **URL**: https://datalatte.pro/blog/instagram-ads-for-coffee-shops-step-by-step-playbook
+- **Date**: 2026-05-15
+- **Words**: 1280
+- **Tags**: Instagram Ads, Coffee Shop Marketing, Social Media Ads, Local Marketing
+- **Description**: Instagram ads for coffee shops don't need to be confusing. Follow this step-by-step playbook to get more local customers and drive in-store traffic.
 
 ### Instagram Ads for Local Business: Complete 2026 Guide
 - **Slug**: `instagram-ads-for-local-business-complete-2026-guide`
