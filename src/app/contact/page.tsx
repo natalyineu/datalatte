@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Mail, MessageCircle, Calendar, ArrowRight, Clock, CheckCircle2 } from "lucide-react";
+import { Mail, MessageCircle, Calendar, ArrowRight, Clock, CheckCircle2, MapPin } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 
 export const metadata: Metadata = {
@@ -168,7 +168,7 @@ export default function ContactPage() {
                 </a>
 
                 <a
-                  href="https://wa.me/1234567890"
+                  href="https://wa.me/48503589781"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-4 p-5 rounded-xl border border-gray-200 hover:border-coffee-300 hover:bg-coffee-50 transition-all group"
@@ -178,12 +178,22 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <div className="font-semibold text-gray-900 group-hover:text-coffee-700 transition-colors">
-                      WhatsApp / Text
+                      WhatsApp
                     </div>
-                    <div className="text-sm text-gray-500">Quick questions welcome</div>
+                    <div className="text-sm text-gray-500">+48 503 589 781</div>
                   </div>
                   <ArrowRight size={16} className="text-gray-400 group-hover:text-coffee-700 ml-auto transition-colors" />
                 </a>
+
+                <div className="flex items-center gap-4 p-5 rounded-xl border border-gray-200 bg-gray-50">
+                  <div className="w-11 h-11 bg-coffee-100 rounded-xl flex items-center justify-center shrink-0">
+                    <MapPin size={20} className="text-coffee-700" />
+                  </div>
+                  <div>
+                    <div className="font-semibold text-gray-900">Office</div>
+                    <div className="text-sm text-gray-500">Bałtyk Business Square, Poznań, Poland</div>
+                  </div>
+                </div>
 
                 <a
                   href="https://cal.com/datalatte"

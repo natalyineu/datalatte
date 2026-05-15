@@ -9,6 +9,13 @@ export function localBusinessSchema() {
     description:
       "Data-driven digital marketing agency for local businesses, mid-market companies, and enterprise brands. Google Ads, Meta Ads, SEO, programmatic advertising, analytics, and full-service marketing strategy.",
     email: "hi@datalatte.pro",
+    telephone: "+48503589781",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Bałtyk Business Square",
+      addressLocality: "Poznań",
+      addressCountry: "PL",
+    },
     priceRange: "$$",
     areaServed: [
       { "@type": "Country", name: "United States" },

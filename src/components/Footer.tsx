@@ -43,11 +43,12 @@ export default function Footer() {
               <a href="mailto:hi@datalatte.pro" className="flex items-center gap-2 text-sm hover:text-white transition-colors">
                 <Mail size={15} /> hi@datalatte.pro
               </a>
-              <a href="https://wa.me/1234567890" className="flex items-center gap-2 text-sm hover:text-white transition-colors">
-                <MessageCircle size={15} /> WhatsApp / Text
+              <a href="https://wa.me/48503589781" className="flex items-center gap-2 text-sm hover:text-white transition-colors">
+                <MessageCircle size={15} /> +48 503 589 781
               </a>
-              <span className="flex items-center gap-2 text-sm">
-                <MapPin size={15} /> Serving US Local Businesses
+              <span className="flex items-start gap-2 text-sm">
+                <MapPin size={15} className="shrink-0 mt-0.5" />
+                <span>Bałtyk Business Square<br />Poznań, Poland</span>
               </span>
             </div>
           </div>
