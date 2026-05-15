@@ -1,9 +1,10 @@
 # Blog Post Index — DataLatte.pro
-Generated: 2026-05-14
-Total posts: 34
+Generated: 2026-05-15
+Total posts: 35
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
+| `salon-marketing-ideas-25-strategies-that-fill-your-chair-every-week` | Salon Marketing Ideas: 25 Strategies That Fill Your Chair Every Week | 2026-05-15 | 1053 | salon marketing ideas, influencer marketing for salons, local SEO, social media marketing |
 | `7-best-marketing-automation-platforms-for-small-businesses-in-2026-compared` | 7 Best Marketing Automation Platforms for Small Businesses in 2026 (Compared) | 2026-05-14 | 826 | marketing automation, small business, digital marketing, local business |
 | `best-marketing-automation-tools-small-business` | Best Marketing Automation Tools for Small Businesses in 2026 (Honestly Compared) | 2026-05-14 | 1581 | marketing automation, tools, comparison, small business, crm |
 | `do-facebook-ads-actually-work-for-local-businesses-data-backed-answer` | Do Facebook Ads Actually Work for Local Businesses? Data-Backed Answer | 2026-05-14 | 1108 | facebook ads, local business, digital marketing, small business |
@@ -40,6 +41,14 @@ Total posts: 34
 | `local-marketing-budget-guide` | What Does a Good Local Marketing Budget Actually Look Like? | 2026-03-05 | 769 | strategy, google ads, meta ads, budget, local seo |
 
 ## Full Details
+
+### Salon Marketing Ideas: 25 Strategies That Fill Your Chair Every Week
+- **Slug**: `salon-marketing-ideas-25-strategies-that-fill-your-chair-every-week`
+- **URL**: https://datalatte.pro/blog/salon-marketing-ideas-25-strategies-that-fill-your-chair-every-week
+- **Date**: 2026-05-15
+- **Words**: 1053
+- **Tags**: salon marketing ideas, influencer marketing for salons, local SEO, social media marketing
+- **Description**: Discover 25 effective salon marketing ideas to fill your chair every week, from social media to influencer partnerships and local SEO strategies
 
 ### 7 Best Marketing Automation Platforms for Small Businesses in 2026 (Compared)
 - **Slug**: `7-best-marketing-automation-platforms-for-small-businesses-in-2026-compared`
