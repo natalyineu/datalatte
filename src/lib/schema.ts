@@ -37,7 +37,7 @@ export function localBusinessSchema() {
       "Marketing Strategy Consulting",
     ],
     sameAs: [
-      "https://www.linkedin.com/company/datalatte",
+      "https://www.linkedin.com/company/datalattepro",
       "https://www.instagram.com/datalatte.pro",
     ],
     founder: {
@@ -73,7 +73,7 @@ export function personSchema() {
       "Brand Strategy", "Media Planning", "Performance Marketing",
     ],
     sameAs: [
-      "https://www.linkedin.com/company/datalatte",
+      "https://www.linkedin.com/company/datalattepro",
       "https://www.instagram.com/datalatte.pro",
     ],
   };
