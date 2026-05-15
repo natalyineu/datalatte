@@ -5,7 +5,7 @@ export function localBusinessSchema() {
     "@id": "https://datalatte.pro/#business",
     name: "DataLatte",
     url: "https://datalatte.pro",
-    logo: "https://datalatte.pro/logo.png",
+    logo: "https://datalatte.pro/icon",
     description:
       "Data-driven digital marketing agency for local businesses, mid-market companies, and enterprise brands. Google Ads, Meta Ads, SEO, programmatic advertising, analytics, and full-service marketing strategy.",
     email: "hi@datalatte.pro",
