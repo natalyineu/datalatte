@@ -41,15 +41,21 @@ const AI_CRAWLERS = [
   // Kagi
   "kagi-fetcher",
   // ByteDance / TikTok
-  "Bytespider",
+  "Bytespider", "TikTokSpider", "imageSpider",
   // Cloudflare AI
   "Cloudflare-AutoRAG",
   // Linkup
   "LinkupBot",
   // Diffbot
   "Diffbot",
-  // Yandex AI
-  "YandexAdditionalBot",
+  // Yandex AI (Russia) — YandexGPT / Alice
+  "YandexAdditional", "YandexAdditionalBot",
+  // Huawei — PanGu LLM + Petal Search
+  "PanguBot", "PetalBot",
+  // Zhipu AI (China) — ChatGLM
+  "ChatGLM-Spider",
+  // iAsk (Chinese AI search)
+  "iAskBot", "iaskspider", "iaskspider/2.0",
   // Standard search
   "Googlebot", "Bingbot",
 ];
