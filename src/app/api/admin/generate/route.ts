@@ -111,11 +111,14 @@ function getExistingArticles(): Array<{ slug: string; title: string }> {
 // ── MDX cleanup ───────────────────────────────────────────────────────────────
 
 function stripFences(text: string): string {
+  // Remove Qwen3 <think>...</think> reasoning blocks
+  let cleaned = text.replace(/<think>[\s\S]*?<\/think>/gi, "").trim();
   // Remove ```mdx ... ``` or ``` ... ``` wrappers the LLM sometimes adds
-  return text
+  cleaned = cleaned
     .replace(/^```(?:mdx|markdown|md)?\s*\n/i, "")
     .replace(/\n```\s*$/i, "")
     .trim();
+  return cleaned;
 }
 
 function ensureValidMdx(text: string): string {
@@ -327,7 +330,9 @@ ${clusterKeywords || `Primary keyword: ${entry.primaryKeyword}`}
 
 TARGET LENGTH: ${entry.targetWords} words (±200 words)`;
 
-  const userPrompt = `Write a complete MDX blog post for DataLatte.
+  const userPrompt = `/no_think
+
+Write a complete MDX blog post for DataLatte.
 
 Title: ${entry.title}
 Primary keyword: ${entry.primaryKeyword}
