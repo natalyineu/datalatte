@@ -1,12 +1,13 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-15
-Total posts: 43
+Total posts: 44
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
 | `best-marketing-for-salons-2026-what-actually-works-with-real-examples` | Best Marketing for Salons in 2026: What Actually Works (With Real Examples) | 2026-05-15 | 961 | salon marketing, influencer marketing, email marketing, Google Ads, marketing automation |
 | `coffee-shop-marketing-ideas-30-strategies-to-fill-every-seat-in-2026` | Coffee Shop Marketing Ideas: 30 Strategies to Fill Every Seat in 2026 | 2026-05-15 | 1261 | coffee shop marketing ideas, email marketing, Google Ads, local SEO, marketing automation |
 | `email-marketing-for-coffee-shops-build-1000-loyal-regulars-in-90-days` | Email Marketing for Coffee Shops: Build 1,000 Loyal Regulars in 90 Days | 2026-05-15 | 1085 | email marketing for coffee shops, coffee shop marketing, loyal customers, digital marketing |
+| `email-marketing-ideas-for-small-businesses-20-campaigns-that-drive-revenue-2026` | Email Marketing Ideas for Small Businesses: 20 Campaigns That Drive Revenue in 2026 | 2026-05-15 | 1101 | email marketing ideas, small business marketing, digital marketing, marketing automation, loyalty programs |
 | `google-responsive-search-ads-best-practices-10-tips-to-improve-ad-strength` | Google Responsive Search Ads Best Practices: 10 Tips to Improve Your Ad Strength | 2026-05-15 | 883 | responsive search ads, google ads, local marketing, digital marketing agency |
 | `how-to-advertise-dog-grooming-business-15-ideas-that-actually-get-bookings` | How to Advertise Your Dog Grooming Business: 15 Ideas That Actually Get Bookings | 2026-05-15 | 944 | dog grooming marketing, pet grooming business, local seo, google ads, facebook ads |
 | `how-to-get-dog-grooming-clients-2026-growth-playbook-for-groomers` | How to Get Dog Grooming Clients: The 2026 Growth Playbook for Groomers | 2026-05-15 | 1130 | dog grooming marketing ideas, how to advertise dog grooming business, dog grooming advertising ideas, pet grooming marketing ideas, dog grooming marketing strategy |
@@ -73,6 +74,14 @@ Total posts: 43
 - **Words**: 1085
 - **Tags**: email marketing for coffee shops, coffee shop marketing, loyal customers, digital marketing
 - **Description**: Discover how to build 1,000 loyal coffee shop regulars in 90 days with effective email marketing strategies and tactics for coffee shops
+
+### Email Marketing Ideas for Small Businesses: 20 Campaigns That Drive Revenue in 2026
+- **Slug**: `email-marketing-ideas-for-small-businesses-20-campaigns-that-drive-revenue-2026`
+- **URL**: https://datalatte.pro/blog/email-marketing-ideas-for-small-businesses-20-campaigns-that-drive-revenue-2026
+- **Date**: 2026-05-15
+- **Words**: 1101
+- **Tags**: email marketing ideas, small business marketing, digital marketing, marketing automation, loyalty programs
+- **Description**: Discover 20 email marketing ideas for small businesses to boost revenue, including automation, personalization, and loyalty programs, with real examples
 
 ### Google Responsive Search Ads Best Practices: 10 Tips to Improve Your Ad Strength
 - **Slug**: `google-responsive-search-ads-best-practices-10-tips-to-improve-ad-strength`
