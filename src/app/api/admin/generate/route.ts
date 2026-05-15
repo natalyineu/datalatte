@@ -123,16 +123,32 @@ function stripFences(text: string): string {
 
 function ensureValidMdx(text: string): string {
   const stripped = stripFences(text);
-  // Verify frontmatter exists
-  if (!stripped.startsWith("---")) {
-    throw new Error("Generated content does not start with YAML frontmatter (---)");
+
+  // If it starts cleanly with frontmatter, return as-is
+  if (stripped.startsWith("---")) {
+    const secondDash = stripped.indexOf("---", 3);
+    if (secondDash === -1) throw new Error("Generated content has unclosed YAML frontmatter");
+    return stripped;
   }
-  // Validate frontmatter closes
-  const secondDash = stripped.indexOf("---", 3);
-  if (secondDash === -1) {
-    throw new Error("Generated content has unclosed YAML frontmatter");
+
+  // Qwen/other models sometimes add preamble text before the frontmatter —
+  // find the first occurrence of "---" and slice from there
+  const fmStart = stripped.indexOf("\n---");
+  if (fmStart !== -1) {
+    const sliced = stripped.slice(fmStart + 1).trim();
+    const secondDash = sliced.indexOf("---", 3);
+    if (secondDash !== -1) return sliced;
   }
-  return stripped;
+
+  // Last attempt: look for "---" anywhere
+  const anyFm = stripped.indexOf("---");
+  if (anyFm !== -1) {
+    const sliced = stripped.slice(anyFm).trim();
+    const secondDash = sliced.indexOf("---", 3);
+    if (secondDash !== -1) return sliced;
+  }
+
+  throw new Error("Generated content does not contain valid YAML frontmatter (---)");
 }
 
 // ── Index regeneration (inlined — avoids Turbopack spawnSync path analysis) ──
