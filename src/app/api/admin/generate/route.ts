@@ -4,6 +4,9 @@ import path from "path";
 import matter from "gray-matter";
 import { execSync } from "child_process";
 
+// Extend timeout to 60s (requires Vercel Pro) — runs fine locally with no limit
+export const maxDuration = 60;
+
 // ── Paths ────────────────────────────────────────────────────────────────────
 
 const QUEUE_PATH   = path.join(process.cwd(), "content/queue.json");
