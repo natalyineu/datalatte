@@ -1,6 +1,6 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-15
-Total posts: 51
+Total posts: 52
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
@@ -13,6 +13,7 @@ Total posts: 51
 | `how-to-advertise-dog-grooming-business-15-ideas-that-actually-get-bookings` | How to Advertise Your Dog Grooming Business: 15 Ideas That Actually Get Bookings | 2026-05-15 | 944 | dog grooming marketing, pet grooming business, local seo, google ads, facebook ads |
 | `how-to-get-dog-grooming-clients-2026-growth-playbook-for-groomers` | How to Get Dog Grooming Clients: The 2026 Growth Playbook for Groomers | 2026-05-15 | 1130 | dog grooming marketing ideas, how to advertise dog grooming business, dog grooming advertising ideas, pet grooming marketing ideas, dog grooming marketing strategy |
 | `how-to-market-a-coffee-shop-the-complete-2026-strategy-guide` | How to Market a Coffee Shop: The Complete 2026 Strategy Guide | 2026-05-15 | 1047 | email marketing for coffee shops, coffee shop marketing ideas, how to market a coffee shop, local SEO, Google Ads |
+| `is-tiktok-advertising-worth-it-for-local-businesses-2026` | Is TikTok Advertising Worth It for Local Businesses in 2026? | 2026-05-15 | 1524 | tiktok advertising, google ads for local, local business marketing, is tiktok advertising worth it |
 | `responsive-search-ads-explained-what-they-are-and-how-to-use-them-in-2026` | Responsive Search Ads Explained: What They Are and How to Use Them in 2026 | 2026-05-15 | 1097 | responsive search ads, google ads, small business marketing, digital marketing |
 | `salon-marketing-ideas-25-strategies-that-fill-your-chair-every-week` | Salon Marketing Ideas: 25 Strategies That Fill Your Chair Every Week | 2026-05-15 | 1053 | salon marketing ideas, influencer marketing for salons, local SEO, social media marketing |
 | `tiktok-ads-for-coffee-shops-step-by-step-guide` | TikTok Ads for Coffee Shops: Step-by-Step Guide | 2026-05-15 | 1450 | TikTok ads, coffee shop marketing, Google Ads for small businesses, digital marketing |
@@ -129,6 +130,14 @@ Total posts: 51
 - **Words**: 1047
 - **Tags**: email marketing for coffee shops, coffee shop marketing ideas, how to market a coffee shop, local SEO, Google Ads
 - **Description**: Learn how to market a coffee shop with our 2026 strategy guide, covering email marketing, Google Ads, and local SEO to attract 1000s of customers
+
+### Is TikTok Advertising Worth It for Local Businesses in 2026?
+- **Slug**: `is-tiktok-advertising-worth-it-for-local-businesses-2026`
+- **URL**: https://datalatte.pro/blog/is-tiktok-advertising-worth-it-for-local-businesses-2026
+- **Date**: 2026-05-15
+- **Words**: 1524
+- **Tags**: tiktok advertising, google ads for local, local business marketing, is tiktok advertising worth it
+- **Description**: Is TikTok advertising worth it for your local business in 2026? Discover real stats and cost benchmarks to help you decide.
 
 ### Responsive Search Ads Explained: What They Are and How to Use Them in 2026
 - **Slug**: `responsive-search-ads-explained-what-they-are-and-how-to-use-them-in-2026`
