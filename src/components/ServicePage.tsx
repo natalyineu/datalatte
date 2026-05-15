@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
+import { faqSchema } from "@/lib/schema";
 
 interface ServicePageProps {
   service: string;
@@ -12,7 +13,7 @@ interface ServicePageProps {
   whatItIs: string;
   howItWorks: { step: string; title: string; desc: string }[];
   included: string[];
-  notIncluded: string[];
+  notIncluded?: string[]; // kept for backward compat but ignored
   bestFor: string[];
   faqs: { q: string; a: string }[];
   relatedLinks: { label: string; href: string }[];
@@ -20,10 +21,16 @@ interface ServicePageProps {
 
 export default function ServicePage({
   service, tagline, description, icon, accentClass,
-  whatItIs, howItWorks, included, notIncluded, bestFor, faqs, relatedLinks,
+  whatItIs, howItWorks, included, bestFor, faqs, relatedLinks,
 }: ServicePageProps) {
   return (
     <>
+      {/* FAQPage structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs)) }}
+      />
+
       {/* Hero */}
       <section className={`${accentClass} py-24 px-4 sm:px-6 lg:px-8`}>
         <div className="max-w-4xl mx-auto text-center">
@@ -35,7 +42,7 @@ export default function ServicePage({
           <p className="text-xl text-white/80 font-medium mb-3">{tagline}</p>
           <p className="text-white/65 max-w-2xl mx-auto mb-8 leading-relaxed">{description}</p>
           <Link href="/contact" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg">
-            Get a Free Audit <ArrowRight size={17} />
+            Request a Free Audit <ArrowRight size={17} />
           </Link>
         </div>
       </section>
@@ -72,37 +79,19 @@ export default function ServicePage({
         </div>
       </SectionWrapper>
 
-      {/* Included / not */}
+      {/* Included */}
       <SectionWrapper>
-        <div className="grid md:grid-cols-2 gap-10 max-w-4xl mx-auto">
-          <div>
-            <h3 className="font-bold text-gray-900 text-xl mb-5 flex items-center gap-2">
-              <span className="text-coffee-600">✓</span> What's included
-            </h3>
-            <ul className="space-y-3">
-              {included.map((item) => (
-                <li key={item} className="flex items-start gap-2.5 text-gray-600">
-                  <CheckCircle2 size={17} className="text-coffee-500 shrink-0 mt-0.5" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-bold text-gray-900 text-xl mb-5 flex items-center gap-2">
-              <span className="text-gray-400">!</span> What I don't do
-            </h3>
-            <ul className="space-y-3">
-              {notIncluded.map((item) => (
-                <li key={item} className="flex items-start gap-2.5 text-gray-500 text-sm">
-                  <span className="text-gray-400 mt-0.5 shrink-0">→</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <p className="mt-5 text-xs text-gray-400 italic">
-              Being clear upfront saves everyone time. If I can't serve a need, I'll tell you.
-            </p>
+        <div className="max-w-4xl mx-auto">
+          <h3 className="font-bold text-gray-900 text-xl mb-6 flex items-center gap-2">
+            <span className="text-coffee-600">✓</span> Everything included in {service}
+          </h3>
+          <div className="grid sm:grid-cols-2 gap-3">
+            {included.map((item) => (
+              <div key={item} className="flex items-start gap-2.5 bg-coffee-50 rounded-xl px-4 py-3 border border-coffee-100">
+                <CheckCircle2 size={17} className="text-coffee-500 shrink-0 mt-0.5" />
+                <span className="text-gray-700 text-sm">{item}</span>
+              </div>
+            ))}
           </div>
         </div>
       </SectionWrapper>

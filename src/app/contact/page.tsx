@@ -136,7 +136,7 @@ export default function ContactPage() {
                 type="submit"
                 className="btn-primary w-full justify-center text-base py-3.5"
               >
-                Send message <ArrowRight size={17} />
+                Request My Free Audit <ArrowRight size={17} />
               </button>
 
               <p className="text-xs text-gray-400 text-center">

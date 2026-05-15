@@ -23,8 +23,8 @@ export const metadata: Metadata = {
     "pet groomer marketing",
     "fitness studio marketing",
   ],
-  authors: [{ name: "DataLatte", url: "https://datalatte.pro" }],
-  creator: "DataLatte",
+  authors: [{ name: "Nataliia Makota", url: "https://datalatte.pro/about" }],
+  creator: "Nataliia Makota",
   openGraph: {
     type: "website",
     locale: "en_US",
