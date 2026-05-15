@@ -35,7 +35,7 @@ export const metadata: Metadata = {
       "Brew up better business with data-driven marketing. Helping local businesses get more customers through the door.",
     images: [
       {
-        url: "/og-image.png",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "DataLatte — Data-Driven Local Marketing",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     title: "DataLatte — Data-Driven Local Marketing",
     description:
       "Brew up better business with data-driven marketing for local SMBs.",
-    images: ["/og-image.png"],
+    images: ["/opengraph-image"],
   },
   robots: {
     index: true,
