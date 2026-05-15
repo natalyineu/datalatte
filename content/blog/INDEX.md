@@ -1,6 +1,6 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-15
-Total posts: 53
+Total posts: 54
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
@@ -13,13 +13,14 @@ Total posts: 53
 | `how-to-advertise-dog-grooming-business-15-ideas-that-actually-get-bookings` | How to Advertise Your Dog Grooming Business: 15 Ideas That Actually Get Bookings | 2026-05-15 | 944 | dog grooming marketing, pet grooming business, local seo, google ads, facebook ads |
 | `how-to-get-dog-grooming-clients-2026-growth-playbook-for-groomers` | How to Get Dog Grooming Clients: The 2026 Growth Playbook for Groomers | 2026-05-15 | 1130 | dog grooming marketing ideas, how to advertise dog grooming business, dog grooming advertising ideas, pet grooming marketing ideas, dog grooming marketing strategy |
 | `how-to-market-a-coffee-shop-the-complete-2026-strategy-guide` | How to Market a Coffee Shop: The Complete 2026 Strategy Guide | 2026-05-15 | 1047 | email marketing for coffee shops, coffee shop marketing ideas, how to market a coffee shop, local SEO, Google Ads |
+| `how-to-target-local-customers-on-tiktok` | How to Target Local Customers on TikTok | 2026-05-15 | 1206 | tiktok local targeting, tiktok advertising, local marketing, small business marketing |
 | `is-tiktok-advertising-worth-it-for-local-businesses-2026` | Is TikTok Advertising Worth It for Local Businesses in 2026? | 2026-05-15 | 1524 | tiktok advertising, google ads for local, local business marketing, is tiktok advertising worth it |
 | `responsive-search-ads-explained-what-they-are-and-how-to-use-them-in-2026` | Responsive Search Ads Explained: What They Are and How to Use Them in 2026 | 2026-05-15 | 1097 | responsive search ads, google ads, small business marketing, digital marketing |
 | `salon-marketing-ideas-25-strategies-that-fill-your-chair-every-week` | Salon Marketing Ideas: 25 Strategies That Fill Your Chair Every Week | 2026-05-15 | 1053 | salon marketing ideas, influencer marketing for salons, local SEO, social media marketing |
 | `tiktok-ads-best-practices-12-tips-for-better-results` | TikTok Ads Best Practices: 12 Tips for Better Results | 2026-05-15 | 1354 | TikTok Ads, Google Ads, Digital Marketing, Local SEO |
 | `tiktok-ads-for-coffee-shops-step-by-step-guide` | TikTok Ads for Coffee Shops: Step-by-Step Guide | 2026-05-15 | 1450 | TikTok ads, coffee shop marketing, Google Ads for small businesses, digital marketing |
 | `tiktok-ads-for-fitness-studios-go-viral-and-fill-classes` | TikTok Ads for Fitness Studios: How to Go Viral and Fill Classes | 2026-05-15 | 1232 | TikTok Ads, Fitness Marketing, Google Ads, Local Marketing |
-| `tiktok-ads-for-hair-salons-get-more-bookings-with-short-videos` | TikTok Ads for Hair Salons: Get More Bookings With Short Videos | 2026-05-15 | 1541 | TikTok Ads, Hair Salons, Local Marketing, Video Advertising |
+| `tiktok-ads-for-hair-salons-get-more-bookings-with-short-videos` | TikTok Ads for Hair Salons: Get More Bookings With Short Videos | 2026-05-15 | 1545 | TikTok Ads, Hair Salons, Local Marketing, Video Advertising |
 | `tiktok-ads-for-pet-groomers-cute-content-that-converts` | TikTok Ads for Pet Groomers: Cute Content That Converts | 2026-05-15 | 1277 | TikTok, pet grooming, Google Ads, pet grooming marketing |
 | `tiktok-ads-for-small-business-complete-beginners-guide-2026` | TikTok Ads for Small Business: Complete Beginner's Guide (2026) | 2026-05-15 | 896 | TikTok Ads, Small Business, Social Media Marketing, Digital Marketing |
 | `tiktok-ads-vs-facebook-ads-which-is-better-for-local-business` | TikTok Ads vs Facebook Ads: Which Is Better for Local Business? | 2026-05-15 | 1168 | tiktok ads, facebook ads, local business, digital marketing |
@@ -132,6 +133,14 @@ Total posts: 53
 - **Tags**: email marketing for coffee shops, coffee shop marketing ideas, how to market a coffee shop, local SEO, Google Ads
 - **Description**: Learn how to market a coffee shop with our 2026 strategy guide, covering email marketing, Google Ads, and local SEO to attract 1000s of customers
 
+### How to Target Local Customers on TikTok
+- **Slug**: `how-to-target-local-customers-on-tiktok`
+- **URL**: https://datalatte.pro/blog/how-to-target-local-customers-on-tiktok
+- **Date**: 2026-05-15
+- **Words**: 1206
+- **Tags**: tiktok local targeting, tiktok advertising, local marketing, small business marketing
+- **Description**: Learn how to use TikTok's local targeting features to reach nearby customers. Real examples, ad settings, and tips for small businesses using TikTok ads.
+
 ### Is TikTok Advertising Worth It for Local Businesses in 2026?
 - **Slug**: `is-tiktok-advertising-worth-it-for-local-businesses-2026`
 - **URL**: https://datalatte.pro/blog/is-tiktok-advertising-worth-it-for-local-businesses-2026
@@ -184,7 +193,7 @@ Total posts: 53
 - **Slug**: `tiktok-ads-for-hair-salons-get-more-bookings-with-short-videos`
 - **URL**: https://datalatte.pro/blog/tiktok-ads-for-hair-salons-get-more-bookings-with-short-videos
 - **Date**: 2026-05-15
-- **Words**: 1541
+- **Words**: 1545
 - **Tags**: TikTok Ads, Hair Salons, Local Marketing, Video Advertising
 - **Description**: Discover how TikTok ads for hair salons can boost bookings fast. Learn budgeting, creative tips, targeting tricks and real ROI numbers in 2026.
 
