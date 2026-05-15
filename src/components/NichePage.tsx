@@ -4,6 +4,7 @@ import { CheckCircle2, ArrowRight, TrendingUp } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
 import TestimonialCard from "@/components/TestimonialCard";
+import { faqSchema } from "@/lib/schema";
 
 interface NichePageProps {
   niche: string;
@@ -26,6 +27,7 @@ export default function NichePage({
 }: NichePageProps) {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faq)) }} />
       {/* Hero */}
       <section className={`relative overflow-hidden ${accentColor} py-24`}>
         <div className="absolute inset-0 opacity-20">

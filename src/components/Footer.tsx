@@ -7,6 +7,8 @@ const footerLinks = {
     { label: "Hair & Beauty Salons",    href: "/for/hair-salons" },
     { label: "Pet Groomers",            href: "/for/pet-groomers" },
     { label: "Fitness & Yoga Studios",  href: "/for/fitness-studios" },
+    { label: "Growing Businesses",      href: "/for/medium-business" },
+    { label: "Enterprise",              href: "/for/enterprise" },
   ],
   Services: [
     { label: "Google Ads",              href: "/services/google-ads" },
@@ -14,6 +16,10 @@ const footerLinks = {
     { label: "Google Business Profile", href: "/services/google-business-profile" },
     { label: "Local SEO",               href: "/services/local-seo" },
     { label: "Analytics & Reporting",   href: "/services/analytics" },
+    { label: "AI Agents",               href: "/services/ai-agents" },
+    { label: "Email & SMS",             href: "/services/email-sms" },
+    { label: "Social Media",            href: "/services/social-media" },
+    { label: "Website Design",          href: "/services/website" },
   ],
   Company: [
     { label: "About",   href: "/about" },

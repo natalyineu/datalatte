@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Mail, MessageCircle, Calendar, ArrowRight, Clock, CheckCircle2, MapPin } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
+import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact — Get a Free Marketing Audit",
@@ -38,111 +39,7 @@ export default function ContactPage() {
               I typically respond within one business day.
             </p>
 
-            <form className="space-y-5" action="https://formspree.io/f/xqenvpwv" method="POST">
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1.5">
-                    Your name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Jane Smith"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-coffee-500 focus:ring-2 focus:ring-coffee-100 outline-none transition text-sm"
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1.5">
-                    Email address
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="jane@yourbusiness.com"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-coffee-500 focus:ring-2 focus:ring-coffee-100 outline-none transition text-sm"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="business" className="block text-sm font-medium text-gray-700 mb-1.5">
-                  Your business name
-                </label>
-                <input
-                  type="text"
-                  id="business"
-                  name="business"
-                  placeholder="The Morning Grind Café"
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-coffee-500 focus:ring-2 focus:ring-coffee-100 outline-none transition text-sm"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="type" className="block text-sm font-medium text-gray-700 mb-1.5">
-                  Business type
-                </label>
-                <select
-                  id="type"
-                  name="type"
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-coffee-500 focus:ring-2 focus:ring-coffee-100 outline-none transition text-sm bg-white text-gray-700"
-                >
-                  <option value="">Select your niche…</option>
-                  <option value="coffee">Coffee Shop / Café / Restaurant</option>
-                  <option value="salon">Hair Salon / Barbershop / Beauty Studio</option>
-                  <option value="grooming">Pet Groomer / Dog Walker / Pet Care</option>
-                  <option value="fitness">Fitness Studio / Gym / Yoga / Personal Trainer</option>
-                  <option value="other">Other local business</option>
-                </select>
-              </div>
-
-              <div>
-                <label htmlFor="interest" className="block text-sm font-medium text-gray-700 mb-1.5">
-                  What are you most interested in?
-                </label>
-                <select
-                  id="interest"
-                  name="interest"
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-coffee-500 focus:ring-2 focus:ring-coffee-100 outline-none transition text-sm bg-white text-gray-700"
-                >
-                  <option value="">Select a service…</option>
-                  <option value="google-ads">Google Ads</option>
-                  <option value="meta-ads">Meta Ads (Facebook / Instagram)</option>
-                  <option value="gbp">Google Business Profile</option>
-                  <option value="seo">Local SEO</option>
-                  <option value="analytics">Analytics & Reporting</option>
-                  <option value="audit">Free audit — not sure yet</option>
-                  <option value="everything">Full marketing strategy</option>
-                </select>
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1.5">
-                  Tell me about your current situation
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={5}
-                  placeholder="What's your biggest marketing challenge right now? What have you tried? What results are you hoping for?"
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-coffee-500 focus:ring-2 focus:ring-coffee-100 outline-none transition text-sm resize-none"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="btn-primary w-full justify-center text-base py-3.5"
-              >
-                Request My Free Audit <ArrowRight size={17} />
-              </button>
-
-              <p className="text-xs text-gray-400 text-center">
-                No spam, ever. Your info stays with me and is used only to respond to your inquiry.
-              </p>
-            </form>
+            <ContactForm />
           </div>
 
           {/* Other options + what to expect */}

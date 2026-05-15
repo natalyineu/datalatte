@@ -188,9 +188,7 @@ export default async function BlogPostPage({
         {/* Author */}
         <div className="mt-12 pt-8 border-t border-gray-100">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-coffee-700 to-coffee-600 flex items-center justify-center text-white font-bold text-lg">
-              N
-            </div>
+            <Image src="/images/founder.png" alt="Nataliia Makota" width={40} height={40} className="rounded-full object-cover w-10 h-10" />
             <div>
               <div className="font-semibold text-gray-900">{frontmatter.author}</div>
               <div className="text-sm text-gray-500">

@@ -136,7 +136,7 @@ export function articleSchema({
       "@type": "Organization",
       name: "DataLatte",
       url: "https://datalatte.pro",
-      logo: { "@type": "ImageObject", url: "https://datalatte.pro/logo.png" },
+      logo: { "@type": "ImageObject", url: "https://datalatte.pro/opengraph-image" },
     },
     image: image ?? "https://datalatte.pro/og-image.png",
   };
