@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Mail, MessageCircle, MapPin } from "lucide-react";
+import { Mail, MessageCircle, MapPin, Linkedin, Instagram } from "lucide-react";
 
 const footerLinks = {
   "For Your Business": [
@@ -50,6 +50,26 @@ export default function Footer() {
                 <MapPin size={15} className="shrink-0 mt-0.5" />
                 <span>Bałtyk Business Square<br />Poznań, Poland</span>
               </span>
+            </div>
+            <div className="flex gap-3 mt-6">
+              <a
+                href="https://www.linkedin.com/company/datalattepro/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="DataLatte on LinkedIn"
+                className="w-9 h-9 rounded-lg bg-coffee-900 hover:bg-coffee-700 flex items-center justify-center transition-colors"
+              >
+                <Linkedin size={16} className="text-gray-300" />
+              </a>
+              <a
+                href="https://www.instagram.com/datalatte.pro"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="DataLatte on Instagram"
+                className="w-9 h-9 rounded-lg bg-coffee-900 hover:bg-coffee-700 flex items-center justify-center transition-colors"
+              >
+                <Instagram size={16} className="text-gray-300" />
+              </a>
             </div>
           </div>
 
