@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -158,41 +161,6 @@ const whyCards = [
   },
 ];
 
-const featuredPosts = [
-  {
-    title: "How Coffee Shops Can Dominate Google Maps in Their Neighborhood",
-    excerpt:
-      "The local map pack gets 44% of clicks for 'near me' searches. Here's exactly how to claim your spot without a big budget.",
-    slug: "coffee-shops-dominate-google-maps",
-    category: "Coffee Shops",
-    date: "Apr 10, 2026",
-    readTime: "6 min read",
-    image:
-      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80",
-  },
-  {
-    title: "The Hair Salon Owner's Guide to Getting More Bookings from Instagram",
-    excerpt:
-      "Meta Ads can feel like throwing money into a black hole — unless you set them up right. Here's what actually works.",
-    slug: "hair-salon-instagram-bookings",
-    category: "Hair Salons",
-    date: "Apr 4, 2026",
-    readTime: "7 min read",
-    image:
-      "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80",
-  },
-  {
-    title: "5 Google Ads Mistakes Pet Groomers Keep Making (and How to Fix Them)",
-    excerpt:
-      "Most small business Google Ads accounts I audit have at least 3 of these issues. They're all fixable in an afternoon.",
-    slug: "pet-groomer-google-ads-mistakes",
-    category: "Pet Groomers",
-    date: "Mar 28, 2026",
-    readTime: "5 min read",
-    image:
-      "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=600&q=80",
-  },
-];
 
 const testimonials = [
   {
@@ -218,7 +186,21 @@ const testimonials = [
   },
 ];
 
+function getLatestPosts(count = 3) {
+  const dir = path.join(process.cwd(), "content/blog");
+  return fs.readdirSync(dir)
+    .filter(f => f.endsWith(".mdx"))
+    .map(file => {
+      const raw = fs.readFileSync(path.join(dir, file), "utf8");
+      const { data } = matter(raw);
+      return { slug: file.replace(".mdx",""), title: String(data.title ?? ""), description: String(data.description ?? ""), category: String(data.category ?? ""), date: String(data.date ?? ""), readTime: String(data.readTime ?? "5 min read"), image: String(data.image ?? "") };
+    })
+    .sort((a,b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, count);
+}
+
 export default function HomePage() {
+  const latestPosts = getLatestPosts();
   return (
     <>
       {/* Hero */}
@@ -327,6 +309,25 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Stats bar */}
+      <div className="bg-white border-y border-gray-100 py-8">
+        <div className="max-w-4xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          {[
+            { value: 10, suffix: "+", label: "Years experience" },
+            { value: 50, suffix: "+", label: "Guides published" },
+            { value: 15, suffix: "+", label: "Ad platforms" },
+            { value: 100, suffix: "%", label: "Data-driven" },
+          ].map((s) => (
+            <div key={s.label}>
+              <div className="text-3xl font-bold text-coffee-700">
+                <AnimatedCounter to={s.value} suffix={s.suffix} />
+              </div>
+              <div className="text-sm text-gray-500 mt-1">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* Niches */}
       <SectionWrapper className="bg-gray-50">
@@ -520,7 +521,7 @@ export default function HomePage() {
             <span className="gradient-text">real businesses</span>
           </h2>
           <p className="section-subtitle mt-4 max-w-lg mx-auto">
-            Still building my portfolio of case studies — but here's what early clients have to say.
+            What clients say after working with DataLatte.
           </p>
         </div>
 
@@ -552,8 +553,8 @@ export default function HomePage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {featuredPosts.map((post) => (
-            <BlogCard key={post.slug} {...post} />
+          {latestPosts.map((post) => (
+            <BlogCard key={post.slug} title={post.title} excerpt={post.description} slug={post.slug} category={post.category} date={post.date} readTime={post.readTime} image={post.image} />
           ))}
         </div>
 

@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import SectionWrapper from "@/components/SectionWrapper";
-import BlogCard from "@/components/BlogCard";
+import BlogGrid from "@/components/BlogGrid";
 import NewsletterForm from "@/components/NewsletterForm";
 import Link from "next/link";
 
@@ -49,8 +49,6 @@ export const metadata: Metadata = {
     "Data-driven local marketing advice for small business owners. Practical tips on Google Ads, Meta Ads, local SEO, and Google Business Profile — written for owners, not marketers.",
 };
 
-const categories = ["All", "Coffee Shops", "Hair Salons", "Pet Groomers", "Fitness Studios", "Local SEO", "Strategy"];
-
 export default function BlogPage() {
   const posts = getAllPosts();
 
@@ -72,40 +70,7 @@ export default function BlogPage() {
       </section>
 
       <SectionWrapper>
-        {/* Category filter (visual only — full filtering would require client component or SSR params) */}
-        <div className="flex flex-wrap gap-2 mb-10">
-          {categories.map((cat, i) => (
-            <button
-              key={cat}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                i === 0
-                  ? "bg-coffee-700 text-white"
-                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {posts.map((post) => (
-            <BlogCard
-              key={post.slug}
-              title={post.title}
-              excerpt={post.description}
-              slug={post.slug}
-              category={post.category}
-              date={new Date(post.date).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-              })}
-              readTime={post.readTime}
-              image={post.image}
-            />
-          ))}
-        </div>
+        <BlogGrid posts={posts} />
 
         {/* Newsletter */}
         <div className="mt-14 text-center">
