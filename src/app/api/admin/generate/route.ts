@@ -110,6 +110,24 @@ function getExistingArticles(): Array<{ slug: string; title: string }> {
 
 // ── MDX cleanup ───────────────────────────────────────────────────────────────
 
+function sanitizeUnicode(text: string): string {
+  // Replace fancy Unicode punctuation that breaks MDX parsing
+  return text
+    .replace(/‑/g, '-')
+    .replace(/‐/g, '-')
+    .replace(/‒/g, '-')
+    .replace(/–/g, '-')
+    .replace(/—/g, ' - ')
+    .replace(/‘/g, "'")
+    .replace(/’/g, "'")
+    .replace(/“/g, '"')
+    .replace(/”/g, '"')
+    .replace(/ /g, ' ')
+    .replace(/<($d)/g, '&lt;$1')
+    .replace(/<(d)/g, '&lt;$1')
+    .replace(/<(%)/g, '&lt;$1');
+}
+
 function stripFences(text: string): string {
   // Remove Qwen3 <think>...</think> reasoning blocks
   let cleaned = text.replace(/<think>[\s\S]*?<\/think>/gi, "").trim();
@@ -118,6 +136,8 @@ function stripFences(text: string): string {
     .replace(/^```(?:mdx|markdown|md)?\s*\n/i, "")
     .replace(/\n```\s*$/i, "")
     .trim();
+  // Sanitize Unicode punctuation that breaks MDX
+  cleaned = sanitizeUnicode(cleaned);
   return cleaned;
 }
 
