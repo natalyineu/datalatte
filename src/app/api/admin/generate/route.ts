@@ -198,8 +198,8 @@ function runBuild(): { success: boolean; output: string } {
 
 const GROQ_MODELS = [
   "qwen/qwen3-32b",             // primary — strong reasoning, great structured content
-  "llama-3.3-70b-versatile",   // fallback — solid quality
-  "llama-3.1-8b-instant",      // last resort — faster, lighter
+  "openai/gpt-oss-120b",        // fallback — largest model on Groq, best quality
+  "llama-3.1-8b-instant",       // last resort — faster, lighter
 ];
 
 async function callGroq(
