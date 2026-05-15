@@ -235,15 +235,15 @@ export default function HomePage() {
                 Data-Driven Local Marketing
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 text-balance">
-                Brew up better
+                Digital Marketing for
                 <br />
-                <span className="text-coffee-300">business</span> with
+                <span className="text-coffee-300">Local Businesses,</span>
                 <br />
-                data that works
+                Done Right
               </h1>
               <p className="text-coffee-200 text-lg md:text-xl mb-8 max-w-lg leading-relaxed">
-                Marketing for coffee shops, hair salons, pet groomers, and fitness studios
-                — the kind that actually brings customers through your door.
+                Google Ads, Meta Ads, local SEO and marketing automation for coffee shops,
+                hair salons, pet groomers, fitness studios — and growing brands at any scale.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Link

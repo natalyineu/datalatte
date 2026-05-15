@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import ServicePage from "@/components/ServicePage";
 
 export const metadata: Metadata = {
-  title: "Google Ads for Local Businesses",
+  title: "Google Ads for Coffee Shops, Salons & Local Businesses",
   description:
-    "Google Ads management for coffee shops, hair salons, pet groomers, and fitness studios. Pay only for clicks from local customers who are actively searching for you.",
+    "Google Ads management for local businesses and growing brands. Pay only for clicks from customers actively searching for you. Setup, strategy, and ongoing optimisation included.",
 };
 
 export default function GoogleAdsPage() {
@@ -44,29 +44,33 @@ export default function GoogleAdsPage() {
         },
       ]}
       included={[
-        "Account setup or audit",
-        "Keyword research and competitive analysis",
-        "Campaign and ad group structure",
-        "Ad copywriting and A/B testing",
-        "Geographic and demographic targeting",
-        "Negative keyword management",
-        "Conversion tracking setup",
-        "Monthly performance reporting",
-        "Ongoing optimizations",
-      ]}
-      notIncluded={[
-        "Landing page design (I'll advise on improvements but don't build pages — I can refer you to someone)",
-        "Ad spend — that goes directly to Google from your account",
-        "Google Merchant Center / Shopping campaigns (for ecommerce)",
-        "Display or YouTube campaigns unless requested",
+        "Account setup or full audit of existing account",
+        "Keyword research and competitive landscape analysis",
+        "Campaign and ad group architecture",
+        "Ad copywriting, RSA optimisation and A/B testing",
+        "Geographic, demographic, and audience targeting",
+        "Negative keyword management and search term mining",
+        "Conversion tracking setup (calls, forms, bookings, purchases)",
+        "Google Shopping & Performance Max campaigns",
+        "Display and YouTube campaigns",
+        "Remarketing and audience list strategy",
+        "Landing page recommendations and CRO guidance",
+        "Landing page design and build (if needed)",
+        "Quality Score improvement and bid strategy optimisation",
+        "Weekly optimisations and bid adjustments",
+        "Monthly performance reports in plain English",
+        "Multi-location and multi-market campaign management",
       ]}
       bestFor={[
         "Coffee shops wanting to show up for 'near me' searches",
         "Hair salons targeting specific service searches like 'balayage near me'",
         "Pet groomers in competitive local markets",
         "Fitness studios promoting trial class sign-ups",
-        "Any local business where customers actively search before buying",
-        "Businesses with clear offers and a working website or booking page",
+        "E-commerce brands running Shopping and Performance Max",
+        "Multi-location businesses needing coordinated geo campaigns",
+        "SaaS and B2B companies running lead generation campaigns",
+        "Enterprise brands requiring structured campaign hierarchies",
+        "Any business where customers actively search before buying",
       ]}
       faqs={[
         {

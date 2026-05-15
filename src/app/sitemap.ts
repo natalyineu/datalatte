@@ -38,6 +38,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/for/hair-salons`,                   lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/for/pet-groomers`,                  lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/for/fitness-studios`,               lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/for/medium-business`,               lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/for/enterprise`,                    lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     // Service pages
     { url: `${baseUrl}/services/google-ads`,               lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/services/meta-ads`,                 lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
