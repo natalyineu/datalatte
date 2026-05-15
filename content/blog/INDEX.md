@@ -1,10 +1,11 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-15
-Total posts: 37
+Total posts: 38
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
 | `best-marketing-for-salons-2026-what-actually-works-with-real-examples` | Best Marketing for Salons in 2026: What Actually Works (With Real Examples) | 2026-05-15 | 961 | salon marketing, influencer marketing, email marketing, Google Ads, marketing automation |
+| `coffee-shop-marketing-ideas-30-strategies-to-fill-every-seat-in-2026` | Coffee Shop Marketing Ideas: 30 Strategies to Fill Every Seat in 2026 | 2026-05-15 | 1261 | coffee shop marketing ideas, email marketing, Google Ads, local SEO, marketing automation |
 | `email-marketing-for-coffee-shops-build-1000-loyal-regulars-in-90-days` | Email Marketing for Coffee Shops: Build 1,000 Loyal Regulars in 90 Days | 2026-05-15 | 1085 | email marketing for coffee shops, coffee shop marketing, loyal customers, digital marketing |
 | `salon-marketing-ideas-25-strategies-that-fill-your-chair-every-week` | Salon Marketing Ideas: 25 Strategies That Fill Your Chair Every Week | 2026-05-15 | 1053 | salon marketing ideas, influencer marketing for salons, local SEO, social media marketing |
 | `7-best-marketing-automation-platforms-for-small-businesses-in-2026-compared` | 7 Best Marketing Automation Platforms for Small Businesses in 2026 (Compared) | 2026-05-14 | 826 | marketing automation, small business, digital marketing, local business |
@@ -51,6 +52,14 @@ Total posts: 37
 - **Words**: 961
 - **Tags**: salon marketing, influencer marketing, email marketing, Google Ads, marketing automation
 - **Description**: Discover the best marketing strategies for salons in 2026, including influencer marketing, email marketing, and Google Ads, with real examples and expert advice
+
+### Coffee Shop Marketing Ideas: 30 Strategies to Fill Every Seat in 2026
+- **Slug**: `coffee-shop-marketing-ideas-30-strategies-to-fill-every-seat-in-2026`
+- **URL**: https://datalatte.pro/blog/coffee-shop-marketing-ideas-30-strategies-to-fill-every-seat-in-2026
+- **Date**: 2026-05-15
+- **Words**: 1261
+- **Tags**: coffee shop marketing ideas, email marketing, Google Ads, local SEO, marketing automation
+- **Description**: Discover 30 coffee shop marketing ideas to fill every seat, from email marketing to Google Ads and local SEO, and learn how to implement them in 2026.
 
 ### Email Marketing for Coffee Shops: Build 1,000 Loyal Regulars in 90 Days
 - **Slug**: `email-marketing-for-coffee-shops-build-1000-loyal-regulars-in-90-days`
