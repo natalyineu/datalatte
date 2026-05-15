@@ -1,10 +1,11 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-15
-Total posts: 36
+Total posts: 37
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
 | `best-marketing-for-salons-2026-what-actually-works-with-real-examples` | Best Marketing for Salons in 2026: What Actually Works (With Real Examples) | 2026-05-15 | 961 | salon marketing, influencer marketing, email marketing, Google Ads, marketing automation |
+| `email-marketing-for-coffee-shops-build-1000-loyal-regulars-in-90-days` | Email Marketing for Coffee Shops: Build 1,000 Loyal Regulars in 90 Days | 2026-05-15 | 1085 | email marketing for coffee shops, coffee shop marketing, loyal customers, digital marketing |
 | `salon-marketing-ideas-25-strategies-that-fill-your-chair-every-week` | Salon Marketing Ideas: 25 Strategies That Fill Your Chair Every Week | 2026-05-15 | 1053 | salon marketing ideas, influencer marketing for salons, local SEO, social media marketing |
 | `7-best-marketing-automation-platforms-for-small-businesses-in-2026-compared` | 7 Best Marketing Automation Platforms for Small Businesses in 2026 (Compared) | 2026-05-14 | 826 | marketing automation, small business, digital marketing, local business |
 | `best-marketing-automation-tools-small-business` | Best Marketing Automation Tools for Small Businesses in 2026 (Honestly Compared) | 2026-05-14 | 1581 | marketing automation, tools, comparison, small business, crm |
@@ -50,6 +51,14 @@ Total posts: 36
 - **Words**: 961
 - **Tags**: salon marketing, influencer marketing, email marketing, Google Ads, marketing automation
 - **Description**: Discover the best marketing strategies for salons in 2026, including influencer marketing, email marketing, and Google Ads, with real examples and expert advice
+
+### Email Marketing for Coffee Shops: Build 1,000 Loyal Regulars in 90 Days
+- **Slug**: `email-marketing-for-coffee-shops-build-1000-loyal-regulars-in-90-days`
+- **URL**: https://datalatte.pro/blog/email-marketing-for-coffee-shops-build-1000-loyal-regulars-in-90-days
+- **Date**: 2026-05-15
+- **Words**: 1085
+- **Tags**: email marketing for coffee shops, coffee shop marketing, loyal customers, digital marketing
+- **Description**: Discover how to build 1,000 loyal coffee shop regulars in 90 days with effective email marketing strategies and tactics for coffee shops
 
 ### Salon Marketing Ideas: 25 Strategies That Fill Your Chair Every Week
 - **Slug**: `salon-marketing-ideas-25-strategies-that-fill-your-chair-every-week`
