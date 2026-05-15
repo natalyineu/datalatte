@@ -4,6 +4,7 @@ import path from "path";
 import matter from "gray-matter";
 import SectionWrapper from "@/components/SectionWrapper";
 import BlogCard from "@/components/BlogCard";
+import NewsletterForm from "@/components/NewsletterForm";
 import Link from "next/link";
 
 export const revalidate = 86400;
@@ -106,27 +107,9 @@ export default function BlogPage() {
           ))}
         </div>
 
-        {/* Load more CTA */}
+        {/* Newsletter */}
         <div className="mt-14 text-center">
-          <div className="bg-coffee-50 rounded-2xl p-8 max-w-lg mx-auto">
-            <h3 className="font-bold text-gray-900 text-lg mb-2">Stay in the loop</h3>
-            <p className="text-gray-500 text-sm mb-5">
-              New posts weekly. No spam, no fluff — just practical local marketing tips.
-            </p>
-            <form className="flex gap-2">
-              <input
-                type="email"
-                placeholder="your@email.com"
-                className="flex-1 px-4 py-2.5 rounded-xl border border-gray-200 focus:border-coffee-500 focus:ring-2 focus:ring-coffee-100 outline-none text-sm"
-              />
-              <button
-                type="submit"
-                className="bg-coffee-700 hover:bg-coffee-800 text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition-colors"
-              >
-                Subscribe
-              </button>
-            </form>
-          </div>
+          <NewsletterForm source="blog" />
         </div>
       </SectionWrapper>
 
