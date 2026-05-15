@@ -1,6 +1,6 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-15
-Total posts: 55
+Total posts: 56
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
@@ -34,6 +34,7 @@ Total posts: 55
 | `tiktok-ads-for-pet-groomers-cute-content-that-converts` | TikTok Ads for Pet Groomers: Cute Content That Converts | 2026-05-15 | 1277 | TikTok, pet grooming, Google Ads, pet grooming marketing |
 | `tiktok-ads-for-small-business-complete-beginners-guide-2026` | TikTok Ads for Small Business: Complete Beginner's Guide (2026) | 2026-05-15 | 896 | TikTok Ads, Small Business, Social Media Marketing, Digital Marketing |
 | `tiktok-ads-vs-facebook-ads-which-is-better-for-local-business` | TikTok Ads vs Facebook Ads: Which Is Better for Local Business? | 2026-05-15 | 1168 | tiktok ads, facebook ads, local business, digital marketing |
+| `what-is-programmatic-advertising-plain-english-guide-for-business-owners` | What Is Programmatic Advertising? Plain-English Guide for Business Owners | 2026-05-15 | 1542 | programmatic advertising, digital marketing, Google Ads, Meta Ads, automation |
 | `youtube-ad-formats-explained-skippable-non-skippable-bumper-discovery` | YouTube Ad Formats Explained: Skippable, Non-Skippable, Bumper, Discovery | 2026-05-15 | 1405 | youtube ads, youtube ad formats, youtube marketing, google ads, video marketing |
 | `youtube-ads-best-practices-10-tips-for-local-businesses` | YouTube Ads Best Practices: 10 Tips for Local Businesses | 2026-05-15 | 1429 | youtube ads best practices, local ad strategy, google ads, video marketing, small business marketing |
 | `youtube-ads-for-small-business-is-it-worth-it-2026` | YouTube Ads for Small Business: Is It Worth It in 2026? | 2026-05-15 | 1632 | YouTube Ads, Google Ads, Local Marketing, Small Business Marketing |
@@ -301,6 +302,14 @@ Total posts: 55
 - **Words**: 1168
 - **Tags**: tiktok ads, facebook ads, local business, digital marketing
 - **Description**: Discover the best ad platform for local businesses: TikTok Ads vs Facebook Ads. Learn which one drives more sales and growth with real examples and data.
+
+### What Is Programmatic Advertising? Plain-English Guide for Business Owners
+- **Slug**: `what-is-programmatic-advertising-plain-english-guide-for-business-owners`
+- **URL**: https://datalatte.pro/blog/what-is-programmatic-advertising-plain-english-guide-for-business-owners
+- **Date**: 2026-05-15
+- **Words**: 1542
+- **Tags**: programmatic advertising, digital marketing, Google Ads, Meta Ads, automation
+- **Description**: What is programmatic advertising? This guide breaks it down in plain English for small business owners. Learn how it works, if it's worth it for you, and when to use it.
 
 ### YouTube Ad Formats Explained: Skippable, Non-Skippable, Bumper, Discovery
 - **Slug**: `youtube-ad-formats-explained-skippable-non-skippable-bumper-discovery`
