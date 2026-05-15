@@ -197,8 +197,8 @@ function runBuild(): { success: boolean; output: string } {
 // On rate-limit errors, parse the wait time from the message and retry up to 3×.
 
 const GROQ_MODELS = [
-  "llama-3.3-70b-versatile",  // primary — best quality
-  "llama3-70b-8192",           // fallback — same size, separate quota
+  "qwen/qwen3-32b",             // primary — strong reasoning, great structured content
+  "llama-3.3-70b-versatile",   // fallback — solid quality
   "llama-3.1-8b-instant",      // last resort — faster, lighter
 ];
 
