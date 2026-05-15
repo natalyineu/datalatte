@@ -20,6 +20,8 @@ import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
 import BlogCard from "@/components/BlogCard";
 import TestimonialCard from "@/components/TestimonialCard";
+import ScrollReveal from "@/components/ScrollReveal";
+import AnimatedCounter from "@/components/AnimatedCounter";
 
 export const metadata: Metadata = {
   title: {
@@ -328,6 +330,7 @@ export default function HomePage() {
 
       {/* Niches */}
       <SectionWrapper className="bg-gray-50">
+        <ScrollReveal>
         <div className="text-center mb-12">
           <span className="section-label">Industries We Serve</span>
           <h2 className="section-title">
@@ -339,13 +342,14 @@ export default function HomePage() {
             and know the exact levers that move the needle for each one.
           </p>
         </div>
+        </ScrollReveal>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {niches.map((niche) => (
+          {niches.map((niche, i) => (
+            <ScrollReveal key={niche.href} delay={i * 0.1} direction="up">
             <Link
-              key={niche.href}
               href={niche.href}
-              className="niche-card h-72 group"
+              className="niche-card h-72 group block"
             >
               <Image
                 src={niche.image}
@@ -372,6 +376,7 @@ export default function HomePage() {
                 </div>
               </div>
             </Link>
+            </ScrollReveal>
           ))}
         </div>
       </SectionWrapper>
@@ -390,11 +395,11 @@ export default function HomePage() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((svc) => (
+          {services.map((svc, i) => (
+            <ScrollReveal key={svc.href} delay={i * 0.07} direction="up">
             <Link
-              key={svc.href}
               href={svc.href}
-              className="card p-6 group hover:-translate-y-1 transition-transform duration-200"
+              className="card p-6 group hover:-translate-y-1 transition-transform duration-200 block h-full"
             >
               <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-4 ${svc.color}`}>
                 <svc.icon size={22} />
@@ -407,6 +412,7 @@ export default function HomePage() {
                 Explore <ArrowRight size={13} />
               </span>
             </Link>
+            </ScrollReveal>
           ))}
 
           {/* Catchall card */}
@@ -519,8 +525,10 @@ export default function HomePage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((t) => (
-            <TestimonialCard key={t.author} {...t} />
+          {testimonials.map((t, i) => (
+            <ScrollReveal key={t.author} delay={i * 0.12}>
+              <TestimonialCard {...t} />
+            </ScrollReveal>
           ))}
         </div>
       </SectionWrapper>
