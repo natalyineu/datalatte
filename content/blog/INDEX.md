@@ -1,6 +1,6 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-15
-Total posts: 56
+Total posts: 57
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
@@ -25,6 +25,7 @@ Total posts: 56
 | `instagram-reels-ads-how-to-use-them-for-local-business-growth` | Instagram Reels Ads: How to Use Them for Local Business Growth | 2026-05-15 | 1045 | instagram reels ads, local marketing, Google Ads, digital advertising |
 | `instagram-retargeting-how-to-re-engage-website-visitors` | Instagram Retargeting: How to Re-Engage People Who Visited Your Website | 2026-05-15 | 1242 | Instagram retargeting, Facebook Pixel, retargeting ads, local business marketing, conversion rate |
 | `is-tiktok-advertising-worth-it-for-local-businesses-2026` | Is TikTok Advertising Worth It for Local Businesses in 2026? | 2026-05-15 | 1524 | tiktok advertising, google ads for local, local business marketing, is tiktok advertising worth it |
+| `programmatic-advertising-for-small-business-is-it-accessible-now` | Programmatic Advertising for Small Business: Is It Accessible Now? | 2026-05-15 | 1399 | programmatic advertising, small business marketing, digital ads, Google Ads, Meta Ads |
 | `responsive-search-ads-explained-what-they-are-and-how-to-use-them-in-2026` | Responsive Search Ads Explained: What They Are and How to Use Them in 2026 | 2026-05-15 | 1097 | responsive search ads, google ads, small business marketing, digital marketing |
 | `salon-marketing-ideas-25-strategies-that-fill-your-chair-every-week` | Salon Marketing Ideas: 25 Strategies That Fill Your Chair Every Week | 2026-05-15 | 1053 | salon marketing ideas, influencer marketing for salons, local SEO, social media marketing |
 | `tiktok-ads-best-practices-12-tips-for-better-results` | TikTok Ads Best Practices: 12 Tips for Better Results | 2026-05-15 | 1354 | TikTok Ads, Google Ads, Digital Marketing, Local SEO |
@@ -230,6 +231,14 @@ Total posts: 56
 - **Words**: 1524
 - **Tags**: tiktok advertising, google ads for local, local business marketing, is tiktok advertising worth it
 - **Description**: Is TikTok advertising worth it for your local business in 2026? Discover real stats and cost benchmarks to help you decide.
+
+### Programmatic Advertising for Small Business: Is It Accessible Now?
+- **Slug**: `programmatic-advertising-for-small-business-is-it-accessible-now`
+- **URL**: https://datalatte.pro/blog/programmatic-advertising-for-small-business-is-it-accessible-now
+- **Date**: 2026-05-15
+- **Words**: 1399
+- **Tags**: programmatic advertising, small business marketing, digital ads, Google Ads, Meta Ads
+- **Description**: Is programmatic advertising for small business still a big budget play? Let's break down costs, platforms, and how it can actually work for local businesses.
 
 ### Responsive Search Ads Explained: What They Are and How to Use Them in 2026
 - **Slug**: `responsive-search-ads-explained-what-they-are-and-how-to-use-them-in-2026`
