@@ -1,6 +1,6 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-16
-Total posts: 91
+Total posts: 92
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
@@ -15,6 +15,7 @@ Total posts: 91
 | `facebook-pixel-vs-google-tag-which-to-install-first` | Facebook Pixel vs Google Tag: Which to Install First? | 2026-05-16 | 1293 | facebook pixel, google tag, retargeting, digital marketing, tracking, local marketing |
 | `google-performance-max-for-local-business-complete-guide-2026` | Google Performance Max for Local Business: Complete Guide (2026) | 2026-05-16 | 1626 | google-ads, performance-max, local-business, digital-marketing, smart-campaigns |
 | `google-responsive-search-ads-best-practices-10-tips-to-improve-your-ad-strength` | Google Responsive Search Ads Best Practices: 10 Tips to Improve Your Ad Strength | 2026-05-16 | 1415 | Google Ads, Responsive Search Ads, Digital Marketing, Local Business |
+| `how-do-i-attract-customers-to-my-coffee-shop-complete-guide-for-2026` | How Do I Attract Customers to My Coffee Shop  -  Complete Guide for 2026 | 2026-05-16 | 1620 | email marketing for coffee shop, google ads for small business, local marketing, data-driven marketing |
 | `how-do-i-set-up-google-ads-for-my-small-business-complete-guide-for-2026` | How do I set up Google Ads for my small business  -  Complete Guide for 2026 | 2026-05-16 | 1312 | Google Ads, Local Marketing, Small Business, Digital Marketing |
 | `how-does-starbucks-use-email-marketing-complete-guide-for-2026` | How Does Starbucks Use Email Marketing  -  Complete Guide for 2026 | 2026-05-16 | 1303 | email marketing for coffee shop, google ads for small business, local marketing, email marketing strategy, coffee shop marketing |
 | `how-much-do-spotify-ads-cost-pricing-for-local-businesses` | How Much Do Spotify Ads Cost? Pricing for Local Businesses | 2026-05-16 | 1178 | Spotify Ads, Local Ads, Audio Advertising, Marketing Budget |
@@ -41,9 +42,9 @@ Total posts: 91
 | `email-marketing-for-coffee-shops-build-1000-loyal-regulars-in-90-days` | Email Marketing for Coffee Shops: Build 1,000 Loyal Regulars in 90 Days | 2026-05-15 | 1085 | email marketing for coffee shops, coffee shop marketing, loyal customers, digital marketing |
 | `email-marketing-ideas-for-small-businesses-20-campaigns-that-drive-revenue-2026` | Email Marketing Ideas for Small Businesses: 20 Campaigns That Drive Revenue in 2026 | 2026-05-15 | 1101 | email marketing ideas, small business marketing, digital marketing, marketing automation, loyalty programs |
 | `google-responsive-search-ads-best-practices-10-tips-to-improve-ad-strength` | Google Responsive Search Ads Best Practices: 10 Tips to Improve Your Ad Strength | 2026-05-15 | 883 | responsive search ads, google ads, local marketing, digital marketing agency |
-| `how-much-do-instagram-ads-cost-2026-pricing-breakdown` | How Much Do Instagram Ads Cost? 2026 Pricing Breakdown | 2026-05-15 | 1618 | Instagram Ads, Facebook Ads, Social Media Marketing, Google Ads, Meta Ads |
-| `how-much-do-tiktok-ads-cost-real-2026-pricing-benchmarks` | How Much Do TikTok Ads Cost? Real 2026 Pricing & Benchmarks | 2026-05-15 | 951 | TikTok Ads, Social Media Marketing, Small Business Marketing, Local Marketing, Digital Marketing |
-| `how-much-do-youtube-ads-cost-real-cpv-cpm-data` | How Much Do YouTube Ads Cost? Real CPV & CPM Data | 2026-05-15 | 1395 | youtube ads, google ads, local marketing, cpm, cpv, small business advertising |
+| `how-much-do-instagram-ads-cost-2026-pricing-breakdown` | How Much Do Instagram Ads Cost? 2026 Pricing Breakdown | 2026-05-15 | 1708 | Instagram Ads, Facebook Ads, Social Media Marketing, Google Ads, Meta Ads |
+| `how-much-do-tiktok-ads-cost-real-2026-pricing-benchmarks` | How Much Do TikTok Ads Cost? Real 2026 Pricing & Benchmarks | 2026-05-15 | 1004 | TikTok Ads, Social Media Marketing, Small Business Marketing, Local Marketing, Digital Marketing |
+| `how-much-do-youtube-ads-cost-real-cpv-cpm-data` | How Much Do YouTube Ads Cost? Real CPV & CPM Data | 2026-05-15 | 1417 | youtube ads, google ads, local marketing, cpm, cpv, small business advertising |
 | `how-much-does-programmatic-advertising-cost-real-cpm-benchmarks-2026` | How Much Does Programmatic Advertising Cost? Real CPM Benchmarks 2026 | 2026-05-15 | 1163 | programmatic advertising cost, Google Ads pricing, ad campaign budget, digital marketing cost, CPM benchmarks |
 | `how-to-advertise-dog-grooming-business-15-ideas-that-actually-get-bookings` | How to Advertise Your Dog Grooming Business: 15 Ideas That Actually Get Bookings | 2026-05-15 | 944 | dog grooming marketing, pet grooming business, local seo, google ads, facebook ads |
 | `how-to-get-dog-grooming-clients-2026-growth-playbook-for-groomers` | How to Get Dog Grooming Clients: The 2026 Growth Playbook for Groomers | 2026-05-15 | 1130 | dog grooming marketing ideas, how to advertise dog grooming business, dog grooming advertising ideas, pet grooming marketing ideas, dog grooming marketing strategy |
@@ -76,7 +77,7 @@ Total posts: 91
 | `7-best-marketing-automation-platforms-for-small-businesses-in-2026-compared` | 7 Best Marketing Automation Platforms for Small Businesses in 2026 (Compared) | 2026-05-14 | 826 | marketing automation, small business, digital marketing, local business |
 | `do-facebook-ads-actually-work-for-local-businesses-data-backed-answer` | Do Facebook Ads Actually Work for Local Businesses? Data-Backed Answer | 2026-05-14 | 1108 | facebook ads, local business, digital marketing, small business |
 | `google-business-profile-optimization-in-2026-the-complete-guide-25-point-checkli` | Google Business Profile Optimization in 2026: The Complete Guide + 25-Point Checklist | 2026-05-14 | 894 | google business profile optimization, local seo, google my business, small business marketing |
-| `how-much-do-facebook-ads-cost-for-small-businesses-2026-benchmarks` | How Much Do Facebook Ads Cost for Small Businesses? 2026 Benchmarks | 2026-05-14 | 1264 | facebook ads for local business, facebook ads cost, small business marketing, local business advertising, facebook ads budget |
+| `how-much-do-facebook-ads-cost-for-small-businesses-2026-benchmarks` | How Much Do Facebook Ads Cost for Small Businesses? 2026 Benchmarks | 2026-05-14 | 1350 | facebook ads for local business, facebook ads cost, small business marketing, local business advertising, facebook ads budget |
 | `how-much-does-google-ads-cost-for-small-businesses-real-2026-pricing-breakdown` | How Much Does Google Ads Cost for Small Businesses? Real 2026 Pricing Breakdown | 2026-05-14 | 1075 | google ads for small business, google ads cost, small business marketing |
 | `how-much-does-local-seo-cost-for-a-small-business-honest-pricing-guide` | How Much Does Local SEO Cost for a Small Business? Honest Pricing Guide | 2026-05-14 | 1007 | local seo for small business, seo costs, small business marketing, local seo pricing, seo budget |
 | `how-to-improve-local-seo-for-your-small-business-15-steps-that-work-in-2026` | How to Improve Local SEO for Your Small Business: 15 Steps That Work in 2026 | 2026-05-14 | 1498 | local seo for small business, small business marketing, seo tips, local search optimization |
@@ -185,6 +186,14 @@ Total posts: 91
 - **Words**: 1415
 - **Tags**: Google Ads, Responsive Search Ads, Digital Marketing, Local Business
 - **Description**: Optimize your responsive search ads for small businesses with these 10 Google Ads best practices to boost ad strength, clicks, and conversions.
+
+### How Do I Attract Customers to My Coffee Shop  -  Complete Guide for 2026
+- **Slug**: `how-do-i-attract-customers-to-my-coffee-shop-complete-guide-for-2026`
+- **URL**: https://datalatte.pro/blog/how-do-i-attract-customers-to-my-coffee-shop-complete-guide-for-2026
+- **Date**: 2026-05-16
+- **Words**: 1620
+- **Tags**: email marketing for coffee shop, google ads for small business, local marketing, data-driven marketing
+- **Description**: Learn how to use email marketing for coffee shops and Google Ads to attract more customers in 2026. Real examples included.
 
 ### How do I set up Google Ads for my small business  -  Complete Guide for 2026
 - **Slug**: `how-do-i-set-up-google-ads-for-my-small-business-complete-guide-for-2026`
@@ -398,7 +407,7 @@ Total posts: 91
 - **Slug**: `how-much-do-instagram-ads-cost-2026-pricing-breakdown`
 - **URL**: https://datalatte.pro/blog/how-much-do-instagram-ads-cost-2026-pricing-breakdown
 - **Date**: 2026-05-15
-- **Words**: 1618
+- **Words**: 1708
 - **Tags**: Instagram Ads, Facebook Ads, Social Media Marketing, Google Ads, Meta Ads
 - **Description**: Instagram Ads cost from $0.50 to $2.00 CPM in 2026. Here's the real pricing breakdown, budget tips, and how to get started for local businesses.
 
@@ -406,7 +415,7 @@ Total posts: 91
 - **Slug**: `how-much-do-tiktok-ads-cost-real-2026-pricing-benchmarks`
 - **URL**: https://datalatte.pro/blog/how-much-do-tiktok-ads-cost-real-2026-pricing-benchmarks
 - **Date**: 2026-05-15
-- **Words**: 951
+- **Words**: 1004
 - **Tags**: TikTok Ads, Social Media Marketing, Small Business Marketing, Local Marketing, Digital Marketing
 - **Description**: Discover the real cost of TikTok ads in 2026, with pricing benchmarks and expert advice for small businesses and local marketers.
 
@@ -414,7 +423,7 @@ Total posts: 91
 - **Slug**: `how-much-do-youtube-ads-cost-real-cpv-cpm-data`
 - **URL**: https://datalatte.pro/blog/how-much-do-youtube-ads-cost-real-cpv-cpm-data
 - **Date**: 2026-05-15
-- **Words**: 1395
+- **Words**: 1417
 - **Tags**: youtube ads, google ads, local marketing, cpm, cpv, small business advertising
 - **Description**: YouTube Ads can be a powerful tool for local businesses. But how much do YouTube ads cost? Real CPV & CPM data and pricing benchmarks for 2026.
 
@@ -678,7 +687,7 @@ Total posts: 91
 - **Slug**: `how-much-do-facebook-ads-cost-for-small-businesses-2026-benchmarks`
 - **URL**: https://datalatte.pro/blog/how-much-do-facebook-ads-cost-for-small-businesses-2026-benchmarks
 - **Date**: 2026-05-14
-- **Words**: 1264
+- **Words**: 1350
 - **Tags**: facebook ads for local business, facebook ads cost, small business marketing, local business advertising, facebook ads budget
 - **Description**: Discover the real cost of Facebook ads for small businesses in 2026. Learn how to budget and optimize your Facebook ads for local business with DataLatte's expert guide
 
