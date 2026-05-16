@@ -1,6 +1,6 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-16
-Total posts: 77
+Total posts: 78
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
@@ -11,9 +11,10 @@ Total posts: 77
 | `facebook-pixel-vs-google-tag-which-to-install-first` | Facebook Pixel vs Google Tag: Which to Install First? | 2026-05-16 | 1293 | facebook pixel, google tag, retargeting, digital marketing, tracking, local marketing |
 | `google-performance-max-for-local-business-complete-guide-2026` | Google Performance Max for Local Business: Complete Guide (2026) | 2026-05-16 | 1626 | google-ads, performance-max, local-business, digital-marketing, smart-campaigns |
 | `how-much-do-spotify-ads-cost-pricing-for-local-businesses` | How Much Do Spotify Ads Cost? Pricing for Local Businesses | 2026-05-16 | 1178 | Spotify Ads, Local Ads, Audio Advertising, Marketing Budget |
-| `how-much-does-ctv-advertising-cost-real-cpm-data` | How Much Does CTV Advertising Cost? Real CPM Data | 2026-05-16 | 1444 | ctv advertising cost, local CTV ads, CTV CPM, OTT advertising, digital ad pricing |
+| `how-much-does-ctv-advertising-cost-real-cpm-data` | How Much Does CTV Advertising Cost? Real CPM Data | 2026-05-16 | 1602 | ctv advertising cost, local CTV ads, CTV CPM, OTT advertising, digital ad pricing |
 | `how-to-run-spotify-ads-step-by-step-ad-studio-guide` | How to Run Spotify Ads Step-by-Step (Spotify Ad Studio Guide) | 2026-05-16 | 1378 | how to run spotify ads, Spotify Ad Studio, audio advertising, music streaming ads |
 | `how-to-set-up-retargeting-on-google-facebook-and-more` | How to Set Up Retargeting on Google, Facebook, and More | 2026-05-16 | 1716 | retargeting, Google Ads, Meta Ads, Facebook Ads, digital marketing |
+| `performance-max-vs-standard-google-ads-which-should-you-run` | Performance Max vs Standard Google Ads: Which Should You Run? | 2026-05-16 | 1565 | google ads, performance max, local marketing, digital advertising, performance max vs standard campaigns |
 | `podcast-advertising-for-local-businesses-is-it-worth-it` | Podcast Advertising for Local Businesses: Is It Worth It? | 2026-05-16 | 1413 | podcast advertising, local business marketing, audio advertising, Google Ads for small businesses |
 | `real-time-bidding-explained-for-non-technical-business-owners` | Real-Time Bidding (RTB) Explained for Non-Technical Business Owners | 2026-05-16 | 1284 | real time bidding explained, programmatic advertising, digital marketing, Google Ads, Meta Ads |
 | `retargeting-ads-for-small-business-complete-guide-2026` | Retargeting Ads for Small Business: Complete Guide (2026) | 2026-05-16 | 1739 | retargeting, Google Ads, Meta Ads, conversion rate, advertising strategy, small business marketing |
@@ -144,7 +145,7 @@ Total posts: 77
 - **Slug**: `how-much-does-ctv-advertising-cost-real-cpm-data`
 - **URL**: https://datalatte.pro/blog/how-much-does-ctv-advertising-cost-real-cpm-data
 - **Date**: 2026-05-16
-- **Words**: 1444
+- **Words**: 1602
 - **Tags**: ctv advertising cost, local CTV ads, CTV CPM, OTT advertising, digital ad pricing
 - **Description**: Find out real CTV advertising cost in 2026  -  including CPM data, budget benchmarks, and what affects pricing. For local business owners.
 
@@ -163,6 +164,14 @@ Total posts: 77
 - **Words**: 1716
 - **Tags**: retargeting, Google Ads, Meta Ads, Facebook Ads, digital marketing
 - **Description**: Learn how to set up retargeting on Google, Facebook, and more to convert website visitors into loyal customers with this step-by-step guide for local businesses.
+
+### Performance Max vs Standard Google Ads: Which Should You Run?
+- **Slug**: `performance-max-vs-standard-google-ads-which-should-you-run`
+- **URL**: https://datalatte.pro/blog/performance-max-vs-standard-google-ads-which-should-you-run
+- **Date**: 2026-05-16
+- **Words**: 1565
+- **Tags**: google ads, performance max, local marketing, digital advertising, performance max vs standard campaigns
+- **Description**: Google Performance Max vs Standard campaigns: which is better? We break it down with real data, use cases, and tips for local businesses.
 
 ### Podcast Advertising for Local Businesses: Is It Worth It?
 - **Slug**: `podcast-advertising-for-local-businesses-is-it-worth-it`
