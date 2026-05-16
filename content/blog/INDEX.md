@@ -1,10 +1,10 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-16
-Total posts: 96
+Total posts: 97
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
-| `how-much-should-a-coffee-shop-spend-on-google-ads` | How Much Should a Coffee Shop Spend on Google Ads? | 2026-05-16 | 1163 | coffee shop ads, google ads for small business, local business marketing, google ads budget |
+| `best-google-ad-keywords-for-coffee-shops-in-2026` | Best Google Ad Keywords for Coffee Shops in 2026 | 2026-05-16 | 1850 | coffee shop marketing, google ads for coffee shops, google ads for local businesses, coffee shop keywords, Google Ads keywords |
 | `best-marketing-for-salons-in-2026-what-actually-works-with-real-examples` | Best Marketing for Salons in 2026: What Actually Works (With Real Examples) | 2026-05-16 | 1221 | influencer marketing for salons, salon marketing, local marketing, google ads for salons, social media marketing for salons |
 | `connected-tv-ads-vs-traditional-tv-ads-why-ctv-wins-for-local-business` | Connected TV Ads vs Traditional TV Ads: Why CTV Wins for Local Business | 2026-05-16 | 1451 | connected tv advertising, local business marketing, digital advertising, CTV vs TV |
 | `cross-channel-retargeting-how-to-follow-customers-across-every-platform` | Cross-Channel Retargeting: How to Follow Customers Across Every Platform | 2026-05-16 | 1422 | cross channel retargeting, retargeting, local ads, Google Ads, Meta Ads |
@@ -14,6 +14,7 @@ Total posts: 96
 | `email-marketing-ideas-for-small-businesses-20-campaigns-that-drive-revenue-in-20` | Email Marketing Ideas for Small Businesses: 20 Campaigns That Drive Revenue in 2026 | 2026-05-16 | 1698 | email marketing for small business, email marketing campaigns, email campaigns for coffee shops, email marketing for salons |
 | `email-marketing-strategy-for-small-business-the-step-by-step-playbook` | Email Marketing Strategy for Small Business: The Step-by-Step Playbook | 2026-05-16 | 1890 | email marketing for small business, email marketing campaigns, email marketing strategy, small business marketing |
 | `facebook-pixel-vs-google-tag-which-to-install-first` | Facebook Pixel vs Google Tag: Which to Install First? | 2026-05-16 | 1384 | facebook pixel, google tag, retargeting, digital marketing, tracking, local marketing |
+| `google-ads-for-coffee-shops-complete-2026-guide` | Google Ads for Coffee Shops: Complete 2026 Guide | 2026-05-16 | 1406 | google-ads, coffee-shops, local-business-marketing, google-ads-2026 |
 | `google-performance-max-for-local-business-complete-guide-2026` | Google Performance Max for Local Business: Complete Guide (2026) | 2026-05-16 | 1702 | google-ads, performance-max, local-business, digital-marketing, smart-campaigns |
 | `google-responsive-search-ads-best-practices-10-tips-to-improve-your-ad-strength` | Google Responsive Search Ads Best Practices: 10 Tips to Improve Your Ad Strength | 2026-05-16 | 1415 | Google Ads, Responsive Search Ads, Digital Marketing, Local Business |
 | `how-do-i-attract-customers-to-my-coffee-shop-complete-guide-for-2026` | How Do I Attract Customers to My Coffee Shop  -  Complete Guide for 2026 | 2026-05-16 | 1658 | email marketing for coffee shop, google ads for small business, local marketing, data-driven marketing |
@@ -103,13 +104,13 @@ Total posts: 96
 
 ## Full Details
 
-### How Much Should a Coffee Shop Spend on Google Ads?
-- **Slug**: `how-much-should-a-coffee-shop-spend-on-google-ads`
-- **URL**: https://datalatte.pro/blog/how-much-should-a-coffee-shop-spend-on-google-ads
+### Best Google Ad Keywords for Coffee Shops in 2026
+- **Slug**: `best-google-ad-keywords-for-coffee-shops-in-2026`
+- **URL**: https://datalatte.pro/blog/best-google-ad-keywords-for-coffee-shops-in-2026
 - **Date**: 2026-05-16
-- **Words**: 1163
-- **Tags**: coffee shop ads, google ads for small business, local business marketing, google ads budget
-- **Description**: How much should your coffee shop spend on Google Ads? Real 2026 data showing the ideal coffee shop Google Ads budget by location, goals, and competition.
+- **Words**: 1850
+- **Tags**: coffee shop marketing, google ads for coffee shops, google ads for local businesses, coffee shop keywords, Google Ads keywords
+- **Description**: Get the best Google Ad keywords for coffee shops in 2026. Learn how to target the right audience with coffee shop Google Ads keywords and boost your ROI.
 
 ### Best Marketing for Salons in 2026: What Actually Works (With Real Examples)
 - **Slug**: `best-marketing-for-salons-in-2026-what-actually-works-with-real-examples`
@@ -182,6 +183,14 @@ Total posts: 96
 - **Words**: 1384
 - **Tags**: facebook pixel, google tag, retargeting, digital marketing, tracking, local marketing
 - **Description**: Facebook Pixel vs Google Tag: Which should you install first? Learn the right order for retargeting, tracking, and boosting ROI with real-world examples.
+
+### Google Ads for Coffee Shops: Complete 2026 Guide
+- **Slug**: `google-ads-for-coffee-shops-complete-2026-guide`
+- **URL**: https://datalatte.pro/blog/google-ads-for-coffee-shops-complete-2026-guide
+- **Date**: 2026-05-16
+- **Words**: 1406
+- **Tags**: google-ads, coffee-shops, local-business-marketing, google-ads-2026
+- **Description**: Learn how to run effective Google Ads for coffee shops in 2026. Real examples, budget tips, and actionable steps for local businesses.
 
 ### Google Performance Max for Local Business: Complete Guide (2026)
 - **Slug**: `google-performance-max-for-local-business-complete-guide-2026`
