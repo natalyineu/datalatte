@@ -14,7 +14,7 @@ jobs:
       - name: Generate article 1
         run: |
           RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
-            "https://datalatte.pro/api/admin/generate-cron" \
+            "https://datalatte.pro/api/cron/generate" \
             -H "x-cron-secret: ${{ secrets.CRON_SECRET }}" \
             -H "Content-Type: application/json" \
             --max-time 90) || echo -e "\ncurl_error"
@@ -28,7 +28,7 @@ jobs:
       - name: Generate article 2
         run: |
           RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
-            "https://datalatte.pro/api/admin/generate-cron" \
+            "https://datalatte.pro/api/cron/generate" \
             -H "x-cron-secret: ${{ secrets.CRON_SECRET }}" \
             -H "Content-Type: application/json" \
             --max-time 90) || echo -e "\ncurl_error"
@@ -42,7 +42,7 @@ jobs:
       - name: Generate article 3
         run: |
           RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
-            "https://datalatte.pro/api/admin/generate-cron" \
+            "https://datalatte.pro/api/cron/generate" \
             -H "x-cron-secret: ${{ secrets.CRON_SECRET }}" \
             -H "Content-Type: application/json" \
             --max-time 90) || echo -e "\ncurl_error"
