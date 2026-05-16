@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import FloatingCTA from "@/components/FloatingCTA";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
 import BackToTop from "@/components/BackToTop";
+import AIChatWidget from "@/components/AIChatWidget";
 import { localBusinessSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
@@ -80,6 +81,7 @@ export default function RootLayout({
         <FloatingCTA />
         <ExitIntentPopup />
         <BackToTop />
+        <AIChatWidget />
         {/* Google Analytics 4 */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-M4L8HJGRCH"
