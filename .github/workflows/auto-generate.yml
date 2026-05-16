@@ -60,6 +60,7 @@ jobs:
           echo "SLUG3=$SLUG" >> $GITHUB_ENV
 
       - name: Telegram notification
+        continue-on-error: true
         run: |
           S1="${STATUS1:-?}" S2="${STATUS2:-?}" S3="${STATUS3:-?}"
           L1="${SLUG1:-?}" L2="${SLUG2:-?}" L3="${SLUG3:-?}"
