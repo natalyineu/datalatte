@@ -6,6 +6,10 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, Clock, Calendar } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
+import Callout from "@/components/mdx/Callout";
+import BarChart from "@/components/mdx/BarChart";
+import StatRow from "@/components/mdx/StatRow";
+import Funnel from "@/components/mdx/Funnel";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
@@ -99,6 +103,10 @@ const mdxComponents = {
     <blockquote className="border-l-4 border-coffee-300 pl-4 italic text-gray-500 my-6" {...props} />
   ),
   hr: () => <hr className="my-8 border-gray-200" />,
+  Callout,
+  BarChart,
+  StatRow,
+  Funnel,
   code: (props: React.HTMLAttributes<HTMLElement>) => (
     <code className="bg-coffee-50 text-coffee-800 text-xs font-mono px-1.5 py-0.5 rounded" {...props} />
   ),
