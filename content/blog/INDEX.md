@@ -1,6 +1,6 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-16
-Total posts: 89
+Total posts: 90
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
@@ -15,6 +15,7 @@ Total posts: 89
 | `facebook-pixel-vs-google-tag-which-to-install-first` | Facebook Pixel vs Google Tag: Which to Install First? | 2026-05-16 | 1293 | facebook pixel, google tag, retargeting, digital marketing, tracking, local marketing |
 | `google-performance-max-for-local-business-complete-guide-2026` | Google Performance Max for Local Business: Complete Guide (2026) | 2026-05-16 | 1626 | google-ads, performance-max, local-business, digital-marketing, smart-campaigns |
 | `google-responsive-search-ads-best-practices-10-tips-to-improve-your-ad-strength` | Google Responsive Search Ads Best Practices: 10 Tips to Improve Your Ad Strength | 2026-05-16 | 1415 | Google Ads, Responsive Search Ads, Digital Marketing, Local Business |
+| `how-do-i-set-up-google-ads-for-my-small-business-complete-guide-for-2026` | How do I set up Google Ads for my small business  -  Complete Guide for 2026 | 2026-05-16 | 1312 | Google Ads, Local Marketing, Small Business, Digital Marketing |
 | `how-much-do-spotify-ads-cost-pricing-for-local-businesses` | How Much Do Spotify Ads Cost? Pricing for Local Businesses | 2026-05-16 | 1178 | Spotify Ads, Local Ads, Audio Advertising, Marketing Budget |
 | `how-much-does-ctv-advertising-cost-real-cpm-data` | How Much Does CTV Advertising Cost? Real CPM Data | 2026-05-16 | 1638 | ctv advertising cost, local CTV ads, CTV CPM, OTT advertising, digital ad pricing |
 | `how-to-advertise-your-dog-grooming-business-15-ideas-that-actually-get-bookings` | How to Advertise Your Dog Grooming Business: 15 Ideas That Actually Get Bookings | 2026-05-16 | 1540 | dog grooming marketing ideas, how to advertise dog grooming business, pet grooming marketing ideas, local marketing for small businesses |
@@ -183,6 +184,14 @@ Total posts: 89
 - **Words**: 1415
 - **Tags**: Google Ads, Responsive Search Ads, Digital Marketing, Local Business
 - **Description**: Optimize your responsive search ads for small businesses with these 10 Google Ads best practices to boost ad strength, clicks, and conversions.
+
+### How do I set up Google Ads for my small business  -  Complete Guide for 2026
+- **Slug**: `how-do-i-set-up-google-ads-for-my-small-business-complete-guide-for-2026`
+- **URL**: https://datalatte.pro/blog/how-do-i-set-up-google-ads-for-my-small-business-complete-guide-for-2026
+- **Date**: 2026-05-16
+- **Words**: 1312
+- **Tags**: Google Ads, Local Marketing, Small Business, Digital Marketing
+- **Description**: Learn how to set up Google Ads for your small business. Step-by-step guide with examples for 2026. Start getting real customers today.
 
 ### How Much Do Spotify Ads Cost? Pricing for Local Businesses
 - **Slug**: `how-much-do-spotify-ads-cost-pricing-for-local-businesses`
