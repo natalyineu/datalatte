@@ -392,13 +392,22 @@ Remember: output ONLY the raw MDX — no code fences, start with --- frontmatter
 
   const mdxPath = path.join(BLOG_DIR, `${entry.slug}.mdx`);
 
-  // Don't overwrite existing published content
+  // Don't overwrite existing published content — mark as generated and skip
   if (fs.existsSync(mdxPath)) {
     const existing = matter(fs.readFileSync(mdxPath, "utf8"));
     if (existing.data.date) {
+      const skipped = readQueue();
+      const si = skipped.queue.findIndex((e) => e.slug === entry.slug);
+      if (si !== -1) {
+        skipped.queue[si].status = "generated";
+        skipped.queue[si].generatedDate = skipped.queue[si].generatedDate ?? new Date().toISOString();
+        delete skipped.queue[si].errorNote;
+        writeQueue(skipped);
+      }
+      const wordCount = existing.content.trim().split(/\s+/).filter(Boolean).length;
       return NextResponse.json(
-        { success: false, error: `File ${entry.slug}.mdx already exists. Remove it first or change the slug.` },
-        { status: 409 }
+        { success: true, slug: entry.slug, url: `https://datalatte.pro/blog/${entry.slug}`, wordCount, gitNote: "skipped — file already exists" },
+        { status: 200 }
       );
     }
   }
