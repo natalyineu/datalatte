@@ -454,7 +454,21 @@ Remember: output ONLY the raw MDX — no code fences, start with --- frontmatter
   let gitNote = "";
   try {
     const cwd = process.cwd();
+    const ghToken = process.env.GH_TOKEN;
     const commitMsg = `Add article: ${entry.title}\n\nAuto-generated via admin panel (~${mdxContent.split(/\s+/).length} words)\nCluster: ${entry.cluster}`;
+
+    // Configure git identity (required in CI/serverless environments)
+    execSync(`git config user.email "analyst@freevpnplanet.com"`, { cwd, encoding: "utf8" });
+    execSync(`git config user.name "analyst-bot"`, { cwd, encoding: "utf8" });
+
+    // If GH_TOKEN is set, inject it into the remote URL so Vercel can push
+    if (ghToken) {
+      execSync(
+        `git remote set-url origin https://${ghToken}@github.com/natalyineu/datalatte.git`,
+        { cwd, encoding: "utf8" }
+      );
+    }
+
     execSync(`git add "${mdxPath}" "${INDEX_PATH}" "${QUEUE_PATH}"`, { cwd, encoding: "utf8" });
     execSync(`git commit -m ${JSON.stringify(commitMsg)}`, { cwd, encoding: "utf8" });
     execSync("git push origin main", { cwd, encoding: "utf8", timeout: 30_000 });

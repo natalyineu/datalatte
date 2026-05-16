@@ -21,6 +21,9 @@ jobs:
           HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
           BODY=$(echo "$RESPONSE" | head -n-1)
           echo "Status: $HTTP_CODE — $BODY"
+          echo "STATUS1=$HTTP_CODE" >> $GITHUB_ENV
+          SLUG=$(echo "$BODY" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('slug','?'))" 2>/dev/null || echo "?")
+          echo "SLUG1=$SLUG" >> $GITHUB_ENV
 
       - name: Wait 30s
         run: sleep 30
@@ -35,6 +38,9 @@ jobs:
           HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
           BODY=$(echo "$RESPONSE" | head -n-1)
           echo "Status: $HTTP_CODE — $BODY"
+          echo "STATUS2=$HTTP_CODE" >> $GITHUB_ENV
+          SLUG=$(echo "$BODY" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('slug','?'))" 2>/dev/null || echo "?")
+          echo "SLUG2=$SLUG" >> $GITHUB_ENV
 
       - name: Wait 30s
         run: sleep 30
@@ -49,13 +55,21 @@ jobs:
           HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
           BODY=$(echo "$RESPONSE" | head -n-1)
           echo "Status: $HTTP_CODE — $BODY"
-          echo "LAST_STATUS=$HTTP_CODE" >> $GITHUB_ENV
-          echo "LAST_BODY=$BODY" >> $GITHUB_ENV
+          echo "STATUS3=$HTTP_CODE" >> $GITHUB_ENV
+          SLUG=$(echo "$BODY" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('slug','?'))" 2>/dev/null || echo "?")
+          echo "SLUG3=$SLUG" >> $GITHUB_ENV
 
       - name: Telegram notification
         run: |
-          # Collect results from env (basic summary)
-          MSG="☕ DataLatte auto-gen complete%0A3 articles generated%0A$(date -u '+%Y-%m-%d %H:%M UTC')%0A%0AView queue: https://datalatte.pro/admin"
+          S1="${STATUS1:-?}" S2="${STATUS2:-?}" S3="${STATUS3:-?}"
+          L1="${SLUG1:-?}" L2="${SLUG2:-?}" L3="${SLUG3:-?}"
+
+          ICON1=$([ "$S1" = "200" ] && echo "✅" || echo "❌")
+          ICON2=$([ "$S2" = "200" ] && echo "✅" || echo "❌")
+          ICON3=$([ "$S3" = "200" ] && echo "✅" || echo "❌")
+
+          MSG="☕ DataLatte auto-gen%0A$(date -u '+%Y-%m-%d %H:%M UTC')%0A%0A${ICON1} $L1%0A${ICON2} $L2%0A${ICON3} $L3%0A%0AView: https://datalatte.pro/admin"
+
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
             -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
             -d "text=$MSG" \
