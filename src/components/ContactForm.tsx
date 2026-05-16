@@ -1,150 +1,295 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
+import { ArrowRight, CheckCircle2, Sparkles, Zap } from "lucide-react";
+
+type Mode = "explore" | "ready";
+type Status = "idle" | "loading" | "success" | "error";
 
 const NICHES = [
-  { value: "coffee",   emoji: "☕", label: "Coffee Shop",   sub: "Café / Restaurant" },
-  { value: "salon",    emoji: "✂️", label: "Hair & Beauty", sub: "Salon / Spa / Barbershop" },
-  { value: "grooming", emoji: "🐾", label: "Pet Business",  sub: "Groomer / Walker / Vet" },
-  { value: "fitness",  emoji: "🏋️", label: "Fitness Studio", sub: "Gym / Yoga / PT" },
-  { value: "other",    emoji: "🏪", label: "Other Local",    sub: "Any brick-and-mortar" },
+  { value: "coffee",   emoji: "☕", label: "Coffee Shop" },
+  { value: "salon",    emoji: "✂️", label: "Hair & Beauty" },
+  { value: "grooming", emoji: "🐾", label: "Pet Business" },
+  { value: "fitness",  emoji: "🏋️", label: "Fitness Studio" },
+  { value: "other",    emoji: "🏪", label: "Other" },
 ];
 
-const field = "w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-coffee-500 focus:ring-2 focus:ring-coffee-100 outline-none transition text-sm";
+const inputCls = "w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-coffee-500 focus:ring-2 focus:ring-coffee-100 outline-none transition text-sm bg-white";
 
-export default function ContactForm() {
-  const [niche,   setNiche]  = useState("");
-  const [status,  setStatus] = useState<"idle"|"loading"|"success"|"error">("idle");
+function ProgressBar({ pct }: { pct: number }) {
+  return (
+    <div className="space-y-1.5">
+      <div className="flex justify-between items-center">
+        <span className="text-xs text-gray-400">Progress</span>
+        <motion.span
+          key={pct}
+          initial={{ opacity: 0, y: -4 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-xs font-semibold text-coffee-700"
+        >
+          {pct}%
+        </motion.span>
+      </div>
+      <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+        <motion.div
+          className="h-full rounded-full bg-gradient-to-r from-coffee-500 to-coffee-700"
+          initial={{ width: 0 }}
+          animate={{ width: `${pct}%` }}
+          transition={{ type: "spring", damping: 22, stiffness: 180 }}
+        />
+      </div>
+    </div>
+  );
+}
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setStatus("loading");
-    const data = new FormData(e.currentTarget);
-    data.append("niche", niche);
-    try {
-      const res = await fetch("https://formspree.io/f/xqenvpwv", {
-        method: "POST", body: data, headers: { Accept: "application/json" },
-      });
-      if (res.ok) {
-        setStatus("success");
-        if (typeof window !== "undefined" && (window as any).gtag) {
-          (window as any).gtag("event", "generate_lead", { event_category: "contact_form" });
-        }
-      } else { setStatus("error"); }
-    } catch { setStatus("error"); }
-  }
+function SuccessState() {
+  return (
+    <motion.div
+      className="text-center py-12"
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ type: "spring", damping: 20 }}
+    >
+      <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-4">
+        <CheckCircle2 size={36} className="text-green-500" />
+      </div>
+      <h3 className="text-xl font-bold text-gray-900 mb-2">You're all set ☕</h3>
+      <p className="text-gray-500 text-sm max-w-xs mx-auto leading-relaxed">
+        I'll get back to you within one business day — usually sooner.
+      </p>
+    </motion.div>
+  );
+}
 
-  if (status === "success") {
-    return (
-      <motion.div
-        className="text-center py-14"
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ type: "spring", damping: 20 }}
-      >
-        <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-5">
-          <CheckCircle2 size={42} className="text-green-500" />
-        </div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-2">You're all set ☕</h3>
-        <p className="text-gray-500 max-w-xs mx-auto leading-relaxed">
-          I'll review your details and get back to you within one business day — usually sooner.
-        </p>
-      </motion.div>
-    );
-  }
+async function submit(data: FormData, setStatus: (s: Status) => void) {
+  setStatus("loading");
+  try {
+    const res = await fetch("https://formspree.io/f/xqenvpwv", {
+      method: "POST", body: data, headers: { Accept: "application/json" },
+    });
+    if (res.ok) {
+      setStatus("success");
+      if (typeof window !== "undefined" && (window as any).gtag) {
+        (window as any).gtag("event", "generate_lead", { event_category: "contact_form" });
+      }
+    } else { setStatus("error"); }
+  } catch { setStatus("error"); }
+}
+
+/* ─── Form 1: Just exploring ─── */
+function ExploreForm() {
+  const [email,   setEmail]   = useState("");
+  const [message, setMessage] = useState("");
+  const [status,  setStatus]  = useState<Status>("idle");
+
+  const pct = Math.min(100, (email ? 50 : 0) + (message.trim() ? 50 : 0));
+
+  if (status === "success") return <SuccessState />;
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form
+      className="space-y-5"
+      onSubmit={e => {
+        e.preventDefault();
+        const fd = new FormData(e.currentTarget);
+        fd.append("form_type", "explore");
+        submit(fd, setStatus);
+      }}
+    >
+      <ProgressBar pct={pct} />
 
-      {/* Step 1 — niche tiles */}
       <div>
-        <p className="text-sm font-semibold text-gray-700 mb-3">What kind of business do you run?</p>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-          {NICHES.map((n) => (
+        <label htmlFor="ex-email" className="block text-sm font-medium text-gray-700 mb-1.5">
+          Your email <span className="text-coffee-600">*</span>
+        </label>
+        <input
+          id="ex-email" name="email" type="email"
+          placeholder="you@yourbusiness.com"
+          value={email} onChange={e => setEmail(e.target.value)}
+          className={inputCls} required
+        />
+      </div>
+
+      <div>
+        <label htmlFor="ex-message" className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-1.5">
+          What are you curious about?
+          <span className="text-[11px] text-gray-400 font-normal">optional</span>
+        </label>
+        <textarea
+          id="ex-message" name="message" rows={3}
+          placeholder="e.g. I want more customers from Google, or I'm not sure where to start…"
+          value={message} onChange={e => setMessage(e.target.value)}
+          className={`${inputCls} resize-none`}
+        />
+      </div>
+
+      <button
+        type="submit" disabled={status === "loading"}
+        className="btn-primary w-full justify-center py-3.5 text-sm disabled:opacity-60 group"
+      >
+        {status === "loading"
+          ? <><Spinner /> Sending…</>
+          : <><ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" /> Send me a note</>}
+      </button>
+
+      {status === "error" && <ErrorMsg />}
+      <p className="text-xs text-gray-400 text-center">No spam. Just a friendly reply. ☕</p>
+    </form>
+  );
+}
+
+/* ─── Form 2: Ready to start ─── */
+function ReadyForm() {
+  const [email,   setEmail]   = useState("");
+  const [name,    setName]    = useState("");
+  const [niche,   setNiche]   = useState("");
+  const [message, setMessage] = useState("");
+  const [status,  setStatus]  = useState<Status>("idle");
+
+  const pct = (email ? 25 : 0) + (name.trim() ? 25 : 0) + (niche ? 25 : 0) + (message.trim() ? 25 : 0);
+
+  if (status === "success") return <SuccessState />;
+
+  return (
+    <form
+      className="space-y-5"
+      onSubmit={e => {
+        e.preventDefault();
+        const fd = new FormData(e.currentTarget);
+        fd.append("niche", niche);
+        fd.append("form_type", "ready");
+        submit(fd, setStatus);
+      }}
+    >
+      <ProgressBar pct={pct} />
+
+      <div className="grid sm:grid-cols-2 gap-4">
+        <div>
+          <label htmlFor="rd-email" className="block text-sm font-medium text-gray-700 mb-1.5">
+            Email <span className="text-coffee-600">*</span>
+          </label>
+          <input
+            id="rd-email" name="email" type="email"
+            placeholder="you@yourbusiness.com"
+            value={email} onChange={e => setEmail(e.target.value)}
+            className={inputCls} required
+          />
+        </div>
+        <div>
+          <label htmlFor="rd-name" className="block text-sm font-medium text-gray-700 mb-1.5">
+            Your name <span className="text-coffee-600">*</span>
+          </label>
+          <input
+            id="rd-name" name="name" type="text"
+            placeholder="Jane Smith"
+            value={name} onChange={e => setName(e.target.value)}
+            className={inputCls} required
+          />
+        </div>
+      </div>
+
+      {/* Niche tiles — compact row */}
+      <div>
+        <p className="text-sm font-medium text-gray-700 mb-2">
+          Your business type <span className="text-gray-400 font-normal text-xs ml-1">optional</span>
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {NICHES.map(n => (
             <button
-              key={n.value}
-              type="button"
+              key={n.value} type="button"
               onClick={() => setNiche(n.value === niche ? "" : n.value)}
-              className={`relative flex flex-col items-center gap-1 p-3.5 rounded-2xl border-2 text-center transition-all duration-150 cursor-pointer select-none
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-xl border-2 text-xs font-medium transition-all cursor-pointer
                 ${niche === n.value
-                  ? "border-coffee-600 bg-coffee-50 shadow-sm"
-                  : "border-gray-200 hover:border-coffee-300 hover:bg-coffee-50/50"
-                }`}
+                  ? "border-coffee-600 bg-coffee-50 text-coffee-800"
+                  : "border-gray-200 text-gray-600 hover:border-coffee-300 hover:bg-coffee-50/50"}`}
             >
+              <span>{n.emoji}</span> {n.label}
               {niche === n.value && (
-                <span className="absolute top-2 right-2 w-4 h-4 bg-coffee-600 rounded-full flex items-center justify-center">
-                  <svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3l2 2 4-4" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                </span>
+                <svg width="10" height="8" viewBox="0 0 10 8" fill="none" className="ml-0.5">
+                  <path d="M1 4l3 3 5-6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               )}
-              <span className="text-2xl leading-none">{n.emoji}</span>
-              <span className={`text-xs font-semibold leading-tight ${niche === n.value ? "text-coffee-800" : "text-gray-700"}`}>{n.label}</span>
-              <span className="text-[10px] text-gray-400 leading-tight">{n.sub}</span>
             </button>
           ))}
         </div>
       </div>
 
-      {/* Divider */}
-      <div className="flex items-center gap-3">
-        <div className="flex-1 h-px bg-gray-100" />
-        <span className="text-xs text-gray-400 font-medium">Your details</span>
-        <div className="flex-1 h-px bg-gray-100" />
-      </div>
-
-      {/* Step 2 — just the essentials */}
-      <div className="grid sm:grid-cols-2 gap-4">
-        <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1.5">Your name</label>
-          <input type="text" id="name" name="name" placeholder="Jane Smith" className={field} required />
-        </div>
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1.5">Email address</label>
-          <input type="email" id="email" name="email" placeholder="jane@mybusiness.com" className={field} required />
-        </div>
-      </div>
-
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1.5">
-          What's your #1 marketing challenge right now?
-          <span className="text-gray-400 font-normal ml-1">(optional)</span>
+        <label htmlFor="rd-message" className="block text-sm font-medium text-gray-700 mb-1.5">
+          What do you need help with? <span className="text-gray-400 font-normal text-xs ml-1">optional</span>
         </label>
         <textarea
-          id="message" name="message" rows={3}
-          placeholder={`e.g. "I'm not showing up on Google Maps" or "I tried Facebook ads but wasted money"`}
-          className={`${field} resize-none`}
+          id="rd-message" name="message" rows={2}
+          placeholder="e.g. Google Ads setup, local SEO, full audit…"
+          value={message} onChange={e => setMessage(e.target.value)}
+          className={`${inputCls} resize-none`}
         />
       </div>
 
       <button
-        type="submit"
-        disabled={status === "loading"}
-        className="btn-primary w-full justify-center text-base py-4 disabled:opacity-60 group"
+        type="submit" disabled={status === "loading"}
+        className="btn-primary w-full justify-center py-3.5 text-sm disabled:opacity-60 group"
       >
-        {status === "loading" ? (
-          <span className="flex items-center gap-2">
-            <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" strokeDasharray="60" strokeDashoffset="20"/></svg>
-            Sending…
-          </span>
-        ) : (
-          <>
-            <Sparkles size={17} className="opacity-80" />
-            Get My Free Audit
-            <ArrowRight size={17} className="group-hover:translate-x-0.5 transition-transform" />
-          </>
-        )}
+        {status === "loading"
+          ? <><Spinner /> Sending…</>
+          : <><Sparkles size={15} className="opacity-80" /> Let's Talk <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" /></>}
       </button>
 
-      {status === "error" && (
-        <p className="text-red-500 text-sm text-center">
-          Something went wrong — email me directly at{" "}
-          <a href="mailto:hi@datalatte.pro" className="underline">hi@datalatte.pro</a>
-        </p>
-      )}
-
-      <p className="text-xs text-gray-400 text-center">
-        Free, no commitment. I'll respond within one business day. ☕
-      </p>
+      {status === "error" && <ErrorMsg />}
+      <p className="text-xs text-gray-400 text-center">Free audit, no commitment. Back to you within one business day. ☕</p>
     </form>
+  );
+}
+
+function Spinner() {
+  return <svg className="animate-spin w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" strokeDasharray="60" strokeDashoffset="20"/></svg>;
+}
+
+function ErrorMsg() {
+  return (
+    <p className="text-red-500 text-xs text-center">
+      Something went wrong — email <a href="mailto:hi@datalatte.pro" className="underline">hi@datalatte.pro</a> directly.
+    </p>
+  );
+}
+
+/* ─── Main export ─── */
+export default function ContactForm() {
+  const [mode, setMode] = useState<Mode>("explore");
+
+  return (
+    <div>
+      {/* Mode toggle */}
+      <div className="flex gap-2 mb-6 p-1 bg-gray-100 rounded-2xl">
+        {([
+          { id: "explore", icon: <ArrowRight size={14} />, label: "Just exploring" },
+          { id: "ready",   icon: <Zap size={14} />,        label: "Ready to start" },
+        ] as const).map(tab => (
+          <button
+            key={tab.id}
+            type="button"
+            onClick={() => setMode(tab.id)}
+            className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-xl text-sm font-medium transition-all duration-200
+              ${mode === tab.id
+                ? "bg-white text-coffee-800 shadow-sm"
+                : "text-gray-500 hover:text-gray-700"}`}
+          >
+            {tab.icon} {tab.label}
+          </button>
+        ))}
+      </div>
+
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={mode}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.18 }}
+        >
+          {mode === "explore" ? <ExploreForm /> : <ReadyForm />}
+        </motion.div>
+      </AnimatePresence>
+    </div>
   );
 }
