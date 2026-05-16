@@ -4,7 +4,7 @@ Total posts: 96
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
-| `google-ads-for-coffee-shops-complete-2026-guide` | Google Ads for Coffee Shops: Complete 2026 Guide | 2026-05-16 | 1406 | google-ads, coffee-shops, local-business-marketing, google-ads-2026 |
+| `how-much-should-a-coffee-shop-spend-on-google-ads` | How Much Should a Coffee Shop Spend on Google Ads? | 2026-05-16 | 1163 | coffee shop ads, google ads for small business, local business marketing, google ads budget |
 | `best-marketing-for-salons-in-2026-what-actually-works-with-real-examples` | Best Marketing for Salons in 2026: What Actually Works (With Real Examples) | 2026-05-16 | 1221 | influencer marketing for salons, salon marketing, local marketing, google ads for salons, social media marketing for salons |
 | `connected-tv-ads-vs-traditional-tv-ads-why-ctv-wins-for-local-business` | Connected TV Ads vs Traditional TV Ads: Why CTV Wins for Local Business | 2026-05-16 | 1451 | connected tv advertising, local business marketing, digital advertising, CTV vs TV |
 | `cross-channel-retargeting-how-to-follow-customers-across-every-platform` | Cross-Channel Retargeting: How to Follow Customers Across Every Platform | 2026-05-16 | 1422 | cross channel retargeting, retargeting, local ads, Google Ads, Meta Ads |
@@ -103,13 +103,13 @@ Total posts: 96
 
 ## Full Details
 
-### Google Ads for Coffee Shops: Complete 2026 Guide
-- **Slug**: `google-ads-for-coffee-shops-complete-2026-guide`
-- **URL**: https://datalatte.pro/blog/google-ads-for-coffee-shops-complete-2026-guide
+### How Much Should a Coffee Shop Spend on Google Ads?
+- **Slug**: `how-much-should-a-coffee-shop-spend-on-google-ads`
+- **URL**: https://datalatte.pro/blog/how-much-should-a-coffee-shop-spend-on-google-ads
 - **Date**: 2026-05-16
-- **Words**: 1406
-- **Tags**: google-ads, coffee-shops, local-business-marketing, google-ads-2026
-- **Description**: Learn how to run effective Google Ads for coffee shops in 2026. Real examples, budget tips, and actionable steps for local businesses.
+- **Words**: 1163
+- **Tags**: coffee shop ads, google ads for small business, local business marketing, google ads budget
+- **Description**: How much should your coffee shop spend on Google Ads? Real 2026 data showing the ideal coffee shop Google Ads budget by location, goals, and competition.
 
 ### Best Marketing for Salons in 2026: What Actually Works (With Real Examples)
 - **Slug**: `best-marketing-for-salons-in-2026-what-actually-works-with-real-examples`
