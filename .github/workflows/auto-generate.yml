@@ -2,8 +2,8 @@ name: Auto-generate articles
 
 on:
   schedule:
-    - cron: '*/5 * * * *'   # every 5 minutes
-  workflow_dispatch:          # also triggerable manually from GitHub UI / phone
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
 
 jobs:
   generate:
@@ -11,18 +11,33 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - name: Generate article 1
+      - name: Check secrets are set
         run: |
+          if [ -z "${{ secrets.SITE_URL }}" ]; then
+            echo "❌ SITE_URL secret is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.CRON_SECRET }}" ]; then
+            echo "❌ CRON_SECRET secret is not set"
+            exit 1
+          fi
+          echo "✅ Secrets present. Target: ${{ secrets.SITE_URL }}"
+
+      - name: Generate article 1
+        id: art1
+        run: |
+          echo "Calling ${{ secrets.SITE_URL }}/api/admin/generate-cron"
           RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
             "${{ secrets.SITE_URL }}/api/admin/generate-cron" \
             -H "x-cron-secret: ${{ secrets.CRON_SECRET }}" \
             -H "Content-Type: application/json" \
-            --max-time 90)
+            --max-time 90) || echo -e "\ncurl_error"
           HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
           BODY=$(echo "$RESPONSE" | head -n-1)
-          echo "Article 1 — status $HTTP_CODE: $BODY"
+          echo "Status: $HTTP_CODE"
+          echo "Body: $BODY"
 
-      - name: Wait (Groq rate-limit cooldown)
+      - name: Wait 30s
         run: sleep 30
 
       - name: Generate article 2
@@ -31,12 +46,13 @@ jobs:
             "${{ secrets.SITE_URL }}/api/admin/generate-cron" \
             -H "x-cron-secret: ${{ secrets.CRON_SECRET }}" \
             -H "Content-Type: application/json" \
-            --max-time 90)
+            --max-time 90) || echo -e "\ncurl_error"
           HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
           BODY=$(echo "$RESPONSE" | head -n-1)
-          echo "Article 2 — status $HTTP_CODE: $BODY"
+          echo "Status: $HTTP_CODE"
+          echo "Body: $BODY"
 
-      - name: Wait
+      - name: Wait 30s
         run: sleep 30
 
       - name: Generate article 3
@@ -45,7 +61,8 @@ jobs:
             "${{ secrets.SITE_URL }}/api/admin/generate-cron" \
             -H "x-cron-secret: ${{ secrets.CRON_SECRET }}" \
             -H "Content-Type: application/json" \
-            --max-time 90)
+            --max-time 90) || echo -e "\ncurl_error"
           HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
           BODY=$(echo "$RESPONSE" | head -n-1)
-          echo "Article 3 — status $HTTP_CODE: $BODY"
+          echo "Status: $HTTP_CODE"
+          echo "Body: $BODY"
