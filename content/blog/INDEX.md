@@ -1,10 +1,10 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-16
-Total posts: 99
+Total posts: 100
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
-| `google-ads-for-hair-salons-complete-2026-guide` | Google Ads for Hair Salons: Complete 2026 Guide | 2026-05-16 | 1676 | google ads for small business, google ads for hair salons, small business marketing, local seo |
+| `how-much-should-a-hair-salon-spend-on-google-ads` | How Much Should a Hair Salon Spend on Google Ads? | 2026-05-16 | 1541 | hair salon google ads budget, google ads for small business, google ads cost for salons, local advertising |
 | `best-google-ad-keywords-for-coffee-shops-in-2026` | Best Google Ad Keywords for Coffee Shops in 2026 | 2026-05-16 | 1850 | coffee shop marketing, google ads for coffee shops, google ads for local businesses, coffee shop keywords, Google Ads keywords |
 | `best-marketing-for-salons-in-2026-what-actually-works-with-real-examples` | Best Marketing for Salons in 2026: What Actually Works (With Real Examples) | 2026-05-16 | 1221 | influencer marketing for salons, salon marketing, local marketing, google ads for salons, social media marketing for salons |
 | `connected-tv-ads-vs-traditional-tv-ads-why-ctv-wins-for-local-business` | Connected TV Ads vs Traditional TV Ads: Why CTV Wins for Local Business | 2026-05-16 | 1451 | connected tv advertising, local business marketing, digital advertising, CTV vs TV |
@@ -16,6 +16,7 @@ Total posts: 99
 | `email-marketing-strategy-for-small-business-the-step-by-step-playbook` | Email Marketing Strategy for Small Business: The Step-by-Step Playbook | 2026-05-16 | 1890 | email marketing for small business, email marketing campaigns, email marketing strategy, small business marketing |
 | `facebook-pixel-vs-google-tag-which-to-install-first` | Facebook Pixel vs Google Tag: Which to Install First? | 2026-05-16 | 1384 | facebook pixel, google tag, retargeting, digital marketing, tracking, local marketing |
 | `google-ads-for-coffee-shops-complete-2026-guide` | Google Ads for Coffee Shops: Complete 2026 Guide | 2026-05-16 | 1406 | google-ads, coffee-shops, local-business-marketing, google-ads-2026 |
+| `google-ads-mistakes-coffee-shops-make-and-how-to-fix-them` | Google Ads Mistakes Coffee Shops Make (And How to Fix Them) | 2026-05-16 | 1663 | google ads mistakes coffee shop, google ads for small business, coffee shop marketing, digital marketing for local business |
 | `google-performance-max-for-local-business-complete-guide-2026` | Google Performance Max for Local Business: Complete Guide (2026) | 2026-05-16 | 1702 | google-ads, performance-max, local-business, digital-marketing, smart-campaigns |
 | `google-responsive-search-ads-best-practices-10-tips-to-improve-your-ad-strength` | Google Responsive Search Ads Best Practices: 10 Tips to Improve Your Ad Strength | 2026-05-16 | 1415 | Google Ads, Responsive Search Ads, Digital Marketing, Local Business |
 | `how-do-i-attract-customers-to-my-coffee-shop-complete-guide-for-2026` | How Do I Attract Customers to My Coffee Shop  -  Complete Guide for 2026 | 2026-05-16 | 1658 | email marketing for coffee shop, google ads for small business, local marketing, data-driven marketing |
@@ -106,13 +107,13 @@ Total posts: 99
 
 ## Full Details
 
-### Google Ads for Hair Salons: Complete 2026 Guide
-- **Slug**: `google-ads-for-hair-salons-complete-2026-guide`
-- **URL**: https://datalatte.pro/blog/google-ads-for-hair-salons-complete-2026-guide
+### How Much Should a Hair Salon Spend on Google Ads?
+- **Slug**: `how-much-should-a-hair-salon-spend-on-google-ads`
+- **URL**: https://datalatte.pro/blog/how-much-should-a-hair-salon-spend-on-google-ads
 - **Date**: 2026-05-16
-- **Words**: 1676
-- **Tags**: google ads for small business, google ads for hair salons, small business marketing, local seo
-- **Description**: Google Ads for hair salons in 2026: learn how to set up, target local clients, and get real results with data-driven ad strategies. A complete guide for small salons.
+- **Words**: 1541
+- **Tags**: hair salon google ads budget, google ads for small business, google ads cost for salons, local advertising
+- **Description**: Find out the ideal Google Ads budget for hair salons  -  real-world examples, cost breakdowns, and how to avoid wasting money on ads.
 
 ### Best Google Ad Keywords for Coffee Shops in 2026
 - **Slug**: `best-google-ad-keywords-for-coffee-shops-in-2026`
@@ -201,6 +202,14 @@ Total posts: 99
 - **Words**: 1406
 - **Tags**: google-ads, coffee-shops, local-business-marketing, google-ads-2026
 - **Description**: Learn how to run effective Google Ads for coffee shops in 2026. Real examples, budget tips, and actionable steps for local businesses.
+
+### Google Ads Mistakes Coffee Shops Make (And How to Fix Them)
+- **Slug**: `google-ads-mistakes-coffee-shops-make-and-how-to-fix-them`
+- **URL**: https://datalatte.pro/blog/google-ads-mistakes-coffee-shops-make-and-how-to-fix-them
+- **Date**: 2026-05-16
+- **Words**: 1663
+- **Tags**: google ads mistakes coffee shop, google ads for small business, coffee shop marketing, digital marketing for local business
+- **Description**: Google Ads mistakes coffee shops make include bad targeting, vague keywords, and poor ad copy. Here's how to fix them and boost ROI.
 
 ### Google Performance Max for Local Business: Complete Guide (2026)
 - **Slug**: `google-performance-max-for-local-business-complete-guide-2026`
