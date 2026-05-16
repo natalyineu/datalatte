@@ -1,6 +1,6 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-16
-Total posts: 79
+Total posts: 80
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
@@ -11,8 +11,9 @@ Total posts: 79
 | `facebook-pixel-vs-google-tag-which-to-install-first` | Facebook Pixel vs Google Tag: Which to Install First? | 2026-05-16 | 1293 | facebook pixel, google tag, retargeting, digital marketing, tracking, local marketing |
 | `google-performance-max-for-local-business-complete-guide-2026` | Google Performance Max for Local Business: Complete Guide (2026) | 2026-05-16 | 1626 | google-ads, performance-max, local-business, digital-marketing, smart-campaigns |
 | `how-much-do-spotify-ads-cost-pricing-for-local-businesses` | How Much Do Spotify Ads Cost? Pricing for Local Businesses | 2026-05-16 | 1178 | Spotify Ads, Local Ads, Audio Advertising, Marketing Budget |
-| `how-much-does-ctv-advertising-cost-real-cpm-data` | How Much Does CTV Advertising Cost? Real CPM Data | 2026-05-16 | 1706 | ctv advertising cost, local CTV ads, CTV CPM, OTT advertising, digital ad pricing |
+| `how-much-does-ctv-advertising-cost-real-cpm-data` | How Much Does CTV Advertising Cost? Real CPM Data | 2026-05-16 | 1775 | ctv advertising cost, local CTV ads, CTV CPM, OTT advertising, digital ad pricing |
 | `how-to-run-spotify-ads-step-by-step-ad-studio-guide` | How to Run Spotify Ads Step-by-Step (Spotify Ad Studio Guide) | 2026-05-16 | 1378 | how to run spotify ads, Spotify Ad Studio, audio advertising, music streaming ads |
+| `how-to-set-up-performance-max-campaigns-step-by-step` | How to Set Up Performance Max Campaigns Step-by-Step | 2026-05-16 | 1321 | google ads, performance max, local business, digital marketing |
 | `how-to-set-up-retargeting-on-google-facebook-and-more` | How to Set Up Retargeting on Google, Facebook, and More | 2026-05-16 | 1716 | retargeting, Google Ads, Meta Ads, Facebook Ads, digital marketing |
 | `performance-max-best-practices-10-tips-to-maximise-results` | Performance Max Best Practices: 10 Tips to Maximise Your Results | 2026-05-16 | 1625 | performance max, google ads, digital marketing, local seo |
 | `performance-max-vs-standard-google-ads-which-should-you-run` | Performance Max vs Standard Google Ads: Which Should You Run? | 2026-05-16 | 1565 | google ads, performance max, local marketing, digital advertising, performance max vs standard campaigns |
@@ -146,7 +147,7 @@ Total posts: 79
 - **Slug**: `how-much-does-ctv-advertising-cost-real-cpm-data`
 - **URL**: https://datalatte.pro/blog/how-much-does-ctv-advertising-cost-real-cpm-data
 - **Date**: 2026-05-16
-- **Words**: 1706
+- **Words**: 1775
 - **Tags**: ctv advertising cost, local CTV ads, CTV CPM, OTT advertising, digital ad pricing
 - **Description**: Find out real CTV advertising cost in 2026  -  including CPM data, budget benchmarks, and what affects pricing. For local business owners.
 
@@ -157,6 +158,14 @@ Total posts: 79
 - **Words**: 1378
 - **Tags**: how to run spotify ads, Spotify Ad Studio, audio advertising, music streaming ads
 - **Description**: Learn how to run Spotify Ads for your local business with a step-by-step guide to Spotify Ad Studio. Real examples, budget tips, and ad formats covered.
+
+### How to Set Up Performance Max Campaigns Step-by-Step
+- **Slug**: `how-to-set-up-performance-max-campaigns-step-by-step`
+- **URL**: https://datalatte.pro/blog/how-to-set-up-performance-max-campaigns-step-by-step
+- **Date**: 2026-05-16
+- **Words**: 1321
+- **Tags**: google ads, performance max, local business, digital marketing
+- **Description**: Google Performance Max campaigns can boost your local business. Here's how to set them up step-by-step for maximum ROI.
 
 ### How to Set Up Retargeting on Google, Facebook, and More
 - **Slug**: `how-to-set-up-retargeting-on-google-facebook-and-more`
