@@ -36,7 +36,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           if grep -q "Pushed" /tmp/gen_output.txt; then
-            sleep 5
+            sleep 65
             gh workflow run auto-generate.yml --repo natalyineu/datalatte
           fi
 
