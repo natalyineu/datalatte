@@ -183,22 +183,12 @@ Output ONLY raw MDX — no code fences, start with ---.`;
 async function run() {
   const results = [];
 
-  for (let i = 0; i < 3; i++) {
-    try {
-      const result = await generateOne();
-      if (result) {
-        results.push(result);
-        if (i < 2) {
-          console.log('⏳ Waiting 30s...');
-          await new Promise((r) => setTimeout(r, 30000));
-        }
-      } else {
-        break; // No more pending articles
-      }
-    } catch (err) {
-      console.error(`❌ Error (attempt ${i + 1}): ${err.message}`);
-      results.push({ slug: '?', status: 500, error: err.message });
-    }
+  try {
+    const result = await generateOne();
+    if (result) results.push(result);
+  } catch (err) {
+    console.error(`❌ Error: ${err.message}`);
+    results.push({ slug: '?', status: 500, error: err.message });
   }
 
   console.log('\n=== Final Results ===');
