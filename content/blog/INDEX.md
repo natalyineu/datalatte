@@ -1,10 +1,11 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-16
-Total posts: 75
+Total posts: 76
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
 | `connected-tv-ads-vs-traditional-tv-ads-why-ctv-wins-for-local-business` | Connected TV Ads vs Traditional TV Ads: Why CTV Wins for Local Business | 2026-05-16 | 1383 | connected tv advertising, local business marketing, digital advertising, CTV vs TV |
+| `cross-channel-retargeting-how-to-follow-customers-across-every-platform` | Cross-Channel Retargeting: How to Follow Customers Across Every Platform | 2026-05-16 | 1387 | cross channel retargeting, retargeting, local ads, Google Ads, Meta Ads |
 | `ctv-ads-for-local-businesses-can-you-advertise-on-streaming-tv` | CTV Ads for Local Businesses: Can You Really Advertise on Streaming TV? | 2026-05-16 | 1457 | ctv ads for local businesses, ott advertising, local business marketing, google ads, streaming tv ads |
 | `ctv-vs-ott-whats-the-difference-and-which-should-you-buy` | CTV vs OTT: What's the Difference and Which Should You Buy? | 2026-05-16 | 1056 | ctv, ott, ctv vs ott, connected tv, streaming ads |
 | `facebook-pixel-vs-google-tag-which-to-install-first` | Facebook Pixel vs Google Tag: Which to Install First? | 2026-05-16 | 1293 | facebook pixel, google tag, retargeting, digital marketing, tracking, local marketing |
@@ -89,6 +90,14 @@ Total posts: 75
 - **Words**: 1383
 - **Tags**: connected tv advertising, local business marketing, digital advertising, CTV vs TV
 - **Description**: Connected TV advertising is outperforming traditional TV for local businesses. Here's why CTV is the smarter choice in 2026.
+
+### Cross-Channel Retargeting: How to Follow Customers Across Every Platform
+- **Slug**: `cross-channel-retargeting-how-to-follow-customers-across-every-platform`
+- **URL**: https://datalatte.pro/blog/cross-channel-retargeting-how-to-follow-customers-across-every-platform
+- **Date**: 2026-05-16
+- **Words**: 1387
+- **Tags**: cross channel retargeting, retargeting, local ads, Google Ads, Meta Ads
+- **Description**: Cross channel retargeting is the most effective way for small businesses to follow customers across Google, Facebook, CTV, and more. Here's how to set it up.
 
 ### CTV Ads for Local Businesses: Can You Really Advertise on Streaming TV?
 - **Slug**: `ctv-ads-for-local-businesses-can-you-advertise-on-streaming-tv`
