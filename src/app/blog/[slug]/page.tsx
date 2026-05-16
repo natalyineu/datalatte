@@ -50,7 +50,7 @@ interface PostFrontmatter {
 }
 
 export async function generateStaticParams() {
-  return getPostSlugs().map((slug) => ({ slug }));
+  return [];
 }
 
 export async function generateMetadata({
