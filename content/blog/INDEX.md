@@ -1,6 +1,6 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-16
-Total posts: 85
+Total posts: 86
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
@@ -10,6 +10,7 @@ Total posts: 85
 | `ctv-ads-for-local-businesses-can-you-advertise-on-streaming-tv` | CTV Ads for Local Businesses: Can You Really Advertise on Streaming TV? | 2026-05-16 | 1457 | ctv ads for local businesses, ott advertising, local business marketing, google ads, streaming tv ads |
 | `ctv-vs-ott-whats-the-difference-and-which-should-you-buy` | CTV vs OTT: What's the Difference and Which Should You Buy? | 2026-05-16 | 1056 | ctv, ott, ctv vs ott, connected tv, streaming ads |
 | `dog-grooming-marketing-ideas-20-ways-to-fill-your-calendar-in-30-days` | Dog Grooming Marketing Ideas: 20 Ways to Fill Your Calendar in 30 Days | 2026-05-16 | 1485 | dog grooming marketing ideas, pet grooming marketing, local SEO, Google Ads, retargeting |
+| `email-marketing-ideas-for-small-businesses-20-campaigns-that-drive-revenue-in-20` | Email Marketing Ideas for Small Businesses: 20 Campaigns That Drive Revenue in 2026 | 2026-05-16 | 1656 | email marketing for small business, email marketing campaigns, email campaigns for coffee shops, email marketing for salons |
 | `facebook-pixel-vs-google-tag-which-to-install-first` | Facebook Pixel vs Google Tag: Which to Install First? | 2026-05-16 | 1293 | facebook pixel, google tag, retargeting, digital marketing, tracking, local marketing |
 | `google-performance-max-for-local-business-complete-guide-2026` | Google Performance Max for Local Business: Complete Guide (2026) | 2026-05-16 | 1626 | google-ads, performance-max, local-business, digital-marketing, smart-campaigns |
 | `google-responsive-search-ads-best-practices-10-tips-to-improve-your-ad-strength` | Google Responsive Search Ads Best Practices: 10 Tips to Improve Your Ad Strength | 2026-05-16 | 1415 | Google Ads, Responsive Search Ads, Digital Marketing, Local Business |
@@ -139,6 +140,14 @@ Total posts: 85
 - **Words**: 1485
 - **Tags**: dog grooming marketing ideas, pet grooming marketing, local SEO, Google Ads, retargeting
 - **Description**: Fill your dog grooming calendar in 30 days with actionable dog grooming marketing ideas. Real examples and ROI-focused tactics from DataLatte.
+
+### Email Marketing Ideas for Small Businesses: 20 Campaigns That Drive Revenue in 2026
+- **Slug**: `email-marketing-ideas-for-small-businesses-20-campaigns-that-drive-revenue-in-20`
+- **URL**: https://datalatte.pro/blog/email-marketing-ideas-for-small-businesses-20-campaigns-that-drive-revenue-in-20
+- **Date**: 2026-05-16
+- **Words**: 1656
+- **Tags**: email marketing for small business, email marketing campaigns, email campaigns for coffee shops, email marketing for salons
+- **Description**: Get 20 high-converting email marketing campaigns for small businesses in 2026. From coffee shops to salons, these email ideas actually drive revenue.
 
 ### Facebook Pixel vs Google Tag: Which to Install First?
 - **Slug**: `facebook-pixel-vs-google-tag-which-to-install-first`
