@@ -11,31 +11,16 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - name: Check secrets are set
-        run: |
-          if [ -z "${{ secrets.SITE_URL }}" ]; then
-            echo "❌ SITE_URL secret is not set"
-            exit 1
-          fi
-          if [ -z "${{ secrets.CRON_SECRET }}" ]; then
-            echo "❌ CRON_SECRET secret is not set"
-            exit 1
-          fi
-          echo "✅ Secrets present. Target: ${{ secrets.SITE_URL }}"
-
       - name: Generate article 1
-        id: art1
         run: |
-          echo "Calling ${{ secrets.SITE_URL }}/api/admin/generate-cron"
           RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
-            "${{ secrets.SITE_URL }}/api/admin/generate-cron" \
+            "https://datalatte.pro/api/admin/generate-cron" \
             -H "x-cron-secret: ${{ secrets.CRON_SECRET }}" \
             -H "Content-Type: application/json" \
             --max-time 90) || echo -e "\ncurl_error"
           HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
           BODY=$(echo "$RESPONSE" | head -n-1)
-          echo "Status: $HTTP_CODE"
-          echo "Body: $BODY"
+          echo "Status: $HTTP_CODE — $BODY"
 
       - name: Wait 30s
         run: sleep 30
@@ -43,14 +28,13 @@ jobs:
       - name: Generate article 2
         run: |
           RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
-            "${{ secrets.SITE_URL }}/api/admin/generate-cron" \
+            "https://datalatte.pro/api/admin/generate-cron" \
             -H "x-cron-secret: ${{ secrets.CRON_SECRET }}" \
             -H "Content-Type: application/json" \
             --max-time 90) || echo -e "\ncurl_error"
           HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
           BODY=$(echo "$RESPONSE" | head -n-1)
-          echo "Status: $HTTP_CODE"
-          echo "Body: $BODY"
+          echo "Status: $HTTP_CODE — $BODY"
 
       - name: Wait 30s
         run: sleep 30
@@ -58,11 +42,10 @@ jobs:
       - name: Generate article 3
         run: |
           RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
-            "${{ secrets.SITE_URL }}/api/admin/generate-cron" \
+            "https://datalatte.pro/api/admin/generate-cron" \
             -H "x-cron-secret: ${{ secrets.CRON_SECRET }}" \
             -H "Content-Type: application/json" \
             --max-time 90) || echo -e "\ncurl_error"
           HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
           BODY=$(echo "$RESPONSE" | head -n-1)
-          echo "Status: $HTTP_CODE"
-          echo "Body: $BODY"
+          echo "Status: $HTTP_CODE — $BODY"
