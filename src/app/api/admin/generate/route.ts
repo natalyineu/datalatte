@@ -2,18 +2,20 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { execSync } from "child_process";
 
 // Extend timeout to 60s (requires Vercel Pro) — runs fine locally with no limit
 export const maxDuration = 60;
 
-// ── Paths ────────────────────────────────────────────────────────────────────
+// ── Paths (read-only on Vercel — writes go via GitHub API) ───────────────────
 
-const QUEUE_PATH   = path.join(process.cwd(), "content/queue.json");
-const BLOG_DIR     = path.join(process.cwd(), "content/blog");
-const INDEX_PATH   = path.join(BLOG_DIR, "INDEX.md");
+const QUEUE_PATH    = path.join(process.cwd(), "content/queue.json");
+const BLOG_DIR      = path.join(process.cwd(), "content/blog");
+const INDEX_PATH    = path.join(BLOG_DIR, "INDEX.md");
 const CLUSTERS_PATH = path.join(process.cwd(), "seo-research/02-keyword-clusters-expanded.md");
-const PAA_PATH     = path.join(process.cwd(), "seo-research/serpapi-raw/paa-all.json");
+const PAA_PATH      = path.join(process.cwd(), "seo-research/serpapi-raw/paa-all.json");
+
+const GH_OWNER = "natalyineu";
+const GH_REPO  = "datalatte";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -34,14 +36,59 @@ interface QueueFile {
   queue: QueueEntry[];
 }
 
-// ── Queue helpers ─────────────────────────────────────────────────────────────
+// ── GitHub Contents API helpers ───────────────────────────────────────────────
 
-function readQueue(): QueueFile {
-  return JSON.parse(fs.readFileSync(QUEUE_PATH, "utf8")) as QueueFile;
+interface GHFile { sha: string; content: string; }
+
+async function ghGet(filePath: string, token: string): Promise<GHFile | null> {
+  const res = await fetch(
+    `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${filePath}`,
+    { headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" } }
+  );
+  if (!res.ok) return null;
+  return res.json() as Promise<GHFile>;
 }
 
-function writeQueue(data: QueueFile) {
-  fs.writeFileSync(QUEUE_PATH, JSON.stringify(data, null, 2) + "\n", "utf8");
+async function ghPut(
+  filePath: string,
+  content: string,
+  message: string,
+  sha: string | undefined,
+  token: string
+): Promise<{ ok: boolean; status: number }> {
+  const body: Record<string, string> = {
+    message,
+    content: Buffer.from(content, "utf8").toString("base64"),
+    branch: "main",
+  };
+  if (sha) body.sha = sha;
+  const res = await fetch(
+    `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${filePath}`,
+    {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/vnd.github+json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }
+  );
+  return { ok: res.ok, status: res.status };
+}
+
+// ── Queue helpers — read from GitHub API for freshness, fallback to disk ─────
+
+async function readQueue(token?: string): Promise<{ data: QueueFile; sha?: string }> {
+  if (token) {
+    const file = await ghGet("content/queue.json", token);
+    if (file) {
+      const content = Buffer.from(file.content, "base64").toString("utf8");
+      return { data: JSON.parse(content) as QueueFile, sha: file.sha };
+    }
+  }
+  // Fallback: read from deployed filesystem (may be slightly stale)
+  return { data: JSON.parse(fs.readFileSync(QUEUE_PATH, "utf8")) as QueueFile };
 }
 
 // ── SEO context helpers ───────────────────────────────────────────────────────
@@ -50,7 +97,6 @@ function getRelevantKeywords(cluster: string, primaryKeyword: string): string {
   try {
     const raw = fs.readFileSync(CLUSTERS_PATH, "utf8");
     const lines = raw.split("\n");
-    // Find the cluster section and extract ~30 lines of it
     const startIdx = lines.findIndex(
       (l) => l.toLowerCase().includes(cluster.toLowerCase().slice(0, 20)) ||
              l.toLowerCase().includes(primaryKeyword.toLowerCase().slice(0, 15))
@@ -69,13 +115,11 @@ function getRelevantPAA(primaryKeyword: string): string[] {
     };
     const keyword = primaryKeyword.toLowerCase();
     const questions: string[] = [];
-
     for (const [kw, items] of Object.entries(raw.data)) {
       if (kw.toLowerCase().includes(keyword.slice(0, 12)) || keyword.includes(kw.slice(0, 12))) {
         items.slice(0, 6).forEach((q) => questions.push(q.question));
       }
     }
-    // Fallback: collect a broad set if nothing matched specifically
     if (questions.length === 0) {
       const allQ = Object.values(raw.data).flat();
       return allQ.slice(0, 8).map((q) => q.question);
@@ -111,69 +155,49 @@ function getExistingArticles(): Array<{ slug: string; title: string }> {
 // ── MDX cleanup ───────────────────────────────────────────────────────────────
 
 function sanitizeUnicode(text: string): string {
-  // Replace fancy Unicode punctuation that breaks MDX parsing
   return text
-    .replace(/‑/g, '-')
-    .replace(/‐/g, '-')
-    .replace(/‒/g, '-')
-    .replace(/–/g, '-')
-    .replace(/—/g, ' - ')
-    .replace(/‘/g, "'")
-    .replace(/’/g, "'")
-    .replace(/“/g, '"')
-    .replace(/”/g, '"')
-    .replace(/ /g, ' ')
+    .replace(/‑/g, '-').replace(/‐/g, '-').replace(/‒/g, '-')
+    .replace(/–/g, '-').replace(/—/g, ' - ')
+    .replace(/'/g, "'").replace(/'/g, "'")
+    .replace(/"/g, '"').replace(/"/g, '"')
+    .replace(/ /g, ' ')
     .replace(/<($d)/g, '&lt;$1')
     .replace(/<(d)/g, '&lt;$1')
     .replace(/<(%)/g, '&lt;$1');
 }
 
 function stripFences(text: string): string {
-  // Remove Qwen3 <think>...</think> reasoning blocks
   let cleaned = text.replace(/<think>[\s\S]*?<\/think>/gi, "").trim();
-  // Remove ```mdx ... ``` or ``` ... ``` wrappers the LLM sometimes adds
   cleaned = cleaned
     .replace(/^```(?:mdx|markdown|md)?\s*\n/i, "")
     .replace(/\n```\s*$/i, "")
     .trim();
-  // Sanitize Unicode punctuation that breaks MDX
-  cleaned = sanitizeUnicode(cleaned);
-  return cleaned;
+  return sanitizeUnicode(cleaned);
 }
 
 function ensureValidMdx(text: string): string {
   const stripped = stripFences(text);
-
-  // If it starts cleanly with frontmatter, return as-is
   if (stripped.startsWith("---")) {
     const secondDash = stripped.indexOf("---", 3);
     if (secondDash === -1) throw new Error("Generated content has unclosed YAML frontmatter");
     return stripped;
   }
-
-  // Qwen/other models sometimes add preamble text before the frontmatter —
-  // find the first occurrence of "---" and slice from there
   const fmStart = stripped.indexOf("\n---");
   if (fmStart !== -1) {
     const sliced = stripped.slice(fmStart + 1).trim();
-    const secondDash = sliced.indexOf("---", 3);
-    if (secondDash !== -1) return sliced;
+    if (sliced.indexOf("---", 3) !== -1) return sliced;
   }
-
-  // Last attempt: look for "---" anywhere
   const anyFm = stripped.indexOf("---");
   if (anyFm !== -1) {
     const sliced = stripped.slice(anyFm).trim();
-    const secondDash = sliced.indexOf("---", 3);
-    if (secondDash !== -1) return sliced;
+    if (sliced.indexOf("---", 3) !== -1) return sliced;
   }
-
   throw new Error("Generated content does not contain valid YAML frontmatter (---)");
 }
 
-// ── Index regeneration (inlined — avoids Turbopack spawnSync path analysis) ──
+// ── Index regeneration (returns string, no disk write) ───────────────────────
 
-function regenerateIndex(): void {
+function buildIndex(extraPost?: { slug: string; title: string; date: string; wordCount: number; tags: string; description: string }): string {
   const files = fs.readdirSync(BLOG_DIR).filter((f) => f.endsWith(".mdx"));
   const posts = files
     .map((file) => {
@@ -181,14 +205,17 @@ function regenerateIndex(): void {
       const raw  = fs.readFileSync(path.join(BLOG_DIR, file), "utf8");
       const { data, content } = matter(raw);
       const wordCount = content.trim().split(/\s+/).filter(Boolean).length;
-      const tags = Array.isArray(data.tags)
-        ? (data.tags as string[]).join(", ")
-        : String(data.tags ?? "");
+      const tags = Array.isArray(data.tags) ? (data.tags as string[]).join(", ") : String(data.tags ?? "");
       return { slug, title: String(data.title ?? ""), date: String(data.date ?? ""), wordCount, tags, description: String(data.description ?? "") };
     })
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-  const table = `# Blog Post Index — DataLatte.pro
+  // Prepend the new article (not yet on disk) if provided
+  if (extraPost && !posts.find((p) => p.slug === extraPost.slug)) {
+    posts.unshift(extraPost);
+  }
+
+  return `# Blog Post Index — DataLatte.pro
 Generated: ${new Date().toISOString().split("T")[0]}
 Total posts: ${posts.length}
 
@@ -199,8 +226,8 @@ ${posts.map((p) => `| \`${p.slug}\` | ${p.title} | ${p.date} | ${p.wordCount} | 
 ## Full Details
 
 ${posts
-  .map(
-    (p) => `### ${p.title}
+    .map(
+      (p) => `### ${p.title}
 - **Slug**: \`${p.slug}\`
 - **URL**: https://datalatte.pro/blog/${p.slug}
 - **Date**: ${p.date}
@@ -208,37 +235,16 @@ ${posts
 - **Tags**: ${p.tags}
 - **Description**: ${p.description}
 `
-  )
-  .join("\n")}`;
-
-  fs.writeFileSync(INDEX_PATH, table, "utf8");
-}
-
-// ── MDX content validation (lightweight — no full build) ─────────────────────
-// Running `npm run build` locally is unreliable: Next.js internal errors
-// (e.g. /_global-error useContext) can roll back perfectly valid content.
-// Vercel rebuilds on every push, so a full local build is not needed here.
-// We validate the content directly instead.
-
-function runBuild(): { success: boolean; output: string } {
-  try {
-    // gray-matter already parsed in ensureValidMdx; do a final sanity check
-    // to make sure the file is readable and has a title in its frontmatter.
-    return { success: true, output: "content validation passed" };
-  } catch (err) {
-    const msg = err instanceof Error ? err.message : String(err);
-    return { success: false, output: msg };
-  }
+    )
+    .join("\n")}`;
 }
 
 // ── Groq API call (with auto-retry on 429) ───────────────────────────────────
-// Free tier limit: 12,000 TPM on llama-3.3-70b-versatile.
-// On rate-limit errors, parse the wait time from the message and retry up to 3×.
 
 const GROQ_MODELS = [
-  "qwen/qwen3-32b",             // primary — strong reasoning, great structured content
-  "openai/gpt-oss-120b",        // fallback — largest model on Groq, best quality
-  "llama-3.1-8b-instant",       // last resort — faster, lighter
+  "qwen/qwen3-32b",
+  "openai/gpt-oss-120b",
+  "llama-3.1-8b-instant",
 ];
 
 async function callGroq(
@@ -251,13 +257,9 @@ async function callGroq(
   if (!apiKey) throw new Error("GROQ_API_KEY is not set in environment variables");
 
   const model = GROQ_MODELS[modelIndex] ?? GROQ_MODELS[0];
-
   const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
     method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
+    headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
     body: JSON.stringify({
       model,
       messages: [
@@ -271,32 +273,27 @@ async function callGroq(
 
   if (!res.ok) {
     const errText = await res.text();
-
     if (res.status === 429 && retries > 0) {
-      // Parse "Please try again in 7.8s" from the error body
       const match = errText.match(/try again in ([\d.]+)s/i);
       const waitMs = match ? Math.ceil(parseFloat(match[1]) * 1000) + 2000 : 20000;
-
       await new Promise((r) => setTimeout(r, waitMs));
-
-      // If still failing after waiting, try next model
       const nextModel = retries === 1 ? modelIndex + 1 : modelIndex;
       return callGroq(systemPrompt, userPrompt, nextModel, retries - 1);
     }
-
     throw new Error(`Groq API error ${res.status}: ${errText.slice(0, 300)}`);
   }
 
-  const json = (await res.json()) as {
-    choices: Array<{ message: { content: string } }>;
-  };
+  const json = (await res.json()) as { choices: Array<{ message: { content: string } }> };
   return json.choices?.[0]?.message?.content ?? "";
 }
 
 // ── POST /api/admin/generate ──────────────────────────────────────────────────
 
 export async function POST(): Promise<NextResponse> {
-  const data = readQueue();
+  const ghToken = process.env.GH_TOKEN;
+
+  // ── Read queue (from GitHub API if token set; else fall back to disk) ────
+  const { data, sha: queueSha } = await readQueue(ghToken);
   const entry = data.queue.find((e) => e.status === "pending");
 
   if (!entry) {
@@ -304,11 +301,10 @@ export async function POST(): Promise<NextResponse> {
   }
 
   // ── Build context ────────────────────────────────────────────────────────
-
-  const clusterKeywords = getRelevantKeywords(entry.cluster, entry.primaryKeyword);
-  const paaQuestions    = getRelevantPAA(entry.primaryKeyword);
-  const existingPosts   = getExistingArticles();
-  const today           = new Date().toISOString().split("T")[0];
+  const clusterKeywords  = getRelevantKeywords(entry.cluster, entry.primaryKeyword);
+  const paaQuestions     = getRelevantPAA(entry.primaryKeyword);
+  const existingPosts    = getExistingArticles();
+  const today            = new Date().toISOString().split("T")[0];
 
   const internalLinksContext = existingPosts
     .slice(0, 10)
@@ -320,7 +316,6 @@ export async function POST(): Promise<NextResponse> {
     : "- No PAA data available for this cluster";
 
   // ── System prompt ────────────────────────────────────────────────────────
-
   const systemPrompt = `You are Nataliia, founder of DataLatte (datalatte.pro) — a freelance local marketing agency helping coffee shops, hair salons, pet groomers, and fitness studios grow with data-driven digital marketing (Google Ads, Meta Ads, local SEO, GBP, email marketing, marketing automation).
 
 WRITING STYLE:
@@ -378,7 +373,6 @@ Target words: ${entry.targetWords}
 Remember: output ONLY the raw MDX — no code fences, start with --- frontmatter.`;
 
   // ── Call Groq ────────────────────────────────────────────────────────────
-
   let mdxContent: string;
   try {
     const raw = await callGroq(systemPrompt, userPrompt);
@@ -388,21 +382,29 @@ Remember: output ONLY the raw MDX — no code fences, start with --- frontmatter
     return NextResponse.json({ success: false, error: `Generation failed: ${msg}` }, { status: 500 });
   }
 
-  // ── Save MDX file ────────────────────────────────────────────────────────
+  // ── Parse frontmatter to get metadata for the index ──────────────────────
+  const { data: fm, content: mdxBody } = matter(mdxContent);
+  const newWordCount = mdxBody.trim().split(/\s+/).filter(Boolean).length;
+  const newTags = Array.isArray(fm.tags) ? (fm.tags as string[]).join(", ") : String(fm.tags ?? "");
 
+  // ── Check if file already exists on disk (stale deploy read) ─────────────
   const mdxPath = path.join(BLOG_DIR, `${entry.slug}.mdx`);
-
-  // Don't overwrite existing published content — mark as generated and skip
   if (fs.existsSync(mdxPath)) {
     const existing = matter(fs.readFileSync(mdxPath, "utf8"));
     if (existing.data.date) {
-      const skipped = readQueue();
-      const si = skipped.queue.findIndex((e) => e.slug === entry.slug);
-      if (si !== -1) {
-        skipped.queue[si].status = "generated";
-        skipped.queue[si].generatedDate = skipped.queue[si].generatedDate ?? new Date().toISOString();
-        delete skipped.queue[si].errorNote;
-        writeQueue(skipped);
+      // Mark as generated in queue and skip
+      const idx = data.queue.findIndex((e) => e.slug === entry.slug);
+      if (idx !== -1 && ghToken && queueSha) {
+        data.queue[idx].status = "generated";
+        data.queue[idx].generatedDate = data.queue[idx].generatedDate ?? new Date().toISOString();
+        delete data.queue[idx].errorNote;
+        await ghPut(
+          "content/queue.json",
+          JSON.stringify(data, null, 2) + "\n",
+          `Mark ${entry.slug} as generated (already exists)`,
+          queueSha,
+          ghToken
+        );
       }
       const wordCount = existing.content.trim().split(/\s+/).filter(Boolean).length;
       return NextResponse.json(
@@ -412,76 +414,96 @@ Remember: output ONLY the raw MDX — no code fences, start with --- frontmatter
     }
   }
 
-  fs.writeFileSync(mdxPath, mdxContent + "\n", "utf8");
-
-  // ── Regenerate index ─────────────────────────────────────────────────────
-
-  regenerateIndex();
-
-  // ── Validate build ───────────────────────────────────────────────────────
-
-  const build = runBuild();
-
-  if (!build.success) {
-    // Rollback
-    fs.unlinkSync(mdxPath);
-    const rollbackData = readQueue();
-    const idx = rollbackData.queue.findIndex((e) => e.slug === entry.slug);
-    if (idx !== -1) {
-      rollbackData.queue[idx].status = "pending";
-      rollbackData.queue[idx].errorNote = `Build failed: ${build.output.slice(-300)}`;
-      writeQueue(rollbackData);
-    }
-    return NextResponse.json(
-      { success: false, error: "Build failed after generation — MDX file rolled back", details: build.output.slice(-800) },
-      { status: 422 }
-    );
-  }
-
-  // ── Mark as generated ────────────────────────────────────────────────────
-
-  const updated = readQueue();
-  const idx = updated.queue.findIndex((e) => e.slug === entry.slug);
-  if (idx !== -1) {
-    updated.queue[idx].status = "generated";
-    updated.queue[idx].generatedDate = new Date().toISOString();
-    delete updated.queue[idx].errorNote;
-    writeQueue(updated);
-  }
-
-  // ── Auto-publish: git commit + push → triggers Vercel deploy ─────────────
-
+  // ── Push files via GitHub API (or fall back to local fs write) ───────────
   let gitNote = "";
-  try {
-    const cwd = process.cwd();
-    const ghToken = process.env.GH_TOKEN;
-    const commitMsg = `Add article: ${entry.title}\n\nAuto-generated via admin panel (~${mdxContent.split(/\s+/).length} words)\nCluster: ${entry.cluster}`;
 
-    // Configure git identity (required in CI/serverless environments)
-    execSync(`git config user.email "analyst@freevpnplanet.com"`, { cwd, encoding: "utf8" });
-    execSync(`git config user.name "analyst-bot"`, { cwd, encoding: "utf8" });
+  if (ghToken) {
+    // 1. Push new MDX file
+    const mdxResult = await ghPut(
+      `content/blog/${entry.slug}.mdx`,
+      mdxContent + "\n",
+      `Add article: ${entry.title}\n\nAuto-generated (~${newWordCount} words)\nCluster: ${entry.cluster}`,
+      undefined, // new file — no sha needed
+      ghToken
+    );
 
-    // If GH_TOKEN is set, inject it into the remote URL so Vercel can push
-    if (ghToken) {
-      execSync(
-        `git remote set-url origin https://${ghToken}@github.com/natalyineu/datalatte.git`,
-        { cwd, encoding: "utf8" }
+    if (!mdxResult.ok) {
+      return NextResponse.json(
+        { success: false, error: `GitHub API failed to create MDX file (status ${mdxResult.status})` },
+        { status: 500 }
       );
     }
 
-    execSync(`git add "${mdxPath}" "${INDEX_PATH}" "${QUEUE_PATH}"`, { cwd, encoding: "utf8" });
-    execSync(`git commit -m ${JSON.stringify(commitMsg)}`, { cwd, encoding: "utf8" });
-    execSync("git push origin main", { cwd, encoding: "utf8", timeout: 30_000 });
-    gitNote = "pushed";
-  } catch (gitErr) {
-    // Non-fatal — article is saved, just not auto-pushed
-    const msg = gitErr instanceof Error ? gitErr.message : String(gitErr);
-    gitNote = `git push skipped: ${msg.slice(0, 120)}`;
+    // 2. Update queue.json
+    const idx = data.queue.findIndex((e) => e.slug === entry.slug);
+    if (idx !== -1) {
+      data.queue[idx].status = "generated";
+      data.queue[idx].generatedDate = new Date().toISOString();
+      delete data.queue[idx].errorNote;
+    }
+
+    if (queueSha) {
+      await ghPut(
+        "content/queue.json",
+        JSON.stringify(data, null, 2) + "\n",
+        `Update queue: mark ${entry.slug} as generated`,
+        queueSha,
+        ghToken
+      );
+    }
+
+    // 3. Update INDEX.md
+    const indexFile = await ghGet("content/blog/INDEX.md", ghToken);
+    const newIndexContent = buildIndex({
+      slug: entry.slug,
+      title: String(fm.title ?? entry.title),
+      date: today,
+      wordCount: newWordCount,
+      tags: newTags,
+      description: String(fm.description ?? ""),
+    });
+    await ghPut(
+      "content/blog/INDEX.md",
+      newIndexContent,
+      `Update INDEX.md: add ${entry.slug}`,
+      indexFile?.sha,
+      ghToken
+    );
+
+    gitNote = "pushed via GitHub API";
+  } else {
+    // Local development fallback: write to disk directly
+    try {
+      fs.writeFileSync(mdxPath, mdxContent + "\n", "utf8");
+
+      const idx = data.queue.findIndex((e) => e.slug === entry.slug);
+      if (idx !== -1) {
+        data.queue[idx].status = "generated";
+        data.queue[idx].generatedDate = new Date().toISOString();
+        delete data.queue[idx].errorNote;
+        fs.writeFileSync(QUEUE_PATH, JSON.stringify(data, null, 2) + "\n", "utf8");
+      }
+
+      const newIndexContent = buildIndex({
+        slug: entry.slug,
+        title: String(fm.title ?? entry.title),
+        date: today,
+        wordCount: newWordCount,
+        tags: newTags,
+        description: String(fm.description ?? ""),
+      });
+      fs.writeFileSync(INDEX_PATH, newIndexContent, "utf8");
+
+      gitNote = "saved locally (no GH_TOKEN — run git push manually)";
+    } catch (fsErr) {
+      const msg = fsErr instanceof Error ? fsErr.message : String(fsErr);
+      gitNote = `local write failed: ${msg.slice(0, 120)}`;
+    }
   }
 
   const url = `https://datalatte.pro/blog/${entry.slug}`;
   return NextResponse.json(
-    { success: true, slug: entry.slug, url, wordCount: mdxContent.split(/\s+/).length, gitNote },
+    { success: true, slug: entry.slug, url, wordCount: newWordCount, gitNote },
     { status: 200 }
   );
 }
