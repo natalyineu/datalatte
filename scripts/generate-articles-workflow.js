@@ -167,14 +167,14 @@ Output ONLY raw MDX — no code fences, start with ---.`;
   // Update queue
   const idx = queue.queue.findIndex((e) => e.slug === entry.slug);
   if (idx !== -1) {
-    queue.queue[idx].status = 'generated';
+    queue.queue[idx].status = 'published';
     queue.queue[idx].generatedDate = new Date().toISOString();
   }
 
   await ghPutFile(
     'content/queue.json',
     JSON.stringify(queue, null, 2) + '\n',
-    `Update queue: mark ${entry.slug} as generated`
+    `Update queue: mark ${entry.slug} as published`
   );
 
   return { slug: entry.slug, status: 200 };
