@@ -29,13 +29,25 @@ jobs:
           echo "output=$OUTPUT" >> $GITHUB_OUTPUT
           echo "$OUTPUT"
 
+      - name: Trigger next run
+        if: always()
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          OUTPUT="${{ steps.generate.outputs.output }}"
+          # Only keep the chain going if an article was generated
+          if echo "$OUTPUT" | grep -q "✅ Pushed"; then
+            sleep 5
+            gh workflow run auto-generate.yml --repo natalyineu/datalatte
+          fi
+
       - name: Telegram notification
         if: always()
         continue-on-error: true
         run: |
           OUTPUT="${{ steps.generate.outputs.output }}"
 
-          # Check for errors
           if echo "$OUTPUT" | grep -q "ERROR_"; then
             ERROR=$(echo "$OUTPUT" | grep "ERROR_" | head -1)
             MSG="❌ Generation failed%0A$ERROR"
