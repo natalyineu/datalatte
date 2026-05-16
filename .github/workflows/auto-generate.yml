@@ -68,10 +68,16 @@ jobs:
           ICON2=$([ "$S2" = "200" ] && echo "✅" || echo "❌")
           ICON3=$([ "$S3" = "200" ] && echo "✅" || echo "❌")
 
-          MSG="☕ DataLatte auto-gen%0A$(date -u '+%Y-%m-%d %H:%M UTC')%0A%0A${ICON1} $L1%0A${ICON2} $L2%0A${ICON3} $L3%0A%0AView: https://datalatte.pro/admin"
+          BASE="https://datalatte.pro/blog"
+          LINE1=$([ "$S1" = "200" ] && echo "${ICON1} <a href='${BASE}/${L1}'>${L1}</a>" || echo "${ICON1} ${L1}")
+          LINE2=$([ "$S2" = "200" ] && echo "${ICON2} <a href='${BASE}/${L2}'>${L2}</a>" || echo "${ICON2} ${L2}")
+          LINE3=$([ "$S3" = "200" ] && echo "${ICON3} <a href='${BASE}/${L3}'>${L3}</a>" || echo "${ICON3} ${L3}")
+
+          MSG="☕ DataLatte auto-gen%0A$(date -u '+%Y-%m-%d %H:%M UTC')%0A%0A${LINE1}%0A${LINE2}%0A${LINE3}"
 
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
             -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
             -d "text=$MSG" \
-            -d "parse_mode=HTML" > /dev/null
+            -d "parse_mode=HTML" \
+            -d "disable_web_page_preview=false" > /dev/null
           echo "✅ Telegram notification sent"
