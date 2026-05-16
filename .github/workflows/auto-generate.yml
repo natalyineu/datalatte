@@ -1,0 +1,33 @@
+name: Auto-generate articles
+
+on:
+  schedule:
+    - cron: '0 6,10,14,18,22 * * *'   # 5× per day: 6am, 10am, 2pm, 6pm, 10pm UTC
+  workflow_dispatch:                    # also triggerable manually from GitHub UI / phone
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Generate next 3 articles
+        run: |
+          RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
+            "${{ secrets.SITE_URL }}/api/admin/generate-cron" \
+            -H "x-cron-secret: ${{ secrets.CRON_SECRET }}" \
+            -H "x-batch-size: 3" \
+            -H "Content-Type: application/json")
+
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+          BODY=$(echo "$RESPONSE" | head -n-1)
+
+          echo "Status: $HTTP_CODE"
+          echo "Response: $BODY"
+
+          if [ "$HTTP_CODE" != "200" ]; then
+            echo "❌ Cron call failed with status $HTTP_CODE"
+            exit 1
+          fi
+
+          echo "✅ Done"
