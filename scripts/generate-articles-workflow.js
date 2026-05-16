@@ -210,15 +210,18 @@ async function run() {
 
 if (!GROQ_KEY) {
   console.error('❌ GROQ_API_KEY not set');
+  process.stdout.write('ERROR_GROQ_KEY_MISSING');
   process.exit(1);
 }
 
 if (!GH_TOKEN) {
   console.error('❌ GH_TOKEN or GITHUB_TOKEN not set');
+  process.stdout.write('ERROR_GH_TOKEN_MISSING');
   process.exit(1);
 }
 
 run().catch((err) => {
   console.error('Fatal error:', err);
+  process.stdout.write('ERROR_' + err.message.replace(/\s+/g, '_').slice(0, 50));
   process.exit(1);
 });
