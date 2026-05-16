@@ -2,7 +2,7 @@ name: Auto-generate articles
 
 on:
   schedule:
-    - cron: '0 6,10,14,18,22 * * *'   # 5× per day: 6am, 10am, 2pm, 6pm, 10pm UTC
+    - cron: '*/5 * * * *'   # every 5 minutes
   workflow_dispatch:                    # also triggerable manually from GitHub UI / phone
 
 jobs:
