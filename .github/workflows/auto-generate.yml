@@ -8,77 +8,28 @@ on:
 jobs:
   generate:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 30
 
     steps:
-      - name: Generate article 1
-        run: |
-          RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
-            "https://datalatte.pro/api/cron/generate" \
-            -H "x-cron-secret: ${{ secrets.CRON_SECRET }}" \
-            -H "Content-Type: application/json" \
-            --max-time 90) || echo -e "\ncurl_error"
-          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
-          BODY=$(echo "$RESPONSE" | head -n-1)
-          echo "Status: $HTTP_CODE — $BODY"
-          echo "STATUS1=$HTTP_CODE" >> $GITHUB_ENV
-          SLUG=$(echo "$BODY" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('slug','?'))" 2>/dev/null || echo "?")
-          echo "SLUG1=$SLUG" >> $GITHUB_ENV
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Wait 30s
-        run: sleep 30
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
-      - name: Generate article 2
-        run: |
-          RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
-            "https://datalatte.pro/api/cron/generate" \
-            -H "x-cron-secret: ${{ secrets.CRON_SECRET }}" \
-            -H "Content-Type: application/json" \
-            --max-time 90) || echo -e "\ncurl_error"
-          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
-          BODY=$(echo "$RESPONSE" | head -n-1)
-          echo "Status: $HTTP_CODE — $BODY"
-          echo "STATUS2=$HTTP_CODE" >> $GITHUB_ENV
-          SLUG=$(echo "$BODY" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('slug','?'))" 2>/dev/null || echo "?")
-          echo "SLUG2=$SLUG" >> $GITHUB_ENV
-
-      - name: Wait 30s
-        run: sleep 30
-
-      - name: Generate article 3
-        run: |
-          RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
-            "https://datalatte.pro/api/cron/generate" \
-            -H "x-cron-secret: ${{ secrets.CRON_SECRET }}" \
-            -H "Content-Type: application/json" \
-            --max-time 90) || echo -e "\ncurl_error"
-          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
-          BODY=$(echo "$RESPONSE" | head -n-1)
-          echo "Status: $HTTP_CODE — $BODY"
-          echo "STATUS3=$HTTP_CODE" >> $GITHUB_ENV
-          SLUG=$(echo "$BODY" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('slug','?'))" 2>/dev/null || echo "?")
-          echo "SLUG3=$SLUG" >> $GITHUB_ENV
+      - name: Generate articles (no timeout limits!)
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/generate-articles-workflow.js
 
       - name: Telegram notification
+        if: always()
         continue-on-error: true
         run: |
-          S1="${STATUS1:-?}" S2="${STATUS2:-?}" S3="${STATUS3:-?}"
-          L1="${SLUG1:-?}" L2="${SLUG2:-?}" L3="${SLUG3:-?}"
-
-          ICON1=$([ "$S1" = "200" ] && echo "✅" || echo "❌")
-          ICON2=$([ "$S2" = "200" ] && echo "✅" || echo "❌")
-          ICON3=$([ "$S3" = "200" ] && echo "✅" || echo "❌")
-
-          BASE="https://datalatte.pro/blog"
-          LINE1=$([ "$S1" = "200" ] && echo "${ICON1} <a href='${BASE}/${L1}'>${L1}</a>" || echo "${ICON1} ${L1}")
-          LINE2=$([ "$S2" = "200" ] && echo "${ICON2} <a href='${BASE}/${L2}'>${L2}</a>" || echo "${ICON2} ${L2}")
-          LINE3=$([ "$S3" = "200" ] && echo "${ICON3} <a href='${BASE}/${L3}'>${L3}</a>" || echo "${ICON3} ${L3}")
-
-          MSG="☕ DataLatte auto-gen%0A$(date -u '+%Y-%m-%d %H:%M UTC')%0A%0A${LINE1}%0A${LINE2}%0A${LINE3}"
-
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
             -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
-            -d "text=$MSG" \
-            -d "parse_mode=HTML" \
-            -d "disable_web_page_preview=false" > /dev/null
-          echo "✅ Telegram notification sent"
+            -d "text=☕ DataLatte auto-gen%0A$(date)%0A%0A✅ Articles generated" \
+            -d "parse_mode=HTML" > /dev/null || true
