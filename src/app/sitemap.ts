@@ -15,7 +15,7 @@ function getBlogRoutes(): MetadataRoute.Sitemap {
       const { data } = matter(raw);
       return {
         url: `${baseUrl}/blog/${file.replace(".mdx", "")}`,
-        lastModified: new Date(data.date as string),
+        lastModified: new Date(data.date as string) instanceof Date && !isNaN(new Date(data.date as string).getTime()) ? new Date(data.date as string) : new Date(),
         changeFrequency: "monthly" as const,
         priority: 0.7,
       };

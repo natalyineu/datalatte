@@ -154,7 +154,9 @@ Target words: ${entry.targetWords}
 
 Output ONLY raw MDX — no code fences, start with ---.`;
 
-  const mdx = await callGroq(systemPrompt, userPrompt);
+  let mdx = await callGroq(systemPrompt, userPrompt);
+  // Strip <think>...</think> reasoning blocks some models emit before output
+  mdx = mdx.replace(/<think>[\s\S]*?<\/think>\s*/g, '').trimStart();
 
   // Push MDX file
   await ghPutFile(
