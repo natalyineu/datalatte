@@ -1,6 +1,6 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-16
-Total posts: 86
+Total posts: 87
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
@@ -11,11 +11,12 @@ Total posts: 86
 | `ctv-vs-ott-whats-the-difference-and-which-should-you-buy` | CTV vs OTT: What's the Difference and Which Should You Buy? | 2026-05-16 | 1056 | ctv, ott, ctv vs ott, connected tv, streaming ads |
 | `dog-grooming-marketing-ideas-20-ways-to-fill-your-calendar-in-30-days` | Dog Grooming Marketing Ideas: 20 Ways to Fill Your Calendar in 30 Days | 2026-05-16 | 1485 | dog grooming marketing ideas, pet grooming marketing, local SEO, Google Ads, retargeting |
 | `email-marketing-ideas-for-small-businesses-20-campaigns-that-drive-revenue-in-20` | Email Marketing Ideas for Small Businesses: 20 Campaigns That Drive Revenue in 2026 | 2026-05-16 | 1656 | email marketing for small business, email marketing campaigns, email campaigns for coffee shops, email marketing for salons |
+| `email-marketing-strategy-for-small-business-the-step-by-step-playbook` | Email Marketing Strategy for Small Business: The Step-by-Step Playbook | 2026-05-16 | 1820 | email marketing for small business, email marketing campaigns, email marketing strategy, small business marketing |
 | `facebook-pixel-vs-google-tag-which-to-install-first` | Facebook Pixel vs Google Tag: Which to Install First? | 2026-05-16 | 1293 | facebook pixel, google tag, retargeting, digital marketing, tracking, local marketing |
 | `google-performance-max-for-local-business-complete-guide-2026` | Google Performance Max for Local Business: Complete Guide (2026) | 2026-05-16 | 1626 | google-ads, performance-max, local-business, digital-marketing, smart-campaigns |
 | `google-responsive-search-ads-best-practices-10-tips-to-improve-your-ad-strength` | Google Responsive Search Ads Best Practices: 10 Tips to Improve Your Ad Strength | 2026-05-16 | 1415 | Google Ads, Responsive Search Ads, Digital Marketing, Local Business |
 | `how-much-do-spotify-ads-cost-pricing-for-local-businesses` | How Much Do Spotify Ads Cost? Pricing for Local Businesses | 2026-05-16 | 1178 | Spotify Ads, Local Ads, Audio Advertising, Marketing Budget |
-| `how-much-does-ctv-advertising-cost-real-cpm-data` | How Much Does CTV Advertising Cost? Real CPM Data | 2026-05-16 | 1775 | ctv advertising cost, local CTV ads, CTV CPM, OTT advertising, digital ad pricing |
+| `how-much-does-ctv-advertising-cost-real-cpm-data` | How Much Does CTV Advertising Cost? Real CPM Data | 2026-05-16 | 1638 | ctv advertising cost, local CTV ads, CTV CPM, OTT advertising, digital ad pricing |
 | `how-to-advertise-your-dog-grooming-business-15-ideas-that-actually-get-bookings` | How to Advertise Your Dog Grooming Business: 15 Ideas That Actually Get Bookings | 2026-05-16 | 1540 | dog grooming marketing ideas, how to advertise dog grooming business, pet grooming marketing ideas, local marketing for small businesses |
 | `how-to-get-dog-grooming-clients-the-2026-growth-playbook-for-groomers` | How to Get Dog Grooming Clients: The 2026 Growth Playbook for Groomers | 2026-05-16 | 1374 | dog grooming marketing ideas, how to advertise dog grooming business, local business marketing, pet grooming marketing |
 | `how-to-run-spotify-ads-step-by-step-ad-studio-guide` | How to Run Spotify Ads Step-by-Step (Spotify Ad Studio Guide) | 2026-05-16 | 1378 | how to run spotify ads, Spotify Ad Studio, audio advertising, music streaming ads |
@@ -149,6 +150,14 @@ Total posts: 86
 - **Tags**: email marketing for small business, email marketing campaigns, email campaigns for coffee shops, email marketing for salons
 - **Description**: Get 20 high-converting email marketing campaigns for small businesses in 2026. From coffee shops to salons, these email ideas actually drive revenue.
 
+### Email Marketing Strategy for Small Business: The Step-by-Step Playbook
+- **Slug**: `email-marketing-strategy-for-small-business-the-step-by-step-playbook`
+- **URL**: https://datalatte.pro/blog/email-marketing-strategy-for-small-business-the-step-by-step-playbook
+- **Date**: 2026-05-16
+- **Words**: 1820
+- **Tags**: email marketing for small business, email marketing campaigns, email marketing strategy, small business marketing
+- **Description**: Build a high-converting email marketing strategy for small businesses. Step-by-step playbook with real examples, templates, and automation tactics.
+
 ### Facebook Pixel vs Google Tag: Which to Install First?
 - **Slug**: `facebook-pixel-vs-google-tag-which-to-install-first`
 - **URL**: https://datalatte.pro/blog/facebook-pixel-vs-google-tag-which-to-install-first
@@ -185,7 +194,7 @@ Total posts: 86
 - **Slug**: `how-much-does-ctv-advertising-cost-real-cpm-data`
 - **URL**: https://datalatte.pro/blog/how-much-does-ctv-advertising-cost-real-cpm-data
 - **Date**: 2026-05-16
-- **Words**: 1775
+- **Words**: 1638
 - **Tags**: ctv advertising cost, local CTV ads, CTV CPM, OTT advertising, digital ad pricing
 - **Description**: Find out real CTV advertising cost in 2026  -  including CPM data, budget benchmarks, and what affects pricing. For local business owners.
 
