@@ -162,7 +162,7 @@ Output ONLY raw MDX — no code fences, start with ---.`;
   await ghPutFile(
     `content/blog/${entry.slug}.mdx`,
     mdx + '\n',
-    `Add article: ${entry.title}`
+    `Add article: ${entry.title} [skip ci]`
   );
   console.log(`✅ Pushed: ${entry.slug}`);
 
@@ -176,7 +176,7 @@ Output ONLY raw MDX — no code fences, start with ---.`;
   await ghPutFile(
     'content/queue.json',
     JSON.stringify(queue, null, 2) + '\n',
-    `Update queue: mark ${entry.slug} as published`
+    `Update queue: mark ${entry.slug} as published [skip ci]`
   );
 
   return { slug: entry.slug, status: 200 };

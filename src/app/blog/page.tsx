@@ -7,7 +7,7 @@ import BlogGrid from "@/components/BlogGrid";
 import NewsletterForm from "@/components/NewsletterForm";
 import Link from "next/link";
 
-export const revalidate = 86400;
+export const revalidate = 3600;
 
 const contentDir = path.join(process.cwd(), "content/blog");
 
