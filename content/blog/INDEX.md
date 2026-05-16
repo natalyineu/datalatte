@@ -1,10 +1,11 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-16
-Total posts: 61
+Total posts: 62
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
 | `real-time-bidding-explained-for-non-technical-business-owners` | Real-Time Bidding (RTB) Explained for Non-Technical Business Owners | 2026-05-16 | 1284 | real time bidding explained, programmatic advertising, digital marketing, Google Ads, Meta Ads |
+| `what-is-ctv-advertising-guide-for-local-business-owners-2026` | What Is CTV Advertising? Guide for Local Business Owners (2026) | 2026-05-16 | 1420 | ctv advertising, local business marketing, connected tv ads, ott advertising, digital marketing |
 | `best-marketing-for-salons-2026-what-actually-works-with-real-examples` | Best Marketing for Salons in 2026: What Actually Works (With Real Examples) | 2026-05-15 | 961 | salon marketing, influencer marketing, email marketing, Google Ads, marketing automation |
 | `coffee-shop-marketing-ideas-30-strategies-to-fill-every-seat-in-2026` | Coffee Shop Marketing Ideas: 30 Strategies to Fill Every Seat in 2026 | 2026-05-15 | 1261 | coffee shop marketing ideas, email marketing, Google Ads, local SEO, marketing automation |
 | `dv360-vs-the-trade-desk-which-dsp-is-right-for-you` | DV360 vs The Trade Desk: Which DSP Is Right for You? | 2026-05-15 | 1610 | dv360 vs the trade desk, programmatic advertising, DSP, Google Ads, The Trade Desk |
@@ -75,6 +76,14 @@ Total posts: 61
 - **Words**: 1284
 - **Tags**: real time bidding explained, programmatic advertising, digital marketing, Google Ads, Meta Ads
 - **Description**: Real time bidding explained in simple terms. Learn how RTB works, if it's right for your business, and how to get started with programmatic advertising today.
+
+### What Is CTV Advertising? Guide for Local Business Owners (2026)
+- **Slug**: `what-is-ctv-advertising-guide-for-local-business-owners-2026`
+- **URL**: https://datalatte.pro/blog/what-is-ctv-advertising-guide-for-local-business-owners-2026
+- **Date**: 2026-05-16
+- **Words**: 1420
+- **Tags**: ctv advertising, local business marketing, connected tv ads, ott advertising, digital marketing
+- **Description**: CTV advertising explained for local businesses. Learn how connected TV ads work, targeting strategies, and how to start in 2026.
 
 ### Best Marketing for Salons in 2026: What Actually Works (With Real Examples)
 - **Slug**: `best-marketing-for-salons-2026-what-actually-works-with-real-examples`
