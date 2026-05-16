@@ -1,6 +1,6 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-16
-Total posts: 68
+Total posts: 69
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
@@ -9,6 +9,7 @@ Total posts: 68
 | `ctv-vs-ott-whats-the-difference-and-which-should-you-buy` | CTV vs OTT: What's the Difference and Which Should You Buy? | 2026-05-16 | 1056 | ctv, ott, ctv vs ott, connected tv, streaming ads |
 | `how-much-do-spotify-ads-cost-pricing-for-local-businesses` | How Much Do Spotify Ads Cost? Pricing for Local Businesses | 2026-05-16 | 1178 | Spotify Ads, Local Ads, Audio Advertising, Marketing Budget |
 | `how-much-does-ctv-advertising-cost-real-cpm-data` | How Much Does CTV Advertising Cost? Real CPM Data | 2026-05-16 | 1444 | ctv advertising cost, local CTV ads, CTV CPM, OTT advertising, digital ad pricing |
+| `podcast-advertising-for-local-businesses-is-it-worth-it` | Podcast Advertising for Local Businesses: Is It Worth It? | 2026-05-16 | 1413 | podcast advertising, local business marketing, audio advertising, Google Ads for small businesses |
 | `real-time-bidding-explained-for-non-technical-business-owners` | Real-Time Bidding (RTB) Explained for Non-Technical Business Owners | 2026-05-16 | 1284 | real time bidding explained, programmatic advertising, digital marketing, Google Ads, Meta Ads |
 | `spotify-ads-for-small-business-complete-guide-2026` | Spotify Ads for Small Business: Complete Guide (2026) | 2026-05-16 | 1338 | Spotify Ads, audio ads, Google Ads for small business, audio advertising |
 | `what-is-ctv-advertising-guide-for-local-business-owners-2026` | What Is CTV Advertising? Guide for Local Business Owners (2026) | 2026-05-16 | 1420 | ctv advertising, local business marketing, connected tv ads, ott advertising, digital marketing |
@@ -114,6 +115,14 @@ Total posts: 68
 - **Words**: 1444
 - **Tags**: ctv advertising cost, local CTV ads, CTV CPM, OTT advertising, digital ad pricing
 - **Description**: Find out real CTV advertising cost in 2026  -  including CPM data, budget benchmarks, and what affects pricing. For local business owners.
+
+### Podcast Advertising for Local Businesses: Is It Worth It?
+- **Slug**: `podcast-advertising-for-local-businesses-is-it-worth-it`
+- **URL**: https://datalatte.pro/blog/podcast-advertising-for-local-businesses-is-it-worth-it
+- **Date**: 2026-05-16
+- **Words**: 1413
+- **Tags**: podcast advertising, local business marketing, audio advertising, Google Ads for small businesses
+- **Description**: Podcast advertising for local businesses can be a powerful strategy when done right. Learn how to decide if it's worth it for your business.
 
 ### Real-Time Bidding (RTB) Explained for Non-Technical Business Owners
 - **Slug**: `real-time-bidding-explained-for-non-technical-business-owners`
