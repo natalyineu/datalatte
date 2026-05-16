@@ -5,8 +5,17 @@ import { NextRequest, NextResponse } from "next/server";
 // so no long-running logic lives inside this serverless function.
 export async function POST(req: NextRequest): Promise<NextResponse> {
   const secret = req.headers.get("x-cron-secret");
-  if (!secret || secret !== process.env.CRON_SECRET) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  const expected = process.env.CRON_SECRET;
+  if (!secret || !expected || secret !== expected) {
+    return NextResponse.json({
+      error: "Unauthorized",
+      debug: {
+        secretReceived: !!secret,
+        secretLength: secret?.length ?? 0,
+        envVarSet: !!expected,
+        envVarLength: expected?.length ?? 0,
+      }
+    }, { status: 401 });
   }
 
   const base = `${req.nextUrl.protocol}//${req.nextUrl.host}`;
