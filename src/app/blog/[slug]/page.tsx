@@ -18,6 +18,7 @@ import ReadingProgress from "@/components/ReadingProgress";
 import { articleSchema } from "@/lib/schema";
 
 export const revalidate = 86400;
+export const dynamicParams = true;
 
 const contentDir = path.join(process.cwd(), "content/blog");
 
