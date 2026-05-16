@@ -1,9 +1,10 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-16
-Total posts: 97
+Total posts: 99
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
+| `google-ads-mistakes-coffee-shops-make-and-how-to-fix-them` | Google Ads Mistakes Coffee Shops Make (And How to Fix Them) | 2026-05-16 | 1663 | google ads mistakes coffee shop, google ads for small business, coffee shop marketing, digital marketing for local business |
 | `best-google-ad-keywords-for-coffee-shops-in-2026` | Best Google Ad Keywords for Coffee Shops in 2026 | 2026-05-16 | 1850 | coffee shop marketing, google ads for coffee shops, google ads for local businesses, coffee shop keywords, Google Ads keywords |
 | `best-marketing-for-salons-in-2026-what-actually-works-with-real-examples` | Best Marketing for Salons in 2026: What Actually Works (With Real Examples) | 2026-05-16 | 1221 | influencer marketing for salons, salon marketing, local marketing, google ads for salons, social media marketing for salons |
 | `connected-tv-ads-vs-traditional-tv-ads-why-ctv-wins-for-local-business` | Connected TV Ads vs Traditional TV Ads: Why CTV Wins for Local Business | 2026-05-16 | 1451 | connected tv advertising, local business marketing, digital advertising, CTV vs TV |
@@ -22,6 +23,7 @@ Total posts: 97
 | `how-does-starbucks-use-email-marketing-complete-guide-for-2026` | How Does Starbucks Use Email Marketing  -  Complete Guide for 2026 | 2026-05-16 | 1335 | email marketing for coffee shop, google ads for small business, local marketing, email marketing strategy, coffee shop marketing |
 | `how-much-do-spotify-ads-cost-pricing-for-local-businesses` | How Much Do Spotify Ads Cost? Pricing for Local Businesses | 2026-05-16 | 1279 | Spotify Ads, Local Ads, Audio Advertising, Marketing Budget |
 | `how-much-does-ctv-advertising-cost-real-cpm-data` | How Much Does CTV Advertising Cost? Real CPM Data | 2026-05-16 | 1638 | ctv advertising cost, local CTV ads, CTV CPM, OTT advertising, digital ad pricing |
+| `how-much-should-a-coffee-shop-spend-on-google-ads` | How Much Should a Coffee Shop Spend on Google Ads? | 2026-05-16 | 1163 | coffee shop ads, google ads for small business, local business marketing, google ads budget |
 | `how-to-advertise-your-dog-grooming-business-15-ideas-that-actually-get-bookings` | How to Advertise Your Dog Grooming Business: 15 Ideas That Actually Get Bookings | 2026-05-16 | 1576 | dog grooming marketing ideas, how to advertise dog grooming business, pet grooming marketing ideas, local marketing for small businesses |
 | `how-to-get-dog-grooming-clients-the-2026-growth-playbook-for-groomers` | How to Get Dog Grooming Clients: The 2026 Growth Playbook for Groomers | 2026-05-16 | 1412 | dog grooming marketing ideas, how to advertise dog grooming business, local business marketing, pet grooming marketing |
 | `how-to-run-spotify-ads-step-by-step-ad-studio-guide` | How to Run Spotify Ads Step-by-Step (Spotify Ad Studio Guide) | 2026-05-16 | 1407 | how to run spotify ads, Spotify Ad Studio, audio advertising, music streaming ads |
@@ -103,6 +105,14 @@ Total posts: 97
 | `local-marketing-budget-guide` | What Does a Good Local Marketing Budget Actually Look Like? | 2026-03-05 | 864 | strategy, google ads, meta ads, budget, local seo |
 
 ## Full Details
+
+### Google Ads Mistakes Coffee Shops Make (And How to Fix Them)
+- **Slug**: `google-ads-mistakes-coffee-shops-make-and-how-to-fix-them`
+- **URL**: https://datalatte.pro/blog/google-ads-mistakes-coffee-shops-make-and-how-to-fix-them
+- **Date**: 2026-05-16
+- **Words**: 1663
+- **Tags**: google ads mistakes coffee shop, google ads for small business, coffee shop marketing, digital marketing for local business
+- **Description**: Google Ads mistakes coffee shops make include bad targeting, vague keywords, and poor ad copy. Here's how to fix them and boost ROI.
 
 ### Best Google Ad Keywords for Coffee Shops in 2026
 - **Slug**: `best-google-ad-keywords-for-coffee-shops-in-2026`
@@ -247,6 +257,14 @@ Total posts: 97
 - **Words**: 1638
 - **Tags**: ctv advertising cost, local CTV ads, CTV CPM, OTT advertising, digital ad pricing
 - **Description**: Find out real CTV advertising cost in 2026  -  including CPM data, budget benchmarks, and what affects pricing. For local business owners.
+
+### How Much Should a Coffee Shop Spend on Google Ads?
+- **Slug**: `how-much-should-a-coffee-shop-spend-on-google-ads`
+- **URL**: https://datalatte.pro/blog/how-much-should-a-coffee-shop-spend-on-google-ads
+- **Date**: 2026-05-16
+- **Words**: 1163
+- **Tags**: coffee shop ads, google ads for small business, local business marketing, google ads budget
+- **Description**: How much should your coffee shop spend on Google Ads? Real 2026 data showing the ideal coffee shop Google Ads budget by location, goals, and competition.
 
 ### How to Advertise Your Dog Grooming Business: 15 Ideas That Actually Get Bookings
 - **Slug**: `how-to-advertise-your-dog-grooming-business-15-ideas-that-actually-get-bookings`
