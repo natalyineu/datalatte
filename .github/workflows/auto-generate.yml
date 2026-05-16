@@ -47,7 +47,7 @@ jobs:
           OUTPUT=$(cat /tmp/gen_output.txt 2>/dev/null || echo "")
           if echo "$OUTPUT" | grep -q "Pushed"; then
             SLUG=$(echo "$OUTPUT" | grep "Pushed" | sed 's/.*Pushed: //')
-            MSG="☕ New article live%0A$(date -u '+%Y-%m-%d %H:%M UTC')%0A%0A${SLUG}"
+            MSG="☕ New article live%0A$(date -u '+%Y-%m-%d %H:%M UTC')%0A%0Ahttps://www.datalatte.pro/blog/${SLUG}"
           elif echo "$OUTPUT" | grep -q "Error\|error"; then
             MSG="❌ Generation failed%0A$(date -u '+%Y-%m-%d %H:%M UTC')%0A$(echo "$OUTPUT" | grep -i error | head -1)"
           else
