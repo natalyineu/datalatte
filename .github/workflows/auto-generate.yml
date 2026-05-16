@@ -3,31 +3,49 @@ name: Auto-generate articles
 on:
   schedule:
     - cron: '*/5 * * * *'   # every 5 minutes
-  workflow_dispatch:                    # also triggerable manually from GitHub UI / phone
+  workflow_dispatch:          # also triggerable manually from GitHub UI / phone
 
 jobs:
   generate:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
 
     steps:
-      - name: Generate next 3 articles
+      - name: Generate article 1
         run: |
           RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
             "${{ secrets.SITE_URL }}/api/admin/generate-cron" \
             -H "x-cron-secret: ${{ secrets.CRON_SECRET }}" \
-            -H "x-batch-size: 3" \
-            -H "Content-Type: application/json")
-
+            -H "Content-Type: application/json" \
+            --max-time 90)
           HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
           BODY=$(echo "$RESPONSE" | head -n-1)
+          echo "Article 1 — status $HTTP_CODE: $BODY"
 
-          echo "Status: $HTTP_CODE"
-          echo "Response: $BODY"
+      - name: Wait (Groq rate-limit cooldown)
+        run: sleep 30
 
-          if [ "$HTTP_CODE" != "200" ]; then
-            echo "❌ Cron call failed with status $HTTP_CODE"
-            exit 1
-          fi
+      - name: Generate article 2
+        run: |
+          RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
+            "${{ secrets.SITE_URL }}/api/admin/generate-cron" \
+            -H "x-cron-secret: ${{ secrets.CRON_SECRET }}" \
+            -H "Content-Type: application/json" \
+            --max-time 90)
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+          BODY=$(echo "$RESPONSE" | head -n-1)
+          echo "Article 2 — status $HTTP_CODE: $BODY"
 
-          echo "✅ Done"
+      - name: Wait
+        run: sleep 30
+
+      - name: Generate article 3
+        run: |
+          RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
+            "${{ secrets.SITE_URL }}/api/admin/generate-cron" \
+            -H "x-cron-secret: ${{ secrets.CRON_SECRET }}" \
+            -H "Content-Type: application/json" \
+            --max-time 90)
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+          BODY=$(echo "$RESPONSE" | head -n-1)
+          echo "Article 3 — status $HTTP_CODE: $BODY"
