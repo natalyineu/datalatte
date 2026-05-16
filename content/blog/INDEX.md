@@ -1,9 +1,10 @@
 # Blog Post Index — DataLatte.pro
-Generated: 2026-05-15
-Total posts: 60
+Generated: 2026-05-16
+Total posts: 61
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
+| `real-time-bidding-explained-for-non-technical-business-owners` | Real-Time Bidding (RTB) Explained for Non-Technical Business Owners | 2026-05-16 | 1284 | real time bidding explained, programmatic advertising, digital marketing, Google Ads, Meta Ads |
 | `best-marketing-for-salons-2026-what-actually-works-with-real-examples` | Best Marketing for Salons in 2026: What Actually Works (With Real Examples) | 2026-05-15 | 961 | salon marketing, influencer marketing, email marketing, Google Ads, marketing automation |
 | `coffee-shop-marketing-ideas-30-strategies-to-fill-every-seat-in-2026` | Coffee Shop Marketing Ideas: 30 Strategies to Fill Every Seat in 2026 | 2026-05-15 | 1261 | coffee shop marketing ideas, email marketing, Google Ads, local SEO, marketing automation |
 | `dv360-vs-the-trade-desk-which-dsp-is-right-for-you` | DV360 vs The Trade Desk: Which DSP Is Right for You? | 2026-05-15 | 1610 | dv360 vs the trade desk, programmatic advertising, DSP, Google Ads, The Trade Desk |
@@ -66,6 +67,14 @@ Total posts: 60
 | `local-marketing-budget-guide` | What Does a Good Local Marketing Budget Actually Look Like? | 2026-03-05 | 769 | strategy, google ads, meta ads, budget, local seo |
 
 ## Full Details
+
+### Real-Time Bidding (RTB) Explained for Non-Technical Business Owners
+- **Slug**: `real-time-bidding-explained-for-non-technical-business-owners`
+- **URL**: https://datalatte.pro/blog/real-time-bidding-explained-for-non-technical-business-owners
+- **Date**: 2026-05-16
+- **Words**: 1284
+- **Tags**: real time bidding explained, programmatic advertising, digital marketing, Google Ads, Meta Ads
+- **Description**: Real time bidding explained in simple terms. Learn how RTB works, if it's right for your business, and how to get started with programmatic advertising today.
 
 ### Best Marketing for Salons in 2026: What Actually Works (With Real Examples)
 - **Slug**: `best-marketing-for-salons-2026-what-actually-works-with-real-examples`
