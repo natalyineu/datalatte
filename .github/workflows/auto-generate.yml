@@ -22,15 +22,12 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Generate articles (no timeout limits!)
-        id: generate
+      - name: Generate article
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          OUTPUT=$(node scripts/generate-articles-workflow.js 2>&1 || true)
-          echo "output=$OUTPUT" >> $GITHUB_OUTPUT
-          echo "$OUTPUT"
+          node scripts/generate-articles-workflow.js 2>&1 | tee /tmp/gen_output.txt || true
 
       - name: Trigger next run
         if: always()
@@ -38,9 +35,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          OUTPUT="${{ steps.generate.outputs.output }}"
-          # Only keep the chain going if an article was generated
-          if echo "$OUTPUT" | grep -q "✅ Pushed"; then
+          if grep -q "Pushed" /tmp/gen_output.txt; then
             sleep 5
             gh workflow run auto-generate.yml --repo natalyineu/datalatte
           fi
@@ -49,17 +44,15 @@ jobs:
         if: always()
         continue-on-error: true
         run: |
-          OUTPUT="${{ steps.generate.outputs.output }}"
-
-          if echo "$OUTPUT" | grep -q "ERROR_"; then
-            ERROR=$(echo "$OUTPUT" | grep "ERROR_" | head -1)
-            MSG="❌ Generation failed%0A$ERROR"
-          elif echo "$OUTPUT" | grep -q "✅ Pushed"; then
-            MSG="☕ DataLatte auto-gen%0A$(date -u '+%Y-%m-%d %H:%M UTC')%0A%0A✅ Articles generated successfully"
+          OUTPUT=$(cat /tmp/gen_output.txt 2>/dev/null || echo "")
+          if echo "$OUTPUT" | grep -q "Pushed"; then
+            SLUG=$(echo "$OUTPUT" | grep "Pushed" | sed 's/.*Pushed: //')
+            MSG="☕ New article live%0A$(date -u '+%Y-%m-%d %H:%M UTC')%0A%0A${SLUG}"
+          elif echo "$OUTPUT" | grep -q "Error\|error"; then
+            MSG="❌ Generation failed%0A$(date -u '+%Y-%m-%d %H:%M UTC')%0A$(echo "$OUTPUT" | grep -i error | head -1)"
           else
-            MSG="⚠️ No articles generated (queue may be empty)%0A$(date -u '+%Y-%m-%d %H:%M UTC')"
+            MSG="⚠️ Queue empty or no article generated%0A$(date -u '+%Y-%m-%d %H:%M UTC')"
           fi
-
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
             -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
             -d "text=$MSG" \
