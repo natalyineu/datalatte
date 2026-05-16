@@ -1,6 +1,6 @@
 # Blog Post Index — DataLatte.pro
 Generated: 2026-05-16
-Total posts: 84
+Total posts: 85
 
 | Slug | Title | Date | Words | Tags |
 |---|---|---|---|---|
@@ -9,6 +9,7 @@ Total posts: 84
 | `cross-channel-retargeting-how-to-follow-customers-across-every-platform` | Cross-Channel Retargeting: How to Follow Customers Across Every Platform | 2026-05-16 | 1387 | cross channel retargeting, retargeting, local ads, Google Ads, Meta Ads |
 | `ctv-ads-for-local-businesses-can-you-advertise-on-streaming-tv` | CTV Ads for Local Businesses: Can You Really Advertise on Streaming TV? | 2026-05-16 | 1457 | ctv ads for local businesses, ott advertising, local business marketing, google ads, streaming tv ads |
 | `ctv-vs-ott-whats-the-difference-and-which-should-you-buy` | CTV vs OTT: What's the Difference and Which Should You Buy? | 2026-05-16 | 1056 | ctv, ott, ctv vs ott, connected tv, streaming ads |
+| `dog-grooming-marketing-ideas-20-ways-to-fill-your-calendar-in-30-days` | Dog Grooming Marketing Ideas: 20 Ways to Fill Your Calendar in 30 Days | 2026-05-16 | 1485 | dog grooming marketing ideas, pet grooming marketing, local SEO, Google Ads, retargeting |
 | `facebook-pixel-vs-google-tag-which-to-install-first` | Facebook Pixel vs Google Tag: Which to Install First? | 2026-05-16 | 1293 | facebook pixel, google tag, retargeting, digital marketing, tracking, local marketing |
 | `google-performance-max-for-local-business-complete-guide-2026` | Google Performance Max for Local Business: Complete Guide (2026) | 2026-05-16 | 1626 | google-ads, performance-max, local-business, digital-marketing, smart-campaigns |
 | `google-responsive-search-ads-best-practices-10-tips-to-improve-your-ad-strength` | Google Responsive Search Ads Best Practices: 10 Tips to Improve Your Ad Strength | 2026-05-16 | 1415 | Google Ads, Responsive Search Ads, Digital Marketing, Local Business |
@@ -130,6 +131,14 @@ Total posts: 84
 - **Words**: 1056
 - **Tags**: ctv, ott, ctv vs ott, connected tv, streaming ads
 - **Description**: CTV vs OTT explained: What's the difference and how to choose for your business. Compare platforms, costs, targeting and ROI.
+
+### Dog Grooming Marketing Ideas: 20 Ways to Fill Your Calendar in 30 Days
+- **Slug**: `dog-grooming-marketing-ideas-20-ways-to-fill-your-calendar-in-30-days`
+- **URL**: https://datalatte.pro/blog/dog-grooming-marketing-ideas-20-ways-to-fill-your-calendar-in-30-days
+- **Date**: 2026-05-16
+- **Words**: 1485
+- **Tags**: dog grooming marketing ideas, pet grooming marketing, local SEO, Google Ads, retargeting
+- **Description**: Fill your dog grooming calendar in 30 days with actionable dog grooming marketing ideas. Real examples and ROI-focused tactics from DataLatte.
 
 ### Facebook Pixel vs Google Tag: Which to Install First?
 - **Slug**: `facebook-pixel-vs-google-tag-which-to-install-first`
