@@ -57,6 +57,52 @@ interface RunSummary {
   url: string;
 }
 
+interface WriterReport {
+  type: "writer";
+  title: string | null;
+  keyword: string | null;
+  cluster: string | null;
+  remaining: number | null;
+  model: string | null;
+  slug: string | null;
+  noPending: boolean;
+}
+
+interface AuditorReport {
+  type: "auditor";
+  syntaxIssues: number;
+  sampled: number;
+  totalIssues: number;
+  allClean: boolean;
+  triggeredFixer: boolean;
+  scores: { file: string; score: number }[];
+  avgScore: string | null;
+}
+
+interface FixerReport {
+  type: "fixer";
+  nothingToFix: boolean;
+  toFix: number;
+  toRegen: number;
+  fixedFiles: { file: string; score: number }[];
+  regenFiles: string[];
+}
+
+interface PipelineReport {
+  type: "pipeline";
+  score: number | null;
+  status: string | null;
+  today: number | null;
+  restarted: boolean;
+}
+
+interface ResearcherReport {
+  type: "researcher";
+  added: number;
+}
+
+type AgentReport = WriterReport | AuditorReport | FixerReport | PipelineReport | ResearcherReport;
+
 interface AgentData {
   name: string;
   emoji: string;
@@ -74,6 +120,7 @@ interface AgentData {
   runsToday: number;
   totalRuns: number;
   recentRuns: RunSummary[];
+  report: AgentReport | null;
 }
 
 const STATUS_COLORS: Record<string, string> = {
@@ -276,6 +323,77 @@ function formatRunDate(isoStr: string | null): string {
   return d.toLocaleDateString("en-US", { month: "short", day: "numeric" }) +
     " " +
     d.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false });
+}
+
+// ── AgentReportSection ────────────────────────────────────────────────────────
+
+function AgentReportSection({ report }: { report: AgentReport | null }) {
+  return (
+    <div className="mt-3 pt-3 border-t border-gray-800">
+      <p className="text-xs font-medium text-gray-500 mb-2">Last run report</p>
+      {report === null ? (
+        <p className="text-xs text-gray-600 italic">Log not available</p>
+      ) : report.type === "writer" ? (
+        report.noPending ? (
+          <p className="text-gray-400 text-xs">Queue was empty — nothing to generate</p>
+        ) : report.title ? (
+          <div className="space-y-1 text-xs">
+            <p className="text-white font-medium truncate">📝 {report.title}</p>
+            <p className="text-gray-400">🔑 {report.keyword} &nbsp;·&nbsp; 📂 {report.cluster}</p>
+            <p className="text-gray-400">🤖 {report.model} &nbsp;·&nbsp; 📊 {report.remaining} left in queue</p>
+          </div>
+        ) : null
+      ) : report.type === "auditor" ? (
+        <div className="space-y-1 text-xs">
+          {report.allClean ? (
+            <p className="text-green-400">✅ All clean — {report.sampled} articles sampled, avg quality {report.avgScore}/10</p>
+          ) : (
+            <p className="text-yellow-400">⚠️ {report.totalIssues} issues found — {report.triggeredFixer ? "Fixer triggered" : "no action"}</p>
+          )}
+          {report.scores.slice(0, 4).map((s) => (
+            <p key={s.file} className={s.score >= 7 ? "text-gray-400" : "text-yellow-400"}>
+              {s.score >= 7 ? "✅" : "⚠️"} {s.file.slice(0, 40)}… ({s.score}/10)
+            </p>
+          ))}
+        </div>
+      ) : report.type === "fixer" ? (
+        report.nothingToFix ? (
+          <p className="text-green-400 text-xs">✅ Nothing needed — all articles healthy</p>
+        ) : (
+          <div className="space-y-1 text-xs">
+            <p className="text-white">Fixed {report.fixedFiles.length}, queued {report.regenFiles.length} for regeneration</p>
+            {report.fixedFiles.map((f) => (
+              <p key={f.file} className="text-gray-400">✅ {f.file} ({f.score}/10)</p>
+            ))}
+            {report.regenFiles.map((f) => (
+              <p key={f} className="text-yellow-400">♻️ {f}</p>
+            ))}
+          </div>
+        )
+      ) : report.type === "pipeline" ? (
+        <div className="space-y-1 text-xs">
+          <div className="flex items-center gap-2">
+            <span className={`text-2xl font-bold ${
+              report.score !== null && report.score >= 80
+                ? "text-green-400"
+                : report.score !== null && report.score >= 60
+                ? "text-yellow-400"
+                : "text-red-400"
+            }`}>{report.score ?? "—"}</span>
+            <span className="text-gray-400">/ 100 health score</span>
+          </div>
+          <p className="text-gray-400">Status: {report.status ?? "—"} &nbsp;·&nbsp; {report.today ?? 0} articles today</p>
+          {report.restarted && <p className="text-yellow-400">⚠️ Auto-restarted a stuck agent</p>}
+        </div>
+      ) : report.type === "researcher" ? (
+        <p className="text-xs text-gray-400">
+          {report.added > 0
+            ? `✅ Added ${report.added} new topics to queue`
+            : "📭 No new topics added this run"}
+        </p>
+      ) : null}
+    </div>
+  );
 }
 
 // ── AgentsTab ─────────────────────────────────────────────────────────────────
@@ -509,6 +627,9 @@ function AgentsTab({
                   ))}
                 </div>
               )}
+
+              {/* Last run report */}
+              <AgentReportSection report={agent.report} />
 
               {/* Toggle button */}
               <div className="flex justify-end border-t border-gray-800 pt-3 mt-auto">
