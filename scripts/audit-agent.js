@@ -91,6 +91,8 @@ function syntaxAudit(content) {
   const firstDash = content.indexOf('---');
   const secondDash = content.indexOf('---', firstDash + 3);
   if (firstDash === -1 || secondDash === -1) issues.push('incomplete_frontmatter');
+  // Unquoted title with colon breaks YAML parser
+  if (/^title:\s*[^"'\n][^\n]*:[^\n]/m.test(content)) issues.push('unquoted_title_colon');
   return issues;
 }
 
