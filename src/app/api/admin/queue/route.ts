@@ -144,6 +144,22 @@ export async function PATCH(req: NextRequest): Promise<NextResponse> {
       entry.generatedDate = new Date().toISOString();
     }
 
+    // Field editing support
+    if (body.title !== undefined) entry.title = body.title;
+    if (body.primaryKeyword !== undefined) entry.primaryKeyword = body.primaryKeyword;
+    if (body.cluster !== undefined) entry.cluster = body.cluster;
+    if (body.targetWords !== undefined) entry.targetWords = Number(body.targetWords);
+
+    // Reorder: move entry before first pending item
+    if (body.moveToTop === true) {
+      data.queue.splice(index, 1);
+      const firstPendingIdx = data.queue.findIndex((e) => e.status === "pending");
+      if (firstPendingIdx === -1) data.queue.push(entry);
+      else data.queue.splice(firstPendingIdx, 0, entry);
+      writeQueue(data);
+      return NextResponse.json({ entry, queue: data.queue }, { status: 200 });
+    }
+
     data.queue[index] = entry;
     writeQueue(data);
 
