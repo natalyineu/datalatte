@@ -40,9 +40,9 @@ async function fetchJson(url, options = {}, body = null) {
 const GROQ_MODELS = [
   'llama-3.3-70b-versatile',
   'qwen/qwen3-32b',
-  'mixtral-8x7b-32768',
   'llama3-70b-8192',
   'gemma2-9b-it',
+  'llama-3.1-8b-instant',
 ];
 
 async function callGroq(systemPrompt, userPrompt) {
@@ -70,16 +70,17 @@ async function callGroq(systemPrompt, userPrompt) {
       return res.data.choices[0].message.content;
     }
 
-    const isRateLimit = res.status === 429 || (res.data?.error?.code === 'rate_limit_exceeded');
-    if (isRateLimit) {
-      console.log(`⚠️ Rate limit on ${model}, trying next...`);
+    const code = res.data?.error?.code;
+    const shouldSkip = res.status === 429 || code === 'rate_limit_exceeded' || code === 'model_decommissioned';
+    if (shouldSkip) {
+      console.log(`⚠️ Skipping ${model} (${code || res.status}), trying next...`);
       continue;
     }
 
     throw new Error(`Groq error ${res.status}: ${JSON.stringify(res.data)}`);
   }
 
-  throw new Error('All Groq models hit rate limits. Try again later.');
+  throw new Error('All Groq models unavailable. Try again later.');
 }
 
 async function ghPutFile(filePath, content, message) {
