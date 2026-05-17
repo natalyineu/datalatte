@@ -12,7 +12,7 @@ concurrency:
 jobs:
   generate:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 40
     permissions:
       contents: write
       actions: write
@@ -51,7 +51,24 @@ jobs:
           OUTPUT=$(cat /tmp/gen_output.txt 2>/dev/null || echo "")
           if echo "$OUTPUT" | grep -q "Pushed"; then
             SLUG=$(echo "$OUTPUT" | grep "Pushed" | sed 's/.*Pushed: //')
-            MSG="☕ New article live%0A$(date -u '+%Y-%m-%d %H:%M UTC')%0A%0Ahttps://www.datalatte.pro/blog/${SLUG}"
+            URL="https://www.datalatte.pro/blog/${SLUG}"
+
+            # Poll until Vercel deployment is live (up to 5 min)
+            STATUS="🔄"
+            for i in $(seq 1 20); do
+              sleep 15
+              HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$URL" || echo "000")
+              if [ "$HTTP_CODE" = "200" ]; then
+                STATUS="✅"
+                break
+              fi
+            done
+
+            if [ "$STATUS" = "✅" ]; then
+              MSG="☕ New article live%0A$(date -u '+%Y-%m-%d %H:%M UTC')%0A%0A${URL}"
+            else
+              MSG="⚠️ Article pushed but not live yet (Vercel deploying)%0A$(date -u '+%Y-%m-%d %H:%M UTC')%0A%0A${URL}"
+            fi
           elif echo "$OUTPUT" | grep -q "Error\|error"; then
             MSG="❌ Generation failed%0A$(date -u '+%Y-%m-%d %H:%M UTC')%0A$(echo "$OUTPUT" | grep -i error | head -1)"
           else
