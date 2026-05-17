@@ -172,6 +172,17 @@ async function generateOne() {
     return null;
   }
 
+  // Claim entry immediately to prevent duplicate generation by concurrent runs
+  const claimIdx = queue.queue.findIndex((e) => e.slug === entry.slug);
+  queue.queue[claimIdx].status = 'generating';
+  queue.queue[claimIdx].generatedDate = new Date().toISOString();
+  await ghPutFile(
+    'content/queue.json',
+    JSON.stringify(queue, null, 2) + '\n',
+    `Claim: ${entry.slug} [skip ci]`
+  );
+  console.log(`🔒 Claimed: ${entry.slug}`);
+
   console.log(`🔄 Generating: ${entry.slug}`);
   const today = new Date().toISOString().split('T')[0];
   const image = getImageForEntry(entry);
