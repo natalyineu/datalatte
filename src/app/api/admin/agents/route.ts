@@ -79,6 +79,63 @@ interface GHRunsResponse {
   workflow_runs: GHRun[];
 }
 
+interface GHJob {
+  id: number;
+  name: string;
+}
+
+interface GHJobsResponse {
+  jobs: GHJob[];
+}
+
+// ── Agent Report types ─────────────────────────────────────────────────────────
+
+interface WriterReport {
+  type: "writer";
+  title: string | null;
+  keyword: string | null;
+  cluster: string | null;
+  remaining: number | null;
+  model: string | null;
+  slug: string | null;
+  noPending: boolean;
+}
+
+interface AuditorReport {
+  type: "auditor";
+  syntaxIssues: number;
+  sampled: number;
+  totalIssues: number;
+  allClean: boolean;
+  triggeredFixer: boolean;
+  scores: { file: string; score: number }[];
+  avgScore: string | null;
+}
+
+interface FixerReport {
+  type: "fixer";
+  nothingToFix: boolean;
+  toFix: number;
+  toRegen: number;
+  fixedFiles: { file: string; score: number }[];
+  regenFiles: string[];
+}
+
+interface PipelineReport {
+  type: "pipeline";
+  score: number | null;
+  status: string | null;
+  today: number | null;
+  restarted: boolean;
+}
+
+interface ResearcherReport {
+  type: "researcher";
+  added: number;
+}
+
+type AgentReport = WriterReport | AuditorReport | FixerReport | PipelineReport | ResearcherReport;
+
 // ── Response types ─────────────────────────────────────────────────────────────
 
 interface RunSummary {
@@ -102,6 +159,7 @@ interface AgentData extends AgentMeta {
   runsToday: number;
   totalRuns: number;
   recentRuns: RunSummary[];
+  report: AgentReport | null;
 }
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
@@ -111,6 +169,7 @@ function ghHeaders(token: string) {
     Authorization: `Bearer ${token}`,
     Accept: "application/vnd.github+json",
     "X-GitHub-Api-Version": "2022-11-28",
+    "User-Agent": "DataLatte-Admin",
   } as const;
 }
 
@@ -134,6 +193,118 @@ function checkAuth(req: NextRequest): boolean {
   const token = authHeader.replace(/^Bearer\s+/i, "");
   const adminPassword = process.env.ADMIN_PASSWORD ?? "";
   return token === adminPassword && adminPassword.length > 0;
+}
+
+// ── Log parsing ────────────────────────────────────────────────────────────────
+
+function parseWriterReport(log: string): WriterReport {
+  const title     = log.match(/^ARTICLE_TITLE: (.+)$/m)?.[1] ?? null;
+  const keyword   = log.match(/^ARTICLE_KEYWORD: (.+)$/m)?.[1] ?? null;
+  const cluster   = log.match(/^ARTICLE_CLUSTER: (.+)$/m)?.[1] ?? null;
+  const remaining = log.match(/^QUEUE_REMAINING: (\d+)$/m)?.[1] ?? null;
+  const model     = log.match(/✅ Model used: (.+)$/m)?.[1] ?? null;
+  const slug      = log.match(/✅ Pushed: (.+)$/m)?.[1] ?? null;
+  const noPending = log.includes("No pending articles");
+  return {
+    type: "writer",
+    title,
+    keyword,
+    cluster,
+    remaining: remaining ? Number(remaining) : null,
+    model,
+    slug,
+    noPending,
+  };
+}
+
+function parseAuditorReport(log: string): AuditorReport {
+  const syntaxIssues  = Number(log.match(/Found (\d+) files with syntax issues/)?.[1] ?? 0);
+  const sampled       = Number(log.match(/Sampling (\d+) random articles/)?.[1] ?? 0);
+  const totalIssues   = Number(log.match(/Total issues: (\d+)/)?.[1] ?? 0);
+  const allClean      = log.includes("✅ All clean");
+  const triggeredFixer = log.includes("trigger") && log.includes("Fixer");
+  const scoreMatches  = [...log.matchAll(/[✅⚠️] (?:Low quality: )?(\S+\.mdx) \((\d+)\/10\)/g)];
+  const scores        = scoreMatches.map((m) => ({ file: m[1].replace(".mdx", ""), score: Number(m[2]) }));
+  const avgScore      = scores.length
+    ? (scores.reduce((s, r) => s + r.score, 0) / scores.length).toFixed(1)
+    : null;
+  return { type: "auditor", syntaxIssues, sampled, totalIssues, allClean, triggeredFixer, scores, avgScore };
+}
+
+function parseFixerReport(log: string): FixerReport {
+  const nothingToFix = log.includes("Nothing to fix") || log.includes("nothing needed");
+  const toFixMatch   = log.match(/Loaded audit report: (\d+) to fix, (\d+) to regenerate/);
+  const toFix        = toFixMatch ? Number(toFixMatch[1]) : 0;
+  const toRegen      = toFixMatch ? Number(toFixMatch[2]) : 0;
+  const fixedFiles   = [...log.matchAll(/✅ Fixed & kept: (\S+) \(quality: (\d+)\/10\)/g)].map((m) => ({
+    file: m[1].replace(".mdx", ""),
+    score: Number(m[2]),
+  }));
+  const regenFiles   = [...log.matchAll(/♻️ (?:Marked for regeneration|Too thin after fix)[^\n]*: (\S+)/g)].map(
+    (m) => m[1].replace(".mdx", "")
+  );
+  return { type: "fixer", nothingToFix, toFix, toRegen, fixedFiles, regenFiles };
+}
+
+function parsePipelineReport(log: string): PipelineReport {
+  const scoreMatch = log.match(/✅ Score: (\d+)\/100 \| Status: ([^|]+) \| Today: (\d+)/);
+  const score      = scoreMatch ? Number(scoreMatch[1]) : null;
+  const status     = scoreMatch ? scoreMatch[2].trim() : null;
+  const today      = scoreMatch ? Number(scoreMatch[3]) : null;
+  const restarted  = log.includes("auto-restarting");
+  return { type: "pipeline", score, status, today, restarted };
+}
+
+function parseResearcherReport(log: string): ResearcherReport {
+  const addedMatch = log.match(/✅ Added (\d+) articles/);
+  const added      = addedMatch ? Number(addedMatch[1]) : 0;
+  return { type: "researcher", added };
+}
+
+function parseReport(workflowFile: string, log: string): AgentReport {
+  switch (workflowFile) {
+    case "auto-generate.yml":    return parseWriterReport(log);
+    case "audit.yml":            return parseAuditorReport(log);
+    case "fixer.yml":            return parseFixerReport(log);
+    case "pipeline-manager.yml": return parsePipelineReport(log);
+    case "research.yml":         return parseResearcherReport(log);
+    default:                     return parseResearcherReport(log);
+  }
+}
+
+async function fetchRunReport(
+  runId: number,
+  workflowFile: string,
+  token: string
+): Promise<AgentReport | null> {
+  try {
+    // 1. Get jobs for this run
+    const jobsRes = await fetch(`${GH_BASE}/runs/${runId}/jobs`, {
+      headers: ghHeaders(token),
+    });
+    if (!jobsRes.ok) return null;
+
+    const jobsData = (await jobsRes.json()) as GHJobsResponse;
+    if (!jobsData.jobs || jobsData.jobs.length === 0) return null;
+    const jobId = jobsData.jobs[0].id;
+
+    // 2. Fetch logs (follows the 302 redirect to Azure Blob Storage)
+    const logsRes = await fetch(
+      `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/actions/jobs/${jobId}/logs`,
+      {
+        headers: ghHeaders(token),
+        redirect: "follow",
+      }
+    );
+    if (!logsRes.ok) return null;
+
+    const logText = await logsRes.text();
+    // Strip timestamps like "2026-05-17T17:43:45.716Z "
+    const clean = logText.replace(/\d{4}-\d{2}-\d{2}T[\d:.]+Z\s*/g, "");
+    return parseReport(workflowFile, clean);
+  } catch {
+    return null;
+  }
 }
 
 // ── GET /api/admin/agents ──────────────────────────────────────────────────────
@@ -169,7 +340,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
       wfMap.set(filename, wf);
     }
 
-    // 2. For each agent, fetch runs
+    // 2. For each agent, fetch runs and logs (all in parallel)
     const agents: AgentData[] = await Promise.all(
       AGENT_META.map(async (meta): Promise<AgentData> => {
         const wf = wfMap.get(meta.workflowFile);
@@ -182,6 +353,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
             runsToday: 0,
             totalRuns: 0,
             recentRuns: [],
+            report: null,
           };
         }
 
@@ -199,6 +371,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
             runsToday: 0,
             totalRuns: 0,
             recentRuns: [],
+            report: null,
           };
         }
 
@@ -225,6 +398,12 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 
         const runsToday = runs.filter((r) => isToday(r.created_at)).length;
 
+        // Fetch report from last completed run's logs
+        const lastCompletedRun = runs.find((r) => r.status === "completed");
+        const report = lastCompletedRun
+          ? await fetchRunReport(lastCompletedRun.id, meta.workflowFile, ghToken)
+          : null;
+
         return {
           ...meta,
           workflowId: wf.id,
@@ -233,6 +412,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
           runsToday,
           totalRuns: runs.length,
           recentRuns,
+          report,
         };
       })
     );
