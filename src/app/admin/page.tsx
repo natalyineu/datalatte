@@ -44,7 +44,7 @@ interface Recommendation {
   source: "cluster" | "paa" | "autocomplete";
 }
 
-type TabId = "agents" | "pipeline" | "queue" | "research" | "published" | "reports";
+type TabId = "agents" | "proposals" | "pipeline" | "queue" | "research" | "published" | "reports";
 
 // ── Agent types ───────────────────────────────────────────────────────────────
 
@@ -101,7 +101,41 @@ interface ResearcherReport {
   added: number;
 }
 
-type AgentReport = WriterReport | AuditorReport | FixerReport | PipelineReport | ResearcherReport;
+interface ImproverReport {
+  type: "improver";
+  analyzed: number;
+  added: number;
+  proposals: { slug: string; impact: number; type: string }[];
+}
+
+type AgentReport = WriterReport | AuditorReport | FixerReport | PipelineReport | ResearcherReport | ImproverReport;
+
+// ── Proposal + Quality types ──────────────────────────────────────────────────
+
+interface Proposal {
+  id: string;
+  slug: string;
+  title: string;
+  cluster: string;
+  issue: string;
+  proposal: string;
+  type: "cta" | "internal_link" | "conversion_language" | "social_proof";
+  impactScore: number;
+  ctaScore: number;
+  linkScore: number;
+  conversionScore: number;
+  overallScore: number;
+  status: "pending" | "approved" | "rejected" | "applied";
+  createdAt: string;
+  reviewedAt?: string;
+}
+
+interface QualityScore {
+  score: number;
+  has_cta: boolean;
+  on_topic: boolean;
+  checkedAt: string;
+}
 
 interface AgentData {
   name: string;
@@ -391,6 +425,17 @@ function AgentReportSection({ report }: { report: AgentReport | null }) {
             ? `✅ Added ${report.added} new topics to queue`
             : "📭 No new topics added this run"}
         </p>
+      ) : report.type === "improver" ? (
+        <div className="space-y-1 text-xs">
+          <p className="text-gray-400">
+            Analyzed {report.analyzed} articles · {report.added} proposals added
+          </p>
+          {report.proposals.slice(0, 4).map((p) => (
+            <p key={p.slug} className="text-amber-400">
+              💡 {p.slug} (impact: {p.impact}/10, {p.type})
+            </p>
+          ))}
+        </div>
       ) : null}
     </div>
   );
@@ -703,7 +748,13 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
   const [collapsedClusters, setCollapsedClusters] = useState<Set<string>>(new Set());
 
   // Published sort
-  const [pubSort, setPubSort]               = useState<"date" | "words">("date");
+  const [pubSort, setPubSort]               = useState<"date" | "words" | "quality">("date");
+
+  // Proposals + quality
+  const [proposals, setProposals]           = useState<Proposal[]>([]);
+  const [qualityScores, setQualityScores]   = useState<Record<string, QualityScore>>({});
+  const [proposalStatusFilter, setProposalStatusFilter] = useState<string>("all");
+  const [proposalTypeFilter, setProposalTypeFilter]     = useState<string>("all");
 
   // ── Fetchers ──────────────────────────────────────────────────────────────
 
@@ -731,11 +782,29 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
     }
   }, [token]);
 
+  const fetchProposals = useCallback(async () => {
+    const res = await authFetch("/api/admin/proposals", {}, token);
+    if (res.ok) {
+      const d = await res.json() as { proposals: Proposal[] };
+      setProposals(d.proposals ?? []);
+    }
+  }, [token]);
+
+  const fetchQualityScores = useCallback(async () => {
+    const res = await authFetch("/api/admin/quality", {}, token);
+    if (res.ok) {
+      const d = await res.json() as { scores: Record<string, QualityScore> };
+      setQualityScores(d.scores ?? {});
+    }
+  }, [token]);
+
   useEffect(() => {
     fetchQueue();
     fetchArticles();
     fetchRecommendations();
-  }, [fetchQueue, fetchArticles, fetchRecommendations]);
+    fetchProposals();
+    fetchQualityScores();
+  }, [fetchQueue, fetchArticles, fetchRecommendations, fetchProposals, fetchQualityScores]);
 
   // ── Helpers ───────────────────────────────────────────────────────────────
 
@@ -823,6 +892,20 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
   function handleCancelBatch() {
     cancelBatchRef.current = true;
     setBatchRunning(false);
+  }
+
+  // ── Proposal actions ──────────────────────────────────────────────────────
+
+  async function handleProposalAction(id: string, action: "approve" | "reject" | "dismiss") {
+    // Optimistic update
+    const newStatus = action === "approve" ? "approved" : "rejected";
+    setProposals((prev) =>
+      prev.map((p) => p.id === id ? { ...p, status: newStatus, reviewedAt: new Date().toISOString() } : p)
+    );
+    await authFetch("/api/admin/proposals", {
+      method: "PATCH",
+      body: JSON.stringify({ id, action }),
+    }, token);
   }
 
   // ── Recommendations ───────────────────────────────────────────────────────
@@ -927,6 +1010,11 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
   // Published articles sorted
   const sortedArticles = [...articles].sort((a, b) => {
     if (pubSort === "date") return b.date.localeCompare(a.date);
+    if (pubSort === "quality") {
+      const qa = qualityScores[a.slug]?.score ?? 99;
+      const qb = qualityScores[b.slug]?.score ?? 99;
+      return qa - qb; // ascending — worst first
+    }
     return b.wordCount - a.wordCount;
   });
 
@@ -948,13 +1036,27 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
   }
   const clusterDistribEntries = Object.entries(clusterDistrib).sort((a, b) => b[1] - a[1]);
 
+  const pendingProposalsCount = proposals.filter((p) => p.status === "pending").length;
+
+  const allQualityValues = Object.values(qualityScores).map((s) => s.score);
+  const avgQualityScore = allQualityValues.length > 0
+    ? (allQualityValues.reduce((a, b) => a + b, 0) / allQualityValues.length).toFixed(1)
+    : null;
+
+  const filteredProposals = proposals.filter((p) => {
+    const matchStatus = proposalStatusFilter === "all" || p.status === proposalStatusFilter;
+    const matchType   = proposalTypeFilter === "all" || p.type === proposalTypeFilter;
+    return matchStatus && matchType;
+  });
+
   const tabs: { id: TabId; label: string }[] = [
-    { id: "agents",   label: "Agents (5)" },
-    { id: "pipeline", label: "Pipeline" },
-    { id: "queue",    label: `Queue (${queue.length})` },
-    { id: "research", label: `Research (${recommendations.length})` },
+    { id: "agents",    label: "Agents (6)" },
+    { id: "proposals", label: `Proposals (${pendingProposalsCount})` },
+    { id: "pipeline",  label: "Pipeline" },
+    { id: "queue",     label: `Queue (${queue.length})` },
+    { id: "research",  label: `Research (${recommendations.length})` },
     { id: "published", label: `Published (${articles.length})` },
-    { id: "reports",  label: "Reports" },
+    { id: "reports",   label: "Reports" },
   ];
 
   return (
@@ -1021,18 +1123,221 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
         )}
 
         {/* ══════════════════════════════════════════════════════════════════ */}
+        {/* Tab: Proposals                                                     */}
+        {/* ══════════════════════════════════════════════════════════════════ */}
+        {activeTab === "proposals" && (
+          <div className="space-y-6">
+            {/* Header */}
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="font-semibold text-white">Improvement Proposals</h2>
+                <p className="text-xs text-gray-500 mt-0.5">From Agent 6 — Improver (weekly analysis)</p>
+              </div>
+              <button
+                onClick={fetchProposals}
+                className="text-sm text-gray-400 hover:text-white border border-gray-700 hover:border-gray-600 rounded-lg px-3 py-1.5 transition"
+              >
+                ↻ Refresh
+              </button>
+            </div>
+
+            {/* Stats row */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <StatCard label="Total Proposals" value={proposals.length} />
+              <StatCard label="Pending Review" value={pendingProposalsCount} />
+              <StatCard
+                label="Approved This Week"
+                value={proposals.filter((p) => {
+                  if (p.status !== "approved" || !p.reviewedAt) return false;
+                  const d = new Date(p.reviewedAt);
+                  return Date.now() - d.getTime() < 7 * 24 * 60 * 60 * 1000;
+                }).length}
+              />
+              <StatCard
+                label="Avg Impact Score"
+                value={proposals.length > 0
+                  ? (proposals.reduce((s, p) => s + p.impactScore, 0) / proposals.length).toFixed(1)
+                  : "—"}
+                sub="out of 10"
+              />
+            </div>
+
+            {/* Filter bar */}
+            <div className="flex flex-wrap gap-3 items-center">
+              <div className="flex gap-1">
+                {(["all", "pending", "approved", "rejected"] as const).map((s) => (
+                  <button
+                    key={s}
+                    onClick={() => setProposalStatusFilter(s)}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-medium transition capitalize ${
+                      proposalStatusFilter === s
+                        ? "bg-amber-600 text-white"
+                        : "bg-gray-800 text-gray-400 hover:text-white"
+                    }`}
+                  >
+                    {s}
+                  </button>
+                ))}
+              </div>
+              <div className="flex gap-1">
+                {([
+                  { value: "all", label: "All Types" },
+                  { value: "cta", label: "CTA" },
+                  { value: "internal_link", label: "Internal Links" },
+                  { value: "conversion_language", label: "Conversion" },
+                  { value: "social_proof", label: "Social Proof" },
+                ] as const).map(({ value, label }) => (
+                  <button
+                    key={value}
+                    onClick={() => setProposalTypeFilter(value)}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-medium transition ${
+                      proposalTypeFilter === value
+                        ? "bg-amber-600 text-white"
+                        : "bg-gray-800 text-gray-400 hover:text-white"
+                    }`}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Proposal cards */}
+            {filteredProposals.length === 0 ? (
+              <div className="text-center py-16 text-gray-500 text-sm">
+                <p className="text-3xl mb-3">🎯</p>
+                {proposals.length === 0
+                  ? "No proposals yet — Agent 6 (Improver) runs every Monday"
+                  : "No proposals match your filters"}
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {filteredProposals.map((p) => {
+                  const impactColor = p.impactScore >= 8
+                    ? "bg-red-500/20 text-red-300 border-red-500/40"
+                    : p.impactScore >= 6
+                    ? "bg-amber-500/20 text-amber-300 border-amber-500/40"
+                    : "bg-gray-700/50 text-gray-400 border-gray-700";
+
+                  const typeColor: Record<string, string> = {
+                    cta: "bg-purple-500/20 text-purple-300 border-purple-500/40",
+                    internal_link: "bg-blue-500/20 text-blue-300 border-blue-500/40",
+                    conversion_language: "bg-green-500/20 text-green-300 border-green-500/40",
+                    social_proof: "bg-orange-500/20 text-orange-300 border-orange-500/40",
+                  };
+
+                  const statusColor: Record<string, string> = {
+                    pending:  "bg-yellow-500/20 text-yellow-300 border-yellow-500/30",
+                    approved: "bg-green-500/20 text-green-300 border-green-500/30",
+                    rejected: "bg-gray-700/50 text-gray-400 border-gray-700",
+                    applied:  "bg-blue-500/20 text-blue-300 border-blue-500/30",
+                  };
+
+                  const typeLabel: Record<string, string> = {
+                    cta: "CTA",
+                    internal_link: "Internal Link",
+                    conversion_language: "Conversion",
+                    social_proof: "Social Proof",
+                  };
+
+                  return (
+                    <div key={p.id} className="bg-gray-900 border border-gray-800 rounded-2xl p-5 space-y-4">
+                      {/* Card header */}
+                      <div className="flex items-start justify-between gap-3 flex-wrap">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className={`text-xs font-bold px-2 py-0.5 rounded-full border ${impactColor}`}>
+                            🎯 {p.impactScore >= 8 ? "HIGH" : p.impactScore >= 6 ? "MED" : "LOW"} IMPACT ({p.impactScore}/10)
+                          </span>
+                          <span className={`text-xs font-medium px-2 py-0.5 rounded-full border ${typeColor[p.type] ?? "bg-gray-700/50 text-gray-400 border-gray-700"}`}>
+                            {typeLabel[p.type] ?? p.type}
+                          </span>
+                          <span className={`text-xs font-medium px-2 py-0.5 rounded-full border ${statusColor[p.status] ?? statusColor.pending}`}>
+                            {p.status}
+                          </span>
+                          {p.cluster && (
+                            <span className="text-xs text-gray-500 px-2 py-0.5 rounded-full bg-gray-800 border border-gray-700">
+                              📂 {p.cluster.split(" — ")[0]}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Title */}
+                      <div>
+                        <p className="font-semibold text-white">{p.title}</p>
+                        <p className="text-xs text-gray-500 font-mono mt-0.5">{p.slug}</p>
+                      </div>
+
+                      {/* Issue */}
+                      <p className="text-sm text-gray-400">
+                        <span className="text-gray-500 font-medium">Issue: </span>
+                        {p.issue}
+                      </p>
+
+                      {/* Proposal */}
+                      <div>
+                        <p className="text-xs text-gray-500 font-medium mb-1.5">Proposed change:</p>
+                        <div className="bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-sm text-gray-300 font-mono whitespace-pre-wrap">
+                          {p.proposal}
+                        </div>
+                      </div>
+
+                      {/* Score breakdown */}
+                      <div className="flex items-center gap-4 text-xs text-gray-500">
+                        <span>CTA: <span className="text-gray-300">{p.ctaScore}/5</span></span>
+                        <span>Links: <span className="text-gray-300">{p.linkScore}/3</span></span>
+                        <span>Conversion: <span className="text-gray-300">{p.conversionScore}/5</span></span>
+                        <span>Overall: <span className="text-gray-300">{p.overallScore}/10</span></span>
+                        <span className="ml-auto text-gray-600">
+                          {new Date(p.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                        </span>
+                      </div>
+
+                      {/* Actions */}
+                      {p.status === "pending" && (
+                        <div className="flex gap-2 pt-2 border-t border-gray-800">
+                          <button
+                            onClick={() => handleProposalAction(p.id, "approve")}
+                            className="text-xs bg-green-700/30 hover:bg-green-700 border border-green-700/50 hover:border-green-600 text-green-300 hover:text-white rounded-lg px-4 py-2 transition"
+                          >
+                            ✅ Approve
+                          </button>
+                          <button
+                            onClick={() => handleProposalAction(p.id, "reject")}
+                            className="text-xs bg-red-700/20 hover:bg-red-700 border border-red-700/40 hover:border-red-600 text-red-400 hover:text-white rounded-lg px-4 py-2 transition"
+                          >
+                            ❌ Reject
+                          </button>
+                        </div>
+                      )}
+                      {p.status !== "pending" && p.reviewedAt && (
+                        <p className="text-xs text-gray-600 pt-1 border-t border-gray-800">
+                          Reviewed {new Date(p.reviewedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}
+                        </p>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* ══════════════════════════════════════════════════════════════════ */}
         {/* Tab: Pipeline                                                      */}
         {/* ══════════════════════════════════════════════════════════════════ */}
         {activeTab === "pipeline" && (
           <div className="space-y-8">
             {/* Stats grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
               <StatCard label="Total Published" value={articles.length} />
               <StatCard label="Published Today" value={publishedToday} sub={today} />
               <StatCard label="Pending in Queue" value={pendingCount} />
               <StatCard label="Est. Time to Clear" value={pendingCount === 0 ? "—" : estTime} sub={`${pendingCount} × 5 min`} />
               <StatCard label="Avg Articles / Day" value={avgPerDay} sub="last 7 days" />
               <StatCard label="Clusters Covered" value={clustersInPublished} sub="in published" />
+              <StatCard label="Avg Quality Score" value={avgQualityScore ? `${avgQualityScore} / 10` : "—"} sub={`${allQualityValues.length} audited`} />
+              <StatCard label="Pending Proposals" value={pendingProposalsCount} sub="from Agent 6" />
             </div>
 
             {/* Generate controls */}
@@ -1274,9 +1579,24 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
                           />
                         </td>
                         <td className="px-4 py-3">
-                          <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${STATUS_COLORS[entry.status]}`}>
-                            {entry.status}
-                          </span>
+                          <div className="flex items-center gap-1.5 flex-wrap">
+                            <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${STATUS_COLORS[entry.status]}`}>
+                              {entry.status}
+                            </span>
+                            {entry.status === "published" && qualityScores[entry.slug] && (() => {
+                              const qs = qualityScores[entry.slug];
+                              const color = qs.score >= 8
+                                ? "bg-green-500/20 text-green-300 border-green-500/30"
+                                : qs.score >= 6
+                                ? "bg-yellow-500/20 text-yellow-300 border-yellow-500/30"
+                                : "bg-red-500/20 text-red-300 border-red-500/30";
+                              return (
+                                <span className={`text-xs px-1.5 py-0.5 rounded-full border ${color}`}>
+                                  {qs.score}/10
+                                </span>
+                              );
+                            })()}
+                          </div>
                         </td>
                         <td className="px-4 py-3 hidden md:table-cell text-xs text-gray-500 font-mono">
                           {entry.generatedDate
@@ -1493,6 +1813,12 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
                 >
                   By Words
                 </button>
+                <button
+                  onClick={() => setPubSort("quality")}
+                  className={`text-xs px-3 py-1.5 rounded-lg transition ${pubSort === "quality" ? "bg-amber-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white"}`}
+                >
+                  By Quality ↑
+                </button>
               </div>
             </div>
             <div className="overflow-x-auto rounded-xl border border-gray-800">
@@ -1502,41 +1828,57 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
                     <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wide">Title</th>
                     <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wide hidden sm:table-cell">Date</th>
                     <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wide hidden md:table-cell">Words</th>
+                    <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wide hidden md:table-cell">Quality</th>
                     <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wide hidden lg:table-cell">Tags</th>
                     <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wide">View</th>
                   </tr>
                 </thead>
                 <tbody className="bg-gray-900 divide-y divide-gray-800">
                   {sortedArticles.length === 0 ? (
-                    <tr><td colSpan={5} className="px-4 py-10 text-center text-gray-500">No articles found</td></tr>
+                    <tr><td colSpan={6} className="px-4 py-10 text-center text-gray-500">No articles found</td></tr>
                   ) : (
-                    sortedArticles.map((a) => (
-                      <tr key={a.slug} className="hover:bg-gray-800/50 transition">
-                        <td className="px-4 py-3">
-                          <p className="font-medium text-white truncate max-w-xs">{a.title}</p>
-                          <p className="text-xs text-gray-500 font-mono mt-0.5 truncate">{a.slug}</p>
-                        </td>
-                        <td className="px-4 py-3 hidden sm:table-cell text-xs text-gray-400">{a.date}</td>
-                        <td className="px-4 py-3 hidden md:table-cell text-xs text-gray-400">{a.wordCount.toLocaleString()}</td>
-                        <td className="px-4 py-3 hidden lg:table-cell">
-                          <div className="flex flex-wrap gap-1">
-                            {a.tags.slice(0, 3).map((t) => (
-                              <span key={t} className="text-xs bg-gray-800 text-gray-400 rounded-full px-2 py-0.5">{t}</span>
-                            ))}
-                          </div>
-                        </td>
-                        <td className="px-4 py-3">
-                          <a
-                            href={a.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-xs text-amber-400 hover:text-amber-300 border border-amber-500/30 hover:border-amber-500/60 rounded-lg px-3 py-1.5 transition"
-                          >
-                            View →
-                          </a>
-                        </td>
-                      </tr>
-                    ))
+                    sortedArticles.map((a) => {
+                      const qs = qualityScores[a.slug];
+                      const qBadgeColor = qs
+                        ? qs.score >= 8
+                          ? "bg-green-500/20 text-green-300 border-green-500/30"
+                          : qs.score >= 6
+                          ? "bg-yellow-500/20 text-yellow-300 border-yellow-500/30"
+                          : "bg-red-500/20 text-red-300 border-red-500/30"
+                        : "bg-gray-800 text-gray-600 border-gray-700";
+                      return (
+                        <tr key={a.slug} className="hover:bg-gray-800/50 transition">
+                          <td className="px-4 py-3">
+                            <p className="font-medium text-white truncate max-w-xs">{a.title}</p>
+                            <p className="text-xs text-gray-500 font-mono mt-0.5 truncate">{a.slug}</p>
+                          </td>
+                          <td className="px-4 py-3 hidden sm:table-cell text-xs text-gray-400">{a.date}</td>
+                          <td className="px-4 py-3 hidden md:table-cell text-xs text-gray-400">{a.wordCount.toLocaleString()}</td>
+                          <td className="px-4 py-3 hidden md:table-cell">
+                            <span className={`text-xs font-medium px-2 py-0.5 rounded-full border ${qBadgeColor}`}>
+                              {qs ? `${qs.score}/10` : "—"}
+                            </span>
+                          </td>
+                          <td className="px-4 py-3 hidden lg:table-cell">
+                            <div className="flex flex-wrap gap-1">
+                              {a.tags.slice(0, 3).map((t) => (
+                                <span key={t} className="text-xs bg-gray-800 text-gray-400 rounded-full px-2 py-0.5">{t}</span>
+                              ))}
+                            </div>
+                          </td>
+                          <td className="px-4 py-3">
+                            <a
+                              href={a.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-xs text-amber-400 hover:text-amber-300 border border-amber-500/30 hover:border-amber-500/60 rounded-lg px-3 py-1.5 transition"
+                            >
+                              View →
+                            </a>
+                          </td>
+                        </tr>
+                      );
+                    })
                   )}
                 </tbody>
               </table>
