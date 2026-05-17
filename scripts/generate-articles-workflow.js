@@ -124,61 +124,80 @@ async function ghPutFile(filePath, content, message) {
   return true;
 }
 
-const CLUSTER_IMAGES = {
-  // Niches
-  'Coffee Shop Marketing':            'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1200&q=80',
-  'Hair Salon Marketing':             'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1200&q=80',
-  'Pet Groomer Marketing':            'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1200&q=80',
-  'Fitness Studio Marketing':         'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80',
-  // Channels
-  'Meta Ads':                         'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=1200&q=80',
-  'Instagram Marketing':              'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=1200&q=80',
-  'TikTok Marketing':                 'https://images.unsplash.com/photo-1611605698335-8b1569810432?w=1200&q=80',
-  'Snapchat Advertising':             'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&q=80',
-  'Pinterest Marketing':              'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1200&q=80',
-  'Microsoft Ads':                    'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1200&q=80',
-  'Yahoo Advertising':                'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1200&q=80',
-  'Programmatic Advertising':         'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80',
-  'Audio Advertising':                'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1200&q=80',
-  'Messaging & Community Marketing':  'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=1200&q=80',
-  'Nextdoor & Neighborhood Marketing':'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&q=80',
-  'Review Platform Ads':              'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&q=80',
-  'Offline Marketing':                'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=1200&q=80',
-  'Influencer & Creator Marketing':   'https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?w=1200&q=80',
-  'Reddit & Community Marketing':     'https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=1200&q=80',
-  // Strategy & tools
-  'AI & Automation':                  'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&q=80',
-  'Local Business Strategy':          'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80',
-  'Local SEO':                        'https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=1200&q=80',
-  'Analytics & Tracking':             'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80',
-  'Email & SMS Marketing':            'https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=1200&q=80',
-  'Social Media':                     'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=1200&q=80',
-  'Website & CRO':                    'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=1200&q=80',
-  'Content Marketing':                'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200&q=80',
-  'Reputation Management':            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&q=80',
-  'Seasonal Marketing':               'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=1200&q=80',
-  'Tool Comparisons':                 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1200&q=80',
-  'Case Studies':                     'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80',
+const NICHE_IMAGES = {
+  'coffee-shops':    'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1200&q=80',
+  'hair-salons':     'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1200&q=80',
+  'pet-groomers':    'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1200&q=80',
+  'fitness-studios': 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80',
 };
 
-const DEFAULT_IMAGE = 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80';
+const CHANNEL_IMAGES = {
+  'ai-agents':       'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1200&q=80',
+  'ai-automation':   'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&q=80',
+  'google-ads':      'https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?w=1200&q=80',
+  'facebook':        'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=1200&q=80',
+  'instagram':       'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=1200&q=80',
+  'tiktok':          'https://images.unsplash.com/photo-1611605698335-8b1569810432?w=1200&q=80',
+  'snapchat':        'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&q=80',
+  'pinterest':       'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1200&q=80',
+  'youtube':         'https://images.unsplash.com/photo-1611162614475-46b635cb6868?w=1200&q=80',
+  'spotify':         'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1200&q=80',
+  'programmatic':    'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80',
+  'ctv':             'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=1200&q=80',
+  'email-sms':       'https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=1200&q=80',
+  'seo':             'https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=1200&q=80',
+  'social-media':    'https://images.unsplash.com/photo-1522542550221-31fd19575a2d?w=1200&q=80',
+  'influencer':      'https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?w=1200&q=80',
+  'analytics':       'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80',
+  'website':         'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=1200&q=80',
+  'content':         'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200&q=80',
+  'reviews':         'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&q=80',
+  'retention':       'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1200&q=80',
+  'local-strategy':  'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80',
+};
+
+const DEFAULT_IMAGE = 'https://images.unsplash.com/photo-1522542550221-31fd19575a2d?w=1200&q=80';
 
 function getImageForEntry(entry) {
-  if (CLUSTER_IMAGES[entry.cluster]) return CLUSTER_IMAGES[entry.cluster];
-  // Fallback: keyword match
-  const slug = entry.slug.toLowerCase();
-  if (slug.includes('coffee')) return CLUSTER_IMAGES['Coffee Shop Marketing'];
-  if (slug.includes('salon') || slug.includes('hair')) return CLUSTER_IMAGES['Hair Salon Marketing'];
-  if (slug.includes('groom') || slug.includes('dog') || slug.includes('cat') || slug.includes('pet')) return CLUSTER_IMAGES['Pet Groomer Marketing'];
-  if (slug.includes('gym') || slug.includes('fitness') || slug.includes('yoga')) return CLUSTER_IMAGES['Fitness Studio Marketing'];
-  if (slug.includes('tiktok')) return CLUSTER_IMAGES['TikTok Marketing'];
-  if (slug.includes('instagram')) return CLUSTER_IMAGES['Instagram Marketing'];
-  if (slug.includes('facebook') || slug.includes('meta')) return CLUSTER_IMAGES['Meta Ads'];
-  if (slug.includes('programmatic') || slug.includes('dsp') || slug.includes('dv360')) return CLUSTER_IMAGES['Programmatic Advertising'];
-  if (slug.includes('spotify') || slug.includes('podcast') || slug.includes('audio')) return CLUSTER_IMAGES['Audio Advertising'];
-  if (slug.includes('email') || slug.includes('sms')) return CLUSTER_IMAGES['Email & SMS Marketing'];
-  if (slug.includes('ai-') || slug.includes('automation')) return CLUSTER_IMAGES['AI & Automation'];
-  if (slug.includes('seo')) return CLUSTER_IMAGES['Local SEO'];
+  const slug = (entry.slug || '').toLowerCase();
+  const category = (entry.category || entry.cluster || '').toLowerCase();
+  const niche = (entry.niche || '').toLowerCase();
+
+  // 1. Niche field (new articles)
+  if (NICHE_IMAGES[niche]) return NICHE_IMAGES[niche];
+
+  // 2. Category field (new articles)
+  if (category.includes('ai agent')) return CHANNEL_IMAGES['ai-agents'];
+  if (category.includes('ai automation') || category.includes('automation')) return CHANNEL_IMAGES['ai-automation'];
+
+  // 3. Slug keyword matching — niches first
+  if (slug.includes('coffee') || slug.includes('cafe') || slug.includes('barista') || slug.includes('espresso')) return NICHE_IMAGES['coffee-shops'];
+  if (slug.includes('salon') || slug.includes('hair') || slug.includes('barbershop') || slug.includes('barber') || slug.includes('nail') || slug.includes('spa') || slug.includes('beauty')) return NICHE_IMAGES['hair-salons'];
+  if (slug.includes('groom') || slug.includes('dog') || slug.includes('cat') || slug.includes('pet') || slug.includes('vet')) return NICHE_IMAGES['pet-groomers'];
+  if (slug.includes('gym') || slug.includes('fitness') || slug.includes('yoga') || slug.includes('pilates') || slug.includes('crossfit') || slug.includes('personal-train') || slug.includes('studio')) return NICHE_IMAGES['fitness-studios'];
+
+  // 4. Slug keyword matching — channels
+  if (slug.includes('ai-agent') || slug.includes('ai-receptionist') || slug.includes('ai-booking') || slug.includes('voice-ai') || slug.includes('chatbot') || slug.includes('whatsapp-ai')) return CHANNEL_IMAGES['ai-agents'];
+  if (slug.includes('automat') || slug.includes('n8n') || slug.includes('zapier') || slug.includes('make-com') || slug.includes('chatgpt') || slug.includes('ai-tool') || slug.includes('ai-for') || slug.includes('ai-market') || slug.includes('ai-content') || slug.includes('ai-power')) return CHANNEL_IMAGES['ai-automation'];
+  if (slug.includes('tiktok')) return CHANNEL_IMAGES['tiktok'];
+  if (slug.includes('instagram')) return CHANNEL_IMAGES['instagram'];
+  if (slug.includes('snapchat')) return CHANNEL_IMAGES['snapchat'];
+  if (slug.includes('youtube')) return CHANNEL_IMAGES['youtube'];
+  if (slug.includes('facebook') || slug.includes('meta-ad') || slug.includes('meta-ads')) return CHANNEL_IMAGES['facebook'];
+  if (slug.includes('spotify') || slug.includes('podcast') || slug.includes('audio')) return CHANNEL_IMAGES['spotify'];
+  if (slug.includes('programmatic') || slug.includes('dsp') || slug.includes('dv360') || slug.includes('retarget') || slug.includes('display')) return CHANNEL_IMAGES['programmatic'];
+  if (slug.includes('ctv') || slug.includes('ott') || slug.includes('connected-tv') || slug.includes('streaming')) return CHANNEL_IMAGES['ctv'];
+  if (slug.includes('email') || slug.includes('sms') || slug.includes('text-message')) return CHANNEL_IMAGES['email-sms'];
+  if (slug.includes('seo') || slug.includes('google-maps') || slug.includes('google-business') || slug.includes('local-search')) return CHANNEL_IMAGES['seo'];
+  if (slug.includes('influencer') || slug.includes('creator') || slug.includes('ugc')) return CHANNEL_IMAGES['influencer'];
+  if (slug.includes('analytic') || slug.includes('tracking') || slug.includes('utm') || slug.includes('dashboard')) return CHANNEL_IMAGES['analytics'];
+  if (slug.includes('website') || slug.includes('landing-page') || slug.includes('cro')) return CHANNEL_IMAGES['website'];
+  if (slug.includes('content') || slug.includes('blog') || slug.includes('video-market')) return CHANNEL_IMAGES['content'];
+  if (slug.includes('review') || slug.includes('reputation') || slug.includes('yelp')) return CHANNEL_IMAGES['reviews'];
+  if (slug.includes('loyalty') || slug.includes('retention') || slug.includes('referral') || slug.includes('rebooking')) return CHANNEL_IMAGES['retention'];
+  if (slug.includes('social') || slug.includes('reels') || slug.includes('organic')) return CHANNEL_IMAGES['social-media'];
+  if (slug.includes('google-ads') || slug.includes('google-ad') || slug.includes('ppc') || slug.includes('keywords-for') || slug.includes('ad-budget') || slug.includes('performance-max')) return CHANNEL_IMAGES['google-ads'];
+
   return DEFAULT_IMAGE;
 }
 
