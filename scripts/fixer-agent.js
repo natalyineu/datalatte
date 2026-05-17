@@ -91,8 +91,9 @@ function applyFixes(content) {
   }
 
   // Fix unquoted title with colon (breaks YAML parser)
-  if (/^title:\s*[^"'\n][^\n]*:[^\n]/m.test(fixed)) {
-    fixed = fixed.replace(/^(title:\s*)([^"'\n][^\n]*)$/m, (_, prefix, title) => {
+  // Use \s+ (not \s*) to avoid backtracking that lets space match [^"'\n]
+  if (/^title:\s+[^"'\n][^\n]*:[^\n]/m.test(fixed)) {
+    fixed = fixed.replace(/^(title:\s+)([^"'\n][^\n]*)$/m, (_, prefix, title) => {
       return `${prefix}"${title.replace(/"/g, '\\"')}"`;
     });
     appliedFixes.push('quoted title containing colon');
