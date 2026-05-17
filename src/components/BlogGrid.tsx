@@ -1,25 +1,41 @@
 "use client";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import BlogCard from "./BlogCard";
 
 interface Post { title: string; description: string; slug: string; category: string; date: string; readTime: string; image: string; }
 
+function formatDate(dateStr: string) {
+  const date = new Date(dateStr);
+  const now = new Date();
+  const diffMs = now.getTime() - date.getTime();
+  const diffDays = Math.floor(diffMs / 86400000);
+  if (diffDays === 0) return "Today";
+  if (diffDays === 1) return "Yesterday";
+  if (diffDays < 7) return `${diffDays} days ago`;
+  if (diffDays < 30) return `${Math.floor(diffDays / 7)} week${Math.floor(diffDays / 7) > 1 ? "s" : ""} ago`;
+  return date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+}
+
 export default function BlogGrid({ posts }: { posts: Post[] }) {
   const [active, setActive] = useState("All");
   const [query, setQuery] = useState("");
+  const [sortAsc, setSortAsc] = useState(false);
   const categories = ["All", ...Array.from(new Set(posts.map(p => p.category))).sort()];
 
-  const filtered = posts.filter(p => {
-    const matchesCategory = active === "All" || p.category === active;
-    const q = query.toLowerCase();
-    const matchesSearch = !q || p.title.toLowerCase().includes(q) || p.description.toLowerCase().includes(q);
-    return matchesCategory && matchesSearch;
-  });
+  const filtered = useMemo(() => {
+    const base = posts.filter(p => {
+      const matchesCategory = active === "All" || p.category === active;
+      const q = query.toLowerCase();
+      const matchesSearch = !q || p.title.toLowerCase().includes(q) || p.description.toLowerCase().includes(q);
+      return matchesCategory && matchesSearch;
+    });
+    return sortAsc ? [...base].reverse() : base;
+  }, [posts, active, query, sortAsc]);
 
   return (
     <>
-      {/* Search input */}
-      <div className="mb-6">
+      {/* Search + sort row */}
+      <div className="flex flex-col sm:flex-row gap-3 mb-6 items-start sm:items-center">
         <input
           type="search"
           value={query}
@@ -27,6 +43,17 @@ export default function BlogGrid({ posts }: { posts: Post[] }) {
           placeholder="Search articles…"
           className="w-full max-w-md px-4 py-2.5 rounded-full border border-coffee-200 bg-white text-gray-700 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-coffee-500 focus:border-transparent transition"
         />
+        <button
+          onClick={() => setSortAsc(v => !v)}
+          className="flex items-center gap-1.5 px-4 py-2.5 rounded-full border border-coffee-200 bg-white text-sm font-medium text-gray-600 hover:bg-gray-50 transition whitespace-nowrap"
+        >
+          <svg className="w-3.5 h-3.5" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8">
+            <path d="M2 4h8M2 8h5M2 12h3" strokeLinecap="round"/>
+            <path d="M11 6l2.5-2.5L16 6M13.5 3.5v9" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          {sortAsc ? "Oldest first" : "Newest first"}
+        </button>
+        <span className="text-xs text-gray-400 sm:ml-auto">{filtered.length} article{filtered.length !== 1 ? "s" : ""}</span>
       </div>
 
       {/* Category filter chips */}
@@ -45,7 +72,8 @@ export default function BlogGrid({ posts }: { posts: Post[] }) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((post) => (
             <BlogCard key={post.slug} title={post.title} excerpt={post.description} slug={post.slug} category={post.category}
-              date={new Date(post.date).toLocaleDateString("en-US", { year:"numeric", month:"short", day:"numeric" })}
+              date={formatDate(post.date)}
+              rawDate={new Date(post.date).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
               readTime={post.readTime} image={post.image} />
           ))}
         </div>

@@ -8,11 +8,12 @@ interface BlogCardProps {
   slug: string;
   category: string;
   date: string;
+  rawDate: string;
   image: string;
   readTime: string;
 }
 
-export default function BlogCard({ title, excerpt, slug, category, date, image, readTime }: BlogCardProps) {
+export default function BlogCard({ title, excerpt, slug, category, date, rawDate, image, readTime }: BlogCardProps) {
   return (
     <Link href={`/blog/${slug}`} className="card overflow-hidden group block">
       <div className="relative h-48 overflow-hidden">
@@ -30,8 +31,14 @@ export default function BlogCard({ title, excerpt, slug, category, date, image, 
         </div>
       </div>
       <div className="p-5">
-        <div className="flex items-center gap-3 text-xs text-gray-400 mb-3">
-          <span>{date}</span>
+        <div className="flex items-center gap-2 text-xs text-gray-400 mb-3">
+          <span title={rawDate} className="flex items-center gap-1 font-medium text-coffee-700">
+            <svg className="w-3 h-3" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8">
+              <rect x="1" y="2" width="14" height="13" rx="2"/>
+              <path d="M1 6h14M5 1v2M11 1v2" strokeLinecap="round"/>
+            </svg>
+            {date}
+          </span>
           <span>·</span>
           <span>{readTime}</span>
         </div>
