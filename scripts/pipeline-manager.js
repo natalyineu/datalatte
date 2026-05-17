@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
- * Agent 5 — Pipeline Manager
- * Runs every hour. Checks pipeline health, auto-restarts if stuck,
- * sends hourly Telegram report.
+ * Agent 5 — Pipeline Manager (with brain)
+ * Runs every hour. Checks pipeline health, auto-restarts if stuck.
+ * Uses Groq to generate smart strategic insights in the hourly report.
  */
 
 const https = require('https');
@@ -10,10 +10,13 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
+const GROQ_KEY = process.env.GROQ_API_KEY;
 const GH_TOKEN = process.env.GH_TOKEN || process.env.GITHUB_TOKEN;
 const REPO = 'natalyineu/datalatte';
 const TELEGRAM_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT = process.env.TELEGRAM_CHAT_ID;
+
+// ── HTTP ──────────────────────────────────────────────────────────────────────
 
 async function fetchJson(url, options = {}, body = null) {
   return new Promise((resolve, reject) => {
@@ -42,7 +45,89 @@ async function telegram(msg) {
   }, JSON.stringify({ chat_id: TELEGRAM_CHAT, text: msg, parse_mode: 'HTML' }));
 }
 
-async function getRecentRuns(workflow, limit = 10) {
+const GROQ_MODELS = ['llama-3.3-70b-versatile', 'qwen/qwen3-32b', 'llama3-70b-8192', 'gemma2-9b-it'];
+
+async function callGroq(prompt, maxTokens = 300) {
+  for (const model of GROQ_MODELS) {
+    const body = JSON.stringify({
+      model,
+      messages: [{ role: 'user', content: prompt }],
+      temperature: 0.6,
+      max_tokens: maxTokens,
+    });
+    const res = await fetchJson('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${GROQ_KEY}`, 'Content-Type': 'application/json' },
+    }, body);
+    if (res.status === 200) {
+      return res.data.choices[0].message.content.replace(/<think>[\s\S]*?<\/think>\s*/g, '').trim();
+    }
+    const code = res.data?.error?.code;
+    if (res.status === 429 || code === 'rate_limit_exceeded' || code === 'model_decommissioned') continue;
+    throw new Error(`Groq error ${res.status}`);
+  }
+  return null; // non-critical, ok to skip
+}
+
+// ── Stats ─────────────────────────────────────────────────────────────────────
+
+function getQueueStats() {
+  const queuePath = path.join(process.cwd(), 'content/queue.json');
+  if (!fs.existsSync(queuePath)) return { published: 0, pending: 0, generating: 0, byCategory: {} };
+  const queue = JSON.parse(fs.readFileSync(queuePath, 'utf8'));
+
+  const byCategory = {};
+  for (const e of queue.queue.filter(e => e.status === 'pending')) {
+    const cat = e.category || 'Unknown';
+    byCategory[cat] = (byCategory[cat] || 0) + 1;
+  }
+
+  return {
+    published: queue.queue.filter(e => e.status === 'published').length,
+    pending: queue.queue.filter(e => e.status === 'pending').length,
+    generating: queue.queue.filter(e => e.status === 'generating').length,
+    byCategory,
+  };
+}
+
+function countTodayArticles() {
+  try {
+    const today = new Date().toISOString().slice(0, 10);
+    const result = execSync(
+      `git log --since="${today}T00:00:00Z" --oneline -- content/blog/ | grep -c "Add article:" || true`,
+      { encoding: 'utf8' }
+    ).trim();
+    return parseInt(result) || 0;
+  } catch { return 0; }
+}
+
+function getLastArticleAge() {
+  try {
+    const result = execSync(
+      'git log --oneline -- content/blog/ | grep "Add article:" | head -1',
+      { encoding: 'utf8' }
+    ).trim();
+    if (!result) return { ageMinutes: 999, title: 'unknown' };
+
+    const sha = result.split(' ')[0];
+    const title = result.replace(/^[a-f0-9]+ Add article: /, '').trim();
+    const dateStr = execSync(`git show -s --format=%cI ${sha}`, { encoding: 'utf8' }).trim();
+    const ageMinutes = Math.round((Date.now() - new Date(dateStr).getTime()) / 60000);
+    return { ageMinutes, title };
+  } catch { return { ageMinutes: 999, title: 'unknown' }; }
+}
+
+function getRecentlyGeneratedTopics() {
+  try {
+    const result = execSync(
+      'git log --oneline --since="24 hours ago" -- content/blog/ | grep "Add article:" | head -10',
+      { encoding: 'utf8' }
+    ).trim();
+    return result ? result.split('\n').map(l => l.replace(/^[a-f0-9]+ Add article: /, '')) : [];
+  } catch { return []; }
+}
+
+async function getRecentRuns(workflow, limit = 15) {
   const res = await fetchJson(
     `https://api.github.com/repos/${REPO}/actions/workflows/${workflow}/runs?per_page=${limit}`,
     { method: 'GET', headers: { 'Authorization': `Bearer ${GH_TOKEN}` } }
@@ -59,128 +144,121 @@ async function triggerWorkflow(workflow) {
   return res.status === 204;
 }
 
-function getQueueStats() {
-  const queuePath = path.join(process.cwd(), 'content/queue.json');
-  if (!fs.existsSync(queuePath)) return { published: 0, pending: 0, generating: 0 };
-  const queue = JSON.parse(fs.readFileSync(queuePath, 'utf8'));
-  return {
-    published: queue.queue.filter(e => e.status === 'published').length,
-    pending: queue.queue.filter(e => e.status === 'pending').length,
-    generating: queue.queue.filter(e => e.status === 'generating').length,
-  };
-}
+// ── Groq insight ──────────────────────────────────────────────────────────────
 
-function countTodayArticles() {
-  const blogDir = path.join(process.cwd(), 'content/blog');
-  if (!fs.existsSync(blogDir)) return 0;
+async function generateInsight(data) {
+  const topPending = Object.entries(data.byCategory)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 6)
+    .map(([cat, n]) => `${cat}: ${n}`)
+    .join(', ');
+
+  const recentTopics = data.recentTopics.slice(0, 5).join('; ');
+
+  const prompt = `You are a content strategist for DataLatte.pro — a local marketing blog targeting coffee shops, salons, pet groomers, and fitness studios.
+
+Current pipeline data:
+- Published articles: ${data.published}
+- Pending queue: ${data.pending} articles
+- Generated today: ${data.todayCount}
+- Pending by category: ${topPending}
+- Recent articles: ${recentTopics || 'none yet today'}
+- Pipeline status: ${data.statusText}
+- Errors in last 15 runs: ${data.recentErrors}
+
+Write ONE short strategic insight (2-3 sentences max) that would be genuinely useful for Nataliia.
+Focus on: queue balance, content gaps, momentum, or a specific action to take.
+Be direct and specific. No fluff. Start with an emoji.`;
+
   try {
-    const today = new Date().toISOString().slice(0, 10);
-    const result = execSync(
-      `git log --since="${today}T00:00:00Z" --oneline -- content/blog/ | grep "Add article:" | wc -l`,
-      { encoding: 'utf8' }
-    ).trim();
-    return parseInt(result) || 0;
-  } catch { return 0; }
-}
-
-function getLastArticleAge() {
-  try {
-    const result = execSync(
-      'git log --oneline -- content/blog/ | grep "Add article:" | head -1',
-      { encoding: 'utf8' }
-    ).trim();
-    if (!result) return null;
-
-    const sha = result.split(' ')[0];
-    const dateStr = execSync(
-      `git show -s --format=%cI ${sha}`,
-      { encoding: 'utf8' }
-    ).trim();
-    const commitDate = new Date(dateStr);
-    const ageMinutes = Math.round((Date.now() - commitDate.getTime()) / 60000);
-    return { ageMinutes, dateStr };
+    return await callGroq(prompt, 150);
   } catch { return null; }
 }
 
-async function getErrorCount(runs) {
-  return runs.filter(r =>
-    r.conclusion === 'failure' ||
-    (r.conclusion === 'success' && r.name?.includes('failed'))
-  ).length;
-}
-
-async function isGeneratorRunning(runs) {
-  return runs.some(r => r.status === 'in_progress' || r.status === 'queued');
-}
+// ── Main ──────────────────────────────────────────────────────────────────────
 
 async function main() {
   console.log('📊 Pipeline Manager starting...');
 
   const now = new Date();
-  const timeStr = now.toUTCString().slice(0, 25);
+  const timeStr = now.toUTCString().slice(5, 22) + ' UTC';
 
-  // Get recent generator runs
-  const runs = await getRecentRuns('auto-generate.yml', 20);
-  const recentRuns = runs.slice(0, 10);
-
-  // Queue stats
+  // Collect all stats
   const stats = getQueueStats();
-
-  // Today's article count
   const todayCount = countTodayArticles();
-
-  // Last article age
   const lastArticle = getLastArticleAge();
-  const ageMinutes = lastArticle?.ageMinutes ?? 999;
+  const ageMinutes = lastArticle.ageMinutes;
+  const recentTopics = getRecentlyGeneratedTopics();
 
-  // Error count in last 10 runs
-  const recentErrors = recentRuns.filter(r => r.conclusion === 'failure').length;
+  // Recent runs
+  const runs = await getRecentRuns('auto-generate.yml', 15);
+  const recentErrors = runs.slice(0, 10).filter(r => r.conclusion === 'failure').length;
+  const isRunning = runs.slice(0, 3).some(r => r.status === 'in_progress' || r.status === 'queued');
 
-  // Is pipeline currently running?
-  const isRunning = await isGeneratorRunning(recentRuns);
-
-  // Determine pipeline status
-  const STUCK_THRESHOLD_MINUTES = 90; // stuck if no article in 90 min AND pending items exist
-  const isStuck = !isRunning && ageMinutes > STUCK_THRESHOLD_MINUTES && stats.pending > 0;
+  // Pipeline health check
+  const STUCK_THRESHOLD = 90;
+  const isStuck = !isRunning && ageMinutes > STUCK_THRESHOLD && stats.pending > 0;
+  const queueLow = stats.pending < 15;
 
   let statusIcon = '✅';
   let statusText = 'Running';
-  let restarted = false;
 
   if (isStuck) {
     statusIcon = '🔴';
-    statusText = `STUCK (no article in ${ageMinutes}min)`;
-    console.log('Pipeline stuck — auto-restarting...');
-    restarted = await triggerWorkflow('auto-generate.yml');
-  } else if (stats.pending === 0) {
+    statusText = `STUCK (${ageMinutes}min idle)`;
+  } else if (queueLow) {
     statusIcon = '⚠️';
-    statusText = 'Queue empty';
-  } else if (recentErrors >= 3) {
+    statusText = `Queue low (${stats.pending} left)`;
+  } else if (recentErrors >= 4) {
     statusIcon = '⚠️';
     statusText = `${recentErrors} recent errors`;
+  } else if (!isRunning) {
+    statusIcon = '⏸️';
+    statusText = 'Idle';
   }
 
-  // Build Telegram message
+  // Auto-restart if stuck
+  let restarted = false;
+  if (isStuck) {
+    console.log('Pipeline stuck — auto-restarting...');
+    restarted = await triggerWorkflow('auto-generate.yml');
+    if (restarted) statusText += ' → restarted ✓';
+  }
+
+  // Groq insight
+  const insight = await generateInsight({
+    published: stats.published,
+    pending: stats.pending,
+    todayCount,
+    byCategory: stats.byCategory,
+    recentTopics,
+    statusText,
+    recentErrors,
+  });
+
+  // Format age
   const ageStr = ageMinutes < 999
     ? ageMinutes < 60 ? `${ageMinutes}min ago` : `${Math.round(ageMinutes / 60)}h ago`
-    : 'unknown';
+    : 'none today';
 
-  let msg = `📊 <b>DataLatte Pipeline</b> — ${timeStr}\n\n`;
-  msg += `${statusIcon} Status: ${statusText}\n`;
-  msg += `📝 Generated today: ${todayCount} articles\n`;
-  msg += `📋 Queue: ${stats.pending} pending | ${stats.published} published\n`;
+  // Build Telegram message
+  let msg = `📊 <b>DataLatte</b> — ${timeStr}\n\n`;
+  msg += `${statusIcon} <b>${statusText}</b>\n`;
+  msg += `📝 Today: ${todayCount} articles generated\n`;
   msg += `⏱️ Last article: ${ageStr}\n`;
-  if (recentErrors > 0) msg += `❗ Recent errors: ${recentErrors}/10 runs\n`;
-  if (restarted) msg += `\n🔄 Pipeline auto-restarted`;
-  if (stats.pending < 10) msg += `\n⚠️ Queue running low — consider adding articles`;
+  msg += `📋 Queue: ${stats.pending} pending | ${stats.published} published\n`;
+  if (recentErrors > 0) msg += `❗ Errors: ${recentErrors}/10 runs\n`;
+  if (restarted) msg += `🔄 Auto-restarted pipeline\n`;
+  if (queueLow) msg += `⚠️ Queue running low!\n`;
+
+  if (insight) {
+    msg += `\n💡 <i>${insight}</i>`;
+  }
 
   await telegram(msg);
-  console.log(`✅ Report sent — Status: ${statusText}, Today: ${todayCount}, Pending: ${stats.pending}`);
+  console.log(`✅ Report sent — ${statusText}, today: ${todayCount}, pending: ${stats.pending}`);
 
-  // Exit with error code if critical issue detected (for visibility in Actions log)
-  if (isStuck && !restarted) {
-    process.exit(1);
-  }
+  if (isStuck && !restarted) process.exit(1);
 }
 
 main().catch(async e => {
