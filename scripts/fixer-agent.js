@@ -90,6 +90,14 @@ function applyFixes(content) {
     appliedFixes.push('fixed bare JSX patterns');
   }
 
+  // Fix unquoted title with colon (breaks YAML parser)
+  if (/^title:\s*[^"'\n][^\n]*:[^\n]/m.test(fixed)) {
+    fixed = fixed.replace(/^(title:\s*)([^"'\n][^\n]*)$/m, (_, prefix, title) => {
+      return `${prefix}"${title.replace(/"/g, '\\"')}"`;
+    });
+    appliedFixes.push('quoted title containing colon');
+  }
+
   // Fix missing closing --- in frontmatter (only one --- found = no closing delimiter)
   if (fixed.startsWith('---') && (fixed.match(/^---/gm) || []).length === 1) {
     const lines = fixed.split('\n');
