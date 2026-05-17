@@ -201,20 +201,28 @@ async function main() {
     }
   }
 
-  // Step 3: Sample 5 random clean articles for quality check
+  // Step 3: Sample 8 random clean articles for quality check
   const cleanFiles = files.filter(f => !syntaxProblems.find(p => p.file === f));
-  const sample = cleanFiles.sort(() => Math.random() - 0.5).slice(0, 5);
+  const sample = cleanFiles.sort(() => Math.random() - 0.5).slice(0, 8);
   const lowQuality = [];
+  const allQualityScores = [];
 
   console.log(`Sampling ${sample.length} random articles for quality...`);
   for (const file of sample) {
     const content = fs.readFileSync(path.join(BLOG_DIR, file), 'utf8');
     const assessment = await assessArticleQuality(file, content);
+    if (assessment.quality) allQualityScores.push(assessment.quality);
     if (assessment.quality < 5 || !assessment.on_topic) {
       lowQuality.push({ file, assessment });
       console.log(`  ⚠️ Low quality: ${file} (${assessment.quality}/10)`);
+    } else {
+      console.log(`  ✅ ${file} (${assessment.quality}/10)`);
     }
   }
+
+  const qualityAvg = allQualityScores.length > 0
+    ? Math.round((allQualityScores.reduce((a, b) => a + b, 0) / allQualityScores.length) * 10) / 10
+    : null;
 
   // Step 4: Check queue duplicates
   const dupes = checkQueueDuplicates();
@@ -222,13 +230,15 @@ async function main() {
   const totalIssues = syntaxProblems.length + dupes.length + lowQuality.length;
   console.log(`Total issues: ${totalIssues}`);
 
-  // Step 5: Save report for Fixer
+  // Step 5: Save report for Fixer + Pipeline Manager
   const report = {
     timestamp: new Date().toISOString(),
     toFix: toFix.map(p => ({ file: p.file, issues: p.issues, assessment: p.assessment })),
     toRegenerate: toRegenerate.map(p => ({ file: p.file, issues: p.issues, assessment: p.assessment })),
     lowQuality,
     duplicateSlugs: dupes,
+    qualityAvg,
+    sampledFiles: sample.length,
   };
   fs.writeFileSync(path.join(process.cwd(), 'scripts/.audit-report.json'), JSON.stringify(report, null, 2));
 
@@ -248,8 +258,12 @@ async function main() {
     msg += `♻️ ${toRegenerate.length} file(s) to regenerate:\n`;
     msg += toRegenerate.slice(0, 3).map(p => `• ${p.file.slice(0, 45)} — ${p.assessment.reason}`).join('\n') + '\n\n';
   }
+  if (qualityAvg !== null) {
+    const qualityEmoji = qualityAvg >= 7 ? '✅' : qualityAvg >= 5 ? '⚠️' : '🔴';
+    msg += `${qualityEmoji} Avg quality (${sample.length} sampled): <b>${qualityAvg}/10</b>\n\n`;
+  }
   if (lowQuality.length > 0) {
-    msg += `⚠️ ${lowQuality.length} low-quality article(s) found in sample:\n`;
+    msg += `⚠️ ${lowQuality.length} low-quality article(s):\n`;
     msg += lowQuality.map(p => `• ${p.file.slice(0, 45)} (${p.assessment.quality}/10)`).join('\n') + '\n\n';
   }
   if (dupes.length > 0) {
