@@ -39,7 +39,7 @@ async function fetchJson(url, options = {}, body = null) {
 
 async function callGroq(systemPrompt, userPrompt) {
   const body = JSON.stringify({
-    model: 'qwen/qwen3-32b',
+    model: 'llama-3.3-70b-versatile',
     messages: [
       { role: 'system', content: systemPrompt },
       { role: 'user', content: userPrompt },
