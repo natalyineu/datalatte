@@ -353,7 +353,7 @@ Output ONLY raw MDX — no code fences, start with ---.`;
   await ghPutFile(
     `content/blog/${entry.slug}.mdx`,
     mdx + '\n',
-    `Add article: ${entry.title} [vercel skip]`
+    `Add article: ${entry.title}`
   );
   console.log(`✅ Pushed: ${entry.slug}`);
 

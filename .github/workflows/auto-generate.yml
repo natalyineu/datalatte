@@ -60,7 +60,7 @@ jobs:
           if echo "$OUTPUT" | grep -q "Pushed"; then
             SLUG=$(echo "$OUTPUT" | grep "Pushed" | sed 's/.*Pushed: //')
             URL="https://www.datalatte.pro/blog/${SLUG}"
-            MSG="📝 Article on GitHub%0A$(date -u '+%Y-%m-%d %H:%M UTC')%0A%0AWill be live after next hourly deploy:%0A${URL}"
+            MSG="📝 Article published%0A$(date -u '+%Y-%m-%d %H:%M UTC')%0A%0A${URL}"
           elif echo "$OUTPUT" | grep -q "rate_limit\|All Groq models\|unavailable"; then
             MSG="⏳ Rate limited — retrying in 3 min%0A$(date -u '+%Y-%m-%d %H:%M UTC')"
           elif echo "$OUTPUT" | grep -q "No pending"; then
