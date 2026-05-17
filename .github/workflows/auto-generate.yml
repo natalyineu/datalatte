@@ -59,14 +59,21 @@ jobs:
           OUTPUT=$(cat /tmp/gen_output.txt 2>/dev/null || echo "")
           if echo "$OUTPUT" | grep -q "Pushed"; then
             SLUG=$(echo "$OUTPUT" | grep "Pushed" | sed 's/.*Pushed: //')
+            TITLE=$(echo "$OUTPUT" | grep "^ARTICLE_TITLE:" | sed 's/^ARTICLE_TITLE: //')
+            KEYWORD=$(echo "$OUTPUT" | grep "^ARTICLE_KEYWORD:" | sed 's/^ARTICLE_KEYWORD: //')
+            CLUSTER=$(echo "$OUTPUT" | grep "^ARTICLE_CLUSTER:" | sed 's/^ARTICLE_CLUSTER: //')
+            REMAINING=$(echo "$OUTPUT" | grep "^QUEUE_REMAINING:" | sed 's/^QUEUE_REMAINING: //')
+            MODEL=$(echo "$OUTPUT" | grep "Model used:" | sed 's/.*Model used: //')
             URL="https://www.datalatte.pro/blog/${SLUG}"
-            MSG="📝 Article published%0A$(date -u '+%Y-%m-%d %H:%M UTC')%0A%0A${URL}"
+            MSG="📝 ${TITLE}%0A%0A🔑 ${KEYWORD}%0A📂 ${CLUSTER} · 🤖 ${MODEL}%0A📊 ${REMAINING} articles left in queue%0A%0A${URL}"
           elif echo "$OUTPUT" | grep -q "rate_limit\|All Groq models\|unavailable"; then
-            MSG="⏳ Rate limited — retrying in 3 min%0A$(date -u '+%Y-%m-%d %H:%M UTC')"
+            REMAINING=$(echo "$OUTPUT" | grep "^QUEUE_REMAINING:" | sed 's/^QUEUE_REMAINING: //')
+            MSG="⏳ Rate limited — retrying in 3 min%0A$(date -u '+%H:%M UTC')"
           elif echo "$OUTPUT" | grep -q "No pending"; then
-            MSG="✅ Queue empty%0A$(date -u '+%Y-%m-%d %H:%M UTC')"
+            MSG="✅ Queue empty — all articles published!"
           else
-            MSG="❌ Generation failed%0A$(date -u '+%Y-%m-%d %H:%M UTC')%0A$(echo "$OUTPUT" | grep -i 'error\|Error' | head -1)"
+            ERR=$(echo "$OUTPUT" | grep -i 'error\|Error' | head -1)
+            MSG="❌ Generation failed%0A${ERR}"
           fi
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
             -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
