@@ -37,30 +37,49 @@ async function fetchJson(url, options = {}, body = null) {
   });
 }
 
+const GROQ_MODELS = [
+  'llama-3.3-70b-versatile',
+  'qwen-qwen3-32b',
+  'mixtral-8x7b-32768',
+  'llama3-70b-8192',
+  'gemma2-9b-it',
+];
+
 async function callGroq(systemPrompt, userPrompt) {
-  const body = JSON.stringify({
-    model: 'llama-3.3-70b-versatile',
-    messages: [
-      { role: 'system', content: systemPrompt },
-      { role: 'user', content: userPrompt },
-    ],
-    temperature: 0.7,
-    max_tokens: 4000,
-  });
+  for (const model of GROQ_MODELS) {
+    const body = JSON.stringify({
+      model,
+      messages: [
+        { role: 'system', content: systemPrompt },
+        { role: 'user', content: userPrompt },
+      ],
+      temperature: 0.7,
+      max_tokens: 4000,
+    });
 
-  const res = await fetchJson('https://api.groq.com/openai/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${GROQ_KEY}`,
-      'Content-Type': 'application/json',
-    },
-  }, body);
+    const res = await fetchJson('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${GROQ_KEY}`,
+        'Content-Type': 'application/json',
+      },
+    }, body);
 
-  if (res.status !== 200) {
+    if (res.status === 200) {
+      console.log(`✅ Model used: ${model}`);
+      return res.data.choices[0].message.content;
+    }
+
+    const isRateLimit = res.status === 429 || (res.data?.error?.code === 'rate_limit_exceeded');
+    if (isRateLimit) {
+      console.log(`⚠️ Rate limit on ${model}, trying next...`);
+      continue;
+    }
+
     throw new Error(`Groq error ${res.status}: ${JSON.stringify(res.data)}`);
   }
 
-  return res.data.choices[0].message.content;
+  throw new Error('All Groq models hit rate limits. Try again later.');
 }
 
 async function ghPutFile(filePath, content, message) {
