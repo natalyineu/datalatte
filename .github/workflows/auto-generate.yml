@@ -2,7 +2,7 @@ name: Auto-generate articles
 
 on:
   schedule:
-    - cron: '* * * * *'
+    - cron: '*/5 * * * *'   # fallback every 5 min in case chain breaks
   workflow_dispatch:
 
 concurrency:
@@ -12,7 +12,7 @@ concurrency:
 jobs:
   generate:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 10
     permissions:
       contents: write
       actions: write
@@ -39,8 +39,16 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
-          if grep -q "Pushed" /tmp/gen_output.txt; then
-            sleep 45
+          OUTPUT=$(cat /tmp/gen_output.txt 2>/dev/null || echo "")
+          if echo "$OUTPUT" | grep -q "No pending"; then
+            echo "Queue empty — not triggering next run"
+          elif echo "$OUTPUT" | grep -q "rate_limit\|All Groq models\|unavailable"; then
+            echo "Rate limited — waiting 3 min before next run"
+            sleep 180
+            gh workflow run auto-generate.yml --repo natalyineu/datalatte
+          else
+            echo "Triggering next run in 5 min"
+            sleep 300
             gh workflow run auto-generate.yml --repo natalyineu/datalatte
           fi
 
@@ -52,11 +60,13 @@ jobs:
           if echo "$OUTPUT" | grep -q "Pushed"; then
             SLUG=$(echo "$OUTPUT" | grep "Pushed" | sed 's/.*Pushed: //')
             URL="https://www.datalatte.pro/blog/${SLUG}"
-            MSG="📝 Article written%0A$(date -u '+%Y-%m-%d %H:%M UTC')%0A%0A${URL}%0A%0A🕐 Goes live at next hourly deploy"
-          elif echo "$OUTPUT" | grep -q "Error\|error"; then
-            MSG="❌ Generation failed%0A$(date -u '+%Y-%m-%d %H:%M UTC')%0A$(echo "$OUTPUT" | grep -i error | head -1)"
+            MSG="📝 Article written%0A$(date -u '+%Y-%m-%d %H:%M UTC')%0A%0A${URL}"
+          elif echo "$OUTPUT" | grep -q "rate_limit\|All Groq models\|unavailable"; then
+            MSG="⏳ Rate limited — retrying in 3 min%0A$(date -u '+%Y-%m-%d %H:%M UTC')"
+          elif echo "$OUTPUT" | grep -q "No pending"; then
+            MSG="✅ Queue empty%0A$(date -u '+%Y-%m-%d %H:%M UTC')"
           else
-            MSG="⚠️ Queue empty or no article generated%0A$(date -u '+%Y-%m-%d %H:%M UTC')"
+            MSG="❌ Generation failed%0A$(date -u '+%Y-%m-%d %H:%M UTC')%0A$(echo "$OUTPUT" | grep -i 'error\|Error' | head -1)"
           fi
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
             -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
