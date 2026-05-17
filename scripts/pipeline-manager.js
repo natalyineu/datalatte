@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
- * Agent 5 — Pipeline Manager (with brain)
+ * Agent 5 — Pipeline Manager (with brain + scoring)
  * Runs every hour. Checks pipeline health, auto-restarts if stuck.
- * Uses Groq to generate smart strategic insights in the hourly report.
+ * Calculates a 0–100 health score, tracks history, sends Telegram report with trend.
  */
 
 const https = require('https');
@@ -15,6 +15,9 @@ const GH_TOKEN = process.env.GH_TOKEN || process.env.GITHUB_TOKEN;
 const REPO = 'natalyineu/datalatte';
 const TELEGRAM_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT = process.env.TELEGRAM_CHAT_ID;
+
+const SCORES_FILE = path.join(process.cwd(), 'scripts/.scores.json');
+const AUDIT_FILE  = path.join(process.cwd(), 'scripts/.audit-report.json');
 
 // ── HTTP ──────────────────────────────────────────────────────────────────────
 
@@ -47,7 +50,7 @@ async function telegram(msg) {
 
 const GROQ_MODELS = ['llama-3.3-70b-versatile', 'qwen/qwen3-32b', 'llama3-70b-8192', 'gemma2-9b-it'];
 
-async function callGroq(prompt, maxTokens = 300) {
+async function callGroq(prompt, maxTokens = 200) {
   for (const model of GROQ_MODELS) {
     const body = JSON.stringify({
       model,
@@ -64,9 +67,43 @@ async function callGroq(prompt, maxTokens = 300) {
     }
     const code = res.data?.error?.code;
     if (res.status === 429 || code === 'rate_limit_exceeded' || code === 'model_decommissioned') continue;
-    throw new Error(`Groq error ${res.status}`);
   }
-  return null; // non-critical, ok to skip
+  return null;
+}
+
+// ── Score history ─────────────────────────────────────────────────────────────
+
+function loadScoreHistory() {
+  if (fs.existsSync(SCORES_FILE)) {
+    try { return JSON.parse(fs.readFileSync(SCORES_FILE, 'utf8')); }
+    catch {}
+  }
+  return { entries: [] };
+}
+
+function saveScoreHistory(history) {
+  // Keep last 168 entries (7 days × 24h)
+  history.entries = history.entries.slice(-168);
+  fs.writeFileSync(SCORES_FILE, JSON.stringify(history, null, 2));
+}
+
+function getPreviousScore(history) {
+  if (history.entries.length < 2) return null;
+  return history.entries[history.entries.length - 2]?.score ?? null;
+}
+
+function getScoreTrend(current, previous) {
+  if (previous === null) return '';
+  const diff = current - previous;
+  if (Math.abs(diff) < 2) return '→';
+  return diff > 0 ? `↑${diff}` : `↓${Math.abs(diff)}`;
+}
+
+function getScoreLabel(score) {
+  if (score >= 90) return '🟢 Excellent';
+  if (score >= 75) return '🟡 Good';
+  if (score >= 55) return '🟠 Needs attention';
+  return '🔴 Critical';
 }
 
 // ── Stats ─────────────────────────────────────────────────────────────────────
@@ -75,17 +112,15 @@ function getQueueStats() {
   const queuePath = path.join(process.cwd(), 'content/queue.json');
   if (!fs.existsSync(queuePath)) return { published: 0, pending: 0, generating: 0, byCategory: {} };
   const queue = JSON.parse(fs.readFileSync(queuePath, 'utf8'));
-
   const byCategory = {};
   for (const e of queue.queue.filter(e => e.status === 'pending')) {
     const cat = e.category || 'Unknown';
     byCategory[cat] = (byCategory[cat] || 0) + 1;
   }
-
   return {
     published: queue.queue.filter(e => e.status === 'published').length,
-    pending: queue.queue.filter(e => e.status === 'pending').length,
-    generating: queue.queue.filter(e => e.status === 'generating').length,
+    pending:   queue.queue.filter(e => e.status === 'pending').length,
+    generating:queue.queue.filter(e => e.status === 'generating').length,
     byCategory,
   };
 }
@@ -108,7 +143,6 @@ function getLastArticleAge() {
       { encoding: 'utf8' }
     ).trim();
     if (!result) return { ageMinutes: 999, title: 'unknown' };
-
     const sha = result.split(' ')[0];
     const title = result.replace(/^[a-f0-9]+ Add article: /, '').trim();
     const dateStr = execSync(`git show -s --format=%cI ${sha}`, { encoding: 'utf8' }).trim();
@@ -120,7 +154,7 @@ function getLastArticleAge() {
 function getRecentlyGeneratedTopics() {
   try {
     const result = execSync(
-      'git log --oneline --since="24 hours ago" -- content/blog/ | grep "Add article:" | head -10',
+      'git log --oneline --since="24 hours ago" -- content/blog/ | grep "Add article:" | head -8',
       { encoding: 'utf8' }
     ).trim();
     return result ? result.split('\n').map(l => l.replace(/^[a-f0-9]+ Add article: /, '')) : [];
@@ -144,35 +178,89 @@ async function triggerWorkflow(workflow) {
   return res.status === 204;
 }
 
+// ── Scoring ───────────────────────────────────────────────────────────────────
+
+function calculateScore({ todayCount, recentErrors, pending, qualityAvg, bugsFound }) {
+  const components = {};
+
+  // Generation (25 pts) — target: 10 articles/day
+  components.generation = Math.min(25, Math.round((todayCount / 10) * 25));
+
+  // Reliability (25 pts) — based on last 10 runs
+  components.reliability = Math.max(0, Math.round(((10 - recentErrors) / 10) * 25));
+
+  // Queue health (15 pts) — healthy = 50+ pending
+  components.queue = Math.min(15, Math.round((pending / 50) * 15));
+
+  // Content quality (20 pts) — from Auditor's Groq quality scores (1–10 scale)
+  components.quality = qualityAvg > 0 ? Math.round((qualityAvg / 10) * 20) : 14; // default 7/10 if no data
+
+  // Bug rate (15 pts) — 0 bugs = full score, -3 per bug found
+  components.bugs = Math.max(0, 15 - bugsFound * 3);
+
+  const total = Object.values(components).reduce((a, b) => a + b, 0);
+  return { total: Math.min(100, total), components };
+}
+
+function loadAuditQualityData() {
+  if (!fs.existsSync(AUDIT_FILE)) return { qualityAvg: 0, bugsFound: 0 };
+  try {
+    const report = JSON.parse(fs.readFileSync(AUDIT_FILE, 'utf8'));
+    const bugsFound = (report.toFix?.length || 0) + (report.toRegenerate?.length || 0) + (report.duplicateSlugs?.length || 0);
+
+    // Collect quality scores from Auditor's assessments
+    const scores = [];
+    for (const item of [...(report.toFix || []), ...(report.toRegenerate || []), ...(report.lowQuality || [])]) {
+      if (item.assessment?.quality) scores.push(item.assessment.quality);
+    }
+
+    // Default: if auditor sampled clean articles and found no issues, assume good quality
+    const qualityAvg = scores.length > 0
+      ? Math.round((scores.reduce((a, b) => a + b, 0) / scores.length) * 10) / 10
+      : 7.5;
+
+    return { qualityAvg, bugsFound };
+  } catch { return { qualityAvg: 0, bugsFound: 0 }; }
+}
+
 // ── Groq insight ──────────────────────────────────────────────────────────────
 
-async function generateInsight(data) {
-  const topPending = Object.entries(data.byCategory)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 6)
-    .map(([cat, n]) => `${cat}: ${n}`)
-    .join(', ');
+async function generateInsight({ score, scoreComponents, trend, published, pending, todayCount, byCategory, recentTopics, statusText, recentErrors, qualityAvg }) {
+  const topPending = Object.entries(byCategory)
+    .sort((a, b) => b[1] - a[1]).slice(0, 5)
+    .map(([cat, n]) => `${cat}: ${n}`).join(', ');
 
-  const recentTopics = data.recentTopics.slice(0, 5).join('; ');
+  const weakest = Object.entries(scoreComponents)
+    .sort((a, b) => {
+      const max = { generation: 25, reliability: 25, queue: 15, quality: 20, bugs: 15 };
+      return (a[1] / max[a[0]]) - (b[1] / max[b[0]]);
+    })[0];
 
-  const prompt = `You are a content strategist for DataLatte.pro — a local marketing blog targeting coffee shops, salons, pet groomers, and fitness studios.
+  const prompt = `You are a content strategist for DataLatte.pro — a local marketing blog for small businesses.
 
-Current pipeline data:
-- Published articles: ${data.published}
-- Pending queue: ${data.pending} articles
-- Generated today: ${data.todayCount}
+Pipeline snapshot:
+- Health score: ${score}/100 (${trend || 'first run'})
+- Weakest area: ${weakest[0]} (${weakest[1]} pts)
+- Published: ${published} | Pending: ${pending}
+- Generated today: ${todayCount}
+- Content quality avg: ${qualityAvg}/10
+- Recent errors: ${recentErrors}/10 runs
 - Pending by category: ${topPending}
-- Recent articles: ${recentTopics || 'none yet today'}
-- Pipeline status: ${data.statusText}
-- Errors in last 15 runs: ${data.recentErrors}
+- Recent articles: ${recentTopics.slice(0, 4).join('; ') || 'none yet'}
+- Status: ${statusText}
 
-Write ONE short strategic insight (2-3 sentences max) that would be genuinely useful for Nataliia.
-Focus on: queue balance, content gaps, momentum, or a specific action to take.
-Be direct and specific. No fluff. Start with an emoji.`;
+Write ONE sharp insight (2 sentences max). Focus on the weakest score component or biggest opportunity.
+Be specific, actionable, direct. Start with an emoji. No fluff.`;
 
-  try {
-    return await callGroq(prompt, 150);
-  } catch { return null; }
+  try { return await callGroq(prompt, 120); }
+  catch { return null; }
+}
+
+// ── Score bar visual ──────────────────────────────────────────────────────────
+
+function scoreBar(value, max, filled = '█', empty = '░', width = 8) {
+  const filled_count = Math.round((value / max) * width);
+  return filled.repeat(filled_count) + empty.repeat(width - filled_count);
 }
 
 // ── Main ──────────────────────────────────────────────────────────────────────
@@ -183,14 +271,15 @@ async function main() {
   const now = new Date();
   const timeStr = now.toUTCString().slice(5, 22) + ' UTC';
 
-  // Collect all stats
-  const stats = getQueueStats();
-  const todayCount = countTodayArticles();
+  // Collect stats
+  const stats       = getQueueStats();
+  const todayCount  = countTodayArticles();
   const lastArticle = getLastArticleAge();
-  const ageMinutes = lastArticle.ageMinutes;
+  const ageMinutes  = lastArticle.ageMinutes;
   const recentTopics = getRecentlyGeneratedTopics();
+  const { qualityAvg, bugsFound } = loadAuditQualityData();
 
-  // Recent runs
+  // Recent workflow runs
   const runs = await getRecentRuns('auto-generate.yml', 15);
   const recentErrors = runs.slice(0, 10).filter(r => r.conclusion === 'failure').length;
   const isRunning = runs.slice(0, 3).some(r => r.status === 'in_progress' || r.status === 'queued');
@@ -202,22 +291,12 @@ async function main() {
 
   let statusIcon = '✅';
   let statusText = 'Running';
+  if (isStuck)         { statusIcon = '🔴'; statusText = `STUCK (${ageMinutes}min idle)`; }
+  else if (queueLow)   { statusIcon = '⚠️'; statusText = `Queue low (${stats.pending} left)`; }
+  else if (recentErrors >= 4) { statusIcon = '⚠️'; statusText = `${recentErrors} recent errors`; }
+  else if (!isRunning) { statusIcon = '⏸️'; statusText = 'Idle'; }
 
-  if (isStuck) {
-    statusIcon = '🔴';
-    statusText = `STUCK (${ageMinutes}min idle)`;
-  } else if (queueLow) {
-    statusIcon = '⚠️';
-    statusText = `Queue low (${stats.pending} left)`;
-  } else if (recentErrors >= 4) {
-    statusIcon = '⚠️';
-    statusText = `${recentErrors} recent errors`;
-  } else if (!isRunning) {
-    statusIcon = '⏸️';
-    statusText = 'Idle';
-  }
-
-  // Auto-restart if stuck
+  // Auto-restart
   let restarted = false;
   if (isStuck) {
     console.log('Pipeline stuck — auto-restarting...');
@@ -225,15 +304,39 @@ async function main() {
     if (restarted) statusText += ' → restarted ✓';
   }
 
+  // Calculate health score
+  const { total: score, components } = calculateScore({
+    todayCount,
+    recentErrors,
+    pending: stats.pending,
+    qualityAvg,
+    bugsFound,
+  });
+
+  // Load score history and update
+  const history = loadScoreHistory();
+  const previousScore = getPreviousScore(history);
+  const trend = getScoreTrend(score, previousScore);
+  const trendDisplay = trend ? ` ${trend}` : '';
+
+  history.entries.push({
+    timestamp: now.toISOString(),
+    score,
+    components,
+    todayCount,
+    pending: stats.pending,
+    published: stats.published,
+    recentErrors,
+    qualityAvg,
+    bugsFound,
+  });
+  saveScoreHistory(history);
+
   // Groq insight
   const insight = await generateInsight({
-    published: stats.published,
-    pending: stats.pending,
-    todayCount,
-    byCategory: stats.byCategory,
-    recentTopics,
-    statusText,
-    recentErrors,
+    score, scoreComponents: components, trend: trendDisplay.trim(),
+    published: stats.published, pending: stats.pending, todayCount,
+    byCategory: stats.byCategory, recentTopics, statusText, recentErrors, qualityAvg,
   });
 
   // Format age
@@ -241,22 +344,42 @@ async function main() {
     ? ageMinutes < 60 ? `${ageMinutes}min ago` : `${Math.round(ageMinutes / 60)}h ago`
     : 'none today';
 
+  // Score breakdown for display
+  const scoreBreakdown = [
+    `Generation  ${scoreBar(components.generation, 25)} ${components.generation}/25`,
+    `Reliability ${scoreBar(components.reliability, 25)} ${components.reliability}/25`,
+    `Quality     ${scoreBar(components.quality, 20)}  ${components.quality}/20`,
+    `Bugs        ${scoreBar(components.bugs, 15)}  ${components.bugs}/15`,
+    `Queue       ${scoreBar(components.queue, 15)}  ${components.queue}/15`,
+  ].join('\n');
+
   // Build Telegram message
   let msg = `📊 <b>DataLatte</b> — ${timeStr}\n\n`;
-  msg += `${statusIcon} <b>${statusText}</b>\n`;
-  msg += `📝 Today: ${todayCount} articles generated\n`;
-  msg += `⏱️ Last article: ${ageStr}\n`;
-  msg += `📋 Queue: ${stats.pending} pending | ${stats.published} published\n`;
+  msg += `<b>Health Score: ${score}/100${trendDisplay} ${getScoreLabel(score)}</b>\n`;
+  msg += `<pre>${scoreBreakdown}</pre>\n`;
+  msg += `${statusIcon} ${statusText}\n`;
+  msg += `📝 Today: ${todayCount} articles\n`;
+  msg += `⏱️ Last: ${ageStr}\n`;
+  msg += `📋 ${stats.pending} pending | ${stats.published} published\n`;
   if (recentErrors > 0) msg += `❗ Errors: ${recentErrors}/10 runs\n`;
-  if (restarted) msg += `🔄 Auto-restarted pipeline\n`;
-  if (queueLow) msg += `⚠️ Queue running low!\n`;
-
-  if (insight) {
-    msg += `\n💡 <i>${insight}</i>`;
-  }
+  if (restarted)   msg += `🔄 Auto-restarted\n`;
+  if (queueLow)    msg += `⚠️ Queue running low!\n`;
+  if (insight)     msg += `\n💡 <i>${insight}</i>`;
 
   await telegram(msg);
-  console.log(`✅ Report sent — ${statusText}, today: ${todayCount}, pending: ${stats.pending}`);
+  console.log(`✅ Score: ${score}/100${trendDisplay} | Status: ${statusText} | Today: ${todayCount}`);
+
+  // Commit scores file update
+  try {
+    execSync('git config user.email "pipeline-manager@datalatte.pro"');
+    execSync('git config user.name "DataLatte Pipeline Manager"');
+    execSync('git add scripts/.scores.json');
+    execSync(`git commit -m "Score: ${score}/100 — ${todayCount} articles today [skip ci]"`);
+    execSync('git pull --rebase origin main');
+    execSync('git push origin main');
+  } catch (e) {
+    if (!e.message.includes('nothing to commit')) console.log('Score commit note:', e.message.slice(0, 100));
+  }
 
   if (isStuck && !restarted) process.exit(1);
 }
