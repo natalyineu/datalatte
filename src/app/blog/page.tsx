@@ -22,19 +22,24 @@ interface PostMeta {
   tags: string[];
 }
 
+function calcReadTime(wordCount: number): string {
+  return `${Math.max(1, Math.ceil(wordCount / 200))} min read`;
+}
+
 function getAllPosts(): PostMeta[] {
   const files = fs.readdirSync(contentDir).filter((f) => f.endsWith(".mdx"));
   const posts = files.map((file) => {
     const slug = file.replace(".mdx", "");
     const raw = fs.readFileSync(path.join(contentDir, file), "utf8");
-    const { data } = matter(raw);
+    const { data, content } = matter(raw);
+    const readTime = data.readTime || calcReadTime(content.split(/\s+/).length);
     return {
       title: data.title,
       description: data.description,
       slug,
       category: data.category,
       date: data.date,
-      readTime: data.readTime,
+      readTime,
       image: data.image,
       tags: data.tags ?? [],
     } as PostMeta;
