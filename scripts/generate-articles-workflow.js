@@ -370,6 +370,12 @@ Output ONLY raw MDX — no code fences, start with ---.`;
     `Update queue: mark ${entry.slug} as published [vercel skip]`
   );
 
+  const remaining = queue.queue.filter((e) => e.status === 'pending').length;
+  console.log(`ARTICLE_TITLE: ${entry.title}`);
+  console.log(`ARTICLE_KEYWORD: ${entry.primaryKeyword}`);
+  console.log(`ARTICLE_CLUSTER: ${entry.cluster}`);
+  console.log(`QUEUE_REMAINING: ${remaining}`);
+
   return { slug: entry.slug, status: 200 };
 }
 
