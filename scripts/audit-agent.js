@@ -150,6 +150,56 @@ Rules:
   return { action: 'fix', reason: 'Quality check inconclusive', quality: 5, has_cta: true, on_topic: true };
 }
 
+// ── Persist quality scores to GitHub ──────────────────────────────────────────
+
+async function persistQualityScores(scores) {
+  // scores = [{ file: 'slug.mdx', score: 8, has_cta: true, on_topic: true }]
+  const url = `https://api.github.com/repos/${REPO}/contents/content/quality-scores.json`;
+
+  // GET existing
+  const getRes = await fetchJson(url, {
+    method: 'GET',
+    headers: { 'Authorization': `Bearer ${GH_TOKEN}` },
+  });
+
+  let existing = { _schema: 'Quality scores from Agent 2 — Auditor', scores: {} };
+  let sha = '';
+
+  if (getRes.status === 200) {
+    try {
+      existing = JSON.parse(Buffer.from(getRes.data.content, 'base64').toString('utf8'));
+      sha = getRes.data.sha;
+    } catch {
+      // keep defaults
+    }
+  }
+
+  const now = new Date().toISOString();
+  for (const s of scores) {
+    const slug = s.file.replace('.mdx', '');
+    existing.scores[slug] = {
+      score: s.score,
+      has_cta: s.has_cta ?? true,
+      on_topic: s.on_topic ?? true,
+      checkedAt: now,
+    };
+  }
+
+  const body = JSON.stringify({
+    message: 'Update quality scores [vercel skip]',
+    content: Buffer.from(JSON.stringify(existing, null, 2) + '\n').toString('base64'),
+    ...(sha && { sha }),
+  });
+
+  await fetchJson(url, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${GH_TOKEN}`,
+      'Content-Type': 'application/json',
+    },
+  }, body);
+}
+
 // ── Queue helpers ─────────────────────────────────────────────────────────────
 
 function checkQueueDuplicates() {
@@ -209,11 +259,13 @@ async function main() {
   const sample = cleanFiles.sort(() => Math.random() - 0.5).slice(0, 8);
   const lowQuality = [];
   const allQualityScores = [];
+  const sampleAssessments = []; // { file, assessment }
 
   console.log(`Sampling ${sample.length} random articles for quality...`);
   for (const file of sample) {
     const content = fs.readFileSync(path.join(BLOG_DIR, file), 'utf8');
     const assessment = await assessArticleQuality(file, content);
+    sampleAssessments.push({ file, assessment });
     if (assessment.quality) allQualityScores.push(assessment.quality);
     if (assessment.quality < 5 || !assessment.on_topic) {
       lowQuality.push({ file, assessment });
@@ -226,6 +278,17 @@ async function main() {
   const qualityAvg = allQualityScores.length > 0
     ? Math.round((allQualityScores.reduce((a, b) => a + b, 0) / allQualityScores.length) * 10) / 10
     : null;
+
+  // Persist quality scores to GitHub (best-effort, don't fail if it errors)
+  if (GH_TOKEN && sampleAssessments.length > 0) {
+    const richScores = sampleAssessments.map(({ file, assessment }) => ({
+      file,
+      score: assessment.quality ?? 5,
+      has_cta: assessment.has_cta ?? true,
+      on_topic: assessment.on_topic ?? true,
+    }));
+    persistQualityScores(richScores).catch(e => console.log('Quality persist failed:', e.message));
+  }
 
   // Step 4: Check queue duplicates
   const dupes = checkQueueDuplicates();

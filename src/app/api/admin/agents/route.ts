@@ -50,6 +50,13 @@ const AGENT_META: AgentMeta[] = [
     schedule: "Every hour",
     workflowFile: "pipeline-manager.yml",
   },
+  {
+    name: "Agent 6 — Improver",
+    emoji: "🎯",
+    description: "Analyzes published articles for conversion effectiveness, proposes CTAs and internal links",
+    schedule: "Weekly Monday 10am",
+    workflowFile: "improver.yml",
+  },
 ];
 
 // ── GitHub API types ───────────────────────────────────────────────────────────
@@ -134,7 +141,14 @@ interface ResearcherReport {
   added: number;
 }
 
-type AgentReport = WriterReport | AuditorReport | FixerReport | PipelineReport | ResearcherReport;
+interface ImproverReport {
+  type: "improver";
+  analyzed: number;
+  added: number;
+  proposals: { slug: string; impact: number; type: string }[];
+}
+
+type AgentReport = WriterReport | AuditorReport | FixerReport | PipelineReport | ResearcherReport | ImproverReport;
 
 // ── Response types ─────────────────────────────────────────────────────────────
 
@@ -261,6 +275,14 @@ function parseResearcherReport(log: string): ResearcherReport {
   return { type: "researcher", added };
 }
 
+function parseImproverReport(log: string): ImproverReport {
+  const analyzed  = Number(log.match(/ARTICLES_ANALYZED: (\d+)/)?.[1] ?? 0);
+  const added     = Number(log.match(/PROPOSALS_ADDED: (\d+)/)?.[1] ?? 0);
+  const proposals = [...log.matchAll(/💡 Proposal added: (\S+) \(impact: (\d+)\/10, type: ([^)]+)\)/g)]
+    .map((m) => ({ slug: m[1], impact: Number(m[2]), type: m[3] }));
+  return { type: "improver", analyzed, added, proposals };
+}
+
 function parseReport(workflowFile: string, log: string): AgentReport {
   switch (workflowFile) {
     case "auto-generate.yml":    return parseWriterReport(log);
@@ -268,6 +290,7 @@ function parseReport(workflowFile: string, log: string): AgentReport {
     case "fixer.yml":            return parseFixerReport(log);
     case "pipeline-manager.yml": return parsePipelineReport(log);
     case "research.yml":         return parseResearcherReport(log);
+    case "improver.yml":         return parseImproverReport(log);
     default:                     return parseResearcherReport(log);
   }
 }
