@@ -717,6 +717,7 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
   const [queue, setQueue]                   = useState<QueueEntry[]>([]);
   const [articles, setArticles]             = useState<Article[]>([]);
   const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
+  const [dismissedSlugs, setDismissedSlugs]   = useState<Set<string>>(new Set());
   const [activeTab, setActiveTab]           = useState<TabId>("pipeline");
 
   // Queue tab state
@@ -1000,12 +1001,14 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
     .sort((a, b) => (b.generatedDate ?? "").localeCompare(a.generatedDate ?? ""))
     .slice(0, 20);
 
-  // Research: group by cluster
+  // Research: group by cluster (exclude dismissed)
   const recsByCluster: Record<string, Recommendation[]> = {};
   for (const rec of recommendations) {
+    if (dismissedSlugs.has(rec.slug)) continue;
     if (!recsByCluster[rec.cluster]) recsByCluster[rec.cluster] = [];
     recsByCluster[rec.cluster].push(rec);
   }
+  const totalVisible = Object.values(recsByCluster).reduce((s, r) => s + r.length, 0);
 
   // Published articles sorted
   const sortedArticles = [...articles].sort((a, b) => {
@@ -1054,7 +1057,7 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
     { id: "proposals", label: `Proposals (${pendingProposalsCount})` },
     { id: "pipeline",  label: "Pipeline" },
     { id: "queue",     label: `Queue (${queue.length})` },
-    { id: "research",  label: `Research (${recommendations.length})` },
+    { id: "research",  label: `Research (${totalVisible})` },
     { id: "published", label: `Published (${articles.length})` },
     { id: "reports",   label: "Reports" },
   ];
@@ -1727,7 +1730,7 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="font-semibold text-white">Topic Recommendations</h2>
-                <p className="text-xs text-gray-500 mt-0.5">{recommendations.length} suggestions from SEO research</p>
+                <p className="text-xs text-gray-500 mt-0.5">{totalVisible} suggestions · {dismissedSlugs.size} dismissed</p>
               </div>
               <button
                 onClick={fetchRecommendations}
@@ -1775,13 +1778,24 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
                               <p className="text-sm text-white truncate">{rec.title}</p>
                               <p className="text-xs text-gray-500 font-mono mt-0.5">{rec.primaryKeyword} · ~{rec.targetWords.toLocaleString()} words</p>
                             </div>
-                            <button
-                              onClick={() => handleAddRecommendation(rec)}
-                              disabled={addingRec === rec.slug}
-                              className="text-xs bg-amber-600/20 hover:bg-amber-600 border border-amber-600/40 hover:border-amber-500 text-amber-300 hover:text-white rounded-lg px-3 py-1.5 transition shrink-0 disabled:opacity-50"
-                            >
-                              {addingRec === rec.slug ? "Adding…" : "Add →"}
-                            </button>
+                            <div className="flex items-center gap-2 shrink-0">
+                              <button
+                                onClick={() => setDismissedSlugs(prev => new Set([...prev, rec.slug]))}
+                                disabled={addingRec === rec.slug}
+                                className="text-xs border border-gray-700 hover:border-red-500/50 text-gray-500 hover:text-red-400 rounded-lg px-3 py-1.5 transition disabled:opacity-50"
+                                title="No — skip this topic"
+                              >
+                                ✕ No
+                              </button>
+                              <button
+                                onClick={() => handleAddRecommendation(rec)}
+                                disabled={addingRec === rec.slug}
+                                className="text-xs bg-green-700/30 hover:bg-green-600 border border-green-600/40 hover:border-green-500 text-green-300 hover:text-white rounded-lg px-3 py-1.5 transition disabled:opacity-50"
+                                title="Yes — add to queue"
+                              >
+                                {addingRec === rec.slug ? "Adding…" : "✓ Yes"}
+                              </button>
+                            </div>
                           </div>
                         ))}
                       </div>
