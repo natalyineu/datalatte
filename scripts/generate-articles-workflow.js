@@ -218,7 +218,7 @@ async function generateOne() {
   await ghPutFile(
     'content/queue.json',
     JSON.stringify(queue, null, 2) + '\n',
-    `Claim: ${entry.slug} [skip ci]`
+    `Claim: ${entry.slug} [vercel skip]`
   );
   console.log(`🔒 Claimed: ${entry.slug}`);
 
@@ -354,7 +354,7 @@ Output ONLY raw MDX — no code fences, start with ---.`;
   await ghPutFile(
     `content/blog/${entry.slug}.mdx`,
     mdx + '\n',
-    `Add article: ${entry.title} [skip ci]`
+    `Add article: ${entry.title} [vercel skip]`
   );
   console.log(`✅ Pushed: ${entry.slug}`);
 
@@ -368,7 +368,7 @@ Output ONLY raw MDX — no code fences, start with ---.`;
   await ghPutFile(
     'content/queue.json',
     JSON.stringify(queue, null, 2) + '\n',
-    `Update queue: mark ${entry.slug} as published [skip ci]`
+    `Update queue: mark ${entry.slug} as published [vercel skip]`
   );
 
   return { slug: entry.slug, status: 200 };

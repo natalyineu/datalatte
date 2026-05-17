@@ -167,7 +167,7 @@ Valid niches: general, coffee-shops, hair-salons, pet-groomers, fitness-studios`
   // 7. Push updated queue
   if (newArticles.length > 0) {
     const saved = await ghPutFile('content/queue.json', JSON.stringify(queue, null, 2) + '\n',
-      `Research: add ${newArticles.length} new articles to queue [skip ci]`, queueFile.sha);
+      `Research: add ${newArticles.length} new articles to queue [vercel skip]`, queueFile.sha);
     console.log(`✅ Added ${newArticles.length} articles, saved: ${saved}`);
   }
 

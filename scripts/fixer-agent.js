@@ -293,7 +293,7 @@ async function main() {
   execSync('git config user.name "DataLatte Fixer"');
   execSync('git add content/ scripts/.audit-report.json 2>/dev/null || git add content/');
 
-  const commitMsg = `Fix: ${fixedFiles.length} fixed, ${regenerateFiles.length} queued for regen, ${dupeFixed} dupes removed [skip ci]`;
+  const commitMsg = `Fix: ${fixedFiles.length} fixed, ${regenerateFiles.length} queued for regen, ${dupeFixed} dupes removed [vercel skip]`;
   try {
     execSync(`git commit -m "${commitMsg}"`);
     execSync('git pull --rebase origin main');

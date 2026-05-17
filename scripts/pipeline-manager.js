@@ -378,7 +378,7 @@ async function main() {
     execSync('git config user.email "pipeline-manager@datalatte.pro"');
     execSync('git config user.name "DataLatte Pipeline Manager"');
     execSync('git add scripts/.scores.json');
-    execSync(`git commit -m "Score: ${score}/100 — ${todayCount} articles today [skip ci]"`);
+    execSync(`git commit -m "Score: ${score}/100 — ${todayCount} articles today [vercel skip]"`);
     execSync('git pull --rebase origin main');
     execSync('git push origin main');
   } catch (e) {
