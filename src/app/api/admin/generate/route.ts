@@ -25,7 +25,7 @@ interface QueueEntry {
   primaryKeyword: string;
   cluster: string;
   targetWords: number;
-  status: "pending" | "generated" | "published";
+  status: "pending" | "generating" | "generated" | "published";
   generatedDate: string | null;
   addedDate: string;
   errorNote?: string;
@@ -343,7 +343,7 @@ async function callGroq(
         { role: "user", content: userPrompt },
       ],
       temperature: 0.7,
-      max_tokens: 7000,
+      max_tokens: 8000,
     }),
   });
 

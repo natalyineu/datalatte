@@ -118,7 +118,7 @@ async function assessArticleQuality(filename, content) {
 
 Assess this article excerpt (first 600 words):
 ---
-${stripped.slice(0, 2000)}
+${stripped.slice(0, 3500)}
 ---
 
 Filename: ${filename}

@@ -116,7 +116,7 @@ async function main() {
   const trendsDir = 'seo-research/google-trends';
   try {
     const files = fs.readdirSync(trendsDir).filter(f => f.startsWith('rising_') && f.endsWith('.csv'));
-    for (const f of files.slice(-4)) {
+    for (const f of files.slice(-10)) {
       const csv = fs.readFileSync(path.join(trendsDir, f), 'utf8');
       const lines = csv.split('\n').slice(1, 16).join('\n');
       trendsContext += `\n--- ${f} ---\n${lines}`;

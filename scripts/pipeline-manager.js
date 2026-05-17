@@ -194,7 +194,7 @@ function calculateScore({ todayCount, recentErrors, pending, qualityAvg, bugsFou
 
   // Content quality (20 pts) — from Auditor's Groq quality scores (1–10 scale)
   // null = Auditor hasn't run yet; use neutral 14/20 (7/10 assumed) so score isn't penalised
-  components.quality = qualityAvg != null ? Math.round((qualityAvg / 10) * 20) : 14;
+  components.quality = qualityAvg != null ? Math.round((qualityAvg / 10) * 20) : 10;
 
   // Bug rate (15 pts) — 0 bugs = full score, -3 per bug found
   components.bugs = Math.max(0, 15 - bugsFound * 3);
