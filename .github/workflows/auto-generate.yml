@@ -40,7 +40,7 @@ jobs:
           GH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           if grep -q "Pushed" /tmp/gen_output.txt; then
-            sleep 65
+            sleep 45
             gh workflow run auto-generate.yml --repo natalyineu/datalatte
           fi
 
