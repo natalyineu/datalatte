@@ -29,12 +29,20 @@ function getPostSlugs(): string[] {
     .map((f) => f.replace(".mdx", ""));
 }
 
+function calcReadTime(wordCount: number): string {
+  return `${Math.max(1, Math.ceil(wordCount / 200))} min read`;
+}
+
 function getPost(slug: string) {
   const filePath = path.join(contentDir, `${slug}.mdx`);
   if (!fs.existsSync(filePath)) return null;
   const raw = fs.readFileSync(filePath, "utf8");
   const { data, content } = matter(raw);
-  return { frontmatter: data as PostFrontmatter, content };
+  const frontmatter = data as PostFrontmatter;
+  if (!frontmatter.readTime) {
+    frontmatter.readTime = calcReadTime(content.split(/\s+/).length);
+  }
+  return { frontmatter, content };
 }
 
 interface PostFrontmatter {
@@ -197,6 +205,9 @@ export default async function BlogPostPage({
           <span className="flex items-center gap-1.5">
             <Calendar size={14} /> {displayDate}
           </span>
+          <span>·</span>
+          <span>{frontmatter.author}</span>
+          <span>·</span>
           <span className="flex items-center gap-1.5">
             <Clock size={14} /> {frontmatter.readTime}
           </span>
