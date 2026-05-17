@@ -40,47 +40,116 @@ async function fetchJson(url, options = {}, body = null) {
 const GROQ_MODELS = [
   'llama-3.3-70b-versatile',
   'qwen/qwen3-32b',
+  'moonshotai/kimi-k2-instruct',
   'llama3-70b-8192',
   'gemma2-9b-it',
-  'llama-3.1-8b-instant',
 ];
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 async function callGroq(systemPrompt, userPrompt) {
   for (const model of GROQ_MODELS) {
-    const body = JSON.stringify({
-      model,
-      messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: userPrompt },
-      ],
-      temperature: 0.7,
-      max_tokens: 4000,
-    });
+    let lastErr = null;
+    for (let attempt = 0; attempt < 3; attempt++) {
+      const body = JSON.stringify({
+        model,
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: userPrompt },
+        ],
+        temperature: 0.7,
+        max_tokens: 4000,
+      });
 
-    const res = await fetchJson('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${GROQ_KEY}`,
-        'Content-Type': 'application/json',
-      },
-    }, body);
+      const res = await fetchJson('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${GROQ_KEY}`,
+          'Content-Type': 'application/json',
+        },
+      }, body);
 
-    if (res.status === 200) {
-      console.log(`✅ Model used: ${model}`);
-      return res.data.choices[0].message.content;
+      if (res.status === 200) {
+        console.log(`✅ Model used: ${model}`);
+        return res.data.choices[0].message.content;
+      }
+
+      const code = res.data?.error?.code;
+      const errMsg = res.data?.error?.message || '';
+
+      if (res.status === 429 || code === 'rate_limit_exceeded') {
+        const waitMatch = errMsg.match(/try again in ([\d.]+)s/i);
+        const waitMs = waitMatch ? Math.ceil(parseFloat(waitMatch[1]) * 1000) + 2000 : 15000;
+        console.log(`⏳ Rate limited on ${model}, waiting ${Math.round(waitMs/1000)}s...`);
+        await sleep(waitMs);
+        lastErr = `rate_limit on ${model}`;
+        continue;
+      }
+
+      if (code === 'model_decommissioned' || res.status === 404) {
+        console.log(`⚠️ Skipping ${model} (decommissioned)`);
+        break;
+      }
+
+      throw new Error(`Groq error ${res.status}: ${JSON.stringify(res.data)}`);
     }
+    if (lastErr) console.log(`⚠️ Giving up on ${model} after retries, trying next model...`);
+  }
 
-    const code = res.data?.error?.code;
-    const shouldSkip = res.status === 429 || code === 'rate_limit_exceeded' || code === 'model_decommissioned';
-    if (shouldSkip) {
-      console.log(`⚠️ Skipping ${model} (${code || res.status}), trying next...`);
+  throw new Error('All Groq models unavailable. rate_limit — try again later.');
+}
+
+// ── MDX sanitizer — fixes common AI output bugs ───────────────────────────────
+function sanitizeMdx(content) {
+  const lines = content.split('\n');
+  const out = [];
+  let i = 0;
+
+  while (i < lines.length) {
+    const line = lines[i];
+    const calloutOpen = line.match(/^(<Callout[^>]*>)(.*)$/);
+    if (calloutOpen && !line.includes('</Callout>')) {
+      const openTag = calloutOpen[1];
+      const inline = calloutOpen[2].trim();
+      const collected = inline ? [inline] : [];
+      i++;
+      let closed = false;
+      while (i < lines.length) {
+        const next = lines[i];
+        if (next.includes('</Callout>')) {
+          const before = next.replace('</Callout>', '').trim();
+          if (before) collected.push(before);
+          closed = true;
+          i++;
+          break;
+        }
+        if (/^#{1,6}\s/.test(next) || /^<[A-Z]/.test(next) || /^---/.test(next)) break;
+        if (next.trim()) collected.push(next.trim());
+        i++;
+      }
+      const body = collected.join(' ').replace(/\s+/g, ' ').trim();
+      out.push(`${openTag}${body}</Callout>`);
+      out.push('');
       continue;
     }
 
-    throw new Error(`Groq error ${res.status}: ${JSON.stringify(res.data)}`);
+    const fixed = line
+      .replace(/<(https?:\/\/[^\s>]+)>/g, '[$1]($1)')
+      .replace(/<(\d)/g, '&lt;$1')
+      .replace(/<(\$)/g, '&lt;$1');
+    out.push(fixed);
+    i++;
   }
 
-  throw new Error('All Groq models unavailable. Try again later.');
+  // Remove orphaned </Callout> tags
+  const result = out.join('\n');
+  const opens = (result.match(/<Callout/g) || []).length;
+  const closes = (result.match(/<\/Callout>/g) || []).length;
+  if (closes > opens) {
+    let excess = closes - opens;
+    return result.replace(/<\/Callout>/g, m => { if (excess > 0) { excess--; return ''; } return m; });
+  }
+  return result;
 }
 
 async function ghPutFile(filePath, content, message) {
@@ -124,81 +193,9 @@ async function ghPutFile(filePath, content, message) {
   return true;
 }
 
-const NICHE_IMAGES = {
-  'coffee-shops':    'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1200&q=80',
-  'hair-salons':     'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1200&q=80',
-  'pet-groomers':    'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1200&q=80',
-  'fitness-studios': 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80',
-};
-
-const CHANNEL_IMAGES = {
-  'ai-agents':       'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1200&q=80',
-  'ai-automation':   'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&q=80',
-  'google-ads':      'https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?w=1200&q=80',
-  'facebook':        'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=1200&q=80',
-  'instagram':       'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=1200&q=80',
-  'tiktok':          'https://images.unsplash.com/photo-1611605698335-8b1569810432?w=1200&q=80',
-  'snapchat':        'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&q=80',
-  'pinterest':       'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1200&q=80',
-  'youtube':         'https://images.unsplash.com/photo-1611162614475-46b635cb6868?w=1200&q=80',
-  'spotify':         'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1200&q=80',
-  'programmatic':    'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80',
-  'ctv':             'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=1200&q=80',
-  'email-sms':       'https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=1200&q=80',
-  'seo':             'https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=1200&q=80',
-  'social-media':    'https://images.unsplash.com/photo-1522542550221-31fd19575a2d?w=1200&q=80',
-  'influencer':      'https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?w=1200&q=80',
-  'analytics':       'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80',
-  'website':         'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=1200&q=80',
-  'content':         'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200&q=80',
-  'reviews':         'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&q=80',
-  'retention':       'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1200&q=80',
-  'local-strategy':  'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80',
-};
-
-const DEFAULT_IMAGE = 'https://images.unsplash.com/photo-1522542550221-31fd19575a2d?w=1200&q=80';
-
+// Unique image per article — slug-seeded Picsum (guaranteed unique, no 404s)
 function getImageForEntry(entry) {
-  const slug = (entry.slug || '').toLowerCase();
-  const category = (entry.category || entry.cluster || '').toLowerCase();
-  const niche = (entry.niche || '').toLowerCase();
-
-  // 1. Niche field (new articles)
-  if (NICHE_IMAGES[niche]) return NICHE_IMAGES[niche];
-
-  // 2. Category field (new articles)
-  if (category.includes('ai agent')) return CHANNEL_IMAGES['ai-agents'];
-  if (category.includes('ai automation') || category.includes('automation')) return CHANNEL_IMAGES['ai-automation'];
-
-  // 3. Slug keyword matching — niches first
-  if (slug.includes('coffee') || slug.includes('cafe') || slug.includes('barista') || slug.includes('espresso')) return NICHE_IMAGES['coffee-shops'];
-  if (slug.includes('salon') || slug.includes('hair') || slug.includes('barbershop') || slug.includes('barber') || slug.includes('nail') || slug.includes('spa') || slug.includes('beauty')) return NICHE_IMAGES['hair-salons'];
-  if (slug.includes('groom') || slug.includes('dog') || slug.includes('cat') || slug.includes('pet') || slug.includes('vet')) return NICHE_IMAGES['pet-groomers'];
-  if (slug.includes('gym') || slug.includes('fitness') || slug.includes('yoga') || slug.includes('pilates') || slug.includes('crossfit') || slug.includes('personal-train') || slug.includes('studio')) return NICHE_IMAGES['fitness-studios'];
-
-  // 4. Slug keyword matching — channels
-  if (slug.includes('ai-agent') || slug.includes('ai-receptionist') || slug.includes('ai-booking') || slug.includes('voice-ai') || slug.includes('chatbot') || slug.includes('whatsapp-ai')) return CHANNEL_IMAGES['ai-agents'];
-  if (slug.includes('automat') || slug.includes('n8n') || slug.includes('zapier') || slug.includes('make-com') || slug.includes('chatgpt') || slug.includes('ai-tool') || slug.includes('ai-for') || slug.includes('ai-market') || slug.includes('ai-content') || slug.includes('ai-power')) return CHANNEL_IMAGES['ai-automation'];
-  if (slug.includes('tiktok')) return CHANNEL_IMAGES['tiktok'];
-  if (slug.includes('instagram')) return CHANNEL_IMAGES['instagram'];
-  if (slug.includes('snapchat')) return CHANNEL_IMAGES['snapchat'];
-  if (slug.includes('youtube')) return CHANNEL_IMAGES['youtube'];
-  if (slug.includes('facebook') || slug.includes('meta-ad') || slug.includes('meta-ads')) return CHANNEL_IMAGES['facebook'];
-  if (slug.includes('spotify') || slug.includes('podcast') || slug.includes('audio')) return CHANNEL_IMAGES['spotify'];
-  if (slug.includes('programmatic') || slug.includes('dsp') || slug.includes('dv360') || slug.includes('retarget') || slug.includes('display')) return CHANNEL_IMAGES['programmatic'];
-  if (slug.includes('ctv') || slug.includes('ott') || slug.includes('connected-tv') || slug.includes('streaming')) return CHANNEL_IMAGES['ctv'];
-  if (slug.includes('email') || slug.includes('sms') || slug.includes('text-message')) return CHANNEL_IMAGES['email-sms'];
-  if (slug.includes('seo') || slug.includes('google-maps') || slug.includes('google-business') || slug.includes('local-search')) return CHANNEL_IMAGES['seo'];
-  if (slug.includes('influencer') || slug.includes('creator') || slug.includes('ugc')) return CHANNEL_IMAGES['influencer'];
-  if (slug.includes('analytic') || slug.includes('tracking') || slug.includes('utm') || slug.includes('dashboard')) return CHANNEL_IMAGES['analytics'];
-  if (slug.includes('website') || slug.includes('landing-page') || slug.includes('cro')) return CHANNEL_IMAGES['website'];
-  if (slug.includes('content') || slug.includes('blog') || slug.includes('video-market')) return CHANNEL_IMAGES['content'];
-  if (slug.includes('review') || slug.includes('reputation') || slug.includes('yelp')) return CHANNEL_IMAGES['reviews'];
-  if (slug.includes('loyalty') || slug.includes('retention') || slug.includes('referral') || slug.includes('rebooking')) return CHANNEL_IMAGES['retention'];
-  if (slug.includes('social') || slug.includes('reels') || slug.includes('organic')) return CHANNEL_IMAGES['social-media'];
-  if (slug.includes('google-ads') || slug.includes('google-ad') || slug.includes('ppc') || slug.includes('keywords-for') || slug.includes('ad-budget') || slug.includes('performance-max')) return CHANNEL_IMAGES['google-ads'];
-
-  return DEFAULT_IMAGE;
+  return `https://picsum.photos/seed/${entry.slug}/1200/630`;
 }
 
 async function generateOne() {
@@ -349,6 +346,8 @@ Output ONLY raw MDX — no code fences, start with ---.`;
   let mdx = await callGroq(systemPrompt, userPrompt);
   // Strip <think>...</think> reasoning blocks some models emit before output
   mdx = mdx.replace(/<think>[\s\S]*?<\/think>\s*/g, '').trimStart();
+  // Fix common MDX syntax bugs before pushing
+  mdx = sanitizeMdx(mdx);
 
   // Push MDX file
   await ghPutFile(
