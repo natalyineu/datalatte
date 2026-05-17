@@ -90,6 +90,24 @@ function applyFixes(content) {
     appliedFixes.push('fixed bare JSX patterns');
   }
 
+  // Fix missing closing --- in frontmatter (only one --- found = no closing delimiter)
+  if (fixed.startsWith('---') && (fixed.match(/^---/gm) || []).length === 1) {
+    const lines = fixed.split('\n');
+    let insertAfter = 0;
+    for (let i = 1; i < lines.length; i++) {
+      if (/^[a-zA-Z][\w-]*\s*:/.test(lines[i]) || /^\s+[-"[{]/.test(lines[i])) {
+        insertAfter = i;
+      } else if (lines[i].trim() === '' && insertAfter > 0) {
+        break;
+      }
+    }
+    if (insertAfter > 0) {
+      lines.splice(insertAfter + 1, 0, '---');
+      fixed = lines.join('\n');
+      appliedFixes.push('added missing frontmatter closing');
+    }
+  }
+
   return { fixed, appliedFixes };
 }
 
