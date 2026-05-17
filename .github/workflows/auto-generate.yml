@@ -5,6 +5,10 @@ on:
     - cron: '* * * * *'
   workflow_dispatch:
 
+concurrency:
+  group: article-generation
+  cancel-in-progress: false
+
 jobs:
   generate:
     runs-on: ubuntu-latest
