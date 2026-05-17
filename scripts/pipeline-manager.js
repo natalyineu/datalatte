@@ -193,7 +193,8 @@ function calculateScore({ todayCount, recentErrors, pending, qualityAvg, bugsFou
   components.queue = Math.min(15, Math.round((pending / 50) * 15));
 
   // Content quality (20 pts) — from Auditor's Groq quality scores (1–10 scale)
-  components.quality = qualityAvg > 0 ? Math.round((qualityAvg / 10) * 20) : 14; // default 7/10 if no data
+  // null = Auditor hasn't run yet; use neutral 14/20 (7/10 assumed) so score isn't penalised
+  components.quality = qualityAvg != null ? Math.round((qualityAvg / 10) * 20) : 14;
 
   // Bug rate (15 pts) — 0 bugs = full score, -3 per bug found
   components.bugs = Math.max(0, 15 - bugsFound * 3);
@@ -203,24 +204,27 @@ function calculateScore({ todayCount, recentErrors, pending, qualityAvg, bugsFou
 }
 
 function loadAuditQualityData() {
-  if (!fs.existsSync(AUDIT_FILE)) return { qualityAvg: 0, bugsFound: 0 };
+  if (!fs.existsSync(AUDIT_FILE)) return { qualityAvg: null, bugsFound: 0 };
   try {
     const report = JSON.parse(fs.readFileSync(AUDIT_FILE, 'utf8'));
     const bugsFound = (report.toFix?.length || 0) + (report.toRegenerate?.length || 0) + (report.duplicateSlugs?.length || 0);
 
-    // Collect quality scores from Auditor's assessments
+    // Prefer the Auditor's sampled qualityAvg (from clean random articles) — most representative
+    if (report.qualityAvg != null && report.qualityAvg > 0) {
+      return { qualityAvg: report.qualityAvg, bugsFound };
+    }
+
+    // Fallback: compute from issue assessments (will skew low — only flagged articles)
     const scores = [];
     for (const item of [...(report.toFix || []), ...(report.toRegenerate || []), ...(report.lowQuality || [])]) {
       if (item.assessment?.quality) scores.push(item.assessment.quality);
     }
-
-    // Default: if auditor sampled clean articles and found no issues, assume good quality
     const qualityAvg = scores.length > 0
       ? Math.round((scores.reduce((a, b) => a + b, 0) / scores.length) * 10) / 10
-      : 7.5;
+      : null; // null = no audit data yet
 
     return { qualityAvg, bugsFound };
-  } catch { return { qualityAvg: 0, bugsFound: 0 }; }
+  } catch { return { qualityAvg: null, bugsFound: 0 }; }
 }
 
 // ── Groq insight ──────────────────────────────────────────────────────────────
@@ -243,7 +247,7 @@ Pipeline snapshot:
 - Weakest area: ${weakest[0]} (${weakest[1]} pts)
 - Published: ${published} | Pending: ${pending}
 - Generated today: ${todayCount}
-- Content quality avg: ${qualityAvg}/10
+- Content quality avg: ${qualityAvg != null ? `${qualityAvg}/10` : 'N/A (awaiting Auditor)'}
 - Recent errors: ${recentErrors}/10 runs
 - Pending by category: ${topPending}
 - Recent articles: ${recentTopics.slice(0, 4).join('; ') || 'none yet'}
@@ -348,7 +352,7 @@ async function main() {
   const scoreBreakdown = [
     `Generation  ${scoreBar(components.generation, 25)} ${components.generation}/25`,
     `Reliability ${scoreBar(components.reliability, 25)} ${components.reliability}/25`,
-    `Quality     ${scoreBar(components.quality, 20)}  ${components.quality}/20`,
+    `Quality     ${scoreBar(components.quality, 20)}  ${components.quality}/20${qualityAvg == null ? ' (est)' : ''}`,
     `Bugs        ${scoreBar(components.bugs, 15)}  ${components.bugs}/15`,
     `Queue       ${scoreBar(components.queue, 15)}  ${components.queue}/15`,
   ].join('\n');
