@@ -39,7 +39,7 @@ async function fetchJson(url, options = {}, body = null) {
 
 const GROQ_MODELS = [
   'llama-3.3-70b-versatile',
-  'qwen-qwen3-32b',
+  'qwen/qwen3-32b',
   'mixtral-8x7b-32768',
   'llama3-70b-8192',
   'gemma2-9b-it',
