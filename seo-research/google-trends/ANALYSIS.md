@@ -10,12 +10,31 @@
 | google ads | 100 | **-30%** |
 | facebook ads | 53 | 0% (flat) |
 | target ads | 22 | -40% |
+| real estate agent marketing | 33 | -30% |
+| marketing manager | 13 | -30% |
+| marketing jobs | 13 | -40% |
+| travel agent marketing | 16 | -10% |
 
-**Implication**: Stop generating Google Ads content. 51 published articles already. Market is saturated and searches are declining.
+**Implication**: Stop generating Google Ads content. 36 published articles already. Market is saturated and searches are declining. General "marketing jobs/manager" content also declining.
 
 ---
 
 ### 🟢 Rising Fast — Write More Of This
+
+#### AI Agents & AI Marketing (Group 4) ⭐ HIGHEST PRIORITY
+| Query | Interest | Growth |
+|---|---|---|
+| ai marketing agent | 100 | **+700%** |
+| ai agent | 98 | **+700%** |
+| claude | 9 | **+2,100%** |
+| openclaw ai agent | 4 | **Breakout** |
+| n8n | 3 | **Breakout** |
+| klaviyo marketing agent | 1 | **Breakout** |
+| digital marketing agent | 33 | **+100%** |
+| online marketing agent | 24 | **+100%** |
+| influencer marketing | 7 | **+450%** |
+| content marketing strategies | 2 | **+450%** |
+| email marketing campaigns | 1 | **+250%** |
 
 #### Marketing Automation & AI (Group 2)
 | Query | Interest | Growth |
@@ -57,14 +76,19 @@
 
 ## Content Priorities for Queue
 
-1. **AI + marketing automation for local business** — biggest growth signal
-2. **Programmatic advertising** — all sub-topics rising, good depth opportunity
-3. **Video marketing** for local business niches
-4. **SMS marketing** for specific niches
-5. **Programmatic DOOH, audio, TV** — emerging formats with rising search
+1. **AI agents for marketing** — +700% and Breakout signals. Biggest opportunity right now.
+2. **n8n, klaviyo, AI automation tools** — Breakout searches, tool-specific content converts
+3. **AI + marketing automation for local business** — +500–1,150% growth
+4. **Influencer marketing** — +450%, especially local/micro-influencer angle
+5. **Content marketing strategies** — +450%, pair with niche-specific content
+6. **Programmatic advertising** — all sub-topics rising +80–800%
+7. **Email marketing campaigns** — +250%, niche-specific guides
+8. **Video marketing** for local business niches — +130%
+9. **SMS marketing** for specific niches — +190%
 
 ## Files
-- `group1` = Google Ads + Facebook Ads comparison (US)
-- `group2` = Marketing tools & automation (US)
-- `group3` = Programmatic advertising (US)
+- `group1` = Google Ads + Facebook Ads comparison (US) — May 2026
+- `group2` = Marketing tools & automation (US) — May 2026
+- `group3` = Programmatic advertising (US) — May 2026
+- `group4` = AI agents & marketing agents (US) — May 2026
 - `worldwide_jan-apr2026` = Not relevant (Russian VPN searches)
