@@ -44,7 +44,37 @@ interface Recommendation {
   source: "cluster" | "paa" | "autocomplete";
 }
 
-type TabId = "pipeline" | "queue" | "research" | "published" | "reports";
+type TabId = "agents" | "pipeline" | "queue" | "research" | "published" | "reports";
+
+// ── Agent types ───────────────────────────────────────────────────────────────
+
+interface RunSummary {
+  id: number;
+  status: string;
+  conclusion: string | null;
+  startedAt: string | null;
+  durationSeconds: number | null;
+  url: string;
+}
+
+interface AgentData {
+  name: string;
+  emoji: string;
+  description: string;
+  schedule: string;
+  workflowFile: string;
+  workflowId: number | null;
+  state: "active" | "disabled";
+  lastRun: {
+    status: string;
+    conclusion: string | null;
+    startedAt: string | null;
+    durationSeconds: number | null;
+  } | null;
+  runsToday: number;
+  totalRuns: number;
+  recentRuns: RunSummary[];
+}
 
 const STATUS_COLORS: Record<string, string> = {
   pending:   "bg-yellow-500/20 text-yellow-300 border border-yellow-500/30",
@@ -205,6 +235,301 @@ function EditableCell({
       {value || <span className="text-gray-600 italic">—</span>}
       {dirty && <span className="ml-1 text-xs text-amber-500">✓</span>}
     </span>
+  );
+}
+
+// ── Agent helpers ─────────────────────────────────────────────────────────────
+
+function relativeTime(isoStr: string | null | undefined): string {
+  if (!isoStr) return "never";
+  const diffMs = Date.now() - new Date(isoStr).getTime();
+  const diffSec = Math.round(diffMs / 1000);
+  if (diffSec < 60) return "just now";
+  const diffMin = Math.round(diffSec / 60);
+  if (diffMin < 60) return `${diffMin}m ago`;
+  const diffH = Math.round(diffMin / 60);
+  if (diffH < 24) return `${diffH}h ago`;
+  const diffD = Math.round(diffH / 24);
+  return `${diffD}d ago`;
+}
+
+function formatDuration(seconds: number | null): string {
+  if (seconds === null) return "—";
+  if (seconds < 60) return `${seconds}s`;
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return `${m}m ${s}s`;
+}
+
+function conclusionIcon(run: { status: string; conclusion: string | null }): string {
+  if (run.status === "queued") return "⏳";
+  if (run.status === "in_progress") return "🔄";
+  if (run.conclusion === "success") return "✅";
+  if (run.conclusion === "failure") return "❌";
+  if (run.conclusion === "cancelled" || run.conclusion === "skipped") return "⏭";
+  return "❓";
+}
+
+function formatRunDate(isoStr: string | null): string {
+  if (!isoStr) return "—";
+  const d = new Date(isoStr);
+  return d.toLocaleDateString("en-US", { month: "short", day: "numeric" }) +
+    " " +
+    d.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false });
+}
+
+// ── AgentsTab ─────────────────────────────────────────────────────────────────
+
+function AgentsTab({
+  token,
+  queue,
+}: {
+  token: string;
+  queue: QueueEntry[];
+}) {
+  const [agents, setAgents]   = useState<AgentData[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [actionLoading, setActionLoading] = useState<string | null>(null);
+
+  const fetchAgents = useCallback(async () => {
+    setLoading(true);
+    try {
+      const res = await authFetch("/api/admin/agents", {}, token);
+      if (res.ok) {
+        const data = await res.json() as { agents: AgentData[] };
+        setAgents(data.agents);
+      }
+    } finally {
+      setLoading(false);
+    }
+  }, [token]);
+
+  useEffect(() => { fetchAgents(); }, [fetchAgents]);
+
+  async function handleAction(workflowFile: string, action: "enable" | "disable" | "trigger") {
+    setActionLoading(`${workflowFile}-${action}`);
+    try {
+      await authFetch("/api/admin/agents", {
+        method: "POST",
+        body: JSON.stringify({ workflow: workflowFile, action }),
+      }, token);
+      await fetchAgents();
+    } finally {
+      setActionLoading(null);
+    }
+  }
+
+  const allDisabled = agents.length > 0 && agents.every((a) => a.state === "disabled");
+  const pendingCount = queue.filter((e) => e.status === "pending").length;
+  const totalTargetWords = queue.filter((e) => e.status === "pending")
+    .reduce((acc, e) => acc + (e.targetWords ?? 0), 0);
+
+  if (loading) {
+    return (
+      <div className="space-y-5">
+        <div className="flex items-center justify-between mb-2">
+          <h2 className="font-semibold text-white">GitHub Actions Agents</h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <div key={i} className="bg-gray-900 border border-gray-800 rounded-2xl p-5 animate-pulse">
+              <div className="flex items-center justify-between mb-3">
+                <div className="h-5 bg-gray-800 rounded w-40" />
+                <div className="h-5 bg-gray-800 rounded w-16" />
+              </div>
+              <div className="h-4 bg-gray-800 rounded w-3/4 mb-4" />
+              <div className="space-y-2">
+                <div className="h-3 bg-gray-800 rounded w-1/2" />
+                <div className="h-3 bg-gray-800 rounded w-2/3" />
+                <div className="h-3 bg-gray-800 rounded w-1/3" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-5">
+      {/* Header row */}
+      <div className="flex items-center justify-between">
+        <h2 className="font-semibold text-white">GitHub Actions Agents</h2>
+        <button
+          onClick={fetchAgents}
+          className="text-sm text-gray-400 hover:text-white border border-gray-700 hover:border-gray-600 rounded-lg px-3 py-1.5 transition"
+        >
+          ↻ Refresh
+        </button>
+      </div>
+
+      {/* All-disabled banner */}
+      {allDisabled && (
+        <div className="bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3 text-sm text-red-300 flex items-center gap-2">
+          <span>⚠️</span>
+          <span>All agents currently paused — generation is off</span>
+        </div>
+      )}
+
+      {/* Agent cards grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {agents.map((agent) => {
+          const isActive   = agent.state === "active";
+          const isWriter   = agent.workflowFile === "auto-generate.yml";
+          const isPipeline = agent.workflowFile === "pipeline-manager.yml";
+
+          return (
+            <div
+              key={agent.workflowFile}
+              className="bg-gray-900 border border-gray-800 rounded-2xl p-5 flex flex-col gap-4"
+            >
+              {/* Card header */}
+              <div className="flex items-start justify-between gap-2">
+                <div className="flex items-center gap-2 min-w-0">
+                  {/* Status dot */}
+                  <span
+                    className={`shrink-0 w-2.5 h-2.5 rounded-full ${
+                      isActive
+                        ? "bg-green-400 animate-pulse"
+                        : "bg-gray-600"
+                    }`}
+                  />
+                  <span className="text-base font-semibold text-white truncate">
+                    {agent.emoji} {agent.name}
+                  </span>
+                  <span className={`shrink-0 text-xs font-medium px-2 py-0.5 rounded-full ${
+                    isActive
+                      ? "bg-green-500/15 text-green-400 border border-green-500/30"
+                      : "bg-gray-700/50 text-gray-400 border border-gray-700"
+                  }`}>
+                    {isActive ? "Active" : "Paused"}
+                  </span>
+                </div>
+                {/* Run button */}
+                <button
+                  onClick={() => handleAction(agent.workflowFile, "trigger")}
+                  disabled={actionLoading !== null || agent.workflowId === null}
+                  title="Trigger run now"
+                  className="shrink-0 text-xs bg-amber-600/20 hover:bg-amber-600 border border-amber-600/40 hover:border-amber-500 text-amber-300 hover:text-white rounded-lg px-2.5 py-1 transition disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  {actionLoading === `${agent.workflowFile}-trigger` ? "…" : "Run ▶"}
+                </button>
+              </div>
+
+              {/* Description */}
+              <p className="text-sm text-gray-400 leading-snug">{agent.description}</p>
+
+              {/* Stats */}
+              <div className="space-y-1.5 text-sm">
+                <div className="flex gap-1 text-gray-500">
+                  <span className="text-gray-600">Schedule:</span>
+                  <span className="text-gray-300">{agent.schedule}</span>
+                </div>
+
+                {agent.lastRun ? (
+                  <div className="text-gray-500">
+                    <span className="text-gray-600">Last run:</span>{" "}
+                    <span className="text-gray-300">{relativeTime(agent.lastRun.startedAt)}</span>
+                    {agent.lastRun.durationSeconds !== null && (
+                      <span className="text-gray-500"> · {formatDuration(agent.lastRun.durationSeconds)}</span>
+                    )}
+                    {" "}
+                    <span>
+                      {conclusionIcon(agent.lastRun)}{" "}
+                      <span className={
+                        agent.lastRun.conclusion === "success" ? "text-green-400" :
+                        agent.lastRun.conclusion === "failure" ? "text-red-400" :
+                        "text-gray-400"
+                      }>
+                        {agent.lastRun.status === "in_progress"
+                          ? "running"
+                          : agent.lastRun.status === "queued"
+                          ? "queued"
+                          : (agent.lastRun.conclusion ?? "—")}
+                      </span>
+                    </span>
+                  </div>
+                ) : (
+                  <div className="text-gray-600 text-sm">Last run: never</div>
+                )}
+
+                <div className="text-gray-500">
+                  <span className="text-gray-600">Runs today:</span>{" "}
+                  <span className="text-gray-300">{agent.runsToday}</span>
+                  <span className="text-gray-600"> · This month:</span>{" "}
+                  <span className="text-gray-300">{agent.totalRuns}</span>
+                </div>
+
+                {/* Writer-specific queue stats */}
+                {isWriter && (
+                  <div className="mt-1 pt-1.5 border-t border-gray-800 text-gray-500">
+                    <span className="text-gray-600">Articles in queue:</span>{" "}
+                    <span className="text-amber-300 font-medium">{pendingCount} pending</span>
+                    {totalTargetWords > 0 && (
+                      <span className="text-gray-500"> · {(totalTargetWords / 1000).toFixed(0)}k words target</span>
+                    )}
+                  </div>
+                )}
+
+                {/* Pipeline manager — show workflow ID as placeholder for health score */}
+                {isPipeline && agent.workflowId && (
+                  <div className="mt-1 pt-1.5 border-t border-gray-800 text-gray-500">
+                    <span className="text-gray-600">Workflow ID:</span>{" "}
+                    <span className="text-gray-400 font-mono text-xs">{agent.workflowId}</span>
+                  </div>
+                )}
+              </div>
+
+              {/* Recent runs */}
+              {agent.recentRuns.length > 0 && (
+                <div className="space-y-1.5">
+                  <div className="text-xs text-gray-600 uppercase tracking-wide border-t border-gray-800 pt-3">
+                    Recent runs
+                  </div>
+                  {agent.recentRuns.map((run) => (
+                    <a
+                      key={run.id}
+                      href={run.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-xs text-gray-500 hover:text-gray-300 transition group"
+                    >
+                      <span className="shrink-0">{conclusionIcon(run)}</span>
+                      <span className="text-gray-400 group-hover:text-gray-300">
+                        {formatRunDate(run.startedAt)}
+                      </span>
+                      {run.durationSeconds !== null && (
+                        <span className="text-gray-600">· {formatDuration(run.durationSeconds)}</span>
+                      )}
+                      {run.conclusion === "failure" && (
+                        <span className="text-red-400 font-medium">failed</span>
+                      )}
+                      <span className="ml-auto text-gray-700 group-hover:text-gray-500">↗</span>
+                    </a>
+                  ))}
+                </div>
+              )}
+
+              {/* Toggle button */}
+              <div className="flex justify-end border-t border-gray-800 pt-3 mt-auto">
+                <button
+                  onClick={() => handleAction(
+                    agent.workflowFile,
+                    isActive ? "disable" : "enable"
+                  )}
+                  disabled={actionLoading !== null || agent.workflowId === null}
+                  className="text-xs border border-amber-600/40 hover:border-amber-500 text-amber-400 hover:text-amber-300 hover:bg-amber-600/10 rounded-lg px-3 py-1.5 transition disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  {actionLoading === `${agent.workflowFile}-${isActive ? "disable" : "enable"}`
+                    ? "…"
+                    : isActive ? "⏸ Pause agent" : "▶ Resume agent"}
+                </button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 
@@ -503,6 +828,7 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
   const clusterDistribEntries = Object.entries(clusterDistrib).sort((a, b) => b[1] - a[1]);
 
   const tabs: { id: TabId; label: string }[] = [
+    { id: "agents",   label: "Agents (5)" },
     { id: "pipeline", label: "Pipeline" },
     { id: "queue",    label: `Queue (${queue.length})` },
     { id: "research", label: `Research (${recommendations.length})` },
@@ -565,6 +891,13 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+
+        {/* ══════════════════════════════════════════════════════════════════ */}
+        {/* Tab: Agents                                                        */}
+        {/* ══════════════════════════════════════════════════════════════════ */}
+        {activeTab === "agents" && (
+          <AgentsTab token={token} queue={queue} />
+        )}
 
         {/* ══════════════════════════════════════════════════════════════════ */}
         {/* Tab: Pipeline                                                      */}
