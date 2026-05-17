@@ -10,7 +10,7 @@ interface QueueEntry {
   primaryKeyword: string;
   cluster: string;
   targetWords: number;
-  status: "pending" | "generated" | "published";
+  status: "pending" | "generating" | "generated" | "published";
   generatedDate: string | null;
   addedDate: string;
   errorNote?: string;
@@ -159,6 +159,7 @@ interface AgentData {
 
 const STATUS_COLORS: Record<string, string> = {
   pending:   "bg-yellow-500/20 text-yellow-300 border border-yellow-500/30",
+  generating: "bg-orange-500/20 text-orange-300 border border-orange-500/30",
   generated: "bg-blue-500/20 text-blue-300 border border-blue-500/30",
   published: "bg-green-500/20 text-green-300 border border-green-500/30",
 };
@@ -1498,7 +1499,7 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
                 className="bg-gray-800 border border-gray-700 text-white rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-amber-500 transition w-64"
               />
               <div className="flex gap-1">
-                {(["all", "pending", "generated", "published"] as const).map((s) => (
+                {(["all", "pending", "generating", "generated", "published"] as const).map((s) => (
                   <button
                     key={s}
                     onClick={() => setQueueStatusFilter(s)}

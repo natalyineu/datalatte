@@ -176,7 +176,7 @@ async function main() {
   const { content: proposalsData, sha: proposalsSha } = await ghGetFile('content/proposals.json');
   const existingProposals = proposalsData?.proposals || [];
   const pendingSlugs = new Set(
-    existingProposals.filter(p => p.status === 'pending').map(p => p.slug)
+    existingProposals.filter(p => ['pending', 'approved'].includes(p.status)).map(p => p.slug)
   );
 
   // 3. Pick 15 random published articles (skip those with pending proposals)

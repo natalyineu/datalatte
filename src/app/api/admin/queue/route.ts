@@ -10,7 +10,7 @@ interface QueueEntry {
   primaryKeyword: string;
   cluster: string;
   targetWords: number;
-  status: "pending" | "generated" | "published";
+  status: "pending" | "generating" | "generated" | "published";
   generatedDate: string | null;
   addedDate: string;
 }
@@ -120,7 +120,7 @@ export async function PATCH(req: NextRequest): Promise<NextResponse> {
       return NextResponse.json({ error: "slug is required" }, { status: 400 });
     }
 
-    const validStatuses = ["pending", "generated", "published"];
+    const validStatuses = ["pending", "generating", "generated", "published"];
     if (body.status && !validStatuses.includes(body.status)) {
       return NextResponse.json(
         { error: `status must be one of: ${validStatuses.join(", ")}` },
