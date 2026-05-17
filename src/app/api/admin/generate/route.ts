@@ -239,12 +239,88 @@ ${posts
     .join("\n")}`;
 }
 
+// ── Unique image per article (slug-based seed → Picsum) ──────────────────────
+
+function getArticleImage(slug: string): string {
+  return `https://picsum.photos/seed/${slug}/1200/630`;
+}
+
+// ── Post-generation MDX sanitizer ─────────────────────────────────────────────
+// Fixes common patterns the AI generates that break the MDX compiler.
+
+function sanitizeMdx(content: string): string {
+  const lines = content.split("\n");
+  const out: string[] = [];
+  let i = 0;
+
+  while (i < lines.length) {
+    const line = lines[i];
+
+    // 1. Collapse multi-line <Callout> blocks (open tag without close on same line)
+    const calloutOpen = line.match(/^(<Callout[^>]*>)(.*)$/);
+    if (calloutOpen && !line.includes("</Callout>")) {
+      const openTag = calloutOpen[1];
+      const inline = calloutOpen[2].trim();
+      const collected: string[] = inline ? [inline] : [];
+      i++;
+      let closed = false;
+      while (i < lines.length) {
+        const next = lines[i];
+        if (next.includes("</Callout>")) {
+          const before = next.replace("</Callout>", "").trim();
+          if (before) collected.push(before);
+          closed = true;
+          i++;
+          break;
+        }
+        // Stop collecting at new section or new component
+        if (/^#{1,6}\s/.test(next) || /^<[A-Z]/.test(next) || /^---/.test(next)) break;
+        if (next.trim()) collected.push(next.trim());
+        i++;
+      }
+      const body = collected.join(" ").replace(/\s+/g, " ").trim();
+      out.push(`${openTag}${body}</Callout>`);
+      out.push("");
+      continue;
+    }
+
+    // 2. Escape bare <https://...> and <http://...> URLs
+    const fixedLine = line
+      .replace(/<(https?:\/\/[^\s>]+)>/g, "[$1]($1)")
+      // 3. Escape <N where N is a digit (e.g. <10%, <5x)
+      .replace(/<(\d)/g, "&lt;$1")
+      // 4. Escape <$ patterns
+      .replace(/<(\$)/g, "&lt;$1")
+      // 5. Remove orphaned </Callout> with no matching open
+      // (handled by tracking opens — simple: just drop unmatched ones)
+      ;
+
+    out.push(fixedLine);
+    i++;
+  }
+
+  // 6. Remove orphaned </Callout> closing tags (no matching open on same line)
+  const result = out.join("\n");
+  const openCount = (result.match(/<Callout/g) ?? []).length;
+  const closeCount = (result.match(/<\/Callout>/g) ?? []).length;
+  if (closeCount > openCount) {
+    // Strip the excess closing tags from the bottom up
+    let excess = closeCount - openCount;
+    return result.replace(/<\/Callout>/g, (match) => {
+      if (excess > 0) { excess--; return ""; }
+      return match;
+    });
+  }
+
+  return result;
+}
+
 // ── Groq API call (with auto-retry on 429) ───────────────────────────────────
 
 const GROQ_MODELS = [
   "qwen/qwen3-32b",
   "openai/gpt-oss-120b",
-  "llama-3.1-8b-instant",
+  "moonshotai/kimi-k2-instruct",
 ];
 
 async function callGroq(
@@ -306,6 +382,8 @@ export async function POST(): Promise<NextResponse> {
   const existingPosts    = getExistingArticles();
   const today            = new Date().toISOString().split("T")[0];
 
+  const articleImage = getArticleImage(entry.slug);
+
   const internalLinksContext = existingPosts
     .slice(0, 10)
     .map((p) => `- /blog/${p.slug} — ${p.title}`)
@@ -322,41 +400,75 @@ WRITING STYLE:
 - Expert but conversational — like advice from a specialist friend
 - Direct and practical — no filler, no corporate speak
 - Use real numbers, real examples, and honest trade-offs
-- British/US English spelling is fine
 - Short paragraphs, punchy sentences
 
-OUTPUT FORMAT — CRITICAL:
-- Respond ONLY with the raw MDX content
-- Do NOT wrap in code fences (\`\`\`mdx or \`\`\`)
-- Start directly with the YAML frontmatter (---)
-- Use this exact frontmatter structure:
+════════════════════════════════════════
+OUTPUT FORMAT — MANDATORY
+════════════════════════════════════════
+- Output ONLY raw MDX. No code fences, no \`\`\`mdx wrapper, no preamble.
+- Start immediately with the YAML frontmatter block (---).
+- Copy this frontmatter exactly, filling in the blanks:
+
 ---
 title: "..."
 date: "${today}"
-description: "150-160 char SEO meta description with primary keyword"
+description: "..."
 author: "Nataliia"
 category: "..."
 tags: ["tag1", "tag2", "tag3", "tag4"]
 slug: "${entry.slug}"
-image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80"
+image: "${articleImage}"
 readTime: "X min read"
 ---
 
-CONTENT STRUCTURE:
-1. Opening paragraph (no heading) — hook the reader with a bold claim or surprising stat
-2. 4-7 H2 sections covering the topic thoroughly
-3. Use H3 subheadings within sections where helpful
-4. Use bullet lists and numbered lists freely
-5. End with an FAQ section (## Frequently Asked Questions) answering 5-7 of the PAA questions below
-6. Final paragraph: natural CTA mentioning DataLatte and linking to /contact
+════════════════════════════════════════
+MDX SYNTAX RULES — READ CAREFULLY
+════════════════════════════════════════
+You may use ONLY these four JSX components: <Callout>, <BarChart>, <StatRow>, <Funnel>.
+Any other capitalised tag (e.g. <Example>, <Tip>, <Warning>, <Note>) will break the build. Do NOT use them.
 
-INTERNAL LINKS — include 2-3 of these naturally in the body:
+CALLOUT — must open AND close on the same single line, always:
+✅ CORRECT:   <Callout type="tip">Your insight here in one line.</Callout>
+✅ CORRECT:   <Callout type="warning">Short warning sentence.</Callout>
+❌ WRONG — never split across lines:
+   <Callout type="tip">
+   Content here
+   </Callout>
+
+Allowed type values: tip | warning | example | coffee | stat
+
+BARCHART — all on one line:
+✅ <BarChart title="Title" labels="A|B|C" values="10|20|30" unit="%" caption="Source" highlights="A"/>
+
+STATROW — all on one line, pipe-separated, matching count in each attribute:
+✅ <StatRow values="80%|60%|40%" labels="Label one|Label two|Label three" subs="Source A|Source B|Source C" trends="up|down|neutral"/>
+
+LINKS — never put a URL in angle brackets:
+❌ WRONG:  <https://example.com>
+✅ CORRECT: [anchor text](https://example.com)
+
+NUMBERS — never write < directly before a number or $ sign:
+❌ WRONG:  costs <$500, results in <10 days
+✅ CORRECT: costs under $500, results in under 10 days
+
+════════════════════════════════════════
+CONTENT STRUCTURE
+════════════════════════════════════════
+1. Opening paragraph (no heading) — hook with a bold claim or real stat
+2. 4–7 ## sections covering the topic thoroughly
+3. Use ### subheadings within sections where helpful
+4. Use bullet lists and numbered lists freely
+5. Include 2–4 Callout components naturally in the body
+6. End with ## Frequently Asked Questions (5–7 questions from the PAA list below)
+7. Final short paragraph: natural CTA linking to /contact
+
+INTERNAL LINKS — weave 2-3 of these naturally into the body:
 ${internalLinksContext}
 
-PAA QUESTIONS TO ANSWER IN FAQ SECTION:
+PAA QUESTIONS (use in FAQ section):
 ${paaContext}
 
-RELEVANT KEYWORDS FROM CLUSTER (use naturally, don't stuff):
+KEYWORDS (use naturally, never stuff):
 ${clusterKeywords || `Primary keyword: ${entry.primaryKeyword}`}
 
 TARGET LENGTH: ${entry.targetWords} words (±200 words)`;
@@ -370,13 +482,14 @@ Primary keyword: ${entry.primaryKeyword}
 Cluster: ${entry.cluster}
 Target words: ${entry.targetWords}
 
-Remember: output ONLY the raw MDX — no code fences, start with --- frontmatter.`;
+Output ONLY raw MDX starting with --- frontmatter. No code fences.`;
 
   // ── Call Groq ────────────────────────────────────────────────────────────
   let mdxContent: string;
   try {
     const raw = await callGroq(systemPrompt, userPrompt);
-    mdxContent = ensureValidMdx(raw);
+    const cleaned = ensureValidMdx(raw);
+    mdxContent = sanitizeMdx(cleaned);
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     return NextResponse.json({ success: false, error: `Generation failed: ${msg}` }, { status: 500 });
