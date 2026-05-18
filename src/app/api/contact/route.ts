@@ -119,7 +119,7 @@ export async function POST(req: NextRequest) {
     if (!emailRes.ok) {
       const err = await emailRes.text();
       console.error("Resend contact notification failed:", err);
-      return NextResponse.json({ error: "Failed to send notification" }, { status: 500 });
+      // Non-fatal: lead is already saved to Airtable; don't block the user
     }
 
     // 3. Telegram notification (use escaped values to avoid breaking HTML parse mode)
