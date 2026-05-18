@@ -92,8 +92,51 @@ function syntaxAudit(content) {
   const secondDash = content.indexOf('---', firstDash + 3);
   if (firstDash === -1 || secondDash === -1) issues.push('incomplete_frontmatter');
   // Unquoted title with colon breaks YAML parser
-  // \s+ (not \s*) prevents backtracking false-positives on already-quoted titles
   if (/^title:\s+[^"'\n][^\n]*:[^\n]/m.test(content)) issues.push('unquoted_title_colon');
+  // MDX component checks
+  issues.push(...mdxComponentAudit(content));
+  return issues;
+}
+
+// ── MDX component checks ──────────────────────────────────────────────────────
+
+function mdxComponentAudit(content) {
+  const issues = [];
+
+  // BarChart/StatRow: CPA label with trend="up" — high CPA is bad, not good
+  const cpaTrendUp = /(?:StatRow|BarChart)[^>]*?(?:labels|label)="[^"]*CPA[^"]*"[^>]*trends?="[^"]*\bup\b/;
+  if (cpaTrendUp.test(content)) issues.push('mdx_cpa_trend_up');
+
+  // BarChart: CPA in highlights — presenting high CPA as "best"
+  const cpaBest = /(?:StatRow|BarChart)[^>]*highlights?="[^"]*CPA[^"]*"/i;
+  if (cpaBest.test(content)) issues.push('mdx_cpa_highlighted_best');
+
+  // BarChart with unit="%" — value renders as %85 instead of 85% (now fixed in component, flag old occurrences for tracking)
+  // Removed — bug is fixed in BarChart.tsx; no need to flag
+
+  // StatRow: CPA label paired with a plain % value (e.g. "50%" for CPA makes no sense)
+  const statRowMatches = [...content.matchAll(/<StatRow[^/]*\/>/gs)];
+  for (const m of statRowMatches) {
+    const block = m[0];
+    const labels = (block.match(/labels="([^"]+)"/) || [])[1] || '';
+    const values = (block.match(/values="([^"]+)"/) || [])[1] || '';
+    if (!labels || !values) continue;
+    const labelArr = labels.split('|');
+    const valueArr = values.split('|');
+    labelArr.forEach((label, i) => {
+      if (/CPA|cost per acq/i.test(label)) {
+        const val = (valueArr[i] || '').trim();
+        // CPA should be a dollar amount, not a bare percentage
+        if (/^\d+%$/.test(val)) issues.push('mdx_cpa_nonsense_percent_value');
+      }
+    });
+  }
+
+  // Generic: any component using "CPA" near positive language suggesting high is good
+  if (/CPA[^.!?\n]{0,40}(?:achiev|target|goal|aim|great|strong|win)[^.!?\n]{0,40}(?:high|higher|\d{3,})/i.test(content)) {
+    issues.push('mdx_cpa_possibly_positive_high');
+  }
+
   return issues;
 }
 

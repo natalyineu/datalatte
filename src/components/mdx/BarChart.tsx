@@ -52,7 +52,7 @@ export default function BarChart({
                   )}
                 </div>
                 <span className={`text-sm font-bold tabular-nums shrink-0 ml-3 ${isHighlight ? "text-coffee-700" : "text-gray-500"}`}>
-                  {unit}{val}
+                  {unit === "%" ? `${val}%` : `${unit}${val}`}
                 </span>
               </div>
               <div className="h-2.5 bg-gray-100 rounded-full overflow-hidden">
