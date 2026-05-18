@@ -181,6 +181,7 @@ Valid niches: general, coffee-shops, hair-salons, pet-groomers, fitness-studios`
   }
 
   // 8. Telegram report
+  const time = new Date().toUTCString().slice(0, 25);
   let msg;
   if (newArticles.length > 0) {
     // Group by cluster/category
@@ -194,12 +195,14 @@ Valid niches: general, coffee-shops, hair-salons, pet-groomers, fitness-studios`
       .map(([cat, titles]) => `  📂 ${cat} (${titles.length})\n` + titles.slice(0, 2).map(t => `    • ${t}`).join('\n'))
       .join('\n');
 
-    msg = `🔬 <b>Researcher</b> — ${newArticles.length} topics added\n\n`;
+    msg = `🔬 <b>Researcher</b> — ${newArticles.length} topics added\n`;
+    msg += `🕐 ${time}\n\n`;
     msg += clusterLines + '\n';
     if (Object.keys(byCat).length > 5) msg += `  + ${Object.keys(byCat).length - 5} more clusters\n`;
-    msg += `\n📊 Queue: ${pending.length + newArticles.length} pending · ${published.length} published`;
+    msg += `\n📊 ${pending.length + newArticles.length} pending · ${published.length} published`;
   } else {
     msg = `🔬 <b>Researcher</b> — queue balanced ✅\n`;
+    msg += `🕐 ${time}\n\n`;
     msg += `No new topics needed right now.\n`;
     msg += `📊 ${pending.length} pending · ${published.length} published`;
   }
