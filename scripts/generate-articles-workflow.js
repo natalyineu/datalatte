@@ -142,13 +142,33 @@ function sanitizeMdx(content) {
   }
 
   // Remove orphaned </Callout> tags
-  const result = out.join('\n');
+  let result = out.join('\n');
   const opens = (result.match(/<Callout/g) || []).length;
   const closes = (result.match(/<\/Callout>/g) || []).length;
   if (closes > opens) {
     let excess = closes - opens;
-    return result.replace(/<\/Callout>/g, m => { if (excess > 0) { excess--; return ''; } return m; });
+    result = result.replace(/<\/Callout>/g, m => { if (excess > 0) { excess--; return ''; } return m; });
   }
+
+  // Fix duplicate FAQ headings — keep only the first occurrence
+  const faqHeadings = [...result.matchAll(/^##\s+Frequently Asked Questions/gm)];
+  if (faqHeadings.length > 1) {
+    let first = true;
+    result = result.replace(/^##\s+Frequently Asked Questions/gm, (m) => {
+      if (first) { first = false; return m; }
+      return '';
+    });
+  }
+
+  // Fix BarChart non-numeric values — strip %, $, commas
+  result = result.replace(/(<BarChart[^>]*values=")([^"]+)(")/g, (full, pre, vals, post) => {
+    const cleaned = vals.split('|').map(v => {
+      const n = parseFloat(v.replace(/[%$,\s]/g, ''));
+      return isNaN(n) ? '0' : String(n);
+    }).join('|');
+    return pre + cleaned + post;
+  });
+
   return result;
 }
 
