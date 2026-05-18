@@ -614,12 +614,14 @@ function AgentsTab({
   token: string;
   queue: QueueEntry[];
 }) {
-  const [agents, setAgents]   = useState<AgentData[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [agents, setAgents]         = useState<AgentData[]>([]);
+  const [initialLoad, setInitialLoad] = useState(true);
+  const [refreshing, setRefreshing]   = useState(false);
   const [actionLoading, setActionLoading] = useState<string | null>(null);
 
-  const fetchAgents = useCallback(async () => {
-    setLoading(true);
+  const fetchAgents = useCallback(async (isInitial = false) => {
+    if (isInitial) setInitialLoad(true);
+    else setRefreshing(true);
     try {
       const res = await authFetch("/api/admin/agents", {}, token);
       if (res.ok) {
@@ -627,11 +629,12 @@ function AgentsTab({
         setAgents(data.agents);
       }
     } finally {
-      setLoading(false);
+      setInitialLoad(false);
+      setRefreshing(false);
     }
   }, [token]);
 
-  useEffect(() => { fetchAgents(); }, [fetchAgents]);
+  useEffect(() => { fetchAgents(true); }, [fetchAgents]);
 
   async function handleAction(workflowFile: string, action: "enable" | "disable" | "trigger") {
     setActionLoading(`${workflowFile}-${action}`);
@@ -640,7 +643,7 @@ function AgentsTab({
         method: "POST",
         body: JSON.stringify({ workflow: workflowFile, action }),
       }, token);
-      await fetchAgents();
+      await fetchAgents(false);
     } finally {
       setActionLoading(null);
     }
@@ -655,7 +658,7 @@ function AgentsTab({
   const pipelineReport = agents.find((a) => a.workflowFile === "pipeline-manager.yml")?.report as PipelineReport | null | undefined;
   const pipelineScore  = pipelineReport?.type === "pipeline" ? pipelineReport.score : null;
 
-  if (loading) {
+  if (initialLoad) {
     return (
       <div className="space-y-5">
         <div className="flex items-center justify-between mb-2">
@@ -687,10 +690,11 @@ function AgentsTab({
       <div className="flex items-center justify-between">
         <h2 className="font-semibold text-white">GitHub Actions Agents</h2>
         <button
-          onClick={fetchAgents}
-          className="text-sm text-gray-400 hover:text-white border border-gray-700 hover:border-gray-600 rounded-lg px-3 py-1.5 transition"
+          onClick={() => fetchAgents(false)}
+          disabled={refreshing}
+          className="text-sm text-gray-400 hover:text-white border border-gray-700 hover:border-gray-600 rounded-lg px-3 py-1.5 transition disabled:opacity-50"
         >
-          ↻ Refresh
+          {refreshing ? "↻ Refreshing…" : "↻ Refresh"}
         </button>
       </div>
 
