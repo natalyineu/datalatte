@@ -259,6 +259,27 @@ function getImageForEntry(entry) {
 async function generateOne() {
   const queuePath = path.join(process.cwd(), 'content/queue.json');
   const queue = JSON.parse(fs.readFileSync(queuePath, 'utf8'));
+
+  // Reset articles stuck in 'generating' for more than 20 minutes (workflow timeout = 10min)
+  const STALE_MS = 20 * 60 * 1000;
+  const now = Date.now();
+  let resetCount = 0;
+  for (const a of queue.queue) {
+    if (a.status === 'generating') {
+      const age = a.generatedDate ? now - new Date(a.generatedDate).getTime() : STALE_MS + 1;
+      if (age > STALE_MS) {
+        a.status = 'pending';
+        delete a.generatedDate;
+        resetCount++;
+        console.log(`Reset: ${a.slug} -> pending (stuck ${Math.round(age/60000)}m)`);
+      }
+    }
+  }
+  if (resetCount > 0) {
+    fs.writeFileSync(queuePath, JSON.stringify(queue, null, 2) + '\n');
+    console.log(`♻️ Reset ${resetCount} stale article(s) to pending`);
+  }
+
   const entry = queue.queue.find((e) => e.status === 'pending');
 
   if (!entry) {
