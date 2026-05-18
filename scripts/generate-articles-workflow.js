@@ -40,9 +40,9 @@ async function fetchJson(url, options = {}, body = null) {
 const GROQ_MODELS = [
   'llama-3.3-70b-versatile',
   'qwen/qwen3-32b',
-  'moonshotai/kimi-k2-instruct',
-  'llama3-70b-8192',
-  'gemma2-9b-it',
+  'meta-llama/llama-4-scout-17b-16e-instruct',
+  'openai/gpt-oss-120b',
+  'llama-3.1-8b-instant',
 ];
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
