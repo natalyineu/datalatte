@@ -48,14 +48,14 @@ const CATEGORY_TO_GROUP = {
 };
 
 const GROUP_QUERIES = {
-  "Paid Ads":       ["digital advertising", "online marketing campaign", "pay per click"],
-  "SEO & Content":  ["content writing blog", "seo search engine", "copywriting desk"],
-  "Social":         ["social media phone", "instagram influencer", "community people"],
-  "AI & Automation":["artificial intelligence technology", "automation robot", "machine learning"],
-  "Email & SMS":    ["email newsletter laptop", "messaging app phone", "inbox communication"],
-  "Analytics":      ["data analytics chart", "business dashboard", "statistics report"],
-  "Niches":         ["coffee shop interior", "hair salon beauty", "pet grooming dog"],
-  "Strategy":       ["business strategy meeting", "marketing plan whiteboard", "growth planning"],
+  "Paid Ads":        ["digital advertising", "online marketing campaign", "pay per click ads", "google ads laptop", "advertising billboard", "marketing analytics"],
+  "SEO & Content":   ["content writing blog", "seo search engine", "copywriting desk", "blogging workspace", "content creator laptop"],
+  "Social":          ["social media phone", "instagram influencer", "community people", "social network", "content creator filming"],
+  "AI & Automation": ["artificial intelligence technology", "automation robot", "machine learning", "ai chatbot", "smart technology", "future tech"],
+  "Email & SMS":     ["email newsletter laptop", "messaging app phone", "inbox communication", "email marketing", "smartphone messaging"],
+  "Analytics":       ["data analytics chart", "business dashboard", "statistics report", "data visualization", "business metrics"],
+  "Niches":          ["coffee shop interior", "hair salon beauty", "pet grooming dog", "fitness studio gym", "small business owner", "barbershop"],
+  "Strategy":        ["business strategy meeting", "marketing plan whiteboard", "growth planning", "entrepreneur office", "startup team"],
 };
 
 async function searchUnsplash(query, page = 1) {
@@ -101,6 +101,7 @@ async function main() {
 
   const files = fs.readdirSync(CONTENT_DIR).filter(f => f.endsWith(".mdx"));
   const groupCounters = {};
+  const usedUrls = new Set();
   const cache = {};
 
   for (const file of files) {
@@ -113,8 +114,23 @@ async function main() {
     const pool = pools[group];
     if (!pool || pool.length === 0) { cache[slug] = null; continue; }
 
-    cache[slug] = pool[groupCounters[group] % pool.length];
-    groupCounters[group]++;
+    // Pick next unused URL from this group's pool
+    let picked = null;
+    const start = groupCounters[group];
+    for (let i = 0; i < pool.length; i++) {
+      const candidate = pool[(start + i) % pool.length];
+      if (!usedUrls.has(candidate)) { picked = candidate; groupCounters[group] = (start + i + 1) % pool.length; break; }
+    }
+    // If all group photos are used, fall back to any unused URL globally
+    if (!picked) {
+      for (const [g, p] of Object.entries(pools)) {
+        picked = p.find(u => !usedUrls.has(u));
+        if (picked) break;
+      }
+    }
+
+    if (picked) { usedUrls.add(picked); cache[slug] = picked; }
+    else cache[slug] = pool[0]; // absolute last resort
   }
 
   fs.writeFileSync(CACHE_FILE, JSON.stringify(cache, null, 2));
