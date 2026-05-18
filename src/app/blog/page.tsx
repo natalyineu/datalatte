@@ -10,6 +10,7 @@ import Link from "next/link";
 export const revalidate = 3600;
 
 const contentDir = path.join(process.cwd(), "content/blog");
+const imageCachePath = path.join(contentDir, "image-cache.json");
 
 interface PostMeta {
   title: string;
@@ -27,6 +28,10 @@ function calcReadTime(wordCount: number): string {
 }
 
 function getAllPosts(): PostMeta[] {
+  const imageCache: Record<string, string> = fs.existsSync(imageCachePath)
+    ? JSON.parse(fs.readFileSync(imageCachePath, "utf8"))
+    : {};
+
   const files = fs.readdirSync(contentDir).filter((f) => f.endsWith(".mdx"));
   const posts = files.map((file) => {
     const slug = file.replace(".mdx", "");
@@ -40,7 +45,7 @@ function getAllPosts(): PostMeta[] {
       category: data.category,
       date: data.date,
       readTime,
-      image: data.image,
+      image: imageCache[slug] ?? data.image,
       tags: data.tags ?? [],
     } as PostMeta;
   });
