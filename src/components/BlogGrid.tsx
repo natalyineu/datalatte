@@ -1,14 +1,22 @@
 "use client";
 import { useState, useMemo } from "react";
 import BlogCard from "./BlogCard";
+import { getGroup, GROUP_CONFIG, type GroupName } from "./blogCategories";
 
-interface Post { title: string; description: string; slug: string; category: string; date: string; readTime: string; image: string; }
+interface Post {
+  title: string;
+  description: string;
+  slug: string;
+  category: string;
+  date: string;
+  readTime: string;
+  image: string;
+}
 
 function formatDate(dateStr: string) {
   const date = new Date(dateStr);
   const now = new Date();
-  const diffMs = now.getTime() - date.getTime();
-  const diffDays = Math.floor(diffMs / 86400000);
+  const diffDays = Math.floor((now.getTime() - date.getTime()) / 86400000);
   if (diffDays === 0) return "Today";
   if (diffDays === 1) return "Yesterday";
   if (diffDays < 7) return `${diffDays} days ago`;
@@ -16,21 +24,36 @@ function formatDate(dateStr: string) {
   return date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
 }
 
+const ALL_GROUPS = Object.keys(GROUP_CONFIG) as GroupName[];
+
 export default function BlogGrid({ posts }: { posts: Post[] }) {
-  const [active, setActive] = useState("All");
+  const [activeGroup, setActiveGroup] = useState<GroupName | "All">("All");
   const [query, setQuery] = useState("");
   const [sortAsc, setSortAsc] = useState(false);
-  const categories = ["All", ...Array.from(new Set(posts.map(p => p.category))).sort()];
+
+  // Count posts per group for badge display
+  const groupCounts = useMemo(() => {
+    const counts: Partial<Record<GroupName, number>> = {};
+    for (const p of posts) {
+      const g = getGroup(p.category);
+      counts[g] = (counts[g] ?? 0) + 1;
+    }
+    return counts;
+  }, [posts]);
 
   const filtered = useMemo(() => {
     const base = posts.filter(p => {
-      const matchesCategory = active === "All" || p.category === active;
+      const matchesGroup = activeGroup === "All" || getGroup(p.category) === activeGroup;
       const q = query.toLowerCase();
       const matchesSearch = !q || p.title.toLowerCase().includes(q) || p.description.toLowerCase().includes(q);
-      return matchesCategory && matchesSearch;
+      return matchesGroup && matchesSearch;
     });
     return sortAsc ? [...base].reverse() : base;
-  }, [posts, active, query, sortAsc]);
+  }, [posts, activeGroup, query, sortAsc]);
+
+  const [featured, ...rest] = filtered;
+  const rawDate = (dateStr: string) =>
+    new Date(dateStr).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
 
   return (
     <>
@@ -56,25 +79,66 @@ export default function BlogGrid({ posts }: { posts: Post[] }) {
         <span className="text-xs text-gray-400 sm:ml-auto">{filtered.length} article{filtered.length !== 1 ? "s" : ""}</span>
       </div>
 
-      {/* Category filter chips */}
+      {/* Group filter chips */}
       <div className="flex flex-wrap gap-2 mb-10">
-        {categories.map((cat) => (
-          <button key={cat} onClick={() => setActive(cat)}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${active === cat ? "bg-coffee-700 text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}>
-            {cat}
-          </button>
-        ))}
+        <button
+          onClick={() => setActiveGroup("All")}
+          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeGroup === "All" ? "bg-coffee-700 text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}
+        >
+          All
+          <span className={`ml-1.5 text-xs ${activeGroup === "All" ? "text-white/70" : "text-gray-400"}`}>
+            {posts.length}
+          </span>
+        </button>
+        {ALL_GROUPS.filter(g => groupCounts[g]).map(group => {
+          const { Icon, chipActive, chipInactive } = GROUP_CONFIG[group];
+          const isActive = activeGroup === group;
+          return (
+            <button
+              key={group}
+              onClick={() => setActiveGroup(group)}
+              className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-colors ${isActive ? chipActive : chipInactive}`}
+            >
+              <Icon size={13} strokeWidth={2} />
+              {group}
+              <span className={`text-xs ${isActive ? "opacity-70" : "opacity-60"}`}>
+                {groupCounts[group]}
+              </span>
+            </button>
+          );
+        })}
       </div>
 
       {filtered.length === 0 ? (
         <p className="text-gray-500 text-sm">No articles found. Try a different search or category.</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filtered.map((post) => (
-            <BlogCard key={post.slug} title={post.title} excerpt={post.description} slug={post.slug} category={post.category}
+          {featured && (
+            <BlogCard
+              key={featured.slug}
+              title={featured.title}
+              excerpt={featured.description}
+              slug={featured.slug}
+              category={featured.category}
+              date={formatDate(featured.date)}
+              rawDate={rawDate(featured.date)}
+              readTime={featured.readTime}
+              image={featured.image}
+              featured
+            />
+          )}
+          {rest.map(post => (
+            <BlogCard
+              key={post.slug}
+              title={post.title}
+              excerpt={post.description}
+              slug={post.slug}
+              category={post.category}
               date={formatDate(post.date)}
-              rawDate={new Date(post.date).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
-              readTime={post.readTime} image={post.image} />
+              rawDate={rawDate(post.date)}
+              readTime={post.readTime}
+              image={post.image}
+            />
           ))}
         </div>
       )}
