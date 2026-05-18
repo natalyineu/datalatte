@@ -1,0 +1,60 @@
+name: Agent 7 — Apply Proposals
+
+on:
+  push:
+    paths:
+      - 'content/proposals.json'   # fires automatically when admin approves
+  schedule:
+    - cron: '*/15 * * * *'         # also polls every 15 min as safety net
+  workflow_dispatch:
+
+concurrency:
+  group: apply-proposals
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check for approved proposals
+        id: check
+        run: |
+          COUNT=$(python3 -c "
+          import json, sys
+          try:
+              data = json.load(open('content/proposals.json'))
+              approved = [p for p in data.get('proposals', []) if p.get('status') == 'approved']
+              print(len(approved))
+          except: print(0)
+          ")
+          echo "approved_count=$COUNT" >> $GITHUB_OUTPUT
+          echo "Approved proposals: $COUNT"
+
+      - name: Apply improvements
+        if: steps.check.outputs.approved_count != '0'
+        run: python3 scripts/apply-improvements.py
+
+      - name: Commit changes
+        if: steps.check.outputs.approved_count != '0'
+        run: |
+          git config user.name  "DataLatte Bot"
+          git config user.email "bot@datalatte.pro"
+          git add content/blog/ content/proposals.json
+          if git diff --cached --quiet; then
+            echo "Nothing to commit."
+          else
+            git commit -m "Apply ${{ steps.check.outputs.approved_count }} approved proposal(s) [vercel skip]"
+            git push
+          fi
+
+      - name: Skip message
+        if: steps.check.outputs.approved_count == '0'
+        run: echo "No approved proposals — nothing to do."

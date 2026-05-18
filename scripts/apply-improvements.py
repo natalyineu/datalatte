@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
 Apply improvements across all published articles:
-1. Apply 3 approved proposals (specific CTAs)
+1. Apply all 'approved' proposals from proposals.json (dynamic, not hardcoded)
 2. Add service-linked CTA callouts to articles missing any Callout
 3. Add internal links to articles missing /services/ links
 """
 
-import os, re, json
+import os, re, json, datetime
 
 BLOG_DIR = "content/blog"
 PROPOSALS_PATH = "content/proposals.json"
@@ -130,40 +130,50 @@ def has_callout(content: str) -> bool:
 def has_service_link(content: str) -> bool:
     return '/services/' in content or '/contact' in content
 
-def apply_proposal_cta(slug: str, content: str, proposal_text: str, service_path: str) -> str:
-    """Apply a specific approved proposal CTA."""
-    if has_callout(content) and service_path in content:
-        return content  # already has it
-    # Add at the end of the article
-    callout = f'\n<Callout type="coffee" title="Ready to Take Action?">\n{proposal_text}\n</Callout>\n'
-    return content.rstrip() + '\n' + callout
+# ── Load approved proposals dynamically ───────────────────────────────────────
 
-# ── 3 Approved proposals ───────────────────────────────────────────────────────
+def load_approved_proposals() -> dict:
+    """Returns {slug: proposal_dict} for all status='approved' entries."""
+    if not os.path.exists(PROPOSALS_PATH):
+        return {}
+    with open(PROPOSALS_PATH) as f:
+        data = json.load(f)
+    return {
+        p['slug']: p
+        for p in data.get('proposals', [])
+        if p.get('status') == 'approved'
+    }
 
-APPROVED_PROPOSALS = {
-    "7-best-marketing-automation-platforms-for-small-businesses-in-2026-compared": {
-        "cta_text": "Ready to automate your marketing? Schedule a **FREE 30-minute strategy call** with Nataliia to get a tailored automation plan for your business → [Schedule Now](/services/ai-agents)",
-        "service_path": "/services/ai-agents",
-    },
-    "how-much-should-a-barbershop-spend-on-google-ads": {
-        "cta_text": "Ready to calculate your perfect Google Ads budget? **Schedule a free 30-minute consultation** with Nataliia to get a tailored strategy → [Schedule Here](/services/google-ads)",
-        "service_path": "/services/google-ads",
-    },
-    "how-to-get-dog-grooming-clients-the-2026-growth-playbook-for-groomers": {
-        "cta_text": "Need help optimising your Google Business Profile or Google Ads? **Get a free strategy session** with Nataliia at DataLatte → [Book Now](/services/google-ads)",
-        "service_path": "/services/google-ads",
-    },
-}
+def mark_proposals_applied(applied_slugs: list):
+    if not applied_slugs or not os.path.exists(PROPOSALS_PATH):
+        return
+    with open(PROPOSALS_PATH) as f:
+        data = json.load(f)
+    now = datetime.datetime.utcnow().isoformat() + 'Z'
+    count = 0
+    for p in data.get('proposals', []):
+        if p['slug'] in applied_slugs and p.get('status') == 'approved':
+            p['status'] = 'applied'
+            p['appliedAt'] = now
+            count += 1
+    with open(PROPOSALS_PATH, 'w') as f:
+        json.dump(data, f, indent=2)
+        f.write('\n')
+    print(f"  📋 Marked {count} proposal(s) as 'applied' in proposals.json")
 
 # ── Main ───────────────────────────────────────────────────────────────────────
 
 def main():
     files = sorted([f for f in os.listdir(BLOG_DIR) if f.endswith('.mdx')])
+    approved_proposals = load_approved_proposals()
 
-    applied_proposals = 0
+    print(f"Approved proposals to apply: {len(approved_proposals)}")
+    for slug in approved_proposals:
+        print(f"  • {slug}")
+
+    applied_proposal_slugs = []
     added_callouts = 0
     already_good = 0
-    skipped = 0
     changed_files = []
 
     for filename in files:
@@ -171,21 +181,29 @@ def main():
         slug = filename.replace('.mdx', '')
         original = open(path, encoding='utf-8').read()
         content = original
+        category = get_frontmatter_field(content, 'category')
 
-        # 1. Apply approved proposals first
-        if slug in APPROVED_PROPOSALS:
-            proposal = APPROVED_PROPOSALS[slug]
-            if not has_callout(content) or proposal['service_path'] not in content:
-                content = apply_proposal_cta(slug, content, proposal['cta_text'], proposal['service_path'])
-                applied_proposals += 1
+        # 1. Apply approved proposal for this slug
+        if slug in approved_proposals:
+            proposal = approved_proposals[slug]
+            proposal_text = proposal.get('proposal', '')
+            service_path, _ = SERVICE_MAP.get(category, DEFAULT_SERVICE)
+            if not has_callout(content):
+                callout = f'\n<Callout type="coffee" title="Ready to Take Action?">\n{proposal_text}\n</Callout>\n'
+                content = content.rstrip() + '\n' + callout
+                applied_proposal_slugs.append(slug)
                 print(f"  ✅ Applied proposal: {slug}")
+            else:
+                # Already has a callout — just mark as applied
+                applied_proposal_slugs.append(slug)
+                print(f"  ✓  Proposal slug already has Callout, marking applied: {slug}")
 
-        # 2. Add CTA callout to articles missing any Callout, OR has callout but no service link
-        elif not has_callout(content) or not has_service_link(content):
-            category = get_frontmatter_field(content, 'category')
+        # 2. Add standard CTA to articles with no Callout at all
+        elif not has_callout(content):
             callout = get_cta_callout(category)
             content = content.rstrip() + '\n' + callout
             added_callouts += 1
+
         else:
             already_good += 1
 
@@ -194,25 +212,18 @@ def main():
                 f.write(content)
             changed_files.append(filename)
 
-    # 3. Mark proposals as applied in proposals.json
-    if os.path.exists(PROPOSALS_PATH):
-        with open(PROPOSALS_PATH) as f:
-            proposals_data = json.load(f)
-        for p in proposals_data.get('proposals', []):
-            if p['slug'] in APPROVED_PROPOSALS and p['status'] == 'approved':
-                p['status'] = 'applied'
-                p['appliedAt'] = __import__('datetime').datetime.utcnow().isoformat() + 'Z'
-        with open(PROPOSALS_PATH, 'w') as f:
-            json.dump(proposals_data, f, indent=2)
-            f.write('\n')
-        print(f"\n📋 Marked {applied_proposals} proposals as 'applied'")
+    # Mark applied proposals in proposals.json
+    mark_proposals_applied(applied_proposal_slugs)
 
     print(f"\n{'='*50}")
-    print(f"✅ Applied approved proposals:  {applied_proposals}")
-    print(f"🎯 Added CTA callouts:          {added_callouts}")
+    print(f"✅ Applied approved proposals:  {len(applied_proposal_slugs)}")
+    print(f"🎯 Added standard CTA callouts: {added_callouts}")
     print(f"✓  Already had callout:         {already_good}")
     print(f"📝 Total files changed:         {len(changed_files)}")
     print(f"{'='*50}")
+
+    if not changed_files:
+        print("Nothing to commit.")
 
 if __name__ == "__main__":
     main()
