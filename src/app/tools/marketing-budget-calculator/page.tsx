@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import BudgetCalculator from "@/components/BudgetCalculator";
+import HeroFloaters from "@/components/tools/HeroFloaters";
 
 export const metadata: Metadata = {
   title: "Free Marketing Budget Calculator for Small Businesses",
@@ -81,7 +82,8 @@ export default function MarketingBudgetCalculatorPage() {
       />
 
       {/* Hero */}
-      <section className="bg-gradient-to-b from-coffee-50 to-white pt-16 pb-10 px-4">
+      <section className="hero-shimmer relative pt-16 pb-10 px-4">
+        <HeroFloaters />
         <div className="max-w-2xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 bg-coffee-100 text-coffee-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-4">
             ☕ Free Tool — No sign-up required
