@@ -58,27 +58,60 @@ jobs:
         run: |
           OUTPUT=$(cat /tmp/gen_output.txt 2>/dev/null || echo "")
           TIME=$(date -u '+%H:%M UTC')
-          if echo "$OUTPUT" | grep -q "Pushed"; then
-            SLUG=$(echo "$OUTPUT" | grep "Pushed" | sed 's/.*Pushed: //')
+          BOT="${{ secrets.TELEGRAM_BOT_TOKEN }}"
+          CHAT="${{ secrets.TELEGRAM_CHAT_ID }}"
+
+          send_telegram() {
+            local text="$1"
+            # Use JSON body to safely handle special characters in titles/keywords
+            local payload
+            payload=$(printf '{"chat_id":"%s","text":"%s","parse_mode":"HTML"}' \
+              "$CHAT" \
+              "$(echo "$text" | sed 's/\\/\\\\/g; s/"/\\"/g; s/$/\\n/g' | tr -d '\n' | sed 's/\\n$//')")
+            curl -s -X POST "https://api.telegram.org/bot${BOT}/sendMessage" \
+              -H "Content-Type: application/json" \
+              -d "$payload" > /dev/null || true
+          }
+
+          if echo "$OUTPUT" | grep -q "✅ Pushed:"; then
+            SLUG=$(echo "$OUTPUT" | grep "✅ Pushed:" | sed 's/.*✅ Pushed: //' | tr -d '[:space:]')
             TITLE=$(echo "$OUTPUT" | grep "^ARTICLE_TITLE:" | sed 's/^ARTICLE_TITLE: //')
             KEYWORD=$(echo "$OUTPUT" | grep "^ARTICLE_KEYWORD:" | sed 's/^ARTICLE_KEYWORD: //')
             CLUSTER=$(echo "$OUTPUT" | grep "^ARTICLE_CLUSTER:" | sed 's/^ARTICLE_CLUSTER: //')
             REMAINING=$(echo "$OUTPUT" | grep "^QUEUE_REMAINING:" | sed 's/^QUEUE_REMAINING: //')
-            MODEL=$(echo "$OUTPUT" | grep "Model used:" | sed 's/.*Model used: //')
+            MODEL=$(echo "$OUTPUT" | grep "✅ Model used:" | sed 's/.*✅ Model used: //')
             URL="https://www.datalatte.pro/blog/${SLUG}"
-            MSG="✍️ <b>Writer</b> — article published%0A%0A📝 ${TITLE}%0A🔑 ${KEYWORD}%0A📂 ${CLUSTER}%0A🤖 ${MODEL}%0A%0A📊 ${REMAINING} pending in queue%0A🔗 ${URL}"
+            TEXT="✍️ <b>Writer</b> — published
+🕐 ${TIME}
+
+📝 ${TITLE}
+🔑 ${KEYWORD}
+📂 ${CLUSTER}
+🤖 ${MODEL}
+
+📊 ${REMAINING} pending in queue
+🔗 ${URL}"
           elif echo "$OUTPUT" | grep -q "rate_limit\|All Groq models\|unavailable"; then
-            MSG="✍️ <b>Writer</b> — rate limited ⏳%0AAll Groq models busy, retrying in 3 min%0A🕐 ${TIME}"
-          elif echo "$OUTPUT" | grep -q "Reset.*pending"; then
-            SLUG=$(echo "$OUTPUT" | grep "Reset:" | sed 's/.*Reset: //' | sed 's/ → pending//')
-            MSG="✍️ <b>Writer</b> — reset after failure 🔄%0AArticle returned to queue: ${SLUG}%0A🕐 ${TIME}"
+            TEXT="✍️ <b>Writer</b> — rate limited ⏳
+🕐 ${TIME}
+
+All Groq models busy, retrying in 3 min."
+          elif echo "$OUTPUT" | grep -q "Reset.*pending\|reset.*pending"; then
+            SLUG=$(echo "$OUTPUT" | grep -i "Reset:" | head -1 | sed 's/.*Reset: //' | sed 's/ → pending//')
+            TEXT="✍️ <b>Writer</b> — reset after failure 🔄
+🕐 ${TIME}
+
+Article returned to queue: ${SLUG}"
           elif echo "$OUTPUT" | grep -q "No pending"; then
-            MSG="✍️ <b>Writer</b> — queue empty ✅%0AAll articles published. Add new topics to queue.%0A🕐 ${TIME}"
+            TEXT="✍️ <b>Writer</b> — queue empty ✅
+🕐 ${TIME}
+
+All articles published. Add new topics to queue."
           else
             ERR=$(echo "$OUTPUT" | grep -i 'error\|Error' | head -1)
-            MSG="✍️ <b>Writer</b> — failed ❌%0A${ERR}%0A🕐 ${TIME}"
+            TEXT="✍️ <b>Writer</b> — failed ❌
+🕐 ${TIME}
+
+${ERR}"
           fi
-          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
-            -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
-            -d "text=$MSG" \
-            -d "parse_mode=HTML" > /dev/null || true
+          send_telegram "$TEXT"
