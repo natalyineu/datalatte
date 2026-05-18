@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const RESEND_API_KEY     = process.env.RESEND_API_KEY!;
+const RESEND_AUDIENCE_ID = process.env.RESEND_AUDIENCE_ID;
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID   = process.env.TELEGRAM_CHAT_ID;
-const AIRTABLE_TOKEN     = process.env.AIRTABLE_TOKEN;
-const AIRTABLE_BASE_ID   = process.env.AIRTABLE_BASE_ID;
 
 function escapeHtml(str: string): string {
   return str
@@ -25,35 +24,24 @@ const NICHE_LABELS: Record<string, string> = {
   other:      "Other",
 };
 
-async function saveLeadToAirtable(fields: {
-  name?: string;
-  email: string;
-  niche?: string;
-  message?: string;
-  formType: string;
-}) {
-  if (!AIRTABLE_TOKEN || !AIRTABLE_BASE_ID) return;
+async function addToResendAudience(email: string, name?: string) {
+  if (!RESEND_AUDIENCE_ID) return;
   try {
-    await fetch(
-      `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/Leads`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${AIRTABLE_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          fields: {
-            "Lead Name": fields.name || fields.email.split("@")[0],
-            "Email":      fields.email,
-            "Lead Source": fields.formType === "ready" ? "Contact Form — Ready" : "Contact Form — Exploring",
-            "Lead Status": "New",
-          },
-        }),
-      }
-    );
+    await fetch(`https://api.resend.com/audiences/${RESEND_AUDIENCE_ID}/contacts`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        first_name: name?.split(" ")[0] ?? undefined,
+        last_name: name?.split(" ").slice(1).join(" ") || undefined,
+        unsubscribed: false,
+      }),
+    });
   } catch (err) {
-    console.error("Airtable lead save failed:", err);
+    console.error("Resend audience add failed:", err);
   }
 }
 
@@ -75,8 +63,8 @@ export async function POST(req: NextRequest) {
 
     const nicheLabel = niche ? (NICHE_LABELS[niche] ?? niche) : null;
 
-    // 1. Save to Airtable CRM (fire-and-forget)
-    saveLeadToAirtable({ name, email, niche, message, formType: form_type }).catch(() => {});
+    // 1. Add to Resend audience (fire-and-forget)
+    addToResendAudience(email, name).catch(() => {});
 
     // 2. Notify Nataliia via Resend
     const safeEmail     = escapeHtml(email);
