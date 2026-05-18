@@ -267,11 +267,30 @@ async function main() {
   console.log(`ARTICLES_ANALYZED: ${analyzed}`);
 
   // 7. Telegram summary
-  await telegram(`🎯 <b>Improver Agent</b>\nAnalyzed ${analyzed} articles · Added ${added} proposals`);
+  let msg = `🎯 <b>Improver</b> — ${analyzed} articles analyzed\n\n`;
+
+  if (newProposals.length > 0) {
+    // Sort by impact desc for top picks
+    const top = [...newProposals].sort((a, b) => b.impactScore - a.impactScore).slice(0, 4);
+    const impactEmoji = (n) => n >= 8 ? '🔴' : n >= 6 ? '🟡' : '🟢';
+    const typeLabel = { cta: 'CTA', internal_link: 'Links', conversion_language: 'Copy', social_proof: 'Social proof' };
+
+    msg += `📋 <b>${added} proposal(s) need your review:</b>\n`;
+    for (const p of top) {
+      msg += `\n${impactEmoji(p.impactScore)} Impact ${p.impactScore}/10 — <b>${p.slug}</b>\n`;
+      msg += `  ${typeLabel[p.type] || p.type}: ${p.proposal.slice(0, 80)}\n`;
+    }
+    if (newProposals.length > 4) msg += `\n+ ${newProposals.length - 4} more proposals\n`;
+    msg += `\n👉 Review at datalatte.pro/admin → Proposals tab`;
+  } else {
+    msg += `✅ No new proposals this run.\n${analyzed} articles look good for conversion.`;
+  }
+
+  await telegram(msg);
 }
 
 main().catch(async e => {
   console.error('Improver Agent error:', e.message);
-  await telegram(`❌ <b>Improver Agent failed</b>\n${e.message}`);
+  await telegram(`🎯 <b>Improver</b> — failed ❌\n${e.message}`);
   process.exit(1);
 });

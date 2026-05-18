@@ -358,16 +358,24 @@ async function main() {
   ].join('\n');
 
   // Build Telegram message
-  let msg = `📊 <b>DataLatte</b> — ${timeStr}\n\n`;
-  msg += `<b>Health Score: ${score}/100${trendDisplay} ${getScoreLabel(score)}</b>\n`;
+  const topClusters = Object.entries(stats.byCategory || {})
+    .sort((a, b) => b[1] - a[1]).slice(0, 3)
+    .map(([k, v]) => `${k} (${v})`).join(', ');
+
+  let msg = `📊 <b>Pipeline</b> — ${timeStr}\n\n`;
+  msg += `<b>Health: ${score}/100${trendDisplay} ${getScoreLabel(score)}</b>\n`;
   msg += `<pre>${scoreBreakdown}</pre>\n`;
-  msg += `${statusIcon} ${statusText}\n`;
-  msg += `📝 Today: ${todayCount} articles\n`;
-  msg += `⏱️ Last: ${ageStr}\n`;
-  msg += `📋 ${stats.pending} pending | ${stats.published} published\n`;
-  if (recentErrors > 0) msg += `❗ Errors: ${recentErrors}/10 runs\n`;
-  if (restarted)   msg += `🔄 Auto-restarted\n`;
-  if (queueLow)    msg += `⚠️ Queue running low!\n`;
+  msg += `📝 Today: <b>${todayCount} articles</b>\n`;
+  msg += `⏱️ Last article: ${ageStr}\n`;
+  msg += `📋 ${stats.pending} pending · ${stats.published} published\n`;
+  if (qualityAvg !== null) {
+    const qe = qualityAvg >= 7 ? '✅' : qualityAvg >= 5 ? '⚠️' : '🔴';
+    msg += `${qe} Avg quality: ${qualityAvg}/10\n`;
+  }
+  if (topClusters) msg += `📂 Top clusters: ${topClusters}\n`;
+  if (recentErrors > 0) msg += `❗ Errors: ${recentErrors}/10 recent runs\n`;
+  if (restarted)   msg += `🔄 Writer auto-restarted\n`;
+  if (queueLow)    msg += `⚠️ Queue low — add new topics!\n`;
   if (insight)     msg += `\n💡 <i>${insight}</i>`;
 
   await telegram(msg);
@@ -390,6 +398,6 @@ async function main() {
 
 main().catch(async e => {
   console.error('Pipeline Manager error:', e.message);
-  await telegram(`❌ <b>Pipeline Manager failed</b>\n${e.message}`);
+  await telegram(`📊 <b>Pipeline</b> — failed ❌\n${e.message}`);
   process.exit(1);
 });

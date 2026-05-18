@@ -172,10 +172,28 @@ Valid niches: general, coffee-shops, hair-salons, pet-groomers, fitness-studios`
   }
 
   // 8. Telegram report
-  const addedList = newArticles.slice(0, 8).map(a => `• ${a.title}`).join('\n');
-  const msg = newArticles.length > 0
-    ? `🔬 <b>Research Agent</b>\n📅 ${new Date().toISOString().slice(0, 10)}\n\n📈 Added ${newArticles.length} new articles to queue:\n${addedList}\n\n📊 Queue: ${pending.length + newArticles.length} pending | ${published.length} published`
-    : `🔬 <b>Research Agent</b>\n📅 ${new Date().toISOString().slice(0, 10)}\n\n✅ Queue looks balanced — no new articles added\n📊 ${pending.length} pending | ${published.length} published`;
+  let msg;
+  if (newArticles.length > 0) {
+    // Group by cluster/category
+    const byCat = {};
+    for (const a of newArticles) {
+      const cat = a.cluster || a.category || 'Uncategorised';
+      if (!byCat[cat]) byCat[cat] = [];
+      byCat[cat].push(a.title);
+    }
+    const clusterLines = Object.entries(byCat).slice(0, 5)
+      .map(([cat, titles]) => `  📂 ${cat} (${titles.length})\n` + titles.slice(0, 2).map(t => `    • ${t}`).join('\n'))
+      .join('\n');
+
+    msg = `🔬 <b>Researcher</b> — ${newArticles.length} topics added\n\n`;
+    msg += clusterLines + '\n';
+    if (Object.keys(byCat).length > 5) msg += `  + ${Object.keys(byCat).length - 5} more clusters\n`;
+    msg += `\n📊 Queue: ${pending.length + newArticles.length} pending · ${published.length} published`;
+  } else {
+    msg = `🔬 <b>Researcher</b> — queue balanced ✅\n`;
+    msg += `No new topics needed right now.\n`;
+    msg += `📊 ${pending.length} pending · ${published.length} published`;
+  }
 
   await telegram(msg);
   console.log('✅ Research Agent done');
@@ -183,6 +201,6 @@ Valid niches: general, coffee-shops, hair-salons, pet-groomers, fitness-studios`
 
 main().catch(async e => {
   console.error('Research Agent error:', e.message);
-  await telegram(`❌ <b>Research Agent failed</b>\n${e.message}`);
+  await telegram(`🔬 <b>Researcher</b> — failed ❌\n${e.message}`);
   process.exit(1);
 });

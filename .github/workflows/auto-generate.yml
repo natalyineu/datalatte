@@ -57,6 +57,7 @@ jobs:
         continue-on-error: true
         run: |
           OUTPUT=$(cat /tmp/gen_output.txt 2>/dev/null || echo "")
+          TIME=$(date -u '+%H:%M UTC')
           if echo "$OUTPUT" | grep -q "Pushed"; then
             SLUG=$(echo "$OUTPUT" | grep "Pushed" | sed 's/.*Pushed: //')
             TITLE=$(echo "$OUTPUT" | grep "^ARTICLE_TITLE:" | sed 's/^ARTICLE_TITLE: //')
@@ -65,15 +66,17 @@ jobs:
             REMAINING=$(echo "$OUTPUT" | grep "^QUEUE_REMAINING:" | sed 's/^QUEUE_REMAINING: //')
             MODEL=$(echo "$OUTPUT" | grep "Model used:" | sed 's/.*Model used: //')
             URL="https://www.datalatte.pro/blog/${SLUG}"
-            MSG="📝 ${TITLE}%0A%0A🔑 ${KEYWORD}%0A📂 ${CLUSTER} · 🤖 ${MODEL}%0A📊 ${REMAINING} articles left in queue%0A%0A${URL}"
+            MSG="✍️ <b>Writer</b> — article published%0A%0A📝 ${TITLE}%0A🔑 ${KEYWORD}%0A📂 ${CLUSTER}%0A🤖 ${MODEL}%0A%0A📊 ${REMAINING} pending in queue%0A🔗 ${URL}"
           elif echo "$OUTPUT" | grep -q "rate_limit\|All Groq models\|unavailable"; then
-            REMAINING=$(echo "$OUTPUT" | grep "^QUEUE_REMAINING:" | sed 's/^QUEUE_REMAINING: //')
-            MSG="⏳ Rate limited — retrying in 3 min%0A$(date -u '+%H:%M UTC')"
+            MSG="✍️ <b>Writer</b> — rate limited ⏳%0AAll Groq models busy, retrying in 3 min%0A🕐 ${TIME}"
+          elif echo "$OUTPUT" | grep -q "Reset.*pending"; then
+            SLUG=$(echo "$OUTPUT" | grep "Reset:" | sed 's/.*Reset: //' | sed 's/ → pending//')
+            MSG="✍️ <b>Writer</b> — reset after failure 🔄%0AArticle returned to queue: ${SLUG}%0A🕐 ${TIME}"
           elif echo "$OUTPUT" | grep -q "No pending"; then
-            MSG="✅ Queue empty — all articles published!"
+            MSG="✍️ <b>Writer</b> — queue empty ✅%0AAll articles published. Add new topics to queue.%0A🕐 ${TIME}"
           else
             ERR=$(echo "$OUTPUT" | grep -i 'error\|Error' | head -1)
-            MSG="❌ Generation failed%0A${ERR}"
+            MSG="✍️ <b>Writer</b> — failed ❌%0A${ERR}%0A🕐 ${TIME}"
           fi
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
             -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \

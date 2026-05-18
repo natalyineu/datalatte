@@ -293,7 +293,7 @@ async function main() {
 
   if (totalChanged === 0) {
     console.log('✅ Nothing to fix');
-    await telegram('🔧 <b>Fixer Agent</b> — ran, nothing needed ✅');
+    await telegram(`🔧 <b>Fixer</b> — nothing to fix ✅\nAll articles clean. Good job Auditor.`);
     return;
   }
 
@@ -314,18 +314,26 @@ async function main() {
   const sha = execSync('git rev-parse --short HEAD').toString().trim();
 
   // Telegram report
-  let msg = `🔧 <b>Fixer Agent</b>\n📅 ${new Date().toUTCString().slice(0, 25)}\n\n`;
+  const time = new Date().toUTCString().slice(0, 25);
+  let msg = `🔧 <b>Fixer</b> — ${totalChanged} issue(s) resolved\n`;
+  msg += `🕐 ${time}\n`;
 
   if (fixedFiles.length > 0) {
-    msg += `✅ Fixed ${fixedFiles.length} file(s):\n`;
-    msg += fixedFiles.slice(0, 5).map(f => `• ${f.file.slice(0, 40)}: ${f.fixes.join(', ')} (${f.quality}/10)`).join('\n') + '\n\n';
+    msg += `\n✅ MDX fixed (${fixedFiles.length}):\n`;
+    msg += fixedFiles.slice(0, 5).map(f => {
+      const name = f.file.replace('content/blog/', '').replace('.mdx', '');
+      return `  • ${name} (${f.quality}/10) — ${f.fixes.join(', ')}`;
+    }).join('\n') + '\n';
   }
   if (regenerateFiles.length > 0) {
-    msg += `♻️ ${regenerateFiles.length} article(s) queued for regeneration:\n`;
-    msg += regenerateFiles.slice(0, 4).map(f => `• ${f.file.slice(0, 40)}\n  ↳ ${f.reason}`).join('\n') + '\n\n';
+    msg += `\n♻️ Queued for regen (${regenerateFiles.length}):\n`;
+    msg += regenerateFiles.slice(0, 4).map(f => {
+      const name = f.file.replace('content/blog/', '').replace('.mdx', '');
+      return `  • ${name}\n    ↳ ${f.reason}`;
+    }).join('\n') + '\n';
   }
-  if (dupeFixed > 0) msg += `🔁 Removed ${dupeFixed} duplicate slug(s)\n\n`;
-  msg += `🔗 Commit: ${sha}`;
+  if (dupeFixed > 0) msg += `\n🔁 Duplicate slugs removed: ${dupeFixed}\n`;
+  msg += `\n🔗 Commit: ${sha}`;
 
   await telegram(msg);
   console.log('✅ Fixer Agent done');
@@ -333,6 +341,6 @@ async function main() {
 
 main().catch(async e => {
   console.error('Fixer Agent error:', e.message);
-  await telegram(`❌ <b>Fixer Agent failed</b>\n${e.message}`);
+  await telegram(`🔧 <b>Fixer</b> — failed ❌\n${e.message}`);
   process.exit(1);
 });

@@ -314,33 +314,36 @@ async function main() {
   }
 
   // Step 6: Build Telegram message
-  let msg = `🔍 <b>Audit Agent</b>\n📅 ${new Date().toUTCString().slice(0, 25)}\n\n`;
+  const qualityEmoji = qualityAvg === null ? '❓' : qualityAvg >= 7 ? '✅' : qualityAvg >= 5 ? '⚠️' : '🔴';
+  const qualityStr = qualityAvg !== null ? `${qualityAvg}/10` : 'n/a';
+  const totalIssues = toFix.length + toRegenerate.length + dupes.length;
+  const time = new Date().toUTCString().slice(0, 25);
 
+  let msg = `🔍 <b>Auditor</b> — ${totalIssues === 0 ? 'all clean ✅' : `${totalIssues} issue(s) found`}\n`;
+  msg += `🕐 ${time}\n\n`;
+  msg += `${qualityEmoji} Avg quality: <b>${qualityStr}</b> · ${sample.length} articles sampled\n`;
+
+  if (lowQuality.length > 0) {
+    msg += `\n⚠️ Low quality (<6/10):\n`;
+    msg += lowQuality.slice(0, 4).map(p => `  • ${p.file.replace('content/blog/', '').replace('.mdx', '')} → <b>${p.assessment.quality}/10</b>`).join('\n') + '\n';
+  }
   if (toFix.length > 0) {
-    msg += `🔧 ${toFix.length} file(s) to fix:\n`;
-    msg += toFix.slice(0, 4).map(p => `• ${p.file.slice(0, 45)}: ${p.issues.join(', ')}`).join('\n') + '\n\n';
+    msg += `\n🔧 MDX issues (${toFix.length}):\n`;
+    msg += toFix.slice(0, 4).map(p => `  • ${p.file.replace('content/blog/', '').replace('.mdx', '')}: ${p.issues.join(', ')}`).join('\n') + '\n';
   }
   if (toRegenerate.length > 0) {
-    msg += `♻️ ${toRegenerate.length} file(s) to regenerate:\n`;
-    msg += toRegenerate.slice(0, 3).map(p => `• ${p.file.slice(0, 45)} — ${p.assessment.reason}`).join('\n') + '\n\n';
-  }
-  if (qualityAvg !== null) {
-    const qualityEmoji = qualityAvg >= 7 ? '✅' : qualityAvg >= 5 ? '⚠️' : '🔴';
-    msg += `${qualityEmoji} Avg quality (${sample.length} sampled): <b>${qualityAvg}/10</b>\n\n`;
-  }
-  if (lowQuality.length > 0) {
-    msg += `⚠️ ${lowQuality.length} low-quality article(s):\n`;
-    msg += lowQuality.map(p => `• ${p.file.slice(0, 45)} (${p.assessment.quality}/10)`).join('\n') + '\n\n';
+    msg += `\n♻️ Queued for regen (${toRegenerate.length}):\n`;
+    msg += toRegenerate.slice(0, 3).map(p => `  • ${p.file.replace('content/blog/', '').replace('.mdx', '')} — ${p.assessment.reason}`).join('\n') + '\n';
   }
   if (dupes.length > 0) {
-    msg += `🔁 ${dupes.length} duplicate slug(s) in queue\n\n`;
+    msg += `\n🔁 Duplicate slugs: ${dupes.length}\n`;
   }
 
   if (toFix.length > 0 || toRegenerate.length > 0 || dupes.length > 0) {
-    msg += `🔧 Triggering Fixer...`;
+    msg += `\n🔧 Triggering Fixer Agent...`;
     await telegram(msg);
     const triggered = await triggerFixer();
-    if (!triggered) await telegram('⚠️ Could not trigger Fixer — check PAT_TOKEN');
+    if (!triggered) await telegram('🔍 <b>Auditor</b> — ⚠️ Could not trigger Fixer. Check PAT_TOKEN.');
   } else {
     await telegram(msg);
   }
@@ -350,6 +353,6 @@ async function main() {
 
 main().catch(async e => {
   console.error('Audit Agent error:', e.message);
-  await telegram(`❌ <b>Audit Agent failed</b>\n${e.message}`);
+  await telegram(`🔍 <b>Auditor</b> — failed ❌\n${e.message}`);
   process.exit(1);
 });
