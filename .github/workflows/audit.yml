@@ -2,7 +2,7 @@ name: Agent 2 — Auditor
 
 on:
   schedule:
-    - cron: '0 * * * *'   # every hour — rotates through all articles, 40/run
+    - cron: '*/5 * * * *'   # every 5 min — rotates through all articles, 40/run
   workflow_dispatch:
 
 jobs:
