@@ -172,17 +172,18 @@ async function main() {
     return;
   }
 
-  // 2. Load existing proposals to skip slugs that already have pending ones
+  // 2. Load existing proposals — only skip articles that already have an unreviewed pending proposal
   const { content: proposalsData, sha: proposalsSha } = await ghGetFile('content/proposals.json');
   const existingProposals = proposalsData?.proposals || [];
+  // Only block articles with a truly unreviewed 'pending' proposal — approved/rejected/applied are done
   const pendingSlugs = new Set(
-    existingProposals.filter(p => ['pending', 'approved'].includes(p.status)).map(p => p.slug)
+    existingProposals.filter(p => p.status === 'pending').map(p => p.slug)
   );
 
-  // 3. Pick 15 random published articles (skip those with pending proposals)
+  // 3. Pick 25 random published articles (skip only those with unreviewed proposals)
   const eligible = publishedEntries.filter(e => !pendingSlugs.has(e.slug));
   const shuffled = eligible.sort(() => Math.random() - 0.5);
-  const sample = shuffled.slice(0, 15);
+  const sample = shuffled.slice(0, 25);
 
   let analyzed = 0;
   let added = 0;
