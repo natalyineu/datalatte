@@ -7,11 +7,13 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import clsx from "clsx";
 
 const niches = [
-  { label: "Coffee Shops",        href: "/for/coffee-shops" },
-  { label: "Hair Salons",         href: "/for/hair-salons" },
-  { label: "Pet Groomers",        href: "/for/pet-groomers" },
-  { label: "Fitness Studios",     href: "/for/fitness-studios" },
-  { label: "Growing Businesses",  href: "/for/medium-business" },
+  { label: "Coffee Shops",          href: "/for/coffee-shops" },
+  { label: "Hair Salons",           href: "/for/hair-salons" },
+  { label: "Pet Groomers",          href: "/for/pet-groomers" },
+  { label: "Fitness Studios",       href: "/for/fitness-studios" },
+  { label: "Startups",              href: "/for/startups" },
+  { label: "Freelancers & Consultants", href: "/for/freelancers" },
+  { label: "Growing Businesses",    href: "/for/medium-business" },
   { label: "Enterprise & Agencies", href: "/for/enterprise" },
 ];
 
