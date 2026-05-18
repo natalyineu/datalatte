@@ -36,6 +36,15 @@ async function saveToAirtable(email: string, source: string) {
   }
 }
 
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 export async function POST(req: NextRequest) {
   try {
     const { email, source = "blog" } = await req.json();
@@ -73,7 +82,7 @@ export async function POST(req: NextRequest) {
             <p style="margin-top:32px">— Nataliia<br><span style="color:#888;font-size:13px">Founder, DataLatte</span></p>
             <hr style="margin:32px 0;border:none;border-top:1px solid #eee">
             <p style="font-size:12px;color:#aaa">
-              You subscribed at datalatte.pro. Source: ${source}.
+              You subscribed at datalatte.pro. Source: ${escapeHtml(source)}.
               To unsubscribe, reply to this email with "unsubscribe" in the subject line.
             </p>
           </div>
