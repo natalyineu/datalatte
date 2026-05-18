@@ -941,7 +941,7 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
   // Proposals + quality
   const [proposals, setProposals]           = useState<Proposal[]>([]);
   const [qualityScores, setQualityScores]   = useState<Record<string, QualityScore>>({});
-  const [proposalStatusFilter, setProposalStatusFilter] = useState<string>("all");
+  const [proposalStatusFilter, setProposalStatusFilter] = useState<string>("pending");
   const [proposalTypeFilter, setProposalTypeFilter]     = useState<string>("all");
 
   // ── Fetchers ──────────────────────────────────────────────────────────────
@@ -1321,7 +1321,17 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="font-semibold text-white">Improvement Proposals</h2>
-                <p className="text-xs text-gray-500 mt-0.5">From Agent 6 — Improver (weekly analysis)</p>
+                <p className="text-xs text-gray-500 mt-0.5">
+                  Improver runs Mon + Thu · {proposals.length} total ·{" "}
+                  <span className={pendingProposalsCount > 0 ? "text-amber-300 font-medium" : "text-gray-500"}>
+                    {pendingProposalsCount} pending review
+                  </span>
+                  {proposals.length > 0 && (
+                    <span className="ml-2 text-gray-600">
+                      · last: {new Date(Math.max(...proposals.map(p => new Date(p.createdAt).getTime()))).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                    </span>
+                  )}
+                </p>
               </div>
               <button
                 onClick={fetchProposals}
@@ -1397,7 +1407,9 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
               <div className="text-center py-16 text-gray-500 text-sm">
                 <p className="text-3xl mb-3">🎯</p>
                 {proposals.length === 0
-                  ? "No proposals yet — Agent 6 (Improver) runs every Monday"
+                  ? "No proposals yet — Improver runs Mon & Thu. Trigger it manually from the Agents tab."
+                  : proposalStatusFilter === "pending"
+                  ? <span>No pending proposals — all reviewed ✅ <button onClick={() => setProposalStatusFilter("all")} className="text-amber-400 underline ml-1">View all {proposals.length}</button></span>
                   : "No proposals match your filters"}
               </div>
             ) : (

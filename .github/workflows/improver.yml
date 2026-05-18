@@ -3,6 +3,7 @@ name: Agent 6 — Improver
 on:
   schedule:
     - cron: '0 10 * * 1'   # Monday 10am UTC
+    - cron: '0 10 * * 4'   # Thursday 10am UTC
   workflow_dispatch:
 
 concurrency:
