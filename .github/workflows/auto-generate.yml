@@ -63,7 +63,6 @@ jobs:
 
           send_telegram() {
             local text="$1"
-            # Use JSON body to safely handle special characters in titles/keywords
             local payload
             payload=$(printf '{"chat_id":"%s","text":"%s","parse_mode":"HTML"}' \
               "$CHAT" \
@@ -73,45 +72,25 @@ jobs:
               -d "$payload" > /dev/null || true
           }
 
-          if echo "$OUTPUT" | grep -q "✅ Pushed:"; then
-            SLUG=$(echo "$OUTPUT" | grep "✅ Pushed:" | sed 's/.*✅ Pushed: //' | tr -d '[:space:]')
+          if echo "$OUTPUT" | grep -q "Pushed:"; then
+            SLUG=$(echo "$OUTPUT" | grep "Pushed:" | sed 's/.*Pushed: //' | tr -d '[:space:]')
             TITLE=$(echo "$OUTPUT" | grep "^ARTICLE_TITLE:" | sed 's/^ARTICLE_TITLE: //')
             KEYWORD=$(echo "$OUTPUT" | grep "^ARTICLE_KEYWORD:" | sed 's/^ARTICLE_KEYWORD: //')
             CLUSTER=$(echo "$OUTPUT" | grep "^ARTICLE_CLUSTER:" | sed 's/^ARTICLE_CLUSTER: //')
             REMAINING=$(echo "$OUTPUT" | grep "^QUEUE_REMAINING:" | sed 's/^QUEUE_REMAINING: //')
-            MODEL=$(echo "$OUTPUT" | grep "✅ Model used:" | sed 's/.*✅ Model used: //')
+            MODEL=$(echo "$OUTPUT" | grep "Model used:" | sed 's/.*Model used: //')
             URL="https://www.datalatte.pro/blog/${SLUG}"
-            TEXT="✍️ <b>Writer</b> — published
-🕐 ${TIME}
-
-📝 ${TITLE}
-🔑 ${KEYWORD}
-📂 ${CLUSTER}
-🤖 ${MODEL}
-
-📊 ${REMAINING} pending in queue
-🔗 ${URL}"
+            TEXT=$(printf "Writer - published\n%s\n\n%s\n%s\n%s\n%s\n\n%s pending\n%s" \
+              "$TIME" "$TITLE" "$KEYWORD" "$CLUSTER" "$MODEL" "$REMAINING" "$URL")
           elif echo "$OUTPUT" | grep -q "rate_limit\|All Groq models\|unavailable"; then
-            TEXT="✍️ <b>Writer</b> — rate limited ⏳
-🕐 ${TIME}
-
-All Groq models busy, retrying in 3 min."
+            TEXT=$(printf "Writer - rate limited\n%s\n\nAll Groq models busy, retrying in 3 min." "$TIME")
           elif echo "$OUTPUT" | grep -q "Reset.*pending\|reset.*pending"; then
-            SLUG=$(echo "$OUTPUT" | grep -i "Reset:" | head -1 | sed 's/.*Reset: //' | sed 's/ → pending//')
-            TEXT="✍️ <b>Writer</b> — reset after failure 🔄
-🕐 ${TIME}
-
-Article returned to queue: ${SLUG}"
+            SLUG=$(echo "$OUTPUT" | grep -i "Reset:" | head -1 | sed 's/.*Reset: //' | sed 's/ -> pending//')
+            TEXT=$(printf "Writer - reset after failure\n%s\n\nArticle returned to queue: %s" "$TIME" "$SLUG")
           elif echo "$OUTPUT" | grep -q "No pending"; then
-            TEXT="✍️ <b>Writer</b> — queue empty ✅
-🕐 ${TIME}
-
-All articles published. Add new topics to queue."
+            TEXT=$(printf "Writer - queue empty\n%s\n\nAll articles published." "$TIME")
           else
             ERR=$(echo "$OUTPUT" | grep -i 'error\|Error' | head -1)
-            TEXT="✍️ <b>Writer</b> — failed ❌
-🕐 ${TIME}
-
-${ERR}"
+            TEXT=$(printf "Writer - failed\n%s\n\n%s" "$TIME" "$ERR")
           fi
           send_telegram "$TEXT"
