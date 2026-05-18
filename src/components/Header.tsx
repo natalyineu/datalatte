@@ -87,6 +87,12 @@ export default function Header() {
             <DropdownMenu label="For Your Business" items={niches} />
             <DropdownMenu label="Services"           items={services} />
             <Link
+              href="/tools/marketing-budget-calculator"
+              className={clsx("text-gray-600 hover:text-gray-900 font-medium transition-colors", pathname.startsWith("/tools") && "text-coffee-700")}
+            >
+              Free Calculator
+            </Link>
+            <Link
               href="/blog"
               className={clsx("text-gray-600 hover:text-gray-900 font-medium transition-colors", pathname === "/blog" && "text-coffee-700")}
             >
@@ -155,6 +161,7 @@ export default function Header() {
             </div>
           )}
 
+          <Link href="/tools/marketing-budget-calculator" className="block py-3 text-gray-700 font-medium" onClick={() => setMobileOpen(false)}>Free Calculator ✨</Link>
           <Link href="/blog"    className="block py-3 text-gray-700 font-medium" onClick={() => setMobileOpen(false)}>Blog</Link>
           <Link href="/about"   className="block py-3 text-gray-700 font-medium" onClick={() => setMobileOpen(false)}>About</Link>
           <Link href="/contact" className="btn-primary w-full justify-center mt-3" onClick={() => setMobileOpen(false)}>
