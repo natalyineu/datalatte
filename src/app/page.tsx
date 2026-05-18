@@ -459,7 +459,7 @@ export default function HomePage() {
                     <item.icon size={19} className="text-coffee-700" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">{item.title}</h4>
+                    <h3 className="font-semibold text-gray-900 mb-1">{item.title}</h3>
                     <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
@@ -499,11 +499,11 @@ export default function HomePage() {
                 key={item.step}
                 className="flex gap-4 bg-white rounded-xl p-5 border border-coffee-100 hover:border-coffee-200 transition-colors"
               >
-                <div className="text-2xl font-bold text-coffee-200 font-display shrink-0 w-10">
+                <div className="text-2xl font-bold text-coffee-400 font-display shrink-0 w-10">
                   {item.step}
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gray-900 mb-1">{item.title}</h4>
+                  <h3 className="font-semibold text-gray-900 mb-1">{item.title}</h3>
                   <p className="text-sm text-gray-500">{item.desc}</p>
                 </div>
               </div>
