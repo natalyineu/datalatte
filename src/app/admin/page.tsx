@@ -41,7 +41,8 @@ interface Recommendation {
   primaryKeyword: string;
   cluster: string;
   targetWords: number;
-  source: "cluster" | "paa" | "autocomplete";
+  source: "queue";
+  status: "pending" | "generating" | "generated" | "published";
 }
 
 type TabId = "agents" | "proposals" | "pipeline" | "queue" | "research" | "published" | "reports";
@@ -904,7 +905,7 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
   const [queue, setQueue]                   = useState<QueueEntry[]>([]);
   const [articles, setArticles]             = useState<Article[]>([]);
   const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
-  const [dismissedSlugs, setDismissedSlugs]   = useState<Set<string>>(new Set());
+  const [collapsedClusters, setCollapsedClusters] = useState<Set<string>>(new Set());
   const [activeTab, setActiveTab]           = useState<TabId>("pipeline");
 
   // Queue tab state
@@ -931,9 +932,7 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
   } | null>(null);
   const cancelBatchRef = useRef(false);
 
-  // Add form state
-  const [addingRec, setAddingRec]           = useState<string | null>(null);
-  const [collapsedClusters, setCollapsedClusters] = useState<Set<string>>(new Set());
+  // (addingRec removed — per-item research actions no longer needed)
 
   // Published sort
   const [pubSort, setPubSort]               = useState<"date" | "words" | "quality">("date");
@@ -1098,26 +1097,6 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
 
   // ── Recommendations ───────────────────────────────────────────────────────
 
-  async function handleAddRecommendation(rec: Recommendation) {
-    setAddingRec(rec.slug);
-    const res = await authFetch("/api/admin/queue", {
-      method: "POST",
-      body: JSON.stringify({ slug: rec.slug, title: rec.title, primaryKeyword: rec.primaryKeyword, cluster: rec.cluster, targetWords: rec.targetWords }),
-    }, token);
-    if (res.ok) {
-      setRecommendations((prev) => prev.filter((r) => r.slug !== rec.slug));
-      fetchQueue();
-    }
-    setAddingRec(null);
-  }
-
-  async function handleAddAllInCluster(clusterName: string) {
-    const recs = recommendations.filter((r) => r.cluster === clusterName);
-    for (const rec of recs) {
-      await handleAddRecommendation(rec);
-    }
-  }
-
   // ── Bulk import ───────────────────────────────────────────────────────────
 
   function parseBulk(text: string) {
@@ -1188,14 +1167,13 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
     .sort((a, b) => (b.generatedDate ?? "").localeCompare(a.generatedDate ?? ""))
     .slice(0, 20);
 
-  // Research: group by cluster (exclude dismissed)
+  // Research: group pending queue articles by cluster
   const recsByCluster: Record<string, Recommendation[]> = {};
   for (const rec of recommendations) {
-    if (dismissedSlugs.has(rec.slug)) continue;
     if (!recsByCluster[rec.cluster]) recsByCluster[rec.cluster] = [];
     recsByCluster[rec.cluster].push(rec);
   }
-  const totalVisible = Object.values(recsByCluster).reduce((s, r) => s + r.length, 0);
+  const totalVisible = recommendations.length;
 
   // Published articles sorted
   const sortedArticles = [...articles].sort((a, b) => {
@@ -1928,8 +1906,10 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="font-semibold text-white">Topic Recommendations</h2>
-                <p className="text-xs text-gray-500 mt-0.5">{totalVisible} suggestions · {dismissedSlugs.size} dismissed</p>
+                <h2 className="font-semibold text-white">Research Queue</h2>
+                <p className="text-xs text-gray-500 mt-0.5">
+                  {totalVisible} articles pending generation · {Object.keys(recsByCluster).length} clusters
+                </p>
               </div>
               <button
                 onClick={fetchRecommendations}
@@ -1940,13 +1920,15 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
             </div>
 
             {Object.keys(recsByCluster).length === 0 ? (
-              <div className="text-center py-12 text-gray-500 text-sm">No recommendations available</div>
+              <div className="text-center py-12 text-gray-500 text-sm">Queue is empty — all articles published or generating</div>
             ) : (
-              Object.entries(recsByCluster).map(([cluster, recs]) => {
-                const isCollapsed = collapsedClusters.has(cluster);
-                return (
-                  <div key={cluster} className="border border-gray-800 rounded-xl overflow-hidden">
-                    <div className="flex items-center justify-between px-5 py-4 bg-gray-900 border-b border-gray-800">
+              Object.entries(recsByCluster)
+                .sort((a, b) => b[1].length - a[1].length)
+                .map(([cluster, recs]) => {
+                  const isCollapsed = collapsedClusters.has(cluster);
+                  const generatingCount = recs.filter(r => r.status === "generating").length;
+                  return (
+                    <div key={cluster} className="border border-gray-800 rounded-xl overflow-hidden">
                       <button
                         onClick={() => {
                           setCollapsedClusters((prev) => {
@@ -1956,52 +1938,41 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
                             return next;
                           });
                         }}
-                        className="flex items-center gap-2 text-left flex-1"
+                        className="w-full flex items-center justify-between px-5 py-4 bg-gray-900 border-b border-gray-800 hover:bg-gray-800/60 transition text-left"
                       >
-                        <span className="text-sm font-semibold text-white">{cluster}</span>
-                        <span className="text-xs text-gray-500">{recs.length} articles</span>
-                        <span className="text-gray-600 text-xs ml-1">{isCollapsed ? "▼" : "▲"}</span>
+                        <div className="flex items-center gap-3">
+                          <span className="text-sm font-semibold text-white">{cluster}</span>
+                          <span className="text-xs text-gray-500 bg-gray-800 px-2 py-0.5 rounded-full">{recs.length} articles</span>
+                          {generatingCount > 0 && (
+                            <span className="text-xs text-blue-400 bg-blue-500/10 border border-blue-500/30 px-2 py-0.5 rounded-full">
+                              {generatingCount} generating
+                            </span>
+                          )}
+                        </div>
+                        <span className="text-gray-600 text-xs">{isCollapsed ? "▼" : "▲"}</span>
                       </button>
-                      <button
-                        onClick={() => handleAddAllInCluster(cluster)}
-                        className="text-xs bg-amber-600/20 hover:bg-amber-600 border border-amber-600/40 hover:border-amber-500 text-amber-300 hover:text-white rounded-lg px-3 py-1.5 transition"
-                      >
-                        Add All in Cluster
-                      </button>
+                      {!isCollapsed && (
+                        <div className="bg-gray-900/50 divide-y divide-gray-800">
+                          {recs.map((rec) => (
+                            <div key={rec.slug} className="flex items-center gap-4 px-5 py-3 hover:bg-gray-800/30 transition">
+                              <div className="flex-1 min-w-0">
+                                <p className="text-sm text-white truncate">{rec.title}</p>
+                                <p className="text-xs text-gray-600 font-mono mt-0.5">{rec.slug}</p>
+                              </div>
+                              <span className={`text-xs px-2 py-0.5 rounded-full shrink-0 ${
+                                rec.status === "generating"
+                                  ? "bg-blue-500/10 text-blue-400 border border-blue-500/30"
+                                  : "bg-amber-500/10 text-amber-400 border border-amber-500/30"
+                              }`}>
+                                {rec.status}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                    {!isCollapsed && (
-                      <div className="bg-gray-900 divide-y divide-gray-800">
-                        {recs.map((rec) => (
-                          <div key={rec.slug} className="flex items-center gap-4 px-5 py-3 hover:bg-gray-800/50 transition">
-                            <div className="flex-1 min-w-0">
-                              <p className="text-sm text-white truncate">{rec.title}</p>
-                              <p className="text-xs text-gray-500 font-mono mt-0.5">{rec.primaryKeyword} · ~{rec.targetWords.toLocaleString()} words</p>
-                            </div>
-                            <div className="flex items-center gap-2 shrink-0">
-                              <button
-                                onClick={() => setDismissedSlugs(prev => new Set([...prev, rec.slug]))}
-                                disabled={addingRec === rec.slug}
-                                className="text-xs border border-gray-700 hover:border-red-500/50 text-gray-500 hover:text-red-400 rounded-lg px-3 py-1.5 transition disabled:opacity-50"
-                                title="No — skip this topic"
-                              >
-                                ✕ No
-                              </button>
-                              <button
-                                onClick={() => handleAddRecommendation(rec)}
-                                disabled={addingRec === rec.slug}
-                                className="text-xs bg-green-700/30 hover:bg-green-600 border border-green-600/40 hover:border-green-500 text-green-300 hover:text-white rounded-lg px-3 py-1.5 transition disabled:opacity-50"
-                                title="Yes — add to queue"
-                              >
-                                {addingRec === rec.slug ? "Adding…" : "✓ Yes"}
-                              </button>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                );
-              })
+                  );
+                })
             )}
           </div>
         )}
