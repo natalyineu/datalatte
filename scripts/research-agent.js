@@ -65,7 +65,7 @@ async function ghPutFile(filePath, content, message, sha) {
 }
 
 async function callGroq(prompt) {
-  const models = ['llama-3.3-70b-versatile', 'qwen/qwen3-32b', 'llama3-70b-8192', 'gemma2-9b-it'];
+  const models = ['llama-3.3-70b-versatile', 'qwen/qwen3-32b', 'meta-llama/llama-4-scout-17b-16e-instruct', 'openai/gpt-oss-120b', 'llama-3.1-8b-instant'];
   for (const model of models) {
     const body = JSON.stringify({
       model,
