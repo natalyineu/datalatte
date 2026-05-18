@@ -8,7 +8,7 @@ import Link from "next/link";
 export default function ExitIntentPopup() {
   const [visible, setVisible] = useState(false);
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "done">("idle");
+  const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const shown = useRef(false);
 
   useEffect(() => {
@@ -58,16 +58,19 @@ export default function ExitIntentPopup() {
     e.preventDefault();
     setStatus("loading");
     try {
-      await fetch("/api/subscribe", {
+      const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, source: "exit-popup" }),
       });
-      setStatus("done");
-      setTimeout(() => dismiss(), 2500);
+      if (res.ok) {
+        setStatus("done");
+        setTimeout(() => dismiss(), 2500);
+      } else {
+        setStatus("error");
+      }
     } catch {
-      setStatus("done");
-      setTimeout(() => dismiss(), 2500);
+      setStatus("error");
     }
   }
 
@@ -163,6 +166,11 @@ export default function ExitIntentPopup() {
                           {status === "loading" ? "…" : "Subscribe"}
                         </button>
                       </form>
+                      {status === "error" && (
+                        <p className="text-red-500 text-xs mt-1 text-center">
+                          Something went wrong — try <a href="mailto:hi@datalatte.pro" className="underline">emailing us</a> directly.
+                        </p>
+                      )}
                     </div>
 
                     <button
