@@ -7,11 +7,13 @@ type Mode = "explore" | "ready";
 type Status = "idle" | "loading" | "success" | "error";
 
 const NICHES = [
-  { value: "coffee",   emoji: "☕", label: "Coffee Shop" },
-  { value: "salon",    emoji: "✂️", label: "Hair & Beauty" },
-  { value: "grooming", emoji: "🐾", label: "Pet Business" },
-  { value: "fitness",  emoji: "🏋️", label: "Fitness Studio" },
-  { value: "other",    emoji: "🏪", label: "Other" },
+  { value: "coffee",     emoji: "☕", label: "Coffee Shop" },
+  { value: "salon",      emoji: "✂️", label: "Hair & Beauty" },
+  { value: "grooming",   emoji: "🐾", label: "Pet Business" },
+  { value: "fitness",    emoji: "🏋️", label: "Fitness Studio" },
+  { value: "startup",    emoji: "🚀", label: "Startup" },
+  { value: "freelancer", emoji: "💼", label: "Freelancer / Consultant" },
+  { value: "other",      emoji: "🏪", label: "Other" },
 ];
 
 const inputCls = "w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-coffee-500 focus:ring-2 focus:ring-coffee-100 outline-none transition text-sm bg-white";
@@ -61,11 +63,13 @@ function SuccessState() {
   );
 }
 
-async function submit(data: FormData, setStatus: (s: Status) => void) {
+async function submit(data: Record<string, string>, setStatus: (s: Status) => void) {
   setStatus("loading");
   try {
-    const res = await fetch("https://formspree.io/f/xqenvpwv", {
-      method: "POST", body: data, headers: { Accept: "application/json" },
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
     });
     if (res.ok) {
       setStatus("success");
@@ -91,9 +95,7 @@ function ExploreForm() {
       className="space-y-5"
       onSubmit={e => {
         e.preventDefault();
-        const fd = new FormData(e.currentTarget);
-        fd.append("form_type", "explore");
-        submit(fd, setStatus);
+        submit({ email, message, form_type: "explore" }, setStatus);
       }}
     >
       <ProgressBar pct={pct} />
@@ -155,10 +157,7 @@ function ReadyForm() {
       className="space-y-5"
       onSubmit={e => {
         e.preventDefault();
-        const fd = new FormData(e.currentTarget);
-        fd.append("niche", niche);
-        fd.append("form_type", "ready");
-        submit(fd, setStatus);
+        submit({ email, name, niche, message, form_type: "ready" }, setStatus);
       }}
     >
       <ProgressBar pct={pct} />
