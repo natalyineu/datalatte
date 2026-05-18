@@ -200,6 +200,17 @@ async function persistQualityScores(scores) {
   }, body);
 }
 
+// ── Local quality scores ──────────────────────────────────────────────────────
+
+function loadLocalScores() {
+  const scoresPath = path.join(process.cwd(), 'content/quality-scores.json');
+  if (!fs.existsSync(scoresPath)) return {};
+  try {
+    const data = JSON.parse(fs.readFileSync(scoresPath, 'utf8'));
+    return data.scores ?? {};
+  } catch { return {}; }
+}
+
 // ── Queue helpers ─────────────────────────────────────────────────────────────
 
 function checkQueueDuplicates() {
@@ -254,15 +265,26 @@ async function main() {
     }
   }
 
-  // Step 3: Sample 8 random clean articles for quality check
+  // Step 3: Audit oldest-unchecked articles first (full rotation, 40/run)
+  const BATCH_SIZE = 40;
+  const existingScores = loadLocalScores();
   const cleanFiles = files.filter(f => !syntaxProblems.find(p => p.file === f));
-  const sample = cleanFiles.sort(() => Math.random() - 0.5).slice(0, 8);
+  const sample = cleanFiles
+    .sort((a, b) => {
+      const aTime = existingScores[a.replace('.mdx', '')]?.checkedAt ?? '1970-01-01';
+      const bTime = existingScores[b.replace('.mdx', '')]?.checkedAt ?? '1970-01-01';
+      return aTime.localeCompare(bTime); // oldest / never-checked first
+    })
+    .slice(0, BATCH_SIZE);
+
   const lowQuality = [];
   const allQualityScores = [];
   const sampleAssessments = []; // { file, assessment }
 
-  console.log(`Sampling ${sample.length} random articles for quality...`);
+  const uncheckedCount = cleanFiles.filter(f => !existingScores[f.replace('.mdx', '')]).length;
+  console.log(`Auditing ${sample.length} articles (${uncheckedCount} never checked, ${cleanFiles.length} total clean)...`);
   for (const file of sample) {
+    await new Promise(r => setTimeout(r, 400)); // stay under Groq rate limit
     const content = fs.readFileSync(path.join(BLOG_DIR, file), 'utf8');
     const assessment = await assessArticleQuality(file, content);
     sampleAssessments.push({ file, assessment });
@@ -304,7 +326,8 @@ async function main() {
     lowQuality,
     duplicateSlugs: dupes,
     qualityAvg,
-    sampledFiles: sample.length,
+    auditedThisRun: sample.length,
+    totalScored: Object.keys(existingScores).length,
   };
   fs.writeFileSync(path.join(process.cwd(), 'scripts/.audit-report.json'), JSON.stringify(report, null, 2));
 
@@ -318,7 +341,7 @@ async function main() {
     // Still report quality data — silence isn't useful
     let cleanMsg = `🔍 <b>Auditor</b> — all clean ✅\n`;
     cleanMsg += `🕐 ${time}\n\n`;
-    cleanMsg += `${qualityEmoji} Avg quality: <b>${qualityStr}</b> · ${sample.length} articles sampled\n`;
+    cleanMsg += `${qualityEmoji} Avg quality: <b>${qualityStr}</b> · ${sample.length} articles audited this run · ${Object.keys(existingScores).length} total scored\n`;
     cleanMsg += `📋 0 syntax issues · 0 duplicates · 0 low quality`;
     await telegram(cleanMsg);
     console.log('✅ Audit Agent done');
@@ -327,7 +350,7 @@ async function main() {
 
   let msg = `🔍 <b>Auditor</b> — ${totalIssues} issue(s) found\n`;
   msg += `🕐 ${time}\n\n`;
-  msg += `${qualityEmoji} Avg quality: <b>${qualityStr}</b> · ${sample.length} articles sampled\n`;
+  msg += `${qualityEmoji} Avg quality: <b>${qualityStr}</b> · ${sample.length} articles audited this run · ${Object.keys(existingScores).length} total scored\n`;
 
   if (lowQuality.length > 0) {
     msg += `\n⚠️ Low quality (&lt;6/10):\n`;
