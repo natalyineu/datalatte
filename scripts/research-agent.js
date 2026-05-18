@@ -171,6 +171,15 @@ Valid niches: general, coffee-shops, hair-salons, pet-groomers, fitness-studios`
     console.log(`✅ Added ${newArticles.length} articles, saved: ${saved}`);
   }
 
+  // Structured output for dashboard parsing
+  console.log(`RESEARCH_ADDED: ${newArticles.length}`);
+  console.log(`RESEARCH_PENDING: ${pending.length + newArticles.length}`);
+  console.log(`RESEARCH_PUBLISHED: ${published.length}`);
+  for (const art of newArticles.slice(0, 10)) {
+    const cluster = art.cluster || art.category || 'Uncategorised';
+    console.log(`RESEARCH_TOPIC: ${cluster} | ${art.title}`);
+  }
+
   // 8. Telegram report
   let msg;
   if (newArticles.length > 0) {

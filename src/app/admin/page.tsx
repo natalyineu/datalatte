@@ -94,11 +94,18 @@ interface PipelineReport {
   status: string | null;
   today: number | null;
   restarted: boolean;
+  components: { generation: number | null; reliability: number | null; quality: number | null; bugs: number | null; queue: number | null };
+  qualityAvg: number | null;
+  published: number | null;
+  pending: number | null;
 }
 
 interface ResearcherReport {
   type: "researcher";
   added: number;
+  pending: number | null;
+  published: number | null;
+  topics: { cluster: string; title: string }[];
 }
 
 interface ImproverReport {
@@ -360,86 +367,237 @@ function formatRunDate(isoStr: string | null): string {
     d.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false });
 }
 
+// ── ScoreBar ──────────────────────────────────────────────────────────────────
+
+function ScoreBar({ value, max, color = "amber" }: { value: number | null; max: number; color?: string }) {
+  const pct = value !== null ? Math.round((value / max) * 100) : 0;
+  const colorClass = color === "green" ? "bg-green-500" : color === "red" ? "bg-red-500" : color === "blue" ? "bg-blue-500" : "bg-amber-500";
+  return (
+    <div className="flex items-center gap-2">
+      <div className="flex-1 h-1.5 bg-gray-800 rounded-full overflow-hidden">
+        <div className={`h-full rounded-full transition-all ${colorClass}`} style={{ width: `${pct}%` }} />
+      </div>
+      <span className="text-xs text-gray-400 w-12 text-right shrink-0">{value ?? "—"}/{max}</span>
+    </div>
+  );
+}
+
+function QualityBadge({ score }: { score: number }) {
+  const color = score >= 8 ? "text-green-400 bg-green-500/10 border-green-500/30"
+    : score >= 6 ? "text-yellow-400 bg-yellow-500/10 border-yellow-500/30"
+    : "text-red-400 bg-red-500/10 border-red-500/30";
+  return <span className={`text-xs font-bold px-1.5 py-0.5 rounded border ${color}`}>{score}/10</span>;
+}
+
 // ── AgentReportSection ────────────────────────────────────────────────────────
 
 function AgentReportSection({ report }: { report: AgentReport | null }) {
-  return (
-    <div className="mt-3 pt-3 border-t border-gray-800">
-      <p className="text-xs font-medium text-gray-500 mb-2">Last run report</p>
-      {report === null ? (
-        <p className="text-xs text-gray-600 italic">Log not available</p>
-      ) : report.type === "writer" ? (
-        report.noPending ? (
-          <p className="text-gray-400 text-xs">Queue was empty — nothing to generate</p>
-        ) : report.title ? (
-          <div className="space-y-1 text-xs">
-            <p className="text-white font-medium truncate">📝 {report.title}</p>
-            <p className="text-gray-400">🔑 {report.keyword} &nbsp;·&nbsp; 📂 {report.cluster}</p>
-            <p className="text-gray-400">🤖 {report.model} &nbsp;·&nbsp; 📊 {report.remaining} left in queue</p>
-          </div>
-        ) : null
-      ) : report.type === "auditor" ? (
-        <div className="space-y-1 text-xs">
-          {report.allClean ? (
-            <p className="text-green-400">✅ All clean — {report.sampled} articles sampled, avg quality {report.avgScore}/10</p>
-          ) : (
-            <p className="text-yellow-400">⚠️ {report.totalIssues} issues found — {report.triggeredFixer ? "Fixer triggered" : "no action"}</p>
-          )}
-          {report.scores.slice(0, 4).map((s) => (
-            <p key={s.file} className={s.score >= 7 ? "text-gray-400" : "text-yellow-400"}>
-              {s.score >= 7 ? "✅" : "⚠️"} {s.file.slice(0, 40)}… ({s.score}/10)
-            </p>
-          ))}
+  if (report === null) {
+    return (
+      <div className="mt-3 pt-3 border-t border-gray-800">
+        <p className="text-xs text-gray-600 italic">No log data available yet</p>
+      </div>
+    );
+  }
+
+  if (report.type === "writer") {
+    if (report.noPending) {
+      return (
+        <div className="mt-3 pt-3 border-t border-gray-800">
+          <p className="text-xs text-gray-500">Queue empty — nothing to generate</p>
         </div>
-      ) : report.type === "fixer" ? (
-        report.nothingToFix ? (
-          <p className="text-green-400 text-xs">✅ Nothing needed — all articles healthy</p>
+      );
+    }
+    if (!report.title) {
+      return (
+        <div className="mt-3 pt-3 border-t border-gray-800">
+          <p className="text-xs text-gray-600 italic">Rate limited or failed last run</p>
+        </div>
+      );
+    }
+    return (
+      <div className="mt-3 pt-3 border-t border-gray-800 space-y-2">
+        <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Last published</p>
+        <p className="text-sm font-medium text-white leading-snug">{report.title}</p>
+        <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs text-gray-400">
+          <span>🔑 {report.keyword ?? "—"}</span>
+          <span>📂 {report.cluster ?? "—"}</span>
+          <span>🤖 {report.model ?? "—"}</span>
+          <span className="text-amber-300 font-medium">📊 {report.remaining ?? "?"} pending</span>
+        </div>
+        {report.slug && (
+          <a
+            href={`https://www.datalatte.pro/blog/${report.slug}`}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-block text-xs text-amber-400 hover:text-amber-300 underline"
+          >
+            View article →
+          </a>
+        )}
+      </div>
+    );
+  }
+
+  if (report.type === "auditor") {
+    return (
+      <div className="mt-3 pt-3 border-t border-gray-800 space-y-2">
+        <div className="flex items-center justify-between">
+          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Last audit</p>
+          {report.avgScore && <QualityBadge score={Number(report.avgScore)} />}
+        </div>
+        <div className="flex gap-3 text-xs">
+          <span className="text-gray-400">{report.sampled} sampled</span>
+          {report.allClean
+            ? <span className="text-green-400 font-medium">✅ All clean</span>
+            : <span className="text-yellow-400 font-medium">⚠️ {report.totalIssues} issues</span>}
+          {report.triggeredFixer && <span className="text-blue-400">→ Fixer triggered</span>}
+        </div>
+        {report.scores.length > 0 && (
+          <div className="space-y-1.5 mt-1">
+            {report.scores.slice(0, 5).map((s) => (
+              <div key={s.file} className="flex items-center gap-2">
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs text-gray-500 truncate">{s.file.replace(/-/g, " ")}</p>
+                </div>
+                <QualityBadge score={s.score} />
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  if (report.type === "fixer") {
+    return (
+      <div className="mt-3 pt-3 border-t border-gray-800 space-y-2">
+        <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Last fix run</p>
+        {report.nothingToFix ? (
+          <p className="text-sm text-green-400">✅ Nothing to fix — all articles healthy</p>
         ) : (
-          <div className="space-y-1 text-xs">
-            <p className="text-white">Fixed {report.fixedFiles.length}, queued {report.regenFiles.length} for regeneration</p>
-            {report.fixedFiles.map((f) => (
-              <p key={f.file} className="text-gray-400">✅ {f.file} ({f.score}/10)</p>
+          <>
+            <div className="flex gap-4 text-xs">
+              <span className="text-green-400 font-medium">✅ {report.toFix} fixed</span>
+              <span className="text-yellow-400 font-medium">♻️ {report.toRegen} re-queued</span>
+            </div>
+            {report.fixedFiles.slice(0, 3).map((f) => (
+              <div key={f.file} className="flex items-center justify-between text-xs">
+                <span className="text-gray-400 truncate">{f.file.replace(/-/g, " ")}</span>
+                <QualityBadge score={f.score} />
+              </div>
             ))}
-            {report.regenFiles.map((f) => (
-              <p key={f} className="text-yellow-400">♻️ {f}</p>
+            {report.regenFiles.slice(0, 2).map((f) => (
+              <p key={f} className="text-xs text-yellow-400 truncate">♻️ {f.replace(/-/g, " ")}</p>
+            ))}
+          </>
+        )}
+      </div>
+    );
+  }
+
+  if (report.type === "pipeline") {
+    const scoreColor = (report.score ?? 0) >= 80 ? "text-green-400" : (report.score ?? 0) >= 60 ? "text-yellow-400" : "text-red-400";
+    const hasComponents = report.components.generation !== null;
+    return (
+      <div className="mt-3 pt-3 border-t border-gray-800 space-y-3">
+        <div className="flex items-center justify-between">
+          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Health score</p>
+          <span className={`text-2xl font-black ${scoreColor}`}>{report.score ?? "—"}<span className="text-sm font-normal text-gray-500">/100</span></span>
+        </div>
+        {hasComponents && (
+          <div className="space-y-1.5">
+            {[
+              { label: "Generation", value: report.components.generation, max: 25, color: "amber" },
+              { label: "Reliability", value: report.components.reliability, max: 25, color: "green" },
+              { label: "Quality", value: report.components.quality, max: 20, color: "blue" },
+              { label: "Bugs", value: report.components.bugs, max: 15, color: "green" },
+              { label: "Queue", value: report.components.queue, max: 15, color: "amber" },
+            ].map((c) => (
+              <div key={c.label} className="grid grid-cols-[80px_1fr] items-center gap-2">
+                <span className="text-xs text-gray-500">{c.label}</span>
+                <ScoreBar value={c.value} max={c.max} color={c.color} />
+              </div>
             ))}
           </div>
-        )
-      ) : report.type === "pipeline" ? (
-        <div className="space-y-1 text-xs">
-          <div className="flex items-center gap-2">
-            <span className={`text-2xl font-bold ${
-              report.score !== null && report.score >= 80
-                ? "text-green-400"
-                : report.score !== null && report.score >= 60
-                ? "text-yellow-400"
-                : "text-red-400"
-            }`}>{report.score ?? "—"}</span>
-            <span className="text-gray-400">/ 100 health score</span>
+        )}
+        <div className="flex gap-4 text-xs text-gray-400 pt-1">
+          <span>📝 <b className="text-white">{report.today ?? 0}</b> today</span>
+          {report.published !== null && <span>✅ <b className="text-white">{report.published}</b> published</span>}
+          {report.pending !== null && <span>⏳ <b className="text-white">{report.pending}</b> pending</span>}
+          {report.qualityAvg !== null && <span>⭐ <b className="text-white">{report.qualityAvg}</b>/10 quality</span>}
+        </div>
+        {report.restarted && <p className="text-xs text-yellow-400">⚠️ Auto-restarted a stuck agent this run</p>}
+      </div>
+    );
+  }
+
+  if (report.type === "researcher") {
+    return (
+      <div className="mt-3 pt-3 border-t border-gray-800 space-y-2">
+        <div className="flex items-center justify-between">
+          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Last research run</p>
+          {report.added > 0 && (
+            <span className="text-xs font-bold text-green-400 bg-green-500/10 border border-green-500/30 px-1.5 py-0.5 rounded">+{report.added} topics</span>
+          )}
+        </div>
+        {report.added === 0 ? (
+          <p className="text-xs text-gray-500">Queue balanced — no new topics added</p>
+        ) : (
+          <div className="space-y-1">
+            {report.topics.slice(0, 5).map((t, i) => (
+              <div key={i} className="text-xs">
+                <span className="text-amber-400/70 mr-1">{t.cluster}:</span>
+                <span className="text-gray-300">{t.title}</span>
+              </div>
+            ))}
+            {report.topics.length > 5 && (
+              <p className="text-xs text-gray-600">+{report.topics.length - 5} more topics</p>
+            )}
           </div>
-          <p className="text-gray-400">Status: {report.status ?? "—"} &nbsp;·&nbsp; {report.today ?? 0} articles today</p>
-          {report.restarted && <p className="text-yellow-400">⚠️ Auto-restarted a stuck agent</p>}
+        )}
+        {(report.pending !== null || report.published !== null) && (
+          <div className="flex gap-4 text-xs text-gray-500 pt-1">
+            {report.pending !== null && <span>⏳ {report.pending} pending</span>}
+            {report.published !== null && <span>✅ {report.published} published</span>}
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  if (report.type === "improver") {
+    const typeLabel: Record<string, string> = { cta: "CTA", internal_link: "Links", conversion_language: "Copy", social_proof: "Social proof" };
+    const impactColor = (n: number) => n >= 8 ? "text-red-400" : n >= 6 ? "text-yellow-400" : "text-green-400";
+    return (
+      <div className="mt-3 pt-3 border-t border-gray-800 space-y-2">
+        <div className="flex items-center justify-between">
+          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Last analysis</p>
+          <span className="text-xs text-gray-400">{report.analyzed} articles</span>
         </div>
-      ) : report.type === "researcher" ? (
-        <p className="text-xs text-gray-400">
-          {report.added > 0
-            ? `✅ Added ${report.added} new topics to queue`
-            : "📭 No new topics added this run"}
-        </p>
-      ) : report.type === "improver" ? (
-        <div className="space-y-1 text-xs">
-          <p className="text-gray-400">
-            Analyzed {report.analyzed} articles · {report.added} proposals added
-          </p>
-          {report.proposals.slice(0, 4).map((p) => (
-            <p key={p.slug} className="text-amber-400">
-              💡 {p.slug} (impact: {p.impact}/10, {p.type})
-            </p>
-          ))}
-        </div>
-      ) : null}
-    </div>
-  );
+        {report.added === 0 ? (
+          <p className="text-xs text-gray-500">No new proposals — content looks good</p>
+        ) : (
+          <>
+            <p className="text-xs text-amber-300 font-medium">{report.added} proposals need review</p>
+            <div className="space-y-1.5">
+              {report.proposals.slice(0, 4).map((p, i) => (
+                <div key={i} className="flex items-start gap-2 text-xs">
+                  <span className={`font-bold shrink-0 ${impactColor(p.impact)}`}>{p.impact}/10</span>
+                  <div className="min-w-0">
+                    <span className="text-gray-300 truncate block">{p.slug.replace(/-/g, " ")}</span>
+                    <span className="text-gray-500">{typeLabel[p.type] ?? p.type}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+    );
+  }
+
+  return null;
 }
 
 // ── AgentsTab ─────────────────────────────────────────────────────────────────
