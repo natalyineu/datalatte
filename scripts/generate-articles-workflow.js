@@ -193,9 +193,47 @@ async function ghPutFile(filePath, content, message) {
   return true;
 }
 
-// Unique image per article — slug-seeded Picsum (guaranteed unique, no 404s)
+// Curated cluster images — one professional photo per content cluster
+const CLUSTER_IMAGES = {
+  'Google Ads':                           '/blog/clusters/google-ads.jpg',
+  'AI & Automation':                      '/blog/clusters/ai-automation.jpg',
+  'Email & SMS Marketing':                '/blog/clusters/email-sms-marketing.jpg',
+  'Programmatic Advertising':             '/blog/clusters/programmatic-advertising.jpg',
+  'Meta Ads':                             '/blog/clusters/meta-ads.jpg',
+  'Pet Groomer Marketing':                '/blog/clusters/pet-groomer-marketing.jpg',
+  'TikTok Ads':                           '/blog/clusters/tiktok-ads.jpg',
+  'Instagram Ads':                        '/blog/clusters/instagram-ads.jpg',
+  'Local SEO':                            '/blog/clusters/local-seo.jpg',
+  'Coffee Shop Marketing':                '/blog/clusters/coffee-shop-marketing.jpg',
+  'Hair Salon Marketing':                 '/blog/clusters/hair-salon-marketing.jpg',
+  'Social Media':                         '/blog/clusters/social-media.jpg',
+  'Audio Advertising':                    '/blog/clusters/audio-advertising.jpg',
+  'Fitness Studio Marketing':             '/blog/clusters/fitness-studio-marketing.jpg',
+  'Website & CRO':                        '/blog/clusters/website-cro.jpg',
+  'Tool Comparisons':                     '/blog/clusters/tool-comparisons.jpg',
+  'Influencer Marketing':                 '/blog/clusters/influencer-marketing.jpg',
+  'Analytics & Tracking':                 '/blog/clusters/analytics-tracking.jpg',
+  'Content Marketing':                    '/blog/clusters/content-marketing.jpg',
+  'YouTube Ads':                          '/blog/clusters/youtube-ads.jpg',
+  'CTV Advertising':                      '/blog/clusters/ctv-advertising.jpg',
+  'Retargeting':                          '/blog/clusters/retargeting.jpg',
+  'Marketing Strategy':                   '/blog/clusters/marketing-strategy.jpg',
+  'Reputation Management':                '/blog/clusters/reputation-management.jpg',
+  'Case Studies':                         '/blog/clusters/case-studies.jpg',
+  'Snapchat Advertising':                 '/blog/clusters/snapchat-advertising.jpg',
+  'Messaging & Community Marketing':      '/blog/clusters/messaging-community-marketing.jpg',
+  'Google Business Profile Optimization': '/blog/clusters/google-business-profile.jpg',
+  'Microsoft Ads':                        '/blog/clusters/microsoft-ads.jpg',
+  'Yahoo Advertising':                    '/blog/clusters/yahoo-advertising.jpg',
+  'Nextdoor & Neighborhood Marketing':    '/blog/clusters/nextdoor-neighborhood.jpg',
+  'Pinterest Marketing':                  '/blog/clusters/pinterest-marketing.jpg',
+  'Review Platform Ads':                  '/blog/clusters/review-platform-ads.jpg',
+  'Reddit & Community Marketing':         '/blog/clusters/reddit-community-marketing.jpg',
+  'Offline Marketing':                    '/blog/clusters/offline-marketing.jpg',
+};
+
 function getImageForEntry(entry) {
-  return `https://picsum.photos/seed/${entry.slug}/1200/630`;
+  return CLUSTER_IMAGES[entry.cluster] || '/blog/clusters/marketing-strategy.jpg';
 }
 
 async function generateOne() {
