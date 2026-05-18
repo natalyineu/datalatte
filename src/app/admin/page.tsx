@@ -391,11 +391,16 @@ function QualityBadge({ score }: { score: number }) {
 
 // ── AgentReportSection ────────────────────────────────────────────────────────
 
-function AgentReportSection({ report }: { report: AgentReport | null }) {
+function AgentReportSection({ report, lastRunConclusion }: { report: AgentReport | null; lastRunConclusion?: string | null }) {
   if (report === null) {
+    const isFailure = lastRunConclusion === "failure";
     return (
       <div className="mt-3 pt-3 border-t border-gray-800">
-        <p className="text-xs text-gray-600 italic">No log data available yet</p>
+        <p className="text-xs text-gray-600 italic">
+          {isFailure
+            ? "⚠️ Last run failed — check GitHub Actions logs for error details"
+            : "No report data yet — logs will appear after first successful run"}
+        </p>
       </div>
     );
   }
@@ -641,10 +646,14 @@ function AgentsTab({
     }
   }
 
-  const allDisabled = agents.length > 0 && agents.every((a) => a.state === "disabled");
-  const pendingCount = queue.filter((e) => e.status === "pending").length;
-  const totalTargetWords = queue.filter((e) => e.status === "pending")
-    .reduce((acc, e) => acc + (e.targetWords ?? 0), 0);
+  const allDisabled    = agents.length > 0 && agents.every((a) => a.state === "disabled");
+  const pendingCount   = queue.filter((e) => e.status === "pending").length;
+  const generatingCount = queue.filter((e) => e.status === "generating").length;
+  const publishedCount = queue.filter((e) => e.status === "published").length;
+  const activeCount    = agents.filter((a) => a.state === "active").length;
+  const failedToday    = agents.filter((a) => a.lastRun?.conclusion === "failure").length;
+  const pipelineReport = agents.find((a) => a.workflowFile === "pipeline-manager.yml")?.report as PipelineReport | null | undefined;
+  const pipelineScore  = pipelineReport?.type === "pipeline" ? pipelineReport.score : null;
 
   if (loading) {
     return (
@@ -685,11 +694,34 @@ function AgentsTab({
         </button>
       </div>
 
-      {/* All-disabled banner */}
+      {/* Stats summary bar */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+        {[
+          { label: "Published", value: publishedCount, color: "text-green-400" },
+          { label: "Pending", value: pendingCount, color: "text-amber-300" },
+          { label: "Generating", value: generatingCount, color: generatingCount > 0 ? "text-orange-400" : "text-gray-500" },
+          { label: "Pipeline score", value: pipelineScore !== null ? `${pipelineScore}/100` : "—", color: pipelineScore !== null ? (pipelineScore >= 80 ? "text-green-400" : pipelineScore >= 60 ? "text-yellow-400" : "text-red-400") : "text-gray-500" },
+          { label: "Agents active", value: `${activeCount}/${agents.length}`, color: activeCount === agents.length ? "text-green-400" : "text-yellow-400" },
+          { label: "Failed last run", value: failedToday, color: failedToday > 0 ? "text-red-400" : "text-gray-500" },
+        ].map((s) => (
+          <div key={s.label} className="bg-gray-900 border border-gray-800 rounded-xl px-4 py-3">
+            <p className="text-xs text-gray-500 mb-0.5">{s.label}</p>
+            <p className={`text-xl font-bold ${s.color}`}>{s.value}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Warning banners */}
       {allDisabled && (
         <div className="bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3 text-sm text-red-300 flex items-center gap-2">
           <span>⚠️</span>
           <span>All agents currently paused — generation is off</span>
+        </div>
+      )}
+      {generatingCount > 0 && (
+        <div className="bg-orange-500/10 border border-orange-500/30 rounded-xl px-4 py-3 text-sm text-orange-300 flex items-center gap-2">
+          <span>🔄</span>
+          <span>{generatingCount} article{generatingCount > 1 ? "s" : ""} stuck in &quot;generating&quot; state — may need manual reset to pending</span>
         </div>
       )}
 
@@ -778,26 +810,18 @@ function AgentsTab({
                 <div className="text-gray-500">
                   <span className="text-gray-600">Runs today:</span>{" "}
                   <span className="text-gray-300">{agent.runsToday}</span>
-                  <span className="text-gray-600"> · This month:</span>{" "}
+                  <span className="text-gray-600"> · Recent:</span>{" "}
                   <span className="text-gray-300">{agent.totalRuns}</span>
                 </div>
 
                 {/* Writer-specific queue stats */}
                 {isWriter && (
                   <div className="mt-1 pt-1.5 border-t border-gray-800 text-gray-500">
-                    <span className="text-gray-600">Articles in queue:</span>{" "}
+                    <span className="text-gray-600">Queue:</span>{" "}
                     <span className="text-amber-300 font-medium">{pendingCount} pending</span>
-                    {totalTargetWords > 0 && (
-                      <span className="text-gray-500"> · {(totalTargetWords / 1000).toFixed(0)}k words target</span>
+                    {queue.filter(e => e.status === "generating").length > 0 && (
+                      <span className="text-orange-400 font-medium"> · {queue.filter(e => e.status === "generating").length} generating</span>
                     )}
-                  </div>
-                )}
-
-                {/* Pipeline manager — show workflow ID as placeholder for health score */}
-                {isPipeline && agent.workflowId && (
-                  <div className="mt-1 pt-1.5 border-t border-gray-800 text-gray-500">
-                    <span className="text-gray-600">Workflow ID:</span>{" "}
-                    <span className="text-gray-400 font-mono text-xs">{agent.workflowId}</span>
                   </div>
                 )}
               </div>
@@ -833,7 +857,7 @@ function AgentsTab({
               )}
 
               {/* Last run report */}
-              <AgentReportSection report={agent.report} />
+              <AgentReportSection report={agent.report} lastRunConclusion={agent.lastRun?.conclusion} />
 
               {/* Toggle button */}
               <div className="flex justify-end border-t border-gray-800 pt-3 mt-auto">

@@ -250,7 +250,7 @@ function parseAuditorReport(log: string): AuditorReport {
   const totalIssues   = Number(log.match(/Total issues: (\d+)/)?.[1] ?? 0);
   const allClean      = log.includes("✅ All clean");
   const triggeredFixer = log.includes("trigger") && log.includes("Fixer");
-  const scoreMatches  = [...log.matchAll(/[✅⚠️] (?:Low quality: )?(\S+\.mdx) \((\d+)\/10\)/g)];
+  const scoreMatches  = [...log.matchAll(/(?:✅|⚠️) (?:Low quality: )?(\S+\.mdx) \((\d+)\/10\)/g)];
   const scores        = scoreMatches.map((m) => ({ file: m[1].replace(".mdx", ""), score: Number(m[2]) }));
   const avgScore      = scores.length
     ? (scores.reduce((s, r) => s + r.score, 0) / scores.length).toFixed(1)
@@ -408,7 +408,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
         }
 
         const runsRes = await fetch(
-          `${GH_BASE}/workflows/${wf.id}/runs?per_page=10`,
+          `${GH_BASE}/workflows/${wf.id}/runs?per_page=30`,
           { headers: ghHeaders(ghToken) }
         );
 

@@ -343,6 +343,7 @@ async function main() {
     msg += `\n🔧 Triggering Fixer Agent...`;
     await telegram(msg);
     const triggered = await triggerFixer();
+    console.log(`Triggering Fixer agent — ${triggered ? 'success' : 'failed'}`);
     if (!triggered) await telegram('🔍 <b>Auditor</b> — ⚠️ Could not trigger Fixer. Check PAT_TOKEN.');
   } else {
     await telegram(msg);
