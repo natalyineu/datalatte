@@ -308,23 +308,29 @@ async function main() {
   };
   fs.writeFileSync(path.join(process.cwd(), 'scripts/.audit-report.json'), JSON.stringify(report, null, 2));
 
+  // Step 6: Build Telegram message
+  const qualityEmoji = qualityAvg === null ? '❓' : qualityAvg >= 7 ? '✅' : qualityAvg >= 5 ? '⚠️' : '🔴';
+  const qualityStr   = qualityAvg !== null ? `${qualityAvg}/10` : 'n/a';
+  const time         = new Date().toUTCString().slice(0, 25);
+
   if (totalIssues === 0) {
     console.log('✅ All clean');
+    // Still report quality data — silence isn't useful
+    let cleanMsg = `🔍 <b>Auditor</b> — all clean ✅\n`;
+    cleanMsg += `🕐 ${time}\n\n`;
+    cleanMsg += `${qualityEmoji} Avg quality: <b>${qualityStr}</b> · ${sample.length} articles sampled\n`;
+    cleanMsg += `📋 0 syntax issues · 0 duplicates · 0 low quality`;
+    await telegram(cleanMsg);
+    console.log('✅ Audit Agent done');
     return;
   }
 
-  // Step 6: Build Telegram message
-  const qualityEmoji = qualityAvg === null ? '❓' : qualityAvg >= 7 ? '✅' : qualityAvg >= 5 ? '⚠️' : '🔴';
-  const qualityStr = qualityAvg !== null ? `${qualityAvg}/10` : 'n/a';
-  const totalIssues = toFix.length + toRegenerate.length + dupes.length;
-  const time = new Date().toUTCString().slice(0, 25);
-
-  let msg = `🔍 <b>Auditor</b> — ${totalIssues === 0 ? 'all clean ✅' : `${totalIssues} issue(s) found`}\n`;
+  let msg = `🔍 <b>Auditor</b> — ${totalIssues} issue(s) found\n`;
   msg += `🕐 ${time}\n\n`;
   msg += `${qualityEmoji} Avg quality: <b>${qualityStr}</b> · ${sample.length} articles sampled\n`;
 
   if (lowQuality.length > 0) {
-    msg += `\n⚠️ Low quality (<6/10):\n`;
+    msg += `\n⚠️ Low quality (&lt;6/10):\n`;
     msg += lowQuality.slice(0, 4).map(p => `  • ${p.file.replace('content/blog/', '').replace('.mdx', '')} → <b>${p.assessment.quality}/10</b>`).join('\n') + '\n';
   }
   if (toFix.length > 0) {

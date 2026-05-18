@@ -292,8 +292,12 @@ async function main() {
   const totalChanged = fixedFiles.length + regenerateFiles.length + dupeFixed;
 
   if (totalChanged === 0) {
+    const time = new Date().toUTCString().slice(0, 25);
     console.log('✅ Nothing to fix');
-    await telegram(`🔧 <b>Fixer</b> — nothing to fix ✅\nAll articles clean. Good job Auditor.`);
+    const qualityNote = auditReport?.qualityAvg != null
+      ? `\nAvg quality: ${auditReport.qualityAvg}/10 · ${auditReport.sampledFiles || 0} articles sampled`
+      : '';
+    await telegram(`🔧 <b>Fixer</b> — nothing to fix ✅\n🕐 ${time}\n\nAll articles clean.${qualityNote}`);
     return;
   }
 
@@ -316,7 +320,7 @@ async function main() {
   // Telegram report
   const time = new Date().toUTCString().slice(0, 25);
   let msg = `🔧 <b>Fixer</b> — ${totalChanged} issue(s) resolved\n`;
-  msg += `🕐 ${time}\n`;
+  msg += `🕐 ${time}\n\n`;
 
   if (fixedFiles.length > 0) {
     msg += `\n✅ MDX fixed (${fixedFiles.length}):\n`;
