@@ -6,6 +6,15 @@ const TELEGRAM_CHAT_ID   = process.env.TELEGRAM_CHAT_ID;
 const AIRTABLE_TOKEN     = process.env.AIRTABLE_TOKEN;
 const AIRTABLE_BASE_ID   = process.env.AIRTABLE_BASE_ID;
 
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 const NICHE_LABELS: Record<string, string> = {
   coffee:     "Coffee Shop",
   salon:      "Hair & Beauty",
@@ -70,11 +79,16 @@ export async function POST(req: NextRequest) {
     saveLeadToAirtable({ name, email, niche, message, formType: form_type }).catch(() => {});
 
     // 2. Notify Nataliia via Resend
+    const safeEmail     = escapeHtml(email);
+    const safeName      = name    ? escapeHtml(name)    : null;
+    const safeMessage   = message ? escapeHtml(message) : null;
+    const safeNicheLabel = nicheLabel ? escapeHtml(nicheLabel) : null;
+
     const subject = form_type === "ready"
       ? `🔥 New lead: ${name || email}${nicheLabel ? ` (${nicheLabel})` : ""}`
       : `📧 New enquiry from ${email}`;
 
-    await fetch("https://api.resend.com/emails", {
+    const emailRes = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${RESEND_API_KEY}`,
@@ -90,10 +104,10 @@ export async function POST(req: NextRequest) {
             <h2 style="color:#5c3317">New contact form submission</h2>
             <table style="width:100%;border-collapse:collapse">
               <tr><td style="padding:8px 0;font-weight:bold;width:140px">Form type</td><td>${form_type === "ready" ? "Ready to start 🔥" : "Just exploring"}</td></tr>
-              <tr><td style="padding:8px 0;font-weight:bold">Email</td><td><a href="mailto:${email}">${email}</a></td></tr>
-              ${name ? `<tr><td style="padding:8px 0;font-weight:bold">Name</td><td>${name}</td></tr>` : ""}
-              ${nicheLabel ? `<tr><td style="padding:8px 0;font-weight:bold">Business type</td><td>${nicheLabel}</td></tr>` : ""}
-              ${message ? `<tr><td style="padding:8px 0;font-weight:bold;vertical-align:top">Message</td><td style="white-space:pre-wrap">${message}</td></tr>` : ""}
+              <tr><td style="padding:8px 0;font-weight:bold">Email</td><td><a href="mailto:${safeEmail}">${safeEmail}</a></td></tr>
+              ${safeName      ? `<tr><td style="padding:8px 0;font-weight:bold">Name</td><td>${safeName}</td></tr>` : ""}
+              ${safeNicheLabel ? `<tr><td style="padding:8px 0;font-weight:bold">Business type</td><td>${safeNicheLabel}</td></tr>` : ""}
+              ${safeMessage   ? `<tr><td style="padding:8px 0;font-weight:bold;vertical-align:top">Message</td><td style="white-space:pre-wrap">${safeMessage}</td></tr>` : ""}
             </table>
             <hr style="margin:24px 0;border:none;border-top:1px solid #eee">
             <p style="font-size:12px;color:#aaa">Sent from datalatte.pro/contact</p>
@@ -102,14 +116,21 @@ export async function POST(req: NextRequest) {
       }),
     });
 
-    // 3. Telegram notification
+    if (!emailRes.ok) {
+      const err = await emailRes.text();
+      console.error("Resend contact notification failed:", err);
+      return NextResponse.json({ error: "Failed to send notification" }, { status: 500 });
+    }
+
+    // 3. Telegram notification (use escaped values to avoid breaking HTML parse mode)
     if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID) {
+      const msgPreview = message ? message.slice(0, 120) + (message.length > 120 ? "…" : "") : null;
       const parts = [
         form_type === "ready" ? "🔥 <b>New lead (ready to start)</b>" : "📧 <b>New enquiry</b>",
-        `📨 ${email}`,
-        name && `👤 ${name}`,
-        nicheLabel && `🏪 ${nicheLabel}`,
-        message && `💬 ${message.slice(0, 120)}${message.length > 120 ? "…" : ""}`,
+        `📨 ${safeEmail}`,
+        safeName      && `👤 ${safeName}`,
+        safeNicheLabel && `🏪 ${safeNicheLabel}`,
+        msgPreview    && `💬 ${escapeHtml(msgPreview)}`,
       ].filter(Boolean);
 
       fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {

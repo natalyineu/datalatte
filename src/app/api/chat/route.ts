@@ -40,28 +40,44 @@ export async function POST(req: NextRequest) {
     // Keep last 10 messages to avoid huge context
     const trimmed = messages.slice(-10);
 
-    const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${GROQ_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: "llama-3.1-8b-instant",
-        messages: [{ role: "system", content: SYSTEM_PROMPT }, ...trimmed],
-        max_tokens: 400,
-        temperature: 0.7,
-      }),
-    });
+    const CHAT_MODELS = [
+      "llama-3.1-8b-instant",
+      "llama3-8b-8192",
+      "gemma2-9b-it",
+    ];
 
-    if (!res.ok) {
-      const err = await res.text();
-      console.error("Groq error:", err);
-      return NextResponse.json({ error: "AI unavailable" }, { status: 502 });
+    let reply = "";
+    let lastError = "";
+
+    for (const model of CHAT_MODELS) {
+      const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${GROQ_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model,
+          messages: [{ role: "system", content: SYSTEM_PROMPT }, ...trimmed],
+          max_tokens: 400,
+          temperature: 0.7,
+        }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        reply = data.choices?.[0]?.message?.content ?? "";
+        if (reply) break;
+      } else {
+        lastError = await res.text();
+        console.error(`Groq model ${model} failed:`, lastError);
+      }
     }
 
-    const data = await res.json();
-    const reply = data.choices?.[0]?.message?.content ?? "Sorry, I couldn't generate a response.";
+    if (!reply) {
+      console.error("All chat models failed. Last error:", lastError);
+      return NextResponse.json({ error: "AI unavailable" }, { status: 502 });
+    }
 
     return NextResponse.json({ reply });
   } catch (err) {
