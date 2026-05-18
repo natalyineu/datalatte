@@ -263,8 +263,8 @@ async function generateOne() {
   const queuePath = path.join(process.cwd(), 'content/queue.json');
   const queue = JSON.parse(fs.readFileSync(queuePath, 'utf8'));
 
-  // Reset articles stuck in 'generating' for more than 20 minutes (workflow timeout = 10min)
-  const STALE_MS = 20 * 60 * 1000;
+  // Reset articles stuck in 'generating' for more than 12 minutes (workflow timeout = 10min)
+  const STALE_MS = 12 * 60 * 1000;
   const now = Date.now();
   let resetCount = 0;
   for (const a of queue.queue) {
