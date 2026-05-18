@@ -15,7 +15,7 @@ import path from "path";
 import matter from "gray-matter";
 import CTABanner from "@/components/CTABanner";
 import ReadingProgress from "@/components/ReadingProgress";
-import { articleSchema } from "@/lib/schema";
+import { articleSchema, faqSchema } from "@/lib/schema";
 
 export const revalidate = 86400;
 export const dynamicParams = true;
@@ -55,6 +55,43 @@ interface PostFrontmatter {
   slug: string;
   image: string;
   readTime: string;
+}
+
+/** Extract FAQ Q&A pairs from MDX content for FAQPage structured data. */
+function extractFaqItems(content: string): { q: string; a: string }[] {
+  // Find the FAQ section (handles variations in heading text)
+  const faqSectionMatch = content.match(
+    /##\s+(?:Frequently Asked Questions|FAQ)[^\n]*\n([\s\S]*?)(?=\n##\s|\n---|\n<|$)/i
+  );
+  if (!faqSectionMatch) return [];
+
+  const faqBody = faqSectionMatch[1];
+
+  // Split on ### headings — each ### is a question
+  const chunks = faqBody.split(/\n###\s+/).slice(1); // slice(1) drops the empty string before first ###
+
+  return chunks
+    .map((chunk) => {
+      const lines = chunk.split("\n");
+      const q = lines[0].trim().replace(/\*+/g, "").replace(/\?$/, "").trim() + "?";
+      // Answer: remaining non-empty lines, stripped of MDX tags and markdown
+      const answerLines = lines
+        .slice(1)
+        .filter((l) => l.trim() && !l.trim().startsWith("<") && !l.trim().startsWith("#"))
+        .map((l) =>
+          l
+            .replace(/<[^>]+>/g, "")          // strip MDX/HTML tags
+            .replace(/\*\*([^*]+)\*\*/g, "$1") // strip bold
+            .replace(/\*([^*]+)\*/g, "$1")     // strip italic
+            .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1") // strip links → text
+            .trim()
+        )
+        .filter(Boolean);
+      const a = answerLines.join(" ").slice(0, 500); // cap answer at 500 chars
+      return q && a ? { q, a } : null;
+    })
+    .filter((item): item is { q: string; a: string } => item !== null)
+    .slice(0, 10); // Google shows max ~10 FAQ entries in rich results
 }
 
 export async function generateStaticParams() {
@@ -163,6 +200,9 @@ export default async function BlogPostPage({
     image: frontmatter.image,
   });
 
+  const faqItems = extractFaqItems(content);
+  const faqStructuredData = faqItems.length > 0 ? faqSchema(faqItems) : null;
+
   // Format date for display
   const displayDate = new Date(frontmatter.date).toLocaleDateString("en-US", {
     year: "numeric",
@@ -177,6 +217,12 @@ export default async function BlogPostPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
+      {faqStructuredData && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
+        />
+      )}
 
       {/* Hero image */}
       <div className="relative h-64 md:h-96 w-full">
