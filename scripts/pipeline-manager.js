@@ -380,6 +380,10 @@ async function main() {
 
   await telegram(msg);
   console.log(`✅ Score: ${score}/100${trendDisplay} | Status: ${statusText} | Today: ${todayCount}`);
+  console.log(`PIPELINE_COMPONENTS: generation=${components.generation},reliability=${components.reliability},quality=${components.quality},bugs=${components.bugs},queue=${components.queue}`);
+  console.log(`PIPELINE_QUALITY: ${qualityAvg ?? 'n/a'}`);
+  console.log(`PIPELINE_PUBLISHED: ${stats.published}`);
+  console.log(`PIPELINE_PENDING: ${stats.pending}`);
 
   // Commit scores file update
   try {

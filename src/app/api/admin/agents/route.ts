@@ -134,11 +134,24 @@ interface PipelineReport {
   status: string | null;
   today: number | null;
   restarted: boolean;
+  components: {
+    generation: number | null;
+    reliability: number | null;
+    quality: number | null;
+    bugs: number | null;
+    queue: number | null;
+  };
+  qualityAvg: number | null;
+  published: number | null;
+  pending: number | null;
 }
 
 interface ResearcherReport {
   type: "researcher";
   added: number;
+  pending: number | null;
+  published: number | null;
+  topics: { cluster: string; title: string }[];
 }
 
 interface ImproverReport {
@@ -261,18 +274,32 @@ function parseFixerReport(log: string): FixerReport {
 }
 
 function parsePipelineReport(log: string): PipelineReport {
-  const scoreMatch = log.match(/✅ Score: (\d+)\/100 \| Status: ([^|]+) \| Today: (\d+)/);
+  const scoreMatch = log.match(/✅ Score: (\d+)\/100[^|]*\| Status: ([^|]+) \| Today: (\d+)/);
   const score      = scoreMatch ? Number(scoreMatch[1]) : null;
   const status     = scoreMatch ? scoreMatch[2].trim() : null;
   const today      = scoreMatch ? Number(scoreMatch[3]) : null;
   const restarted  = log.includes("auto-restarting");
-  return { type: "pipeline", score, status, today, restarted };
+
+  const compMatch  = log.match(/PIPELINE_COMPONENTS: generation=(\d+),reliability=(\d+),quality=(\d+),bugs=(\d+),queue=(\d+)/);
+  const components = compMatch
+    ? { generation: Number(compMatch[1]), reliability: Number(compMatch[2]), quality: Number(compMatch[3]), bugs: Number(compMatch[4]), queue: Number(compMatch[5]) }
+    : { generation: null, reliability: null, quality: null, bugs: null, queue: null };
+
+  const qualityStr = log.match(/PIPELINE_QUALITY: ([\d.]+)/)?.[1];
+  const qualityAvg = qualityStr && qualityStr !== "n/a" ? Number(qualityStr) : null;
+  const published  = log.match(/PIPELINE_PUBLISHED: (\d+)/)?.[1] ? Number(log.match(/PIPELINE_PUBLISHED: (\d+)/)?.[1]) : null;
+  const pending    = log.match(/PIPELINE_PENDING: (\d+)/)?.[1] ? Number(log.match(/PIPELINE_PENDING: (\d+)/)?.[1]) : null;
+
+  return { type: "pipeline", score, status, today, restarted, components, qualityAvg, published, pending };
 }
 
 function parseResearcherReport(log: string): ResearcherReport {
-  const addedMatch = log.match(/✅ Added (\d+) articles/);
-  const added      = addedMatch ? Number(addedMatch[1]) : 0;
-  return { type: "researcher", added };
+  const added     = Number(log.match(/RESEARCH_ADDED: (\d+)/)?.[1] ?? log.match(/✅ Added (\d+) articles/)?.[1] ?? 0);
+  const pending   = log.match(/RESEARCH_PENDING: (\d+)/)?.[1] ? Number(log.match(/RESEARCH_PENDING: (\d+)/)?.[1]) : null;
+  const published = log.match(/RESEARCH_PUBLISHED: (\d+)/)?.[1] ? Number(log.match(/RESEARCH_PUBLISHED: (\d+)/)?.[1]) : null;
+  const topics    = [...log.matchAll(/RESEARCH_TOPIC: ([^|]+) \| (.+)/g)]
+    .map((m) => ({ cluster: m[1].trim(), title: m[2].trim() }));
+  return { type: "researcher", added, pending, published, topics };
 }
 
 function parseImproverReport(log: string): ImproverReport {
