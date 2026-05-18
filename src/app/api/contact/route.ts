@@ -119,10 +119,49 @@ export async function POST(req: NextRequest) {
     if (!emailRes.ok) {
       const err = await emailRes.text();
       console.error("Resend contact notification failed:", err);
-      // Non-fatal: lead is already saved to Airtable; don't block the user
+      return NextResponse.json({ error: "Failed to send notification" }, { status: 500 });
     }
 
-    // 3. Telegram notification (use escaped values to avoid breaking HTML parse mode)
+    // 3. Confirmation email to the visitor
+    const confirmSubject = form_type === "ready"
+      ? "Got it! I'll be in touch soon ☕"
+      : "Thanks for reaching out — Nataliia @ DataLatte";
+
+    const confirmHtml = `
+      <div style="font-family:sans-serif;max-width:520px;margin:0 auto;color:#333">
+        <div style="background:linear-gradient(135deg,#7c4a2d,#a0622a);padding:32px 32px 24px;border-radius:16px 16px 0 0;text-align:center">
+          <p style="font-size:28px;margin:0 0 8px">☕</p>
+          <h1 style="color:#fff;font-size:20px;margin:0;font-weight:700">${form_type === "ready" ? "You're on my radar 🔥" : "Message received!"}</h1>
+        </div>
+        <div style="background:#fff;padding:28px 32px;border:1px solid #eee;border-top:none;border-radius:0 0 16px 16px">
+          <p style="margin:0 0 16px">Hey${safeName ? ` ${safeName}` : ""}! 👋</p>
+          <p style="margin:0 0 16px;line-height:1.6">
+            ${form_type === "ready"
+              ? "Thanks for reaching out — I can see you mean business. I'll review what you've shared and get back to you <strong>within one business day</strong> with thoughts on how I can help."
+              : "Thanks for your message! I'll take a look and get back to you <strong>within one business day</strong> — usually sooner."}
+          </p>
+          <p style="margin:0 0 24px;line-height:1.6">In the meantime, feel free to browse the blog — I write practical, no-fluff marketing tips for local businesses every week.</p>
+          <a href="https://datalatte.pro/blog" style="display:inline-block;background:#7c4a2d;color:#fff;font-weight:700;padding:12px 24px;border-radius:10px;text-decoration:none">Read the blog →</a>
+          <hr style="margin:28px 0;border:none;border-top:1px solid #f0ebe6">
+          <p style="margin:0;line-height:1.6">Talk soon,<br><strong>Nataliia</strong><br><span style="color:#999;font-size:13px">Founder, DataLatte · <a href="https://datalatte.pro" style="color:#7c4a2d">datalatte.pro</a></span></p>
+        </div>
+        <p style="text-align:center;font-size:11px;color:#bbb;margin-top:16px">You're receiving this because you contacted us at datalatte.pro.</p>
+      </div>
+    `;
+
+    fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${RESEND_API_KEY}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        from: "Nataliia at DataLatte <hi@datalatte.pro>",
+        to: email,
+        reply_to: "hi@datalatte.pro",
+        subject: confirmSubject,
+        html: confirmHtml,
+      }),
+    }).catch((err) => console.error("Confirmation email failed:", err));
+
+    // 4. Telegram notification (use escaped values to avoid breaking HTML parse mode)
     if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID) {
       const msgPreview = message ? message.slice(0, 120) + (message.length > 120 ? "…" : "") : null;
       const parts = [
