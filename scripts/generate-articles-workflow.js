@@ -343,7 +343,27 @@ Requirements:
 
 Output ONLY raw MDX — no code fences, start with ---.`;
 
-  let mdx = await callGroq(systemPrompt, userPrompt);
+  let mdx;
+  try {
+    mdx = await callGroq(systemPrompt, userPrompt);
+  } catch (err) {
+    // Reset claim so the next run can retry this article
+    console.error(`❌ Groq failed, resetting ${entry.slug} to pending: ${err.message}`);
+    const resetQueue = JSON.parse(fs.readFileSync(queuePath, 'utf8'));
+    const ri = resetQueue.queue.findIndex((e) => e.slug === entry.slug);
+    if (ri !== -1 && resetQueue.queue[ri].status === 'generating') {
+      resetQueue.queue[ri].status = 'pending';
+      delete resetQueue.queue[ri].generatedDate;
+      await ghPutFile(
+        'content/queue.json',
+        JSON.stringify(resetQueue, null, 2) + '\n',
+        `Reset: ${entry.slug} back to pending [vercel skip]`
+      );
+      console.log(`🔄 Reset: ${entry.slug} → pending`);
+    }
+    throw err;
+  }
+
   // Strip <think>...</think> reasoning blocks some models emit before output
   mdx = mdx.replace(/<think>[\s\S]*?<\/think>\s*/g, '').trimStart();
   // Fix common MDX syntax bugs before pushing
