@@ -48,7 +48,7 @@ export default function BlogCard({ title, excerpt, slug, category, date, rawDate
             {title}
           </h2>
           <p className="text-gray-500 text-sm line-clamp-3 mb-4">{excerpt}</p>
-          <div className="flex items-center gap-3 text-xs text-gray-400">
+          <div className="flex items-center gap-3 text-xs text-gray-500">
             <time dateTime={rawDate} className="font-medium text-coffee-700">{date}</time>
             <span>·</span>
             <span>{readTime}</span>
@@ -91,7 +91,7 @@ export default function BlogCard({ title, excerpt, slug, category, date, rawDate
         </h3>
         <p className="text-sm text-gray-500 line-clamp-2 mb-4">{excerpt}</p>
         <div className="flex items-center justify-between mt-auto">
-          <div className="flex items-center gap-2 text-xs text-gray-400">
+          <div className="flex items-center gap-2 text-xs text-gray-500">
             <time dateTime={rawDate} className="font-medium text-coffee-700">{date}</time>
             <span>·</span>
             <span>{readTime}</span>
