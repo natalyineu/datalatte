@@ -40,8 +40,11 @@ async function fetchJson(url, options = {}, body = null) {
 const GROQ_MODELS = [
   'llama-3.3-70b-versatile',
   'qwen/qwen3-32b',
-  'meta-llama/llama-4-scout-17b-16e-instruct',
   'openai/gpt-oss-120b',
+  'openai/gpt-oss-20b',
+  'meta-llama/llama-4-scout-17b-16e-instruct',
+  'groq/compound',
+  'groq/compound-mini',
   'llama-3.1-8b-instant',
 ];
 
