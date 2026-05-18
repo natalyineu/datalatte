@@ -103,9 +103,22 @@ function syntaxAudit(content) {
 function mdxComponentAudit(content) {
   const issues = [];
 
-  // BarChart/StatRow: CPA label with trend="up" — high CPA is bad, not good
-  const cpaTrendUp = /(?:StatRow|BarChart)[^>]*?(?:labels|label)="[^"]*CPA[^"]*"[^>]*trends?="[^"]*\bup\b/;
-  if (cpaTrendUp.test(content)) issues.push('mdx_cpa_trend_up');
+  // BarChart/StatRow: CPA label with trend="up" at the same pipe-index — high CPA is bad
+  // Uses position-aware parsing: "up" elsewhere in trends string is NOT a problem
+  const componentBlocks = [...content.matchAll(/<(?:StatRow|BarChart)\s[^>]+?\/>/gs)];
+  for (const m of componentBlocks) {
+    const block = m[0];
+    const labelsM = block.match(/labels="([^"]+)"/);
+    const trendsM = block.match(/trends?="([^"]+)"/);
+    if (!labelsM || !trendsM) continue;
+    const lbls = labelsM[1].split('|').map(s => s.trim());
+    const trds = trendsM[1].split('|').map(s => s.trim());
+    lbls.forEach((lbl, i) => {
+      if (/CPA|cost per acq/i.test(lbl) && trds[i] === 'up') {
+        issues.push('mdx_cpa_trend_up');
+      }
+    });
+  }
 
   // BarChart: CPA in highlights — presenting high CPA as "best"
   const cpaBest = /(?:StatRow|BarChart)[^>]*highlights?="[^"]*CPA[^"]*"/i;
