@@ -937,6 +937,9 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
   // Published sort
   const [pubSort, setPubSort]               = useState<"date" | "words" | "quality">("date");
 
+  // Auto-refresh
+  const [autoRefresh, setAutoRefresh]       = useState(false);
+
   // Proposals + quality
   const [proposals, setProposals]           = useState<Proposal[]>([]);
   const [qualityScores, setQualityScores]   = useState<Record<string, QualityScore>>({});
@@ -992,6 +995,36 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
     fetchProposals();
     fetchQualityScores();
   }, [fetchQueue, fetchArticles, fetchRecommendations, fetchProposals, fetchQualityScores]);
+
+  // Auto-refresh: every 30s, 15s if Writer is active
+  useEffect(() => {
+    if (!autoRefresh) return;
+    const hasActive = queue.some((e) => e.status === "generating");
+    const ms = hasActive ? 15_000 : 30_000;
+    const id = setInterval(() => {
+      fetchQueue();
+      fetchArticles();
+      fetchProposals();
+    }, ms);
+    return () => clearInterval(id);
+  }, [autoRefresh, queue, fetchQueue, fetchArticles, fetchProposals]);
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const tabIds: TabId[] = ["agents", "proposals", "pipeline", "queue", "research", "published", "reports"];
+    function handler(e: KeyboardEvent) {
+      const tag = (e.target as HTMLElement)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+      if (e.key === "r" || e.key === "R") { fetchQueue(); fetchArticles(); fetchProposals(); }
+      if ((e.key === "g" || e.key === "G") && !generating && !batchRunning) handleGenerate();
+      if ((e.key === "a" || e.key === "A") && !generating && !batchRunning) setAutoRefresh((v) => !v);
+      const n = parseInt(e.key);
+      if (n >= 1 && n <= 7) setActiveTab(tabIds[n - 1]);
+    }
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [generating, batchRunning]);
 
   // ── Helpers ───────────────────────────────────────────────────────────────
 
@@ -1082,6 +1115,22 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
   }
 
   // ── Proposal actions ──────────────────────────────────────────────────────
+
+  async function handleBulkApproveHighImpact() {
+    const highImpact = proposals.filter((p) => p.status === "pending" && p.impactScore >= 8);
+    setProposals((prev) =>
+      prev.map((p) =>
+        p.status === "pending" && p.impactScore >= 8
+          ? { ...p, status: "approved" as const, reviewedAt: new Date().toISOString() }
+          : p
+      )
+    );
+    await Promise.all(
+      highImpact.map((p) =>
+        authFetch("/api/admin/proposals", { method: "PATCH", body: JSON.stringify({ id: p.id, action: "approve" }) }, token)
+      )
+    );
+  }
 
   async function handleProposalAction(id: string, action: "approve" | "reject" | "dismiss") {
     // Optimistic update
@@ -1217,6 +1266,24 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
     return matchStatus && matchType;
   });
 
+  // Next article to generate
+  const nextArticle = queue.find((e) => e.status === "pending") ?? null;
+
+  // Cluster coverage: published vs pending per cluster
+  const clusterCoverage: Record<string, { published: number; pending: number }> = {};
+  for (const e of queue) {
+    if (!clusterCoverage[e.cluster]) clusterCoverage[e.cluster] = { published: 0, pending: 0 };
+    if (e.status === "published") clusterCoverage[e.cluster].published++;
+    else if (e.status === "pending" || e.status === "generating") clusterCoverage[e.cluster].pending++;
+  }
+  const clusterCoverageEntries = Object.entries(clusterCoverage)
+    .map(([name, v]) => ({ name, ...v, total: v.published + v.pending }))
+    .filter((c) => c.total > 0)
+    .sort((a, b) => b.total - a.total)
+    .slice(0, 12);
+
+  const highImpactPendingCount = proposals.filter((p) => p.status === "pending" && p.impactScore >= 8).length;
+
   const tabs: { id: TabId; label: string }[] = [
     { id: "agents",    label: "Agents (6)" },
     { id: "proposals", label: `Proposals (${pendingProposalsCount})` },
@@ -1238,21 +1305,39 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
             <p className="text-gray-400 text-xs mt-0.5">Pipeline management</p>
           </div>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <div className="hidden sm:flex items-center gap-3 text-sm text-gray-400">
             <span className="flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-green-400" />
+              <span className="text-green-300 font-medium">{articles.length}</span>
+              <span className="text-gray-500">published</span>
+            </span>
+            <span className="text-gray-700">|</span>
+            <span className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-yellow-400" />
-              {pendingCount} pending
+              <span className="text-yellow-300 font-medium">{pendingCount}</span>
+              <span className="text-gray-500">pending</span>
             </span>
-            <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-blue-400" />
-              {generatedCount} generated
-            </span>
-            <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-gray-400" />
-              {articles.length} published
-            </span>
+            <span className="text-gray-700">|</span>
+            <span className="text-amber-300 font-medium">{avgPerDay}/day</span>
+            {publishedToday > 0 && (
+              <span className="text-green-400 font-medium text-xs bg-green-500/10 border border-green-500/30 px-2 py-0.5 rounded-full">
+                +{publishedToday} today
+              </span>
+            )}
           </div>
+          <button
+            onClick={() => setAutoRefresh((v) => !v)}
+            title="Toggle auto-refresh (A)"
+            className={`text-xs px-3 py-1.5 rounded-lg border transition flex items-center gap-1.5 ${
+              autoRefresh
+                ? "bg-amber-600/20 border-amber-500/50 text-amber-300"
+                : "bg-gray-800 border-gray-700 text-gray-400 hover:text-white"
+            }`}
+          >
+            <span className={autoRefresh ? "animate-spin inline-block" : ""} style={{ animationDuration: "3s" }}>⟳</span>
+            {autoRefresh ? "Live" : "Auto"}
+          </button>
           <button
             onClick={onLogout}
             className="text-sm text-gray-400 hover:text-white transition px-3 py-1.5 rounded-lg hover:bg-gray-800"
@@ -1339,6 +1424,21 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
                 sub="out of 10"
               />
             </div>
+
+            {/* Bulk actions */}
+            {highImpactPendingCount > 0 && (
+              <div className="flex items-center gap-3 bg-red-500/5 border border-red-500/20 rounded-xl px-4 py-3">
+                <span className="text-sm text-red-300 flex-1">
+                  🎯 <span className="font-semibold">{highImpactPendingCount} HIGH IMPACT</span> proposals pending (≥ 8/10)
+                </span>
+                <button
+                  onClick={handleBulkApproveHighImpact}
+                  className="text-xs bg-green-700/30 hover:bg-green-700 border border-green-700/50 hover:border-green-600 text-green-300 hover:text-white rounded-lg px-4 py-2 transition font-medium"
+                >
+                  ✅ Approve all high-impact
+                </button>
+              </div>
+            )}
 
             {/* Filter bar */}
             <div className="flex flex-wrap gap-3 items-center">
@@ -1508,6 +1608,14 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
         {/* ══════════════════════════════════════════════════════════════════ */}
         {activeTab === "pipeline" && (
           <div className="space-y-8">
+            {/* Keyboard shortcuts hint */}
+            <div className="flex flex-wrap gap-3 text-xs text-gray-600">
+              <span><kbd className="bg-gray-800 border border-gray-700 rounded px-1.5 py-0.5 font-mono text-gray-500">G</kbd> Generate next</span>
+              <span><kbd className="bg-gray-800 border border-gray-700 rounded px-1.5 py-0.5 font-mono text-gray-500">R</kbd> Refresh data</span>
+              <span><kbd className="bg-gray-800 border border-gray-700 rounded px-1.5 py-0.5 font-mono text-gray-500">A</kbd> Toggle auto-refresh</span>
+              <span><kbd className="bg-gray-800 border border-gray-700 rounded px-1.5 py-0.5 font-mono text-gray-500">1–7</kbd> Switch tabs</span>
+            </div>
+
             {/* Stats grid */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
               <StatCard label="Total Published" value={articles.length} />
@@ -1519,6 +1627,30 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
               <StatCard label="Avg Quality Score" value={avgQualityScore ? `${avgQualityScore} / 10` : "—"} sub={`${allQualityValues.length} audited`} />
               <StatCard label="Pending Proposals" value={pendingProposalsCount} sub="from Agent 6" />
             </div>
+
+            {/* Next Article Preview */}
+            {nextArticle && (
+              <div className="bg-gray-900 border border-amber-500/20 rounded-xl p-5 flex items-start justify-between gap-4">
+                <div className="min-w-0">
+                  <p className="text-xs text-amber-400 font-semibold uppercase tracking-wide mb-2">⏭ Next in Queue</p>
+                  <p className="text-white font-semibold leading-snug">{nextArticle.title}</p>
+                  <div className="flex flex-wrap gap-3 mt-2 text-xs text-gray-400">
+                    <span>🔑 {nextArticle.primaryKeyword}</span>
+                    <span>📂 {nextArticle.cluster.split(" — ")[0]}</span>
+                    <span>📝 {nextArticle.targetWords} words</span>
+                  </div>
+                </div>
+                <button
+                  onClick={handleGenerate}
+                  disabled={generating || batchRunning}
+                  className="shrink-0 bg-green-700 hover:bg-green-600 disabled:opacity-40 text-white font-semibold rounded-xl px-4 py-2 text-sm transition flex items-center gap-2"
+                >
+                  {generating
+                    ? <><span className="inline-block w-3 h-3 border-2 border-white/30 border-t-white rounded-full animate-spin" />Generating…</>
+                    : "⚡ Generate"}
+                </button>
+              </div>
+            )}
 
             {/* Generate controls */}
             <div className="bg-gray-900 border border-gray-800 rounded-xl p-5">
@@ -1623,6 +1755,47 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
                 </div>
               )}
             </div>
+
+            {/* Cluster Coverage Map */}
+            {clusterCoverageEntries.length > 0 && (
+              <div className="bg-gray-900 border border-gray-800 rounded-xl p-5">
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <h2 className="font-semibold text-white">Cluster Coverage</h2>
+                    <p className="text-xs text-gray-500 mt-0.5">Published vs pending per topic cluster</p>
+                  </div>
+                  <div className="flex items-center gap-3 text-xs text-gray-500">
+                    <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-amber-500 inline-block" /> Published</span>
+                    <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-gray-700 inline-block" /> Pending</span>
+                  </div>
+                </div>
+                <div className="space-y-2.5">
+                  {clusterCoverageEntries.map((c) => {
+                    const pubPct = Math.round((c.published / c.total) * 100);
+                    return (
+                      <div key={c.name}>
+                        <div className="flex items-center justify-between text-xs mb-1">
+                          <span className="text-gray-300 truncate flex-1 mr-4 max-w-xs" title={c.name}>
+                            {c.name.split(" — ")[0]}
+                          </span>
+                          <span className="text-gray-500 shrink-0">
+                            <span className="text-amber-300 font-medium">{c.published}</span>
+                            <span className="text-gray-600">/{c.total}</span>
+                            <span className="ml-1.5 text-gray-600">{pubPct}%</span>
+                          </span>
+                        </div>
+                        <div className="w-full bg-gray-800 rounded-full h-1.5 overflow-hidden">
+                          <div
+                            className="h-full bg-amber-600 rounded-full transition-all"
+                            style={{ width: `${pubPct}%` }}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
 
             {/* Activity timeline */}
             <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
