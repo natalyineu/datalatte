@@ -72,11 +72,11 @@ export async function POST(req: NextRequest) {
             <h2 style="color:#5c3317">Welcome to DataLatte ☕</h2>
             <p>Hey! Thanks for subscribing.</p>
             <p>Every week I share practical, no-fluff local marketing tips — things that actually move the needle for small businesses like yours.</p>
-            <p>In the meantime, here are a few posts to get you started:</p>
+            <p>In the meantime, here are a few places to start:</p>
             <ul>
-              <li><a href="https://datalatte.pro/blog/coffee-shops-dominate-google-maps" style="color:#7c4a2d">How Coffee Shops Can Dominate Google Maps</a></li>
-              <li><a href="https://datalatte.pro/blog/google-business-profile-optimization-checklist" style="color:#7c4a2d">Google Business Profile Optimization Checklist</a></li>
-              <li><a href="https://datalatte.pro/blog/local-marketing-budget-guide" style="color:#7c4a2d">Local Marketing Budget Guide</a></li>
+              <li><a href="https://datalatte.pro/tools/marketing-budget-calculator" style="color:#7c4a2d">Free Marketing Budget Calculator</a> — find out exactly how much to spend and where</li>
+              <li><a href="https://datalatte.pro/blog" style="color:#7c4a2d">The DataLatte Blog</a> — practical, no-fluff local marketing tips</li>
+              <li><a href="https://datalatte.pro/services/google-ads" style="color:#7c4a2d">Google Ads for Local Businesses</a> — how it works and what to expect</li>
             </ul>
             <p>Got a question or want a free audit of your marketing? Just reply to this email — I read every one.</p>
             <p style="margin-top:32px">— Nataliia<br><span style="color:#888;font-size:13px">Founder, DataLatte</span></p>
