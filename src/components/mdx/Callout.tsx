@@ -1,7 +1,7 @@
-import { Lightbulb, AlertTriangle, Coffee, Zap, BookOpen } from "lucide-react";
+import { Lightbulb, AlertTriangle, Coffee, Zap, BookOpen, HelpCircle } from "lucide-react";
 import { ReactNode } from "react";
 
-type CalloutType = "tip" | "warning" | "stat" | "example" | "coffee";
+type CalloutType = "tip" | "warning" | "stat" | "example" | "coffee" | "faq";
 
 const CONFIG: Record<CalloutType, {
   icon: ReactNode;
@@ -13,6 +13,7 @@ const CONFIG: Record<CalloutType, {
   stat:    { icon: <Zap size={15} />,           bg: "bg-coffee-50",  border: "border-coffee-400", label: "Key Stat",         labelColor: "text-coffee-700", textColor: "text-coffee-900" },
   example: { icon: <BookOpen size={15} />,      bg: "bg-gray-50",    border: "border-gray-300",   label: "Real Example",     labelColor: "text-gray-600",   textColor: "text-gray-800"   },
   coffee:  { icon: <Coffee size={15} />,        bg: "bg-coffee-50",  border: "border-coffee-300", label: "DataLatte Take",   labelColor: "text-coffee-700", textColor: "text-coffee-900" },
+  faq:     { icon: <HelpCircle size={15} />,    bg: "bg-blue-50",    border: "border-blue-300",   label: "FAQ",              labelColor: "text-blue-700",   textColor: "text-blue-900"   },
 };
 
 interface CalloutProps {
@@ -22,7 +23,7 @@ interface CalloutProps {
 }
 
 export default function Callout({ type = "tip", title, children }: CalloutProps) {
-  const c = CONFIG[type];
+  const c = CONFIG[type] ?? CONFIG.tip;
   return (
     <div className={`my-6 rounded-xl border-l-4 ${c.border} ${c.bg} px-5 py-4 mdx-fade-left`}>
       <div className={`flex items-center gap-2 font-semibold text-sm mb-1.5 ${c.labelColor}`}>
