@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import ServicePage from "@/components/ServicePage";
 
 export const metadata: Metadata = {
@@ -9,7 +10,15 @@ export const metadata: Metadata = {
 
 export default function AIAgentsPage() {
   return (
-    <ServicePage
+    <>
+      {/* Tool promo banner */}
+      <div className="bg-coffee-50 border-b border-coffee-100 py-3 px-4 text-center text-sm">
+        <span className="text-gray-600">Want to explore AI agents yourself? </span>
+        <Link href="/tools/ai-agent-builder" className="font-semibold text-coffee-700 hover:underline">
+          Try our free AI Agent Builder →
+        </Link>
+      </div>
+      <ServicePage
       service="AI Agents & Automation"
       tagline="Let AI handle the repetitive stuff. You focus on running the business."
       description="Most small businesses lose leads not because of bad marketing, but because nobody followed up fast enough. AI agents handle your lead responses, review replies, appointment reminders, and FAQ answers — instantly, 24/7, without hiring anyone."
@@ -92,11 +101,13 @@ export default function AIAgentsPage() {
         },
       ]}
       relatedLinks={[
+        { label: "🤖 Free AI Agent Builder Tool", href: "/tools/ai-agent-builder" },
         { label: "Analytics & Reporting", href: "/services/analytics" },
         { label: "Google Ads", href: "/services/google-ads" },
         { label: "Email & SMS Marketing", href: "/services/email-sms" },
         { label: "Website & Landing Pages", href: "/services/website" },
       ]}
     />
+    </>
   );
 }

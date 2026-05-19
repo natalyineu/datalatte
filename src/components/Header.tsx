@@ -17,6 +17,11 @@ const niches = [
   { label: "Enterprise & Agencies", href: "/for/enterprise" },
 ];
 
+const tools = [
+  { label: "Budget Calculator ✨", href: "/tools/marketing-budget-calculator" },
+  { label: "AI Agent Builder 🤖",  href: "/tools/ai-agent-builder" },
+];
+
 const services = [
   { label: "Google Ads",              href: "/services/google-ads" },
   { label: "Meta Ads",                href: "/services/meta-ads" },
@@ -86,12 +91,7 @@ export default function Header() {
           <nav className="hidden md:flex items-center gap-6">
             <DropdownMenu label="For Your Business" items={niches} />
             <DropdownMenu label="Services"           items={services} />
-            <Link
-              href="/tools/marketing-budget-calculator"
-              className={clsx("text-gray-600 hover:text-gray-900 font-medium transition-colors", pathname.startsWith("/tools") && "text-coffee-700")}
-            >
-              Free Calculator
-            </Link>
+            <DropdownMenu label="Free Tools"         items={tools} />
             <Link
               href="/blog"
               className={clsx("text-gray-600 hover:text-gray-900 font-medium transition-colors", pathname === "/blog" && "text-coffee-700")}
@@ -161,7 +161,9 @@ export default function Header() {
             </div>
           )}
 
-          <Link href="/tools/marketing-budget-calculator" className="block py-3 text-gray-700 font-medium" onClick={() => setMobileOpen(false)}>Free Calculator ✨</Link>
+          {tools.map((t) => (
+            <Link key={t.href} href={t.href} className="block py-3 text-gray-700 font-medium" onClick={() => setMobileOpen(false)}>{t.label}</Link>
+          ))}
           <Link href="/blog"    className="block py-3 text-gray-700 font-medium" onClick={() => setMobileOpen(false)}>Blog</Link>
           <Link href="/about"   className="block py-3 text-gray-700 font-medium" onClick={() => setMobileOpen(false)}>About</Link>
           <Link href="/contact" className="btn-primary w-full justify-center mt-3" onClick={() => setMobileOpen(false)}>
