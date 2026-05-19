@@ -1,4 +1,5 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { checkAdminAuth } from "@/lib/adminAuth";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
@@ -367,7 +368,9 @@ async function callGroq(
 
 // ── POST /api/admin/generate ──────────────────────────────────────────────────
 
-export async function POST(): Promise<NextResponse> {
+export async function POST(req: NextRequest): Promise<NextResponse> {
+  const authError = checkAdminAuth(req);
+  if (authError) return authError;
   const ghToken = process.env.GH_TOKEN;
 
   // ── Read queue (from GitHub API if token set; else fall back to disk) ────

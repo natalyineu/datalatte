@@ -4,7 +4,7 @@ import { CheckCircle2, ArrowRight, TrendingUp } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
 import TestimonialCard from "@/components/TestimonialCard";
-import { faqSchema } from "@/lib/schema";
+import { faqSchema, breadcrumbSchema } from "@/lib/schema";
 
 interface NichePageProps {
   niche: string;
@@ -21,13 +21,31 @@ interface NichePageProps {
   ctaHeadline: string;
 }
 
+const NICHE_SLUGS: Record<string, string> = {
+  "Coffee Shops": "coffee-shops",
+  "Hair & Beauty Salons": "hair-salons",
+  "Pet Groomers": "pet-groomers",
+  "Fitness & Yoga Studios": "fitness-studios",
+  "Startups": "startups",
+  "Freelancers": "freelancers",
+  "Medium Business": "medium-business",
+  "Enterprise": "enterprise",
+};
+
 export default function NichePage({
   niche, headline, subheadline, heroImage, accentColor,
   problems, services, kpis, tactics, testimonial, faq, ctaHeadline,
 }: NichePageProps) {
+  const slug = NICHE_SLUGS[niche] ?? niche.toLowerCase().replace(/[\s&]+/g, "-").replace(/[^a-z0-9-]/g, "");
+  const breadcrumb = breadcrumbSchema([
+    { name: "Home", url: "https://datalatte.pro" },
+    { name: `${niche} Marketing`, url: `https://datalatte.pro/for/${slug}` },
+  ]);
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faq)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       {/* Hero */}
       <section className={`relative overflow-hidden ${accentColor} py-24`}>
         <div className="absolute inset-0 opacity-20">

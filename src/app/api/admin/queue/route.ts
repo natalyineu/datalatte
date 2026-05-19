@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import { checkAdminAuth } from "@/lib/adminAuth";
 
 const QUEUE_PATH = path.join(process.cwd(), "content/queue.json");
 
@@ -30,7 +31,9 @@ function writeQueue(data: QueueFile): void {
 }
 
 // ── GET /api/admin/queue ─────────────────────────────────────────────────────
-export async function GET(): Promise<NextResponse> {
+export async function GET(req: NextRequest): Promise<NextResponse> {
+  const authError = checkAdminAuth(req);
+  if (authError) return authError;
   try {
     const data = readQueue();
     return NextResponse.json(
@@ -45,6 +48,8 @@ export async function GET(): Promise<NextResponse> {
 
 // ── POST /api/admin/queue ────────────────────────────────────────────────────
 export async function POST(req: NextRequest): Promise<NextResponse> {
+  const authError = checkAdminAuth(req);
+  if (authError) return authError;
   try {
     const body = await req.json();
 
@@ -113,6 +118,8 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 // ── PATCH /api/admin/queue ───────────────────────────────────────────────────
 // Update status of an existing entry (e.g. pending → generated → published)
 export async function PATCH(req: NextRequest): Promise<NextResponse> {
+  const authError = checkAdminAuth(req);
+  if (authError) return authError;
   try {
     const body = await req.json();
 
@@ -173,6 +180,8 @@ export async function PATCH(req: NextRequest): Promise<NextResponse> {
 // ── DELETE /api/admin/queue ──────────────────────────────────────────────────
 // Remove an entry from the queue by slug
 export async function DELETE(req: NextRequest): Promise<NextResponse> {
+  const authError = checkAdminAuth(req);
+  if (authError) return authError;
   try {
     const { searchParams } = new URL(req.url);
     const slug = searchParams.get("slug");
