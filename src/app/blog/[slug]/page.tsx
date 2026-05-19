@@ -10,6 +10,9 @@ import Callout from "@/components/mdx/Callout";
 import BarChart from "@/components/mdx/BarChart";
 import StatRow from "@/components/mdx/StatRow";
 import Funnel from "@/components/mdx/Funnel";
+import DonutChart from "@/components/mdx/DonutChart";
+import LineChart from "@/components/mdx/LineChart";
+import CompareBar from "@/components/mdx/CompareBar";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
@@ -209,6 +212,9 @@ const mdxComponents = {
   BarChart,
   StatRow,
   Funnel,
+  DonutChart,
+  LineChart,
+  CompareBar,
   code: (props: React.HTMLAttributes<HTMLElement>) => (
     <code className="bg-coffee-50 text-coffee-800 text-xs font-mono px-1.5 py-0.5 rounded" {...props} />
   ),
