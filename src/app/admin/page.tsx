@@ -943,6 +943,14 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
   // Proposals + quality
   const [proposals, setProposals]           = useState<Proposal[]>([]);
   const [qualityScores, setQualityScores]   = useState<Record<string, QualityScore>>({});
+  const [qualityStats, setQualityStats]     = useState<{
+    totalScored: number;
+    avgScore: number | null;
+    dist: { excellent: number; good: number; fair: number; poor: number };
+    fixerQueue: number;
+    recentlyImproved: { slug: string; score: number; improvedFrom: number | null; improvedAt: string }[];
+    lowestScoring: { slug: string; score: number; checkedAt: string; improvedAt: string | null }[];
+  } | null>(null);
   const [proposalStatusFilter, setProposalStatusFilter] = useState<string>("pending");
   const [proposalTypeFilter, setProposalTypeFilter]     = useState<string>("all");
 
@@ -983,8 +991,12 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
   const fetchQualityScores = useCallback(async () => {
     const res = await authFetch("/api/admin/quality", {}, token);
     if (res.ok) {
-      const d = await res.json() as { scores: Record<string, QualityScore> };
+      const d = await res.json() as {
+        scores: Record<string, QualityScore>;
+        stats?: typeof qualityStats;
+      };
       setQualityScores(d.scores ?? {});
+      if (d.stats) setQualityStats(d.stats);
     }
   }, [token]);
 
@@ -1285,7 +1297,7 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
   const highImpactPendingCount = proposals.filter((p) => p.status === "pending" && p.impactScore >= 8).length;
 
   const tabs: { id: TabId; label: string }[] = [
-    { id: "agents",    label: "Agents (6)" },
+    { id: "agents",    label: "Agents (8)" },
     { id: "proposals", label: `Proposals (${pendingProposalsCount})` },
     { id: "pipeline",  label: "Pipeline" },
     { id: "queue",     label: `Queue (${queue.length})` },
@@ -1625,8 +1637,79 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
               <StatCard label="Avg Articles / Day" value={avgPerDay} sub="last 7 days" />
               <StatCard label="Clusters Covered" value={clustersInPublished} sub="in published" />
               <StatCard label="Avg Quality Score" value={avgQualityScore ? `${avgQualityScore} / 10` : "—"} sub={`${allQualityValues.length} audited`} />
-              <StatCard label="Pending Proposals" value={pendingProposalsCount} sub="from Agent 6" />
+              <StatCard label="Pending Proposals" value={pendingProposalsCount} sub="from Improver" />
+              <StatCard label="Fixer Queue" value={qualityStats?.fixerQueue ?? "—"} sub="score < 7, need rewrite" />
+              <StatCard label="Excellent (9-10)" value={qualityStats?.dist.excellent ?? "—"} sub="top quality" />
+              <StatCard label="Poor (< 5)" value={qualityStats?.dist.poor ?? "—"} sub="urgent fixes" />
+              <StatCard label="Recently Improved" value={qualityStats?.recentlyImproved.length ?? "—"} sub="last 7 days" />
             </div>
+
+            {/* Quality score distribution */}
+            {qualityStats && (
+              <div className="bg-gray-900 border border-gray-800 rounded-xl p-5">
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <h2 className="font-semibold text-white">Quality Score Distribution</h2>
+                    <p className="text-xs text-gray-500 mt-0.5">{qualityStats.totalScored} articles scored · avg {qualityStats.avgScore}/10</p>
+                  </div>
+                  <button
+                    onClick={fetchQualityScores}
+                    className="text-xs text-gray-500 hover:text-white transition px-2 py-1 rounded hover:bg-gray-800"
+                  >⟳ Refresh</button>
+                </div>
+                <div className="grid grid-cols-4 gap-3 mb-4">
+                  {[
+                    { label: "Excellent", sub: "9–10", value: qualityStats.dist.excellent, color: "text-green-400 bg-green-500/10 border-green-500/30" },
+                    { label: "Good", sub: "7–8", value: qualityStats.dist.good, color: "text-blue-400 bg-blue-500/10 border-blue-500/30" },
+                    { label: "Fair", sub: "5–6", value: qualityStats.dist.fair, color: "text-yellow-400 bg-yellow-500/10 border-yellow-500/30" },
+                    { label: "Poor", sub: "< 5", value: qualityStats.dist.poor, color: "text-red-400 bg-red-500/10 border-red-500/30" },
+                  ].map((b) => (
+                    <div key={b.label} className={`rounded-xl border px-3 py-2.5 text-center ${b.color}`}>
+                      <p className={`text-2xl font-black`}>{b.value}</p>
+                      <p className="text-xs font-semibold mt-0.5">{b.label}</p>
+                      <p className="text-[10px] opacity-70">{b.sub}</p>
+                    </div>
+                  ))}
+                </div>
+                {/* Fixer queue + lowest scoring */}
+                {qualityStats.lowestScoring.length > 0 && (
+                  <div>
+                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">
+                      Fixer queue — {qualityStats.fixerQueue} articles need improvement
+                    </p>
+                    <div className="space-y-1.5 max-h-48 overflow-y-auto">
+                      {qualityStats.lowestScoring.map((a) => (
+                        <div key={a.slug} className="flex items-center gap-3 text-xs">
+                          <QualityBadge score={a.score} />
+                          <span className="text-gray-400 truncate flex-1">{a.slug.replace(/-/g, " ")}</span>
+                          {a.improvedAt && (
+                            <span className="text-gray-600 shrink-0">improved {relativeTime(a.improvedAt)}</span>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {/* Recently improved */}
+                {qualityStats.recentlyImproved.length > 0 && (
+                  <div className="mt-4 pt-4 border-t border-gray-800">
+                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Recently improved (last 7 days)</p>
+                    <div className="space-y-1.5">
+                      {qualityStats.recentlyImproved.slice(0, 5).map((a) => (
+                        <div key={a.slug} className="flex items-center gap-3 text-xs">
+                          <QualityBadge score={a.score} />
+                          {a.improvedFrom !== null && (
+                            <span className="text-gray-600 shrink-0">{a.improvedFrom}→{a.score}</span>
+                          )}
+                          <span className="text-gray-400 truncate flex-1">{a.slug.replace(/-/g, " ")}</span>
+                          <span className="text-gray-600 shrink-0">{relativeTime(a.improvedAt)}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* Next Article Preview */}
             {nextArticle && (
