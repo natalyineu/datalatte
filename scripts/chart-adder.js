@@ -152,13 +152,80 @@ function parseFrontmatter(raw) {
 }
 
 function hasCharts(content) {
-  return /<BarChart|<StatRow|<Funnel/.test(content);
+  return /<BarChart|<StatRow|<Funnel|<DonutChart|<LineChart|<CompareBar/.test(content);
 }
 
 // ── Chart generation ──────────────────────────────────────────────────────────
 
+// Pick the best pair of chart types for a given article topic
+function pickChartTypes(title, content) {
+  const t = (title + ' ' + content.slice(0, 500)).toLowerCase();
+
+  // Comparison articles → CompareBar
+  const isComparison = /vs\.?|versus|compare|comparison|which is better|better than/.test(t);
+  // Trend / over time articles → LineChart
+  const isTrend = /over time|month|quarter|year|trend|growth|season|weekly|monthly|annual/.test(t);
+  // Budget / breakdown articles → DonutChart
+  const isBreakdown = /budget|breakdown|split|allocat|spend|portion|percentage of|share of/.test(t);
+
+  if (isComparison) return ['CompareBar', 'StatRow'];
+  if (isTrend)      return ['LineChart', 'StatRow'];
+  if (isBreakdown)  return ['DonutChart', 'StatRow'];
+  // default: classic bar + stat
+  return ['BarChart', 'StatRow'];
+}
+
+const CHART_FORMATS = {
+  BarChart: `<BarChart
+  title="Descriptive chart title"
+  labels="Label 1|Label 2|Label 3|Label 4|Label 5"
+  values="45|38|62|29|51"
+  unit="%"
+  highlights="Label 3"
+  caption="Source or context note"
+/>`,
+
+  DonutChart: `<DonutChart
+  title="Descriptive donut chart title"
+  labels="Category A|Category B|Category C|Category D"
+  values="40|25|20|15"
+  unit="%"
+  centerLabel="Budget"
+  caption="Source or context note"
+/>`,
+
+  LineChart: `<LineChart
+  title="Trend over time"
+  labels="Jan|Feb|Mar|Apr|May|Jun|Jul|Aug"
+  values="12|18|15|24|30|28|35|40"
+  unit="%"
+  area="true"
+  caption="Source or context note"
+/>`,
+
+  CompareBar: `<CompareBar
+  title="Side-by-side comparison"
+  leftLabel="Option A"
+  rightLabel="Option B"
+  metrics="Avg CPC|CTR|Conversion Rate|ROI"
+  leftValues="3.50|4.2|6.1|210"
+  rightValues="1.20|1.8|3.4|140"
+  unit="$"
+  caption="Source or context note"
+/>`,
+
+  StatRow: `<StatRow
+  title="KEY NUMBERS"
+  values="$3.50|82%|4.2×|14 days"
+  labels="Avg CPC|Conversion rate|ROI|Time to results"
+  subs="per click|for local searches|vs. no ads|typical"
+  trends="neutral|up|up|neutral"
+/>`,
+};
+
 async function generateCharts(title, category, content) {
   const snippet = content.slice(0, 1000).replace(/[<>]/g, '').trim();
+  const [type1, type2] = pickChartTypes(title, content);
 
   const prompt = `You are adding visual data components to a blog post on DataLatte.pro, a local marketing agency for small businesses.
 
@@ -166,55 +233,51 @@ Article title: "${title}"
 Category: "${category}"
 Article excerpt: "${snippet}"
 
-Generate EXACTLY 2 visual components for this article. Output ONLY the raw MDX components — no explanation, no prose, no markdown headers.
+Generate EXACTLY 2 visual components for this article. Output ONLY the raw MDX — no explanation, no prose, no markdown headers, no backticks.
 
-Component 1: A <BarChart> with 4–6 bars showing data DIRECTLY relevant to this article's topic.
-Component 2: A <StatRow> with 3–4 key stats from this topic.
+Component 1 — use this EXACT component type: <${type1}>
+Component 2 — use this EXACT component type: <${type2}>
 
-Use these EXACT formats:
+Format examples (use the same attribute names and pipe-separated values):
 
-<BarChart
-  title="Descriptive chart title here"
-  labels="Label 1|Label 2|Label 3|Label 4"
-  values="45|38|62|29"
-  unit="%"
-  highlights="Label 3"
-  caption="Source or context note here"
-/>
+${CHART_FORMATS[type1]}
 
-<StatRow
-  title="KEY NUMBERS"
-  values="$3.50|82%|4.2×|14 days"
-  labels="Avg CPC|Conversion rate|ROI|Time to results"
-  subs="per click|for local searches|vs. no ads|typical"
-  trends="neutral|up|up|neutral"
-/>
+${CHART_FORMATS[type2]}
 
 Rules:
-- Use real-world benchmark numbers appropriate for the article topic
+- Use real-world benchmark numbers relevant to the article topic
+- All values are pipe-separated strings
 - unit can be: "%", "$", "" (blank for plain numbers)
-- trends must be: "up", "down", or "neutral" — one per stat, pipe-separated
-- highlights must match one of the labels exactly
-- Do NOT include any JSX attributes other than what's shown
-- Do NOT wrap in backticks or code blocks
+- StatRow trends must each be: "up", "down", or "neutral"
+- CompareBar leftLabel/rightLabel must reflect the two things being compared in the article
+- DonutChart centerLabel: short word (e.g. "Budget", "Traffic", "Leads")
+- LineChart labels should be time periods relevant to the topic
+- highlights (BarChart) must exactly match one of the labels
 - Output ONLY the two components, separated by a blank line`;
 
-  const raw = await callGroq(prompt, 500);
+  const raw = await callGroq(prompt, 600);
 
-  // Extract just the two component blocks
-  const barMatch = raw.match(/<BarChart[\s\S]*?\/>/);
-  const statMatch = raw.match(/<StatRow[\s\S]*?\/>/);
+  // Extract the two component blocks
+  const comp1Match = raw.match(new RegExp(`<${type1}[\\s\\S]*?\\/>`));
+  const comp2Match = raw.match(new RegExp(`<${type2}[\\s\\S]*?\\/>`));
 
-  if (!barMatch || !statMatch) {
-    throw new Error(`Chart generation returned unexpected format:\n${raw.slice(0, 300)}`);
+  if (!comp1Match || !comp2Match) {
+    // fallback: try BarChart + StatRow
+    const barMatch  = raw.match(/<BarChart[\s\S]*?\/>/);
+    const statMatch = raw.match(/<StatRow[\s\S]*?\/>/);
+    if (!barMatch || !statMatch) {
+      throw new Error(`Chart generation returned unexpected format:\n${raw.slice(0, 300)}`);
+    }
+    return { chart1: barMatch[0].trim(), chart2: statMatch[0].trim() };
   }
 
-  return { barChart: barMatch[0].trim(), statRow: statMatch[0].trim() };
+  return { chart1: comp1Match[0].trim(), chart2: comp2Match[0].trim() };
 }
 
 // ── Inject charts into content ────────────────────────────────────────────────
 
-function injectCharts(content, barChart, statRow) {
+function injectCharts(content, chart1, chart2) {
+  const barChart = chart1, statRow = chart2;
   const lines = content.split('\n');
 
   // Find positions of all ## headings
@@ -302,9 +365,11 @@ async function main() {
       const category = fm.category || '';
 
       console.log(`📈 Generating charts for: ${title.slice(0, 60)}...`);
-      const { barChart, statRow } = await generateCharts(title, category, content);
+      const { chart1, chart2 } = await generateCharts(title, category, content);
+      const chartType = chart1.match(/<(\w+)/)?.[1] || 'BarChart';
+      console.log(`   Chart type: ${chartType} + StatRow`);
 
-      const updatedContent = injectCharts(content, barChart, statRow);
+      const updatedContent = injectCharts(content, chart1, chart2);
       const updatedRaw     = `---\n${fmRaw}\n---\n${updatedContent}`;
 
       await ghPut(ghPath, updatedRaw, `Add charts: ${file.replace('.mdx','')} [vercel skip]`, ghFile.sha);
