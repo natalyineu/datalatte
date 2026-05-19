@@ -291,24 +291,32 @@ async function generateOne() {
   const queuePath = path.join(process.cwd(), 'content/queue.json');
   const queue = JSON.parse(fs.readFileSync(queuePath, 'utf8'));
 
-  // Reset articles stuck in 'generating' for more than 12 minutes (workflow timeout = 10min)
-  const STALE_MS = 12 * 60 * 1000;
+  // Reset articles stuck in 'generating' for more than 8 minutes.
+  // IMPORTANT: must push reset to GitHub — writing locally only has no effect
+  // because every run starts from a fresh checkout. Without the push, the article
+  // gets locally reset, re-claimed, pushed as 'generating' again → infinite loop.
+  const STALE_MS = 8 * 60 * 1000;
   const now = Date.now();
-  let resetCount = 0;
+  const toReset = [];
   for (const a of queue.queue) {
     if (a.status === 'generating') {
       const age = a.generatedDate ? now - new Date(a.generatedDate).getTime() : STALE_MS + 1;
       if (age > STALE_MS) {
         a.status = 'pending';
         delete a.generatedDate;
-        resetCount++;
-        console.log(`Reset: ${a.slug} -> pending (stuck ${Math.round(age/60000)}m)`);
+        toReset.push(a.slug);
+        console.log(`♻️ Reset: ${a.slug} → pending (stuck ${Math.round(age/60000)}m)`);
       }
     }
   }
-  if (resetCount > 0) {
-    fs.writeFileSync(queuePath, JSON.stringify(queue, null, 2) + '\n');
-    console.log(`♻️ Reset ${resetCount} stale article(s) to pending`);
+  if (toReset.length > 0) {
+    // Push reset to GitHub so the next run doesn't re-see 'generating'
+    await ghPutFile(
+      'content/queue.json',
+      JSON.stringify(queue, null, 2) + '\n',
+      `Reset stuck: ${toReset.join(', ')} → pending [vercel skip]`
+    );
+    console.log(`✅ Pushed reset for ${toReset.length} stuck article(s) to GitHub`);
   }
 
   const entry = queue.queue.find((e) => e.status === 'pending');
