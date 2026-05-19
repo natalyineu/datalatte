@@ -4,6 +4,8 @@ import path from "path";
 import { checkAdminAuth } from "@/lib/adminAuth";
 
 const QUEUE_PATH = path.join(process.cwd(), "content/queue.json");
+const REPO = "natalyineu/datalatte";
+const GH_TOKEN = process.env.GH_TOKEN || process.env.GITHUB_TOKEN;
 
 interface QueueEntry {
   slug: string;
@@ -26,6 +28,22 @@ function readQueue(): QueueFile {
   return JSON.parse(raw) as QueueFile;
 }
 
+async function fetchQueueFromGitHub(): Promise<QueueFile | null> {
+  if (!GH_TOKEN) return null;
+  try {
+    const res = await fetch(
+      `https://api.github.com/repos/${REPO}/contents/content/queue.json`,
+      { headers: { Authorization: `Bearer ${GH_TOKEN}`, "User-Agent": "DataLatte-Admin" }, cache: "no-store" }
+    );
+    if (!res.ok) return null;
+    const json = await res.json();
+    const decoded = Buffer.from(json.content as string, "base64").toString("utf8");
+    return JSON.parse(decoded) as QueueFile;
+  } catch {
+    return null;
+  }
+}
+
 function writeQueue(data: QueueFile): void {
   fs.writeFileSync(QUEUE_PATH, JSON.stringify(data, null, 2) + "\n", "utf8");
 }
@@ -35,7 +53,8 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
   const authError = checkAdminAuth(req);
   if (authError) return authError;
   try {
-    const data = readQueue();
+    // Prefer live GitHub data so [vercel skip] commits are always visible
+    const data = (await fetchQueueFromGitHub()) ?? readQueue();
     return NextResponse.json(
       { queue: data.queue, total: data.queue.length },
       { status: 200 }

@@ -385,7 +385,6 @@ async function main() {
     saveScores(scores);
     execSync('git config user.email "fixer-agent@datalatte.pro"');
     execSync('git config user.name "DataLatte Fixer"');
-    execSync('git add content/ 2>/dev/null || true');
 
     const parts = [];
     if (improvedFiles.length) parts.push(`${improvedFiles.length} improved`);
@@ -394,8 +393,9 @@ async function main() {
     if (dupeFixed)            parts.push(`${dupeFixed} dupes removed`);
 
     try {
-      // Pull BEFORE commit to avoid rebase conflicts from concurrent pushes
+      // Pull first (clean working tree), then stage and commit
       execSync('git pull --rebase origin main', { stdio: 'inherit' });
+      execSync('git add content/ 2>/dev/null || true');
       execSync(`git commit -m "Fixer: ${parts.join(', ')} [vercel skip]"`);
       // Retry push up to 3× in case another agent pushed between our pull and push
       let pushed = false;
