@@ -96,13 +96,20 @@ async function callGroq(systemPrompt, userPrompt) {
         const retryAfterHeader = res.headers?.['retry-after'];
         // 2. Try "try again in Xs" in the message body
         const waitMatch = errMsg.match(/try again in ([\d.]+)s/i) || errMsg.match(/please retry after ([\d.]+) second/i);
-        const waitMs = retryAfterHeader
+        const rawWaitMs = retryAfterHeader
           ? Math.ceil(parseFloat(retryAfterHeader) * 1000) + 2000
           : waitMatch
             ? Math.ceil(parseFloat(waitMatch[1]) * 1000) + 2000
-            : 60000; // default 60s — enough for a per-minute token bucket to reset
-        console.log(`⏳ Rate limited on ${model}, waiting ${Math.round(waitMs/1000)}s...`);
-        await sleep(waitMs);
+            : 60000;
+        // Cap at 120s — if Groq says "retry in 7220s" that's a daily quota
+        // exhaustion on this model; skip to the next one instead of hanging.
+        const MAX_WAIT_MS = 120000;
+        if (rawWaitMs > MAX_WAIT_MS) {
+          console.log(`⚡ ${model} quota exhausted (retry-after ${Math.round(rawWaitMs/1000)}s) — skipping to next model`);
+          break; // break inner attempt loop → try next model
+        }
+        console.log(`⏳ Rate limited on ${model}, waiting ${Math.round(rawWaitMs/1000)}s...`);
+        await sleep(rawWaitMs);
         lastErr = `rate_limit on ${model}`;
         continue;
       }
