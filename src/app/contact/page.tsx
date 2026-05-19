@@ -4,15 +4,68 @@ import { Mail, MessageCircle, Calendar, ArrowRight, Clock, CheckCircle2, MapPin 
 import SectionWrapper from "@/components/SectionWrapper";
 import ContactForm from "@/components/ContactForm";
 
+const CONTACT_URL = "https://datalatte.pro/contact";
+const CONTACT_TITLE = "Contact — Get a Free Marketing Audit";
+const CONTACT_DESC =
+  "Get in touch with DataLatte. Book a free marketing audit for your coffee shop, hair salon, pet grooming, or fitness business. Multiple contact options available.";
+
 export const metadata: Metadata = {
-  title: "Contact — Get a Free Marketing Audit",
-  description:
-    "Get in touch with DataLatte. Book a free marketing audit for your coffee shop, hair salon, pet grooming, or fitness business. Multiple contact options available.",
+  title: CONTACT_TITLE,
+  description: CONTACT_DESC,
+  alternates: {
+    canonical: CONTACT_URL,
+    languages: {
+      "en-US": CONTACT_URL,
+      "en-GB": CONTACT_URL,
+      "en-AU": CONTACT_URL,
+      "en-CA": CONTACT_URL,
+      "x-default": CONTACT_URL,
+    },
+  },
+  openGraph: {
+    title: CONTACT_TITLE,
+    description: CONTACT_DESC,
+    url: CONTACT_URL,
+    siteName: "DataLatte",
+    type: "website",
+    images: [{ url: "https://datalatte.pro/opengraph-image", width: 1200, height: 630, alt: "DataLatte — Free Marketing Audit" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: CONTACT_TITLE,
+    description: CONTACT_DESC,
+    images: ["https://datalatte.pro/opengraph-image"],
+  },
+};
+
+const contactSchema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  name: CONTACT_TITLE,
+  description: CONTACT_DESC,
+  url: CONTACT_URL,
+  mainEntity: {
+    "@type": "Organization",
+    name: "DataLatte",
+    url: "https://datalatte.pro",
+    email: "hi@datalatte.pro",
+    telephone: "+48503589781",
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+48503589781",
+      contactType: "customer support",
+      availableLanguage: "English",
+    },
+  },
 };
 
 export default function ContactPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }}
+      />
       {/* Hero */}
       <section className="hero-gradient py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
