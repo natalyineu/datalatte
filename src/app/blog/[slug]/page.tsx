@@ -187,7 +187,7 @@ const mdxComponents = {
     <h3 className="text-xl font-semibold text-gray-800 mt-8 mb-3" {...props} />
   ),
   p: (props: React.HTMLAttributes<HTMLParagraphElement>) => (
-    <p className="text-gray-600 leading-relaxed mb-4" {...props} />
+    <div className="text-gray-600 leading-relaxed mb-4" {...props} />
   ),
   ul: (props: React.HTMLAttributes<HTMLUListElement>) => (
     <ul className="list-disc list-inside mb-5 space-y-2 text-gray-600" {...props} />
