@@ -79,7 +79,7 @@ export default async function LocationNichePage({
         <div className="absolute inset-0 bg-black/55" />
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav className="flex items-center gap-2 text-sm text-white/60 mb-8">
-            <Link href="/for" className="hover:text-white transition-colors">Industries</Link>
+            <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <span>›</span>
             <Link href={`/for/${niche.slug}`} className="hover:text-white transition-colors">{niche.labelPlural}</Link>
             <span>›</span>
