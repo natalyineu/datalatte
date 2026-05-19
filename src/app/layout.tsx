@@ -73,6 +73,8 @@ export const metadata: Metadata = {
   },
   verification: {
     yandex: "f5be53e8a0a36e39",
+    // Bing Webmaster Tools (meta tag + file at /0db0ab755c9749b2ba9521accb56b1dd.txt)
+    other: { "msvalidate.01": "0db0ab755c9749b2ba9521accb56b1dd" },
   },
 };
 
