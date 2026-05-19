@@ -2,7 +2,7 @@ name: Agent 2 — Auditor
 
 on:
   schedule:
-    - cron: '0 1,9,17 * * *'   # 3× daily — keeps scores fresh as fixer improves articles
+    - cron: '*/10 * * * *'   # every 10 minutes
   workflow_dispatch:
 
 jobs:
