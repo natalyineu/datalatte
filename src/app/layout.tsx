@@ -4,10 +4,12 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ClientWidgets from "@/components/ClientWidgets";
-import { localBusinessSchema } from "@/lib/schema";
+import { localBusinessSchema, websiteSchema } from "@/lib/schema";
+
+const BASE = "https://datalatte.pro";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://datalatte.pro"),
+  metadataBase: new URL(BASE),
   title: {
     default: "DataLatte — Data-Driven Local Marketing for Small Businesses",
     template: "%s | DataLatte",
@@ -24,14 +26,27 @@ export const metadata: Metadata = {
     "pet groomer marketing",
     "fitness studio marketing",
   ],
-  authors: [{ name: "Nataliia Makota", url: "https://datalatte.pro/about" }],
+  authors: [{ name: "Nataliia Makota", url: `${BASE}/about` }],
   creator: "Nataliia Makota",
+  // ── Canonical + hreflang ──────────────────────────────────────────────────
+  alternates: {
+    canonical: BASE,
+    languages: {
+      "en-US": BASE,
+      "en-GB": BASE,
+      "en-AU": BASE,
+      "en-CA": BASE,
+      "x-default": BASE,
+    },
+  },
+  // ── Open Graph ────────────────────────────────────────────────────────────
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://datalatte.pro",
+    alternateLocale: ["en_GB", "en_AU", "en_CA"],
+    url: BASE,
     siteName: "DataLatte",
-    title: "DataLatte — Data-Driven Local Marketing",
+    title: "DataLatte — Data-Driven Local Marketing for Small Businesses",
     description:
       "Brew up better business with data-driven marketing. Helping local businesses get more customers through the door.",
     images: [
@@ -43,6 +58,7 @@ export const metadata: Metadata = {
       },
     ],
   },
+  // ── Twitter / X ───────────────────────────────────────────────────────────
   twitter: {
     card: "summary_large_image",
     title: "DataLatte — Data-Driven Local Marketing",
@@ -53,7 +69,7 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true },
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
   verification: {
     yandex: "f5be53e8a0a36e39",
@@ -68,9 +84,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="font-sans antialiased">
+        {/* LocalBusiness structured data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema()) }}
+        />
+        {/* WebSite structured data — enables Google Sitelinks Search Box */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema()) }}
         />
         <Header />
         <main>{children}</main>

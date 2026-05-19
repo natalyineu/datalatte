@@ -2,6 +2,16 @@ import type { Metadata } from "next";
 import ServicePage from "@/components/ServicePage";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://datalatte.pro/services/google-ads",
+    languages: {
+      "en-US": "https://datalatte.pro/services/google-ads",
+      "en-GB": "https://datalatte.pro/services/google-ads",
+      "en-AU": "https://datalatte.pro/services/google-ads",
+      "en-CA": "https://datalatte.pro/services/google-ads",
+      "x-default": "https://datalatte.pro/services/google-ads",
+    },
+  },
   title: "Google Ads for Coffee Shops, Salons & Local Businesses",
   description:
     "Google Ads management for local businesses and growing brands. Pay only for clicks from customers actively searching for you. Setup, strategy, and ongoing optimisation included.",

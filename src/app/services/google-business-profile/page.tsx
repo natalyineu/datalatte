@@ -2,6 +2,16 @@ import type { Metadata } from "next";
 import ServicePage from "@/components/ServicePage";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://datalatte.pro/services/google-business-profile",
+    languages: {
+      "en-US": "https://datalatte.pro/services/google-business-profile",
+      "en-GB": "https://datalatte.pro/services/google-business-profile",
+      "en-AU": "https://datalatte.pro/services/google-business-profile",
+      "en-CA": "https://datalatte.pro/services/google-business-profile",
+      "x-default": "https://datalatte.pro/services/google-business-profile",
+    },
+  },
   title: "Google Business Profile Optimization | Local Map Pack",
   description:
     "Google Business Profile setup and optimization for local businesses. Rank higher in Google Maps, get more calls and directions, and build reviews that convert.",

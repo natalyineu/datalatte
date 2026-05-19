@@ -2,6 +2,16 @@ import type { Metadata } from "next";
 import NichePage from "@/components/NichePage";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://datalatte.pro/for/hair-salons",
+    languages: {
+      "en-US": "https://datalatte.pro/for/hair-salons",
+      "en-GB": "https://datalatte.pro/for/hair-salons",
+      "en-AU": "https://datalatte.pro/for/hair-salons",
+      "en-CA": "https://datalatte.pro/for/hair-salons",
+      "x-default": "https://datalatte.pro/for/hair-salons",
+    },
+  },
   title: "Hair Salon & Beauty Marketing | Get More Bookings with Local SEO & Ads",
   description:
     "Marketing for hair salons, barbershops, and beauty studios. More online bookings, higher Google Maps visibility, and Instagram ads that actually convert.",

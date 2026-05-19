@@ -2,6 +2,16 @@ import type { Metadata } from "next";
 import ServicePage from "@/components/ServicePage";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://datalatte.pro/services/analytics",
+    languages: {
+      "en-US": "https://datalatte.pro/services/analytics",
+      "en-GB": "https://datalatte.pro/services/analytics",
+      "en-AU": "https://datalatte.pro/services/analytics",
+      "en-CA": "https://datalatte.pro/services/analytics",
+      "x-default": "https://datalatte.pro/services/analytics",
+    },
+  },
   title: "Marketing Analytics & Reporting for Local Businesses",
   description:
     "Clear marketing analytics and dashboards for small businesses. Know exactly which channels bring in customers and stop guessing where to spend your marketing budget.",

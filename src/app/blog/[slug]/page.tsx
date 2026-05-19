@@ -125,14 +125,52 @@ export async function generateMetadata({
   const post = getPost(slug);
   if (!post) return {};
   const { frontmatter } = post;
+  const url = `https://datalatte.pro/blog/${slug}`;
+  const imageUrl = frontmatter.image?.startsWith("http")
+    ? frontmatter.image
+    : `https://datalatte.pro${frontmatter.image}`;
+
   return {
     title: frontmatter.title,
     description: frontmatter.description,
+    // ── Canonical + hreflang per article ──────────────────────────────────
+    alternates: {
+      canonical: url,
+      languages: {
+        "en-US": url,
+        "en-GB": url,
+        "en-AU": url,
+        "en-CA": url,
+        "x-default": url,
+      },
+    },
+    // ── Open Graph (article type with full metadata) ───────────────────────
     openGraph: {
       title: frontmatter.title,
       description: frontmatter.description,
-      images: [{ url: frontmatter.image }],
+      url,
       type: "article",
+      locale: "en_US",
+      alternateLocale: ["en_GB", "en_AU", "en_CA"],
+      siteName: "DataLatte",
+      publishedTime: frontmatter.date,
+      authors: ["https://datalatte.pro/about"],
+      tags: frontmatter.tags ?? [],
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: frontmatter.title,
+        },
+      ],
+    },
+    // ── Twitter / X card ──────────────────────────────────────────────────
+    twitter: {
+      card: "summary_large_image",
+      title: frontmatter.title,
+      description: frontmatter.description,
+      images: [imageUrl],
     },
   };
 }

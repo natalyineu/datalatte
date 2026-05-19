@@ -2,6 +2,16 @@ import type { Metadata } from "next";
 import ServicePage from "@/components/ServicePage";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://datalatte.pro/services/email-sms",
+    languages: {
+      "en-US": "https://datalatte.pro/services/email-sms",
+      "en-GB": "https://datalatte.pro/services/email-sms",
+      "en-AU": "https://datalatte.pro/services/email-sms",
+      "en-CA": "https://datalatte.pro/services/email-sms",
+      "x-default": "https://datalatte.pro/services/email-sms",
+    },
+  },
   title: "Email & SMS Marketing for Local Businesses",
   description:
     "Email and SMS marketing for coffee shops, salons, pet groomers, and fitness studios. Build a list, stay top of mind, and turn one-time visitors into loyal regulars.",

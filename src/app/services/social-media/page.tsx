@@ -2,6 +2,16 @@ import type { Metadata } from "next";
 import ServicePage from "@/components/ServicePage";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://datalatte.pro/services/social-media",
+    languages: {
+      "en-US": "https://datalatte.pro/services/social-media",
+      "en-GB": "https://datalatte.pro/services/social-media",
+      "en-AU": "https://datalatte.pro/services/social-media",
+      "en-CA": "https://datalatte.pro/services/social-media",
+      "x-default": "https://datalatte.pro/services/social-media",
+    },
+  },
   title: "Social Media Management for Local Businesses",
   description:
     "Organic social media management for coffee shops, salons, pet groomers, and fitness studios. Consistent content, real engagement, and a feed that turns followers into customers.",

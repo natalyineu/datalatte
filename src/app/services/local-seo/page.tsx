@@ -2,6 +2,16 @@ import type { Metadata } from "next";
 import ServicePage from "@/components/ServicePage";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://datalatte.pro/services/local-seo",
+    languages: {
+      "en-US": "https://datalatte.pro/services/local-seo",
+      "en-GB": "https://datalatte.pro/services/local-seo",
+      "en-AU": "https://datalatte.pro/services/local-seo",
+      "en-CA": "https://datalatte.pro/services/local-seo",
+      "x-default": "https://datalatte.pro/services/local-seo",
+    },
+  },
   title: "Local SEO for Small Businesses | Coffee Shops, Salons & More",
   description:
     "Local SEO services for small businesses. Rank for 'near me' searches, build local citations, and drive consistent organic traffic from your neighborhood.",
