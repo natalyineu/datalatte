@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
-import { faqSchema } from "@/lib/schema";
+import { faqSchema, breadcrumbSchema } from "@/lib/schema";
 
 interface ServicePageProps {
   service: string;
@@ -19,16 +19,39 @@ interface ServicePageProps {
   relatedLinks: { label: string; href: string }[];
 }
 
+const SERVICE_SLUGS: Record<string, string> = {
+  "Google Ads": "google-ads",
+  "Meta Ads": "meta-ads",
+  "Local SEO": "local-seo",
+  "Google Business Profile": "google-business-profile",
+  "Analytics & Reporting": "analytics",
+  "AI Agents & Automation": "ai-agents",
+  "Email & SMS Marketing": "email-sms",
+  "Social Media Management": "social-media",
+  "Website & Landing Pages": "website",
+};
+
 export default function ServicePage({
   service, tagline, description, icon, accentClass,
   whatItIs, howItWorks, included, bestFor, faqs, relatedLinks,
 }: ServicePageProps) {
+  const slug = SERVICE_SLUGS[service] ?? service.toLowerCase().replace(/[\s&]+/g, "-").replace(/[^a-z0-9-]/g, "");
+  const breadcrumb = breadcrumbSchema([
+    { name: "Home", url: "https://datalatte.pro" },
+    { name: "Services", url: "https://datalatte.pro/services/google-ads" },
+    { name: service, url: `https://datalatte.pro/services/${slug}` },
+  ]);
+
   return (
     <>
-      {/* FAQPage structured data */}
+      {/* FAQPage + BreadcrumbList structured data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
 
       {/* Hero */}

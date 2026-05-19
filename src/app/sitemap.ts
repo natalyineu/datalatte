@@ -2,9 +2,29 @@ import type { MetadataRoute } from "next";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { CITIES, NICHES } from "@/lib/locationData";
 
 const baseUrl = "https://datalatte.pro";
 const contentDir = path.join(process.cwd(), "content/blog");
+
+function getCategoryRoutes(): MetadataRoute.Sitemap {
+  const cats = new Set<string>();
+  fs.readdirSync(contentDir)
+    .filter((f) => f.endsWith(".mdx"))
+    .forEach((f) => {
+      const { data } = matter(fs.readFileSync(path.join(contentDir, f), "utf8"));
+      if (data.category) cats.add(data.category as string);
+    });
+  return [...cats].map((cat) => {
+    const slug = cat.toLowerCase().replace(/\s*&\s*/g, "-").replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+    return {
+      url: `${baseUrl}/blog/category/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.6,
+    };
+  });
+}
 
 function getBlogRoutes(): MetadataRoute.Sitemap {
   return fs
@@ -60,5 +80,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/terms`,                              lastModified: today,      changeFrequency: "yearly",  priority: 0.3 },
   ];
 
-  return [...staticRoutes, ...blogRoutes];
+  const categoryRoutes = getCategoryRoutes();
+
+  const locationRoutes: MetadataRoute.Sitemap = [];
+  for (const niche of NICHES) {
+    for (const city of CITIES) {
+      locationRoutes.push({
+        url: `${baseUrl}/for/${niche}/${city.slug}`,
+        lastModified: today,
+        changeFrequency: "monthly",
+        priority: 0.7,
+      });
+    }
+  }
+
+  return [...staticRoutes, ...locationRoutes, ...categoryRoutes, ...blogRoutes];
 }

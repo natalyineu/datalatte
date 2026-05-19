@@ -1,4 +1,5 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { checkAdminAuth } from "@/lib/adminAuth";
 import fs from "fs";
 import path from "path";
 
@@ -21,7 +22,9 @@ export interface Recommendation {
 // ── GET /api/admin/recommendations ───────────────────────────────────────────
 // Returns pending/generating articles from queue.json, sorted by cluster.
 
-export async function GET(): Promise<NextResponse> {
+export async function GET(req: NextRequest): Promise<NextResponse> {
+  const authError = checkAdminAuth(req);
+  if (authError) return authError;
   try {
     if (!fs.existsSync(QUEUE_PATH)) {
       return NextResponse.json({ recommendations: [], total: 0 }, { status: 200 });

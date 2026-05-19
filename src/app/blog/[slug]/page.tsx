@@ -14,13 +14,31 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import CTABanner from "@/components/CTABanner";
+import { ArrowRight } from "lucide-react";
 import ReadingProgress from "@/components/ReadingProgress";
-import { articleSchema, faqSchema } from "@/lib/schema";
+import { articleSchema, faqSchema, breadcrumbSchema } from "@/lib/schema";
 
 export const revalidate = 86400;
 export const dynamicParams = true;
 
 const contentDir = path.join(process.cwd(), "content/blog");
+
+const CLUSTER_TO_SERVICE: Record<string, { label: string; href: string }> = {
+  "Google Ads":                           { label: "Google Ads Management", href: "/services/google-ads" },
+  "Meta Ads":                             { label: "Meta Ads Management", href: "/services/meta-ads" },
+  "Instagram Ads":                        { label: "Meta Ads Management", href: "/services/meta-ads" },
+  "Local SEO":                            { label: "Local SEO", href: "/services/local-seo" },
+  "Google Business Profile Optimization": { label: "Google Business Profile", href: "/services/google-business-profile" },
+  "Analytics & Tracking":                 { label: "Analytics & Reporting", href: "/services/analytics" },
+  "AI & Automation":                      { label: "AI Agents & Automation", href: "/services/ai-agents" },
+  "Email & SMS Marketing":                { label: "Email & SMS Marketing", href: "/services/email-sms" },
+  "Social Media":                         { label: "Social Media Management", href: "/services/social-media" },
+  "Website & CRO":                        { label: "Website & Landing Pages", href: "/services/website" },
+  "Coffee Shop Marketing":                { label: "Coffee Shop Marketing", href: "/for/coffee-shops" },
+  "Hair Salon Marketing":                 { label: "Hair Salon Marketing", href: "/for/hair-salons" },
+  "Pet Groomer Marketing":                { label: "Pet Groomer Marketing", href: "/for/pet-groomers" },
+  "Fitness Studio Marketing":             { label: "Fitness Studio Marketing", href: "/for/fitness-studios" },
+};
 
 function getPostSlugs(): string[] {
   return fs
@@ -200,6 +218,12 @@ export default async function BlogPostPage({
     image: frontmatter.image,
   });
 
+  const breadcrumb = breadcrumbSchema([
+    { name: "Home", url: "https://datalatte.pro" },
+    { name: "Blog", url: "https://datalatte.pro/blog" },
+    { name: frontmatter.title, url: `https://datalatte.pro/blog/${slug}` },
+  ]);
+
   const faqItems = extractFaqItems(content);
   const faqStructuredData = faqItems.length > 0 ? faqSchema(faqItems) : null;
 
@@ -223,6 +247,10 @@ export default async function BlogPostPage({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
         />
       )}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
 
       {/* Hero image */}
       <div className="relative h-64 md:h-96 w-full">
@@ -236,9 +264,12 @@ export default async function BlogPostPage({
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 max-w-4xl mx-auto">
-          <span className="inline-block bg-coffee-700 text-white text-xs font-semibold px-3 py-1 rounded-full mb-3">
+          <Link
+            href={`/blog/category/${frontmatter.category.toLowerCase().replace(/\s*&\s*/g, "-").replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}`}
+            className="inline-block bg-coffee-700 text-white text-xs font-semibold px-3 py-1 rounded-full mb-3 hover:bg-coffee-600 transition-colors"
+          >
             {frontmatter.category}
-          </span>
+          </Link>
           <h1 className="text-2xl md:text-4xl font-bold text-white leading-tight">
             {frontmatter.title}
           </h1>
@@ -279,6 +310,25 @@ export default async function BlogPostPage({
                 {tag}
               </span>
             ))}
+          </div>
+        )}
+
+        {/* Related service link */}
+        {CLUSTER_TO_SERVICE[frontmatter.category] && (
+          <div className="mt-10 p-5 rounded-xl bg-coffee-50 border border-coffee-100 flex items-center justify-between gap-4">
+            <div>
+              <p className="text-xs font-semibold text-coffee-600 uppercase tracking-wide mb-1">Want hands-on help?</p>
+              <p className="text-sm text-gray-700">
+                See how DataLatte handles{" "}
+                <span className="font-semibold">{CLUSTER_TO_SERVICE[frontmatter.category].label}</span> for local businesses.
+              </p>
+            </div>
+            <Link
+              href={CLUSTER_TO_SERVICE[frontmatter.category].href}
+              className="flex-shrink-0 inline-flex items-center gap-1.5 text-sm font-bold text-coffee-800 hover:text-coffee-950 hover:underline"
+            >
+              Learn more <ArrowRight size={14} />
+            </Link>
           </div>
         )}
 

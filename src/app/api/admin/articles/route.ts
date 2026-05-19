@@ -1,4 +1,5 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { checkAdminAuth } from "@/lib/adminAuth";
 import fs from "fs";
 import path from "path";
 
@@ -53,7 +54,9 @@ function parseIndexMd(): ArticleMeta[] {
   }).filter((a): a is ArticleMeta => a !== null);
 }
 
-export async function GET(): Promise<NextResponse> {
+export async function GET(req: NextRequest): Promise<NextResponse> {
+  const authError = checkAdminAuth(req);
+  if (authError) return authError;
   try {
     const articles = parseIndexMd();
     return NextResponse.json({ articles, total: articles.length }, { status: 200 });
