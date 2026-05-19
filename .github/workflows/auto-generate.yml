@@ -42,13 +42,12 @@ jobs:
           OUTPUT=$(cat /tmp/gen_output.txt 2>/dev/null || echo "")
           if echo "$OUTPUT" | grep -q "No pending"; then
             echo "Queue empty — not triggering next run"
-          elif echo "$OUTPUT" | grep -q "rate_limit\|All Groq models\|unavailable"; then
-            echo "Rate limited — waiting 3 min before next run"
-            sleep 180
-            gh workflow run auto-generate.yml --repo natalyineu/datalatte
           else
-            echo "Triggering next run in 5 min"
-            sleep 300
+            # Trigger immediately — no sleep. The cron fallback fires every 5 min anyway.
+            # Sleeping 300s inside the job was the root cause of 20-min timeout cancellations
+            # which broke the chain. The concurrency group (cancel-in-progress: false)
+            # ensures runs queue up and execute one at a time.
+            echo "Triggering next run immediately..."
             gh workflow run auto-generate.yml --repo natalyineu/datalatte
           fi
 
