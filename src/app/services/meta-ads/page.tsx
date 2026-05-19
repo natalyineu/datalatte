@@ -2,6 +2,16 @@ import type { Metadata } from "next";
 import ServicePage from "@/components/ServicePage";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://datalatte.pro/services/meta-ads",
+    languages: {
+      "en-US": "https://datalatte.pro/services/meta-ads",
+      "en-GB": "https://datalatte.pro/services/meta-ads",
+      "en-AU": "https://datalatte.pro/services/meta-ads",
+      "en-CA": "https://datalatte.pro/services/meta-ads",
+      "x-default": "https://datalatte.pro/services/meta-ads",
+    },
+  },
   title: "Meta Ads (Facebook & Instagram) for Local Businesses",
   description:
     "Facebook and Instagram advertising for local SMBs. Reach your ideal local customer with scroll-stopping creative and campaigns that drive real foot traffic and bookings.",

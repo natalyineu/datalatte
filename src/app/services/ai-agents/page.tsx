@@ -3,6 +3,16 @@ import Link from "next/link";
 import ServicePage from "@/components/ServicePage";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://datalatte.pro/services/ai-agents",
+    languages: {
+      "en-US": "https://datalatte.pro/services/ai-agents",
+      "en-GB": "https://datalatte.pro/services/ai-agents",
+      "en-AU": "https://datalatte.pro/services/ai-agents",
+      "en-CA": "https://datalatte.pro/services/ai-agents",
+      "x-default": "https://datalatte.pro/services/ai-agents",
+    },
+  },
   title: "AI Agents & Automation for Local Businesses",
   description:
     "AI-powered agents and automation for local businesses. Automate lead follow-up, review replies, appointment reminders, and customer Q&A — so you never miss a hot lead again.",

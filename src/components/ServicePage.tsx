@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
-import { faqSchema, breadcrumbSchema } from "@/lib/schema";
+import { faqSchema, breadcrumbSchema, serviceSchema } from "@/lib/schema";
 
 interface ServicePageProps {
   service: string;
@@ -36,15 +36,16 @@ export default function ServicePage({
   whatItIs, howItWorks, included, bestFor, faqs, relatedLinks,
 }: ServicePageProps) {
   const slug = SERVICE_SLUGS[service] ?? service.toLowerCase().replace(/[\s&]+/g, "-").replace(/[^a-z0-9-]/g, "");
+  const serviceUrl = `https://datalatte.pro/services/${slug}`;
   const breadcrumb = breadcrumbSchema([
     { name: "Home", url: "https://datalatte.pro" },
     { name: "Services", url: "https://datalatte.pro/services/google-ads" },
-    { name: service, url: `https://datalatte.pro/services/${slug}` },
+    { name: service, url: serviceUrl },
   ]);
 
   return (
     <>
-      {/* FAQPage + BreadcrumbList structured data */}
+      {/* FAQPage + BreadcrumbList + Service structured data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs)) }}
@@ -52,6 +53,10 @@ export default function ServicePage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema({ name: service, description, url: serviceUrl })) }}
       />
 
       {/* Hero */}

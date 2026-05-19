@@ -2,6 +2,16 @@ import type { Metadata } from "next";
 import NichePage from "@/components/NichePage";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://datalatte.pro/for/pet-groomers",
+    languages: {
+      "en-US": "https://datalatte.pro/for/pet-groomers",
+      "en-GB": "https://datalatte.pro/for/pet-groomers",
+      "en-AU": "https://datalatte.pro/for/pet-groomers",
+      "en-CA": "https://datalatte.pro/for/pet-groomers",
+      "x-default": "https://datalatte.pro/for/pet-groomers",
+    },
+  },
   title: "Pet Groomer Marketing | Local SEO, Google Ads & More for Pet Businesses",
   description:
     "Marketing for pet groomers, dog walkers, and pet care businesses. Rank higher on Google Maps, get more appointment bookings, and grow your local client base.",

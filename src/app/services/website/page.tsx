@@ -2,6 +2,16 @@ import type { Metadata } from "next";
 import ServicePage from "@/components/ServicePage";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://datalatte.pro/services/website",
+    languages: {
+      "en-US": "https://datalatte.pro/services/website",
+      "en-GB": "https://datalatte.pro/services/website",
+      "en-AU": "https://datalatte.pro/services/website",
+      "en-CA": "https://datalatte.pro/services/website",
+      "x-default": "https://datalatte.pro/services/website",
+    },
+  },
   title: "Website & Landing Pages for Local Businesses",
   description:
     "Conversion-focused websites and landing pages for local businesses. Built to turn visitors into bookings, calls, and customers — not just look good.",

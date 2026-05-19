@@ -2,6 +2,16 @@ import type { Metadata } from "next";
 import NichePage from "@/components/NichePage";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://datalatte.pro/for/coffee-shops",
+    languages: {
+      "en-US": "https://datalatte.pro/for/coffee-shops",
+      "en-GB": "https://datalatte.pro/for/coffee-shops",
+      "en-AU": "https://datalatte.pro/for/coffee-shops",
+      "en-CA": "https://datalatte.pro/for/coffee-shops",
+      "x-default": "https://datalatte.pro/for/coffee-shops",
+    },
+  },
   title: "Coffee Shop & Restaurant Marketing | Google Ads, Local SEO & More",
   description:
     "Data-driven marketing for coffee shops, cafés, and restaurants. Dominate Google Maps, run profitable Google Ads, and grow your foot traffic with real analytics.",

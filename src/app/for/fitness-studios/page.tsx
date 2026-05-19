@@ -2,6 +2,16 @@ import type { Metadata } from "next";
 import NichePage from "@/components/NichePage";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://datalatte.pro/for/fitness-studios",
+    languages: {
+      "en-US": "https://datalatte.pro/for/fitness-studios",
+      "en-GB": "https://datalatte.pro/for/fitness-studios",
+      "en-AU": "https://datalatte.pro/for/fitness-studios",
+      "en-CA": "https://datalatte.pro/for/fitness-studios",
+      "x-default": "https://datalatte.pro/for/fitness-studios",
+    },
+  },
   title: "Fitness Studio & Gym Marketing | More Trial Sign-Ups & Memberships",
   description:
     "Marketing for fitness studios, yoga studios, gyms, and personal trainers. Drive trial class bookings, grow memberships, and reduce churn with data-driven campaigns.",

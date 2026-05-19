@@ -1,22 +1,20 @@
+const BASE = "https://datalatte.pro";
+
 export function localBusinessSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "@id": "https://datalatte.pro/#business",
+    "@type": ["ProfessionalService", "OnlineBusiness"],
+    "@id": `${BASE}/#business`,
     name: "DataLatte",
-    url: "https://datalatte.pro",
-    logo: "https://datalatte.pro/icon",
+    url: BASE,
+    logo: `${BASE}/icon`,
+    image: `${BASE}/opengraph-image`,
     description:
-      "Data-driven digital marketing agency for local businesses, mid-market companies, and enterprise brands. Google Ads, Meta Ads, SEO, programmatic advertising, analytics, and full-service marketing strategy.",
+      "Data-driven digital marketing for local small businesses in the US, UK, Australia, and Canada. Google Ads, Meta Ads, Local SEO, Google Business Profile optimization, and AI marketing automation — run by an ex-agency strategist.",
     email: "hi@datalatte.pro",
-    telephone: "+48503589781",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Bałtyk Business Square",
-      addressLocality: "Poznań",
-      addressCountry: "PL",
-    },
     priceRange: "$$",
+    // Remote / online service — deliberately no physical address (serves US/UK/AU/CA)
+    hasMap: `${BASE}/contact`,
     areaServed: [
       { "@type": "Country", name: "United States" },
       { "@type": "Country", name: "United Kingdom" },
@@ -29,13 +27,12 @@ export function localBusinessSchema() {
       "Google Business Profile Optimization",
       "Local SEO",
       "Marketing Analytics",
-      "Programmatic Advertising",
       "Email Marketing",
       "Social Media Marketing",
       "AI Marketing Automation",
       "Website & Landing Page Design",
-      "Marketing Strategy Consulting",
     ],
+    knowsLanguage: ["en-US", "en-GB"],
     sameAs: [
       "https://www.linkedin.com/company/datalattepro",
       "https://www.instagram.com/datalatte.pro",
@@ -43,8 +40,26 @@ export function localBusinessSchema() {
     founder: {
       "@type": "Person",
       name: "Nataliia Makota",
-      url: "https://datalatte.pro/about",
+      url: `${BASE}/about`,
     },
+  };
+}
+
+export function websiteSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${BASE}/#website`,
+    url: BASE,
+    name: "DataLatte",
+    description: "Data-driven local marketing for small businesses",
+    publisher: { "@id": `${BASE}/#business` },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: { "@type": "EntryPoint", urlTemplate: `${BASE}/blog?q={search_term_string}` },
+      "query-input": "required name=search_term_string",
+    },
+    inLanguage: ["en-US", "en-GB"],
   };
 }
 
@@ -52,15 +67,12 @@ export function personSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": `${BASE}/#founder`,
     name: "Nataliia Makota",
     jobTitle: "Digital Marketing Consultant & Founder",
-    url: "https://datalatte.pro/about",
+    url: `${BASE}/about`,
     email: "hi@datalatte.pro",
-    worksFor: {
-      "@type": "Organization",
-      name: "DataLatte",
-      url: "https://datalatte.pro",
-    },
+    worksFor: { "@id": `${BASE}/#business` },
     alumniOf: [
       { "@type": "Organization", name: "OMD" },
       { "@type": "Organization", name: "Dentsu" },
@@ -76,6 +88,34 @@ export function personSchema() {
       "https://www.linkedin.com/company/datalattepro",
       "https://www.instagram.com/datalatte.pro",
     ],
+  };
+}
+
+export function serviceSchema({
+  name,
+  description,
+  url,
+}: {
+  name: string;
+  description: string;
+  url: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${url}#service`,
+    name,
+    description,
+    url,
+    provider: { "@id": `${BASE}/#business` },
+    areaServed: [
+      { "@type": "Country", name: "United States" },
+      { "@type": "Country", name: "United Kingdom" },
+      { "@type": "Country", name: "Australia" },
+      { "@type": "Country", name: "Canada" },
+    ],
+    serviceType: name,
+    inLanguage: "en",
   };
 }
 
@@ -111,6 +151,7 @@ export function articleSchema({
   datePublished,
   dateModified,
   image,
+  tags,
 }: {
   title: string;
   description: string;
@@ -118,6 +159,7 @@ export function articleSchema({
   datePublished: string;
   dateModified?: string;
   image?: string;
+  tags?: string[];
 }) {
   return {
     "@context": "https://schema.org",
@@ -127,17 +169,23 @@ export function articleSchema({
     url,
     datePublished,
     dateModified: dateModified ?? datePublished,
+    keywords: tags?.join(", "),
+    inLanguage: "en-US",
     author: {
       "@type": "Person",
+      "@id": `${BASE}/#founder`,
       name: "Nataliia Makota",
-      url: "https://datalatte.pro/about",
+      url: `${BASE}/about`,
     },
     publisher: {
       "@type": "Organization",
+      "@id": `${BASE}/#business`,
       name: "DataLatte",
-      url: "https://datalatte.pro",
-      logo: { "@type": "ImageObject", url: "https://datalatte.pro/opengraph-image" },
+      url: BASE,
+      logo: { "@type": "ImageObject", url: `${BASE}/opengraph-image` },
     },
-    image: image ?? "https://datalatte.pro/og-image.png",
+    image: image ? (image.startsWith("http") ? image : `${BASE}${image}`) : `${BASE}/opengraph-image`,
+    isPartOf: { "@id": `${BASE}/#website` },
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
   };
 }
