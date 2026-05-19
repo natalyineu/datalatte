@@ -38,14 +38,14 @@ async function fetchJson(url, options = {}, body = null) {
 }
 
 const GROQ_MODELS = [
-  'llama-3.3-70b-versatile',           // best quality
-  'qwen/qwen3-32b',                    // separate quota
-  'openai/gpt-oss-120b',               // separate quota
-  'meta-llama/llama-4-scout-17b-16e-instruct', // separate quota
-  'openai/gpt-oss-20b',               // smaller, separate quota
-  'llama-3.1-8b-instant',             // fast fallback
-  'groq/compound',                     // uses scout+gpt-oss internally
-  'groq/compound-mini',                // uses llama-3.3-70b internally — try last
+  'llama-3.3-70b-versatile',                    // best quality — 12K TPM, 100K TPD
+  'meta-llama/llama-4-scout-17b-16e-instruct',  // 30K TPM, 500K TPD — highest throughput
+  'openai/gpt-oss-120b',                        // 8K TPM, 200K TPD
+  'openai/gpt-oss-20b',                         // 8K TPM, 200K TPD
+  'groq/compound',                              // 70K TPM, no daily cap (scout+gpt-oss internally)
+  'qwen/qwen3-32b',                             // 6K TPM, 500K TPD — needs max_tokens ≤ 4000
+  'llama-3.1-8b-instant',                       // 6K TPM, 500K TPD — needs max_tokens ≤ 4000
+  'groq/compound-mini',                         // 70K TPM, no daily cap (llama-3.3-70b internally)
 ];
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
@@ -71,7 +71,7 @@ async function callGroq(systemPrompt, userPrompt) {
           { role: 'user', content: userPrompt },
         ],
         temperature: 0.7,
-        max_tokens: 8000,
+        max_tokens: 4000,
       });
 
       const res = await fetchJson('https://api.groq.com/openai/v1/chat/completions', {
