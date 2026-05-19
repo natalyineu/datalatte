@@ -14,11 +14,35 @@ jobs:
       actions: write
 
     steps:
+      - name: ⏱ Job start
+        run: |
+          echo "========================================"
+          echo "🔍 Auditor started at $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+          echo "  Run ID : $GITHUB_RUN_ID"
+          echo "========================================"
+
       - uses: actions/checkout@v5
+
+      - name: ✅ Checkout done
+        run: |
+          echo "📂 Repo checked out — $(git rev-parse --short HEAD)"
+          SCORED=$(python3 -c "
+          import json, pathlib
+          try:
+            qs = json.load(open('content/quality-scores.json'))
+            total = len(qs)
+            low = sum(1 for v in qs.values() if v.get('score',10) < 7)
+            print(f'  Scores : {total} total, {low} below 7')
+          except: print('  Scores : (file not found)')
+          " 2>/dev/null || echo "  Scores : (error reading)")
+          echo "$SCORED"
 
       - uses: actions/setup-node@v5
         with:
           node-version: '24'
+
+      - name: ✅ Node ready
+        run: echo "🟢 Node $(node -v)"
 
       - name: Run Audit Agent
         env:
@@ -26,4 +50,45 @@ jobs:
           GH_TOKEN: ${{ secrets.PAT_TOKEN }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: node scripts/audit-agent.js
+        run: |
+          echo "----------------------------------------"
+          echo "🔎 Running audit-agent.js…"
+          echo "----------------------------------------"
+          node scripts/audit-agent.js 2>&1 | tee /tmp/audit_output.txt || true
+
+      - name: 📋 Audit summary
+        if: always()
+        run: |
+          OUTPUT=$(cat /tmp/audit_output.txt 2>/dev/null || echo "")
+          echo "========================================"
+          SCORED=$(echo "$OUTPUT" | grep -c "score:" || echo "0")
+          LOW=$(echo "$OUTPUT" | grep "score:[0-6]" | wc -l | tr -d ' ')
+          echo "  Articles scored this run : $SCORED"
+          echo "  Scored below 7           : $LOW"
+          echo "$OUTPUT" | grep -E "^(✅|⚠️|❌|score:|Scored)" | head -20
+          echo "========================================"
+
+      - name: 📊 Write job summary
+        if: always()
+        run: |
+          OUTPUT=$(cat /tmp/audit_output.txt 2>/dev/null || echo "")
+          TIME=$(date -u '+%Y-%m-%d %H:%M UTC')
+          {
+            echo "## 🔍 Auditor — $TIME"
+            echo ""
+            SCORED=$(echo "$OUTPUT" | grep -c "score:" || echo "0")
+            echo "- Articles scored this run: **$SCORED**"
+            LOW=$(echo "$OUTPUT" | grep "score:[0-6]" | wc -l | tr -d ' ')
+            echo "- Scored below 7: **$LOW**"
+            echo ""
+            if [ -n "$(echo "$OUTPUT" | grep "score:")" ]; then
+              echo "### Scores"
+              echo '```'
+              echo "$OUTPUT" | grep "score:" | head -30
+              echo '```'
+            fi
+          } >> $GITHUB_STEP_SUMMARY
+
+      - name: ⏱ Job end
+        if: always()
+        run: echo "🏁 Auditor finished at $(date -u '+%Y-%m-%d %H:%M:%S UTC')"

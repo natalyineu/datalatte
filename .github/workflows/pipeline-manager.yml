@@ -14,13 +14,40 @@ jobs:
       actions: write
 
     steps:
+      - name: ⏱ Job start
+        run: |
+          echo "========================================"
+          echo "🛠  Pipeline Manager started at $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+          echo "  Run ID : $GITHUB_RUN_ID"
+          echo "========================================"
+
       - uses: actions/checkout@v5
         with:
           fetch-depth: 50   # need git history to check article age
 
+      - name: ✅ Checkout done
+        run: |
+          echo "📂 Repo checked out — $(git rev-parse --short HEAD)"
+          python3 -c "
+          import json
+          try:
+            d = json.load(open('content/queue.json'))
+            statuses = {}
+            for x in d:
+              s = x.get('status','unknown')
+              statuses[s] = statuses.get(s, 0) + 1
+            for s,c in sorted(statuses.items()):
+              print(f'  {s:15}: {c}')
+          except Exception as e:
+            print(f'  (error: {e})')
+          " 2>/dev/null || true
+
       - uses: actions/setup-node@v5
         with:
           node-version: '24'
+
+      - name: ✅ Node ready
+        run: echo "🟢 Node $(node -v)"
 
       - name: Run Pipeline Manager
         env:
@@ -28,4 +55,33 @@ jobs:
           GH_TOKEN: ${{ secrets.PAT_TOKEN }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: node scripts/pipeline-manager.js
+        run: |
+          echo "----------------------------------------"
+          echo "🛠  Running pipeline-manager.js…"
+          echo "----------------------------------------"
+          node scripts/pipeline-manager.js 2>&1 | tee /tmp/pm_output.txt || true
+
+      - name: 📋 Pipeline Manager summary
+        if: always()
+        run: |
+          OUTPUT=$(cat /tmp/pm_output.txt 2>/dev/null || echo "")
+          echo "========================================"
+          echo "$OUTPUT" | grep -E "^(✅|⚠️|❌|🚀|Queue|Triggered|Reset|Stuck)" | head -20
+          echo "========================================"
+
+      - name: 📊 Write job summary
+        if: always()
+        run: |
+          OUTPUT=$(cat /tmp/pm_output.txt 2>/dev/null || echo "")
+          TIME=$(date -u '+%Y-%m-%d %H:%M UTC')
+          {
+            echo "## 🛠 Pipeline Manager — $TIME"
+            echo ""
+            echo '```'
+            echo "$OUTPUT" | grep -E "Queue|pending|generating|Stuck|Reset|Triggered" | head -20
+            echo '```'
+          } >> $GITHUB_STEP_SUMMARY
+
+      - name: ⏱ Job end
+        if: always()
+        run: echo "🏁 Pipeline Manager finished at $(date -u '+%Y-%m-%d %H:%M:%S UTC')"

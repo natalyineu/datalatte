@@ -18,13 +18,29 @@ jobs:
       actions: write
 
     steps:
+      - name: ⏱ Job start
+        run: |
+          echo "========================================"
+          echo "📊 Chart Adder started at $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+          echo "  Run ID : $GITHUB_RUN_ID"
+          echo "========================================"
+
       - uses: actions/checkout@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: ✅ Checkout done
+        run: |
+          echo "📂 Repo checked out — $(git rev-parse --short HEAD)"
+          NOCHARTS=$(grep -rL "<BarChart\|<StatRow\|<Funnel" content/blog/*.mdx 2>/dev/null | wc -l | tr -d ' ')
+          echo "  Articles without charts: $NOCHARTS"
+
       - uses: actions/setup-node@v5
         with:
           node-version: '24'
+
+      - name: ✅ Node ready
+        run: echo "🟢 Node $(node -v)"
 
       - name: Run Chart Adder
         env:
@@ -32,7 +48,24 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: node scripts/chart-adder.js 2>&1 | tee /tmp/chart_output.txt || true
+        run: |
+          echo "----------------------------------------"
+          echo "📊 Running chart-adder.js…"
+          echo "----------------------------------------"
+          node scripts/chart-adder.js 2>&1 | tee /tmp/chart_output.txt || true
+
+      - name: 📋 Chart Adder summary
+        if: always()
+        run: |
+          OUTPUT=$(cat /tmp/chart_output.txt 2>/dev/null || echo "")
+          REMAINING=$(echo "$OUTPUT" | grep "^CHARTS_REMAINING:" | sed 's/CHARTS_REMAINING://')
+          ADDED=$(echo "$OUTPUT" | grep -c "✅\|Added chart" || echo "0")
+          echo "========================================"
+          echo "  Charts added  : $ADDED"
+          echo "  Still need    : ${REMAINING:-0}"
+          echo "----------------------------------------"
+          echo "$OUTPUT" | grep -E "^(✅|⚠️|❌|Added|Skipped|CHARTS)" | head -20
+          echo "========================================"
 
       - name: Trigger next run if articles remain
         if: always()
@@ -45,6 +78,32 @@ jobs:
           if [ -z "$REMAINING" ] || [ "$REMAINING" = "0" ]; then
             echo "✅ All articles have charts — not triggering next run."
           else
-            echo "📊 $REMAINING articles still need charts — triggering next run..."
+            echo "📊 $REMAINING articles still need charts — triggering next run…"
             gh workflow run chart-adder.yml --repo natalyineu/datalatte
+            echo "✅ Next run queued"
           fi
+
+      - name: 📊 Write job summary
+        if: always()
+        run: |
+          OUTPUT=$(cat /tmp/chart_output.txt 2>/dev/null || echo "")
+          TIME=$(date -u '+%Y-%m-%d %H:%M UTC')
+          REMAINING=$(echo "$OUTPUT" | grep "^CHARTS_REMAINING:" | sed 's/CHARTS_REMAINING://')
+          {
+            echo "## 📊 Chart Adder — $TIME"
+            echo ""
+            echo "| Field | Value |"
+            echo "|-------|-------|"
+            echo "| Charts added this run | $(echo "$OUTPUT" | grep -c '✅' || echo 0) |"
+            echo "| Articles still without charts | ${REMAINING:-0} |"
+            echo ""
+            ADDED_LIST=$(echo "$OUTPUT" | grep "✅")
+            if [ -n "$ADDED_LIST" ]; then
+              echo "### Added charts to"
+              echo "$ADDED_LIST" | while read line; do echo "- $line"; done
+            fi
+          } >> $GITHUB_STEP_SUMMARY
+
+      - name: ⏱ Job end
+        if: always()
+        run: echo "🏁 Chart Adder finished at $(date -u '+%Y-%m-%d %H:%M:%S UTC')"

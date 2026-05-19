@@ -20,27 +20,56 @@ jobs:
       contents: write
 
     steps:
+      - name: ⏱ Job start
+        run: |
+          echo "========================================"
+          echo "📝 Apply Proposals started at $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+          echo "  Run ID : $GITHUB_RUN_ID"
+          echo "  Trigger: $GITHUB_EVENT_NAME"
+          echo "========================================"
+
       - uses: actions/checkout@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: ✅ Checkout done
+        run: echo "📂 Repo checked out — $(git rev-parse --short HEAD)"
+
       - name: Check for approved proposals
         id: check
         run: |
+          echo "----------------------------------------"
+          echo "🔎 Checking proposals.json for approved items…"
           COUNT=$(python3 -c "
           import json, sys
           try:
               data = json.load(open('content/proposals.json'))
-              approved = [p for p in data.get('proposals', []) if p.get('status') == 'approved']
+              all_p = data.get('proposals', [])
+              approved = [p for p in all_p if p.get('status') == 'approved']
+              pending  = [p for p in all_p if p.get('status') == 'pending']
               print(len(approved))
-          except: print(0)
-          ")
+              import sys
+              print(f'  Total proposals : {len(all_p)}', file=sys.stderr)
+              print(f'  Approved        : {len(approved)}', file=sys.stderr)
+              print(f'  Pending review  : {len(pending)}', file=sys.stderr)
+          except Exception as e:
+              print(0)
+              print(f'  Error: {e}', file=sys.stderr)
+          ") 2>&1 | tee /tmp/check_output.txt | head -1
+          COUNT=$(head -1 /tmp/check_output.txt)
+          tail -n +2 /tmp/check_output.txt
           echo "approved_count=$COUNT" >> $GITHUB_OUTPUT
-          echo "Approved proposals: $COUNT"
+          echo "  → Will apply: $COUNT proposals"
 
       - name: Apply improvements
         if: steps.check.outputs.approved_count != '0'
-        run: python3 scripts/apply-improvements.py
+        run: |
+          echo "----------------------------------------"
+          echo "✏️  Applying ${{ steps.check.outputs.approved_count }} approved proposal(s)…"
+          python3 scripts/apply-improvements.py 2>&1 | tee /tmp/apply_output.txt || true
+          echo "----------------------------------------"
+          echo "Apply output:"
+          cat /tmp/apply_output.txt
 
       - name: Commit changes
         if: steps.check.outputs.approved_count != '0'
@@ -49,12 +78,32 @@ jobs:
           git config user.email "bot@datalatte.pro"
           git add content/blog/ content/proposals.json
           if git diff --cached --quiet; then
-            echo "Nothing to commit."
+            echo "ℹ️  Nothing to commit."
           else
             git commit -m "Apply ${{ steps.check.outputs.approved_count }} approved proposal(s) [vercel skip]"
             git push
+            echo "✅ Changes pushed"
           fi
 
       - name: Skip message
         if: steps.check.outputs.approved_count == '0'
-        run: echo "No approved proposals — nothing to do."
+        run: echo "ℹ️  No approved proposals — nothing to do."
+
+      - name: 📊 Write job summary
+        if: always()
+        run: |
+          TIME=$(date -u '+%Y-%m-%d %H:%M UTC')
+          COUNT="${{ steps.check.outputs.approved_count }}"
+          {
+            echo "## 📝 Apply Proposals — $TIME"
+            echo ""
+            if [ "${COUNT:-0}" = "0" ]; then
+              echo "ℹ️ No approved proposals found."
+            else
+              echo "✅ Applied **$COUNT** proposal(s) and pushed to main."
+            fi
+          } >> $GITHUB_STEP_SUMMARY
+
+      - name: ⏱ Job end
+        if: always()
+        run: echo "🏁 Apply Proposals finished at $(date -u '+%Y-%m-%d %H:%M:%S UTC')"

@@ -18,13 +18,26 @@ jobs:
       contents: write
 
     steps:
+      - name: ⏱ Job start
+        run: |
+          echo "========================================"
+          echo "⬆️  Improver started at $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+          echo "  Run ID : $GITHUB_RUN_ID"
+          echo "========================================"
+
       - uses: actions/checkout@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: ✅ Checkout done
+        run: echo "📂 Repo checked out — $(git rev-parse --short HEAD)"
+
       - uses: actions/setup-node@v5
         with:
           node-version: '24'
+
+      - name: ✅ Node ready
+        run: echo "🟢 Node $(node -v)"
 
       - name: Run Improver Agent
         env:
@@ -32,4 +45,31 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: node scripts/improver-agent.js
+        run: |
+          echo "----------------------------------------"
+          echo "⬆️  Running improver-agent.js…"
+          echo "----------------------------------------"
+          node scripts/improver-agent.js 2>&1 | tee /tmp/improver_output.txt || true
+
+      - name: 📋 Improver summary
+        if: always()
+        run: |
+          OUTPUT=$(cat /tmp/improver_output.txt 2>/dev/null || echo "")
+          echo "========================================"
+          echo "$OUTPUT" | grep -E "^(✅|⚠️|❌|Improved|Skipped|score)" | head -20
+          echo "========================================"
+
+      - name: 📊 Write job summary
+        if: always()
+        run: |
+          OUTPUT=$(cat /tmp/improver_output.txt 2>/dev/null || echo "")
+          TIME=$(date -u '+%Y-%m-%d %H:%M UTC')
+          {
+            echo "## ⬆️ Improver — $TIME"
+            echo ""
+            echo "Articles improved: **$(echo "$OUTPUT" | grep -c '✅' || echo 0)**"
+          } >> $GITHUB_STEP_SUMMARY
+
+      - name: ⏱ Job end
+        if: always()
+        run: echo "🏁 Improver finished at $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
