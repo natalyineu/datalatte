@@ -1,0 +1,51 @@
+name: FAQ Fixer
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * *'   # daily at 3am UTC as a safety net
+
+concurrency:
+  group: faq-fixer
+  cancel-in-progress: false
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: write
+      actions: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run FAQ Fixer
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: node scripts/faq-fixer.js 2>&1 | tee /tmp/faq_output.txt || true
+
+      - name: Trigger next run if articles remain
+        if: always()
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
+        run: |
+          OUTPUT=$(cat /tmp/faq_output.txt 2>/dev/null || echo "")
+          REMAINING=$(echo "$OUTPUT" | grep "^FAQ_REMAINING:" | sed 's/FAQ_REMAINING://')
+          if [ -z "$REMAINING" ] || [ "$REMAINING" = "0" ]; then
+            echo "✅ All FAQ sections added — not triggering next run."
+          else
+            echo "📋 $REMAINING articles still need FAQs — triggering next run in 3 min..."
+            sleep 180
+            gh workflow run faq-fixer.yml --repo natalyineu/datalatte
+          fi
