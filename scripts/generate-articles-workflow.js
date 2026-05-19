@@ -203,6 +203,48 @@ function sanitizeMdx(content) {
     return pre + cleaned + post;
   });
 
+  // ── Frontmatter fixes ──────────────────────────────────────────────────────
+
+  // 1. Ensure frontmatter has a closing ---
+  //    The content must start with --- and have a second --- on its own line
+  //    before any body content begins.
+  if (result.startsWith('---\n')) {
+    const afterOpen = result.slice(4); // skip opening ---\n
+    const closeIdx = afterOpen.search(/^---\s*$/m);
+    if (closeIdx === -1) {
+      // No closing --- found — insert one after the last frontmatter field
+      // (the first blank line after the opening ---)
+      const blankIdx = afterOpen.search(/^\s*$/m);
+      if (blankIdx !== -1) {
+        result = '---\n' + afterOpen.slice(0, blankIdx) + '\n---\n' + afterOpen.slice(blankIdx);
+      }
+    }
+  }
+
+  // 2. Quote any title that contains ": " but is unquoted — YAML parse error
+  result = result.replace(
+    /^(title:\s*)([^"\n][^\n]*:\s[^\n]*)$/m,
+    (_, prefix, val) => `${prefix}"${val.replace(/"/g, '\\"')}"`
+  );
+
+  // 3. Replace unknown shorthand components with Callout equivalents
+  const COMPONENT_MAP = {
+    Tip:     'tip',
+    Warning: 'warning',
+    Coffee:  'coffee',
+  };
+  for (const [tag, calloutType] of Object.entries(COMPONENT_MAP)) {
+    result = result
+      .replace(new RegExp(`<${tag}(\\s[^>]*)?>`, 'g'), `<Callout type="${calloutType}">`)
+      .replace(new RegExp(`</${tag}>`, 'g'), `</Callout>`);
+  }
+
+  // 4. Replace unknown Callout types with 'tip'
+  const VALID_CALLOUT_TYPES = new Set(['tip', 'warning', 'stat', 'example', 'coffee', 'faq']);
+  result = result.replace(/(<Callout\s+type=")([^"]+)(")/g, (full, pre, t, post) => {
+    return VALID_CALLOUT_TYPES.has(t) ? full : `${pre}tip${post}`;
+  });
+
   return result;
 }
 
