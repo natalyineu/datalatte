@@ -2,6 +2,8 @@ name: Agent 3 — Fixer
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '0 2,8,14,20 * * *'   # 4× daily — improves ~12 articles/day
 
 concurrency:
   group: fixer
@@ -10,9 +12,10 @@ concurrency:
 jobs:
   fix:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     permissions:
       contents: write
+      actions: write
 
     steps:
       - uses: actions/checkout@v5
@@ -30,4 +33,19 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: node scripts/fixer-agent.js
+        run: node scripts/fixer-agent.js 2>&1 | tee /tmp/fixer_output.txt || true
+
+      - name: Trigger next run if articles remain
+        if: always()
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
+        run: |
+          OUTPUT=$(cat /tmp/fixer_output.txt 2>/dev/null || echo "")
+          REMAINING=$(echo "$OUTPUT" | grep "^FIXER_REMAINING:" | sed 's/FIXER_REMAINING://')
+          if [ -z "$REMAINING" ] || [ "$REMAINING" = "0" ]; then
+            echo "✅ All articles improved — not triggering next run."
+          else
+            echo "📋 $REMAINING articles still need improvement — triggering next run..."
+            gh workflow run fixer.yml --repo natalyineu/datalatte
+          fi

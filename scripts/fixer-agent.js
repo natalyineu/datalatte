@@ -1,24 +1,42 @@
 #!/usr/bin/env node
 /**
- * Agent 3 — Fixer (with brain)
- * Triggered by Auditor. Fixes syntax issues, then uses Groq to verify
- * the result is worth keeping. Marks bad articles for regeneration.
+ * Agent 3 — Fixer (with real improvement)
+ * Two jobs per run:
+ *  1. Syntax fixes  — think tags, double headings, broken frontmatter
+ *  2. Content improvement — rewrites thin/low-quality articles (score < 7)
+ *
+ * Processes 3 improvement articles per run to stay within timeout.
+ * Self-chains while there are articles left to improve.
  */
 
-const fs = require('fs');
+const fs   = require('fs');
 const path = require('path');
 const https = require('https');
 const { execSync } = require('child_process');
 
-const GROQ_KEY = process.env.GROQ_API_KEY;
-const GH_TOKEN = process.env.GH_TOKEN || process.env.GITHUB_TOKEN;
-const REPO = 'natalyineu/datalatte';
+const GROQ_KEY       = process.env.GROQ_API_KEY;
+const GH_TOKEN       = process.env.GH_TOKEN || process.env.GITHUB_TOKEN;
+const REPO           = 'natalyineu/datalatte';
 const TELEGRAM_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-const TELEGRAM_CHAT = process.env.TELEGRAM_CHAT_ID;
+const TELEGRAM_CHAT  = process.env.TELEGRAM_CHAT_ID;
+const BLOG_DIR       = path.join(process.cwd(), 'content/blog');
+const SCORES_PATH    = path.join(process.cwd(), 'content/quality-scores.json');
 
-const BLOG_DIR = path.join(process.cwd(), 'content/blog');
+const IMPROVE_BATCH     = 3;  // articles improved per run
+const IMPROVE_THRESHOLD = 7;  // score < this → eligible for improvement
+
+const GROQ_MODELS = [
+  'llama-3.3-70b-versatile',
+  'qwen/qwen3-32b',
+  'openai/gpt-oss-120b',
+  'meta-llama/llama-4-scout-17b-16e-instruct',
+  'openai/gpt-oss-20b',
+  'llama-3.1-8b-instant',
+];
 
 // ── HTTP ──────────────────────────────────────────────────────────────────────
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 async function fetchJson(url, options = {}, body = null) {
   return new Promise((resolve, reject) => {
@@ -29,8 +47,8 @@ async function fetchJson(url, options = {}, body = null) {
       let data = '';
       res.on('data', c => data += c);
       res.on('end', () => {
-        try { resolve({ status: res.statusCode, data: JSON.parse(data) }); }
-        catch { resolve({ status: res.statusCode, data: null, raw: data }); }
+        try { resolve({ status: res.statusCode, data: JSON.parse(data), headers: res.headers }); }
+        catch { resolve({ status: res.statusCode, data: null, raw: data, headers: res.headers }); }
       });
     });
     req.on('error', reject);
@@ -42,36 +60,60 @@ async function fetchJson(url, options = {}, body = null) {
 async function telegram(msg) {
   if (!TELEGRAM_TOKEN || !TELEGRAM_CHAT) return;
   await fetchJson(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-  }, JSON.stringify({ chat_id: TELEGRAM_CHAT, text: msg, parse_mode: 'HTML' }));
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+  }, JSON.stringify({ chat_id: TELEGRAM_CHAT, text: msg, parse_mode: 'HTML' })).catch(() => {});
 }
 
-const GROQ_MODELS = ['llama-3.3-70b-versatile', 'qwen/qwen3-32b', 'meta-llama/llama-4-scout-17b-16e-instruct', 'openai/gpt-oss-120b', 'llama-3.1-8b-instant'];
+// ── Groq ─────────────────────────────────────────────────────────────────────
 
-async function callGroq(prompt, maxTokens = 600) {
+async function callGroq(prompt, maxTokens = 2000) {
+  let consecutiveFails = 0;
   for (const model of GROQ_MODELS) {
-    const body = JSON.stringify({
-      model,
-      messages: [{ role: 'user', content: prompt }],
-      temperature: 0.3,
-      max_tokens: maxTokens,
-    });
-    const res = await fetchJson('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      headers: { 'Authorization': `Bearer ${GROQ_KEY}`, 'Content-Type': 'application/json' },
-    }, body);
-    if (res.status === 200) {
-      return res.data.choices[0].message.content.replace(/<think>[\s\S]*?<\/think>\s*/g, '').trim();
+    if (consecutiveFails >= 3) { await sleep(90000); consecutiveFails = 0; }
+    for (let attempt = 0; attempt < 3; attempt++) {
+      const res = await fetchJson('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${GROQ_KEY}`, 'Content-Type': 'application/json' },
+      }, JSON.stringify({ model, messages: [{ role: 'user', content: prompt }], temperature: 0.4, max_tokens: maxTokens }));
+
+      if (res.status === 200) {
+        return res.data.choices[0].message.content.replace(/<think>[\s\S]*?<\/think>\s*/g, '').trim();
+      }
+      const code = res.data?.error?.code;
+      if (res.status === 429 || code === 'rate_limit_exceeded') {
+        const retryAfter = res.headers?.['retry-after'];
+        const waitMatch  = (res.data?.error?.message || '').match(/try again in ([\d.]+)s/i);
+        const waitMs = retryAfter ? Math.ceil(parseFloat(retryAfter) * 1000) + 2000
+          : waitMatch ? Math.ceil(parseFloat(waitMatch[1]) * 1000) + 2000 : 60000;
+        console.log(`⏳ Rate limited on ${model}, waiting ${Math.round(waitMs/1000)}s...`);
+        await sleep(waitMs);
+        continue;
+      }
+      if (code === 'model_decommissioned' || res.status === 404) break;
+      throw new Error(`Groq ${res.status}: ${JSON.stringify(res.data).slice(0, 120)}`);
     }
-    const code = res.data?.error?.code;
-    if (res.status === 429 || code === 'rate_limit_exceeded' || code === 'model_decommissioned') continue;
-    throw new Error(`Groq error ${res.status}`);
+    consecutiveFails++;
   }
   throw new Error('All Groq models unavailable');
 }
 
-// ── Fixes ─────────────────────────────────────────────────────────────────────
+// ── Quality scores ────────────────────────────────────────────────────────────
+
+function loadScores() {
+  if (!fs.existsSync(SCORES_PATH)) return {};
+  try { return JSON.parse(fs.readFileSync(SCORES_PATH, 'utf8')).scores ?? {}; }
+  catch { return {}; }
+}
+
+function saveScores(scores) {
+  const existing = fs.existsSync(SCORES_PATH)
+    ? JSON.parse(fs.readFileSync(SCORES_PATH, 'utf8'))
+    : { _schema: 'Quality scores from Agent 2 — Auditor', scores: {} };
+  existing.scores = scores;
+  fs.writeFileSync(SCORES_PATH, JSON.stringify(existing, null, 2) + '\n');
+}
+
+// ── Syntax fixes ──────────────────────────────────────────────────────────────
 
 function applyFixes(content) {
   let fixed = content;
@@ -85,109 +127,133 @@ function applyFixes(content) {
     fixed = fixed.replace(/^## ## /gm, '## ');
     appliedFixes.push('fixed double headings');
   }
-  if (/<\$\d|\s<\d/.test(fixed)) {
-    fixed = fixed.replace(/<\$(\d)/g, 'under $$$$1').replace(/(\s)<(\d)/g, '$1under $2');
-    appliedFixes.push('fixed bare JSX patterns');
-  }
-
-  // Fix unquoted title with colon (breaks YAML parser)
-  // Use \s+ (not \s*) to avoid backtracking that lets space match [^"'\n]
   if (/^title:\s+[^"'\n][^\n]*:[^\n]/m.test(fixed)) {
-    fixed = fixed.replace(/^(title:\s+)([^"'\n][^\n]*)$/m, (_, prefix, title) => {
-      return `${prefix}"${title.replace(/"/g, '\\"')}"`;
-    });
-    appliedFixes.push('quoted title containing colon');
+    fixed = fixed.replace(/^(title:\s+)([^"'\n][^\n]*)$/m,
+      (_, p, t) => `${p}"${t.replace(/"/g, '\\"')}"`);
+    appliedFixes.push('quoted title with colon');
   }
-
-  // Fix missing closing --- in frontmatter (only one --- found = no closing delimiter)
   if (fixed.startsWith('---') && (fixed.match(/^---/gm) || []).length === 1) {
     const lines = fixed.split('\n');
     let insertAfter = 0;
     for (let i = 1; i < lines.length; i++) {
-      if (/^[a-zA-Z][\w-]*\s*:/.test(lines[i]) || /^\s+[-"[{]/.test(lines[i])) {
-        insertAfter = i;
-      } else if (lines[i].trim() === '' && insertAfter > 0) {
-        break;
-      }
+      if (/^[a-zA-Z][\w-]*\s*:/.test(lines[i])) insertAfter = i;
+      else if (lines[i].trim() === '' && insertAfter > 0) break;
     }
     if (insertAfter > 0) {
       lines.splice(insertAfter + 1, 0, '---');
       fixed = lines.join('\n');
-      appliedFixes.push('added missing frontmatter closing');
+      appliedFixes.push('added missing frontmatter close');
     }
   }
-
   return { fixed, appliedFixes };
 }
 
-// ── Groq: verify fixed content is worth keeping ───────────────────────────────
-
-async function verifyFixed(filename, fixedContent, appliedFixes) {
-  const stripped = fixedContent
-    .replace(/^---[\s\S]*?---\n/, '')
-    .replace(/<[A-Z][^>]*\/>/g, '')
-    .trim();
-
-  const wordCount = stripped.split(/\s+/).filter(Boolean).length;
-
-  // Too short = definitely regenerate
-  if (wordCount < 200) {
-    return { keep: false, reason: `Only ${wordCount} words after fixing — needs regeneration` };
-  }
-
-  // If fixes were minor (no think tags), skip Groq check — it's fine
-  if (!appliedFixes.includes('stripped think tags')) {
-    return { keep: true, reason: 'Minor fixes applied, content intact' };
-  }
-
-  // After stripping think tags, ask Groq if remaining content is usable
-  const prompt = `A blog article for local small business owners had AI thinking tags stripped.
-Assess if the remaining content is a complete, useful article.
-
-Article excerpt (post-fix):
----
-${stripped.slice(0, 1500)}
----
-
-Filename: ${filename}
-Word count after fix: ~${wordCount}
-
-Answer JSON only:
-{
-  "keep": true|false,
-  "reason": "<one sentence>",
-  "quality": <1-10>
+function syntaxScanAll() {
+  if (!fs.existsSync(BLOG_DIR)) return [];
+  return fs.readdirSync(BLOG_DIR)
+    .filter(f => f.endsWith('.mdx'))
+    .filter(file => {
+      const content = fs.readFileSync(path.join(BLOG_DIR, file), 'utf8');
+      return /<think>/i.test(content)
+        || /^## ##/m.test(content)
+        || (content.startsWith('---') && (content.match(/^---/gm) || []).length === 1)
+        || /^title:\s+[^"'\n][^\n]*:[^\n]/m.test(content);
+    });
 }
 
-Keep=true if: article has proper intro, substantive content, actionable advice, at least 300 words.
-Keep=false if: content is incomplete, just an outline, mostly AI planning text, or too thin.`;
+// ── Article improvement ───────────────────────────────────────────────────────
 
-  try {
-    const response = await callGroq(prompt, 200);
-    const match = response.match(/\{[\s\S]*\}/);
-    if (match) return JSON.parse(match[0]);
-  } catch (e) {
-    console.log(`Verify failed for ${filename}: ${e.message}`);
-  }
-
-  return { keep: wordCount > 400, reason: 'Verification inconclusive', quality: 5 };
+function parseFrontmatter(raw) {
+  const m = raw.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  if (!m) return null;
+  const fm = {};
+  m[1].split('\n').forEach(line => {
+    const lm = line.match(/^(\w+):\s*(.*)$/);
+    if (lm) fm[lm[1]] = lm[2].replace(/^["']|["']$/g, '');
+  });
+  return { fmRaw: m[1], body: m[2], fm };
 }
 
-// ── Queue: mark slug as pending for regeneration ──────────────────────────────
+async function improveArticle(filename, content) {
+  const parsed = parseFrontmatter(content);
+  if (!parsed) return null;
+  const { fmRaw, body, fm } = parsed;
+
+  const title    = fm.title    || filename.replace('.mdx', '').replace(/-/g, ' ');
+  const category = fm.category || 'Local Marketing';
+
+  // Replace MDX component blocks with numbered placeholders to protect them
+  const mdxBlocks = [];
+  const bodyWithPlaceholders = body.replace(
+    /<(?:BarChart|StatRow|Funnel|Callout)[\s\S]*?\/>/g,
+    (match) => { mdxBlocks.push(match); return `__MDX_${mdxBlocks.length - 1}__`; }
+  );
+
+  const wordsBefore = bodyWithPlaceholders.split(/\s+/).filter(Boolean).length;
+
+  const prompt = `You are a senior content editor improving a blog article for DataLatte.pro — a marketing agency helping US/UK local small businesses (coffee shops, hair salons, pet groomers, fitness studios).
+
+Article title: "${title}"
+Category: "${category}"
+
+Current article (${wordsBefore} words). MDX components replaced with __MDX_N__ placeholders — leave ALL placeholders exactly where they are.
+
+---
+${bodyWithPlaceholders.slice(0, 4000)}
+---
+
+YOUR TASK: Rewrite and improve this article. Return the COMPLETE improved body only. No frontmatter, no code fences, no preamble.
+
+REQUIRED improvements:
+1. Opening paragraph: replace any vague opener with a specific, data-driven hook. Example: instead of "Many businesses struggle with X" write "A hair salon owner spending $400/month on Google Ads told me she was getting zero calls — here's what changed when she fixed her keyword match types."
+2. Thin sections: any ## section with fewer than 3 sentences must be expanded with specific, practical detail. Add real numbers ($, %, timeframes, platform names).
+3. Generic advice: replace vague statements ("use social media") with specific tactics ("post a 15-second before/after Reel every Tuesday — this format gets 3× more saves than static images on Instagram in 2026").
+4. Missing takeaway: if there is no "## The Bottom Line" or similar closing summary — add one (2-3 punchy sentences recapping the core insight).
+5. Missing next step: if the article ends without directing the reader to act — add one closing sentence nudging them toward the next step.
+
+STRICT RULES:
+- Keep every __MDX_N__ placeholder exactly in place — do not move, duplicate, or delete any
+- Keep all ## and ### headings exactly as written
+- Do NOT add new JSX, HTML tags, or MDX components
+- Do NOT add new ## sections — only improve existing content
+- Output ONLY the improved body, nothing else`;
+
+  const raw = await callGroq(prompt, 2500);
+  if (!raw || raw.length < 300) return null;
+
+  // Restore MDX blocks
+  const restored = raw.replace(/__MDX_(\d+)__/g, (_, i) => mdxBlocks[parseInt(i)] ?? '');
+
+  // Validate all MDX blocks survived
+  for (let i = 0; i < mdxBlocks.length; i++) {
+    const firstChars = mdxBlocks[i].slice(0, 35);
+    if (!restored.includes(firstChars)) {
+      console.log(`  ⚠️  MDX block ${i} lost in output — skipping ${filename}`);
+      return null;
+    }
+  }
+
+  // Sanity: output shouldn't be drastically shorter
+  const wordsAfter = restored.split(/\s+/).filter(Boolean).length;
+  if (wordsAfter < wordsBefore * 0.85) {
+    console.log(`  ⚠️  Output too short (${wordsAfter} vs ${wordsBefore} words) — skipping`);
+    return null;
+  }
+
+  console.log(`  📝 ${wordsBefore} → ${wordsAfter} words`);
+  return `---\n${fmRaw}\n---\n${restored}`;
+}
+
+// ── Queue helpers ─────────────────────────────────────────────────────────────
 
 function markForRegeneration(slug) {
   const queuePath = path.join(process.cwd(), 'content/queue.json');
   if (!fs.existsSync(queuePath)) return false;
-
   const queue = JSON.parse(fs.readFileSync(queuePath, 'utf8'));
   const entry = queue.queue.find(e => e.slug === slug);
-  if (entry) {
-    entry.status = 'pending';
-    delete entry.generatedDate;
-    fs.writeFileSync(queuePath, JSON.stringify(queue, null, 2) + '\n');
-    return true;
-  }
-  return false;
+  if (entry) { entry.status = 'pending'; delete entry.generatedDate; }
+  fs.writeFileSync(queuePath, JSON.stringify(queue, null, 2) + '\n');
+  return !!entry;
 }
 
 function fixQueueDuplicates() {
@@ -199,16 +265,9 @@ function fixQueueDuplicates() {
   let removed = 0;
   for (let i = queue.queue.length - 1; i >= 0; i--) {
     const e = queue.queue[i];
-    if (seen[e.slug]) {
-      const keepPriority = PRIORITY[seen[e.slug].status] || 0;
-      const thisPriority = PRIORITY[e.status] || 0;
-      if (thisPriority <= keepPriority) {
-        queue.queue.splice(i, 1);
-        removed++;
-      }
-    } else {
-      seen[e.slug] = e;
-    }
+    if (seen[e.slug] && (PRIORITY[e.status] || 0) <= (PRIORITY[seen[e.slug].status] || 0)) {
+      queue.queue.splice(i, 1); removed++;
+    } else { seen[e.slug] = e; }
   }
   if (removed > 0) fs.writeFileSync(queuePath, JSON.stringify(queue, null, 2) + '\n');
   return removed;
@@ -219,125 +278,137 @@ function fixQueueDuplicates() {
 async function main() {
   console.log('🔧 Fixer Agent starting...');
 
-  // Load audit report if available
-  const reportPath = path.join(process.cwd(), 'scripts/.audit-report.json');
-  let auditReport = null;
-  if (fs.existsSync(reportPath)) {
-    auditReport = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
-    console.log(`Loaded audit report: ${auditReport.toFix?.length || 0} to fix, ${auditReport.toRegenerate?.length || 0} to regenerate`);
-  }
+  const scores = loadScores();
+  const fixedFiles    = [];
+  const improvedFiles = [];
+  const regenFiles    = [];
 
-  if (!fs.existsSync(BLOG_DIR)) {
-    console.log('No blog directory — nothing to fix');
-    return;
-  }
+  // ── 1. Syntax scan + fix all articles ──────────────────────────────────────
+  const brokenFiles = syntaxScanAll();
+  console.log(`🔍 Syntax issues: ${brokenFiles.length}`);
 
-  const files = fs.readdirSync(BLOG_DIR).filter(f => f.endsWith('.mdx'));
-  const fixedFiles = [];
-  const regenerateFiles = [];
-
-  // Use audit report targets if available, else scan all
-  const targets = auditReport?.toFix?.map(f => f.file) ||
-    files.filter(file => {
-      const content = fs.readFileSync(path.join(BLOG_DIR, file), 'utf8');
-      return /<think>/i.test(content) || /^## ##/m.test(content) || /<\$\d/.test(content);
-    });
-
-  // Also add files Auditor flagged for regeneration
-  const regenTargets = auditReport?.toRegenerate?.map(f => f.file) || [];
-
-  // Delete files marked for regeneration (Auditor already assessed these with Groq)
-  for (const filename of regenTargets) {
+  for (const filename of brokenFiles) {
     const fullPath = path.join(BLOG_DIR, filename);
-    if (fs.existsSync(fullPath)) {
-      const slug = filename.replace('.mdx', '');
-      fs.unlinkSync(fullPath);
-      markForRegeneration(slug);
-      regenerateFiles.push({ file: filename, reason: auditReport?.toRegenerate?.find(f => f.file === filename)?.assessment?.reason || 'Quality too low' });
-      console.log(`♻️ Marked for regeneration: ${filename}`);
-    }
-  }
-
-  // Fix syntax issues
-  for (const filename of targets) {
-    const fullPath = path.join(BLOG_DIR, filename);
-    if (!fs.existsSync(fullPath)) continue;
-
     const original = fs.readFileSync(fullPath, 'utf8');
     const { fixed, appliedFixes } = applyFixes(original);
-
     if (fixed === original) continue;
 
-    // Groq verify: is the fixed content worth keeping?
-    console.log(`  Verifying fixed content: ${filename}...`);
-    const verdict = await verifyFixed(filename, fixed, appliedFixes);
-
-    if (verdict.keep) {
-      fs.writeFileSync(fullPath, fixed);
-      fixedFiles.push({ file: filename, fixes: appliedFixes, quality: verdict.quality });
-      console.log(`✅ Fixed & kept: ${filename} (quality: ${verdict.quality}/10)`);
-    } else {
-      // Not worth keeping — delete and mark for regeneration
+    const wordCount = fixed.split(/\s+/).length;
+    if (wordCount < 200) {
       fs.unlinkSync(fullPath);
-      const slug = filename.replace('.mdx', '');
-      markForRegeneration(slug);
-      regenerateFiles.push({ file: filename, reason: verdict.reason });
-      console.log(`♻️ Too thin after fix — queued for regeneration: ${filename}`);
+      markForRegeneration(filename.replace('.mdx', ''));
+      regenFiles.push({ file: filename, reason: `Only ${wordCount} words after fix` });
+      console.log(`♻️  Queued for regen: ${filename}`);
+    } else {
+      fs.writeFileSync(fullPath, fixed);
+      fixedFiles.push({ file: filename, fixes: appliedFixes });
+      console.log(`✅ Syntax fixed: ${filename} (${appliedFixes.join(', ')})`);
     }
+  }
+
+  // ── 2. Improve low-quality articles ────────────────────────────────────────
+  const now = Date.now();
+  const thirtyDays = 30 * 24 * 60 * 60 * 1000;
+
+  const candidates = Object.entries(scores)
+    .filter(([slug, data]) => {
+      if ((data.score ?? 10) >= IMPROVE_THRESHOLD) return false;
+      if (data.improvedAt && (now - new Date(data.improvedAt).getTime()) < thirtyDays) return false;
+      return fs.existsSync(path.join(BLOG_DIR, `${slug}.mdx`));
+    })
+    .sort(([, a], [, b]) => {
+      const scoreDiff = (a.score ?? 5) - (b.score ?? 5);
+      return scoreDiff !== 0 ? scoreDiff : (a.checkedAt ?? '').localeCompare(b.checkedAt ?? '');
+    })
+    .slice(0, IMPROVE_BATCH);
+
+  const totalNeedImprovement = Object.values(scores).filter(d =>
+    (d.score ?? 10) < IMPROVE_THRESHOLD &&
+    (!d.improvedAt || (now - new Date(d.improvedAt).getTime()) >= thirtyDays) &&
+    fs.existsSync(path.join(BLOG_DIR, `${Object.keys(scores).find(k => scores[k] === d) || ''}.mdx`))
+  ).length;
+
+  console.log(`\n📈 Articles needing improvement: ${totalNeedImprovement}`);
+  console.log(`🔧 Processing batch of ${candidates.length}...\n`);
+
+  for (let i = 0; i < candidates.length; i++) {
+    const [slug, scoreData] = candidates[i];
+    const filename = `${slug}.mdx`;
+    const fullPath = path.join(BLOG_DIR, filename);
+    const original = fs.readFileSync(fullPath, 'utf8');
+
+    console.log(`📝 [${i + 1}/${candidates.length}] ${slug} (score: ${scoreData.score}/10)...`);
+    try {
+      const improved = await improveArticle(filename, original);
+      if (improved) {
+        fs.writeFileSync(fullPath, improved);
+        scores[slug] = { ...scoreData, improvedAt: new Date().toISOString(), improvedFrom: scoreData.score };
+        improvedFiles.push({ file: filename, score: scoreData.score });
+        console.log(`  ✅ Improved`);
+      } else {
+        console.log(`  ⏭️  Skipped (validation failed)`);
+      }
+    } catch (err) {
+      console.error(`  ❌ Error: ${err.message}`);
+    }
+
+    if (i < candidates.length - 1) await sleep(5000);
   }
 
   // Fix queue duplicates
   const dupeFixed = fixQueueDuplicates();
+  const totalChanged = fixedFiles.length + improvedFiles.length + regenFiles.length + dupeFixed;
+  const remaining = Math.max(0, totalNeedImprovement - improvedFiles.length);
 
-  const totalChanged = fixedFiles.length + regenerateFiles.length + dupeFixed;
+  console.log(`\n=== ${improvedFiles.length} improved, ${fixedFiles.length} syntax-fixed, ${regenFiles.length} requeued ===`);
+  console.log(`FIXER_IMPROVED:${improvedFiles.length}`);
+  console.log(`FIXER_REMAINING:${remaining}`);
 
-  if (totalChanged === 0) {
-    const time = new Date().toUTCString().slice(0, 25);
-    console.log('✅ Nothing to fix');
-    const qualityNote = auditReport?.qualityAvg != null
-      ? `\nAvg quality: ${auditReport.qualityAvg}/10 · ${auditReport.sampledFiles || 0} articles sampled`
-      : '';
-    await telegram(`🔧 <b>Fixer</b> — nothing to fix ✅\n🕐 ${time}\n\nAll articles clean.${qualityNote}`);
-    return;
+  // ── 3. Commit ───────────────────────────────────────────────────────────────
+  if (totalChanged > 0) {
+    saveScores(scores);
+    execSync('git config user.email "fixer-agent@datalatte.pro"');
+    execSync('git config user.name "DataLatte Fixer"');
+    execSync('git add content/ 2>/dev/null || true');
+
+    const parts = [];
+    if (improvedFiles.length) parts.push(`${improvedFiles.length} improved`);
+    if (fixedFiles.length)    parts.push(`${fixedFiles.length} syntax-fixed`);
+    if (regenFiles.length)    parts.push(`${regenFiles.length} requeued`);
+    if (dupeFixed)            parts.push(`${dupeFixed} dupes removed`);
+
+    try {
+      execSync(`git commit -m "Fixer: ${parts.join(', ')} [vercel skip]"`);
+      execSync('git pull --rebase origin main');
+      execSync('git push origin main');
+    } catch (e) {
+      if (!e.message?.includes('nothing to commit')) throw e;
+    }
   }
 
-  // Commit
-  execSync('git config user.email "fixer-agent@datalatte.pro"');
-  execSync('git config user.name "DataLatte Fixer"');
-  execSync('git add content/ scripts/.audit-report.json 2>/dev/null || git add content/');
-
-  const commitMsg = `Fix: ${fixedFiles.length} fixed, ${regenerateFiles.length} queued for regen, ${dupeFixed} dupes removed [vercel skip]`;
-  try {
-    execSync(`git commit -m "${commitMsg}"`);
-    execSync('git pull --rebase origin main');
-    execSync('git push origin main');
-  } catch (e) {
-    if (!e.message.includes('nothing to commit')) throw e;
-  }
-
-  const sha = execSync('git rev-parse --short HEAD').toString().trim();
-
-  // Telegram report
+  // ── 4. Telegram report ───────────────────────────────────────────────────────
   const time = new Date().toUTCString().slice(0, 25);
-  let msg = `🔧 <b>Fixer</b> — ${totalChanged} issue(s) resolved\n`;
-  msg += `🕐 ${time}\n\n`;
+  let msg = `🔧 <b>Fixer</b>${totalChanged === 0 ? ' — nothing to fix ✅' : ''}\n🕐 ${time}\n`;
 
+  if (improvedFiles.length > 0) {
+    msg += `\n📈 Content improved (${improvedFiles.length}):\n`;
+    msg += improvedFiles.slice(0, 5).map(f =>
+      `  • ${f.file.replace('.mdx', '')} (was ${f.score}/10)`
+    ).join('\n') + '\n';
+  }
   if (fixedFiles.length > 0) {
-    msg += `\n✅ MDX fixed (${fixedFiles.length}):\n`;
-    msg += fixedFiles.slice(0, 5).map(f => {
-      const name = f.file.replace('content/blog/', '').replace('.mdx', '');
-      return `  • ${name} (${f.quality}/10) — ${f.fixes.join(', ')}`;
-    }).join('\n') + '\n';
+    msg += `\n✅ Syntax fixed (${fixedFiles.length}):\n`;
+    msg += fixedFiles.slice(0, 4).map(f =>
+      `  • ${f.file.replace('.mdx', '')} — ${f.fixes.join(', ')}`
+    ).join('\n') + '\n';
   }
-  if (regenerateFiles.length > 0) {
-    msg += `\n♻️ Queued for regen (${regenerateFiles.length}):\n`;
-    msg += regenerateFiles.slice(0, 4).map(f => {
-      const name = f.file.replace('content/blog/', '').replace('.mdx', '');
-      return `  • ${name}\n    ↳ ${f.reason}`;
-    }).join('\n') + '\n';
+  if (regenFiles.length > 0) {
+    msg += `\n♻️ Requeued (${regenFiles.length}):\n`;
+    msg += regenFiles.slice(0, 3).map(f => `  • ${f.file.replace('.mdx', '')} — ${f.reason}`).join('\n') + '\n';
   }
-  if (dupeFixed > 0) msg += `\n🔁 Duplicate slugs removed: ${dupeFixed}\n`;
-  msg += `\n🔗 Commit: ${sha}`;
+
+  msg += `\n📋 Remaining to improve: <b>${remaining}</b>`;
+  if (remaining > 0) msg += `\n⏭ Next batch triggered automatically`;
 
   await telegram(msg);
   console.log('✅ Fixer Agent done');
