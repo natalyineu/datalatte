@@ -28,9 +28,14 @@ function calcReadTime(wordCount: number): string {
 }
 
 function getAllPosts(): PostMeta[] {
-  const imageCache: Record<string, string> = fs.existsSync(imageCachePath)
-    ? JSON.parse(fs.readFileSync(imageCachePath, "utf8"))
-    : {};
+  let imageCache: Record<string, string> = {};
+  if (fs.existsSync(imageCachePath)) {
+    try {
+      imageCache = JSON.parse(fs.readFileSync(imageCachePath, "utf8"));
+    } catch {
+      // corrupted cache — fall back to frontmatter images
+    }
+  }
 
   const files = fs.readdirSync(contentDir).filter((f) => f.endsWith(".mdx"));
   const posts = files.map((file) => {

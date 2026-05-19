@@ -88,6 +88,8 @@ jobs:
           OUTPUT=$(cat /tmp/gen_output.txt 2>/dev/null || echo "")
           if echo "$OUTPUT" | grep -q "No pending"; then
             echo "🏁 Queue empty — not triggering next run"
+          elif echo "$OUTPUT" | grep -q "rate_limit\|All Groq models\|quota exhausted\|unavailable"; then
+            echo "⚡ Rate limited — skipping immediate retrigger (fallback cron will resume in ≤5 min)"
           else
             echo "🔁 Triggering next run immediately…"
             gh workflow run auto-generate.yml --repo natalyineu/datalatte

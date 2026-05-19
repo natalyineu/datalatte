@@ -33,9 +33,10 @@ function getBlogRoutes(): MetadataRoute.Sitemap {
     .map((file) => {
       const raw = fs.readFileSync(path.join(contentDir, file), "utf8");
       const { data } = matter(raw);
+      const parsed = new Date(data.date as string);
       return {
         url: `${baseUrl}/blog/${file.replace(".mdx", "")}`,
-        lastModified: new Date(data.date as string) instanceof Date && !isNaN(new Date(data.date as string).getTime()) ? new Date(data.date as string) : new Date(),
+        lastModified: !isNaN(parsed.getTime()) ? parsed : new Date(),
         changeFrequency: "monthly" as const,
         priority: 0.7,
       };
