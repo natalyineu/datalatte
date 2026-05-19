@@ -5,6 +5,7 @@ interface BarChartProps {
   labels: string;       // pipe-separated: "Label A|Label B|Label C"
   values: string;       // pipe-separated numbers: "37|30|25"
   unit?: string;
+  units?: string;       // pipe-separated per-bar units, overrides unit: "%|$||×"
   maxValue?: string;
   caption?: string;
   highlights?: string;  // pipe-separated label names to highlight: "Label A"
@@ -12,12 +13,13 @@ interface BarChartProps {
 }
 
 export default function BarChart({
-  title, labels, values, unit = "", maxValue, caption, highlights = "", subs = ""
+  title, labels, values, unit = "", units = "", maxValue, caption, highlights = "", subs = ""
 }: BarChartProps) {
   const labelArr = labels.split("|").map(s => s.trim()).filter(Boolean);
   const valueArr = values.split("|").map(s => parseFloat(s.trim()));
   const highlightSet = new Set(highlights.split("|").map(s => s.trim()).filter(Boolean));
   const subArr = subs.split("|").map(s => s.trim());
+  const unitsArr = units ? units.split("|") : [];
 
   if (!labelArr.length) return null;
 
@@ -52,7 +54,12 @@ export default function BarChart({
                   )}
                 </div>
                 <span className={`text-sm font-bold tabular-nums shrink-0 ml-3 ${isHighlight ? "text-coffee-700" : "text-gray-500"}`}>
-                  {unit === "%" ? `${val}%` : `${unit}${val}`}
+                  {(() => {
+                    const u = unitsArr[i] !== undefined ? unitsArr[i] : unit;
+                    if (u === "%") return `${val}%`;
+                    if (u === "×") return `${val}×`;
+                    return `${u}${val}`;
+                  })()}
                 </span>
               </div>
               <div className="h-2.5 bg-gray-100 rounded-full overflow-hidden">
