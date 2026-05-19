@@ -25,9 +25,9 @@ async function fetchJson(url, options = {}, body = null) {
       res.on('data', (chunk) => (data += chunk));
       res.on('end', () => {
         try {
-          resolve({ status: res.statusCode, data: JSON.parse(data) });
+          resolve({ status: res.statusCode, data: JSON.parse(data), headers: res.headers });
         } catch (e) {
-          resolve({ status: res.statusCode, data: null, raw: data });
+          resolve({ status: res.statusCode, data: null, raw: data, headers: res.headers });
         }
       });
     });
@@ -38,20 +38,30 @@ async function fetchJson(url, options = {}, body = null) {
 }
 
 const GROQ_MODELS = [
-  'llama-3.3-70b-versatile',
-  'qwen/qwen3-32b',
-  'openai/gpt-oss-120b',
-  'openai/gpt-oss-20b',
-  'meta-llama/llama-4-scout-17b-16e-instruct',
-  'groq/compound',
-  'groq/compound-mini',
-  'llama-3.1-8b-instant',
+  'llama-3.3-70b-versatile',           // best quality
+  'qwen/qwen3-32b',                    // separate quota
+  'openai/gpt-oss-120b',               // separate quota
+  'meta-llama/llama-4-scout-17b-16e-instruct', // separate quota
+  'openai/gpt-oss-20b',               // smaller, separate quota
+  'llama-3.1-8b-instant',             // fast fallback
+  'groq/compound',                     // uses scout+gpt-oss internally
+  'groq/compound-mini',                // uses llama-3.3-70b internally — try last
 ];
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 async function callGroq(systemPrompt, userPrompt) {
+  let consecutiveRateLimits = 0;
+
   for (const model of GROQ_MODELS) {
+    // Global backoff: if 3+ models failed in a row, pause 90s before continuing.
+    // This gives Groq's per-minute token buckets time to refill across the board.
+    if (consecutiveRateLimits >= 3) {
+      console.log(`⏸️  ${consecutiveRateLimits} models rate-limited in a row — pausing 90s for quota reset...`);
+      await sleep(90000);
+      consecutiveRateLimits = 0;
+    }
+
     let lastErr = null;
     for (let attempt = 0; attempt < 3; attempt++) {
       const body = JSON.stringify({
@@ -74,6 +84,7 @@ async function callGroq(systemPrompt, userPrompt) {
 
       if (res.status === 200) {
         console.log(`✅ Model used: ${model}`);
+        consecutiveRateLimits = 0;
         return res.data.choices[0].message.content;
       }
 
@@ -81,8 +92,15 @@ async function callGroq(systemPrompt, userPrompt) {
       const errMsg = res.data?.error?.message || '';
 
       if (res.status === 429 || code === 'rate_limit_exceeded') {
-        const waitMatch = errMsg.match(/try again in ([\d.]+)s/i);
-        const waitMs = waitMatch ? Math.ceil(parseFloat(waitMatch[1]) * 1000) + 2000 : 15000;
+        // 1. Try Retry-After header (Groq sends this for token-per-minute limits)
+        const retryAfterHeader = res.headers?.['retry-after'];
+        // 2. Try "try again in Xs" in the message body
+        const waitMatch = errMsg.match(/try again in ([\d.]+)s/i) || errMsg.match(/please retry after ([\d.]+) second/i);
+        const waitMs = retryAfterHeader
+          ? Math.ceil(parseFloat(retryAfterHeader) * 1000) + 2000
+          : waitMatch
+            ? Math.ceil(parseFloat(waitMatch[1]) * 1000) + 2000
+            : 60000; // default 60s — enough for a per-minute token bucket to reset
         console.log(`⏳ Rate limited on ${model}, waiting ${Math.round(waitMs/1000)}s...`);
         await sleep(waitMs);
         lastErr = `rate_limit on ${model}`;
@@ -96,7 +114,10 @@ async function callGroq(systemPrompt, userPrompt) {
 
       throw new Error(`Groq error ${res.status}: ${JSON.stringify(res.data)}`);
     }
-    if (lastErr) console.log(`⚠️ Giving up on ${model} after retries, trying next model...`);
+    if (lastErr) {
+      console.log(`⚠️ Giving up on ${model} after retries, trying next model...`);
+      consecutiveRateLimits++;
+    }
   }
 
   throw new Error('All Groq models unavailable. rate_limit — try again later.');
