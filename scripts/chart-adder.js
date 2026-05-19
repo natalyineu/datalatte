@@ -12,7 +12,7 @@ const GROQ_KEY      = process.env.GROQ_API_KEY;
 const GH_TOKEN      = process.env.GH_TOKEN || process.env.GITHUB_TOKEN;
 const REPO          = 'natalyineu/datalatte';
 const BLOG_DIR      = path.join(process.cwd(), 'content/blog');
-const BATCH         = 5;
+const BATCH         = 3;   // smaller batch — chart generation is slower than FAQ
 const TELEGRAM_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT  = process.env.TELEGRAM_CHAT_ID;
 

@@ -18,13 +18,13 @@ jobs:
       actions: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: Run Chart Adder
         env:
@@ -45,7 +45,6 @@ jobs:
           if [ -z "$REMAINING" ] || [ "$REMAINING" = "0" ]; then
             echo "✅ All articles have charts — not triggering next run."
           else
-            echo "📊 $REMAINING articles still need charts — triggering next run in 3 min..."
-            sleep 180
+            echo "📊 $REMAINING articles still need charts — triggering next run..."
             gh workflow run chart-adder.yml --repo natalyineu/datalatte
           fi
