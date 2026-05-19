@@ -19,7 +19,7 @@ const TELEGRAM_CHAT = process.env.TELEGRAM_CHAT_ID;
 const BLOG_DIR = path.join(process.cwd(), 'content/blog');
 const QUEUE_PATH = path.join(process.cwd(), 'content/queue.json');
 
-const GROQ_MODELS = ['llama-3.3-70b-versatile', 'qwen/qwen3-32b', 'meta-llama/llama-4-scout-17b-16e-instruct', 'openai/gpt-oss-120b', 'llama-3.1-8b-instant'];
+const GROQ_MODELS = ['llama-3.3-70b-versatile', 'meta-llama/llama-4-scout-17b-16e-instruct', 'openai/gpt-oss-120b', 'openai/gpt-oss-20b', 'groq/compound', 'qwen/qwen3-32b', 'llama-3.1-8b-instant', 'groq/compound-mini'];
 
 // ── HTTP ──────────────────────────────────────────────────────────────────────
 
