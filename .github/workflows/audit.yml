@@ -5,6 +5,10 @@ on:
     - cron: '*/10 * * * *'   # every 10 minutes
   workflow_dispatch:
 
+concurrency:
+  group: auditor
+  cancel-in-progress: false
+
 jobs:
   audit:
     runs-on: ubuntu-latest

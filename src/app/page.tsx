@@ -554,7 +554,7 @@ export default function HomePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {latestPosts.map((post) => (
-            <BlogCard key={post.slug} title={post.title} excerpt={post.description} slug={post.slug} category={post.category} date={new Date(post.date).toLocaleDateString("en-US",{year:"numeric",month:"short",day:"numeric"})} rawDate={new Date(post.date).toLocaleDateString("en-US",{year:"numeric",month:"short",day:"numeric"})} readTime={post.readTime} image={post.image} />
+            <BlogCard key={post.slug} title={post.title} excerpt={post.description} slug={post.slug} category={post.category} date={new Date(post.date).toLocaleDateString("en-US",{year:"numeric",month:"short",day:"numeric"})} rawDate={post.date} readTime={post.readTime} image={post.image} />
           ))}
         </div>
 
