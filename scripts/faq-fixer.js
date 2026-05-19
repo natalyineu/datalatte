@@ -16,6 +16,8 @@ const BATCH     = 5;   // articles per run
 const TELEGRAM_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT  = process.env.TELEGRAM_CHAT_ID;
 
+let _groqTokens = 0;
+
 const GROQ_MODELS = [
   'llama-3.3-70b-versatile',
   'meta-llama/llama-4-scout-17b-16e-instruct',
@@ -80,6 +82,7 @@ async function callGroq(prompt, maxTokens = 800) {
         headers: { 'Authorization': `Bearer ${GROQ_KEY}`, 'Content-Type': 'application/json' },
       }, body);
       if (res.status === 200) {
+        _groqTokens += res.data?.usage?.total_tokens ?? 0;
         const text = res.data.choices[0].message.content;
         return text.replace(/<think>[\s\S]*?<\/think>\s*/g, '').trim();
       }
@@ -272,7 +275,10 @@ async function main() {
   );
 }
 
-main().catch(err => {
+main().then(() => {
+  console.log(`GROQ_TOKENS: ${_groqTokens}`);
+}).catch(err => {
+  console.log(`GROQ_TOKENS: ${_groqTokens}`);
   console.error('Fatal:', err.message);
   process.exit(1);
 });

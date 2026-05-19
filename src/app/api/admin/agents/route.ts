@@ -201,6 +201,7 @@ interface AgentData extends AgentMeta {
   totalRuns: number;
   recentRuns: RunSummary[];
   report: AgentReport | null;
+  tokensLastRun: number;
 }
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
@@ -340,16 +341,16 @@ async function fetchRunReport(
   runId: number,
   workflowFile: string,
   token: string
-): Promise<AgentReport | null> {
+): Promise<{ report: AgentReport | null; tokensLastRun: number }> {
   try {
     // 1. Get jobs for this run
     const jobsRes = await fetch(`${GH_BASE}/runs/${runId}/jobs`, {
       headers: ghHeaders(token),
     });
-    if (!jobsRes.ok) return null;
+    if (!jobsRes.ok) return { report: null, tokensLastRun: 0 };
 
     const jobsData = (await jobsRes.json()) as GHJobsResponse;
-    if (!jobsData.jobs || jobsData.jobs.length === 0) return null;
+    if (!jobsData.jobs || jobsData.jobs.length === 0) return { report: null, tokensLastRun: 0 };
     const jobId = jobsData.jobs[0].id;
 
     // 2. Fetch logs (follows the 302 redirect to Azure Blob Storage)
@@ -360,14 +361,16 @@ async function fetchRunReport(
         redirect: "follow",
       }
     );
-    if (!logsRes.ok) return null;
+    if (!logsRes.ok) return { report: null, tokensLastRun: 0 };
 
     const logText = await logsRes.text();
     // Strip timestamps like "2026-05-17T17:43:45.716Z "
     const clean = logText.replace(/\d{4}-\d{2}-\d{2}T[\d:.]+Z\s*/g, "");
-    return parseReport(workflowFile, clean);
+    const tokensMatch = clean.match(/^GROQ_TOKENS:\s*(\d+)/m);
+    const tokensLastRun = tokensMatch ? Number(tokensMatch[1]) : 0;
+    return { report: parseReport(workflowFile, clean), tokensLastRun };
   } catch {
-    return null;
+    return { report: null, tokensLastRun: 0 };
   }
 }
 
@@ -418,6 +421,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
             totalRuns: 0,
             recentRuns: [],
             report: null,
+            tokensLastRun: 0,
           };
         }
 
@@ -436,6 +440,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
             totalRuns: 0,
             recentRuns: [],
             report: null,
+            tokensLastRun: 0,
           };
         }
 
@@ -464,9 +469,9 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 
         // Fetch report from last completed run's logs
         const lastCompletedRun = runs.find((r) => r.status === "completed");
-        const report = lastCompletedRun
+        const { report, tokensLastRun } = lastCompletedRun
           ? await fetchRunReport(lastCompletedRun.id, meta.workflowFile, ghToken)
-          : null;
+          : { report: null, tokensLastRun: 0 };
 
         return {
           ...meta,
@@ -477,6 +482,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
           totalRuns: runs.length,
           recentRuns,
           report,
+          tokensLastRun,
         };
       })
     );

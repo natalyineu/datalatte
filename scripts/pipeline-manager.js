@@ -50,6 +50,8 @@ async function telegram(msg) {
 
 const GROQ_MODELS = ['llama-3.3-70b-versatile', 'meta-llama/llama-4-scout-17b-16e-instruct', 'openai/gpt-oss-120b', 'openai/gpt-oss-20b', 'groq/compound', 'qwen/qwen3-32b', 'llama-3.1-8b-instant', 'groq/compound-mini'];
 
+let _groqTokens = 0;
+
 async function callGroq(prompt, maxTokens = 200) {
   for (const model of GROQ_MODELS) {
     const body = JSON.stringify({
@@ -63,6 +65,7 @@ async function callGroq(prompt, maxTokens = 200) {
       headers: { 'Authorization': `Bearer ${GROQ_KEY}`, 'Content-Type': 'application/json' },
     }, body);
     if (res.status === 200) {
+      _groqTokens += res.data?.usage?.total_tokens ?? 0;
       return res.data.choices[0].message.content.replace(/<think>[\s\S]*?<\/think>\s*/g, '').trim();
     }
     const code = res.data?.error?.code;
@@ -400,7 +403,10 @@ async function main() {
   if (isStuck && !restarted) process.exit(1);
 }
 
-main().catch(async e => {
+main().then(() => {
+  console.log(`GROQ_TOKENS: ${_groqTokens}`);
+}).catch(async e => {
+  console.log(`GROQ_TOKENS: ${_groqTokens}`);
   console.error('Pipeline Manager error:', e.message);
   await telegram(`📊 <b>Pipeline</b> — failed ❌\n${e.message}`);
   process.exit(1);
