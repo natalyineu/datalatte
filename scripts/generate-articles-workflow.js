@@ -9,6 +9,7 @@ const path = require('path');
 const https = require('https');
 
 const GROQ_KEY = process.env.GROQ_API_KEY;
+const CEREBRAS_KEY = process.env.CEREBRAS_API_KEY;
 const GH_TOKEN = process.env.GH_TOKEN || process.env.GITHUB_TOKEN;
 const REPO = 'natalyineu/datalatte';
 
@@ -48,11 +49,48 @@ const GROQ_MODELS = [
   'groq/compound-mini',                         // 70K TPM, no daily cap (llama-3.3-70b internally)
 ];
 
+const CEREBRAS_MODELS = [
+  'llama-3.3-70b',   // 30K TPM, 1M TPD — best quality
+  'llama3.1-70b',    // 30K TPM, 1M TPD
+  'llama3.1-8b',     // 30K TPM, 1M TPD — fastest
+  'qwen-3-32b',      // 30K TPM, 1M TPD
+];
+
 let _groqTokens = 0;
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 async function callGroq(systemPrompt, userPrompt) {
+  // Try Cerebras first — 2400 RPD per model, OpenAI-compatible
+  if (CEREBRAS_KEY) {
+    for (const model of CEREBRAS_MODELS) {
+      const body = JSON.stringify({
+        model,
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: userPrompt },
+        ],
+        temperature: 0.7,
+        max_tokens: 4000,
+      });
+      const res = await fetchJson('https://api.cerebras.ai/v1/chat/completions', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${CEREBRAS_KEY}`, 'Content-Type': 'application/json' },
+      }, body);
+      if (res.status === 200) {
+        _groqTokens += res.data?.usage?.total_tokens ?? 0;
+        console.log(`✅ Cerebras model used: ${model}`);
+        return res.data.choices[0].message.content.replace(/<think>[\s\S]*?<\/think>\s*/g, '').trim();
+      }
+      if (res.status === 429 || res.data?.error?.code === 'rate_limit_exceeded') {
+        console.log(`⏳ Cerebras rate limit on ${model}, trying next...`);
+        continue;
+      }
+      if (res.status === 404 || res.data?.error?.code === 'model_decommissioned') continue;
+    }
+    console.log('⚠️  All Cerebras models unavailable, falling back to Groq...');
+  }
+
   let consecutiveRateLimits = 0;
 
   for (const model of GROQ_MODELS) {
