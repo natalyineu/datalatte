@@ -72,15 +72,15 @@ jobs:
         if: always()
         run: |
           OUTPUT=$(cat /tmp/fixer_output.txt 2>/dev/null || echo "")
-          REMAINING=$(echo "$OUTPUT" | grep "^FIXER_REMAINING:" | sed 's/FIXER_REMAINING://')
-          IMPROVED=$(echo "$OUTPUT" | grep -c "✅ Improved:" || echo "0")
-          SKIPPED=$(echo "$OUTPUT" | grep -c "⏭ Skipped\|skip" || echo "0")
+          REMAINING=$(echo "$OUTPUT" | grep "^FIXER_REMAINING:" | sed 's/FIXER_REMAINING://' | tr -d '[:space:]')
+          IMPROVED=$(echo "$OUTPUT" | grep "^FIXER_IMPROVED:" | sed 's/FIXER_IMPROVED://' | tr -d '[:space:]')
+          SKIPPED=$(echo "$OUTPUT" | grep -c "⏭️\|Skipped (validation" || echo "0")
           echo "========================================"
-          echo "  Improved  : $IMPROVED articles"
+          echo "  Improved  : ${IMPROVED:-0} articles"
           echo "  Skipped   : $SKIPPED articles"
           echo "  Remaining : ${REMAINING:-unknown}"
           echo "----------------------------------------"
-          echo "$OUTPUT" | grep -E "^(✅|⏭|⚠️|❌|Improved|Skipped|score)" | head -20
+          echo "$OUTPUT" | grep -E "(✅ Improved|⏭|⚠️|❌|📝 \[|=== )" | head -20
           echo "========================================"
 
       - name: Trigger next run if articles remain
@@ -104,19 +104,26 @@ jobs:
         run: |
           OUTPUT=$(cat /tmp/fixer_output.txt 2>/dev/null || echo "")
           TIME=$(date -u '+%Y-%m-%d %H:%M UTC')
-          REMAINING=$(echo "$OUTPUT" | grep "^FIXER_REMAINING:" | sed 's/FIXER_REMAINING://')
-          IMPROVED=$(echo "$OUTPUT" | grep "✅ Improved:" | sed 's/.*Improved: //')
+          REMAINING=$(echo "$OUTPUT" | grep "^FIXER_REMAINING:" | sed 's/FIXER_REMAINING://' | tr -d '[:space:]')
+          IMPROVED=$(echo "$OUTPUT" | grep "^FIXER_IMPROVED:" | sed 's/FIXER_IMPROVED://' | tr -d '[:space:]')
           {
             echo "## 🔧 Fixer — $TIME"
             echo ""
             echo "| Field | Value |"
             echo "|-------|-------|"
-            echo "| Articles improved | $(echo "$OUTPUT" | grep -c '✅ Improved:' || echo 0) |"
+            echo "| Articles improved | ${IMPROVED:-0} |"
+            echo "| Articles skipped (validation) | $(echo "$OUTPUT" | grep -c 'Skipped (validation' || echo 0) |"
             echo "| Remaining in queue | ${REMAINING:-0} |"
             echo ""
-            if [ -n "$IMPROVED" ]; then
-              echo "### Improved articles"
-              echo "$OUTPUT" | grep "✅ Improved:" | while read line; do echo "- $line"; done
+            IMPROVED_LIST=$(echo "$OUTPUT" | grep "✅ Improved")
+            if [ -n "$IMPROVED_LIST" ]; then
+              echo "### ✅ Improved this run"
+              echo "$OUTPUT" | grep -E "📝 \[|✅ Improved|📝 [0-9]" | paste - - | while read line; do echo "- $line"; done
+            fi
+            SKIPPED_LIST=$(echo "$OUTPUT" | grep "Output too short")
+            if [ -n "$SKIPPED_LIST" ]; then
+              echo "### ⚠️ Skipped (output too short)"
+              echo "$SKIPPED_LIST" | while read line; do echo "- $line"; done
             fi
           } >> $GITHUB_STEP_SUMMARY
 
