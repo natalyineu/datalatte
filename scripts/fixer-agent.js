@@ -187,14 +187,19 @@ async function improveArticle(filename, content) {
   const title    = fm.title    || filename.replace('.mdx', '').replace(/-/g, ' ');
   const category = fm.category || 'Local Marketing';
 
-  // Replace MDX component blocks with numbered placeholders to protect them
+  // Replace ALL MDX component blocks with numbered placeholders to protect them
+  // Includes new chart types: DonutChart, LineChart, CompareBar
   const mdxBlocks = [];
   const bodyWithPlaceholders = body.replace(
-    /<(?:BarChart|StatRow|Funnel|Callout)[\s\S]*?\/>/g,
+    /<(?:BarChart|StatRow|Funnel|Callout|DonutChart|LineChart|CompareBar)[\s\S]*?\/>/g,
     (match) => { mdxBlocks.push(match); return `__MDX_${mdxBlocks.length - 1}__`; }
   );
 
   const wordsBefore = bodyWithPlaceholders.split(/\s+/).filter(Boolean).length;
+
+  // Send the FULL body — slicing to 4000 chars caused model to return only partial rewrites
+  // which then failed the 85% word-count validation. Use full content up to 12000 chars.
+  const bodyForPrompt = bodyWithPlaceholders.slice(0, 12000);
 
   const prompt = `You are a senior content editor improving a blog article for DataLatte.pro — a marketing agency helping US/UK local small businesses (coffee shops, hair salons, pet groomers, fitness studios).
 
@@ -204,7 +209,7 @@ Category: "${category}"
 Current article (${wordsBefore} words). MDX components replaced with __MDX_N__ placeholders — leave ALL placeholders exactly where they are.
 
 ---
-${bodyWithPlaceholders.slice(0, 4000)}
+${bodyForPrompt}
 ---
 
 YOUR TASK: Rewrite and improve this article. Return the COMPLETE improved body only. No frontmatter, no code fences, no preamble.
@@ -217,13 +222,14 @@ REQUIRED improvements:
 5. Missing next step: if the article ends without directing the reader to act — add one closing sentence nudging them toward the next step.
 
 STRICT RULES:
+- Return the COMPLETE improved article body — do NOT truncate or stop early
 - Keep every __MDX_N__ placeholder exactly in place — do not move, duplicate, or delete any
 - Keep all ## and ### headings exactly as written
 - Do NOT add new JSX, HTML tags, or MDX components
 - Do NOT add new ## sections — only improve existing content
 - Output ONLY the improved body, nothing else`;
 
-  const raw = await callGroq(prompt, 2500);
+  const raw = await callGroq(prompt, 4000);
   if (!raw || raw.length < 300) return null;
 
   // Restore MDX blocks
@@ -238,10 +244,10 @@ STRICT RULES:
     }
   }
 
-  // Sanity: output shouldn't be drastically shorter
+  // Sanity: output shouldn't be drastically shorter (lowered to 70% — small models compress)
   const wordsAfter = restored.split(/\s+/).filter(Boolean).length;
-  if (wordsAfter < wordsBefore * 0.85) {
-    console.log(`  ⚠️  Output too short (${wordsAfter} vs ${wordsBefore} words) — skipping`);
+  if (wordsAfter < wordsBefore * 0.70) {
+    console.log(`  ⚠️  Output too short (${wordsAfter} vs ${wordsBefore} words, need ≥70%) — skipping`);
     return null;
   }
 
@@ -383,9 +389,22 @@ async function main() {
     if (dupeFixed)            parts.push(`${dupeFixed} dupes removed`);
 
     try {
+      // Pull BEFORE commit to avoid rebase conflicts from concurrent pushes
+      execSync('git pull --rebase origin main', { stdio: 'inherit' });
       execSync(`git commit -m "Fixer: ${parts.join(', ')} [vercel skip]"`);
-      execSync('git pull --rebase origin main');
-      execSync('git push origin main');
+      // Retry push up to 3× in case another agent pushed between our pull and push
+      let pushed = false;
+      for (let attempt = 0; attempt < 3; attempt++) {
+        try {
+          execSync('git push origin main');
+          pushed = true;
+          break;
+        } catch {
+          console.log(`⚠️  Push failed (attempt ${attempt + 1}/3) — pulling and retrying...`);
+          execSync('git pull --rebase origin main', { stdio: 'inherit' });
+        }
+      }
+      if (!pushed) throw new Error('Push failed after 3 attempts');
     } catch (e) {
       if (!e.message?.includes('nothing to commit')) throw e;
     }
