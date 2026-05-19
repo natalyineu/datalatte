@@ -1,8 +1,9 @@
 name: Agent 1 — Researcher
 
 on:
-  schedule:
-    - cron: '0 9 * * *'   # daily at 9am UTC
+  # PAUSED — queue already has 151 pending articles; no need to generate more ideas.
+  # Re-enable when queue drops below ~20 articles.
+  # Was: daily at 9am UTC — cron: '0 9 * * *'
   workflow_dispatch:
 
 jobs:

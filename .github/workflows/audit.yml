@@ -1,8 +1,11 @@
 name: Agent 2 — Auditor
 
 on:
+  # REDUCED — was every 5 min, competing with auto-generate for Groq quota and
+  # causing rate-limit cascades. Now weekly (Sunday 4am UTC) as a low-priority sweep.
+  # Use workflow_dispatch to run on-demand.
   schedule:
-    - cron: '*/5 * * * *'   # every 5 min — rotates through all articles, 40/run
+    - cron: '0 4 * * 0'   # weekly — Sunday 4am UTC
   workflow_dispatch:
 
 jobs:
