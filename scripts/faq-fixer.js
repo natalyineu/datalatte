@@ -85,11 +85,16 @@ async function callGroq(prompt, maxTokens = 800) {
       if (res.status === 429 || code === 'rate_limit_exceeded') {
         const retryAfter = res.headers?.['retry-after'];
         const waitMatch  = (res.data?.error?.message || '').match(/try again in ([\d.]+)s/i);
-        const waitMs = retryAfter
+        const rawWaitMs = retryAfter
           ? Math.ceil(parseFloat(retryAfter) * 1000) + 2000
           : waitMatch ? Math.ceil(parseFloat(waitMatch[1]) * 1000) + 2000 : 60000;
-        console.log(`⏳ Rate limited on ${model}, waiting ${Math.round(waitMs/1000)}s...`);
-        await sleep(waitMs);
+        const MAX_WAIT_MS = 120000;
+        if (rawWaitMs > MAX_WAIT_MS) {
+          console.log(`⚡ ${model} quota exhausted (retry-after ${Math.round(rawWaitMs/1000)}s) — skipping to next model`);
+          break;
+        }
+        console.log(`⏳ Rate limited on ${model}, waiting ${Math.round(rawWaitMs/1000)}s...`);
+        await sleep(rawWaitMs);
         continue;
       }
       if (code === 'model_decommissioned' || res.status === 404) break;
