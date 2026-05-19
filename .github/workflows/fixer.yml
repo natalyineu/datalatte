@@ -18,14 +18,43 @@ jobs:
       actions: write
 
     steps:
+      - name: ⏱ Job start
+        run: |
+          echo "========================================"
+          echo "🔧 Fixer started at $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+          echo "  Run ID : $GITHUB_RUN_ID"
+          echo "========================================"
+
       - uses: actions/checkout@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
+      - name: ✅ Checkout done
+        run: |
+          echo "📂 Repo checked out — $(git rev-parse --short HEAD)"
+          python3 -c "
+          import json
+          try:
+            qs = json.load(open('content/quality-scores.json'))
+            from datetime import datetime, timedelta, timezone
+            cutoff = (datetime.now(timezone.utc) - timedelta(days=30)).isoformat()
+            eligible = [
+              k for k,v in qs.items()
+              if v.get('score',10) < 7
+              and (not v.get('improvedAt') or v['improvedAt'] < cutoff)
+            ]
+            print(f'  Eligible for improvement: {len(eligible)} articles (score<7, not improved in 30d)')
+          except Exception as e:
+            print(f'  (could not read quality-scores.json: {e})')
+          " 2>/dev/null || true
+
       - uses: actions/setup-node@v5
         with:
           node-version: '24'
+
+      - name: ✅ Node ready
+        run: echo "🟢 Node $(node -v)"
 
       - name: Run Fixer Agent
         env:
@@ -33,7 +62,26 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: node scripts/fixer-agent.js 2>&1 | tee /tmp/fixer_output.txt || true
+        run: |
+          echo "----------------------------------------"
+          echo "🔧 Running fixer-agent.js…"
+          echo "----------------------------------------"
+          node scripts/fixer-agent.js 2>&1 | tee /tmp/fixer_output.txt || true
+
+      - name: 📋 Fixer summary
+        if: always()
+        run: |
+          OUTPUT=$(cat /tmp/fixer_output.txt 2>/dev/null || echo "")
+          REMAINING=$(echo "$OUTPUT" | grep "^FIXER_REMAINING:" | sed 's/FIXER_REMAINING://')
+          IMPROVED=$(echo "$OUTPUT" | grep -c "✅ Improved:" || echo "0")
+          SKIPPED=$(echo "$OUTPUT" | grep -c "⏭ Skipped\|skip" || echo "0")
+          echo "========================================"
+          echo "  Improved  : $IMPROVED articles"
+          echo "  Skipped   : $SKIPPED articles"
+          echo "  Remaining : ${REMAINING:-unknown}"
+          echo "----------------------------------------"
+          echo "$OUTPUT" | grep -E "^(✅|⏭|⚠️|❌|Improved|Skipped|score)" | head -20
+          echo "========================================"
 
       - name: Trigger next run if articles remain
         if: always()
@@ -46,6 +94,32 @@ jobs:
           if [ -z "$REMAINING" ] || [ "$REMAINING" = "0" ]; then
             echo "✅ All articles improved — not triggering next run."
           else
-            echo "📋 $REMAINING articles still need improvement — triggering next run..."
+            echo "📋 $REMAINING articles still need improvement — triggering next run…"
             gh workflow run fixer.yml --repo natalyineu/datalatte
+            echo "✅ Next run queued"
           fi
+
+      - name: 📊 Write job summary
+        if: always()
+        run: |
+          OUTPUT=$(cat /tmp/fixer_output.txt 2>/dev/null || echo "")
+          TIME=$(date -u '+%Y-%m-%d %H:%M UTC')
+          REMAINING=$(echo "$OUTPUT" | grep "^FIXER_REMAINING:" | sed 's/FIXER_REMAINING://')
+          IMPROVED=$(echo "$OUTPUT" | grep "✅ Improved:" | sed 's/.*Improved: //')
+          {
+            echo "## 🔧 Fixer — $TIME"
+            echo ""
+            echo "| Field | Value |"
+            echo "|-------|-------|"
+            echo "| Articles improved | $(echo "$OUTPUT" | grep -c '✅ Improved:' || echo 0) |"
+            echo "| Remaining in queue | ${REMAINING:-0} |"
+            echo ""
+            if [ -n "$IMPROVED" ]; then
+              echo "### Improved articles"
+              echo "$OUTPUT" | grep "✅ Improved:" | while read line; do echo "- $line"; done
+            fi
+          } >> $GITHUB_STEP_SUMMARY
+
+      - name: ⏱ Job end
+        if: always()
+        run: echo "🏁 Fixer finished at $(date -u '+%Y-%m-%d %H:%M:%S UTC')"

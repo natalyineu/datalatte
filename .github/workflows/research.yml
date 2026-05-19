@@ -14,13 +14,29 @@ jobs:
       contents: write
 
     steps:
+      - name: ⏱ Job start
+        run: |
+          echo "========================================"
+          echo "🔬 Researcher started at $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+          echo "  Run ID : $GITHUB_RUN_ID"
+          echo "========================================"
+
       - uses: actions/checkout@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: ✅ Checkout done
+        run: |
+          echo "📂 Repo checked out — $(git rev-parse --short HEAD)"
+          PENDING=$(python3 -c "import json; d=json.load(open('content/queue.json')); print(f'  Queue pending: {sum(1 for x in d if x.get(\"status\")==\"pending\")}')" 2>/dev/null || echo "  Queue: (error)")
+          echo "$PENDING"
+
       - uses: actions/setup-node@v5
         with:
           node-version: '24'
+
+      - name: ✅ Node ready
+        run: echo "🟢 Node $(node -v)"
 
       - name: Run Research Agent
         env:
@@ -28,4 +44,33 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: node scripts/research-agent.js
+        run: |
+          echo "----------------------------------------"
+          echo "🔬 Running research-agent.js…"
+          echo "----------------------------------------"
+          node scripts/research-agent.js 2>&1 | tee /tmp/research_output.txt || true
+
+      - name: 📋 Research summary
+        if: always()
+        run: |
+          OUTPUT=$(cat /tmp/research_output.txt 2>/dev/null || echo "")
+          echo "========================================"
+          ADDED=$(echo "$OUTPUT" | grep -c "Added\|queued\|✅" || echo "0")
+          echo "  Topics added to queue: $ADDED"
+          echo "$OUTPUT" | tail -10
+          echo "========================================"
+
+      - name: 📊 Write job summary
+        if: always()
+        run: |
+          OUTPUT=$(cat /tmp/research_output.txt 2>/dev/null || echo "")
+          TIME=$(date -u '+%Y-%m-%d %H:%M UTC')
+          {
+            echo "## 🔬 Researcher — $TIME"
+            echo ""
+            echo "Topics queued this run: **$(echo "$OUTPUT" | grep -c '✅' || echo 0)**"
+          } >> $GITHUB_STEP_SUMMARY
+
+      - name: ⏱ Job end
+        if: always()
+        run: echo "🏁 Researcher finished at $(date -u '+%Y-%m-%d %H:%M:%S UTC')"

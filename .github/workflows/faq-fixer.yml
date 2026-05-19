@@ -18,13 +18,29 @@ jobs:
       actions: write
 
     steps:
+      - name: ⏱ Job start
+        run: |
+          echo "========================================"
+          echo "❓ FAQ Fixer started at $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+          echo "  Run ID : $GITHUB_RUN_ID"
+          echo "========================================"
+
       - uses: actions/checkout@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: ✅ Checkout done
+        run: |
+          echo "📂 Repo checked out — $(git rev-parse --short HEAD)"
+          NOFAQ=$(grep -rL "## FAQ\|## Frequently\|<FAQ" content/blog/*.mdx 2>/dev/null | wc -l | tr -d ' ')
+          echo "  Articles without FAQ section: $NOFAQ"
+
       - uses: actions/setup-node@v5
         with:
           node-version: '24'
+
+      - name: ✅ Node ready
+        run: echo "🟢 Node $(node -v)"
 
       - name: Run FAQ Fixer
         env:
@@ -32,7 +48,24 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: node scripts/faq-fixer.js 2>&1 | tee /tmp/faq_output.txt || true
+        run: |
+          echo "----------------------------------------"
+          echo "❓ Running faq-fixer.js…"
+          echo "----------------------------------------"
+          node scripts/faq-fixer.js 2>&1 | tee /tmp/faq_output.txt || true
+
+      - name: 📋 FAQ Fixer summary
+        if: always()
+        run: |
+          OUTPUT=$(cat /tmp/faq_output.txt 2>/dev/null || echo "")
+          REMAINING=$(echo "$OUTPUT" | grep "^FAQ_REMAINING:" | sed 's/FAQ_REMAINING://')
+          ADDED=$(echo "$OUTPUT" | grep -c "✅\|Added FAQ" || echo "0")
+          echo "========================================"
+          echo "  FAQs added   : $ADDED"
+          echo "  Still need   : ${REMAINING:-0}"
+          echo "----------------------------------------"
+          echo "$OUTPUT" | grep -E "^(✅|⚠️|❌|Added|Skipped|FAQ_REMAINING)" | head -20
+          echo "========================================"
 
       - name: Trigger next run if articles remain
         if: always()
@@ -45,7 +78,26 @@ jobs:
           if [ -z "$REMAINING" ] || [ "$REMAINING" = "0" ]; then
             echo "✅ All FAQ sections added — not triggering next run."
           else
-            echo "📋 $REMAINING articles still need FAQs — triggering next run in 3 min..."
-            sleep 180
+            echo "📋 $REMAINING articles still need FAQs — triggering next run…"
             gh workflow run faq-fixer.yml --repo natalyineu/datalatte
+            echo "✅ Next run queued"
           fi
+
+      - name: 📊 Write job summary
+        if: always()
+        run: |
+          OUTPUT=$(cat /tmp/faq_output.txt 2>/dev/null || echo "")
+          TIME=$(date -u '+%Y-%m-%d %H:%M UTC')
+          REMAINING=$(echo "$OUTPUT" | grep "^FAQ_REMAINING:" | sed 's/FAQ_REMAINING://')
+          {
+            echo "## ❓ FAQ Fixer — $TIME"
+            echo ""
+            echo "| Field | Value |"
+            echo "|-------|-------|"
+            echo "| FAQs added this run | $(echo "$OUTPUT" | grep -c '✅' || echo 0) |"
+            echo "| Articles still without FAQ | ${REMAINING:-0} |"
+          } >> $GITHUB_STEP_SUMMARY
+
+      - name: ⏱ Job end
+        if: always()
+        run: echo "🏁 FAQ Fixer finished at $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
