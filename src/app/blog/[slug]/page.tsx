@@ -215,6 +215,10 @@ const mdxComponents = {
   DonutChart,
   LineChart,
   CompareBar,
+  // Aliases for shorthand component names the AI sometimes generates
+  Tip: ({ children }: { children: React.ReactNode }) => <Callout type="tip">{children}</Callout>,
+  Warning: ({ children }: { children: React.ReactNode }) => <Callout type="warning">{children}</Callout>,
+  Coffee: ({ children }: { children: React.ReactNode }) => <Callout type="coffee">{children}</Callout>,
   code: (props: React.HTMLAttributes<HTMLElement>) => (
     <code className="bg-coffee-50 text-coffee-800 text-xs font-mono px-1.5 py-0.5 rounded" {...props} />
   ),
