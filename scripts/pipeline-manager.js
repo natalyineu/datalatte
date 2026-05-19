@@ -11,6 +11,7 @@ const fs = require('fs');
 const path = require('path');
 
 const GROQ_KEY = process.env.GROQ_API_KEY;
+const CEREBRAS_KEY = process.env.CEREBRAS_API_KEY;
 const GH_TOKEN = process.env.GH_TOKEN || process.env.GITHUB_TOKEN;
 const REPO = 'natalyineu/datalatte';
 const TELEGRAM_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
@@ -49,10 +50,25 @@ async function telegram(msg) {
 }
 
 const GROQ_MODELS = ['llama-3.3-70b-versatile', 'meta-llama/llama-4-scout-17b-16e-instruct', 'openai/gpt-oss-120b', 'openai/gpt-oss-20b', 'groq/compound', 'qwen/qwen3-32b', 'llama-3.1-8b-instant', 'groq/compound-mini'];
+const CEREBRAS_MODELS = ['llama-3.3-70b', 'llama3.1-70b', 'llama3.1-8b', 'qwen-3-32b'];
 
 let _groqTokens = 0;
 
 async function callGroq(prompt, maxTokens = 200) {
+  if (CEREBRAS_KEY) {
+    for (const model of CEREBRAS_MODELS) {
+      const res = await fetchJson('https://api.cerebras.ai/v1/chat/completions', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${CEREBRAS_KEY}`, 'Content-Type': 'application/json' },
+      }, JSON.stringify({ model, messages: [{ role: 'user', content: prompt }], temperature: 0.6, max_tokens: maxTokens }));
+      if (res.status === 200) {
+        _groqTokens += res.data?.usage?.total_tokens ?? 0;
+        return res.data.choices[0].message.content.replace(/<think>[\s\S]*?<\/think>\s*/g, '').trim();
+      }
+      if (res.status === 429 || res.data?.error?.code === 'rate_limit_exceeded') continue;
+      if (res.status === 404 || res.data?.error?.code === 'model_decommissioned') continue;
+    }
+  }
   for (const model of GROQ_MODELS) {
     const body = JSON.stringify({
       model,

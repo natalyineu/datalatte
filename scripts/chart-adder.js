@@ -9,6 +9,7 @@ const path  = require('path');
 const https = require('https');
 
 const GROQ_KEY      = process.env.GROQ_API_KEY;
+const CEREBRAS_KEY  = process.env.CEREBRAS_API_KEY;
 const GH_TOKEN      = process.env.GH_TOKEN || process.env.GITHUB_TOKEN;
 const REPO          = 'natalyineu/datalatte';
 const BLOG_DIR      = path.join(process.cwd(), 'content/blog');
@@ -27,6 +28,13 @@ const GROQ_MODELS = [
   'qwen/qwen3-32b',
   'llama-3.1-8b-instant',
   'groq/compound-mini',
+];
+
+const CEREBRAS_MODELS = [
+  'llama-3.3-70b',
+  'llama3.1-70b',
+  'llama3.1-8b',
+  'qwen-3-32b',
 ];
 
 // ── HTTP helpers ─────────────────────────────────────────────────────────────
@@ -63,6 +71,22 @@ async function telegram(msg) {
 // ── Groq ─────────────────────────────────────────────────────────────────────
 
 async function callGroq(prompt, maxTokens = 600) {
+  if (CEREBRAS_KEY) {
+    for (const model of CEREBRAS_MODELS) {
+      const res = await fetchJson('https://api.cerebras.ai/v1/chat/completions', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${CEREBRAS_KEY}`, 'Content-Type': 'application/json' },
+      }, JSON.stringify({ model, messages: [{ role: 'user', content: prompt }], temperature: 0.3, max_tokens: maxTokens }));
+      if (res.status === 200) {
+        _groqTokens += res.data?.usage?.total_tokens ?? 0;
+        console.log(`✅ Cerebras model used: ${model}`);
+        return res.data.choices[0].message.content.replace(/<think>[\s\S]*?<\/think>\s*/g, '').trim();
+      }
+      if (res.status === 429 || res.data?.error?.code === 'rate_limit_exceeded') continue;
+      if (res.status === 404 || res.data?.error?.code === 'model_decommissioned') continue;
+    }
+    console.log('⚠️  All Cerebras models unavailable, falling back to Groq...');
+  }
   let consecutiveFails = 0;
   for (const model of GROQ_MODELS) {
     if (consecutiveFails >= 3) {
