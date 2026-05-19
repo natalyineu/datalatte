@@ -4,8 +4,8 @@ on:
   push:
     paths:
       - 'content/proposals.json'   # fires automatically when admin approves
-  schedule:
-    - cron: '*/15 * * * *'         # also polls every 15 min as safety net
+  # REMOVED 15-min cron — the push trigger above handles the real use case instantly.
+  # Polling every 15 min was pure wasted Actions minutes.
   workflow_dispatch:
 
 concurrency:

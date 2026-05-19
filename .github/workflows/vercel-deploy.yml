@@ -1,8 +1,9 @@
 name: Hourly Vercel Deploy
 
 on:
-  schedule:
-    - cron: '0 * * * *'   # top of every hour
+  # DISABLED — Vercel auto-deploys on every push to main.
+  # Hourly forced deploys wasted 15 min of Actions per hour for no benefit.
+  # Re-enable manually via workflow_dispatch if you ever need a forced redeploy.
   workflow_dispatch:
 
 jobs:
