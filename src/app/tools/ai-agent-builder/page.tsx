@@ -1,12 +1,37 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+const TOOL_URL = "https://datalatte.pro/tools/ai-agent-builder";
+const TOOL_TITLE = "AI Agent Builder for Local Business";
+const TOOL_DESC =
+  "Build a custom AI agent for your local business in minutes. Automate marketing, customer replies, bookings, and more — no coding required.";
+
 export const metadata: Metadata = {
-  title: "AI Agent Builder for Local Business",
-  description:
-    "Build a custom AI agent for your local business in minutes. Automate marketing, customer replies, bookings, and more — no coding required.",
+  title: TOOL_TITLE,
+  description: TOOL_DESC,
   alternates: {
-    canonical: "https://datalatte.pro/tools/ai-agent-builder",
+    canonical: TOOL_URL,
+    languages: {
+      "en-US": TOOL_URL,
+      "en-GB": TOOL_URL,
+      "en-AU": TOOL_URL,
+      "en-CA": TOOL_URL,
+      "x-default": TOOL_URL,
+    },
+  },
+  openGraph: {
+    title: TOOL_TITLE,
+    description: TOOL_DESC,
+    url: TOOL_URL,
+    siteName: "DataLatte",
+    type: "website",
+    images: [{ url: "https://datalatte.pro/opengraph-image", width: 1200, height: 630, alt: "AI Agent Builder — DataLatte" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TOOL_TITLE,
+    description: TOOL_DESC,
+    images: ["https://datalatte.pro/opengraph-image"],
   },
 };
 

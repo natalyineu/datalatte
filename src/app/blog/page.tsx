@@ -53,17 +53,71 @@ function getAllPosts(): PostMeta[] {
   return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
+const BASE = "https://datalatte.pro";
+const BLOG_URL = `${BASE}/blog`;
+const BLOG_TITLE = "Blog | Local Marketing Tips for Small Businesses";
+const BLOG_DESC =
+  "Data-driven local marketing tips for small business owners. Google Ads, Meta Ads, local SEO, and Google Business Profile — written for owners, not marketers.";
+
 export const metadata: Metadata = {
-  title: "Blog | Local Marketing Tips for Coffee Shops, Salons, Pet Groomers & Fitness Studios",
-  description:
-    "Data-driven local marketing advice for small business owners. Practical tips on Google Ads, Meta Ads, local SEO, and Google Business Profile — written for owners, not marketers.",
+  title: BLOG_TITLE,
+  description: BLOG_DESC,
+  alternates: {
+    canonical: BLOG_URL,
+    languages: {
+      "en-US": BLOG_URL,
+      "en-GB": BLOG_URL,
+      "en-AU": BLOG_URL,
+      "en-CA": BLOG_URL,
+      "x-default": BLOG_URL,
+    },
+  },
+  openGraph: {
+    title: BLOG_TITLE,
+    description: BLOG_DESC,
+    url: BLOG_URL,
+    siteName: "DataLatte",
+    type: "website",
+    images: [{ url: `${BASE}/opengraph-image`, width: 1200, height: 630, alt: "DataLatte Blog" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: BLOG_TITLE,
+    description: BLOG_DESC,
+    images: [`${BASE}/opengraph-image`],
+  },
 };
 
 export default function BlogPage() {
   const posts = getAllPosts();
 
+  const collectionPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: BLOG_TITLE,
+    description: BLOG_DESC,
+    url: BLOG_URL,
+    publisher: {
+      "@type": "Organization",
+      name: "DataLatte",
+      url: "https://datalatte.pro",
+    },
+    hasPart: posts.slice(0, 20).map((p) => ({
+      "@type": "BlogPosting",
+      headline: p.title,
+      description: p.description,
+      url: `${BASE}/blog/${p.slug}`,
+      datePublished: p.date,
+      image: p.image,
+    })),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionPageSchema) }}
+      />
       {/* Hero */}
       <section className="bg-gray-50 py-20 px-4 sm:px-6 lg:px-8 border-b border-gray-100">
         <div className="max-w-3xl mx-auto text-center">
