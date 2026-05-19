@@ -48,6 +48,8 @@ const GROQ_MODELS = [
   'groq/compound-mini',                         // 70K TPM, no daily cap (llama-3.3-70b internally)
 ];
 
+let _groqTokens = 0;
+
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 async function callGroq(systemPrompt, userPrompt) {
@@ -83,6 +85,7 @@ async function callGroq(systemPrompt, userPrompt) {
       }, body);
 
       if (res.status === 200) {
+        _groqTokens += res.data?.usage?.total_tokens ?? 0;
         console.log(`✅ Model used: ${model}`);
         consecutiveRateLimits = 0;
         return res.data.choices[0].message.content;
@@ -547,7 +550,10 @@ if (!GH_TOKEN) {
   process.exit(1);
 }
 
-run().catch((err) => {
+run().then(() => {
+  console.log(`GROQ_TOKENS: ${_groqTokens}`);
+}).catch((err) => {
+  console.log(`GROQ_TOKENS: ${_groqTokens}`);
   console.error('Fatal error:', err);
   process.stdout.write('ERROR_' + err.message.replace(/\s+/g, '_').slice(0, 50));
   process.exit(1);

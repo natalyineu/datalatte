@@ -163,6 +163,7 @@ interface AgentData {
   totalRuns: number;
   recentRuns: RunSummary[];
   report: AgentReport | null;
+  tokensLastRun: number;
 }
 
 const STATUS_COLORS: Record<string, string> = {
@@ -606,6 +607,92 @@ function AgentReportSection({ report, lastRunConclusion }: { report: AgentReport
   return null;
 }
 
+// ── TokenBudgetPanel ──────────────────────────────────────────────────────────
+
+const MODEL_DAILY_CAPS: Record<string, number> = {
+  "llama-3.3-70b-versatile":                   100_000,
+  "meta-llama/llama-4-scout-17b-16e-instruct": 500_000,
+  "openai/gpt-oss-120b":                       200_000,
+  "openai/gpt-oss-20b":                        200_000,
+  "qwen/qwen3-32b":                            500_000,
+  "llama-3.1-8b-instant":                      500_000,
+  "groq/compound":                             Infinity,
+  "groq/compound-mini":                        Infinity,
+};
+
+function fmtK(n: number): string {
+  if (n === 0) return "—";
+  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`;
+  if (n >= 1_000) return `${(n / 1_000).toFixed(1)}K`;
+  return String(n);
+}
+
+function TokenBudgetPanel({ agents }: { agents: AgentData[] }) {
+  const rows = agents
+    .filter((a) => a.tokensLastRun > 0 || a.runsToday > 0)
+    .map((a) => ({
+      emoji: a.emoji,
+      name: a.name,
+      tokensLastRun: a.tokensLastRun,
+      runsToday: a.runsToday,
+      estimated: a.tokensLastRun * Math.max(a.runsToday, 1),
+    }))
+    .sort((a, b) => b.estimated - a.estimated);
+
+  const totalEst = rows.reduce((s, r) => s + r.estimated, 0);
+  // tightest single-model daily cap that matters (llama-3.3-70b = 100K)
+  const tightestCap = 100_000;
+  const tightPct = Math.min(100, Math.round((totalEst / tightestCap) * 100));
+
+  if (rows.length === 0) return null;
+
+  return (
+    <div className="bg-gray-900 border border-gray-800 rounded-2xl p-5">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-sm font-semibold text-white">Groq Token Budget</h3>
+        <div className="flex items-center gap-3 text-xs text-gray-500">
+          <span>Est. today: <span className="text-amber-300 font-semibold">{fmtK(totalEst)}</span></span>
+          <span className="text-gray-700">·</span>
+          <span>llama-3.3-70b cap: <span className={tightPct >= 90 ? "text-red-400 font-semibold" : tightPct >= 60 ? "text-yellow-400 font-semibold" : "text-gray-400"}>{tightPct}%</span> of 100K</span>
+        </div>
+      </div>
+
+      <div className="space-y-2.5">
+        {rows.map((r) => {
+          const pct = Math.min(100, Math.round((r.estimated / tightestCap) * 100));
+          const barColor = pct >= 90 ? "bg-red-500" : pct >= 60 ? "bg-yellow-500" : "bg-amber-500";
+          return (
+            <div key={r.name} className="grid grid-cols-[140px_1fr_90px_80px] items-center gap-3">
+              <span className="text-xs text-gray-300 truncate">{r.emoji} {r.name}</span>
+              <div className="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                <div
+                  className={`h-full rounded-full transition-all ${barColor}`}
+                  style={{ width: `${Math.max(pct, r.tokensLastRun > 0 ? 2 : 0)}%` }}
+                />
+              </div>
+              <span className="text-xs text-gray-400 text-right">
+                {fmtK(r.tokensLastRun)}<span className="text-gray-600">/run</span>
+              </span>
+              <span className="text-xs text-gray-500 text-right">
+                ×{r.runsToday} <span className="text-gray-600">≈</span> <span className="text-gray-300">{fmtK(r.estimated)}</span>
+              </span>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Daily cap reference */}
+      <div className="mt-4 pt-3 border-t border-gray-800 flex flex-wrap gap-x-4 gap-y-1 text-xs text-gray-600">
+        <span>Daily caps:</span>
+        <span>llama-3.3-70b <span className="text-gray-500">100K</span></span>
+        <span>gpt-oss-120b/20b <span className="text-gray-500">200K</span></span>
+        <span>llama-4-scout / qwen / llama-8b <span className="text-gray-500">500K</span></span>
+        <span>compound / compound-mini <span className="text-gray-500">∞</span></span>
+      </div>
+    </div>
+  );
+}
+
 // ── AgentsTab ─────────────────────────────────────────────────────────────────
 
 function AgentsTab({
@@ -715,6 +802,9 @@ function AgentsTab({
           </div>
         ))}
       </div>
+
+      {/* Token budget panel */}
+      <TokenBudgetPanel agents={agents} />
 
       {/* Warning banners */}
       {allDisabled && (

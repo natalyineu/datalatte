@@ -25,6 +25,8 @@ const SCORES_PATH    = path.join(process.cwd(), 'content/quality-scores.json');
 const IMPROVE_BATCH     = 5;  // articles improved per run (5×4runs = 20/day)
 const IMPROVE_THRESHOLD = 7;  // score < this → eligible for improvement
 
+let _groqTokens = 0;
+
 const GROQ_MODELS = [
   'llama-3.3-70b-versatile',
   'meta-llama/llama-4-scout-17b-16e-instruct',
@@ -79,6 +81,7 @@ async function callGroq(prompt, maxTokens = 2000) {
       }, JSON.stringify({ model, messages: [{ role: 'user', content: prompt }], temperature: 0.4, max_tokens: maxTokens }));
 
       if (res.status === 200) {
+        _groqTokens += res.data?.usage?.total_tokens ?? 0;
         return res.data.choices[0].message.content.replace(/<think>[\s\S]*?<\/think>\s*/g, '').trim();
       }
       const code = res.data?.error?.code;
@@ -440,7 +443,10 @@ async function main() {
   console.log('✅ Fixer Agent done');
 }
 
-main().catch(async e => {
+main().then(() => {
+  console.log(`GROQ_TOKENS: ${_groqTokens}`);
+}).catch(async e => {
+  console.log(`GROQ_TOKENS: ${_groqTokens}`);
   console.error('Fixer Agent error:', e.message);
   await telegram(`🔧 <b>Fixer</b> — failed ❌\n${e.message}`);
   process.exit(1);
