@@ -3,7 +3,7 @@ name: Agent 3 — Fixer
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 2,8,14,20 * * *'   # 4× daily — improves ~12 articles/day
+    - cron: '0 1,5,9,13,17,21 * * *'   # 6× daily — improves ~30 articles/day (was 4×/12 per day)
 
 concurrency:
   group: fixer
@@ -12,7 +12,7 @@ concurrency:
 jobs:
   fix:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     permissions:
       contents: write
       actions: write

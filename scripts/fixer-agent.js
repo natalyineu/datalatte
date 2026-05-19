@@ -5,7 +5,7 @@
  *  1. Syntax fixes  — think tags, double headings, broken frontmatter
  *  2. Content improvement — rewrites thin/low-quality articles (score < 7)
  *
- * Processes 3 improvement articles per run to stay within timeout.
+ * Processes 5 improvement articles per run (6× daily = ~30/day).
  * Self-chains while there are articles left to improve.
  */
 
@@ -22,7 +22,7 @@ const TELEGRAM_CHAT  = process.env.TELEGRAM_CHAT_ID;
 const BLOG_DIR       = path.join(process.cwd(), 'content/blog');
 const SCORES_PATH    = path.join(process.cwd(), 'content/quality-scores.json');
 
-const IMPROVE_BATCH     = 3;  // articles improved per run
+const IMPROVE_BATCH     = 5;  // articles improved per run (5×4runs = 20/day)
 const IMPROVE_THRESHOLD = 7;  // score < this → eligible for improvement
 
 const GROQ_MODELS = [
