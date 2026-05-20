@@ -50,6 +50,49 @@ function getPostSlugs(): string[] {
     .map((f) => f.replace(".mdx", ""));
 }
 
+interface RelatedPost {
+  slug: string;
+  title: string;
+  description: string;
+  image: string;
+  category: string;
+  readTime: string;
+  date: string;
+}
+
+function getRelatedPosts(currentSlug: string, category: string, limit = 3): RelatedPost[] {
+  const files = fs.readdirSync(contentDir).filter((f) => f.endsWith(".mdx"));
+  const candidates: RelatedPost[] = [];
+  const fallbacks: RelatedPost[] = [];
+
+  for (const file of files) {
+    const slug = file.replace(".mdx", "");
+    if (slug === currentSlug) continue;
+    try {
+      const raw = fs.readFileSync(path.join(contentDir, file), "utf8");
+      const { data, content } = matter(raw);
+      const post: RelatedPost = {
+        slug,
+        title: data.title || slug,
+        description: data.description || "",
+        image: data.image || `/blog/clusters/marketing-strategy.jpg`,
+        category: data.category || "",
+        readTime: data.readTime || `${Math.max(1, Math.ceil(content.split(/\s+/).length / 200))} min read`,
+        date: data.date || "",
+      };
+      if (data.category === category) candidates.push(post);
+      else fallbacks.push(post);
+    } catch {
+      // skip unreadable files
+    }
+  }
+
+  const pool = candidates.length >= limit ? candidates : [...candidates, ...fallbacks];
+  // shuffle deterministically by slug to avoid hydration mismatch
+  pool.sort((a, b) => a.slug.localeCompare(b.slug));
+  return pool.slice(0, limit);
+}
+
 function calcReadTime(wordCount: number): string {
   return `${Math.max(1, Math.ceil(wordCount / 200))} min read`;
 }
@@ -219,6 +262,9 @@ const mdxComponents = {
   Tip: ({ children }: { children: React.ReactNode }) => <Callout type="tip">{children}</Callout>,
   Warning: ({ children }: { children: React.ReactNode }) => <Callout type="warning">{children}</Callout>,
   Coffee: ({ children }: { children: React.ReactNode }) => <Callout type="coffee">{children}</Callout>,
+  Example: ({ children }: { children: React.ReactNode }) => <Callout type="example">{children}</Callout>,
+  Stat: ({ children }: { children: React.ReactNode }) => <Callout type="stat">{children}</Callout>,
+  Faq: ({ children }: { children: React.ReactNode }) => <Callout type="faq">{children}</Callout>,
   code: (props: React.HTMLAttributes<HTMLElement>) => (
     <code className="bg-coffee-50 text-coffee-800 text-xs font-mono px-1.5 py-0.5 rounded" {...props} />
   ),
@@ -257,6 +303,7 @@ export default async function BlogPostPage({
   if (!post) notFound();
 
   const { frontmatter, content } = post;
+  const relatedPosts = getRelatedPosts(slug, frontmatter.category);
 
   const schema = articleSchema({
     title: frontmatter.title,
@@ -301,6 +348,19 @@ export default async function BlogPostPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
+
+      {/* Breadcrumb nav */}
+      <nav aria-label="Breadcrumb" className="bg-white border-b border-gray-100 py-3">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ol className="flex items-center gap-1.5 text-sm text-gray-500 flex-wrap">
+            <li><Link href="/" className="hover:text-coffee-700 transition-colors">Home</Link></li>
+            <li className="text-gray-300" aria-hidden="true">/</li>
+            <li><Link href="/blog" className="hover:text-coffee-700 transition-colors">Blog</Link></li>
+            <li className="text-gray-300" aria-hidden="true">/</li>
+            <li className="text-gray-700 truncate max-w-[240px] sm:max-w-none" aria-current="page">{frontmatter.title}</li>
+          </ol>
+        </div>
+      </nav>
 
       {/* Hero image */}
       <div className="relative h-64 md:h-96 w-full">
@@ -395,6 +455,39 @@ export default async function BlogPostPage({
           </div>
         </div>
       </div>
+
+      {/* Related Posts */}
+      {relatedPosts.length > 0 && (
+        <section className="bg-gray-50 border-t border-gray-100 py-14 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-xl font-bold text-gray-900 mb-8">Related articles</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {relatedPosts.map((rp) => (
+                <Link
+                  key={rp.slug}
+                  href={`/blog/${rp.slug}`}
+                  className="group flex flex-col bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow overflow-hidden"
+                >
+                  <div className="relative h-40 w-full flex-shrink-0">
+                    <Image
+                      src={rp.image}
+                      alt={rp.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                  </div>
+                  <div className="p-4 flex flex-col flex-1">
+                    <span className="text-xs font-semibold text-coffee-600 uppercase tracking-wide mb-2">{rp.category}</span>
+                    <h3 className="text-sm font-semibold text-gray-900 leading-snug line-clamp-2 group-hover:text-coffee-700 transition-colors">{rp.title}</h3>
+                    <span className="mt-auto pt-3 text-xs text-gray-400">{rp.readTime}</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <CTABanner
         headline="Want this applied to your business?"
