@@ -30,6 +30,10 @@ const NICHE_SLUGS: Record<string, string> = {
   "Freelancers": "freelancers",
   "Medium Business": "medium-business",
   "Enterprise": "enterprise",
+  "Restaurants": "restaurants",
+  "Dentists": "dentists",
+  "Cleaning Services": "cleaning-services",
+  "Real Estate Agents": "real-estate-agents",
 };
 
 export default function NichePage({
