@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
+import Link from "next/link";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -1136,8 +1137,7 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
       .replace(/[^a-z0-9\s-]/g, "")
       .trim()
       .replace(/\s+/g, "-")
-      .replace(/-+/g, "-")
-      .slice(0, 80);
+      .replace(/-+/g, "-");
   }
 
   // ── Queue actions ─────────────────────────────────────────────────────────
@@ -1465,6 +1465,12 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
               {tab.label}
             </button>
           ))}
+          <Link
+            href="/admin/reports"
+            className="px-4 py-3 text-sm font-medium whitespace-nowrap border-b-2 border-transparent text-gray-400 hover:text-white transition"
+          >
+            Reports ↗
+          </Link>
         </div>
       </div>
 

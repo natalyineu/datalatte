@@ -10,6 +10,7 @@ export interface ArticleMeta {
   title: string;
   date: string;
   wordCount: number;
+  category: string;
   tags: string[];
   url: string;
 }
@@ -26,7 +27,7 @@ function parseIndexMd(): ArticleMeta[] {
   const dataLines = lines.slice(headerIdx + 2).filter((l) => l.startsWith("|"));
 
   return dataLines.map((line) => {
-    // | `slug` | Title | Date | Words | Tags |
+    // | `slug` | Title | Date | Words | Category | Tags |
     const cols = line
       .split("|")
       .map((c) => c.trim())
@@ -38,7 +39,10 @@ function parseIndexMd(): ArticleMeta[] {
     const title = cols[1];
     const date = cols[2];
     const wordCount = parseInt(cols[3], 10) || 0;
-    const tags = cols[4]
+    // Support both old format (5 cols: no category) and new (6 cols: with category)
+    const hasCategory = cols.length >= 6;
+    const category = hasCategory ? cols[4] : "";
+    const tags = (hasCategory ? cols[5] : cols[4])
       .split(",")
       .map((t) => t.trim())
       .filter(Boolean);
@@ -48,6 +52,7 @@ function parseIndexMd(): ArticleMeta[] {
       title,
       date,
       wordCount,
+      category,
       tags,
       url: `https://datalatte.pro/blog/${slug}`,
     } as ArticleMeta;
