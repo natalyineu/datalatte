@@ -264,7 +264,13 @@ function sanitizeMdx(content) {
     }
   }
 
-  // 2. Quote any title that contains ": " but is unquoted — YAML parse error
+  // 2a. Fix double-escaped title: title:" \"Actual Title\"" → title: "Actual Title"
+  result = result.replace(
+    /^(title:)" \\"(.*)\\""/m,
+    (_, prefix, val) => `${prefix} "${val}"`
+  );
+
+  // 2b. Quote any title that contains ": " but is unquoted — YAML parse error
   result = result.replace(
     /^(title:\s*)([^"\n][^\n]*:\s[^\n]*)$/m,
     (_, prefix, val) => `${prefix}"${val.replace(/"/g, '\\"')}"`
