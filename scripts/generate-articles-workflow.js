@@ -92,13 +92,20 @@ async function callGroq(systemPrompt, userPrompt) {
   }
 
   let consecutiveRateLimits = 0;
+  const callStart = Date.now();
+  const BUDGET_MS = 5 * 60 * 1000; // 5-minute total budget — must exit before 20-min GH timeout
 
   for (const model of GROQ_MODELS) {
-    // Global backoff: if 3+ models failed in a row, pause 90s before continuing.
-    // This gives Groq's per-minute token buckets time to refill across the board.
+    // Hard exit if we've spent too long — ensures script exits cleanly so Telegram is sent
+    if (Date.now() - callStart > BUDGET_MS) {
+      console.log(`⏱ Budget exceeded (${Math.round((Date.now()-callStart)/1000)}s) — exiting rate-limit path`);
+      throw new Error('All Groq models unavailable. rate_limit — try again later.');
+    }
+
+    // Brief pause after 3 consecutive failures (reduced from 90s to 15s)
     if (consecutiveRateLimits >= 3) {
-      console.log(`⏸️  ${consecutiveRateLimits} models rate-limited in a row — pausing 90s for quota reset...`);
-      await sleep(90000);
+      console.log(`⏸️  ${consecutiveRateLimits} models rate-limited — pausing 15s...`);
+      await sleep(15000);
       consecutiveRateLimits = 0;
     }
 
@@ -135,21 +142,17 @@ async function callGroq(systemPrompt, userPrompt) {
       const errMsg = res.data?.error?.message || '';
 
       if (res.status === 429 || code === 'rate_limit_exceeded') {
-        // 1. Try Retry-After header (Groq sends this for token-per-minute limits)
         const retryAfterHeader = res.headers?.['retry-after'];
-        // 2. Try "try again in Xs" in the message body
         const waitMatch = errMsg.match(/try again in ([\d.]+)s/i) || errMsg.match(/please retry after ([\d.]+) second/i);
         const rawWaitMs = retryAfterHeader
           ? Math.ceil(parseFloat(retryAfterHeader) * 1000) + 2000
           : waitMatch
             ? Math.ceil(parseFloat(waitMatch[1]) * 1000) + 2000
             : 60000;
-        // Cap at 120s — if Groq says "retry in 7220s" that's a daily quota
-        // exhaustion on this model; skip to the next one instead of hanging.
-        const MAX_WAIT_MS = 120000;
-        if (rawWaitMs > MAX_WAIT_MS) {
-          console.log(`⚡ ${model} quota exhausted (retry-after ${Math.round(rawWaitMs/1000)}s) — skipping to next model`);
-          break; // break inner attempt loop → try next model
+        // Skip model entirely if it needs a long wait (daily quota)
+        if (rawWaitMs > 30000) {
+          console.log(`⚡ ${model} quota exhausted (retry-after ${Math.round(rawWaitMs/1000)}s) — skipping`);
+          break;
         }
         console.log(`⏳ Rate limited on ${model}, waiting ${Math.round(rawWaitMs/1000)}s...`);
         await sleep(rawWaitMs);
