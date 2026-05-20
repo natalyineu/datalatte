@@ -612,11 +612,11 @@ Output ONLY raw MDX — no code fences, start with ---.`;
   // Fix common MDX syntax bugs before pushing
   mdx = sanitizeMdx(mdx);
 
-  // Push MDX file
+  // Push MDX file — [vercel skip] so all articles batch into one deploy trigger at end of run
   await ghPutFile(
     `content/blog/${entry.slug}.mdx`,
     mdx + '\n',
-    `Add article: ${entry.title}`
+    `Add article: ${entry.title} [vercel skip]`
   );
   console.log(`✅ Pushed: ${entry.slug}`);
 
@@ -683,6 +683,21 @@ async function run() {
 
   console.log('\n=== Final Results ===');
   console.log(JSON.stringify(published, null, 2));
+
+  // Push ONE deploy trigger commit for the whole batch (all article commits used [vercel skip])
+  // This means Vercel builds ONCE per generator run instead of once per article
+  if (published.length > 0) {
+    const slugList = published.map(r => r.slug).join(', ');
+    const deployMsg = published.length === 1
+      ? `Deploy: ${published[0].title}`
+      : `Deploy: ${published.length} new articles`;
+    await ghPutFile(
+      'content/last-deploy.txt',
+      `${new Date().toISOString()} — ${published.length} article(s)\n${slugList}\n`,
+      deployMsg
+    );
+    console.log(`🚀 Deploy trigger pushed: "${deployMsg}"`);
+  }
 
   // Telegram notification
   const time = new Date().toUTCString().slice(0, 25);
