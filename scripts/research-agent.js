@@ -41,7 +41,7 @@ async function telegram(msg) {
   await fetchJson(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-  }, JSON.stringify({ chat_id: TELEGRAM_CHAT, text: msg, parse_mode: 'HTML' }));
+  }, JSON.stringify({ chat_id: TELEGRAM_CHAT, text: msg }));
 }
 
 async function ghGetFile(filePath) {
@@ -195,13 +195,13 @@ Valid niches: general, coffee-shops, hair-salons, pet-groomers, fitness-studios`
       .map(([cat, titles]) => `  📂 ${cat} (${titles.length})\n` + titles.slice(0, 2).map(t => `    • ${t}`).join('\n'))
       .join('\n');
 
-    msg = `🔬 <b>Researcher</b> — ${newArticles.length} topics added\n`;
+    msg = `🔬 Researcher — ${newArticles.length} topics added\n`;
     msg += `🕐 ${time}\n\n`;
     msg += clusterLines + '\n';
     if (Object.keys(byCat).length > 5) msg += `  + ${Object.keys(byCat).length - 5} more clusters\n`;
     msg += `\n📊 ${pending.length + newArticles.length} pending · ${published.length} published`;
   } else {
-    msg = `🔬 <b>Researcher</b> — queue balanced ✅\n`;
+    msg = `🔬 Researcher — queue balanced ✅\n`;
     msg += `🕐 ${time}\n\n`;
     msg += `No new topics needed right now.\n`;
     msg += `📊 ${pending.length} pending · ${published.length} published`;
@@ -213,6 +213,6 @@ Valid niches: general, coffee-shops, hair-salons, pet-groomers, fitness-studios`
 
 main().catch(async e => {
   console.error('Research Agent error:', e.message);
-  await telegram(`🔬 <b>Researcher</b> — failed ❌\n${e.message}`);
+  await telegram(`🔬 Researcher — failed ❌\n${e.message}`);
   process.exit(1);
 });
