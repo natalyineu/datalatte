@@ -124,9 +124,11 @@ async function callGroq(systemPrompt, userPrompt) {
 
       if (res.status === 200) {
         _groqTokens += res.data?.usage?.total_tokens ?? 0;
+        const content = res.data?.choices?.[0]?.message?.content;
+        if (!content) { console.log(`⚠️  ${model} returned 200 but no content — skipping`); continue; }
         console.log(`✅ Model used: ${model}`);
         consecutiveRateLimits = 0;
-        return res.data.choices[0].message.content;
+        return content;
       }
 
       const code = res.data?.error?.code;

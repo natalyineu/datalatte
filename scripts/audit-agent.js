@@ -45,7 +45,7 @@ async function telegram(msg) {
   await fetchJson(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-  }, JSON.stringify({ chat_id: TELEGRAM_CHAT, text: msg }));
+  }, JSON.stringify({ chat_id: TELEGRAM_CHAT, text: msg })).catch(() => {});
 }
 
 async function triggerFixer() {

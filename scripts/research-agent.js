@@ -77,7 +77,11 @@ async function callGroq(prompt) {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${GROQ_KEY}`, 'Content-Type': 'application/json' },
     }, body);
-    if (res.status === 200) return res.data.choices[0].message.content.replace(/<think>[\s\S]*?<\/think>\s*/g, '').trim();
+    if (res.status === 200) {
+      const content = res.data?.choices?.[0]?.message?.content;
+      if (!content) continue;
+      return content.replace(/<think>[\s\S]*?<\/think>\s*/g, '').trim();
+    }
     const code = res.data?.error?.code;
     if (res.status === 429 || code === 'rate_limit_exceeded' || code === 'model_decommissioned') continue;
     throw new Error(`Groq error ${res.status}: ${JSON.stringify(res.data)}`);
@@ -138,11 +142,17 @@ Avoid: generic Google Ads content (we have too much already).
 
 Return ONLY a JSON array of objects, no explanation:
 [
-  {"slug": "url-friendly-slug-here", "title": "Full Article Title Here", "category": "AI Agents", "niche": "general"},
+  {
+    "slug": "url-friendly-slug-here",
+    "title": "Full Article Title Here",
+    "primaryKeyword": "main seo keyword phrase",
+    "cluster": "Cluster Name",
+    "niche": "general"
+  },
   ...
 ]
 
-Valid categories: AI Agents, AI Automation, Email Marketing, Local SEO, Instagram Ads, TikTok Ads, Facebook Ads, Programmatic Advertising, Marketing Automation, Coffee Shops, Hair Salons, Pet Groomers, Fitness Studios
+Valid clusters (use exactly): Google Ads, Meta Ads, Local SEO, Google Business Profile Optimization, AI Agents, AI Automation, Email Marketing, Instagram Ads, TikTok Ads, Facebook Ads, Programmatic Advertising, Marketing Automation, Coffee Shop Marketing, Hair Salon Marketing, Pet Groomer Marketing, Fitness Studio Marketing, Social Media, Analytics & Tracking, Website & CRO
 Valid niches: general, coffee-shops, hair-salons, pet-groomers, fitness-studios`;
 
   console.log('🤖 Asking Groq for article suggestions...');
@@ -160,7 +170,16 @@ Valid niches: general, coffee-shops, hair-salons, pet-groomers, fitness-studios`
   // 6. Filter out existing slugs and add to queue
   const newArticles = suggestions.filter(a => a.slug && !existingSlugs.has(a.slug));
   for (const art of newArticles) {
-    queue.queue.push({ slug: art.slug, title: art.title, status: 'pending', category: art.category, niche: art.niche || 'general' });
+    queue.queue.push({
+      slug: art.slug,
+      title: art.title,
+      primaryKeyword: art.primaryKeyword || art.title.toLowerCase().replace(/[^a-z0-9 ]/g, '').trim(),
+      cluster: art.cluster || art.category || 'Marketing Strategy',
+      targetWords: 1500,
+      status: 'pending',
+      niche: art.niche || 'general',
+      addedDate: new Date().toISOString(),
+    });
     existingSlugs.add(art.slug);
   }
 
