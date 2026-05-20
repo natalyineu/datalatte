@@ -345,6 +345,26 @@ function fixQueueDuplicates() {
   return removed;
 }
 
+/**
+ * Reset entries stuck in "generating" back to "pending".
+ * Happens when the writer crashes mid-run and never marks them published.
+ * Safe to run: if the article was actually written, it exists as an MDX file
+ * and the writer will detect it's already published before writing again.
+ */
+function resetStuckGenerating() {
+  if (!fs.existsSync(QUEUE_PATH)) return 0;
+  const queue = JSON.parse(fs.readFileSync(QUEUE_PATH, 'utf8'));
+  let reset = 0;
+  for (const e of queue.queue) {
+    if (e.status === 'generating') {
+      e.status = 'pending';
+      reset++;
+    }
+  }
+  if (reset > 0) fs.writeFileSync(QUEUE_PATH, JSON.stringify(queue, null, 2) + '\n');
+  return reset;
+}
+
 async function runFixPhase() {
   console.log('\n═══ PHASE 1: SYNTAX FIX ═══');
   const files = allMdxFiles();
@@ -372,14 +392,16 @@ async function runFixPhase() {
     if (modified) fs.writeFileSync(fullPath, content);
   }
 
-  const dupRemoved = fixQueueDuplicates();
+  const dupRemoved  = fixQueueDuplicates();
+  const genReset    = resetStuckGenerating();
 
   console.log(`  Structural fixes: ${structFixed}`);
   console.log(`  Angle-bracket fixes: ${angleFixed}`);
   console.log(`  Service links injected: ${linkInjected}`);
   console.log(`  Queue duplicates removed: ${dupRemoved}`);
+  if (genReset > 0) console.log(`  ⚠️  Stuck "generating" reset: ${genReset}`);
 
-  return { structFixed, angleFixed, linkInjected, dupRemoved };
+  return { structFixed, angleFixed, linkInjected, dupRemoved, genReset };
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -756,11 +778,12 @@ async function main() {
   msg += `📊 ${queueStats.published} published · ${queueStats.pending} pending\n`;
   msg += `⏱️ Took ${elapsed}s · ${_tokens} tokens\n`;
 
-  if (fixCount > 0 || fixStats.linkInjected > 0) {
+  if (fixCount > 0 || fixStats.linkInjected > 0 || fixStats.genReset > 0) {
     msg += `\n🔧 Fixed:\n`;
     if (fixStats.structFixed  > 0) msg += `  • ${fixStats.structFixed} structural issues\n`;
     if (fixStats.angleFixed   > 0) msg += `  • ${fixStats.angleFixed} angle-bracket escapes\n`;
     if (fixStats.linkInjected > 0) msg += `  • ${fixStats.linkInjected} service links injected\n`;
+    if (fixStats.genReset     > 0) msg += `  • ${fixStats.genReset} stuck "generating" entries reset ⚠️\n`;
   }
 
   if (faqStats.added > 0 || chartStats.added > 0) {
