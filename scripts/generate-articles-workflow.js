@@ -275,6 +275,13 @@ function sanitizeMdx(content) {
     Tip:     'tip',
     Warning: 'warning',
     Coffee:  'coffee',
+    Example: 'example',
+    Stat:    'stat',
+    Faq:     'faq',
+    Info:    'tip',
+    Note:    'tip',
+    Alert:   'warning',
+    Danger:  'warning',
   };
   for (const [tag, calloutType] of Object.entries(COMPONENT_MAP)) {
     result = result
@@ -522,7 +529,20 @@ Syntax:
 5–7 questions written exactly as someone would type them into Google.
 Each answer: 2–4 sentences, direct and specific.
 
-**7. Closing CTA (no heading)**
+**7. Internal links to DataLatte service pages (REQUIRED — add 2–3 within body sections)**
+Naturally link to relevant service pages using descriptive anchor text inside a sentence:
+- [Google Ads management](/services/google-ads) — for any Google Ads topic
+- [Meta Ads management](/services/meta-ads) — for Facebook/Instagram ads
+- [local SEO services](/services/local-seo) — for search/maps/rankings topics
+- [Google Business Profile optimization](/services/google-business-profile) — for GBP topics
+- [analytics & reporting](/services/analytics) — for tracking/data topics
+- [AI agents & automation](/services/ai-agents) — for automation topics
+- [email & SMS marketing](/services/email-sms) — for email/text topics
+- [social media management](/services/social-media) — for social topics
+- [website & landing page services](/services/website) — for website/CRO topics
+Place these links naturally in sentences — never as a standalone line or list item.
+
+**8. Closing CTA (no heading)**
 2–3 sentences. Natural mention of DataLatte and a link to /contact for a free audit. Don't be salesy — frame it as "if you want help applying this."
 
 ## SEO RULES
