@@ -27,21 +27,90 @@ export const dynamicParams = true;
 const contentDir = path.join(process.cwd(), "content/blog");
 
 const CLUSTER_TO_SERVICE: Record<string, { label: string; href: string }> = {
+  // Google Ads variants
   "Google Ads":                           { label: "Google Ads Management", href: "/services/google-ads" },
+  "Google Ads Advanced":                  { label: "Google Ads Management", href: "/services/google-ads" },
+  "Microsoft Ads":                        { label: "Google Ads Management", href: "/services/google-ads" },
+  "Yahoo Advertising":                    { label: "Google Ads Management", href: "/services/google-ads" },
+  "YouTube Ads":                          { label: "Google Ads Management", href: "/services/google-ads" },
+  "Programmatic Advertising":             { label: "Google Ads Management", href: "/services/google-ads" },
+  "Retargeting":                          { label: "Google Ads Management", href: "/services/google-ads" },
+  "CTV & OTT":                            { label: "Google Ads Management", href: "/services/google-ads" },
+  "CTV Advertising":                      { label: "Google Ads Management", href: "/services/google-ads" },
+  "Audio Advertising":                    { label: "Google Ads Management", href: "/services/google-ads" },
+  // Meta Ads variants
   "Meta Ads":                             { label: "Meta Ads Management", href: "/services/meta-ads" },
+  "Facebook Ads":                         { label: "Meta Ads Management", href: "/services/meta-ads" },
   "Instagram Ads":                        { label: "Meta Ads Management", href: "/services/meta-ads" },
+  "Instagram Marketing":                  { label: "Meta Ads Management", href: "/services/meta-ads" },
+  "TikTok Ads":                           { label: "Social Media Management", href: "/services/social-media" },
+  "TikTok Marketing":                     { label: "Social Media Management", href: "/services/social-media" },
+  "Snapchat Advertising":                 { label: "Social Media Management", href: "/services/social-media" },
+  "Pinterest Marketing":                  { label: "Social Media Management", href: "/services/social-media" },
+  "Reddit & Community Marketing":         { label: "Social Media Management", href: "/services/social-media" },
+  "Nextdoor & Neighborhood Marketing":    { label: "Local SEO", href: "/services/local-seo" },
+  "Messaging & Community Marketing":      { label: "Email & SMS Marketing", href: "/services/email-sms" },
+  "Telegram & Messaging Ads":             { label: "Email & SMS Marketing", href: "/services/email-sms" },
+  // Local SEO variants
   "Local SEO":                            { label: "Local SEO", href: "/services/local-seo" },
   "Google Business Profile Optimization": { label: "Google Business Profile", href: "/services/google-business-profile" },
+  "Reputation Management":                { label: "Google Business Profile", href: "/services/google-business-profile" },
+  "Review Platform Ads":                  { label: "Google Business Profile", href: "/services/google-business-profile" },
+  // Analytics
   "Analytics & Tracking":                 { label: "Analytics & Reporting", href: "/services/analytics" },
+  // AI & Automation
   "AI & Automation":                      { label: "AI Agents & Automation", href: "/services/ai-agents" },
+  "Marketing Automation":                 { label: "AI Agents & Automation", href: "/services/ai-agents" },
+  // Email & SMS
   "Email & SMS Marketing":                { label: "Email & SMS Marketing", href: "/services/email-sms" },
+  "Email Marketing":                      { label: "Email & SMS Marketing", href: "/services/email-sms" },
+  // Social Media
   "Social Media":                         { label: "Social Media Management", href: "/services/social-media" },
+  "Content Marketing":                    { label: "Social Media Management", href: "/services/social-media" },
+  "Influencer Marketing":                 { label: "Social Media Management", href: "/services/social-media" },
+  "Influencer Marketing for Salons":      { label: "Social Media Management", href: "/services/social-media" },
+  "Influencer & Creator Marketing":       { label: "Social Media Management", href: "/services/social-media" },
+  // Website & CRO
   "Website & CRO":                        { label: "Website & Landing Pages", href: "/services/website" },
+  // Strategy — default to analytics
+  "Marketing Strategy":                   { label: "Analytics & Reporting", href: "/services/analytics" },
+  "Local Business Strategy":              { label: "Analytics & Reporting", href: "/services/analytics" },
+  "Tool Comparisons":                     { label: "Analytics & Reporting", href: "/services/analytics" },
+  "Offline Marketing":                    { label: "Local SEO", href: "/services/local-seo" },
+  "Case Studies":                         { label: "Local SEO", href: "/services/local-seo" },
+  // Niche pages
   "Coffee Shop Marketing":                { label: "Coffee Shop Marketing", href: "/for/coffee-shops" },
+  "Coffee Shops":                         { label: "Coffee Shop Marketing", href: "/for/coffee-shops" },
   "Hair Salon Marketing":                 { label: "Hair Salon Marketing", href: "/for/hair-salons" },
+  "Hair Salons":                          { label: "Hair Salon Marketing", href: "/for/hair-salons" },
   "Pet Groomer Marketing":                { label: "Pet Groomer Marketing", href: "/for/pet-groomers" },
+  "Pet Groomers":                         { label: "Pet Groomer Marketing", href: "/for/pet-groomers" },
+  "Dog Grooming Marketing":               { label: "Pet Groomer Marketing", href: "/for/pet-groomers" },
   "Fitness Studio Marketing":             { label: "Fitness Studio Marketing", href: "/for/fitness-studios" },
+  "Fitness Studios":                      { label: "Fitness Studio Marketing", href: "/for/fitness-studios" },
 };
+
+/** Fuzzy fallback: keyword-match the category to a service. */
+function getServiceLink(category: string): { label: string; href: string } | null {
+  if (!category) return null;
+  if (CLUSTER_TO_SERVICE[category]) return CLUSTER_TO_SERVICE[category];
+  const c = category.toLowerCase();
+  if (c.includes("google ads") || c.includes("ppc") || c.includes("search ad")) return { label: "Google Ads Management", href: "/services/google-ads" };
+  if (c.includes("facebook") || c.includes("meta") || c.includes("instagram ad")) return { label: "Meta Ads Management", href: "/services/meta-ads" };
+  if (c.includes("seo") || c.includes("search") || c.includes("local") && !c.includes("social")) return { label: "Local SEO", href: "/services/local-seo" };
+  if (c.includes("google business") || c.includes("gbp") || c.includes("review") || c.includes("reputation")) return { label: "Google Business Profile", href: "/services/google-business-profile" };
+  if (c.includes("analytic") || c.includes("tracking") || c.includes("report")) return { label: "Analytics & Reporting", href: "/services/analytics" };
+  if (c.includes("ai") || c.includes("automat")) return { label: "AI Agents & Automation", href: "/services/ai-agents" };
+  if (c.includes("email") || c.includes("sms") || c.includes("message")) return { label: "Email & SMS Marketing", href: "/services/email-sms" };
+  if (c.includes("social") || c.includes("tiktok") || c.includes("instagram") || c.includes("influenc") || c.includes("content") || c.includes("pinterest") || c.includes("snapchat") || c.includes("reddit")) return { label: "Social Media Management", href: "/services/social-media" };
+  if (c.includes("website") || c.includes("landing") || c.includes("cro") || c.includes("convert")) return { label: "Website & Landing Pages", href: "/services/website" };
+  if (c.includes("coffee") || c.includes("café") || c.includes("cafe")) return { label: "Coffee Shop Marketing", href: "/for/coffee-shops" };
+  if (c.includes("salon") || c.includes("barber") || c.includes("hair") || c.includes("beauty") || c.includes("spa")) return { label: "Hair Salon Marketing", href: "/for/hair-salons" };
+  if (c.includes("groom") || c.includes("pet") || c.includes("dog") || c.includes("cat")) return { label: "Pet Groomer Marketing", href: "/for/pet-groomers" };
+  if (c.includes("fitness") || c.includes("gym") || c.includes("yoga") || c.includes("studio") || c.includes("trainer")) return { label: "Fitness Studio Marketing", href: "/for/fitness-studios" };
+  // Final fallback
+  return { label: "Local Marketing Services", href: "/services/local-seo" };
+}
 
 function getPostSlugs(): string[] {
   return fs
@@ -424,23 +493,26 @@ export default async function BlogPostPage({
         )}
 
         {/* Related service link */}
-        {CLUSTER_TO_SERVICE[frontmatter.category] && (
-          <div className="mt-10 p-5 rounded-xl bg-coffee-50 border border-coffee-100 flex items-center justify-between gap-4">
-            <div>
-              <p className="text-xs font-semibold text-coffee-600 uppercase tracking-wide mb-1">Want hands-on help?</p>
-              <p className="text-sm text-gray-700">
-                See how DataLatte handles{" "}
-                <span className="font-semibold">{CLUSTER_TO_SERVICE[frontmatter.category].label}</span> for local businesses.
-              </p>
+        {(() => {
+          const svc = getServiceLink(frontmatter.category);
+          return svc ? (
+            <div className="mt-10 p-5 rounded-xl bg-coffee-50 border border-coffee-100 flex items-center justify-between gap-4">
+              <div>
+                <p className="text-xs font-semibold text-coffee-600 uppercase tracking-wide mb-1">Want hands-on help?</p>
+                <p className="text-sm text-gray-700">
+                  See how DataLatte handles{" "}
+                  <span className="font-semibold">{svc.label}</span> for local businesses.
+                </p>
+              </div>
+              <Link
+                href={svc.href}
+                className="flex-shrink-0 inline-flex items-center gap-1.5 text-sm font-bold text-coffee-800 hover:text-coffee-950 hover:underline"
+              >
+                Learn more <ArrowRight size={14} />
+              </Link>
             </div>
-            <Link
-              href={CLUSTER_TO_SERVICE[frontmatter.category].href}
-              className="flex-shrink-0 inline-flex items-center gap-1.5 text-sm font-bold text-coffee-800 hover:text-coffee-950 hover:underline"
-            >
-              Learn more <ArrowRight size={14} />
-            </Link>
-          </div>
-        )}
+          ) : null;
+        })()}
 
         {/* Author */}
         <div className="mt-12 pt-8 border-t border-gray-100">
