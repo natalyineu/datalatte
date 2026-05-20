@@ -1,108 +1,133 @@
 ---
-title: "Schema Markup for Local Business: How to Get Rich Snippets on Google"
-date: "2026-05-17"
-description: "Get more visibility for your local business with schema markup. Rich snippets in Google search results can increase clicks by up to 30%. Learn how to get."
+title:" \"Schema Markup for Local Business: How to Get Rich Snippets on Google\""
+date: "2026-05-20"
+description: "Unlock the full potential of your local business by leveraging schema markup to get rich snippets on Google."
 author: "Nataliia"
 category: "Website & CRO"
-tags: ["local business schema markup", "rich snippets", "google search results"]
+tags: ["local business schema markup", "rich snippets", "google search", "small business owners"]
 slug: "local-business-schema-markup-rich-snippets-google"
-image: "https://picsum.photos/seed/local-business-schema-markup-rich-snippets-google/800/450"
+image: "/blog/clusters/website-cro.jpg"
 readTime: "10 min read"
 ---
-A pet groomer in Manchester spent £300/month on Google Ads but saw zero phone inquiries — until we added schema markup for business hours and reviews. Within 6 weeks, their website’s click-through rate doubled, and phone calls increased by 170%. This is the power of schema markup for local businesses.  
 
-### What is Schema Markup for Local Business?  
-
-Schema markup is a code format (supported by Google, Bing, and Yahoo) that tells search engines exactly what your business does, when it’s open, and what customers are saying. Unlike generic HTML, schema uses a shared vocabulary like “LocalBusiness” or “Review” to make your data instantly scannable. For example, a yoga studio in London added “Service” schema for their “Postnatal Recovery” class, and now that service appears in Google’s “Top Stories” carousel for local searches.  
-
-### Why is Schema Markup Important for Local Business?  
-
-Local businesses need schema markup to dominate Google’s rich results, which get **2.5× more clicks** than standard listings (BrightEdge, 2024). Rich snippets include:  
-- Star ratings and review counts (e.g., “4.8★ (123 reviews)”)  
-- Price ranges (££, £££)  
-- Open/closed status in real time  
-- Images of your storefront or menu  
+Did you know that 67% of online experiences begin with a search engine, and 71% of customers use Google to find local businesses? However, only 12% of search results on the first page of Google include rich snippets – a critical component of search engine optimization (SEO). Rich snippets can significantly improve your local business's visibility, driving more customers to your store, restaurant, or salon.
 
 <StatRow
-  values="30|500|50|10"
-  labels="Increased clicks on Google search results|Number of businesses using schema markup|Average cost savings per month|Potential revenue boost"
-  subs="up to 30% increase in clicks with rich snippets|over 500,000 businesses using schema markup|save up to $50 per month on advertising expenses|potential revenue boost of up to $10,000 per year"
-  trends="up|neutral|down|up"
-/>  
+  values="67|71|12|30"
+  labels="Searches start with a search engine|Customers use Google to find local businesses|Search results with rich snippets|Rise in local SEO awareness in the past year"
+  subs="Source: Google, 2022|Source: Google, 2022|Source: Moz, 2022|Source: DataLatte, 2022"
+  trends="up|up|neutral|up"
+/>
 
-Here’s how it works: When a user searches “best coffee near me,” Google pulls schema data from your site to show a preview of your hours, menu, and reviews. A study by Backlinko found pages with schema load **37% faster** in search results, improving both visibility and user trust.  
+Schema markup is a crucial element in getting rich snippets on Google. By adding schema markup to your website, you provide search engines with additional context about your business, helping them understand and display relevant information to users. This can include your business hours, address, reviews, ratings, and even your menu items or services.
 
-### How to Add Schema Markup to Your Local Business Website  
+In this article, we will explore how to implement schema markup for local businesses, and provide actionable tips to help you get rich snippets on Google.
 
-1. **Choose your schema type**  
-   Use Google’s [Schema.org Generator](https://schema.org/) to pick the right format. A hair salon might use `https://schema.org/BeautySalon`, while a fitness studio would select `https://schema.org/Gym`.  
+### What is Schema Markup?
 
-2. **Use a plugin or code manually**  
-   - **WordPress**: Install Yoast SEO (£99/year) or Schema Pro (£149) to auto-generate markup.  
-   - **Squarespace/Wix**: Use their built-in SEO tools (check for “Structured Data” settings).  
-   - **Custom code**: Paste JSON-LD code into your `<body>` tag. Example for business hours:  
-     ```json
-     "openingHours": [
-       "Mo,Tu,We,Th,Fr 08:00-18:00",
-       "Sa 09:00-16:00"
-     ]
-     ```  
+Schema markup is a type of microdata that you can add to your website's HTML to provide search engines with additional context about your business. This context can include your business name, address, phone number, hours of operation, and even your menu items or services. By adding schema markup, you can help search engines understand the structure and content of your website, making it easier for them to display relevant information to users.
 
-3. **Test and validate**  
-   Run your URL through Google’s [Rich Results Test](https://search.google.com/test/rich-results) to catch errors. Fix any “Missing required fields” warnings within 48 hours to avoid indexing delays.  
+### Benefits of Schema Markup for Local Business
 
-### Common Schema Markup Types for Local Business  
+Adding schema markup to your local business website has several benefits, including:
 
-| Schema Type       | Best For                          | Example Impact                     |  
-|--------------------|-----------------------------------|-------------------------------------|  
-| `OpeningHours`    | All retail/service businesses     | Pet groomer saw +170% calls         |  
-| `Review`          | Product/service reviews           | 5-star reviews boost CTR by 82%     |  
-| `Menu`            | Restaurants, cafes                | Pizza place increased online orders by 35% |  
-| `Service`         | Salons, fitness studios           | Yoga studio booked 20 more classes/month |  
+- Improved local SEO rankings
+- Increased visibility in search engine results
+- Enhanced user experience through rich snippets
+- Better understanding of your business by search engines
+
+### How to Implement Schema Markup for Local Business
+
+Implementing schema markup for local business requires a few steps:
+
+1. **Choose a schema type**: Select the schema type that best fits your business, such as Business, Organization, or Restaurant.
+2. **Add schema markup to your website**: Add the schema markup code to your website's HTML, typically in the header or footer section.
+3. **Test your schema markup**: Use tools like Google's Structured Data Markup Helper or Google Search Console to test your schema markup and ensure it's working correctly.
+4. **Monitor and update**: Continuously monitor your schema markup and update it as needed to reflect changes in your business.
+
+### Example of Schema Markup for Local Business
+
+Here's an example of schema markup for a local coffee shop:
+```html
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "The Daily Grind",
+  "image": "https://thedailygrind.com/logo.png",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "123 Main St",
+    "addressLocality": "Anytown",
+    "addressRegion": "CA",
+    "postalCode": "12345",
+    "addressCountry": "USA"
+  },
+  "openingHours": "Mo-Th 6am-6pm, Fr-Su 6am-8pm",
+  "telephone": "+1 555 555 5555",
+  "menu": {
+    "@type": "Menu",
+    "name": "The Daily Grind Menu",
+    "itemListElement": [
+      {
+        "@type": "MenuItem",
+        "name": "Coffee",
+        "description": "A cup of our finest coffee",
+        "price": "$2.50"
+      },
+      {
+        "@type": "MenuItem",
+        "name": "Latte",
+        "description": "A shot of espresso and steamed milk",
+        "price": "$4.50"
+      }
+    ]
+  }
+}
+</script>
+```
+### Tips for Success
+
+To succeed with schema markup for local business, keep the following tips in mind:
+
+<Callout type="tip">Use a schema markup generator tool to simplify the process of adding schema markup to your website.</Callout>
+
+<Callout type="warning">Make sure to test your schema markup regularly to ensure it's working correctly and to catch any errors.</Callout>
+
+<Callout type="example">The Body Shop, a global retailer, saw a 25% increase in conversions after implementing schema markup on their website.</Callout>
 
 <BarChart
-  title="Types of schema markup for local businesses"
-  labels="Business Hours|Reviews|Address|Phone Number"
-  values="85|62|45|30"
+  title="Conversions Increase with Schema Markup"
+  labels="Before Schema Markup|After Schema Markup|Increase"
+  values="85|105|25"
   unit="%"
-  caption="Common schema markup types used by local businesses"
-  highlights="Business Hours"
-/>  
+  caption="Source: The Body Shop, 2022"
+  highlights="Increase"
+/>
 
-### Callout: Tip  
+### Frequently Asked Questions
 
-Pair schema markup with Google Business Profile updates. If your website says “Closed until 1pm,” but your GBP profile shows “Open 24/7,” Google will prioritize the GBP data — confusing customers and hurting trust.  
+Q: What is schema markup?
+A: Schema markup is a type of microdata that you can add to your website's HTML to provide search engines with additional context about your business.
 
-### Callout: Warning  
+Q: Why is schema markup important for local business?
+A: Schema markup is essential for local businesses as it helps search engines understand the structure and content of your website, making it easier for them to display relevant information to users.
 
-Avoid duplicate schema on the same page. For example, don’t add both `Review` and `AggregateRating` without linking them. Google penalizes “over-optimized” pages with a 30%+ drop in rankings.  
+Q: How do I implement schema markup for local business?
+A: To implement schema markup for local business, choose a schema type, add schema markup to your website, test it, and continuously monitor and update it.
 
-### Callout: Example  
+Q: What are the benefits of schema markup for local business?
+A: The benefits of schema markup for local business include improved local SEO rankings, increased visibility in search engine results, enhanced user experience through rich snippets, and better understanding of your business by search engines.
 
-[Insert image of Google search results with rich snippets]  
+Q: Can I use schema markup on my website if I'm not a local business?
+A: Yes, schema markup can be used by any type of business, not just local businesses.
 
-### Frequently Asked Questions  
+Q: How often should I update my schema markup?
+A: You should update your schema markup regularly to reflect changes in your business and to ensure it's working correctly.
 
-**Q: What’s the fastest way to add schema markup?**  
-A: Use a plugin like Schema Pro (£149) — it takes 30 minutes to set up and auto-updates hours/reviews.  
+Q: Can I use schema markup on my social media profiles?
+A: Yes, schema markup can be used on your social media profiles to provide additional context about your business.
 
-**Q: How long until I see results?**  
-A: Google crawls most small business sites every 7–14 days. Use [Google URL Inspector](https://search.google.com/search-console) to request faster indexing.  
+### Call to Action
 
-**Q: Can schema markup fix bad local SEO?**  
-A: No. Schema is a *layer* on top of core SEO. First optimize for keywords like “organic coffee near me,” then add schema to enhance visibility.  
-
-**Q: What if I’m not tech-savvy?**  
-A: Hire a local SEO specialist. DataLatte’s schema audit includes 12+ data points and takes 48 hours — for £499, you’ll rank above 80% of competitors in your area.  
-
-## The Bottom Line  
-
-Schema markup turns your website into a clickable billboard in Google search. By adding structured data for hours, reviews, and services, you’ll beat 72% of local businesses that ignore this tactic. Start with one schema type (e.g., business hours), test results in Google Search Console, and scale from there.  
-
-Book a free schema audit with DataLatte today — we’ll show you exactly where your competitors are winning (and how to steal their clicks).  
-
-<Callout type="coffee" title="Turn Visitors Into Customers">  
-DataLatte designs and optimises local business websites for conversions. [Book a free audit](/contact) or learn more about [Website & CRO services](/services/website).  
-</Callout>  
-
-## Frequently Asked Questions
+If you're ready to unlock the full potential of your local business by leveraging schema markup to get rich snippets on Google, contact DataLatte today for a free audit and consultation. Our team of experts will help you implement schema markup and improve your local SEO rankings. [Get in touch with us](/contact) to learn more.
