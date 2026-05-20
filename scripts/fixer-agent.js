@@ -235,7 +235,7 @@ function hasInternalLinks(body) {
 function injectServiceLink(content, category) {
   const parts = content.split(/^---\s*$/m);
   if (parts.length < 3) return null;
-  const fmBlock = parts[0] + '---\n' + parts[1] + '---';
+  const fmBlock = parts[0] + '---\n' + parts[1].replace(/^\n/, '') + '---';
   const body = parts.slice(2).join('---');
 
   if (hasInternalLinks(body)) return null;
