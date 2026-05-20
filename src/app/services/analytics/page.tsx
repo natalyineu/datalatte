@@ -15,6 +15,20 @@ export const metadata: Metadata = {
   title: "Marketing Analytics & Reporting for Local Businesses",
   description:
     "Clear marketing analytics and dashboards for small businesses. Know exactly which channels bring in customers and stop guessing where to spend your marketing budget.",
+  openGraph: {
+    title: "Marketing Analytics & Reporting for Local Businesses",
+    description: "Clear marketing analytics and dashboards for small businesses. Know exactly which channels bring in customers and stop guessing where to spend your marketing budget.",
+    url: "https://datalatte.pro/services/analytics",
+    siteName: "DataLatte",
+    type: "website",
+    images: [{ url: "https://datalatte.pro/opengraph-image", width: 1200, height: 630, alt: "DataLatte — Marketing Analytics for Local Businesses" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Marketing Analytics & Reporting for Local Businesses",
+    description: "Clear marketing analytics and dashboards for small businesses. Know exactly which channels bring in customers and stop guessing where to spend your marketing budget.",
+    images: ["https://datalatte.pro/opengraph-image"],
+  },
 };
 
 export default function AnalyticsPage() {

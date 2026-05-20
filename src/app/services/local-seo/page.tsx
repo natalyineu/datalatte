@@ -15,6 +15,20 @@ export const metadata: Metadata = {
   title: "Local SEO for Small Businesses | Coffee Shops, Salons & More",
   description:
     "Local SEO services for small businesses. Rank for 'near me' searches, build local citations, and drive consistent organic traffic from your neighborhood.",
+  openGraph: {
+    title: "Local SEO for Small Businesses | Coffee Shops, Salons & More",
+    description: "Local SEO services for small businesses. Rank for 'near me' searches, build local citations, and drive consistent organic traffic from your neighborhood.",
+    url: "https://datalatte.pro/services/local-seo",
+    siteName: "DataLatte",
+    type: "website",
+    images: [{ url: "https://datalatte.pro/opengraph-image", width: 1200, height: 630, alt: "DataLatte — Local SEO for Small Businesses" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Local SEO for Small Businesses | Coffee Shops, Salons & More",
+    description: "Local SEO services for small businesses. Rank for 'near me' searches, build local citations, and drive consistent organic traffic from your neighborhood.",
+    images: ["https://datalatte.pro/opengraph-image"],
+  },
 };
 
 export default function LocalSEOPage() {

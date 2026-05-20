@@ -604,12 +604,17 @@ const TG_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TG_CHAT  = process.env.TELEGRAM_CHAT_ID;
 
 async function telegram(msg) {
-  if (!TG_TOKEN || !TG_CHAT) return;
-  await fetchJson(
+  if (!TG_TOKEN || !TG_CHAT) {
+    console.log(`[Telegram] skipped — token set: ${!!TG_TOKEN}, chat set: ${!!TG_CHAT}`);
+    return;
+  }
+  console.log(`[Telegram] sending: ${msg.slice(0, 60).replace(/\n/g, ' ')}...`);
+  const res = await fetchJson(
     `https://api.telegram.org/bot${TG_TOKEN}/sendMessage`,
     { method: 'POST', headers: { 'Content-Type': 'application/json' } },
     JSON.stringify({ chat_id: TG_CHAT, text: msg })
-  ).catch(() => {});
+  ).catch((e) => ({ status: 0, error: e.message }));
+  console.log(`[Telegram] response: ${res.status}${res.data?.description ? ' — ' + res.data.description : ''}`);
 }
 
 async function run() {

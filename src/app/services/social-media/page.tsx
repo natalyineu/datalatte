@@ -15,6 +15,20 @@ export const metadata: Metadata = {
   title: "Social Media Management for Local Businesses",
   description:
     "Organic social media management for coffee shops, salons, pet groomers, and fitness studios. Consistent content, real engagement, and a feed that turns followers into customers.",
+  openGraph: {
+    title: "Social Media Management for Local Businesses",
+    description: "Organic social media management for coffee shops, salons, pet groomers, and fitness studios. Consistent content, real engagement, and a feed that turns followers into customers.",
+    url: "https://datalatte.pro/services/social-media",
+    siteName: "DataLatte",
+    type: "website",
+    images: [{ url: "https://datalatte.pro/opengraph-image", width: 1200, height: 630, alt: "DataLatte — Social Media Management for Local Businesses" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Social Media Management for Local Businesses",
+    description: "Organic social media management for coffee shops, salons, pet groomers, and fitness studios. Consistent content, real engagement, and a feed that turns followers into customers.",
+    images: ["https://datalatte.pro/opengraph-image"],
+  },
 };
 
 export default function SocialMediaPage() {
