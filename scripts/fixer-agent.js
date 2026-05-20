@@ -417,20 +417,19 @@ async function main() {
     if (dupeFixed)            parts.push(`${dupeFixed} dupes removed`);
 
     try {
-      // Pull first (clean working tree), then stage and commit
-      execSync('git pull --rebase origin main', { stdio: 'inherit' });
-      execSync('git add content/ 2>/dev/null || true');
+      // Stage and commit first, then rebase on top of remote changes
+      execSync('git add content/');
       execSync(`git commit -m "Fixer: ${parts.join(', ')} [vercel skip]"`);
-      // Retry push up to 3× in case another agent pushed between our pull and push
+      // Retry push up to 3× in case another agent pushed between our commit and push
       let pushed = false;
       for (let attempt = 0; attempt < 3; attempt++) {
         try {
+          execSync('git pull --rebase --autostash origin main', { stdio: 'inherit' });
           execSync('git push origin main');
           pushed = true;
           break;
         } catch {
-          console.log(`⚠️  Push failed (attempt ${attempt + 1}/3) — pulling and retrying...`);
-          execSync('git pull --rebase origin main', { stdio: 'inherit' });
+          console.log(`⚠️  Push failed (attempt ${attempt + 1}/3) — retrying...`);
         }
       }
       if (!pushed) throw new Error('Push failed after 3 attempts');
