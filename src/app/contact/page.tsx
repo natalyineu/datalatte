@@ -146,17 +146,17 @@ export default function ContactPage() {
                 </div>
 
                 <a
-                  href="https://cal.com/datalatte"
+                  href="https://calendly.com/hi-datalatte/new-meeting"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-5 rounded-xl border border-gray-200 hover:border-coffee-400 hover:bg-coffee-50 transition-all group"
+                  className="flex items-center gap-4 p-5 rounded-xl border border-coffee-300 bg-coffee-50 hover:border-coffee-400 hover:bg-coffee-100 transition-all group"
                 >
-                  <div className="w-11 h-11 bg-coffee-100 rounded-xl flex items-center justify-center shrink-0">
+                  <div className="w-11 h-11 bg-coffee-200 rounded-xl flex items-center justify-center shrink-0">
                     <Calendar size={20} className="text-coffee-700" />
                   </div>
                   <div>
                     <div className="font-semibold text-gray-900 group-hover:text-coffee-700 transition-colors">
-                      Book a call (cal.com)
+                      Book a call
                     </div>
                     <div className="text-sm text-gray-500">30-minute intro or audit call</div>
                   </div>
