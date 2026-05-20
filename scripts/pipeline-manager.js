@@ -408,9 +408,9 @@ async function main() {
   try {
     execSync('git config user.email "pipeline-manager@datalatte.pro"');
     execSync('git config user.name "DataLatte Pipeline Manager"');
-    execSync('git pull --rebase origin main');
     execSync('git add scripts/.scores.json');
     execSync(`git commit -m "Score: ${score}/100 — ${todayCount} articles today [vercel skip]"`);
+    execSync('git pull --rebase --autostash origin main');
     execSync('git push origin main');
   } catch (e) {
     if (!e.message.includes('nothing to commit')) console.log('Score commit note:', e.message.slice(0, 100));
