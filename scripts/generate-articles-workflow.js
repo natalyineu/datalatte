@@ -597,25 +597,54 @@ Output ONLY raw MDX — no code fences, start with ---.`;
   console.log(`ARTICLE_CLUSTER: ${entry.cluster}`);
   console.log(`QUEUE_REMAINING: ${remaining}`);
 
-  return { slug: entry.slug, status: 200 };
+  return { slug: entry.slug, title: entry.title, keyword: entry.primaryKeyword, cluster: entry.cluster, remaining, status: 200 };
+}
+
+const TG_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+const TG_CHAT  = process.env.TELEGRAM_CHAT_ID;
+
+async function telegram(msg) {
+  if (!TG_TOKEN || !TG_CHAT) return;
+  await fetchJson(
+    `https://api.telegram.org/bot${TG_TOKEN}/sendMessage`,
+    { method: 'POST', headers: { 'Content-Type': 'application/json' } },
+    JSON.stringify({ chat_id: TG_CHAT, text: msg })
+  ).catch(() => {});
 }
 
 async function run() {
   const results = [];
+  let published = null;
+  let errorMsg  = null;
 
   try {
     const result = await generateOne();
-    if (result) results.push(result);
+    if (result) {
+      results.push(result);
+      published = result;
+    }
   } catch (err) {
     console.error(`❌ Error: ${err.message}`);
     results.push({ slug: '?', status: 500, error: err.message });
+    errorMsg = err.message;
   }
 
   console.log('\n=== Final Results ===');
   console.log(JSON.stringify(results, null, 2));
 
-  // Set env for notification
-  process.env.GEN_RESULTS = JSON.stringify(results);
+  // Telegram notification
+  const time = new Date().toUTCString().slice(0, 25);
+  if (published) {
+    await telegram(
+      `✍️ Writer — published\n🕐 ${time}\n\n📄 ${published.title}\n🔑 ${published.keyword}\n📂 ${published.cluster}\n\n📊 ${published.remaining} pending\nhttps://www.datalatte.pro/blog/${published.slug}`
+    );
+  } else if (errorMsg && (errorMsg.includes('rate_limit') || errorMsg.includes('All Groq') || errorMsg.includes('unavailable'))) {
+    await telegram(`⚡ Writer — rate limited\n🕐 ${time}\n\nAll models busy, retrying in 5 min.`);
+  } else if (!published && !errorMsg && results.length === 0) {
+    await telegram(`🏁 Writer — queue empty\n🕐 ${time}\n\nAll articles published.`);
+  } else if (errorMsg) {
+    await telegram(`⚠️ Writer — failed\n🕐 ${time}\n\n${errorMsg.slice(0, 200)}`);
+  }
 }
 
 if (!GROQ_KEY) {
