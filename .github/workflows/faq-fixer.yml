@@ -1,9 +1,8 @@
 name: FAQ Fixer
 
 on:
+  # Merged into caretaker.yml — kept here for manual use only
   workflow_dispatch:
-  schedule:
-    - cron: '0 3 * * *'   # daily at 3am UTC as a safety net
 
 concurrency:
   group: faq-fixer
