@@ -35,7 +35,7 @@ jobs:
           echo "📂 Repo checked out"
           echo "  Branch : $(git rev-parse --abbrev-ref HEAD)"
           echo "  Commit : $(git rev-parse --short HEAD)"
-          QUEUE=$(python3 -c "import json; d=json.load(open('content/queue.json')); pending=[x for x in d if x.get('status')=='pending']; print(f'  Queue  : {len(pending)} pending articles')" 2>/dev/null || echo "  Queue  : (could not read)")
+          QUEUE=$(python3 -c "import json; d=json.load(open('content/queue.json')); pending=[x for x in d['queue'] if x.get('status')=='pending']; print(f'  Queue  : {len(pending)} pending articles')" 2>/dev/null || echo "  Queue  : (could not read)")
           echo "$QUEUE"
 
       - uses: actions/setup-node@v5
@@ -80,6 +80,8 @@ jobs:
             echo "⚠️  Unexpected output — last 5 lines:"
             echo "$OUTPUT" | tail -5
           fi
+          echo "--- Telegram status ---"
+          echo "$OUTPUT" | grep "\[Telegram\]" || echo "(no [Telegram] lines found — script may have exited early)"
           echo "========================================"
 
       - name: Trigger next run
