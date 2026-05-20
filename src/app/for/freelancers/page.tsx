@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, User, MessageSquare, Star, Globe, Mail, TrendingUp } from "lucide-react";
+import { ArrowRight, CheckCircle2, User, MessageSquare, Star, TrendingUp } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
 
