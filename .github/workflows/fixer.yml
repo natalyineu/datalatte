@@ -3,7 +3,7 @@ name: Agent 3 — Fixer
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 1,5,9,13,17,21 * * *'   # 6× daily — improves ~30 articles/day (was 4×/12 per day)
+    - cron: '0 */2 * * *'   # every 2 hours
 
 concurrency:
   group: fixer
