@@ -656,27 +656,22 @@ async function telegram(msg) {
 async function run() {
   console.log(`[Config] TG_TOKEN set: ${!!TG_TOKEN} | TG_CHAT set: ${!!TG_CHAT} | GROQ_KEY set: ${!!GROQ_KEY}`);
   const published = [];
+  const MAX_ARTICLES = 10;
   let errorMsg = null;
 
-  // Article 1
-  try {
-    const r1 = await generateOne();
-    if (r1) published.push(r1);
-  } catch (err) {
-    console.error(`❌ Error (article 1): ${err.message}`);
-    errorMsg = err.message;
-  }
-
-  // Article 2 — only if article 1 succeeded (not rate-limited)
-  if (published.length > 0) {
+  for (let i = 0; i < MAX_ARTICLES; i++) {
     try {
-      const refreshed = await refreshLocalQueue();
-      console.log(`♻️ Queue refreshed from GitHub: ${refreshed}`);
-      const r2 = await generateOne();
-      if (r2) published.push(r2);
+      if (i > 0) {
+        const refreshed = await refreshLocalQueue();
+        console.log(`♻️ Queue refreshed from GitHub: ${refreshed}`);
+      }
+      const r = await generateOne();
+      if (!r) break; // queue empty
+      published.push(r);
     } catch (err) {
-      // Rate limited or queue empty on second try — first article already counts
-      console.log(`⚠️ Article 2 skipped: ${err.message.slice(0, 80)}`);
+      console.error(`❌ Error (article ${i + 1}): ${err.message}`);
+      if (!errorMsg) errorMsg = err.message;
+      break;
     }
   }
 

@@ -73,8 +73,8 @@ jobs:
         if: always()
         run: |
           OUTPUT=$(cat /tmp/fixer_output.txt 2>/dev/null || echo "")
-          REMAINING=$(echo "$OUTPUT" | grep "^FIXER_REMAINING:" | sed 's/FIXER_REMAINING://' | tr -d '[:space:]')
-          IMPROVED=$(echo "$OUTPUT" | grep "^FIXER_IMPROVED:" | sed 's/FIXER_IMPROVED://' | tr -d '[:space:]')
+          REMAINING=$(echo "$OUTPUT" | grep "^FIXER_REMAINING:" | sed 's/FIXER_REMAINING://' | tr -d '[:space:]') || true
+          IMPROVED=$(echo "$OUTPUT" | grep "^FIXER_IMPROVED:" | sed 's/FIXER_IMPROVED://' | tr -d '[:space:]') || true
           SKIPPED=$(echo "$OUTPUT" | grep -c "⏭️\|Skipped (validation" || echo "0")
           echo "========================================"
           echo "  Improved  : ${IMPROVED:-0} articles"
@@ -105,8 +105,8 @@ jobs:
         run: |
           OUTPUT=$(cat /tmp/fixer_output.txt 2>/dev/null || echo "")
           TIME=$(date -u '+%Y-%m-%d %H:%M UTC')
-          REMAINING=$(echo "$OUTPUT" | grep "^FIXER_REMAINING:" | sed 's/FIXER_REMAINING://' | tr -d '[:space:]')
-          IMPROVED=$(echo "$OUTPUT" | grep "^FIXER_IMPROVED:" | sed 's/FIXER_IMPROVED://' | tr -d '[:space:]')
+          REMAINING=$(echo "$OUTPUT" | grep "^FIXER_REMAINING:" | sed 's/FIXER_REMAINING://' | tr -d '[:space:]') || true
+          IMPROVED=$(echo "$OUTPUT" | grep "^FIXER_IMPROVED:" | sed 's/FIXER_IMPROVED://' | tr -d '[:space:]') || true
           {
             echo "## 🔧 Fixer — $TIME"
             echo ""
@@ -116,12 +116,12 @@ jobs:
             echo "| Articles skipped (validation) | $(echo "$OUTPUT" | grep -c 'Skipped (validation' || echo 0) |"
             echo "| Remaining in queue | ${REMAINING:-0} |"
             echo ""
-            IMPROVED_LIST=$(echo "$OUTPUT" | grep "✅ Improved")
+            IMPROVED_LIST=$(echo "$OUTPUT" | grep "✅ Improved") || true
             if [ -n "$IMPROVED_LIST" ]; then
               echo "### ✅ Improved this run"
-              echo "$OUTPUT" | grep -E "📝 \[|✅ Improved|📝 [0-9]" | paste - - | while read line; do echo "- $line"; done
+              echo "$OUTPUT" | grep -E "📝 \[|✅ Improved|📝 [0-9]" | paste - - | while read line; do echo "- $line"; done || true
             fi
-            SKIPPED_LIST=$(echo "$OUTPUT" | grep "Output too short")
+            SKIPPED_LIST=$(echo "$OUTPUT" | grep "Output too short") || true
             if [ -n "$SKIPPED_LIST" ]; then
               echo "### ⚠️ Skipped (output too short)"
               echo "$SKIPPED_LIST" | while read line; do echo "- $line"; done
