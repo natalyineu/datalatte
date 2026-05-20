@@ -22,6 +22,7 @@ interface Article {
   title: string;
   date: string;
   wordCount: number;
+  category: string;
   tags: string[];
   url: string;
 }
