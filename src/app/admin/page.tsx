@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import Link from "next/link";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -1119,7 +1118,7 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
 
   // Keyboard shortcuts
   useEffect(() => {
-    const tabIds: TabId[] = ["agents", "proposals", "pipeline", "queue", "research", "published", "reports"];
+    const tabIds: TabId[] = ["pipeline", "agents", "queue", "published", "research", "proposals", "reports"];
     function handler(e: KeyboardEvent) {
       const tag = (e.target as HTMLElement)?.tagName;
       if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
@@ -1389,12 +1388,12 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
   const highImpactPendingCount = proposals.filter((p) => p.status === "pending" && p.impactScore >= 8).length;
 
   const tabs: { id: TabId; label: string }[] = [
-    { id: "agents",    label: agentCount > 0 ? `Agents (${agentCount})` : "Agents" },
-    { id: "proposals", label: `Proposals (${pendingProposalsCount})` },
     { id: "pipeline",  label: "Pipeline" },
+    { id: "agents",    label: agentCount > 0 ? `Agents (${agentCount})` : "Agents" },
     { id: "queue",     label: `Queue (${queue.length})` },
-    { id: "research",  label: `Research (${totalVisible})` },
     { id: "published", label: `Published (${articles.length})` },
+    { id: "research",  label: `Research (${totalVisible})` },
+    { id: "proposals", label: `Proposals (${pendingProposalsCount})` },
     { id: "reports",   label: "Reports" },
   ];
 
@@ -1467,12 +1466,6 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
               {tab.label}
             </button>
           ))}
-          <Link
-            href="/admin/reports"
-            className="px-4 py-3 text-sm font-medium whitespace-nowrap border-b-2 border-transparent text-gray-400 hover:text-white transition"
-          >
-            Reports ↗
-          </Link>
         </div>
       </div>
 
@@ -2461,7 +2454,7 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
               ) : (
                 <div className="space-y-3">
                   {clusterDistribEntries.map(([cluster, count]) => {
-                    const pct = Math.round((count / publishedQueue.length) * 100);
+                    const pct = articles.length > 0 ? Math.round((count / articles.length) * 100) : 0;
                     return (
                       <div key={cluster}>
                         <div className="flex items-center justify-between text-sm mb-1">
