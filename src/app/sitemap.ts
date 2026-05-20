@@ -59,10 +59,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/for/hair-salons`,                   lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/for/pet-groomers`,                  lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/for/fitness-studios`,               lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/for/restaurants`,                    lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/for/dentists`,                      lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/for/cleaning-services`,             lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/for/real-estate-agents`,            lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/for/startups`,                      lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/for/freelancers`,                   lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/for/medium-business`,               lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/for/enterprise`,                    lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
+    // Lead gen
+    { url: `${baseUrl}/free-audit`,                        lastModified: today,      changeFrequency: "monthly", priority: 0.9 },
     // Service pages
     { url: `${baseUrl}/services/google-ads`,               lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/services/meta-ads`,                 lastModified: today,      changeFrequency: "monthly", priority: 0.8 },

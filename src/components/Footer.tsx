@@ -2,29 +2,40 @@ import Link from "next/link";
 import { Mail, MessageCircle, MapPin, Linkedin } from "lucide-react";
 
 const footerLinks = {
-  "For Your Business": [
-    { label: "Coffee Shops",            href: "/for/coffee-shops" },
-    { label: "Hair & Beauty Salons",    href: "/for/hair-salons" },
-    { label: "Pet Groomers",            href: "/for/pet-groomers" },
-    { label: "Fitness & Yoga Studios",  href: "/for/fitness-studios" },
-    { label: "Growing Businesses",      href: "/for/medium-business" },
-    { label: "Enterprise",              href: "/for/enterprise" },
+  "Industries": [
+    { label: "Coffee Shops",          href: "/for/coffee-shops" },
+    { label: "Restaurants",           href: "/for/restaurants" },
+    { label: "Hair & Beauty Salons",  href: "/for/hair-salons" },
+    { label: "Pet Groomers",          href: "/for/pet-groomers" },
+    { label: "Fitness Studios",       href: "/for/fitness-studios" },
+    { label: "Dentists",              href: "/for/dentists" },
+    { label: "Cleaning Services",     href: "/for/cleaning-services" },
+    { label: "Real Estate Agents",    href: "/for/real-estate-agents" },
+    { label: "Startups",              href: "/for/startups" },
+    { label: "Freelancers",           href: "/for/freelancers" },
+    { label: "Growing Businesses",    href: "/for/medium-business" },
   ],
-  Services: [
+  "Services": [
     { label: "Google Ads",              href: "/services/google-ads" },
     { label: "Meta Ads",                href: "/services/meta-ads" },
     { label: "Google Business Profile", href: "/services/google-business-profile" },
     { label: "Local SEO",               href: "/services/local-seo" },
-    { label: "Analytics & Reporting",   href: "/services/analytics" },
     { label: "AI Agents",               href: "/services/ai-agents" },
     { label: "Email & SMS",             href: "/services/email-sms" },
     { label: "Social Media",            href: "/services/social-media" },
+    { label: "Analytics & Reporting",   href: "/services/analytics" },
     { label: "Website Design",          href: "/services/website" },
   ],
-  Company: [
-    { label: "About",   href: "/about" },
-    { label: "Blog",    href: "/blog" },
-    { label: "Contact", href: "/contact" },
+  "Free Tools": [
+    { label: "Budget Calculator",       href: "/tools/marketing-budget-calculator" },
+    { label: "AI Agent Builder",        href: "/tools/ai-agent-builder" },
+    { label: "Free Marketing Audit",    href: "/free-audit" },
+  ],
+  "Company": [
+    { label: "About Nataliia",          href: "/about" },
+    { label: "Blog",                    href: "/blog" },
+    { label: "Contact",                 href: "/contact" },
+    { label: "Free Audit",              href: "/free-audit" },
   ],
 };
 
@@ -32,10 +43,10 @@ export default function Footer() {
   return (
     <footer className="bg-coffee-950 text-gray-400">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-10">
 
           {/* Brand */}
-          <div className="lg:col-span-2">
+          <div className="md:col-span-3 lg:col-span-2">
             <Link href="/" className="flex items-center gap-1.5 font-display font-bold text-xl mb-4">
               <span className="text-coffee-300">Data</span>
               <span className="text-coffee-500">Latte</span>
@@ -81,7 +92,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Links */}
+          {/* Link columns */}
           {Object.entries(footerLinks).map(([group, links]) => (
             <div key={group}>
               <h3 className="text-white font-semibold text-sm mb-4">{group}</h3>
