@@ -7,7 +7,7 @@ import CTABanner from "@/components/CTABanner";
 import { personSchema } from "@/lib/schema";
 
 const ABOUT_URL = "https://datalatte.pro/about";
-const ABOUT_TITLE = "About Nataliia — Senior Digital Marketing Consultant | DataLatte";
+const ABOUT_TITLE = "About Nataliia — Senior Digital Marketing Consultant";
 const ABOUT_DESC =
   "10+ years across OMD, Dentsu, BBDO and GroupM working with Fortune 500 and FTSE 100 brands. Now bringing enterprise-grade marketing to businesses of every size.";
 
