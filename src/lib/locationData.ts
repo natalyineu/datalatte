@@ -95,7 +95,7 @@ export const NICHE_DATA: Record<NicheSlug, NicheInfo> = {
       "Review generation strategy to build social proof",
       "Analytics to track calls, directions, and ad conversions",
     ],
-    faq: (city, state) => [
+    faq: (city, _state) => [
       {
         q: `How long until my coffee shop ranks in Google Maps in ${city}?`,
         a: `Most ${city} coffee shops see GBP improvements within 4–8 weeks of optimization. Ranking in the local map pack for competitive terms like "coffee shop near me" typically takes 2–4 months of consistent work.`,
@@ -134,7 +134,7 @@ export const NICHE_DATA: Record<NicheSlug, NicheInfo> = {
       "Review strategy to grow your star rating and review count",
       "Analytics tracking calls, bookings, and ad performance",
     ],
-    faq: (city, state) => [
+    faq: (city, _state) => [
       {
         q: `How do I get my hair salon to the top of Google in ${city}?`,
         a: `The map pack (top 3 results) is driven by GBP completeness, review quantity/quality, and proximity. We optimize all three. Organic rankings take 3–6 months; GBP improvements are often visible in 4–8 weeks.`,
@@ -173,7 +173,7 @@ export const NICHE_DATA: Record<NicheSlug, NicheInfo> = {
       "Review generation to build trust with new pet owners",
       "Analytics to measure bookings and track which channels drive appointments",
     ],
-    faq: (city, state) => [
+    faq: (city, _state) => [
       {
         q: `How do pet groomers get more clients in ${city}?`,
         a: `The most effective channels are Google Business Profile (ranking in 'dog groomer near me' searches), Google Ads, and word-of-mouth amplified by consistent five-star reviews. We focus on all three.`,
@@ -212,7 +212,7 @@ export const NICHE_DATA: Record<NicheSlug, NicheInfo> = {
       "Email and SMS campaigns to re-engage lapsed members",
       "Analytics to track trial sign-ups, membership conversions, and retention rates",
     ],
-    faq: (city, state) => [
+    faq: (city, _state) => [
       {
         q: `What's the best marketing channel for a fitness studio in ${city}?`,
         a: `It depends on your niche. Google Ads captures people actively searching for gyms; Meta Ads are better for building brand awareness and retargeting trial visitors. Most studios need both working together.`,

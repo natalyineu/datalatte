@@ -264,13 +264,13 @@ function sanitizeMdx(content: string): string {
       const inline = calloutOpen[2].trim();
       const collected: string[] = inline ? [inline] : [];
       i++;
-      let closed = false;
+      let _closed = false;
       while (i < lines.length) {
         const next = lines[i];
         if (next.includes("</Callout>")) {
           const before = next.replace("</Callout>", "").trim();
           if (before) collected.push(before);
-          closed = true;
+          _closed = true;
           i++;
           break;
         }

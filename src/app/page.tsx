@@ -494,7 +494,7 @@ export default function HomePage() {
                 title: "Measure & improve",
                 desc: "You get a dashboard you can actually read. Every month we review what's working and double down.",
               },
-            ].map((item, i) => (
+            ].map((item) => (
               <div
                 key={item.step}
                 className="flex gap-4 bg-white rounded-xl p-5 border border-coffee-100 hover:border-coffee-200 transition-colors"

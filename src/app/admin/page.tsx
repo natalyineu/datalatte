@@ -609,7 +609,7 @@ function AgentReportSection({ report, lastRunConclusion }: { report: AgentReport
 
 // ── TokenBudgetPanel ──────────────────────────────────────────────────────────
 
-const MODEL_DAILY_CAPS: Record<string, number> = {
+const _MODEL_DAILY_CAPS: Record<string, number> = {
   "llama-3.3-70b-versatile":                   100_000,
   "meta-llama/llama-4-scout-17b-16e-instruct": 500_000,
   "openai/gpt-oss-120b":                       200_000,
@@ -825,7 +825,7 @@ function AgentsTab({
         {agents.map((agent) => {
           const isActive   = agent.state === "active";
           const isWriter   = agent.workflowFile === "auto-generate.yml";
-          const isPipeline = agent.workflowFile === "pipeline-manager.yml";
+          const _isPipeline = agent.workflowFile === "pipeline-manager.yml";
 
           return (
             <div
