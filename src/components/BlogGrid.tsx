@@ -1,7 +1,9 @@
 "use client";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import BlogCard from "./BlogCard";
 import { getGroup, GROUP_CONFIG, type GroupName } from "./blogCategories";
+
+const PAGE_SIZE = 24;
 
 interface Post {
   title: string;
@@ -30,6 +32,7 @@ export default function BlogGrid({ posts }: { posts: Post[] }) {
   const [activeGroup, setActiveGroup] = useState<GroupName | "All">("All");
   const [query, setQuery] = useState("");
   const [sortAsc, setSortAsc] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
   // Count posts per group for badge display
   const groupCounts = useMemo(() => {
@@ -51,7 +54,12 @@ export default function BlogGrid({ posts }: { posts: Post[] }) {
     return sortAsc ? [...base].reverse() : base;
   }, [posts, activeGroup, query, sortAsc]);
 
-  const [featured, ...rest] = filtered;
+  // Reset pagination when filters change
+  useEffect(() => { setVisibleCount(PAGE_SIZE); }, [activeGroup, query, sortAsc]);
+
+  const visible = filtered.slice(0, visibleCount);
+  const hasMore = visibleCount < filtered.length;
+  const [featured, ...rest] = visible;
   const rawDate = (dateStr: string) =>
     new Date(dateStr).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
 
@@ -112,6 +120,7 @@ export default function BlogGrid({ posts }: { posts: Post[] }) {
       {filtered.length === 0 ? (
         <p className="text-gray-500 text-sm">No articles found. Try a different search or category.</p>
       ) : (
+        <>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {featured && (
             <BlogCard
@@ -141,6 +150,18 @@ export default function BlogGrid({ posts }: { posts: Post[] }) {
             />
           ))}
         </div>
+        {hasMore && (
+          <div className="text-center mt-10">
+            <button
+              onClick={() => setVisibleCount(c => c + PAGE_SIZE)}
+              className="inline-flex items-center gap-2 px-8 py-3 bg-coffee-700 hover:bg-coffee-600 text-white font-semibold rounded-xl transition-colors text-sm"
+            >
+              Load more articles
+              <span className="text-white/60 text-xs">({filtered.length - visibleCount} remaining)</span>
+            </button>
+          </div>
+        )}
+      </>
       )}
     </>
   );
