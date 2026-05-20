@@ -699,10 +699,12 @@ function TokenBudgetPanel({ agents }: { agents: AgentData[] }) {
 function AgentsTab({
   token,
   queue,
+  articles,
   onAgentsLoaded,
 }: {
   token: string;
   queue: QueueEntry[];
+  articles: Article[];
   onAgentsLoaded?: (count: number) => void;
 }) {
   const [agents, setAgents]         = useState<AgentData[]>([]);
@@ -744,7 +746,7 @@ function AgentsTab({
   const allDisabled    = agents.length > 0 && agents.every((a) => a.state === "disabled");
   const pendingCount   = queue.filter((e) => e.status === "pending").length;
   const generatingCount = queue.filter((e) => e.status === "generating").length;
-  const publishedCount = queue.filter((e) => e.status === "published").length;
+  const publishedCount = articles.length;
   const activeCount    = agents.filter((a) => a.state === "active").length;
   const failedToday    = agents.filter((a) => a.lastRun?.conclusion === "failure").length;
   const pipelineReport = agents.find((a) => a.workflowFile === "pipeline-manager.yml")?.report as PipelineReport | null | undefined;
@@ -1312,10 +1314,9 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
     return matchSearch && matchStatus && matchCluster;
   });
 
-  // Activity feed: last 20 published sorted by generatedDate desc
-  const activityFeed = [...queue]
-    .filter((e) => e.generatedDate)
-    .sort((a, b) => (b.generatedDate ?? "").localeCompare(a.generatedDate ?? ""))
+  // Activity feed: last 20 published sorted by date desc (source of truth: MDX)
+  const activityFeed = [...articles]
+    .sort((a, b) => b.date.localeCompare(a.date))
     .slice(0, 20);
 
   // Research: group pending queue articles by cluster
@@ -1475,7 +1476,7 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
         {/* Tab: Agents                                                        */}
         {/* ══════════════════════════════════════════════════════════════════ */}
         {activeTab === "agents" && (
-          <AgentsTab token={token} queue={queue} onAgentsLoaded={setAgentCount} />
+          <AgentsTab token={token} queue={queue} articles={articles} onAgentsLoaded={setAgentCount} />
         )}
 
         {/* ══════════════════════════════════════════════════════════════════ */}
@@ -1975,7 +1976,7 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
             <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
               <div className="px-5 py-4 border-b border-gray-800">
                 <h2 className="font-semibold text-white">Recent Activity</h2>
-                <p className="text-xs text-gray-500 mt-0.5">Last 20 processed articles</p>
+                <p className="text-xs text-gray-500 mt-0.5">Last 20 published articles</p>
               </div>
               {activityFeed.length === 0 ? (
                 <div className="px-5 py-8 text-center text-gray-500 text-sm">No activity yet</div>
@@ -1983,15 +1984,20 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
                 <div className="divide-y divide-gray-800">
                   {activityFeed.map((entry) => (
                     <div key={entry.slug} className="px-5 py-3 flex items-center gap-4 hover:bg-gray-800/50 transition">
-                      <span className="text-xs text-gray-500 font-mono shrink-0 w-28">
-                        {formatDate(entry.generatedDate)}
+                      <span className="text-xs text-gray-500 font-mono shrink-0 w-16">
+                        {new Date(entry.date + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" })}
                       </span>
                       <span className="flex-1 text-sm text-white truncate">{entry.title}</span>
-                      <span className="text-xs px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 shrink-0 hidden sm:inline">
-                        {entry.cluster.split(" — ")[0] ?? entry.cluster}
+                      {entry.category && (
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 shrink-0 hidden sm:inline">
+                          {entry.category}
+                        </span>
+                      )}
+                      <span className="text-xs text-gray-600 shrink-0 hidden md:inline">
+                        {entry.wordCount.toLocaleString()}w
                       </span>
                       <a
-                        href={`https://datalatte.pro/blog/${entry.slug}`}
+                        href={entry.url}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-gray-500 hover:text-amber-400 transition shrink-0"
