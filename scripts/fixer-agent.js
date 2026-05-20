@@ -131,6 +131,149 @@ async function callGroq(prompt, maxTokens = 2000) {
   throw new Error('All Groq models unavailable');
 }
 
+// ── MDX safety: fix bare < before digits/$ (same as writer sanitizeMdx) ──────
+
+function sanitizeBareAngleBrackets(content) {
+  const parts = content.split('---');
+  if (parts.length < 3) return content;
+  const fm = parts[0] + '---' + parts[1] + '---';
+  let body = parts.slice(2).join('---');
+  const lines = body.split('\n');
+  const out = [];
+  let inCode = false;
+  for (const line of lines) {
+    if (line.trim().startsWith('```')) inCode = !inCode;
+    if (inCode || /^\s*<[A-Z]/.test(line)) { out.push(line); continue; }
+    out.push(
+      line
+        .replace(/<(\d)/g, '&lt;$1')
+        .replace(/<\$(\d)/g, 'under $$$1')
+        .replace(/ < \$(\d)/g, ' under $$$1')
+    );
+  }
+  return fm + out.join('\n');
+}
+
+// ── Rule-based internal link injection ───────────────────────────────────────
+
+const CATEGORY_LINK_MAP = {
+  'Google Ads':                           { anchor: 'Google Ads management', href: '/services/google-ads' },
+  'Google Ads Advanced':                  { anchor: 'Google Ads management', href: '/services/google-ads' },
+  'Microsoft Ads':                        { anchor: 'Google Ads management', href: '/services/google-ads' },
+  'YouTube Ads':                          { anchor: 'Google Ads management', href: '/services/google-ads' },
+  'Programmatic Advertising':             { anchor: 'Google Ads management', href: '/services/google-ads' },
+  'Retargeting':                          { anchor: 'Google Ads management', href: '/services/google-ads' },
+  'CTV & OTT':                            { anchor: 'Google Ads management', href: '/services/google-ads' },
+  'Audio Advertising':                    { anchor: 'Google Ads management', href: '/services/google-ads' },
+  'Meta Ads':                             { anchor: 'Meta Ads management', href: '/services/meta-ads' },
+  'Facebook Ads':                         { anchor: 'Meta Ads management', href: '/services/meta-ads' },
+  'Instagram Ads':                        { anchor: 'Meta Ads management', href: '/services/meta-ads' },
+  'Instagram Marketing':                  { anchor: 'Meta Ads management', href: '/services/meta-ads' },
+  'TikTok Ads':                           { anchor: 'social media management', href: '/services/social-media' },
+  'TikTok Marketing':                     { anchor: 'social media management', href: '/services/social-media' },
+  'Snapchat Advertising':                 { anchor: 'social media management', href: '/services/social-media' },
+  'Pinterest Marketing':                  { anchor: 'social media management', href: '/services/social-media' },
+  'Reddit & Community Marketing':         { anchor: 'social media management', href: '/services/social-media' },
+  'Nextdoor & Neighborhood Marketing':    { anchor: 'local SEO services', href: '/services/local-seo' },
+  'Review Platform Ads':                  { anchor: 'Google Business Profile optimization', href: '/services/google-business-profile' },
+  'Local SEO':                            { anchor: 'local SEO services', href: '/services/local-seo' },
+  'Google Business Profile Optimization': { anchor: 'Google Business Profile optimization', href: '/services/google-business-profile' },
+  'Reputation Management':                { anchor: 'Google Business Profile optimization', href: '/services/google-business-profile' },
+  'Analytics & Tracking':                 { anchor: 'analytics & reporting', href: '/services/analytics' },
+  'AI & Automation':                      { anchor: 'AI agents & automation', href: '/services/ai-agents' },
+  'Marketing Automation':                 { anchor: 'AI agents & automation', href: '/services/ai-agents' },
+  'Email & SMS Marketing':                { anchor: 'email & SMS marketing', href: '/services/email-sms' },
+  'Email Marketing':                      { anchor: 'email & SMS marketing', href: '/services/email-sms' },
+  'Messaging & Community Marketing':      { anchor: 'email & SMS marketing', href: '/services/email-sms' },
+  'Social Media':                         { anchor: 'social media management', href: '/services/social-media' },
+  'Content Marketing':                    { anchor: 'social media management', href: '/services/social-media' },
+  'Influencer Marketing':                 { anchor: 'social media management', href: '/services/social-media' },
+  'Website & CRO':                        { anchor: 'website & landing page services', href: '/services/website' },
+  'Marketing Strategy':                   { anchor: 'analytics & reporting', href: '/services/analytics' },
+  'Local Business Strategy':              { anchor: 'local SEO services', href: '/services/local-seo' },
+  'Tool Comparisons':                     { anchor: 'analytics & reporting', href: '/services/analytics' },
+  'Offline Marketing':                    { anchor: 'local SEO services', href: '/services/local-seo' },
+  'Coffee Shop Marketing':                { anchor: 'coffee shop marketing', href: '/for/coffee-shops' },
+  'Coffee Shops':                         { anchor: 'coffee shop marketing', href: '/for/coffee-shops' },
+  'Hair Salon Marketing':                 { anchor: 'hair salon marketing', href: '/for/hair-salons' },
+  'Hair Salons':                          { anchor: 'hair salon marketing', href: '/for/hair-salons' },
+  'Pet Groomer Marketing':                { anchor: 'pet groomer marketing', href: '/for/pet-groomers' },
+  'Pet Groomers':                         { anchor: 'pet groomer marketing', href: '/for/pet-groomers' },
+  'Dog Grooming Marketing':               { anchor: 'pet groomer marketing', href: '/for/pet-groomers' },
+  'Fitness Studio Marketing':             { anchor: 'fitness studio marketing', href: '/for/fitness-studios' },
+  'Fitness Studios':                      { anchor: 'fitness studio marketing', href: '/for/fitness-studios' },
+};
+
+function getCategoryLink(category) {
+  if (CATEGORY_LINK_MAP[category]) return CATEGORY_LINK_MAP[category];
+  const c = (category || '').toLowerCase();
+  if (c.includes('google ads') || c.includes('ppc')) return { anchor: 'Google Ads management', href: '/services/google-ads' };
+  if (c.includes('facebook') || c.includes('meta') || c.includes('instagram ad')) return { anchor: 'Meta Ads management', href: '/services/meta-ads' };
+  if (c.includes('seo') || c.includes('local market')) return { anchor: 'local SEO services', href: '/services/local-seo' };
+  if (c.includes('google business') || c.includes('gbp') || c.includes('review') || c.includes('reputation')) return { anchor: 'Google Business Profile optimization', href: '/services/google-business-profile' };
+  if (c.includes('analytic') || c.includes('tracking')) return { anchor: 'analytics & reporting', href: '/services/analytics' };
+  if (c.includes('ai') || c.includes('automat')) return { anchor: 'AI agents & automation', href: '/services/ai-agents' };
+  if (c.includes('email') || c.includes('sms') || c.includes('message')) return { anchor: 'email & SMS marketing', href: '/services/email-sms' };
+  if (c.includes('social') || c.includes('tiktok') || c.includes('instagram') || c.includes('content') || c.includes('influenc')) return { anchor: 'social media management', href: '/services/social-media' };
+  if (c.includes('website') || c.includes('landing') || c.includes('cro')) return { anchor: 'website & landing page services', href: '/services/website' };
+  if (c.includes('coffee') || c.includes('café') || c.includes('cafe')) return { anchor: 'coffee shop marketing', href: '/for/coffee-shops' };
+  if (c.includes('salon') || c.includes('hair') || c.includes('beauty') || c.includes('barber')) return { anchor: 'hair salon marketing', href: '/for/hair-salons' };
+  if (c.includes('groom') || c.includes('pet') || c.includes('dog')) return { anchor: 'pet groomer marketing', href: '/for/pet-groomers' };
+  if (c.includes('fitness') || c.includes('gym') || c.includes('yoga') || c.includes('studio')) return { anchor: 'fitness studio marketing', href: '/for/fitness-studios' };
+  return null;
+}
+
+/** Return true if the article body already has at least one /services/ or /for/ link. */
+function hasInternalLinks(body) {
+  return /\(\/services\/|\(\/for\//.test(body);
+}
+
+/**
+ * Inject a Callout with a service link after the FIRST ## section.
+ * Only runs on articles with no existing internal links.
+ */
+function injectServiceLink(content, category) {
+  const parts = content.split(/^---\s*$/m);
+  if (parts.length < 3) return null;
+  const fmBlock = parts[0] + '---\n' + parts[1] + '---';
+  const body = parts.slice(2).join('---');
+
+  if (hasInternalLinks(body)) return null;
+
+  const svcLink = getCategoryLink(category);
+  if (!svcLink) return null;
+
+  // Find the end of the first ## section (next ## heading or first MDX component)
+  const lines = body.split('\n');
+  let insertAfter = -1;
+  let foundFirstH2 = false;
+  for (let i = 0; i < lines.length; i++) {
+    if (/^## /.test(lines[i])) {
+      if (!foundFirstH2) { foundFirstH2 = true; continue; }
+      // Second ## found — insert before it
+      insertAfter = i - 1;
+      break;
+    }
+    if (foundFirstH2 && /^<[A-Z]/.test(lines[i].trim())) {
+      // MDX component marks end of first section
+      insertAfter = i - 1;
+      break;
+    }
+  }
+
+  if (!foundFirstH2) return null; // no ## headings — skip
+
+  // If no good spot found, insert before FAQ or at end of body
+  if (insertAfter === -1) {
+    const faqIdx = lines.findIndex(l => /^## (Frequently Asked|FAQ)/i.test(l));
+    insertAfter = faqIdx > 0 ? faqIdx - 1 : lines.length - 1;
+  }
+
+  const callout = `\n<Callout type="tip">Want expert help? DataLatte's [${svcLink.anchor}](${svcLink.href}) service is built specifically for local small businesses.</Callout>\n`;
+  lines.splice(insertAfter + 1, 0, callout);
+  return fmBlock + lines.join('\n');
+}
+
 // ── Quality scores ────────────────────────────────────────────────────────────
 
 function loadScores() {
@@ -327,6 +470,22 @@ async function main() {
   const brokenFiles = syntaxScanAll();
   console.log(`🔍 Syntax issues: ${brokenFiles.length}`);
 
+  const allMdxFiles = fs.existsSync(BLOG_DIR) ? fs.readdirSync(BLOG_DIR).filter(f => f.endsWith('.mdx')) : [];
+  let mdxFixed = 0;
+  let linkInjected = 0;
+
+  for (const filename of allMdxFiles) {
+    const fullPath = path.join(BLOG_DIR, filename);
+    let content = fs.readFileSync(fullPath, 'utf8');
+    const after = sanitizeBareAngleBrackets(content);
+    if (after !== content) {
+      fs.writeFileSync(fullPath, after);
+      content = after;
+      mdxFixed++;
+    }
+  }
+  if (mdxFixed > 0) console.log(`🔧 MDX angle-bracket fixes: ${mdxFixed} files`);
+
   for (const filename of brokenFiles) {
     const fullPath = path.join(BLOG_DIR, filename);
     const original = fs.readFileSync(fullPath, 'utf8');
@@ -345,6 +504,29 @@ async function main() {
       console.log(`✅ Syntax fixed: ${filename} (${appliedFixes.join(', ')})`);
     }
   }
+
+  // ── 1b. Rule-based internal link injection (batch of 30/run) ───────────────
+  const LINK_BATCH = 30;
+  let linkCount = 0;
+  for (const filename of allMdxFiles) {
+    if (linkCount >= LINK_BATCH) break;
+    const fullPath = path.join(BLOG_DIR, filename);
+    const content = fs.readFileSync(fullPath, 'utf8');
+    // Quick pre-check: skip if already has internal links
+    if (hasInternalLinks(content)) continue;
+
+    // Extract category from frontmatter
+    const catMatch = content.match(/^category:\s*["']?([^"'\n]+)["']?/m);
+    const category = catMatch ? catMatch[1].trim() : '';
+
+    const injected = injectServiceLink(content, category);
+    if (injected) {
+      fs.writeFileSync(fullPath, injected);
+      linkInjected++;
+      linkCount++;
+    }
+  }
+  if (linkInjected > 0) console.log(`🔗 Internal links injected: ${linkInjected} articles`);
 
   // ── 2. Improve low-quality articles ────────────────────────────────────────
   const now = Date.now();
@@ -397,7 +579,7 @@ async function main() {
 
   // Fix queue duplicates
   const dupeFixed = fixQueueDuplicates();
-  const totalChanged = fixedFiles.length + improvedFiles.length + regenFiles.length + dupeFixed;
+  const totalChanged = fixedFiles.length + improvedFiles.length + regenFiles.length + dupeFixed + linkInjected + mdxFixed;
   const remaining = Math.max(0, totalNeedImprovement - improvedFiles.length);
 
   console.log(`\n=== ${improvedFiles.length} improved, ${fixedFiles.length} syntax-fixed, ${regenFiles.length} requeued ===`);
@@ -415,6 +597,8 @@ async function main() {
     if (fixedFiles.length)    parts.push(`${fixedFiles.length} syntax-fixed`);
     if (regenFiles.length)    parts.push(`${regenFiles.length} requeued`);
     if (dupeFixed)            parts.push(`${dupeFixed} dupes removed`);
+    if (linkInjected)         parts.push(`${linkInjected} links added`);
+    if (mdxFixed)             parts.push(`${mdxFixed} mdx-fixed`);
 
     try {
       // Stage and commit first, then rebase on top of remote changes
@@ -459,6 +643,8 @@ async function main() {
     msg += regenFiles.slice(0, 3).map(f => `  • ${f.file.replace('.mdx', '')} — ${f.reason}`).join('\n') + '\n';
   }
 
+  if (linkInjected > 0) msg += `\n🔗 Service links injected: ${linkInjected} articles\n`;
+  if (mdxFixed > 0) msg += `\n🔧 MDX fixes: ${mdxFixed} files\n`;
   msg += `\n📋 Remaining to improve: ${remaining}`;
   if (remaining > 0) msg += `\n⏭ Next batch triggered automatically`;
 
