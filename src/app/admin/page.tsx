@@ -699,9 +699,11 @@ function TokenBudgetPanel({ agents }: { agents: AgentData[] }) {
 function AgentsTab({
   token,
   queue,
+  onAgentsLoaded,
 }: {
   token: string;
   queue: QueueEntry[];
+  onAgentsLoaded?: (count: number) => void;
 }) {
   const [agents, setAgents]         = useState<AgentData[]>([]);
   const [initialLoad, setInitialLoad] = useState(true);
@@ -716,12 +718,13 @@ function AgentsTab({
       if (res.ok) {
         const data = await res.json() as { agents: AgentData[] };
         setAgents(data.agents);
+        onAgentsLoaded?.(data.agents.length);
       }
     } finally {
       setInitialLoad(false);
       setRefreshing(false);
     }
-  }, [token]);
+  }, [token, onAgentsLoaded]);
 
   useEffect(() => { fetchAgents(true); }, [fetchAgents]);
 
@@ -993,6 +996,7 @@ function StatCard({ label, value, sub }: { label: string; value: string | number
 // ── Dashboard ─────────────────────────────────────────────────────────────────
 
 function Dashboard({ token, onLogout }: { token: string; onLogout: () => void }) {
+  const [agentCount, setAgentCount]         = useState(0);
   const [queue, setQueue]                   = useState<QueueEntry[]>([]);
   const [articles, setArticles]             = useState<Article[]>([]);
   const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
@@ -1284,14 +1288,10 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
   const publishedQueue = queue.filter((e) => e.status === "published");
 
   const today = todayStr();
-  const publishedToday = queue.filter((e) => e.generatedDate?.startsWith(today)).length;
+  const publishedToday = articles.filter((a) => a.date === today).length;
 
-  const last7Published = queue.filter((e) => {
-    if (!e.generatedDate) return false;
-    const d = new Date(e.generatedDate);
-    const cutoff = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
-    return d >= cutoff;
-  }).length;
+  const sevenDaysAgo = new Date(Date.now() - 7 * 86400_000).toISOString().slice(0, 10);
+  const last7Published = articles.filter((a) => a.date >= sevenDaysAgo).length;
   const avgPerDay = (last7Published / 7).toFixed(1);
 
   const estMinutes = pendingCount * 5;
@@ -1299,7 +1299,7 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
     ? `${estMinutes}m`
     : `${Math.floor(estMinutes / 60)}h ${estMinutes % 60}m`;
 
-  const clustersInPublished = new Set(publishedQueue.map((e) => e.cluster)).size;
+  const clustersInPublished = new Set(articles.map((a) => a.category).filter(Boolean)).size;
 
   const queueClusters = Array.from(new Set(queue.map((e) => e.cluster))).sort();
 
@@ -1337,21 +1337,22 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
     return b.wordCount - a.wordCount;
   });
 
-  // Reports: articles per day (last 14 days)
+  // Reports: articles per day (last 14 days) — source of truth: MDX article dates
   const last14Days: { date: string; label: string; count: number }[] = [];
   for (let i = 13; i >= 0; i--) {
-    const d = new Date(Date.now() - i * 24 * 60 * 60 * 1000);
+    const d = new Date(Date.now() - i * 86400_000);
     const dateStr = d.toISOString().slice(0, 10);
     const label = d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
-    const count = queue.filter((e) => e.generatedDate?.startsWith(dateStr)).length;
+    const count = articles.filter((a) => a.date === dateStr).length;
     last14Days.push({ date: dateStr, label, count });
   }
   const maxDayCount = Math.max(...last14Days.map((d) => d.count), 1);
 
-  // Cluster distribution in published
+  // Cluster/category distribution — source of truth: MDX frontmatter category field
   const clusterDistrib: Record<string, number> = {};
-  for (const e of publishedQueue) {
-    clusterDistrib[e.cluster] = (clusterDistrib[e.cluster] ?? 0) + 1;
+  for (const a of articles) {
+    const cat = a.category || "Uncategorized";
+    clusterDistrib[cat] = (clusterDistrib[cat] ?? 0) + 1;
   }
   const clusterDistribEntries = Object.entries(clusterDistrib).sort((a, b) => b[1] - a[1]);
 
@@ -1387,7 +1388,7 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
   const highImpactPendingCount = proposals.filter((p) => p.status === "pending" && p.impactScore >= 8).length;
 
   const tabs: { id: TabId; label: string }[] = [
-    { id: "agents",    label: "Agents (8)" },
+    { id: "agents",    label: agentCount > 0 ? `Agents (${agentCount})` : "Agents" },
     { id: "proposals", label: `Proposals (${pendingProposalsCount})` },
     { id: "pipeline",  label: "Pipeline" },
     { id: "queue",     label: `Queue (${queue.length})` },
@@ -1480,7 +1481,7 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
         {/* Tab: Agents                                                        */}
         {/* ══════════════════════════════════════════════════════════════════ */}
         {activeTab === "agents" && (
-          <AgentsTab token={token} queue={queue} />
+          <AgentsTab token={token} queue={queue} onAgentsLoaded={setAgentCount} />
         )}
 
         {/* ══════════════════════════════════════════════════════════════════ */}
@@ -2492,7 +2493,7 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
                   <p className="text-xs text-gray-500 mt-1 uppercase tracking-wide">Generated</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-3xl font-bold text-green-400">{publishedQueue.length}</p>
+                  <p className="text-3xl font-bold text-green-400">{articles.length}</p>
                   <p className="text-xs text-gray-500 mt-1 uppercase tracking-wide">Published</p>
                 </div>
               </div>
