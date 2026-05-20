@@ -1,8 +1,7 @@
 name: Agent 5 — Pipeline Manager
 
 on:
-  schedule:
-    - cron: '0 * * * *'   # every hour
+  # Merged into caretaker.yml — kept here for manual use only
   workflow_dispatch:
 
 jobs:

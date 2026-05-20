@@ -1,9 +1,8 @@
 name: Chart Adder
 
 on:
+  # Merged into caretaker.yml — kept here for manual use only
   workflow_dispatch:
-  schedule:
-    - cron: '0 5 * * *'   # daily at 5am UTC as safety net
 
 concurrency:
   group: chart-adder
