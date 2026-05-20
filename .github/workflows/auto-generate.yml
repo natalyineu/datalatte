@@ -129,22 +129,12 @@ jobs:
       - name: Telegram notification
         if: always()
         continue-on-error: true
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
           OUTPUT=$(cat /tmp/gen_output.txt 2>/dev/null || echo "")
           TIME=$(date -u '+%H:%M UTC')
-          BOT="${{ secrets.TELEGRAM_BOT_TOKEN }}"
-          CHAT="${{ secrets.TELEGRAM_CHAT_ID }}"
-
-          send_telegram() {
-            local text="$1"
-            local payload
-            payload=$(printf '{"chat_id":"%s","text":"%s","parse_mode":"HTML"}' \
-              "$CHAT" \
-              "$(echo "$text" | sed 's/\\/\\\\/g; s/"/\\"/g; s/$/\\n/g' | tr -d '\n' | sed 's/\\n$//')")
-            curl -s -X POST "https://api.telegram.org/bot${BOT}/sendMessage" \
-              -H "Content-Type: application/json" \
-              -d "$payload" > /dev/null || true
-          }
 
           if echo "$OUTPUT" | grep -q "Pushed:"; then
             SLUG=$(echo "$OUTPUT" | grep "Pushed:" | sed 's/.*Pushed: //' | tr -d '[:space:]')
@@ -154,20 +144,39 @@ jobs:
             REMAINING=$(echo "$OUTPUT" | grep "^QUEUE_REMAINING:" | sed 's/^QUEUE_REMAINING: //')
             MODEL=$(echo "$OUTPUT" | grep "Model used:" | sed 's/.*Model used: //')
             URL="https://www.datalatte.pro/blog/${SLUG}"
-            TEXT=$(printf "Writer - published\n%s\n\n%s\n%s\n%s\n%s\n\n%s pending\n%s" \
-              "$TIME" "$TITLE" "$KEYWORD" "$CLUSTER" "$MODEL" "$REMAINING" "$URL")
+            printf "✍️ Writer — published\n%s\n\n%s\n🔑 %s\n📂 %s\n🤖 %s\n\n📊 %s pending\n%s" \
+              "$TIME" "$TITLE" "$KEYWORD" "$CLUSTER" "$MODEL" "$REMAINING" "$URL" > /tmp/tg_msg.txt
           elif echo "$OUTPUT" | grep -q "rate_limit\|All Groq models\|unavailable"; then
-            TEXT=$(printf "Writer - rate limited\n%s\n\nAll Groq models busy, retrying in 3 min." "$TIME")
+            printf "⚡ Writer — rate limited\n%s\n\nAll Groq models busy, retrying in 3 min." "$TIME" > /tmp/tg_msg.txt
           elif echo "$OUTPUT" | grep -q "Reset.*pending\|reset.*pending"; then
             SLUG=$(echo "$OUTPUT" | grep -i "Reset:" | head -1 | sed 's/.*Reset: //' | sed 's/ -> pending//')
-            TEXT=$(printf "Writer - reset after failure\n%s\n\nArticle returned to queue: %s" "$TIME" "$SLUG")
+            printf "🔄 Writer — reset after failure\n%s\n\nArticle returned to queue: %s" "$TIME" "$SLUG" > /tmp/tg_msg.txt
           elif echo "$OUTPUT" | grep -q "No pending"; then
-            TEXT=$(printf "Writer - queue empty\n%s\n\nAll articles published." "$TIME")
+            printf "🏁 Writer — queue empty\n%s\n\nAll articles published." "$TIME" > /tmp/tg_msg.txt
           else
             ERR=$(echo "$OUTPUT" | grep -i 'error\|Error' | head -1)
-            TEXT=$(printf "Writer - failed\n%s\n\n%s" "$TIME" "$ERR")
+            printf "⚠️ Writer — failed\n%s\n\n%s" "$TIME" "$ERR" > /tmp/tg_msg.txt
           fi
-          send_telegram "$TEXT"
+
+          python3 - <<'PYEOF'
+import os, json, urllib.request
+bot  = os.environ.get('TELEGRAM_BOT_TOKEN', '')
+chat = os.environ.get('TELEGRAM_CHAT_ID', '')
+try:
+    text = open('/tmp/tg_msg.txt').read()
+except Exception:
+    text = ''
+if bot and chat and text:
+    data = json.dumps({'chat_id': chat, 'text': text}).encode()
+    req  = urllib.request.Request(
+        f'https://api.telegram.org/bot{bot}/sendMessage',
+        data=data, headers={'Content-Type': 'application/json'})
+    try:
+        urllib.request.urlopen(req, timeout=10)
+        print('Telegram: sent')
+    except Exception as e:
+        print(f'Telegram error: {e}')
+PYEOF
 
       - name: ⏱ Job end
         if: always()
