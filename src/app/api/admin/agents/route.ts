@@ -325,7 +325,7 @@ function parseImproverReport(log: string): ImproverReport {
   return { type: "improver", analyzed, added, proposals };
 }
 
-function parseReport(workflowFile: string, log: string): AgentReport {
+function parseReport(workflowFile: string, log: string): AgentReport | null {
   switch (workflowFile) {
     case "auto-generate.yml":    return parseWriterReport(log);
     case "audit.yml":            return parseAuditorReport(log);
@@ -333,7 +333,7 @@ function parseReport(workflowFile: string, log: string): AgentReport {
     case "pipeline-manager.yml": return parsePipelineReport(log);
     case "research.yml":         return parseResearcherReport(log);
     case "improver.yml":         return parseImproverReport(log);
-    default:                     return parseResearcherReport(log);
+    default:                     return null;
   }
 }
 

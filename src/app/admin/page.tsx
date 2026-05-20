@@ -831,7 +831,6 @@ function AgentsTab({
         {agents.map((agent) => {
           const isActive   = agent.state === "active";
           const isWriter   = agent.workflowFile === "auto-generate.yml";
-          const _isPipeline = agent.workflowFile === "pipeline-manager.yml";
 
           return (
             <div
@@ -911,7 +910,7 @@ function AgentsTab({
                 <div className="text-gray-500">
                   <span className="text-gray-600">Runs today:</span>{" "}
                   <span className="text-gray-300">{agent.runsToday}</span>
-                  <span className="text-gray-600"> · Recent:</span>{" "}
+                  <span className="text-gray-600"> · Last 30:</span>{" "}
                   <span className="text-gray-300">{agent.totalRuns}</span>
                 </div>
 
@@ -920,8 +919,8 @@ function AgentsTab({
                   <div className="mt-1 pt-1.5 border-t border-gray-800 text-gray-500">
                     <span className="text-gray-600">Queue:</span>{" "}
                     <span className="text-amber-300 font-medium">{pendingCount} pending</span>
-                    {queue.filter(e => e.status === "generating").length > 0 && (
-                      <span className="text-orange-400 font-medium"> · {queue.filter(e => e.status === "generating").length} generating</span>
+                    {generatingCount > 0 && (
+                      <span className="text-orange-400 font-medium"> · {generatingCount} generating</span>
                     )}
                   </div>
                 )}
