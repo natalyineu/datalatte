@@ -263,7 +263,9 @@ export default async function BlogPostPage({
     description: frontmatter.description,
     url: `https://datalatte.pro/blog/${slug}`,
     datePublished: frontmatter.date,
+    dateModified: frontmatter.date,
     image: frontmatter.image,
+    tags: frontmatter.tags,
   });
 
   const breadcrumb = breadcrumbSchema([
