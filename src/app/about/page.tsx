@@ -6,10 +6,38 @@ import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
 import { personSchema } from "@/lib/schema";
 
+const ABOUT_URL = "https://datalatte.pro/about";
+const ABOUT_TITLE = "About Nataliia — Senior Digital Marketing Consultant | DataLatte";
+const ABOUT_DESC =
+  "10+ years across OMD, Dentsu, BBDO and GroupM working with Fortune 500 and FTSE 100 brands. Now bringing enterprise-grade marketing to businesses of every size.";
+
 export const metadata: Metadata = {
-  title: "About Nataliia — Senior Digital Marketing Consultant | DataLatte",
-  description:
-    "10+ years across OMD, Dentsu, BBDO and GroupM working with Fortune 500 and FTSE 100 brands. Now bringing enterprise-grade marketing to businesses of every size.",
+  title: ABOUT_TITLE,
+  description: ABOUT_DESC,
+  alternates: {
+    canonical: ABOUT_URL,
+    languages: {
+      "en-US": ABOUT_URL,
+      "en-GB": ABOUT_URL,
+      "en-AU": ABOUT_URL,
+      "en-CA": ABOUT_URL,
+      "x-default": ABOUT_URL,
+    },
+  },
+  openGraph: {
+    title: ABOUT_TITLE,
+    description: ABOUT_DESC,
+    url: ABOUT_URL,
+    siteName: "DataLatte",
+    type: "profile",
+    images: [{ url: "https://datalatte.pro/opengraph-image", width: 1200, height: 630, alt: "Nataliia Makota — DataLatte Founder" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: ABOUT_TITLE,
+    description: ABOUT_DESC,
+    images: ["https://datalatte.pro/opengraph-image"],
+  },
 };
 
 const agencies = [
