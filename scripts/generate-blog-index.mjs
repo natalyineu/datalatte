@@ -43,6 +43,7 @@ const posts = files.map(file => {
     url: `https://datalatte.pro/blog/${slug}`,
     description: data.description || "",
     tags: Array.isArray(data.tags) ? data.tags.join(", ") : (data.tags || ""),
+    category: data.category || "",
   };
 }).sort((a, b) => new Date(b.date) - new Date(a.date));
 
@@ -50,9 +51,9 @@ const table = `# Blog Post Index — DataLatte.pro
 Generated: ${new Date().toISOString().split("T")[0]}
 Total posts: ${posts.length}
 
-| Slug | Title | Date | Words | Tags |
-|---|---|---|---|---|
-${posts.map(p => `| \`${p.slug}\` | ${p.title} | ${p.date} | ${p.wordCount} | ${p.tags} |`).join("\n")}
+| Slug | Title | Date | Words | Category | Tags |
+|---|---|---|---|---|---|
+${posts.map(p => `| \`${p.slug}\` | ${p.title} | ${p.date} | ${p.wordCount} | ${p.category} | ${p.tags} |`).join("\n")}
 
 ## Full Details
 
