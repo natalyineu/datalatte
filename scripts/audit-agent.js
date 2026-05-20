@@ -45,7 +45,7 @@ async function telegram(msg) {
   await fetchJson(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-  }, JSON.stringify({ chat_id: TELEGRAM_CHAT, text: msg, parse_mode: 'HTML' }));
+  }, JSON.stringify({ chat_id: TELEGRAM_CHAT, text: msg }));
 }
 
 async function triggerFixer() {
@@ -416,22 +416,22 @@ async function main() {
   if (totalIssues === 0) {
     console.log('✅ All clean');
     // Still report quality data — silence isn't useful
-    let cleanMsg = `🔍 <b>Auditor</b> — all clean ✅\n`;
+    let cleanMsg = `🔍 Auditor — all clean ✅\n`;
     cleanMsg += `🕐 ${time}\n\n`;
-    cleanMsg += `${qualityEmoji} Avg quality: <b>${qualityStr}</b> · ${sample.length} articles audited this run · ${Object.keys(existingScores).length} total scored\n`;
+    cleanMsg += `${qualityEmoji} Avg quality: ${qualityStr} · ${sample.length} articles audited this run · ${Object.keys(existingScores).length} total scored\n`;
     cleanMsg += `📋 0 syntax issues · 0 duplicates · 0 low quality`;
     await telegram(cleanMsg);
     console.log('✅ Audit Agent done');
     return;
   }
 
-  let msg = `🔍 <b>Auditor</b> — ${totalIssues} issue(s) found\n`;
+  let msg = `🔍 Auditor — ${totalIssues} issue(s) found\n`;
   msg += `🕐 ${time}\n\n`;
-  msg += `${qualityEmoji} Avg quality: <b>${qualityStr}</b> · ${sample.length} articles audited this run · ${Object.keys(existingScores).length} total scored\n`;
+  msg += `${qualityEmoji} Avg quality: ${qualityStr} · ${sample.length} articles audited this run · ${Object.keys(existingScores).length} total scored\n`;
 
   if (lowQuality.length > 0) {
-    msg += `\n⚠️ Low quality (&lt;6/10):\n`;
-    msg += lowQuality.slice(0, 4).map(p => `  • ${p.file.replace('content/blog/', '').replace('.mdx', '')} → <b>${p.assessment.quality}/10</b>`).join('\n') + '\n';
+    msg += `\n⚠️ Low quality (<6/10):\n`;
+    msg += lowQuality.slice(0, 4).map(p => `  • ${p.file.replace('content/blog/', '').replace('.mdx', '')} → ${p.assessment.quality}/10`).join('\n') + '\n';
   }
   if (toFix.length > 0) {
     msg += `\n🔧 MDX issues (${toFix.length}):\n`;
@@ -450,7 +450,7 @@ async function main() {
     await telegram(msg);
     const triggered = await triggerFixer();
     console.log(`Triggering Fixer agent — ${triggered ? 'success' : 'failed'}`);
-    if (!triggered) await telegram('🔍 <b>Auditor</b> — ⚠️ Could not trigger Fixer. Check PAT_TOKEN.');
+    if (!triggered) await telegram('🔍 Auditor — ⚠️ Could not trigger Fixer. Check PAT_TOKEN.');
   } else {
     await telegram(msg);
   }
@@ -463,6 +463,6 @@ main().then(() => {
 }).catch(async e => {
   console.log(`GROQ_TOKENS: ${_groqTokens}`);
   console.error('Audit Agent error:', e.message);
-  await telegram(`🔍 <b>Auditor</b> — failed ❌\n${e.message}`);
+  await telegram(`🔍 Auditor — failed ❌\n${e.message}`);
   process.exit(1);
 });

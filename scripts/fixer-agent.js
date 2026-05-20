@@ -73,7 +73,7 @@ async function telegram(msg) {
   if (!TELEGRAM_TOKEN || !TELEGRAM_CHAT) return;
   await fetchJson(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
-  }, JSON.stringify({ chat_id: TELEGRAM_CHAT, text: msg, parse_mode: 'HTML' })).catch(() => {});
+  }, JSON.stringify({ chat_id: TELEGRAM_CHAT, text: msg })).catch(() => {});
 }
 
 // ── Groq ─────────────────────────────────────────────────────────────────────
@@ -440,7 +440,7 @@ async function main() {
 
   // ── 4. Telegram report ───────────────────────────────────────────────────────
   const time = new Date().toUTCString().slice(0, 25);
-  let msg = `🔧 <b>Fixer</b>${totalChanged === 0 ? ' — nothing to fix ✅' : ''}\n🕐 ${time}\n`;
+  let msg = `🔧 Fixer${totalChanged === 0 ? ' — nothing to fix ✅' : ''}\n🕐 ${time}\n`;
 
   if (improvedFiles.length > 0) {
     msg += `\n📈 Content improved (${improvedFiles.length}):\n`;
@@ -459,7 +459,7 @@ async function main() {
     msg += regenFiles.slice(0, 3).map(f => `  • ${f.file.replace('.mdx', '')} — ${f.reason}`).join('\n') + '\n';
   }
 
-  msg += `\n📋 Remaining to improve: <b>${remaining}</b>`;
+  msg += `\n📋 Remaining to improve: ${remaining}`;
   if (remaining > 0) msg += `\n⏭ Next batch triggered automatically`;
 
   await telegram(msg);
@@ -471,6 +471,6 @@ main().then(() => {
 }).catch(async e => {
   console.log(`GROQ_TOKENS: ${_groqTokens}`);
   console.error('Fixer Agent error:', e.message);
-  await telegram(`🔧 <b>Fixer</b> — failed ❌\n${e.message}`);
+  await telegram(`🔧 Fixer — failed ❌\n${e.message}`);
   process.exit(1);
 });

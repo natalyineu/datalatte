@@ -51,7 +51,7 @@ async function telegram(msg) {
   await fetchJson(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-  }, JSON.stringify({ chat_id: TELEGRAM_CHAT, text: msg, parse_mode: 'HTML' }));
+  }, JSON.stringify({ chat_id: TELEGRAM_CHAT, text: msg }));
 }
 
 function sleep(ms) {
@@ -298,17 +298,17 @@ async function main() {
     const impactEmoji = (n) => n >= 8 ? '🔴' : n >= 6 ? '🟡' : '🟢';
     const typeLabel = { cta: 'CTA', internal_link: 'Links', conversion_language: 'Copy', social_proof: 'Social proof' };
 
-    msg = `🎯 <b>Improver</b> — ${added} proposal(s) need review\n`;
+    msg = `🎯 Improver — ${added} proposal(s) need review\n`;
     msg += `🕐 ${time}\n\n`;
-    msg += `📋 Analyzed: <b>${analyzed} articles</b>\n`;
+    msg += `📋 Analyzed: ${analyzed} articles\n`;
     for (const p of top) {
-      msg += `\n${impactEmoji(p.impactScore)} Impact ${p.impactScore}/10 — <b>${p.slug}</b>\n`;
+      msg += `\n${impactEmoji(p.impactScore)} Impact ${p.impactScore}/10 — ${p.slug}\n`;
       msg += `  ${typeLabel[p.type] || p.type}: ${p.proposal.slice(0, 80)}\n`;
     }
     if (newProposals.length > 4) msg += `\n+ ${newProposals.length - 4} more proposals\n`;
     msg += `\n👉 datalatte.pro/admin → Proposals tab`;
   } else {
-    msg = `🎯 <b>Improver</b> — all good ✅\n`;
+    msg = `🎯 Improver — all good ✅\n`;
     msg += `🕐 ${time}\n\n`;
     msg += `${analyzed} articles analyzed — no improvements needed this run.`;
   }
@@ -321,6 +321,6 @@ main().then(() => {
 }).catch(async e => {
   console.log(`GROQ_TOKENS: ${_groqTokens}`);
   console.error('Improver Agent error:', e.message);
-  await telegram(`🎯 <b>Improver</b> — failed ❌\n${e.message}`);
+  await telegram(`🎯 Improver — failed ❌\n${e.message}`);
   process.exit(1);
 });

@@ -46,7 +46,7 @@ async function telegram(msg) {
   await fetchJson(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-  }, JSON.stringify({ chat_id: TELEGRAM_CHAT, text: msg, parse_mode: 'HTML' }));
+  }, JSON.stringify({ chat_id: TELEGRAM_CHAT, text: msg }));
 }
 
 const GROQ_MODELS = ['llama-3.3-70b-versatile', 'meta-llama/llama-4-scout-17b-16e-instruct', 'openai/gpt-oss-120b', 'openai/gpt-oss-20b', 'groq/compound', 'qwen/qwen3-32b', 'llama-3.1-8b-instant', 'groq/compound-mini'];
@@ -381,10 +381,10 @@ async function main() {
     .sort((a, b) => b[1] - a[1]).slice(0, 3)
     .map(([k, v]) => `${k} (${v})`).join(', ');
 
-  let msg = `📊 <b>Pipeline</b> — ${timeStr}\n\n`;
-  msg += `<b>Health: ${score}/100${trendDisplay} ${getScoreLabel(score)}</b>\n`;
-  msg += `<pre>${scoreBreakdown}</pre>\n`;
-  msg += `📝 Today: <b>${todayCount} articles</b>\n`;
+  let msg = `📊 Pipeline — ${timeStr}\n\n`;
+  msg += `Health: ${score}/100${trendDisplay} ${getScoreLabel(score)}\n`;
+  msg += `${scoreBreakdown}\n`;
+  msg += `📝 Today: ${todayCount} articles\n`;
   msg += `⏱️ Last article: ${ageStr}\n`;
   msg += `📋 ${stats.pending} pending · ${stats.published} published\n`;
   if (qualityAvg !== null) {
@@ -395,7 +395,7 @@ async function main() {
   if (recentErrors > 0) msg += `❗ Errors: ${recentErrors}/10 recent runs\n`;
   if (restarted)   msg += `🔄 Writer auto-restarted\n`;
   if (queueLow)    msg += `⚠️ Queue low — add new topics!\n`;
-  if (insight)     msg += `\n💡 <i>${insight}</i>`;
+  if (insight)     msg += `\n💡 ${insight}`;
 
   await telegram(msg);
   console.log(`✅ Score: ${score}/100${trendDisplay} | Status: ${statusText} | Today: ${todayCount}`);
@@ -424,6 +424,6 @@ main().then(() => {
 }).catch(async e => {
   console.log(`GROQ_TOKENS: ${_groqTokens}`);
   console.error('Pipeline Manager error:', e.message);
-  await telegram(`📊 <b>Pipeline</b> — failed ❌\n${e.message}`);
+  await telegram(`📊 Pipeline — failed ❌\n${e.message}`);
   process.exit(1);
 });
