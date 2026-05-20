@@ -15,6 +15,20 @@ export const metadata: Metadata = {
   title: "Google Business Profile Optimization | Local Map Pack",
   description:
     "Google Business Profile setup and optimization for local businesses. Rank higher in Google Maps, get more calls and directions, and build reviews that convert.",
+  openGraph: {
+    title: "Google Business Profile Optimization | Local Map Pack",
+    description: "Google Business Profile setup and optimization for local businesses. Rank higher in Google Maps, get more calls and directions, and build reviews that convert.",
+    url: "https://datalatte.pro/services/google-business-profile",
+    siteName: "DataLatte",
+    type: "website",
+    images: [{ url: "https://datalatte.pro/opengraph-image", width: 1200, height: 630, alt: "DataLatte — Google Business Profile Optimization" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Google Business Profile Optimization | Local Map Pack",
+    description: "Google Business Profile setup and optimization for local businesses. Rank higher in Google Maps, get more calls and directions, and build reviews that convert.",
+    images: ["https://datalatte.pro/opengraph-image"],
+  },
 };
 
 export default function GoogleBusinessProfilePage() {

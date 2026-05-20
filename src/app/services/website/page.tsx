@@ -15,6 +15,20 @@ export const metadata: Metadata = {
   title: "Website & Landing Pages for Local Businesses",
   description:
     "Conversion-focused websites and landing pages for local businesses. Built to turn visitors into bookings, calls, and customers — not just look good.",
+  openGraph: {
+    title: "Website & Landing Pages for Local Businesses",
+    description: "Conversion-focused websites and landing pages for local businesses. Built to turn visitors into bookings, calls, and customers — not just look good.",
+    url: "https://datalatte.pro/services/website",
+    siteName: "DataLatte",
+    type: "website",
+    images: [{ url: "https://datalatte.pro/opengraph-image", width: 1200, height: 630, alt: "DataLatte — Websites & Landing Pages for Local Businesses" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Website & Landing Pages for Local Businesses",
+    description: "Conversion-focused websites and landing pages for local businesses. Built to turn visitors into bookings, calls, and customers — not just look good.",
+    images: ["https://datalatte.pro/opengraph-image"],
+  },
 };
 
 export default function WebsitePage() {

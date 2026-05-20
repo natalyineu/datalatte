@@ -15,6 +15,20 @@ export const metadata: Metadata = {
   title: "Meta Ads (Facebook & Instagram) for Local Businesses",
   description:
     "Facebook and Instagram advertising for local SMBs. Reach your ideal local customer with scroll-stopping creative and campaigns that drive real foot traffic and bookings.",
+  openGraph: {
+    title: "Meta Ads (Facebook & Instagram) for Local Businesses",
+    description: "Facebook and Instagram advertising for local SMBs. Reach your ideal local customer with scroll-stopping creative and campaigns that drive real foot traffic and bookings.",
+    url: "https://datalatte.pro/services/meta-ads",
+    siteName: "DataLatte",
+    type: "website",
+    images: [{ url: "https://datalatte.pro/opengraph-image", width: 1200, height: 630, alt: "DataLatte — Meta Ads for Local Businesses" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Meta Ads (Facebook & Instagram) for Local Businesses",
+    description: "Facebook and Instagram advertising for local SMBs. Reach your ideal local customer with scroll-stopping creative and campaigns that drive real foot traffic and bookings.",
+    images: ["https://datalatte.pro/opengraph-image"],
+  },
 };
 
 export default function MetaAdsPage() {

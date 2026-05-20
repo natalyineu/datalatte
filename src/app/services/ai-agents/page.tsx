@@ -19,6 +19,20 @@ export const metadata: Metadata = {
   title: "AI Agents & Automation for Local Businesses",
   description:
     "Custom AI agents built on OpenAI, Claude, and n8n — automating lead follow-up, review replies, booking flows, and customer Q&A for local businesses. Real LLM pipelines, not chatbot toys.",
+  openGraph: {
+    title: "AI Agents & Automation for Local Businesses",
+    description: "Custom AI agents built on OpenAI, Claude, and n8n — automating lead follow-up, review replies, booking flows, and customer Q&A for local businesses. Real LLM pipelines, not chatbot toys.",
+    url: "https://datalatte.pro/services/ai-agents",
+    siteName: "DataLatte",
+    type: "website",
+    images: [{ url: "https://datalatte.pro/opengraph-image", width: 1200, height: 630, alt: "DataLatte — AI Agents & Automation for Local Businesses" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AI Agents & Automation for Local Businesses",
+    description: "Custom AI agents built on OpenAI, Claude, and n8n — automating lead follow-up, review replies, booking flows, and customer Q&A for local businesses. Real LLM pipelines, not chatbot toys.",
+    images: ["https://datalatte.pro/opengraph-image"],
+  },
 };
 
 // ── Agent catalog ─────────────────────────────────────────────────────────────
