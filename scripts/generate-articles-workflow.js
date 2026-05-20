@@ -288,6 +288,17 @@ function sanitizeMdx(content) {
   return result;
 }
 
+async function refreshLocalQueue() {
+  const url = `https://api.github.com/repos/${REPO}/contents/content/queue.json`;
+  const res = await fetchJson(url, { method: 'GET', headers: { 'Authorization': `Bearer ${GH_TOKEN}` } });
+  if (res.status === 200 && res.data?.content) {
+    const content = Buffer.from(res.data.content, 'base64').toString('utf8');
+    fs.writeFileSync(path.join(process.cwd(), 'content/queue.json'), content);
+    return true;
+  }
+  return false;
+}
+
 async function ghPutFile(filePath, content, message) {
   const encodedContent = Buffer.from(content).toString('base64');
   const url = `https://api.github.com/repos/${REPO}/contents/${filePath}`;
@@ -620,36 +631,49 @@ async function telegram(msg) {
 }
 
 async function run() {
-  const results = [];
-  let published = null;
-  let errorMsg  = null;
+  console.log(`[Config] TG_TOKEN set: ${!!TG_TOKEN} | TG_CHAT set: ${!!TG_CHAT} | GROQ_KEY set: ${!!GROQ_KEY}`);
+  const published = [];
+  let errorMsg = null;
 
+  // Article 1
   try {
-    const result = await generateOne();
-    if (result) {
-      results.push(result);
-      published = result;
-    }
+    const r1 = await generateOne();
+    if (r1) published.push(r1);
   } catch (err) {
-    console.error(`❌ Error: ${err.message}`);
-    results.push({ slug: '?', status: 500, error: err.message });
+    console.error(`❌ Error (article 1): ${err.message}`);
     errorMsg = err.message;
   }
 
+  // Article 2 — only if article 1 succeeded (not rate-limited)
+  if (published.length > 0) {
+    try {
+      const refreshed = await refreshLocalQueue();
+      console.log(`♻️ Queue refreshed from GitHub: ${refreshed}`);
+      const r2 = await generateOne();
+      if (r2) published.push(r2);
+    } catch (err) {
+      // Rate limited or queue empty on second try — first article already counts
+      console.log(`⚠️ Article 2 skipped: ${err.message.slice(0, 80)}`);
+    }
+  }
+
   console.log('\n=== Final Results ===');
-  console.log(JSON.stringify(results, null, 2));
+  console.log(JSON.stringify(published, null, 2));
 
   // Telegram notification
   const time = new Date().toUTCString().slice(0, 25);
-  if (published) {
+  if (published.length > 0) {
+    const last = published[published.length - 1];
+    const countTag = published.length > 1 ? ` x${published.length}` : '';
+    const articleLines = published.map(r => `📄 ${r.title}\n   datalatte.pro/blog/${r.slug}`).join('\n');
     await telegram(
-      `✍️ Writer — published\n🕐 ${time}\n\n📄 ${published.title}\n🔑 ${published.keyword}\n📂 ${published.cluster}\n\n📊 ${published.remaining} pending\nhttps://www.datalatte.pro/blog/${published.slug}`
+      `✍️ Writer — published${countTag}\n🕐 ${time}\n\n${articleLines}\n\n🔑 ${last.keyword}\n📂 ${last.cluster}\n📊 ${last.remaining} pending`
     );
   } else if (errorMsg && (errorMsg.includes('rate_limit') || errorMsg.includes('All Groq') || errorMsg.includes('unavailable'))) {
     await telegram(`⚡ Writer — rate limited\n🕐 ${time}\n\nAll models busy, retrying in 5 min.`);
-  } else if (!published && !errorMsg && results.length === 0) {
+  } else if (!errorMsg) {
     await telegram(`🏁 Writer — queue empty\n🕐 ${time}\n\nAll articles published.`);
-  } else if (errorMsg) {
+  } else {
     await telegram(`⚠️ Writer — failed\n🕐 ${time}\n\n${errorMsg.slice(0, 200)}`);
   }
 }
