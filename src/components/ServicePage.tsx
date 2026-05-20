@@ -39,7 +39,6 @@ export default function ServicePage({
   const serviceUrl = `https://datalatte.pro/services/${slug}`;
   const breadcrumb = breadcrumbSchema([
     { name: "Home", url: "https://datalatte.pro" },
-    { name: "Services", url: "https://datalatte.pro/services/google-ads" },
     { name: service, url: serviceUrl },
   ]);
 
