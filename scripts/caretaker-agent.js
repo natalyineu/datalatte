@@ -308,6 +308,12 @@ function applyStructuralFixes(content) {
     fixed = fixed.replace(/^(title:)" \\"(.*)\\""/m, (_, prefix, val) => `${prefix} "${val}"`);
     changed = true;
   }
+  // Fix multi-line Callout where closing tag is on same line as content text
+  // Pattern: <Callout ...>\nsome text.</Callout> → needs </Callout> on its own line
+  if (/<Callout[^>]*>\n[^\n]+<\/Callout>/.test(fixed)) {
+    fixed = fixed.replace(/(<Callout[^>]*>\n)([^\n]+)(<\/Callout>)/g, '$1$2\n$3');
+    changed = true;
+  }
   // Fix blank line after opening frontmatter fence (causes gray-matter to mis-parse)
   if (/^---\n\n/.test(fixed)) {
     fixed = fixed.replace(/^---\n\n/, '---\n');
