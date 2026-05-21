@@ -24,8 +24,13 @@ export function localBusinessSchema() {
     serviceType: [
       "Google Ads Management",
       "Meta Ads Management",
+      "TikTok Ads Management",
       "Google Business Profile Optimization",
       "Local SEO",
+      "Content Marketing",
+      "Reputation Management",
+      "Conversion Rate Optimisation",
+      "Video Marketing",
       "Marketing Analytics",
       "Email Marketing",
       "Social Media Marketing",

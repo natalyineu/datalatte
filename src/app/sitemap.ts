@@ -106,6 +106,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/services/email-sms`,                lastModified: today,      changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/services/social-media`,             lastModified: today,      changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/services/website`,                  lastModified: today,      changeFrequency: "monthly", priority: 0.7 },
+    { url: `${baseUrl}/services/content-marketing`,        lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/services/reputation-management`,    lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/services/cro`,                      lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/services/video-marketing`,          lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/services/tiktok-ads`,               lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     // Tools
     { url: `${baseUrl}/tools/marketing-budget-calculator`, lastModified: today,      changeFrequency: "monthly", priority: 0.9 },
     { url: `${baseUrl}/tools/ai-agent-builder`,            lastModified: today,      changeFrequency: "monthly", priority: 0.8 },

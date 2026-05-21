@@ -29,6 +29,11 @@ const SERVICE_SLUGS: Record<string, string> = {
   "Email & SMS Marketing": "email-sms",
   "Social Media Management": "social-media",
   "Website & Landing Pages": "website",
+  "Content Marketing": "content-marketing",
+  "Reputation Management": "reputation-management",
+  "Conversion Rate Optimisation": "cro",
+  "Video Marketing": "video-marketing",
+  "TikTok Ads": "tiktok-ads",
 };
 
 export default function ServicePage({
