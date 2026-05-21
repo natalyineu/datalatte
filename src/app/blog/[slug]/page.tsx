@@ -568,7 +568,7 @@ export default async function BlogPostPage({
           {/* Article body */}
           <div className="flex-1 min-w-0 max-w-3xl">
             {/* Mobile ToC (renders inside content column, hidden on xl) */}
-            <TableOfContents source={content} />
+            <TableOfContents source={content} variant="mobile" />
 
             {/* MDX Content */}
             <div className="prose-datalatte">
@@ -627,7 +627,7 @@ export default async function BlogPostPage({
           </div>{/* end article body */}
 
           {/* Desktop sticky ToC (hidden below xl) */}
-          <TableOfContents source={content} />
+          <TableOfContents source={content} variant="desktop" />
         </div>{/* end flex row */}
       </div>
 
