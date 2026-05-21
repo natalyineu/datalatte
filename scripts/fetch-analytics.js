@@ -1,16 +1,13 @@
 #!/usr/bin/env node
 /**
- * Fetches last-28-day data from Google Search Console and GA4,
- * then writes JSON snapshots to data/analytics/.
+ * Fetches last-28-day data from Google Search Console and GA4.
+ * Both use the same OAuth2 refresh token — no service account needed.
  *
- * GSC uses OAuth2 refresh token (service accounts not supported by GSC UI):
+ * Required secrets (all 3 already set from GSC setup):
  *   GSC_OAUTH_CLIENT_ID
  *   GSC_OAUTH_CLIENT_SECRET
- *   GSC_OAUTH_REFRESH_TOKEN
+ *   GSC_OAUTH_REFRESH_TOKEN   — includes both webmasters + analytics scopes
  *   GSC_SITE_URL              — e.g. "sc-domain:datalatte.pro"
- *
- * GA4 uses service account (works fine):
- *   GOOGLE_SERVICE_ACCOUNT_JSON
  *   GA4_PROPERTY_ID           — e.g. "properties/123456789"
  */
 
@@ -20,7 +17,7 @@ const path = require("path");
 
 const OUT_DIR = path.join(__dirname, "../data/analytics");
 
-function getGscAuth() {
+function getAuth() {
   const clientId     = process.env.GSC_OAUTH_CLIENT_ID;
   const clientSecret = process.env.GSC_OAUTH_CLIENT_SECRET;
   const refreshToken = process.env.GSC_OAUTH_REFRESH_TOKEN;
@@ -32,15 +29,6 @@ function getGscAuth() {
   return oauth2;
 }
 
-function getGa4Auth() {
-  const raw = process.env.GOOGLE_SERVICE_ACCOUNT_JSON;
-  if (!raw) throw new Error("GOOGLE_SERVICE_ACCOUNT_JSON not set");
-  return new google.auth.GoogleAuth({
-    credentials: JSON.parse(raw),
-    scopes: ["https://www.googleapis.com/auth/analytics.readonly"],
-  });
-}
-
 function dateStr(offsetDays) {
   const d = new Date();
   d.setDate(d.getDate() + offsetDays);
@@ -48,7 +36,7 @@ function dateStr(offsetDays) {
 }
 
 async function fetchGSC() {
-  const auth = getGscAuth();
+  const auth = getAuth();
   const siteUrl = process.env.GSC_SITE_URL;
   if (!siteUrl) throw new Error("GSC_SITE_URL not set");
 
@@ -116,7 +104,7 @@ async function fetchGSC() {
 }
 
 async function fetchGA4() {
-  const auth = await getGa4Auth().getClient();
+  const auth = getAuth();
   const propertyId = process.env.GA4_PROPERTY_ID;
   if (!propertyId) throw new Error("GA4_PROPERTY_ID not set");
 
