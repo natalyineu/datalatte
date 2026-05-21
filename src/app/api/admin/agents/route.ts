@@ -5,6 +5,10 @@ const GH_REPO  = "datalatte";
 const GH_BASE  = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/actions`;
 
 // ── Agent metadata ─────────────────────────────────────────────────────────────
+// Only the two workflows that actually drive the pipeline. Everything else
+// (the old Auditor / Fixer / Chart Adder / FAQ Fixer / Pipeline Manager /
+// Improver / Researcher agents) has been absorbed into Caretaker, which runs
+// every 2h. Their workflow files still exist but only fire on workflow_dispatch.
 
 interface AgentMeta {
   name: string;
@@ -16,27 +20,6 @@ interface AgentMeta {
 
 const AGENT_META: AgentMeta[] = [
   {
-    name: "Researcher",
-    emoji: "🔍",
-    description: "Discovers new topics from trends & SEO data, proposes articles via Groq. Paused — queue has 149+ articles.",
-    schedule: "Manual (queue full)",
-    workflowFile: "research.yml",
-  },
-  {
-    name: "Auditor",
-    emoji: "🔎",
-    description: "Scores every published article 1-10 via Groq. Saves results to quality-scores.json. Feeds the Fixer queue.",
-    schedule: "Every 10 minutes",
-    workflowFile: "audit.yml",
-  },
-  {
-    name: "Fixer",
-    emoji: "🔧",
-    description: "Rewrites low-quality articles (score < 7) using Groq. Processes 3 per run, self-chains until all improved.",
-    schedule: "4× daily (02/08/14/20 UTC)",
-    workflowFile: "fixer.yml",
-  },
-  {
     name: "Writer",
     emoji: "✍️",
     description: "Picks pending articles from queue.json, generates full MDX via Groq, pushes to GitHub. Self-chains until queue empty.",
@@ -44,32 +27,11 @@ const AGENT_META: AgentMeta[] = [
     workflowFile: "auto-generate.yml",
   },
   {
-    name: "Chart Adder",
-    emoji: "📊",
-    description: "Adds BarChart, DonutChart, LineChart or CompareBar to articles that have no visual components. Auto-selects best chart type per article.",
-    schedule: "Daily 5am UTC + self-chain",
-    workflowFile: "chart-adder.yml",
-  },
-  {
-    name: "FAQ Fixer",
-    emoji: "❓",
-    description: "Adds FAQ sections to articles that lack them. Uses Groq to generate 5 Q&As relevant to the article topic.",
-    schedule: "Daily 3am UTC + self-chain",
-    workflowFile: "faq-fixer.yml",
-  },
-  {
-    name: "Pipeline Manager",
-    emoji: "🎛️",
-    description: "Monitors pipeline health, calculates 0-100 health score, auto-restarts stuck agents, resets stuck 'generating' articles.",
-    schedule: "Every hour",
-    workflowFile: "pipeline-manager.yml",
-  },
-  {
-    name: "Improver",
-    emoji: "🎯",
-    description: "Analyzes published articles for conversion effectiveness, proposes CTAs and internal links via improvement proposals.",
-    schedule: "Mon + Thu 10am UTC",
-    workflowFile: "improver.yml",
+    name: "Caretaker",
+    emoji: "🧰",
+    description: "Runs 4 phases every 2h: syntax fix, FAQ enrichment, chart enrichment, queue refill. Absorbs the work of the old Auditor / Fixer / Chart Adder / FAQ Fixer / Pipeline Manager / Improver / Researcher agents.",
+    schedule: "Every 2 hours",
+    workflowFile: "caretaker.yml",
   },
 ];
 
@@ -122,60 +84,17 @@ interface WriterReport {
   noPending: boolean;
 }
 
-interface AuditorReport {
-  type: "auditor";
-  syntaxIssues: number;
-  sampled: number;
-  totalIssues: number;
-  allClean: boolean;
-  triggeredFixer: boolean;
-  scores: { file: string; score: number }[];
-  avgScore: string | null;
-}
-
-interface FixerReport {
-  type: "fixer";
-  nothingToFix: boolean;
-  toFix: number;
-  toRegen: number;
-  fixedFiles: { file: string; score: number }[];
-  regenFiles: string[];
-}
-
-interface PipelineReport {
-  type: "pipeline";
-  score: number | null;
-  status: string | null;
-  today: number | null;
-  restarted: boolean;
-  components: {
-    generation: number | null;
-    reliability: number | null;
-    quality: number | null;
-    bugs: number | null;
-    queue: number | null;
-  };
-  qualityAvg: number | null;
-  published: number | null;
+interface CaretakerReport {
+  type: "caretaker";
+  syntaxFixed: number;
+  linksInjected: number;
+  faqAdded: number;
+  chartsAdded: number;
+  queueAdded: number;
   pending: number | null;
 }
 
-interface ResearcherReport {
-  type: "researcher";
-  added: number;
-  pending: number | null;
-  published: number | null;
-  topics: { cluster: string; title: string }[];
-}
-
-interface ImproverReport {
-  type: "improver";
-  analyzed: number;
-  added: number;
-  proposals: { slug: string; impact: number; type: string }[];
-}
-
-type AgentReport = WriterReport | AuditorReport | FixerReport | PipelineReport | ResearcherReport | ImproverReport;
+type AgentReport = WriterReport | CaretakerReport;
 
 // ── Response types ─────────────────────────────────────────────────────────────
 
@@ -259,81 +178,29 @@ function parseWriterReport(log: string): WriterReport {
   };
 }
 
-function parseAuditorReport(log: string): AuditorReport {
-  const syntaxIssues  = Number(log.match(/Found (\d+) files with syntax issues/)?.[1] ?? 0);
-  const sampled       = Number(log.match(/Sampling (\d+) random articles/)?.[1] ?? 0);
-  const totalIssues   = Number(log.match(/Total issues: (\d+)/)?.[1] ?? 0);
-  const allClean      = log.includes("✅ All clean");
-  const triggeredFixer = log.includes("trigger") && log.includes("Fixer");
-  const scoreMatches  = [...log.matchAll(/(?:✅|⚠️) (?:Low quality: )?(\S+\.mdx) \((\d+)\/10\)/g)];
-  const scores        = scoreMatches.map((m) => ({ file: m[1].replace(".mdx", ""), score: Number(m[2]) }));
-  const avgScore      = scores.length
-    ? (scores.reduce((s, r) => s + r.score, 0) / scores.length).toFixed(1)
-    : null;
-  return { type: "auditor", syntaxIssues, sampled, totalIssues, allClean, triggeredFixer, scores, avgScore };
-}
-
-function parseFixerReport(log: string): FixerReport {
-  const nothingToFix = log.includes("Nothing to fix") || log.includes("nothing needed");
-  const toFixMatch   = log.match(/Loaded audit report: (\d+) to fix, (\d+) to regenerate/);
-  const toFix        = toFixMatch ? Number(toFixMatch[1]) : 0;
-  const toRegen      = toFixMatch ? Number(toFixMatch[2]) : 0;
-  const fixedFiles   = [...log.matchAll(/✅ Fixed & kept: (\S+) \(quality: (\d+)\/10\)/g)].map((m) => ({
-    file: m[1].replace(".mdx", ""),
-    score: Number(m[2]),
-  }));
-  const regenFiles   = [...log.matchAll(/♻️ (?:Marked for regeneration|Too thin after fix)[^\n]*: (\S+)/g)].map(
-    (m) => m[1].replace(".mdx", "")
-  );
-  return { type: "fixer", nothingToFix, toFix, toRegen, fixedFiles, regenFiles };
-}
-
-function parsePipelineReport(log: string): PipelineReport {
-  const scoreMatch = log.match(/✅ Score: (\d+)\/100[^|]*\| Status: ([^|]+) \| Today: (\d+)/);
-  const score      = scoreMatch ? Number(scoreMatch[1]) : null;
-  const status     = scoreMatch ? scoreMatch[2].trim() : null;
-  const today      = scoreMatch ? Number(scoreMatch[3]) : null;
-  const restarted  = log.includes("auto-restarting");
-
-  const compMatch  = log.match(/PIPELINE_COMPONENTS: generation=(\d+),reliability=(\d+),quality=(\d+),bugs=(\d+),queue=(\d+)/);
-  const components = compMatch
-    ? { generation: Number(compMatch[1]), reliability: Number(compMatch[2]), quality: Number(compMatch[3]), bugs: Number(compMatch[4]), queue: Number(compMatch[5]) }
-    : { generation: null, reliability: null, quality: null, bugs: null, queue: null };
-
-  const qualityStr = log.match(/PIPELINE_QUALITY: ([\d.]+)/)?.[1];
-  const qualityAvg = qualityStr && qualityStr !== "n/a" ? Number(qualityStr) : null;
-  const published  = log.match(/PIPELINE_PUBLISHED: (\d+)/)?.[1] ? Number(log.match(/PIPELINE_PUBLISHED: (\d+)/)?.[1]) : null;
-  const pending    = log.match(/PIPELINE_PENDING: (\d+)/)?.[1] ? Number(log.match(/PIPELINE_PENDING: (\d+)/)?.[1]) : null;
-
-  return { type: "pipeline", score, status, today, restarted, components, qualityAvg, published, pending };
-}
-
-function parseResearcherReport(log: string): ResearcherReport {
-  const added     = Number(log.match(/RESEARCH_ADDED: (\d+)/)?.[1] ?? log.match(/✅ Added (\d+) articles/)?.[1] ?? 0);
-  const pending   = log.match(/RESEARCH_PENDING: (\d+)/)?.[1] ? Number(log.match(/RESEARCH_PENDING: (\d+)/)?.[1]) : null;
-  const published = log.match(/RESEARCH_PUBLISHED: (\d+)/)?.[1] ? Number(log.match(/RESEARCH_PUBLISHED: (\d+)/)?.[1]) : null;
-  const topics    = [...log.matchAll(/RESEARCH_TOPIC: ([^|]+) \| (.+)/g)]
-    .map((m) => ({ cluster: m[1].trim(), title: m[2].trim() }));
-  return { type: "researcher", added, pending, published, topics };
-}
-
-function parseImproverReport(log: string): ImproverReport {
-  const analyzed  = Number(log.match(/ARTICLES_ANALYZED: (\d+)/)?.[1] ?? 0);
-  const added     = Number(log.match(/PROPOSALS_ADDED: (\d+)/)?.[1] ?? 0);
-  const proposals = [...log.matchAll(/💡 Proposal added: (\S+) \(impact: (\d+)\/10, type: ([^)]+)\)/g)]
-    .map((m) => ({ slug: m[1], impact: Number(m[2]), type: m[3] }));
-  return { type: "improver", analyzed, added, proposals };
+function parseCaretakerReport(log: string): CaretakerReport {
+  const syntaxFixed   = Number(log.match(/CARETAKER_FIXED:\s*(\d+)/)?.[1] ?? 0);
+  const linksInjected = Number(log.match(/CARETAKER_LINKS:\s*(\d+)/)?.[1] ?? 0);
+  const faqAdded      = Number(log.match(/CARETAKER_FAQ:\s*(\d+)/)?.[1] ?? 0);
+  const chartsAdded   = Number(log.match(/CARETAKER_CHARTS:\s*(\d+)/)?.[1] ?? 0);
+  const queueAdded    = Number(log.match(/CARETAKER_QUEUE_ADDED:\s*(\d+)/)?.[1] ?? 0);
+  const pendingRaw    = log.match(/CARETAKER_PENDING:\s*(\d+)/)?.[1];
+  return {
+    type: "caretaker",
+    syntaxFixed,
+    linksInjected,
+    faqAdded,
+    chartsAdded,
+    queueAdded,
+    pending: pendingRaw ? Number(pendingRaw) : null,
+  };
 }
 
 function parseReport(workflowFile: string, log: string): AgentReport | null {
   switch (workflowFile) {
-    case "auto-generate.yml":    return parseWriterReport(log);
-    case "audit.yml":            return parseAuditorReport(log);
-    case "fixer.yml":            return parseFixerReport(log);
-    case "pipeline-manager.yml": return parsePipelineReport(log);
-    case "research.yml":         return parseResearcherReport(log);
-    case "improver.yml":         return parseImproverReport(log);
-    default:                     return null;
+    case "auto-generate.yml": return parseWriterReport(log);
+    case "caretaker.yml":     return parseCaretakerReport(log);
+    default:                  return null;
   }
 }
 
