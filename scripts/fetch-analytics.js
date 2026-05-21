@@ -3,10 +3,15 @@
  * Fetches last-28-day data from Google Search Console and GA4,
  * then writes JSON snapshots to data/analytics/.
  *
- * Required env vars:
- *   GOOGLE_SERVICE_ACCOUNT_JSON  — full service account key JSON (as string)
- *   GSC_SITE_URL                 — e.g. "sc-domain:datalatte.pro"
- *   GA4_PROPERTY_ID              — e.g. "properties/123456789"
+ * GSC uses OAuth2 refresh token (service accounts not supported by GSC UI):
+ *   GSC_OAUTH_CLIENT_ID
+ *   GSC_OAUTH_CLIENT_SECRET
+ *   GSC_OAUTH_REFRESH_TOKEN
+ *   GSC_SITE_URL              — e.g. "sc-domain:datalatte.pro"
+ *
+ * GA4 uses service account (works fine):
+ *   GOOGLE_SERVICE_ACCOUNT_JSON
+ *   GA4_PROPERTY_ID           — e.g. "properties/123456789"
  */
 
 const { google } = require("googleapis");
@@ -15,16 +20,24 @@ const path = require("path");
 
 const OUT_DIR = path.join(__dirname, "../data/analytics");
 
-function getAuth() {
+function getGscAuth() {
+  const clientId     = process.env.GSC_OAUTH_CLIENT_ID;
+  const clientSecret = process.env.GSC_OAUTH_CLIENT_SECRET;
+  const refreshToken = process.env.GSC_OAUTH_REFRESH_TOKEN;
+  if (!clientId || !clientSecret || !refreshToken) {
+    throw new Error("GSC_OAUTH_CLIENT_ID / CLIENT_SECRET / REFRESH_TOKEN not set");
+  }
+  const oauth2 = new google.auth.OAuth2(clientId, clientSecret);
+  oauth2.setCredentials({ refresh_token: refreshToken });
+  return oauth2;
+}
+
+function getGa4Auth() {
   const raw = process.env.GOOGLE_SERVICE_ACCOUNT_JSON;
   if (!raw) throw new Error("GOOGLE_SERVICE_ACCOUNT_JSON not set");
-  const key = JSON.parse(raw);
   return new google.auth.GoogleAuth({
-    credentials: key,
-    scopes: [
-      "https://www.googleapis.com/auth/webmasters.readonly",
-      "https://www.googleapis.com/auth/analytics.readonly",
-    ],
+    credentials: JSON.parse(raw),
+    scopes: ["https://www.googleapis.com/auth/analytics.readonly"],
   });
 }
 
@@ -34,7 +47,8 @@ function dateStr(offsetDays) {
   return d.toISOString().slice(0, 10);
 }
 
-async function fetchGSC(auth) {
+async function fetchGSC() {
+  const auth = getGscAuth();
   const siteUrl = process.env.GSC_SITE_URL;
   if (!siteUrl) throw new Error("GSC_SITE_URL not set");
 
@@ -101,7 +115,8 @@ async function fetchGSC(auth) {
   };
 }
 
-async function fetchGA4(auth) {
+async function fetchGA4() {
+  const auth = await getGa4Auth().getClient();
   const propertyId = process.env.GA4_PROPERTY_ID;
   if (!propertyId) throw new Error("GA4_PROPERTY_ID not set");
 
@@ -172,7 +187,6 @@ async function fetchGA4(auth) {
 }
 
 async function main() {
-  const auth = getAuth();
   fs.mkdirSync(OUT_DIR, { recursive: true });
 
   const errors = [];
@@ -180,7 +194,7 @@ async function main() {
   // GSC
   try {
     console.log("Fetching Google Search Console...");
-    const gsc = await fetchGSC(auth);
+    const gsc = await fetchGSC();
     const gscPath = path.join(OUT_DIR, "gsc-latest.json");
     fs.writeFileSync(gscPath, JSON.stringify(gsc, null, 2));
     console.log(`✓ GSC saved → ${gscPath}`);
@@ -193,7 +207,7 @@ async function main() {
   // GA4
   try {
     console.log("Fetching Google Analytics 4...");
-    const ga4 = await fetchGA4(auth);
+    const ga4 = await fetchGA4();
     const ga4Path = path.join(OUT_DIR, "ga4-latest.json");
     fs.writeFileSync(ga4Path, JSON.stringify(ga4, null, 2));
     console.log(`✓ GA4 saved → ${ga4Path}`);
