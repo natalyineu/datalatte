@@ -21,9 +21,12 @@ function slugify(text: string): string {
 interface TableOfContentsProps {
   /** Raw MDX source — pass `content` from getPost(). */
   source: string;
+  /** Which variant to render. The page renders the component twice (once per breakpoint)
+   *  so each instance must opt in to only one variant, otherwise both panels duplicate. */
+  variant: "mobile" | "desktop";
 }
 
-export default function TableOfContents({ source }: TableOfContentsProps) {
+export default function TableOfContents({ source, variant }: TableOfContentsProps) {
   const [active, setActive] = useState<string>("");
   const [open, setOpen] = useState(false);
 
@@ -70,9 +73,8 @@ export default function TableOfContents({ source }: TableOfContentsProps) {
   // Don't render if fewer than 3 headings
   if (headings.length < 3) return null;
 
-  return (
-    <>
-      {/* ── Desktop: sticky sidebar ─────────────────────────────────────────── */}
+  if (variant === "desktop") {
+    return (
       <nav
         aria-label="Table of contents"
         className="hidden xl:block sticky top-24 self-start w-56 shrink-0 text-sm"
@@ -97,9 +99,11 @@ export default function TableOfContents({ source }: TableOfContentsProps) {
           ))}
         </ul>
       </nav>
+    );
+  }
 
-      {/* ── Mobile: collapsible at top of article ───────────────────────────── */}
-      <div className="xl:hidden mb-8 rounded-xl border border-gray-200 bg-gray-50 overflow-hidden">
+  return (
+    <div className="xl:hidden mb-8 rounded-xl border border-gray-200 bg-gray-50 overflow-hidden">
         <button
           onClick={() => setOpen((o) => !o)}
           className="w-full flex items-center justify-between px-4 py-3 text-sm font-semibold text-gray-700"
@@ -126,6 +130,5 @@ export default function TableOfContents({ source }: TableOfContentsProps) {
           </ul>
         )}
       </div>
-    </>
   );
 }
