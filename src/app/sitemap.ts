@@ -33,11 +33,16 @@ function getBlogRoutes(): MetadataRoute.Sitemap {
     .map((file) => {
       const raw = fs.readFileSync(path.join(contentDir, file), "utf8");
       const { data } = matter(raw);
-      const parsed = new Date(data.date as string);
+      // Use lastModified (set by caretaker on enrichment) if present, fall back to publish date
+      const modStr = (data.lastModified as string | undefined) ?? (data.date as string);
+      const parsed = new Date(modStr);
+      const publishDate = new Date(data.date as string);
+      const isRecentlyUpdated = !isNaN(parsed.getTime()) &&
+        (parsed.getTime() - publishDate.getTime()) > 24 * 60 * 60 * 1000; // updated after publish
       return {
         url: `${baseUrl}/blog/${file.replace(".mdx", "")}`,
         lastModified: !isNaN(parsed.getTime()) ? parsed : new Date(),
-        changeFrequency: "monthly" as const,
+        changeFrequency: isRecentlyUpdated ? ("weekly" as const) : ("monthly" as const),
         priority: 0.7,
       };
     })
