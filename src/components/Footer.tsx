@@ -18,8 +18,13 @@ const footerLinks = {
   "Services": [
     { label: "Google Ads",              href: "/services/google-ads" },
     { label: "Meta Ads",                href: "/services/meta-ads" },
+    { label: "TikTok Ads",              href: "/services/tiktok-ads" },
     { label: "Google Business Profile", href: "/services/google-business-profile" },
     { label: "Local SEO",               href: "/services/local-seo" },
+    { label: "Content Marketing",       href: "/services/content-marketing" },
+    { label: "Reputation Management",   href: "/services/reputation-management" },
+    { label: "Video Marketing",         href: "/services/video-marketing" },
+    { label: "CRO",                     href: "/services/cro" },
     { label: "AI Agents",               href: "/services/ai-agents" },
     { label: "Email & SMS",             href: "/services/email-sms" },
     { label: "Social Media",            href: "/services/social-media" },
