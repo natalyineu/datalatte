@@ -117,6 +117,7 @@ Local small business owners in the US, UK, Australia, Canada, and other English-
 - Free resource (e.g. "Local Marketing Budget Calculator" or "GBP Checklist PDF") for email capture + backlinks
 
 ## 🔧 Development Notes
+- **Always commit & push directly to `main`** — no feature branches. The repo deploys on every push to `main` and Nataliia works solo, so PRs add friction with no review benefit. If a Claude Code session opens on a `claude/*` branch, merge into `main` (fast-forward) and push to `main`.
 - Always run `npm run build` before deploying to catch TypeScript errors
 - Blog posts are defined as objects inside `src/app/blog/[slug]/page.tsx` — add new posts there AND update `generateStaticParams` AND `src/app/sitemap.ts`
 - The `renderInline()` function handles `**bold**` and `*italic*` in blog content
