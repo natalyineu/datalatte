@@ -49,10 +49,32 @@ function getBlogRoutes(): MetadataRoute.Sitemap {
     .sort((a, b) => b.lastModified.getTime() - a.lastModified.getTime());
 }
 
+const POSTS_PER_PAGE = 24;
+
+function getBlogPaginationRoutes(totalPosts: number, latestPost: Date): MetadataRoute.Sitemap {
+  const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
+  const routes: MetadataRoute.Sitemap = [];
+  // Start from page 2 (page 1 is /blog, already in staticRoutes)
+  for (let p = 2; p <= totalPages; p++) {
+    routes.push({
+      url: `${baseUrl}/blog?page=${p}`,
+      lastModified: latestPost,
+      changeFrequency: "weekly" as const,
+      priority: 0.6,
+    });
+  }
+  return routes;
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const blogRoutes = getBlogRoutes();
   const latestPost = blogRoutes[0]?.lastModified ?? new Date();
   const today = new Date();
+
+  // Count total MDX files for pagination
+  const totalPosts = fs.readdirSync(contentDir).filter((f) => f.endsWith(".mdx")).length;
+  const latestPostDate = latestPost instanceof Date ? latestPost : new Date(latestPost);
+  const paginationRoutes = getBlogPaginationRoutes(totalPosts, latestPostDate);
 
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: baseUrl,                                        lastModified: today,      changeFrequency: "weekly",  priority: 1.0 },
@@ -106,5 +128,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
-  return [...staticRoutes, ...locationRoutes, ...categoryRoutes, ...blogRoutes];
+  return [...staticRoutes, ...paginationRoutes, ...locationRoutes, ...categoryRoutes, ...blogRoutes];
 }
