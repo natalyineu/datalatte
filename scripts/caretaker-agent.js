@@ -287,6 +287,11 @@ function applyStructuralFixes(content) {
     fixed = fixed.replace(/<think>[\s\S]*?<\/think>\s*/gi, '').trimStart();
     changed = true;
   }
+  // Replace bare <Link href="...">text</Link> with markdown links (not a defined MDX component)
+  if (/<Link\s+href=/.test(fixed)) {
+    fixed = fixed.replace(/<Link\s+href="([^"]+)">([^<]+)<\/Link>/g, '[$2]($1)');
+    changed = true;
+  }
   // Fix double headings
   if (/^## ##/m.test(fixed)) {
     fixed = fixed.replace(/^## ## /gm, '## ');
