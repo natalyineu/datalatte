@@ -130,6 +130,32 @@ function getPostSlugs(): string[] {
     .map((f) => f.replace(".mdx", ""));
 }
 
+interface AdjacentPost { slug: string; title: string; }
+
+/** Returns the previous (newer) and next (older) articles sorted by date desc. */
+function getAdjacentPosts(currentSlug: string): { prev: AdjacentPost | null; next: AdjacentPost | null } {
+  const files = fs.readdirSync(contentDir).filter((f) => f.endsWith(".mdx"));
+  const posts: { slug: string; title: string; date: string }[] = [];
+
+  for (const file of files) {
+    try {
+      const { data } = matter(fs.readFileSync(path.join(contentDir, file), "utf8"));
+      posts.push({ slug: file.replace(".mdx", ""), title: String(data.title ?? ""), date: String(data.date ?? "") });
+    } catch { /* skip */ }
+  }
+
+  // Sort newest → oldest (same order as the blog listing)
+  posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  const idx = posts.findIndex((p) => p.slug === currentSlug);
+  if (idx === -1) return { prev: null, next: null };
+
+  // "prev" = newer article (lower index), "next" = older article (higher index)
+  const prev = idx > 0 ? { slug: posts[idx - 1].slug, title: posts[idx - 1].title } : null;
+  const next = idx < posts.length - 1 ? { slug: posts[idx + 1].slug, title: posts[idx + 1].title } : null;
+  return { prev, next };
+}
+
 interface RelatedPost {
   slug: string;
   title: string;
@@ -167,9 +193,10 @@ function getRelatedPosts(currentSlug: string, category: string, limit = 3): Rela
     }
   }
 
+  // Sort same-category candidates by date desc (most recent first), then fill with fallbacks
+  candidates.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  fallbacks.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   const pool = candidates.length >= limit ? candidates : [...candidates, ...fallbacks];
-  // shuffle deterministically by slug to avoid hydration mismatch
-  pool.sort((a, b) => a.slug.localeCompare(b.slug));
   return pool.slice(0, limit);
 }
 
@@ -429,6 +456,7 @@ export default async function BlogPostPage({
 
   const { frontmatter, content } = post;
   const relatedPosts = getRelatedPosts(slug, frontmatter.category);
+  const { prev: prevPost, next: nextPost } = getAdjacentPosts(slug);
 
   // Word count and reading time for schema
   const wordCount = content.split(/\s+/).filter(Boolean).length;
@@ -634,6 +662,40 @@ export default async function BlogPostPage({
             </div>
           </div>
         </section>
+      )}
+
+      {/* Prev / Next navigation */}
+      {(prevPost || nextPost) && (
+        <nav aria-label="Article navigation" className="border-t border-gray-100 bg-white py-8 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {prevPost ? (
+              <Link
+                href={`/blog/${prevPost.slug}`}
+                className="group flex flex-col gap-1 p-4 rounded-xl border border-gray-200 hover:border-coffee-300 hover:bg-coffee-50 transition-colors"
+              >
+                <span className="flex items-center gap-1 text-xs font-semibold text-coffee-600 uppercase tracking-wide">
+                  <ArrowLeft size={12} /> Newer
+                </span>
+                <span className="text-sm font-medium text-gray-800 group-hover:text-coffee-800 line-clamp-2 leading-snug">
+                  {prevPost.title}
+                </span>
+              </Link>
+            ) : <div />}
+            {nextPost && (
+              <Link
+                href={`/blog/${nextPost.slug}`}
+                className="group flex flex-col gap-1 p-4 rounded-xl border border-gray-200 hover:border-coffee-300 hover:bg-coffee-50 transition-colors sm:text-right"
+              >
+                <span className="flex items-center gap-1 text-xs font-semibold text-coffee-600 uppercase tracking-wide sm:justify-end">
+                  Older <ArrowRight size={12} />
+                </span>
+                <span className="text-sm font-medium text-gray-800 group-hover:text-coffee-800 line-clamp-2 leading-snug">
+                  {nextPost.title}
+                </span>
+              </Link>
+            )}
+          </div>
+        </nav>
       )}
 
       <CTABanner
