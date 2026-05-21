@@ -152,6 +152,8 @@ export function articleSchema({
   dateModified,
   image,
   tags,
+  wordCount,
+  timeRequired,
 }: {
   title: string;
   description: string;
@@ -160,6 +162,8 @@ export function articleSchema({
   dateModified?: string;
   image?: string;
   tags?: string[];
+  wordCount?: number;
+  timeRequired?: string; // ISO 8601 duration e.g. "PT8M"
 }) {
   return {
     "@context": "https://schema.org",
@@ -171,6 +175,8 @@ export function articleSchema({
     dateModified: dateModified ?? datePublished,
     keywords: tags?.join(", "),
     inLanguage: "en-US",
+    ...(wordCount ? { wordCount } : {}),
+    ...(timeRequired ? { timeRequired } : {}),
     author: {
       "@type": "Person",
       "@id": `${BASE}/#founder`,

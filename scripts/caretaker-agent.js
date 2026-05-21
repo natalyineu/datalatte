@@ -142,6 +142,15 @@ function parseFrontmatter(raw) {
   return { fm, body: m[2], fmRaw: m[1] };
 }
 
+/** Add or update `lastModified` field in a raw YAML frontmatter string. */
+function stampLastModified(fmRaw) {
+  const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+  if (/^lastModified:/m.test(fmRaw)) {
+    return fmRaw.replace(/^lastModified:.*$/m, `lastModified: "${today}"`);
+  }
+  return fmRaw + `\nlastModified: "${today}"`;
+}
+
 function allMdxFiles() {
   if (!fs.existsSync(BLOG_DIR)) return [];
   return fs.readdirSync(BLOG_DIR).filter(f => f.endsWith('.mdx'));
@@ -475,7 +484,8 @@ async function runFaqPhase() {
       console.log(`  ✍️  FAQ: ${title.slice(0, 55)}...`);
       const faqSection = await generateFaq(title, category, body);
       const updatedBody = body.trimEnd() + faqSection + '\n';
-      fs.writeFileSync(fullPath, `---\n${fmRaw}\n---\n${updatedBody}`);
+      const updatedFm = stampLastModified(fmRaw);
+      fs.writeFileSync(fullPath, `---\n${updatedFm}\n---\n${updatedBody}`);
       added++;
     } catch (e) {
       console.log(`  ⚠️  Failed ${filename}: ${e.message}`);
@@ -617,7 +627,8 @@ async function runChartPhase() {
       console.log(`  📊 Charts: ${title.slice(0, 55)}...`);
       const { chart1, chart2 } = await generateCharts(title, category, body);
       const updatedBody = injectCharts(body, chart1, chart2);
-      fs.writeFileSync(fullPath, `---\n${fmRaw}\n---\n${updatedBody}`);
+      const updatedFm = stampLastModified(fmRaw);
+      fs.writeFileSync(fullPath, `---\n${updatedFm}\n---\n${updatedBody}`);
       added++;
     } catch (e) {
       console.log(`  ⚠️  Failed ${filename}: ${e.message}`);
