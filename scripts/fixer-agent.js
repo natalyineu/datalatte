@@ -506,7 +506,7 @@ async function main() {
   }
 
   // ── 1b. Rule-based internal link injection (batch of 30/run) ───────────────
-  const LINK_BATCH = 30;
+  const LINK_BATCH = 100;
   let linkCount = 0;
   for (const filename of allMdxFiles) {
     if (linkCount >= LINK_BATCH) break;

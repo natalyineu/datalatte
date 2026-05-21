@@ -10,6 +10,7 @@ const https = require('https');
 
 const GROQ_KEY = process.env.GROQ_API_KEY;
 const CEREBRAS_KEY = process.env.CEREBRAS_API_KEY;
+const GEMINI_KEY = process.env.GEMINI_API_KEY;
 const GH_TOKEN = process.env.GH_TOKEN || process.env.GITHUB_TOKEN;
 const REPO = 'natalyineu/datalatte';
 
@@ -60,8 +61,40 @@ let _groqTokens = 0;
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
+// ── Gemini 2.5 Flash ─────────────────────────────────────────────────────────
+async function callGemini(systemPrompt, userPrompt) {
+  if (!GEMINI_KEY) return null;
+  const model = 'gemini-2.5-flash-preview-05-20';
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_KEY}`;
+  const body = JSON.stringify({
+    system_instruction: { parts: [{ text: systemPrompt }] },
+    contents: [{ role: 'user', parts: [{ text: userPrompt }] }],
+    generationConfig: { temperature: 0.7, maxOutputTokens: 8192 },
+  });
+  try {
+    const res = await fetchJson(url, { method: 'POST', headers: { 'Content-Type': 'application/json' } }, body);
+    if (res.status === 200) {
+      const text = res.data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (text) {
+        console.log(`✅ Gemini 2.5 Flash used`);
+        return text.replace(/<think>[\s\S]*?<\/think>\s*/g, '').trim();
+      }
+    }
+    if (res.status === 429) { console.log('⏳ Gemini rate limited, falling back...'); return null; }
+    if (res.status === 403) { console.log('⚠️  Gemini API key invalid or quota exceeded'); return null; }
+    console.log(`⚠️  Gemini error ${res.status}: ${JSON.stringify(res.data)?.slice(0, 100)}`);
+  } catch (e) {
+    console.log(`⚠️  Gemini fetch error: ${e.message}`);
+  }
+  return null;
+}
+
 async function callGroq(systemPrompt, userPrompt) {
-  // Try Cerebras first — 2400 RPD per model, OpenAI-compatible
+  // Try Gemini 2.5 Flash first — best quality, free tier 1500 req/day
+  const geminiResult = await callGemini(systemPrompt, userPrompt);
+  if (geminiResult) return geminiResult;
+
+  // Try Cerebras next — 2400 RPD per model, OpenAI-compatible
   if (CEREBRAS_KEY) {
     for (const model of CEREBRAS_MODELS) {
       const body = JSON.stringify({
