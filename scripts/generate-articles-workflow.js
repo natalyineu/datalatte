@@ -237,6 +237,19 @@ function sanitizeMdx(content) {
     });
   }
 
+  // Fix space-separated quoted attribute values in MDX components → pipe-separated
+  // e.g. labels="A" "B" "C" → labels="A|B|C"  (only on component-attribute lines)
+  result = result.split('\n').map(line => {
+    if (!/^[\s]*<[A-Z]|<[A-Z][A-Za-z]+/.test(line) && !/^\s+[a-z]+="|^\s+[a-z]+\s*$/.test(line)) return line;
+    let fixed = line;
+    let prev;
+    do {
+      prev = fixed;
+      fixed = fixed.replace(/"([^"\n]*)"\s+"([^"\n]*)"/g, '"$1|$2"');
+    } while (fixed !== prev);
+    return fixed;
+  }).join('\n');
+
   // Fix BarChart non-numeric values — strip %, $, commas
   result = result.replace(/(<BarChart[^>]*values=")([^"]+)(")/g, (full, pre, vals, post) => {
     const cleaned = vals.split('|').map(v => {
@@ -503,6 +516,9 @@ Syntax:
   subs="sub text|sub text|sub text|sub text"
   trends="up|down|neutral|up"
 />
+CRITICAL: ALL multi-value attributes use | (pipe) as separator inside ONE quoted string.
+WRONG: labels="Label A" "Label B" "Label C"
+RIGHT: labels="Label A|Label B|Label C"
 
 **3. Body sections (4–6 H2 headings)**
 Each H2 section should:
@@ -522,6 +538,7 @@ Syntax:
   caption="Source or context note"
   highlights="Label A"
 />
+CRITICAL: labels= must be ONE quoted string with | separators, never: labels="A" "B" "C"
 
 **5. Callout components (REQUIRED — use 2–3 throughout the article)**
 Place after key insights. Types available: tip | warning | stat | example | coffee
@@ -565,6 +582,7 @@ Place these links naturally in sentences — never as a standalone line or list 
 - Never write generic advice that applies to any business — always tie to the specific niche
 - Never start a section with "In conclusion" or "To summarize"
 - Never use the Funnel component (reserved for special use)
+- NEVER use space-separated quoted attribute values: labels="A" "B" "C" is INVALID JSX and will crash the build. Always use pipe-separated inside one string: labels="A|B|C"
 
 PRIMARY KEYWORD: ${entry.primaryKeyword}
 TARGET LENGTH: ${entry.targetWords} words (±200)
