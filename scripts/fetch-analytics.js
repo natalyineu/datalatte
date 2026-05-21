@@ -41,8 +41,10 @@ async function fetchGSC() {
   if (!siteUrl) throw new Error("GSC_SITE_URL not set");
 
   const sc = google.searchconsole({ version: "v1", auth });
-  const endDate = dateStr(-3);   // GSC lags ~3 days
-  const startDate = dateStr(-30);
+  // Use "all" dataState to include fresh (yesterday's) data — matches the GSC web UI.
+  // "final" would exclude the last 2-3 days while Google reconciles totals.
+  const endDate = dateStr(-1);   // through yesterday
+  const startDate = dateStr(-28);
 
   // Top queries
   const queriesRes = await sc.searchanalytics.query({
@@ -52,7 +54,7 @@ async function fetchGSC() {
       endDate,
       dimensions: ["query"],
       rowLimit: 100,
-      dataState: "final",
+      dataState: "all",
     },
   });
 
@@ -64,7 +66,7 @@ async function fetchGSC() {
       endDate,
       dimensions: ["page"],
       rowLimit: 50,
-      dataState: "final",
+      dataState: "all",
     },
   });
 
@@ -76,7 +78,7 @@ async function fetchGSC() {
       endDate,
       dimensions: ["country"],
       rowLimit: 20,
-      dataState: "final",
+      dataState: "all",
     },
   });
 
@@ -88,7 +90,7 @@ async function fetchGSC() {
       endDate,
       dimensions: ["date"],
       rowLimit: 30,
-      dataState: "final",
+      dataState: "all",
     },
   });
 
