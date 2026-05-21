@@ -189,7 +189,7 @@ async function authFetch(url: string, options: RequestInit = {}, token: string) 
 
 // ── Helper: format date ───────────────────────────────────────────────────────
 
-function formatDate(iso: string | null): string {
+function _formatDate(iso: string | null): string {
   if (!iso) return "—";
   const d = new Date(iso);
   return d.toLocaleDateString("en-US", { month: "short", day: "numeric" }) +
@@ -1286,7 +1286,7 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
 
   const pendingCount   = queue.filter((e) => e.status === "pending").length;
   const generatedCount = queue.filter((e) => e.status === "generated").length;
-  const publishedQueue = queue.filter((e) => e.status === "published");
+  const _publishedQueue = queue.filter((e) => e.status === "published");
 
   const today = todayStr();
   const publishedToday = articles.filter((a) => a.date === today).length;

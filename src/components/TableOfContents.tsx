@@ -42,11 +42,10 @@ export default function TableOfContents({ source }: TableOfContentsProps) {
     }
   }
 
-  // Don't render if fewer than 3 headings
-  if (headings.length < 3) return null;
-
-  // Observe which heading is in view
+  // Observe which heading is in view — must be called before any early return (Rules of Hooks)
   useEffect(() => {
+    if (headings.length < 3) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -67,6 +66,9 @@ export default function TableOfContents({ source }: TableOfContentsProps) {
     return () => observer.disconnect();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Don't render if fewer than 3 headings
+  if (headings.length < 3) return null;
 
   return (
     <>
