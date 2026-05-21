@@ -1,0 +1,112 @@
+name: Validate MDX
+
+on:
+  push:
+    paths:
+      - 'content/blog/**.mdx'
+  pull_request:
+    paths:
+      - 'content/blog/**.mdx'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate MDX files
+        run: |
+          python3 << 'PYEOF'
+          import os, re, sys
+
+          blog_dir = "content/blog"
+          all_issues = {}
+
+          for fname in sorted(os.listdir(blog_dir)):
+              if not fname.endswith('.mdx'): continue
+              fpath = os.path.join(blog_dir, fname)
+              with open(fpath) as f:
+                  lines = f.readlines()
+              content = ''.join(lines)
+              issues = []
+
+              for i, line in enumerate(lines, 1):
+                  s = line.strip()
+                  nxt = lines[i].strip() if i < len(lines) else ''
+
+                  # Orphan tag with no attributes
+                  if re.match(r'^<(StatRow|BarChart|Callout)$', s) and not re.match(r'^[a-z]+=|^/>', nxt):
+                      issues.append((i, "orphan tag with no attributes"))
+
+                  # Missing opening < on component
+                  if re.match(r'^(Callout|StatRow|BarChart)\s+\w+=', s):
+                      issues.append((i, "missing < on component tag"))
+
+                  # Callout without type=
+                  if re.match(r'^<Callout\b', s) and 'type=' not in s and not s.startswith('</Callout'):
+                      issues.append((i, "Callout missing type= attribute"))
+
+                  # Bare <Callout> without type
+                  if s == '<Callout>':
+                      issues.append((i, "bare <Callout> without type="))
+
+                  # Doubled closing tag
+                  if '</Callout</Callout>' in line or '</Callout></Callout>' in line:
+                      issues.append((i, "doubled </Callout> closing tag"))
+
+                  # StatRow/BarChart not self-closing
+                  for tag in ['StatRow', 'BarChart']:
+                      if re.match(rf'^<{tag}\b', s) and s.endswith('>') and not s.endswith('/>'):
+                          issues.append((i, f"<{tag}> not self-closing (needs />)"))
+
+                  # Non-self-closing void HTML elements
+                  if re.search(r'<br\s*(?!/)>', line) or re.search(r'<hr\s*(?!/)>', line):
+                      issues.append((i, "non-self-closing void element (use <br /> or <hr />)"))
+
+              # Callout open/close count mismatch
+              opens = len(re.findall(r'<Callout\b', content))
+              closes = len(re.findall(r'</Callout>', content))
+              if opens != closes:
+                  issues.append((0, f"Callout mismatch: {opens} open vs {closes} close"))
+
+              # StatRow missing required props
+              for m in re.finditer(r'<StatRow\b(.*?)/?>', content, re.DOTALL):
+                  attrs = m.group(1)
+                  missing = [p for p in ['values','labels','subs','trends'] if f'{p}=' not in attrs]
+                  if missing:
+                      ln = content[:m.start()].count('\n') + 1
+                      issues.append((ln, f"StatRow missing required props: {missing}"))
+
+              # BarChart missing required props
+              for m in re.finditer(r'<BarChart\b(.*?)/?>', content, re.DOTALL):
+                  attrs = m.group(1)
+                  missing = [p for p in ['values','labels','title'] if f'{p}=' not in attrs]
+                  if missing:
+                      ln = content[:m.start()].count('\n') + 1
+                      issues.append((ln, f"BarChart missing required props: {missing}"))
+
+              # StatRow pipe count mismatch
+              for m in re.finditer(r'<StatRow\b(.*?)/?>', content, re.DOTALL):
+                  attrs = m.group(1)
+                  counts = {}
+                  for prop in ['values','labels','subs','trends']:
+                      pm = re.search(rf'{prop}="([^"]*)"', attrs)
+                      if pm: counts[prop] = len(pm.group(1).split('|'))
+                  if len(set(counts.values())) > 1:
+                      ln = content[:m.start()].count('\n') + 1
+                      issues.append((ln, f"StatRow pipe count mismatch: {counts}"))
+
+              if issues:
+                  all_issues[fname] = issues
+
+          total = sum(len(v) for v in all_issues.values())
+          if total == 0:
+              print("✅ All MDX files valid!")
+              sys.exit(0)
+          else:
+              print(f"❌ {total} issues found in {len(all_issues)} files:\n")
+              for f, iss in sorted(all_issues.items()):
+                  for ln, msg in iss:
+                      print(f"  {f}:{ln} — {msg}")
+              sys.exit(1)
+          PYEOF
