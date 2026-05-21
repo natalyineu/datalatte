@@ -19,7 +19,18 @@ import matter from "gray-matter";
 import CTABanner from "@/components/CTABanner";
 import { ArrowRight } from "lucide-react";
 import ReadingProgress from "@/components/ReadingProgress";
+import TableOfContents from "@/components/TableOfContents";
 import { articleSchema, faqSchema, breadcrumbSchema } from "@/lib/schema";
+
+/** Convert heading text to an anchor id (mirrors TableOfContents slugify). */
+function headingId(text: string): string {
+  return String(text)
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .trim();
+}
 
 export const revalidate = 86400;
 export const dynamicParams = true;
@@ -181,6 +192,7 @@ function getPost(slug: string) {
 interface PostFrontmatter {
   title: string;
   date: string;
+  lastModified?: string; // set by caretaker when FAQ/charts are added
   description: string;
   author: string;
   category: string;
@@ -190,41 +202,72 @@ interface PostFrontmatter {
   readTime: string;
 }
 
-/** Extract FAQ Q&A pairs from MDX content for FAQPage structured data. */
+/** Strip markdown / MDX syntax to plain text. */
+function stripMarkdown(text: string): string {
+  return text
+    .replace(/<[^>]+>/g, "")           // strip MDX/HTML tags
+    .replace(/\*\*([^*]+)\*\*/g, "$1") // bold
+    .replace(/\*([^*]+)\*/g, "$1")     // italic
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1") // links → text
+    .replace(/`[^`]+`/g, (m) => m.slice(1, -1)) // inline code
+    .trim();
+}
+
+/** Extract FAQ Q&A pairs from MDX content for FAQPage structured data.
+ *  Handles three formats:
+ *   1. ### heading per question (most common in new articles)
+ *   2. Q: / A: plain or list style  (older articles)
+ *   3. **Bold question?** followed by answer paragraph
+ */
 function extractFaqItems(content: string): { q: string; a: string }[] {
   // Find the FAQ section (handles variations in heading text)
   const faqSectionMatch = content.match(
-    /##\s+(?:Frequently Asked Questions|FAQ)[^\n]*\n([\s\S]*?)(?=\n##\s|\n---|\n<|$)/i
+    /##\s+(?:Frequently Asked Questions|FAQ)[^\n]*\n([\s\S]*?)(?=\n##\s|\n---|\n<\/|$)/i
   );
   if (!faqSectionMatch) return [];
 
   const faqBody = faqSectionMatch[1];
+  const results: { q: string; a: string }[] = [];
 
-  // Split on ### headings — each ### is a question
-  const chunks = faqBody.split(/\n###\s+/).slice(1); // slice(1) drops the empty string before first ###
-
-  return chunks
-    .map((chunk) => {
+  // ── Format 1: ### Sub-headings ────────────────────────────────────────────
+  const hashChunks = faqBody.split(/\n###\s+/).slice(1);
+  if (hashChunks.length > 0) {
+    for (const chunk of hashChunks) {
       const lines = chunk.split("\n");
-      const q = lines[0].trim().replace(/\*+/g, "").replace(/\?$/, "").trim() + "?";
-      // Answer: remaining non-empty lines, stripped of MDX tags and markdown
+      const rawQ = lines[0].trim();
+      const q = stripMarkdown(rawQ).replace(/\?*$/, "") + "?";
       const answerLines = lines
         .slice(1)
         .filter((l) => l.trim() && !l.trim().startsWith("<") && !l.trim().startsWith("#"))
-        .map((l) =>
-          l
-            .replace(/<[^>]+>/g, "")          // strip MDX/HTML tags
-            .replace(/\*\*([^*]+)\*\*/g, "$1") // strip bold
-            .replace(/\*([^*]+)\*/g, "$1")     // strip italic
-            .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1") // strip links → text
-            .trim()
-        )
+        .map((l) => stripMarkdown(l))
         .filter(Boolean);
-      const a = answerLines.join(" ").slice(0, 500); // cap answer at 500 chars
-      return q && a ? { q, a } : null;
-    })
-    .filter((item): item is { q: string; a: string } => item !== null)
-    .slice(0, 10); // Google shows max ~10 FAQ entries in rich results
+      const a = answerLines.join(" ").slice(0, 500);
+      if (q && a) results.push({ q, a });
+    }
+    if (results.length > 0) return results.slice(0, 10);
+  }
+
+  // ── Format 2: Q: / A: plain or list style ────────────────────────────────
+  // Handles: "Q: question\nA: answer", "* **Q: question**\n  A: answer",
+  //          "**Q: question**\nA: answer", "Q: question\n\nA: answer"
+  const qaPattern = /(?:^|\n)\s*(?:\*\s*)?(?:\*{1,2})?Q(?:uestion)?:\s*\*{0,2}\s*(.+?)(?:\*{0,2})\s*\n+\s*(?:\*\s*)?(?:\*{1,2})?A(?:nswer)?:\s*\*{0,2}\s*([\s\S]+?)(?=\n\s*(?:\*\s*)?(?:\*{0,2})?Q(?:uestion)?:|$)/gi;
+  let m: RegExpExecArray | null;
+  while ((m = qaPattern.exec(faqBody)) !== null && results.length < 10) {
+    const q = stripMarkdown(m[1]).replace(/\?*$/, "") + "?";
+    const a = stripMarkdown(m[2].split("\n")[0]).slice(0, 500); // first paragraph of answer
+    if (q.length > 10 && a.length > 10) results.push({ q, a });
+  }
+  if (results.length > 0) return results;
+
+  // ── Format 3: **Bold question?** + paragraph answer ──────────────────────
+  const boldQPattern = /\*\*([^*]{10,}?\?)\*\*\s*\n+([^\n*#]{20,})/g;
+  while ((m = boldQPattern.exec(faqBody)) !== null && results.length < 10) {
+    const q = stripMarkdown(m[1]).replace(/\?*$/, "") + "?";
+    const a = stripMarkdown(m[2]).slice(0, 500);
+    if (q && a) results.push({ q, a });
+  }
+
+  return results.slice(0, 10); // Google shows max ~10 FAQ entries
 }
 
 export async function generateStaticParams() {
@@ -244,6 +287,8 @@ export async function generateMetadata({
   const imageUrl = frontmatter.image?.startsWith("http")
     ? frontmatter.image
     : `https://datalatte.pro${frontmatter.image}`;
+
+  const modifiedTime = frontmatter.lastModified ?? frontmatter.date;
 
   return {
     title: frontmatter.title,
@@ -269,6 +314,7 @@ export async function generateMetadata({
       alternateLocale: ["en_GB", "en_AU", "en_CA"],
       siteName: "DataLatte",
       publishedTime: frontmatter.date,
+      modifiedTime,
       authors: ["https://datalatte.pro/about"],
       tags: frontmatter.tags ?? [],
       images: [
@@ -292,12 +338,22 @@ export async function generateMetadata({
 
 // MDX component overrides — maps markdown elements to Tailwind-styled JSX
 const mdxComponents = {
-  h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4" {...props} />
-  ),
-  h3: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h3 className="text-xl font-semibold text-gray-800 mt-8 mb-3" {...props} />
-  ),
+  h2: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => {
+    const id = headingId(String(children));
+    return (
+      <h2 id={id} className="text-2xl font-bold text-gray-900 mt-10 mb-4 scroll-mt-24" {...props}>
+        {children}
+      </h2>
+    );
+  },
+  h3: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => {
+    const id = headingId(String(children));
+    return (
+      <h3 id={id} className="text-xl font-semibold text-gray-800 mt-8 mb-3 scroll-mt-24" {...props}>
+        {children}
+      </h3>
+    );
+  },
   p: (props: React.HTMLAttributes<HTMLParagraphElement>) => (
     <div className="text-gray-600 leading-relaxed mb-4" {...props} />
   ),
@@ -374,14 +430,20 @@ export default async function BlogPostPage({
   const { frontmatter, content } = post;
   const relatedPosts = getRelatedPosts(slug, frontmatter.category);
 
+  // Word count and reading time for schema
+  const wordCount = content.split(/\s+/).filter(Boolean).length;
+  const readMinutes = Math.max(1, Math.ceil(wordCount / 200));
+
   const schema = articleSchema({
     title: frontmatter.title,
     description: frontmatter.description,
     url: `https://datalatte.pro/blog/${slug}`,
     datePublished: frontmatter.date,
-    dateModified: frontmatter.date,
+    dateModified: frontmatter.lastModified ?? frontmatter.date,
     image: frontmatter.image,
     tags: frontmatter.tags,
+    wordCount,
+    timeRequired: `PT${readMinutes}M`,
   });
 
   const breadcrumb = breadcrumbSchema([
@@ -455,9 +517,10 @@ export default async function BlogPostPage({
         </div>
       </div>
 
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Meta */}
-        <div className="flex items-center gap-4 text-sm text-gray-500 mb-8 pb-8 border-b border-gray-100">
+      {/* Wide wrapper for content + sidebar */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Meta row — full width */}
+        <div className="max-w-3xl mx-auto flex items-center gap-4 text-sm text-gray-500 mb-8 pb-8 border-b border-gray-100">
           <span className="flex items-center gap-1.5">
             <Calendar size={14} /> {displayDate}
           </span>
@@ -472,14 +535,21 @@ export default async function BlogPostPage({
           </Link>
         </div>
 
-        {/* MDX Content */}
-        <div className="prose-datalatte">
-          <MDXRemote
-            source={content}
-            components={mdxComponents}
-            options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
-          />
-        </div>
+        {/* Content + sticky TOC sidebar */}
+        <div className="flex gap-12 items-start">
+          {/* Article body */}
+          <div className="flex-1 min-w-0 max-w-3xl">
+            {/* Mobile ToC (renders inside content column, hidden on xl) */}
+            <TableOfContents source={content} />
+
+            {/* MDX Content */}
+            <div className="prose-datalatte">
+              <MDXRemote
+                source={content}
+                components={mdxComponents}
+                options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+              />
+            </div>
 
         {/* Tags */}
         {frontmatter.tags && frontmatter.tags.length > 0 && (
@@ -526,6 +596,11 @@ export default async function BlogPostPage({
             </div>
           </div>
         </div>
+          </div>{/* end article body */}
+
+          {/* Desktop sticky ToC (hidden below xl) */}
+          <TableOfContents source={content} />
+        </div>{/* end flex row */}
       </div>
 
       {/* Related Posts */}
