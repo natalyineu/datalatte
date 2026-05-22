@@ -34,6 +34,7 @@ const SERVICE_SLUGS: Record<string, string> = {
   "Conversion Rate Optimisation": "cro",
   "Video Marketing": "video-marketing",
   "TikTok Ads": "tiktok-ads",
+  "Programmatic Advertising": "programmatic",
 };
 
 export default function ServicePage({
@@ -44,6 +45,7 @@ export default function ServicePage({
   const serviceUrl = `https://datalatte.pro/services/${slug}`;
   const breadcrumb = breadcrumbSchema([
     { name: "Home", url: "https://datalatte.pro" },
+    { name: "Services", url: "https://datalatte.pro/services/google-ads" },
     { name: service, url: serviceUrl },
   ]);
 

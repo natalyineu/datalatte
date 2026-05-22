@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { CITIES, NICHES } from "@/lib/locationData";
+import { CITIES, NICHES, SERVICE_SEGMENT_SLUGS } from "@/lib/locationData";
 
 const baseUrl = "https://datalatte.pro";
 const contentDir = path.join(process.cwd(), "content/blog");
@@ -33,48 +33,21 @@ function getBlogRoutes(): MetadataRoute.Sitemap {
     .map((file) => {
       const raw = fs.readFileSync(path.join(contentDir, file), "utf8");
       const { data } = matter(raw);
-      // Use lastModified (set by caretaker on enrichment) if present, fall back to publish date
-      const modStr = (data.lastModified as string | undefined) ?? (data.date as string);
-      const parsed = new Date(modStr);
-      const publishDate = new Date(data.date as string);
-      const isRecentlyUpdated = !isNaN(parsed.getTime()) &&
-        (parsed.getTime() - publishDate.getTime()) > 24 * 60 * 60 * 1000; // updated after publish
+      const parsed = new Date(data.date as string);
       return {
         url: `${baseUrl}/blog/${file.replace(".mdx", "")}`,
         lastModified: !isNaN(parsed.getTime()) ? parsed : new Date(),
-        changeFrequency: isRecentlyUpdated ? ("weekly" as const) : ("monthly" as const),
+        changeFrequency: "monthly" as const,
         priority: 0.7,
       };
     })
     .sort((a, b) => b.lastModified.getTime() - a.lastModified.getTime());
 }
 
-const POSTS_PER_PAGE = 24;
-
-function getBlogPaginationRoutes(totalPosts: number, latestPost: Date): MetadataRoute.Sitemap {
-  const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
-  const routes: MetadataRoute.Sitemap = [];
-  // Start from page 2 (page 1 is /blog, already in staticRoutes)
-  for (let p = 2; p <= totalPages; p++) {
-    routes.push({
-      url: `${baseUrl}/blog?page=${p}`,
-      lastModified: latestPost,
-      changeFrequency: "weekly" as const,
-      priority: 0.6,
-    });
-  }
-  return routes;
-}
-
 export default function sitemap(): MetadataRoute.Sitemap {
   const blogRoutes = getBlogRoutes();
   const latestPost = blogRoutes[0]?.lastModified ?? new Date();
   const today = new Date();
-
-  // Count total MDX files for pagination
-  const totalPosts = fs.readdirSync(contentDir).filter((f) => f.endsWith(".mdx")).length;
-  const latestPostDate = latestPost instanceof Date ? latestPost : new Date(latestPost);
-  const paginationRoutes = getBlogPaginationRoutes(totalPosts, latestPostDate);
 
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: baseUrl,                                        lastModified: today,      changeFrequency: "weekly",  priority: 1.0 },
@@ -86,21 +59,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/for/hair-salons`,                   lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/for/pet-groomers`,                  lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/for/fitness-studios`,               lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/for/restaurants`,                    lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/for/dentists`,                      lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/for/cleaning-services`,             lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/for/real-estate-agents`,            lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/for/barbershops`,                   lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/for/yoga-studios`,                  lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/for/nail-salons`,                   lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/for/plumbers`,                      lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/for/electricians`,                  lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/for/startups`,                      lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/for/freelancers`,                   lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/for/medium-business`,               lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/for/enterprise`,                    lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
-    // Lead gen
-    { url: `${baseUrl}/free-audit`,                        lastModified: today,      changeFrequency: "monthly", priority: 0.9 },
     // Service pages
     { url: `${baseUrl}/services/google-ads`,               lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/services/meta-ads`,                 lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
@@ -111,14 +73,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/services/email-sms`,                lastModified: today,      changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/services/social-media`,             lastModified: today,      changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/services/website`,                  lastModified: today,      changeFrequency: "monthly", priority: 0.7 },
-    { url: `${baseUrl}/services/content-marketing`,        lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/services/reputation-management`,    lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/services/cro`,                      lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/services/video-marketing`,          lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/services/tiktok-ads`,               lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     // Tools
     { url: `${baseUrl}/tools/marketing-budget-calculator`, lastModified: today,      changeFrequency: "monthly", priority: 0.9 },
     { url: `${baseUrl}/tools/ai-agent-builder`,            lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/tools/local-seo-grader`,            lastModified: today,      changeFrequency: "monthly", priority: 0.9 },
+    // New content pages
+    { url: `${baseUrl}/pricing`,                           lastModified: today,      changeFrequency: "monthly", priority: 0.9 },
+    { url: `${baseUrl}/case-studies`,                      lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/results`,                           lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/resources`,                         lastModified: today,      changeFrequency: "weekly",  priority: 0.8 },
+    { url: `${baseUrl}/for/multi-location`,                lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/compare/freelance-vs-agency`,       lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/services/programmatic`,             lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     // Legal
     { url: `${baseUrl}/privacy`,                            lastModified: today,      changeFrequency: "yearly",  priority: 0.3 },
     { url: `${baseUrl}/terms`,                              lastModified: today,      changeFrequency: "yearly",  priority: 0.3 },
@@ -138,5 +104,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
-  return [...staticRoutes, ...paginationRoutes, ...locationRoutes, ...categoryRoutes, ...blogRoutes];
+  // Niche × service intersection pages
+  const nicheServiceRoutes: MetadataRoute.Sitemap = [];
+  for (const niche of NICHES) {
+    for (const serviceSlug of SERVICE_SEGMENT_SLUGS) {
+      nicheServiceRoutes.push({
+        url: `${baseUrl}/for/${niche}/${serviceSlug}`,
+        lastModified: today,
+        changeFrequency: "monthly",
+        priority: 0.75,
+      });
+    }
+  }
+
+  return [...staticRoutes, ...locationRoutes, ...nicheServiceRoutes, ...categoryRoutes, ...blogRoutes];
 }
