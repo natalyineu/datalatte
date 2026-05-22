@@ -9,8 +9,13 @@ import clsx from "clsx";
 const niches = [
   { label: "Coffee Shops",          href: "/for/coffee-shops" },
   { label: "Hair Salons",           href: "/for/hair-salons" },
+  { label: "Barbershops",           href: "/for/barbershops" },
+  { label: "Nail Salons",           href: "/for/nail-salons" },
   { label: "Pet Groomers",          href: "/for/pet-groomers" },
   { label: "Fitness Studios",       href: "/for/fitness-studios" },
+  { label: "Yoga Studios",          href: "/for/yoga-studios" },
+  { label: "Plumbers",              href: "/for/plumbers" },
+  { label: "Electricians",          href: "/for/electricians" },
   { label: "Startups",              href: "/for/startups" },
   { label: "Freelancers & Consultants", href: "/for/freelancers" },
   { label: "Growing Businesses",    href: "/for/medium-business" },
