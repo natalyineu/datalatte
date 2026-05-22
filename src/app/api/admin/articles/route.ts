@@ -28,10 +28,15 @@ function scanMdxFiles(): ArticleMeta[] {
       const { data, content } = matter(raw);
       // Rough word count from content body
       const wordCount = content.trim().split(/\s+/).length;
+      // gray-matter parses unquoted YAML dates as JS Date objects
+      const rawDate = data.date;
+      const date = rawDate instanceof Date
+        ? rawDate.toISOString().slice(0, 10)
+        : String(rawDate ?? "");
       articles.push({
         slug,
         title: String(data.title ?? slug),
-        date: String(data.date ?? ""),
+        date,
         wordCount,
         category: String(data.category ?? ""),
         tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
