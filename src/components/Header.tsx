@@ -9,38 +9,31 @@ import clsx from "clsx";
 const niches = [
   { label: "Coffee Shops",          href: "/for/coffee-shops" },
   { label: "Hair Salons",           href: "/for/hair-salons" },
-  { label: "Barbershops",           href: "/for/barbershops" },
-  { label: "Nail Salons",           href: "/for/nail-salons" },
   { label: "Pet Groomers",          href: "/for/pet-groomers" },
   { label: "Fitness Studios",       href: "/for/fitness-studios" },
-  { label: "Yoga Studios",          href: "/for/yoga-studios" },
-  { label: "Plumbers",              href: "/for/plumbers" },
-  { label: "Electricians",          href: "/for/electricians" },
   { label: "Startups",              href: "/for/startups" },
   { label: "Freelancers & Consultants", href: "/for/freelancers" },
+  { label: "Multi-Location",        href: "/for/multi-location" },
   { label: "Growing Businesses",    href: "/for/medium-business" },
   { label: "Enterprise & Agencies", href: "/for/enterprise" },
 ];
 
 const tools = [
-  { label: "Budget Calculator ✨", href: "/tools/marketing-budget-calculator" },
-  { label: "AI Agent Builder 🤖",  href: "/tools/ai-agent-builder" },
+  { label: "Budget Calculator ✨",  href: "/tools/marketing-budget-calculator" },
+  { label: "AI Agent Builder 🤖",   href: "/tools/ai-agent-builder" },
+  { label: "Local SEO Grader 📊",   href: "/tools/local-seo-grader" },
 ];
 
 const services = [
   { label: "Google Ads",              href: "/services/google-ads" },
   { label: "Meta Ads",                href: "/services/meta-ads" },
-  { label: "TikTok Ads",              href: "/services/tiktok-ads" },
   { label: "Google Business Profile", href: "/services/google-business-profile" },
   { label: "Local SEO",               href: "/services/local-seo" },
-  { label: "Content Marketing",       href: "/services/content-marketing" },
-  { label: "Reputation Management",   href: "/services/reputation-management" },
-  { label: "Video Marketing",         href: "/services/video-marketing" },
   { label: "Analytics & Reporting",   href: "/services/analytics" },
-  { label: "Conversion Rate Optimisation", href: "/services/cro" },
   { label: "AI Agents & Automation",  href: "/services/ai-agents" },
   { label: "Email & SMS Marketing",   href: "/services/email-sms" },
   { label: "Social Media",            href: "/services/social-media" },
+  { label: "Programmatic Advertising", href: "/services/programmatic" },
   { label: "Website & Landing Pages", href: "/services/website" },
 ];
 
@@ -109,6 +102,18 @@ export default function Header() {
               Blog
             </Link>
             <Link
+              href="/resources"
+              className={clsx("text-gray-600 hover:text-gray-900 font-medium transition-colors", pathname === "/resources" && "text-coffee-700")}
+            >
+              Resources
+            </Link>
+            <Link
+              href="/pricing"
+              className={clsx("text-gray-600 hover:text-gray-900 font-medium transition-colors", pathname === "/pricing" && "text-coffee-700")}
+            >
+              Pricing
+            </Link>
+            <Link
               href="/about"
               className={clsx("text-gray-600 hover:text-gray-900 font-medium transition-colors", pathname === "/about" && "text-coffee-700")}
             >
@@ -174,8 +179,12 @@ export default function Header() {
           {tools.map((t) => (
             <Link key={t.href} href={t.href} className="block py-3 text-gray-700 font-medium" onClick={() => setMobileOpen(false)}>{t.label}</Link>
           ))}
-          <Link href="/blog"    className="block py-3 text-gray-700 font-medium" onClick={() => setMobileOpen(false)}>Blog</Link>
-          <Link href="/about"   className="block py-3 text-gray-700 font-medium" onClick={() => setMobileOpen(false)}>About</Link>
+          <Link href="/blog"       className="block py-3 text-gray-700 font-medium" onClick={() => setMobileOpen(false)}>Blog</Link>
+          <Link href="/resources"  className="block py-3 text-gray-700 font-medium" onClick={() => setMobileOpen(false)}>Resources</Link>
+          <Link href="/pricing"    className="block py-3 text-gray-700 font-medium" onClick={() => setMobileOpen(false)}>Pricing</Link>
+          <Link href="/case-studies" className="block py-3 text-gray-700 font-medium" onClick={() => setMobileOpen(false)}>Case Studies</Link>
+          <Link href="/results"    className="block py-3 text-gray-700 font-medium" onClick={() => setMobileOpen(false)}>Results</Link>
+          <Link href="/about"      className="block py-3 text-gray-700 font-medium" onClick={() => setMobileOpen(false)}>About</Link>
           <Link href="/contact" className="btn-primary w-full justify-center mt-3" onClick={() => setMobileOpen(false)}>
             Get a Free Audit
           </Link>

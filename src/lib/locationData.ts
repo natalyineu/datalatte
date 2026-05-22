@@ -3,7 +3,6 @@ export interface City {
   state: string;
   stateCode: string;
   slug: string; // e.g. "austin-tx"
-  country?: "US" | "UK" | "AU"; // defaults to US
 }
 
 export const CITIES: City[] = [
@@ -57,38 +56,9 @@ export const CITIES: City[] = [
   { city: "Chattanooga", state: "Tennessee", stateCode: "TN", slug: "chattanooga-tn" },
   { city: "Spokane", state: "Washington", stateCode: "WA", slug: "spokane-wa" },
   { city: "Anchorage", state: "Alaska", stateCode: "AK", slug: "anchorage-ak" },
-  // UK cities
-  { city: "London",       state: "England",  stateCode: "UK", slug: "london-uk",       country: "UK" },
-  { city: "Manchester",   state: "England",  stateCode: "UK", slug: "manchester-uk",   country: "UK" },
-  { city: "Birmingham",   state: "England",  stateCode: "UK", slug: "birmingham-uk",   country: "UK" },
-  { city: "Leeds",        state: "England",  stateCode: "UK", slug: "leeds-uk",        country: "UK" },
-  { city: "Liverpool",    state: "England",  stateCode: "UK", slug: "liverpool-uk",    country: "UK" },
-  { city: "Sheffield",    state: "England",  stateCode: "UK", slug: "sheffield-uk",    country: "UK" },
-  { city: "Bristol",      state: "England",  stateCode: "UK", slug: "bristol-uk",      country: "UK" },
-  { city: "Edinburgh",    state: "Scotland", stateCode: "UK", slug: "edinburgh-uk",    country: "UK" },
-  { city: "Glasgow",      state: "Scotland", stateCode: "UK", slug: "glasgow-uk",      country: "UK" },
-  { city: "Cardiff",      state: "Wales",    stateCode: "UK", slug: "cardiff-uk",      country: "UK" },
-  { city: "Nottingham",   state: "England",  stateCode: "UK", slug: "nottingham-uk",   country: "UK" },
-  { city: "Leicester",    state: "England",  stateCode: "UK", slug: "leicester-uk",    country: "UK" },
-  { city: "Southampton",  state: "England",  stateCode: "UK", slug: "southampton-uk",  country: "UK" },
-  { city: "Brighton",     state: "England",  stateCode: "UK", slug: "brighton-uk",     country: "UK" },
-  { city: "Newcastle",    state: "England",  stateCode: "UK", slug: "newcastle-uk",    country: "UK" },
-  // Australia cities
-  { city: "Sydney",       state: "New South Wales",    stateCode: "NSW", slug: "sydney-nsw",       country: "AU" },
-  { city: "Melbourne",    state: "Victoria",            stateCode: "VIC", slug: "melbourne-vic",    country: "AU" },
-  { city: "Brisbane",     state: "Queensland",          stateCode: "QLD", slug: "brisbane-qld",     country: "AU" },
-  { city: "Perth",        state: "Western Australia",   stateCode: "WA",  slug: "perth-wa",         country: "AU" },
-  { city: "Adelaide",     state: "South Australia",     stateCode: "SA",  slug: "adelaide-sa",      country: "AU" },
-  { city: "Gold Coast",   state: "Queensland",          stateCode: "QLD", slug: "gold-coast-qld",   country: "AU" },
-  { city: "Canberra",     state: "ACT",                 stateCode: "ACT", slug: "canberra-act",     country: "AU" },
-  { city: "Newcastle",    state: "New South Wales",    stateCode: "NSW", slug: "newcastle-nsw",    country: "AU" },
-  { city: "Wollongong",   state: "New South Wales",    stateCode: "NSW", slug: "wollongong-nsw",   country: "AU" },
-  { city: "Geelong",      state: "Victoria",            stateCode: "VIC", slug: "geelong-vic",      country: "AU" },
-  { city: "Hobart",       state: "Tasmania",            stateCode: "TAS", slug: "hobart-tas",       country: "AU" },
-  { city: "Sunshine Coast", state: "Queensland",        stateCode: "QLD", slug: "sunshine-coast-qld", country: "AU" },
 ];
 
-export const NICHES = ["coffee-shops", "hair-salons", "pet-groomers", "fitness-studios", "barbershops", "yoga-studios", "nail-salons", "plumbers", "electricians"] as const;
+export const NICHES = ["coffee-shops", "hair-salons", "pet-groomers", "fitness-studios"] as const;
 export type NicheSlug = typeof NICHES[number];
 
 export interface NicheInfo {
@@ -125,7 +95,7 @@ export const NICHE_DATA: Record<NicheSlug, NicheInfo> = {
       "Review generation strategy to build social proof",
       "Analytics to track calls, directions, and ad conversions",
     ],
-    faq: (city, _state) => [
+    faq: (city, state) => [
       {
         q: `How long until my coffee shop ranks in Google Maps in ${city}?`,
         a: `Most ${city} coffee shops see GBP improvements within 4–8 weeks of optimization. Ranking in the local map pack for competitive terms like "coffee shop near me" typically takes 2–4 months of consistent work.`,
@@ -164,7 +134,7 @@ export const NICHE_DATA: Record<NicheSlug, NicheInfo> = {
       "Review strategy to grow your star rating and review count",
       "Analytics tracking calls, bookings, and ad performance",
     ],
-    faq: (city, _state) => [
+    faq: (city, state) => [
       {
         q: `How do I get my hair salon to the top of Google in ${city}?`,
         a: `The map pack (top 3 results) is driven by GBP completeness, review quantity/quality, and proximity. We optimize all three. Organic rankings take 3–6 months; GBP improvements are often visible in 4–8 weeks.`,
@@ -203,7 +173,7 @@ export const NICHE_DATA: Record<NicheSlug, NicheInfo> = {
       "Review generation to build trust with new pet owners",
       "Analytics to measure bookings and track which channels drive appointments",
     ],
-    faq: (city, _state) => [
+    faq: (city, state) => [
       {
         q: `How do pet groomers get more clients in ${city}?`,
         a: `The most effective channels are Google Business Profile (ranking in 'dog groomer near me' searches), Google Ads, and word-of-mouth amplified by consistent five-star reviews. We focus on all three.`,
@@ -242,7 +212,7 @@ export const NICHE_DATA: Record<NicheSlug, NicheInfo> = {
       "Email and SMS campaigns to re-engage lapsed members",
       "Analytics to track trial sign-ups, membership conversions, and retention rates",
     ],
-    faq: (city, _state) => [
+    faq: (city, state) => [
       {
         q: `What's the best marketing channel for a fitness studio in ${city}?`,
         a: `It depends on your niche. Google Ads captures people actively searching for gyms; Meta Ads are better for building brand awareness and retargeting trial visitors. Most studios need both working together.`,
@@ -261,199 +231,137 @@ export const NICHE_DATA: Record<NicheSlug, NicheInfo> = {
       },
     ],
   },
+};
 
-  "barbershops": {
-    slug: "barbershops",
-    label: "Barbershop",
-    labelPlural: "Barbershops",
-    emoji: "✂️",
-    primaryService: "Local SEO & Google Ads",
-    accentClass: "bg-gradient-to-br from-coffee-800 to-coffee-950",
-    heroImage: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1200&q=80",
-    tagline: (city) => `Keep every chair booked in ${city}`,
-    intro: (city, state) =>
-      `Barbershops in ${city}, ${state} run on loyalty, word-of-mouth, and local visibility. DataLatte helps ${city} barbershops rank at the top of Google Maps, run profitable ads, and build a review profile that turns first-timers into regulars.`,
-    services: [
-      "Google Business Profile optimization to dominate 'barber near me' searches",
-      "Local SEO to rank for 'barbershop in ${city}' and neighbourhood-level queries",
-      "Google Ads targeting men actively searching for haircuts in your area",
-      "Instagram & Meta Ads to showcase cuts and attract style-conscious clients",
-      "Review generation to build social proof and outrank competitors",
-      "Analytics to track calls, bookings, and which channels drive new clients",
+// ── Service segments for niche × service intersection pages ───────────────────
+
+export interface ServiceSegmentInfo {
+  slug: string;
+  label: string;
+  shortLabel: string;
+  icon: string;
+  tagline: (nicheLabel: string) => string;
+  intro: (nicheLabel: string, nicheLabelPlural: string) => string;
+  bullets: (nicheLabel: string) => string[];
+  ctaNote: string;
+  href: string;
+}
+
+export const SERVICE_SEGMENTS: Record<string, ServiceSegmentInfo> = {
+  "google-ads": {
+    slug: "google-ads",
+    label: "Google Ads",
+    shortLabel: "Google Ads",
+    icon: "🎯",
+    tagline: (n) => `Show up at the top of Google when ${n.toLowerCase()} customers are searching`,
+    intro: (n, np) =>
+      `Google Ads is the fastest way for ${np.toLowerCase()} to capture customers who are actively searching right now. Unlike social ads, Google Ads targets people with real buying intent — they typed in exactly what they need. Done right, it delivers qualified leads within days of launch.`,
+    bullets: (n) => [
+      `Keyword research specific to ${n.toLowerCase()} services and your local area`,
+      `Campaign structure built to avoid wasted spend on irrelevant searches`,
+      `Ad copy that speaks to ${n.toLowerCase()} customers at the moment of decision`,
+      `Conversion tracking: every call, booking, and form submission attributed`,
+      `Negative keyword management to filter out tyre-kickers`,
+      `Weekly optimisation and transparent monthly reporting`,
     ],
-    faq: (city, _state) => [
-      {
-        q: `How do I get my barbershop to the top of Google Maps in ${city}?`,
-        a: `Map pack rankings are driven by GBP completeness, review velocity, and proximity. We optimise all three. Most ${city} barbershops see meaningful GBP improvement within 4–8 weeks.`,
-      },
-      {
-        q: `Should I run Google Ads or Instagram Ads for my barbershop?`,
-        a: `Both work, but for different goals. Google Ads captures men searching for a barber right now — high intent, fast results. Instagram Ads build brand and are great for showcasing your best cuts to a local audience.`,
-      },
-      {
-        q: `How much should a barbershop in ${city} spend on marketing?`,
-        a: `Most ${city} barbershops see solid results with $200–$500/month combining GBP optimisation and a small Google Ads budget. Given repeat-client lifetime value of $500–$1,500+, the ROI is strong.`,
-      },
-      {
-        q: `How do I get more Google reviews for my barbershop?`,
-        a: `The easiest approach: send a follow-up text after each appointment with a direct Google review link. We'll set up this workflow so it happens automatically after every visit.`,
-      },
-    ],
+    ctaNote: "Campaigns go live within 1–2 weeks. Results visible within 30 days.",
+    href: "/services/google-ads",
   },
-
-  "yoga-studios": {
-    slug: "yoga-studios",
-    label: "Yoga Studio",
-    labelPlural: "Yoga Studios",
-    emoji: "🧘",
-    primaryService: "Google Ads & Meta Ads",
-    accentClass: "bg-gradient-to-br from-slate-700 to-slate-900",
-    heroImage: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200&q=80",
-    tagline: (city) => `Fill your classes and grow memberships in ${city}`,
-    intro: (city, state) =>
-      `Yoga studios in ${city}, ${state} thrive on community, consistency, and finding the right students. DataLatte helps ${city} yoga studios attract new members through local search and targeted ads, reduce churn with retention marketing, and build a reputation that fills classes year-round.`,
-    services: [
-      "Google Business Profile optimisation to rank for 'yoga classes near me' in ${city}",
-      "Local SEO targeting wellness and yoga searches in your area",
-      "Google Ads for high-intent searches like 'yoga studio in ${city}' and 'beginner yoga classes'",
-      "Meta & Instagram Ads showcasing your studio culture and class offerings",
-      "Email & SMS campaigns to reduce drop-off and re-engage lapsed students",
-      "Analytics tracking trial sign-ups, membership conversions, and retention rates",
+  "local-seo": {
+    slug: "local-seo",
+    label: "Local SEO",
+    shortLabel: "Local SEO",
+    icon: "📍",
+    tagline: (n) => `Rank in the Google Map Pack when locals search for ${n.toLowerCase()} services`,
+    intro: (n, np) =>
+      `Over 80% of local searches result in a visit or contact within 24 hours. For ${np.toLowerCase()}, ranking in the top 3 local results ("the map pack") is the single highest-ROI marketing activity — it's free traffic from people actively looking for what you offer.`,
+    bullets: (n) => [
+      `Google Business Profile optimisation specific to ${n.toLowerCase()} categories and attributes`,
+      `On-page local SEO: title tags, location landing pages, and schema markup`,
+      `Citation building and NAP consistency across directories`,
+      `Review strategy to increase velocity and average rating`,
+      `Competitor gap analysis to identify exactly what rivals are ranking for`,
+      `Monthly tracking of map pack positions and organic keyword rankings`,
     ],
-    faq: (city, _state) => [
-      {
-        q: `What's the best way to get new yoga students in ${city}?`,
-        a: `A combination of Google Maps visibility (via GBP optimisation) and targeted Meta Ads works well for most ${city} studios. Google captures searchers ready to book; Instagram attracts people exploring yoga who haven't searched yet.`,
-      },
-      {
-        q: `How do I compete with large yoga chains in ${city}?`,
-        a: `Independent studios win on authenticity, community, and specialisation. We highlight your unique style, instructors, and class variety in ads and local search — things chains can't replicate.`,
-      },
-      {
-        q: `How much should a yoga studio in ${city} spend on ads?`,
-        a: `$400–$1,000/month is typical for ${city} studios. We recommend starting with Meta Ads for new member acquisition and Google Ads for intent-driven searches, adjusting based on what converts best.`,
-      },
-      {
-        q: `How do I reduce student churn at my yoga studio?`,
-        a: `Churn is often a communication gap. We set up automated email and SMS sequences — milestone celebrations, re-engagement campaigns, class reminders — that keep students connected between visits.`,
-      },
-    ],
+    ctaNote: "Initial improvements visible in 4–8 weeks. Compounding results over 3–6 months.",
+    href: "/services/local-seo",
   },
-
-  "nail-salons": {
-    slug: "nail-salons",
-    label: "Nail Salon",
-    labelPlural: "Nail Salons",
-    emoji: "💅",
-    primaryService: "Local SEO & Google Ads",
-    accentClass: "bg-gradient-to-br from-rose-800 to-pink-950",
-    heroImage: "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=1200&q=80",
-    tagline: (city) => `Fill your appointment book every week in ${city}`,
-    intro: (city, state) =>
-      `Nail salons in ${city}, ${state} live on repeat bookings and word-of-mouth. DataLatte helps ${city} nail salons dominate local search, attract new clients with visual advertising, and build a review profile that keeps the appointment book full.`,
-    services: [
-      "Google Business Profile optimisation to rank in the 'nail salon near me' map pack in ${city}",
-      "Local SEO targeting searches like 'gel nails in ${city}' and 'nail technician near me'",
-      "Google Ads capturing clients searching for specific services in your area",
-      "Instagram & Meta Ads showcasing nail art and designs to attract style-focused clients",
-      "Review strategy to build your star rating and stand out from competitors",
-      "Analytics tracking bookings, calls, and which channels drive new appointments",
+  "meta-ads": {
+    slug: "meta-ads",
+    label: "Meta Ads",
+    shortLabel: "Meta Ads",
+    icon: "📱",
+    tagline: (n) => `Reach ${n.toLowerCase()} customers on Facebook and Instagram before they start searching`,
+    intro: (n, np) =>
+      `Meta Ads (Facebook & Instagram) let ${np.toLowerCase()} reach a highly targeted local audience based on demographics, interests, and behaviours. Unlike Google Ads which captures existing demand, Meta Ads creates it — building awareness and driving action before someone even starts Googling.`,
+    bullets: (n) => [
+      `Audience strategy: local targeting, lookalike audiences, and retargeting`,
+      `Creative guidance for ${n.toLowerCase()}-specific ad formats that stop the scroll`,
+      `Campaign objective selection: bookings, leads, awareness, or foot traffic`,
+      `Instagram and Facebook placement optimisation`,
+      `A/B testing of ad copy, visuals, and offers`,
+      `Pixel setup and conversion tracking for every lead and booking`,
     ],
-    faq: (city, _state) => [
-      {
-        q: `How do I get my nail salon to rank higher on Google in ${city}?`,
-        a: `Ranking in the local map pack requires a fully optimised GBP, consistent five-star reviews, and accurate NAP (name, address, phone) data across directories. We handle all of this — most ${city} salons see results in 4–8 weeks.`,
-      },
-      {
-        q: `Are Instagram Ads worth it for a nail salon?`,
-        a: `Absolutely. Nail art is highly visual and performs well on Instagram. We run tight geographic targeting so your ads only reach people in ${city} who are likely to book.`,
-      },
-      {
-        q: `How much should a nail salon in ${city} spend on marketing?`,
-        a: `Most ${city} nail salons see strong results with $200–$500/month. Given repeat-client lifetime value and the relatively low cost per lead for local searches, the ROI is typically excellent.`,
-      },
-      {
-        q: `How do I get more five-star reviews for my nail salon?`,
-        a: `The simplest system: send clients a follow-up text or email 24 hours after their appointment with a direct Google review link. We'll set this up so it happens automatically after every visit.`,
-      },
-    ],
+    ctaNote: "Campaigns live in 1–2 weeks. Optimisation typically improves ROAS over 4–6 weeks.",
+    href: "/services/meta-ads",
   },
-
-  "plumbers": {
-    slug: "plumbers",
-    label: "Plumber",
-    labelPlural: "Plumbers",
-    emoji: "🔧",
-    primaryService: "Google Ads & Local SEO",
-    accentClass: "bg-gradient-to-br from-blue-900 to-slate-900",
-    heroImage: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80",
-    tagline: (city) => `Get more service calls and jobs in ${city}`,
-    intro: (city, state) =>
-      `Plumbing is a high-urgency, high-value service. When someone in ${city}, ${state} needs a plumber, they search Google and call immediately. DataLatte helps ${city} plumbers dominate local search, run profitable Google Ads, and build the trusted reputation that wins both emergency and planned jobs.`,
-    services: [
-      "Google Business Profile optimisation to rank in '${city} plumber' map pack searches",
-      "Local SEO targeting 'plumber near me', 'emergency plumber ${city}', and service-specific keywords",
-      "Google Ads capturing high-intent plumbing searches — emergency and planned jobs",
-      "Google Local Services Ads (LSA) for Google-guaranteed placement with pay-per-lead pricing",
-      "Review generation to build the trust profile that converts searchers into callers",
-      "Analytics to track every call, form submission, and job source by channel",
+  "google-business-profile": {
+    slug: "google-business-profile",
+    label: "Google Business Profile",
+    shortLabel: "Google Business Profile",
+    icon: "🗺️",
+    tagline: (n) => `Win the local map pack and get more calls, directions, and bookings`,
+    intro: (n, np) =>
+      `Your Google Business Profile is the most visible piece of real estate in local search — it shows your photos, hours, reviews, and contact details before your website. For ${np.toLowerCase()}, an optimised GBP is often the difference between ranking in the top 3 and being invisible to local customers.`,
+    bullets: (n) => [
+      `Full GBP audit against ${n.toLowerCase()}-specific ranking factors`,
+      `Category, attribute, and service section optimisation`,
+      `Photo strategy: what types, how many, and how often to update`,
+      `Google Posts calendar to maintain freshness signals`,
+      `Review generation system and response template setup`,
+      `Q&A section management and spam fighting`,
     ],
-    faq: (city, _state) => [
-      {
-        q: `What's the fastest way to get more plumbing calls in ${city}?`,
-        a: `Google Ads and Local Services Ads (LSA) can generate calls within days of launch. Both capture high-intent emergency and planned-job searches. For longer-term growth, GBP optimisation compounds over time.`,
-      },
-      {
-        q: `Should I use Google Ads or Local Services Ads as a ${city} plumber?`,
-        a: `Both work well. LSA places you at the very top with a Google Guaranteed badge and charges per lead. Regular Google Ads give more keyword control. We typically recommend starting with LSA if your reviews are strong.`,
-      },
-      {
-        q: `How much should a ${city} plumber spend on Google Ads?`,
-        a: `Most ${city} plumbing companies see strong results with $500–$1,500/month. With average job values of $300–$2,000+, even a handful of extra jobs per month creates excellent ROI.`,
-      },
-      {
-        q: `How long does local SEO take for a plumber in ${city}?`,
-        a: `GBP improvements are typically visible in 4–8 weeks. Ranking consistently for competitive ${city} plumber terms takes 3–6 months of ongoing work. Google Ads deliver results immediately.`,
-      },
-    ],
+    ctaNote: "GBP improvements start affecting rankings within 4–8 weeks.",
+    href: "/services/google-business-profile",
   },
-
-  "electricians": {
-    slug: "electricians",
-    label: "Electrician",
-    labelPlural: "Electricians",
-    emoji: "⚡",
-    primaryService: "Google Ads & Local SEO",
-    accentClass: "bg-gradient-to-br from-coffee-800 to-coffee-900",
-    heroImage: "https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=1200&q=80",
-    tagline: (city) => `More service calls and jobs in ${city}`,
-    intro: (city, state) =>
-      `Electrical services in ${city}, ${state} are high-value and high-trust. When homeowners need an electrician, they search Google first and call whoever inspires the most confidence. DataLatte helps ${city} electricians dominate local search, run profitable Google Ads, and build the trusted reputation that wins residential and commercial jobs.`,
-    services: [
-      "Google Business Profile optimisation to rank in '${city} electrician' map pack searches",
-      "Local SEO targeting 'electrician near me', 'licensed electrician ${city}', and service-specific keywords",
-      "Google Ads capturing high-intent electrical searches across emergency and planned jobs",
-      "Google Local Services Ads (LSA) for Google-guaranteed placement with pay-per-lead pricing",
-      "Review generation to build the trust signals that convert searchers into callers",
-      "Analytics to track every call, form submission, and job source by channel",
+  "email-sms": {
+    slug: "email-sms",
+    label: "Email & SMS Marketing",
+    shortLabel: "Email & SMS",
+    icon: "✉️",
+    tagline: (n) => `Turn one-time visitors into loyal ${n.toLowerCase()} regulars`,
+    intro: (n, np) =>
+      `Email and SMS marketing delivers the highest ROI of any channel for ${np.toLowerCase()} — because it targets people who already visited, booked, or bought. It's the engine that turns a one-time customer into a regular, and a regular into a referral source.`,
+    bullets: (n) => [
+      `List building strategy: capture emails and phone numbers at every touchpoint`,
+      `Welcome sequence that introduces new ${n.toLowerCase()} customers to your full offer`,
+      `Re-engagement campaigns to win back lapsed clients`,
+      `Booking reminder sequences to reduce no-shows`,
+      `Seasonal and event campaigns for ${n.toLowerCase()} peak periods`,
+      `Segmentation to send the right message to the right customer`,
     ],
-    faq: (city, _state) => [
-      {
-        q: `How do I get more electrical jobs in ${city}?`,
-        a: `The most reliable combination: GBP optimisation to rank in local map searches, Google Ads for immediate high-intent traffic, and a strong review profile to convert searchers into callers. We run all three together.`,
-      },
-      {
-        q: `Should I use Google Ads or Local Services Ads as a ${city} electrician?`,
-        a: `LSA places you at the very top with a Google Guaranteed badge — great if you have strong reviews. Regular Google Ads offer more keyword control. We typically recommend both once you're established.`,
-      },
-      {
-        q: `How much should an electrician in ${city} spend on Google Ads?`,
-        a: `Most ${city} electricians see strong ROI with $500–$1,500/month. With average job values of $500–$3,000+, even a few additional jobs per month more than covers the ad spend.`,
-      },
-      {
-        q: `How long does local SEO take for an electrician in ${city}?`,
-        a: `GBP improvements show up in 4–8 weeks. Ranking consistently for competitive ${city} electrician terms takes 3–6 months. Google Ads and LSA deliver results immediately while SEO compounds.`,
-      },
+    ctaNote: "First campaigns typically launch within 2–3 weeks. Results visible immediately on open and booking rates.",
+    href: "/services/email-sms",
+  },
+  "social-media": {
+    slug: "social-media",
+    label: "Social Media Management",
+    shortLabel: "Social Media",
+    icon: "📸",
+    tagline: (n) => `Build a feed that turns followers into ${n.toLowerCase()} customers`,
+    intro: (n, np) =>
+      `Organic social media for ${np.toLowerCase()} isn't about follower counts — it's about building trust with the local community that eventually converts into bookings and visits. A consistent, well-executed social presence builds the social proof that new customers look for before choosing any local service.`,
+    bullets: (n) => [
+      `Content strategy tailored to ${n.toLowerCase()} audience and platforms`,
+      `Post scheduling: Instagram, Facebook, and Google Business Profile`,
+      `${n} showcase content: before/afters, team features, and behind-the-scenes`,
+      `Community management: responding to comments and DMs`,
+      `Hashtag and location tagging strategy for local discovery`,
+      `Monthly reporting on reach, engagement, and profile visits`,
     ],
+    ctaNote: "Content calendar built and scheduled in week one. Engagement typically grows over 60–90 days.",
+    href: "/services/social-media",
   },
 };
+
+export const SERVICE_SEGMENT_SLUGS = Object.keys(SERVICE_SEGMENTS);
