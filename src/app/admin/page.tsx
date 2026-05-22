@@ -2307,15 +2307,15 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
             <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
               <h2 className="font-semibold text-white mb-1">Articles Published Per Day</h2>
               <p className="text-xs text-gray-500 mb-5">Last 14 days · source: MDX files</p>
-              <div className="flex items-end gap-2 h-32">
+              <div className="flex gap-2 h-32">
                 {last14Days.map((day) => (
-                  <div key={day.date} className="flex-1 flex flex-col items-center gap-1">
+                  <div key={day.date} className="flex-1 flex flex-col justify-end items-center gap-1">
                     {day.count > 0 && (
                       <span className="text-xs text-gray-400">{day.count}</span>
                     )}
                     <div
-                      className="w-full rounded-t bg-amber-600/70 hover:bg-amber-500 transition min-h-[2px]"
-                      style={{ height: `${Math.max((day.count / maxDayCount) * 100, day.count > 0 ? 4 : 0)}%` }}
+                      className="w-full rounded-t bg-amber-600/70 hover:bg-amber-500 transition"
+                      style={{ height: `${Math.max((day.count / maxDayCount) * 104, day.count > 0 ? 4 : 2)}px` }}
                       title={`${day.label}: ${day.count} articles`}
                     />
                     <span className="text-xs text-gray-600 hidden sm:block" style={{ fontSize: "0.6rem" }}>
@@ -2361,12 +2361,12 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
                   {gsc.dailyTrend.length > 0 && (
                     <div className="bg-gray-900 border border-gray-800 rounded-xl p-5">
                       <p className="text-sm font-medium text-white mb-4">Impressions Trend</p>
-                      <div className="flex items-end gap-1 h-24">
+                      <div className="flex gap-1 h-24">
                         {gsc.dailyTrend.map((d) => (
-                          <div key={d.date} className="flex-1 flex flex-col items-center gap-1">
+                          <div key={d.date} className="flex-1 flex flex-col justify-end">
                             <div
-                              className="w-full rounded-t bg-purple-600/60 hover:bg-purple-500 transition min-h-[2px]"
-                              style={{ height: `${Math.max((d.impressions / maxGscImpressions) * 100, d.impressions > 0 ? 4 : 0)}%` }}
+                              className="w-full rounded-t bg-purple-600/60 hover:bg-purple-500 transition"
+                              style={{ height: `${Math.max((d.impressions / maxGscImpressions) * 88, d.impressions > 0 ? 4 : 2)}px` }}
                               title={`${d.date}: ${d.impressions.toLocaleString()} impressions, ${d.clicks} clicks`}
                             />
                           </div>
@@ -2465,12 +2465,12 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
                   {ga4.dailyTrend.length > 0 && (
                     <div className="bg-gray-900 border border-gray-800 rounded-xl p-5">
                       <p className="text-sm font-medium text-white mb-4">Sessions Trend</p>
-                      <div className="flex items-end gap-1 h-24">
+                      <div className="flex gap-1 h-24">
                         {ga4.dailyTrend.map((d) => (
-                          <div key={d.date} className="flex-1 flex flex-col items-center gap-1">
+                          <div key={d.date} className="flex-1 flex flex-col justify-end">
                             <div
-                              className="w-full rounded-t bg-blue-600/60 hover:bg-blue-500 transition min-h-[2px]"
-                              style={{ height: `${Math.max((d.sessions / maxSessions) * 100, d.sessions > 0 ? 4 : 0)}%` }}
+                              className="w-full rounded-t bg-blue-600/60 hover:bg-blue-500 transition"
+                              style={{ height: `${Math.max((d.sessions / maxSessions) * 88, d.sessions > 0 ? 4 : 2)}px` }}
                               title={`${d.date}: ${d.sessions} sessions, ${d.users} users`}
                             />
                           </div>
