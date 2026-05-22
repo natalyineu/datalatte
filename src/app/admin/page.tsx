@@ -48,6 +48,41 @@ interface Recommendation {
 
 type TabId = "agents" | "proposals" | "pipeline" | "queue" | "research" | "published" | "reports";
 
+// ── Analytics types ───────────────────────────────────────────────────────────
+
+interface GSCSummary {
+  fetchedAt: string;
+  period: { startDate: string; endDate: string };
+  clicks: number;
+  impressions: number;
+  ctr: number;
+  avgPosition: number | null;
+  topQueries: { query: string; clicks: number; impressions: number; position: number }[];
+  topPages: { page: string; clicks: number; impressions: number; position: number }[];
+  dailyTrend: { date: string; clicks: number; impressions: number; position: number }[];
+}
+
+interface GA4Summary {
+  fetchedAt: string;
+  period: { startDate: string; endDate: string };
+  overview: {
+    sessions: number;
+    activeUsers: number;
+    newUsers: number;
+    bounceRate: number;
+    avgSessionDurationSeconds: number;
+    pageViews: number;
+  } | null;
+  topPages: { page: string; views: number; users: number }[];
+  trafficSources: { channel: string; sessions: number; users: number }[];
+  dailyTrend: { date: string; sessions: number; users: number }[];
+}
+
+interface AnalyticsData {
+  gsc: GSCSummary | null;
+  ga4: GA4Summary | null;
+}
+
 // ── Agent types ───────────────────────────────────────────────────────────────
 
 interface RunSummary {
@@ -862,6 +897,9 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
   const [proposalStatusFilter, setProposalStatusFilter] = useState<string>("pending");
   const [proposalTypeFilter, setProposalTypeFilter]     = useState<string>("all");
 
+  // Analytics
+  const [analytics, setAnalytics] = useState<AnalyticsData | null>(null);
+
   // ── Fetchers ──────────────────────────────────────────────────────────────
 
   const fetchQueue = useCallback(async () => {
@@ -908,13 +946,22 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
     }
   }, [token]);
 
+  const fetchAnalytics = useCallback(async () => {
+    const res = await authFetch("/api/admin/analytics", {}, token);
+    if (res.ok) {
+      const d = await res.json() as AnalyticsData;
+      setAnalytics(d);
+    }
+  }, [token]);
+
   useEffect(() => {
     fetchQueue();
     fetchArticles();
     fetchRecommendations();
     fetchProposals();
     fetchQualityScores();
-  }, [fetchQueue, fetchArticles, fetchRecommendations, fetchProposals, fetchQualityScores]);
+    fetchAnalytics();
+  }, [fetchQueue, fetchArticles, fetchRecommendations, fetchProposals, fetchQualityScores, fetchAnalytics]);
 
   // Auto-refresh: every 30s, 15s if Writer is active
   useEffect(() => {
@@ -2239,10 +2286,27 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
         {/* ══════════════════════════════════════════════════════════════════ */}
         {activeTab === "reports" && (
           <div className="space-y-8">
+
+            {/* ── Content stats ─────────────────────────────────────────── */}
+            <div className="grid grid-cols-3 gap-4">
+              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 text-center">
+                <p className="text-3xl font-bold text-green-400">{articles.length}</p>
+                <p className="text-xs text-gray-500 mt-1 uppercase tracking-wide">Published</p>
+              </div>
+              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 text-center">
+                <p className="text-3xl font-bold text-yellow-400">{pendingCount}</p>
+                <p className="text-xs text-gray-500 mt-1 uppercase tracking-wide">Pending</p>
+              </div>
+              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 text-center">
+                <p className="text-3xl font-bold text-amber-400">{publishedToday}</p>
+                <p className="text-xs text-gray-500 mt-1 uppercase tracking-wide">Today</p>
+              </div>
+            </div>
+
             {/* Articles per day */}
             <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
-              <h2 className="font-semibold text-white mb-1">Articles Per Day</h2>
-              <p className="text-xs text-gray-500 mb-5">Last 14 days</p>
+              <h2 className="font-semibold text-white mb-1">Articles Published Per Day</h2>
+              <p className="text-xs text-gray-500 mb-5">Last 14 days · source: MDX files</p>
               <div className="flex items-end gap-2 h-32">
                 {last14Days.map((day) => (
                   <div key={day.date} className="flex-1 flex flex-col items-center gap-1">
@@ -2262,10 +2326,212 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
               </div>
             </div>
 
+            {/* ── GSC ───────────────────────────────────────────────────── */}
+            {analytics?.gsc ? (() => {
+              const gsc = analytics.gsc!;
+              const maxGscImpressions = Math.max(...gsc.dailyTrend.map((d) => d.impressions), 1);
+              const periodLabel = `${gsc.period.startDate} → ${gsc.period.endDate}`;
+              const fetchedLabel = new Date(gsc.fetchedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
+              return (
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <h2 className="font-semibold text-white">Google Search Console</h2>
+                    <span className="text-xs text-gray-500">{periodLabel} · fetched {fetchedLabel}</span>
+                  </div>
+                  {/* GSC KPIs */}
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 text-center">
+                      <p className="text-2xl font-bold text-blue-400">{gsc.clicks.toLocaleString()}</p>
+                      <p className="text-xs text-gray-500 mt-1">Clicks</p>
+                    </div>
+                    <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 text-center">
+                      <p className="text-2xl font-bold text-purple-400">{gsc.impressions.toLocaleString()}</p>
+                      <p className="text-xs text-gray-500 mt-1">Impressions</p>
+                    </div>
+                    <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 text-center">
+                      <p className="text-2xl font-bold text-green-400">{(gsc.ctr * 100).toFixed(2)}%</p>
+                      <p className="text-xs text-gray-500 mt-1">CTR</p>
+                    </div>
+                    <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 text-center">
+                      <p className="text-2xl font-bold text-amber-400">{gsc.avgPosition !== null ? gsc.avgPosition.toFixed(1) : "—"}</p>
+                      <p className="text-xs text-gray-500 mt-1">Avg Position</p>
+                    </div>
+                  </div>
+                  {/* GSC daily trend */}
+                  {gsc.dailyTrend.length > 0 && (
+                    <div className="bg-gray-900 border border-gray-800 rounded-xl p-5">
+                      <p className="text-sm font-medium text-white mb-4">Impressions Trend</p>
+                      <div className="flex items-end gap-1 h-24">
+                        {gsc.dailyTrend.map((d) => (
+                          <div key={d.date} className="flex-1 flex flex-col items-center gap-1">
+                            <div
+                              className="w-full rounded-t bg-purple-600/60 hover:bg-purple-500 transition min-h-[2px]"
+                              style={{ height: `${Math.max((d.impressions / maxGscImpressions) * 100, d.impressions > 0 ? 4 : 0)}%` }}
+                              title={`${d.date}: ${d.impressions.toLocaleString()} impressions, ${d.clicks} clicks`}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                      <div className="flex justify-between mt-1 text-xs text-gray-600">
+                        <span>{gsc.dailyTrend[0]?.date.slice(5)}</span>
+                        <span>{gsc.dailyTrend[gsc.dailyTrend.length - 1]?.date.slice(5)}</span>
+                      </div>
+                    </div>
+                  )}
+                  {/* Top queries + top pages side by side */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <div className="bg-gray-900 border border-gray-800 rounded-xl p-5">
+                      <p className="text-sm font-medium text-white mb-3">Top Queries</p>
+                      <div className="space-y-2">
+                        {gsc.topQueries.slice(0, 8).map((q) => (
+                          <div key={q.query} className="flex items-center justify-between gap-2">
+                            <span className="text-xs text-gray-300 truncate flex-1">{q.query}</span>
+                            <div className="flex items-center gap-3 shrink-0 text-xs text-gray-500">
+                              <span className="text-blue-400">{q.clicks} clk</span>
+                              <span>{q.impressions.toLocaleString()} imp</span>
+                              <span className="text-amber-400">#{q.position.toFixed(0)}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="bg-gray-900 border border-gray-800 rounded-xl p-5">
+                      <p className="text-sm font-medium text-white mb-3">Top Pages (GSC)</p>
+                      <div className="space-y-2">
+                        {gsc.topPages.slice(0, 8).map((p) => (
+                          <div key={p.page} className="flex items-center justify-between gap-2">
+                            <span className="text-xs text-gray-300 truncate flex-1 font-mono">{p.page || "/"}</span>
+                            <div className="flex items-center gap-3 shrink-0 text-xs text-gray-500">
+                              <span className="text-blue-400">{p.clicks} clk</span>
+                              <span>{p.impressions.toLocaleString()} imp</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })() : (
+              <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
+                <h2 className="font-semibold text-white mb-1">Google Search Console</h2>
+                <p className="text-sm text-gray-500">No data yet — run the Daily Analytics Fetch workflow to populate GSC data.</p>
+              </div>
+            )}
+
+            {/* ── GA4 ───────────────────────────────────────────────────── */}
+            {analytics?.ga4 ? (() => {
+              const ga4 = analytics.ga4!;
+              const ov = ga4.overview;
+              const maxSessions = Math.max(...ga4.dailyTrend.map((d) => d.sessions), 1);
+              const periodLabel = `${ga4.period.startDate} → ${ga4.period.endDate}`;
+              const fetchedLabel = new Date(ga4.fetchedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
+              const fmtDur = (s: number) => s < 60 ? `${s.toFixed(0)}s` : `${Math.floor(s / 60)}m ${(s % 60).toFixed(0)}s`;
+              return (
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <h2 className="font-semibold text-white">Google Analytics 4</h2>
+                    <span className="text-xs text-gray-500">{periodLabel} · fetched {fetchedLabel}</span>
+                  </div>
+                  {ov && (
+                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+                      <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 text-center">
+                        <p className="text-2xl font-bold text-blue-400">{ov.sessions.toLocaleString()}</p>
+                        <p className="text-xs text-gray-500 mt-1">Sessions</p>
+                      </div>
+                      <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 text-center">
+                        <p className="text-2xl font-bold text-green-400">{ov.activeUsers.toLocaleString()}</p>
+                        <p className="text-xs text-gray-500 mt-1">Active Users</p>
+                      </div>
+                      <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 text-center">
+                        <p className="text-2xl font-bold text-teal-400">{ov.newUsers.toLocaleString()}</p>
+                        <p className="text-xs text-gray-500 mt-1">New Users</p>
+                      </div>
+                      <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 text-center">
+                        <p className="text-2xl font-bold text-orange-400">{(ov.bounceRate * 100).toFixed(1)}%</p>
+                        <p className="text-xs text-gray-500 mt-1">Bounce Rate</p>
+                      </div>
+                      <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 text-center">
+                        <p className="text-2xl font-bold text-amber-400">{fmtDur(ov.avgSessionDurationSeconds)}</p>
+                        <p className="text-xs text-gray-500 mt-1">Avg Duration</p>
+                      </div>
+                      <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 text-center">
+                        <p className="text-2xl font-bold text-purple-400">{ov.pageViews.toLocaleString()}</p>
+                        <p className="text-xs text-gray-500 mt-1">Page Views</p>
+                      </div>
+                    </div>
+                  )}
+                  {/* GA4 daily sessions trend */}
+                  {ga4.dailyTrend.length > 0 && (
+                    <div className="bg-gray-900 border border-gray-800 rounded-xl p-5">
+                      <p className="text-sm font-medium text-white mb-4">Sessions Trend</p>
+                      <div className="flex items-end gap-1 h-24">
+                        {ga4.dailyTrend.map((d) => (
+                          <div key={d.date} className="flex-1 flex flex-col items-center gap-1">
+                            <div
+                              className="w-full rounded-t bg-blue-600/60 hover:bg-blue-500 transition min-h-[2px]"
+                              style={{ height: `${Math.max((d.sessions / maxSessions) * 100, d.sessions > 0 ? 4 : 0)}%` }}
+                              title={`${d.date}: ${d.sessions} sessions, ${d.users} users`}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                      <div className="flex justify-between mt-1 text-xs text-gray-600">
+                        <span>{ga4.dailyTrend[0]?.date}</span>
+                        <span>{ga4.dailyTrend[ga4.dailyTrend.length - 1]?.date}</span>
+                      </div>
+                    </div>
+                  )}
+                  {/* Top pages + traffic sources side by side */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <div className="bg-gray-900 border border-gray-800 rounded-xl p-5">
+                      <p className="text-sm font-medium text-white mb-3">Top Pages (GA4)</p>
+                      <div className="space-y-2">
+                        {ga4.topPages.slice(0, 8).map((p) => (
+                          <div key={p.page} className="flex items-center justify-between gap-2">
+                            <span className="text-xs text-gray-300 truncate flex-1 font-mono">{p.page || "/"}</span>
+                            <div className="flex items-center gap-3 shrink-0 text-xs text-gray-500">
+                              <span className="text-purple-400">{p.views.toLocaleString()} views</span>
+                              <span>{p.users} users</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="bg-gray-900 border border-gray-800 rounded-xl p-5">
+                      <p className="text-sm font-medium text-white mb-3">Traffic Sources</p>
+                      <div className="space-y-2">
+                        {ga4.trafficSources.slice(0, 8).map((s) => {
+                          const totalSessions = ga4.trafficSources.reduce((acc, x) => acc + x.sessions, 0);
+                          const pct = totalSessions > 0 ? Math.round((s.sessions / totalSessions) * 100) : 0;
+                          return (
+                            <div key={s.channel}>
+                              <div className="flex items-center justify-between text-xs mb-1">
+                                <span className="text-gray-300 truncate flex-1 mr-3">{s.channel}</span>
+                                <span className="text-gray-500 shrink-0">{s.sessions.toLocaleString()} · {pct}%</span>
+                              </div>
+                              <div className="w-full bg-gray-800 rounded-full h-1">
+                                <div className="bg-blue-600 h-1 rounded-full" style={{ width: `${pct}%` }} />
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })() : (
+              <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
+                <h2 className="font-semibold text-white mb-1">Google Analytics 4</h2>
+                <p className="text-sm text-gray-500">No data yet — run the Daily Analytics Fetch workflow to populate GA4 data.</p>
+              </div>
+            )}
+
             {/* Cluster distribution */}
             <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
               <h2 className="font-semibold text-white mb-1">Cluster Distribution</h2>
-              <p className="text-xs text-gray-500 mb-5">Published articles by cluster</p>
+              <p className="text-xs text-gray-500 mb-5">Published articles by cluster · source: MDX files</p>
               {clusterDistribEntries.length === 0 ? (
                 <p className="text-gray-500 text-sm">No published articles yet</p>
               ) : (
@@ -2289,25 +2555,6 @@ function Dashboard({ token, onLogout }: { token: string; onLogout: () => void })
                   })}
                 </div>
               )}
-            </div>
-
-            {/* Status breakdown */}
-            <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
-              <h2 className="font-semibold text-white mb-5">Status Breakdown</h2>
-              <div className="grid grid-cols-3 gap-4">
-                <div className="text-center">
-                  <p className="text-3xl font-bold text-yellow-400">{pendingCount}</p>
-                  <p className="text-xs text-gray-500 mt-1 uppercase tracking-wide">Pending</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-3xl font-bold text-blue-400">{generatedCount}</p>
-                  <p className="text-xs text-gray-500 mt-1 uppercase tracking-wide">Generated</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-3xl font-bold text-green-400">{articles.length}</p>
-                  <p className="text-xs text-gray-500 mt-1 uppercase tracking-wide">Published</p>
-                </div>
-              </div>
             </div>
           </div>
         )}

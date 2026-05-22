@@ -2,8 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { checkAdminAuth } from "@/lib/adminAuth";
 import fs from "fs";
 import path from "path";
+import matter from "gray-matter";
 
-const INDEX_PATH = path.join(process.cwd(), "content/blog/INDEX.md");
+const BLOG_DIR = path.join(process.cwd(), "content/blog");
 
 export interface ArticleMeta {
   slug: string;
@@ -15,58 +16,43 @@ export interface ArticleMeta {
   url: string;
 }
 
-function parseIndexMd(): ArticleMeta[] {
-  const raw = fs.readFileSync(INDEX_PATH, "utf8");
-  const lines = raw.split("\n");
+function scanMdxFiles(): ArticleMeta[] {
+  const files = fs.readdirSync(BLOG_DIR).filter((f) => f.endsWith(".mdx"));
+  const articles: ArticleMeta[] = [];
 
-  // Find the table header line
-  const headerIdx = lines.findIndex((l) => l.startsWith("| Slug"));
-  if (headerIdx === -1) return [];
+  for (const file of files) {
+    if (file === "INDEX.md") continue;
+    const slug = file.replace(/\.mdx$/, "");
+    try {
+      const raw = fs.readFileSync(path.join(BLOG_DIR, file), "utf8");
+      const { data, content } = matter(raw);
+      // Rough word count from content body
+      const wordCount = content.trim().split(/\s+/).length;
+      articles.push({
+        slug,
+        title: String(data.title ?? slug),
+        date: String(data.date ?? ""),
+        wordCount,
+        category: String(data.category ?? ""),
+        tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
+        url: `https://datalatte.pro/blog/${slug}`,
+      });
+    } catch {
+      // skip unreadable files
+    }
+  }
 
-  // Data rows start after header + separator
-  const dataLines = lines.slice(headerIdx + 2).filter((l) => l.startsWith("|"));
-
-  return dataLines.map((line) => {
-    // | `slug` | Title | Date | Words | Category | Tags |
-    const cols = line
-      .split("|")
-      .map((c) => c.trim())
-      .filter(Boolean);
-
-    if (cols.length < 5) return null;
-
-    const slug = cols[0].replace(/`/g, "");
-    const title = cols[1];
-    const date = cols[2];
-    const wordCount = parseInt(cols[3], 10) || 0;
-    // Support both old format (5 cols: no category) and new (6 cols: with category)
-    const hasCategory = cols.length >= 6;
-    const category = hasCategory ? cols[4] : "";
-    const tags = (hasCategory ? cols[5] : cols[4])
-      .split(",")
-      .map((t) => t.trim())
-      .filter(Boolean);
-
-    return {
-      slug,
-      title,
-      date,
-      wordCount,
-      category,
-      tags,
-      url: `https://datalatte.pro/blog/${slug}`,
-    } as ArticleMeta;
-  }).filter((a): a is ArticleMeta => a !== null);
+  return articles.sort((a, b) => b.date.localeCompare(a.date));
 }
 
 export async function GET(req: NextRequest): Promise<NextResponse> {
   const authError = checkAdminAuth(req);
   if (authError) return authError;
   try {
-    const articles = parseIndexMd();
+    const articles = scanMdxFiles();
     return NextResponse.json({ articles, total: articles.length }, { status: 200 });
   } catch (err) {
-    console.error("Articles read error:", err);
-    return NextResponse.json({ error: "Failed to read articles index" }, { status: 500 });
+    console.error("Articles scan error:", err);
+    return NextResponse.json({ error: "Failed to scan articles" }, { status: 500 });
   }
 }
