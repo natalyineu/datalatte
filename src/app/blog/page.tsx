@@ -283,7 +283,7 @@ export default async function BlogPage({
       )}
 
       <SectionWrapper>
-        <BlogGrid posts={pagePosts} />
+        <BlogGrid posts={allPosts} />
 
         {/* HTML pagination — crawlable by Google */}
         <Pagination currentPage={currentPage} totalPages={totalPages} />
