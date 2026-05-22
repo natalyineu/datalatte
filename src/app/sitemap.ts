@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { CITIES, NICHES } from "@/lib/locationData";
+import { CITIES, NICHES, SERVICE_SEGMENT_SLUGS } from "@/lib/locationData";
 
 const baseUrl = "https://datalatte.pro";
 const contentDir = path.join(process.cwd(), "content/blog");
@@ -119,6 +119,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Tools
     { url: `${baseUrl}/tools/marketing-budget-calculator`, lastModified: today,      changeFrequency: "monthly", priority: 0.9 },
     { url: `${baseUrl}/tools/ai-agent-builder`,            lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/tools/local-seo-grader`,            lastModified: today,      changeFrequency: "monthly", priority: 0.9 },
+    // New content pages
+    { url: `${baseUrl}/pricing`,                           lastModified: today,      changeFrequency: "monthly", priority: 0.9 },
+    { url: `${baseUrl}/case-studies`,                      lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/results`,                           lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/resources`,                         lastModified: today,      changeFrequency: "weekly",  priority: 0.8 },
+    { url: `${baseUrl}/for/multi-location`,                lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/compare/freelance-vs-agency`,       lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/services/programmatic`,             lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     // Legal
     { url: `${baseUrl}/privacy`,                            lastModified: today,      changeFrequency: "yearly",  priority: 0.3 },
     { url: `${baseUrl}/terms`,                              lastModified: today,      changeFrequency: "yearly",  priority: 0.3 },
@@ -138,5 +147,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
-  return [...staticRoutes, ...paginationRoutes, ...locationRoutes, ...categoryRoutes, ...blogRoutes];
+  // Niche × service intersection pages
+  const nicheServiceRoutes: MetadataRoute.Sitemap = [];
+  for (const niche of NICHES) {
+    for (const serviceSlug of SERVICE_SEGMENT_SLUGS) {
+      nicheServiceRoutes.push({
+        url: `${baseUrl}/for/${niche}/${serviceSlug}`,
+        lastModified: today,
+        changeFrequency: "monthly",
+        priority: 0.75,
+      });
+    }
+  }
+
+  return [...staticRoutes, ...paginationRoutes, ...locationRoutes, ...nicheServiceRoutes, ...categoryRoutes, ...blogRoutes];
 }

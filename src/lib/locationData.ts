@@ -457,3 +457,136 @@ export const NICHE_DATA: Record<NicheSlug, NicheInfo> = {
     ],
   },
 };
+
+// ── Service segments for niche × service intersection pages ───────────────────
+
+export interface ServiceSegmentInfo {
+  slug: string;
+  label: string;
+  shortLabel: string;
+  icon: string;
+  tagline: (nicheLabel: string) => string;
+  intro: (nicheLabel: string, nicheLabelPlural: string) => string;
+  bullets: (nicheLabel: string) => string[];
+  ctaNote: string;
+  href: string;
+}
+
+export const SERVICE_SEGMENTS: Record<string, ServiceSegmentInfo> = {
+  "google-ads": {
+    slug: "google-ads",
+    label: "Google Ads",
+    shortLabel: "Google Ads",
+    icon: "🎯",
+    tagline: (n) => `Show up at the top of Google when ${n.toLowerCase()} customers are searching`,
+    intro: (n, np) =>
+      `Google Ads is the fastest way for ${np.toLowerCase()} to capture customers who are actively searching right now. Unlike social ads, Google Ads targets people with real buying intent — they typed in exactly what they need. Done right, it delivers qualified leads within days of launch.`,
+    bullets: (n) => [
+      `Keyword research specific to ${n.toLowerCase()} services and your local area`,
+      `Campaign structure built to avoid wasted spend on irrelevant searches`,
+      `Ad copy that speaks to ${n.toLowerCase()} customers at the moment of decision`,
+      `Conversion tracking: every call, booking, and form submission attributed`,
+      `Negative keyword management to filter out tyre-kickers`,
+      `Weekly optimisation and transparent monthly reporting`,
+    ],
+    ctaNote: "Campaigns go live within 1–2 weeks. Results visible within 30 days.",
+    href: "/services/google-ads",
+  },
+  "local-seo": {
+    slug: "local-seo",
+    label: "Local SEO",
+    shortLabel: "Local SEO",
+    icon: "📍",
+    tagline: (n) => `Rank in the Google Map Pack when locals search for ${n.toLowerCase()} services`,
+    intro: (n, np) =>
+      `Over 80% of local searches result in a visit or contact within 24 hours. For ${np.toLowerCase()}, ranking in the top 3 local results ("the map pack") is the single highest-ROI marketing activity — it's free traffic from people actively looking for what you offer.`,
+    bullets: (n) => [
+      `Google Business Profile optimisation specific to ${n.toLowerCase()} categories and attributes`,
+      `On-page local SEO: title tags, location landing pages, and schema markup`,
+      `Citation building and NAP consistency across directories`,
+      `Review strategy to increase velocity and average rating`,
+      `Competitor gap analysis to identify exactly what rivals are ranking for`,
+      `Monthly tracking of map pack positions and organic keyword rankings`,
+    ],
+    ctaNote: "Initial improvements visible in 4–8 weeks. Compounding results over 3–6 months.",
+    href: "/services/local-seo",
+  },
+  "meta-ads": {
+    slug: "meta-ads",
+    label: "Meta Ads",
+    shortLabel: "Meta Ads",
+    icon: "📱",
+    tagline: (n) => `Reach ${n.toLowerCase()} customers on Facebook and Instagram before they start searching`,
+    intro: (n, np) =>
+      `Meta Ads (Facebook & Instagram) let ${np.toLowerCase()} reach a highly targeted local audience based on demographics, interests, and behaviours. Unlike Google Ads which captures existing demand, Meta Ads creates it — building awareness and driving action before someone even starts Googling.`,
+    bullets: (n) => [
+      `Audience strategy: local targeting, lookalike audiences, and retargeting`,
+      `Creative guidance for ${n.toLowerCase()}-specific ad formats that stop the scroll`,
+      `Campaign objective selection: bookings, leads, awareness, or foot traffic`,
+      `Instagram and Facebook placement optimisation`,
+      `A/B testing of ad copy, visuals, and offers`,
+      `Pixel setup and conversion tracking for every lead and booking`,
+    ],
+    ctaNote: "Campaigns live in 1–2 weeks. Optimisation typically improves ROAS over 4–6 weeks.",
+    href: "/services/meta-ads",
+  },
+  "google-business-profile": {
+    slug: "google-business-profile",
+    label: "Google Business Profile",
+    shortLabel: "Google Business Profile",
+    icon: "🗺️",
+    tagline: (n) => `Win the local map pack and get more calls, directions, and bookings`,
+    intro: (n, np) =>
+      `Your Google Business Profile is the most visible piece of real estate in local search — it shows your photos, hours, reviews, and contact details before your website. For ${np.toLowerCase()}, an optimised GBP is often the difference between ranking in the top 3 and being invisible to local customers.`,
+    bullets: (n) => [
+      `Full GBP audit against ${n.toLowerCase()}-specific ranking factors`,
+      `Category, attribute, and service section optimisation`,
+      `Photo strategy: what types, how many, and how often to update`,
+      `Google Posts calendar to maintain freshness signals`,
+      `Review generation system and response template setup`,
+      `Q&A section management and spam fighting`,
+    ],
+    ctaNote: "GBP improvements start affecting rankings within 4–8 weeks.",
+    href: "/services/google-business-profile",
+  },
+  "email-sms": {
+    slug: "email-sms",
+    label: "Email & SMS Marketing",
+    shortLabel: "Email & SMS",
+    icon: "✉️",
+    tagline: (n) => `Turn one-time visitors into loyal ${n.toLowerCase()} regulars`,
+    intro: (n, np) =>
+      `Email and SMS marketing delivers the highest ROI of any channel for ${np.toLowerCase()} — because it targets people who already visited, booked, or bought. It's the engine that turns a one-time customer into a regular, and a regular into a referral source.`,
+    bullets: (n) => [
+      `List building strategy: capture emails and phone numbers at every touchpoint`,
+      `Welcome sequence that introduces new ${n.toLowerCase()} customers to your full offer`,
+      `Re-engagement campaigns to win back lapsed clients`,
+      `Booking reminder sequences to reduce no-shows`,
+      `Seasonal and event campaigns for ${n.toLowerCase()} peak periods`,
+      `Segmentation to send the right message to the right customer`,
+    ],
+    ctaNote: "First campaigns typically launch within 2–3 weeks. Results visible immediately on open and booking rates.",
+    href: "/services/email-sms",
+  },
+  "social-media": {
+    slug: "social-media",
+    label: "Social Media Management",
+    shortLabel: "Social Media",
+    icon: "📸",
+    tagline: (n) => `Build a feed that turns followers into ${n.toLowerCase()} customers`,
+    intro: (n, np) =>
+      `Organic social media for ${np.toLowerCase()} isn't about follower counts — it's about building trust with the local community that eventually converts into bookings and visits. A consistent, well-executed social presence builds the social proof that new customers look for before choosing any local service.`,
+    bullets: (n) => [
+      `Content strategy tailored to ${n.toLowerCase()} audience and platforms`,
+      `Post scheduling: Instagram, Facebook, and Google Business Profile`,
+      `${n} showcase content: before/afters, team features, and behind-the-scenes`,
+      `Community management: responding to comments and DMs`,
+      `Hashtag and location tagging strategy for local discovery`,
+      `Monthly reporting on reach, engagement, and profile visits`,
+    ],
+    ctaNote: "Content calendar built and scheduled in week one. Engagement typically grows over 60–90 days.",
+    href: "/services/social-media",
+  },
+};
+
+export const SERVICE_SEGMENT_SLUGS = Object.keys(SERVICE_SEGMENTS);

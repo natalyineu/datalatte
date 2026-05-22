@@ -34,6 +34,7 @@ const SERVICE_SLUGS: Record<string, string> = {
   "Conversion Rate Optimisation": "cro",
   "Video Marketing": "video-marketing",
   "TikTok Ads": "tiktok-ads",
+  "Programmatic Advertising": "programmatic",
 };
 
 export default function ServicePage({
