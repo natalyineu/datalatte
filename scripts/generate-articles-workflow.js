@@ -735,19 +735,19 @@ async function run() {
   console.log('\n=== Final Results ===');
   console.log(JSON.stringify(published, null, 2));
 
-  // Push ONE deploy trigger commit for the whole batch (all article commits used [vercel skip])
-  // This means Vercel builds ONCE per generator run instead of once per article
+  // Record published articles — [vercel skip] so deploys are batched by the
+  // hourly vercel-deploy.yml webhook instead of firing once per generator run.
   if (published.length > 0) {
     const slugList = published.map(r => r.slug).join(', ');
-    const deployMsg = published.length === 1
-      ? `Deploy: ${published[0].title}`
-      : `Deploy: ${published.length} new articles`;
+    const recordMsg = published.length === 1
+      ? `Published: ${published[0].title} [vercel skip]`
+      : `Published: ${published.length} new articles [vercel skip]`;
     await ghPutFile(
       'content/last-deploy.txt',
       `${new Date().toISOString()} — ${published.length} article(s)\n${slugList}\n`,
-      deployMsg
+      recordMsg
     );
-    console.log(`🚀 Deploy trigger pushed: "${deployMsg}"`);
+    console.log(`📝 Record pushed (deploy handled by hourly webhook): "${recordMsg}"`);
   }
 
   // Telegram notification
