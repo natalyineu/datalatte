@@ -210,6 +210,88 @@ async function main() {
     console.error("\nErrors:", errors.join("; "));
     process.exit(1);
   }
+
+  // Send Telegram summary
+  await sendTelegramReport();
+}
+
+async function sendTelegramReport() {
+  const tgToken = process.env.TELEGRAM_BOT_TOKEN;
+  const tgChat  = process.env.TELEGRAM_CHAT_ID;
+  if (!tgToken || !tgChat) {
+    console.log("No TELEGRAM_BOT_TOKEN/TELEGRAM_CHAT_ID — skipping Telegram report");
+    return;
+  }
+
+  const gsc = JSON.parse(fs.readFileSync(path.join(OUT_DIR, "gsc-latest.json"), "utf8"));
+  const ga4 = JSON.parse(fs.readFileSync(path.join(OUT_DIR, "ga4-latest.json"), "utf8"));
+
+  const overview = ga4.overview.rows?.[0]?.metricValues || [];
+  const sessions  = overview[0]?.value || "0";
+  const users     = overview[1]?.value || "0";
+  const bounce    = overview[3] ? (parseFloat(overview[3].value) * 100).toFixed(0) + "%" : "—";
+  const avgSec    = overview[4] ? Math.round(parseFloat(overview[4].value)) : 0;
+  const avgMin    = `${Math.floor(avgSec / 60)}m ${avgSec % 60}s`;
+
+  const totalClicks      = gsc.queries.reduce((s, q) => s + q.clicks, 0);
+  const totalImpressions = gsc.queries.reduce((s, q) => s + q.impressions, 0);
+  const topQueries = gsc.queries
+    .filter(q => q.clicks > 0)
+    .sort((a, b) => b.clicks - a.clicks)
+    .slice(0, 3)
+    .map(q => `  • "${q.keys[0]}" — ${q.clicks} clicks, pos ${q.position.toFixed(1)}`)
+    .join("\n") || "  (нет кликов пока)";
+
+  const topPages = ga4.topPages
+    .filter(p => p.dimensionValues[0].value !== "/admin" && p.dimensionValues[0].value !== "/admin/reports")
+    .slice(0, 5)
+    .map(p => `  • ${p.dimensionValues[0].value} — ${p.metricValues[0].value} views`)
+    .join("\n");
+
+  // Last 7 days trend
+  const last7 = ga4.dailyTrend.slice(-7);
+  const trend7sessions = last7.reduce((s, d) => s + parseInt(d.metricValues[0].value), 0);
+
+  const organic = ga4.trafficSources.find(s => s.dimensionValues[0].value === "Organic Search");
+  const organicSessions = organic?.metricValues[0]?.value || "0";
+
+  const date = new Date().toLocaleDateString("ru-RU", { day: "2-digit", month: "2-digit", year: "numeric" });
+
+  const msg = [
+    `📊 Analytics Report — ${date}`,
+    `📅 Period: ${gsc.period.startDate} → ${gsc.period.endDate}`,
+    "",
+    `🌐 GA4 (28 дней)`,
+    `  Sessions: ${sessions} | Users: ${users}`,
+    `  Bounce: ${bounce} | Avg session: ${avgMin}`,
+    `  Organic sessions: ${organicSessions}`,
+    `  Last 7 days: ${trend7sessions} sessions`,
+    "",
+    `🔍 Search Console`,
+    `  Clicks: ${totalClicks} | Impressions: ${totalImpressions}`,
+    `  Top queries:`,
+    topQueries,
+    "",
+    `📄 Top pages:`,
+    topPages,
+  ].join("\n");
+
+  const body = JSON.stringify({ chat_id: tgChat, text: msg });
+  await new Promise((resolve, reject) => {
+    const https = require("https");
+    const url = `https://api.telegram.org/bot${tgToken}/sendMessage`;
+    const req = https.request(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Content-Length": Buffer.byteLength(body) },
+    }, res => {
+      res.resume();
+      if (res.statusCode === 200) { console.log("✓ Telegram report sent"); resolve(); }
+      else { console.error(`✗ Telegram error: ${res.statusCode}`); resolve(); }
+    });
+    req.on("error", e => { console.error("✗ Telegram network error:", e.message); resolve(); });
+    req.write(body);
+    req.end();
+  });
 }
 
 main();
