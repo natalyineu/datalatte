@@ -111,6 +111,12 @@ export default function Header() {
               Resources
             </Link>
             <Link
+              href="/reporting"
+              className={clsx("text-gray-600 hover:text-gray-900 font-medium transition-colors", pathname === "/reporting" && "text-coffee-700")}
+            >
+              Reporting
+            </Link>
+            <Link
               href="/pricing"
               className={clsx("text-gray-600 hover:text-gray-900 font-medium transition-colors", pathname === "/pricing" && "text-coffee-700")}
             >
@@ -184,6 +190,7 @@ export default function Header() {
           ))}
           <Link href="/blog"       className="block py-3 text-gray-700 font-medium" onClick={() => setMobileOpen(false)}>Blog</Link>
           <Link href="/resources"  className="block py-3 text-gray-700 font-medium" onClick={() => setMobileOpen(false)}>Resources</Link>
+          <Link href="/reporting"  className="block py-3 text-gray-700 font-medium" onClick={() => setMobileOpen(false)}>Reporting</Link>
           <Link href="/pricing"    className="block py-3 text-gray-700 font-medium" onClick={() => setMobileOpen(false)}>Pricing</Link>
           <Link href="/case-studies" className="block py-3 text-gray-700 font-medium" onClick={() => setMobileOpen(false)}>Case Studies</Link>
           <Link href="/results"    className="block py-3 text-gray-700 font-medium" onClick={() => setMobileOpen(false)}>Results</Link>

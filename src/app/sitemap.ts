@@ -90,6 +90,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/for/multi-location`,                lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/compare/freelance-vs-agency`,       lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/services/programmatic`,             lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/services`,                            lastModified: today,      changeFrequency: "monthly", priority: 0.9 },
+    { url: `${baseUrl}/reporting`,                          lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     // Legal
     { url: `${baseUrl}/privacy`,                            lastModified: today,      changeFrequency: "yearly",  priority: 0.3 },
     { url: `${baseUrl}/terms`,                              lastModified: today,      changeFrequency: "yearly",  priority: 0.3 },
