@@ -13,12 +13,12 @@ const PAGE_URL = `${BASE}/reporting`;
 export const metadata: Metadata = {
   title: "Marketing Reporting & Analytics Dashboard",
   description:
-    "See exactly how DataLatte connects Google Ads, Meta, TikTok, SEO, and 21 data sources into one clear weekly report. No spreadsheets. No mystery.",
+    "See exactly how DataLatte connects Google Ads, Meta, TikTok, Yelp, Mindbody, and 31 data sources into one clear weekly report. No spreadsheets. No mystery.",
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title: "Marketing Reporting | DataLatte",
     description:
-      "Every channel. One clear report. DataLatte turns 21 data sources into actionable weekly insights.",
+      "Every channel. One clear report. DataLatte turns 31 data sources into actionable weekly insights.",
     url: PAGE_URL,
     type: "website",
     siteName: "DataLatte",
@@ -82,6 +82,28 @@ const DATA_SOURCE_GROUPS: { label: string; color: string; sources: DataSource[] 
       { name: "Email Marketing",   abbr: "EM",  color: "#7C3AED", bg: "#F0EBFF", category: "Retention",      freshness: "Per send", metrics: ["Open rate", "CTR", "Revenue", "Unsubscribes"],           description: "Campaign & automation performance"      },
       { name: "SMS Marketing",     abbr: "SM",  color: "#9333EA", bg: "#F3E8FF", category: "Retention",      freshness: "Per send", metrics: ["Delivery", "CTR", "Revenue", "Opt-outs"],                description: "SMS blasts & drip sequences"            },
       { name: "CRM",               abbr: "CR",  color: "#6D28D9", bg: "#EDE9FE", category: "Retention",      freshness: "Daily",    metrics: ["Contacts", "Pipeline", "Deals won", "LTV"],             description: "Contact health & deal pipeline"         },
+    ],
+  },
+  {
+    label: "Reviews & Directories",
+    color: "#D97706",
+    sources: [
+      { name: "Yelp",              abbr: "Yp",  color: "#D32323", bg: "#FDECEA", category: "Reviews",        freshness: "Daily",    metrics: ["Rating", "Reviews", "Profile views", "Leads"],           description: "Reviews, leads & business visibility"   },
+      { name: "Tripadvisor",       abbr: "TA",  color: "#00AA6C", bg: "#E6FAF3", category: "Reviews",        freshness: "Daily",    metrics: ["Rating", "Reviews", "Ranking", "Impressions"],           description: "Review ranking & travel audience reach" },
+      { name: "Nextdoor",          abbr: "ND",  color: "#8DB600", bg: "#F4FAE6", category: "Local Social",   freshness: "Daily",    metrics: ["Recommendations", "Reach", "Clicks", "Followers"],       description: "Neighbourhood recommendations & reach"  },
+      { name: "Apple Maps",        abbr: "AM",  color: "#555555", bg: "#F3F4F6", category: "Local Search",   freshness: "Weekly",   metrics: ["Views", "Taps", "Directions", "Calls"],                  description: "Apple Maps listing & search visibility" },
+      { name: "Bing Places",       abbr: "BP",  color: "#008272", bg: "#E6F5F3", category: "Local Search",   freshness: "Weekly",   metrics: ["Impressions", "Clicks", "Calls", "Directions"],          description: "Bing & Microsoft search local listings" },
+    ],
+  },
+  {
+    label: "Booking & POS",
+    color: "#059669",
+    sources: [
+      { name: "Mindbody",          abbr: "MB",  color: "#00B4D8", bg: "#E6F7FB", category: "Fitness / Wellness", freshness: "Daily", metrics: ["Bookings", "New clients", "Retention", "Revenue"],      description: "Fitness & wellness booking platform"    },
+      { name: "Booksy",            abbr: "Bk",  color: "#6246EA", bg: "#EFEBFF", category: "Hair & Beauty",  freshness: "Daily",    metrics: ["Appointments", "Rating", "New clients", "Revenue"],      description: "Salon & barber appointment tracking"    },
+      { name: "Fresha",            abbr: "Fr",  color: "#00C4A0", bg: "#E6FAF7", category: "Salons & Spas",  freshness: "Daily",    metrics: ["Bookings", "Revenue", "Retention", "Reviews"],           description: "Salon & spa booking & payment data"     },
+      { name: "Square POS",        abbr: "Sq",  color: "#1A1A1A", bg: "#F3F4F6", category: "Cafés / Retail", freshness: "Daily",    metrics: ["Transactions", "Revenue", "Avg ticket", "Repeat rate"],  description: "Point-of-sale revenue & loyalty data"   },
+      { name: "OpenTable",         abbr: "OT",  color: "#DA3743", bg: "#FDECEA", category: "Restaurants",    freshness: "Daily",    metrics: ["Reservations", "Covers", "No-shows", "Reviews"],         description: "Reservation & dining experience data"   },
     ],
   },
 ];
@@ -212,7 +234,7 @@ export default function ReportingPage() {
             <span className="text-coffee-400">One clear report.</span>
           </h1>
           <p className="text-xl text-white/65 max-w-2xl mx-auto mb-4 leading-relaxed">
-            DataLatte connects Google Ads, Meta, TikTok, SEO, organic social, email, and 21 other sources
+            DataLatte connects Google Ads, Meta, TikTok, Yelp, Mindbody, Booksy, and 31 data sources
             into a single weekly briefing — so you always know what&apos;s working, what isn&apos;t, and exactly what to do next.
           </p>
           <p className="text-sm text-coffee-400 mb-10 font-medium">
@@ -233,7 +255,7 @@ export default function ReportingPage() {
       <div className="bg-coffee-950 border-b border-coffee-900">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-5 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
           {[
-            { value: "21",     label: "Connected sources" },
+            { value: "31",     label: "Connected sources" },
             { value: "5 days", label: "To first dashboard" },
             { value: "3–5 hrs",label: "Saved per week"    },
             { value: "0",      label: "Spreadsheets"      },
@@ -284,7 +306,7 @@ export default function ReportingPage() {
         <div className="text-center mb-12">
           <span className="section-label">Data Sources</span>
           <h2 className="section-title">
-            Connected to <span className="gradient-text">21 platforms</span>
+            Connected to <span className="gradient-text">31 platforms</span>
           </h2>
           <p className="section-subtitle">
             Every channel you run — pulled automatically, cleaned, and cross-referenced.
