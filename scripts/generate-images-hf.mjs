@@ -31,7 +31,7 @@ if (!HF_TOKEN) {
 }
 
 const client = new InferenceClient(HF_TOKEN);
-const MODEL  = "black-forest-labs/FLUX.1-schnell";
+const MODEL  = "black-forest-labs/FLUX.1-dev";
 
 // ── Parse args ───────────────────────────────────────────────────────────────
 const args     = process.argv.slice(2);
@@ -41,13 +41,84 @@ const slugArg  = slugIdx  !== -1 ? (args[slugIdx  + 1] || null) : null;
 const limitArg = limitIdx !== -1 ? (args[limitIdx + 1] || null) : null;
 const LIMIT    = limitArg ? parseInt(limitArg, 10) : Infinity;
 
-// ── Build prompt from slug ───────────────────────────────────────────────────
+// ── Niche scene detection from slug ─────────────────────────────────────────
+const NICHE_SCENES = [
+  {
+    keys: ["coffee", "cafe", "espresso", "latte", "barista", "brew"],
+    scene: "cozy independent coffee shop interior, espresso machine steaming, ceramic cups on wooden counter, warm café lighting, coffee beans scattered, latte art close-up",
+  },
+  {
+    keys: ["hair", "salon", "barber", "haircut", "balayage", "stylist", "beauty", "spa", "nail"],
+    scene: "modern hair salon interior, professional styling station with mirror, haircare products neatly arranged, salon chairs, soft ambient lighting, clean and luxurious atmosphere",
+  },
+  {
+    keys: ["pet", "groomer", "grooming", "dog", "cat", "vet", "animal"],
+    scene: "bright professional pet grooming studio, grooming tools laid out on table, fluffy towels, pet shampoo bottles, clean stainless steel grooming table, warm welcoming space",
+  },
+  {
+    keys: ["fitness", "gym", "yoga", "workout", "exercise", "studio", "pilates", "training"],
+    scene: "modern fitness studio interior, exercise equipment, yoga mats rolled out, large windows with natural light, motivational minimalist space, clean athletic environment",
+  },
+  {
+    keys: ["restaurant", "food", "menu", "dining", "kitchen", "chef", "meal"],
+    scene: "upscale restaurant interior, beautifully plated dish on table, ambient candlelight, elegant table setting, empty chairs, warm restaurant atmosphere",
+  },
+  {
+    keys: ["google", "ads", "meta", "tiktok", "facebook", "instagram", "advertising", "campaign", "paid"],
+    scene: "modern marketing workspace, laptop showing colorful analytics dashboard, charts and graphs on screen, clean desk with notebook, soft office lighting",
+  },
+  {
+    keys: ["seo", "search", "local", "maps", "ranking", "keyword", "organic"],
+    scene: "flat lay of notebook with SEO strategy mind map, laptop with search results on screen, coffee cup beside keyboard, clean minimalist desk setup, bright natural light",
+  },
+  {
+    keys: ["email", "sms", "crm", "automation", "retention", "newsletter"],
+    scene: "close-up of smartphone showing email inbox with notification badges, laptop in background, clean modern desk, plants, soft morning light",
+  },
+  {
+    keys: ["social", "media", "content", "instagram", "video", "reels", "tiktok"],
+    scene: "content creation flat lay: smartphone on tripod, ring light, props arranged artfully, colorful backgrounds, creative studio setup",
+  },
+  {
+    keys: ["budget", "pricing", "cost", "revenue", "roi", "profit", "money", "finance"],
+    scene: "overhead flat lay of financial planning: calculator, notebook with graphs, pen, glasses on white desk, clean minimal composition",
+  },
+  {
+    keys: ["ai", "automation", "agent", "chatbot", "technology", "software"],
+    scene: "abstract technology concept: glowing laptop screen with data visualization, soft blue light, minimalist desk, futuristic but approachable atmosphere",
+  },
+  {
+    keys: ["cleaning", "service", "home", "maintenance", "janitorial"],
+    scene: "professional cleaning supplies neatly arranged, spray bottles and microfiber cloths on pristine white surface, bright clean environment",
+  },
+  {
+    keys: ["real", "estate", "property", "agent", "house", "home"],
+    scene: "beautiful modern home exterior or bright living room interior, architectural photography, clean lines, warm inviting atmosphere, no people",
+  },
+];
+
 function slugToPrompt(slug) {
-  const title = slug.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+  const lower = slug.toLowerCase();
+
+  // Find matching niche scene
+  let scene = null;
+  for (const niche of NICHE_SCENES) {
+    if (niche.keys.some(k => lower.includes(k))) {
+      scene = niche.scene;
+      break;
+    }
+  }
+
+  // Default scene for unmatched slugs
+  if (!scene) {
+    scene = "modern small business storefront exterior, clean signage, welcoming entrance, warm natural lighting, vibrant neighbourhood street";
+  }
+
   return (
-    `Professional marketing photography for a blog post titled "${title}". ` +
-    `Modern, clean, commercial style. Warm natural tones, business context. ` +
-    `No text, no logos, no watermarks. Horizontal 16:9 composition.`
+    `${scene}. ` +
+    `Professional commercial photography, 16:9 horizontal composition, shallow depth of field, ` +
+    `warm natural tones, high detail. ` +
+    `No people, no faces, no text, no logos, no watermarks, no words.`
   );
 }
 
@@ -56,7 +127,7 @@ async function generateImage(slug) {
   const blob = await client.textToImage({
     model:  MODEL,
     inputs: slugToPrompt(slug),
-    parameters: { width: 1200, height: 630, num_inference_steps: 4 },
+    parameters: { width: 1200, height: 630, num_inference_steps: 28 },
   });
   return Buffer.from(await blob.arrayBuffer());
 }

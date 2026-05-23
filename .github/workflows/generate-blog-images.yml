@@ -29,6 +29,7 @@ jobs:
         run: npm install @huggingface/inference
 
       - name: Generate images
+        timeout-minutes: 30
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
