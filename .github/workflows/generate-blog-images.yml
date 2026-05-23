@@ -25,6 +25,9 @@ jobs:
         with:
           node-version: 20
 
+      - name: Install HF client
+        run: npm install @huggingface/inference
+
       - name: Generate images
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
