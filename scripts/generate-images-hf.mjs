@@ -30,8 +30,10 @@ if (!HF_TOKEN) {
   process.exit(1);
 }
 
-// HF Inference API — try newer router endpoint first, fall back to legacy
-const ENDPOINTS = [
+// Pollinations.ai — free FLUX, no auth, simple GET request
+// HF endpoints kept as fallback if Pollinations is unavailable
+const POLLINATIONS = `https://image.pollinations.ai/prompt/`;
+const HF_ENDPOINTS = [
   `https://router.huggingface.co/hf-inference/models/black-forest-labs/FLUX.1-schnell`,
   `https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell`,
 ];
@@ -57,56 +59,64 @@ function slugToPrompt(slug) {
   );
 }
 
-async function generateImage(slug) {
+async function tryPollinations(slug) {
+  const prompt = encodeURIComponent(slugToPrompt(slug));
+  const seed   = Math.floor(Math.random() * 99999);
+  const url    = `${POLLINATIONS}${prompt}?width=1200&height=630&nologo=true&model=flux&seed=${seed}`;
+  const res    = await fetch(url, { headers: { "User-Agent": "DataLatte/1.0" } });
+  if (!res.ok) throw new Error(`Pollinations HTTP ${res.status}`);
+  const buf = Buffer.from(await res.arrayBuffer());
+  if (buf.length < 5000) throw new Error(`Pollinations returned too-small response (${buf.length} bytes)`);
+  return buf;
+}
+
+async function tryHuggingFace(slug) {
   const prompt = slugToPrompt(slug);
   let lastError = null;
-
-  for (const endpoint of ENDPOINTS) {
+  for (const endpoint of HF_ENDPOINTS) {
     try {
       const res = await fetch(endpoint, {
         method: "POST",
-        headers: {
-          Authorization: `Bearer ${HF_TOKEN}`,
-          "Content-Type": "application/json",
-          "Accept": "image/jpeg,image/*",
-        },
-        body: JSON.stringify({
-          inputs: prompt,
-          parameters: { width: 1200, height: 630, num_inference_steps: 4 },
-        }),
+        headers: { Authorization: `Bearer ${HF_TOKEN}`, "Content-Type": "application/json", "Accept": "image/jpeg,image/*" },
+        body: JSON.stringify({ inputs: prompt, parameters: { width: 1200, height: 630, num_inference_steps: 4 } }),
       });
-
       if (res.status === 503) {
         const text = await res.text();
         let wait = 20;
         try { wait = JSON.parse(text)?.estimated_time ?? 20; } catch {}
-        console.log(`\n   ⏳ Model loading on ${endpoint.includes("router") ? "router" : "legacy"}, waiting ${Math.ceil(wait)}s…`);
+        process.stdout.write(`\n   ⏳ HF model loading, waiting ${Math.ceil(wait)}s… `);
         await new Promise(r => setTimeout(r, (wait + 2) * 1000));
-        // retry same endpoint
-        const res2 = await fetch(endpoint, {
+        const r2 = await fetch(endpoint, {
           method: "POST",
-          headers: { Authorization: `Bearer ${HF_TOKEN}`, "Content-Type": "application/json", "Accept": "image/jpeg,image/*" },
+          headers: { Authorization: `Bearer ${HF_TOKEN}`, "Content-Type": "application/json" },
           body: JSON.stringify({ inputs: prompt, parameters: { width: 1200, height: 630, num_inference_steps: 4 } }),
         });
-        if (res2.ok) return Buffer.from(await res2.arrayBuffer());
-        lastError = new Error(`HTTP ${res2.status} from ${endpoint}`);
+        if (r2.ok) return Buffer.from(await r2.arrayBuffer());
+        lastError = new Error(`HF HTTP ${r2.status} after retry`);
         continue;
       }
-
       if (!res.ok) {
         const body = await res.text().catch(() => "");
-        lastError = new Error(`HTTP ${res.status}: ${body.slice(0, 200)}`);
+        lastError = new Error(`HF HTTP ${res.status}: ${body.slice(0, 120)}`);
         continue;
       }
-
       return Buffer.from(await res.arrayBuffer());
     } catch (err) {
-      lastError = new Error(`${err.message}${err.cause ? ` (cause: ${err.cause?.message ?? err.cause})` : ""}`);
-      // try next endpoint
+      lastError = new Error(`HF ${err.message}${err.cause ? ` (${err.cause?.message ?? err.cause})` : ""}`);
     }
   }
+  throw lastError ?? new Error("HF: all endpoints failed");
+}
 
-  throw lastError ?? new Error("All endpoints failed");
+async function generateImage(slug) {
+  // Try Pollinations first (free, no auth, reliable)
+  try {
+    return await tryPollinations(slug);
+  } catch (pollinationsErr) {
+    process.stdout.write(`\n   ⚠️  Pollinations failed (${pollinationsErr.message}), trying HF… `);
+  }
+  // Fall back to HuggingFace
+  return tryHuggingFace(slug);
 }
 
 // ── Main ─────────────────────────────────────────────────────────────────────
