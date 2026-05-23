@@ -27,8 +27,11 @@ const tools = [
 const services = [
   { label: "Google Ads",              href: "/services/google-ads" },
   { label: "Meta Ads",                href: "/services/meta-ads" },
+  { label: "TikTok Ads",              href: "/services/tiktok-ads" },
   { label: "Google Business Profile", href: "/services/google-business-profile" },
   { label: "Local SEO",               href: "/services/local-seo" },
+  { label: "Content Marketing",       href: "/services/content-marketing" },
+  { label: "Reputation Management",   href: "/services/reputation-management" },
   { label: "Analytics & Reporting",   href: "/services/analytics" },
   { label: "AI Agents & Automation",  href: "/services/ai-agents" },
   { label: "Email & SMS Marketing",   href: "/services/email-sms" },

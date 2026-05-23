@@ -34,6 +34,7 @@ const footerLinks = {
   "Free Tools": [
     { label: "Budget Calculator",       href: "/tools/marketing-budget-calculator" },
     { label: "AI Agent Builder",        href: "/tools/ai-agent-builder" },
+    { label: "Local SEO Grader",        href: "/tools/local-seo-grader" },
     { label: "Free Marketing Audit",    href: "/free-audit" },
   ],
   "Company": [
