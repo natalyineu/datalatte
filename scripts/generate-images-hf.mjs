@@ -101,7 +101,7 @@ async function generateImage(slug) {
 
       return Buffer.from(await res.arrayBuffer());
     } catch (err) {
-      lastError = err;
+      lastError = new Error(`${err.message}${err.cause ? ` (cause: ${err.cause?.message ?? err.cause})` : ""}`);
       // try next endpoint
     }
   }
