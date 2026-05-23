@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, TrendingUp, TrendingDown, Minus } from "lucide-react";
+import { ArrowRight, TrendingUp, TrendingDown, Minus, Check, X } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
+import ReportingFlow from "@/components/ReportingFlow";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 
 const BASE = "https://datalatte.pro";
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Marketing Reporting | DataLatte",
     description:
-      "Every channel. One clear report. See how DataLatte turns 10+ data sources into actionable weekly insights.",
+      "Every channel. One clear report. DataLatte turns 10+ data sources into actionable weekly insights.",
     url: PAGE_URL,
     type: "website",
     siteName: "DataLatte",
@@ -33,175 +34,64 @@ interface DataSource {
   category: string;
   metrics: string[];
   description: string;
+  freshness: string;
 }
 
 const DATA_SOURCES: DataSource[] = [
-  {
-    name: "Google Ads",
-    abbr: "GA",
-    color: "#4285F4",
-    bg: "#EBF2FF",
-    category: "Paid Search",
-    metrics: ["Clicks", "Conversions", "CPC", "ROAS", "Quality Score"],
-    description: "Search & Performance Max campaigns",
-  },
-  {
-    name: "Meta Ads",
-    abbr: "fb",
-    color: "#0866FF",
-    bg: "#EBF4FF",
-    category: "Paid Social",
-    metrics: ["Reach", "CPM", "CTR", "ROAS", "Frequency"],
-    description: "Facebook & Instagram campaigns",
-  },
-  {
-    name: "TikTok Ads",
-    abbr: "TT",
-    color: "#010101",
-    bg: "#F3F4F6",
-    category: "Video Ads",
-    metrics: ["Views", "CTR", "CPV", "Conversions"],
-    description: "In-feed & TopView video ads",
-  },
-  {
-    name: "Google Display",
-    abbr: "GD",
-    color: "#34A853",
-    bg: "#EDFAF1",
-    category: "Programmatic",
-    metrics: ["Impressions", "Viewability", "CTR", "CPC"],
-    description: "Display & programmatic inventory",
-  },
-  {
-    name: "Search Console",
-    abbr: "SC",
-    color: "#EA4335",
-    bg: "#FEECEA",
-    category: "Organic Search",
-    metrics: ["Clicks", "Impressions", "CTR", "Position"],
-    description: "Organic keyword & page data",
-  },
-  {
-    name: "Google Business",
-    abbr: "GBP",
-    color: "#FBBC04",
-    bg: "#FFF9E6",
-    category: "Local Search",
-    metrics: ["Views", "Calls", "Directions", "Bookings"],
-    description: "Maps & local search visibility",
-  },
-  {
-    name: "Google Analytics 4",
-    abbr: "A4",
-    color: "#E8710A",
-    bg: "#FEF3E7",
-    category: "Analytics",
-    metrics: ["Sessions", "Users", "Engagement", "Revenue"],
-    description: "On-site behaviour & conversions",
-  },
-  {
-    name: "Instagram",
-    abbr: "IG",
-    color: "#C13584",
-    bg: "#FCF0F7",
-    category: "Social Organic",
-    metrics: ["Followers", "Reach", "Engagement", "Stories"],
-    description: "Organic growth & content performance",
-  },
-  {
-    name: "Facebook Page",
-    abbr: "FB",
-    color: "#1877F2",
-    bg: "#EBF4FF",
-    category: "Social Organic",
-    metrics: ["Reach", "Likes", "Shares", "Messages"],
-    description: "Page performance & community",
-  },
-  {
-    name: "Email & SMS",
-    abbr: "EM",
-    color: "#7C3AED",
-    bg: "#F0EBFF",
-    category: "Retention",
-    metrics: ["Open rate", "CTR", "Revenue", "Unsubscribes"],
-    description: "Campaign performance & list health",
-  },
+  { name: "Google Ads",        abbr: "GA",  color: "#4285F4", bg: "#EBF2FF", category: "Paid Search",    freshness: "Hourly",     metrics: ["Clicks", "Conversions", "CPC", "ROAS", "Quality Score"], description: "Search & Performance Max campaigns" },
+  { name: "Meta Ads",          abbr: "fb",  color: "#0866FF", bg: "#EBF4FF", category: "Paid Social",    freshness: "Hourly",     metrics: ["Reach", "CPM", "CTR", "ROAS", "Frequency"],             description: "Facebook & Instagram campaigns"     },
+  { name: "TikTok Ads",        abbr: "TT",  color: "#010101", bg: "#F3F4F6", category: "Video Ads",      freshness: "Daily",      metrics: ["Views", "CTR", "CPV", "Conversions"],                   description: "In-feed & TopView video ads"        },
+  { name: "Google Display",    abbr: "GD",  color: "#34A853", bg: "#EDFAF1", category: "Programmatic",   freshness: "Daily",      metrics: ["Impressions", "Viewability", "CTR", "CPC"],             description: "Display & programmatic inventory"   },
+  { name: "Search Console",    abbr: "SC",  color: "#EA4335", bg: "#FEECEA", category: "Organic Search", freshness: "Daily",      metrics: ["Clicks", "Impressions", "CTR", "Position"],             description: "Organic keyword & page data"        },
+  { name: "Google Business",   abbr: "GBP", color: "#FBBC04", bg: "#FFF9E6", category: "Local Search",   freshness: "Daily",      metrics: ["Views", "Calls", "Directions", "Bookings"],            description: "Maps & local search visibility"     },
+  { name: "Google Analytics 4",abbr: "A4",  color: "#E8710A", bg: "#FEF3E7", category: "Analytics",      freshness: "Real-time",  metrics: ["Sessions", "Users", "Engagement", "Revenue"],          description: "On-site behaviour & conversions"    },
+  { name: "Instagram",         abbr: "IG",  color: "#C13584", bg: "#FCF0F7", category: "Social Organic", freshness: "Daily",      metrics: ["Followers", "Reach", "Engagement", "Stories"],         description: "Organic growth & content"           },
+  { name: "Facebook Page",     abbr: "FB",  color: "#1877F2", bg: "#EBF4FF", category: "Social Organic", freshness: "Daily",      metrics: ["Reach", "Likes", "Shares", "Messages"],                description: "Page performance & community"       },
+  { name: "Email & SMS",       abbr: "EM",  color: "#7C3AED", bg: "#F0EBFF", category: "Retention",      freshness: "Per send",   metrics: ["Open rate", "CTR", "Revenue", "Unsubscribes"],         description: "Campaign & list health"             },
 ];
 
 const REPORT_OUTPUTS = [
-  {
-    emoji: "📧",
-    name: "Weekly Email Brief",
-    timing: "Every Monday",
-    desc: "Key numbers, top wins, one concern, and 3 action items — in 90 seconds of reading.",
-    color: "border-coffee-300 bg-coffee-50",
-  },
-  {
-    emoji: "📄",
-    name: "Monthly PDF Report",
-    timing: "First of the month",
-    desc: "Full channel breakdown with trend charts, benchmarks, competitor context, and a 30-day action plan.",
-    color: "border-coffee-300 bg-coffee-50",
-  },
-  {
-    emoji: "📊",
-    name: "Live Dashboard",
-    timing: "Real-time",
-    desc: "Bookmark-ready dashboard with every connected channel — updated automatically, no login required.",
-    color: "border-coffee-300 bg-coffee-50",
-  },
-  {
-    emoji: "🔔",
-    name: "Instant Alerts",
-    timing: "As it happens",
-    desc: "Telegram or email alerts the moment spend spikes, CTR drops, or a target is hit.",
-    color: "border-coffee-300 bg-coffee-50",
-  },
-  {
-    emoji: "💬",
-    name: "Monthly Strategy Call",
-    timing: "45 min / month",
-    desc: "Review the numbers together, decide the next priorities, and adjust the plan.",
-    color: "border-coffee-300 bg-coffee-50",
-  },
+  { emoji: "📧", name: "Weekly Email Brief",   timing: "Every Monday",     desc: "Key numbers, top wins, one concern, and 3 action items — in 90 seconds of reading."              },
+  { emoji: "📄", name: "Monthly PDF Report",   timing: "1st of the month", desc: "Full channel breakdown with trend charts, benchmarks, competitor context, and a 30-day plan."  },
+  { emoji: "📊", name: "Live Dashboard",       timing: "Real-time",        desc: "Bookmark-ready view of every connected channel — updated automatically, no login required."       },
+  { emoji: "🔔", name: "Instant Alerts",       timing: "As it happens",    desc: "Telegram or email alerts the moment spend spikes, CTR drops, or a goal is hit."                  },
+  { emoji: "💬", name: "Monthly Strategy Call",timing: "45 min / month",   desc: "Review the numbers together, decide priorities, and adjust the plan for next month."              },
 ];
 
 const FAQS = [
-  {
-    q: "How long does it take to set up reporting?",
-    a: "Most clients have a live dashboard and their first weekly brief within 5 business days of onboarding. We handle all the platform connections.",
-  },
-  {
-    q: "Do I need to install any software?",
-    a: "No. You give DataLatte read-only access to your ad accounts and analytics tools. Everything else is handled on our side.",
-  },
-  {
-    q: "Can I see reports for channels I manage myself?",
-    a: "Yes. If you run your own Instagram or email platform, we connect to it and include it alongside the channels we manage for you.",
-  },
-  {
-    q: "What if I only use 2–3 of these platforms?",
-    a: "We report on what you actually use. There's no minimum number of connected channels.",
-  },
+  { q: "How long does it take to set up reporting?",      a: "Most clients have a live dashboard and their first weekly brief within 5 business days of onboarding. We handle all the platform connections."                           },
+  { q: "Do I need to install any software?",              a: "No. You give DataLatte read-only access to your ad accounts and analytics tools. Everything else is handled on our side."                                                },
+  { q: "Can I see reports for channels I manage myself?", a: "Yes. If you run your own Instagram or email platform, we connect to it and include it alongside the channels we manage for you."                                         },
+  { q: "What if I only use 2–3 of these platforms?",      a: "We report on what you actually use. There's no minimum number of connected channels — and we flag which extra channels would likely be worth adding for your business type." },
+  { q: "How is this different from Google's own reports?", a: "Google's dashboards show you one channel. DataLatte shows you all channels together — so you can see trade-offs like 'our Meta CPL is 40% higher than Google, should we shift budget?'" },
 ];
 
 const MOCK_METRICS = [
-  { label: "Total Ad Spend", value: "$4,280", change: -3.2, note: "vs last week" },
-  { label: "Leads Generated", value: "94", change: 18.4, note: "vs last week" },
-  { label: "Cost per Lead", value: "$45.53", change: -18.5, note: "vs last week" },
-  { label: "Blended ROAS", value: "3.8×", change: 12.1, note: "vs last week" },
+  { label: "Total Ad Spend",    value: "$4,280", change: -3.2,   note: "vs last week", positive: false },
+  { label: "Leads Generated",  value: "94",     change: 18.4,   note: "vs last week", positive: true  },
+  { label: "Cost per Lead",    value: "$45.53", change: -18.5,  note: "vs last week", positive: true  },
+  { label: "Blended ROAS",     value: "3.8×",   change: 12.1,   note: "vs last week", positive: true  },
 ];
 
 const MOCK_CHANNELS = [
-  { name: "Google Ads", spend: "$2,100", leads: 52, cpl: "$40.38", roas: "4.2×", trend: "up" },
-  { name: "Meta Ads", spend: "$1,480", leads: 28, cpl: "$52.86", roas: "3.1×", trend: "up" },
-  { name: "TikTok Ads", spend: "$700", leads: 14, cpl: "$50.00", roas: "2.9×", trend: "neutral" },
-  { name: "Organic SEO", spend: "—", leads: 0, cpl: "—", roas: "—", trend: "up" },
+  { name: "Google Ads",   spend: "$2,100", leads: 52, cpl: "$40.38", roas: "4.2×", trend: "up"      },
+  { name: "Meta Ads",     spend: "$1,480", leads: 28, cpl: "$52.86", roas: "3.1×", trend: "up"      },
+  { name: "TikTok Ads",  spend: "$700",   leads: 14, cpl: "$50.00", roas: "2.9×", trend: "neutral"  },
+  { name: "Organic SEO", spend: "—",      leads: 0,  cpl: "—",      roas: "—",    trend: "up"       },
+];
+
+const BEFORE_AFTER = [
+  { before: "5 tabs open, no single source of truth",   after: "One live dashboard, always current"        },
+  { before: "Manual data pulls every week",             after: "Automated Monday brief in your inbox"      },
+  { before: "No idea which channel is actually working",after: "Clear ROAS breakdown per channel"          },
+  { before: "Panic when ad spend suddenly changes",     after: "Instant alert with context — no surprises" },
+  { before: "Monthly mystery report from an agency",    after: "Weekly brief + real-time visibility"       },
+  { before: "3–5 hours a week on spreadsheets",         after: "5 minutes reading, rest of week executing" },
 ];
 
 function TrendIcon({ trend }: { trend: string }) {
-  if (trend === "up") return <TrendingUp size={14} className="text-green-500" />;
-  if (trend === "down") return <TrendingDown size={14} className="text-red-500" />;
+  if (trend === "up")   return <TrendingUp  size={14} className="text-green-500" />;
+  if (trend === "down") return <TrendingDown size={14} className="text-red-500"   />;
   return <Minus size={14} className="text-gray-400" />;
 }
 
@@ -213,20 +103,44 @@ export default function ReportingPage() {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb)      }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(FAQS)) }} />
 
       {/* ── Hero ── */}
-      <section className="bg-gradient-to-br from-gray-950 via-coffee-950 to-coffee-900 py-24 px-4 sm:px-6 lg:px-8 overflow-hidden relative">
-        {/* subtle grid pattern */}
-        <div
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.15) 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-          }}
-        />
+      <section className="bg-gradient-to-br from-gray-950 via-coffee-950 to-coffee-900 pt-24 pb-28 px-4 sm:px-6 lg:px-8 overflow-hidden relative">
+        {/* Grid overlay */}
+        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.6) 1px,transparent 1px)", backgroundSize: "40px 40px" }} />
+
+        {/* Floating platform badges */}
+        <div className="absolute left-6 top-20 lg:left-20 lg:top-24 hidden sm:block animate-float opacity-90">
+          <div className="bg-gray-900/80 backdrop-blur border border-gray-700 rounded-xl px-3 py-2 text-xs text-white flex items-center gap-2 shadow-lg">
+            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse shrink-0" />
+            <span className="text-gray-300">Google Ads</span>
+            <span className="text-green-400 font-bold">4.2× ROAS</span>
+          </div>
+        </div>
+        <div className="absolute right-6 top-24 lg:right-24 lg:top-28 hidden sm:block animate-float-r opacity-90" style={{ animationDelay: "0.8s" }}>
+          <div className="bg-gray-900/80 backdrop-blur border border-gray-700 rounded-xl px-3 py-2 text-xs text-white flex items-center gap-2 shadow-lg">
+            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse shrink-0" />
+            <span className="text-gray-300">Leads this week</span>
+            <span className="text-green-400 font-bold">↑ 18%</span>
+          </div>
+        </div>
+        <div className="absolute left-10 bottom-16 lg:left-32 hidden lg:block animate-float opacity-80" style={{ animationDelay: "1.4s" }}>
+          <div className="bg-gray-900/80 backdrop-blur border border-gray-700 rounded-xl px-3 py-2 text-xs text-white flex items-center gap-2 shadow-lg">
+            <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse shrink-0" />
+            <span className="text-gray-300">Meta CPL</span>
+            <span className="text-amber-400 font-bold">↓ $12 vs last week</span>
+          </div>
+        </div>
+        <div className="absolute right-10 bottom-20 lg:right-28 hidden lg:block animate-float-r opacity-80" style={{ animationDelay: "0.4s" }}>
+          <div className="bg-gray-900/80 backdrop-blur border border-gray-700 rounded-xl px-3 py-2 text-xs text-white flex items-center gap-2 shadow-lg">
+            <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse shrink-0" />
+            <span className="text-gray-300">Dashboard live</span>
+            <span className="text-blue-400 font-bold">Day 5 ✓</span>
+          </div>
+        </div>
+
         <div className="max-w-4xl mx-auto text-center relative">
           <span className="inline-block bg-white/10 border border-white/20 text-coffee-300 text-sm font-medium px-4 py-1.5 rounded-full mb-6 backdrop-blur-sm">
             Reporting & Analytics
@@ -235,29 +149,76 @@ export default function ReportingPage() {
             Every channel.{" "}
             <span className="text-coffee-400">One clear report.</span>
           </h1>
-          <p className="text-xl text-white/65 max-w-2xl mx-auto mb-10 leading-relaxed">
-            DataLatte connects Google Ads, Meta, TikTok, SEO, and 10+ data sources into a single
-            weekly briefing — so you always know what&apos;s working, what&apos;s not, and what to do next.
+          <p className="text-xl text-white/65 max-w-2xl mx-auto mb-4 leading-relaxed">
+            DataLatte connects Google Ads, Meta, TikTok, SEO, and 10+ other sources into a single
+            weekly briefing — so you always know what&apos;s working, what isn&apos;t, and exactly what to do next.
+          </p>
+          <p className="text-sm text-coffee-400 mb-10 font-medium">
+            No spreadsheets. No guessing. No 5-tab Monday mornings.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 bg-coffee-500 text-white font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-400 transition-all hover:shadow-xl hover:shadow-coffee-900/30"
-            >
+            <Link href="/contact" className="inline-flex items-center gap-2 bg-coffee-500 text-white font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-400 transition-all hover:shadow-xl hover:shadow-coffee-900/30">
               Get my free audit <ArrowRight size={17} />
             </Link>
-            <Link
-              href="/services/analytics"
-              className="inline-flex items-center gap-2 bg-white/8 border border-white/15 text-white/80 font-semibold px-7 py-3.5 rounded-xl hover:bg-white/15 transition-all"
-            >
+            <Link href="/services/analytics" className="inline-flex items-center gap-2 bg-white/8 border border-white/15 text-white/80 font-semibold px-7 py-3.5 rounded-xl hover:bg-white/15 transition-all">
               Analytics service →
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ── Data Sources Grid ── */}
+      {/* ── Stats bar ── */}
+      <div className="bg-coffee-950 border-b border-coffee-900">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-5 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+          {[
+            { value: "10+",    label: "Connected sources" },
+            { value: "5 days", label: "To first dashboard" },
+            { value: "3–5 hrs",label: "Saved per week"    },
+            { value: "0",      label: "Spreadsheets"      },
+          ].map((s) => (
+            <div key={s.label}>
+              <div className="text-xl font-bold text-coffee-300">{s.value}</div>
+              <div className="text-xs text-gray-500 mt-0.5">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Before / After ── */}
       <SectionWrapper>
+        <div className="text-center mb-12">
+          <span className="section-label">The Difference</span>
+          <h2 className="section-title">
+            Sound familiar?{" "}
+            <span className="gradient-text">Here&apos;s the fix.</span>
+          </h2>
+        </div>
+        <div className="max-w-3xl mx-auto divide-y divide-gray-100 border border-gray-100 rounded-2xl overflow-hidden shadow-sm">
+          <div className="grid grid-cols-2 bg-gray-50 text-xs font-bold text-gray-400 uppercase tracking-widest">
+            <div className="px-5 py-3 border-r border-gray-100 flex items-center gap-2">
+              <X size={13} className="text-red-400" /> Before
+            </div>
+            <div className="px-5 py-3 flex items-center gap-2">
+              <Check size={13} className="text-green-500" /> After DataLatte
+            </div>
+          </div>
+          {BEFORE_AFTER.map((row, i) => (
+            <div key={i} className="grid grid-cols-2 text-sm hover:bg-gray-50 transition-colors">
+              <div className="px-5 py-3.5 text-gray-400 border-r border-gray-100 flex items-start gap-2">
+                <X size={13} className="text-red-400 shrink-0 mt-0.5" />
+                {row.before}
+              </div>
+              <div className="px-5 py-3.5 text-gray-800 flex items-start gap-2">
+                <Check size={13} className="text-green-500 shrink-0 mt-0.5" />
+                {row.after}
+              </div>
+            </div>
+          ))}
+        </div>
+      </SectionWrapper>
+
+      {/* ── Data Sources Grid ── */}
+      <SectionWrapper className="bg-gray-50">
         <div className="text-center mb-12">
           <span className="section-label">Data Sources</span>
           <h2 className="section-title">
@@ -269,39 +230,48 @@ export default function ReportingPage() {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-          {DATA_SOURCES.map((source) => (
+          {DATA_SOURCES.map((source, i) => (
             <div
               key={source.name}
-              className="bg-white rounded-2xl border border-gray-100 p-5 hover:shadow-md hover:border-gray-200 transition-all group"
+              className="bg-white rounded-2xl border border-gray-100 p-5 hover:shadow-lg transition-all duration-300 group relative overflow-hidden animate-card-rise"
+              style={{ animationDelay: `${i * 0.07}s` }}
             >
-              {/* Logo badge */}
-              <div className="flex items-center gap-3 mb-3">
+              {/* hover colour glow */}
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none rounded-2xl"
+                style={{ background: `radial-gradient(circle at top left, ${source.color}18, transparent 65%)` }}
+              />
+
+              <div className="flex items-center gap-3 mb-3 relative">
                 <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm text-white shrink-0 shadow-sm"
+                  className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm text-white shrink-0 shadow-sm group-hover:scale-110 transition-transform duration-200"
                   style={{ backgroundColor: source.color }}
                 >
                   {source.abbr}
                 </div>
-                <div>
-                  <div className="font-semibold text-gray-900 text-sm leading-tight">{source.name}</div>
-                  <div
-                    className="text-xs font-medium px-1.5 py-0.5 rounded mt-0.5 inline-block"
-                    style={{ backgroundColor: source.bg, color: source.color }}
-                  >
-                    {source.category}
+                <div className="min-w-0">
+                  <div className="font-semibold text-gray-900 text-sm leading-tight truncate">{source.name}</div>
+                  <div className="flex items-center gap-1.5 mt-0.5">
+                    <span
+                      className="text-xs font-medium px-1.5 py-0.5 rounded"
+                      style={{ backgroundColor: source.bg, color: source.color }}
+                    >
+                      {source.category}
+                    </span>
                   </div>
                 </div>
               </div>
 
-              <p className="text-gray-400 text-xs mb-3 leading-relaxed">{source.description}</p>
+              <div className="flex items-center gap-1.5 mb-2.5 relative">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse shrink-0" />
+                <span className="text-xs text-gray-400">{source.freshness} refresh</span>
+              </div>
 
-              {/* Metric chips */}
-              <div className="flex flex-wrap gap-1">
+              <p className="text-gray-400 text-xs mb-3 leading-relaxed relative">{source.description}</p>
+
+              <div className="flex flex-wrap gap-1 relative">
                 {source.metrics.map((m) => (
-                  <span
-                    key={m}
-                    className="text-xs text-gray-500 bg-gray-50 border border-gray-100 px-1.5 py-0.5 rounded"
-                  >
+                  <span key={m} className="text-xs text-gray-500 bg-gray-50 border border-gray-100 px-1.5 py-0.5 rounded">
                     {m}
                   </span>
                 ))}
@@ -312,127 +282,40 @@ export default function ReportingPage() {
       </SectionWrapper>
 
       {/* ── Flow Diagram ── */}
-      <SectionWrapper className="bg-gray-950 overflow-hidden relative">
-        {/* grid overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px)",
-            backgroundSize: "32px 32px",
-          }}
-        />
-
-        <div className="relative">
-          <div className="text-center mb-12">
+      <section className="bg-gray-950 py-20 px-4 sm:px-6 lg:px-8 overflow-hidden relative">
+        <div className="absolute inset-0 opacity-[0.035]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.6) 1px,transparent 1px)", backgroundSize: "32px 32px" }} />
+        <div className="max-w-7xl mx-auto relative">
+          <div className="text-center mb-14">
             <span className="inline-block text-coffee-400 text-sm font-semibold uppercase tracking-widest mb-3">
               How It Works
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-white">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
               Your data pipeline, visualised
             </h2>
+            <p className="text-gray-500 max-w-xl mx-auto text-sm leading-relaxed">
+              Data flows in from every channel, gets normalised and cross-referenced in the DataLatte hub,
+              then comes out as clear, actionable reports.
+            </p>
           </div>
-
-          <div className="grid lg:grid-cols-[1fr,auto,1fr] gap-6 items-center max-w-5xl mx-auto">
-
-            {/* ── Left: Inputs ── */}
-            <div className="space-y-3">
-              <div className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-4 text-center lg:text-left">
-                Your Channels
-              </div>
-              {[
-                { label: "Ad Platforms", sources: ["Google Ads", "Meta Ads", "TikTok Ads", "Programmatic"], color: "#4285F4" },
-                { label: "Search & Local", sources: ["Search Console", "Google Business Profile", "Local SEO"], color: "#34A853" },
-                { label: "Analytics & Social", sources: ["GA4", "Instagram", "Facebook Page"], color: "#E8710A" },
-                { label: "Email & Retention", sources: ["Email", "SMS", "CRM"], color: "#7C3AED" },
-              ].map((group) => (
-                <div
-                  key={group.label}
-                  className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex items-center gap-3"
-                >
-                  <div
-                    className="w-2 h-10 rounded-full shrink-0"
-                    style={{ backgroundColor: group.color }}
-                  />
-                  <div>
-                    <div className="text-white text-sm font-semibold">{group.label}</div>
-                    <div className="text-gray-500 text-xs mt-0.5">{group.sources.join(" · ")}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* ── Center: Hub ── */}
-            <div className="flex flex-col items-center gap-3 py-4">
-              {/* Arrow in */}
-              <div className="hidden lg:flex flex-col items-center">
-                <div className="w-px h-8 bg-gradient-to-b from-transparent to-coffee-500" />
-                <div className="w-2 h-2 rounded-full bg-coffee-500" />
-              </div>
-
-              {/* Hub card */}
-              <div className="relative">
-                {/* Glow ring */}
-                <div className="absolute inset-0 rounded-2xl bg-coffee-500/20 blur-xl scale-110" />
-                <div className="relative bg-gradient-to-b from-coffee-800 to-coffee-900 border border-coffee-600/50 rounded-2xl p-6 text-center w-44 shadow-2xl">
-                  <div className="text-5xl mb-3">☕</div>
-                  <div className="text-white font-bold text-sm leading-tight">DataLatte</div>
-                  <div className="text-coffee-300 text-xs mt-1">Analytics Hub</div>
-                  <div className="mt-3 flex flex-wrap gap-1 justify-center">
-                    {["Normalise", "Cross-ref", "Score", "Trend"].map((t) => (
-                      <span key={t} className="text-xs bg-coffee-700/60 text-coffee-200 px-2 py-0.5 rounded-full">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Arrow out */}
-              <div className="hidden lg:flex flex-col items-center">
-                <div className="w-2 h-2 rounded-full bg-coffee-500" />
-                <div className="w-px h-8 bg-gradient-to-b from-coffee-500 to-transparent" />
-              </div>
-            </div>
-
-            {/* ── Right: Outputs ── */}
-            <div className="space-y-3">
-              <div className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-4 text-center lg:text-right">
-                Your Reports
-              </div>
-              {REPORT_OUTPUTS.map((output) => (
-                <div
-                  key={output.name}
-                  className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex items-center gap-3"
-                >
-                  <div className="text-2xl shrink-0">{output.emoji}</div>
-                  <div>
-                    <div className="text-white text-sm font-semibold">{output.name}</div>
-                    <div className="text-gray-500 text-xs">{output.timing}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          <ReportingFlow />
         </div>
-      </SectionWrapper>
+      </section>
 
-      {/* ── Sample Report Preview ── */}
+      {/* ── Sample Weekly Report ── */}
       <SectionWrapper>
         <div className="text-center mb-12">
           <span className="section-label">Report Preview</span>
           <h2 className="section-title">
-            This is what you&apos;ll see{" "}
+            This lands in your inbox{" "}
             <span className="gradient-text">every Monday</span>
           </h2>
           <p className="section-subtitle">
-            A real-format weekly brief — numbers changed for privacy.
+            Real format, illustrative numbers. 90 seconds to read. 3 actions to take.
           </p>
         </div>
 
-        {/* Mock report card */}
-        <div className="max-w-3xl mx-auto bg-white rounded-2xl border border-gray-200 shadow-xl overflow-hidden">
-          {/* Report header */}
+        <div className="max-w-3xl mx-auto bg-white rounded-2xl border border-gray-200 shadow-2xl overflow-hidden">
+          {/* Header */}
           <div className="bg-gradient-to-r from-coffee-900 to-coffee-700 px-6 py-5 flex items-center justify-between">
             <div>
               <div className="text-coffee-300 text-xs font-semibold uppercase tracking-widest">
@@ -440,35 +323,39 @@ export default function ReportingPage() {
               </div>
               <div className="text-white font-bold text-lg mt-1">Bloom Hair Studio — Austin TX</div>
             </div>
-            <div className="text-4xl">☕</div>
+            <div className="text-4xl animate-float">☕</div>
           </div>
 
-          {/* Top metrics */}
+          {/* Metrics */}
           <div className="grid grid-cols-2 sm:grid-cols-4 divide-x divide-y sm:divide-y-0 divide-gray-100">
-            {MOCK_METRICS.map((m) => {
-              const isPositive = m.label === "Cost per Lead" ? m.change < 0 : m.change > 0;
-              const isNeutral = m.change === 0;
-              return (
-                <div key={m.label} className="p-5">
-                  <div className="text-xs text-gray-400 mb-1">{m.label}</div>
-                  <div className="text-2xl font-bold text-gray-900">{m.value}</div>
-                  <div
-                    className={`text-xs font-medium mt-1 flex items-center gap-0.5 ${
-                      isNeutral ? "text-gray-400" : isPositive ? "text-green-600" : "text-red-500"
-                    }`}
-                  >
-                    {isNeutral ? (
-                      <Minus size={11} />
-                    ) : isPositive ? (
-                      <TrendingUp size={11} />
-                    ) : (
-                      <TrendingDown size={11} />
-                    )}
-                    {Math.abs(m.change)}% {m.note}
-                  </div>
+            {MOCK_METRICS.map((m) => (
+              <div key={m.label} className="p-5 group hover:bg-gray-50 transition-colors">
+                <div className="text-xs text-gray-400 mb-1">{m.label}</div>
+                <div className="text-2xl font-bold text-gray-900 tabular-nums">{m.value}</div>
+                <div className={`text-xs font-medium mt-1 flex items-center gap-0.5 ${m.positive ? "text-green-600" : "text-red-500"}`}>
+                  {m.positive ? <TrendingUp size={11} /> : <TrendingDown size={11} />}
+                  {Math.abs(m.change)}% {m.note}
                 </div>
-              );
-            })}
+              </div>
+            ))}
+          </div>
+
+          {/* Spend bar */}
+          <div className="px-6 pt-4 pb-2">
+            <div className="text-xs text-gray-400 mb-2 font-medium">Budget allocation this week</div>
+            <div className="flex rounded-full overflow-hidden h-3">
+              <div className="bg-[#4285F4]" style={{ width: "49%" }} title="Google Ads 49%" />
+              <div className="bg-[#0866FF]" style={{ width: "35%" }} title="Meta Ads 35%"   />
+              <div className="bg-[#010101]" style={{ width: "16%" }} title="TikTok Ads 16%" />
+            </div>
+            <div className="flex gap-4 mt-2">
+              {[{ c: "#4285F4", l: "Google Ads 49%" }, { c: "#0866FF", l: "Meta Ads 35%" }, { c: "#333", l: "TikTok 16%" }].map(x => (
+                <div key={x.l} className="flex items-center gap-1.5 text-xs text-gray-400">
+                  <span className="w-2.5 h-2.5 rounded-sm shrink-0" style={{ backgroundColor: x.c }} />
+                  {x.l}
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Channel table */}
@@ -490,15 +377,13 @@ export default function ReportingPage() {
                 </thead>
                 <tbody className="divide-y divide-gray-50">
                   {MOCK_CHANNELS.map((ch) => (
-                    <tr key={ch.name} className="text-gray-700">
+                    <tr key={ch.name} className="text-gray-700 hover:bg-gray-50 transition-colors">
                       <td className="py-2.5 font-medium text-gray-900">{ch.name}</td>
-                      <td className="py-2.5 text-right">{ch.spend}</td>
-                      <td className="py-2.5 text-right">{ch.leads || "—"}</td>
-                      <td className="py-2.5 text-right">{ch.cpl}</td>
-                      <td className="py-2.5 text-right font-medium">{ch.roas}</td>
-                      <td className="py-2.5 text-right">
-                        <TrendIcon trend={ch.trend} />
-                      </td>
+                      <td className="py-2.5 text-right tabular-nums">{ch.spend}</td>
+                      <td className="py-2.5 text-right tabular-nums">{ch.leads || "—"}</td>
+                      <td className="py-2.5 text-right tabular-nums">{ch.cpl}</td>
+                      <td className="py-2.5 text-right font-semibold">{ch.roas}</td>
+                      <td className="py-2.5 text-right"><TrendIcon trend={ch.trend} /></td>
                     </tr>
                   ))}
                 </tbody>
@@ -506,19 +391,19 @@ export default function ReportingPage() {
             </div>
           </div>
 
-          {/* Action items */}
-          <div className="mx-6 my-4 bg-coffee-50 rounded-xl p-4 border border-coffee-100">
-            <div className="text-xs font-semibold text-coffee-700 uppercase tracking-widest mb-3">
+          {/* 3 priorities */}
+          <div className="mx-6 my-5 bg-coffee-50 rounded-xl p-5 border border-coffee-100">
+            <div className="text-xs font-bold text-coffee-700 uppercase tracking-widest mb-4">
               This week&apos;s 3 priorities
             </div>
-            <ol className="space-y-2">
+            <ol className="space-y-3">
               {[
-                "Pause the 3 Google Ads keywords with CPL > $90 — they're dragging the average up.",
-                "Test a new Meta creative for the hair treatment offer — CTR on current set is declining.",
-                "Reply to the 2 unanswered Google reviews from this week — response rate affects ranking.",
+                "Pause the 3 Google Ads keywords with CPL > $90 — they're dragging the blended average up by ~$8.",
+                "Test a new Meta creative for the hair treatment offer — CTR on the current set has dropped 22% in 10 days.",
+                "Reply to the 2 unanswered Google reviews from this week — response rate directly affects your Maps ranking.",
               ].map((item, i) => (
-                <li key={i} className="flex items-start gap-2.5 text-sm text-gray-700">
-                  <span className="w-5 h-5 rounded-full bg-coffee-200 text-coffee-800 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
+                <li key={i} className="flex items-start gap-3 text-sm text-gray-700">
+                  <span className="w-6 h-6 rounded-full bg-coffee-200 text-coffee-800 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
                     {i + 1}
                   </span>
                   {item}
@@ -527,28 +412,63 @@ export default function ReportingPage() {
             </ol>
           </div>
 
-          <div className="px-6 pb-6 text-center text-xs text-gray-400">
+          <div className="px-6 pb-5 text-center text-xs text-gray-400">
             Sample report — numbers are illustrative only.
           </div>
         </div>
       </SectionWrapper>
 
-      {/* ── Report Delivery Methods ── */}
+      {/* ── Setup Timeline ── */}
       <SectionWrapper className="bg-gray-50">
+        <div className="text-center mb-12">
+          <span className="section-label">Onboarding</span>
+          <h2 className="section-title">Live in 5 days</h2>
+          <p className="section-subtitle">You handle one Zoom call. We handle the rest.</p>
+        </div>
+        <div className="max-w-3xl mx-auto">
+          {[
+            { day: "Day 1",  icon: "🔑", title: "Access granted",       desc: "You share read-only access to your ad accounts and analytics tools in a 30-min onboarding call." },
+            { day: "Days 2–3", icon: "⚙️", title: "We connect everything", desc: "DataLatte pulls your historical data, cleans it, and maps it across channels."                  },
+            { day: "Day 4",  icon: "📊", title: "Dashboard goes live",  desc: "Your bookmarkable real-time dashboard is ready. We send you the link."                            },
+            { day: "Day 5",  icon: "📧", title: "First brief arrives",  desc: "Your first weekly brief lands in your inbox — with baselines, early wins, and 3 action items."     },
+            { day: "Ongoing",icon: "♻️", title: "Weekly cadence begins", desc: "Monday briefs, monthly deep-dives, instant alerts, and a monthly strategy call."                  },
+          ].map((step, i) => (
+            <div key={step.day} className="flex gap-5 mb-6 last:mb-0">
+              <div className="flex flex-col items-center">
+                <div className="w-10 h-10 rounded-full bg-coffee-100 text-xl flex items-center justify-center shrink-0">
+                  {step.icon}
+                </div>
+                {i < 4 && <div className="w-px flex-1 bg-coffee-100 my-2" />}
+              </div>
+              <div className="pb-6">
+                <div className="text-xs font-bold text-coffee-600 uppercase tracking-widest mb-1">{step.day}</div>
+                <div className="font-semibold text-gray-900 mb-1">{step.title}</div>
+                <p className="text-gray-500 text-sm leading-relaxed">{step.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </SectionWrapper>
+
+      {/* ── Delivery Methods ── */}
+      <SectionWrapper>
         <div className="text-center mb-12">
           <span className="section-label">Delivery</span>
           <h2 className="section-title">How you receive your reports</h2>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-4xl mx-auto">
-          {REPORT_OUTPUTS.map((output) => (
+          {REPORT_OUTPUTS.map((output, i) => (
             <div
               key={output.name}
-              className="bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-md hover:border-coffee-200 transition-all"
+              className="bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-md hover:border-coffee-200 hover:-translate-y-1 transition-all duration-300 animate-card-rise"
+              style={{ animationDelay: `${i * 0.09}s` }}
             >
-              <div className="text-3xl mb-3">{output.emoji}</div>
+              <div className="text-3xl mb-3 animate-float" style={{ animationDelay: `${i * 0.4}s` }}>
+                {output.emoji}
+              </div>
               <div className="flex items-center justify-between mb-2">
                 <h3 className="font-bold text-gray-900 text-sm">{output.name}</h3>
-                <span className="text-xs bg-coffee-100 text-coffee-700 px-2 py-0.5 rounded-full font-medium">
+                <span className="text-xs bg-coffee-100 text-coffee-700 px-2 py-0.5 rounded-full font-medium whitespace-nowrap">
                   {output.timing}
                 </span>
               </div>
@@ -559,7 +479,7 @@ export default function ReportingPage() {
       </SectionWrapper>
 
       {/* ── FAQ ── */}
-      <SectionWrapper>
+      <SectionWrapper className="bg-gray-50">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-10">
             <span className="section-label">FAQ</span>
