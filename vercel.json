@@ -1,3 +1,24 @@
 {
-  "ignoreCommand": "git log -1 --pretty=%B | grep -q '\\[vercel skip\\]' && exit 0 || exit 1"
+  "ignoreCommand": "git log -1 --pretty=%B | grep -q '\\[vercel skip\\]' && exit 1 || exit 0",
+  "rewrites": [
+    { "source": "/sitemap.xml", "destination": "/sitemap/route" },
+    { "source": "/robots.txt", "destination": "/public/robots.txt" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "X-XSS-Protection", "value": "1; mode=block" }
+      ]
+    },
+    {
+      "source": "/_next/static/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
+  ]
 }
