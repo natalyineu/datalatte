@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 
 const tiers = [
   {
-    name: "Starter",
+    name: "Espresso",
     tagline: "One channel, done properly",
     price: "From $500",
     period: "/month",
@@ -60,7 +60,7 @@ const tiers = [
     badgeClass: "bg-coffee-100 text-coffee-700",
   },
   {
-    name: "Growth",
+    name: "Americano",
     tagline: "Most popular for local businesses",
     price: "From $1,200",
     period: "/month",
@@ -85,7 +85,7 @@ const tiers = [
     badgeClass: "bg-coffee-700 text-white",
   },
   {
-    name: "Full Service",
+    name: "Pumpkin Spice Latte",
     tagline: "Enterprise thinking, your budget",
     price: "From $2,500",
     period: "/month",
