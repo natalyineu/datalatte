@@ -118,6 +118,7 @@ Local small business owners in the US, UK, Australia, Canada, and other English-
 
 ## 🔧 Development Notes
 - **Always commit & push directly to `main`** — no feature branches. The repo deploys on every push to `main` and Nataliia works solo, so PRs add friction with no review benefit. If a Claude Code session opens on a `claude/*` branch, merge into `main` (fast-forward) and push to `main`.
+- **Vercel deploy trigger**: The Ignored Build Step is inverted — commits **with** `[vercel skip]` in the message **trigger** a build; commits **without** it are skipped. Always include `[vercel skip]` in commit messages that should deploy to production.
 - Always run `npm run build` before deploying to catch TypeScript errors
 - Blog posts are defined as objects inside `src/app/blog/[slug]/page.tsx` — add new posts there AND update `generateStaticParams` AND `src/app/sitemap.ts`
 - The `renderInline()` function handles `**bold**` and `*italic*` in blog content
