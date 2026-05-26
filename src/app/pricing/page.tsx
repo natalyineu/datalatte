@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CheckCircle2, ArrowRight, X } from "lucide-react";
+import { CheckCircle2, ArrowRight, X, BarChart3, TrendingUp, BookOpen, Zap, PieChart, Calculator } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
 import { faqSchema, breadcrumbSchema } from "@/lib/schema";
@@ -106,6 +106,51 @@ const tiers = [
     cta: "Let's talk",
     accentClass: "border-gray-300",
     badgeClass: "bg-gray-100 text-gray-700",
+  },
+];
+
+const benefits = [
+  {
+    icon: BarChart3,
+    title: "Beautiful monthly reports",
+    desc: "Plain-English performance summaries every month — what worked, what didn't, and the exact next steps. No jargon, no padding.",
+    href: "/reporting",
+    linkText: "See what reporting looks like",
+  },
+  {
+    icon: TrendingUp,
+    title: "Proven results, real numbers",
+    desc: "Real outcomes from coffee shops, salons, pet groomers, and fitness studios across the US and UK — not cherry-picked.",
+    href: "/results",
+    linkText: "View client results",
+  },
+  {
+    icon: BookOpen,
+    title: "Deep-dive case studies",
+    desc: "Step-by-step breakdowns of how underperforming accounts became consistent lead machines — with the data to prove it.",
+    href: "/case-studies",
+    linkText: "Read the case studies",
+  },
+  {
+    icon: Zap,
+    title: "AI & automation setup",
+    desc: "Chatbots, automated follow-up sequences, and AI-powered targeting — built and managed for you, no tech skills needed.",
+    href: "/services/ai-agents",
+    linkText: "Explore AI services",
+  },
+  {
+    icon: PieChart,
+    title: "Full analytics & conversion tracking",
+    desc: "GA4 setup, goal tracking, and dashboards that show your real cost-per-lead — so you always know what's working.",
+    href: "/services/analytics",
+    linkText: "Learn about analytics",
+  },
+  {
+    icon: Calculator,
+    title: "Free marketing budget calculator",
+    desc: "Not sure how much to spend across channels? Model your budget and expected returns before committing a single dollar.",
+    href: "/tools/marketing-budget-calculator",
+    linkText: "Try the calculator",
   },
 ];
 
@@ -238,6 +283,38 @@ export default function PricingPage() {
             Use the budget calculator →
           </Link>
         </p>
+      </SectionWrapper>
+
+      {/* Benefits */}
+      <SectionWrapper className="bg-coffee-50/40">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-10">
+            <span className="section-label">Included in every package</span>
+            <h2 className="section-title">More than just campaign management</h2>
+            <p className="text-gray-500 mt-3 max-w-2xl mx-auto text-base leading-relaxed">
+              Every client gets a senior strategist — not a junior account manager — plus the tools,
+              reports, and transparency to know exactly what their money is doing.
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {benefits.map((b) => (
+              <Link
+                key={b.href}
+                href={b.href}
+                className="group bg-white rounded-2xl border border-gray-200 p-6 hover:border-coffee-400 hover:shadow-md transition-all flex flex-col"
+              >
+                <div className="w-10 h-10 bg-coffee-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-coffee-200 transition-colors">
+                  <b.icon size={20} className="text-coffee-700" />
+                </div>
+                <h3 className="font-semibold text-gray-900 mb-2 text-base">{b.title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed flex-1">{b.desc}</p>
+                <span className="inline-flex items-center gap-1 text-coffee-700 text-sm font-medium mt-4 group-hover:gap-2 transition-all">
+                  {b.linkText} <ArrowRight size={14} />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
       </SectionWrapper>
 
       {/* Feature comparison */}
