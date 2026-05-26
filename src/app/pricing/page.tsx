@@ -140,7 +140,7 @@ const faqs = [
   },
   {
     q: "Can I start small and upgrade later?",
-    a: "Absolutely. Most clients start on the Starter or Growth package and add channels as they see results. Upgrading is seamless — there's no new setup or onboarding needed.",
+    a: "Absolutely. Most clients start on the Espresso or Americano package and add channels as they see results. Upgrading is seamless — there's no new setup or onboarding needed.",
   },
   {
     q: "How is this different from a marketing agency?",
@@ -252,9 +252,9 @@ export default function PricingPage() {
               <thead>
                 <tr className="border-b border-gray-100">
                   <th className="text-left p-4 text-gray-600 font-medium w-1/2">Feature</th>
-                  <th className="p-4 text-center text-gray-700 font-bold">Starter</th>
-                  <th className="p-4 text-center text-coffee-700 font-bold">Growth</th>
-                  <th className="p-4 text-center text-gray-700 font-bold">Full Service</th>
+                  <th className="p-4 text-center text-gray-700 font-bold">Espresso</th>
+                  <th className="p-4 text-center text-coffee-700 font-bold">Americano</th>
+                  <th className="p-4 text-center text-gray-700 font-bold">Pumpkin Spice Latte</th>
                 </tr>
               </thead>
               <tbody>
