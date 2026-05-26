@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, X, Check } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
 import { faqSchema, breadcrumbSchema, serviceSchema } from "@/lib/schema";
@@ -13,10 +13,12 @@ interface ServicePageProps {
   whatItIs: string;
   howItWorks: { step: string; title: string; desc: string }[];
   included: string[];
-  notIncluded?: string[]; // kept for backward compat but ignored
+  notIncluded?: string[];
   bestFor: string[];
   faqs: { q: string; a: string }[];
   relatedLinks: { label: string; href: string }[];
+  beforeAfter?: { before: string; after: string }[];
+  stats?: { value: string; label: string }[];
 }
 
 const SERVICE_SLUGS: Record<string, string> = {
@@ -37,9 +39,26 @@ const SERVICE_SLUGS: Record<string, string> = {
   "Programmatic Advertising": "programmatic",
 };
 
+const DEFAULT_STATS = [
+  { value: "10+",    label: "Years experience" },
+  { value: "48 h",   label: "First audit turnaround" },
+  { value: "0",      label: "Lock-in contracts" },
+  { value: "Direct", label: "Access to Nataliia" },
+];
+
+const DEFAULT_BEFORE_AFTER = [
+  { before: "No idea what's actually working",         after: "Clear weekly report: what's working & why"   },
+  { before: "Paying an agency that ignores you",       after: "Direct access to a senior strategist"        },
+  { before: "Budget spent with no clear ROI",          after: "Cost-per-lead tracked from day one"          },
+  { before: "Signed into a 12-month contract",         after: "Month-to-month — cancel any time"            },
+  { before: "Generic campaigns, generic results",      after: "Strategy built for your niche specifically"  },
+];
+
 export default function ServicePage({
   service, tagline, description, icon, accentClass,
   whatItIs, howItWorks, included, bestFor, faqs, relatedLinks,
+  beforeAfter = DEFAULT_BEFORE_AFTER,
+  stats = DEFAULT_STATS,
 }: ServicePageProps) {
   const slug = SERVICE_SLUGS[service] ?? service.toLowerCase().replace(/[\s&]+/g, "-").replace(/[^a-z0-9-]/g, "");
   const serviceUrl = `https://datalatte.pro/services/${slug}`;
@@ -51,38 +70,108 @@ export default function ServicePage({
 
   return (
     <>
-      {/* FAQPage + BreadcrumbList + Service structured data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs)) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema({ name: service, description, url: serviceUrl })) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema({ name: service, description, url: serviceUrl })) }} />
 
-      {/* Hero */}
-      <section className={`${accentClass} py-24 px-4 sm:px-6 lg:px-8`}>
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="text-6xl mb-5">{icon}</div>
-          <span className="inline-block bg-white/15 border border-white/25 text-white text-sm font-medium px-4 py-1.5 rounded-full mb-5 backdrop-blur-sm">
+      {/* ── Hero ── */}
+      <section className={`relative overflow-hidden ${accentClass} pt-24 pb-28 px-4 sm:px-6 lg:px-8`}>
+        {/* Grid overlay */}
+        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.6) 1px,transparent 1px)", backgroundSize: "40px 40px" }} />
+
+        {/* Floating badges */}
+        <div className="absolute left-6 top-20 lg:left-16 lg:top-24 hidden sm:block animate-float opacity-90">
+          <div className="bg-black/40 backdrop-blur border border-white/15 rounded-xl px-3 py-2 text-xs text-white flex items-center gap-2 shadow-lg">
+            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse shrink-0" />
+            <span className="text-white/70">Free audit</span>
+            <span className="text-green-400 font-bold">48 h turnaround</span>
+          </div>
+        </div>
+        <div className="absolute right-6 top-24 lg:right-20 lg:top-28 hidden sm:block animate-float-r opacity-90" style={{ animationDelay: "0.8s" }}>
+          <div className="bg-black/40 backdrop-blur border border-white/15 rounded-xl px-3 py-2 text-xs text-white flex items-center gap-2 shadow-lg">
+            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse shrink-0" />
+            <span className="text-white/70">Month-to-month</span>
+            <span className="text-green-400 font-bold">No lock-in</span>
+          </div>
+        </div>
+        <div className="absolute left-12 bottom-16 lg:left-28 hidden lg:block animate-float opacity-75" style={{ animationDelay: "1.5s" }}>
+          <div className="bg-black/40 backdrop-blur border border-white/15 rounded-xl px-3 py-2 text-xs text-white flex items-center gap-2 shadow-lg">
+            <span className="w-2 h-2 rounded-full bg-coffee-400 animate-pulse shrink-0" />
+            <span className="text-white/70">Weekly report</span>
+            <span className="text-coffee-300 font-bold">Every Monday</span>
+          </div>
+        </div>
+        <div className="absolute right-10 bottom-20 lg:right-24 hidden lg:block animate-float-r opacity-75" style={{ animationDelay: "0.4s" }}>
+          <div className="bg-black/40 backdrop-blur border border-white/15 rounded-xl px-3 py-2 text-xs text-white flex items-center gap-2 shadow-lg">
+            <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse shrink-0" />
+            <span className="text-white/70">Setup</span>
+            <span className="text-blue-400 font-bold">Live in 5 days ✓</span>
+          </div>
+        </div>
+
+        <div className="max-w-4xl mx-auto text-center relative">
+          <div className="text-6xl mb-5 animate-float" style={{ animationDelay: "0.2s" }}>{icon}</div>
+          <span className="inline-block bg-white/10 border border-white/20 text-white/80 text-sm font-medium px-4 py-1.5 rounded-full mb-5 backdrop-blur-sm">
             Service
           </span>
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-5 text-balance">{service}</h1>
           <p className="text-xl text-white/80 font-medium mb-3">{tagline}</p>
-          <p className="text-white/65 max-w-2xl mx-auto mb-8 leading-relaxed">{description}</p>
-          <Link href="/contact" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg">
-            Request a Free Audit <ArrowRight size={17} />
-          </Link>
+          <p className="text-white/60 max-w-2xl mx-auto mb-10 leading-relaxed">{description}</p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link href="/contact" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg">
+              Request a Free Audit <ArrowRight size={17} />
+            </Link>
+            <Link href="/pricing" className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-white/15 transition-all">
+              See pricing →
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* What it is */}
+      {/* ── Stats bar ── */}
+      <div className="bg-gray-950 border-b border-gray-800/60">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-5 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+          {stats.map((s) => (
+            <div key={s.label}>
+              <div className="text-xl font-bold text-coffee-300">{s.value}</div>
+              <div className="text-xs text-gray-500 mt-0.5">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Before / After ── */}
       <SectionWrapper>
+        <div className="text-center mb-10">
+          <span className="section-label">The Difference</span>
+          <h2 className="section-title">Sound familiar? <span className="gradient-text">Here&apos;s the fix.</span></h2>
+        </div>
+        <div className="max-w-3xl mx-auto divide-y divide-gray-100 border border-gray-100 rounded-2xl overflow-hidden shadow-sm">
+          <div className="grid grid-cols-2 bg-gray-50 text-xs font-bold text-gray-400 uppercase tracking-widest">
+            <div className="px-5 py-3 border-r border-gray-100 flex items-center gap-2">
+              <X size={13} className="text-red-400" /> Before
+            </div>
+            <div className="px-5 py-3 flex items-center gap-2">
+              <Check size={13} className="text-green-500" /> After DataLatte
+            </div>
+          </div>
+          {beforeAfter.map((row, i) => (
+            <div key={i} className="grid grid-cols-2 text-sm hover:bg-gray-50 transition-colors">
+              <div className="px-5 py-3.5 text-gray-400 border-r border-gray-100 flex items-start gap-2">
+                <X size={13} className="text-red-400 shrink-0 mt-0.5" />
+                {row.before}
+              </div>
+              <div className="px-5 py-3.5 text-gray-800 flex items-start gap-2">
+                <Check size={13} className="text-green-500 shrink-0 mt-0.5" />
+                {row.after}
+              </div>
+            </div>
+          ))}
+        </div>
+      </SectionWrapper>
+
+      {/* ── What it is ── */}
+      <SectionWrapper className="bg-gray-50">
         <div className="max-w-3xl mx-auto">
           <span className="section-label">The Basics</span>
           <h2 className="section-title mb-6">What is {service}, really?</h2>
@@ -90,39 +179,53 @@ export default function ServicePage({
         </div>
       </SectionWrapper>
 
-      {/* How it works */}
-      <SectionWrapper className="bg-gray-50">
-        <div className="text-center mb-12">
-          <span className="section-label">My Process</span>
-          <h2 className="section-title">
-            How I approach <span className="gradient-text">{service}</span>
-          </h2>
-        </div>
-        <div className="max-w-3xl mx-auto space-y-4">
-          {howItWorks.map((item) => (
-            <div key={item.step} className="flex gap-5 bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
-              <div className="w-10 h-10 rounded-full bg-coffee-100 text-coffee-700 font-bold text-sm flex items-center justify-center shrink-0">
-                {item.step}
+      {/* ── How it works — dark pipeline ── */}
+      <section className="bg-gray-950 py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.035]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.6) 1px,transparent 1px)", backgroundSize: "32px 32px" }} />
+        <div className="max-w-3xl mx-auto relative">
+          <div className="text-center mb-12">
+            <span className="inline-block text-coffee-400 text-sm font-semibold uppercase tracking-widest mb-3">My Process</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
+              How I approach <span className="text-coffee-400">{service}</span>
+            </h2>
+            <p className="text-gray-500 max-w-xl mx-auto text-sm leading-relaxed">
+              A clear, repeatable process — so you always know where things stand.
+            </p>
+          </div>
+          <div className="space-y-0">
+            {howItWorks.map((item, i) => (
+              <div key={item.step} className="flex gap-5 animate-card-rise" style={{ animationDelay: `${i * 0.08}s` }}>
+                <div className="flex flex-col items-center">
+                  <div className="w-10 h-10 rounded-full bg-coffee-800 border border-coffee-600 text-coffee-300 font-bold text-sm flex items-center justify-center shrink-0 z-10">
+                    {item.step}
+                  </div>
+                  {i < howItWorks.length - 1 && <div className="w-px flex-1 bg-coffee-900 my-2" />}
+                </div>
+                <div className={`pb-8 ${i < howItWorks.length - 1 ? "" : ""}`}>
+                  <h4 className="font-semibold text-white mb-2 mt-2">{item.title}</h4>
+                  <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
+                </div>
               </div>
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-2">{item.title}</h4>
-                <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </SectionWrapper>
+      </section>
 
-      {/* Included */}
+      {/* ── Included ── */}
       <SectionWrapper>
         <div className="max-w-4xl mx-auto">
-          <h3 className="font-bold text-gray-900 text-xl mb-6 flex items-center gap-2">
-            <span className="text-coffee-600">✓</span> Everything included in {service}
-          </h3>
+          <div className="text-center mb-10">
+            <span className="section-label">What&apos;s Included</span>
+            <h2 className="section-title">Everything in {service}</h2>
+          </div>
           <div className="grid sm:grid-cols-2 gap-3">
-            {included.map((item) => (
-              <div key={item} className="flex items-start gap-2.5 bg-coffee-50 rounded-xl px-4 py-3 border border-coffee-100">
-                <CheckCircle2 size={17} className="text-coffee-500 shrink-0 mt-0.5" />
+            {included.map((item, i) => (
+              <div
+                key={item}
+                className="flex items-start gap-3 bg-white rounded-xl px-5 py-4 border border-gray-100 shadow-sm hover:border-coffee-300 hover:shadow-md transition-all animate-card-rise group"
+                style={{ animationDelay: `${i * 0.05}s` }}
+              >
+                <CheckCircle2 size={17} className="text-coffee-500 shrink-0 mt-0.5 group-hover:text-coffee-600 transition-colors" />
                 <span className="text-gray-700 text-sm">{item}</span>
               </div>
             ))}
@@ -130,14 +233,20 @@ export default function ServicePage({
         </div>
       </SectionWrapper>
 
-      {/* Best for */}
+      {/* ── Best for ── */}
       <SectionWrapper className="bg-coffee-50">
-        <div className="max-w-3xl mx-auto">
-          <span className="section-label">Is This Right for You?</span>
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">{service} works best for:</h2>
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-10">
+            <span className="section-label">Is This Right for You?</span>
+            <h2 className="section-title">{service} works best for:</h2>
+          </div>
           <div className="grid sm:grid-cols-2 gap-3">
-            {bestFor.map((item) => (
-              <div key={item} className="flex items-start gap-3 bg-white rounded-xl p-4 border border-coffee-100">
+            {bestFor.map((item, i) => (
+              <div
+                key={item}
+                className="flex items-start gap-3 bg-white rounded-xl p-5 border border-coffee-100 hover:border-coffee-400 hover:shadow-md transition-all animate-card-rise"
+                style={{ animationDelay: `${i * 0.06}s` }}
+              >
                 <CheckCircle2 size={17} className="text-coffee-600 shrink-0 mt-0.5" />
                 <span className="text-gray-700 text-sm">{item}</span>
               </div>
@@ -146,7 +255,7 @@ export default function ServicePage({
         </div>
       </SectionWrapper>
 
-      {/* FAQ */}
+      {/* ── FAQ ── */}
       <SectionWrapper>
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-10">
@@ -155,7 +264,7 @@ export default function ServicePage({
           </div>
           <div className="space-y-4">
             {faqs.map((item) => (
-              <div key={item.q} className="card p-6">
+              <div key={item.q} className="card p-6 hover:border-coffee-200 hover:shadow-sm transition-all">
                 <h4 className="font-semibold text-gray-900 mb-2">{item.q}</h4>
                 <p className="text-gray-500 text-sm leading-relaxed">{item.a}</p>
               </div>
@@ -164,7 +273,7 @@ export default function ServicePage({
         </div>
       </SectionWrapper>
 
-      {/* Related */}
+      {/* ── Related ── */}
       <SectionWrapper className="bg-gray-50">
         <div className="text-center mb-8">
           <h3 className="text-xl font-bold text-gray-900">Explore related services</h3>
