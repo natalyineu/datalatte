@@ -18,6 +18,7 @@ interface BlogCardProps {
 export default function BlogCard({ title, excerpt, slug, category, date, rawDate, image, readTime, featured }: BlogCardProps) {
   const group = getGroup(category);
   const { Icon, gradient } = GROUP_CONFIG[group];
+  const unoptimized = image?.startsWith("http");
 
   if (featured) {
     return (
@@ -29,6 +30,7 @@ export default function BlogCard({ title, excerpt, slug, category, date, rawDate
               src={image}
               alt={title}
               fill
+              unoptimized={unoptimized}
               className="object-cover group-hover:scale-105 transition-transform duration-500"
               sizes="(max-width: 640px) 100vw, 288px"
             />
@@ -70,6 +72,7 @@ export default function BlogCard({ title, excerpt, slug, category, date, rawDate
             src={image}
             alt={title}
             fill
+            unoptimized={unoptimized}
             className="object-cover group-hover:scale-105 transition-transform duration-500"
             sizes="(max-width: 768px) 100vw, 33vw"
           />

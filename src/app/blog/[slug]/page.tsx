@@ -527,6 +527,7 @@ export default async function BlogPostPage({
           src={frontmatter.image}
           alt={frontmatter.title}
           fill
+          unoptimized={frontmatter.image?.startsWith("http")}
           className="object-cover"
           priority
           sizes="100vw"
