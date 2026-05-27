@@ -613,6 +613,359 @@ export const checklists: Checklist[] = [
       },
     ],
   },
+  {
+    slug: "pet-groomer-marketing",
+    title: "Pet Groomer Marketing Checklist",
+    description:
+      "A complete marketing checklist for pet grooming businesses. Build a loyal client base, fill your schedule, and stand out in your local area.",
+    icon: "🐾",
+    category: "Niche",
+    timeEstimate: "60 min",
+    difficulty: "Beginner",
+    sections: [
+      {
+        title: "Google & Local Visibility",
+        items: [
+          "Claim and fully complete your Google Business Profile with every service listed (breed-specific grooming, nail trims, baths, etc.)",
+          "Add at least 30 photos: before/after grooms, your grooming station, staff with animals, happy pets",
+          "Enable the 'Booking' button on GBP and link it directly to your scheduling system",
+          "List every breed you work with in your GBP services — pet owners search by breed",
+          "Collect 50+ Google reviews with a specific ask: 'Mention [pet name] and the service'",
+          "Add 'pet groomer near me', '[breed] groomer [city]', and 'mobile pet grooming [city]' as keyword targets",
+          "Get listed on Yelp, Nextdoor, PetBacker, Rover (for visibility), and local pet directories",
+        ],
+      },
+      {
+        title: "Website & Online Booking",
+        items: [
+          "Your homepage headline should mention your city and top service: 'Professional Dog Grooming in [City]'",
+          "Create individual service pages for each grooming service with pricing and photos",
+          "Embed your booking calendar on the homepage — minimize clicks to book",
+          "Add a 'New Client Special' offer prominently on the homepage",
+          "Create a breed gallery showing before/after photos for popular breeds you serve",
+          "Include a 'Meet the Groomers' page with bios and certifications",
+          "Add a FAQ page addressing: How long does grooming take? What products do you use? Do you take aggressive dogs?",
+        ],
+      },
+      {
+        title: "Social Media & Community",
+        items: [
+          "Post a before/after groom photo every day you're open — these are your highest-performing posts",
+          "Create a 'Pet of the Month' feature tagging the owners — they share it with their entire network",
+          "Join every local Facebook group for pet owners and introduce yourself (no spam — add value first)",
+          "Partner with local vets, dog trainers, and pet stores for referral arrangements",
+          "Run a 'Fluffy Friday' contest where followers share pet photos for a free groom prize",
+          "Post grooming tips on TikTok and Instagram Reels — 'Signs your dog needs a groom now'",
+          "Create a loyalty card: 'Buy 9 grooms, get the 10th free' — digital or physical",
+        ],
+      },
+      {
+        title: "Client Retention & Upsells",
+        items: [
+          "Send automated appointment reminders 48 hours and 2 hours before each groom",
+          "Send a rebooking reminder 6–8 weeks after each visit based on breed grooming frequency",
+          "Offer a 'Puppy's First Groom' package with a photo and a certificate — parents share this everywhere",
+          "Upsell add-on services at checkout: teeth brushing, de-shedding treatment, paw balm",
+          "Create a monthly 'Grooming Club' subscription: unlimited baths + one full groom per month",
+          "Ask every happy client for a referral: 'We'd love to meet another pet like [pet name]'",
+          "Send a holiday card to every active client — handwritten notes create raving fans",
+        ],
+      },
+    ],
+  },
+
+  {
+    slug: "fitness-studio-marketing",
+    title: "Fitness Studio Marketing Checklist",
+    description:
+      "Grow your gym, yoga studio, or personal training business with this step-by-step marketing checklist. Attract members, reduce churn, and fill every class.",
+    icon: "🏋️",
+    category: "Niche",
+    timeEstimate: "60 min",
+    difficulty: "Intermediate",
+    sections: [
+      {
+        title: "Local Discovery & SEO",
+        items: [
+          "Complete your Google Business Profile with every class type, amenity, and membership option listed",
+          "Add photos of every area: floor, equipment, changing rooms, classes in action, exterior",
+          "Get to 100+ Google reviews — studios with 4.7+ and 100+ reviews dominate local results",
+          "Create landing pages for each class: 'Yoga Classes in [City]', 'CrossFit [City]', 'Personal Training [City]'",
+          "Target 'gym near me', '[class type] near me', and '[fitness goal] trainer [city]' keywords",
+          "List on ClassPass, Mindbody, Yelp, Groupon (for visibility), and local wellness directories",
+          "Run a 'New Year New You' seasonal campaign targeting gym-switchers in January and September",
+        ],
+      },
+      {
+        title: "Member Acquisition",
+        items: [
+          "Offer a 7-day or 14-day free trial — lower the barrier to the first visit",
+          "Create a 'Bring a Friend Free' week every quarter — your members are your best salespeople",
+          "Run Facebook and Instagram ads targeting people within 5 miles who are interested in fitness",
+          "Use Google Ads for high-intent searches: 'join a gym [city]', 'personal trainer near me'",
+          "Partner with local nutritionists, chiropractors, and physiotherapists for cross-referrals",
+          "Offer a corporate wellness package to local businesses — one deal can bring 20+ members",
+          "Run a 6-week transformation challenge — charge a small entry fee, award prizes, generate huge buzz",
+        ],
+      },
+      {
+        title: "Content & Community",
+        items: [
+          "Post workout videos, member spotlights, and transformation stories 5x per week on Instagram",
+          "Create a private Facebook group for members — community is your #1 retention tool",
+          "Go live on Instagram for a free 15-min workout weekly — builds audience and shows your coaches",
+          "Share member transformations (with permission) — these are your most powerful social proof",
+          "Create a YouTube channel with full-length workouts — ranks in search and builds authority",
+          "Start a 30-day challenge on social media with a daily prompt — drives daily engagement",
+          "Host a free outdoor workout monthly — great for community building and local press",
+        ],
+      },
+      {
+        title: "Retention & Revenue",
+        items: [
+          "Call every new member after their first week — this alone reduces 30-day churn by 40%",
+          "Send a win-back campaign to anyone who hasn't visited in 3 weeks",
+          "Offer annual memberships at a 15–20% discount — improves cash flow and locks in commitment",
+          "Sell personal training packages, nutrition coaching, and merchandise as upsells",
+          "Create a tiered membership: Basic (classes only), Pro (classes + PT session), VIP (unlimited everything)",
+          "Track monthly retention rate — if it drops below 85%, investigate immediately",
+          "Survey churned members within 7 days of cancellation — their feedback is gold",
+        ],
+      },
+    ],
+  },
+
+  {
+    slug: "restaurant-marketing",
+    title: "Restaurant Marketing Checklist",
+    description:
+      "Fill more seats, drive more orders, and build a loyal dining community. This checklist covers every marketing channel that matters for restaurants.",
+    icon: "🍽️",
+    category: "Niche",
+    timeEstimate: "75 min",
+    difficulty: "Intermediate",
+    sections: [
+      {
+        title: "Google & Local Search",
+        items: [
+          "Claim and fully complete your Google Business Profile including menu, hours, dine-in/takeout/delivery options",
+          "Add professional food photos — restaurants with 100+ photos get 3x more direction requests",
+          "Enable Google Food Ordering if available in your area — free incremental orders",
+          "Keep your hours updated especially for holidays and special events",
+          "Respond to every Google review within 4 hours — Google tracks engagement speed",
+          "Get listed on Yelp, TripAdvisor, OpenTable, Resy, and local food blogs",
+          "Target: '[cuisine] restaurant [city]', 'best [cuisine] near me', 'restaurants open now [city]'",
+        ],
+      },
+      {
+        title: "Online Ordering & Delivery",
+        items: [
+          "Set up commission-free online ordering on your website (use Square, Toast, or Owner.com)",
+          "List on DoorDash, Uber Eats, and Grubhub for discovery — but push customers toward direct ordering",
+          "Offer a 10% discount for direct orders vs. third-party orders — print this on your menus",
+          "Include a 'Order Direct and Save' flyer in every delivery bag from third-party platforms",
+          "Create a family meal bundle and a 'date night for two' bundle — these drive higher average order values",
+          "Run a 'Free delivery on orders over $X' promotion every weekend to boost order volume",
+          "Build an email list from online orders — these customers are your most loyal repeat buyers",
+        ],
+      },
+      {
+        title: "Social Media & Content",
+        items: [
+          "Post a high-quality photo or Reel of every new menu item on Instagram the day it launches",
+          "Go behind the scenes: show your chefs, prep process, ingredient sourcing — people love authenticity",
+          "Run a weekly 'staff pick' — each week a team member recommends their favorite dish",
+          "Partner with local food influencers for a comp meal in exchange for an honest post",
+          "Create a TikTok account showing satisfying food prep videos — these get millions of views",
+          "Run a 'tag us in your meal' UGC campaign — reshare every tagged post to your stories",
+          "Announce specials and events on social media with 48-hour notice to build anticipation",
+        ],
+      },
+      {
+        title: "Loyalty & Retention",
+        items: [
+          "Implement a digital loyalty program (Stamp Me, Belly, or Square Loyalty) — not paper punch cards",
+          "Offer a birthday reward — free dessert, appetizer, or discount — collect birthdays at signup",
+          "Create a VIP email list for your most loyal customers — give them early access to specials",
+          "Run a 'locals discount' program — residents of your ZIP code get a standing 10% off",
+          "Host a monthly themed dinner night (wine pairing, trivia night, chef's table) — drives repeat visits",
+          "Send an email newsletter weekly with specials, new items, and behind-the-scenes stories",
+          "Track your average visit frequency per customer — your goal is to increase it by 1 visit per quarter",
+        ],
+      },
+    ],
+  },
+
+  {
+    slug: "dentist-marketing",
+    title: "Dental Practice Marketing Checklist",
+    description:
+      "Attract new patients, reduce no-shows, and build a practice known for trust and quality. The complete marketing checklist for dentists and dental clinics.",
+    icon: "🦷",
+    category: "Niche",
+    timeEstimate: "60 min",
+    difficulty: "Intermediate",
+    sections: [
+      {
+        title: "Local SEO & Google Presence",
+        items: [
+          "Claim your Google Business Profile and select 'Dentist' as your primary category",
+          "Add specialist categories: Orthodontist, Cosmetic Dentist, Pediatric Dentist (if applicable)",
+          "Add every service: cleaning, whitening, implants, Invisalign, veneers, emergency dentistry",
+          "Add photos of your reception, treatment rooms, staff, and before/after cases (with patient consent)",
+          "Get listed on Healthgrades, Zocdoc, US News, WebMD, and Vitals — these rank for dentist searches",
+          "Target: 'dentist near me', 'emergency dentist [city]', 'dental implants [city]', 'family dentist [city]'",
+          "Build location pages for every city and neighborhood you serve",
+        ],
+      },
+      {
+        title: "Website & Patient Acquisition",
+        items: [
+          "Display your top services above the fold with a clear 'Book Appointment' button",
+          "Add an online booking widget — 60% of patients prefer to book online vs. calling",
+          "Create service pages for high-value procedures: implants, Invisalign, veneers, whitening",
+          "Add before/after photo gallery for cosmetic procedures (with patient consent and HIPAA compliance)",
+          "Display accepted insurance plans prominently — patients filter by insurance first",
+          "Add a live chat or chatbot for after-hours appointment requests",
+          "Publish 'New Patient Special' offer (e.g. $99 cleaning + X-ray) as a lead magnet",
+        ],
+      },
+      {
+        title: "Reviews & Reputation",
+        items: [
+          "Ask every patient for a Google review at checkout — train your front desk team",
+          "Use a HIPAA-compliant review platform (Birdeye, Weave, or Swell) for automated review requests",
+          "Respond to every review mentioning you're happy to discuss any concerns privately",
+          "Never mention treatment details in review responses — HIPAA compliance is critical",
+          "Aim for 200+ Google reviews — dental practices with 4.7+ and 200+ reviews dominate their area",
+          "Share 5-star reviews on social media as text graphics (no patient photos without written consent)",
+          "Display review badges on your website homepage and service pages",
+        ],
+      },
+      {
+        title: "Retention & Reactivation",
+        items: [
+          "Send automated recall reminders at 3, 6, and 12 months after each visit via SMS and email",
+          "Call lapsed patients (no visit in 18+ months) personally — your receptionists should have a script",
+          "Offer a 'family plan' that bundles checkups for 2 adults + 2 children at a discount",
+          "Create a patient referral program: 'Refer a friend, get a $50 credit toward your next visit'",
+          "Send a birthday message with a special offer for a whitening or cosmetic consultation",
+          "Offer flexible payment plans (CareCredit, Sunbit) — cost is the #1 reason patients skip treatment",
+          "Survey patients annually with a 3-question NPS survey — act on every piece of feedback",
+        ],
+      },
+    ],
+  },
+
+  {
+    slug: "cleaning-service-marketing",
+    title: "Cleaning Service Marketing Checklist",
+    description:
+      "Win more recurring clients, dominate local search, and build a cleaning business that runs on referrals. The complete checklist for residential and commercial cleaners.",
+    icon: "🏠",
+    category: "Niche",
+    timeEstimate: "50 min",
+    difficulty: "Beginner",
+    sections: [
+      {
+        title: "Local Search & Google",
+        items: [
+          "Claim your GBP with category 'House Cleaning Service' or 'Commercial Cleaning Service'",
+          "List every service: regular cleaning, deep cleaning, move-in/out, post-construction, office cleaning",
+          "Add your service area explicitly — GBP lets you list every city and neighborhood you cover",
+          "Add photos of clean results, your team in uniform, your equipment, and your branded vehicle",
+          "Get listed on Thumbtack, Angi, HomeAdvisor, TaskRabbit, and Nextdoor for leads",
+          "Target keywords: 'house cleaning [city]', 'maid service near me', 'deep cleaning [city]'",
+          "Collect 5 Google reviews per week — this is the fastest path to #1 in your area",
+        ],
+      },
+      {
+        title: "Pricing & Lead Generation",
+        items: [
+          "Add an instant quote calculator to your website — it's your #1 conversion driver",
+          "Create a 'First Clean Special' (e.g. 20% off) — lower the barrier to the first booking",
+          "Build separate landing pages for each service type targeting specific search intent",
+          "Add a live chat widget for instant quote requests — speed to response wins the booking",
+          "Run Google Local Services Ads (GLSA) — these appear above regular ads with a 'Google Guaranteed' badge",
+          "Send direct mail postcards to neighborhoods after completing a job in the area",
+          "Partner with real estate agents — every home sale is a move-in/move-out clean opportunity",
+        ],
+      },
+      {
+        title: "Retention & Recurring Revenue",
+        items: [
+          "Offer weekly, biweekly, and monthly subscription plans at 10–15% discount vs. one-time cleans",
+          "Send a 'how was your clean?' text within 2 hours of every job completion",
+          "Create a referral program: 'Refer a neighbor, both of you get $25 off'",
+          "Leave a branded thank-you card after every clean with a review request QR code",
+          "Upsell add-ons at booking: inside oven cleaning, inside fridge, window cleaning, laundry folding",
+          "Send a 'Spring Deep Clean' and 'Holiday Preparation Clean' email campaign each season",
+          "Track client retention monthly — losing a recurring client costs 5x more than keeping them",
+        ],
+      },
+    ],
+  },
+
+  {
+    slug: "real-estate-marketing",
+    title: "Real Estate Agent Marketing Checklist",
+    description:
+      "Generate more listings, win more buyers, and build a personal brand that dominates your local market. The complete marketing checklist for real estate agents.",
+    icon: "🏡",
+    category: "Niche",
+    timeEstimate: "75 min",
+    difficulty: "Advanced",
+    sections: [
+      {
+        title: "Personal Brand & Online Presence",
+        items: [
+          "Create a personal agent website (not just your brokerage page) with your niche and farm area front and center",
+          "Claim your Google Business Profile as a 'Real Estate Agent' with your direct contact info",
+          "Complete your Zillow Premier Agent, Realtor.com, and Homes.com profiles with 100% completion",
+          "Get client reviews on Google, Zillow, and Realtor.com after every closed transaction",
+          "Build a 'neighborhood expert' content hub: blog posts about schools, local events, market stats",
+          "Record a 60-second video introduction — pin it to your website, Google profile, and social media",
+          "Create a professional headshot and consistent brand colors/fonts across all platforms",
+        ],
+      },
+      {
+        title: "Lead Generation",
+        items: [
+          "Run Facebook and Instagram ads targeting homeowners aged 35–65 within your farm area",
+          "Use Google Ads for buyer intent: 'homes for sale [city]', '[neighborhood] real estate agent'",
+          "Create a free 'Home Valuation' landing page — this is your highest-converting lead magnet",
+          "Run a 'Just Listed / Just Sold' postcard campaign within 0.5 miles of every transaction",
+          "Build a referral network: mortgage brokers, divorce attorneys, estate attorneys, financial planners",
+          "Host a free 'First-Time Homebuyer Workshop' quarterly — generates 10–20 qualified leads per event",
+          "Door-knock your farm area with a market report — 1 in 50 opens into a listing conversation",
+        ],
+      },
+      {
+        title: "Listings Marketing",
+        items: [
+          "Hire a professional photographer for every listing — non-negotiable",
+          "Create a property-specific landing page with a virtual tour, floor plan, and neighborhood guide",
+          "Post every listing as an Instagram Reel walkthrough — these get 5x more reach than photos",
+          "Run Facebook ads to a 10-mile radius around every listing the day it goes live",
+          "Email your database of buyers every new listing before it hits the MLS",
+          "Create a '48-hour exclusive preview' for your buyer clients — makes them feel VIP",
+          "Send a printed 'Just Listed' flyer to 500 neighbors — neighbors refer buyers who want to live near them",
+        ],
+      },
+      {
+        title: "Database & Referral Marketing",
+        items: [
+          "Segment your CRM into: active buyers, active sellers, past clients, sphere of influence",
+          "Send a monthly market report email to your entire database — position yourself as the local expert",
+          "Call every past client on their 'home anniversary' — most agents never do this",
+          "Send handwritten thank-you notes after every closing and every referral received",
+          "Host an annual client appreciation event (BBQ, wine tasting, movie night) — your referral engine",
+          "Set a 'touch' goal: every person in your database hears from you at least 12 times per year",
+          "Track your referral conversion rate — 80% of business should come from referrals within 3 years",
+        ],
+      },
+    ],
+  },
 ];
 
 export function getChecklist(slug: string): Checklist | undefined {
