@@ -28,6 +28,7 @@ const footerLinks = {
     { label: "AI Agents",               href: "/services/ai-agents" },
     { label: "Email & SMS",             href: "/services/email-sms" },
     { label: "Social Media",            href: "/services/social-media" },
+    { label: "Competitor Analysis",      href: "/services/competitor-analysis" },
     { label: "Analytics & Reporting",   href: "/services/analytics" },
     { label: "Website Design",          href: "/services/website" },
   ],
