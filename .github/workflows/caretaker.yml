@@ -1,8 +1,7 @@
 name: Caretaker
 
 on:
-  schedule:
-    - cron: '0 */2 * * *'   # every 2 hours
+  # DISABLED — article generation paused
   workflow_dispatch:
 
 jobs:
