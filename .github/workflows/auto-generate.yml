@@ -1,11 +1,7 @@
 name: Auto-generate articles
 
 on:
-  schedule:
-    # Fallback every 30 min — the post-publish self-chain (see "Trigger next run"
-    # step below) drives normal throughput. Firing the cron too often piles up
-    # queued runs while the chain is healthy.
-    - cron: '*/30 * * * *'
+  # DISABLED — article generation paused
   workflow_dispatch:
 
 concurrency:
