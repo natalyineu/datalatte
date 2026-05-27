@@ -188,15 +188,26 @@ const testimonials = [
 
 function getLatestPosts(count = 3) {
   const dir = path.join(process.cwd(), "content/blog");
-  return fs.readdirSync(dir)
+  const all = fs.readdirSync(dir)
     .filter(f => f.endsWith(".mdx"))
     .map(file => {
       const raw = fs.readFileSync(path.join(dir, file), "utf8");
       const { data } = matter(raw);
       return { slug: file.replace(".mdx",""), title: String(data.title ?? ""), description: String(data.description ?? ""), category: String(data.category ?? ""), date: String(data.date ?? ""), readTime: String(data.readTime ?? "5 min read"), image: String(data.image ?? "") };
     })
-    .sort((a,b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, count);
+    .sort((a,b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  // Pick `count` posts with unique images
+  const seen = new Set<string>();
+  const result = [];
+  for (const post of all) {
+    if (!seen.has(post.image)) {
+      seen.add(post.image);
+      result.push(post);
+      if (result.length === count) break;
+    }
+  }
+  return result;
 }
 
 export default function HomePage() {

@@ -57,7 +57,36 @@ export default function BlogGrid({ posts }: { posts: Post[] }) {
   // Reset pagination when filters change
   useEffect(() => { setVisibleCount(PAGE_SIZE); }, [activeGroup, query, sortAsc]);
 
-  const visible = filtered.slice(0, visibleCount);
+  // Deduplicate images within the visible slice
+  const visible = useMemo(() => {
+    const slice = filtered.slice(0, visibleCount);
+    const seenImages = new Set<string>();
+    const sliceSlugs = new Set(slice.map(p => p.slug));
+
+    // Pool of unique images from posts outside the current slice
+    const extraImages: string[] = [];
+    for (const p of filtered) {
+      if (!sliceSlugs.has(p.slug) && !extraImages.includes(p.image)) {
+        extraImages.push(p.image);
+      }
+    }
+
+    let extraIdx = 0;
+    return slice.map(post => {
+      if (!seenImages.has(post.image)) {
+        seenImages.add(post.image);
+        return post;
+      }
+      while (extraIdx < extraImages.length && seenImages.has(extraImages[extraIdx])) extraIdx++;
+      if (extraIdx < extraImages.length) {
+        const img = extraImages[extraIdx++];
+        seenImages.add(img);
+        return { ...post, image: img };
+      }
+      return post;
+    });
+  }, [filtered, visibleCount]);
+
   const hasMore = visibleCount < filtered.length;
   const [featured, ...rest] = visible;
   const rawDate = (dateStr: string) =>
