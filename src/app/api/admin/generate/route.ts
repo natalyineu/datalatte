@@ -7,6 +7,7 @@ import matter from "gray-matter";
 // Extend timeout to 60s (requires Vercel Pro) — runs fine locally with no limit
 export const maxDuration = 60;
 
+
 // ── Paths (read-only on Vercel — writes go via GitHub API) ───────────────────
 
 const QUEUE_PATH    = path.join(process.cwd(), "content/queue.json");
@@ -371,6 +372,9 @@ async function callGroq(
 export async function POST(req: NextRequest): Promise<NextResponse> {
   const authError = checkAdminAuth(req);
   if (authError) return authError;
+  return NextResponse.json({ disabled: true, message: "Article generation is disabled." }, { status: 503 });
+
+  // eslint-disable-next-line no-unreachable
   const ghToken = process.env.GH_TOKEN;
 
   // ── Read queue (from GitHub API if token set; else fall back to disk) ────
