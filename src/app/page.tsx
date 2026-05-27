@@ -25,6 +25,8 @@ import BlogCard from "@/components/BlogCard";
 import TestimonialCard from "@/components/TestimonialCard";
 import ScrollReveal from "@/components/ScrollReveal";
 import AnimatedCounter from "@/components/AnimatedCounter";
+import HeroAnimated from "@/components/HeroAnimated";
+import AnimatedDashboard from "@/components/AnimatedDashboard";
 
 export const metadata: Metadata = {
   title: {
@@ -223,99 +225,12 @@ export default function HomePage() {
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left */}
-            <div>
-              <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-white text-sm font-medium mb-6 backdrop-blur-sm">
-                <span className="w-2 h-2 bg-coffee-400 rounded-full animate-pulse" />
-                Data-Driven Local Marketing
-              </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 text-balance">
-                Digital Marketing for
-                <br />
-                <span className="text-coffee-300">Local Businesses,</span>
-                <br />
-                Done Right
-              </h1>
-              <p className="text-coffee-200 text-lg md:text-xl mb-8 max-w-lg leading-relaxed">
-                Google Ads, Meta Ads, local SEO and marketing automation for coffee shops,
-                hair salons, pet groomers, fitness studios — and growing brands at any scale.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center gap-2 bg-white text-coffee-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5"
-                >
-                  Get a Free Marketing Audit
-                  <ArrowRight size={18} />
-                </Link>
-                <Link
-                  href="#how-it-works"
-                  className="inline-flex items-center justify-center gap-2 border-2 border-white/40 text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-white/10 transition-all duration-200"
-                >
-                  See how it works
-                </Link>
-              </div>
+            {/* Left — animated entrance */}
+            <HeroAnimated />
 
-              {/* Mini trust signals */}
-              <div className="flex items-center gap-5 mt-10">
-                <div className="flex -space-x-2">
-                  {["☕", "✂️", "🐾", "🧘"].map((e, i) => (
-                    <div
-                      key={i}
-                      className="w-9 h-9 rounded-full bg-white/20 border-2 border-white/30 flex items-center justify-center text-sm"
-                    >
-                      {e}
-                    </div>
-                  ))}
-                </div>
-                <p className="text-sm text-coffee-200">
-                  Built for <strong className="text-white">local businesses</strong> across 4 niches
-                </p>
-              </div>
-            </div>
-
-            {/* Right — floating dashboard card */}
+            {/* Right — animated dashboard */}
             <div className="hidden lg:block">
-              <div className="relative">
-                <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-6 shadow-2xl">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-white font-semibold">Your Marketing Dashboard</span>
-                    <span className="text-coffee-300 text-xs font-medium bg-coffee-300/20 px-2 py-0.5 rounded-full">
-                      Live
-                    </span>
-                  </div>
-
-                  {/* Fake chart bars */}
-                  <div className="flex items-end gap-2 h-28 mb-4">
-                    {[40, 55, 45, 70, 60, 80, 75, 90, 85, 100, 95, 88].map((h, i) => (
-                      <div
-                        key={i}
-                        className="flex-1 rounded-t-sm bg-gradient-to-t from-coffee-700 to-coffee-400 opacity-80 hover:opacity-100 transition-opacity"
-                        style={{ height: `${h}%` }}
-                      />
-                    ))}
-                  </div>
-
-                  <div className="grid grid-cols-3 gap-3">
-                    {[
-                      { label: "Impressions", value: "12.4K", change: "+34%" },
-                      { label: "Clicks", value: "847", change: "+21%" },
-                      { label: "Conversions", value: "63", change: "+48%" },
-                    ].map((s) => (
-                      <div key={s.label} className="stat-card">
-                        <div className="text-white font-bold">{s.value}</div>
-                        <div className="text-gray-400 text-xs">{s.label}</div>
-                        <div className="text-coffee-300 text-xs font-medium">{s.change}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Floating badge */}
-                <div className="absolute -bottom-4 -left-4 bg-coffee-800 text-white text-xs font-semibold px-4 py-2 rounded-full shadow-lg border border-coffee-600 animate-float">
-                  ☕ +38% new customers this month
-                </div>
-              </div>
+              <AnimatedDashboard />
             </div>
           </div>
         </div>
@@ -505,10 +420,10 @@ export default function HomePage() {
                 title: "Measure & improve",
                 desc: "You get a dashboard you can actually read. Every month we review what's working and double down.",
               },
-            ].map((item) => (
+            ].map((item, i) => (
+              <ScrollReveal key={item.step} delay={i * 0.1} direction="left">
               <div
-                key={item.step}
-                className="flex gap-4 bg-white rounded-xl p-5 border border-coffee-100 hover:border-coffee-200 transition-colors"
+                className="flex gap-4 bg-white rounded-xl p-5 border border-coffee-100 hover:border-coffee-300 hover:shadow-md transition-all duration-200"
               >
                 <div className="text-2xl font-bold text-coffee-400 font-display shrink-0 w-10">
                   {item.step}
@@ -518,6 +433,7 @@ export default function HomePage() {
                   <p className="text-sm text-gray-500">{item.desc}</p>
                 </div>
               </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -564,8 +480,10 @@ export default function HomePage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {latestPosts.map((post) => (
-            <BlogCard key={post.slug} title={post.title} excerpt={post.description} slug={post.slug} category={post.category} date={new Date(post.date).toLocaleDateString("en-US",{year:"numeric",month:"short",day:"numeric"})} rawDate={post.date} readTime={post.readTime} image={post.image} />
+          {latestPosts.map((post, i) => (
+            <ScrollReveal key={post.slug} delay={i * 0.1}>
+              <BlogCard title={post.title} excerpt={post.description} slug={post.slug} category={post.category} date={new Date(post.date).toLocaleDateString("en-US",{year:"numeric",month:"short",day:"numeric"})} rawDate={post.date} readTime={post.readTime} image={post.image} />
+            </ScrollReveal>
           ))}
         </div>
 
