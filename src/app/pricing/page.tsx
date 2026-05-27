@@ -160,6 +160,7 @@ const comparisonRows = [
   { feature: "Meta Ads",                 starter: false, growth: true,  full: true },
   { feature: "Email & SMS marketing",    starter: false, growth: true,  full: true },
   { feature: "Analytics dashboards",     starter: false, growth: true,  full: true },
+  { feature: "AI competitor analysis",   starter: false, growth: true,  full: true },
   { feature: "Programmatic advertising", starter: false, growth: false, full: true },
   { feature: "AI automation setup",      starter: false, growth: false, full: true },
   { feature: "A/B testing & CRO",        starter: false, growth: false, full: true },

@@ -78,6 +78,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/services/video-marketing`,          lastModified: today,      changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/services/reputation-management`,    lastModified: today,      changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/services/tiktok-ads`,               lastModified: today,      changeFrequency: "monthly", priority: 0.7 },
+    { url: `${baseUrl}/services/competitor-analysis`,      lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     // Checklists
     { url: `${baseUrl}/checklists`,                                         lastModified: today, changeFrequency: "monthly", priority: 0.9 },
     { url: `${baseUrl}/checklists/google-business-profile`,                 lastModified: today, changeFrequency: "monthly", priority: 0.8 },
