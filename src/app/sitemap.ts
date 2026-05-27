@@ -78,6 +78,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/services/video-marketing`,          lastModified: today,      changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/services/reputation-management`,    lastModified: today,      changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/services/tiktok-ads`,               lastModified: today,      changeFrequency: "monthly", priority: 0.7 },
+    // Checklists
+    { url: `${baseUrl}/checklists`,                                         lastModified: today, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${baseUrl}/checklists/google-business-profile`,                 lastModified: today, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/checklists/local-seo-audit`,                         lastModified: today, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/checklists/google-ads-setup`,                        lastModified: today, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/checklists/meta-ads-setup`,                          lastModified: today, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/checklists/website-cro`,                             lastModified: today, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/checklists/email-marketing`,                         lastModified: today, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/checklists/social-media-content`,                    lastModified: today, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/checklists/coffee-shop-marketing`,                   lastModified: today, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/checklists/hair-salon-marketing`,                    lastModified: today, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/checklists/reputation-management`,                   lastModified: today, changeFrequency: "monthly", priority: 0.8 },
     // Tools
     { url: `${baseUrl}/tools/marketing-budget-calculator`, lastModified: today,      changeFrequency: "monthly", priority: 0.9 },
     { url: `${baseUrl}/tools/ai-agent-builder`,            lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
