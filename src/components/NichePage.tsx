@@ -4,6 +4,7 @@ import { CheckCircle2, ArrowRight, TrendingUp, X, Check } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
 import TestimonialCard from "@/components/TestimonialCard";
+import ScrollReveal from "@/components/ScrollReveal";
 import { faqSchema, breadcrumbSchema } from "@/lib/schema";
 
 interface NichePageProps {
@@ -120,11 +121,13 @@ export default function NichePage({
             { value: kpis[1]?.improvement ?? "↓35%", label: kpis[1]?.metric ?? "Cost per lead"     },
             { value: kpis[2]?.improvement ?? "3×",   label: kpis[2]?.metric ?? "Return on ad spend" },
             { value: "5 days",                        label: "To first live dashboard"               },
-          ].map((s) => (
-            <div key={s.label}>
-              <div className="text-xl font-bold text-coffee-300">{s.value}</div>
-              <div className="text-xs text-gray-500 mt-0.5">{s.label}</div>
-            </div>
+          ].map((s, i) => (
+            <ScrollReveal key={s.label} delay={i * 0.08} direction="up">
+              <div>
+                <div className="text-xl font-bold text-coffee-300">{s.value}</div>
+                <div className="text-xs text-gray-500 mt-0.5">{s.label}</div>
+              </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>
@@ -183,12 +186,14 @@ export default function NichePage({
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {kpis.map((kpi, i) => (
-            <div key={kpi.metric} className="card p-6 text-center hover:border-coffee-300 hover:shadow-lg transition-all animate-card-rise" style={{ animationDelay: `${i * 0.1}s` }}>
+            <ScrollReveal key={kpi.metric} delay={i * 0.1}>
+            <div className="card p-6 text-center hover:border-coffee-300 hover:shadow-lg hover:-translate-y-1 transition-all h-full">
               <TrendingUp size={28} className="text-coffee-600 mx-auto mb-3" />
               <div className="text-3xl font-bold text-coffee-700 mb-1">{kpi.improvement}</div>
               <div className="font-semibold text-gray-900 mb-2">{kpi.metric}</div>
               <p className="text-sm text-gray-500">{kpi.desc}</p>
             </div>
+            </ScrollReveal>
           ))}
         </div>
       </SectionWrapper>
@@ -204,11 +209,13 @@ export default function NichePage({
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((svc, i) => (
-            <div key={svc.title} className="card p-6 hover:border-coffee-300 hover:shadow-md hover:-translate-y-1 transition-all animate-card-rise" style={{ animationDelay: `${i * 0.07}s` }}>
+            <ScrollReveal key={svc.title} delay={i * 0.07}>
+            <div className="card p-6 hover:border-coffee-300 hover:shadow-md hover:-translate-y-1 transition-all h-full">
               <div className="text-3xl mb-4 animate-float" style={{ animationDelay: `${i * 0.3}s` }}>{svc.icon}</div>
               <h3 className="font-bold text-gray-900 text-lg mb-2">{svc.title}</h3>
               <p className="text-gray-500 text-sm leading-relaxed">{svc.desc}</p>
             </div>
+            </ScrollReveal>
           ))}
         </div>
       </SectionWrapper>
@@ -230,7 +237,8 @@ export default function NichePage({
           </div>
           <div className="space-y-0">
             {tactics.map((t, i) => (
-              <div key={t.title} className="flex gap-5 animate-card-rise" style={{ animationDelay: `${i * 0.08}s` }}>
+              <ScrollReveal key={t.title} delay={i * 0.09} direction="left">
+              <div className="flex gap-5">
                 <div className="flex flex-col items-center">
                   <div className="w-9 h-9 rounded-full bg-coffee-800 border border-coffee-600 text-coffee-300 font-bold text-sm flex items-center justify-center shrink-0">
                     {i + 1}
@@ -242,6 +250,7 @@ export default function NichePage({
                   <p className="text-gray-400 text-sm leading-relaxed">{t.detail}</p>
                 </div>
               </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -266,14 +275,16 @@ export default function NichePage({
             <h2 className="section-title">Common questions</h2>
           </div>
           <div className="space-y-4">
-            {faq.map((item) => (
-              <div key={item.q} className="card p-6 hover:border-coffee-200 hover:shadow-sm transition-all">
+            {faq.map((item, i) => (
+              <ScrollReveal key={item.q} delay={i * 0.07}>
+              <div className="card p-6 hover:border-coffee-300 hover:shadow-md transition-all">
                 <h4 className="font-semibold text-gray-900 mb-2 flex items-start gap-2">
                   <CheckCircle2 size={18} className="text-coffee-600 mt-0.5 shrink-0" />
                   {item.q}
                 </h4>
                 <p className="text-gray-500 text-sm leading-relaxed pl-6">{item.a}</p>
               </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>

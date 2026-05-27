@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2, X, Check } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
+import ScrollReveal from "@/components/ScrollReveal";
 import { faqSchema, breadcrumbSchema, serviceSchema } from "@/lib/schema";
 
 interface ServicePageProps {
@@ -131,11 +132,13 @@ export default function ServicePage({
       {/* ── Stats bar ── */}
       <div className="bg-gray-950 border-b border-gray-800/60">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-5 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
-          {stats.map((s) => (
-            <div key={s.label}>
-              <div className="text-xl font-bold text-coffee-300">{s.value}</div>
-              <div className="text-xs text-gray-500 mt-0.5">{s.label}</div>
-            </div>
+          {stats.map((s, i) => (
+            <ScrollReveal key={s.label} delay={i * 0.08} direction="up">
+              <div>
+                <div className="text-xl font-bold text-coffee-300">{s.value}</div>
+                <div className="text-xs text-gray-500 mt-0.5">{s.label}</div>
+              </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>
@@ -194,18 +197,20 @@ export default function ServicePage({
           </div>
           <div className="space-y-0">
             {howItWorks.map((item, i) => (
-              <div key={item.step} className="flex gap-5 animate-card-rise" style={{ animationDelay: `${i * 0.08}s` }}>
+              <ScrollReveal key={item.step} delay={i * 0.1} direction="left">
+              <div className="flex gap-5">
                 <div className="flex flex-col items-center">
                   <div className="w-10 h-10 rounded-full bg-coffee-800 border border-coffee-600 text-coffee-300 font-bold text-sm flex items-center justify-center shrink-0 z-10">
                     {item.step}
                   </div>
                   {i < howItWorks.length - 1 && <div className="w-px flex-1 bg-coffee-900 my-2" />}
                 </div>
-                <div className={`pb-8 ${i < howItWorks.length - 1 ? "" : ""}`}>
+                <div className="pb-8">
                   <h4 className="font-semibold text-white mb-2 mt-2">{item.title}</h4>
                   <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
                 </div>
               </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -220,14 +225,12 @@ export default function ServicePage({
           </div>
           <div className="grid sm:grid-cols-2 gap-3">
             {included.map((item, i) => (
-              <div
-                key={item}
-                className="flex items-start gap-3 bg-white rounded-xl px-5 py-4 border border-gray-100 shadow-sm hover:border-coffee-300 hover:shadow-md transition-all animate-card-rise group"
-                style={{ animationDelay: `${i * 0.05}s` }}
-              >
+              <ScrollReveal key={item} delay={i * 0.05}>
+              <div className="flex items-start gap-3 bg-white rounded-xl px-5 py-4 border border-gray-100 shadow-sm hover:border-coffee-300 hover:shadow-md transition-all group h-full">
                 <CheckCircle2 size={17} className="text-coffee-500 shrink-0 mt-0.5 group-hover:text-coffee-600 transition-colors" />
                 <span className="text-gray-700 text-sm">{item}</span>
               </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -263,11 +266,13 @@ export default function ServicePage({
             <h2 className="section-title">Questions about {service}</h2>
           </div>
           <div className="space-y-4">
-            {faqs.map((item) => (
-              <div key={item.q} className="card p-6 hover:border-coffee-200 hover:shadow-sm transition-all">
+            {faqs.map((item, i) => (
+              <ScrollReveal key={item.q} delay={i * 0.07}>
+              <div className="card p-6 hover:border-coffee-300 hover:shadow-md transition-all">
                 <h4 className="font-semibold text-gray-900 mb-2">{item.q}</h4>
                 <p className="text-gray-500 text-sm leading-relaxed">{item.a}</p>
               </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
