@@ -36,6 +36,13 @@ export const revalidate = 86400;
 export const dynamicParams = true;
 
 const contentDir = path.join(process.cwd(), "content/blog");
+const imageCachePath = path.join(contentDir, "image-cache.json");
+let imageCache: Record<string, string> = {};
+try {
+  if (fs.existsSync(imageCachePath)) {
+    imageCache = JSON.parse(fs.readFileSync(imageCachePath, "utf8"));
+  }
+} catch { /* corrupted cache — fall back to frontmatter */ }
 
 const CLUSTER_TO_SERVICE: Record<string, { label: string; href: string }> = {
   // Google Ads variants
@@ -181,7 +188,7 @@ function getRelatedPosts(currentSlug: string, category: string, limit = 3): Rela
         slug,
         title: data.title || slug,
         description: data.description || "",
-        image: data.image || `/blog/clusters/marketing-strategy.jpg`,
+        image: imageCache[slug] ?? data.image ?? `/blog/clusters/marketing-strategy.jpg`,
         category: data.category || "",
         readTime: data.readTime || `${Math.max(1, Math.ceil(content.split(/\s+/).length / 200))} min read`,
         date: data.date || "",
@@ -524,10 +531,9 @@ export default async function BlogPostPage({
       {/* Hero image */}
       <div className="relative h-64 md:h-96 w-full">
         <Image
-          src={frontmatter.image}
+          src={imageCache[slug] ?? frontmatter.image}
           alt={frontmatter.title}
           fill
-          unoptimized={frontmatter.image?.startsWith("http")}
           className="object-cover"
           priority
           sizes="100vw"
