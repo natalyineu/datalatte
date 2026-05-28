@@ -36,6 +36,12 @@ function calcReadTime(wordCount: number): string {
 }
 
 function getAllPosts(): PostMeta[] {
+  const cachePath = path.join(contentDir, "image-cache.json");
+  let imageCache: Record<string, string> = {};
+  try {
+    if (fs.existsSync(cachePath)) imageCache = JSON.parse(fs.readFileSync(cachePath, "utf8"));
+  } catch { /* ignore */ }
+
   const files = fs.readdirSync(contentDir).filter((f) => f.endsWith(".mdx"));
   return files
     .map((file) => {
@@ -49,7 +55,7 @@ function getAllPosts(): PostMeta[] {
         category: data.category ?? "",
         date: data.date,
         readTime: data.readTime || calcReadTime(content.split(/\s+/).length),
-        image: data.image,
+        image: imageCache[slug] ?? data.image,
         tags: data.tags ?? [],
       } as PostMeta;
     })

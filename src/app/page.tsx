@@ -190,12 +190,20 @@ const testimonials = [
 
 function getLatestPosts(count = 3) {
   const dir = path.join(process.cwd(), "content/blog");
+  const cachePath = path.join(dir, "image-cache.json");
+  let imageCache: Record<string, string> = {};
+  try {
+    if (fs.existsSync(cachePath)) imageCache = JSON.parse(fs.readFileSync(cachePath, "utf8"));
+  } catch { /* ignore */ }
+
   const all = fs.readdirSync(dir)
     .filter(f => f.endsWith(".mdx"))
     .map(file => {
       const raw = fs.readFileSync(path.join(dir, file), "utf8");
       const { data } = matter(raw);
-      return { slug: file.replace(".mdx",""), title: String(data.title ?? ""), description: String(data.description ?? ""), category: String(data.category ?? ""), date: String(data.date ?? ""), readTime: String(data.readTime ?? "5 min read"), image: String(data.image ?? "") };
+      const slug = file.replace(".mdx","");
+      const image = imageCache[slug] ?? String(data.image ?? "");
+      return { slug, title: String(data.title ?? ""), description: String(data.description ?? ""), category: String(data.category ?? ""), date: String(data.date ?? ""), readTime: String(data.readTime ?? "5 min read"), image };
     })
     .sort((a,b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
