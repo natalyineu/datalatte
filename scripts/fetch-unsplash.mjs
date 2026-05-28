@@ -63,7 +63,7 @@ async function searchUnsplash(query, page = 1) {
   const res = await fetch(url, { headers: { Authorization: `Client-ID ${KEY}` } });
   if (!res.ok) throw new Error(`Unsplash error ${res.status}: ${await res.text()}`);
   const data = await res.json();
-  return data.results.map(p => p.urls.regular + "&w=800&q=75&fit=crop");
+  return data.results.map(p => p.urls.regular);
 }
 
 async function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
