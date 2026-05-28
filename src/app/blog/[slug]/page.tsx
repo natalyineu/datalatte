@@ -318,9 +318,10 @@ export async function generateMetadata({
   if (!post) return {};
   const { frontmatter } = post;
   const url = `https://datalatte.pro/blog/${slug}`;
-  const imageUrl = frontmatter.image?.startsWith("http")
-    ? frontmatter.image
-    : `https://datalatte.pro${frontmatter.image}`;
+  const rawImage = imageCache[slug] ?? frontmatter.image;
+  const imageUrl = rawImage?.startsWith("http")
+    ? rawImage
+    : `https://datalatte.pro${rawImage}`;
 
   const modifiedTime = frontmatter.lastModified ?? frontmatter.date;
 
@@ -475,7 +476,7 @@ export default async function BlogPostPage({
     url: `https://datalatte.pro/blog/${slug}`,
     datePublished: frontmatter.date,
     dateModified: frontmatter.lastModified ?? frontmatter.date,
-    image: frontmatter.image,
+    image: imageCache[slug] ?? frontmatter.image,
     tags: frontmatter.tags,
     wordCount,
     timeRequired: `PT${readMinutes}M`,
