@@ -5,6 +5,7 @@ export type GroupName = "Paid Ads" | "SEO & Content" | "Social" | "AI & Automati
 
 export const CATEGORY_TO_GROUP: Record<string, GroupName> = {
   "Google Ads": "Paid Ads",
+  "Google Ads Advanced": "Paid Ads",
   "Meta Ads": "Paid Ads",
   "Facebook Ads": "Paid Ads",
   "Instagram Ads": "Paid Ads",
@@ -17,21 +18,27 @@ export const CATEGORY_TO_GROUP: Record<string, GroupName> = {
   "Yahoo Advertising": "Paid Ads",
   "Programmatic Advertising": "Paid Ads",
   "CTV & OTT": "Paid Ads",
+  "CTV Advertising": "Paid Ads",
   "Retargeting": "Paid Ads",
   "Review Platform Ads": "Paid Ads",
+  "Amazon Advertising": "Paid Ads",
+  "Mobile Advertising": "Paid Ads",
 
   "Local SEO": "SEO & Content",
   "Content Marketing": "SEO & Content",
   "Reputation Management": "SEO & Content",
   "Offline Marketing": "SEO & Content",
+  "Google Business Profile Optimization": "SEO & Content",
 
   "Social Media": "Social",
   "Instagram Marketing": "Social",
   "Influencer Marketing": "Social",
   "Influencer & Creator Marketing": "Social",
+  "Influencer Marketing for Salons": "Social",
   "Reddit & Community Marketing": "Social",
   "Nextdoor & Neighborhood Marketing": "Social",
   "Messaging & Community Marketing": "Social",
+  "Telegram & Messaging Ads": "Social",
   "Pinterest Marketing": "Social",
 
   "AI & Automation": "AI & Automation",
@@ -51,10 +58,16 @@ export const CATEGORY_TO_GROUP: Record<string, GroupName> = {
   "Hair Salon Marketing": "Niches",
   "Pet Groomers": "Niches",
   "Pet Groomer Marketing": "Niches",
+  "Dog Grooming Marketing": "Niches",
   "Fitness Studios": "Niches",
   "Fitness Studio Marketing": "Niches",
+  "Medical Marketing": "Niches",
+  "Canada Local Marketing": "Niches",
+  "Chinese Market Marketing": "Niches",
 
   "Marketing Strategy": "Strategy",
+  "Local Business Strategy": "Strategy",
+  "Seasonal Marketing": "Strategy",
 };
 
 export interface GroupConfig {
