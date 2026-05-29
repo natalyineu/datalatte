@@ -54,6 +54,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/blog`,                              lastModified: latestPost, changeFrequency: "daily",   priority: 0.9 },
     { url: `${baseUrl}/contact`,                           lastModified: today,      changeFrequency: "monthly", priority: 0.9 },
     { url: `${baseUrl}/about`,                             lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/radar`,                             lastModified: today,      changeFrequency: "daily",   priority: 0.8 },
     // Niche pages
     { url: `${baseUrl}/for/coffee-shops`,                  lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/for/hair-salons`,                   lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
