@@ -226,6 +226,7 @@ function getPost(slug: string) {
 
 interface PostFrontmatter {
   title: string;
+  seoTitle?: string;
   date: string;
   lastModified?: string; // set by caretaker when FAQ/charts are added
   description: string;
@@ -309,6 +310,13 @@ export async function generateStaticParams() {
   return getPostSlugs().map((slug) => ({ slug }));
 }
 
+function truncateSeoTitle(title: string, max = 55): string {
+  if (title.length <= max) return title;
+  const cut = title.slice(0, max - 1);
+  const lastSpace = cut.lastIndexOf(" ");
+  return (lastSpace > 30 ? cut.slice(0, lastSpace) : cut) + "…";
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -320,9 +328,10 @@ export async function generateMetadata({
   const { frontmatter } = post;
   const url = `https://datalatte.pro/blog/${slug}`;
   const modifiedTime = frontmatter.lastModified ?? frontmatter.date;
+  const seoTitle = frontmatter.seoTitle ?? truncateSeoTitle(frontmatter.title);
 
   return {
-    title: frontmatter.title,
+    title: seoTitle,
     description: frontmatter.description,
     // ── Canonical + hreflang per article ──────────────────────────────────
     alternates: {
