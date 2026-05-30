@@ -42,6 +42,7 @@ const footerLinks = {
   "Company": [
     { label: "About Nataliia",          href: "/about" },
     { label: "Blog",                    href: "/blog" },
+    { label: "⚡ Value Radar",          href: "/radar" },
     { label: "Reporting",               href: "/reporting" },
     { label: "Pricing",                 href: "/pricing" },
     { label: "Contact",                 href: "/contact" },
