@@ -31,13 +31,11 @@ export const metadata: Metadata = {
     url: PAGE_URL,
     siteName: "DataLatte",
     type: "website",
-    images: [{ url: "https://datalatte.pro/opengraph-image", width: 1200, height: 630, alt: "DataLatte — AI Competitor Analysis" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "AI Competitor Analysis for Local Businesses | DataLatte",
     description: "Track your local competitors automatically — weekly AI reports to inbox or WhatsApp.",
-    images: ["https://datalatte.pro/opengraph-image"],
   },
 };
 
