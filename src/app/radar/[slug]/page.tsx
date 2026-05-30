@@ -20,6 +20,7 @@ const CATEGORY_BAR: Record<string, string> = {
   ai: "bg-purple-500",
   tiktok: "bg-pink-500",
   seo: "bg-green-500",
+  ctv: "bg-cyan-500",
 };
 
 const IMPACT_CONFIG: Record<string, { dot: string; label: string; badge: string }> = {

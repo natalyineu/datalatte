@@ -21,6 +21,7 @@ const CATEGORIES: { id: Category | "all"; label: string }[] = [
   { id: "ai", label: "AI & Automation" },
   { id: "tiktok", label: "TikTok" },
   { id: "seo", label: "SEO" },
+  { id: "ctv", label: "CTV / DOOH" },
 ];
 
 const NICHES: { id: Niche | "all"; label: string }[] = [
@@ -64,6 +65,7 @@ const CATEGORY_BAR: Record<Category, string> = {
   ai: "bg-purple-500",
   tiktok: "bg-pink-500",
   seo: "bg-green-500",
+  ctv: "bg-cyan-500",
 };
 
 /* ─── Card ───────────────────────────────────────────────────────────────── */
