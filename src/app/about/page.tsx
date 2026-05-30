@@ -180,8 +180,8 @@ export default function AboutPage() {
           </Prose>
         </Section>
 
-        <Photo src="/images/personal/IMG_1131.jpg" alt="Sunny Poznań street flanked by elegant buildings" caption="Home — Poznań, Poland. Still gets me every time." priority />
-        <Photo src="/images/personal/IMG_1186.jpg" alt="Wanda café summer terrace in Poznań" caption="Wanda — one of my favourite Poznań spots" />
+        <Photo src="/images/personal/p_IMG_1131.jpg" alt="Sunny Poznań street flanked by elegant buildings" caption="Home — Poznań, Poland. Still gets me every time." priority />
+        <Photo src="/images/personal/p_IMG_1186.jpg" alt="Wanda café summer terrace in Poznań" caption="Wanda — one of my favourite Poznań spots" />
 
         <div className="max-w-2xl mx-auto px-4 sm:px-6 mb-10">
           <Prose>
@@ -193,9 +193,9 @@ export default function AboutPage() {
           </Prose>
         </div>
 
-        <Photo src="/images/personal/IMG_1209.jpg" alt="Coffee and cheesecake at an outdoor café" caption="Coffee + cheesecake. Non-negotiable." />
-        <Photo src="/images/personal/IMG_0378.jpg" alt="Coffee to go on a Poznań street" caption="Saturday morning, every Saturday" />
-        <Photo src="/images/personal/IMG_1081.jpg" alt="Coffee with flowers at a café table" caption="Sometimes the view outside doesn't matter at all" />
+        <Photo src="/images/personal/p_IMG_1209.jpg" alt="Coffee and cheesecake at an outdoor café" caption="Coffee + cheesecake. Non-negotiable." />
+        <Photo src="/images/personal/p_IMG_0378.jpg" alt="Coffee to go on a Poznań street" caption="Saturday morning, every Saturday" />
+        <Photo src="/images/personal/p_IMG_1081.jpg" alt="Coffee with flowers at a café table" caption="Sometimes the view outside doesn't matter at all" />
 
         <div className="max-w-2xl mx-auto px-4 sm:px-6 mb-10">
           <Pullquote>
@@ -203,8 +203,8 @@ export default function AboutPage() {
           </Pullquote>
         </div>
 
-        <PhotoWide src="/images/personal/IMG_0406.jpg" alt="Meringue cake and coffee in a cosy café" caption="When the cake matches the coffee" />
-        <PhotoWide src="/images/personal/IMG_1038.jpg" alt="Rainy day at Starbucks, city street outside" caption="Rainy days have their charm too" />
+        <PhotoWide src="/images/personal/p_IMG_0406.jpg" alt="Meringue cake and coffee in a cosy café" caption="When the cake matches the coffee" />
+        <PhotoWide src="/images/personal/p_IMG_1038.jpg" alt="Rainy day at Starbucks, city street outside" caption="Rainy days have their charm too" />
 
         {/* ── Animals ── */}
         <Section emoji="🐾" title="Animals are my people">
@@ -222,7 +222,7 @@ export default function AboutPage() {
           </Prose>
         </Section>
 
-        <Photo src="/images/personal/IMG_1221.jpg" alt="Scottish Fold cat looking up with huge golden eyes" caption="My cat-sitting companion. No, she does not care about your KPIs." />
+        <Photo src="/images/personal/p_IMG_1221.jpg" alt="Scottish Fold cat looking up with huge golden eyes" caption="My cat-sitting companion. No, she does not care about your KPIs." />
 
         {/* ── Croatia ── */}
         <Section emoji="🌊" title="Croatia is my reset button">
@@ -239,7 +239,7 @@ export default function AboutPage() {
           </Prose>
         </Section>
 
-        <Photo src="/images/personal/IMG_0548.jpg" alt="Crystal clear turquoise Adriatic Sea" caption="The Adriatic. That colour is real, not a filter." />
+        <Photo src="/images/personal/p_IMG_0548.jpg" alt="Crystal clear turquoise Adriatic Sea" caption="The Adriatic. That colour is real, not a filter." />
 
         <div className="max-w-2xl mx-auto px-4 sm:px-6 mb-10">
           <Prose>
@@ -250,13 +250,13 @@ export default function AboutPage() {
           </Prose>
         </div>
 
-        <PhotoWide src="/images/personal/IMG_0674.jpg" alt="Latte macchiato with sunglasses next to the Adriatic" caption="Coffee + sea. Basically my brand." />
-        <PhotoWide src="/images/personal/IMG_0541.jpg" alt="Barcaffè espresso on a Croatian café terrace" caption="Barcaffè. Italy's coffee culture, Croatia's setting." />
-        <Photo src="/images/personal/IMG_0556.jpg" alt="Ice cream cone in front of a Croatian church tower" caption="Gelato in the old town. Mandatory." />
-        <Photo src="/images/personal/IMG_0544.jpg" alt="Croatian old town street with flags stretching overhead" caption="The old towns never get old." />
-        <Photo src="/images/personal/IMG_0528.jpg" alt="Loquat tree heavy with yellow fruit against blue sky" caption="The trees are different there. Everything is different." />
-        <PhotoWide src="/images/personal/IMG_0608.jpg" alt="Pizza beside ancient stone columns in Croatia" caption="Pizza next to a 2000-year-old wall. Regular Tuesday." />
-        <Photo src="/images/personal/IMG_0570.jpg" alt="Stone sea wall with the Adriatic and islands beyond" caption="Where I go when I need to remember what actually matters." />
+        <PhotoWide src="/images/personal/p_IMG_0674.jpg" alt="Latte macchiato with sunglasses next to the Adriatic" caption="Coffee + sea. Basically my brand." />
+        <PhotoWide src="/images/personal/p_IMG_0541.jpg" alt="Barcaffè espresso on a Croatian café terrace" caption="Barcaffè. Italy's coffee culture, Croatia's setting." />
+        <Photo src="/images/personal/p_IMG_0556.jpg" alt="Ice cream cone in front of a Croatian church tower" caption="Gelato in the old town. Mandatory." />
+        <Photo src="/images/personal/p_IMG_0544.jpg" alt="Croatian old town street with flags stretching overhead" caption="The old towns never get old." />
+        <Photo src="/images/personal/p_IMG_0528.jpg" alt="Loquat tree heavy with yellow fruit against blue sky" caption="The trees are different there. Everything is different." />
+        <PhotoWide src="/images/personal/p_IMG_0608.jpg" alt="Pizza beside ancient stone columns in Croatia" caption="Pizza next to a 2000-year-old wall. Regular Tuesday." />
+        <Photo src="/images/personal/p_IMG_0570.jpg" alt="Stone sea wall with the Adriatic and islands beyond" caption="Where I go when I need to remember what actually matters." />
 
         <div className="max-w-2xl mx-auto px-4 sm:px-6 pb-4">
           <Pullquote>
