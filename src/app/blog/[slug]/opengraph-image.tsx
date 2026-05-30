@@ -8,6 +8,46 @@ export const contentType = "image/png";
 
 const contentDir = path.join(process.cwd(), "content/blog");
 
+const CATEGORY_ICONS: Record<string, string> = {
+  "google ads":           "🔍",
+  "microsoft ads":        "🔍",
+  "youtube ads":          "▶️",
+  "programmatic":         "📡",
+  "retargeting":          "🎯",
+  "ctv":                  "📺",
+  "audio advertising":    "🎙️",
+  "meta ads":             "📱",
+  "facebook":             "📱",
+  "instagram":            "📸",
+  "tiktok":               "🎵",
+  "snapchat":             "👻",
+  "pinterest":            "📌",
+  "local seo":            "📍",
+  "google business":      "🗺️",
+  "reputation":           "⭐",
+  "analytics":            "📊",
+  "ai & automation":      "🤖",
+  "marketing automation": "🤖",
+  "email":                "📧",
+  "sms":                  "💬",
+  "social media":         "📲",
+  "content marketing":    "✍️",
+  "website":              "🌐",
+  "landing page":         "🌐",
+  "coffee shop":          "☕",
+  "fitness":              "🏋️",
+  "hair salon":           "✂️",
+  "pet":                  "🐾",
+};
+
+function getCategoryIcon(category: string): string {
+  const lower = category.toLowerCase();
+  for (const [key, icon] of Object.entries(CATEGORY_ICONS)) {
+    if (lower.includes(key)) return icon;
+  }
+  return "📣";
+}
+
 export default async function BlogOgImage({
   params,
 }: {
@@ -20,17 +60,25 @@ export default async function BlogOgImage({
   let category = "Marketing";
   let description = "Data-driven local marketing insights";
 
-  if (fs.existsSync(filePath)) {
-    const raw = fs.readFileSync(filePath, "utf8");
-    const { data } = matter(raw);
-    if (data.title) title = data.title as string;
-    if (data.category) category = data.category as string;
-    if (data.description) description = data.description as string;
-  }
+  try {
+    if (fs.existsSync(filePath)) {
+      const raw = fs.readFileSync(filePath, "utf8");
+      const { data } = matter(raw);
+      if (data.title) title = data.title as string;
+      if (data.category) category = data.category as string;
+      if (data.description) description = data.description as string;
+    }
+  } catch { /* fall back to defaults */ }
 
-  // Truncate long titles gracefully
+  const icon = getCategoryIcon(category);
   const shortTitle = title.length > 72 ? title.slice(0, 70) + "…" : title;
   const shortDesc = description.length > 110 ? description.slice(0, 108) + "…" : description;
+  const titleFontSize = shortTitle.length > 55 ? 40 : shortTitle.length > 38 ? 46 : 52;
+
+  // Coffee brand palette — no external brand colors
+  const caramel = "#d4956a";
+  const caramelDim = "rgba(212,149,106,0.18)";
+  const caramelBorder = "rgba(212,149,106,0.35)";
 
   return new ImageResponse(
     (
@@ -47,7 +95,33 @@ export default async function BlogOgImage({
           overflow: "hidden",
         }}
       >
-        {/* Decorative coffee ring top-right */}
+        {/* Top caramel accent line */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 4,
+            background: "linear-gradient(90deg, #8B5E3C 0%, #d4956a 50%, #8B5E3C 100%)",
+          }}
+        />
+
+        {/* Large icon watermark bottom-right */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: -10,
+            right: 60,
+            fontSize: 180,
+            opacity: 0.06,
+            lineHeight: 1,
+          }}
+        >
+          {icon}
+        </div>
+
+        {/* Decorative circles top-right */}
         <div
           style={{
             position: "absolute",
@@ -74,31 +148,29 @@ export default async function BlogOgImage({
         {/* Logo row */}
         <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 40 }}>
           <span style={{ fontSize: 36 }}>☕</span>
-          <span style={{ fontSize: 30, fontWeight: 700, color: "#d4956a" }}>DataLatte</span>
-          <span style={{ fontSize: 14, color: "rgba(212,149,106,0.5)", marginLeft: 4 }}>datalatte.pro</span>
+          <span style={{ fontSize: 30, fontWeight: 700, color: caramel }}>DataLatte</span>
+          <span style={{ fontSize: 14, color: "rgba(212,149,106,0.45)", marginLeft: 4 }}>datalatte.pro</span>
         </div>
 
-        {/* Category badge */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            marginBottom: 24,
-          }}
-        >
+        {/* Category badge — coffee colors only */}
+        <div style={{ display: "flex", alignItems: "center", marginBottom: 24 }}>
           <div
             style={{
-              background: "rgba(212,149,106,0.15)",
-              border: "1px solid rgba(212,149,106,0.3)",
+              background: caramelDim,
+              border: `1px solid ${caramelBorder}`,
               borderRadius: 6,
               padding: "6px 14px",
               fontSize: 13,
               fontWeight: 600,
-              color: "#d4956a",
+              color: caramel,
               letterSpacing: "0.06em",
               textTransform: "uppercase",
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
             }}
           >
+            <span style={{ fontSize: 15 }}>{icon}</span>
             {category}
           </div>
         </div>
@@ -106,15 +178,14 @@ export default async function BlogOgImage({
         {/* Title */}
         <div
           style={{
-            fontSize: shortTitle.length > 50 ? 40 : 48,
+            fontSize: titleFontSize,
             fontWeight: 800,
             color: "#f5ede4",
-            lineHeight: 1.2,
+            lineHeight: 1.25,
             letterSpacing: "-0.02em",
-            marginBottom: 24,
-            flex: 1,
-            display: "flex",
-            alignItems: "flex-start",
+            marginBottom: 28,
+            maxHeight: 220,
+            overflow: "hidden",
           }}
         >
           {shortTitle}
@@ -123,10 +194,12 @@ export default async function BlogOgImage({
         {/* Description */}
         <div
           style={{
-            fontSize: 18,
-            color: "rgba(245,237,228,0.6)",
+            fontSize: 17,
+            color: "rgba(245,237,228,0.55)",
             lineHeight: 1.5,
-            marginBottom: 40,
+            marginBottom: 32,
+            maxHeight: 80,
+            overflow: "hidden",
           }}
         >
           {shortDesc}
@@ -153,6 +226,8 @@ export default async function BlogOgImage({
                 alignItems: "center",
                 justifyContent: "center",
                 fontSize: 16,
+                color: "#d4956a",
+                fontWeight: 700,
               }}
             >
               N
@@ -161,13 +236,7 @@ export default async function BlogOgImage({
               Nataliia Makota · DataLatte
             </span>
           </div>
-          <span
-            style={{
-              fontSize: 14,
-              color: "rgba(212,149,106,0.6)",
-              fontWeight: 500,
-            }}
-          >
+          <span style={{ fontSize: 14, color: "rgba(212,149,106,0.6)", fontWeight: 500 }}>
             Local Marketing Insights
           </span>
         </div>

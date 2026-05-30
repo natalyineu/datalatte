@@ -13,6 +13,7 @@ import Funnel from "@/components/mdx/Funnel";
 import DonutChart from "@/components/mdx/DonutChart";
 import LineChart from "@/components/mdx/LineChart";
 import CompareBar from "@/components/mdx/CompareBar";
+import StepPlan from "@/components/mdx/StepPlan";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
@@ -318,11 +319,6 @@ export async function generateMetadata({
   if (!post) return {};
   const { frontmatter } = post;
   const url = `https://datalatte.pro/blog/${slug}`;
-  const rawImage = imageCache[slug] ?? frontmatter.image;
-  const imageUrl = rawImage?.startsWith("http")
-    ? rawImage
-    : `https://datalatte.pro${rawImage}`;
-
   const modifiedTime = frontmatter.lastModified ?? frontmatter.date;
 
   return {
@@ -340,6 +336,7 @@ export async function generateMetadata({
       },
     },
     // ── Open Graph (article type with full metadata) ───────────────────────
+    // og:image is handled by opengraph-image.tsx (file-based, hosted on domain)
     openGraph: {
       title: frontmatter.title,
       description: frontmatter.description,
@@ -352,27 +349,19 @@ export async function generateMetadata({
       modifiedTime,
       authors: ["https://datalatte.pro/about"],
       tags: frontmatter.tags ?? [],
-      images: [
-        {
-          url: imageUrl,
-          width: 1200,
-          height: 630,
-          alt: frontmatter.title,
-        },
-      ],
     },
     // ── Twitter / X card ──────────────────────────────────────────────────
     twitter: {
       card: "summary_large_image",
       title: frontmatter.title,
       description: frontmatter.description,
-      images: [imageUrl],
     },
   };
 }
 
 // MDX component overrides — maps markdown elements to Tailwind-styled JSX
 const mdxComponents = {
+  StepPlan,
   h2: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => {
     const id = headingId(String(children));
     return (

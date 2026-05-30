@@ -21,13 +21,11 @@ export const metadata: Metadata = {
     url: "https://datalatte.pro/services/google-ads",
     siteName: "DataLatte",
     type: "website",
-    images: [{ url: "https://datalatte.pro/opengraph-image", width: 1200, height: 630, alt: "DataLatte — Google Ads for Local Businesses" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Google Ads for Coffee Shops, Salons & Local Businesses",
     description: "Google Ads management for local businesses and growing brands. Pay only for clicks from customers actively searching for you.",
-    images: ["https://datalatte.pro/opengraph-image"],
   },
 };
 

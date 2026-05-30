@@ -22,13 +22,11 @@ export const metadata: Metadata = {
     url: "https://datalatte.pro/services/programmatic",
     siteName: "DataLatte",
     type: "website",
-    images: [{ url: "https://datalatte.pro/opengraph-image", width: 1200, height: 630, alt: "DataLatte — Programmatic Advertising" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Programmatic Advertising for Small & Growing Businesses | DataLatte",
     description: "DV360, The Trade Desk, and Amazon DSP — enterprise programmatic for businesses of every size.",
-    images: ["https://datalatte.pro/opengraph-image"],
   },
 };
 

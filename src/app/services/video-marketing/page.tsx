@@ -21,13 +21,11 @@ export const metadata: Metadata = {
     url: "https://datalatte.pro/services/video-marketing",
     siteName: "DataLatte",
     type: "website",
-    images: [{ url: "https://datalatte.pro/opengraph-image", width: 1200, height: 630, alt: "DataLatte — Video Marketing for Local Businesses" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Video Marketing & YouTube Ads for Local Businesses | DataLatte",
     description: "YouTube Ads, Reels, and short-form video strategy for local businesses.",
-    images: ["https://datalatte.pro/opengraph-image"],
   },
 };
 

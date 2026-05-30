@@ -21,13 +21,11 @@ export const metadata: Metadata = {
     url: "https://datalatte.pro/services/email-sms",
     siteName: "DataLatte",
     type: "website",
-    images: [{ url: "https://datalatte.pro/opengraph-image", width: 1200, height: 630, alt: "DataLatte — Email & SMS Marketing for Local Businesses" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Email & SMS Marketing for Local Businesses",
     description: "Email and SMS marketing for coffee shops, salons, pet groomers, and fitness studios. Build a list, stay top of mind, and turn one-time visitors into loyal regulars.",
-    images: ["https://datalatte.pro/opengraph-image"],
   },
 };
 

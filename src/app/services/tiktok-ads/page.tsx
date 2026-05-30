@@ -21,13 +21,11 @@ export const metadata: Metadata = {
     url: "https://datalatte.pro/services/tiktok-ads",
     siteName: "DataLatte",
     type: "website",
-    images: [{ url: "https://datalatte.pro/opengraph-image", width: 1200, height: 630, alt: "DataLatte — TikTok Ads for Local Businesses" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "TikTok Ads for Local Businesses & Small Brands | DataLatte",
     description: "TikTok Ads management for local businesses and growing brands.",
-    images: ["https://datalatte.pro/opengraph-image"],
   },
 };
 

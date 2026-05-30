@@ -47,8 +47,9 @@ export default function BlogGrid({ posts }: { posts: Post[] }) {
   const filtered = useMemo(() => {
     const base = posts.filter(p => {
       const matchesGroup = activeGroup === "All" || getGroup(p.category) === activeGroup;
-      const q = query.toLowerCase();
-      const matchesSearch = !q || p.title.toLowerCase().includes(q) || p.description.toLowerCase().includes(q);
+      const words = query.toLowerCase().split(/\s+/).filter(Boolean);
+      const haystack = `${p.title} ${p.description} ${p.slug}`.toLowerCase();
+      const matchesSearch = words.length === 0 || words.every(w => haystack.includes(w));
       return matchesGroup && matchesSearch;
     });
     return sortAsc ? [...base].reverse() : base;

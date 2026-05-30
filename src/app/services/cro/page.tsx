@@ -21,13 +21,11 @@ export const metadata: Metadata = {
     url: "https://datalatte.pro/services/cro",
     siteName: "DataLatte",
     type: "website",
-    images: [{ url: "https://datalatte.pro/opengraph-image", width: 1200, height: 630, alt: "DataLatte — CRO for Small Businesses" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Conversion Rate Optimisation (CRO) for Small Businesses | DataLatte",
     description: "Turn more visitors into customers without spending more on ads.",
-    images: ["https://datalatte.pro/opengraph-image"],
   },
 };
 
