@@ -1,7 +1,7 @@
 import { supabase } from "./supabase";
 
 export type Impact = "breaking" | "high" | "medium" | "fyi";
-export type Category = "meta" | "google" | "ai" | "tiktok" | "seo";
+export type Category = "meta" | "google" | "ai" | "tiktok" | "seo" | "ctv";
 export type Niche = "coffee" | "salons" | "pet" | "fitness";
 
 export interface Signal {
@@ -32,6 +32,7 @@ export const CATEGORY_LABEL: Record<Category, string> = {
   ai: "AI & Automation",
   tiktok: "TikTok",
   seo: "SEO",
+  ctv: "CTV / OTT / DOOH",
 };
 
 function toTimeAgo(isoDate: string): string {
