@@ -110,6 +110,37 @@ const RSS_SOURCES = [
     name: "Google Blog",
     siteUrl: "https://blog.google",
   },
+  // ── CTV / OTT / DOOH ─────────────────────────────────────────────────────
+  {
+    url: "https://www.adexchanger.com/feed/",
+    name: "AdExchanger",
+    siteUrl: "https://www.adexchanger.com",
+  },
+  {
+    url: "https://digiday.com/feed/",
+    name: "Digiday",
+    siteUrl: "https://digiday.com",
+  },
+  {
+    url: "https://www.vistarmedia.com/blog/rss.xml",
+    name: "Vistar Media Blog",
+    siteUrl: "https://www.vistarmedia.com/blog",
+  },
+  {
+    url: "https://www.stackadapt.com/blog/feed",
+    name: "StackAdapt Blog",
+    siteUrl: "https://www.stackadapt.com/blog",
+  },
+  {
+    url: "https://www.nexttv.com/rss",
+    name: "Next TV",
+    siteUrl: "https://www.nexttv.com",
+  },
+  {
+    url: "https://adage.com/rss",
+    name: "Ad Age",
+    siteUrl: "https://adage.com",
+  },
 ];
 
 const MAX_AGE_HOURS = 48;  // only articles from last 48h
