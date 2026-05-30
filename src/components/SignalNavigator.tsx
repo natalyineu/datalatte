@@ -102,25 +102,12 @@ export default function SignalNavigator({ prev, next, index, total }: Props) {
         </button>
       )}
 
-      {/* Mobile swipe hint — only on first visit feel */}
-      <div className="flex items-center justify-between text-xs text-gray-700 mt-8 lg:hidden select-none">
-        <button
-          onClick={goPrev}
-          disabled={!prev}
-          className="flex items-center gap-1.5 disabled:opacity-20 hover:text-gray-400 transition-colors px-3 py-2 rounded-xl border border-gray-800 hover:border-gray-600 disabled:border-transparent"
-        >
-          <ChevronLeft size={14} />
-          {prev ? <span className="line-clamp-1 max-w-[120px]">{prev.headline}</span> : "Start"}
-        </button>
-        <button
-          onClick={goNext}
-          disabled={!next}
-          className="flex items-center gap-1.5 disabled:opacity-20 hover:text-gray-400 transition-colors px-3 py-2 rounded-xl border border-gray-800 hover:border-gray-600 disabled:border-transparent"
-        >
-          {next ? <span className="line-clamp-1 max-w-[120px]">{next.headline}</span> : "End"}
-          <ChevronRight size={14} />
-        </button>
-      </div>
+      {/* Swipe hint on mobile — subtle */}
+      {(prev || next) && (
+        <p className="text-center text-xs text-gray-800 mt-1 lg:hidden select-none">
+          swipe ← → to navigate
+        </p>
+      )}
     </>
   );
 }

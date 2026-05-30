@@ -169,16 +169,41 @@ export default async function SignalPage({
           </p>
         </div>
 
-        {/* Mobile prev/next + back */}
-        <div className="flex items-center gap-3 flex-wrap">
+        {/* ── Bottom navigation ── */}
+        <div className="flex items-center justify-between gap-3 pt-2">
           <Link
             href="/radar"
-            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-white transition-colors border border-gray-800 hover:border-gray-600 px-4 py-2.5 rounded-full"
+            className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-white transition-colors"
           >
             <ArrowLeft size={14} /> All signals
           </Link>
+          <span className="text-xs text-gray-700">{index + 1} / {total}</span>
         </div>
       </div>
+
+      {/* ── Next signal — full-width card ─────────────────────────────────── */}
+      {next && (
+        <Link href={`/radar/${next.slug}`} className="block group">
+          <div className="border-t border-gray-800 bg-gray-900 hover:bg-gray-800 transition-colors px-4 py-10">
+            <div className="max-w-3xl mx-auto flex items-center justify-between gap-6">
+              <div className="min-w-0">
+                <p className="text-xs font-bold text-gray-600 uppercase tracking-widest mb-2">
+                  Up next
+                </p>
+                <h3 className="text-lg md:text-2xl font-bold text-white leading-snug group-hover:text-coffee-300 transition-colors">
+                  {next.headline}
+                </h3>
+                <p className="text-sm text-gray-500 mt-2">
+                  {next.source} · {next.timeAgo}
+                </p>
+              </div>
+              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gray-800 border border-gray-700 group-hover:border-coffee-500 group-hover:bg-gray-700 flex items-center justify-center transition-all">
+                <ArrowRight size={20} className="text-gray-400 group-hover:text-coffee-400 transition-colors translate-x-0 group-hover:translate-x-0.5" />
+              </div>
+            </div>
+          </div>
+        </Link>
+      )}
 
       {/* ── Related signals ───────────────────────────────────────────────── */}
       {related.length > 0 && (
