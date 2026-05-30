@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import RadarFeed from "@/components/RadarFeed";
-import { SIGNALS } from "@/lib/radar-signals";
+import { fetchPublishedSignals } from "@/lib/radar-signals";
+
+export const revalidate = 21600; // 6 hours
 
 export const metadata: Metadata = {
   title: "Value Radar — Daily Marketing Intelligence for Local Businesses",
@@ -9,8 +11,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://datalatte.pro/radar" },
 };
 
-export default function RadarPage() {
-  const tickerItems = [...SIGNALS, ...SIGNALS]; // duplicate for seamless loop
+export default async function RadarPage() {
+  const signals = await fetchPublishedSignals();
+  const tickerItems = [...signals, ...signals]; // duplicate for seamless loop
 
   return (
     <main>
@@ -61,22 +64,22 @@ export default function RadarPage() {
 
             {/* Live signal count panel */}
             <div className="flex-shrink-0 border border-gray-800 rounded-2xl p-5 bg-gray-900/50 backdrop-blur-sm">
-              <div className="text-4xl font-black text-white tabular-nums">{SIGNALS.length}</div>
+              <div className="text-4xl font-black text-white tabular-nums">{signals.length}</div>
               <div className="text-xs text-gray-500 mt-1 font-medium uppercase tracking-wider">Signals today</div>
               <div className="mt-3 space-y-1">
-                {SIGNALS.filter(s => s.impact === "breaking").length > 0 && (
+                {signals.filter(s => s.impact === "breaking").length > 0 && (
                   <div className="flex items-center gap-1.5 text-xs">
                     <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-                    <span className="text-red-400 font-semibold">{SIGNALS.filter(s => s.impact === "breaking").length} breaking</span>
+                    <span className="text-red-400 font-semibold">{signals.filter(s => s.impact === "breaking").length} breaking</span>
                   </div>
                 )}
                 <div className="flex items-center gap-1.5 text-xs">
                   <span className="w-1.5 h-1.5 rounded-full bg-orange-400" />
-                  <span className="text-gray-400">{SIGNALS.filter(s => s.impact === "high").length} high impact</span>
+                  <span className="text-gray-400">{signals.filter(s => s.impact === "high").length} high impact</span>
                 </div>
                 <div className="flex items-center gap-1.5 text-xs">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                  <span className="text-gray-400">{SIGNALS.filter(s => s.impact === "medium").length} watch</span>
+                  <span className="text-gray-400">{signals.filter(s => s.impact === "medium").length} watch</span>
                 </div>
               </div>
             </div>
@@ -104,7 +107,7 @@ export default function RadarPage() {
       </section>
 
       {/* ── Feed ─────────────────────────────────────────────────────────── */}
-      <RadarFeed />
+      <RadarFeed signals={signals} />
     </main>
   );
 }
