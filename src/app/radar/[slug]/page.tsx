@@ -105,17 +105,6 @@ export default async function SignalPage({
           </span>
 
           <span className="text-gray-700">·</span>
-
-          <a
-            href={signal.sourceUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs text-gray-500 hover:text-gray-300 transition-colors"
-          >
-            {signal.source} ↗
-          </a>
-
-          <span className="text-gray-700">·</span>
           <span className="text-xs text-gray-600">{signal.timeAgo}</span>
 
           <span className="flex items-center gap-1 text-xs text-gray-700 ml-auto">
@@ -156,12 +145,28 @@ export default async function SignalPage({
         </div>
 
         {/* Niche relevance */}
-        <div className="flex flex-wrap gap-2 mb-10">
+        <div className="flex flex-wrap gap-2 mb-8">
           {signal.niches.map((n) => (
             <span key={n} className="text-xs text-gray-500 bg-gray-900 border border-gray-800 px-3 py-1.5 rounded-full">
               {NICHE_LABELS[n]}
             </span>
           ))}
+        </div>
+
+        {/* Source attribution — end of article */}
+        <div className="border-t border-gray-800/60 pt-6 mb-10">
+          <p className="text-xs text-gray-600">
+            Source:{" "}
+            <a
+              href={signal.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-500 hover:text-gray-300 underline underline-offset-2 transition-colors"
+            >
+              {signal.source}
+            </a>
+            {" · "}{signal.date}
+          </p>
         </div>
 
         {/* Mobile prev/next + back */}
