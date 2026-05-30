@@ -5,6 +5,7 @@ import Parser from "rss-parser";
 // ─── RSS Sources ────────────────────────────────────────────────────────────
 
 const RSS_SOURCES = [
+  // ── SEO & Google ──────────────────────────────────────────────────────────
   {
     url: "https://www.searchenginejournal.com/feed/",
     name: "Search Engine Journal",
@@ -16,6 +17,37 @@ const RSS_SOURCES = [
     siteUrl: "https://searchengineland.com",
   },
   {
+    url: "https://developers.google.com/search/blog/rss.xml",
+    name: "Google Search Central",
+    siteUrl: "https://developers.google.com/search/blog",
+  },
+  {
+    url: "https://blog.google/products/ads/rss/",
+    name: "Google Ads Blog",
+    siteUrl: "https://blog.google/products/ads/",
+  },
+  {
+    url: "https://moz.com/blog/feed",
+    name: "Moz Blog",
+    siteUrl: "https://moz.com/blog",
+  },
+  {
+    url: "https://www.semrush.com/blog/feed/",
+    name: "Semrush Blog",
+    siteUrl: "https://www.semrush.com/blog/",
+  },
+  {
+    url: "https://ahrefs.com/blog/feed/",
+    name: "Ahrefs Blog",
+    siteUrl: "https://ahrefs.com/blog/",
+  },
+  {
+    url: "https://www.brightlocal.com/blog/feed/",
+    name: "BrightLocal Blog",
+    siteUrl: "https://www.brightlocal.com/blog/",
+  },
+  // ── Social & Meta ─────────────────────────────────────────────────────────
+  {
     url: "https://www.socialmediatoday.com/rss.xml",
     name: "Social Media Today",
     siteUrl: "https://www.socialmediatoday.com",
@@ -26,24 +58,57 @@ const RSS_SOURCES = [
     siteUrl: "https://www.socialmediaexaminer.com",
   },
   {
-    url: "https://blog.google/rss/",
-    name: "Google Blog",
-    siteUrl: "https://blog.google",
+    url: "https://sproutsocial.com/insights/feed/",
+    name: "Sprout Social Insights",
+    siteUrl: "https://sproutsocial.com/insights/",
   },
   {
-    url: "https://moz.com/blog/feed",
-    name: "Moz Blog",
-    siteUrl: "https://moz.com/blog",
+    url: "https://later.com/blog/rss/",
+    name: "Later Blog",
+    siteUrl: "https://later.com/blog",
   },
+  {
+    url: "https://buffer.com/resources/rss/",
+    name: "Buffer Blog",
+    siteUrl: "https://buffer.com/resources/",
+  },
+  {
+    url: "https://blog.hubspot.com/marketing/rss.xml",
+    name: "HubSpot Marketing Blog",
+    siteUrl: "https://blog.hubspot.com/marketing",
+  },
+  // ── TikTok ───────────────────────────────────────────────────────────────
+  {
+    url: "https://newsroom.tiktok.com/feed/",
+    name: "TikTok Newsroom",
+    siteUrl: "https://newsroom.tiktok.com",
+  },
+  // ── AI & Automation ───────────────────────────────────────────────────────
   {
     url: "https://blog.n8n.io/rss.xml",
     name: "n8n Blog",
     siteUrl: "https://n8n.io/blog",
   },
   {
-    url: "https://later.com/blog/rss/",
-    name: "Later Blog",
-    siteUrl: "https://later.com/blog",
+    url: "https://zapier.com/blog/feeds/latest/",
+    name: "Zapier Blog",
+    siteUrl: "https://zapier.com/blog",
+  },
+  {
+    url: "https://www.make.com/en/blog/feed",
+    name: "Make.com Blog",
+    siteUrl: "https://www.make.com/en/blog",
+  },
+  // ── Multi / Industry ─────────────────────────────────────────────────────
+  {
+    url: "https://www.morningbrew.com/marketing/rss",
+    name: "Marketing Brew",
+    siteUrl: "https://www.marketingbrew.com",
+  },
+  {
+    url: "https://blog.google/rss/",
+    name: "Google Blog",
+    siteUrl: "https://blog.google",
   },
 ];
 
