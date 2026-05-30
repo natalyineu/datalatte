@@ -2,8 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Lightbulb, Clock } from "lucide-react";
-import { SIGNALS, NICHE_LABELS, CATEGORY_LABEL, getSignalBySlug, getAdjacentSignals } from "@/lib/radar-signals";
+import {
+  fetchPublishedSignals,
+  fetchSignalBySlug,
+  getAdjacentSignals,
+  NICHE_LABELS,
+  CATEGORY_LABEL,
+} from "@/lib/radar-signals";
 import SignalNavigator from "@/components/SignalNavigator";
+
+export const revalidate = 21600; // 6 hours
+export const dynamicParams = true;
 
 const CATEGORY_BAR: Record<string, string> = {
   meta: "bg-blue-500",
@@ -37,7 +46,8 @@ const IMPACT_CONFIG: Record<string, { dot: string; label: string; badge: string 
 };
 
 export async function generateStaticParams() {
-  return SIGNALS.map((s) => ({ slug: s.slug }));
+  const signals = await fetchPublishedSignals();
+  return signals.map((s) => ({ slug: s.slug }));
 }
 
 export async function generateMetadata({
@@ -46,7 +56,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const signal = getSignalBySlug(slug);
+  const signal = await fetchSignalBySlug(slug);
   if (!signal) return {};
   return {
     title: signal.headline,
@@ -60,15 +70,17 @@ export default async function SignalPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const signal = getSignalBySlug(slug);
+  const [signal, allSignals] = await Promise.all([
+    fetchSignalBySlug(slug),
+    fetchPublishedSignals(),
+  ]);
   if (!signal) notFound();
 
   const impact = IMPACT_CONFIG[signal.impact];
   const readMinutes = Math.max(1, Math.ceil(signal.body.join(" ").split(/\s+/).length / 200));
-  const { prev, next, index, total } = getAdjacentSignals(slug);
+  const { prev, next, index, total } = getAdjacentSignals(allSignals, slug);
 
-  // Related: same category or same niche, excluding current
-  const related = SIGNALS.filter(
+  const related = allSignals.filter(
     (s) =>
       s.slug !== signal.slug &&
       (s.category === signal.category || s.niches.some((n) => signal.niches.includes(n)))

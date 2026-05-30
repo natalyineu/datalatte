@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Lightbulb, Zap } from "lucide-react";
 import {
-  SIGNALS,
   NICHE_LABELS,
   CATEGORY_LABEL,
   type Impact,
@@ -151,11 +150,11 @@ function SignalCard({ signal, index }: { signal: Signal; index: number }) {
 
 /* ─── Feed ───────────────────────────────────────────────────────────────── */
 
-export default function RadarFeed() {
+export default function RadarFeed({ signals }: { signals: Signal[] }) {
   const [category, setCategory] = useState<Category | "all">("all");
   const [niche, setNiche] = useState<Niche | "all">("all");
 
-  const visible = SIGNALS.filter((s) => {
+  const visible = signals.filter((s) => {
     const catMatch = category === "all" || s.category === category;
     const nicheMatch = niche === "all" || s.niches.includes(niche as Niche);
     return catMatch && nicheMatch;
