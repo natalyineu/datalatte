@@ -143,3 +143,18 @@ export const CATEGORY_LABEL: Record<Category, string> = {
 export function getSignalBySlug(slug: string): Signal | undefined {
   return SIGNALS.find((s) => s.slug === slug);
 }
+
+export function getAdjacentSignals(slug: string): {
+  prev: Signal | null;
+  next: Signal | null;
+  index: number;
+  total: number;
+} {
+  const index = SIGNALS.findIndex((s) => s.slug === slug);
+  return {
+    prev: index > 0 ? SIGNALS[index - 1] : null,
+    next: index < SIGNALS.length - 1 ? SIGNALS[index + 1] : null,
+    index,
+    total: SIGNALS.length,
+  };
+}

@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Lightbulb, Clock } from "lucide-react";
-import { SIGNALS, NICHE_LABELS, CATEGORY_LABEL, getSignalBySlug } from "@/lib/radar-signals";
+import { SIGNALS, NICHE_LABELS, CATEGORY_LABEL, getSignalBySlug, getAdjacentSignals } from "@/lib/radar-signals";
+import SignalNavigator from "@/components/SignalNavigator";
 
 const CATEGORY_BAR: Record<string, string> = {
   meta: "bg-blue-500",
@@ -64,6 +65,7 @@ export default async function SignalPage({
 
   const impact = IMPACT_CONFIG[signal.impact];
   const readMinutes = Math.max(1, Math.ceil(signal.body.join(" ").split(/\s+/).length / 200));
+  const { prev, next, index, total } = getAdjacentSignals(slug);
 
   // Related: same category or same niche, excluding current
   const related = SIGNALS.filter(
@@ -77,7 +79,10 @@ export default async function SignalPage({
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
       <div className={`h-1 w-full ${CATEGORY_BAR[signal.category]}`} />
 
-      <div className="max-w-3xl mx-auto px-4 pt-10 pb-16">
+      {/* Progress dots + side arrows */}
+      <SignalNavigator prev={prev} next={next} index={index} total={total} />
+
+      <div className="max-w-3xl mx-auto px-4 pt-6 pb-16">
 
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-xs text-gray-600 mb-8">
@@ -159,13 +164,15 @@ export default async function SignalPage({
           ))}
         </div>
 
-        {/* Back link */}
-        <Link
-          href="/radar"
-          className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-white transition-colors border border-gray-800 hover:border-gray-600 px-4 py-2.5 rounded-full"
-        >
-          <ArrowLeft size={14} /> Back to Radar
-        </Link>
+        {/* Mobile prev/next + back */}
+        <div className="flex items-center gap-3 flex-wrap">
+          <Link
+            href="/radar"
+            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-white transition-colors border border-gray-800 hover:border-gray-600 px-4 py-2.5 rounded-full"
+          >
+            <ArrowLeft size={14} /> All signals
+          </Link>
+        </div>
       </div>
 
       {/* ── Related signals ───────────────────────────────────────────────── */}
