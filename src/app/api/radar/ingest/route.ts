@@ -145,17 +145,26 @@ ${articleList}`;
       return classifyBatch(articles);
     }
 
-    if (!res.ok) return articles.map((_, i) => ({ index: i, relevant: false }));
+    if (!res.ok) {
+      const errText = await res.text().catch(() => "");
+      console.error(`[radar] Cerebras error ${res.status}: ${errText.slice(0, 200)}`);
+      return articles.map((_, i) => ({ index: i, relevant: false }));
+    }
 
     const data = await res.json();
     const content = data.choices?.[0]?.message?.content;
-    if (!content) return articles.map((_, i) => ({ index: i, relevant: false }));
+    if (!content) {
+      console.error("[radar] Cerebras returned empty content");
+      return articles.map((_, i) => ({ index: i, relevant: false }));
+    }
 
     const parsed = JSON.parse(content);
     // Handle both array and {results: [...]} shapes
     const results: SignalResult[] = Array.isArray(parsed) ? parsed : (parsed.results ?? []);
+    console.log(`[radar] Cerebras batch: ${results.filter(r => r.relevant).length}/${articles.length} relevant`);
     return results;
-  } catch {
+  } catch (err) {
+    console.error(`[radar] Cerebras exception: ${err instanceof Error ? err.message : err}`);
     return articles.map((_, i) => ({ index: i, relevant: false }));
   }
 }
@@ -239,6 +248,8 @@ export async function GET(request: NextRequest) {
   }
 
   stats.articles_collected = allArticles.length;
+  console.log(`[radar] Sources: ${stats.sources_fetched}/${RSS_SOURCES.length} | Articles after dedup: ${allArticles.length} | Skipped dedup: ${stats.skipped_dedup} | Errors: ${stats.errors.length}`);
+  if (stats.errors.length > 0) console.log(`[radar] Source errors: ${stats.errors.join("; ")}`);
 
   // ── Step 2: Process in batches of BATCH_SIZE ─────────────────────────────
 
@@ -291,6 +302,8 @@ export async function GET(request: NextRequest) {
       await sleep(13000); // ~13s between batches → stay under 5 RPM
     }
   }
+
+  console.log(`[radar] DONE — inserted: ${stats.inserted} | irrelevant: ${stats.skipped_irrelevant} | dedup: ${stats.skipped_dedup} | errors: ${stats.errors.length}`);
 
   return NextResponse.json({
     ok: true,
