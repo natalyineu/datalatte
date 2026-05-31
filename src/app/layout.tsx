@@ -38,6 +38,9 @@ export const metadata: Metadata = {
   // ── Canonical + hreflang ──────────────────────────────────────────────────
   alternates: {
     canonical: BASE,
+    types: {
+      "application/rss+xml": `${BASE}/feed.xml`,
+    },
     languages: {
       "en-US": BASE,
       "en-GB": BASE,
