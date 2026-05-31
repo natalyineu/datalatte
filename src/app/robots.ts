@@ -63,10 +63,14 @@ const AI_CRAWLERS = [
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
-      // Allow all crawlers (including all AI bots via wildcard)
-      { userAgent: "*", allow: "/" },
+      // Block admin + API routes for all crawlers
+      {
+        userAgent: "*",
+        allow: "/",
+        disallow: ["/admin", "/api/"],
+      },
       // Explicit allow for every known AI crawler — belt-and-suspenders
-      ...AI_CRAWLERS.map((ua) => ({ userAgent: ua, allow: "/" as const })),
+      ...AI_CRAWLERS.map((ua) => ({ userAgent: ua, allow: "/", disallow: ["/admin", "/api/"] as string[] })),
     ],
     sitemap: "https://datalatte.pro/sitemap.xml",
   };

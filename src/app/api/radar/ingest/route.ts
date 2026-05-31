@@ -6,37 +6,39 @@ import Parser from "rss-parser";
 
 const RSS_SOURCES = [
   // SEO & Google
-  { url: "https://www.searchenginejournal.com/feed/",          name: "Search Engine Journal",  siteUrl: "https://www.searchenginejournal.com" },
-  { url: "https://searchengineland.com/feed",                  name: "Search Engine Land",     siteUrl: "https://searchengineland.com" },
-  { url: "https://developers.google.com/search/blog/rss.xml",  name: "Google Search Central",  siteUrl: "https://developers.google.com/search/blog" },
-  { url: "https://blog.google/products/ads/rss/",              name: "Google Ads Blog",        siteUrl: "https://blog.google/products/ads/" },
-  { url: "https://moz.com/blog/feed",                          name: "Moz Blog",               siteUrl: "https://moz.com/blog" },
-  { url: "https://www.semrush.com/blog/feed/",                 name: "Semrush Blog",           siteUrl: "https://www.semrush.com/blog/" },
-  { url: "https://ahrefs.com/blog/feed/",                      name: "Ahrefs Blog",            siteUrl: "https://ahrefs.com/blog/" },
-  { url: "https://www.brightlocal.com/blog/feed/",             name: "BrightLocal Blog",       siteUrl: "https://www.brightlocal.com/blog/" },
+  { url: "https://www.searchenginejournal.com/feed/",         name: "Search Engine Journal",  siteUrl: "https://www.searchenginejournal.com" },
+  { url: "https://searchengineland.com/feed",                 name: "Search Engine Land",     siteUrl: "https://searchengineland.com" },
+  { url: "https://feeds.feedburner.com/blogspot/amDG",        name: "Google Search Central",  siteUrl: "https://developers.google.com/search/blog" },  // fixed
+  { url: "https://ads-developers.googleblog.com/feeds/posts/default", name: "Google Ads Blog", siteUrl: "https://blog.google/products/ads/" },           // fixed
+  { url: "https://moz.com/blog/feed",                         name: "Moz Blog",               siteUrl: "https://moz.com/blog" },
+  { url: "https://www.semrush.com/blog/feed/",                name: "Semrush Blog",           siteUrl: "https://www.semrush.com/blog/" },
+  { url: "https://ahrefs.com/blog/feed/",                     name: "Ahrefs Blog",            siteUrl: "https://ahrefs.com/blog/" },
+  { url: "https://www.brightlocal.com/blog/feed/",            name: "BrightLocal Blog",       siteUrl: "https://www.brightlocal.com/blog/" },
+  { url: "https://www.searchenginewatch.com/feed/",           name: "Search Engine Watch",    siteUrl: "https://www.searchenginewatch.com" },            // new
+  { url: "https://martech.org/feed/",                         name: "MarTech",                siteUrl: "https://martech.org" },                          // new
   // Social & Meta
-  { url: "https://www.socialmediatoday.com/rss.xml",           name: "Social Media Today",     siteUrl: "https://www.socialmediatoday.com" },
-  { url: "https://www.socialmediaexaminer.com/feed/",          name: "Social Media Examiner",  siteUrl: "https://www.socialmediaexaminer.com" },
-  { url: "https://sproutsocial.com/insights/feed/",            name: "Sprout Social Insights", siteUrl: "https://sproutsocial.com/insights/" },
-  { url: "https://later.com/blog/rss/",                        name: "Later Blog",             siteUrl: "https://later.com/blog" },
-  { url: "https://buffer.com/resources/rss/",                  name: "Buffer Blog",            siteUrl: "https://buffer.com/resources/" },
-  { url: "https://blog.hubspot.com/marketing/rss.xml",         name: "HubSpot Marketing Blog", siteUrl: "https://blog.hubspot.com/marketing" },
+  { url: "https://www.socialmediaexaminer.com/feed/",         name: "Social Media Examiner",  siteUrl: "https://www.socialmediaexaminer.com" },
+  { url: "https://sproutsocial.com/insights/feed/",           name: "Sprout Social Insights", siteUrl: "https://sproutsocial.com/insights/" },
+  { url: "https://buffer.com/resources/rss/",                 name: "Buffer Blog",            siteUrl: "https://buffer.com/resources/" },
+  { url: "https://blog.hubspot.com/marketing/rss.xml",        name: "HubSpot Marketing Blog", siteUrl: "https://blog.hubspot.com/marketing" },
+  { url: "https://blog.hootsuite.com/feed/",                  name: "Hootsuite Blog",         siteUrl: "https://blog.hootsuite.com" },                   // replaces Later (404)
+  { url: "https://neilpatel.com/blog/feed/",                  name: "Neil Patel Blog",        siteUrl: "https://neilpatel.com/blog" },                   // new
+  { url: "https://www.convinceandconvert.com/feed/",          name: "Convince & Convert",     siteUrl: "https://www.convinceandconvert.com" },           // new
   // TikTok
-  { url: "https://newsroom.tiktok.com/feed/",                  name: "TikTok Newsroom",        siteUrl: "https://newsroom.tiktok.com" },
+  { url: "https://newsroom.tiktok.com/feed/",                 name: "TikTok Newsroom",        siteUrl: "https://newsroom.tiktok.com" },
   // AI & Automation
-  { url: "https://blog.n8n.io/rss.xml",                        name: "n8n Blog",               siteUrl: "https://n8n.io/blog" },
-  { url: "https://zapier.com/blog/feeds/latest/",              name: "Zapier Blog",            siteUrl: "https://zapier.com/blog" },
-  { url: "https://www.make.com/en/blog/feed",                  name: "Make.com Blog",          siteUrl: "https://www.make.com/en/blog" },
+  { url: "https://blog.n8n.io/feed",                          name: "n8n Blog",               siteUrl: "https://n8n.io/blog" },                          // fixed
+  { url: "https://zapier.com/blog/feeds/latest/",             name: "Zapier Blog",            siteUrl: "https://zapier.com/blog" },
   // Multi / Industry
-  { url: "https://www.morningbrew.com/marketing/rss",          name: "Marketing Brew",         siteUrl: "https://www.marketingbrew.com" },
-  { url: "https://blog.google/rss/",                           name: "Google Blog",            siteUrl: "https://blog.google" },
+  { url: "https://blog.google/rss/",                          name: "Google Blog",            siteUrl: "https://blog.google" },
+  { url: "https://www.practicalecommerce.com/feed",           name: "Practical Ecommerce",    siteUrl: "https://www.practicalecommerce.com" },           // replaces Marketing Brew (403)
+  { url: "https://www.wordstream.com/blog/feed",              name: "WordStream Blog",        siteUrl: "https://www.wordstream.com/blog" },              // new
   // CTV / OTT / DOOH
-  { url: "https://www.adexchanger.com/feed/",                  name: "AdExchanger",            siteUrl: "https://www.adexchanger.com" },
-  { url: "https://digiday.com/feed/",                          name: "Digiday",                siteUrl: "https://digiday.com" },
-  { url: "https://www.vistarmedia.com/blog/rss.xml",           name: "Vistar Media Blog",      siteUrl: "https://www.vistarmedia.com/blog" },
-  { url: "https://www.stackadapt.com/blog/feed",               name: "StackAdapt Blog",        siteUrl: "https://www.stackadapt.com/blog" },
-  { url: "https://www.nexttv.com/rss",                         name: "Next TV",                siteUrl: "https://www.nexttv.com" },
-  { url: "https://adage.com/rss",                              name: "Ad Age",                 siteUrl: "https://adage.com" },
+  { url: "https://www.adexchanger.com/feed/",                 name: "AdExchanger",            siteUrl: "https://www.adexchanger.com" },
+  { url: "https://digiday.com/feed/",                         name: "Digiday",                siteUrl: "https://digiday.com" },
+  { url: "https://www.vistarmedia.com/blog/rss.xml",          name: "Vistar Media Blog",      siteUrl: "https://www.vistarmedia.com/blog" },
+  { url: "https://www.stackadapt.com/resources/blog/rss",     name: "StackAdapt Blog",        siteUrl: "https://www.stackadapt.com/resources/blog" },   // fixed
+  { url: "https://www.nexttv.com/rss",                        name: "Next TV",                siteUrl: "https://www.nexttv.com" },
 ];
 
 const MAX_AGE_HOURS  = 48;  // only articles from last 48h
