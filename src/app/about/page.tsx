@@ -137,14 +137,16 @@ export default function AboutPage() {
         <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">
           <Prose>
             <p>
-              When I first moved here, I did what I always do in a new city: mapped every café
-              worth visiting. Not on Google Maps — in my head. An internal list of where the
-              espresso is right and where the sofa by the window is always free.
+              That&apos;s my neighbourhood. I walk that street almost every Saturday morning,
+              usually on the way to a café, never in a rush. The light hits those buildings in a
+              way that still catches me off guard after three years. I think that&apos;s a good
+              sign — it means I haven&apos;t stopped noticing.
             </p>
             <p>
-              Wanda became a regular pretty quickly. A summer terrace, good coffee, the kind of
-              outdoor setup where you can sit for two hours and nobody looks at you like
-              you&apos;ve overstayed your welcome.
+              When I first moved here, I did what I always do in a new city: mapped every café
+              worth visiting. Not on Google Maps — in my head. An internal list of where the
+              espresso is right and where the sofa by the window is always free. It took about
+              three weeks. I was very motivated.
             </p>
           </Prose>
         </div>
@@ -154,24 +156,45 @@ export default function AboutPage() {
         <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">
           <Prose>
             <p>
+              Wanda became a regular pretty quickly. A summer terrace, good coffee, the kind of
+              outdoor setup where you can sit for two hours and nobody looks at you like
+              you&apos;ve overstayed your welcome. The menu has something called a &quot;Wanda
+              latte&quot; and I have tried to resist ordering it every single time and failed
+              every single time.
+            </p>
+            <p>
               Coffee, for me, has never just been about the drink. It&apos;s the whole ritual —
               choosing where to go, walking there, sitting with something in your hands and
-              nowhere urgent to be. I&apos;ve had some of my best ideas over a second coffee
-              I definitely didn&apos;t need. There&apos;s something about that unhurried state
+              nowhere urgent to be. I&apos;ve had some of my best ideas over a second coffee I
+              definitely didn&apos;t need. There&apos;s something about that unhurried state
               that makes everything clearer.
             </p>
           </Prose>
         </div>
 
         <Photo src="/images/personal/p_IMG_1209.jpg" alt="Coffee and cheesecake at an outdoor café" caption="Coffee + cheesecake. Non-negotiable." />
+
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">
+          <Prose>
+            <p>
+              I did not plan for the cheesecake. I never do. That&apos;s the thing about café
+              mornings — you go in for a coffee and then the pastry case makes a very compelling
+              argument and suddenly you&apos;re forty minutes in with a fork in your hand and no
+              regrets whatsoever. The cheesecake was very good, by the way. Obviously.
+            </p>
+          </Prose>
+        </div>
+
         <Photo src="/images/personal/p_IMG_0378.jpg" alt="Coffee to go on a Poznań street" caption="Saturday morning, every Saturday" />
 
         <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">
           <Prose>
             <p>
-              I have a weakness for takeaway cups with something written on them that makes me
-              feel vaguely understood. Saturday morning, walking nowhere in particular, coffee
-              in hand — that&apos;s honestly the whole thing.
+              Sometimes the café is wherever you&apos;re already walking. I have a real weakness
+              for the takeaway coffee as a concept — it gives you something to hold and a reason
+              to be outside, which is sometimes all you need. That cup has something written on it
+              in Polish that translates roughly to &quot;swap texting for meeting up.&quot; Very
+              pointed. I was alone. I kept walking.
             </p>
           </Prose>
         </div>
@@ -179,6 +202,14 @@ export default function AboutPage() {
         <Photo src="/images/personal/p_IMG_1081.jpg" alt="Coffee with flowers at a café table" caption="Sometimes the view outside doesn't matter at all" />
 
         <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">
+          <Prose>
+            <p>
+              This was taken at a place with flowers on every table and enormous windows looking
+              onto the street. The kind of café that makes you feel like you&apos;re inside a
+              painting. I sat there for two hours. I ordered a second coffee I did not need.
+              I would do it again immediately.
+            </p>
+          </Prose>
           <Pullquote>
             Coffee isn&apos;t a theme for me. It&apos;s a whole orientation toward the world.
           </Pullquote>
@@ -189,48 +220,73 @@ export default function AboutPage() {
         <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">
           <Prose>
             <p>
-              Not every café morning is precious and curated. Some are a rainy Tuesday somewhere
-              familiar because you need somewhere warm to sit and think. That counts too. What I
-              like about coffee culture is that it has room for all of it — the craft flat white
-              and the emergency americano.
+              That meringue is from a café where everything on the menu looked exactly like
+              this — too beautiful to eat, too good not to. I&apos;ve made peace with the fact
+              that I&apos;m the kind of person who photographs dessert before eating it. It
+              takes about four seconds and I stand by it completely.
             </p>
           </Prose>
         </div>
 
         <Photo src="/images/personal/p_IMG_1038.jpg" alt="Rainy day at a café, city street outside" caption="Rainy days have their charm too" />
 
-        {/* Cat */}
         <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">
+          <Prose>
+            <p>
+              Not every café morning is precious and curated. Some are a rainy Tuesday at
+              somewhere familiar because you need somewhere warm to sit and think. That counts
+              too. What I like about coffee culture is that it has room for all of it — the
+              slow Saturday flat white and the emergency americano in the rain.
+            </p>
+            <p>
+              Also, rain in Poznań is genuinely quite nice sometimes. The city gets quieter.
+              The café gets cozier. I have no complaints.
+            </p>
+          </Prose>
+        </div>
+
+        {/* Cat */}
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 pb-4">
           <Prose>
             <p>
               I also cat-sit for a friend pretty regularly. His name is Ragnar. He&apos;s a
               Scottish Fold with a very flat face and the kind of calm, intense stare that
-              suggests he knows exactly what you&apos;re thinking and is mostly unimpressed by it.
-            </p>
-            <p>
-              Cat-sitting is, honestly, one of my favourite things. There&apos;s a cat. The cat
-              wants food. You provide food. Then you sit on the sofa together and nobody needs
-              to talk. The best kind of company.
+              suggests he knows exactly what you&apos;re thinking and is mostly unimpressed by
+              it. He has never once been excited to see me. He is always very pleased when I
+              open the food cabinet.
             </p>
           </Prose>
         </div>
 
         <Photo src="/images/personal/p_IMG_1221.jpg" alt="Scottish Fold cat looking up with huge golden eyes" caption="Ragnar. He does not care about your KPIs." />
 
-        {/* Croatia */}
         <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">
           <Prose>
             <p>
+              He sat like this for about twenty minutes. I still don&apos;t know what he wanted.
+              Probably just to be observed. Cat-sitting is, honestly, one of my favourite
+              things — there&apos;s a cat, the cat wants food, you provide food, and then you
+              sit on the sofa together and nobody needs to say anything. The best kind of company.
+            </p>
+          </Prose>
+        </div>
+
+        {/* Croatia */}
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 pb-4">
+          <Prose>
+            <p>
               I lived in Zagreb for a while — which meant I got to know Croatia properly, not
-              just as a tourist but as a place people actually live. The coffee culture there is
-              very real: Italian-influenced, small cups, espresso taken seriously, usually
-              standing at a bar counter.
+              just as a tourist but as a place people actually live. I loved it. The pace, the
+              coffee culture, the way evenings in the old town feel completely unhurried. When
+              I left Zagreb I stayed connected to the country — every summer I go back to
+              the coast.
             </p>
             <p>
-              Every summer I go back to the coast. I&apos;ve been to Dubrovnik, Split, Šibenik,
-              Zadar — each with its own old town, its own light, its own pace. The Adriatic does
-              something to your nervous system. Three days of looking at that colour of water and
-              you start breathing differently.
+              I&apos;ve been to Dubrovnik, Split, Šibenik, Zadar. Each one has its own old
+              town, its own light, its own particular version of beautiful. The Adriatic does
+              something to your nervous system that I can&apos;t explain scientifically but
+              can report anecdotally: three days of looking at that colour of water and you
+              start breathing differently.
             </p>
           </Prose>
         </div>
@@ -240,48 +296,109 @@ export default function AboutPage() {
         <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">
           <Prose>
             <p>
-              There&apos;s always a café with a sea view involved. Coffee in front of me, the
-              water close enough to hear, sunglasses on, nothing urgent. That&apos;s the Croatia
-              I keep going back to.
+              I took that photo from a pier. The water was so clear you could see the bottom
+              ten metres down. There were fish. I just stood there for a while. No thoughts,
+              no agenda. Just the water and the light and the very specific sound the Adriatic
+              makes when it hits stone.
             </p>
           </Prose>
         </div>
 
         <Photo src="/images/personal/p_IMG_0674.jpg" alt="Latte macchiato with sunglasses next to the Adriatic" caption="Coffee + sea. Basically my brand." />
+
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">
+          <Prose>
+            <p>
+              Finding a café that&apos;s actually on the water — tables-over-the-sea on the
+              water — is one of those things I actively search for every trip. This one had a
+              railing and the Adriatic right below it. I ordered a latte, put on my sunglasses,
+              and felt extremely at peace with every decision I had ever made.
+            </p>
+          </Prose>
+        </div>
+
         <Photo src="/images/personal/p_IMG_0541.jpg" alt="Barcaffè espresso on a Croatian café terrace" caption="Barcaffè — Italy's coffee culture, Croatia's setting." />
 
         <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">
           <Prose>
             <p>
-              Gelato in an old town is non-negotiable. The best way to see a place is on foot,
-              slowly, with something in your hand.
+              Barcaffè is everywhere on the Croatian coast — Italian-influenced, small cups,
+              fast and serious, usually at a little counter or a tiny table with the sea
+              somewhere nearby. It&apos;s a completely different coffee experience from what
+              I drink in Poznań. I love both for completely different reasons. Coffee tastes
+              like where you are.
             </p>
           </Prose>
         </div>
 
         <Photo src="/images/personal/p_IMG_0556.jpg" alt="Ice cream cone in front of a Croatian church tower" caption="Gelato in the old town. Mandatory." />
+
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">
+          <Prose>
+            <p>
+              The rule is: if you&apos;re in an old town in Croatia and you see a gelateria,
+              you stop. It doesn&apos;t matter if you just ate. It doesn&apos;t matter if
+              it&apos;s 10am. You stop, you choose carefully, you walk and eat and look at
+              the church tower and feel like you&apos;re doing exactly the right thing.
+            </p>
+          </Prose>
+        </div>
+
         <Photo src="/images/personal/p_IMG_0544.jpg" alt="Croatian old town street with flags stretching overhead" caption="The old towns never get old." />
+
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">
+          <Prose>
+            <p>
+              I&apos;ve walked through a lot of Croatian old towns now. They&apos;re all
+              different — Dubrovnik is dramatic, Split is alive, Zadar is quietly beautiful —
+              but they all have this. Narrow stone streets, flags overhead, the sound of your
+              own footsteps echoing off walls that have been there for centuries. I never want
+              to leave any of them.
+            </p>
+          </Prose>
+        </div>
+
         <Photo src="/images/personal/p_IMG_0528.jpg" alt="Loquat tree heavy with yellow fruit against blue sky" caption="The trees are different there. Everything is." />
 
         <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">
           <Prose>
             <p>
-              I grew up further north and every summer I&apos;m slightly amazed by how different
-              the light is in Croatia, how unhurried everything feels. I once had pizza next to a
-              Roman column that was just standing there, built into a wall, completely unremarkable
-              to everyone who lived nearby. Croatia is full of things like that.
+              Loquat trees. I had never seen one before Croatia. Now I look for them every time.
+              There&apos;s something about that particular shade of orange-yellow against a
+              completely blue sky that I find genuinely joyful — the kind of small, specific
+              pleasure you only notice when you&apos;re moving slowly and paying attention.
+              Croatia taught me to move more slowly.
             </p>
           </Prose>
         </div>
 
         <Photo src="/images/personal/p_IMG_0608.jpg" alt="Pizza beside ancient stone columns in Croatia" caption="Pizza next to a 2000-year-old wall. Regular Tuesday." />
+
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">
+          <Prose>
+            <p>
+              This pizza was excellent. The column next to it was approximately 2,000 years
+              old and had been incorporated into the restaurant wall as if that were completely
+              normal. Nobody around me seemed particularly amazed. I was amazed enough for the
+              whole table.
+            </p>
+          </Prose>
+        </div>
+
         <Photo src="/images/personal/p_IMG_0570.jpg" alt="Stone sea wall with the Adriatic and islands beyond" caption="Where I go when I need to remember what actually matters." />
 
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 pt-6 pb-10">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 pt-8 pb-10">
+          <Prose>
+            <p>
+              This is the view that resets everything. I sit here with a coffee or without one,
+              I look at the water and the islands, and whatever I was stressed about before
+              the trip stops feeling quite so important. I always come back from Croatia with
+              better ideas, a clearer head, and an embarrassing number of photos that are
+              basically all the same coffee cup from slightly different angles.
+            </p>
+          </Prose>
           <Pullquote>
-            I always come back with better ideas, a clearer head, and an embarrassing number
-            of photos that are basically all the same coffee cup from slightly different angles.
-            No regrets.
+            No regrets. Never any regrets.
           </Pullquote>
         </div>
 
