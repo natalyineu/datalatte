@@ -41,6 +41,7 @@ export function localBusinessSchema() {
     sameAs: [
       "https://www.linkedin.com/company/datalattepro",
       "https://www.instagram.com/datalatte.pro",
+      "https://medium.com/@datalatte.pro",
     ],
     founder: {
       "@type": "Person",
@@ -92,6 +93,7 @@ export function personSchema() {
     sameAs: [
       "https://www.linkedin.com/company/datalattepro",
       "https://www.instagram.com/datalatte.pro",
+      "https://medium.com/@datalatte.pro",
     ],
   };
 }
