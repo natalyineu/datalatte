@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Digital Marketing for Growing & Mid-Market Businesses",
   description:
     "Full-funnel digital marketing for scaling companies. Multi-channel paid media, SEO, CRM, and marketing analytics from a consultant with Fortune 500 agency experience.",
+  alternates: { canonical: "https://datalatte.pro/for/medium-business" },
 };
 
 const challenges = [

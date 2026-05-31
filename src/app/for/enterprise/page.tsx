@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Enterprise Digital Marketing & Agency White-Label Services",
   description:
     "Enterprise-grade digital marketing strategy, programmatic advertising, and white-label agency services. OMD, Dentsu, BBDO and GroupM background. US, UK and EU markets.",
+  alternates: { canonical: "https://datalatte.pro/for/enterprise" },
 };
 
 const credentials = [
