@@ -8,7 +8,24 @@ export const metadata: Metadata = {
   title: "Value Radar — Daily Marketing Intelligence for Local Businesses",
   description:
     "Daily marketing signals decoded for local businesses. New ad formats, AI tools, Google updates — explained in plain language for coffee shops, salons, pet groomers and fitness studios.",
-  alternates: { canonical: "https://datalatte.pro/radar" },
+  alternates: {
+    canonical: "https://datalatte.pro/radar",
+    languages: {
+      "en-US": "https://datalatte.pro/radar",
+      "en-GB": "https://datalatte.pro/radar",
+      "en-AU": "https://datalatte.pro/radar",
+      "en-CA": "https://datalatte.pro/radar",
+      "x-default": "https://datalatte.pro/radar",
+    },
+  },
+  openGraph: {
+    title: "Value Radar — Daily Marketing Intelligence for Local Businesses",
+    description: "Daily marketing signals decoded for local businesses. New ad formats, AI tools, Google updates — explained in plain language.",
+    url: "https://datalatte.pro/radar",
+    siteName: "DataLatte",
+    type: "website",
+    images: [{ url: "https://datalatte.pro/opengraph-image", width: 1200, height: 630 }],
+  },
 };
 
 export default async function RadarPage() {
