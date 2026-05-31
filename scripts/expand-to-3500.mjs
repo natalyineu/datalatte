@@ -4,12 +4,18 @@
  * Rewrites every blog post to ~3500 words with Nataliia's specific voice.
  * Processes in parallel batches, tracks progress, resumes on restart.
  *
+ * Supported API providers (in priority order):
+ *   1. OPENROUTER_API_KEY  → deepseek/deepseek-chat (best quality, cheapest)
+ *   2. CEREBRAS_API_KEY    → llama-3.3-70b (fastest)
+ *   3. GROQ_API_KEY        → llama-3.3-70b-versatile
+ *
  * Usage:
  *   OPENROUTER_API_KEY=sk-or-... node scripts/expand-to-3500.mjs
- *   OPENROUTER_API_KEY=sk-or-... node scripts/expand-to-3500.mjs --limit 20
- *   OPENROUTER_API_KEY=sk-or-... node scripts/expand-to-3500.mjs --min-words 0       # all posts
- *   OPENROUTER_API_KEY=sk-or-... node scripts/expand-to-3500.mjs --slug coffee-shop-cro-techniques
- *   OPENROUTER_API_KEY=sk-or-... node scripts/expand-to-3500.mjs --dry-run
+ *   GROQ_API_KEY=gsk_...        node scripts/expand-to-3500.mjs
+ *   CEREBRAS_API_KEY=...        node scripts/expand-to-3500.mjs
+ *   node scripts/expand-to-3500.mjs --limit 20
+ *   node scripts/expand-to-3500.mjs --slug coffee-shop-cro-techniques
+ *   node scripts/expand-to-3500.mjs --dry-run
  */
 
 import fs from "fs";
@@ -20,14 +26,46 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CONTENT_DIR = path.join(__dirname, "../content/blog");
 const PROGRESS_FILE = path.join(__dirname, "../content/expand-progress.json");
 
+// ── Provider detection ──────────────────────────────────────────────────────
+function detectProvider() {
+  if (process.env.OPENROUTER_API_KEY) {
+    return {
+      name: "OpenRouter",
+      key: process.env.OPENROUTER_API_KEY,
+      url: "https://openrouter.ai/api/v1/chat/completions",
+      model: process.env.EXPAND_MODEL || "deepseek/deepseek-chat",
+      extraHeaders: { "X-Title": "DataLatte Expander" },
+    };
+  }
+  if (process.env.CEREBRAS_API_KEY) {
+    return {
+      name: "Cerebras",
+      key: process.env.CEREBRAS_API_KEY,
+      url: "https://api.cerebras.ai/v1/chat/completions",
+      model: process.env.EXPAND_MODEL || "llama-3.3-70b",
+      extraHeaders: {},
+    };
+  }
+  if (process.env.GROQ_API_KEY) {
+    return {
+      name: "Groq",
+      key: process.env.GROQ_API_KEY,
+      url: "https://api.groq.com/openai/v1/chat/completions",
+      model: process.env.EXPAND_MODEL || "llama-3.3-70b-versatile",
+      extraHeaders: {},
+    };
+  }
+  return null;
+}
+
+const PROVIDER = detectProvider();
+
 // ── Config ─────────────────────────────────────────────────────────────────
-const API_KEY = process.env.OPENROUTER_API_KEY;
-const MODEL = process.env.EXPAND_MODEL || "deepseek/deepseek-chat";
 const TARGET_WORDS = 3500;
 const SKIP_ABOVE = 3200;       // skip posts already at/above this
-const CONCURRENCY = 3;         // parallel requests
+const CONCURRENCY = process.env.CEREBRAS_API_KEY ? 5 : 3; // cerebras is faster
 const RETRY_LIMIT = 2;
-const DELAY_MS = 800;          // between batch starts
+const DELAY_MS = process.env.GROQ_API_KEY ? 1500 : 800; // groq needs more breathing room
 
 // ── CLI args ───────────────────────────────────────────────────────────────
 const args = process.argv.slice(2);
@@ -131,16 +169,15 @@ Output ONLY the article body — no frontmatter, no code fences, no preamble. St
 
 // ── API call ───────────────────────────────────────────────────────────────
 async function callOpenRouter(prompt, attempt = 1) {
-  const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+  const res = await fetch(PROVIDER.url, {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${API_KEY}`,
+      Authorization: `Bearer ${PROVIDER.key}`,
       "Content-Type": "application/json",
-      "HTTP-Referer": "https://datalatte.pro",
-      "X-Title": "DataLatte Blog Expander",
+      ...PROVIDER.extraHeaders,
     },
     body: JSON.stringify({
-      model: MODEL,
+      model: PROVIDER.model,
       messages: [{ role: "user", content: prompt }],
       max_tokens: 10000,
       temperature: 0.7,
@@ -233,16 +270,19 @@ async function processFile(file, progress) {
 
 // ── Main ───────────────────────────────────────────────────────────────────
 async function main() {
-  if (!API_KEY && !DRY_RUN) {
-    console.error("❌ OPENROUTER_API_KEY not set");
-    console.error("   Usage: OPENROUTER_API_KEY=sk-or-... node scripts/expand-to-3500.mjs");
+  if (!PROVIDER && !DRY_RUN) {
+    console.error("❌ No API key found. Set one of:");
+    console.error("   OPENROUTER_API_KEY=sk-or-...");
+    console.error("   CEREBRAS_API_KEY=...");
+    console.error("   GROQ_API_KEY=gsk_...");
     process.exit(1);
   }
 
   const progress = loadProgress();
 
   console.log(`🚀 DataLatte Blog Expander`);
-  console.log(`   Model:       ${MODEL}`);
+  console.log(`   Provider:    ${PROVIDER?.name || "DRY RUN"}`);
+  console.log(`   Model:       ${PROVIDER?.model || "-"}`);
   console.log(`   Target:      ${TARGET_WORDS} words`);
   console.log(`   Skip above:  ${SKIP_ABOVE} words`);
   console.log(`   Concurrency: ${CONCURRENCY}`);
