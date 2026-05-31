@@ -63,39 +63,6 @@ function Photo({ src, alt, caption, priority = false }: {
   );
 }
 
-function PhotoWide({ src, alt, caption, priority = false }: {
-  src: string; alt: string; caption: string; priority?: boolean;
-}) {
-  return (
-    <div className="max-w-2xl mx-auto px-4 sm:px-6 mb-12">
-      <div className="relative w-full overflow-hidden rounded-2xl shadow-md" style={{ aspectRatio: "4/3" }}>
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          className="object-cover"
-          sizes={SIZES}
-          priority={priority}
-        />
-      </div>
-      <p className="text-sm text-gray-400 italic mt-3 text-center leading-snug">{caption}</p>
-    </div>
-  );
-}
-
-function Section({ emoji, title, children }: { emoji: string; title: string; children: React.ReactNode }) {
-  return (
-    <div className="border-t border-gray-100 pt-16 pb-4">
-      <div className="max-w-2xl mx-auto px-4 sm:px-6 mb-10">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="text-2xl">{emoji}</span>
-          <h2 className="text-2xl font-bold text-gray-900">{title}</h2>
-        </div>
-        {children}
-      </div>
-    </div>
-  );
-}
 
 function Prose({ children }: { children: React.ReactNode }) {
   return <div className="space-y-4 text-gray-600 leading-relaxed text-[17px]">{children}</div>;
@@ -152,113 +119,165 @@ export default function AboutPage() {
           <Prose>
             <p className="text-xl text-gray-800 font-medium leading-relaxed">
               The best way to understand someone is to know what they do on a Saturday morning.
-              Mine almost always involves walking to a café, ordering a flat white, and spending
-              an hour just being somewhere nice.
+              Mine almost always involves walking somewhere in Poznań, ordering a flat white,
+              and spending however long I want just being somewhere nice.
             </p>
             <p>
-              That&apos;s not a hobby — it&apos;s basically who I am. I started DataLatte because
-              I wanted to build something that felt real. A consultancy with a genuine point of view,
-              run by an actual person, not a brand voice.
-            </p>
-            <Pullquote>The coffee in the name is not a metaphor. It&apos;s a lifestyle.</Pullquote>
-          </Prose>
-        </div>
-
-        {/* ── Poznań & Coffee ── */}
-        <Section emoji="☕" title="Poznań & my coffee obsession">
-          <Prose>
-            <p>
-              I moved to Poznań and within about three weeks had mapped every café worth visiting.
-              I explore the city&apos;s spots the way other people explore museums — with intention,
-              notes, and strong opinions about what makes a good flat white.
-            </p>
-            <p>
-              There&apos;s something about sitting in a good café — the light, the noise, the ritual
-              of it — that makes me think better. I&apos;ve had some of my best ideas over a second
-              coffee I definitely didn&apos;t need.
-            </p>
-          </Prose>
-        </Section>
-
-        <PhotoWide src="/images/personal/p_IMG_1131.jpg" alt="Sunny Poznań street flanked by elegant buildings" caption="Home — Poznań, Poland. Still gets me every time." priority />
-        <PhotoWide src="/images/personal/p_IMG_1186.jpg" alt="Wanda café summer terrace in Poznań" caption="Wanda — one of my favourite Poznań spots" />
-
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 mb-10">
-          <Prose>
-            <p>
-              Coffee isn&apos;t just a drink for me — it&apos;s an excuse to sit down, slow down,
-              and be present somewhere. A café with flowers on the table and a good espresso
-              beats a rooftop bar every time.
+              I&apos;ve lived here for three years now. Long enough to have a mental map of every
+              café worth sitting in, strong opinions about which streets are worth walking slowly,
+              and a genuine feeling that this city is mine. Poznań surprised me when I arrived —
+              it&apos;s quieter than Warsaw but not in a boring way. More like a place
+              that&apos;s completely comfortable with itself.
             </p>
           </Prose>
         </div>
 
-        <PhotoWide src="/images/personal/p_IMG_1209.jpg" alt="Coffee and cheesecake at an outdoor café" caption="Coffee + cheesecake. Non-negotiable." />
-        <PhotoWide src="/images/personal/p_IMG_0378.jpg" alt="Coffee to go on a Poznań street" caption="Saturday morning, every Saturday" />
-        <PhotoWide src="/images/personal/p_IMG_1081.jpg" alt="Coffee with flowers at a café table" caption="Sometimes the view outside doesn't matter at all" />
+        <Photo src="/images/personal/p_IMG_1131.jpg" alt="Sunny Poznań street flanked by elegant buildings" caption="Home — Poznań, Poland. Still gets me every time." priority />
 
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 mb-10">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">
+          <Prose>
+            <p>
+              When I first moved here, I did what I always do in a new city: mapped every café
+              worth visiting. Not on Google Maps — in my head. An internal list of where the
+              espresso is right and where the sofa by the window is always free.
+            </p>
+            <p>
+              Wanda became a regular pretty quickly. A summer terrace, good coffee, the kind of
+              outdoor setup where you can sit for two hours and nobody looks at you like
+              you&apos;ve overstayed your welcome.
+            </p>
+          </Prose>
+        </div>
+
+        <Photo src="/images/personal/p_IMG_1186.jpg" alt="Wanda café summer terrace in Poznań" caption="Wanda — one of my favourite Poznań spots" />
+
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">
+          <Prose>
+            <p>
+              Coffee, for me, has never just been about the drink. It&apos;s the whole ritual —
+              choosing where to go, walking there, sitting with something in your hands and
+              nowhere urgent to be. I&apos;ve had some of my best ideas over a second coffee
+              I definitely didn&apos;t need. There&apos;s something about that unhurried state
+              that makes everything clearer.
+            </p>
+          </Prose>
+        </div>
+
+        <Photo src="/images/personal/p_IMG_1209.jpg" alt="Coffee and cheesecake at an outdoor café" caption="Coffee + cheesecake. Non-negotiable." />
+        <Photo src="/images/personal/p_IMG_0378.jpg" alt="Coffee to go on a Poznań street" caption="Saturday morning, every Saturday" />
+
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">
+          <Prose>
+            <p>
+              I have a weakness for takeaway cups with something written on them that makes me
+              feel vaguely understood. Saturday morning, walking nowhere in particular, coffee
+              in hand — that&apos;s honestly the whole thing.
+            </p>
+          </Prose>
+        </div>
+
+        <Photo src="/images/personal/p_IMG_1081.jpg" alt="Coffee with flowers at a café table" caption="Sometimes the view outside doesn't matter at all" />
+
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">
           <Pullquote>
-            Coffee isn&apos;t a theme for me — it&apos;s a whole orientation toward the world.
+            Coffee isn&apos;t a theme for me. It&apos;s a whole orientation toward the world.
           </Pullquote>
         </div>
 
         <Photo src="/images/personal/p_IMG_0406.jpg" alt="Meringue cake and coffee in a cosy café" caption="When the cake matches the coffee" />
-        <Photo src="/images/personal/p_IMG_1038.jpg" alt="Rainy day at Starbucks, city street outside" caption="Rainy days have their charm too" />
 
-        {/* ── Animals ── */}
-        <Section emoji="🐾" title="Animals are my people">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">
           <Prose>
             <p>
-              I&apos;m a huge animal lover. I regularly cat-sit for friends, which in practice
-              means spending my weekends being watched very intensely by a Scottish Fold who
-              has zero interest in my work calendar and absolute conviction that it&apos;s
-              always feeding time.
-            </p>
-            <p>
-              Honestly, best job I have. Animals are better at feedback than most clients —
-              brutally honest, no fluff.
+              Not every café morning is precious and curated. Some are a rainy Tuesday somewhere
+              familiar because you need somewhere warm to sit and think. That counts too. What I
+              like about coffee culture is that it has room for all of it — the craft flat white
+              and the emergency americano.
             </p>
           </Prose>
-        </Section>
+        </div>
 
-        <PhotoWide src="/images/personal/p_IMG_1221.jpg" alt="Scottish Fold cat looking up with huge golden eyes" caption="My cat-sitting companion. No, she does not care about your KPIs." />
+        <Photo src="/images/personal/p_IMG_1038.jpg" alt="Rainy day at a café, city street outside" caption="Rainy days have their charm too" />
 
-        {/* ── Croatia ── */}
-        <Section emoji="🌊" title="Croatia is my reset button">
+        {/* Cat */}
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">
           <Prose>
             <p>
-              Every year I go to Croatia and completely slow down. The Adriatic does something
-              to your nervous system that I can&apos;t explain scientifically but can report
-              anecdotally: three days there and I think more clearly than I have in months.
+              I also cat-sit for a friend pretty regularly. His name is Ragnar. He&apos;s a
+              Scottish Fold with a very flat face and the kind of calm, intense stare that
+              suggests he knows exactly what you&apos;re thinking and is mostly unimpressed by it.
             </p>
             <p>
-              I also drink a lot of coffee there — very Italian-influenced, espresso culture,
-              small cups, taken seriously. I am extremely here for it.
+              Cat-sitting is, honestly, one of my favourite things. There&apos;s a cat. The cat
+              wants food. You provide food. Then you sit on the sofa together and nobody needs
+              to talk. The best kind of company.
             </p>
           </Prose>
-        </Section>
+        </div>
 
-        <PhotoWide src="/images/personal/p_IMG_0548.jpg" alt="Crystal clear turquoise Adriatic Sea" caption="The Adriatic. That colour is real, not a filter." />
+        <Photo src="/images/personal/p_IMG_1221.jpg" alt="Scottish Fold cat looking up with huge golden eyes" caption="Ragnar. He does not care about your KPIs." />
 
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 mb-10">
+        {/* Croatia */}
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">
           <Prose>
             <p>
-              Finding a café with a sea view is basically my version of a life goal. Coffee in
-              front of me, the Adriatic ahead, sunglasses on, nothing urgent.
+              I lived in Zagreb for a while — which meant I got to know Croatia properly, not
+              just as a tourist but as a place people actually live. The coffee culture there is
+              very real: Italian-influenced, small cups, espresso taken seriously, usually
+              standing at a bar counter.
+            </p>
+            <p>
+              Every summer I go back to the coast. I&apos;ve been to Dubrovnik, Split, Šibenik,
+              Zadar — each with its own old town, its own light, its own pace. The Adriatic does
+              something to your nervous system. Three days of looking at that colour of water and
+              you start breathing differently.
+            </p>
+          </Prose>
+        </div>
+
+        <Photo src="/images/personal/p_IMG_0548.jpg" alt="Crystal clear turquoise Adriatic Sea" caption="The Adriatic. That colour is real, not a filter." />
+
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">
+          <Prose>
+            <p>
+              There&apos;s always a café with a sea view involved. Coffee in front of me, the
+              water close enough to hear, sunglasses on, nothing urgent. That&apos;s the Croatia
+              I keep going back to.
             </p>
           </Prose>
         </div>
 
         <Photo src="/images/personal/p_IMG_0674.jpg" alt="Latte macchiato with sunglasses next to the Adriatic" caption="Coffee + sea. Basically my brand." />
-        <Photo src="/images/personal/p_IMG_0541.jpg" alt="Barcaffè espresso on a Croatian café terrace" caption="Barcaffè. Italy's coffee culture, Croatia's setting." />
+        <Photo src="/images/personal/p_IMG_0541.jpg" alt="Barcaffè espresso on a Croatian café terrace" caption="Barcaffè — Italy's coffee culture, Croatia's setting." />
+
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">
+          <Prose>
+            <p>
+              Gelato in an old town is non-negotiable. The best way to see a place is on foot,
+              slowly, with something in your hand.
+            </p>
+          </Prose>
+        </div>
+
         <Photo src="/images/personal/p_IMG_0556.jpg" alt="Ice cream cone in front of a Croatian church tower" caption="Gelato in the old town. Mandatory." />
         <Photo src="/images/personal/p_IMG_0544.jpg" alt="Croatian old town street with flags stretching overhead" caption="The old towns never get old." />
-        <Photo src="/images/personal/p_IMG_0528.jpg" alt="Loquat tree heavy with yellow fruit against blue sky" caption="The trees are different there. Everything is different." />
+        <Photo src="/images/personal/p_IMG_0528.jpg" alt="Loquat tree heavy with yellow fruit against blue sky" caption="The trees are different there. Everything is." />
+
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">
+          <Prose>
+            <p>
+              I grew up further north and every summer I&apos;m slightly amazed by how different
+              the light is in Croatia, how unhurried everything feels. I once had pizza next to a
+              Roman column that was just standing there, built into a wall, completely unremarkable
+              to everyone who lived nearby. Croatia is full of things like that.
+            </p>
+          </Prose>
+        </div>
+
         <Photo src="/images/personal/p_IMG_0608.jpg" alt="Pizza beside ancient stone columns in Croatia" caption="Pizza next to a 2000-year-old wall. Regular Tuesday." />
         <Photo src="/images/personal/p_IMG_0570.jpg" alt="Stone sea wall with the Adriatic and islands beyond" caption="Where I go when I need to remember what actually matters." />
 
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 pb-4">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 pt-6 pb-10">
           <Pullquote>
             I always come back with better ideas, a clearer head, and an embarrassing number
             of photos that are basically all the same coffee cup from slightly different angles.
