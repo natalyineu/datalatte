@@ -34,7 +34,7 @@ function detectProvider() {
       key: process.env.OPENROUTER_API_KEY,
       url: "https://openrouter.ai/api/v1/chat/completions",
       model: process.env.EXPAND_MODEL || "deepseek/deepseek-chat",
-      extraHeaders: { "X-Title": "DataLatte Expander" },
+      extraHeaders: { "HTTP-Referer": "https://datalatte.pro", "X-Title": "DataLatte Expander" },
     };
   }
   if (process.env.CEREBRAS_API_KEY) {
