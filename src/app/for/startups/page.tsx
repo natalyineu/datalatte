@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Digital Marketing for Startups | User Acquisition & Growth",
   description:
     "Marketing strategy for early-stage and growth-stage startups. Rapid user acquisition, performance marketing, and data-driven growth experiments — without burning your runway.",
+  alternates: { canonical: "https://datalatte.pro/for/startups" },
 };
 
 const challenges = [

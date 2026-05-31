@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Digital Marketing for Freelancers & Consultants | Build Your Personal Brand",
   description:
     "Marketing strategy for freelancers, consultants, and independent professionals. Build your personal brand, generate consistent inbound leads, and charge premium rates.",
+  alternates: { canonical: "https://datalatte.pro/for/freelancers" },
 };
 
 const challenges = [
