@@ -111,6 +111,17 @@ export default function Footer() {
                   <path d="M21.8 3.1L2.2 10.7c-1.3.5-1.3 1.3-.2 1.6l5 1.6 1.9 5.8c.3.8.4 1.1 1.1 1.1.6 0 .9-.3 1.2-.6l2.9-2.8 5.9 4.4c1.1.6 1.9.3 2.2-.9l3.9-18.3c.4-1.6-.6-2.3-1.3-1.5z" fill="currentColor"/>
                 </svg>
               </a>
+              <a
+                href="https://medium.com/@datalatte.pro"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="DataLatte on Medium"
+                className="w-9 h-9 rounded-lg bg-coffee-900 hover:bg-coffee-700 flex items-center justify-center transition-colors"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="text-gray-300">
+                  <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
+                </svg>
+              </a>
             </div>
           </div>
 
