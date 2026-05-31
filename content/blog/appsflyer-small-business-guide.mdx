@@ -1,0 +1,135 @@
+---
+title: "AppsFlyer for Small Business: Do You Actually Need Mobile Attribution?"
+date: "2026-05-31"
+description: "AppsFlyer is the world's leading mobile attribution platform. But do local businesses with apps actually need it? Here's an honest breakdown of what AppsFlyer does, what it costs, and when it's worth it."
+author: "Nataliia"
+category: "Analytics & Tracking"
+tags: ["appsflyer", "mobile attribution", "app marketing", "small business", "mobile analytics"]
+slug: "appsflyer-small-business-guide"
+image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80&auto=format&fit=crop"
+readTime: "9 min read"
+lastModified: "2026-05-31"
+---
+
+AppsFlyer is the world's most widely used mobile attribution platform — the tool that answers the question "which ad campaign led to this app install or in-app purchase?" Used by Coca-Cola, Uber, and thousands of mid-market companies, it sits at the centre of mobile marketing infrastructure for app-driven businesses.
+
+But here's the honest question for local small businesses: **do you actually need it?**
+
+The answer depends almost entirely on one factor: whether you have a mobile app and whether that app is a meaningful revenue driver for your business.
+
+## What AppsFlyer Actually Does
+
+Mobile attribution solves a specific problem. When someone installs your app or makes an in-app purchase, that action came from somewhere — a Google App Campaign, a Meta mobile ad, an influencer's Instagram story link, an organic App Store search. Without attribution, you see the installs but not which channel generated them.
+
+AppsFlyer places a Software Development Kit (SDK) inside your app. When a user installs your app after seeing an ad, the SDK communicates with AppsFlyer's platform to record which specific campaign, ad set, and creative led to that install. You get a clean picture of cost per install and in-app conversion by channel.
+
+**What this enables:**
+- Knowing your true CAC (customer acquisition cost) per marketing channel
+- Turning off campaigns that look productive but aren't driving quality users
+- Scaling campaigns that generate high-LTV customers
+- Detecting mobile ad fraud (fake installs from bots or click farms)
+
+**What it doesn't do:**
+- Track web-only behaviour (that's Google Analytics 4's territory)
+- Help businesses without apps
+- Improve ad performance on its own — it only provides the measurement data
+
+<Callout type="tip">
+AppsFlyer tracks mobile app events. If your entire business operates through a website (no app), you don't need AppsFlyer — GA4, Segment, or similar web analytics tools are the right solution. The question "do I need AppsFlyer?" is really "do I have an app where marketing attribution matters?"
+</Callout>
+
+## When Local Businesses Need AppsFlyer
+
+Most local small businesses don't need AppsFlyer. But these scenarios do warrant it:
+
+**You have a booking or loyalty app with paid marketing.** If your fitness studio, salon, or restaurant has an app for scheduling, ordering, or loyalty points — and you're running paid campaigns to drive app installs — you need attribution to understand which campaigns generate actual users vs. fake installs.
+
+**Your app generates significant revenue.** A coffee shop with a mobile ordering app doing $50,000/month in mobile revenue should be tracking which marketing drives that app usage. Without attribution, you're optimising blind.
+
+**You're running campaigns across multiple ad platforms.** If you run Google App Campaigns, Meta Mobile App Ads, and Apple Search Ads simultaneously, you need a neutral third-party to de-duplicate installs and provide unified reporting. Each platform claims credit for installs — AppsFlyer provides the impartial view.
+
+**You suspect mobile ad fraud.** Fake installs are a real problem at scale. If your app install numbers look suspicious (high installs, low engagement), AppsFlyer's fraud protection tools can identify and filter out fraudulent activity.
+
+## AppsFlyer Pricing: What You'll Actually Pay
+
+AppsFlyer's pricing structure has changed over the years. Current structure as of 2026:
+
+**Free tier:** Up to 1,000 non-organic (paid) installs per month free. Sufficient for businesses just starting mobile marketing or with very small app campaigns.
+
+**Growth plan:** Starts around $0.05–0.07 per non-organic install above the free tier threshold. For a business generating 5,000 installs/month, that's roughly $250–350/month.
+
+**Enterprise:** Custom pricing for large volumes (100,000+ installs/month), with advanced features including cohort analysis, raw data export, and dedicated support.
+
+Additional costs:
+- **Protect360 (fraud protection):** Add-on, typically adds 10–20% to base cost
+- **Audiences:** Ad audience management features — additional cost tier
+
+<StatRow
+  values="1,000|$0.05–0.07|75%|40%"
+  labels="Free installs/month"
+  subs="Free tier threshold|Cost per additional install|Market share vs competitors|Avg. fraud detected in mobile"
+  trends="neutral|up|up|neutral"
+/>
+
+## AppsFlyer Setup: What's Involved
+
+Setting up AppsFlyer requires developer involvement. It's not a plug-and-play tool — your development team needs to integrate the SDK into your app.
+
+**Technical requirements:**
+- iOS and Android SDK integration (separate for each platform)
+- Event mapping (defining which in-app actions to track: installs, registrations, purchases, bookings)
+- Link generation (OneLink deep links for cross-channel attribution)
+- Integration with each ad platform (Google, Meta, Apple Search Ads, etc.) through AppsFlyer's partner integrations
+
+Implementation time for a simple app: 2–5 developer days. For complex apps with many custom events: 1–3 weeks.
+
+**Non-technical setup:**
+- Dashboard configuration
+- Connecting to ad platforms for cost data import
+- Setting up conversion events and goals
+- Configuring fraud detection rules
+
+<Callout type="warning">
+The most common mistake small businesses make with AppsFlyer: installing the SDK but not mapping the right conversion events. Installing the app is only one data point. You want to track in-app bookings, purchases, and meaningful actions — not just installs. Work with your developer to define and implement all relevant conversion events before launching campaigns.
+</Callout>
+
+## AppsFlyer vs the Alternatives
+
+AppsFlyer isn't the only mobile attribution solution. Alternatives to consider:
+
+**Adjust:** Direct competitor, similar capabilities, different pricing. Often cheaper for small volumes. Strong fraud protection. Good choice if AppsFlyer's pricing feels heavy for your install volume.
+
+**Branch:** Strong deep linking capabilities, popular for e-commerce apps. Good alternative if cross-channel deep linking is a priority.
+
+**Google Analytics 4 for Firebase:** Free, works for basic attribution if you're primarily running Google App Campaigns. Limited cross-platform attribution and no fraud protection. Fine for starting out.
+
+**Singular:** Enterprise-focused, strong for brands running large multi-channel campaigns. Overkill for small businesses.
+
+For most local businesses just starting with app marketing, **Firebase + GA4** is the right free starting point. Once you're scaling past $5,000/month in mobile ad spend and running on multiple platforms, AppsFlyer or Adjust becomes worth the cost.
+
+<CompareBar
+  title="AppsFlyer vs Adjust vs Firebase for Small Business"
+  metrics="Setup simplicity|Cost efficiency|Attribution accuracy|Fraud protection|Integration breadth|Free tier"
+  leftValues="60|55|90|95|90|30"
+  rightValues="65|70|85|88|80|30"
+  leftLabel="AppsFlyer"
+  rightLabel="Adjust"
+/>
+
+## Frequently Asked Questions
+
+### Does a small local business with a loyalty app need AppsFlyer?
+
+If you're not running paid ads to promote that app, probably not — GA4 for Firebase covers basic analytics. If you're spending money on Instagram or Google ads to drive app downloads, yes — you need attribution to know which campaigns generate loyal customers vs. one-time users.
+
+### Can AppsFlyer work without a developer?
+
+No — AppsFlyer requires SDK integration in your app's codebase. There's no tag-manager-style installation for mobile apps. You need either an in-house developer, a freelancer, or your app development agency to handle setup.
+
+### How long does AppsFlyer attribution data take to appear?
+
+Once the SDK is live and your campaigns are running, attribution data starts appearing in the dashboard within hours. Historical data (before SDK installation) is not available — attribution is forward-looking only.
+
+### Is AppsFlyer worth it if I only run Apple Search Ads?
+
+Apple Search Ads provides its own attribution data within its platform. For single-platform campaigns on ASA only, you may not need third-party attribution. AppsFlyer adds most value when you're running campaigns across multiple platforms and need unified de-duplicated reporting.
