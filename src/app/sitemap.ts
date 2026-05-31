@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { CITIES, NICHES, SERVICE_SEGMENT_SLUGS } from "@/lib/locationData";
+import { fetchPublishedSignals } from "@/lib/radar-signals";
 
 const baseUrl = "https://datalatte.pro";
 const contentDir = path.join(process.cwd(), "content/blog");
@@ -44,7 +45,21 @@ function getBlogRoutes(): MetadataRoute.Sitemap {
     .sort((a, b) => b.lastModified.getTime() - a.lastModified.getTime());
 }
 
-export default function sitemap(): MetadataRoute.Sitemap {
+async function getRadarRoutes(): Promise<MetadataRoute.Sitemap> {
+  try {
+    const signals = await fetchPublishedSignals();
+    return signals.map((s) => ({
+      url: `${baseUrl}/radar/${s.slug}`,
+      lastModified: new Date(s.date),
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    }));
+  } catch {
+    return [];
+  }
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const blogRoutes = getBlogRoutes();
   const latestPost = blogRoutes[0]?.lastModified ?? new Date();
   const today = new Date();
@@ -128,6 +143,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const categoryRoutes = getCategoryRoutes();
+  const radarRoutes = await getRadarRoutes();
 
   const locationRoutes: MetadataRoute.Sitemap = [];
   for (const niche of NICHES) {
@@ -154,5 +170,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
-  return [...staticRoutes, ...locationRoutes, ...nicheServiceRoutes, ...categoryRoutes, ...blogRoutes];
+  return [...staticRoutes, ...radarRoutes, ...locationRoutes, ...nicheServiceRoutes, ...categoryRoutes, ...blogRoutes];
 }
