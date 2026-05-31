@@ -29,7 +29,7 @@ export default async function RadarPage() {
               </span>
               <span className="text-red-400 font-bold uppercase tracking-widest">Live</span>
               <span className="text-gray-600">|</span>
-              <span className="text-gray-400">May 29, 2026</span>
+              <span className="text-gray-400">{new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
             </div>
             <div className="hidden sm:flex items-center gap-4 text-gray-500">
               <span>Meta</span><span>·</span>

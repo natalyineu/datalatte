@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, Lightbulb, Clock } from "lucide-react";
+import { ArrowLeft, ArrowRight, Lightbulb, Clock, ArrowUpRight } from "lucide-react";
 import {
   fetchPublishedSignals,
   fetchSignalBySlug,
@@ -21,6 +21,15 @@ const CATEGORY_BAR: Record<string, string> = {
   tiktok: "bg-pink-500",
   seo: "bg-green-500",
   ctv: "bg-cyan-500",
+};
+
+const CATEGORY_SERVICE: Record<string, { href: string; label: string }> = {
+  meta:   { href: "/services/meta-ads",            label: "Meta Ads" },
+  google: { href: "/services/google-ads",           label: "Google Ads" },
+  ai:     { href: "/services/ai-agents",            label: "AI & Automation" },
+  tiktok: { href: "/services/tiktok-ads",           label: "TikTok Ads" },
+  seo:    { href: "/services/local-seo",            label: "Local SEO" },
+  ctv:    { href: "/services/programmatic",         label: "Programmatic / CTV" },
 };
 
 const IMPACT_CONFIG: Record<string, { dot: string; label: string; badge: string }> = {
@@ -160,7 +169,7 @@ export default async function SignalPage({
         </div>
 
         {/* Insight box */}
-        <div className="bg-coffee-950/40 border border-coffee-800/40 rounded-2xl p-6 mb-10">
+        <div className="bg-coffee-950/40 border border-coffee-800/40 rounded-2xl p-6 mb-6">
           <div className="flex gap-3">
             <Lightbulb size={18} className="text-coffee-400 mt-0.5 shrink-0" />
             <div>
@@ -169,6 +178,35 @@ export default async function SignalPage({
               </div>
               <p className="text-coffee-200 leading-relaxed">{signal.insight}</p>
             </div>
+          </div>
+        </div>
+
+        {/* ── CTA — act on this signal ── */}
+        <div className="border border-gray-700 rounded-2xl p-6 mb-10 bg-gray-900/60 flex flex-col sm:flex-row sm:items-center gap-4">
+          <div className="flex-1 min-w-0">
+            <p className="text-white font-semibold text-base leading-snug mb-1">
+              Want to act on this signal?
+            </p>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              Get a free audit — Nataliia will review your current{" "}
+              {CATEGORY_SERVICE[signal.category]?.label ?? "marketing"} setup and show you exactly where the gap is.
+            </p>
+          </div>
+          <div className="flex flex-col gap-2 flex-shrink-0">
+            <Link
+              href="/free-audit"
+              className="inline-flex items-center justify-center gap-2 bg-coffee-600 hover:bg-coffee-500 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-colors whitespace-nowrap"
+            >
+              Get free audit <ArrowUpRight size={14} />
+            </Link>
+            {CATEGORY_SERVICE[signal.category] && (
+              <Link
+                href={CATEGORY_SERVICE[signal.category].href}
+                className="inline-flex items-center justify-center gap-1.5 text-xs text-gray-500 hover:text-gray-300 transition-colors"
+              >
+                Learn about {CATEGORY_SERVICE[signal.category].label} <ArrowRight size={10} />
+              </Link>
+            )}
           </div>
         </div>
 

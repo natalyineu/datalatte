@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Lightbulb, Zap } from "lucide-react";
+import { ArrowRight, Lightbulb, Zap, ArrowUpRight } from "lucide-react";
 import {
   NICHE_LABELS,
   CATEGORY_LABEL,
@@ -223,8 +223,33 @@ export default function RadarFeed({ signals }: { signals: Signal[] }) {
           </div>
         )}
 
+        {/* ── CTA banner ── */}
+        <div className="mt-12 border border-gray-800 rounded-2xl p-8 bg-gray-900/40 text-center">
+          <p className="text-xs font-bold text-coffee-400 uppercase tracking-widest mb-3">DataLatte · Local Marketing Intelligence</p>
+          <h2 className="text-2xl md:text-3xl font-black text-white mb-3 leading-snug">
+            See a signal that affects your business?
+          </h2>
+          <p className="text-gray-400 text-sm md:text-base max-w-lg mx-auto mb-6 leading-relaxed">
+            Nataliia turns these signals into action. Get a free audit of your Google Ads, Meta campaigns, or Local SEO — and find out exactly what you&apos;re missing.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link
+              href="/free-audit"
+              className="inline-flex items-center justify-center gap-2 bg-coffee-600 hover:bg-coffee-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors text-sm"
+            >
+              Get free audit <ArrowUpRight size={15} />
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center gap-2 border border-gray-700 hover:border-gray-500 text-gray-300 hover:text-white font-semibold px-6 py-3 rounded-xl transition-colors text-sm"
+            >
+              Send a brief <ArrowRight size={15} />
+            </Link>
+          </div>
+        </div>
+
         {/* Footer */}
-        <p className="text-center text-xs text-gray-700 mt-12 pb-4">
+        <p className="text-center text-xs text-gray-700 mt-8 pb-4">
           Curated daily by Nataliia · DataLatte · Sources linked on each signal
         </p>
       </div>
