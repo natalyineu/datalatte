@@ -56,7 +56,21 @@ export async function generateMetadata({
   if (city) {
     const title = `${niche.label} Marketing in ${city.city}, ${city.stateCode} | DataLatte`;
     const description = `Data-driven marketing for ${niche.labelPlural.toLowerCase()} in ${city.city}, ${city.state}. Local SEO, Google Ads, and reputation management to grow your business.`;
-    return { title, description, openGraph: { title, description } };
+    const url = `https://datalatte.pro/for/${nicheSlug}/${segment}`;
+    return {
+      title,
+      description,
+      alternates: {
+        canonical: url,
+        languages: {
+          "en-US": url, "en-GB": url, "en-AU": url, "en-CA": url, "x-default": url,
+        },
+      },
+      openGraph: {
+        title, description, url, siteName: "DataLatte", type: "website",
+        images: [{ url: "https://datalatte.pro/opengraph-image", width: 1200, height: 630, alt: `${niche.label} Marketing in ${city.city}` }],
+      },
+    };
   }
 
   const service = getServiceSegment(segment);

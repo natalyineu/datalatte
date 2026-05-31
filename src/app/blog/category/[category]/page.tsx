@@ -86,9 +86,22 @@ export async function generateMetadata({
   const allCategories = getAllCategories();
   const category = slugToCategory(slug, allCategories);
   if (!category) return {};
+  const url = `https://datalatte.pro/blog/category/${slug}`;
   return {
     title: `${category} Articles`,
     description: `Browse all DataLatte articles about ${category}. Practical tips for local business owners on ${category.toLowerCase()}.`,
+    alternates: {
+      canonical: url,
+      languages: {
+        "en-US": url, "en-GB": url, "en-AU": url, "en-CA": url, "x-default": url,
+      },
+    },
+    openGraph: {
+      title: `${category} Articles | DataLatte`,
+      description: `Browse all DataLatte articles about ${category}. Practical tips for local business owners on ${category.toLowerCase()}.`,
+      url, siteName: "DataLatte", type: "website",
+      images: [{ url: "https://datalatte.pro/opengraph-image", width: 1200, height: 630 }],
+    },
   };
 }
 
