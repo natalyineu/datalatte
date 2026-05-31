@@ -17,6 +17,7 @@ export const metadata: Metadata = {
       "en-CA": "https://datalatte.pro/radar",
       "x-default": "https://datalatte.pro/radar",
     },
+    types: { "application/rss+xml": "https://datalatte.pro/radar/feed.xml" },
   },
   openGraph: {
     title: "Value Radar — Daily Marketing Intelligence for Local Businesses",
