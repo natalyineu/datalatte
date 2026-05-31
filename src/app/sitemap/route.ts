@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import sitemap from "@/app/sitemap";
 
 export async function GET(request: Request) {
-  const sitemapData: MetadataRoute.Sitemap = sitemap();
+  const sitemapData: MetadataRoute.Sitemap = await sitemap();
   
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
