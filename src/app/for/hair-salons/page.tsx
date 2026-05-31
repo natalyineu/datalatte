@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
   title: "Hair Salon & Beauty Marketing | Get More Bookings with Local SEO & Ads",
   description:
-    "Marketing for hair salons, barbershops, and beauty studios. More online bookings, higher Google Maps visibility, and Instagram ads that actually convert.",
+    "Get more salon bookings with targeted Google & Meta Ads. Local SEO + Google Maps optimization for hair salons & barbershops. See results in 30 days — free audit.",
   openGraph: {
     title: "Hair Salon & Beauty Marketing | DataLatte",
     description:

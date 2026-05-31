@@ -5,9 +5,9 @@ import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
 
 export const metadata: Metadata = {
-  title: "Enterprise Digital Marketing & Agency White-Label Services",
+  title: "Enterprise Marketing Consultant | White-Label Agency Services",
   description:
-    "Enterprise-grade digital marketing strategy, programmatic advertising, and white-label agency services. OMD, Dentsu, BBDO and GroupM background. US, UK and EU markets.",
+    "Senior digital marketing strategy from OMD, Dentsu, BBDO & GroupM. Enterprise campaigns, programmatic media & white-label services for agencies. Free consultation.",
   alternates: { canonical: "https://datalatte.pro/for/enterprise" },
 };
 
