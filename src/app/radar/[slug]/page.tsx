@@ -59,9 +59,24 @@ export async function generateMetadata({
   const { slug } = await params;
   const signal = await fetchSignalBySlug(slug);
   if (!signal) return {};
+  const url = `https://datalatte.pro/radar/${slug}`;
   return {
     title: signal.headline,
     description: signal.summary,
+    alternates: { canonical: url },
+    openGraph: {
+      title: signal.headline,
+      description: signal.summary,
+      url,
+      type: "article",
+      publishedTime: signal.date,
+      siteName: "DataLatte",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: signal.headline,
+      description: signal.summary,
+    },
   };
 }
 
