@@ -41,7 +41,7 @@ const RSS_SOURCES = [
   { url: "https://www.nexttv.com/rss",                        name: "Next TV",                siteUrl: "https://www.nexttv.com" },
 ];
 
-const MAX_AGE_HOURS  = 48;  // only articles from last 48h
+const MAX_AGE_HOURS  = 26;  // only articles from last 26h (daily cron — small overlap buffer)
 const MAX_PER_SOURCE = 5;   // max articles per source to consider
 const BATCH_SIZE     = 10;  // articles per AI call (batching to stay under RPM)
 
