@@ -8,7 +8,7 @@ import CTABanner from "@/components/CTABanner";
 import { faqSchema, breadcrumbSchema } from "@/lib/schema";
 import {
   CITIES, NICHES, NICHE_DATA, SERVICE_SEGMENTS, SERVICE_SEGMENT_SLUGS,
-  type NicheSlug,
+  cityCurrency, type NicheSlug,
 } from "@/lib/locationData";
 
 export const revalidate = 86400;
@@ -109,7 +109,7 @@ function LocationNichePage({ niche: nicheData, city }: {
   niche: ReturnType<typeof getNiche> & object;
   city: NonNullable<ReturnType<typeof getCity>>;
 }) {
-  const faqItems = nicheData!.faq(city.city, city.state);
+  const faqItems = nicheData!.faq(city.city, city.state, cityCurrency(city));
   const breadcrumb = breadcrumbSchema([
     { name: "Home", url: "https://datalatte.pro" },
     { name: `${nicheData!.labelPlural} Marketing`, url: `https://datalatte.pro/for/${nicheData!.slug}` },
