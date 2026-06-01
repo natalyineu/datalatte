@@ -3,6 +3,17 @@ export interface City {
   state: string;
   stateCode: string;
   slug: string; // e.g. "austin-tx"
+  country?: "US" | "GB" | "CA" | "AU"; // defaults to "US"
+}
+
+/** Returns the currency symbol for a city */
+export function cityCurrency(city: City): string {
+  switch (city.country) {
+    case "GB": return "£";
+    case "CA": return "CA$";
+    case "AU": return "AU$";
+    default:   return "$";
+  }
 }
 
 export const CITIES: City[] = [
@@ -56,6 +67,24 @@ export const CITIES: City[] = [
   { city: "Chattanooga", state: "Tennessee", stateCode: "TN", slug: "chattanooga-tn" },
   { city: "Spokane", state: "Washington", stateCode: "WA", slug: "spokane-wa" },
   { city: "Anchorage", state: "Alaska", stateCode: "AK", slug: "anchorage-ak" },
+  // United Kingdom
+  { city: "London", state: "England", stateCode: "UK", slug: "london-england", country: "GB" },
+  { city: "Manchester", state: "England", stateCode: "UK", slug: "manchester-england", country: "GB" },
+  { city: "Birmingham", state: "England", stateCode: "UK", slug: "birmingham-england", country: "GB" },
+  { city: "Edinburgh", state: "Scotland", stateCode: "UK", slug: "edinburgh-scotland", country: "GB" },
+  { city: "Bristol", state: "England", stateCode: "UK", slug: "bristol-england", country: "GB" },
+  // Canada
+  { city: "Toronto", state: "Ontario", stateCode: "ON", slug: "toronto-on", country: "CA" },
+  { city: "Vancouver", state: "British Columbia", stateCode: "BC", slug: "vancouver-bc", country: "CA" },
+  { city: "Calgary", state: "Alberta", stateCode: "AB", slug: "calgary-ab", country: "CA" },
+  { city: "Montreal", state: "Quebec", stateCode: "QC", slug: "montreal-qc", country: "CA" },
+  { city: "Ottawa", state: "Ontario", stateCode: "ON", slug: "ottawa-on", country: "CA" },
+  // Australia
+  { city: "Sydney", state: "New South Wales", stateCode: "NSW", slug: "sydney-nsw", country: "AU" },
+  { city: "Melbourne", state: "Victoria", stateCode: "VIC", slug: "melbourne-vic", country: "AU" },
+  { city: "Brisbane", state: "Queensland", stateCode: "QLD", slug: "brisbane-qld", country: "AU" },
+  { city: "Perth", state: "Western Australia", stateCode: "WA", slug: "perth-wa", country: "AU" },
+  { city: "Adelaide", state: "South Australia", stateCode: "SA", slug: "adelaide-sa", country: "AU" },
 ];
 
 export const NICHES = ["coffee-shops", "hair-salons", "pet-groomers", "fitness-studios"] as const;
@@ -72,7 +101,7 @@ export interface NicheInfo {
   tagline: (city: string) => string;
   intro: (city: string, state: string) => string;
   services: string[];
-  faq: (city: string, state: string) => { q: string; a: string }[];
+  faq: (city: string, state: string, currency?: string) => { q: string; a: string }[];
 }
 
 export const NICHE_DATA: Record<NicheSlug, NicheInfo> = {
@@ -95,14 +124,14 @@ export const NICHE_DATA: Record<NicheSlug, NicheInfo> = {
       "Review generation strategy to build social proof",
       "Analytics to track calls, directions, and ad conversions",
     ],
-    faq: (city, state) => [
+    faq: (city, state, currency = "$") => [
       {
         q: `How long until my coffee shop ranks in Google Maps in ${city}?`,
         a: `Most ${city} coffee shops see GBP improvements within 4–8 weeks of optimization. Ranking in the local map pack for competitive terms like "coffee shop near me" typically takes 2–4 months of consistent work.`,
       },
       {
         q: `What's a realistic Google Ads budget for a coffee shop in ${city}?`,
-        a: `For most ${city} neighborhoods, $300–$700/month in Google Ads is enough to drive meaningful foot traffic if well-targeted. The exact amount depends on your location's competitiveness and your goals.`,
+        a: `For most ${city} neighbourhoods, ${currency}300–${currency}700/month in Google Ads is enough to drive meaningful foot traffic if well-targeted. The exact amount depends on your location's competitiveness and your goals.`,
       },
       {
         q: `Do I need a website or just a Google Business Profile?`,
@@ -134,7 +163,7 @@ export const NICHE_DATA: Record<NicheSlug, NicheInfo> = {
       "Review strategy to grow your star rating and review count",
       "Analytics tracking calls, bookings, and ad performance",
     ],
-    faq: (city, state) => [
+    faq: (city, state, currency = "$") => [
       {
         q: `How do I get my hair salon to the top of Google in ${city}?`,
         a: `The map pack (top 3 results) is driven by GBP completeness, review quantity/quality, and proximity. We optimize all three. Organic rankings take 3–6 months; GBP improvements are often visible in 4–8 weeks.`,
@@ -145,7 +174,7 @@ export const NICHE_DATA: Record<NicheSlug, NicheInfo> = {
       },
       {
         q: `What's the ROI on Google Ads for a salon?`,
-        a: `With an average client value of $60–$150+ and a CPC of $2–$6 for local hair searches, a well-managed campaign typically returns 4–8× ad spend for established salons.`,
+        a: `With an average client value of ${currency}60–${currency}150+ and a CPC of ${currency}2–${currency}6 for local hair searches, a well-managed campaign typically returns 4–8× ad spend for established salons.`,
       },
       {
         q: `Can you help me get more Google reviews for my salon in ${city}?`,
@@ -173,14 +202,14 @@ export const NICHE_DATA: Record<NicheSlug, NicheInfo> = {
       "Review generation to build trust with new pet owners",
       "Analytics to measure bookings and track which channels drive appointments",
     ],
-    faq: (city, state) => [
+    faq: (city, state, currency = "$") => [
       {
         q: `How do pet groomers get more clients in ${city}?`,
         a: `The most effective channels are Google Business Profile (ranking in 'dog groomer near me' searches), Google Ads, and word-of-mouth amplified by consistent five-star reviews. We focus on all three.`,
       },
       {
         q: `What does it cost to advertise a pet grooming business in ${city}?`,
-        a: `Most ${city} pet groomers see solid results with $200–$500/month in Google Ads combined with local SEO work. The key is tight geographic targeting and bidding on high-intent keywords.`,
+        a: `Most ${city} pet groomers see solid results with ${currency}200–${currency}500/month in Google Ads combined with local SEO work. The key is tight geographic targeting and bidding on high-intent keywords.`,
       },
       {
         q: `How long does local SEO take for a pet groomer?`,
@@ -212,7 +241,7 @@ export const NICHE_DATA: Record<NicheSlug, NicheInfo> = {
       "Email and SMS campaigns to re-engage lapsed members",
       "Analytics to track trial sign-ups, membership conversions, and retention rates",
     ],
-    faq: (city, state) => [
+    faq: (city, state, currency = "$") => [
       {
         q: `What's the best marketing channel for a fitness studio in ${city}?`,
         a: `It depends on your niche. Google Ads captures people actively searching for gyms; Meta Ads are better for building brand awareness and retargeting trial visitors. Most studios need both working together.`,
@@ -223,7 +252,7 @@ export const NICHE_DATA: Record<NicheSlug, NicheInfo> = {
       },
       {
         q: `How much should a fitness studio in ${city} spend on ads?`,
-        a: `$500–$1,500/month is a common starting range for ${city} studios, depending on competition and whether you're running Google, Meta, or both. We'll recommend a budget based on your goals and market.`,
+        a: `${currency}500–${currency}1,500/month is a common starting range for ${city} studios, depending on competition and whether you're running Google, Meta, or both. We'll recommend a budget based on your goals and market.`,
       },
       {
         q: `How do I get more Google reviews for my gym?`,
