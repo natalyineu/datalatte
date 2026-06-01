@@ -2,7 +2,8 @@ import { fetchPublishedSignals } from "@/lib/radar-signals";
 
 const BASE = "https://datalatte.pro";
 
-export const revalidate = 21600; // 6 hours
+export const dynamic = "force-dynamic";
+export const revalidate = 21600;
 
 export async function GET() {
   const signals = await fetchPublishedSignals();

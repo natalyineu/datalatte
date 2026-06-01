@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import RadarFeed from "@/components/RadarFeed";
 import { fetchPublishedSignals } from "@/lib/radar-signals";
 
-export const revalidate = 21600; // 6 hours
+export const dynamic = "force-dynamic";
+export const revalidate = 21600;
 
 export const metadata: Metadata = {
   title: "Value Radar — Daily Marketing Intelligence for Local Businesses",
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
 };
 
 export default async function RadarPage() {
-  const signals = await fetchPublishedSignals();
+  const signals = await fetchPublishedSignals().catch(() => []);
   const tickerItems = [...signals, ...signals]; // duplicate for seamless loop
 
   return (

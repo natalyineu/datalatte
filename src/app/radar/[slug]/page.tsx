@@ -56,8 +56,12 @@ const IMPACT_CONFIG: Record<string, { dot: string; label: string; badge: string 
 };
 
 export async function generateStaticParams() {
-  const signals = await fetchPublishedSignals();
-  return signals.map((s) => ({ slug: s.slug }));
+  try {
+    const signals = await fetchPublishedSignals();
+    return signals.map((s) => ({ slug: s.slug }));
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({

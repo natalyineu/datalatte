@@ -1,6 +1,17 @@
-import { createClient } from "@supabase/supabase-js";
+import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
-const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let _client: SupabaseClient<any> | null = null;
 
-export const supabase = createClient(url, key);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const supabase = new Proxy({} as SupabaseClient<any>, {
+  get(_target, prop) {
+    if (!_client) {
+      const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+      const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+      if (!url || !key) throw new Error("Supabase env vars not set");
+      _client = createClient(url, key);
+    }
+    return (_client as unknown as Record<string | symbol, unknown>)[prop];
+  },
+});
