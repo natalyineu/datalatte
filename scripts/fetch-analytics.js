@@ -1,14 +1,12 @@
 #!/usr/bin/env node
 /**
  * Fetches last-28-day data from Google Search Console and GA4.
- * Both use the same OAuth2 refresh token — no service account needed.
+ * Uses a Google service account for both — no expiring OAuth tokens.
  *
- * Required secrets (all 3 already set from GSC setup):
- *   GSC_OAUTH_CLIENT_ID
- *   GSC_OAUTH_CLIENT_SECRET
- *   GSC_OAUTH_REFRESH_TOKEN   — includes both webmasters + analytics scopes
- *   GSC_SITE_URL              — e.g. "sc-domain:datalatte.pro"
- *   GA4_PROPERTY_ID           — e.g. "properties/123456789"
+ * Required secrets:
+ *   GOOGLE_SERVICE_ACCOUNT_JSON  — full service account key JSON (as string)
+ *   GSC_SITE_URL                 — e.g. "sc-domain:datalatte.pro"
+ *   GA4_PROPERTY_ID              — e.g. "properties/123456789"
  */
 
 const { google } = require("googleapis");
@@ -18,15 +16,16 @@ const path = require("path");
 const OUT_DIR = path.join(__dirname, "../data/analytics");
 
 function getAuth() {
-  const clientId     = process.env.GSC_OAUTH_CLIENT_ID;
-  const clientSecret = process.env.GSC_OAUTH_CLIENT_SECRET;
-  const refreshToken = process.env.GSC_OAUTH_REFRESH_TOKEN;
-  if (!clientId || !clientSecret || !refreshToken) {
-    throw new Error("GSC_OAUTH_CLIENT_ID / CLIENT_SECRET / REFRESH_TOKEN not set");
-  }
-  const oauth2 = new google.auth.OAuth2(clientId, clientSecret);
-  oauth2.setCredentials({ refresh_token: refreshToken });
-  return oauth2;
+  const raw = process.env.GOOGLE_SERVICE_ACCOUNT_JSON;
+  if (!raw) throw new Error("GOOGLE_SERVICE_ACCOUNT_JSON not set");
+  const key = JSON.parse(raw);
+  return new google.auth.GoogleAuth({
+    credentials: key,
+    scopes: [
+      "https://www.googleapis.com/auth/webmasters.readonly",
+      "https://www.googleapis.com/auth/analytics.readonly",
+    ],
+  });
 }
 
 function dateStr(offsetDays) {
