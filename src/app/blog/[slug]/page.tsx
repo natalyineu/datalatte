@@ -307,7 +307,21 @@ function extractFaqItems(content: string): { q: string; a: string }[] {
 }
 
 export async function generateStaticParams() {
-  return getPostSlugs().map((slug) => ({ slug }));
+  // Pre-build only the 50 most recently modified posts at deploy time.
+  // All other slugs are generated on first request (dynamicParams = true)
+  // and then cached for 24h (revalidate = 86400). This keeps builds fast.
+  const slugs = getPostSlugs();
+  const withMtime = slugs.map((slug) => {
+    const filePath = path.join(
+      process.cwd(),
+      "content/blog",
+      `${slug}.mdx`
+    );
+    const mtime = fs.statSync(filePath).mtimeMs;
+    return { slug, mtime };
+  });
+  withMtime.sort((a, b) => b.mtime - a.mtime);
+  return withMtime.slice(0, 50).map(({ slug }) => ({ slug }));
 }
 
 function truncateSeoTitle(title: string, max = 55): string {
