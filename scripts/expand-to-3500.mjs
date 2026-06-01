@@ -23,8 +23,20 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const CONTENT_DIR = path.join(__dirname, "../content/blog");
-const PROGRESS_FILE = path.join(__dirname, "../content/expand-progress.json");
+const ROOT = path.join(__dirname, "..");
+const CONTENT_DIR = path.join(ROOT, "content/blog");
+const PROGRESS_FILE = path.join(__dirname, ".expand-progress.json");
+
+// ── Load .env.local ─────────────────────────────────────────────────────────
+function loadEnv() {
+  const envPath = path.join(ROOT, ".env.local");
+  if (!fs.existsSync(envPath)) return;
+  for (const line of fs.readFileSync(envPath, "utf8").split("\n")) {
+    const m = line.match(/^([A-Z0-9_]+)=(.*)$/);
+    if (m && !process.env[m[1]]) process.env[m[1]] = m[2].replace(/^["']|["']$/g, "");
+  }
+}
+loadEnv();
 
 // ── Provider detection ──────────────────────────────────────────────────────
 function detectProvider() {
@@ -33,7 +45,7 @@ function detectProvider() {
       name: "OpenRouter",
       key: process.env.OPENROUTER_API_KEY,
       url: "https://openrouter.ai/api/v1/chat/completions",
-      model: process.env.EXPAND_MODEL || "deepseek/deepseek-chat",
+      model: process.env.EXPAND_MODEL || "deepseek/deepseek-v4-flash",
       extraHeaders: { "HTTP-Referer": "https://datalatte.pro", "X-Title": "DataLatte Expander" },
     };
   }
@@ -44,6 +56,16 @@ function detectProvider() {
       url: "https://api.cerebras.ai/v1/chat/completions",
       model: process.env.EXPAND_MODEL || "llama-3.3-70b",
       extraHeaders: {},
+    };
+  }
+  // qwen3-235b as secondary via OpenRouter (cheaper fallback)
+  if (process.env.OPENROUTER_API_KEY && process.env.USE_QWEN) {
+    return {
+      name: "OpenRouter/Qwen",
+      key: process.env.OPENROUTER_API_KEY,
+      url: "https://openrouter.ai/api/v1/chat/completions",
+      model: "qwen/qwen3-235b-a22b-2507",
+      extraHeaders: { "HTTP-Referer": "https://datalatte.pro", "X-Title": "DataLatte Expander" },
     };
   }
   if (process.env.GROQ_API_KEY) {
@@ -140,31 +162,25 @@ Category: ${fm.category || ""}
 Description: ${fm.description || ""}
 Target audience: Small business owners in US, UK, Canada, Australia (coffee shops, hair salons, pet groomers, fitness studios)
 
-Current article (${currentWords} words):
-${body}
+Current article opening (${currentWords} words total — do NOT repeat this content):
+${body.slice(0, 1500)}${body.length > 1500 ? "\n\n...[rest of article continues for " + (currentWords - body.slice(0,1500).split(/\s+/).length) + " more words]" : ""}
 
 ## YOUR TASK
 
-Rewrite and expand this article to exactly ${TARGET_WORDS}–${TARGET_WORDS + 300} words total.
+Write ${Math.max(TARGET_WORDS - currentWords, 1200)}+ words of NEW sections to APPEND at the end of this article. Do NOT repeat or summarize existing content.
 
-Structure requirements:
-1. Keep the original intro paragraph(s) — you may polish the wording slightly
-2. Keep all existing MDX components exactly as they are (do not modify props or add new component types)
-3. Add 5–7 new substantive H2 sections. Each section should be 400–500 words with:
-   - A specific, non-obvious insight (not "make sure you use keywords")
-   - A real-world scenario or example with numbers
-   - 1–2 actionable steps the reader can do this week
-4. Add a "## Common Mistakes (And What to Do Instead)" section — 3 mistakes, each with a short story of what happens when you make it
-5. Add a "## Frequently Asked Questions" section with 5–6 real questions a skeptical business owner would ask, with direct answers (no fluff)
-6. End with a CTA paragraph that sounds like Nataliia: personal, direct, no hype
+Required new sections:
+1. **## Common Mistakes (And What to Do Instead)** — 3–4 mistakes. Each must have: a real story from a US small business (name the city, describe what went wrong, give the fix, show the outcome with $ numbers or % change)
+2. **2–3 more H2 sections** relevant to the article topic — each 300–500 words with specific US examples, dollar amounts, real tools (Google Ads, Yelp, Square, Mailchimp, Booksy, etc.)
+3. **## Frequently Asked Questions** — 5–6 real questions a skeptical US business owner would actually ask. Direct answers, no fluff. Format: **Q: question?** then answer paragraph.
+4. **Closing paragraph** (no heading) — Nataliia's voice: personal, direct, a specific observation from her agency experience, ends with [Book a free consultation](/contact)
 
-MDX component rules (CRITICAL):
-- ONLY use these components if they already appear in the original: <Callout>, <StatRow>, <BarChart>, <Funnel>, <DonutChart>, <LineChart>, <CompareBar>, <StepPlan>
-- Do NOT add new component instances
-- Write FAQ as plain markdown (## Frequently Asked Questions, then **Q:** bold question, then answer paragraph)
-- All other content is standard markdown (##, ###, **bold**, *italic*, bullet lists, numbered lists)
-
-Output ONLY the article body — no frontmatter, no code fences, no preamble. Start directly with the first heading or paragraph.`;
+Rules:
+- US cities (Austin TX, Nashville, Portland OR, Chicago, Denver, NYC, etc.)
+- Real dollar amounts ($500/mo, $1,200 wasted, $3,800 revenue gained)
+- Plain markdown only — no frontmatter, no code fences, no custom MDX components
+- Do NOT use: "in today's digital landscape", "let's dive in", "game-changer", "leverage", "synergy"
+- Start immediately with the first ## heading — no preamble`;
 }
 
 // ── API call ───────────────────────────────────────────────────────────────
@@ -254,11 +270,13 @@ async function processFile(file, progress) {
       `readTime: '${estimateReadTime(newWords)}'`
     );
 
-    fs.writeFileSync(filePath, `---\n${updatedFm}\n---\n\n${expanded}\n`);
+    // APPEND new sections to existing content (don't replace)
+    const totalWords = currentWords + newWords;
+    fs.writeFileSync(filePath, `---\n${updatedFm}\n---\n\n${body}\n\n${expanded}\n`);
     progress.done.push(slug);
     saveProgress(progress);
 
-    console.log(`   ✅ ${tag} ${currentWords}w → ${newWords}w`);
+    console.log(`   ✅ ${tag} ${currentWords}w + ${newWords}w = ${totalWords}w total`);
     return "done";
   } catch (err) {
     console.error(`   ❌ ${tag} failed: ${err.message}`);
