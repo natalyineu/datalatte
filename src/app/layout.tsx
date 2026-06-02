@@ -72,6 +72,8 @@ export const metadata: Metadata = {
   // ── Twitter / X ───────────────────────────────────────────────────────────
   twitter: {
     card: "summary_large_image",
+    site: "@datalattepro",
+    creator: "@datalattepro",
     title: "DataLatte — Data-Driven Local Marketing",
     description:
       "Brew up better business with data-driven marketing for local SMBs.",
