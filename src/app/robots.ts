@@ -56,6 +56,10 @@ const AI_CRAWLERS = [
   "ChatGLM-Spider",
   // iAsk (Chinese AI search)
   "iAskBot", "iaskspider", "iaskspider/2.0",
+  // Common Crawl
+  "CCBot",
+  // Meta / Facebook link previews
+  "facebookexternalhit",
   // Standard search
   "Googlebot", "Bingbot",
 ];
