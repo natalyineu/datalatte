@@ -1,6 +1,9 @@
+export const dynamic = "force-dynamic";
+
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { fetchPublishedSignals } from "@/lib/radar-signals";
 
 const BASE = "https://datalatte.pro";
 const contentDir = path.join(process.cwd(), "content/blog");
@@ -70,6 +73,17 @@ const TOOL_PAGES = [
   { slug: "ai-agent-builder",            label: "AI Agent Builder — automate customer interactions" },
 ];
 
+function getBlogCategories(): string[] {
+  const cats = new Set<string>();
+  fs.readdirSync(contentDir)
+    .filter((f) => f.endsWith(".mdx"))
+    .forEach((f) => {
+      const { data } = matter(fs.readFileSync(path.join(contentDir, f), "utf8"));
+      if (data.category) cats.add(String(data.category));
+    });
+  return [...cats].sort();
+}
+
 function getTopBlogPosts(limit = 100): { slug: string; title: string }[] {
   const files = fs.readdirSync(contentDir).filter((f) => f.endsWith(".mdx"));
   const posts: { slug: string; title: string; mtime: number }[] = [];
@@ -93,6 +107,22 @@ function getTopBlogPosts(limit = 100): { slug: string; title: string }[] {
 
 export async function GET() {
   const topPosts = getTopBlogPosts(100);
+  const categories = getBlogCategories();
+
+  let radarLines: string[] = [];
+  try {
+    const signals = await fetchPublishedSignals();
+    if (signals.length > 0) {
+      radarLines = [
+        `## Marketing Radar — Recent Insights`,
+        ``,
+        ...signals.slice(0, 20).map((s) => `- [${s.headline ?? s.slug}](${BASE}/radar/${s.slug})`),
+        ``,
+      ];
+    }
+  } catch {
+    // Radar unavailable — skip section
+  }
 
   const lines: string[] = [
     `# DataLatte — Data-Driven Local Marketing for Small Businesses`,
@@ -108,8 +138,13 @@ export async function GET() {
     `- [Free marketing checklists](${BASE}/checklists): Step-by-step checklists for Google Ads, SEO, Meta Ads, and more`,
     `- [Marketing Radar](${BASE}/radar): Weekly local marketing insights and trends`,
     `- [Contact / Free Audit](${BASE}/contact): Get a free marketing audit`,
-    `- [Free Audit page](${BASE}/free-audit): Request a free local marketing audit`,
+    `- [Free Audit](${BASE}/free-audit): Request a free local marketing audit`,
     `- [Pricing](${BASE}/pricing): Service pricing and packages`,
+    `- [Case Studies](${BASE}/case-studies): Real results from local business marketing campaigns`,
+    `- [Results](${BASE}/results): Performance benchmarks and client outcomes`,
+    `- [Resources](${BASE}/resources): Free marketing resources for small businesses`,
+    `- [Reporting](${BASE}/reporting): Marketing analytics and reporting services`,
+    `- [Freelance vs Agency](${BASE}/compare/freelance-vs-agency): Compare hiring a freelancer vs a marketing agency`,
     ``,
     `## Services`,
     ``,
@@ -127,6 +162,14 @@ export async function GET() {
     ``,
     ...CHECKLIST_PAGES.map(({ slug, label }) => `- [${label}](${BASE}/checklists/${slug})`),
     ``,
+    `## Blog Categories`,
+    ``,
+    ...categories.map((cat) => {
+      const slug = cat.toLowerCase().replace(/\s*&\s*/g, "-").replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+      return `- [${cat}](${BASE}/blog/category/${slug})`;
+    }),
+    ``,
+    ...radarLines,
     `## Blog — 100 Most Recent Articles`,
     ``,
     ...topPosts.map(({ slug, title }) => `- [${title}](${BASE}/blog/${slug})`),
