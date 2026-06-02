@@ -72,6 +72,9 @@ export default function robots(): MetadataRoute.Robots {
       // Explicit allow for every known AI crawler — belt-and-suspenders
       ...AI_CRAWLERS.map((ua) => ({ userAgent: ua, allow: "/", disallow: ["/admin", "/api/"] as string[] })),
     ],
-    sitemap: "https://datalatte.pro/sitemap.xml",
+    sitemap: [
+      "https://datalatte.pro/sitemap.xml",
+      "https://datalatte.pro/llms.txt",
+    ],
   };
 }
