@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import ClientWidgets from "@/components/ClientWidgets";
 import { localBusinessSchema, websiteSchema } from "@/lib/schema";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const BASE = "https://datalatte.pro";
 
@@ -117,6 +118,7 @@ export default function RootLayout({
         <Footer />
         <ClientWidgets />
         <Analytics />
+        <SpeedInsights />
         {/* Google Analytics 4 */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-M4L8HJGRCH"

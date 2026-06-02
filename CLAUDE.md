@@ -1,5 +1,7 @@
 # DataLatte.pro — Project Memory for Claude
 
+> **Task board**: [`TASKS.md`](TASKS.md) — обновляй при начале и конце каждой задачи.
+
 ## 🌐 Project Overview
 - **Website**: https://www.datalatte.pro/
 - **Brand**: DataLatte — "Data-Driven Local Marketing for Small Businesses"
