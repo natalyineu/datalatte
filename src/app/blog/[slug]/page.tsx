@@ -567,6 +567,7 @@ export default async function BlogPostPage({
           fill
           className="object-cover"
           priority
+          unoptimized={(imageCache[slug] ?? frontmatter.image)?.startsWith("http")}
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
@@ -709,6 +710,7 @@ export default async function BlogPostPage({
                       src={rp.image}
                       alt={rp.title}
                       fill
+                      unoptimized={rp.image?.startsWith("http")}
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
