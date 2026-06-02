@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint src",
-    "generate-index": "node scripts/generate-blog-index.mjs"
+    "generate-index": "node scripts/generate-blog-index.mjs",
+    "ping-indexing": "node scripts/ping-indexing.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.106.2",
