@@ -190,6 +190,16 @@ export function articleSchema({
       name: "Nataliia Makota",
       url: `${BASE}/about`,
     },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": url,
+    },
+    isPartOf: {
+      "@type": "Blog",
+      "@id": `${BASE}/blog#blog`,
+      name: "DataLatte Blog",
+      url: `${BASE}/blog`,
+    },
     publisher: {
       "@type": "Organization",
       "@id": `${BASE}/#business`,
@@ -198,7 +208,5 @@ export function articleSchema({
       logo: { "@type": "ImageObject", url: `${BASE}/opengraph-image` },
     },
     image: image ? (image.startsWith("http") ? image : `${BASE}${image}`) : `${BASE}/opengraph-image`,
-    isPartOf: { "@id": `${BASE}/#website` },
-    mainEntityOfPage: { "@type": "WebPage", "@id": url },
   };
 }

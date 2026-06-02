@@ -131,6 +131,24 @@ function getServiceLink(category: string): { label: string; href: string } | nul
   return { label: "Local Marketing Services", href: "/services/local-seo" };
 }
 
+/** Returns a niche page link based on post tags or title keywords. */
+function getNicheLink(tags: string[], title: string): { label: string; href: string; emoji: string } | null {
+  const haystack = [...tags, title].join(' ').toLowerCase();
+  if (haystack.includes('coffee shop') || haystack.includes('café') || haystack.includes('cafe') || haystack.includes('barista')) {
+    return { label: 'Coffee Shop Marketing Guide', href: '/for/coffee-shops', emoji: '☕' };
+  }
+  if (haystack.includes('hair salon') || haystack.includes('barbershop') || haystack.includes('barber') || haystack.includes('beauty salon') || haystack.includes('spa')) {
+    return { label: 'Hair & Salon Marketing Guide', href: '/for/hair-salons', emoji: '✂️' };
+  }
+  if (haystack.includes('pet groom') || haystack.includes('dog groom') || haystack.includes('pet groomer')) {
+    return { label: 'Pet Groomer Marketing Guide', href: '/for/pet-groomers', emoji: '🐾' };
+  }
+  if (haystack.includes('fitness studio') || haystack.includes('yoga studio') || haystack.includes('gym') || haystack.includes('personal trainer')) {
+    return { label: 'Fitness Studio Marketing Guide', href: '/for/fitness-studios', emoji: '🏋️' };
+  }
+  return null;
+}
+
 function getPostSlugs(): string[] {
   return fs
     .readdirSync(contentDir)
@@ -475,7 +493,7 @@ export default async function BlogPostPage({
   if (!post) notFound();
 
   const { frontmatter, content } = post;
-  const relatedPosts = getRelatedPosts(slug, frontmatter.category);
+  const relatedPosts = getRelatedPosts(slug, frontmatter.category, 4);
   const { prev: prevPost, next: nextPost } = getAdjacentPosts(slug);
 
   // Word count and reading time for schema
@@ -603,9 +621,13 @@ export default async function BlogPostPage({
         {frontmatter.tags && frontmatter.tags.length > 0 && (
           <div className="mt-8 flex flex-wrap gap-2">
             {frontmatter.tags.map((tag) => (
-              <span key={tag} className="text-xs bg-coffee-50 text-coffee-700 px-3 py-1 rounded-full font-medium">
+              <Link
+                key={tag}
+                href={`/blog?q=${encodeURIComponent(tag)}`}
+                className="text-xs bg-coffee-50 text-coffee-700 px-3 py-1 rounded-full font-medium hover:bg-coffee-100 hover:text-coffee-900 transition-colors"
+              >
                 {tag}
-              </span>
+              </Link>
             ))}
           </div>
         )}
@@ -627,6 +649,25 @@ export default async function BlogPostPage({
                 className="flex-shrink-0 inline-flex items-center gap-1.5 text-sm font-bold text-coffee-800 hover:text-coffee-950 hover:underline"
               >
                 Learn more <ArrowRight size={14} />
+              </Link>
+            </div>
+          ) : null;
+        })()}
+
+        {/* Niche page link */}
+        {(() => {
+          const niche = getNicheLink(frontmatter.tags ?? [], frontmatter.title);
+          return niche ? (
+            <div className="mt-4 p-5 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-between gap-4">
+              <div>
+                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">{niche.emoji} Industry Guide</p>
+                <p className="text-sm text-gray-700 font-medium">{niche.label}</p>
+              </div>
+              <Link
+                href={niche.href}
+                className="flex-shrink-0 inline-flex items-center gap-1.5 text-sm font-bold text-coffee-800 hover:text-coffee-950 hover:underline"
+              >
+                View guide <ArrowRight size={14} />
               </Link>
             </div>
           ) : null;
@@ -656,7 +697,7 @@ export default async function BlogPostPage({
         <section className="bg-gray-50 border-t border-gray-100 py-14 px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-xl font-bold text-gray-900 mb-8">Related articles</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {relatedPosts.map((rp) => (
                 <Link
                   key={rp.slug}
