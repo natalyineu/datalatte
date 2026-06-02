@@ -135,89 +135,6 @@ Still brewing over the decision? Follow this quick framework:
 
 If you’re still unsure about which e-commerce platform is best for your local business, I’d be happy to help you weigh the options and create a customized online store that drives sales and growth. Contact me today for a free consultation at [datalatte.pro/contact](/contact).
 
-## Common Mistakes (And What to Do Instead)
-
-I've watched local business owners lose real money on platform decisions. Here are the mistakes I see most often — and what actually works.
-
-### Mistake 1: Picking Shopify Because “It’s Just Easier”
-
-**The story:** A coffee roaster in Austin, Texas came to me after six months on Shopify. They'd signed up for the $79/month plan because a friend said it was “easier to set up.” They spent $2,400 on a theme, three apps at $20–$30/month each, and were paying 2.9% + $0.30 per transaction. Monthly total: roughly $220 just to keep the store running.
-
-The owner, Sarah, was selling wholesale to five local cafes plus direct-to-consumer for beans. She needed shipping by weight, volume discounts for cafes, and a way to schedule local pickup for customers. Shopify wanted an app for each function. Three apps, three monthly bills, and two of them didn't talk to each other.
-
-**The fix:** We moved to WooCommerce. Hosting through a managed WordPress provider: $35/month. A single plugin for wholesale pricing and shipping rules: $79/year. Stripe for payments: 2.9% + $0.30 — same as Shopify — but no additional transaction fees because WooCommerce doesn't charge its own cut. Total monthly cost: ~$45.
-
-**The outcome:** Sarah saved $175/month. That's $2,100/year. She also stopped losing wholesale orders because the new system handled volume pricing automatically. Her wholesale revenue increased 22% in three months because manual errors dropped to zero.
-
-**What to do instead:** If your business has more than one way of selling (retail + wholesale, pick-up + delivery, subscription + one-off), WooCommerce will probably save you money and headaches. Shopify is great if you sell one thing one way. Otherwise, you're paying for workarounds.
-
-### Mistake 2: Ignoring Your Local SEO Setup on Either Platform
-
-**The story:** A hair salon in Denver — let's call it “The Mane” — launched on Shopify with a beautiful store. Products: retail shampoo, gift cards, bookings. Problem: nobody could find them on Google. They were using a Shopify theme that didn't output proper local business schema. Their Google Business Profile had a different address than their Shopify store. Yelp had a third address.
-
-The owner, Jenna, was spending $500/month on Google Ads to compensate. Her organic traffic was 47 visits per month. Competitors within a two-mile radius were getting 300+.
-
-**The fix:** First, we fixed the NAP (name, address, phone) consistency across Google Business Profile, Yelp, Facebook, and the website. Then we switched to a WooCommerce setup with a local SEO plugin (Rank Math, free version). Added local business schema, set up a location page with embedded Google Map, and wrote city-specific product descriptions (“curly hair products in Denver's Capitol Hill”).
-
-**The outcome:** Within 8 weeks, organic traffic went from 47 to 412 visits per month. She dropped the $500/month Google Ads budget to $150/month because she didn't need it anymore. Monthly revenue from online product sales went from $1,200 to $3,800. Total cost to fix: $0 for Rank Math, $15 for a plugin to manage Google Business Profile updates.
-
-**What to do instead:** Before you even pick a platform, check whether it handles local SEO natively. Shopify does not. You'll need to manually add schema or pay for an app. WooCommerce with a good SEO plugin gives you control. Either way: get your NAP consistent everywhere first.
-
-### Mistake 3: Buying Every App or Plugin That Sounds Useful
-
-**The story:** A pet groomer in Portland, Oregon had a WooCommerce store with 17 active plugins. I counted. She had a booking plugin ($79/year), a loyalty points plugin ($99/year), a review collector plugin ($49/year), a Facebook feed plugin ($29/year), a popup plugin ($39/year), three different performance plugins (because none worked alone), and a “speed optimizer” that slowed things down.
-
-Total plugin cost: ~$500/year. Page load time: 6.8 seconds. Mobile bounce rate: 74%.
-
-**The fix:** I asked one question: “What do you actually need?” Answer: customers need to book grooming appointments, buy prepaid packages, and leave reviews. Three functions. We removed 12 plugins. Used a single lightweight booking plugin that also handled prepaid packages ($149/year). Used native WooCommerce review functionality (free). Installed one caching plugin ($0).
-
-**The outcome:** Page load time dropped to 1.9 seconds. Mobile bounce rate went from 74% to 38%. Booking revenue increased 31% because customers stopped leaving before the page loaded. Saved $351/year on unused plugins.
-
-**What to do instead:** Start with the absolute minimum number of plugins or apps. Add one, test the load time, add another only if you have a specific problem. Most businesses need 4–6 plugins total, not 17.
-
-### Mistake 4: Not Factoring Payment Processing Costs
-
-**The story:** A boutique in Nashville selling handbags and accessories was on Shopify Basic ($29/month). They were also taking in-person payments at pop-up markets using Square. They had a Square card reader, Square account, and were paying Square's 2.6% + $0.10 for in-person sales. Online, they paid Shopify Payments 2.9% + $0.30.
-
-Total monthly payment processing: ~$640. Plus Shopify's $29. Plus Square's monthly fee for inventory sync ($38/month). Total: $707/month.
-
-**The fix:** We moved them to WooCommerce with Stripe. Stripe's online rate: 2.9% + $0.30 — same as Shopify. For in-person sales, they started using Stripe Terminal with a $49 reader (one-time purchase). No monthly fee. No separate account. All transactions in one dashboard.
-
-**The outcome:** Total monthly payment processing dropped to $580. Savings: $127/month. Plus they canceled Square's $38/month fee. Total monthly reduction: $165. Over a year: $1,980 saved.
-
-**What to do instead:** If you take payments in person and online, use one processor for both. Stripe and Square both offer this. But with WooCommerce, you're not locked into either. You can switch processors without rebuilding your store.
-
-## How Each Platform Handles Local Delivery and Pickup
-
-For a local business, delivery and pickup aren't afterthoughts — they're half the reason you're online. A coffee shop might sell 40% of its products via local delivery. A bakery might do 60% pickup.
-
-**Shopify's approach:** Shopify has a “local delivery” option built into the Shipping settings. You set a radius (say, 5 miles) and a flat fee or free delivery above $X. It works. But it's rigid. You can't set different zones with different rules easily. One bakery in Chicago tried to offer $3 delivery within 1 mile, $5 within 3 miles, and free for orders over $25 within 1 mile. Shopify couldn't do that without an app ($29/month).
-
-Pickup is better. Shopify's “local pickup” option is straightforward — customers select pickup at checkout, and you get a notification. No extra cost.
-
-**WooCommerce's approach:** WooCommerce has more flexibility via plugins, but you need to set it up. The “WooCommerce Local Pickup” feature is free and basic. For delivery zones, you'll want a plugin like “Table Rate Shipping” or “Advanced Shipping Packages.” One-time cost: $79–$129.
-
-A pet supply store in Denver used this setup: $2 delivery within 2 miles, $4 within 5 miles, free over $50. No monthly fees. They also offered same-day delivery for $6. The plugin handled it all.
-
-**Which wins?** For simple pickup and single-zone delivery: Shopify is easier. For multiple zones, different pricing rules, or same-day options: WooCommerce gives you more control without monthly app fees.
-
-**Real numbers:** The Denver pet store spent $89 on the shipping plugin. Their delivery revenue went from $1,200/month to $2,800/month because they could offer pricing that made sense for different neighborhoods. They recouped the plugin cost in two days.
-
-## Local Marketing Integration: Which Platform Connects Better?
-
-Your e-commerce platform doesn't exist in a vacuum. It needs to talk to your email marketing, your booking system, your loyalty program, and your local ad accounts.
-
-**Email marketing:** Shopify connects natively to Mailchimp, Klaviyo, and Omnisend. It's easy. But Mailchimp's free tier limits you to 500 contacts and 1,000 sends/month. A small business with 300 customers might hit that limit fast. Klaviyo is better, but starts at $20/month.
-
-WooCommerce connects to the same tools, plus a bunch of free or cheap alternatives. MailPoet is a solid email plugin ($0 for up to 1,000 subscribers). Brevo (formerly Sendinblue) integrates cheaply. A bakery in Austin with 400 email subscribers switched from Mailchimp ($13/month) to MailPoet ($0/month). Same functionality. Saved $156/year.
-
-**Booking systems:** If you're a salon, fitness studio, or service-based business, Booksy and Square Appointments are common. Shopify integrates with Booksy via app ($19/month). WooCommerce integrates via plugin ($49 one-time) or direct API.
-
-A fitness studio in NYC compared both: Shopify + Booksy app = $19/month + $29/month Booksy subscription = $48/month. WooCommerce + WooCommerce Bookings plugin = $199 one-time (lasts years).
-
-**Google Ads integration:** Both platforms work with Google Ads, but the tracking is different. Shopify's Google channel app is free but limited. WooCommerce's Google Listings & Ads plugin is also free. In practice, both require a conversion tracking setup — but WooCommerce gives you access to the raw code, which makes advanced tracking (like dynamic remarketing) easier without paying for an app.
-
-**The real cost:** A hair salon in Nashville was using Shopify + Mailchimp + Booksy + Google Ads app. Total monthly cost for integrations: $59. On WooCommerce with MailPoet + Bookings plugin + Google Listings plugin: $199 one-time + $0/month. After one year: Shopify route costs $708. WooCommerce route costs $199. Savings: $509/year.
 
 ## Frequently Asked Questions
 
@@ -258,3 +175,10 @@ A hair salon doesn't need an enterprise Shopify plan. A coffee roaster with whol
 Start with how you actually sell. Trace a single transaction from order to delivery. Map every step. Then pick the platform that handles that exact path without extra fees or plugins. If you're not sure, I've walked through this decision with dozens of business owners in a single 30-minute call. Usually by minute 15, it's obvious which one you need.
 
 [Book a free consultation](/contact)
+
+## Related Articles
+
+- [A/B Testing for Local Business Websites: Double Your Conversion Rate](/blog/a-b-testing-for-local-business)
+- [Above the Fold Design for Local Businesses: What Visitors See First Decides Everything](/blog/above-the-fold-design-local-business)
+- [Elevate Your Coffee Shop Website with AI-Driven Optimization Strategies](/blog/ai-driven-website-optimization-for-coffee-shops)
+- [AI-Powered Website Personalization: Elevating the Local Business Experience](/blog/ai-powered-website-personalization)

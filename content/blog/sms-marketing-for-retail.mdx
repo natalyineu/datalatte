@@ -62,117 +62,6 @@ Measuring the success of your SMS marketing campaigns is crucial. Here are some 
 
 **5.
 
-## Common Mistakes (And What to Do Instead)
-
-### Mistake #1: Buying a List Instead of Building One
-
-A boutique clothing store in Austin, Texas spent $500 on a list of 8,000 phone numbers from a "local lead generator" promising high-intent shoppers. The owner, let's call her Sarah, sent a 50% off flash sale text two days after buying the list.
-
-What happened? Eighteen people replied "STOP" within the first hour. Three people called the store yelling. One person threatened to report her to the FCC. The campaign generated exactly zero sales. Worse, the store's carrier flagged the number as spam, and legitimate opt-in subscribers stopped receiving texts for two weeks while she sorted it out with Twilio support.
-
-The fix was painful but simple: Sarah deleted the entire purchased list, implemented a double opt-in via Square's marketing tools, and started collecting numbers at checkout with a sign that said "Text us for flash sales — we promise not to be annoying." She also added an opt-in checkbox to her online store's checkout flow.
-
-After three months, she had 340 real subscribers. Her first flash sale to that list — 30% off denim, four-hour window — did $1,800 in revenue. The lesson: a list of 340 people who actually want your texts will outperform 8,000 people who don't know you exist. Every single time.
-
-### Mistake #2: Texting at the Wrong Time (Consistently)
-
-A hair salon in Portland, Oregon was sending their SMS blasts at 7:00 AM sharp every Saturday. The owner thought they were being proactive. "People check their phones first thing, right?"
-
-Wrong. The salon's stylists were getting calls from clients asking why they received a text about "blowout specials" while still in bed. One client, a night-shift nurse, replied at 7:02 AM with a single word: "Unsubscribe." The salon lost 12 subscribers in two weeks.
-
-I ran the numbers for them. Their open rate was actually decent at 78%, but their conversion rate was 1.2%. People read the messages at 7 AM, thought about booking, and forgot by the time the salon opened at 10.
-
-The fix: I had them switch to 11:30 AM on Tuesdays and Thursdays, using Booksy's scheduling integration to send the text exactly two hours before their slowest appointment slot. The same offer — $20 off a cut and blow-dry — went from 1.2% conversion to 8.7% conversion in three weeks. Revenue from SMS increased from $380 per month to $1,450 per month.
-
-The uncomfortable truth is that when you send a text matters more than what the text says. Late morning on a weekday, when people are bored at work and already thinking about their weekend plans, is your sweet spot. 7 AM on a Saturday is how you lose subscribers.
-
-### Mistake #3: Treating Everyone the Same
-
-A dog grooming business in Nashville had 600 SMS subscribers. They sent the exact same "Last-minute opening available" text to all 600 people. The problem? 200 of those subscribers lived more than 20 minutes away and had never shown up for a last-minute appointment in 18 months. They were clogging the list, driving up costs, and diluting results.
-
-The owner was sending three texts per week and spending about $350 per month on SMS credits. Her conversion rate had dropped from 6% to 2% over six months. She assumed SMS was dying.
-
-What was actually dying was subscriber patience. People who only booked two weeks in advance didn't care about same-day openings. People who lived across town weren't driving in for a bath appointment on two hours' notice.
-
-The fix: I had her segment her list into three groups using Klaviyo — "regulars" (booked within the last 30 days), "occasional" (booked within 90 days), and "lapsed" (haven't booked in 6+ months). Regulars got the last-minute openings text. Occasionals got a "We miss you — book this week and get 15% off" text once per month. Lapsed got nothing unless there was a real sale, and then only once per quarter.
-
-Cost dropped to $180 per month because she was sending fewer texts. The regulars segment started converting at 12% on last-minute openings. The occasional segment had a 9% rebooking rate. Total SMS revenue went from $890 per month to $2,300 per month.
-
-Most guides skip this part: segment by behavior, not demographics. I don't care if your customer is male or female, 25 or 55. I care if they actually show up when you text them. Group people by what they do, not who they are.
-
-### Mistake #4: No Clear Call to Action (Just a Link)
-
-A bike shop in Chicago sent a text that said: "New shipment arrived — check it out!" with a link to their website. The owner couldn't figure out why only 3 people clicked out of 450 texts sent.
-
-I asked him what he wanted people to do. He said "look at the bikes." I asked him what happened after they clicked. He said "they see the bikes." I asked him to show me the page. It was their full inventory page — 87 bike models, ranging from $400 to $8,000, no filtering, no sale indicator, no urgency.
-
-The fix was brutal but simple: every text needs one action, one reward, and one deadline. "Come test ride the new Trek Marlin 5 this Saturday. First 20 test riders get a free water bottle. We open at 9. Show this text."
-
-He sent that exact message on a Friday at 11:30 AM. 22 people showed up on Saturday. He sold 8 bikes that weekend — $12,400 in revenue from a single text. The water bottles cost him $60.
-
-The mistake most small businesses make is they treat SMS like a billboard. "Here's information. Do something with it." SMS is a direct request. Tell them exactly what to do, why they should do it, and when it expires. If you can't write all three of those in 160 characters, your offer is too complicated.
-
----
-
-## Building Your List the Right Way (Without Wasting Money)
-
-You need subscribers before you can send texts. The mistake I see most often is businesses trying to collect numbers the same way they collect emails — with a sad little sign by the register that says "Join our text list."
-
-That approach works for emails because people are numb to email. SMS is different. Someone giving you their phone number is giving you access to their morning coffee, their commute, their lunch break. Treat that like the privilege it is.
-
-Here's what actually works, based on what I've seen across 30+ small businesses:
-
-**The checkout prompt.** When someone pays with a card at your coffee shop or salon, Square can automatically send them an opt-in prompt for SMS. The conversion rate on this is around 40% — significantly higher than a sign-up form. The key is the timing. They just gave you money. They're feeling good about your business. Ask then, not when they're walking out the door.
-
-**The "text this number" signage.** Put a sign in your window that says "Text COFFEE to [number] for a free drink on your next visit." The free drink costs you maybe $2 in materials. A subscriber who shows up to redeem that free drink has an average lifetime value, at a coffee shop, of about $380 over 12 months. I'll trade $2 for $380 any day of the week.
-
-One coffee shop in Denver did this with a simple chalkboard sign and a Twilio number. They collected 180 subscribers in the first week. Cost of the free drinks: $360. Revenue from those subscribers over the next three months: $14,200. The math works because the people who opt in for a free drink are exactly the people who live or work nearby and will actually show up.
-
-**The Yelp integration.** This is one most people miss. If you have a Yelp Business Page, you can add a call-to-action button that links to your SMS opt-in form. Use a tool like Postscript or Klaviyo to generate a unique link. The conversion rate is lower — around 12% — but the people who convert are typically higher spenders because they came through Yelp, which already filters for intent.
-
-**The loyalty program bridge.** If you're using a loyalty app like Belly or FiveStars, connect it to your SMS tool. When someone earns a reward, send them a text instead of an email. Conversion on reward redemptions via SMS is 3x higher than email. I've seen a pet supply store in Portland go from $890 in monthly loyalty redemptions to $2,400 just by switching their notification channel.
-
-One thing to avoid: don't try to collect numbers through Facebook ads. I've tested this at three different clients. The quality of Facebook-collected phone numbers is terrible. You get a lot of people who fat-finger their number, use a burner, or just don't care. The opt-in rate looks good on paper — 18-22% — but the deliverability rate is around 60%. You're paying for leads that can't even receive your messages.
-
----
-
-## Designing Offers That Actually Make People Show Up
-
-Flash sales work for SMS because SMS is immediate. But most small businesses design their offers wrong. They think "20% off everything" is a good flash sale. It's not. It's lazy and it trains customers to wait for the next sale instead of buying now.
-
-Here's what I've learned from running actual campaigns:
-
-**The one-item deep discount works better than a storewide percentage.** A salon in Nashville tried "15% off all services" and got 8 bookings. Two weeks later, they tried "$40 Brazilian blowout (normally $85) — 12 spots available, first come first served." They booked all 12 spots in 47 minutes. The storewide offer felt generic. The specific offer felt like a real deal you had to act on.
-
-**Add a scarcity mechanic that's honest.** Don't say "limited time only" if you run the same sale every month. Say "We're testing a new product and need feedback — first 20 people to show up with this text get a free sample." Or "We over-ordered on [item] and need to clear shelf space." Small business owners are nervous about sounding like car dealerships, so they swing too far the other direction and sound boring. Honest scarcity works. Fabricated scarcity makes people unsubscribe.
-
-**Use dollar amounts, not percentages, for low-ticket items.** A coffee shop offering "20% off" on a $4 latte is saving the customer $0.80. That's not a flash sale, that's a rounding error. A coffee shop offering "Buy one pastry, get the second for $1" actually moves product. I saw a bakery in Austin do a BOGO for $1 on their day-old pastries — they cleared out $180 worth of inventory in 90 minutes. They would have thrown that away otherwise.
-
-**Time-box the redemption, not just the offer.** "20% off this weekend" is weak. "20% off if you show this text within the next 3 hours" is strong. A fitness studio in Chicago sent a text at 9:30 AM saying "The 5:30 PM class has 4 spots left. Show this text at check-in and your first class is free." They filled all 4 spots in 11 minutes. They converted 2 of those 4 to monthly memberships worth $180 each. The text cost them $0.02.
-
-**The VIP offer tier.** Don't send the same offer to everyone. Your best customers — the ones who spend $100+ per month — should get different offers than people who visit once a quarter. For your top tier, invite them to an "early access" hour. One pet supply store in Portland let their SMS VIPs shop 2 hours before the Black Friday doors opened. They did $3,800 in sales during that 2-hour window. The rest of Black Friday, open to everyone, did $4,200. Half their Black Friday revenue came from the VIP window.
-
----
-
-## Measuring What Actually Matters (and Ignoring Vanity Metrics)
-
-Here's the part that makes agency people uncomfortable: I don't care about your open rate.
-
-Open rates for SMS are almost always high — 90%+ if you're sending to a clean list. The variance between a good campaign and a bad campaign is maybe 5%. If you're obsessing over whether your open rate is 92% or 96%, you're wasting time.
-
-What I actually track, and what I make my clients track:
-
-**Redemption rate.** How many people who received the text actually showed up and did the thing. This is the only number that matters. If you sent a flash sale and 5% of recipients redeemed it, that's a good baseline. If you're below 2%, either your offer is bad or your list is stale.
-
-**Revenue per text sent.** Divide total revenue from the campaign by the number of texts sent. If you spent $40 on SMS credits and made $800, your revenue per text is $2.00. That number should go up over time as your list gets cleaner and your offers get better. If it's flat or declining for three months straight, something is broken.
-
-**Subscriber churn rate.** Every time someone replies STOP, that's a signal. If your monthly churn is above 5%, you're sending too often or your offers are irrelevant. A healthy SMS list for a small retail business runs 2-3% monthly churn. Anything above that and you're burning through your list.
-
-**Cost per acquisition.** This is where SMS beats everything else. I've calculated the CPA for an SMS subscriber at a coffee shop in New York: $1.20 per subscriber, calculated by dividing total opt-in costs (signage, free drink costs, Square fees) by number of subscribers acquired in a month. Compare that to Google Ads, where the same business was paying $8.50 per click that might or might not become a customer. The math isn't close.
-
-One salon owner in Denver told me she "didn't see results" from SMS. I asked what she was measuring. She said "how many people open the texts." She had a 94% open rate and thought that meant it wasn't working. She wasn't tracking how many people actually booked. We added UTM parameters and connected her SMS tool to her Square appointments. Turned out her SMS was driving $1,900 per month in bookings that she had been attributing to "walk-ins." She just hadn't connected the dots.
-
----
 
 ## Frequently Asked Questions
 
@@ -203,3 +92,11 @@ That's the thing nobody tells you about SMS. It's not sexy. You can't put a scre
 If you're running a small retail business and you're not using SMS, you are leaving money on the table. I've seen the numbers at enough clients to know it's not a "nice to have" anymore. It's the difference between a slow Tuesday and a day where you need to re-stock the pastry case twice.
 
 If you want to figure out whether SMS makes sense for your specific business — and I mean your actual numbers, not some template — [Book a free consultation](/contact). I'll tell you if it's worth it or not. I've also told people it wasn't. No coffee required, but it helps.
+
+## Related Articles
+
+- [Abandoned Appointment Emails: How to Win Back No-Shows](/blog/abandoned-appointment-email-win-back-no-shows)
+- [Abandoned Cart Email Strategy: Recover Lost Revenue With Smart Sequences](/blog/abandoned-cart-email-strategy)
+- [Take Your Email Marketing to the Next Level with AI-Assisted Campaigns](/blog/ai-assisted-email-marketing-campaigns)
+- [Streamlining Email Marketing with AI for Coffee Shops](/blog/ai-assisted-email-marketing-for-coffee-shops)
+- [5 AI-Driven Customer Loyalty Program Ideas for Small Businesses](/blog/ai-driven-customer-loyalty-programs)

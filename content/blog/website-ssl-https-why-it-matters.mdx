@@ -103,122 +103,6 @@ A: You can test your website by visiting it in a browser and checking that it lo
 
 At DataLatte, we specialize in helping small businesses like yours improve their online presence and security. If you're struggling to set up HTTPS or need help implementing other security features, contact us for a free audit.
 
-## Common Mistakes (And What to Do Instead)
-
-### Mistake #1: Installing HTTPS but Keeping Mixed Content
-
-I had a client in Austin, Texas — a boutique fitness studio called Core & Sole. They ran a membership booking page through Square. The owner, Megan, was proud she'd finally gotten an SSL certificate. Her browser showed the little padlock icon. She thought she was done.
-
-She wasn't.
-
-Every single image on her site was still loading over HTTP. So were the embedded Google Fonts and a Mailchimp sign-up form. Browsers don't call this "fine." They call it "mixed content." They show a gray padlock with a yellow triangle or outright say "Not Secure" in the address bar.
-
-Megan's bounce rate from Google Ads (she was spending $1,200/month) was 68%. Her conversion rate was 1.1%.
-
-When I ran her site through a free mixed-content checker (whythehost.com has a decent one), we found 23 insecure elements. I spent 45 minutes updating internal links and forcing HTTPS on her WordPress site using a plugin called Really Simple SSL (free, works fine). Then I updated the image URLs in her Mailchimp templates because those were still pulling from the old HTTP source.
-
-Outcome: Bounce rate dropped to 42% over the next three weeks. Her Google Ads conversion rate hit 2.8%. That $1,200/month ad spend started producing 2.5x the leads. She was paying $43 per lead before the fix. After? $18.
-
-The fix took less than an hour. The cost? Zero dollars.
-
-### Mistake #2: Letting the SSL Certificate Expire (and Not Noticing for Weeks)
-
-A pet grooming salon in Nashville — Paws & Claws by Claire — had HTTPS set up correctly in 2022. Then the certificate expired in February 2024. Claire didn't notice for three weeks.
-
-Here's what happened: Customers who typed her URL directly saw a full-screen "Your connection is not private" error. Most of them left. Her Yelp reviews started mentioning "I tried to book online but the site gave a scary warning." She lost an estimated 18 bookings in that window. At $75 per groom, that's $1,350 in direct lost revenue. Plus the customers who never came back.
-
-She also ran a Google Business Profile campaign — a local service ad that cost about $400/month. Google had been sending traffic to her HTTPS version. Once the certificate expired, those clicks hit the error page. The ad platform reported "no issues" because the URL didn't change. The problem was invisible unless you actually clicked the link.
-
-Claire's fix: I set up auto-renewal on her SSL through her hosting provider (SiteGround, though most hosts offer this). I also added expiration monitoring via an UptimeRobot free plan — it sends a Slack alert 30 days before expiry. Total setup time: 12 minutes.
-
-The uncomfortable truth: if you manage your own SSL, you will forget to renew it. Everyone does. Automate it or pay someone $50/year to handle it.
-
-### Mistake #3: Only Securing the Homepage
-
-A coffee roaster in Portland, Oregon — Red Bird Roasters — had HTTPS on their homepage and product pages. But their checkout page for wholesale orders ran on a subdomain (shop.redbirdroasters.com) that was still HTTP.
-
-The owner, Tom, was spending $3,800/month on Google Ads driving traffic to wholesale product pages. His cart abandonment rate was 79%. He thought it was the prices.
-
-When I tested the checkout flow, Chrome showed a "Not Secure" badge right above the credit card field. No one is typing their card number into that page. No one.
-
-The fix: I generated a free wildcard SSL certificate through Let's Encrypt (covered the main domain + all subdomains) and installed it on the subdomain server. Total time: 30 minutes. Cost: zero.
-
-Within two weeks, the cart abandonment rate went to 61%. That 18-point drop translated to roughly $680/month in recovered wholesale orders. Tom had been blaming his pricing strategy. The problem was a missing $0 certificate.
-
-### Mistake #4: Assuming HTTPS Handles Everything
-
-A hair salon in Chicago — Studio Cuts — had HTTPS. They were proud of it. They still got hit with a phishing attack.
-
-Here's what happened: The salon had a contact form that emailed submissions to their booking manager. The form itself was secure. But the email it sent wasn't encrypted in transit unless the salon's email provider used TLS (transport layer security). Their provider (an old GoDaddy email plan) did not.
-
-A fake booking request came through with a malicious link. The manager clicked it. That's not an HTTPS problem — that's a "your security awareness is the weak link" problem.
-
-HTTPS protects data between the customer's browser and your server. It does not protect what happens after the data reaches your inbox. It does not protect you from phishing. It does not protect you from an employee using "Password123" on the admin panel.
-
-The fix I suggested: Enable SPF, DKIM, and DMARC records on the salon's domain (most hosts have guides for this). Move email to a provider that uses TLS by default — Google Workspace ($6/month per user) or FastMail. And run a 30-minute phishing awareness session with the team. Not a training module from HR. A real conversation.
-
-Most small business owners skip this part. Don't.
-
----
-
-## The $5,000 Mistake: What Happens When Your Host Blocks Let's Encrypt
-
-You've probably heard you can get HTTPS free through Let's Encrypt. That's true — for most people.
-
-Here's the catch nobody mentions: some shared hosting providers, especially budget ones, refuse to install Let's Encrypt certificates because they want to sell you their own SSL for $9.99/year. Or they limit the auto-renewal feature, meaning your certificate expires in 90 days and you have to manually re-verify every time. I've seen this at three different clients using HostGator and Bluehost's basic shared plans.
-
-If you're on a plan that blocks free certificates, you have two options:
-
-1. **Pay the $10/year for the host's certificate.** It's not ideal, but it's better than running HTTP.
-2. **Switch hosts.** I've moved five small business sites to Cloudways (starts at $12/month) and DreamHost (has free Let's Encrypt baked in). The migration takes about two hours. The cost difference is negligible compared to the traffic you're losing.
-
-Do not get stuck in a situation where you think "I'll get to it later" for six months. That six months of "I'll do it later" cost a Denver plumbing company I consulted $4,200 in lost Google Ads conversions. Their competitor showed up first because Google gave them the ranking advantage. By the time they fixed it, the competitor had captured the December emergency call surge. That's a permanent revenue shift.
-
----
-
-## What HTTPS Does for Your Google Ads and SEO Budget (Directly)
-
-Here's something most guides skip: HTTPS affects your Quality Score in Google Ads.
-
-Quality Score is Google's measure of how relevant and trustworthy your landing page is. It directly impacts your cost per click. A higher Quality Score means you pay less per click. A lower one means you pay more.
-
-HTTPS is a small but real signal in that calculation. Google has confirmed it outright. If your landing page is HTTP and your competitor's is HTTPS, you are paying more for the same keyword. Your $2.50 click might cost your competitor $1.80. Over 500 clicks a month, that's $350 you're burning for no reason.
-
-I worked with a yoga studio in Denver that was running Google Local Service Ads. They were spending $900/month on clicks. Their landing page was HTTP. I switched them to HTTPS. Their average cost per lead dropped from $22 to $17. That's $200/month in savings. The switch took 20 minutes and cost $9 for a domain-validated certificate through their host.
-
-On the SEO side: Google has confirmed HTTPS is a ranking signal. It's not the strongest signal, but when you're a small business competing for "best coffee shop Austin TX" against 15 other shops, you need every signal you can get. A 14% ranking drop from HTTP (the number in the original article) is enough to push you from position 3 to position 5. Position 5 gets roughly 40% less click-through than position 3. That's a direct traffic loss.
-
-A hair salon in Chicago I advised saw their organic traffic drop by about 30% over two months after their certificate expired (yes, expiry mistake again). Restoring HTTPS brought 80% of that traffic back within three weeks. Google takes time to recrawl. But it does come back.
-
----
-
-## The Real Cost of HTTPS for Booking, Payments, and Email Links
-
-If you use any third-party booking or payment tools, you need to check something specific.
-
-**Square Online:** Square handles its own SSL on the checkout page. But if you have a custom domain pointing to your Square store, you need to enable SSL on that domain through Square's settings. It's free. Most people don't know it's there.
-
-**Mailchimp:** If you send email campaigns with links back to your site, those links need to point to the HTTPS version. Mailchimp does not automatically update your link URLs. If your old emails pointed to HTTP, people are still clicking through to an unsecured page. I found 14 old campaign links for a Nashville pet groomer that were still pointing to HTTP. Each one was a potential trust failure. We updated the domain-level redirect in Mailchimp's template settings and set up a 301 redirect from HTTP to HTTPS on the server. Problem solved in 20 minutes.
-
-**Booksy (for salons and barbers):** Booksy generates booking links that live on their subdomain (booksy.com). That subdomain is already HTTPS. But if you embed a Booksy booking button on your site, that button is fine from a security perspective. The issue is whether the page hosting that button is HTTPS. If your site page is HTTP, the browser still warns the user. I've seen this at three different barbershops in Austin.
-
-**Yelp:** Yelp does not require your website to be HTTPS to list your business. But if someone clicks through from Yelp to your HTTP site, they see the warning. They blame Yelp. Then they blame you. Then they go to a competitor. Yelp's own data shows that click-through rates drop significantly when the destination site shows a security warning. I don't have the exact Yelp internal number, but I've seen a 12% drop in Yelp-originated bookings for a client who let their HTTPS lapse.
-
----
-
-## Why Your Yelp and Google Business Profile Might Already Be Penalizing You (Even If You Have HTTPS)
-
-This is the one that surprises people.
-
-You can have HTTPS installed correctly on your main website. But if your Yelp business page or Google Business Profile links to an HTTP version of your site (because you typed the wrong URL when you set up the profile), you are losing traffic.
-
-I checked a client in Nashville — a hair salon — and their Google Business Profile listed "http://salonname.com" instead of "https://salonname.com". Every time someone clicked that link from Google Maps, they hit an HTTP page. Google Business Profile doesn't check for this. It just takes whatever URL you gave it.
-
-The fix: Log into your Google Business Profile, click "Info," and update the website URL to the HTTPS version. Do the same on Yelp. Do the same on Facebook, Instagram, and any other directory. Most small business owners set this up once and never touch it again. That's how old HTTP URLs persist for years.
-
-I changed that Nashville salon's URL. They said the phone started ringing more within a week. I'm not claiming it was the only factor, but removing a roadblock never hurts.
-
----
 
 ## Frequently Asked Questions
 
@@ -255,3 +139,11 @@ Here's what actually happened with that Nashville pet groomer I mentioned: after
 If you want me to check whether your site is losing traffic right now because of an HTTPS issue, I'll do it for free. No pitch, no contract. I'll run the scan and send you a list of what's broken. Most small business owners are surprised at what they find.
 
 [Book a free consultation](/contact)
+
+## Related Articles
+
+- [A/B Testing for Local Business Websites: Double Your Conversion Rate](/blog/a-b-testing-for-local-business)
+- [Above the Fold Design for Local Businesses: What Visitors See First Decides Everything](/blog/above-the-fold-design-local-business)
+- [Elevate Your Coffee Shop Website with AI-Driven Optimization Strategies](/blog/ai-driven-website-optimization-for-coffee-shops)
+- [AI-Powered Website Personalization: Elevating the Local Business Experience](/blog/ai-powered-website-personalization)
+- [Booking Form Optimization: Reduce Friction and Get More Submissions](/blog/booking-form-optimization)
