@@ -90,134 +90,6 @@ A: Website accessibility refers to the ability of users with disabilities to acc
 
 If you want help making your website more accessible and user-friendly, contact us today for a free audit. Our team of specialists can help you identify and fix accessibility issues, improve your website's search engine rankings, and increase your online visibility for everyone.
 
-## Common Mistakes (And What to Do Instead)
-
-### Mistake #1: Adding Alt Text That Says Nothing Useful
-
-A coffee shop in Austin, TX — let's call it "Brew & Co." — had a beautifully photographed website. Every product shot had alt text. Problem was, the alt text said things like "coffee cup" and "pastry plate."
-
-I ran a quick test using a screen reader on their site. The homepage banner image of their signature latte was labeled "IMG_4523_final.jpg." The menu photo — their most visited page element — had alt text reading "menu board."
-
-A customer using a screen reader would hear: "IMG_4523_final.jpg, link." That's zero information.
-
-**What went wrong:** They treated alt text as an SEO checkbox, not as actual communication. Google's crawler could extract almost nothing about what those images showed. Meanwhile, a blind customer trying to decide between a cortado and a cold brew was left guessing.
-
-**The fix:** We rewrote every image description to answer one question: *What would I say if I were describing this to someone on the phone?*
-
-- "IMG_4523_final.jpg" became "Barista pouring latte art into a white ceramic cup at Brew & Co. counter, steam rising from the espresso machine in background."
-- "Menu board" became "Brew & Co. seasonal menu board listing: Pumpkin Spice Latte ($5.50), Apple Cider Cold Brew ($5.75), Cardamom Honey Latte ($5.50)."
-
-**The outcome:** Within six weeks, their Google organic traffic to the menu page increased 34%. Their bounce rate dropped from 68% to 51%. Was some of that from improved SEO? Yes. But we also heard from two customers who specifically mentioned they chose Brew & Co. because they could actually "read" the menu on their screen reader. Estimated monthly revenue gain from new customers: $1,800.
-
----
-
-### Mistake #2: Forms That Assume Everyone Can See and Type
-
-A hair salon in Denver, CO — "Mane Street Studio" — used an online booking form powered by Booksy. Beautiful design. Clean layout. But when I tried booking an appointment using only my keyboard (no mouse), I couldn't get past the "Select Date" field.
-
-The date picker was a JavaScript calendar that required clicking specific dates. No keyboard navigation. No way to tab through. If you were using voice commands or a screen reader, you were stuck.
-
-**What went wrong:** The salon's booking form had no labels connected to input fields. Screen readers couldn't identify which field was for name, which was for phone number, and which was for appointment notes. The "Submit" button was an unlabeled image.
-
-A customer with a motor disability or who relies on assistive technology couldn't book online. They'd either call (if they could) or go somewhere else.
-
-**The fix:** We didn't redesign the whole form. We made three changes in Booksy's settings:
-1. Added proper `<label>` tags linked to each input field (Booksy allows custom code injection on their paid plans)
-2. Ensured the date picker had keyboard controls — up/down arrows to navigate months, Enter to select
-3. Changed the submit button from an image to a proper HTML button with text "Book Appointment"
-
-**The outcome:** Online bookings increased 28% within two months. More importantly, their abandonment rate on the booking page dropped from 73% to 44%. The salon owner, Danielle, told me she received a thank-you email from a client who uses a voice-activated browser — she could finally book her own appointments. Estimated monthly revenue from previously inaccessible bookings: $1,200.
-
----
-
-### Mistake #3: Color Contrast That Makes Text Disappear
-
-A pet grooming business in Nashville, TN — "Paws & Claws Grooming" — had a brand color of pale yellow. They used it for their menu backgrounds, with white text on top. It looked clean on the designer's monitor. On a sunny afternoon, on a phone screen, it was unreadable.
-
-I checked their site using WebAIM's contrast checker. The contrast ratio between their pale yellow backgrounds and white text was 1.2:1. The WCAG AA standard requires 4.5:1 for normal text. They were 73% below the minimum.
-
-**What went wrong:** The owner, Mark, had chosen the color scheme because it "felt warm and friendly." He didn't know contrast mattered. His Google Ads were driving traffic to a service page where pricing was literally invisible to 8% of the male population (who have some form of color vision deficiency) and anyone with low vision.
-
-**The fix:** We kept the pale yellow as an accent color but switched service page backgrounds to a dark charcoal (#2B2B2B) with white text (contrast ratio: 14:1). We used the pale yellow only for decorative elements and hover states. Total CSS changes: about 12 lines.
-
-**The outcome:** The service page bounce rate dropped from 81% to 59%. Mark saw his Google Ads conversion rate go from 1.8% to 3.4%. His cost per conversion dropped from $34 to $18. He reduced his ad spend by $300/month — same traffic volume, better results. Monthly savings plus revenue from converted traffic: $1,500.
-
----
-
-### Mistake #4: Auto-Playing Video With No Controls
-
-A fitness studio in Portland, OR — "Core Collective" — had a professionally produced class preview video that auto-played on their homepage. Full volume. No pause button visible. The video player was embedded from YouTube with the controls hidden for "aesthetic reasons."
-
-A customer with a vestibular disorder (sensitivity to motion) would land on that page and immediately feel nauseous. Someone using a screen reader would hear the video audio overlapping with the voice output. A customer with cognitive disabilities might be overwhelmed by sudden, unexpected movement and sound.
-
-**What went wrong:** The studio owner wanted a "cinematic" first impression. She didn't realize she was actively making her site hostile to a significant portion of her potential client base.
-
-**The fix:** We made three changes:
-1. Removed auto-play entirely. Video now plays only when the user clicks "Play."
-2. Restored visible controls — play/pause, volume slider, closed captions toggle
-3. Added a transcript below the video for people who can't watch or prefer to read
-
-**The outcome:** Time on page actually increased by 22 seconds on average. The studio started receiving inquiries from users who said they appreciated the captions — including one who was considering joining but had hearing loss and wanted to confirm the class format. Estimated monthly membership revenue from previously inaccessible leads: $3,800.
-
----
-
-## How Accessibility Affects Your Local SEO (Not Just Morale)
-
-Here's something most accessibility guides skip: Google's ranking algorithm favors accessible sites. Not because Google is virtuous — because accessible sites tend to have better structure, clearer content, and lower bounce rates.
-
-I ran an experiment with a small law firm in Chicago. They had a beautiful one-page site with everything hidden behind JavaScript animations. Their Google Business Profile was their main traffic driver, but their website conversion rate was stuck at 0.8%.
-
-We added proper heading hierarchy (H1 for page title, H2 for sections, H3 for subsections). We ensured all content was navigable by keyboard. We added descriptive link text instead of "click here."
-
-Their organic traffic from Google Search — not Maps, not ads, just regular search results — increased 41% over the following 90 days. Their Google Business Profile engagement went up too, because the link from their profile to their site actually led to a page that loaded cleanly and made sense.
-
-**The direct connection:** Google's crawler is essentially a very basic screen reader. If your site is hard for a screen reader to parse, it's hard for Google to parse. Video content without text transcripts? Google can't index it. Images without descriptive alt text? Google doesn't know what they show. Forms that can't be submitted without a mouse? Google's crawler can't test your conversion flow.
-
-If you're running Google Ads for your local business, accessibility matters even more. Google Quality Score considers landing page experience. If your landing page has poor accessibility signals — high bounce rate, low time on page, no clear content structure — your Quality Score drops, and your cost per click goes up.
-
-A bakery in Brooklyn I worked with was paying $4.50 per click for "custom birthday cakes near me." After we fixed their heading structure, added alt text, and made their menu readable on mobile, their Quality Score went from 5 to 8. Their cost per click dropped to $2.10. Same ad budget, 114% more clicks.
-
----
-
-## The $0 Accessibility Audit: What to Check Right Now
-
-You don't need expensive software or a developer to find the most damaging accessibility problems. Here's a 15-minute audit you can run today.
-
-**Step 1: Unplug your mouse.** Navigate your entire website using only the Tab key, Enter, and arrow keys. Can you reach every link, button, and form field? Can you see a visible focus indicator (a blue outline or highlight) around each element as you tab through? If you get stuck somewhere, fix that first.
-
-**Step 2: Turn on your phone's screen reader.** On iPhone, go to Settings > Accessibility > VoiceOver and turn it on. On Android, it's TalkBack. Navigate your site with your eyes closed. Does it make sense? Can you find your contact info? Can you complete a purchase or booking? If the screen reader stumbles, your site has a problem.
-
-**Step 3: Check your color contrast for free.** Go to webaim.org/resources/contrastchecker. Enter the background color and text color from your most important pages — your call-to-action buttons, your menu, your pricing. If the ratio is below 4.5:1 for normal text or 3:1 for large text (18px+ bold or 24px+ regular), you need to change something.
-
-**Step 4: Turn off images in your browser.** Firefox and Chrome both let you disable images in developer tools. Browse your site. Does the content still make sense? Are your alt texts descriptive enough to replace the images? If you see blank spaces with no useful text, your alt text needs work.
-
-**Step 5: Run your homepage through WAVE.** The WAVE tool (wave.webaim.org) checks for common accessibility issues and shows them visually on your page. Red icons mean errors. Yellow icons mean warnings. Don't panic if you see 30 issues. Start with the red ones: missing form labels, empty headings, missing alt text on important images.
-
-**What this audit costs:** Zero dollars. Time investment: 15-30 minutes for a small business site.
-
-**What you'll likely find:** Missing alt text on at least half your images. Poor contrast somewhere. At least one form field that can't be reached by keyboard. A video or carousel that auto-plays.
-
-**What to fix first:** Keyboard navigation issues. If someone can't use your site at all, nothing else matters. Then fix contrast. Then fix alt text. In that order.
-
----
-
-## Booking Software, Newsletters, and POS: Accessibility Beyond Your Website
-
-Your website isn't the only digital touchpoint your customers interact with. If you're using Square, Mailchimp, Booksy, Yelp, or any third-party platform, those need to work for everyone too.
-
-**Square Online:** Square's default checkout templates are reasonably accessible out of the box, but customizations can break things. If you've added custom CSS to change colors, check that you haven't accidentally reduced contrast or hidden form labels. I've seen a boutique in Austin lose $2,000 in gift card sales because a custom color scheme made the "Apply Gift Card" button invisible on mobile.
-
-**Mailchimp:** Their email builder has built-in accessibility checks. Use them. Emails with poor contrast, missing alt text, or tiny font sizes get filtered by spam detectors more often. A salon in Nashville saw their email open rate jump from 18% to 29% after switching to larger fonts and descriptive subject lines that worked with screen readers.
-
-**Yelp:** You can't change Yelp's code, but you can control what you post. When you add photos of your menu or location, include clear text descriptions in the caption. Yelp's app uses alt text from metadata, and many screen reader users rely on those descriptions. A restaurant in Denver started adding detailed text descriptions to their Yelp photos and saw a measurable increase in check-ins from visually impaired users who said they could finally "see" what the place looked like.
-
-**Booksy (or similar booking platforms):** Most booking platforms have accessibility settings buried in their dashboards. Look for options to enlarge text, increase button sizes, or add text labels to icons. A fitness studio in Portland switched to a text-based booking flow instead of a visual calendar grid and saw their online booking rate increase 40% among users aged 55+ — a demographic that includes many users with age-related vision changes.
-
-**Google My Business:** Your Google Business Profile is often the first thing people see. Make sure your Q&A section has clear, readable answers. Use bullet points and short paragraphs. Don't post images of text without describing them in the caption. A pet groomer in Austin added detailed written descriptions to all their Google Photos and saw their phone call bookings increase by 22% in two months.
-
-**The pattern:** Every third-party platform you use has some accessibility levers you can pull. Most are free. Most take under an hour to implement. Most produce measurable results in 30-60 days.
-
----
 
 ## Frequently Asked Questions
 
@@ -256,3 +128,11 @@ The uncomfortable truth is that most small business owners won't do any of this.
 I've helped businesses in Austin, Denver, Nashville, Portland, Chicago, and New York make these changes. If you want someone to walk through your site with you and tell you exactly what to fix — no jargon, no upsells — I'll do it.
 
 [Book a free consultation](/contact)
+
+## Related Articles
+
+- [Call Tracking for Local Businesses: Know Which Ads Drive Phone Calls](/blog/call-tracking-for-local-business)
+- [DIY Website vs Hiring a Developer: What Small Businesses Get Wrong](/blog/diy-website-vs-professional-developer)
+- [Framer for Small Business Websites: Fast, Beautiful, and Worth It?](/blog/framer-website-builder-small-business)
+- [Google Analytics 4 for Small Businesses: Track What Actually Matters](/blog/google-analytics-4-for-small-business)
+- [Google Tag Manager for Small Businesses: No-Code Tracking Setup](/blog/google-tag-manager-for-small-business)

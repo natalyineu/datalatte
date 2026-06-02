@@ -133,101 +133,7 @@ In that case, use **Firebase + Google Analytics 4** (free) until your mobile mar
 
 Switching between platforms is painful. The SDK needs to be replaced in your app, which requires a new app store submission and review. Attribution history doesn't transfer. If you're choosing for the first time, choose carefully — migrating after 12+ months of data creates reporting gaps.
 
-## Frequently Asked Questions
 
-### Can I run both Adjust and AppsFlyer simultaneously?
-
-Technically possible but not recommended. Running two attribution SDKs creates data conflicts and attribution discrepancies. The platforms are mutually exclusive for attribution purposes — choose one.
-
-### Which platform do larger brands use?
-
-Both. AppsFlyer is used by a slightly higher proportion of enterprise gaming and commerce brands. Adjust has strong adoption in the European market and among performance-focused mobile-first businesses. Market share is roughly competitive, with AppsFlyer holding a modest lead by customer count globally.
-
-### Does the choice matter for a local business with a simple loyalty app?
-
-At small scale (under 5,000 installs/month), the difference is minimal. Start with AppsFlyer's free tier because it costs nothing to begin. If you later need Adjust's specific strengths, migrating at that point is a manageable decision with more data to justify it.
-
-### How long does SDK implementation take for each platform?
-
-Implementation time is roughly equivalent: 2–5 developer days for a simple app, longer for complex apps with many custom events. Both platforms have good documentation and developer support. Neither is significantly more complex to implement than the other.
-
-## Common Mistakes (And What to Do Instead)
-
-### Mistake 1: Using the Free Trial to Run a Full Campaign
-
-A pet grooming app in Austin, Texas, launched with the AppsFlyer free trial. They had 12 locations, a loyalty program, and a budget of $8,000/month across Google Ads and Meta. The free trial covers up to 1,000 installs per month. They hit 847 installs in week one.
-
-What went wrong: They didn't realize the free tier limits event tracking. They couldn't see which campaigns drove actual bookings (versus just installs). After three weeks, they thought Google Ads was underperforming. They pulled $3,000 from Google and moved it to Meta. The next month, installs dropped 34% and bookings fell 22%. The real problem: Meta drove installs. Google drove bookings. They couldn't see that because the free tier capped custom event data.
-
-The fix: Move to a paid plan before running significant ad spend. Both Adjust and AppsFlyer will let you upgrade mid-month, but you lose the data from the free period. At minimum, run a 7-day test with a $500 budget, then upgrade to paid before scaling.
-
-The outcome: After switching to Adjust's paid plan ($299/month for their volume), they re-ran both channels for two weeks. Google Ads was driving 68% of actual booking events, not installs. They reallocated budget back to Google, spent the same $8,000, and saw bookings climb 41% in the next 30 days. The $299/month plan cost them less than the $3,000 they misallocated.
-
-### Mistake 2: Trusting Default Attribution Windows
-
-A hair salon chain in Nashville with 4 locations ran a heavy TikTok campaign. Their AppsFlyer dashboard showed 1,200 installs and 340 bookings attributed directly to TikTok. The owner was thrilled and doubled the TikTok budget to $6,000/month.
-
-What went wrong: The default attribution window for TikTok in AppsFlyer is 7-day click-through and 1-day view-through. TikTok's audience tends to see an ad, leave, and come back days later through Google search. The platform was crediting TikTok for conversions that Google should have shared credit for. When they doubled the TikTok budget, the installs went up but the booking rate stayed flat. They were spending $6,000 to get the same 340 bookings they got with $3,000.
-
-The fix: Shorten the TikTok attribution window to 1-day click-through and 0-day view-through in both platforms. Or better, use a multi-touch model. For Adjust, switch to their "weighted attribution" model that splits credit across the first and last click. For AppsFlyer, use the "custom attribution flow" to set time windows per network.
-
-The outcome: After adjusting the windows, TikTok's attributed bookings dropped to 120. Google's attributed bookings jumped to 280. The actual total bookings hadn't changed — the credit was just wrong. They moved $2,000 back to Google Ads and spent $4,000 on TikTok. Bookings stayed at 340 per month. They saved $2,000/month in wasted TikTok spend.
-
-### Mistake 3: Ignoring Fraud Detection Entirely
-
-A fitness studio app in Denver had been running programmatic ads through a small ad network. Their cost per install was $2.80, which seemed reasonable. They were spending $4,200/month across 1,500 installs. The studio owner thought everything was working fine — until they looked at retention data.
-
-What went wrong: Of those 1,500 installs, only 300 users opened the app a second time. That's an 80% drop-off on day 1. Normal for fitness apps is 30-40% day 1 retention. The owner assumed the app was bad. They spent $1,200 on a UX audit. The app was fine. The problem: 800 of those 1,500 installs were bots. A click injection campaign was generating fake installs from a Vietnamese IP pool. The $2.80 CPI looked good, but the real CPI for actual users was closer to $7.00.
-
-The fix: Both Adjust and AppsFlyer have fraud detection. The mistake was not activating it. In Adjust, go to Settings > Fraud Prevention and turn on all filters: click injection prevention, SDK spoofing detection, and pre-install attribution validation. In AppsFlyer, activate the "Fraud Detection Suite" under Security. The owner had the free trial, so fraud tools were not included. That was the first problem.
-
-The outcome: After upgrading to Adjust's paid plan ($399/month for their volume with fraud included), they ran a fraud audit. It flagged 53% of installations as suspicious. They blocked the programmatic network that was running the bot traffic. The next month, installs dropped to 700 — but day 1 retention jumped to 62%. The true CPI turned out to be $5.00, not $2.80. The savings: $2,200/month they had been spending on fake traffic.
-
-### Mistake 4: Not Connecting Offline Events
-
-A coffee roasting company in Portland with a mobile ordering app was spending $5,000/month on ads. They tracked installs and in-app purchases — coffee beans ordered through the app. But 60% of their revenue came from in-store pickups. Customers would order through the app, then walk into one of three cafes and pay with a card at the register.
-
-What went wrong: The app was generating $8,000/month in in-app purchases. The ads looked barely profitable. The owner was about to cut the ad budget by 50% because the ROAS was 1.6x. They didn't realize they were missing all the offline revenue driven by app-driven awareness and ordering.
-
-The fix: Both Adjust and AppsFlyer can ingest offline conversion data. Connect your POS system (Square, Clover, or Lightspeed) to the platform. In Adjust, use the "Offline Conversion API" to send transaction data back. In AppsFlyer, use "Event API" to push offline purchases. The coffee roaster used Square. They matched Square transactions to app user IDs by email hash.
-
-The outcome: Once offline data was connected, the true revenue from app-attributed customers was $14,000/month — not $8,000. The ROAS jumped from 1.6x to 2.8x. The owner actually increased the ad budget by $2,000/month and saw revenue climb to $18,000 within 60 days. The cost to implement the offline integration was about 4 hours of developer time. The return was $6,000/month in previously invisible revenue.
-
----
-
-## How Much You'll Actually Pay (And What's Hidden)
-
-The published pricing for both platforms is about as transparent as a coffee shop menu in a language you don't speak. Let me translate based on what I've seen clients actually pay in 2025 and 2026.
-
-AppsFlyer's public stance is "free for up to 1,000 installs per month." That sounds generous until you realize 1,000 installs is about what a single Yelp ad campaign in a mid-sized city like Austin generates in a month. Once you cross that threshold, AppsFlyer pricing starts around $500/month for their "Pro" tier. For a small business with under 10,000 installs per month, you're looking at $500-$1,000/month. That gets you basic attribution, fraud detection (basic version), and up to 10 custom events.
-
-Adjust's pricing is event-based, not install-based. You pay per tracked event. For a small business with 5,000 installs and an average of 4 events per user (install, login, add to cart, purchase), you're looking at roughly $300-$600/month. The floor is lower — Adjust starts around $200/month for smaller volumes. The catch: Adjust's free tier is more limited. No fraud detection, no offline conversion, no raw data export. You need at least their "Growth" tier at $299/month to get useful features.
-
-Here's the hidden cost nobody talks about: setup time. I've seen businesses spend $2,000-$5,000 on developer hours to integrate the SDK, set up events, test deep linking, and configure fraud settings. AppsFlyer's SDK is slightly easier for a solo developer to integrate. Adjust requires a bit more configuration but the documentation is cleaner. The average cost for a US agency to do this integration: $3,500 for AppsFlyer, $4,200 for Adjust. The difference is negligible if you factor in the monthly savings.
-
-A concrete example: A bakery chain in Chicago with 6 locations runs 4,000 installs per month. They have 3 events they care about (install, order placed, order completed). AppsFlyer wants $500/month. Adjust charges $350/month. Over 12 months, Adjust saves $1,800. The bakery used that savings to fund a Yelp integration that brought in $3,200 in additional revenue. Not bad.
-
-The question I get most often: "Which one is cheaper for a small business?" The answer is: if you have under 10,000 installs and under 5 custom events, Adjust is almost always cheaper. If you have more than 10,000 installs or you need complex event tracking, AppsFlyer's flat fee can be more predictable. But don't sign a 12-month contract with either without testing. Run both for 30 days (yes, you can do that). See which one your developer hates less. That's worth $100/month on its own.
-
----
-
-## Integration with the Tools You Already Use
-
-Both platforms connect to the standard ad networks (Google, Meta, TikTok, Apple Search Ads, Snapchat). That's table stakes. The real question is whether they connect to the tools your actual business runs on.
-
-For a coffee shop, salon, or fitness studio, the tech stack typically includes: a booking platform (Booksy, Vagaro, Mindbody), a payment processor (Square, Clover, Stripe), an email tool (Mailchimp, Klaviyo), and a review platform (Yelp, Google Business Profile).
-
-Let's start with Square. Over 60% of the small businesses I work with in the US use Square for payments. Both Adjust and AppsFlyer can ingest Square transaction data through their API. The catch: you need a developer to set up the webhook. You send transaction data from Square to the attribution platform, where it's matched to app users. I saw a barbershop in Detroit do this. They connected Square to AppsFlyer. They discovered that 22% of their app users who visited the shop never actually booked through the app — they just showed up. Those walk-ins were being completely ignored in their ROAS calculations. After connecting Square, they realized their Facebook ads were driving $2,800/month in additional walk-in revenue they'd been missing. The setup took one afternoon and cost $600 in developer time. The return was $2,800/month in newly attributed revenue.
-
-Booksy is another common one — especially for salons and barbershops. Adjust has a direct Booksy integration via their partner marketplace. AppsFlyer does not have a native Booksy integration, but you can pipe data through a middleware tool like Zapier. That adds another $20-30/month and some maintenance overhead. If you're a hair salon in Atlanta running Booksy bookings, Adjust will save you that monthly zap.
-
-Mailchimp is a no-brainer for both. Connect your attribution data to Mailchimp to see which ad campaigns generate email subscribers. A Nashville coffee shop did this: they connected AppsFlyer to Mailchimp and discovered that their TikTok ads drove 40% of email signups, even though TikTok was only responsible for 12% of app installs. They shifted $500/month from Google to TikTok, and email-driven revenue went up 18% in two months.
-
-Yelp is the tricky one. Yelp's ad platform does not integrate natively with either Adjust or AppsFlyer. You have to use deep linking or UTMs. Both platforms support Yelp trackable links. A pet groomer in Denver set up Adjust Links connected to their Yelp ads. They tracked that every $100 spent on Yelp generated 4 app installs and 2 bookings — a roughly 5x ROAS. Without that tracking, they would have assumed Yelp was a waste of money.
-
-The lesson: check the integration marketplace before you choose. If your core tool has a native integration, you'll save setup time and ongoing maintenance headaches. For most small businesses in the US, Adjust has slightly better coverage for booking and payment platforms. AppsFlyer wins on ad network breadth. Choose based on where your money comes from.
-
----
 
 ## Frequently Asked Questions
 
@@ -254,3 +160,11 @@ Yes and no. You can export your raw event data from either platform as CSV files
 ---
 
 I've watched more agency meetings than I care to remember — whiteboards full of attribution models, debates over click windows, someone inevitably arguing that "view-through conversions shouldn't count." Here's what I actually know: the platform matters far less than whether you actually look at the data every week. I've seen both tools collect dust because the business owner signed up, installed the SDK, and never logged in again. The best platform is the one you'll actually use. If you have specific questions about your setup — your Square terminal, your Mailchimp audience, your Booksy bookings — I'll give you a straight answer. No pitch, no "let's align," no discovery call theater. [Book a free consultation](/contact)
+
+## Related Articles
+
+- [AppsFlyer for Small Business: Do You Actually Need Mobile Attribution?](/blog/appsflyer-small-business-guide)
+- [Unlocking AI-Driven Analytics for Local Businesses](/blog/ai-driven-analytics-for-local-businesses)
+- [Unlocking Insights with AI-Driven Analytics for Pet Groomers](/blog/ai-driven-analytics-for-pet-groomers)
+- [Unlock Customer Insights with AI-Driven Analytics](/blog/ai-driven-customer-insights-for-local-businesses)
+- [>-](/blog/ai-powered-analytics-for-local-businesses)

@@ -84,107 +84,6 @@ When choosing a website hosting plan, consider the following factors:
 
 **
 
-## Common Mistakes (And What to Do Instead)
-
-I've watched small business owners burn months of momentum and thousands of dollars on bad hosting decisions. These aren't edge cases. I saw the same patterns at three different agencies. Here are the ones that keep happening.
-
-### Mistake #1: Buying the Cheapest Shared Hosting Plan
-
-**The story:** A coffee shop in Portland, Oregon — let's call it "Morning Fuel" (not their real name, but they'll recognize themselves) — launched a new seasonal menu in November 2023. They'd been paying $2.99/month on a basic shared hosting account with one of the big-name providers. Their website had maybe 200 visitors a day normally.
-
-They posted the holiday menu on Instagram. It got picked up by a local food blog. Their site had 1,200 visitors in two hours. At 1:47 PM, the site went down. Completely. White screen of death. The hosting provider's support told them they'd exceeded CPU limits and could upgrade to a "business plan" for $29.99/month — after a 48-hour processing period.
-
-**What went wrong:** Shared hosting pools server resources among dozens (sometimes hundreds) of sites. One neighbor's traffic spike or a plugin update can take down your entire site. There's also no real surge capacity. The $2.99 plan is priced that way for a reason — they're selling you a shoebox and hoping you never check the neighbors.
-
-**The fix:** Move to a hosting plan with isolated resources. For most small businesses, that means a low-tier managed WordPress host (like SiteGround's GrowBig or Flywheel) or a reliable VPS (Cloudways is my go-to for clients who need flexibility). Expect to pay $15–$30/month. Yes, it's 5–10x the cheap plan. Here's what actually happened when I tested this:
-
-**The outcome:** After the crash, Morning Fuel migrated to a managed host at $19.99/month. Three months later, they ran a Valentine's Day campaign. Traffic hit 2,800 visitors on a single day. Zero downtime. They sold out of pre-orders by 3 PM. Total revenue that day: $4,200. The old host would have crashed by 10 AM. The extra $17/month paid for itself in about 14 minutes of a busy day.
-
-### Mistake #2: Ignoring Where Your Hosting Servers Are Actually Located
-
-**The story:** A hair salon in Austin — "Eastside Cuts" — booked their hosting through a friend's web developer who used a bargain provider based entirely in Singapore. The site worked fine at 2 AM when the developer was testing it. The problem: 80% of Eastside Cuts' clients are within a 5-mile radius of the salon. That data had to travel from Austin to Singapore and back every time someone loaded the booking page.
-
-Average load time: 6.8 seconds. Their Google Ads campaign for "hair salon Austin" was getting clicks at $3.50 each. The landing page was timing out before it even finished loading on mobile. Their conversion rate: 0.8%. A slow site with a local audience.
-
-**What went wrong:** Most hosting providers let you pick a server location. Many small business owners don't realize this matters — or they assume their host automatically routes traffic to the nearest server. They don't. If your data center is on the other side of the planet, your Austin customers are waiting for data to make a round trip that adds seconds to every page load.
-
-**The fix:** Choose a hosting provider with data centers in your country — ideally in your region of the country. For US businesses, that means servers in Dallas, Ashburn, Los Angeles, or similar. For UK, London. For Australia, Sydney. Many hosts let you pick during checkout. I tell clients: if your host can't tell you which city their servers are in within 30 seconds, run.
-
-**The outcome:** Eastside Cuts migrated to a host with a Dallas data center. Load time dropped from 6.8 seconds to 1.2 seconds. Their Google Ads quality score improved. Their cost per click dropped to $1.80. Their conversion rate went from 0.8% to 4.1%. Monthly bookings increased by 140% — no change to the ads, the offer, or the website design. Just the hosting. That's $2,100/month in additional revenue from a $10/month hosting change.
-
-### Mistake #3: Not Checking What Happens When Things Break
-
-**The story:** A pet grooming studio in Nashville — "Paws & Polish" — used a hosting provider they'd heard about from a Facebook group. The site was fine for 14 months. Then their booking plugin (they used Booksy integration) had a conflict with a WordPress update. The site stopped accepting bookings. No error message. Just a blank booking form that never submitted.
-
-They contacted support. The host's response: "We don't support plugin issues. You'll need to talk to a WordPress developer." The next available developer couldn't look at it for three days. Three days of zero online bookings. For a business that gets 60% of its appointments through the website, that's about 18 missed appointments at $65 each = $1,170 lost. The owner told me she considered switching to paper appointment books. I told her to switch hosts instead.
-
-**What went wrong:** Many budget hosting providers offer "support" that covers only their server infrastructure. If your WordPress install has an issue — a plugin conflict, a PHP version mismatch, a corrupted .htaccess file — they'll tell you it's not their problem. Some hosts won't even help you restore a backup. You're on your own.
-
-**The fix:** Choose a host that offers managed WordPress support. That means they'll actually troubleshoot plugin conflicts, fix database errors, and restore backups for you. It's the difference between "the server is up" and "your website is working." I've used Kinsta's support team to debug a WooCommerce shipping issue at 11 PM on a Sunday. That's what you're paying for.
-
-**The outcome:** Paws & Polish migrated to a managed WordPress host with 24/7 support. Three months later, their SEO plugin had a conflict after an update. They called support at 9 PM on a Tuesday. A human answered in 90 seconds. They fixed the conflict in 11 minutes. The booking system never went down. The owner's words: "I didn't realize peace of mind came with a hosting plan." The cost difference: $15/month more than her old host. The cost of another three-day outage: $1,170. It's not a hard math problem.
-
-### Mistake #4: Using a Free SSL Certificate and Forgetting to Renew It
-
-**The story:** A small accounting firm in Denver — "Mile High Numbers" — had their developer set up a free SSL certificate through Let's Encrypt. It was part of the initial hosting setup and worked perfectly for 90 days. Then it expired. The developer had set auto-renewal, but the hosting provider's cron job configuration failed. Nobody checked.
-
-For two weeks, anyone visiting milehighnumbers.com saw a "Your connection is not private" warning in Chrome. The owner — a CPA — didn't realize because she was logged into the WordPress admin on her own computer, which bypassed the warning. Her clients? They saw the scary red screen and bounced. One told her later: "I thought you'd been hacked." She lost at least 12 consultation bookings — at $200 per initial appointment, that's $2,400 in direct lost revenue. Plus whatever ripple damage to trust and referrals.
-
-**What went wrong:** Free SSL certificates (Let's Encrypt and similar) require renewal every 90 days. Most hosts now automate this. Some don't. Even automated systems can fail silently. If nobody monitors it, you'll find out about the problem when a client sends you a screenshot of the security warning.
-
-**The fix:** Use a hosting provider that includes a managed SSL certificate with auto-renewal and monitoring. Many mid-tier hosts (SiteGround, Flywheel, Kinsta) handle this automatically and will notify you if there's an issue. Or pay the extra $3–5/month for a premium SSL that lasts a year and comes with warranty protection. Either way, set a calendar reminder to check your SSL status manually every 60 days. It takes 10 seconds.
-
-**The outcome:** Mile High Numbers upgraded to a host with managed SSL. The cost: $0 extra — included in their $24.99/month plan. They now get a monthly report that shows SSL status, uptime, and speed metrics. In the year since, zero security warnings. Their booking form conversion rate returned to pre-incident levels (about 5.2%). The $2,400 loss never repeated.
-
----
-
-## What Your Hosting Cost Actually Covers (And What It Doesn't)
-
-Let's be direct about pricing. You'll see hosting plans ranging from $2.99/month to $300/month. Here's what the different price tiers actually get you — based on what I've seen work and fail across dozens of clients.
-
-**Under $10/month:** You get space on a server shared with 200+ other sites. Your performance depends entirely on what your neighbors do. If someone on your server gets a traffic spike from a viral TikTok, your site slows down. If a neighbor's site gets hacked, your site might get blocked too. Support is usually a ticket system with 12+ hour response times. This is fine if your website is a digital business card that nobody visits. It's not fine if you're trying to generate leads or sales.
-
-**$10–$30/month:** This is the sweet spot for most small businesses. At this price, you usually get managed support, automated backups, a CDN (content delivery network — basically, copies of your site stored on servers around the world so it loads fast everywhere), and some level of performance isolation. You're not sharing resources with 200 other sites — maybe 10-20. Support responses are usually under 2 hours. SSL is included and managed. This is where you should be if you're taking online bookings, processing payments, or running any kind of ad campaign.
-
-**$30–$80/month:** This gets you into serious managed hosting territory. You get dedicated support teams who actually understand WordPress (or whatever CMS you're using). You get staging environments — a copy of your site where you can test changes before pushing them live. You get automatic plugin updates that won't break your site. You get detailed analytics on traffic patterns and server performance. I recommend this tier for businesses generating more than $10,000/month through their website. The hosting cost is about 0.3–0.8% of revenue at this level — and it pays for itself in prevented downtime alone.
-
-**$80+/month:** Enterprise hosting. Custom configurations, dedicated account managers, SLA guarantees with financial penalties if they miss uptime targets. Most small businesses don't need this. If you're here, you already know why.
-
-One uncomfortable truth: I've seen businesses spend $500/month on a developer retainer to fix problems that a $25/month managed host would have prevented. The developer was making $60/hour fixing plugin conflicts and SSL issues. The hosting cost wasn't the problem — the problem was not paying for the right kind of hosting.
-
----
-
-## The Hosting Decision That Affects Your Google Ads and Local SEO
-
-Most small business owners separate "hosting" from "marketing" in their heads. They're the same thing. Here's why.
-
-**Google Ads Quality Score:** Google measures how fast your landing page loads. If your site takes 4 seconds to load on mobile, your Quality Score drops. That means you're paying more per click than a competitor with a faster site. I've run split tests on this. A client in Chicago—a plumbing company running local ads—had a 2.8 second load time on their service page. Their cost per click was $4.20. We moved them to faster hosting with server-side caching. Load time dropped to 1.1 seconds. Cost per click dropped to $2.60. Same ads, same budget, same landing page. The only change was where the site was hosted. That's $1.60 saved on every click. At 500 clicks per month, that's $800/month in pure margin.
-
-**Local SEO (Google Business Profile):** Google's local ranking algorithm considers website quality signals. Site speed, uptime, and security (HTTPS) all matter. A slow or unreliable site tells Google you're not maintaining your online presence. I've seen a Denver bakery's local pack ranking drop from position 3 to position 8 after a week of intermittent downtime. It took three months of consistent uptime to recover. That's three months of fewer local searches converting into foot traffic.
-
-**Yelp Integration:** If you use Yelp's booking or advertising features, your website needs to load quickly when someone clicks through from your Yelp profile. Yelp tracks bounce rates. If users click through to a slow site and immediately bounce, Yelp's algorithm assumes your listing isn't providing a good user experience. Your Yelp ranking can drop. A fitness studio in Nashville saw their Yelp phone call requests drop 40% after a hosting slowdown. They fixed the hosting. The calls came back within two weeks.
-
-**Email Deliverability:** Many hosting plans include email services. If your host's IP range is flagged for spam (because another client on your shared server is sending spam), your business emails — including booking confirmations, invoices, and replies to inquiries — may land in spam folders. This is a recurring problem with budget hosts. I recommend using a separate email service (Google Workspace at $6/month or Microsoft 365 at $5/month). It costs less than most hosting plans and eliminates an entire category of headaches.
-
-**Mailchimp and CRM Connections:** If you're using Mailchimp, HubSpot, or Square to manage customer data and send emails, your website needs to respond quickly to API calls. Every time someone fills out a contact form or makes a booking, your site sends data to these services. A slow server creates lag — and sometimes the API call times out entirely. The form submission just... disappears. No record. No follow-up email. That's a lead you paid for (through ads or SEO) that evaporates into the void.
-
----
-
-## When It Makes Sense to Upgrade (And When It Really Doesn't)
-
-Every year, a hosting provider runs a "deal" — 70% off the first year, free domain, $5/month for life. You sign up. Year two rolls around and the price triples. Should you stay or should you leave?
-
-**Stay if:** Your current host has maintained consistent uptime (99.9% or better), your site loads in under 2 seconds, and support has resolved issues in under 4 hours. Price increases of 20-30% are normal. If you're getting the service, pay the increase. Your time is worth more than the $8/month you'd save by switching.
-
-**Leave if:** You've had more than one outage in the past six months. Support has taken more than 24 hours to respond more than once. Your site is slower than it was a year ago (this can indicate overloading on a shared server). You've outgrown your plan — more traffic, more functionality, more risk if things break.
-
-**Upgrade within the same host if:** You like the support and the platform but need more resources. Most hosts offer clear upgrade paths. I've moved clients from shared to VPS or from basic managed to premium managed within the same host with zero downtime. It takes 15 minutes.
-
-**Don't upgrade just because a sales rep calls you.** I've had clients told they "need" enterprise hosting because they hit 10,000 monthly visitors. That's not enterprise traffic — that's a mid-tier managed plan. If a host tries to upsell you before you've had any performance issues, be suspicious.
-
-One specific scenario where upgrading pays for itself immediately: if you're running time-sensitive promotions. A pet groomer in Denver runs monthly "puppy specials" that go live at 8 AM on the first Monday. Her old host couldn't handle the traffic spike. Now she's on a plan that auto-scales (temporarily adds resources during traffic surges). The cost: about $15/month more. The last promotion hit 3,200 visitors in three hours. Zero slowdowns. She generated $2,800 in bookings from that promotion alone. The upgrade paid for itself in the first 12 minutes of traffic.
-
----
 
 ## Frequently Asked Questions
 
@@ -227,3 +126,11 @@ If you want my current list of what I actually use and recommend — including t
 One last thing: if you're running any kind of paid traffic, your hosting is part of your ad budget. A slow site doesn't just annoy visitors — it increases your cost per acquisition. Every dollar you save on hosting is a dollar you're probably paying double for in wasted ad spend. I've run the audit. The numbers don't lie.
 
 [Book a free consultation](/contact)
+
+## Related Articles
+
+- [Call Tracking for Local Businesses: Know Which Ads Drive Phone Calls](/blog/call-tracking-for-local-business)
+- [DIY Website vs Hiring a Developer: What Small Businesses Get Wrong](/blog/diy-website-vs-professional-developer)
+- [Framer for Small Business Websites: Fast, Beautiful, and Worth It?](/blog/framer-website-builder-small-business)
+- [Google Analytics 4 for Small Businesses: Track What Actually Matters](/blog/google-analytics-4-for-small-business)
+- [Google Tag Manager for Small Businesses: No-Code Tracking Setup](/blog/google-tag-manager-for-small-business)
