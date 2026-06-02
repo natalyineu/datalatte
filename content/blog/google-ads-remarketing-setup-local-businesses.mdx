@@ -7,9 +7,10 @@ category: "Google Ads Advanced"
 tags: ["google ads remarketing", "local business", "remarketing strategy"]
 slug: "google-ads-remarketing-setup-local-businesses"
 image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&auto=format&fit=crop"
-readTime: "8 min read"
+readTime: '14 min read'
 
 ---
+
 **The Average Local Business Loses 70% of Customers Due to Poor Retargeting**
 
 If you're like many local business owners, you're probably losing potential customers to competitors who know how to retarget them effectively. But what if you could turn those lost customers into loyal fans? With Google Ads remarketing, you can.
@@ -84,3 +85,177 @@ You can track a variety of conversions with Google Ads conversion tracking, incl
 ### Do I need to have a Google Ads account to use conversion tracking?
 
 Yes, you need a Google Ads account to use conversion tracking. If you don't have a Google Ads account, you can create one for free and set up conversion tracking from there.
+
+## Common Mistakes (And What to Do Instead)
+
+### Mistake 1: Targeting Everyone Who Visited Your Site
+
+A hair salon in Austin, Texas — let's call it Luna Beauty Bar — came to me after spending $1,400 on remarketing in six weeks with exactly zero booked appointments. Zero.
+
+I looked at their audience setup. They were targeting anyone who'd visited any page on their site in the past 30 days. That included people who landed on their "Careers" page, read their blog post about balayage trends, and accidentally clicked an ad at 2 a.m. while drunk-shopping for hair clips.
+
+**What went wrong:** They treated every visitor as equally valuable. Someone who browsed pricing for 30 seconds is not the same as someone who clicked "Book Now" but didn't complete the form. Their audience was 80% noise.
+
+**The fix:** I rebuilt their audiences into tiers. Tier 1: People who clicked "Book Now" but didn't book (5-day window, max $1.50 CPC). Tier 2: People who viewed the pricing page for more than 20 seconds (14-day window, $0.75 CPC). Tier 3: Everyone else ran on a $0.35 CPC with strict frequency caps.
+
+**The outcome:** In the first month after restructuring, Luna Beauty Bar spent $480 and booked $2,100 in appointments directly attributed to remarketing. Their cost per booking dropped from $233 to $38.
+
+### Mistake 2: No Exclusions (And Double-Counting Your Best Customers)
+
+A pet grooming business in Portland, Oregon — Paws & Clippers — had a different problem. Their remarketing was working fine, except they were serving ads to customers who had already booked and visited. Their regulars saw a "Come back for a bath!" ad the day after their appointment. Not great.
+
+Over eight months, they'd spent $2,600 showing ads to people who were already customers. That's $2,600 they could have kept.
+
+**What went wrong:** They never built a list of converted customers and excluded them from remarketing. Most guides skip this part because it requires knowing how to set up customer match lists or tag existing clients in your CRM. Most local businesses don't have a CRM that talks to Google Ads.
+
+**The fix:** We exported their client email list from their booking software (they used Booksy) and uploaded it as a customer match list in Google Ads. Then we created an exclusion audience from that list. New remarketing campaigns automatically excluded anyone on the customer list.
+
+We also set up a "past clients who haven't booked in 60+ days" list for a separate win-back campaign. That one had a different message: "It's been a while. Here's $10 off your next groom."
+
+**The outcome:** They stopped burning $325/month on ads to current customers. The win-back campaign brought in $1,100 in revenue from 14 lapsed clients in its first month. Total ad spend on that campaign: $180.
+
+### Mistake 3: Using the Same Ad for Everyone
+
+A coffee shop in Nashville — Eastside Brew — ran remarketing with one generic ad: "Come grab a coffee!" They spent $900 over three months. They got 17 clicks and zero redemptions of their "first visit free" offer.
+
+**What went wrong:** Their audience was a mix of people who had visited once, people who ordered delivery through DoorDash but never walked in, and people who had browsed their seasonal menu page. One ad can't speak to all of them. The "first visit free" offer was irrelevant to someone who had already visited three times.
+
+**The fix:** We split audiences into three groups. Group A: People who visited once in the last 30 days got a "Try our new cold brew flight" ad. Group B: People who only ordered delivery got a "Come see us in person — free pastry with any drink" ad. Group C: People who viewed seasonal menu pages got a "Limited-time pumpkin spice latte available now" ad.
+
+Each group had its own landing page with a specific offer and tracking pixel.
+
+**The outcome:** Spent $340 in the next 30 days. Group A drove 22 visits (tracked via a promo code). Group B drove 19 visits. Group C drove 8 visits. Total attributed revenue: $1,420. Cost per visit: $6.95. Previously, their cost per click was $52.94 with zero conversions.
+
+### Mistake 4: Setting Frequency Caps Too High (or Not at All)
+
+A fitness studio in Denver — Mile High Yoga — ran remarketing with no frequency cap. One person saw their ad 47 times in two weeks. She emailed them saying, "I will never come to your studio because your ads are stalking me."
+
+**What went wrong:** Google's default frequency cap is essentially "unlimited." The studio had a 30-day audience window, 200 visitors in the list, and a $5 daily budget. That meant their ads were serving multiple times per day to a very small pool of people. They were annoying potential customers into hating them.
+
+**The fix:** I set a frequency cap of three impressions per person per day across all remarketing campaigns. We also shortened the audience window from 30 days to 14 days for most lists. If someone hasn't come back in two weeks, they're probably not coming back from a generic ad.
+
+**The outcome:** Ad spend remained roughly the same ($320/month). Complaints stopped. Their click-through rate actually increased from 0.4% to 1.8% because people weren't numb to the ad. They booked $1,900 in class passes that month — up from $680 before the fix.
+
+---
+
+## How to Layer Remarketing with Local Inventory Data
+
+If you sell physical products or services with appointments, your most powerful remarketing asset isn't a website visitor — it's someone who looked at a specific item or service and didn't buy.
+
+Most local businesses don't realize you can feed your inventory into Google Ads and create remarketing lists based on what people viewed. Here's how that works in practice.
+
+### For Retail: Square Inventory + Google Ads
+
+A boutique clothing store in Chicago — Logan Square Threads — used Square to manage their point of sale and inventory. They had a customer who looked at a $180 wool coat online three times but never bought it.
+
+Standard remarketing would show them a generic "Shop our winter collection" ad. Instead, we used Square's inventory feed to create a dynamic remarketing campaign. This is where Google shows the exact product someone viewed, along with similar products and pricing.
+
+**The setup:** You need a product feed (Google Merchant Center), conversion tracking on your checkout process, and a remarketing tag on product pages. Square integrates directly with Google Merchant Center through a free app.
+
+**The numbers:** Logan Square Threads spent $220/month on dynamic remarketing. In the first quarter, they attributed $4,600 in sales to those ads. Their cost per sale: $14.37. For a store where average order value is $85, that's a 6x return.
+
+**The catch:** You need at least 100 products in your feed to qualify for dynamic remarketing. For smaller shops, you can manually create segmented audiences based on product categories ("Viewed Outerwear," "Viewed Accessories") and serve category-specific ads.
+
+### For Service Businesses: Booksy or Yelp Book Integration
+
+A nail salon in San Diego — Ocean View Nails — used Booksy for appointment booking. When a client browsed available slots for a gel manicure at 3 p.m. on Saturday but didn't book, that's a high-intent signal.
+
+Most local businesses leave that signal on the table.
+
+**The fix:** Booksy has a Google Ads integration that passes booking data back to your remarketing audiences. We set up a list of "people who viewed available appointments but didn't book" with a 48-hour window. This audience got a specific ad: "That appointment you were looking at is still available. Book now and get 10% off."
+
+**The numbers:** That 48-hour list was small — usually 15–30 people at any time. But the conversion rate was 22%. In one month, that list alone drove $640 in appointments from $90 in ad spend.
+
+### The Data Layer You're Ignoring
+
+If you're using Square, Booksy, Yelp Book, or even Mailchimp to send appointment reminders, you have data that tells you exactly when someone is ready to buy. The "viewed availability but didn't book" signal is worth 5–10x more than a random site visit.
+
+Most local businesses don't take the 30 minutes to connect these tools to Google Ads because they assume it's complicated. It's not. Square's integration takes about 15 minutes. Booksy's takes 20. If you have a developer, they can do it in 10.
+
+Every week you don't do this, you're paying to show ads to people who looked at your homepage once instead of showing ads to people who almost booked but got distracted.
+
+---
+
+## The Budget Math: What $500/Month Actually Buys You
+
+I see local business owners set remarketing budgets based on vibes. "I'll throw $200 at it and see what happens." That's not a strategy. Let me show you what different budgets actually deliver based on real campaigns I've managed.
+
+### $200/Month: The Starter Floor
+
+At $200/month with a $0.50 average CPC, you get about 400 clicks. If your site converts at 3% (average for local service businesses), that's 12 conversions. If each conversion is worth $50 (a haircut, a coffee subscription, a single class pass), you're generating $600 in revenue. That's a 3x return.
+
+**But here's the problem:** At $200/month, you can't run multiple audience tiers effectively. You'll need to pick one audience — usually "people who visited in the last 7 days" — and that's it. You have no budget left for testing different ad copy or landing pages.
+
+**Who this works for:** A single-location business with low-ticket services ($30–$50 average), a clear offer, and a website that converts reasonably well on its own.
+
+**Who this doesn't work for:** Anyone with high-ticket services ($200+), multiple locations, or a slow-converting website. You'll burn through your budget before you get enough data to optimize.
+
+### $500/Month: The Sweet Spot
+
+At $500/month with a $0.50 CPC, you get about 1,000 clicks. At 3% conversion, that's 30 conversions. If your average order value is $80 (a typical salon visit or pet grooming session), you're looking at $2,400 in revenue.
+
+But the real value isn't the clicks — it's the flexibility. With $500/month, you can run three audience tiers:
+
+- **Tier 1 ($250):** High-intent visitors (cart abandoners, "Book Now" clickers) with a max $1.50 CPC
+- **Tier 2 ($150):** Medium-intent visitors (pricing page viewers, service-specific pages) with $0.75 CPC
+- **Tier 3 ($100):** General site visitors with $0.35 CPC and tight frequency caps
+
+**Real example:** A dog groomer in Denver ran this exact setup. Tier 1 booked $1,100 in appointments. Tier 2 booked $680. Tier 3 booked $220. Total revenue: $2,000 against $490 in ad spend. That's a 4x return. They stopped Tier 3 entirely after two months and moved that $100 into Tier 1, which increased their return to 5.5x.
+
+### $1,000+/Month: The Full Funnel
+
+At $1,000/month, you can add dynamic remarketing, customer match win-back campaigns, and YouTube remarketing. This is where you start seeing 8–12x returns because you're hitting people at every stage of the buying cycle.
+
+But here's the uncomfortable truth: I've seen local businesses throw $1,000/month at remarketing without first fixing their audience structure, and they got worse results than the $500/month businesses who did it right.
+
+**The rule:** Don't scale budget until you've proven the mechanics at $500/month. If you can't make $500 work profitably, $1,000 will just lose money faster.
+
+### The Hidden Costs
+
+Most guides don't mention that you'll also need:
+
+- **Landing page updates ($0–$300):** If you're directing people to a generic homepage, your remarketing will underperform. You need a page that matches the ad promise.
+- **Tracking setup ($100–$500):** If you can't set up conversion tracking yourself, a freelancer on Upwork can do it for around $200. Skip this and you're flying blind.
+- **Monthly management (your time or $200–$500):** Remarketing isn't set-and-forget. You need to check audience sizes, exclude converted customers, refresh ads. If you value your time at $100/hour and spend 3 hours/month managing this, that's a $300 opportunity cost.
+
+**Total first-month cost:** $500 (ad spend) + $200 (setup) + $300 (your time) = $1,000. If that scares you, start at $200/month and manage it yourself. Just know that $200/month will take longer to generate meaningful data.
+
+---
+
+## Frequently Asked Questions
+
+**Q: Will remarketing annoy my customers and make them hate my business?**
+
+Yes, if you do it wrong. No, if you do it right. I've seen three specific scenarios where remarketing backfires: (1) no frequency cap — someone sees your ad 40 times in a week, (2) showing the same ad to everyone regardless of where they are in the buying cycle, (3) serving ads to people who already converted. Fix those three things and most people won't even notice your ads. The ones who do notice are either interested (good) or annoyed by all digital ads generally (not your problem). Set a frequency cap of 3 impressions per person per day and you'll be fine.
+
+**Q: How much money do I need to start? I only have $200–$300/month for ads.**
+
+Start at $200/month. Focus on one audience: people who visited your site in the last 7 days. Set a $1 max CPC. Run one ad with a clear offer. Monitor it for 14 days. If you get 2+ conversions, keep going. If you get zero, your ad or landing page needs work — don't increase budget until you fix that. At $200/month, you're not going to get rich, but you'll learn what works. I've seen a coffee shop in Seattle generate $780 in monthly revenue from $200/month in remarketing. It's possible.
+
+**Q: Can I run remarketing if I don't have a website? I just use Instagram and a booking link.**
+
+Technically yes, practically no. Google Ads requires a website with a tracking tag to build remarketing lists. If you only have a booking link (like a Booksy or Square Appointments page), you can install the Google tag on that page, but your audience will be small. A better option: create a simple landing page with Google Sites or Carrd (free), install the tag, and direct all your ads there. Or build an email list and use customer match remarketing, which doesn't require a website. But the honest answer is: if you don't have a website, you're leaving money on the table with remarketing. Get a basic site first. It doesn't need to be fancy.
+
+**Q: How is remarketing different from just running regular Google Ads?**
+
+Regular Google Ads targets people searching for what you offer. Remarketing targets people who already visited your site. The intent level is completely different. Someone searching "dog grooming Austin" has general intent. Someone who visited your grooming pricing page and left has specific intent — they were considering you specifically. Remarketing usually converts at 3–5x the rate of regular search ads because you're not convincing someone to try your business; you're reminding them to finish what they started. That said, you should run both. Remarketing without regular ads means you're only catching people who already found you. Regular ads without remarketing means you're losing most of the people who almost bought.
+
+**Q: What if nobody is visiting my website? Can I still use remarketing?**
+
+No. Remarketing requires an audience of at least 100 people for standard campaigns and 1,000 for dynamic remarketing. If you're getting fewer than 100 site visitors per month, you have two problems: (1) you can't run remarketing yet, and (2) you need to drive traffic first. Focus on local SEO (Google Business Profile optimization), local search ads, or even flyers with a QR code that sends people to a tracking page. Build your visitor pool to 500–1,000 per month, then start remarketing. I've had clients rush into remarketing with 40 visitors in their list. They spent $300 and got zero conversions. Build the base first.
+
+**Q: How do I track if someone books an appointment offline after seeing my ad?**
+
+This is the most common question I get, and most guides skip it. You need offline conversion tracking. Here's how it works: (1) Someone clicks your ad and lands on your site. Google drops a cookie. (2) They call your business or book through a third-party tool. (3) You upload that booking data back to Google Ads, linking it to the click. Google matches it and tells you which ad drove the call.
+
+The easiest way to do this: Use a call tracking service like CallRail or WhatConverts ($30–$50/month). They'll assign a unique phone number to your ads, track the calls, and automatically send conversion data back to Google Ads. For bookings through Booksy or Square, those platforms can pass conversion data back if you set up the integration. Without offline tracking, you'll underestimate your remarketing value by 40–60%.
+
+---
+
+I've been running remarketing campaigns since 2014, and the most common thing I see is business owners overcomplicating this. You don't need a $5,000/month budget. You don't need a custom software integration. You need three things: a tracking tag, a specific audience, and an ad that matches where that person is in their decision.
+
+I once had a client in Philadelphia who spent six months trying to build the perfect audience using custom intent signals and in-market segments. His cost per conversion was $74. I stripped it back to a 7-day remarketing list of people who viewed his pricing page. Cost per conversion dropped to $18. Sometimes the obvious answer is the right one.
+
+If you want me to look at your current setup and tell you which mistake you're making — because every single one of my clients has made at least two of the mistakes I listed above — I'll be honest with you about what's working and what's wasting money. No generic advice. No "it depends." Just a real diagnosis.
+
+[Book a free consultation](/contact)

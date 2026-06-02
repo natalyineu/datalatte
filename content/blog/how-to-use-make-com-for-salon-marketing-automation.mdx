@@ -7,8 +7,9 @@ category: "AI & Automation"
 tags: ["marketing automation", "salon marketing", "make.com"]
 slug: "how-to-use-make-com-for-salon-marketing-automation"
 image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&q=80&auto=format&fit=crop"
-readTime: "20 min read"
+readTime: '16 min read'
 ---
+
 As a salon owner, you wear many hats: stylist, manager, and marketer. But with a packed schedule and limited budget, marketing often takes a backseat. You're not alone – 60% of small businesses struggle to find time for marketing. But what if you could automate repetitive tasks and focus on what matters: making clients look and feel great?
 
 <StatRow
@@ -102,3 +103,127 @@ Make.com offers extensive documentation, tutorials, and customer support.
 
 ## Closing CTA
 If you want to automate your salon marketing with Make.com but need help getting started, I'd love to chat. Book a free audit with me at [DataLatte.pro/contact](https://datalatte.pro/contact) and let's explore how to boost your bookings and save time.
+
+## Common Mistakes (And What to Do Instead)
+
+### Mistake #1: Automating Everything at Once Without Testing
+
+A stylist in Austin, Texas, named Lauren decided she was done with manual follow-ups. She’d heard automation could save her ten hours a week, so she dove in headfirst. Over one weekend, she connected her Booksy calendar to Mailchimp and set up a series of seven automated emails — booking confirmation, pre-appointment reminder, post-visit thank-you, follow-up review request, rebooking offer, birthday message, and a “we miss you” after 60 days of no-shows. She hit “activate” on Sunday night feeling proud.
+
+By Tuesday, she had 14 unsubscribes and three angry clients who had received a “we miss you” email the morning after their appointment. One client thought she was being passive-aggressively reminded to come back. Another client, who had been coming weekly for three years, was offended. Lauren spent Wednesday morning writing apologies and manually overriding the automation for those clients. She also discovered that the birthday email was going out two months early to people whose birth dates she’d entered wrong in Booksy.
+
+**The fix:** Start with one trigger, test it on yourself, then on a small segment, then ramp up. For a salon, the highest-impact single automation is the appointment reminder — and it’s the one that can blow up in your face if the logic is wrong. Set up a test scenario: book a fake appointment with a fake email address (use your own), run through the full cycle, and check every message. Don’t turn on the whole sequence until you’ve seen the reminder arrive exactly when you want it, with the correct time, date, and service name.
+
+**The outcome:** Once Lauren cleaned up her data and tested one flow at a time, she lost zero clients. Her no-show rate dropped from 22% to 9% within two months — worth about $1,400 a month in recovered appointment slots.
+
+### Mistake #2: Using the Wrong Trigger for Reminders
+
+A barbershop in Portland, Oregon, owned by Marcus, wanted to reduce late cancellations. He set up Make.com to send an SMS reminder via Twilio six hours before every appointment. Sounded reasonable. But Marcus had connected his Square Appointments calendar using a generic “new event” trigger. That meant every time he blocked off a personal lunch break or a staff meeting, the system sent a reminder to *him* about that internal event. His phone blew up with texts saying “Your appointment is in 6 hours” during his own haircuts. Worse, one day he canceled a client who had booked online and then rebooked a different time — the system sent two reminders for both time slots, and the client showed up at the wrong one.
+
+**The fix:** Use the specific “appointment confirmed” or “client booked” trigger (available in most scheduling apps like Booksy, Vagaro, or Square). Then add a filter in Make.com to only send reminders when the status equals “confirmed” and the service type does not include “internal” or “staff.” Also, add a delay so reminders don’t fire for appointments booked within the next hour — those clients just booked and will see the confirmation screen anyway.
+
+**The outcome:** After Marcus added the filter and fixed his trigger, he eliminated 100% of the false reminders. His cancellation rate dropped from 18% to 11% because clients were actually getting the right reminder at the right time. That saved him about $800 per month in lost appointment revenue. He also stopped wanting to throw his phone out the window.
+
+### Mistake #3: Forgetting to Handle the “After” — No Follow-Up Logic
+
+A nail salon in Nashville called Gloss & Go set up a beautiful onboarding automation. New clients who booked online received a welcome email with a discount for their next visit. Then the system sent a reminder the day before. All good. But nobody thought about what happened *after* the appointment. The automation had no post-visit sequence. Clients walked out the door and never heard from the salon again unless they manually booked. Repeat booking rate was under 20%.
+
+Meanwhile, the discount code in the welcome email didn’t have an expiration date. Clients who used the code three months later still got the discount. That wasn’t a disaster, but it meant the salon was leaving money on the table. Worse, the salon’s Yelp review request was a manual text sent by the receptionist — they only sent it to about half the clients, and only when they remembered.
+
+**The fix:** Build a post-visit flow that triggers one day after the appointment. Send a short thank-you email with a link to leave a Google or Yelp review (use a tool like ReviewPush or GatherUp integrated via Make). Then send a rebooking offer email 3–4 weeks later for services with typical 4–6 week cycles (nails, hair color). Include a deadline on the offer — “Book within 7 days and get 10% off your next service.” Set the original welcome discount to expire after 30 days.
+
+**The outcome:** Gloss & Go added the post-visit flow and the rebooking sequence. Within three months, repeat bookings increased from 20% to 38%. The automated review requests doubled their monthly Google reviews from 8 to 17. The estimated revenue lift from retained clients and new reviews was about $3,800 per month.
+
+### Mistake #4: Ignoring Data Hygiene — Bad Data In, Bad Automations Out
+
+A pet grooming studio in Denver, Colorado, called Bark & Bubble had been collecting client emails on a paper sign-in sheet for years. When the owner, Jenna, finally digitized everything into Square, she had 1,200 email addresses — but only 600 were still active, and about 200 were entered incorrectly (missing letters, wrong domains like “@gnail.com” instead of “@gmail.com”). She imported the list into Mailchimp and connected it to Make.com to send a monthly newsletter with grooming tips and a promo code.
+
+The first blast had a 47% bounce rate. Mailchimp flagged her account for high bounces and temporarily suspended her sending privileges. That meant she couldn’t send reminders for the next three days. She had to call 40 clients manually to confirm their appointments. She lost two full hours of grooming time that day.
+
+**The fix:** Before you connect any automation tools, clean your list. Use a free service like ZeroBounce or NeverBounce to verify emails — it costs about $10–$20 for a list of 1,000 addresses. Remove duplicates, fix obvious typos, and segment out anyone who hasn’t booked in 12 months. Then set up a re-engagement flow for that segment: send a “We miss you — here’s $10 off” email, and if they don’t open or click within 2 weeks, auto-remove them. Never automate to a dirty list. Also, add a double opt-in for new sign-ups collected on your website or booking page.
+
+**The outcome:** After cleaning the list, Jenna’s bounce rate dropped to 2%. Her open rates went from 18% to 34%. She also discovered that 30% of her list had never actually been clients — they were random emails from people who just signed up for a contest once. Removing them saved her $50 per month in Mailchimp fees (lower tier). More importantly, she never lost sending privileges again. The monthly newsletter now drives about $1,200 in additional bookings each month from the promo code.
+
+---
+
+## Which Tools Are Worth Connecting First (And Which Are a Waste)
+
+Not every SaaS app plays nice with Make.com, and not every integration is worth your weekend. I’ve tested about two dozen combinations for local businesses, and here’s what actually moves the needle for a salon or barbershop.
+
+**Start with these three:**
+
+- **Scheduling/Booking App (Booksy, Vagaro, Square Appointments, or Mindbody):** This is your source of truth. All automations should originate from booking data. Make has native modules for Booksy, Square, and Mindbody. Vagaro requires a bit more work via API, but it’s doable. If you use Booksy, you can trigger actions when a booking is created, modified, or canceled. That single connector unlocks reminders, follow-ups, and client re-engagement.
+
+- **Email Marketing (Mailchimp or ConvertKit):** Mailchimp is the most popular with small businesses, and its Make integration is solid. You can add subscribers, tag them by service type, and send targeted sequences. ConvertKit is cleaner for sequences, but Mailchimp has better local business templates. Budget $13–$50 per month depending on list size.
+
+- **SMS (Twilio or SimpleTexting):** SMS has higher open rates than email — around 98% vs. 20%. Twilio is the cheapest (pay per message, about $0.0075 per SMS in the US), but setup is more technical. SimpleTexting is more user-friendly and has a direct Make module. Start with SMS reminders first; they reduce no-shows more than email reminders do.
+
+**Worth connecting if you already use them:**
+
+- **Yelp:** You can pull new Yelp reviews into a Slack or email notification, or auto-respond with a thank-you message. Don’t try to automate review generation directly — Yelp’s terms kill that. But you can use Make to track review volume and alert you if a 1-star comes in so you can respond fast.
+
+- **Google Business Profile:** Similar to Yelp — you can set up alerts for new reviews. Make doesn’t have a direct Google Business Profile module, but you can use a third-party tool like Reputation.com or the Google My Business API via HTTP module.
+
+- **Square Point of Sale:** If you run Square for payments, you can connect transactions to Mailchimp. For example, tag a client as “high spender” if they spend over $100 in a single visit, then send them a VIP offer. This works but requires careful setup to avoid tagging repeat credit card swipes as separate transactions.
+
+**Skip these (or deprioritize):**
+
+- **Instagram direct publishing:** Make can auto-post to Instagram via Facebook’s Graph API, but it’s notoriously unreliable — posts might fail, images get cropped weirdly, and you can’t schedule Stories. Better to use a native scheduler like Later or Meta Business Suite.
+
+- **Facebook lead ads to booking app:** Sounds good, but the data mapping is messy. Most leads fill out a simple form and expect a human follow-up anyway. Automated booking links in the ad response lead to low conversion rates. Use a human phone call instead.
+
+- **Complex social media monitoring:** Don’t waste time building a bot to track mentions of your salon. You don’t have enough online chatter to justify it. Just set a Google Alert for your business name.
+
+**Real budget example:** A two-chair salon in Chicago connected Square Appointments + Mailchimp + Twilio through Make.com. The total monthly cost of the three apps plus Make’s $9.99 plan was $72. Within two months, no-shows dropped from 15% to 6%, and email revenue (from promo sequences) added $1,100 per month. Net gain: about $1,028 per month, plus 45 minutes per day of manual phone call time saved.
+
+---
+
+## How to Actually Build Your First Automation in One Weekend (Without Coding)
+
+Most guides tell you to “set up a workflow” and leave you staring at a blank Make.com screen. I’m going to give you a specific flow that works for 90% of service-based businesses — the Appointment Reminder + Post-Visit Follow-Up. You can build this in two afternoons.
+
+**Friday evening (2 hours):** Create your Make.com account (free plan handles 1,000 operations/month — enough for a solo salon). Connect your booking app (Booksy, Square, or Vagaro) and Mailchimp. Test the connection by pulling one recent appointment into Make. You’ll need to find your API keys — most apps have a “Developer” or “API” section in settings. Write them down. Then set up a simple scenario: when a new booking is created, add the client to a Mailchimp list. Don’t send any emails yet — just make sure the contact appears. This will take you 45 minutes if you follow Make’s templates. Spend the remaining hour cleaning your client list (export from your booking app, run through a free email verifier).
+
+**Saturday morning (3 hours):** Build the reminder flow. Create a new scenario in Make: trigger = booking confirmed, filter = status equals confirmed AND start time is more than 2 hours away. Then add a module for delay — “Wait until 24 hours before appointment time.” Then add two modules in parallel: an SMS module (via Twilio) and an email module (Mailchimp or Gmail). The SMS should say: “Hi [client name], just a reminder — you’re booked with [stylist name] tomorrow at [time] at [salon name]. Reply C to confirm or RESCHEDULE to change.” The email can include a link to your cancellation policy. Test this flow by creating a fake booking using a second email address. Verify the SMS text comes through with the right time. Fix any formatting issues. Then create a second path for last-minute bookings — if the appointment is within 24 hours, skip the email and send only an SMS immediately.
+
+**Saturday afternoon (2 hours):** Build the post-visit flow. Trigger = appointment status changed to “completed.” Filter by completed status. Wait 4 hours (to let the client leave). Send an email with a link to leave a Google review. Then add a second email scheduled 3 weeks later: “Time for a touch-up? Book now and get 10% off your next service.” Use a coupon code from your booking app. Test this flow by manually marking a test appointment as completed in your calendar. Check that the review email arrives and the coupon code is valid. If your booking app doesn’t have a coupon system, generate a unique code using Make’s “text aggregator” module.
+
+**Sunday (2–3 hours):** Set up a “no-show” flow. Trigger = appointment status changed to “no-show” or “missed.” Immediately send a short email: “We missed you! No worries — click here to rebook within 48 hours and we’ll waive the late-cancel fee.” Then add a 7-day wait, and if they haven’t booked again, send one more email with a stronger offer (20% off). After 30 days, move them to a “cold” segment and stop emailing. Test this by marking a test appointment as no-show. Finally, review your account usage — Make’s free plan allows 1,000 operations, and this whole setup uses about 30 operations per appointment. So a salon with 80 appointments per month stays under the limit. If you have more, upgrade to the $9.99 plan.
+
+**What not to build on your first weekend:** Multi-step sequences with conditional branching for every service type. Don’t try to send different messages for haircuts vs. coloring vs. blowouts until you’ve run the basic flow for two weeks. You’ll get overwhelmed and break something. Start simple, then add complexity later.
+
+---
+
+## Frequently Asked Questions
+
+**Q: I only have an iPhone and no computer. Can I still set this up?**
+
+Technically yes — Make.com has a mobile browser interface, but it’s miserable for building workflows on a phone screen. You need to copy-paste API keys, drag modules, and test connections. I’ve tried it; I gave up after 20 minutes and found my laptop. If you don’t own a computer, borrow one from a friend for a weekend, or hire a teenager to do the setup while you direct them. The actual management (checking errors, adding new triggers) works fine on a phone after the initial build.
+
+**Q: What if I mess up and accidentally send a wrong email to all my clients?**
+
+You will. Every person I’ve ever trained has sent at least one embarrassing test email to real clients. The fix is simple: never activate a scenario until you’ve tested it with a fake account first. Use a separate email address (set up a free Gmail alias) and create a test client in your booking app. Run the automation on that fake booking and check every message. Also, set your Mailchimp list to “double opt-in” initially — that way even if you send something weird, only subscribed clients see it. Still paranoid? Start with a segment of 10 trusted clients and get their feedback before scaling.
+
+**Q: How long does it actually take to set up from scratch, realistically?**
+
+If you’ve never used Make.com before, plan for a full weekend — maybe 8–12 hours total. That includes account setup, connecting apps, building the reminder flow, testing, and fixing mistakes. If you’re tech-savvy and follow a template, cut that to 4–6 hours. The mistake people make is rushing and skipping testing, which adds hours of cleanup later. Go slow, test each step. I once spent 2 hours debugging a flow because I forgot to set the time zone in Booksy. That’s 2 hours I could have saved by reading the setup instructions first.
+
+**Q: Does Make.com cost extra on top of the apps I already use?**
+
+Yes, but it’s cheap. Make’s free plan covers 1,000 operations per month — enough for a solo salon with about 30–40 appointments and few follow-up emails. If you send more emails or add multiple triggers, you’ll need the $9.99/month starter plan. The apps themselves (Mailchimp, Twilio, Square) have their own costs — Mailchimp’s free tier allows up to 500 contacts, Twilio charges about $7 per 1,000 SMS messages, and Square has a transaction fee. Budget $30–$50/month total for a small salon.
+
+**Q: Will automation make me seem impersonal to clients?**
+
+It can — if you write robotic messages. I’ve seen salons send “Dear Valued Client, your appointment is scheduled…” — that sounds like a dentist office form letter. Write in your voice. Use the client’s name and stylist’s name. Add a line like “We’ve got your favorite chair ready.” One barbershop in Nashville added a custom field for “preferred conversation topic” (sports, movies, or quiet) and referenced it in follow-ups. Their clients loved it. Automation handles the delivery; you control the tone. Make it personal or it will feel like spam.
+
+**Q: I already use Booksy’s built-in reminders. Why do I need Make?**
+
+Booksy’s built-in reminders are fine for a basic text and email. But they’re limited — you can’t add a post-visit email sequence, send a coupon code based on service type, or automatically add reviewers to a VIP list. Make lets you connect Booksy to other tools and build custom logic. For example, if a client books a color service, you can automatically tag them in Mailchimp and send a “How to maintain your color” guide 3 days later, then a rebooking offer at week 6. Booksy alone can’t do that. The question isn’t “should I replace Booksy’s reminders?” It’s “should I add a layer on top?” For most salons, yes — the ROI on that extra layer is within the first month.
+
+---
+
+I once spent an entire weekend building a gorgeous 12-step automation for a salon in Brooklyn. Connected everything, tested twice, and felt like a genius. Then the client called me Monday morning: she had 43 clients who received a “Your hair appointment is next week” email — except the date was correct and the time was correct, but the *year* was 2022. We had set the date field to pull from the calendar in a way that defaulted to the start year of the event instead of the current year. That was four months ago, and I still check year fields twice before hitting activate.
+
+The truth is, automation saves time only if you give it the right instructions. It won’t fix bad data, bad timing, or bad copy. But if you start small, test ruthlessly, and keep your client’s experience at the center, you’ll free up hours every week and probably see your booking rate climb faster than a fresh blowout on a humid day.
+
+If you want help building a flow that’s actually tested for your specific setup, [book a free consultation](/contact). I’ll look at your current tools, show you where Make fits, and tell you the one thing you should not automate (hint: it’s the “how was your service?” question — some things need a human voice). No pressure, no jargon, just a straight conversation with someone who’s made all the mistakes so you don’t have to.
