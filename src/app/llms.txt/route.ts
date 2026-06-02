@@ -102,7 +102,9 @@ function getAllBlogPosts(): { slug: string; title: string }[] {
     .map(({ slug, title }) => ({ slug, title }));
 }
 
-export async function GET() {
+export async function GET(req: Request) {
+  const ua = req.headers.get("user-agent") ?? "unknown";
+  console.log(`[llms.txt] ${new Date().toISOString()} ua="${ua}"`);
   const topPosts = getAllBlogPosts();
   const categories = getBlogCategories();
 
