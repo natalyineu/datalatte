@@ -84,29 +84,26 @@ function getBlogCategories(): string[] {
   return [...cats].sort();
 }
 
-function getTopBlogPosts(limit = 100): { slug: string; title: string }[] {
+function getAllBlogPosts(): { slug: string; title: string }[] {
   const files = fs.readdirSync(contentDir).filter((f) => f.endsWith(".mdx"));
-  const posts: { slug: string; title: string; mtime: number }[] = [];
+  const posts: { slug: string; title: string; date: string }[] = [];
 
   for (const file of files) {
-    const filePath = path.join(contentDir, file);
-    const { data } = matter(fs.readFileSync(filePath, "utf8"));
-    const mtime = fs.statSync(filePath).mtime.getTime();
+    const { data } = matter(fs.readFileSync(path.join(contentDir, file), "utf8"));
     posts.push({
       slug: file.replace(".mdx", ""),
       title: String(data.title ?? ""),
-      mtime,
+      date: String(data.date ?? ""),
     });
   }
 
   return posts
-    .sort((a, b) => b.mtime - a.mtime)
-    .slice(0, limit)
+    .sort((a, b) => b.date.localeCompare(a.date))
     .map(({ slug, title }) => ({ slug, title }));
 }
 
 export async function GET() {
-  const topPosts = getTopBlogPosts(100);
+  const topPosts = getAllBlogPosts();
   const categories = getBlogCategories();
 
   let radarLines: string[] = [];
@@ -170,7 +167,7 @@ export async function GET() {
     }),
     ``,
     ...radarLines,
-    `## Blog — 100 Most Recent Articles`,
+    `## Blog — All Articles`,
     ``,
     ...topPosts.map(({ slug, title }) => `- [${title}](${BASE}/blog/${slug})`),
     ``,
