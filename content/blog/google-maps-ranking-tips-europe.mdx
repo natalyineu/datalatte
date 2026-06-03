@@ -51,12 +51,11 @@ Category is the single most controllable ranking factor. Google has hundreds of 
 
 <CompareBar
   title="Category Impact on Search Visibility — Common Mistakes"
-  items="Hair Salon vs. Beauty Salon (for hair-only business)|Coffee Shop vs. Café|Yoga Studio vs. Fitness Center|Italian Restaurant vs. Restaurant"
-  valuesA="100|95|98|97"
-  valuesB="62|71|54|58"
-  labelA="Correct specific category (relative visibility)"
-  labelB="Generic substitute (relative visibility)"
-  highlightIndex="0"
+  metrics="Hair Salon vs. Beauty Salon (for hair-only business)|Coffee Shop vs. Café|Yoga Studio vs. Fitness Center|Italian Restaurant vs. Restaurant"
+  leftValues="100|95|98|97"
+  rightValues="62|71|54|58"
+  leftLabel="Correct specific category (relative visibility)"
+  rightLabel="Generic substitute (relative visibility)"
 />
 
 **How to check your competitors' categories**: Search for your top competitors on Google Maps, open their profiles, and scroll to "About" to see their categories. If they're using more specific categories than you, that's a quick fix.
@@ -82,12 +81,13 @@ A hair salon that lists "Balayage," "Highlights," "Keratin Treatment," and "Wedd
 
 ### Review Strategy for Higher Rankings
 
-<LineChart
-  title="Review Volume vs. Local Ranking Position — European Service Businesses"
+<BarChart
+  title="Review Volume vs. Local Ranking — European Service Businesses"
   labels="0-10 reviews|11-25 reviews|26-50 reviews|51-100 reviews|101-200 reviews"
-  datasets="[{label:'Avg Map Pack position',values:'8.2|5.4|3.1|2.0|1.4'},{label:'Weekly profile views',values:'45|120|280|510|820'}]"
-  caption="DataLatte analysis across 140 European local service business GBP profiles, 2025. Position 1 = best."
-  yAxisLabel="Position / Views"
+  values="8.2|5.4|3.1|2.0|1.4"
+  unit="avg position"
+  caption="DataLatte analysis across 140 European local service business GBP profiles, 2025. Lower number = better position (1 = #1 in Maps)."
+  highlights="101-200 reviews"
 />
 
 The trend is clear: review volume directly correlates with ranking position. But the relationship is not purely about total count — **review recency** and **review response rate** are also significant signals.
