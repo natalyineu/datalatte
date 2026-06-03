@@ -12,6 +12,7 @@ export const revalidate = 3600;
 
 const contentDir = path.join(process.cwd(), "content/blog");
 const imageCachePath = path.join(contentDir, "image-cache.json");
+const popularityPath = path.join(contentDir, "popularity.json");
 
 const POSTS_PER_PAGE = 24;
 const BASE = "https://datalatte.pro";
@@ -45,6 +46,15 @@ function getAllPosts(): PostMeta[] {
     }
   }
 
+  let popularity: Record<string, number> = {};
+  if (fs.existsSync(popularityPath)) {
+    try {
+      popularity = JSON.parse(fs.readFileSync(popularityPath, "utf8"));
+    } catch {
+      // missing or corrupt — fall back to date sort
+    }
+  }
+
   const files = fs.readdirSync(contentDir).filter((f) => f.endsWith(".mdx"));
   const posts = files.map((file) => {
     const slug = file.replace(".mdx", "");
@@ -62,7 +72,17 @@ function getAllPosts(): PostMeta[] {
       tags: data.tags ?? [],
     } as PostMeta;
   });
-  return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  // Popular posts (GSC clicks > 0) first, sorted by clicks desc.
+  // New posts with no GSC data appended after, sorted by date desc.
+  const popular = posts
+    .filter((p) => (popularity[p.slug] ?? 0) > 0)
+    .sort((a, b) => (popularity[b.slug] ?? 0) - (popularity[a.slug] ?? 0));
+  const fresh = posts
+    .filter((p) => (popularity[p.slug] ?? 0) === 0)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  return [...popular, ...fresh];
 }
 
 // ── Dynamic metadata (includes page number for pages 2+) ─────────────────────
