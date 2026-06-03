@@ -69,12 +69,16 @@ export async function generateMetadata({
   const signal = await fetchSignalBySlug(slug);
   if (!signal) return {};
   const url = `https://datalatte.pro/radar/${slug}`;
+  const titleText =
+    signal.headline.length > 53
+      ? signal.headline.slice(0, 50).trimEnd() + "…"
+      : signal.headline;
   return {
-    title: signal.headline,
+    title: titleText,
     description: signal.summary,
     alternates: { canonical: url },
     openGraph: {
-      title: signal.headline,
+      title: titleText,
       description: signal.summary,
       url,
       type: "article",
@@ -83,7 +87,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: signal.headline,
+      title: titleText,
       description: signal.summary,
     },
   };
