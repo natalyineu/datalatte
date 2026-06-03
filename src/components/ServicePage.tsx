@@ -119,7 +119,7 @@ export default function ServicePage({
           <p className="text-xl text-white/80 font-medium mb-3">{tagline}</p>
           <p className="text-white/60 max-w-2xl mx-auto mb-10 leading-relaxed">{description}</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href="/contact" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg">
+            <Link href="/free-audit" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg">
               Request a Free Audit <ArrowRight size={17} />
             </Link>
             <Link href="/pricing" className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-white/15 transition-all">

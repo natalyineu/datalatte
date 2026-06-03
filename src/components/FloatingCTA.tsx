@@ -46,7 +46,7 @@ export default function FloatingCTA() {
                 <p className="text-sm font-semibold text-gray-900">Find out what's holding you back</p>
               </div>
               <Link
-                href="/contact"
+                href="/free-audit"
                 className="bg-coffee-700 text-white font-semibold text-sm px-4 py-2.5 rounded-xl flex items-center gap-1.5 shrink-0"
               >
                 Book now <ArrowRight size={14} />
@@ -79,7 +79,7 @@ export default function FloatingCTA() {
             </motion.div>
             <div className="flex items-center gap-2">
               <Link
-                href="/contact"
+                href="/free-audit"
                 className="bg-coffee-700 hover:bg-coffee-800 text-white font-semibold text-sm px-5 py-3 rounded-xl flex items-center gap-2 shadow-lg hover:shadow-xl transition-all group"
               >
                 Get Free Audit
