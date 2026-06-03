@@ -104,12 +104,11 @@ June marks the start of UK wedding season and the return of outdoor socialising.
 
 <CompareBar
   title="July–August: Business Performance vs. Marketing Activity"
-  items="Coffee shops|Hair salons|Fitness studios|Pet groomers|Dog walkers"
-  valuesA="85|70|60|90|95"
-  valuesB="60|65|55|80|85"
-  labelA="Revenue vs. annual average (%)"
-  labelB="Marketing activity vs. annual average (%)"
-  highlightIndex="3"
+  metrics="Coffee shops|Hair salons|Fitness studios|Pet groomers|Dog walkers"
+  leftValues="85|70|60|90|95"
+  rightValues="60|65|55|80|85"
+  leftLabel="Revenue vs. annual average (%)"
+  rightLabel="Marketing activity vs. annual average (%)"
 />
 
 Summer is a mixed bag. Some businesses thrive (dog walkers, coffee shops in tourist areas); others slow down (gyms face significant member attrition as people travel). The mistake is to cut marketing when revenue dips.
@@ -160,12 +159,13 @@ December is not the time to launch new marketing initiatives. It's the time to h
 
 ## Building Your Annual Marketing Calendar
 
-<LineChart
-  title="UK Consumer Spending Index by Month — Service Businesses"
+<BarChart
+  title="UK Consumer Spending Index by Month — Hair & Beauty Services"
   labels="Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec"
-  datasets="[{label:'Hair & Beauty',values:'75|85|110|95|90|105|85|80|100|90|100|115'},{label:'Coffee & Cafes',values:'90|85|95|100|105|110|95|90|100|105|95|120'},{label:'Fitness',values:'130|100|85|80|85|90|75|70|110|95|90|70'}]"
-  caption="Indexed spending (100 = annual average). Illustrative based on UK retail and ONS service spending data."
-  yAxisLabel="Spending index"
+  values="75|85|110|95|90|105|85|80|100|90|100|115"
+  unit="index"
+  caption="Indexed spending (100 = annual average) for hair and beauty services. Illustrative based on UK retail and ONS service spending data."
+  highlights="Mar"
 />
 
 The fundamental principle: plan 6–8 weeks ahead for creative, 4 weeks ahead for email and social, 2 weeks ahead for paid media changes.

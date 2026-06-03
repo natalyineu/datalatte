@@ -41,7 +41,8 @@ The first four are all things marketing and operations can address. The fifth is
 Most gyms think of marketing as customer acquisition. The most profitable gyms think of marketing as customer retention — with acquisition as a secondary function.
 
 <Funnel
-  stages="New member joins|Completes first week (all sessions attended)|30-day check-in completed|3-month mark reached|12-month anniversary"
+  stages="Joins|Week 1|Month 1|Month 3|Month 12"
+  stepLabels="New member joins|Completes first week (all sessions attended)|30-day check-in completed|3-month mark reached|12-month anniversary"
   values="100|65|45|38|22"
   title="UK Gym Member Journey — Industry Average"
   caption="Illustrative funnel based on ukactive retention data. Each stage represents % of original cohort remaining. Improving each transition point by 10pp compounds to dramatically higher LTV."
@@ -108,12 +109,13 @@ Ads that attract better-quality members:
 
 ## The January Marketing Dilemma
 
-<LineChart
-  title="UK Gym Revenue and Member Count — Monthly Trend"
+<BarChart
+  title="New Member Joins by Month — UK Gym (Indexed, 100 = Average)"
   labels="Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec"
-  datasets="[{label:'New member joins (indexed)',values:'180|95|70|65|70|75|60|55|110|80|85|90'},{label:'Cancellations (indexed)',values:'80|130|110|90|80|85|95|90|75|80|80|80'}]"
-  caption="Illustrative monthly membership dynamics for UK gym. Index: 100 = average month. January brings high joins but February brings high cancellations from lapsed December joins."
-  yAxisLabel="Index (100 = avg)"
+  values="180|95|70|65|70|75|60|55|110|80|85|90"
+  unit="index"
+  caption="Illustrative monthly new member joins for a UK gym. January peak and September secondary peak are consistent patterns across the industry."
+  highlights="Jan"
 />
 
 The January cohort joins at peak volume and cancels at peak rate. You cannot escape this reality, but you can manage it:
