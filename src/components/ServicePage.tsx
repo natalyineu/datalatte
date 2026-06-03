@@ -178,7 +178,7 @@ export default function ServicePage({
         <div className="max-w-3xl mx-auto">
           <span className="section-label">The Basics</span>
           <h2 className="section-title mb-6">What is {service}, really?</h2>
-          {whatItIs.split("\n\n").map((para, i) => (
+          {whatItIs.split("\\n\\n").map((para, i) => (
             <p key={i} className="text-gray-600 leading-relaxed text-lg mb-4 last:mb-0">{para}</p>
           ))}
         </div>
