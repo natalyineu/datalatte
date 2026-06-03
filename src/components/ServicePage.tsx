@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, X, Check } from "lucide-react";
+import { ArrowRight, CheckCircle2, X, Check, ChevronRight } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -112,12 +112,20 @@ export default function ServicePage({
 
         <div className="max-w-4xl mx-auto text-center relative">
           <div className="text-6xl mb-5 animate-float" style={{ animationDelay: "0.2s" }}>{icon}</div>
-          <span className="inline-block bg-white/10 border border-white/20 text-white/80 text-sm font-medium px-4 py-1.5 rounded-full mb-5 backdrop-blur-sm">
-            Service
+          <span className="inline-block bg-white/10 border border-white/20 text-white/70 text-xs font-mono px-4 py-1.5 rounded-full mb-5 tracking-wider uppercase">
+            {service}
           </span>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-5 text-balance">{service}</h1>
-          <p className="text-xl text-white/80 font-medium mb-3">{tagline}</p>
-          <p className="text-white/60 max-w-2xl mx-auto mb-10 leading-relaxed">{description}</p>
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 text-balance">{tagline}</h1>
+          <p className="text-white/60 max-w-2xl mx-auto mb-5 leading-relaxed text-lg">{description}</p>
+          {/* Monospace flow indicator */}
+          <p className="text-white/35 text-xs font-mono mb-10 max-w-2xl mx-auto tracking-wide">
+            {howItWorks.map((s, i) => (
+              <span key={s.step}>
+                {s.title}
+                {i < howItWorks.length - 1 && <span className="mx-2 text-coffee-600">→</span>}
+              </span>
+            ))}
+          </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link href="/free-audit" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg">
               Request a Free Audit <ArrowRight size={17} />
@@ -217,37 +225,55 @@ export default function ServicePage({
         </div>
       </SectionWrapper>
 
-      {/* ── How it works — dark pipeline ── */}
+      {/* ── How it works — architecture flow ── */}
       <section className="bg-gray-950 py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.035]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.6) 1px,transparent 1px)", backgroundSize: "32px 32px" }} />
-        <div className="max-w-3xl mx-auto relative">
+        <div className="max-w-5xl mx-auto relative">
           <div className="text-center mb-12">
-            <span className="inline-block text-coffee-400 text-sm font-semibold uppercase tracking-widest mb-3">My Process</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
+            <span className="text-xs font-mono text-coffee-400 uppercase tracking-widest">My Process</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mt-2 mb-3">
               How I approach <span className="text-coffee-400">{service}</span>
             </h2>
             <p className="text-gray-500 max-w-xl mx-auto text-sm leading-relaxed">
               A clear, repeatable process — so you always know where things stand.
             </p>
           </div>
-          <div className="space-y-0">
-            {howItWorks.map((item, i) => (
-              <ScrollReveal key={item.step} delay={i * 0.1} direction="left">
-              <div className="flex gap-5">
-                <div className="flex flex-col items-center">
-                  <div className="w-10 h-10 rounded-full bg-coffee-800 border border-coffee-600 text-coffee-300 font-bold text-sm flex items-center justify-center shrink-0 z-10">
-                    {item.step}
+          {/* First row: up to 4 steps as horizontal cards */}
+          <div className="flex flex-col sm:flex-row items-stretch gap-0 mb-4">
+            {howItWorks.slice(0, 4).map((item, i) => (
+              <div key={item.step} className="flex-1 relative">
+                <div className="bg-gray-900 border border-gray-800 rounded-xl p-5 h-full mx-1 first:ml-0 last:mr-0">
+                  <div className="text-xs font-mono text-coffee-500 mb-2 uppercase tracking-widest">{item.step}</div>
+                  <div className="text-white font-semibold mb-2 text-sm">{item.title}</div>
+                  <div className="text-gray-400 text-xs leading-relaxed">{item.desc}</div>
+                </div>
+                {i < Math.min(howItWorks.length, 4) - 1 && (
+                  <div className="hidden sm:flex absolute -right-2 top-1/2 -translate-y-1/2 z-10 w-4 h-4 bg-coffee-700 rounded-full items-center justify-center">
+                    <ChevronRight size={10} className="text-white" />
                   </div>
-                  {i < howItWorks.length - 1 && <div className="w-px flex-1 bg-coffee-900 my-2" />}
-                </div>
-                <div className="pb-8">
-                  <h4 className="font-semibold text-white mb-2 mt-2">{item.title}</h4>
-                  <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
-                </div>
+                )}
               </div>
-              </ScrollReveal>
             ))}
           </div>
+          {/* Overflow steps (5+) in a second row */}
+          {howItWorks.length > 4 && (
+            <div className="flex flex-col sm:flex-row items-stretch gap-0">
+              {howItWorks.slice(4).map((item, i) => (
+                <div key={item.step} className="flex-1 relative">
+                  <div className="bg-gray-900/60 border border-gray-800/60 rounded-xl p-5 h-full mx-1 first:ml-0">
+                    <div className="text-xs font-mono text-coffee-600 mb-2 uppercase tracking-widest">{item.step}</div>
+                    <div className="text-white/80 font-semibold mb-2 text-sm">{item.title}</div>
+                    <div className="text-gray-500 text-xs leading-relaxed">{item.desc}</div>
+                  </div>
+                  {i < howItWorks.slice(4).length - 1 && (
+                    <div className="hidden sm:flex absolute -right-2 top-1/2 -translate-y-1/2 z-10 w-4 h-4 bg-coffee-800 rounded-full items-center justify-center">
+                      <ChevronRight size={10} className="text-white" />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
