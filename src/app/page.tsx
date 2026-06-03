@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import Link from "next/link";
+import { faqSchema } from "@/lib/schema";
 import Image from "next/image";
 import {
   ArrowRight,
@@ -219,6 +220,33 @@ function getLatestPosts(count = 3) {
   }
   return result;
 }
+
+const homeFaqs = [
+  {
+    q: "How much does local marketing cost?",
+    a: "Services start from $500/month for single-channel management (e.g. Google Ads or Local SEO). Most local businesses see the best results with the Americano package at $1,200/month, which covers 2–3 channels with full analytics. See the full pricing page for details — no hidden fees.",
+  },
+  {
+    q: "Do you work with businesses outside the US?",
+    a: "Yes — I work with small businesses in the US, UK, Australia, Canada, and beyond. All work is done remotely, and I'm comfortable with international time zones and currencies. Most client communication happens over email and scheduled video calls.",
+  },
+  {
+    q: "How long before I see results?",
+    a: "Google Ads and Google Business Profile optimisation can show results within 2–4 weeks. Local SEO typically takes 3–6 months to show meaningful ranking gains. I'll always be transparent about realistic timelines during the free audit.",
+  },
+  {
+    q: "What's included in the free marketing audit?",
+    a: "I review your Google Business Profile, existing website, any live ad accounts, and your top 3 local competitors. You receive a written report with specific findings and a prioritised action plan — within 48 hours, no sales call required.",
+  },
+  {
+    q: "How is DataLatte different from a marketing agency?",
+    a: "You work directly with me — a senior strategist with 10+ years at OMD, Dentsu, BBDO, and GroupM. There are no account managers, no junior staff, and no long-term lock-in contracts. Every decision is data-backed and explained in plain English.",
+  },
+  {
+    q: "What if I've tried Google Ads before and it didn't work?",
+    a: "That's the most common story I hear. In the vast majority of cases, past campaigns failed due to broad-match keywords, no negative keyword lists, or sending traffic to a homepage instead of a dedicated landing page. These are fixable. The free audit will tell you exactly what went wrong.",
+  },
+];
 
 export default function HomePage() {
   const latestPosts = getLatestPosts();
@@ -506,6 +534,40 @@ export default function HomePage() {
           <Link href="/blog" className="btn-outline">
             View all posts
           </Link>
+        </div>
+      </SectionWrapper>
+
+      {/* FAQ */}
+      <SectionWrapper>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(homeFaqs)) }}
+        />
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-10">
+            <span className="section-label">Common Questions</span>
+            <h2 className="section-title">Everything you need to <span className="gradient-text">know before starting</span></h2>
+          </div>
+          <div className="space-y-4">
+            {homeFaqs.map((faq, i) => (
+              <details key={i} className="group border border-gray-200 rounded-xl overflow-hidden">
+                <summary className="flex items-center justify-between gap-4 px-6 py-4 cursor-pointer list-none font-semibold text-gray-900 hover:bg-coffee-50 transition-colors">
+                  {faq.q}
+                  <span className="text-coffee-500 shrink-0 text-xl font-light group-open:rotate-45 transition-transform duration-200">+</span>
+                </summary>
+                <div className="px-6 pb-5 text-gray-500 text-sm leading-relaxed border-t border-gray-100 pt-4">
+                  {faq.a}
+                </div>
+              </details>
+            ))}
+          </div>
+          <p className="text-center mt-8 text-sm text-gray-500">
+            Still have questions?{" "}
+            <Link href="/contact" className="text-coffee-700 font-semibold hover:underline">
+              Send me a message
+            </Link>{" "}
+            — I reply within one business day.
+          </p>
         </div>
       </SectionWrapper>
 
