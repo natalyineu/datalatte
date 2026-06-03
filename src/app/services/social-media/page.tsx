@@ -37,7 +37,16 @@ export default function SocialMediaPage() {
       description="Posting once a week and hoping for the best isn't a social media strategy. I build content systems for local businesses that keep your feed active, your audience engaged, and your brand front of mind — so when someone's ready to book, you're the first name they think of."
       icon="📱"
       accentClass="bg-gradient-to-br from-gray-800 to-coffee-900"
-      whatItIs="Organic social media management means running your Instagram, Facebook, TikTok, or other channels with a consistent strategy — not just filling a feed. For local businesses, social media serves a specific purpose: it's where people check if you're still open, get a feel for your vibe before visiting, and decide whether to trust you enough to book. A well-run account builds credibility, drives word-of-mouth, and gives your paid ads warm audiences to retarget. Done badly — inconsistent posting, generic content, stock photos — it actively undermines your brand. The key difference between social media management and Meta Ads: ads reach new people who don't know you yet. Organic social nurtures the people who already do."
+      stats={[
+        { value: "4.8B", label: "Social media users worldwide — your customers are already there" },
+        { value: "54%", label: "Of social media browsers use it to research products and services" },
+        { value: "3×", label: "Higher engagement rate for local business content vs national brands" },
+      ]}
+      whatItIs="Organic social media management means running your Instagram, Facebook, TikTok, or other channels with a consistent strategy — not just filling a feed. For local businesses, social media serves a specific purpose: it's where people check if you're still open, get a feel for your vibe before visiting, and decide whether to trust you enough to book. A well-run account builds credibility, drives word-of-mouth, and gives your paid ads warm audiences to retarget. Done badly — inconsistent posting, generic content, stock photos — it actively undermines your brand. The key difference between social media management and Meta Ads: ads reach new people who don't know you yet. Organic social nurtures the people who already do.
+
+The challenge for most local business owners is time — not skill or intent. You know what makes your business special; you just don't have two hours a day to translate that into content, captions, and scheduling. That's the gap I fill. I handle the strategy, the copy, the planning, and the publishing — and build a system around whatever assets you can realistically provide. Even one batch of 10 photos per month is enough to keep a feed active, varied, and authentic when paired with the right content framework.
+
+Platform selection matters as much as execution. Instagram remains the dominant channel for visual-first businesses (salons, food and beverage, fitness), while Facebook still drives strong local community engagement and event attendance — especially for 35+ audiences. TikTok is the right addition for businesses with transformation content or strong personalities. LinkedIn is worth managing if you serve other businesses. I'll assess where your customers actually spend time and build your presence on the 2–3 platforms that matter, rather than spreading you thin across all five."
       howItWorks={[
         {
           step: "01",
@@ -116,6 +125,14 @@ export default function SocialMediaPage() {
         {
           q: "What if I already have someone doing social but it's not working?",
           a: "That's the most common scenario. I'll audit what's there, identify why it isn't converting, and either rebuild the strategy or give you a clear brief to hand to whoever's managing it.",
+        },
+        {
+          q: "How many posts per week do you publish?",
+          a: "For most local businesses, 4–5 posts per week across platforms is the sweet spot — enough to stay top-of-mind without burning through your content budget. I'll recommend a posting frequency based on your niche, platform, and available assets. Quality and consistency beat volume every time.",
+        },
+        {
+          q: "Do you do community management (replying to comments and DMs)?",
+          a: "Yes, community management is available as an add-on. I monitor comments and DMs, respond to questions and reviews, flag anything requiring your direct input, and handle basic customer service queries. This is especially valuable for businesses with high comment volume or DM-based booking inquiries.",
         },
       ]}
       relatedLinks={[
