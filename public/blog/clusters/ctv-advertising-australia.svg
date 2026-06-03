@@ -1,0 +1,235 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2c1a0e"/>
+      <stop offset="60%" style="stop-color:#4a2d18"/>
+      <stop offset="100%" style="stop-color:#6b4226"/>
+    </linearGradient>
+    <!-- Screen glow -->
+    <radialGradient id="screenGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#b87a50;stop-opacity:0.25"/>
+      <stop offset="100%" style="stop-color:#2c1a0e;stop-opacity:0"/>
+    </radialGradient>
+    <!-- TV screen gradient -->
+    <linearGradient id="screenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1c1008"/>
+      <stop offset="100%" style="stop-color:#2c1a0e"/>
+    </linearGradient>
+    <!-- Accent shimmer -->
+    <linearGradient id="shimmer" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#d4a574;stop-opacity:0"/>
+      <stop offset="50%" style="stop-color:#d4a574;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#d4a574;stop-opacity:0"/>
+    </linearGradient>
+    <!-- Australia outline clip -->
+    <clipPath id="tvClip">
+      <rect x="360" y="120" width="480" height="310" rx="8"/>
+    </clipPath>
+    <!-- Bar chart gradient -->
+    <linearGradient id="barGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#d4a574"/>
+      <stop offset="100%" style="stop-color:#9a6040"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+
+  <!-- Subtle grid texture -->
+  <g opacity="0.06" stroke="#d4a574" stroke-width="0.5">
+    <line x1="0" y1="0" x2="0" y2="630"/>
+    <line x1="100" y1="0" x2="100" y2="630"/>
+    <line x1="200" y1="0" x2="200" y2="630"/>
+    <line x1="300" y1="0" x2="300" y2="630"/>
+    <line x1="400" y1="0" x2="400" y2="630"/>
+    <line x1="500" y1="0" x2="500" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="700" y1="0" x2="700" y2="630"/>
+    <line x1="800" y1="0" x2="800" y2="630"/>
+    <line x1="900" y1="0" x2="900" y2="630"/>
+    <line x1="1000" y1="0" x2="1000" y2="630"/>
+    <line x1="1100" y1="0" x2="1100" y2="630"/>
+    <line x1="0" y1="0" x2="1200" y2="0"/>
+    <line x1="0" y1="90" x2="1200" y2="90"/>
+    <line x1="0" y1="180" x2="1200" y2="180"/>
+    <line x1="0" y1="270" x2="1200" y2="270"/>
+    <line x1="0" y1="360" x2="1200" y2="360"/>
+    <line x1="0" y1="450" x2="1200" y2="450"/>
+    <line x1="0" y1="540" x2="1200" y2="540"/>
+    <line x1="0" y1="630" x2="1200" y2="630"/>
+  </g>
+
+  <!-- Glow behind TV -->
+  <ellipse cx="600" cy="280" rx="300" ry="200" fill="url(#screenGlow)"/>
+
+  <!-- ===== TV MONITOR ===== -->
+  <!-- TV body shadow -->
+  <rect x="348" y="108" width="504" height="334" rx="16" fill="#1c1008" opacity="0.6"/>
+  <!-- TV body frame -->
+  <rect x="350" y="110" width="500" height="330" rx="14" fill="#3d2410" stroke="#9a6040" stroke-width="2"/>
+  <!-- TV screen -->
+  <rect x="362" y="122" width="476" height="306" rx="8" fill="url(#screenGrad)"/>
+
+  <!-- Screen content — streaming UI -->
+  <!-- Top bar -->
+  <rect x="362" y="122" width="476" height="36" rx="0" fill="#1c1008" opacity="0.8"/>
+  <!-- Streaming dots -->
+  <circle cx="383" cy="140" r="5" fill="#9a6040"/>
+  <circle cx="399" cy="140" r="5" fill="#b87a50"/>
+  <circle cx="415" cy="140" r="5" fill="#d4a574"/>
+  <!-- Mock streaming logo -->
+  <rect x="435" y="131" width="60" height="18" rx="4" fill="#6b4226" opacity="0.7"/>
+  <text x="465" y="143" font-family="system-ui, sans-serif" font-size="9" fill="#e8c9a8" text-anchor="middle" font-weight="bold">STREAM</text>
+
+  <!-- Australia map silhouette (simplified) -->
+  <g transform="translate(430, 155)" opacity="0.18" fill="#d4a574">
+    <!-- Simplified Australia outline -->
+    <path d="M 120 0 L 160 5 L 185 20 L 200 45 L 205 70 L 195 90 L 180 100 L 195 115 L 200 135 L 180 155 L 155 160 L 130 150 L 110 155 L 80 145 L 60 125 L 40 120 L 20 130 L 5 120 L 0 100 L 10 75 L 5 50 L 20 30 L 50 15 L 80 5 Z"/>
+  </g>
+
+  <!-- Australia map solid (stylized) -->
+  <g transform="translate(430, 152)" opacity="0.35">
+    <path d="M 118 2 C 135 0 158 4 178 18 C 198 32 205 55 204 78 C 203 98 192 114 188 128 C 192 140 202 152 198 165 C 193 175 178 178 158 172 C 145 167 130 172 112 168 C 92 163 74 150 57 148 C 40 146 22 155 10 147 C -1 138 -3 118 5 98 C 12 78 8 57 18 38 C 28 19 52 8 78 4 C 92 2 105 3 118 2 Z" fill="#b87a50"/>
+  </g>
+
+  <!-- Streaming content on TV — fake video player -->
+  <rect x="370" y="165" width="460" height="240" fill="#0d0804" opacity="0.5"/>
+
+  <!-- Play button overlay -->
+  <circle cx="600" cy="280" r="30" fill="#9a6040" opacity="0.85"/>
+  <polygon points="592,268 592,292 618,280" fill="#fdf8f4"/>
+
+  <!-- Progress bar -->
+  <rect x="370" y="408" width="460" height="4" rx="2" fill="#3d2410"/>
+  <rect x="370" y="408" width="230" height="4" rx="2" fill="#d4a574"/>
+  <circle cx="600" cy="410" r="6" fill="#e8c9a8"/>
+
+  <!-- Time labels -->
+  <text x="376" y="423" font-family="system-ui, sans-serif" font-size="9" fill="#9a6040">1:23</text>
+  <text x="820" y="423" font-family="system-ui, sans-serif" font-size="9" fill="#9a6040" text-anchor="end">2:47</text>
+
+  <!-- TV stand -->
+  <rect x="565" y="442" width="70" height="12" rx="3" fill="#4a2d18"/>
+  <rect x="550" y="454" width="100" height="8" rx="4" fill="#6b4226"/>
+
+  <!-- ===== LEFT SIDE — STATS ===== -->
+  <!-- Stats card -->
+  <rect x="55" y="135" width="270" height="330" rx="12" fill="#3d2410" opacity="0.7" stroke="#9a6040" stroke-width="1"/>
+
+  <!-- Card header -->
+  <rect x="55" y="135" width="270" height="44" rx="12" fill="#6b4226"/>
+  <rect x="55" y="157" width="270" height="22" fill="#6b4226"/>
+  <text x="190" y="163" font-family="system-ui, sans-serif" font-size="12" fill="#e8c9a8" text-anchor="middle" font-weight="700">🇦🇺 Australia CTV Stats</text>
+
+  <!-- Bar chart -->
+  <text x="75" y="202" font-family="system-ui, sans-serif" font-size="10" fill="#9a6040">Streaming penetration</text>
+  <!-- Bars -->
+  <rect x="75" y="215" width="160" height="18" rx="3" fill="#3d2410"/>
+  <rect x="75" y="215" width="144" height="18" rx="3" fill="url(#barGrad)"/>
+  <text x="224" y="228" font-family="system-ui, sans-serif" font-size="10" fill="#d4a574" font-weight="bold">90%</text>
+
+  <rect x="75" y="241" width="160" height="18" rx="3" fill="#3d2410"/>
+  <rect x="75" y="241" width="130" height="18" rx="3" fill="url(#barGrad)" opacity="0.85"/>
+  <text x="210" y="254" font-family="system-ui, sans-serif" font-size="10" fill="#d4a574" font-weight="bold">81%</text>
+
+  <rect x="75" y="267" width="160" height="18" rx="3" fill="#3d2410"/>
+  <rect x="75" y="267" width="112" height="18" rx="3" fill="url(#barGrad)" opacity="0.7"/>
+  <text x="192" y="280" font-family="system-ui, sans-serif" font-size="10" fill="#d4a574" font-weight="bold">70%</text>
+
+  <text x="75" y="245" font-family="system-ui, sans-serif" font-size="8" fill="#9a6040" dy="28">BVOD</text>
+  <text x="75" y="271" font-family="system-ui, sans-serif" font-size="8" fill="#9a6040" dy="28">SVOD</text>
+
+  <!-- Divider -->
+  <line x1="70" y1="300" x2="315" y2="300" stroke="#9a6040" stroke-width="0.5" opacity="0.5"/>
+
+  <!-- Metric pills -->
+  <rect x="70" y="312" width="110" height="50" rx="8" fill="#4a2d18"/>
+  <text x="125" y="330" font-family="system-ui, sans-serif" font-size="9" fill="#b87a50" text-anchor="middle">Avg. CPM</text>
+  <text x="125" y="350" font-family="system-ui, sans-serif" font-size="18" fill="#e8c9a8" text-anchor="middle" font-weight="800">$28</text>
+
+  <rect x="195" y="312" width="110" height="50" rx="8" fill="#4a2d18"/>
+  <text x="250" y="330" font-family="system-ui, sans-serif" font-size="9" fill="#b87a50" text-anchor="middle">View-through</text>
+  <text x="250" y="350" font-family="system-ui, sans-serif" font-size="18" fill="#e8c9a8" text-anchor="middle" font-weight="800">93%</text>
+
+  <!-- Bottom stat -->
+  <rect x="70" y="376" width="235" height="60" rx="8" fill="#4a2d18"/>
+  <text x="187" y="396" font-family="system-ui, sans-serif" font-size="9" fill="#b87a50" text-anchor="middle">Min. budget to start</text>
+  <text x="187" y="422" font-family="system-ui, sans-serif" font-size="22" fill="#d4a574" text-anchor="middle" font-weight="800">$500 / mo</text>
+
+  <!-- ===== RIGHT SIDE — AD FORMATS ===== -->
+  <rect x="875" y="135" width="270" height="330" rx="12" fill="#3d2410" opacity="0.7" stroke="#9a6040" stroke-width="1"/>
+
+  <!-- Card header -->
+  <rect x="875" y="135" width="270" height="44" rx="12" fill="#6b4226"/>
+  <rect x="875" y="157" width="270" height="22" fill="#6b4226"/>
+  <text x="1010" y="163" font-family="system-ui, sans-serif" font-size="12" fill="#e8c9a8" text-anchor="middle" font-weight="700">Ad Formats for SMBs</text>
+
+  <!-- Format list -->
+  <!-- Pre-roll -->
+  <rect x="890" y="192" width="235" height="44" rx="6" fill="#4a2d18"/>
+  <rect x="890" y="192" width="4" height="44" rx="2" fill="#d4a574"/>
+  <text x="905" y="210" font-family="system-ui, sans-serif" font-size="11" fill="#e8c9a8" font-weight="600">▶ Pre-roll Ads</text>
+  <text x="905" y="226" font-family="system-ui, sans-serif" font-size="9" fill="#9a6040">Plays before streaming content</text>
+
+  <!-- Mid-roll -->
+  <rect x="890" y="244" width="235" height="44" rx="6" fill="#4a2d18"/>
+  <rect x="890" y="244" width="4" height="44" rx="2" fill="#b87a50"/>
+  <text x="905" y="262" font-family="system-ui, sans-serif" font-size="11" fill="#e8c9a8" font-weight="600">⏸ Pause Ads</text>
+  <text x="905" y="278" font-family="system-ui, sans-serif" font-size="9" fill="#9a6040">Shows when viewer pauses</text>
+
+  <!-- Display -->
+  <rect x="890" y="296" width="235" height="44" rx="6" fill="#4a2d18"/>
+  <rect x="890" y="296" width="4" height="44" rx="2" fill="#9a6040"/>
+  <text x="905" y="314" font-family="system-ui, sans-serif" font-size="11" fill="#e8c9a8" font-weight="600">📱 Cross-Device</text>
+  <text x="905" y="330" font-family="system-ui, sans-serif" font-size="9" fill="#9a6040">TV + mobile + tablet reach</text>
+
+  <!-- Targeting -->
+  <rect x="890" y="348" width="235" height="44" rx="6" fill="#4a2d18"/>
+  <rect x="890" y="348" width="4" height="44" rx="2" fill="#c8956c"/>
+  <text x="905" y="366" font-family="system-ui, sans-serif" font-size="11" fill="#e8c9a8" font-weight="600">📍 Geo Targeting</text>
+  <text x="905" y="382" font-family="system-ui, sans-serif" font-size="9" fill="#9a6040">City-level local audience</text>
+
+  <!-- ROI badge -->
+  <rect x="890" y="400" width="235" height="44" rx="6" fill="#6b4226"/>
+  <text x="1007" y="418" font-family="system-ui, sans-serif" font-size="9" fill="#d4a574" text-anchor="middle" font-weight="600">AVERAGE ROI</text>
+  <text x="1007" y="436" font-family="system-ui, sans-serif" font-size="16" fill="#e8c9a8" text-anchor="middle" font-weight="800">3.2× vs Traditional TV</text>
+
+  <!-- ===== BOTTOM TEXT ===== -->
+  <!-- Main headline -->
+  <text x="600" y="510" font-family="system-ui, sans-serif" font-size="28" fill="#e8c9a8" text-anchor="middle" font-weight="800" letter-spacing="1">CTV Advertising in Australia</text>
+  <text x="600" y="540" font-family="system-ui, sans-serif" font-size="14" fill="#9a6040" text-anchor="middle">The complete guide for small business owners · 2026</text>
+
+  <!-- Brand tag -->
+  <rect x="530" y="558" width="140" height="28" rx="14" fill="#6b4226"/>
+  <text x="600" y="576" font-family="system-ui, sans-serif" font-size="11" fill="#e8c9a8" text-anchor="middle" font-weight="700">☕ DataLatte.pro</text>
+
+  <!-- Decorative circles top corners -->
+  <circle cx="80" cy="80" r="50" fill="#9a6040" opacity="0.08"/>
+  <circle cx="80" cy="80" r="30" fill="#b87a50" opacity="0.1"/>
+  <circle cx="1120" cy="80" r="50" fill="#9a6040" opacity="0.08"/>
+  <circle cx="1120" cy="80" r="30" fill="#b87a50" opacity="0.1"/>
+  <circle cx="80" cy="560" r="40" fill="#9a6040" opacity="0.08"/>
+  <circle cx="1120" cy="560" r="40" fill="#9a6040" opacity="0.08"/>
+
+  <!-- Floating streaming icons -->
+  <!-- WiFi/signal icon top left area -->
+  <g transform="translate(130, 75)" opacity="0.6">
+    <path d="M 0 20 Q 10 0 20 20" stroke="#d4a574" stroke-width="2" fill="none"/>
+    <path d="M -8 28 Q 10 -8 28 28" stroke="#b87a50" stroke-width="2" fill="none"/>
+    <circle cx="10" cy="22" r="3" fill="#d4a574"/>
+  </g>
+
+  <!-- Signal bars top right -->
+  <g transform="translate(1030, 68)" opacity="0.6">
+    <rect x="0" y="14" width="6" height="8" rx="1" fill="#9a6040"/>
+    <rect x="9" y="9" width="6" height="13" rx="1" fill="#b87a50"/>
+    <rect x="18" y="4" width="6" height="18" rx="1" fill="#d4a574"/>
+    <rect x="27" y="0" width="6" height="22" rx="1" fill="#e8c9a8"/>
+  </g>
+
+  <!-- Top shimmer line -->
+  <rect x="0" y="0" width="1200" height="3" fill="url(#shimmer)"/>
+  <!-- Bottom shimmer line -->
+  <rect x="0" y="627" width="1200" height="3" fill="url(#shimmer)"/>
+</svg>
