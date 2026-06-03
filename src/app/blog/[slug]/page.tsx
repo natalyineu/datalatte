@@ -618,6 +618,29 @@ export default async function BlogPostPage({
               />
             </div>
 
+        {/* Mid-article audit CTA */}
+        <div className="mt-10 mb-2 rounded-2xl bg-gradient-to-br from-coffee-800 to-coffee-950 p-7 text-white">
+          <p className="text-coffee-300 text-xs font-semibold uppercase tracking-widest mb-2">Free for local businesses</p>
+          <h3 className="text-xl font-bold mb-2">Want this applied to your business?</h3>
+          <p className="text-coffee-200 text-sm leading-relaxed mb-5">
+            I'll review your Google presence, local SEO, and ad accounts — and send you a specific action plan within 48 hours. No pitch, no pressure.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link
+              href="/free-audit"
+              className="inline-flex items-center justify-center gap-2 bg-white text-coffee-900 font-bold px-6 py-3 rounded-xl hover:bg-coffee-100 transition-colors text-sm"
+            >
+              Get my free audit <ArrowRight size={15} />
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center gap-2 border border-white/30 text-white font-semibold px-6 py-3 rounded-xl hover:bg-white/10 transition-colors text-sm"
+            >
+              Ask a question
+            </Link>
+          </div>
+        </div>
+
         {/* Tags */}
         {frontmatter.tags && frontmatter.tags.length > 0 && (
           <div className="mt-8 flex flex-wrap gap-2">
@@ -676,13 +699,20 @@ export default async function BlogPostPage({
 
         {/* Author */}
         <div className="mt-12 pt-8 border-t border-gray-100">
-          <div className="flex items-center gap-4">
-            <Image src="/images/founder.png" alt="Nataliia Makota" width={40} height={40} className="rounded-full object-cover w-10 h-10" />
+          <div className="flex items-start gap-4">
+            <Link href="/about" className="shrink-0">
+              <Image src="/images/founder.png" alt="Nataliia — local marketing expert" width={56} height={56} className="rounded-full object-cover w-14 h-14 ring-2 ring-coffee-100" />
+            </Link>
             <div>
-              <div className="font-semibold text-gray-900">{frontmatter.author}</div>
-              <div className="text-sm text-gray-500">
-                Freelance local marketing & analytics — for businesses that want real results.
-              </div>
+              <Link href="/about" className="font-bold text-gray-900 hover:text-coffee-700 transition-colors">
+                {frontmatter.author}
+              </Link>
+              <p className="text-sm text-gray-500 mt-0.5 leading-relaxed">
+                Local marketing strategist with 10+ years at global agencies — OMD, Dentsu, GroupM, and BBDO. Now helping small businesses get the same data-driven edge. Based in Europe, working with clients in the US, UK, Australia, and beyond.
+              </p>
+              <Link href="/about" className="inline-flex items-center gap-1 text-xs text-coffee-700 font-semibold mt-2 hover:underline">
+                About Nataliia <ArrowRight size={12} />
+              </Link>
             </div>
           </div>
         </div>
