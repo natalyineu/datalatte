@@ -18,6 +18,30 @@ jobs:
           curl -s -X POST "${{ secrets.VERCEL_DEPLOY_HOOK }}" > /tmp/vercel_response.txt
           cat /tmp/vercel_response.txt
 
+      - name: Wait for deploy to go live
+        run: sleep 90
+
+      - name: Ping IndexNow and sitemaps
+        run: |
+          BASE="https://datalatte.pro"
+          KEY="0db0ab755c9749b2ba9521accb56b1dd"
+          SITEMAP="${BASE}/sitemap.xml"
+
+          # Ping Google sitemap
+          curl -s "https://www.google.com/ping?sitemap=${SITEMAP}" -o /dev/null -w "Google sitemap ping: %{http_code}\n" || true
+
+          # Ping Bing sitemap
+          curl -s "https://www.bing.com/ping?sitemap=${SITEMAP}" -o /dev/null -w "Bing sitemap ping: %{http_code}\n" || true
+
+          # IndexNow batch for most recent 50 blog posts
+          URLS=$(curl -s "${BASE}/sitemap.xml" | grep -oP '(?<=<loc>)[^<]+/blog/[^<]+' | head -50 | jq -R . | jq -sc .)
+          if [ -n "$URLS" ] && [ "$URLS" != "null" ]; then
+            curl -s -X POST "https://api.indexnow.org/indexnow" \
+              -H "Content-Type: application/json; charset=utf-8" \
+              -d "{\"host\":\"datalatte.pro\",\"key\":\"${KEY}\",\"keyLocation\":\"${BASE}/${KEY}.txt\",\"urlList\":${URLS}}" \
+              -w "\nIndexNow batch: %{http_code}\n" || true
+          fi
+
       - name: Notify Telegram
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -26,5 +50,5 @@ jobs:
           TIME=$(date -u '+%Y-%m-%d %H:%M UTC')
           curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
             -d "chat_id=${TELEGRAM_CHAT_ID}" \
-            -d "text=🚀 Hourly deploy triggered — ${TIME}" \
+            -d "text=🚀 Hourly deploy triggered + IndexNow pinged — ${TIME}" \
             > /dev/null || true
