@@ -7,8 +7,7 @@
     }
   ],
   "rewrites": [
-    { "source": "/sitemap.xml", "destination": "/sitemap/route" },
-    { "source": "/robots.txt", "destination": "/public/robots.txt" }
+    { "source": "/sitemap.xml", "destination": "/sitemap/route" }
   ],
   "headers": [
     {
