@@ -37,7 +37,16 @@ export default function CROPage() {
       description="If 100 people visit your website and only 2 book an appointment, your conversion rate is 2%. CRO is the practice of systematically improving that number. Doubling your conversion rate is the same as doubling your traffic — but it costs a fraction of the price."
       icon="📈"
       accentClass="bg-gradient-to-br from-violet-800 to-violet-950"
-      whatItIs="Conversion Rate Optimisation (CRO) is the process of identifying why visitors leave your website without taking action — and then fixing it. The reasons are almost always the same: unclear value proposition, confusing navigation, slow load times, weak CTAs, lack of trust signals, or forms that are too long. CRO is data-driven: I use heatmaps, session recordings, Google Analytics funnels, and A/B tests to identify exactly where people drop off and what changes move the needle. For local businesses running Google Ads or Meta Ads, CRO is often the highest-ROI investment you can make — because every improvement multiplies the return on every dollar you're already spending."
+      stats={[
+        { value: "2–3×", label: "Average improvement in conversion rate after a professional CRO audit" },
+        { value: "38%", label: "Of users abandon a website if the layout or content is unattractive" },
+        { value: "0", label: "Extra ad spend needed to double leads — just convert existing traffic better" },
+      ]}
+      whatItIs="Conversion Rate Optimisation (CRO) is the process of identifying why visitors leave your website without taking action — and then fixing it. The reasons are almost always the same: unclear value proposition, confusing navigation, slow load times, weak CTAs, lack of trust signals, or forms that are too long. CRO is data-driven: I use heatmaps, session recordings, Google Analytics funnels, and A/B tests to identify exactly where people drop off and what changes move the needle. For local businesses running Google Ads or Meta Ads, CRO is often the highest-ROI investment you can make — because every improvement multiplies the return on every dollar you're already spending.
+
+Consider the economics: if you spend $1,000/month on Google Ads and your landing page converts at 2%, you get roughly 20 leads. Fix the page to convert at 4% and you get 40 leads — with zero increase in ad spend. No other marketing activity offers that kind of leverage on existing investment. And unlike ads, the improvements are permanent: a better page keeps converting long after the one-time optimisation cost is recovered.
+
+CRO for local businesses is different from CRO for large e-commerce — the primary goals are phone calls, booking form submissions, and direction requests, not purchases. I specialise in this context: optimising for local trust signals (your address, photos of your space, staff faces, Google review count), reducing friction in booking flows, and making it dead simple for a first-time visitor to take the one action that matters most."
       howItWorks={[
         {
           step: "01",
@@ -103,6 +112,18 @@ export default function CROPage() {
         {
           q: "How much can CRO actually improve my results?",
           a: "Improvements of 20–50% in conversion rate are common after a proper audit and fixes. For a business spending $1,000/month on ads, going from 2% to 3% conversion rate means 50% more leads from the same budget.",
+        },
+        {
+          q: "What tools do you use for CRO analysis?",
+          a: "I use Google Analytics 4 for funnel analysis and traffic source breakdown, Microsoft Clarity or Hotjar for heatmaps and session recordings, and Google Optimize or VWO for A/B testing. For Core Web Vitals, I use PageSpeed Insights and Lighthouse. The tool choice depends on your current setup and traffic volume.",
+        },
+        {
+          q: "How long does a CRO engagement take?",
+          a: "An initial audit and first round of fixes typically takes 2–4 weeks. Meaningful A/B test results require 4–8 weeks of running time to reach statistical significance. Most clients see their first measurable uplift within 30–60 days, with further gains compounding over subsequent test cycles.",
+        },
+        {
+          q: "Is CRO a one-time project or ongoing?",
+          a: "Both options work. Many clients start with a one-time audit and implementation, which delivers lasting improvements. Ongoing monthly CRO — running continuous experiments — makes sense once you have 5,000+ monthly visitors and want to compound gains over time. I'll recommend which model fits your current traffic level.",
         },
       ]}
       relatedLinks={[

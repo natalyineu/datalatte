@@ -37,7 +37,16 @@ export default function ReputationManagementPage() {
       description="88% of consumers trust online reviews as much as personal recommendations. Your star rating directly affects how many people call, book, or walk through the door. Reputation management makes sure the story told about your business online is the right one."
       icon="⭐"
       accentClass="bg-gradient-to-br from-amber-700 to-amber-950"
-      whatItIs="Online reputation management (ORM) is the process of monitoring, generating, and responding to customer reviews and mentions across platforms like Google, Yelp, Facebook, TripAdvisor, and industry-specific sites. For local businesses, your Google Business Profile star rating is often the first thing a potential customer sees — before your website, before your ad, before your social media. A 4.2 average with 30 reviews loses to a 4.8 average with 200 reviews every time. ORM isn't about hiding negative feedback — it's about generating so many authentic positive reviews that one bad experience doesn't define you, and responding professionally so even a 1-star becomes a trust signal."
+      stats={[
+        { value: "88%", label: "Consumers trust online reviews as much as personal recommendations" },
+        { value: "3.3×", label: "More clicks for businesses with 4+ star ratings vs lower-rated competitors" },
+        { value: "60 days", label: "Typical time to reach 4.5+ stars with a review generation system" },
+      ]}
+      whatItIs="Online reputation management (ORM) is the process of monitoring, generating, and responding to customer reviews and mentions across platforms like Google, Yelp, Facebook, TripAdvisor, and industry-specific sites. For local businesses, your Google Business Profile star rating is often the first thing a potential customer sees — before your website, before your ad, before your social media. A 4.2 average with 30 reviews loses to a 4.8 average with 200 reviews every time. ORM isn't about hiding negative feedback — it's about generating so many authentic positive reviews that one bad experience doesn't define you, and responding professionally so even a 1-star becomes a trust signal.
+
+The most common mistake local businesses make is doing nothing — waiting for reviews to trickle in naturally and hoping the bad ones stay buried. In practice, unhappy customers are far more likely to leave reviews than happy ones unless you actively ask. A systematic post-visit review request (sent at the right moment via the right channel) changes that ratio entirely. Businesses that implement a review generation system typically go from receiving 2–3 reviews per month to 15–30, compounding their rating improvement over time.
+
+Beyond star ratings, ORM also covers how your business appears when someone Googles your brand name. If a complaint thread appears on page one of Google for your business name, that's a reputational liability that needs addressing through a combination of content strategy, response management, and in some cases, proactive publishing. I manage the full picture — not just the star rating on one platform."
       howItWorks={[
         {
           step: "01",
@@ -103,6 +112,18 @@ export default function ReputationManagementPage() {
         {
           q: "Do you manage reputation for multi-location businesses?",
           a: "Yes. I manage review generation and response management across multiple locations under one reporting dashboard, with location-specific benchmarking.",
+        },
+        {
+          q: "What platforms do you monitor beyond Google?",
+          a: "I monitor Google, Yelp, Facebook, TripAdvisor (for hospitality), Healthgrades and Zocdoc (for healthcare), Houzz (for home services), Avvo (for legal), and any industry-specific platform relevant to your business. I also set up Google Alerts and social listening for brand mentions.",
+        },
+        {
+          q: "How does responding to reviews help my ranking?",
+          a: "Google has confirmed that responding to reviews is a positive signal for local search rankings. It shows your business is active, engaged, and customer-focused. Businesses that respond to more than 75% of their reviews consistently outrank those that don't — and it also directly increases the trust of prospects who read the responses.",
+        },
+        {
+          q: "What if a competitor is leaving fake negative reviews?",
+          a: "This happens more often than people think. If you suspect fake reviews, I can audit the review profiles for bot signals and guide you through the formal flagging and dispute process with Google and other platforms. In severe cases, this can escalate to a legal notice — I can advise on when that threshold has been reached.",
         },
       ]}
       relatedLinks={[
