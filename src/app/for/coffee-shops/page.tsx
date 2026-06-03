@@ -132,6 +132,18 @@ export default function CoffeeShopsPage() {
           q: "Do you work with chains or just independents?",
           a: "My focus is independent and small-chain coffee shops. I find the work more interesting and the impact more meaningful for owners who are actually building something.",
         },
+        {
+          q: "What's the difference between Google Ads and Google Business Profile — do I need both?",
+          a: "They're different: your Google Business Profile is the free listing that appears in Google Maps (the map pack), while Google Ads are paid results that appear above organic search. Most coffee shops benefit from both — GBP for ongoing organic visibility, and ads for specific promotions or when you want to accelerate growth. During the free audit I'll tell you which should come first given your current situation.",
+        },
+        {
+          q: "My Google rating is under 4.0 — can you still help?",
+          a: "Yes, and improving your rating is often the highest-ROI thing we can do first. I'll set up a review generation system that consistently drives new positive reviews, and respond professionally to any negative ones. Going from 3.8 to 4.4 stars can noticeably increase how often people choose you over a competitor in the map pack.",
+        },
+        {
+          q: "Do you work with coffee shops outside the US?",
+          a: "Yes — I work with coffee shops in the US, UK, Australia, Canada, and other English-speaking markets. Local search platforms (Google Maps, Google Ads) work the same way globally, and my approach adapts to local pricing benchmarks and competitive dynamics.",
+        },
       ]}
       ctaHeadline="Ready to fill more seats and build more regulars?"
     />

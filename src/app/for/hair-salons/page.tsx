@@ -132,6 +132,18 @@ export default function HairSalonsPage() {
           q: "How much should I budget for ads?",
           a: "For most salons, $300–$600/month in Meta Ads is a great starting point. Google Ads depend on your local competition. I'll give you a specific recommendation during the free audit.",
         },
+        {
+          q: "Do you work with salons outside the US?",
+          a: "Yes — I work with hair salons and beauty businesses in the UK, Australia, Canada, and other English-speaking markets. The platforms (Google, Meta, Instagram) are global, and I adapt strategy to local market benchmarks and competition levels.",
+        },
+        {
+          q: "My salon doesn't show up in Google Maps — why?",
+          a: "Usually one of three reasons: your Google Business Profile isn't fully optimised, your review count is low compared to nearby competitors, or there's an issue with your category selection or service area settings. A free audit will diagnose the specific cause for your location.",
+        },
+        {
+          q: "Can Instagram actually drive bookings, not just followers?",
+          a: "Yes — but only with the right strategy. Organic Instagram builds brand recognition; Instagram Ads (via Meta Ads Manager) drive actual bookings by targeting people in your area who match your client profile. The two work together: organic content warms the audience, paid ads convert them.",
+        },
       ]}
       ctaHeadline="Ready to fill your appointment book with new clients?"
     />

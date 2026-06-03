@@ -132,6 +132,18 @@ export default function FitnessStudiosPage() {
           q: "Can you help with retention marketing too?",
           a: "I focus primarily on acquisition, but I can advise on email/SMS flows for retention and help you set up the basics if you don't have them.",
         },
+        {
+          q: "What's a realistic cost per new member or trial from paid ads?",
+          a: "For a well-run Meta lead ad campaign targeting local fitness audiences, $8–$20 per trial sign-up is achievable for most independent studios. Google Ads typically run higher ($20–$50 per lead) but attract higher-intent prospects who convert to memberships at a better rate. I'll give you specific projections based on your location and offer during the free audit.",
+        },
+        {
+          q: "Do you work with yoga studios, gyms, CrossFit boxes, and pilates studios — or just one type?",
+          a: "All of the above. The paid acquisition and local SEO fundamentals are similar across fitness formats. Where they differ is in offer strategy (class pass vs. membership vs. free trial) and audience targeting. I've worked across yoga, HIIT, pilates, CrossFit, and general gym formats.",
+        },
+        {
+          q: "Do you work with fitness studios outside the US?",
+          a: "Yes — UK, Australia, Canada, and other English-speaking markets. Fitness is one of the strongest local search categories globally, and the platforms I use (Google, Meta) are available everywhere. I adapt pricing benchmarks and strategy to the local market.",
+        },
       ]}
       ctaHeadline="Ready to fill your classes and grow your membership base?"
     />
