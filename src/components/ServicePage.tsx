@@ -175,12 +175,45 @@ export default function ServicePage({
 
       {/* ── What it is ── */}
       <SectionWrapper className="bg-gray-50">
-        <div className="max-w-3xl mx-auto">
-          <span className="section-label">The Basics</span>
-          <h2 className="section-title mb-6">What is {service}, really?</h2>
-          {whatItIs.split("\\n\\n").map((para, i) => (
-            <p key={i} className="text-gray-600 leading-relaxed text-lg mb-4 last:mb-0">{para}</p>
-          ))}
+        <div className="max-w-5xl mx-auto">
+          <div className={`grid gap-10 items-start ${stats && stats.length > 0 ? "md:grid-cols-[1fr_300px]" : ""}`}>
+            {/* Text column */}
+            <div>
+              <span className="section-label">The Basics</span>
+              <h2 className="section-title mb-8">What is {service}, really?</h2>
+              <div className="space-y-6">
+                {whatItIs.split("\\n\\n").map((para, i) => {
+                  if (i === 0) return (
+                    <p key={i} className="text-gray-800 leading-relaxed text-xl">{para}</p>
+                  );
+                  if (i === 1) return (
+                    <div key={i} className="flex gap-4 bg-white rounded-xl p-5 border border-coffee-100 shadow-sm">
+                      <div className="shrink-0 w-1 rounded-full bg-coffee-400 self-stretch" />
+                      <p className="text-gray-600 leading-relaxed text-sm">{para}</p>
+                    </div>
+                  );
+                  return (
+                    <div key={i} className="bg-amber-50 border border-amber-200 rounded-xl px-5 py-4">
+                      <p className="text-xs font-semibold text-amber-700 uppercase tracking-widest mb-2">Common mistake to avoid</p>
+                      <p className="text-gray-700 leading-relaxed text-sm">{para}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Stats sidebar */}
+            {stats && stats.length > 0 && (
+              <div className="space-y-3 md:sticky md:top-24">
+                {stats.map((stat) => (
+                  <div key={stat.label} className="bg-white rounded-xl px-5 py-4 border border-coffee-100 shadow-sm">
+                    <div className="text-3xl font-bold text-coffee-800 mb-1">{stat.value}</div>
+                    <div className="text-xs text-gray-500 leading-snug">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </SectionWrapper>
 
