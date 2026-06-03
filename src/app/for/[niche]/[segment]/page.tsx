@@ -154,6 +154,27 @@ function LocationNichePage({ niche: nicheData, city }: {
         </div>
       </section>
 
+      <div className="border-b border-gray-100">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+          <div>
+            <p className="text-2xl font-bold text-coffee-700">3–5×</p>
+            <p className="text-sm text-gray-500 mt-1">avg. return on ad spend</p>
+          </div>
+          <div>
+            <p className="text-2xl font-bold text-coffee-700">30 days</p>
+            <p className="text-sm text-gray-500 mt-1">to first leads from Google Ads</p>
+          </div>
+          <div>
+            <p className="text-2xl font-bold text-coffee-700">$0</p>
+            <p className="text-sm text-gray-500 mt-1">cost for an initial audit</p>
+          </div>
+          <div>
+            <p className="text-2xl font-bold text-coffee-700">No contracts</p>
+            <p className="text-sm text-gray-500 mt-1">month-to-month, cancel anytime</p>
+          </div>
+        </div>
+      </div>
+
       <SectionWrapper>
         <div className="max-w-3xl mx-auto">
           <span className="section-label">What We Do</span>
