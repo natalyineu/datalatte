@@ -56,13 +56,13 @@ def get_credentials():
 
 
 # ── GSC fetch ────────────────────────────────────────────────────────────────
-def fetch_all_blog_clicks(creds) -> dict[str, int]:
-    """Return {slug: clicks} for all /blog/* pages in the last DAYS days."""
+def fetch_all_blog_impressions(creds) -> dict[str, int]:
+    """Return {slug: impressions} for all /blog/* pages in the last DAYS days."""
     from googleapiclient.discovery import build
 
     service = build("searchconsole", "v1", credentials=creds)
 
-    clicks_by_slug: dict[str, int] = {}
+    impr_by_slug: dict[str, int] = {}
     start_row = 0
     row_limit  = 25_000
 
@@ -87,41 +87,39 @@ def fetch_all_blog_clicks(creds) -> dict[str, int]:
             break
 
         for row in rows:
-            url    = row["keys"][0]           # e.g. https://datalatte.pro/blog/some-slug
-            clicks = int(row.get("clicks", 0))
-            if clicks == 0:
+            url  = row["keys"][0]
+            impr = int(row.get("impressions", 0))
+            if impr == 0:
                 continue
-            # Extract slug from URL
             parts = url.rstrip("/").split("/blog/")
             if len(parts) == 2 and parts[1]:
-                slug = parts[1].split("/")[0]  # drop any sub-path
-                clicks_by_slug[slug] = clicks_by_slug.get(slug, 0) + clicks
+                slug = parts[1].split("/")[0]
+                impr_by_slug[slug] = impr_by_slug.get(slug, 0) + impr
 
         if len(rows) < row_limit:
-            break  # last page
+            break
         start_row += row_limit
 
-    return clicks_by_slug
+    return impr_by_slug
 
 
 # ── Main ─────────────────────────────────────────────────────────────────────
 def main():
     print(f"Fetching GSC data: {START_DATE} → {END_DATE} ({DAYS} days)...")
     creds = get_credentials()
-    clicks = fetch_all_blog_clicks(creds)
+    impressions = fetch_all_blog_impressions(creds)
 
-    if not clicks:
-        print("WARNING: No click data returned. Check GSC access or date range.")
+    if not impressions:
+        print("WARNING: No impression data returned. Check GSC access or date range.")
         sys.exit(0)
 
-    # Sort by clicks desc for human-readable output
-    sorted_clicks = dict(sorted(clicks.items(), key=lambda x: x[1], reverse=True))
+    sorted_impr = dict(sorted(impressions.items(), key=lambda x: x[1], reverse=True))
 
-    OUTPUT_FILE.write_text(json.dumps(sorted_clicks, indent=2))
-    print(f"Saved {len(sorted_clicks)} posts to {OUTPUT_FILE}")
+    OUTPUT_FILE.write_text(json.dumps(sorted_impr, indent=2))
+    print(f"Saved {len(sorted_impr)} posts to {OUTPUT_FILE}")
     print(f"Top 10:")
-    for slug, n in list(sorted_clicks.items())[:10]:
-        print(f"  {n:>6} clicks  {slug}")
+    for slug, n in list(sorted_impr.items())[:10]:
+        print(f"  {n:>6} impr  {slug}")
 
 
 if __name__ == "__main__":
