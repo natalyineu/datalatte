@@ -37,7 +37,7 @@ export default function WebsitePage() {
       description="A beautiful website that doesn't convert is just an expensive brochure. I build lean, fast, conversion-focused websites and ad landing pages for local businesses — pages designed around one goal: getting you the call, booking, or form submission."
       icon="🌐"
       accentClass="bg-gradient-to-br from-coffee-800 to-gray-900"
-      whatItIs="For local businesses, your website has one job: convert visitors into customers. That means fast load times (Google penalises slow sites in both ads and SEO), clear calls-to-action above the fold, trust signals (reviews, photos, credentials), and a booking or contact flow that doesn't have unnecessary friction. Most local business websites fail on at least three of these. Landing pages are a focused version of this for ad campaigns — a single page with one offer, one CTA, and no distractions. When you're paying for Google Ads or Meta Ads traffic, sending it to a generic homepage instead of a dedicated landing page can cut your conversion rate by 50–70%. The maths are simple: better page = lower cost per lead = more return on your ad spend."
+      whatItIs="For local businesses, your website has one job: convert visitors into customers. That means fast load times (Google penalises slow sites in both ads and SEO), clear calls-to-action above the fold, trust signals (reviews, photos, credentials), and a booking or contact flow that doesn't have unnecessary friction. Most local business websites fail on at least three of these. Landing pages are a focused version of this for ad campaigns — a single page with one offer, one CTA, and no distractions. When you're paying for Google Ads or Meta Ads traffic, sending it to a generic homepage instead of a dedicated landing page can cut your conversion rate by 50–70%. The maths are simple: better page = lower cost per lead = more return on your ad spend.\n\nYour website sits at the intersection of every other marketing channel you run. Google Ads, Meta Ads, Local SEO, content marketing, and your Google Business Profile all feed traffic to your website — which makes it the single highest-leverage piece of your marketing stack. A weak website doesn't just underperform on its own; it depresses the returns from everything else. A well-built, fast-loading, conversion-focused site amplifies every pound and dollar you spend elsewhere: better Quality Scores in Google Ads mean lower cost-per-click, better user experience means higher SEO rankings, and a frictionless booking flow means more of your hard-won visitors actually become paying customers.\n\nThe most common mistake local business owners make with their website is prioritising how it looks over how it performs. A visually impressive site with slow load times, no clear CTA, and a buried phone number will always lose to a simpler site that loads in under 2 seconds and puts a 'Book Now' button in the first viewport. Google's own data shows that 53% of mobile users abandon a site that takes longer than 3 seconds to load — and the majority of local business website traffic comes from mobile. Speed is not optional. Neither is a prominent, tap-friendly phone number and a booking link that works on every device."
       howItWorks={[
         {
           step: "01",
@@ -76,6 +76,9 @@ export default function WebsitePage() {
         "Click-to-call and booking CTA implementation",
         "Basic on-page SEO (title tags, schema, meta)",
         "30-day post-launch support",
+        "PageSpeed and Core Web Vitals QA (targeting 90+ scores)",
+        "Review and trust-signal integration (Google reviews widget)",
+        "Booking system embed (Acuity, Calendly, Mindbody, etc.)",
       ]}
       notIncluded={[
         "Custom illustration or brand photography (I advise on what you need)",
@@ -108,6 +111,28 @@ export default function WebsitePage() {
           q: "How long does a landing page take vs a full website?",
           a: "A high-converting landing page can be live in 1–2 weeks. A full 5–8 page website typically takes 3–4 weeks from wireframe to launch, depending on feedback turnaround.",
         },
+        {
+          q: "What PageSpeed score should my website have?",
+          a: "Aim for 90+ on both mobile and desktop in Google PageSpeed Insights. Scores below 50 on mobile hurt your Google Ads Quality Score and your organic rankings simultaneously. Every build I deliver is tested against Core Web Vitals benchmarks before launch — if it doesn't score well, it doesn't ship.",
+        },
+        {
+          q: "Will I be able to update the website myself after it's built?",
+          a: "Yes. I build sites with handoff in mind. Webflow sites have a visual editor you can use without touching code. WordPress sites give you full CMS control. I provide a short walkthrough video and documentation so you can update hours, add photos, or publish blog posts independently.",
+        },
+        {
+          q: "Do you handle the hosting and domain setup?",
+          a: "I'll guide you through it and can handle the technical configuration, but hosting and domain registration stay in your name and under your control. I typically recommend Webflow Hosting, Cloudflare Pages, or Vercel depending on the stack — all fast, reliable, and affordable for local businesses.",
+        },
+        {
+          q: "What if I already have a website — can you just improve it?",
+          a: "Absolutely. A conversion audit often surfaces quick wins — adding a sticky call button, tightening the above-the-fold CTA, compressing images to fix load speed, or adding a reviews section — that can meaningfully improve performance without a full rebuild. I'll tell you honestly whether a refresh or a rebuild makes more financial sense.",
+        },
+      ]}
+      stats={[
+        { value: "3s", label: "Load time threshold before 53% of users leave" },
+        { value: "2–5×", label: "Conversion lift from optimised landing pages" },
+        { value: "14 days", label: "Typical build time for a local business site" },
+        { value: "100", label: "PageSpeed target for all builds" },
       ]}
       relatedLinks={[
         { label: "Google Ads", href: "/services/google-ads" },
