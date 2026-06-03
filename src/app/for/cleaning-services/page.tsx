@@ -123,6 +123,18 @@ export default function CleaningServicesPage() {
           q: "Can you help me target specific neighbourhoods?",
           a: "Absolutely. Radius and zip-code targeting in Google Ads, combined with neighbourhood-specific landing pages, is one of the most effective approaches for cleaning companies.",
         },
+        {
+          q: "How do I handle negative reviews from unhappy clients?",
+          a: "Responding professionally and promptly to negative reviews significantly reduces their impact on your star rating and conversion rate. I'll set up a reputation management process that lets you address concerns quickly and demonstrate to future clients that you take quality seriously.",
+        },
+        {
+          q: "What's the difference between marketing for residential and commercial cleaning?",
+          a: "Residential cleaning targets homeowners and renters via Google Maps, local search, and neighbourhood-level Facebook ads. Commercial cleaning targets office managers and facilities directors via LinkedIn, Google Ads for B2B terms, and direct outreach sequences. The platforms and messaging differ significantly — I'll tailor the approach to your focus.",
+        },
+        {
+          q: "Do you work with cleaning companies outside the US?",
+          a: "Yes — UK, Australia, Canada, and other English-speaking markets. The cleaning sector is highly local and search-driven in all these markets. I adapt ad copy, pricing strategy, and competitive benchmarks to your local environment.",
+        },
       ]}
       ctaHeadline="Ready to build a fully booked cleaning business?"
     />

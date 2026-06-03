@@ -123,6 +123,18 @@ export default function DentistsPage() {
           q: "How long until we see new patients from the campaigns?",
           a: "Google Ads can generate enquiries within the first week. Local SEO improvements show traction in 6–12 weeks. GBP optimisation often produces results in under a month.",
         },
+        {
+          q: "Our practice is already full — do we need marketing?",
+          a: "Full schedules are great until something changes: an associate leaves, insurance reimbursements drop, or a new practice opens nearby. Marketing built before you need it protects you from those shocks. It also gives you the positioning to attract higher-value cases (implants, ortho, cosmetics) rather than just any patient.",
+        },
+        {
+          q: "What ad budget makes sense for a dental practice?",
+          a: "Most single-location dental practices see strong results with $600–$1,500/month in Google Ads. With the lifetime value of a patient relationship ranging from $2,000 to $8,000+, the ROI threshold is very low. I'll give you a specific recommendation based on your location and the procedures you want to attract.",
+        },
+        {
+          q: "Do you work with dental practices outside the US?",
+          a: "Yes — I work with dental practices in the UK, Australia, Canada, and other English-speaking markets. The fundamentals of local search (Google Business Profile, Google Ads, review strategy) are the same globally. I adapt ad copy, compliance requirements, and pricing benchmarks to the local market.",
+        },
       ]}
       ctaHeadline="Ready to fill your schedule with high-value new patients?"
     />

@@ -132,6 +132,18 @@ export default function ElectriciansPage() {
           q: "How quickly can I see results?",
           a: "Google Ads and LSA can generate calls within days of launch. GBP improvements typically show results in 4–8 weeks. Organic local SEO builds over 3–6 months.",
         },
+        {
+          q: "I get most of my work from referrals — is online marketing worth it?",
+          a: "Referrals are valuable but unpredictable. When a referred customer searches for you online before calling, a weak Google presence loses them. And when referral volume dips (it always does), online channels give you a predictable backup. The best electricians use referrals as a base and digital marketing as the growth layer.",
+        },
+        {
+          q: "How do I attract higher-value jobs like panel upgrades or EV charger installs?",
+          a: "Service-specific Google Ads targeting keywords like 'EV charger installation near me' or 'electrical panel upgrade [city]' attract clients specifically looking for those jobs — not just whoever calls first. Landing pages optimized for high-value services convert these searches at a much higher rate than a generic homepage.",
+        },
+        {
+          q: "Do you work with electricians outside the US?",
+          a: "Yes — UK, Australia, Canada, and other English-speaking markets. The trade services sector is highly local and search-driven globally. I adapt strategy, pricing benchmarks, and compliance requirements (UK Gas Safe, AU licensing requirements) to your local market.",
+        },
       ]}
       ctaHeadline="Ready to build a predictable pipeline of jobs?"
     />

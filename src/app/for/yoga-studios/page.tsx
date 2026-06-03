@@ -132,6 +132,18 @@ export default function YogaStudiosPage() {
           q: "Do you work with studios that use ClassPass or Mindbody?",
           a: "Yes — I work around your existing booking system. I can also advise on how to balance direct memberships vs. third-party platforms from a margin perspective.",
         },
+        {
+          q: "How do I attract people who've never done yoga before?",
+          a: "Beginners need lower-friction entry points: a free or discounted intro class, clear messaging about what to expect, and social proof from people who look like them. Meta Lead Ads with 'first class free' offers and beginner-specific ad copy consistently outperform generic campaigns for first-time yoga students.",
+        },
+        {
+          q: "What's the difference between marketing for a yoga studio versus a general gym?",
+          a: "Yoga clients tend to be more values-driven — they respond to authenticity, community, and instructor personality more than equipment or facilities. Your marketing should feature real instructors, genuine transformations, and a sense of the studio's culture. This performs better than generic fitness imagery.",
+        },
+        {
+          q: "Do you work with yoga studios outside the US?",
+          a: "Yes — UK, Australia, Canada, and other English-speaking markets. Yoga is a strong local search category globally and the core acquisition channels (Google, Meta, local SEO) are available everywhere. I adapt strategy and pricing benchmarks to your local competitive environment.",
+        },
       ]}
       ctaHeadline="Ready to fill every class and grow your membership?"
     />

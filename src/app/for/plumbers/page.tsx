@@ -132,6 +132,18 @@ export default function PlumbersPage() {
           q: "Do you work with solo plumbers or just larger companies?",
           a: "Both. Solo operators and small crews often see the best ROI because overhead is low and a few extra jobs per month is highly meaningful. I tailor the strategy to your capacity.",
         },
+        {
+          q: "I'm already busy with emergency calls — why do I need marketing?",
+          a: "Emergency jobs are reactive and unpredictable. Marketing helps you attract the higher-margin planned work: bathroom renovations, boiler replacements, full replumbs. These jobs are bigger, schedulable, and give you better control over your workload and revenue.",
+        },
+        {
+          q: "How do I get more high-value jobs and fewer small call-outs?",
+          a: "Service-specific campaigns targeting 'bathroom remodel plumber [city]', 'boiler installation near me', or 'pipe repiping service' attract clients explicitly looking for larger projects. Paired with landing pages built around those services, you pre-qualify leads before they call.",
+        },
+        {
+          q: "Do you work with plumbers outside the US?",
+          a: "Yes — UK, Australia, Canada, and other English-speaking markets. Plumbing is one of the strongest local search categories in all these markets. I adapt campaigns to local platform norms, pricing benchmarks, and licensing contexts (e.g. Gas Safe in the UK).",
+        },
       ]}
       ctaHeadline="Ready to keep your schedule full of jobs?"
     />

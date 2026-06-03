@@ -132,6 +132,18 @@ export default function BarbershopsPage() {
           q: "Can you help me get more 5-star reviews?",
           a: "Yes — review generation is part of every engagement. I set up a simple system that asks happy clients at the right moment. Most shops 3× their review volume in 90 days.",
         },
+        {
+          q: "I mostly get walk-ins — should I still advertise online?",
+          a: "Walk-ins are great, but they're weather-dependent, day-of-week dependent, and location-dependent. Online visibility brings in clients who plan ahead — first-timers searching for a barber near their new apartment, people looking for a specific cut they saw online. Building both channels means fewer slow Tuesdays.",
+        },
+        {
+          q: "Is TikTok or Instagram worth it for a barbershop?",
+          a: "Video content of impressive fades, transformations, and sharp cuts performs extremely well on both platforms. Organic reach on TikTok specifically is still strong for local businesses. Combine it with paid Meta ads to your local ZIP code and you have a very cost-effective acquisition machine.",
+        },
+        {
+          q: "Do you work with barbershops outside the US?",
+          a: "Yes — UK, Australia, Canada, and other English-speaking markets. Barbershops are one of the strongest local search categories globally, and the core strategy (Google Maps, review velocity, targeted local ads) works the same way everywhere.",
+        },
       ]}
       ctaHeadline="Ready to keep every chair booked?"
     />

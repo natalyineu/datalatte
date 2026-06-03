@@ -123,6 +123,18 @@ export default function RealEstateAgentsPage() {
           q: "I'm with a large brokerage — can I still build my own brand?",
           a: "Absolutely. Building your personal brand alongside your brokerage affiliation is not only allowed — it's expected. The agents with the strongest personal brands are the ones who survive market downturns and brokerage changes.",
         },
+        {
+          q: "Should I be advertising on Zillow and Realtor.com or Google?",
+          a: "Zillow and Realtor.com leads are shared with multiple agents and the cost per lead has risen sharply. Google Ads generate exclusive leads — someone searching 'buy a home in [city]' and clicking your specific ad. Over time, owned Google traffic and SEO dramatically reduces dependency on third-party portals.",
+        },
+        {
+          q: "How important is video content for real estate marketing?",
+          a: "Very. Property walk-throughs on YouTube and Instagram Reels establish you as the neighbourhood authority and perform well organically. Short 'sold in X days' or market update videos build trust with sellers. Combining organic video with paid social ads amplifies reach significantly.",
+        },
+        {
+          q: "Do you work with real estate agents outside the US?",
+          a: "Yes — UK, Australia, Canada, and other English-speaking markets. The core acquisition strategy (Google Ads, personal GBP, neighbourhood SEO, social proof) adapts well across markets. I understand the compliance differences (UK Advertising Standards, AU Consumer Law) and adjust ad copy accordingly.",
+        },
       ]}
       ctaHeadline="Ready to own your leads instead of renting them?"
     />
