@@ -37,7 +37,16 @@ export default function VideoMarketingPage() {
       description="Video is now the highest-performing content format across every major platform — Google Search, YouTube, Instagram, Facebook, and TikTok. For local businesses, a well-executed video strategy turns browsers into believers before they ever visit you."
       icon="🎬"
       accentClass="bg-gradient-to-br from-rose-800 to-rose-950"
-      whatItIs="Video marketing encompasses everything from YouTube pre-roll ads to Instagram Reels to in-feed Facebook video — and the strategies for each platform are completely different. YouTube Ads work like Google Ads for video: you target people actively searching for relevant content or browsing related channels, and pay when they choose to watch. Short-form video (Reels, Shorts, TikTok) works more like organic content distribution, where the algorithm shows your video to people based on their interests — you don't need a large following to go viral. For local businesses, the most powerful use case is often 'before and after' content (hair salons, cleaning services, fitness studios), 'how it works' explainers (dentists, financial advisors), and local atmosphere content (coffee shops, restaurants) that makes people want to come in."
+      stats={[
+        { value: "86%", label: "Of businesses use video as a marketing tool — up from 61% in 2016" },
+        { value: "2×", label: "More time spent on pages with video vs text-only pages" },
+        { value: "$0.01", label: "Minimum cost-per-view achievable with YouTube Ads for local targeting" },
+      ]}
+      whatItIs="Video marketing encompasses everything from YouTube pre-roll ads to Instagram Reels to in-feed Facebook video — and the strategies for each platform are completely different. YouTube Ads work like Google Ads for video: you target people actively searching for relevant content or browsing related channels, and pay when they choose to watch. Short-form video (Reels, Shorts, TikTok) works more like organic content distribution, where the algorithm shows your video to people based on their interests — you don't need a large following to go viral. For local businesses, the most powerful use case is often 'before and after' content (hair salons, cleaning services, fitness studios), 'how it works' explainers (dentists, financial advisors), and local atmosphere content (coffee shops, restaurants) that makes people want to come in.
+
+The single biggest barrier local businesses face with video is the belief that it requires expensive production. It doesn't. The most effective local business video content is filmed on a modern smartphone, edited with a free app, and looks deliberately casual — because on TikTok, Reels, and YouTube Shorts, authenticity outperforms polish every time. A salon owner filming a 30-second transformation with trending audio will routinely outperform a $5,000 brand video shot by a production company. The strategy matters far more than the equipment.
+
+YouTube Ads deserve special attention for local businesses with any consideration phase in the buying journey. Dentists, financial advisors, cosmetic clinics, fitness studios — any business where a prospect needs to feel comfortable before booking — benefit enormously from video ads that show their face, their space, and their approach. A 30-second YouTube Ad that a prospect sees 3–5 times before they book creates the same trust that word-of-mouth used to provide. For these categories, video isn't optional — it's the channel that closes the trust gap faster than anything else."
       howItWorks={[
         {
           step: "01",
@@ -104,6 +113,18 @@ export default function VideoMarketingPage() {
         {
           q: "Can video marketing work for B2B businesses?",
           a: "Absolutely. YouTube and LinkedIn video ads are increasingly effective for B2B lead generation — especially explainer videos and case study content. The approach differs from consumer local businesses, but the underlying strategy is the same.",
+        },
+        {
+          q: "What's the difference between YouTube Ads and running organic YouTube content?",
+          a: "Organic YouTube requires consistent long-form content publishing over months to build an audience — it's a long game. YouTube Ads give you immediate, targeted reach to people who haven't found your channel yet. For local businesses, ads are almost always the faster path to results. Organic YouTube makes sense as a secondary strategy once you have an established content library.",
+        },
+        {
+          q: "How do I know if my video ads are actually working?",
+          a: "I set up conversion tracking for every video campaign — phone clicks, form submissions, and store visits where available. YouTube Ads also provide view-through conversions: people who saw your ad and converted later without clicking. Monthly reports show cost-per-view, view-through rate, and attributed conversions so you can see the full picture.",
+        },
+        {
+          q: "Should I use the same video across all platforms?",
+          a: "Not without editing. Video specs, aspect ratios, ideal lengths, and content styles differ significantly between YouTube (16:9, 30–60s for ads), Instagram Reels (9:16, 15–30s), Facebook (square or 4:5 often wins), and TikTok (9:16, fast pace). I'll advise on repurposing your core video into platform-optimised cuts so you get maximum reach without producing everything from scratch.",
         },
       ]}
       relatedLinks={[
