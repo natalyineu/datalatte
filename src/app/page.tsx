@@ -415,11 +415,23 @@ export default function HomePage() {
               <span className="text-coffee-700">warm as your latte</span>,
               as sharp as your data
             </h2>
-            <p className="text-gray-500 leading-relaxed mb-8">
+            <p className="text-gray-500 leading-relaxed mb-5">
               I'm not a big agency. I'm a one-person shop with deep expertise in local marketing
               and a genuine obsession with analytics. That means you get my full attention —
               not handed off to a junior account manager.
             </p>
+
+            {/* Agency credentials */}
+            <div className="mb-8">
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3">10+ years experience at</p>
+              <div className="flex flex-wrap gap-2">
+                {["OMD", "Dentsu", "BBDO", "GroupM"].map((agency) => (
+                  <span key={agency} className="inline-flex items-center px-3 py-1.5 rounded-lg bg-white border border-coffee-100 text-sm font-semibold text-gray-700 shadow-sm">
+                    {agency}
+                  </span>
+                ))}
+              </div>
+            </div>
 
             <div className="space-y-6">
               {whyCards.map((item) => (
