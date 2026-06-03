@@ -132,6 +132,18 @@ export default function NailSalonsPage() {
           q: "How quickly can I see results?",
           a: "Google Business Profile improvements show results in 4–8 weeks. Google Ads can drive bookings the first week. Organic SEO builds over 3–6 months.",
         },
+        {
+          q: "My clients are mostly regulars — how do I attract new ones?",
+          a: "Regulars are your foundation, but growth requires a steady stream of new clients to replace natural attrition (people move, change routines, or try a competitor). Google Maps, paid local ads, and before/after Instagram content specifically attract first-time visitors who haven't heard of you yet.",
+        },
+        {
+          q: "Can you help with promoting higher-margin services like gels or nail art?",
+          a: "Absolutely. Service-specific landing pages and targeted Google Ads for terms like 'gel manicure near me' or 'nail art [city]' attract clients specifically looking for those services — not just the cheapest walk-in option.",
+        },
+        {
+          q: "Do you work with nail salons outside the US?",
+          a: "Yes — UK, Australia, Canada, and other English-speaking markets. Nail salons are one of the strongest local search niches globally. I adapt the strategy to local platform availability and competitive dynamics.",
+        },
       ]}
       ctaHeadline="Ready to fill your appointment book?"
     />

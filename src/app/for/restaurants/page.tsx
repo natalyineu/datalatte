@@ -123,6 +123,18 @@ export default function RestaurantsPage() {
           q: "Can you help with OpenTable or Resy integration?",
           a: "Yes — I'll make sure your booking platform is correctly linked in your GBP, ads, and website to minimise friction from search to reservation.",
         },
+        {
+          q: "We're already fully booked on weekends — why would we need marketing?",
+          a: "Two good reasons: filling weekday gaps and protecting your pipeline. If your Saturday is packed but Tuesday is empty, targeted midweek promotions can smooth your revenue. And if a key chef leaves or a competitor opens nearby, you want an established online presence pulling new customers in — not scrambling to build one from scratch.",
+        },
+        {
+          q: "What's the difference between Google Ads and Google Business Profile for a restaurant?",
+          a: "Your Google Business Profile is the free listing that appears in Google Maps — it drives directions, calls, and menu views organically. Google Ads are paid results that appear above organic search results. For restaurants, the GBP is often the single highest-ROI investment; ads layer on top to capture specific searches or promote seasonal menus.",
+        },
+        {
+          q: "Do you work with restaurants outside the US?",
+          a: "Yes — I work with restaurants and cafés in the UK, Australia, Canada, and other English-speaking markets. Google Maps and Google Ads work the same way globally; I adapt strategy and pricing benchmarks to your local competitive environment.",
+        },
       ]}
       ctaHeadline="Ready to turn more searches into seated guests?"
     />
