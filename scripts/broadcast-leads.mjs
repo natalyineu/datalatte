@@ -23,7 +23,7 @@ const NICHE_CONFIG = {
     scene: "Denver's independent coffee scene",
     service: "small coffee shops",
     result: "doubled their new customer count in 90 days",
-    subject: "quick question for your coffee shop — from datalatte.pro",
+    subject: "quick question about your coffee shop",
   },
   salon: {
     audienceName: "DataLatte — Hair Salons Denver",
@@ -31,7 +31,7 @@ const NICHE_CONFIG = {
     scene: "Denver's independent salon scene",
     service: "hair salons and barbershops",
     result: "grew their booking calendar by 40% in 60 days",
-    subject: "quick question for your salon — from datalatte.pro",
+    subject: "quick question about your salon",
   },
   pet: {
     audienceName: "DataLatte — Pet Groomers Denver",
@@ -39,7 +39,7 @@ const NICHE_CONFIG = {
     scene: "Denver's independent pet care scene",
     service: "pet groomers and dog daycares",
     result: "filled their schedule with repeat clients in 60 days",
-    subject: "quick question for your grooming business — from datalatte.pro",
+    subject: "quick question about your grooming business",
   },
   fitness: {
     audienceName: "DataLatte — Fitness Studios Denver",
@@ -47,7 +47,7 @@ const NICHE_CONFIG = {
     scene: "Denver's independent fitness scene",
     service: "gyms, yoga and pilates studios",
     result: "grew their membership by 30% in 90 days",
-    subject: "quick question for your studio — from datalatte.pro",
+    subject: "quick question about your studio",
   },
 };
 
@@ -140,6 +140,17 @@ async function main() {
     return;
   }
 
+  // Load existing broadcasts once to check for duplicates
+  const existingBroadcasts = await resend("/broadcasts");
+  const sentToday = new Set(
+    (existingBroadcasts.data || [])
+      .filter(b => b.sent_at && b.sent_at.startsWith(new Date().toISOString().slice(0, 10)))
+      .map(b => b.name)
+  );
+  if (sentToday.size > 0) {
+    console.log(`\n⚠️  Already sent today: ${[...sentToday].join(", ")}`);
+  }
+
   for (const [niche, leads] of Object.entries(byNiche)) {
     const cfg = NICHE_CONFIG[niche];
     if (!cfg) { console.log(`\nSkipping unknown niche: ${niche}`); continue; }
@@ -174,8 +185,12 @@ async function main() {
     }
     console.log(`  ✅ ${added} contacts ready, ${failed} failed`);
 
-    // 3. Create broadcast
+    // 3. Create broadcast — skip if already sent today for this niche
     const broadcastName = `Denver ${niche} — ${new Date().toISOString().slice(0, 10)}`;
+    if (sentToday.has(broadcastName)) {
+      console.log(`  ⏭️  Broadcast "${broadcastName}" already sent today — skipping to prevent duplicate.`);
+      continue;
+    }
     console.log(`Creating broadcast "${broadcastName}"...`);
     const broadcast = await resend("/broadcasts", "POST", {
       audience_id: audienceId,
