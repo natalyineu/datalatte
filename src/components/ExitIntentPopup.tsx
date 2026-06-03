@@ -132,7 +132,7 @@ export default function ExitIntentPopup() {
                     {/* Options */}
                     <div className="space-y-3 mb-5">
                       <Link
-                        href="/contact"
+                        href="/free-audit"
                         onClick={dismiss}
                         className="flex items-center justify-between w-full bg-coffee-700 hover:bg-coffee-800 text-white font-semibold px-5 py-3.5 rounded-xl transition-colors group"
                       >

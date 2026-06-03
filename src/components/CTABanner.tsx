@@ -12,7 +12,7 @@ export default function CTABanner({
   headline = "Ready to brew up better results?",
   sub      = "Let's take a look at your current setup — totally free, no pressure.",
   ctaLabel = "Get Your Free Marketing Audit",
-  ctaHref  = "/contact",
+  ctaHref  = "/free-audit",
 }: CTABannerProps) {
   return (
     <section className="hero-gradient py-20 px-4 sm:px-6 lg:px-8">
