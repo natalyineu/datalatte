@@ -69,16 +69,18 @@ function DropdownMenu({ label, items }: { label: string; items: { label: string;
       </button>
 
       {open && (
-        <div className="absolute top-full left-0 mt-1 w-52 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50 animate-fade-in">
-          {items.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="block px-4 py-2 text-sm text-gray-600 hover:text-coffee-700 hover:bg-coffee-50 transition-colors"
-            >
-              {item.label}
-            </Link>
-          ))}
+        <div className="absolute top-full left-0 pt-1 w-52 z-50">
+          <div className="bg-white rounded-xl shadow-xl border border-gray-100 py-2 animate-fade-in">
+            {items.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="block px-4 py-2 text-sm text-gray-600 hover:text-coffee-700 hover:bg-coffee-50 transition-colors"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
         </div>
       )}
     </div>
