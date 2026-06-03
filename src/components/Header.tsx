@@ -41,11 +41,13 @@ const services = [
 ];
 
 const learn = [
-  { label: "Blog",       href: "/blog" },
-  { label: "Resources",  href: "/resources" },
-  { label: "Reporting",  href: "/reporting" },
-  { label: "Pricing",    href: "/pricing" },
-  { label: "About",      href: "/about" },
+  { label: "Blog",           href: "/blog" },
+  { label: "Resources",      href: "/resources" },
+  { label: "Client Results", href: "/results" },
+  { label: "Case Studies",   href: "/case-studies" },
+  { label: "Reporting",      href: "/reporting" },
+  { label: "Pricing",        href: "/pricing" },
+  { label: "About",          href: "/about" },
 ];
 
 function DropdownMenu({ label, items }: { label: string; items: { label: string; href: string }[] }) {

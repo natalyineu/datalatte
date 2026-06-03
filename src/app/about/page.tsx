@@ -111,6 +111,32 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* ── Credentials strip ── */}
+      <section className="bg-gray-50 border-b border-gray-200 py-8 px-4 sm:px-6">
+        <div className="max-w-3xl mx-auto">
+          <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-5 text-center">
+            10+ years of senior strategy at
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-6">
+            {agencies.map((a) => (
+              <div key={a.name} className="text-center">
+                <div className="text-lg font-bold text-gray-800">{a.name}</div>
+                <div className="text-xs text-gray-400">{a.desc}</div>
+              </div>
+            ))}
+          </div>
+          <p className="text-center text-sm text-gray-500 mt-5 max-w-xl mx-auto">
+            Fortune 500 clients, multi-million dollar budgets, full-funnel campaigns across Europe and the US —
+            now applied to local businesses that talk to me like a human.
+          </p>
+          <div className="flex justify-center mt-5">
+            <Link href="/contact" className="inline-flex items-center gap-2 bg-coffee-700 hover:bg-coffee-800 text-white font-semibold px-6 py-2.5 rounded-xl text-sm transition-colors">
+              Work with me <ArrowRight size={15} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ── Story ── */}
       <div className="bg-white">
 

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Mail, MessageCircle, MapPin, Linkedin } from "lucide-react";
+import NewsletterForm from "@/components/NewsletterForm";
 
 const footerLinks = {
   "Industries": [
@@ -42,6 +43,8 @@ const footerLinks = {
   "Company": [
     { label: "About Nataliia",          href: "/about" },
     { label: "Blog",                    href: "/blog" },
+    { label: "Client Results",          href: "/results" },
+    { label: "Case Studies",            href: "/case-studies" },
     { label: "⚡ Value Radar",          href: "/radar" },
     { label: "Reporting",               href: "/reporting" },
     { label: "Pricing",                 href: "/pricing" },
@@ -142,7 +145,14 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="border-t border-coffee-900 mt-14 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
+        {/* Newsletter */}
+        <div className="border-t border-coffee-900 mt-14 pt-12 pb-6">
+          <div className="max-w-lg">
+            <NewsletterForm source="footer" />
+          </div>
+        </div>
+
+        <div className="border-t border-coffee-900 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
           <p>© {new Date().getFullYear()} DataLatte. All rights reserved.</p>
           <div className="flex gap-5">
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
