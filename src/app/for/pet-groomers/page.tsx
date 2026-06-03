@@ -132,6 +132,18 @@ export default function PetGroomersPage() {
           q: "How competitive is the pet grooming space locally?",
           a: "It varies by market. During the free audit I'll check your local map pack and tell you exactly what you're up against and how realistic it is to win top positions.",
         },
+        {
+          q: "How much should a pet grooming business spend on Google Ads?",
+          a: "Most independent groomers see good results starting at $200–$500/month in ad spend, depending on local competition and your service area size. The management fee on top of that is separate. I'll give you a specific budget recommendation during the free audit based on your location.",
+        },
+        {
+          q: "My grooming business is fully booked — why would I need marketing?",
+          a: "Two reasons: protection and pricing power. If your current clients leave (moving, change of lifestyle, pet loss), you want a pipeline of new clients rather than scrambling to fill slots. And businesses with strong online presence and reviews can justify higher prices — clients perceive higher quality.",
+        },
+        {
+          q: "Do you work with groomers outside the US?",
+          a: "Yes — UK, Australia, Canada, and other English-speaking markets. Pet grooming is a strong local search category globally, and my approach adapts to local competitive dynamics and platform availability.",
+        },
       ]}
       ctaHeadline="Ready to grow your grooming business with real marketing?"
     />
