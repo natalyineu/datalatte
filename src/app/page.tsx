@@ -328,6 +328,12 @@ export default function HomePage() {
           <p className="section-subtitle mt-4 max-w-xl mx-auto">
             From getting found on Google Maps to converting that interest into paying customers.
           </p>
+          <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 mt-5 text-sm text-gray-500">
+            <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-coffee-500" /> Starting from <Link href="/pricing" className="font-semibold text-coffee-700 hover:underline">$500/month</Link></span>
+            <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-coffee-500" /> No lock-in contracts</span>
+            <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-coffee-500" /> Direct access to Nataliia</span>
+            <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-coffee-500" /> Free audit to start</span>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
