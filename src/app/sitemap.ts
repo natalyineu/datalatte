@@ -28,18 +28,26 @@ function getCategoryRoutes(): MetadataRoute.Sitemap {
 }
 
 function getBlogRoutes(): MetadataRoute.Sitemap {
+  let popularity: Record<string, number> = {};
+  const popPath = path.join(contentDir, "popularity.json");
+  if (fs.existsSync(popPath)) {
+    try { popularity = JSON.parse(fs.readFileSync(popPath, "utf8")); } catch { /* ignore */ }
+  }
+
   return fs
     .readdirSync(contentDir)
     .filter((f) => f.endsWith(".mdx"))
     .map((file) => {
+      const slug = file.replace(".mdx", "");
       const raw = fs.readFileSync(path.join(contentDir, file), "utf8");
       const { data } = matter(raw);
       const parsed = new Date(data.date as string);
+      const impressions = popularity[slug] ?? 0;
       return {
-        url: `${baseUrl}/blog/${file.replace(".mdx", "")}`,
+        url: `${baseUrl}/blog/${slug}`,
         lastModified: !isNaN(parsed.getTime()) ? parsed : new Date(),
         changeFrequency: "monthly" as const,
-        priority: 0.7,
+        priority: impressions > 100 ? 0.9 : impressions >= 10 ? 0.8 : 0.7,
       };
     })
     .sort((a, b) => b.lastModified.getTime() - a.lastModified.getTime());
@@ -108,22 +116,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/services/competitor-analysis`,      lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     // Checklists
     { url: `${baseUrl}/checklists`,                                         lastModified: today, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${baseUrl}/checklists/google-business-profile`,                 lastModified: today, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/checklists/local-seo-audit`,                         lastModified: today, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/checklists/google-ads-setup`,                        lastModified: today, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/checklists/meta-ads-setup`,                          lastModified: today, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/checklists/website-cro`,                             lastModified: today, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/checklists/email-marketing`,                         lastModified: today, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/checklists/social-media-content`,                    lastModified: today, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/checklists/coffee-shop-marketing`,                   lastModified: today, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/checklists/hair-salon-marketing`,                    lastModified: today, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/checklists/reputation-management`,                   lastModified: today, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/checklists/pet-groomer-marketing`,                   lastModified: today, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/checklists/fitness-studio-marketing`,                lastModified: today, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/checklists/restaurant-marketing`,                    lastModified: today, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/checklists/dentist-marketing`,                       lastModified: today, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/checklists/cleaning-service-marketing`,              lastModified: today, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/checklists/real-estate-marketing`,                   lastModified: today, changeFrequency: "monthly", priority: 0.8 },
     // Tools
     { url: `${baseUrl}/tools/marketing-budget-calculator`, lastModified: today,      changeFrequency: "monthly", priority: 0.9 },
     { url: `${baseUrl}/tools/ai-agent-builder`,            lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
