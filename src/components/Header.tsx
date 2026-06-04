@@ -36,6 +36,7 @@ const services = [
   { label: "AI Agents & Automation",   href: "/services/ai-agents" },
   { label: "Email & SMS Marketing",    href: "/services/email-sms" },
   { label: "Social Media",             href: "/services/social-media" },
+  { label: "CTV Advertising",           href: "/services/ctv-advertising" },
   { label: "Programmatic Advertising", href: "/services/programmatic" },
   { label: "Website & Landing Pages",  href: "/services/website" },
 ];
