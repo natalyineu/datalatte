@@ -43,7 +43,9 @@ const RSS_SOURCES = [
 
 const MAX_AGE_HOURS  = 26;  // only articles from last 26h (daily cron — small overlap buffer)
 const MAX_PER_SOURCE = 5;   // max articles per source to consider
-const BATCH_SIZE     = 10;  // articles per AI call (batching to stay under RPM)
+const BATCH_SIZE     = 10;  // articles per AI call
+
+export const maxDuration = 60; // Vercel Pro: 60s max; Hobby: also 60s as of 2024
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -202,50 +204,60 @@ export async function GET(request: NextRequest) {
     signals: [] as string[],
   };
 
-  // ── Step 1: Collect all recent articles from all sources ─────────────────
+  // ── Step 1: Fetch all RSS sources in parallel ────────────────────────────
 
-  const allArticles: RawArticle[] = [];
-
-  for (const source of RSS_SOURCES) {
-    try {
+  const fetchResults = await Promise.allSettled(
+    RSS_SOURCES.map(async (source) => {
       const feed = await parser.parseURL(source.url);
-      stats.sources_fetched++;
+      return { source, items: feed.items };
+    })
+  );
 
-      const recent = feed.items
-        .filter((item) => {
-          const date = item.pubDate || item.isoDate;
-          return date ? new Date(date) > cutoff : false;
-        })
-        .slice(0, MAX_PER_SOURCE);
+  const candidateArticles: RawArticle[] = [];
 
-      for (const item of recent) {
-        if (!item.title) continue;
+  for (const result of fetchResults) {
+    if (result.status === "rejected") {
+      stats.errors.push(`fetch failed: ${String(result.reason).slice(0, 80)}`);
+      continue;
+    }
+    stats.sources_fetched++;
+    const { source, items } = result.value;
 
-        // Quick dedup check before sending to AI
-        const { data: similar } = await supabase.rpc("find_similar_signals", {
-          p_headline: item.title,
-          threshold: 0.55,
-        });
-        if (similar && similar.length > 0) {
-          stats.skipped_dedup++;
-          continue;
-        }
+    const recent = items
+      .filter((item) => {
+        const date = item.pubDate || item.isoDate;
+        return date ? new Date(date) > cutoff : false;
+      })
+      .slice(0, MAX_PER_SOURCE);
 
-        allArticles.push({
-          title: item.title,
-          description: item.contentSnippet || item.summary || item.content || "",
-          link: item.link || source.siteUrl,
-          source: source.name,
-          siteUrl: source.siteUrl,
-          pubDate: item.isoDate || item.pubDate || new Date().toISOString(),
-        });
-      }
-    } catch (err) {
-      stats.errors.push(
-        `${source.name}: ${err instanceof Error ? err.message : "fetch failed"}`
-      );
+    for (const item of recent) {
+      if (!item.title) continue;
+      candidateArticles.push({
+        title: item.title,
+        description: item.contentSnippet || item.summary || item.content || "",
+        link: item.link || source.siteUrl,
+        source: source.name,
+        siteUrl: source.siteUrl,
+        pubDate: item.isoDate || item.pubDate || new Date().toISOString(),
+      });
     }
   }
+
+  // Dedup check in parallel (one RPC per candidate)
+  const allArticles: RawArticle[] = [];
+  await Promise.allSettled(
+    candidateArticles.map(async (article) => {
+      const { data: similar } = await supabase.rpc("find_similar_signals", {
+        p_headline: article.title,
+        threshold: 0.55,
+      });
+      if (similar && similar.length > 0) {
+        stats.skipped_dedup++;
+      } else {
+        allArticles.push(article);
+      }
+    })
+  );
 
   stats.articles_collected = allArticles.length;
   console.log(`[radar] Sources: ${stats.sources_fetched}/${RSS_SOURCES.length} | Articles after dedup: ${allArticles.length} | Skipped dedup: ${stats.skipped_dedup} | Errors: ${stats.errors.length}`);
@@ -297,10 +309,7 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    // Polite pause between batches to respect RPM
-    if (i + BATCH_SIZE < allArticles.length) {
-      await sleep(13000); // ~13s between batches → stay under 5 RPM
-    }
+    // Cerebras is fast (ms response times) — no rate-limit sleep needed
   }
 
   console.log(`[radar] DONE — inserted: ${stats.inserted} | irrelevant: ${stats.skipped_irrelevant} | dedup: ${stats.skipped_dedup} | errors: ${stats.errors.length}`);
