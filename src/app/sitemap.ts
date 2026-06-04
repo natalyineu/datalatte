@@ -143,7 +143,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/resources`,                         lastModified: today,      changeFrequency: "weekly",  priority: 0.8 },
     { url: `${baseUrl}/for/multi-location`,                lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/compare/freelance-vs-agency`,       lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/compare/ai-agents-platforms`,       lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/services/ctv-advertising`,          lastModified: today,      changeFrequency: "monthly", priority: 0.9 },
+    // AI agent skill pages
+    { url: `${baseUrl}/services/ai-agents/booking`,        lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/services/ai-agents/phone-answering`, lastModified: today,     changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/services/ai-agents/review-management`, lastModified: today,   changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/services/ai-agents/lead-capture`,   lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
+    // Niche × AI agent pages
+    { url: `${baseUrl}/for/coffee-shops/ai-agents`,        lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/for/hair-salons/ai-agents`,         lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/for/fitness-studios/ai-agents`,     lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/for/pet-groomers/ai-agents`,        lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/services/programmatic`,             lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/services`,                            lastModified: today,      changeFrequency: "monthly", priority: 0.9 },
     { url: `${baseUrl}/reporting`,                          lastModified: today,      changeFrequency: "monthly", priority: 0.8 },

@@ -61,6 +61,7 @@ function rowToSignal(row: Record<string, unknown>): Signal {
 }
 
 export async function fetchPublishedSignals(): Promise<Signal[]> {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) return [];
   const { data, error } = await supabase
     .from("radar_signals")
     .select("slug,source,source_url,category,published_at,impact,headline,summary,body,insight,niches")
@@ -72,6 +73,7 @@ export async function fetchPublishedSignals(): Promise<Signal[]> {
 }
 
 export async function fetchSignalBySlug(slug: string): Promise<Signal | null> {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) return null;
   const { data, error } = await supabase
     .from("radar_signals")
     .select("slug,source,source_url,category,published_at,impact,headline,summary,body,insight,niches")
