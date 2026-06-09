@@ -136,8 +136,8 @@ export default function Header() {
 
           {/* CTA */}
           <div className="hidden md:flex">
-            <Link href="/contact" className="btn-primary text-sm py-2.5 px-5">
-              Get a Free Audit
+            <Link href="/free-audit" className="btn-primary text-sm py-2.5 px-5">
+              Free Audit
             </Link>
           </div>
 
@@ -223,7 +223,7 @@ export default function Header() {
             </div>
           )}
 
-          <Link href="/contact" className="btn-primary w-full justify-center mt-3" onClick={() => setMobileOpen(false)}>
+          <Link href="/free-audit" className="btn-primary w-full justify-center mt-3" onClick={() => setMobileOpen(false)}>
             Get a Free Audit
           </Link>
         </div>

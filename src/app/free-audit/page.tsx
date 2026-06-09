@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CheckCircle2, ArrowRight, Clock, Search, BarChart3, Star, Target } from "lucide-react";
+import { CheckCircle2, ArrowRight, Clock, Search, BarChart3, Star, Target, ChevronDown } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import ContactForm from "@/components/ContactForm";
 import CTABanner from "@/components/CTABanner";
@@ -69,10 +69,11 @@ const steps = [
 ];
 
 export default function FreeAuditPage() {
+  const currentMonth = new Date().toLocaleString("en-US", { month: "long" });
   return (
     <>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-coffee-800 to-coffee-950 py-24">
+      <section className="bg-gradient-to-br from-coffee-800 to-coffee-950 py-20 md:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <span className="inline-block bg-white/15 border border-white/25 text-white text-sm font-medium px-4 py-1.5 rounded-full mb-5 backdrop-blur-sm">
@@ -84,7 +85,7 @@ export default function FreeAuditPage() {
             <p className="text-white/75 text-lg mb-8 leading-relaxed">
               Get a personalised local marketing audit — your Google Business Profile, local SEO rankings, competitor gaps, and ad account health — delivered to your inbox within 48 hours.
             </p>
-            <div className="flex flex-wrap gap-4 text-white/80 text-sm">
+            <div className="flex flex-wrap gap-4 text-white/80 text-sm mb-8">
               {["No commitment", "Personal analysis by Nataliia", "Specific action plan included", "Works for any local business"].map((item) => (
                 <span key={item} className="flex items-center gap-1.5">
                   <CheckCircle2 size={15} className="text-coffee-300" />
@@ -92,12 +93,20 @@ export default function FreeAuditPage() {
                 </span>
               ))}
             </div>
-            <div className="mt-6 inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-2 text-sm text-white backdrop-blur-sm">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400" />
-              </span>
-              Taking new clients now — limited spots available in June
+            <div className="flex flex-col sm:flex-row gap-4 mb-6">
+              <Link
+                href="#audit-form"
+                className="inline-flex items-center justify-center gap-2 bg-white text-coffee-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg text-base"
+              >
+                Request my free audit <ChevronDown size={18} />
+              </Link>
+              <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-xl px-5 py-3.5 text-sm text-white backdrop-blur-sm">
+                <span className="relative flex h-2 w-2 shrink-0">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400" />
+                </span>
+                Taking new clients — limited spots in {currentMonth}
+              </div>
             </div>
           </div>
         </div>

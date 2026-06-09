@@ -54,7 +54,7 @@ export default function HeroAnimated() {
 
       <FadeUp delay={0.3} className="flex flex-col sm:flex-row gap-3">
         <Link
-          href="/contact"
+          href="/free-audit"
           className="inline-flex items-center justify-center gap-2 bg-white text-coffee-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5"
         >
           Get a Free Marketing Audit
