@@ -66,7 +66,7 @@ function buildHtml(cfg) {
 
   <p style="margin-top:32px">
     — Nataliia, DataLatte<br>
-    <a href="https://datalatte.pro/contact?${cfg.utm}" style="color:#7c4a2d">Free local marketing audit →</a>
+    <a href="https://datalatte.pro/free-audit?${cfg.utm}" style="color:#7c4a2d">Free local marketing audit →</a>
   </p>
 
   <hr style="margin:32px 0;border:none;border-top:1px solid #eee">

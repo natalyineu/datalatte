@@ -76,7 +76,7 @@ function buildHtml(businessName, niche) {
 
   <p style="margin-top:32px">
     — Nataliia, DataLatte<br>
-    <a href="https://datalatte.pro/contact?${cfg.utm}" style="color:#7c4a2d">Free local marketing audit →</a>
+    <a href="https://datalatte.pro/free-audit?${cfg.utm}" style="color:#7c4a2d">Free local marketing audit →</a>
   </p>
 
   <hr style="margin:32px 0;border:none;border-top:1px solid #eee">
@@ -101,7 +101,7 @@ I help ${cfg.service} in the US get more foot traffic through Google and social 
 If it's relevant, happy to share what's working. If not, no worries at all.
 
 — Nataliia, DataLatte
-https://datalatte.pro/contact?${cfg.utm}
+https://datalatte.pro/free-audit?${cfg.utm}
 
 ---
 To opt out, reply with "unsubscribe".

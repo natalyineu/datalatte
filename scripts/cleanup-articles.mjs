@@ -98,7 +98,7 @@ function fixArticle(content) {
   // 4. Fix any remaining raw DataLatte.pro/audit text (not in markdown link)
   fixed = fixed.replace(
     /(?<!\()(https?:\/\/(?:www\.)?datalatte\.pro\/audit)/gi,
-    "https://datalatte.pro/contact"
+    "https://datalatte.pro/free-audit"
   );
 
   return { fixed, changes };
