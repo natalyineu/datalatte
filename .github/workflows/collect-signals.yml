@@ -25,14 +25,17 @@ jobs:
 
       - name: Validate required secrets
         run: |
-          if [ -z "${{ secrets.SUPABASE_URL }}" ]; then
-            echo "❌ SUPABASE_URL secret is not set — go to GitHub Settings > Secrets > Actions and add it"
+          SUPA_URL="${{ secrets.SUPABASE_URL }}${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}"
+          if [ -z "$SUPA_URL" ]; then
+            echo "❌ Supabase URL secret is not set."
+            echo "   Add SUPABASE_URL (or NEXT_PUBLIC_SUPABASE_URL) to GitHub Settings > Secrets > Actions"
             echo "   Value: https://olsxxfwvwsycwzihbmdn.supabase.co"
             exit 1
           fi
           if [ -z "${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" ]; then
-            echo "❌ SUPABASE_SERVICE_ROLE_KEY secret is not set — go to GitHub Settings > Secrets > Actions and add it"
-            echo "   Value: find it in Supabase dashboard > Settings > API > Service role key"
+            echo "❌ SUPABASE_SERVICE_ROLE_KEY secret is not set."
+            echo "   Add it to GitHub Settings > Secrets > Actions"
+            echo "   Value: Supabase dashboard > Settings > API > Service role (secret) key"
             exit 1
           fi
           if [ -z "${{ secrets.GROQ_API_KEY }}" ]; then
@@ -53,5 +56,6 @@ jobs:
       - name: Insert signals into Supabase
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: node scripts/insert-signals.mjs
