@@ -187,7 +187,7 @@ export default function CompetitorAnalysisPage() {
             An AI agent monitors your local competitors 24/7 across Google, social media, their website, and ad platforms — then sends you a clear, actionable report every week.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact" className="btn-primary">
+            <Link href="/free-audit" className="btn-primary">
               Get competitor analysis <ArrowRight size={16} />
             </Link>
             <Link href="/pricing" className="inline-flex items-center gap-2 px-6 py-3 border border-gray-600 text-gray-300 rounded-xl hover:border-gray-400 hover:text-white transition-colors font-medium">

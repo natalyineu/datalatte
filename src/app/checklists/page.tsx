@@ -211,7 +211,7 @@ export default function ChecklistsPage() {
             Book a free audit and get a personalized marketing plan for your local business — no fluff, just the specific actions that move the needle.
           </p>
           <Link
-            href="/contact"
+            href="/free-audit"
             className="inline-flex items-center gap-2 bg-white text-coffee-800 font-bold px-8 py-3.5 rounded-xl hover:bg-coffee-50 transition-colors duration-200 text-base"
           >
             Get a Free Marketing Audit

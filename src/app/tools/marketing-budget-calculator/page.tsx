@@ -148,7 +148,7 @@ export default function MarketingBudgetCalculatorPage() {
             gives you a precise plan based on your actual website, competitors, and local market.
           </p>
           <Link
-            href="/contact"
+            href="/free-audit"
             className="inline-flex items-center gap-2 bg-white text-coffee-700 font-bold px-6 py-3 rounded-xl hover:bg-coffee-50 transition-colors"
           >
             Book my free audit →

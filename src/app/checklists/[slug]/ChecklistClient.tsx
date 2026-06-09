@@ -250,7 +250,7 @@ export default function ChecklistClient({
                 </p>
               </div>
               <Link
-                href="/contact"
+                href="/free-audit"
                 className="flex-shrink-0 inline-flex items-center gap-2 bg-white text-coffee-800 font-bold px-5 py-2.5 rounded-xl hover:bg-coffee-50 transition-colors text-sm"
               >
                 Get a Free Audit
@@ -364,7 +364,7 @@ export default function ChecklistClient({
             Book a 30-minute audit with Nataliia. You&apos;ll get a personalized action plan for your business — no sales pitch, just strategy.
           </p>
           <Link
-            href="/contact"
+            href="/free-audit"
             className="inline-flex items-center gap-2 bg-coffee-700 hover:bg-coffee-600 text-white font-bold px-8 py-3.5 rounded-xl transition-colors duration-200"
           >
             Book Free Audit

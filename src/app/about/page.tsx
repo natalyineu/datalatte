@@ -130,7 +130,7 @@ export default function AboutPage() {
             now applied to local businesses that talk to me like a human.
           </p>
           <div className="flex justify-center mt-5">
-            <Link href="/contact" className="inline-flex items-center gap-2 bg-coffee-700 hover:bg-coffee-800 text-white font-semibold px-6 py-2.5 rounded-xl text-sm transition-colors">
+            <Link href="/free-audit" className="inline-flex items-center gap-2 bg-coffee-700 hover:bg-coffee-800 text-white font-semibold px-6 py-2.5 rounded-xl text-sm transition-colors">
               Work with me <ArrowRight size={15} />
             </Link>
           </div>
@@ -463,7 +463,7 @@ export default function AboutPage() {
             </div>
 
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
-              <Link href="/contact" className="btn-primary">
+              <Link href="/free-audit" className="btn-primary">
                 Work with me <ArrowRight size={16} />
               </Link>
               <Link href="/services/google-ads" className="btn-secondary">

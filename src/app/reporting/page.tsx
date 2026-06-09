@@ -241,7 +241,7 @@ export default function ReportingPage() {
             No spreadsheets. No guessing. No 5-tab Monday mornings.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href="/contact" className="inline-flex items-center gap-2 bg-coffee-500 text-white font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-400 transition-all hover:shadow-xl hover:shadow-coffee-900/30">
+            <Link href="/free-audit" className="inline-flex items-center gap-2 bg-coffee-500 text-white font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-400 transition-all hover:shadow-xl hover:shadow-coffee-900/30">
               Get my free audit <ArrowRight size={17} />
             </Link>
             <Link href="/services/analytics" className="inline-flex items-center gap-2 bg-white/8 border border-white/15 text-white/80 font-semibold px-7 py-3.5 rounded-xl hover:bg-white/15 transition-all">

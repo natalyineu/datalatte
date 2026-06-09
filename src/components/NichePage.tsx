@@ -102,7 +102,7 @@ export default function NichePage({
             </h1>
             <p className="text-white/70 text-lg mb-10 leading-relaxed">{subheadline}</p>
             <div className="flex flex-col sm:flex-row gap-3">
-              <Link href="/contact" className="inline-flex items-center justify-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg">
+              <Link href="/free-audit" className="inline-flex items-center justify-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg">
                 Get a Free Audit <ArrowRight size={17} />
               </Link>
               <Link href="/pricing" className="inline-flex items-center justify-center gap-2 bg-white/10 border border-white/25 text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-white/15 transition-all">
@@ -261,7 +261,7 @@ export default function NichePage({
         <div className="max-w-2xl mx-auto text-center">
           <span className="section-label">What Clients Say</span>
           <TestimonialCard {...testimonial} />
-          <Link href="/contact" className="btn-primary mt-8">
+          <Link href="/free-audit" className="btn-primary mt-8">
             Let&apos;s talk about your {niche.toLowerCase()} <ArrowRight size={16} />
           </Link>
         </div>

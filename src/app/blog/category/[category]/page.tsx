@@ -156,7 +156,7 @@ export default async function CategoryPage({
         <p className="text-gray-400 mb-6">
           Let&apos;s review your current setup — free audit, no obligations.
         </p>
-        <Link href="/contact" className="btn-primary">
+        <Link href="/free-audit" className="btn-primary">
           Get a free audit
         </Link>
       </section>

@@ -24,53 +24,53 @@ interface CtaButton {
 
 const CTA_MAP: Record<string, CtaButton[]> = {
   audit: [
-    { label: "Book my free audit →",     href: "/contact",                          primary: true,  icon: "arrow" },
+    { label: "Book my free audit →",     href: "/free-audit",                       primary: true,  icon: "arrow" },
     { label: "See how it works",          href: "/about",                            primary: false, icon: "external" },
   ],
   google_ads: [
     { label: "Google Ads service →",      href: "/services/google-ads",              primary: true,  icon: "arrow" },
-    { label: "Book a free audit",         href: "/contact",                          primary: false },
+    { label: "Book a free audit",         href: "/free-audit",                          primary: false },
   ],
   meta_ads: [
     { label: "Meta Ads service →",        href: "/services/meta-ads",                primary: true,  icon: "arrow" },
-    { label: "Book a free audit",         href: "/contact",                          primary: false },
+    { label: "Book a free audit",         href: "/free-audit",                          primary: false },
   ],
   local_seo: [
     { label: "Local SEO service →",       href: "/services/local-seo",               primary: true,  icon: "arrow" },
-    { label: "Book a free audit",         href: "/contact",                          primary: false },
+    { label: "Book a free audit",         href: "/free-audit",                          primary: false },
   ],
   gbp: [
     { label: "GBP Optimisation →",        href: "/services/google-business-profile", primary: true,  icon: "arrow" },
-    { label: "Book a free audit",         href: "/contact",                          primary: false },
+    { label: "Book a free audit",         href: "/free-audit",                          primary: false },
   ],
   email: [
     { label: "Email & SMS service →",     href: "/services/email-sms",               primary: true,  icon: "arrow" },
-    { label: "Book a free audit",         href: "/contact",                          primary: false },
+    { label: "Book a free audit",         href: "/free-audit",                          primary: false },
   ],
   ai: [
     { label: "AI Agents service →",       href: "/services/ai-agents",               primary: true,  icon: "arrow" },
-    { label: "Book a free audit",         href: "/contact",                          primary: false },
+    { label: "Book a free audit",         href: "/free-audit",                          primary: false },
   ],
   social: [
     { label: "Social Media service →",    href: "/services/social-media",            primary: true,  icon: "arrow" },
-    { label: "Book a free audit",         href: "/contact",                          primary: false },
+    { label: "Book a free audit",         href: "/free-audit",                          primary: false },
   ],
   analytics: [
     { label: "Analytics service →",       href: "/services/analytics",               primary: true,  icon: "arrow" },
-    { label: "Book a free audit",         href: "/contact",                          primary: false },
+    { label: "Book a free audit",         href: "/free-audit",                          primary: false },
   ],
   website: [
     { label: "Website & Landing Pages →", href: "/services/website",                 primary: true,  icon: "arrow" },
-    { label: "Book a free audit",         href: "/contact",                          primary: false },
+    { label: "Book a free audit",         href: "/free-audit",                          primary: false },
   ],
   calculator: [
     { label: "Try budget calculator →",   href: "/tools/marketing-budget-calculator", primary: true, icon: "calc" },
-    { label: "Book a free audit",         href: "/contact",                          primary: false },
+    { label: "Book a free audit",         href: "/free-audit",                          primary: false },
   ],
 };
 
 const DEFAULT_CTA: CtaButton[] = [
-  { label: "Book a free audit →", href: "/contact", primary: true, icon: "arrow" },
+  { label: "Book a free audit →", href: "/free-audit", primary: true, icon: "arrow" },
 ];
 
 // ─── Starter topics ──────────────────────────────────────────────────────────
@@ -290,7 +290,7 @@ export default function AIChatWidget() {
 
             {/* Persistent free audit banner */}
             <div className="bg-coffee-50 border-b border-coffee-100 px-3 py-2 shrink-0">
-              <Link href="/contact" className="flex items-center justify-between group">
+              <Link href="/free-audit" className="flex items-center justify-between group">
                 <div>
                   <p className="text-xs font-semibold text-coffee-800">🎯 Free 20-min marketing audit</p>
                   <p className="text-[10px] text-coffee-600">Nataliia reviews your setup personally — no obligation</p>
@@ -388,7 +388,7 @@ export default function AIChatWidget() {
 
             {/* Footer */}
             <p className="text-center text-gray-400 text-[10px] pb-2 shrink-0">
-              Powered by DataLatte AI · <Link href="/contact" className="hover:text-coffee-600 underline transition-colors">Talk to Nataliia directly</Link>
+              Powered by DataLatte AI · <Link href="/free-audit" className="hover:text-coffee-600 underline transition-colors">Talk to Nataliia directly</Link>
             </p>
           </motion.div>
         )}

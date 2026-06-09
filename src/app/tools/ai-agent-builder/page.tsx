@@ -116,7 +116,7 @@ export default function AIAgentBuilderPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
-              href="/contact"
+              href="/free-audit"
               className="inline-block bg-white text-coffee-700 font-bold px-8 py-3.5 rounded-xl hover:bg-coffee-50 transition-colors"
             >
               Get early access →
@@ -194,7 +194,7 @@ export default function AIAgentBuilderPage() {
           The AI Agent Builder is in development. Join the waitlist and get free early access plus a 1-on-1 setup session with Nataliia.
         </p>
         <Link
-          href="/contact"
+          href="/free-audit"
           className="inline-block bg-coffee-700 hover:bg-coffee-600 text-white font-bold px-10 py-4 rounded-xl text-lg transition-colors"
         >
           Join the waitlist →

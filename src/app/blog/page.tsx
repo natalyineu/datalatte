@@ -333,7 +333,7 @@ export default async function BlogPage({
         <p className="text-gray-400 mb-6">
           Reading is great. Implementation is better. Let&apos;s audit your marketing together.
         </p>
-        <Link href="/contact" className="btn-primary">
+        <Link href="/free-audit" className="btn-primary">
           Get a free audit
         </Link>
       </section>

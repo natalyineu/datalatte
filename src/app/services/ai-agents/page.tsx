@@ -319,7 +319,7 @@ export default function AIAgentsPage() {
             trigger → classify → LLM call → structured action → human escalation path
           </p>
           <div className="flex flex-wrap justify-center gap-3">
-            <Link href="/contact" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg">
+            <Link href="/free-audit" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg">
               Request a Free Audit <ArrowRight size={17} />
             </Link>
             <Link href="/tools/ai-agent-builder" className="inline-flex items-center gap-2 border border-white/25 text-white/80 font-medium px-6 py-3.5 rounded-xl hover:bg-white/10 transition-all">
