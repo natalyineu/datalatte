@@ -219,10 +219,10 @@ export default function PricingPage() {
             Every package includes direct access to a senior marketer with 10+ years at the world&apos;s
             top agencies — without the agency overhead. Month-to-month. No lock-in.
           </p>
-          <Link href="/contact" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg">
-            Get a free audit first <ArrowRight size={17} />
+          <Link href="/free-audit" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg">
+            Get your free audit first <ArrowRight size={17} />
           </Link>
-          <p className="text-coffee-400 text-sm mt-4">Not sure what you need? Start with a free 48-hour audit — no strings attached.</p>
+          <p className="text-coffee-400 text-sm mt-4">Not sure what you need? Start with a free 48-hour audit — I&apos;ll recommend the right package for your business.</p>
         </div>
       </section>
 
@@ -269,10 +269,10 @@ export default function PricingPage() {
               </div>
 
               <Link
-                href="/contact"
+                href="/free-audit"
                 className={`w-full text-center font-bold py-3 px-6 rounded-xl transition-all ${tier.highlight ? "bg-coffee-700 hover:bg-coffee-600 text-white" : "bg-coffee-100 hover:bg-coffee-200 text-coffee-800"}`}
               >
-                {tier.cta}
+                {tier.cta} — free audit first
               </Link>
             </div>
           ))}

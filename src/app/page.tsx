@@ -277,7 +277,7 @@ export default function HomePage() {
         <div className="max-w-4xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           {[
             { value: 10, suffix: "+", label: "Years experience" },
-            { value: 50, suffix: "+", label: "Guides published" },
+            { value: 1500, suffix: "+", label: "Guides published" },
             { value: 15, suffix: "+", label: "Ad platforms" },
             { value: 100, suffix: "%", label: "Data-driven" },
           ].map((s) => (
@@ -396,10 +396,10 @@ export default function HomePage() {
               for your business right now.
             </p>
             <Link
-              href="/contact"
+              href="/free-audit"
               className="inline-flex items-center gap-1 bg-white text-coffee-900 font-bold text-sm px-5 py-2.5 rounded-lg hover:bg-coffee-100 transition-colors"
             >
-              Start the conversation <ArrowRight size={13} />
+              Get a free audit <ArrowRight size={13} />
             </Link>
           </div>
         </div>
