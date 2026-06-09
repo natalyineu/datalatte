@@ -53,8 +53,8 @@ const RSS_SOURCES = [
   { url: "https://www.nexttv.com/rss",                        name: "Next TV",                category: "ctv" },
 ];
 
-const MAX_AGE_HOURS = 50; // wider window since cron missed 2 days
-const MAX_PER_SOURCE = 3;
+const MAX_AGE_HOURS = parseInt(process.env.MAX_AGE_HOURS || "26"); // override: MAX_AGE_HOURS=168 for catch-up runs
+const MAX_PER_SOURCE = parseInt(process.env.MAX_PER_SOURCE || "3");
 const BATCH_SIZE = 8;
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }

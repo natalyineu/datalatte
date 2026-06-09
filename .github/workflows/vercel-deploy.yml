@@ -33,12 +33,27 @@ jobs:
           # Ping Bing sitemap
           curl -s "https://www.bing.com/ping?sitemap=${SITEMAP}" -o /dev/null -w "Bing sitemap ping: %{http_code}\n" || true
 
-          # IndexNow batch for most recent 50 blog posts
-          URLS=$(curl -s "${BASE}/sitemap.xml" | grep -oP '(?<=<loc>)[^<]+/blog/[^<]+' | head -50 | jq -R . | jq -sc .)
-          if [ -n "$URLS" ] && [ "$URLS" != "null" ]; then
+          # Fetch sitemap once
+          SITEMAP_CONTENT=$(curl -s "${BASE}/sitemap.xml")
+
+          # Extract URLs by section (blog: 30, radar: all, service+niche+tools: key pages)
+          BLOG_URLS=$(echo "$SITEMAP_CONTENT" | grep -oP '(?<=<loc>)[^<]+/blog/[^<]+' | head -30)
+          RADAR_URLS=$(echo "$SITEMAP_CONTENT" | grep -oP '(?<=<loc>)[^<]+/radar/[^<]+' | grep -v 'feed\.xml' | head -50)
+          SERVICE_URLS=$(echo "$SITEMAP_CONTENT" | grep -oP '(?<=<loc>)[^<]+/services/[^<]+' | head -20)
+          NICHE_URLS=$(echo "$SITEMAP_CONTENT" | grep -oP '(?<=<loc>)https://datalatte\.pro/for/[^/<]+(?=<)' | head -15)
+          TOOL_URLS=$(echo "$SITEMAP_CONTENT" | grep -oP '(?<=<loc>)[^<]+/tools/[^<]+' | head -5)
+          STATIC_URLS=$(printf '%s\n' "${BASE}" "${BASE}/blog" "${BASE}/radar" "${BASE}/contact" "${BASE}/about" "${BASE}/pricing" "${BASE}/checklists" "${BASE}/resources")
+
+          # Combine and deduplicate (max 100 per IndexNow request)
+          ALL_URLS=$(printf '%s\n' "$BLOG_URLS" "$RADAR_URLS" "$SERVICE_URLS" "$NICHE_URLS" "$TOOL_URLS" "$STATIC_URLS" \
+            | grep -v '^$' | sort -u | head -100 | jq -R . | jq -sc .)
+
+          echo "Submitting $(echo "$ALL_URLS" | jq 'length') URLs to IndexNow"
+
+          if [ -n "$ALL_URLS" ] && [ "$ALL_URLS" != "null" ] && [ "$ALL_URLS" != "[]" ]; then
             curl -s -X POST "https://api.indexnow.org/indexnow" \
               -H "Content-Type: application/json; charset=utf-8" \
-              -d "{\"host\":\"datalatte.pro\",\"key\":\"${KEY}\",\"keyLocation\":\"${BASE}/${KEY}.txt\",\"urlList\":${URLS}}" \
+              -d "{\"host\":\"datalatte.pro\",\"key\":\"${KEY}\",\"keyLocation\":\"${BASE}/${KEY}.txt\",\"urlList\":${ALL_URLS}}" \
               -w "\nIndexNow batch: %{http_code}\n" || true
           fi
 
