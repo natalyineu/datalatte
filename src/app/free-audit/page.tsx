@@ -154,6 +154,22 @@ export default function FreeAuditPage() {
         </div>
       </SectionWrapper>
 
+      {/* Social proof strip */}
+      <div className="bg-coffee-50/60 border-y border-coffee-100 py-6">
+        <div className="max-w-4xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {[
+            { quote: "GBP impressions doubled in 6 weeks. Getting calls from people who'd never heard of us.", author: "Sarah M., The Daily Grind Coffee Co." },
+            { quote: "Cut my cost per booking in half. Finally understood where every dollar was going.", author: "Priya K., Studio Flow Yoga" },
+            { quote: "Honest, explains things in plain language. Feels like working with someone who genuinely cares.", author: "Marcus T., Paws & Polish Grooming" },
+          ].map((t) => (
+            <div key={t.author} className="bg-white rounded-xl p-4 shadow-sm border border-coffee-100">
+              <p className="text-sm text-gray-700 leading-relaxed mb-2 italic">&ldquo;{t.quote}&rdquo;</p>
+              <p className="text-xs text-coffee-700 font-semibold">{t.author}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Form */}
       <SectionWrapper id="audit-form">
         <div className="max-w-2xl mx-auto">
