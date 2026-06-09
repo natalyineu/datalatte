@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '0 7 * * *'   # 7am UTC daily — after overnight news cycle
   workflow_dispatch:        # allow manual trigger from GitHub Actions UI
+    inputs:
+      max_age_hours:
+        description: 'How far back to look for articles (default: 26h; use 168 for 7-day catch-up)'
+        required: false
+        default: '26'
 
 jobs:
   collect:
@@ -11,12 +16,30 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
+
+      - name: Validate required secrets
+        run: |
+          if [ -z "${{ secrets.SUPABASE_URL }}" ]; then
+            echo "❌ SUPABASE_URL secret is not set — go to GitHub Settings > Secrets > Actions and add it"
+            echo "   Value: https://olsxxfwvwsycwzihbmdn.supabase.co"
+            exit 1
+          fi
+          if [ -z "${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" ]; then
+            echo "❌ SUPABASE_SERVICE_ROLE_KEY secret is not set — go to GitHub Settings > Secrets > Actions and add it"
+            echo "   Value: find it in Supabase dashboard > Settings > API > Service role key"
+            exit 1
+          fi
+          if [ -z "${{ secrets.GROQ_API_KEY }}" ]; then
+            echo "❌ GROQ_API_KEY secret is not set — go to https://console.groq.com and generate a key"
+            exit 1
+          fi
+          echo "✅ All required secrets are present"
 
       - name: Install dependencies
         run: npm ci --ignore-scripts
@@ -24,6 +47,7 @@ jobs:
       - name: Collect signals from RSS feeds
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          MAX_AGE_HOURS: ${{ github.event.inputs.max_age_hours || '26' }}
         run: node scripts/collect-signals.mjs
 
       - name: Insert signals into Supabase
