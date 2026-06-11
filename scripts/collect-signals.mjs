@@ -55,7 +55,7 @@ const RSS_SOURCES = [
 
 const MAX_AGE_HOURS = parseInt(process.env.MAX_AGE_HOURS || "26"); // override: MAX_AGE_HOURS=168 for catch-up runs
 const MAX_PER_SOURCE = parseInt(process.env.MAX_PER_SOURCE || "3");
-const BATCH_SIZE = 8;
+const BATCH_SIZE = 3; // smaller batches = more tokens per signal = richer output
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
@@ -88,7 +88,7 @@ async function fetchFeed(source) {
       const title = (/<title><!\[CDATA\[(.*?)\]\]><\/title>/.exec(item) || /<title>(.*?)<\/title>/.exec(item))?.[1]?.trim();
       const link = (/<link>(.*?)<\/link>/.exec(item) || /<link[^>]+href="(.*?)"/.exec(item))?.[1]?.trim();
       const pubDate = (/<pubDate>(.*?)<\/pubDate>/.exec(item) || /<published>(.*?)<\/published>/.exec(item))?.[1]?.trim();
-      const desc = (/<description><!\[CDATA\[([\s\S]*?)\]\]><\/description>/.exec(item) || /<description>([\s\S]*?)<\/description>/.exec(item))?.[1]?.trim()?.replace(/<[^>]+>/g, "")?.slice(0, 400);
+      const desc = (/<description><!\[CDATA\[([\s\S]*?)\]\]><\/description>/.exec(item) || /<description>([\s\S]*?)<\/description>/.exec(item))?.[1]?.trim()?.replace(/<[^>]+>/g, "")?.slice(0, 800);
       if (title && link) items.push({ title, link, pubDate, desc });
     }
     return items;
@@ -99,16 +99,19 @@ async function fetchFeed(source) {
 
 async function classifyBatch(articles) {
   const list = articles.map((a, i) =>
-    `[${i}] SOURCE: ${a.source}\nTITLE: ${a.title}\nCONTENT: ${(a.desc || "").slice(0, 350)}`
+    `[${i}] SOURCE: ${a.source}\nTITLE: ${a.title}\nCONTENT: ${(a.desc || "").slice(0, 800)}`
   ).join("\n\n---\n\n");
 
-  const prompt = `You are a marketing intelligence analyst for DataLatte — local marketing agency for coffee shops, hair salons, pet groomers, and fitness studios in US/UK/AU.
+  const prompt = `You are a marketing intelligence analyst for DataLatte — a local marketing agency for coffee shops, hair salons, pet groomers, and fitness studios in US/UK/AU.
 
-Evaluate these ${articles.length} articles. For each, decide if it's relevant to LOCAL BUSINESS MARKETING (digital ads, local SEO, Google Business Profile, AI tools for small business, social media marketing, CTV/OTT, review management, booking tools).
+Evaluate these ${articles.length} articles. Be STRICT about relevance — only mark relevant if the article has a DIRECT, CONCRETE impact on how local small businesses should run their digital marketing RIGHT NOW.
 
-NOT relevant: enterprise B2B, stock markets, politics, pure tech.
+RELEVANT: changes to Google/Meta/TikTok ad products, local SEO algorithm updates, Google Business Profile changes, AI tools that local businesses can actually use, review management, booking tools, CTV/OTT for local advertisers, social media feature changes affecting local reach.
+NOT RELEVANT: enterprise B2B tech, pure startup/VC news, stock markets, politics, AI research with no near-term product impact, "AI might pause development" think-pieces, abstract tech debates.
 
-Return a JSON object with key "results" containing an array, one object per article:
+For relevant articles, write SUBSTANTIAL content — a business owner should finish reading and know exactly what to do differently. Minimum 5 body paragraphs.
+
+Return a JSON object:
 {
   "results": [
     {
@@ -121,10 +124,16 @@ Return a JSON object with key "results" containing an array, one object per arti
       "category": "meta"|"google"|"ai"|"tiktok"|"seo"|"ctv",
       "impact": "breaking"|"high"|"medium"|"fyi",
       "niches": ["coffee","salons","pet","fitness"],
-      "headline": "punchy headline max 90 chars",
-      "summary": "1-2 sentences — what changed and why local businesses care",
-      "body": ["context paragraph", "data/specifics paragraph", "implications for local businesses"],
-      "insight": "1-2 sentences of concrete actionable advice for a local business owner"
+      "headline": "punchy, specific headline max 90 chars — name what changed",
+      "summary": "2-3 sentences — what specifically changed, which platform/product, and the concrete effect on local business revenue or visibility",
+      "body": [
+        "Background paragraph: what this platform/feature is and why local businesses use it",
+        "What changed: the specific update, rollout, or announcement with any numbers/dates mentioned in the source",
+        "Why it matters: how this affects a local business's ad spend, reach, bookings, or search ranking",
+        "Niche breakdown: 2-3 specific examples — e.g. a hair salon running Instagram ads would see X; a coffee shop relying on Google Maps would see Y",
+        "What to watch: timeline, whether this is a test or full rollout, what signals to monitor"
+      ],
+      "insight": "2-3 sentences of SPECIFIC, ACTIONABLE advice — name the exact setting to change, the exact feature to enable, or the exact thing to do this week. Not generic. Not 'consider updating your strategy'."
     }
   ]
 }
@@ -142,7 +151,7 @@ ${list}`;
       model: "llama-3.3-70b-versatile",
       messages: [{ role: "user", content: prompt }],
       temperature: 0.3,
-      max_tokens: 4000,
+      max_tokens: 6000,
       response_format: { type: "json_object" },
     }),
   });
