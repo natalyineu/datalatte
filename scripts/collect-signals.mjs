@@ -217,7 +217,7 @@ async function main() {
     for (const result of results) {
       const article = batch[result.index];
       if (!article || !result.relevant || !result.headline) continue;
-      const slug = `${toSlug(result.headline)}-${Date.now().toString(36)}`;
+      const slug = toSlug(result.headline);
       signals.push({
         slug,
         status: "published",
