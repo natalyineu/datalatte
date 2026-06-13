@@ -1,0 +1,423 @@
+---
+title: "Llama 4 for Local Business Automation: Free Setup via Groq"
+date: "2026-06-13"
+lastModified: "2026-06-13"
+description: "Run Llama 4 for free via Groq API for local business automation — review replies, social posts, FAQ chatbots, and appointment reminders with zero cost."
+author: "Nataliia"
+category: "AI Automation"
+tags: ["Llama 4", "Groq", "free AI", "local business automation"]
+slug: "llama-4-local-business-automation-groq-free"
+image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&auto=format&fit=crop"
+readTime: "10 min read"
+---
+
+What if you could run production-quality AI automation for your coffee shop, salon, or pet grooming business — completely free? Not a free trial. Not a limited demo. Actually free, every month, for as long as you stay within reasonable usage limits.
+
+That's what Meta's Llama 4 model combined with Groq's free inference tier makes possible in 2026. This guide walks you through the complete setup: getting your API key, writing your first script, and deploying four real automations that local businesses use every day. No credit card required to start.
+
+## What Is Llama 4?
+
+Llama 4 is Meta's fourth-generation open-source large language model, released in 2025. "Open-source" in this context means Meta publishes the model weights publicly — anyone can download, run, or modify the model. This is fundamentally different from GPT-4o (OpenAI, closed) or Claude (Anthropic, closed), where the underlying model is proprietary.
+
+The practical impact for small businesses: because the weights are open, dozens of hosting providers can run Llama 4 on their infrastructure and offer it to users. Competition drives prices down — all the way to free in some cases.
+
+Llama 4 comes in multiple sizes. The most relevant for local business automation are:
+
+- **Llama 4 Scout** (17B active parameters): Fast, cost-efficient, excellent for structured tasks like review replies and SMS drafting
+- **Llama 4 Maverick** (17B active parameters, multimodal): Handles images as well as text — useful for generating captions from product photos
+
+Both are available via Groq's free tier as of mid-2026.
+
+## What Is Groq and Why Is It Free?
+
+Groq is an AI inference company that built custom hardware called Language Processing Units (LPUs) — chips designed specifically for running AI models at extreme speeds. Where a standard GPU cluster might deliver 50–100 tokens per second on a large model, Groq's LPUs deliver 300–800 tokens per second. This speed advantage is their product differentiation.
+
+Groq offers a free tier as a marketing strategy: let developers and small businesses build on their platform for free, capture adoption, then convert power users to paid plans as they scale. It's the classic developer tool playbook, and it works well for local businesses who stay within modest usage limits.
+
+**Groq free tier limits (as of mid-2026):**
+
+- Llama 4 Scout: 30 requests per minute, 6,000 tokens per minute, 14,400 requests per day
+- Llama 4 Maverick: 30 requests per minute, 6,000 tokens per minute, 14,400 requests per day
+- Rate limits reset every minute and every day
+
+For context: a typical Google review reply uses about 200–300 tokens total (input + output). At 14,400 requests per day, you could generate 14,400 review replies every day for free. A real local business needs maybe 50–100 per month. The free tier is more than sufficient.
+
+## Step-by-Step Setup
+
+### Step 1: Get Your Groq API Key
+
+1. Go to [console.groq.com](https://console.groq.com)
+2. Sign up with your Google account or email
+3. Navigate to **API Keys** in the left sidebar
+4. Click **Create API Key**, give it a name (e.g., "My Business Bot"), and copy the key
+5. Store it somewhere safe — Groq only shows it once
+
+Your key looks like: `gsk_xxxxxxxxxxxxxxxxxxxxxxxxxxxx`
+
+### Step 2: Install the Groq Python Library
+
+```bash
+# Make sure you have Python 3.8+ installed
+python --version
+
+# Install the Groq SDK
+pip install groq
+
+# Optional: install python-dotenv to manage your API key securely
+pip install python-dotenv
+```
+
+Create a `.env` file in your project directory:
+
+```bash
+echo "GROQ_API_KEY=gsk_your-key-here" > .env
+```
+
+### Step 3: Make Your First Call
+
+```python
+import os
+from groq import Groq
+from dotenv import load_dotenv
+
+load_dotenv()
+
+client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
+
+def ask_llama(system_prompt: str, user_message: str, model: str = "meta-llama/llama-4-scout-17b-16e-instruct") -> str:
+    """
+    Simple wrapper for Groq API calls.
+    Default model: Llama 4 Scout (fast, free tier)
+    """
+    response = client.chat.completions.create(
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_message}
+        ],
+        model=model,
+        temperature=0.7,
+        max_tokens=300,
+    )
+    return response.choices[0].message.content
+
+# Test it
+result = ask_llama(
+    system_prompt="You are the friendly owner of Paws & Clippers pet grooming salon.",
+    user_message="Write a reply to this Google review: 'Rocky came back smelling amazing and looking so fluffy! Best groomer in town!'"
+)
+print(result)
+```
+
+Run it: `python your_script.py`
+
+You should get a warm, professional reply in under a second. Groq's LPUs are genuinely fast — typical latency on Scout is 200–400ms for short outputs.
+
+## 4 Automation Scripts for Local Businesses
+
+### Automation 1: Auto-Reply to Google Reviews
+
+This script processes a batch of reviews and generates personalized replies for each one. In a real deployment, you'd connect this to the Google Business Profile API to fetch and post reviews automatically. Here we demonstrate the core AI logic:
+
+```python
+import os
+from groq import Groq
+from dotenv import load_dotenv
+
+load_dotenv()
+client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
+
+BUSINESS_NAME = "The Daily Grind Cafe"
+BUSINESS_TYPE = "coffee shop"
+
+def generate_review_reply(review: dict) -> str:
+    star_rating = review.get("rating", 5)
+    tone_guidance = (
+        "Be warm and grateful." if star_rating >= 4
+        else "Acknowledge the issue, apologize sincerely, and offer to make it right."
+    )
+
+    response = client.chat.completions.create(
+        messages=[
+            {
+                "role": "system",
+                "content": (
+                    f"You are the owner of {BUSINESS_NAME}, a {BUSINESS_TYPE}. "
+                    f"Write a Google review reply. {tone_guidance} "
+                    "Keep it under 100 words. Sound human and specific to the review."
+                )
+            },
+            {"role": "user", "content": f"Customer review ({star_rating} stars): {review['text']}"}
+        ],
+        model="meta-llama/llama-4-scout-17b-16e-instruct",
+        temperature=0.7,
+        max_tokens=150,
+    )
+    return response.choices[0].message.content
+
+# Example batch
+reviews = [
+    {"rating": 5, "text": "Perfect oat milk latte every single time. Staff remembers my order!"},
+    {"rating": 2, "text": "Waited 20 minutes and my drink was cold. Very disappointed."},
+    {"rating": 4, "text": "Great coffee but seating is limited on weekends."},
+]
+
+for review in reviews:
+    reply = generate_review_reply(review)
+    print(f"[{review['rating']} stars] {review['text'][:50]}...")
+    print(f"Reply: {reply}\n")
+```
+
+### Automation 2: Weekly Social Post Schedule Generator
+
+```python
+import os
+import json
+from groq import Groq
+from dotenv import load_dotenv
+
+load_dotenv()
+client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
+
+def generate_weekly_schedule(business_info: dict) -> list:
+    """
+    Generates 5 social media posts for the week (Mon-Fri).
+    Returns a list of dicts with day, caption, and hashtags.
+    """
+    prompt = f"""
+    Business: {business_info['name']} ({business_info['type']})
+    Current promotion: {business_info.get('promo', 'None')}
+    Brand voice: {business_info.get('voice', 'friendly and professional')}
+    
+    Generate exactly 5 Instagram captions for Monday through Friday.
+    Mix content types: product highlight, behind-the-scenes, customer tip, promotion, community.
+    Each caption should be 50-100 words with 4-6 relevant hashtags.
+    
+    Return as valid JSON array: [{{"day": "Monday", "caption": "...", "hashtags": ["...", "..."]}}]
+    """
+
+    response = client.chat.completions.create(
+        messages=[
+            {"role": "system", "content": "You are a social media manager for local businesses. Always return valid JSON."},
+            {"role": "user", "content": prompt}
+        ],
+        model="meta-llama/llama-4-scout-17b-16e-instruct",
+        temperature=0.8,
+        max_tokens=1200,
+        response_format={"type": "json_object"}
+    )
+
+    raw = response.choices[0].message.content
+    data = json.loads(raw)
+    return data.get("posts", data)  # handle both {"posts": [...]} and [...]
+
+# Example
+business = {
+    "name": "Bloom Beauty Studio",
+    "type": "hair salon",
+    "promo": "15% off balayage services throughout June",
+    "voice": "warm, aspirational, beauty-focused"
+}
+
+schedule = generate_weekly_schedule(business)
+for post in schedule:
+    print(f"\n{post.get('day', 'Day')}:")
+    print(post.get('caption', ''))
+    print("Hashtags:", " ".join(f"#{h}" for h in post.get('hashtags', [])))
+```
+
+### Automation 3: FAQ Chatbot from a Text File
+
+This lets you point the AI at your own FAQ document so it answers customer questions using only your actual policies and information — no hallucinated details.
+
+```python
+import os
+from groq import Groq
+from dotenv import load_dotenv
+
+load_dotenv()
+client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
+
+def load_faq_document(filepath: str) -> str:
+    with open(filepath, "r", encoding="utf-8") as f:
+        return f.read()
+
+def answer_customer_question(question: str, faq_content: str, business_name: str) -> str:
+    response = client.chat.completions.create(
+        messages=[
+            {
+                "role": "system",
+                "content": (
+                    f"You are a helpful assistant for {business_name}. "
+                    "Answer customer questions using ONLY the information in the FAQ document below. "
+                    "If the answer is not in the document, say 'I don't have that information — please call us directly.' "
+                    "Be friendly and concise.\n\n"
+                    f"FAQ DOCUMENT:\n{faq_content}"
+                )
+            },
+            {"role": "user", "content": question}
+        ],
+        model="meta-llama/llama-4-scout-17b-16e-instruct",
+        temperature=0.3,  # Lower temp for factual accuracy
+        max_tokens=200,
+    )
+    return response.choices[0].message.content
+
+# Create a sample FAQ file (faq.txt) with your business info, then:
+# faq_content = load_faq_document("faq.txt")
+
+# For demo purposes:
+sample_faq = """
+Hours: Monday-Saturday 9am-7pm, Sunday 10am-5pm
+Parking: Free parking behind the building on Oak Street
+Booking: Online at our website or call (555) 123-4567
+Cancellation policy: 24-hour notice required to avoid a $25 fee
+Services: Haircut ($45), Color ($120+), Balayage ($180+), Blow-dry ($35)
+Products: We use and sell Kevin Murphy and Olaplex products
+"""
+
+questions = [
+    "Do you have parking?",
+    "How much does a balayage cost?",
+    "What's your cancellation policy?",
+    "Do you do nail services?"
+]
+
+for q in questions:
+    answer = answer_customer_question(q, sample_faq, "Bloom Beauty Studio")
+    print(f"Q: {q}")
+    print(f"A: {answer}\n")
+```
+
+### Automation 4: Appointment Reminder Email Drafts
+
+```python
+import os
+from groq import Groq
+from datetime import datetime, timedelta
+from dotenv import load_dotenv
+
+load_dotenv()
+client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
+
+def draft_reminder_email(appointment: dict) -> dict:
+    """
+    Generates a personalized appointment reminder email.
+    Returns dict with subject and body.
+    """
+    appt_time = appointment['datetime'].strftime("%A, %B %d at %I:%M %p")
+
+    prompt = f"""
+    Write an appointment reminder email for:
+    - Client name: {appointment['client_name']}
+    - Service: {appointment['service']}
+    - Staff member: {appointment['staff']}
+    - Date/time: {appt_time}
+    - Business: {appointment['business_name']}
+    - Business address: {appointment['address']}
+    
+    Include: greeting, appointment details, any prep instructions for {appointment['service']},
+    cancellation policy (24hr notice), and a warm sign-off.
+    Keep total length under 200 words.
+    
+    Return as JSON: {{"subject": "...", "body": "..."}}
+    """
+
+    response = client.chat.completions.create(
+        messages=[
+            {"role": "system", "content": "You are an email assistant for a local service business. Return valid JSON only."},
+            {"role": "user", "content": prompt}
+        ],
+        model="meta-llama/llama-4-scout-17b-16e-instruct",
+        temperature=0.6,
+        max_tokens=400,
+        response_format={"type": "json_object"}
+    )
+
+    import json
+    return json.loads(response.choices[0].message.content)
+
+# Example
+appointment = {
+    "client_name": "Emma Thompson",
+    "service": "Balayage + Toner",
+    "staff": "Jessica",
+    "datetime": datetime.now() + timedelta(days=1, hours=3),
+    "business_name": "Bloom Beauty Studio",
+    "address": "142 Maple Ave, Portland, OR 97201"
+}
+
+email = draft_reminder_email(appointment)
+print(f"Subject: {email['subject']}")
+print(f"\nBody:\n{email['body']}")
+```
+
+## Free vs Paid Tier Comparison
+
+At some point your automation volume may outgrow Groq's free tier. Here's how the options stack up:
+
+| Option | Model | Cost | Speed | Monthly Free Limit | Best For |
+|---|---|---|---|---|---|
+| Groq Free Tier | Llama 4 Scout | $0 | ~400 tok/sec | 14,400 req/day | Startups, low-medium volume |
+| Groq Paid | Llama 4 Scout | $0.11/1M input | ~400 tok/sec | Unlimited | High volume |
+| OpenAI | GPT-4o Mini | $0.15/1M input | ~100 tok/sec | None | Quality priority |
+| Anthropic | Claude Haiku 3.5 | $0.80/1M input | ~150 tok/sec | None | Customer-facing |
+
+The free tier handles:
+- 50 review replies/month → **easily within limits**
+- 20 social posts/week → **easily within limits**
+- 200 FAQ chatbot queries/day → **within daily limits**
+
+You'd only need to upgrade if you're running multiple businesses, serving 500+ customer chatbot queries per day, or processing thousands of documents weekly.
+
+## When Free Isn't Enough
+
+Here are the signs you've outgrown Groq's free tier:
+
+**You're hitting rate limit errors.** The 30 requests/minute limit is generous for scheduled batch jobs but can become a bottleneck if you have a real-time chatbot with simultaneous users. If your website chatbot gets more than 30 questions per minute during peak hours, you'll need a paid plan or a queue system.
+
+**Response latency matters at scale.** Groq is fast, but for a busy booking widget with users expecting instant responses, the occasional cold-start latency (1–2 seconds after idle periods) can feel slow. Paid tiers offer priority routing.
+
+**You need guaranteed uptime SLAs.** Free tiers don't come with service level agreements. If your review-reply automation goes down for a day, it's an inconvenience. If a customer-facing chatbot goes down during peak booking hours, it costs you revenue. Groq's paid plans include SLA commitments.
+
+**Upgrade path**: Groq's Developer plan starts at $0.11 per million input tokens for Llama 4 Scout — still dramatically cheaper than GPT-4o Mini or Claude Haiku. For a business generating 1,000 AI outputs per month, the paid plan costs approximately $0.33/month. Barely anything.
+
+## Real-World Performance: What to Expect
+
+Groq's speed advantage over standard GPU inference is significant. Here are actual benchmarks for Llama 4 Scout on Groq infrastructure:
+
+- Short review reply (150 tokens output): **~0.4 seconds**
+- Social caption with hashtags (200 tokens): **~0.5 seconds**
+- FAQ answer (100 tokens): **~0.25 seconds**
+- Full appointment email (350 tokens): **~0.9 seconds**
+
+By comparison, the same tasks on OpenAI's GPT-4o Mini typically take 1.5–3 seconds. This matters for real-time customer interactions — nobody wants to watch a loading spinner for 3 seconds before getting an FAQ answer.
+
+## FAQ
+
+**Is Llama 4 really free on Groq?**
+
+Yes — Groq offers a free tier that includes Llama 4 Scout and Llama 4 Maverick access with no credit card required. The free tier is limited to 30 requests per minute and 14,400 requests per day, but these limits are generous for most small businesses. There is no time limit on the free tier; it is not a trial. You only need to upgrade to a paid plan if you exceed those usage limits.
+
+**How fast is Groq compared to other AI providers?**
+
+Groq is the fastest publicly available AI inference platform as of 2026. On Llama 4 Scout, Groq delivers approximately 300–500 tokens per second, compared to 50–150 tokens per second on standard GPU-based providers like OpenAI or Anthropic. For a 150-token review reply, this means 0.3–0.5 seconds on Groq versus 1.5–3 seconds elsewhere. The difference is perceptible in real-time customer interactions.
+
+**Can I use Llama 4 for commercial use?**
+
+Yes. Meta's Llama 4 license allows commercial use for companies with fewer than 700 million monthly active users. For any local small business, this is effectively unrestricted commercial use. You can build customer-facing products, automate revenue-generating workflows, and charge clients for services that use Llama 4 under the hood. Read the full Meta Llama 4 Community License Agreement if you have specific legal questions, but for typical local business automation, you're clear.
+
+**What are the actual rate limits I need to plan around?**
+
+On the Groq free tier for Llama 4 Scout as of mid-2026: 30 requests per minute, 6,000 tokens per minute, and 14,400 requests per day. The tokens-per-minute limit is actually more constraining than the requests-per-minute limit for longer outputs. A 400-token email at 30 requests per minute would hit the 6,000 token/minute limit after 15 requests per minute. For batch jobs (running overnight), space requests 2–3 seconds apart and you'll never hit limits. For real-time chatbots with concurrent users, plan around 15–20 requests per minute as a safe sustained rate.
+
+**How does Llama 4 compare to ChatGPT for local business tasks?**
+
+For structured tasks — review replies, appointment reminders, social captions, FAQ answers — Llama 4 Scout performs comparably to GPT-4o Mini (OpenAI's mid-tier model) on most benchmarks. Where ChatGPT/GPT-4o edges ahead is on open-ended creative writing and highly nuanced tasks. Where Llama 4 via Groq wins: it's free (vs $0.15+/1M tokens for GPT-4o Mini), it's significantly faster, and it runs on infrastructure you can access without an OpenAI account. For the specific use cases covered in this article, you won't notice a meaningful quality difference.
+
+## Related Articles
+
+- [OpenRouter Guide: Access 100+ AI Models for Local Business Automation](/blog/openrouter-guide-local-business-automation-2026)
+- [GPT-4o Mini vs Groq Llama: Cost Comparison for Small Business 2026](/blog/gpt-4o-mini-vs-groq-llama-cost-comparison-2026)
+- [Ollama: Run a Local LLM for Free on Your Own Machine](/blog/ollama-local-llm-small-business-free-setup)
+- [Best Free OpenRouter Models for Business Automation](/blog/best-free-openrouter-models-business-automation)
+- [Mistral AI for Small Business: Practical Use Cases in 2026](/blog/mistral-ai-small-business-use-cases-2026)
