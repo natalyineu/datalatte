@@ -32,6 +32,13 @@ export const metadata: Metadata = {
 export default async function RadarPage() {
   const signals = await fetchPublishedSignals();
   const tickerItems = [...signals, ...signals]; // duplicate for seamless loop
+  const today = new Date().toISOString().slice(0, 10);
+  const todayCount = signals.filter(s => s.date === today).length;
+  const weekCount = signals.filter(s => {
+    const d = new Date(s.date);
+    const now = new Date();
+    return (now.getTime() - d.getTime()) < 7 * 24 * 60 * 60 * 1000;
+  }).length;
 
   return (
     <main>
@@ -82,8 +89,8 @@ export default async function RadarPage() {
 
             {/* Live signal count panel */}
             <div className="flex-shrink-0 border border-gray-800 rounded-2xl p-5 bg-gray-900/50 backdrop-blur-sm">
-              <div className="text-4xl font-black text-white tabular-nums">{signals.length}</div>
-              <div className="text-xs text-gray-500 mt-1 font-medium uppercase tracking-wider">Signals today</div>
+              <div className="text-4xl font-black text-white tabular-nums">{todayCount > 0 ? todayCount : weekCount}</div>
+              <div className="text-xs text-gray-500 mt-1 font-medium uppercase tracking-wider">{todayCount > 0 ? "New today" : "This week"}</div>
               <div className="mt-3 space-y-1">
                 {signals.filter(s => s.impact === "breaking").length > 0 && (
                   <div className="flex items-center gap-1.5 text-xs">
