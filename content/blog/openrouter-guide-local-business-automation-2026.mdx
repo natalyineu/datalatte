@@ -2,242 +2,257 @@
 title: "OpenRouter Guide: Access 100+ AI Models for Local Business Automation"
 date: "2026-06-13"
 lastModified: "2026-06-13"
-description: "Learn how to use OpenRouter to access 100+ AI models and automate local business tasks like review replies, social posts, and email marketing."
+description: "Learn how to use OpenRouter to access 100+ AI models and automate local business tasks like review replies, social posts, and email marketing affordably."
 author: "Nataliia"
 category: "AI Automation"
 tags: ["OpenRouter", "AI automation", "local business", "API"]
 slug: "openrouter-guide-local-business-automation-2026"
 image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80&auto=format&fit=crop"
-readTime: "10 min read"
+readTime: "9 min read"
 ---
 
-If you run a coffee shop, hair salon, pet grooming business, or fitness studio, you've probably felt the gap between "I know AI could help me" and "I actually have time to figure this out." OpenRouter closes that gap by giving you a single API key that unlocks over 100 AI models — GPT-4o, Claude Sonnet, Llama 3, Mistral, Gemini Flash, and dozens more — without separate accounts or billing setups for each provider.
+If you run a coffee shop, salon, or fitness studio, you already know the grind: responding to Google reviews at midnight, trying to come up with fresh social captions every week, answering the same customer questions over and over. AI can handle all of that — but navigating the dozens of competing AI providers is its own full-time job. That's exactly the problem OpenRouter solves.
 
-This guide explains exactly what OpenRouter is, how to make your first automated task run in under 30 minutes, and how to estimate what it will actually cost your small business per month.
+OpenRouter is a single API gateway that gives you access to over 100 AI models — GPT-4o, Claude, Llama, Mistral, Gemini, and more — through one consistent interface. Instead of juggling five different API keys and five different billing accounts, you manage one. You can switch models with a single line of code. And because you're routing through a marketplace, you get competitive pricing that's often cheaper than going direct.
 
-## What Is OpenRouter and Why Should a Local Business Owner Care?
+This guide is written specifically for local business owners and the developers or virtual assistants who help them. No prior AI experience required.
 
-OpenRouter is a unified AI gateway. Instead of signing up for OpenAI, Anthropic, Google, Meta, and Mistral separately — each with their own billing dashboard, API quirks, and rate limits — you authenticate once with OpenRouter and send requests to any model using the same format.
+## What Is OpenRouter and Why Should Local Businesses Care?
 
-For a small business owner, this matters for three practical reasons:
+OpenRouter is not an AI model itself — it's a routing layer. Think of it like a telecom carrier: you don't care which cell tower handles your call, you just want reliable service at the best price. OpenRouter does the same thing for AI inference.
 
-**1. You can switch models without rewriting your code.** If GPT-4o gets expensive in Q3, you swap one line and route to Gemini Flash instead. Your automation keeps running.
+Here's why that matters for a small business:
 
-**2. You pay only for what you use.** No monthly subscription. No per-seat licensing. OpenRouter passes through provider pricing (often with a small markup) and you're billed by tokens consumed. A month of automated review replies might cost less than a cup of coffee.
+**You're not locked in.** If Anthropic raises prices on Claude, you can switch to Mistral tomorrow without rewriting your code. If one model starts producing off-brand responses, you swap it out. This is leverage.
 
-**3. You get access to free and open-source models.** Models like Llama 3, Mistral 7B, and Gemma run on OpenRouter's infrastructure with no per-token charge — just a small inference fee or sometimes completely free during off-peak hours.
+**You access frontier models at wholesale rates.** OpenRouter aggregates demand across thousands of users, which lets them negotiate better rates with providers and pass savings to you. Some models on OpenRouter are literally free (e.g., Llama 3 via Meta's free tier routing).
 
-## Getting Started: API Key and First Call
+**One billing relationship.** For a small business owner, simplicity is everything. One invoice, one credit card on file, one dashboard showing exactly what you spent on AI last month.
 
-### Step 1: Create an OpenRouter Account
+**Fallback and load balancing.** If your primary model is overloaded or down, OpenRouter can automatically route to a backup. For customer-facing automations like chatbots, this means near-zero downtime.
 
-Go to [openrouter.ai](https://openrouter.ai) and sign up with your Google or GitHub account. No credit card required to start — you get a small free credit allocation for testing.
+## Getting Your API Key and Making Your First Call
 
-### Step 2: Generate an API Key
+Setup takes under five minutes.
 
-Navigate to **Keys** in the dashboard sidebar. Click **Create Key**, give it a name like `datalatte-salon-bot`, and copy the key immediately (it won't be shown again).
+1. Go to [openrouter.ai](https://openrouter.ai) and create a free account.
+2. Navigate to **API Keys** in your dashboard and click **Create Key**.
+3. Add a credit card. You'll only be charged for what you use — there's no subscription fee.
+4. Copy your key. It looks like: `sk-or-v1-...`
 
-### Step 3: Install the OpenAI Python Library
-
-OpenRouter uses the same request format as OpenAI, so you don't need a special library:
-
-```bash
-pip install openai
-```
-
-### Step 4: Make Your First Automated Call
-
-Here's a complete Python script that generates a polished reply to a Google review — one of the most common automation tasks for local businesses:
+Now make your first call. This Python example generates a Google review reply for a coffee shop:
 
 ```python
-import os
-from openai import OpenAI
+import requests
+import json
 
-# Initialize the client pointing at OpenRouter
-client = OpenAI(
-    base_url="https://openrouter.ai/api/v1",
-    api_key=os.environ.get("OPENROUTER_API_KEY"),
-)
+OPENROUTER_API_KEY = "sk-or-v1-your-key-here"
 
-def generate_review_reply(business_name: str, reviewer_name: str, review_text: str) -> str:
-    """Generate a warm, professional reply to a Google review."""
-    prompt = f"""You are the owner of {business_name}, a local small business.
-A customer named {reviewer_name} left this Google review:
+def generate_review_reply(review_text: str, business_name: str) -> str:
+    headers = {
+        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+        "Content-Type": "application/json",
+        "HTTP-Referer": "https://yourbusiness.com",  # Recommended by OpenRouter
+        "X-Title": "Local Business Automation"       # Shows in OpenRouter dashboard
+    }
 
-"{review_text}"
+    payload = {
+        "model": "anthropic/claude-sonnet-4-5",
+        "messages": [
+            {
+                "role": "system",
+                "content": (
+                    f"You are the friendly owner of {business_name}. "
+                    "Write a warm, professional reply to this Google review. "
+                    "Keep it under 100 words. Do not use generic templates."
+                )
+            },
+            {
+                "role": "user",
+                "content": f"Customer review: {review_text}"
+            }
+        ],
+        "max_tokens": 150,
+        "temperature": 0.7
+    }
 
-Write a warm, genuine reply (3-4 sentences). Thank them by name, reference a specific detail
-from their review, and invite them to return. Do not use generic phrases like "We appreciate
-your feedback." Sound like a real business owner, not a PR department."""
-
-    response = client.chat.completions.create(
-        model="anthropic/claude-sonnet-4-5",
-        messages=[{"role": "user", "content": prompt}],
-        max_tokens=200,
-        temperature=0.7,
+    response = requests.post(
+        "https://openrouter.ai/api/v1/chat/completions",
+        headers=headers,
+        json=payload
     )
-    return response.choices[0].message.content
+
+    data = response.json()
+    return data["choices"][0]["message"]["content"]
 
 # Example usage
-reply = generate_review_reply(
-    business_name="Brew & Bloom Coffee",
-    reviewer_name="Sarah",
-    review_text="Best oat milk latte I've ever had. The barista remembered my order on my second visit!"
-)
+review = "Amazing flat white! The barista remembered my name after just two visits. Will be back every day."
+reply = generate_review_reply(review, "The Daily Grind Cafe")
 print(reply)
 ```
 
-Run this script and you'll get a personalized, human-sounding reply in under 2 seconds. That same script, scheduled with a cron job or connected to your Google Business Profile API, can process every new review automatically.
+You'll get a response like: *"Thank you so much — that genuinely made our morning! We love getting to know our regulars, and we can't wait to see you tomorrow."*
 
-## Model Comparison: Choosing the Right AI for Each Task
+To switch models, change one line: `"model": "meta-llama/llama-3.3-70b-instruct"`. Everything else stays the same.
 
-Not all models are created equal — and for a small business, cost matters as much as quality. Here's how the most popular OpenRouter models stack up for local business automation:
+## Model Comparison: Which Should You Use?
 
-| Model | Provider | Input (per 1M tokens) | Output (per 1M tokens) | Context Window | Best Use Case |
+Not all models are equal, and the right choice depends on your task and budget. Here's how the major options stack up as of mid-2026:
+
+| Model | Provider | Input (per 1M tokens) | Output (per 1M tokens) | Context Window | Best Use Case for Local Business |
 |---|---|---|---|---|---|
-| GPT-4o | OpenAI | $2.50 | $10.00 | 128K | Complex, nuanced customer comms |
-| Claude Sonnet 4.5 | Anthropic | $3.00 | $15.00 | 200K | Long emails, tone-sensitive content |
-| Llama 3.1 70B | Meta (free) | $0.00 | $0.00 | 128K | High-volume, cost-free automation |
-| Mistral 7B Instruct | Mistral | $0.07 | $0.07 | 32K | Fast FAQ responses, SMS drafts |
-| Gemini Flash 2.0 | Google | $0.075 | $0.30 | 1M | Bulk content, image descriptions |
+| GPT-4o | OpenAI | $2.50 | $10.00 | 128K | Complex marketing copy, nuanced tone |
+| Claude Sonnet 4.6 | Anthropic | $3.00 | $15.00 | 200K | Customer-facing replies, brand voice |
+| Llama 3.3 70B | Meta (free tier) | $0.00 | $0.00 | 128K | High-volume, cost-sensitive tasks |
+| Mistral Small 3 | Mistral AI | $0.10 | $0.30 | 32K | FAQ answers, short-form content |
+| Gemini Flash 2.0 | Google | $0.075 | $0.30 | 1M | Processing long menus, policies, docs |
 
-**Key insight:** For review replies and social captions — tasks where quality directly impacts your reputation — Claude Sonnet or GPT-4o are worth the extra cost. For high-volume, internal tasks like generating draft schedules or processing data, Mistral 7B or Llama 3 get the job done at near-zero cost.
+**Practical takeaway**: For customer-facing content — the reply to a 1-star review, the email to a VIP client — use Claude or GPT-4o. The quality difference is real and worth the cost (each reply costs less than $0.01 either way). For bulk tasks like generating 30 social captions or processing intake forms, Llama 3 or Mistral Small will do the job at near-zero cost.
 
 ## 5 Automation Use Cases for Local Businesses
 
 ### 1. Automated Google Review Replies
 
-**The problem:** Responding to every review takes 10-15 minutes per response. At 20 reviews a month, that's 5 hours of work.
+Responding to every Google review improves your local SEO ranking and shows prospective customers you care. Most business owners either don't respond at all or copy-paste the same generic reply.
 
-**The solution:** A script that reads new reviews (via Google My Business API or a Zapier trigger), sends the review text to OpenRouter, and posts the generated reply.
+With OpenRouter, you can build a nightly script that pulls new reviews from the Google Business Profile API, generates personalized replies using Claude or GPT-4o, and queues them for your approval or posts them automatically. A business getting 20 new reviews per month at $0.015 per reply spends **$0.30/month** on this — less than a postage stamp.
 
-**Model recommendation:** Claude Sonnet or GPT-4o. Review replies are public and reflect your brand — quality matters.
+### 2. Weekly Social Media Captions
 
-**Estimated monthly cost at 50 reviews:** ~$0.18 with Claude Sonnet (assuming ~300 tokens per reply pair).
+Consistency on Instagram and Facebook drives follower growth, but writing five posts a week is exhausting. A simple script can generate a full week of captions every Sunday night, including relevant hashtags, emojis, and a call-to-action tailored to your current promotion.
 
-### 2. Social Media Captions
-
-Generate a week of Instagram, Facebook, and Google Business Post captions from a single brief. Feed it your weekly specials, and the AI produces platform-appropriate copy with relevant hashtags.
-
-```python
-def generate_social_calendar(business_type: str, weekly_specials: list[str]) -> dict:
-    specials_text = "\n".join([f"- {s}" for s in weekly_specials])
-
-    prompt = f"""Create a 7-day social media calendar for a {business_type}.
-This week's specials and news:
-{specials_text}
-
-For each day, write:
-1. An Instagram caption (engaging, 1-2 sentences + 5 hashtags)
-2. A Facebook post (friendly, slightly longer)
-3. A Google Business Update (professional, local SEO optimized)
-
-Format as JSON with keys: monday, tuesday, ... sunday.
-Each day has: instagram, facebook, google_post."""
-
-    response = client.chat.completions.create(
-        model="mistralai/mistral-7b-instruct",  # Cost-effective for bulk content
-        messages=[{"role": "user", "content": prompt}],
-        max_tokens=2000,
-        temperature=0.8,
-    )
-    return response.choices[0].message.content
-```
-
-**Model recommendation:** Mistral 7B for draft content; upgrade to GPT-4o if you want ready-to-post quality.
+Use Mistral Small or Llama 3 for this task — the cost is negligible and the quality is more than sufficient for social copy.
 
 ### 3. FAQ Chatbot for Your Website
 
-Train a lightweight chatbot on your business's FAQ document. When a customer asks "Do you take walk-ins?" or "What's your cancellation policy?", the AI answers instantly — 24/7, without you lifting a finger.
+A chatbot trained on your menu, pricing, hours, policies, and services can handle 60–80% of inbound customer questions without you lifting a finger. The setup involves passing your FAQ document as context in the system prompt, then routing customer messages through OpenRouter.
 
-**Implementation:** Paste your FAQ into the system prompt (or use retrieval for larger knowledge bases), then hook the API to your website chat widget via a simple webhook.
-
-**Model recommendation:** Mistral 7B or Llama 3 for cost efficiency. FAQ responses don't need premium models.
+Gemini Flash is ideal here because of its 1M-token context window — you can dump your entire policy handbook, menu, and FAQ page into the prompt and it won't miss a detail.
 
 ### 4. Email Marketing Campaigns
 
-Feed your customer segment (e.g., "lapsed clients who haven't booked in 60 days") and a promotion ("20% off this week only") to OpenRouter. Get a complete email — subject line, preview text, body, and CTA — in seconds.
-
-**Monthly volume for a typical salon:** 4 campaigns × 1 email each = 4 API calls. Total cost: under $0.05.
+Promotional emails for Mother's Day, summer specials, loyalty rewards — these follow predictable structures but still require fresh copy each time. A workflow that generates campaign emails from a brief (e.g., "20% off facials, valid June 14-21, target: existing clients who haven't visited in 60 days") can cut your marketing prep time from 2 hours to 10 minutes.
 
 ### 5. Appointment Reminder SMS
 
-Reduce no-shows (which cost the average salon $100+ per missed slot) by automating personalized SMS reminders. The AI personalizes each message with the client's name, service, and stylist — far more effective than generic "You have an appointment tomorrow" texts.
+No-show rates average 10–20% for service businesses. A personalized reminder sent 24 hours before ("Hey Sarah, just a heads up — your blowout with Mia is tomorrow at 2pm at Style Co. Reply STOP to cancel.") reduces no-shows by up to 30%.
 
-```python
-def draft_appointment_sms(
-    client_name: str,
-    service: str,
-    date: str,
-    time: str,
-    business_name: str
-) -> str:
-    prompt = f"""Write a friendly SMS appointment reminder. Keep it under 160 characters.
-Client: {client_name}
-Service: {service}
-Date/Time: {date} at {time}
-Business: {business_name}
-Include a simple reply instruction like 'Reply C to confirm or R to reschedule.'"""
-
-    response = client.chat.completions.create(
-        model="mistralai/mistral-7b-instruct",
-        messages=[{"role": "user", "content": prompt}],
-        max_tokens=80,
-        temperature=0.5,
-    )
-    return response.choices[0].message.content
-```
+OpenRouter can generate these messages dynamically from appointment data, ensuring each one feels personal rather than robotic.
 
 ## Real Cost Estimate for a Typical Small Business
 
-Let's run the numbers for a hair salon doing the following every month:
+Let's run the numbers for a hair salon using OpenRouter for two tasks: review replies and social captions.
 
-| Task | Volume | Model | Tokens Used | Monthly Cost |
-|---|---|---|---|---|
-| Google review replies | 50 replies | Claude Sonnet | ~30,000 | ~$0.54 |
-| Social media captions | 30 posts | Mistral 7B | ~60,000 | ~$0.004 |
-| FAQ chatbot responses | 200 queries | Llama 3 (free) | ~100,000 | $0.00 |
-| Email campaigns | 4 emails | GPT-4o | ~8,000 | ~$0.10 |
-| Appointment SMS drafts | 120 reminders | Mistral 7B | ~24,000 | ~$0.002 |
-| **TOTAL** | | | | **~$0.65/month** |
+**Monthly volume:**
+- 50 Google review replies (avg. 80 tokens input + 80 tokens output each)
+- 30 social captions (avg. 50 tokens input + 100 tokens output each)
 
-Less than $1 per month to automate tasks that previously consumed 8-10 hours of your time. Even if you add a premium model for higher-quality output and your costs jump to $5/month, the ROI is obvious.
+**Using Claude Sonnet 4.6 for reviews, Mistral Small for captions:**
 
-## Setting Up Cost Controls
+| Task | Volume | Model | Input Tokens | Output Tokens | Cost |
+|---|---|---|---|---|---|
+| Review replies | 50 | Claude Sonnet 4.6 | 4,000 | 4,000 | ~$0.07 |
+| Social captions | 30 | Mistral Small 3 | 1,500 | 3,000 | ~$0.001 |
+| **Total** | 80 tasks | Mixed | 5,500 | 7,000 | **~$0.08/month** |
 
-OpenRouter lets you set hard spending limits per key. Go to your dashboard, click your API key, and set a monthly budget cap. This prevents runaway costs if a script loops accidentally.
+Eight cents a month. Even if your volume is 10x higher, you're still under $1. The ROI is essentially infinite.
 
-```json
-{
-  "openrouter_key_settings": {
-    "monthly_budget_usd": 10.00,
-    "alert_at_usd": 8.00,
-    "note": "Salon automation key — review replies + social content"
-  }
-}
+## Setting Up Your First Automated Workflow
+
+Here's a minimal end-to-end workflow for review replies using Python and a simple scheduler:
+
+```bash
+# Install dependencies
+pip install requests schedule
+
+# Create a .env file with your credentials
+echo "OPENROUTER_API_KEY=sk-or-v1-your-key-here" > .env
 ```
+
+```python
+import os
+import schedule
+import time
+import requests
+
+API_KEY = os.getenv("OPENROUTER_API_KEY")
+
+def generate_reply(review_text, business_name):
+    response = requests.post(
+        "https://openrouter.ai/api/v1/chat/completions",
+        headers={"Authorization": f"Bearer {API_KEY}"},
+        json={
+            "model": "anthropic/claude-sonnet-4-5",
+            "messages": [
+                {"role": "system", "content": f"You are the owner of {business_name}. Reply warmly to this Google review in under 80 words."},
+                {"role": "user", "content": review_text}
+            ]
+        }
+    )
+    return response.json()["choices"][0]["message"]["content"]
+
+def nightly_review_job():
+    # Replace with your actual review fetching logic
+    new_reviews = [
+        {"id": "rev_001", "text": "Best cortado in town!", "author": "Mike"},
+        {"id": "rev_002", "text": "Waited 20 min for a latte. Disappointing.", "author": "Sarah"}
+    ]
+    for review in new_reviews:
+        reply = generate_reply(review["text"], "The Daily Grind Cafe")
+        print(f"Reply for {review['author']}: {reply}\n")
+        # Add your GBP API posting logic here
+
+schedule.every().day.at("23:00").do(nightly_review_job)
+
+print("Review bot running. Ctrl+C to stop.")
+while True:
+    schedule.run_pending()
+    time.sleep(60)
+```
+
+This runs silently in the background — on a $5/month VPS or even a Raspberry Pi — and handles your review responses automatically every night.
+
+## Choosing the Right Model for Each Task
+
+The single biggest mistake businesses make when starting with OpenRouter is using the most powerful (and expensive) model for everything. Here's a practical decision framework:
+
+**Use Claude Sonnet or GPT-4o when:**
+- The output will be seen directly by customers (review replies, complaint responses)
+- Brand voice consistency is critical
+- The task requires nuanced judgment (handling a negative review tactfully)
+
+**Use Mistral Small or Llama 3 when:**
+- You're generating content for internal review before publishing
+- Volume is high (100+ items/week)
+- Tasks are formulaic (appointment reminders, social captions from a template)
+
+**Use Gemini Flash when:**
+- You need to process long documents (your menu, terms of service, staff handbook)
+- You're building a knowledge-base chatbot that needs to reference a large corpus
+
+The good news: you can mix and match within a single application. A smart workflow might use Gemini Flash to extract relevant FAQ snippets from your knowledge base, then pass those snippets to Mistral Small to generate a conversational response. Total cost per customer inquiry: under $0.002.
 
 ## FAQ
 
-**What is OpenRouter exactly?**
+**What is OpenRouter?**
 
-OpenRouter is a unified API gateway that lets you access over 100 AI language models from a single endpoint. Instead of managing separate API keys and billing for OpenAI, Anthropic, Google, and others, you use one OpenRouter key. It routes your requests to whichever model you specify and consolidates billing in one place.
+OpenRouter is an API gateway that lets you access 100+ AI language models — including GPT-4o, Claude, Llama, Mistral, and Gemini — through a single endpoint and billing account. Instead of signing up separately for each AI provider, you use one API key and one dashboard. OpenRouter handles routing, load balancing, and fallback automatically. It's particularly valuable for small businesses and developers who want flexibility without the overhead of managing multiple vendor relationships.
 
 **How much does OpenRouter cost?**
 
-OpenRouter itself charges a small markup on top of provider pricing (typically 5-10%), but many open-source models like Llama 3 and Mistral 7B run at extremely low cost or even free during off-peak periods. For a typical small business automating review replies and social posts, expect to spend $0.50–$5.00 per month depending on volume and model choice.
+OpenRouter itself charges a small routing markup (typically 0–10% above provider costs, depending on the model). Many models are available at or near provider list price, and some open-source models route for free. For a typical local business automation setup — review replies, social captions, FAQ responses — you can expect to spend $1–$5 per month total. There is no monthly subscription fee; you only pay for tokens consumed.
 
-**Can I switch between models without rewriting my code?**
+**Can I switch between AI models without rewriting my code?**
 
-Yes — that's one of OpenRouter's core advantages. The API format is identical for every model. To switch from Claude to Gemini Flash, change one line: `model="google/gemini-flash-2.0"`. Your prompts, parsing logic, and error handling all stay the same.
+Yes — that's the primary advantage of OpenRouter. The API format follows the OpenAI standard, so switching models requires changing exactly one parameter: the `model` field in your API call. Your prompt, your parsing logic, and your workflow all stay identical. You can even set up A/B testing across models or implement fallback logic (e.g., "try Claude first; if it fails, fall back to GPT-4o Mini") with a few extra lines of code.
 
-**Is my business data safe when using OpenRouter?**
+**Is my business data safe with OpenRouter?**
 
-OpenRouter's privacy policy states that it does not use your prompts to train models. However, your requests do pass through OpenRouter's infrastructure before reaching the underlying provider. For highly sensitive customer data (full names with medical history, payment details), avoid sending it in prompts. For general business tasks — review replies, social captions, FAQ answers — the risk profile is the same as using any SaaS tool. Review OpenRouter's data processing agreement if you serve EU customers and have GDPR obligations.
+OpenRouter does not train AI models on your data. By default, prompts and completions may be logged for debugging purposes, but you can disable logging in your account settings. For highly sensitive data (patient records, financial data), review OpenRouter's data processing agreement before use. For typical local business tasks — review replies, social copy, appointment reminders — the data sensitivity is low and standard usage is appropriate. As a best practice, avoid including full customer names combined with contact details in any AI prompt.
 
-**How do I actually start if I'm not a developer?**
+**How do I get started with OpenRouter today?**
 
-The no-code path: Use OpenRouter with Zapier or Make (formerly Integromat). Both platforms have HTTP request steps that can call any API. Set up a Zap that triggers on a new Google review, sends the text to OpenRouter via HTTP, and posts the reply. No Python required. The developer path: The Python snippet in this article is your starting point — copy it, add your API key as an environment variable, and customize the prompt for your business.
+Go to openrouter.ai, create a free account, add a payment method (you won't be charged until you use tokens), and generate an API key. Copy the Python example from this article, replace the API key and business name, and run it. Your first working AI automation takes less than 15 minutes to set up. Start with a low-stakes task like social caption generation before moving to customer-facing automations like review replies.
 
 ## Related Articles
 
