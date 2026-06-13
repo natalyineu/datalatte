@@ -1,0 +1,224 @@
+---
+title: "AgentOps: Monitor and Debug Your Local Business AI Agents"
+date: "2026-06-13"
+lastModified: "2026-06-13"
+description: "Use AgentOps to monitor, debug, and optimize your local business AI agents — track costs, catch errors, replay sessions, and improve agent performance."
+author: "Nataliia"
+category: "AI Automation"
+tags: ["AgentOps", "AI monitoring", "debugging AI", "local business"]
+slug: "agentops-monitor-debug-ai-agents-local-business"
+image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&auto=format&fit=crop"
+readTime: "9 min read"
+---
+
+You built an AI agent to respond to reviews, book appointments, or answer customer FAQs. It worked great in testing. But after two weeks in production, customers are complaining that the bot gave wrong prices, the review responses sound off, or the booking agent gets confused and drops the conversation.
+
+How do you even debug this? You can't watch every AI interaction in real time.
+
+AgentOps is the answer. It's an observability platform built specifically for AI agents — every LLM call, tool use, error, and cost gets logged, replayed, and analyzed. Think of it as Google Analytics for your AI agents.
+
+## What AgentOps Does
+
+AgentOps adds three to five lines of code to your existing agent and immediately gives you:
+
+- **Session replay**: watch every conversation step by step
+- **Cost tracking**: exactly how much each agent run costs in API tokens
+- **Error detection**: automatic flagging of failed LLM calls, tool errors, and unexpected outputs
+- **Latency monitoring**: which steps are slow and why
+- **LLM comparison**: run the same task with two different models and compare quality + cost
+- **Team dashboard**: share access with a developer or VA who manages your agents
+
+Pricing: free tier (1,000 events/month, 30-day retention), paid from $10/month.
+
+## Installation and Setup
+
+```bash
+pip install agentops
+```
+
+Create a free account at agentops.ai and get your API key.
+
+## Adding AgentOps to an Existing Agent
+
+If you have a review response bot or FAQ agent already built, adding AgentOps is 3 lines:
+
+```python
+import agentops
+import anthropic
+
+# Initialize AgentOps at the start of your script
+agentops.init("YOUR_AGENTOPS_API_KEY")
+
+client = anthropic.Anthropic(api_key="YOUR_ANTHROPIC_API_KEY")
+
+def generate_review_response(review: str, stars: int, reviewer_name: str) -> str:
+    """Generate a Google review response with full AgentOps tracking."""
+    
+    # AgentOps automatically tracks this LLM call
+    response = client.messages.create(
+        model="claude-haiku-4-5-20251001",
+        max_tokens=300,
+        system="""You write professional Google review responses for The Loft Hair Studio.
+Be warm, specific, and 3-5 sentences. Always thank the reviewer by name.""",
+        messages=[{
+            "role": "user",
+            "content": f"Write a response to this {stars}-star review from {reviewer_name}: '{review}'"
+        }]
+    )
+    
+    return response.content[0].text
+
+def process_weekly_reviews(reviews: list) -> dict:
+    """Process all reviews for the week — every call tracked in AgentOps."""
+    
+    responses = {}
+    
+    for review in reviews:
+        try:
+            response = generate_review_response(
+                review["text"],
+                review["stars"],
+                review["name"]
+            )
+            responses[review["id"]] = {"status": "success", "response": response}
+            
+            # Log custom events for business metrics
+            agentops.record(agentops.ActionEvent(
+                action_type="review_processed",
+                params={"stars": review["stars"], "review_id": review["id"]},
+                returns={"response_length": len(response)}
+            ))
+            
+        except Exception as e:
+            # AgentOps captures this error with full context
+            agentops.record(agentops.ErrorEvent(exception=e))
+            responses[review["id"]] = {"status": "error", "error": str(e)}
+    
+    return responses
+
+# End the session — AgentOps uploads all data
+agentops.end_session("Success")
+```
+
+After running, log into agentops.ai and you see every call: the prompt sent, the response received, tokens used, cost, and latency.
+
+## Using AgentOps with CrewAI
+
+AgentOps integrates natively with CrewAI (one of the most popular multi-agent frameworks):
+
+```python
+import agentops
+from crewai import Agent, Task, Crew
+
+# AgentOps automatically instruments all CrewAI agents
+agentops.init("YOUR_AGENTOPS_API_KEY")
+
+review_writer = Agent(
+    role="Review Response Writer",
+    goal="Write warm, specific Google review responses",
+    backstory="You've been managing customer relations for The Loft Hair Studio for years.",
+    verbose=True
+)
+
+review_task = Task(
+    description="Write responses to these reviews: {reviews}",
+    agent=review_writer,
+    expected_output="A response for each review, formatted as a list"
+)
+
+crew = Crew(agents=[review_writer], tasks=[review_task])
+
+# AgentOps tracks every agent conversation, tool call, and LLM request
+result = crew.kickoff(inputs={"reviews": sample_reviews})
+agentops.end_session("Success")
+```
+
+Every agent turn, every LLM call, every token shows up in your AgentOps dashboard with timestamps.
+
+## What to Monitor
+
+### 1. Cost Per Task
+
+The most important metric for local businesses. In AgentOps, you can see cost per session and cost per LLM call. Common findings:
+
+- Your review response bot costs $0.003 per review (acceptable)
+- Your weekly marketing report costs $0.12 to generate (acceptable)
+- One broken prompt is causing the FAQ bot to make 8 LLM calls per question instead of 1 (fix: tighten your prompt)
+
+### 2. Error Rate
+
+AgentOps shows failed calls with full error context. Common errors:
+- `max_tokens exceeded` → increase max_tokens or summarize input first
+- `rate_limit_error` → add exponential backoff retry logic
+- `context_length_exceeded` → your conversation history is growing too long, add a summarization step
+
+### 3. Latency Outliers
+
+If some FAQ responses take 12 seconds while others take 1.5 seconds, AgentOps shows why. Usually: the slow calls have much longer system prompts or conversation histories. Optimize by:
+- Trimming the system prompt
+- Limiting conversation history to last N turns
+- Switching to a faster model (Claude Haiku vs Sonnet)
+
+### 4. Output Quality with Tags
+
+Track quality manually by adding tags to sessions:
+
+```python
+# After generating a review response, ask for a quick quality check
+agentops.end_session(
+    end_state="Success",
+    end_state_reason="review_responded",
+    tags=["review_response", f"stars_{stars}", "production"]
+)
+```
+
+Filter by tag in the dashboard to compare quality across star ratings, agent versions, or time periods.
+
+## Debugging a Broken Agent
+
+When a customer reports the AI gave wrong information, here's your debugging flow with AgentOps:
+
+1. **Find the session**: Search by timestamp or customer ID in the dashboard
+2. **Replay the conversation**: See every message exactly as sent and received
+3. **Identify the failure point**: Was it the wrong prompt? A tool returning bad data? A hallucination?
+4. **Compare to good sessions**: Filter to find similar successful sessions and spot the difference
+5. **Fix and verify**: Update your prompt, redeploy, and watch the next sessions to confirm the fix
+
+Without AgentOps (or similar), step 1-4 would require digging through raw API logs. With it, the whole process takes 5 minutes.
+
+## Comparison Table
+
+| Tool | Focus | Price | LangChain | CrewAI | AutoGen | Local AI |
+|---|---|---|---|---|---|---|
+| **AgentOps** | Agent observability | Free + $10/mo | ✅ | ✅ | ✅ | ✅ |
+| **LangSmith** | LangChain tracing | Free + $39/mo | ✅ Best | ❌ | ❌ | ❌ |
+| **Helicone** | LLM cost tracking | Free + $20/mo | ✅ | ✅ | ✅ | ❌ |
+| **Weights & Biases** | ML experiment tracking | Free + $50/mo | ✅ | ✅ | ✅ | ✅ |
+| **Raw logs** | Manual debugging | Free | ✅ | ✅ | ✅ | ✅ |
+
+For local businesses running CrewAI or AutoGen, AgentOps is the best fit. For pure LangChain users, LangSmith has deeper integration.
+
+## FAQ
+
+**Do I need AgentOps from day one?**
+Not necessarily. For very simple automations (one LLM call, no tools), your API provider's usage dashboard is enough. Add AgentOps when: (1) you're running agents in production, (2) you have multi-step agents with tools, or (3) you've had a customer complaint about AI behavior and can't reproduce it. For anything with CrewAI or LangGraph, add it from the start.
+
+**Is my customer data safe with AgentOps?**
+AgentOps logs prompts and responses, which may contain customer names or review text. Review AgentOps' privacy policy before use. For HIPAA-regulated businesses (healthcare), evaluate carefully. For typical local businesses (salon, café, fitness), the standard tier is fine — data is stored in the US and you can configure data retention periods.
+
+**How do I share AgentOps with my VA or developer?**
+AgentOps supports team accounts. Invite collaborators from the dashboard — they get read-only or edit access to sessions and dashboards. This lets a VA monitor daily agent performance and flag issues without needing access to your code or API keys.
+
+**Can AgentOps tell me if my agent's quality is declining?**
+You can track this manually with tags and output length metrics. AgentOps doesn't do automated quality scoring out of the box, but you can add your own scoring: after each agent run, have a second LLM call rate the output 1-10 and log that score as a custom event. Then trend that score over time in the dashboard.
+
+**What's the alternative to AgentOps if I want self-hosted?**
+For self-hosted observability, look at **Langfuse** (open-source, free, deployable on your own VPS). It has similar session replay and cost tracking but requires a server to run. Ideal if you're handling sensitive customer data and don't want it leaving your infrastructure.
+
+## Related Articles
+
+- [AutoGen Multi-Agent: Automate Your Marketing Reports and Review Responses](/blog/autogen-multi-agent-marketing-automation-local-business)
+- [CrewAI for Local Business: Build a Team of AI Agents](/blog/crewai-local-business-multi-agent-automation)
+- [LangGraph: Build an AI Booking Agent with Memory and State](/blog/langgraph-ai-booking-agent-memory-local-business)
+- [LangChain RAG: AI That Answers Customer FAQs from Your Own Data](/blog/langchain-rag-customer-faq-local-business)
+- [OpenRouter Guide: Access 100+ AI Models for Local Business Automation](/blog/openrouter-guide-local-business-automation-2026)

@@ -1,0 +1,289 @@
+---
+title: "LangChain RAG: AI That Answers Customer FAQs from Your Own Data"
+date: "2026-06-13"
+lastModified: "2026-06-13"
+description: "Build a RAG-powered FAQ chatbot with LangChain that answers customer questions from your own data — menu, services, policies, and prices. Full code included."
+author: "Nataliia"
+category: "AI Automation"
+tags: ["LangChain", "RAG", "FAQ chatbot", "local business"]
+slug: "langchain-rag-customer-faq-local-business"
+image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80&auto=format&fit=crop"
+readTime: "12 min read"
+---
+
+Every local business answers the same questions hundreds of times per month. "What are your hours?" "Do you have parking?" "How much is a balayage?" "Can I bring my dog?" These questions are costing you hours of staff time and customer patience.
+
+RAG — Retrieval-Augmented Generation — is the technique that lets an AI answer questions *specifically from your own business data*, not from general internet knowledge. A RAG chatbot knows your prices, your policies, your menu, and your staff — because you told it, not because it guessed.
+
+LangChain is the most popular Python framework for building RAG systems. This guide shows you how to build one for your local business in an afternoon.
+
+## What RAG Is (and Why It Beats a Simple Prompt)
+
+A regular AI chatbot (like pasting your menu into ChatGPT) has limits: you can only fit so much text in a prompt, the AI might hallucinate details it doesn't know, and it can't update automatically when your menu changes.
+
+RAG works differently:
+
+1. **Index**: Split your business documents into chunks, convert to vectors, store in a vector database
+2. **Retrieve**: When a customer asks a question, find the 3-5 most relevant chunks
+3. **Generate**: Pass those chunks + the question to an LLM to generate a precise answer
+
+The result: the AI only answers from your actual documents, cites its sources, and you can update the knowledge base by adding a new file — no retraining needed.
+
+| Approach | Cost | Accuracy | Update process | Best for |
+|---|---|---|---|---|
+| Simple system prompt | Free | Medium | Edit prompt manually | Small, simple businesses |
+| RAG with LangChain | Low | High | Add/edit files | Businesses with rich content |
+| Fine-tuned model | High | Very high | Retrain model | Enterprise, unique voice |
+| Human staff | Very high | Highest | Train employees | Complex, emotional queries |
+
+## Installation
+
+```bash
+pip install langchain langchain-anthropic langchain-community \
+            chromadb sentence-transformers python-dotenv
+```
+
+## Step 1: Build Your Knowledge Base
+
+Create a folder `knowledge_base/` with text files for each topic:
+
+```
+knowledge_base/
+├── services.txt
+├── pricing.txt
+├── hours_location.txt
+├── policies.txt
+├── team.txt
+└── faqs.txt
+```
+
+Example `knowledge_base/pricing.txt` for a hair salon:
+
+```text
+HAIR SERVICES PRICING - The Loft Hair Studio (updated June 2026)
+
+Women's Haircuts:
+- Cut & Style (blowout included): $65-95 depending on length and stylist
+- Bang trim (existing clients only): $15
+- Kids cut (under 12): $35
+
+Color Services:
+- Single Process Color (root to tip): $90-130
+- Partial Highlights (foil, top section): $120-160
+- Full Highlights (foil, all over): $160-220
+- Balayage / Ombre: $150-250 (consultation required for exact quote)
+- Color Correction: $200+ (consultation required, price varies by complexity)
+- Gloss / Toner: $45-65
+
+Blowouts & Styling:
+- Blow Out: $45-55
+- Updo / Special Occasion: $75-120 (deposit required)
+- Bridal Trial: $100
+
+Treatments:
+- Keratin Smoothing Treatment: $200-300 (lasts 3-6 months)
+- Deep Conditioning Treatment: $35-55
+- Olaplex Treatment (standalone): $45
+
+Note: Prices vary by stylist. Senior stylists charge top of range.
+Prices subject to change. Always confirm at time of booking.
+```
+
+## Step 2: Index the Documents
+
+```python
+from langchain.document_loaders import DirectoryLoader, TextLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_community.vectorstores import Chroma
+from langchain_community.embeddings import SentenceTransformerEmbeddings
+import os
+
+def build_knowledge_base(docs_dir: str = "knowledge_base", db_dir: str = "chroma_db"):
+    """Load documents, split into chunks, and store in vector DB."""
+    
+    # Load all .txt files from the knowledge base folder
+    loader = DirectoryLoader(docs_dir, glob="*.txt", loader_cls=TextLoader)
+    documents = loader.load()
+    print(f"Loaded {len(documents)} documents")
+    
+    # Split into chunks (500 chars with 50 char overlap)
+    splitter = RecursiveCharacterTextSplitter(
+        chunk_size=500,
+        chunk_overlap=50,
+        length_function=len
+    )
+    chunks = splitter.split_documents(documents)
+    print(f"Created {len(chunks)} chunks")
+    
+    # Create embeddings (free, runs locally)
+    embeddings = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
+    
+    # Store in ChromaDB (local vector database, free)
+    vectorstore = Chroma.from_documents(
+        documents=chunks,
+        embedding=embeddings,
+        persist_directory=db_dir
+    )
+    vectorstore.persist()
+    print(f"Knowledge base built and saved to {db_dir}/")
+    return vectorstore
+
+if __name__ == "__main__":
+    build_knowledge_base()
+```
+
+Run this once (and re-run whenever you update your knowledge base):
+
+```bash
+python build_kb.py
+# Output: Loaded 6 documents → Created 47 chunks → Saved to chroma_db/
+```
+
+## Step 3: Build the FAQ Chatbot
+
+```python
+from langchain_anthropic import ChatAnthropic
+from langchain_community.vectorstores import Chroma
+from langchain_community.embeddings import SentenceTransformerEmbeddings
+from langchain.chains import ConversationalRetrievalChain
+from langchain.memory import ConversationBufferWindowMemory
+from langchain.prompts import PromptTemplate
+
+def build_faq_bot(db_dir: str = "chroma_db"):
+    """Build the RAG FAQ chatbot."""
+    
+    # Load the existing vector store
+    embeddings = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
+    vectorstore = Chroma(persist_directory=db_dir, embedding_function=embeddings)
+    retriever = vectorstore.as_retriever(search_kwargs={"k": 4})  # Fetch top 4 relevant chunks
+    
+    # LLM (Claude Haiku for speed and cost)
+    llm = ChatAnthropic(
+        model="claude-haiku-4-5-20251001",
+        anthropic_api_key="YOUR_ANTHROPIC_API_KEY",
+        temperature=0.1  # Low temp for factual accuracy
+    )
+    
+    # Custom prompt that keeps answers grounded
+    qa_prompt = PromptTemplate(
+        input_variables=["context", "question", "chat_history"],
+        template="""You are the helpful AI assistant for The Loft Hair Studio.
+Answer the customer's question using ONLY the information in the context below.
+If the answer isn't in the context, say "I'm not sure about that — please call us at (615) 555-0123 for the most accurate information."
+Never make up prices, policies, or services.
+
+Context from our knowledge base:
+{context}
+
+Conversation history:
+{chat_history}
+
+Customer question: {question}
+
+Answer (be friendly, concise, and specific):"""
+    )
+    
+    # Memory keeps the last 5 exchanges for context
+    memory = ConversationBufferWindowMemory(
+        memory_key="chat_history",
+        return_messages=True,
+        k=5
+    )
+    
+    chain = ConversationalRetrievalChain.from_llm(
+        llm=llm,
+        retriever=retriever,
+        memory=memory,
+        combine_docs_chain_kwargs={"prompt": qa_prompt},
+        verbose=False
+    )
+    
+    return chain
+
+def answer_question(chain, question: str) -> str:
+    result = chain({"question": question})
+    return result["answer"]
+
+if __name__ == "__main__":
+    print("Building FAQ bot...")
+    bot = build_faq_bot()
+    
+    print("FAQ Bot ready! Ask me anything.\n")
+    while True:
+        question = input("Customer: ").strip()
+        if question.lower() in ["quit", "exit"]:
+            break
+        answer = answer_question(bot, question)
+        print(f"Bot: {answer}\n")
+```
+
+## Step 4: Deploy as a Web Widget or API
+
+Wrap in FastAPI for easy integration with your website or WhatsApp:
+
+```python
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+
+app = FastAPI()
+app.add_middleware(CORSMiddleware, allow_origins=["*"])
+
+bot = build_faq_bot()
+
+class Question(BaseModel):
+    session_id: str
+    question: str
+
+sessions = {}  # In production, use Redis or a DB
+
+@app.post("/faq")
+async def faq_endpoint(q: Question):
+    if q.session_id not in sessions:
+        sessions[q.session_id] = build_faq_bot()
+    
+    answer = answer_question(sessions[q.session_id], q.question)
+    return {"answer": answer}
+```
+
+Embed in your website with a simple JavaScript widget, or connect to WhatsApp via Twilio.
+
+## Keeping the Knowledge Base Fresh
+
+The power of RAG is that updating is trivial. Changed your prices? Edit `pricing.txt` and re-run `build_kb.py`. Added a new service? Add a line to `services.txt` and rebuild. No AI retraining, no prompt engineering — just update the file.
+
+Set up a weekly reminder to audit your knowledge base for accuracy, especially for pricing (the #1 source of customer confusion).
+
+## Cost Estimate
+
+For a salon handling 500 customer questions per month:
+- Embeddings: Free (running locally with Sentence Transformers)
+- ChromaDB: Free (local)
+- Claude Haiku: 500 questions × ~800 tokens average = 400K tokens → **~$0.32/month**
+
+Total: under $1/month for 500 AI-powered customer answers.
+
+## FAQ
+
+**What's the difference between RAG and just putting my info in a prompt?**
+With a simple prompt, you're limited by context window size (you can't paste your entire website into a prompt), and the AI sees everything every time (slow, expensive). RAG retrieves only the relevant sections for each question — faster, cheaper, and more accurate because the AI isn't distracted by irrelevant information.
+
+**Can I use RAG with my existing website content instead of text files?**
+Yes — LangChain has loaders for websites (WebBaseLoader), PDFs, Google Docs, Notion, and more. You could point it at your website URL and it will crawl and index the content automatically. Text files are the most reliable for ensuring accuracy.
+
+**How do I stop the AI from making up information?**
+Two keys: (1) set temperature to 0.0-0.2 for factual responses, and (2) include explicit instructions in your prompt like "ONLY answer from the provided context. If the answer isn't there, say you don't know." The `never make up prices` instruction in the example above is critical for local businesses where wrong pricing causes real customer problems.
+
+**Can I use this for multiple locations?**
+Yes — create separate knowledge bases per location (different Chroma collections) and route incoming requests based on which location's number/widget the customer is using. Each location gets its own accurate pricing and hours, while sharing the same general FAQ answers.
+
+**What if a customer asks something my knowledge base doesn't cover?**
+Your bot says "I'm not sure about that — please call us at [phone number]." This is the correct behavior. Graceful fallback to a human is far better than a hallucinated answer. Track these unanswered questions (log them) — they're a list of things to add to your knowledge base.
+
+## Related Articles
+
+- [CrewAI for Local Business: Build a Team of AI Agents](/blog/crewai-local-business-multi-agent-automation)
+- [LangGraph: Build an AI Booking Agent with Memory and State](/blog/langgraph-ai-booking-agent-memory-local-business)
+- [MCP + Notion: Build a Self-Updating Client CRM with AI](/blog/mcp-notion-connector-client-crm-local-business)
+- [Best Free Models on OpenRouter for Business Automation 2026](/blog/best-free-openrouter-models-business-automation)
+- [OpenRouter Guide: Access 100+ AI Models for Local Business Automation](/blog/openrouter-guide-local-business-automation-2026)

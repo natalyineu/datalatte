@@ -1,0 +1,308 @@
+---
+title: "AutoGen Multi-Agent: Automate Your Marketing Reports and Review Responses"
+date: "2026-06-13"
+lastModified: "2026-06-13"
+description: "Use Microsoft AutoGen to build multi-agent workflows that automate marketing reports, respond to reviews, and generate social content for local business."
+author: "Nataliia"
+category: "AI Automation"
+tags: ["AutoGen", "multi-agent", "marketing automation", "local business"]
+slug: "autogen-multi-agent-marketing-automation-local-business"
+image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80&auto=format&fit=crop"
+readTime: "11 min read"
+---
+
+Most automation tools run one task at a time. You generate your review responses. Then you create social posts. Then you compile your weekly report. Each task is isolated, and nothing learns from anything else.
+
+Microsoft AutoGen takes a different approach: multiple AI agents that *talk to each other*, challenge each other's work, and collaborate until they produce the best output. A critic agent reviews what the writer agent produces. A data agent pulls the numbers that the analyst agent interprets. The result is better than any single agent could achieve alone.
+
+For local businesses, this translates into a marketing automation system that runs like a small (very cheap) team.
+
+## What AutoGen Is
+
+AutoGen is an open-source Python framework from Microsoft Research. The core idea: define multiple agents, each with a name, role, and capabilities. They exchange messages in a conversation until a task is complete.
+
+Two core patterns:
+- **Two-agent chat**: One agent makes, the other critiques. Iterates until quality threshold is met.
+- **Group chat**: Multiple specialist agents collaborate on a complex task.
+
+AutoGen works with any OpenAI-compatible API, including Anthropic via the compatibility endpoint, OpenRouter, and local models via Ollama.
+
+## Installation
+
+```bash
+pip install pyautogen python-dotenv
+```
+
+## Pattern 1: Two-Agent Review Response System
+
+A common local business pain point: responding to all Google reviews takes 20-30 minutes per week, and responses often sound rushed or generic.
+
+AutoGen's two-agent pattern: a **writer** drafts the response, a **critic** checks it for tone, accuracy, and helpfulness, then the writer revises. You only see the final output.
+
+```python
+import autogen
+
+config_list = [
+    {
+        "model": "claude-haiku-4-5-20251001",
+        "api_key": "YOUR_ANTHROPIC_API_KEY",
+        "base_url": "https://api.anthropic.com/v1",
+        "api_type": "anthropic",
+    }
+]
+
+llm_config = {"config_list": config_list, "temperature": 0.4}
+
+# The writer agent drafts responses
+response_writer = autogen.AssistantAgent(
+    name="ReviewResponseWriter",
+    system_message="""You write professional, warm Google review responses for The Loft Hair Studio.
+Rules:
+- Always thank the reviewer by name
+- Acknowledge specific details they mentioned
+- For 5-stars: celebrate their kind words, invite them back
+- For 3-4 stars: acknowledge the concern, explain what changed or how you'll improve
+- For 1-2 stars: apologize sincerely, offer to make it right, provide direct contact
+- Keep responses 3-5 sentences
+- Never be defensive or argumentative
+- Sign off as: Maya | The Loft Hair Studio Team""",
+    llm_config=llm_config,
+)
+
+# The critic agent checks each response
+response_critic = autogen.AssistantAgent(
+    name="ReviewResponseCritic",
+    system_message="""You review AI-drafted Google review responses for quality.
+Check for:
+1. Does it use the reviewer's name?
+2. Does it mention specific details from the review?
+3. Is it warm but professional (not overly salesy)?
+4. Is it the right length (3-5 sentences)?
+5. For negative reviews: does it offer a path to resolution?
+
+If the response passes all checks, say "APPROVED: [response]"
+If it needs changes, say "REVISION NEEDED: [specific feedback]" and the writer will try again.
+Maximum 2 revision rounds.""",
+    llm_config=llm_config,
+)
+
+# Human proxy to initiate and end conversations
+user_proxy = autogen.UserProxyAgent(
+    name="Manager",
+    human_input_mode="NEVER",
+    max_consecutive_auto_reply=5,
+    is_termination_msg=lambda x: "APPROVED:" in x.get("content", ""),
+    code_execution_config=False,
+)
+
+def generate_review_response(review_text: str, star_rating: int, reviewer_name: str) -> str:
+    """Generate a polished review response using two AutoGen agents."""
+    
+    task = f"""
+Please write a Google review response for this review:
+
+Reviewer: {reviewer_name}
+Stars: {star_rating}/5
+Review: "{review_text}"
+"""
+    
+    user_proxy.initiate_chat(
+        response_writer,
+        message=task,
+        max_turns=6,
+    )
+    
+    # Extract the approved response from conversation history
+    for msg in reversed(user_proxy.chat_messages[response_writer]):
+        if "APPROVED:" in msg.get("content", ""):
+            return msg["content"].replace("APPROVED:", "").strip()
+    
+    # Fallback to last writer message
+    for msg in reversed(user_proxy.chat_messages[response_writer]):
+        if msg.get("role") == "assistant":
+            return msg["content"]
+    
+    return "Thank you for your feedback!"
+
+# Example usage
+if __name__ == "__main__":
+    response = generate_review_response(
+        review_text="Sarah was amazing! She really listened to what I wanted for my highlights and the result was exactly what I had in mind. The salon is so cozy too.",
+        star_rating=5,
+        reviewer_name="Jennifer K."
+    )
+    print("Final Response:", response)
+```
+
+## Pattern 2: Marketing Report GroupChat
+
+Every Monday morning you want a digest: last week's bookings, top reviews, social performance, and this week's recommendations. AutoGen GroupChat with 4 specialist agents handles this automatically.
+
+```python
+import autogen
+from datetime import datetime, timedelta
+
+config_list = [{"model": "claude-haiku-4-5-20251001", "api_key": "YOUR_ANTHROPIC_API_KEY", "api_type": "anthropic"}]
+llm_config = {"config_list": config_list}
+
+# Agent 1: Data Analyst — summarizes the numbers
+data_analyst = autogen.AssistantAgent(
+    name="DataAnalyst",
+    system_message="You summarize business metrics. When given raw data, extract key insights: top services, revenue trends, busiest days, comparison to last week. Be concise with numbers.",
+    llm_config=llm_config,
+)
+
+# Agent 2: Reputation Manager — handles review insights
+reputation_manager = autogen.AssistantAgent(
+    name="ReputationManager",
+    system_message="You analyze customer reviews. Identify sentiment trends, recurring praises, recurring complaints, and suggest 1-2 specific improvements based on feedback patterns.",
+    llm_config=llm_config,
+)
+
+# Agent 3: Content Strategist — plans the week's social content
+content_strategist = autogen.AssistantAgent(
+    name="ContentStrategist",
+    system_message="You create a 5-post social media plan for Instagram. Base it on the week's services, seasonal trends, and any promotions. Provide caption drafts for each post.",
+    llm_config=llm_config,
+)
+
+# Agent 4: Report Writer — compiles everything into a readable digest
+report_writer = autogen.AssistantAgent(
+    name="ReportWriter",
+    system_message="""You compile everything the other agents say into a clean Monday Morning Digest.
+Format:
+## 📊 Last Week's Numbers (from DataAnalyst)
+## ⭐ Review Highlights (from ReputationManager)  
+## 📱 This Week's Social Plan (from ContentStrategist)
+## 🎯 Top 3 Priorities This Week
+
+When you've compiled everything, say REPORT_COMPLETE at the end.""",
+    llm_config=llm_config,
+)
+
+user_proxy = autogen.UserProxyAgent(
+    name="Manager",
+    human_input_mode="NEVER",
+    max_consecutive_auto_reply=15,
+    is_termination_msg=lambda x: "REPORT_COMPLETE" in x.get("content", ""),
+    code_execution_config=False,
+)
+
+def generate_weekly_report(bookings_data: dict, reviews_data: list) -> str:
+    """Generate the Monday digest using AutoGen GroupChat."""
+    
+    group_chat = autogen.GroupChat(
+        agents=[user_proxy, data_analyst, reputation_manager, content_strategist, report_writer],
+        messages=[],
+        max_round=12,
+        speaker_selection_method="round_robin",
+    )
+    
+    manager = autogen.GroupChatManager(groupchat=group_chat, llm_config=llm_config)
+    
+    prompt = f"""
+Generate the Monday Morning Marketing Digest for The Loft Hair Studio.
+
+LAST WEEK'S DATA:
+Bookings: {bookings_data}
+New Reviews: {reviews_data}
+Week of: {(datetime.now() - timedelta(days=7)).strftime('%B %d, %Y')}
+
+DataAnalyst: Summarize the booking metrics.
+ReputationManager: Analyze the reviews.
+ContentStrategist: Plan 5 Instagram posts for this week.
+ReportWriter: Compile everything into the digest.
+"""
+    
+    user_proxy.initiate_chat(manager, message=prompt, max_turns=12)
+    
+    for msg in reversed(user_proxy.chat_messages[manager]):
+        if "REPORT_COMPLETE" in msg.get("content", ""):
+            return msg["content"].replace("REPORT_COMPLETE", "").strip()
+    
+    return "Report generation failed — check AutoGen logs."
+
+# Example
+sample_bookings = {
+    "total_appointments": 47,
+    "revenue_estimate": 3820,
+    "top_services": ["Balayage (12)", "Cut & Style (15)", "Color (9)"],
+    "busiest_day": "Saturday (18 appointments)",
+    "no_shows": 3,
+    "new_clients": 8
+}
+
+sample_reviews = [
+    {"stars": 5, "text": "Best balayage I've ever gotten!", "name": "Amy L."},
+    {"stars": 4, "text": "Great cut but had to wait 20 mins past my appointment time.", "name": "David M."},
+    {"stars": 5, "text": "Sarah is a wizard with color. Highly recommend!", "name": "Priya S."},
+]
+
+if __name__ == "__main__":
+    report = generate_weekly_report(sample_bookings, sample_reviews)
+    print(report)
+```
+
+## Automating the Weekly Run
+
+Schedule this to run every Monday at 7am using a GitHub Actions cron job:
+
+```yaml
+# .github/workflows/weekly-report.yml
+name: Weekly Marketing Report
+
+on:
+  schedule:
+    - cron: '0 7 * * 1'  # Every Monday at 7am UTC
+
+jobs:
+  generate-report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pyautogen requests
+      - run: python scripts/weekly_report.py
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          BOOKING_API_KEY: ${{ secrets.BOOKING_API_KEY }}
+```
+
+The script fetches last week's data from your booking system API, runs the AutoGen group chat, and emails the result to you.
+
+## Platform Comparison
+
+| Framework | Learning Curve | Best Pattern | LLM Support | Cost to Run | Best For |
+|---|---|---|---|---|---|
+| **AutoGen** | Medium | Multi-agent chat | Any (via config) | Low | Quality through agent debate |
+| **CrewAI** | Medium | Role-based teams | Any | Low | Structured task delegation |
+| **LangGraph** | High | Stateful workflows | Any | Low | Complex conditional flows |
+| **n8n** | Low | Visual workflows | Limited | Free/cheap | No-code automation |
+| **Zapier** | Very Low | Trigger-action | GPT-4 only | Medium | Simple automations |
+
+## FAQ
+
+**Is AutoGen free to use?**
+AutoGen is free and open-source. You pay only for LLM API calls. A typical two-agent review response uses about 1,000-2,000 tokens total — at Claude Haiku rates that's about $0.001 per review response. The weekly marketing report GroupChat uses about 10,000-15,000 tokens — around $0.01 per report.
+
+**How many agents should I use?**
+For local business automation, 2-4 agents is the sweet spot. More agents = more tokens = higher cost and slower runtime. The two-agent (writer + critic) pattern is ideal for content quality. GroupChat with 3-5 agents works for complex reports. Avoid very large groups — the conversations get unwieldy.
+
+**Can I use AutoGen without coding?**
+AutoGen requires Python. If you're not comfortable coding, consider n8n (visual workflow builder) or Make.com instead — they have similar multi-step automation without code. However, if you can hire a developer to set up AutoGen once, the system runs on autopilot afterward and is very cost-effective.
+
+**Does AutoGen work with Claude?**
+Yes — AutoGen 0.4+ has native support for Anthropic's API via `api_type: "anthropic"` in the config. Alternatively, use Claude via OpenRouter with the standard OpenAI-compatible endpoint format. Claude Haiku works well for most local business tasks; use Claude Sonnet when you need more sophisticated reasoning (e.g., handling nuanced negative reviews).
+
+**How do I stop agents from going off-task?**
+Strong system prompts are key. Each agent should have a very specific role description and explicit constraints ("ONLY discuss review data, do not suggest social content"). Also use `max_consecutive_auto_reply` and `is_termination_msg` to stop conversations at the right point — otherwise agents will keep chatting indefinitely, burning tokens.
+
+## Related Articles
+
+- [CrewAI for Local Business: Build a Team of AI Agents](/blog/crewai-local-business-multi-agent-automation)
+- [LangGraph: Build an AI Booking Agent with Memory and State](/blog/langgraph-ai-booking-agent-memory-local-business)
+- [AgentOps: Monitor and Debug Your Local Business AI Agents](/blog/agentops-monitor-debug-ai-agents-local-business)
+- [OpenRouter Guide: Access 100+ AI Models for Local Business Automation](/blog/openrouter-guide-local-business-automation-2026)
+- [Best Free Models on OpenRouter for Business Automation 2026](/blog/best-free-openrouter-models-business-automation)
