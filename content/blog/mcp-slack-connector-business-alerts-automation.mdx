@@ -1,0 +1,625 @@
+---
+title: "MCP Slack Connector: AI Business Alerts in Your Team Channel"
+date: "2026-06-13"
+lastModified: "2026-06-13"
+description: "Set up AI-powered business alerts in Slack using MCP — new bookings, review notifications, daily revenue summaries, and team updates automatically."
+author: "Nataliia"
+category: "AI Automation"
+tags: ["MCP", "Slack", "business alerts", "automation"]
+slug: "mcp-slack-connector-business-alerts-automation"
+image: "https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=800&q=80&auto=format&fit=crop"
+readTime: "9 min read"
+---
+
+Here is a familiar scene. It is 7pm on a Tuesday. You are heading home after a 10-hour day at the salon. Your phone has 14 unread notifications spread across four apps: your booking software, your Google Business Profile review alerts, your email, and a text from a supplier. Somewhere in that pile is a 2-star review that has been sitting unanswered for six hours. And a cancellation that freed up your prime Thursday slot. And a booking request you missed.
+
+This is the real cost of running a modern small business: not one problem, but a dozen information streams you are supposed to monitor simultaneously, all day, while also doing the actual work.
+
+The average small business owner checks **8 to 12 different apps per day** to stay on top of operations. Most of the checks are unnecessary — nothing changed. But the one time you stop checking is the one time the bad review comes in or the Thursday cancellation goes unfilled.
+
+The solution is a single channel where all the important stuff surfaces automatically, with AI deciding what is actually worth your attention. That channel is Slack. The AI that decides what to tell you is Claude, connected through the Model Context Protocol (MCP).
+
+This guide shows you how to build six automated alert types that turn your Slack into a smart business operations hub — covering reviews, bookings, cancellations, inventory, revenue, and marketing performance.
+
+---
+
+## What You Are Actually Solving
+
+Before diving into setup, it is worth being precise about the problem. You are not trying to get more notifications — you already have too many. You are trying to get **fewer, smarter notifications that require less context-switching**.
+
+The right system should:
+- Tell you about the bad review within minutes, not hours, with a suggested reply already drafted
+- Surface the Thursday cancellation immediately to the staff member who can fill it
+- Send you a 6pm revenue summary so you know whether today was a good day before you leave
+- Stay quiet during the 95% of the day when nothing requires your attention
+
+Claude's role is the intelligence filter. Instead of every event generating a raw notification, Claude reads the event, decides how to frame it, drafts any necessary response, and routes it to the right person or channel in Slack.
+
+---
+
+## Prerequisites and Architecture
+
+**What you need:**
+- Slack workspace (free tier works for everything described here)
+- Claude API key (Anthropic Console)
+- Python 3.10+
+- A Slack App with a Bot Token (we will create this below)
+- Optional: a running webhook server for real-time events (can be replaced with polling for simpler setup)
+
+**How the system works:**
+
+Your Python scripts poll or receive events from various sources (Google Business Profile API, your booking system, inventory tracking). Each event is passed to Claude with context about your business. Claude decides on the appropriate message, formats it for Slack, and sends it through the Slack MCP server. The whole chain from event to Slack message typically takes 3–8 seconds.
+
+---
+
+## Step 1: Create Your Slack App and Get a Bot Token
+
+1. Go to [api.slack.com/apps](https://api.slack.com/apps) and click **Create New App**
+2. Choose **From scratch**, name it something like "DataLatte Ops" or "[Your Business] Alerts"
+3. Under **OAuth & Permissions**, add these Bot Token Scopes:
+   - `chat:write` — post messages
+   - `channels:read` — list channels
+   - `channels:join` — join channels to post
+   - `files:write` — upload reports as files
+4. Click **Install to Workspace** and copy the **Bot User OAuth Token** (starts with `xoxb-`)
+5. Create your alert channels in Slack: `#reviews`, `#bookings`, `#marketing`, `#ops-daily`
+6. Invite your bot to each channel: `/invite @YourBotName`
+
+---
+
+## Step 2: Configure the Slack MCP Server
+
+Add the Slack MCP server to your Claude Desktop configuration:
+
+```json
+{
+  "mcpServers": {
+    "slack": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-slack"],
+      "env": {
+        "SLACK_BOT_TOKEN": "xoxb-your-bot-token-here",
+        "SLACK_TEAM_ID": "T0123456789"
+      }
+    }
+  }
+}
+```
+
+Find your Team ID in Slack under **Settings > About this workspace**. Restart Claude Desktop and you will see Slack listed as an available tool — Claude can now read channel history, post messages, and look up channel IDs without any additional integration code.
+
+For the Python automations, you will use the Slack SDK directly alongside the Anthropic SDK:
+
+```bash
+pip install anthropic slack-sdk schedule requests flask
+```
+
+---
+
+## Step 3: The Six Alert Automations
+
+### Alert 1: New Google Review — With AI-Drafted Reply
+
+A negative review that sits unanswered for more than 4 hours is a missed opportunity to demonstrate professionalism. Studies consistently show that a thoughtful owner response to a bad review increases the likelihood of that reviewer updating their rating.
+
+```python
+import anthropic
+import requests
+from slack_sdk import WebClient
+from datetime import datetime, timedelta
+
+anthropic_client = anthropic.Anthropic(api_key="YOUR_ANTHROPIC_API_KEY")
+slack_client = WebClient(token="xoxb-YOUR-BOT-TOKEN")
+
+REVIEWS_CHANNEL = "#reviews"
+GBP_API_KEY = "YOUR_GOOGLE_API_KEY"
+BUSINESS_NAME = "Paws & Claws Grooming"
+LOCATION_ID = "YOUR_GBP_LOCATION_ID"
+
+def check_new_reviews():
+    """Poll Google Business Profile API for reviews in the last hour."""
+    since = (datetime.utcnow() - timedelta(hours=1)).isoformat() + "Z"
+    url = f"https://mybusiness.googleapis.com/v4/accounts/YOUR_ACCOUNT/locations/{LOCATION_ID}/reviews"
+    response = requests.get(url, headers={"Authorization": f"Bearer {GBP_API_KEY}"})
+    reviews = response.json().get("reviews", [])
+
+    for review in reviews:
+        star_rating = review.get("starRating", "FIVE")
+        review_text = review.get("comment", "No written comment")
+        reviewer_name = review.get("reviewer", {}).get("displayName", "A customer")
+        create_time = review.get("createTime", "")
+
+        # Only alert immediately for 1, 2, or 3 star reviews
+        if star_rating in ["ONE", "TWO", "THREE"]:
+            process_negative_review(reviewer_name, star_rating, review_text)
+        else:
+            # Queue positive reviews for the daily digest
+            pass
+
+def process_negative_review(reviewer, rating, review_text):
+    prompt = f"""
+A {rating.lower()}-star review was just posted on Google for {BUSINESS_NAME}.
+
+Reviewer: {reviewer}
+Review text: "{review_text}"
+
+Please:
+1. Write a professional, warm, and empathetic response (under 200 words) that:
+   - Thanks the reviewer by first name if possible
+   - Acknowledges the specific concern they raised
+   - Offers to make it right (e.g., "Please call us at...")
+   - Does NOT sound defensive or scripted
+2. Rate the urgency: LOW / MEDIUM / HIGH based on the severity and specificity of the complaint
+
+Format your response as:
+URGENCY: [level]
+SUGGESTED REPLY:
+[the reply text]
+"""
+
+    response = anthropic_client.messages.create(
+        model="claude-opus-4-5",
+        max_tokens=600,
+        messages=[{"role": "user", "content": prompt}]
+    )
+
+    ai_response = response.content[0].text
+
+    # Post to Slack with Block Kit formatting
+    slack_client.chat_postMessage(
+        channel=REVIEWS_CHANNEL,
+        blocks=[
+            {
+                "type": "header",
+                "text": {"type": "plain_text", "text": f"⚠️ New {rating.title()} Star Review"}
+            },
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": f"*Reviewer:* {reviewer}\n*Rating:* {'⭐' * {'ONE':1,'TWO':2,'THREE':3}.get(rating, 0)}\n*Review:* \"{review_text}\""
+                }
+            },
+            {"type": "divider"},
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": f"*Claude's suggested reply:*\n{ai_response}"
+                }
+            }
+        ]
+    )
+```
+
+### Alert 2: Daily Revenue Summary at 6pm
+
+```python
+import schedule
+
+def post_daily_revenue_summary():
+    """Pull today's bookings from your booking system and post a summary."""
+    today = datetime.now().strftime("%A, %B %d")
+
+    # Replace with your actual booking system API call
+    bookings_today = get_todays_bookings()  # Returns list of appointment dicts
+    total_revenue = sum(b.get("price", 0) for b in bookings_today)
+    daily_target = 800  # Set your target
+    completed = len([b for b in bookings_today if b.get("status") == "completed"])
+    cancelled = len([b for b in bookings_today if b.get("status") == "cancelled"])
+
+    prompt = f"""
+Today is {today}. Here is the day's performance data for {BUSINESS_NAME}:
+
+- Total revenue: ${total_revenue}
+- Daily target: ${daily_target}
+- Appointments completed: {completed}
+- Cancellations: {cancelled}
+- Bookings data: {bookings_today}
+
+Write a brief, friendly Slack summary (3-5 sentences) that:
+1. Opens with whether today hit the target (positive if yes, encouraging if no)
+2. Highlights one standout fact (busiest hour, most popular service, etc.)
+3. Notes if there are open slots tomorrow that could be filled
+4. Ends with a one-word "vibe" for the day in brackets, e.g. [Solid] or [Tough one]
+"""
+
+    response = anthropic_client.messages.create(
+        model="claude-opus-4-5",
+        max_tokens=400,
+        messages=[{"role": "user", "content": prompt}]
+    )
+
+    pct = int((total_revenue / daily_target) * 100)
+    bar = "█" * (pct // 10) + "░" * (10 - pct // 10)
+
+    slack_client.chat_postMessage(
+        channel="#ops-daily",
+        blocks=[
+            {
+                "type": "header",
+                "text": {"type": "plain_text", "text": f"📊 Daily Wrap-Up — {today}"}
+            },
+            {
+                "type": "section",
+                "fields": [
+                    {"type": "mrkdwn", "text": f"*Revenue*\n${total_revenue} / ${daily_target}"},
+                    {"type": "mrkdwn", "text": f"*Progress*\n{bar} {pct}%"},
+                    {"type": "mrkdwn", "text": f"*Completed*\n{completed} appointments"},
+                    {"type": "mrkdwn", "text": f"*Cancelled*\n{cancelled} appointments"}
+                ]
+            },
+            {
+                "type": "section",
+                "text": {"type": "mrkdwn", "text": response.content[0].text}
+            }
+        ]
+    )
+
+schedule.every().day.at("18:00").do(post_daily_revenue_summary)
+```
+
+### Alert 3: New Booking Notification
+
+```python
+def handle_new_booking(booking_data):
+    """Called when a new booking comes in via webhook from your booking system."""
+    client_name = booking_data.get("client_name")
+    service = booking_data.get("service")
+    staff_member = booking_data.get("staff_member")
+    appointment_time = booking_data.get("datetime")
+    is_new_client = booking_data.get("is_new_client", False)
+
+    new_badge = " 🆕 *New client!*" if is_new_client else ""
+
+    slack_client.chat_postMessage(
+        channel="#bookings",
+        blocks=[
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": (
+                        f"✅ *New Booking*{new_badge}\n"
+                        f"*Client:* {client_name}\n"
+                        f"*Service:* {service}\n"
+                        f"*With:* {staff_member}\n"
+                        f"*When:* {appointment_time}"
+                    )
+                }
+            }
+        ]
+    )
+```
+
+### Alert 4: Cancellation Alert with Rebooking Suggestion
+
+Cancellations sting less when you have an immediate plan to fill the slot.
+
+```python
+def handle_cancellation(cancellation_data):
+    cancelled_slot = cancellation_data.get("datetime")
+    service = cancellation_data.get("service")
+    client_name = cancellation_data.get("client_name")
+
+    prompt = f"""
+A booking just cancelled for {BUSINESS_NAME}.
+
+Cancelled appointment:
+- Client: {client_name}
+- Service: {service}
+- Slot: {cancelled_slot}
+
+Suggest one specific action to fill this slot. Consider:
+1. Which type of client most commonly books last-minute?
+2. Should we post to Instagram Stories about the opening?
+3. Is there a waitlist message we should send?
+
+Write a 2-sentence action suggestion for the team, then write a 
+ready-to-post Instagram Story caption (under 100 characters) about 
+the opening slot.
+"""
+
+    response = anthropic_client.messages.create(
+        model="claude-opus-4-5",
+        max_tokens=300,
+        messages=[{"role": "user", "content": prompt}]
+    )
+
+    slack_client.chat_postMessage(
+        channel="#bookings",
+        blocks=[
+            {
+                "type": "header",
+                "text": {"type": "plain_text", "text": "❌ Cancellation — Slot Available"}
+            },
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": (
+                        f"*Client:* {client_name}\n"
+                        f"*Service:* {service}\n"
+                        f"*Open slot:* {cancelled_slot}"
+                    )
+                }
+            },
+            {"type": "divider"},
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": f"*Suggested action:*\n{response.content[0].text}"
+                }
+            }
+        ]
+    )
+```
+
+### Alert 5: Inventory Low Alert (Coffee Shop Example)
+
+```python
+# For coffee shops tracking inventory levels
+
+INVENTORY_THRESHOLDS = {
+    "Ethiopian Yirgacheffe": 2.0,   # kg — alert when under 2kg
+    "House Blend": 3.0,
+    "Oat Milk": 6,                  # cartons
+    "Whole Milk": 4,                # gallons
+    "Vanilla Syrup": 2              # bottles
+}
+
+def check_inventory(current_stock: dict):
+    """Pass in current_stock as {item_name: quantity}."""
+    low_items = []
+
+    for item, quantity in current_stock.items():
+        threshold = INVENTORY_THRESHOLDS.get(item)
+        if threshold and quantity <= threshold:
+            low_items.append({"item": item, "quantity": quantity, "threshold": threshold})
+
+    if not low_items:
+        return  # No alert needed
+
+    prompt = f"""
+The following inventory items are running low at {BUSINESS_NAME}:
+
+{low_items}
+
+Write a brief Slack alert (3-4 sentences) that:
+1. Lists each low item with current quantity
+2. Estimates how many days of stock remain (assume busy weekend = 30% higher usage)
+3. Recommends which supplier to contact first based on lead time
+   (beans typically need 2 days lead time, dairy is next-day)
+"""
+
+    response = anthropic_client.messages.create(
+        model="claude-opus-4-5",
+        max_tokens=300,
+        messages=[{"role": "user", "content": prompt}]
+    )
+
+    slack_client.chat_postMessage(
+        channel="#ops-daily",
+        blocks=[
+            {
+                "type": "header",
+                "text": {"type": "plain_text", "text": "📦 Inventory Alert — Reorder Needed"}
+            },
+            {
+                "type": "section",
+                "text": {"type": "mrkdwn", "text": response.content[0].text}
+            }
+        ]
+    )
+```
+
+### Alert 6: Weekly Marketing Performance Digest
+
+This posts every Monday morning with a summary of the past week's marketing metrics.
+
+```python
+def post_weekly_marketing_digest():
+    # Pull metrics from your marketing platforms via their APIs
+    # These are example values — replace with real API calls
+    marketing_data = {
+        "google_ads_spend": 142.50,
+        "google_ads_clicks": 89,
+        "google_ads_conversions": 7,
+        "meta_ads_spend": 68.00,
+        "meta_reach": 4820,
+        "meta_link_clicks": 112,
+        "new_google_reviews": 3,
+        "average_review_rating": 4.8,
+        "top_review_keywords": ["friendly", "gentle", "professional", "clean"],
+        "website_sessions": 340,
+        "top_landing_page": "/for/pet-groomers"
+    }
+
+    prompt = f"""
+Here is last week's marketing performance data for {BUSINESS_NAME}:
+
+{marketing_data}
+
+Write a Monday morning marketing digest for the Slack #marketing channel.
+Format it as:
+
+**MARKETING WEEK IN REVIEW**
+
+WHAT WORKED: [2-3 bullet points highlighting wins]
+WATCH OUT FOR: [1-2 potential concerns or things to optimize]
+THIS WEEK'S PRIORITY: [one specific action to take this week based on the data]
+
+Keep the total to under 200 words. Be specific about numbers.
+Do not use vague language like "good performance" — say exactly what was good and why it matters.
+"""
+
+    response = anthropic_client.messages.create(
+        model="claude-opus-4-5",
+        max_tokens=500,
+        messages=[{"role": "user", "content": prompt}]
+    )
+
+    slack_client.chat_postMessage(
+        channel="#marketing",
+        blocks=[
+            {
+                "type": "header",
+                "text": {"type": "plain_text", "text": "📈 Weekly Marketing Digest"}
+            },
+            {
+                "type": "section",
+                "text": {"type": "mrkdwn", "text": response.content[0].text}
+            }
+        ]
+    )
+
+schedule.every().monday.at("09:00").do(post_weekly_marketing_digest)
+```
+
+---
+
+## Slack Message Formatting with Block Kit
+
+All the examples above use Slack's Block Kit format. Here is a reference JSON template you can adapt for any alert type:
+
+```json
+{
+  "blocks": [
+    {
+      "type": "header",
+      "text": {
+        "type": "plain_text",
+        "text": "Your Alert Title Here",
+        "emoji": true
+      }
+    },
+    {
+      "type": "section",
+      "fields": [
+        {
+          "type": "mrkdwn",
+          "text": "*Field Label:*\nField value here"
+        },
+        {
+          "type": "mrkdwn",
+          "text": "*Another Field:*\nAnother value"
+        }
+      ]
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "Longer text block with *bold*, _italic_, and `code` formatting supported."
+      }
+    },
+    {
+      "type": "actions",
+      "elements": [
+        {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "View in Notion"
+          },
+          "url": "https://notion.so/your-crm-link",
+          "style": "primary"
+        }
+      ]
+    }
+  ]
+}
+```
+
+Use the [Slack Block Kit Builder](https://app.slack.com/block-kit-builder) to preview your layouts before coding them — drag-and-drop interface, instant preview, copy the JSON directly into your Python code.
+
+---
+
+## Channel Routing Strategy
+
+Not every alert belongs in the same channel. Here is the routing logic that works best for most local businesses:
+
+| Alert Type | Channel | Why |
+|---|---|---|
+| New booking | #bookings | Staff need to see this immediately |
+| Cancellation | #bookings | Same audience, immediate action needed |
+| Bad review (1–2 star) | #reviews | Owner or manager attention required |
+| Good review (4–5 star) | #reviews | Optional; can skip to reduce noise |
+| Daily revenue summary | #ops-daily | End-of-day ritual, all staff |
+| Inventory alerts | #ops-daily | Whoever handles ordering |
+| Weekly marketing digest | #marketing | Owner / marketing focus |
+| System errors | #ops-daily | Technical issues |
+
+For solo businesses with no team, route everything to one channel (`#alerts` or `#biz-ops`) and use the alert title headers to skim quickly.
+
+---
+
+## Cost Breakdown: What Does This Actually Cost?
+
+| Component | Cost | Notes |
+|---|---|---|
+| Slack workspace | Free | Up to 90 days message history |
+| Slack Pro (optional) | $7.25/user/month | Unlimited history, more channels |
+| Claude API (Haiku) | ~$3–$8/month | For a 200-client, 6-alert business |
+| Claude API (Sonnet) | ~$12–$25/month | Better quality for client-facing messages |
+| Python hosting | $0–$5/month | Raspberry Pi, spare laptop, or $5 VPS |
+| Google Business Profile API | Free | Read-only review polling |
+| **Total** | **$3–$30/month** | Depending on Slack plan and model choice |
+
+Compare this to a tool like Birdeye ($299/month) or Podium ($299/month) that covers some but not all of these alert types. The MCP + Claude approach costs roughly 10% as much and is fully customizable to your exact workflows.
+
+---
+
+## Comparison: MCP + Claude vs Generic Automation Tools
+
+| Feature | MCP + Claude + Slack | Zapier | Make (Integromat) | IFTTT |
+|---|---|---|---|---|
+| Monthly cost | $3–$30 | $19–$69 | $9–$16 | Free–$3.99 |
+| AI-drafted responses | Yes | No | No | No |
+| Context-aware alerts | Yes | No | No | No |
+| Custom business logic | Fully flexible | Template-based | Template-based | Very limited |
+| Review reply drafting | Yes | No | No | No |
+| Revenue narrative summaries | Yes | No | No | No |
+| Setup complexity | Medium | Low | Low–Medium | Very low |
+| Local business focus | Fully customizable | Generic | Generic | Generic |
+| Multi-channel routing | Yes | Yes | Yes | Limited |
+
+The fundamental gap in tools like Zapier and Make is that they automate action triggers but do not add intelligence. They can send you a notification when a review comes in. They cannot read the review, assess the tone, and draft a specific professional response. Claude does the latter — which is the part that actually saves time.
+
+---
+
+## FAQ
+
+**Does Slack MCP work with the free Slack plan?**
+
+Yes. The free Slack plan supports the Bot Token authentication that MCP uses, and all six alert types described here work on the free tier. The main free-tier limitation is that Slack only shows 90 days of message history — older messages are archived but not searchable. For operational alerts that you read and act on in real time, this is not a constraint. If you want to search alert history for trends (e.g., "how many cancellations did we get last month?"), consider Slack Pro at $7.25/user/month or export the history to Notion for long-term storage.
+
+**How do I avoid alert fatigue from too many Slack messages?**
+
+Start with just two alerts: the daily revenue summary and bad review notifications. Run those for two weeks and notice how often you actually need to act on them. Add more alert types only when you feel a real gap. The goal is to reduce the number of apps you check, not to create a sixth app that you also have to check. Use Slack's notification settings to mute low-priority channels during focus hours. Consider batching non-urgent alerts — for example, instead of posting each new 5-star review individually, have Claude collect them and post a daily "great reviews" summary.
+
+**Can I use this for a solo business with no team?**
+
+Absolutely. A solo operator arguably benefits more from this system than a team does, because there is no one else to catch what you miss. When you are the groomer, the receptionist, the marketer, and the owner all at once, the alerts do the work of the staff you do not have. Route everything to a single channel on your phone and set it to notify you only for the high-urgency alerts (bad reviews, cancellations above a threshold). Check the rest in the evening.
+
+**How do I customize the alert message format for my business?**
+
+Every alert is generated by a prompt you control. Changing the output format is as simple as updating the prompt text. For example, if you want the daily revenue summary to include a joke at the end, add "End with a one-liner coffee pun related to the day's performance" to the prompt. If you want the cancellation alert to always check your CRM for the client's loyalty status before suggesting a rebooking approach, add that context to the prompt. The system is fully transparent — there is no hidden logic, only the prompts you write.
+
+**What if Claude sends a wrong or inappropriate alert?**
+
+Claude can occasionally misread context or generate an off-tone message — especially for nuanced situations like a review that is mixed (4 stars but mentions a complaint). Build in a human review step for any message that goes to a customer: use the alerts for internal Slack only, and copy-paste the suggested reply into Google Business Profile yourself after reviewing it. This two-second review step adds enough friction to catch errors while keeping the speed benefit of AI drafting. For purely internal alerts (revenue summaries, inventory counts), errors are low-stakes and easy to spot.
+
+---
+
+## Related Articles
+
+- [What Is MCP (Model Context Protocol)? A Plain-English Guide for Local Business Owners](/blog/what-is-mcp-model-context-protocol-explained)
+- [Best MCP Servers for Local Business: The Complete Setup Guide](/blog/best-mcp-servers-local-business-setup-guide)
+- [MCP + Notion: Build a Self-Updating Client CRM with AI](/blog/mcp-notion-connector-client-crm-local-business)
+- [MCP + Supabase: Build an AI Agent with a Real Database Backend](/blog/mcp-supabase-connector-ai-agent-database)
+- [WhatsApp Business API for Local Marketing: The Complete Automation Guide](/blog/whatsapp-business-api-local-marketing-automation)
