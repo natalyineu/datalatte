@@ -1,0 +1,376 @@
+---
+title: "Best MCP Servers for Local Business: Google Drive, Notion, Slack Setup"
+date: "2026-06-13"
+lastModified: "2026-06-13"
+description: "The best MCP servers for local business in 2026 — Google Drive, Notion, Slack, Supabase, and more. Step-by-step setup with Claude Desktop."
+author: "Nataliia"
+category: "AI Automation"
+tags: ["MCP servers", "AI tools", "local business automation", "setup guide"]
+slug: "best-mcp-servers-local-business-setup-guide"
+image: "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=800&q=80&auto=format&fit=crop"
+readTime: "10 min read"
+---
+
+If you've read our [intro to MCP (Model Context Protocol)](/blog/what-is-mcp-model-context-protocol-explained), you know the core idea: MCP servers are connectors that let AI tools like Claude interact with your real business systems — your calendar, your files, your CRM, your database. Instead of AI being a standalone chatbot, it becomes an agent that can actually *do* things in the tools you already use every day.
+
+This guide is the practical follow-up: which MCP servers are actually worth installing for a local business, how to set them up, and what you can accomplish with each one. We'll cover the top 8, with real use cases for coffee shops, salons, pet groomers, and fitness studios.
+
+---
+
+## Quick Recap: How MCP Servers Work
+
+An MCP server is a small program that runs on your computer (or a server) and acts as a bridge between an AI model and an external tool. You configure it once in your Claude Desktop settings, and from that point forward, Claude can use it automatically whenever your requests require it.
+
+The typical flow:
+
+1. You ask Claude something ("What client appointments do I have this week?")
+2. Claude identifies it needs to access a tool (Google Calendar)
+3. Claude sends the request to the MCP server for Google Calendar
+4. The MCP server authenticates with Google's API and fetches the data
+5. The data comes back to Claude, which answers your question in plain English
+
+The magic is that steps 2–5 happen invisibly. From your perspective, you just asked a question and got an answer.
+
+---
+
+## How to Install MCP Servers in Claude Desktop
+
+All MCP server configuration for Claude Desktop lives in a single JSON file:
+
+- **Mac**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+- **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
+
+If the file doesn't exist yet, create it. The basic structure looks like this:
+
+```json
+{
+  "mcpServers": {
+    "server-name": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-name"],
+      "env": {
+        "API_KEY": "your-key-here"
+      }
+    }
+  }
+}
+```
+
+Each server gets a named block inside `mcpServers`. After saving changes, **restart Claude Desktop** — it reads this file fresh on startup. If a server fails to connect, check the Claude Desktop logs (Menu → Help → Show Logs) for error details.
+
+You'll need **Node.js** installed on your machine to run `npx` commands. Install it from [nodejs.org](https://nodejs.org) if you haven't already — this is a one-time setup.
+
+---
+
+## The Top 8 MCP Servers for Local Businesses
+
+### 1. Google Drive MCP
+
+**What it does**: Lets Claude read and write files in your Google Drive — Docs, Sheets, PDFs, and more. Claude can search for files, read their contents, create new documents, and update existing ones.
+
+**Installation**:
+```bash
+npx @modelcontextprotocol/server-google-drive
+```
+
+**Config**:
+```json
+"google-drive": {
+  "command": "npx",
+  "args": ["-y", "@modelcontextprotocol/server-google-drive"],
+  "env": {
+    "GOOGLE_CLIENT_ID": "your-client-id",
+    "GOOGLE_CLIENT_SECRET": "your-client-secret",
+    "GOOGLE_REDIRECT_URI": "http://localhost:3000/oauth2callback"
+  }
+}
+```
+
+**Local business use case**: A fitness studio stores client waivers, class schedules, and pricing docs in Google Drive. With this MCP, Claude can answer "What's our drop-in rate for yoga?" by reading the pricing sheet directly — no copy-pasting required. You can also ask Claude to draft a new service description and save it straight to Drive.
+
+---
+
+### 2. Google Calendar MCP
+
+**What it does**: Gives Claude full access to read, create, update, and delete calendar events. Claude can check availability, find free slots, book appointments, and list upcoming events.
+
+**Installation**:
+```bash
+npx @modelcontextprotocol/server-google-calendar
+```
+
+**Config**:
+```json
+"google-calendar": {
+  "command": "npx",
+  "args": ["-y", "@modelcontextprotocol/server-google-calendar"],
+  "env": {
+    "GOOGLE_CLIENT_ID": "your-client-id",
+    "GOOGLE_CLIENT_SECRET": "your-client-secret"
+  }
+}
+```
+
+**Local business use case**: A hair salon owner asks Claude each morning: "What does my Tuesday look like and do I have any gaps I could fill with a walk-in?" Claude checks the calendar, spots a 90-minute gap at 2pm, and even drafts a quick Instagram story offering a walk-in slot — all in one request.
+
+For a full appointment booking automation guide, see [Claude + MCP Google Calendar: Auto-Book Appointments with AI](/blog/claude-mcp-google-calendar-booking-automation).
+
+---
+
+### 3. Notion MCP
+
+**What it does**: Connects Claude to your Notion workspace. Claude can read and update pages, query databases, create new entries, and filter records — making Notion databases act like a live CRM that AI can interact with.
+
+**Installation**:
+```bash
+npx @modelcontextprotocol/server-notion
+```
+
+**Config**:
+```json
+"notion": {
+  "command": "npx",
+  "args": ["-y", "@modelcontextprotocol/server-notion"],
+  "env": {
+    "NOTION_API_KEY": "secret_your_notion_integration_token"
+  }
+}
+```
+
+**Local business use case**: A pet groomer tracks every client in a Notion database — pet name, breed, last visit, special notes (anxious around clippers, needs medicated shampoo, etc.). With Notion MCP, the groomer asks Claude before each appointment: "Tell me about Max the golden retriever" and gets a full briefing from the database in seconds. After the visit, Claude updates the record with new notes via voice-to-text.
+
+---
+
+### 4. Slack MCP
+
+**What it does**: Lets Claude send messages, read channel history, and post to specific Slack channels or users. Useful for getting AI-generated reports and alerts into your team's existing communication flow.
+
+**Installation**:
+```bash
+npx @modelcontextprotocol/server-slack
+```
+
+**Config**:
+```json
+"slack": {
+  "command": "npx",
+  "args": ["-y", "@modelcontextprotocol/server-slack"],
+  "env": {
+    "SLACK_BOT_TOKEN": "xoxb-your-bot-token",
+    "SLACK_TEAM_ID": "T0XXXXXXX"
+  }
+}
+```
+
+**Local business use case**: A coffee shop with two locations and a team of 5 uses Slack for internal comms. An AI agent runs each Monday morning, pulls the previous week's sales data from a spreadsheet via Google Drive MCP, generates a brief performance summary, and posts it to the #weekly-numbers Slack channel — so the whole team sees it without anyone having to compile the report manually.
+
+---
+
+### 5. Supabase MCP
+
+**What it does**: Connects Claude to a Supabase (PostgreSQL) database. Claude can run queries, insert records, update data, and retrieve information — giving your AI agent persistent memory and access to structured data.
+
+**Installation**:
+```bash
+npx @modelcontextprotocol/server-supabase
+```
+
+**Config**:
+```json
+"supabase": {
+  "command": "npx",
+  "args": ["-y", "@modelcontextprotocol/server-supabase"],
+  "env": {
+    "SUPABASE_URL": "https://your-project.supabase.co",
+    "SUPABASE_SERVICE_ROLE_KEY": "your-service-role-key"
+  }
+}
+```
+
+**Local business use case**: A fitness studio tracks membership status, check-in history, and class attendance in Supabase. Claude can answer questions like "Which members haven't visited in 30+ days?" and generate a re-engagement email list automatically. Supabase is also the go-to choice for giving AI agents a memory store — the agent can save what it learned about a client and retrieve it in future sessions.
+
+---
+
+### 6. Filesystem MCP
+
+**What it does**: Gives Claude access to read and write files on your local computer — within directories you explicitly allow. Claude can read text files, create new files, and update existing documents.
+
+**Installation**:
+```bash
+npx @modelcontextprotocol/server-filesystem /path/to/allowed/directory
+```
+
+**Config**:
+```json
+"filesystem": {
+  "command": "npx",
+  "args": [
+    "-y",
+    "@modelcontextprotocol/server-filesystem",
+    "/Users/yourname/business-docs"
+  ]
+}
+```
+
+**Local business use case**: A coffee shop keeps its menu, pricing, and seasonal specials as text files in a folder. Claude can read these files to answer customer questions (via a chat widget), and the owner can update prices by simply editing the text file — no database required. Great for businesses that want simplicity over sophistication.
+
+---
+
+### 7. Puppeteer MCP
+
+**What it does**: Gives Claude control of a headless web browser. Claude can navigate to URLs, click elements, fill forms, and extract content from web pages — enabling competitive research and web scraping automation.
+
+**Installation**:
+```bash
+npx @modelcontextprotocol/server-puppeteer
+```
+
+**Config**:
+```json
+"puppeteer": {
+  "command": "npx",
+  "args": ["-y", "@modelcontextprotocol/server-puppeteer"]
+}
+```
+
+**Local business use case**: A salon owner asks Claude once a month: "Check the Google reviews for my top 3 competitors and tell me what customers are complaining about most." Claude uses Puppeteer MCP to visit each Google Business Profile, scrape recent reviews, analyze sentiment, and return a competitive intelligence report — in minutes rather than hours of manual research.
+
+**Note**: Use Puppeteer responsibly and in line with websites' terms of service. Publicly available data like Google Business Profile reviews is generally acceptable.
+
+---
+
+### 8. Postgres MCP
+
+**What it does**: Direct SQL access to any PostgreSQL database. Unlike Supabase MCP (which is Supabase-specific), this connects to any Postgres instance — including your booking software's database if you have access to it.
+
+**Installation**:
+```bash
+npx @modelcontextprotocol/server-postgres
+```
+
+**Config**:
+```json
+"postgres": {
+  "command": "npx",
+  "args": [
+    "-y",
+    "@modelcontextprotocol/server-postgres",
+    "postgresql://username:password@localhost:5432/your-database"
+  ]
+}
+```
+
+**Local business use case**: A pet grooming business using a custom booking system built on Postgres can ask Claude: "How many unique clients have we seen this quarter, and what's the average spend per visit?" Claude queries the database directly and returns the answer — turning raw data into business intelligence without a separate analytics tool.
+
+---
+
+## Comparison Table: All 8 MCP Servers
+
+| MCP Server | Setup Difficulty | Cost | Best For | Requires Coding? |
+|---|---|---|---|---|
+| Google Drive | Medium | Free (API) | Docs, spreadsheets, file storage | No |
+| Google Calendar | Medium | Free (API) | Scheduling, availability, bookings | No |
+| Notion | Easy | Free (integration) | CRM, content calendar, notes | No |
+| Slack | Medium | Free (bot token) | Team alerts, automated reports | No |
+| Supabase | Medium | Free tier available | AI memory, structured data | Light |
+| Filesystem | Easy | Free | Local files, simple docs | No |
+| Puppeteer | Hard | Free | Web scraping, competitive research | Yes |
+| Postgres | Hard | Free | Custom database queries | Yes |
+
+"Requires Coding?" refers to using the MCP server for real automations — the installation itself never requires coding, just copy-paste config.
+
+---
+
+## A Complete claude_desktop_config.json with 3 Servers
+
+Here's a production-ready configuration for a salon or service business using Google Calendar, Notion, and Slack together:
+
+```json
+{
+  "mcpServers": {
+    "google-calendar": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-google-calendar"],
+      "env": {
+        "GOOGLE_CLIENT_ID": "123456789-abc.apps.googleusercontent.com",
+        "GOOGLE_CLIENT_SECRET": "GOCSPX-your-secret-here"
+      }
+    },
+    "notion": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-notion"],
+      "env": {
+        "NOTION_API_KEY": "secret_abcdefghijklmnopqrstuvwxyz123456"
+      }
+    },
+    "slack": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-slack"],
+      "env": {
+        "SLACK_BOT_TOKEN": "xoxb-YOUR-BOT-TOKEN-HERE",
+        "SLACK_TEAM_ID": "YOUR-TEAM-ID"
+      }
+    }
+  }
+}
+```
+
+With this configuration, you could ask Claude:
+- "Book a haircut for Sarah next Thursday at 3pm and add her to our Notion client database"
+- "Post a summary of this week's bookings to the #owner-updates Slack channel"
+- "Who do I have on the books tomorrow and what are their notes in Notion?"
+
+All three tools work together in a single conversation.
+
+---
+
+## Common Setup Mistakes and How to Fix Them
+
+**Mistake 1: Forgetting to restart Claude Desktop after editing the config**
+The config file is only read on startup. If you add a new server and it doesn't show up, restart the app.
+
+**Mistake 2: Using the wrong API key type**
+Some tools (like Supabase) have both a "public/anon key" and a "service role key." MCP servers typically need the service role key for full access. Using the anon key will result in permission errors.
+
+**Mistake 3: Not enabling the API in Google Cloud Console**
+For any Google MCP server (Calendar, Drive), you must first enable the relevant API in Google Cloud Console *and* set up OAuth 2.0 credentials. Skipping this step gives you a "403 Access Not Configured" error.
+
+**Mistake 4: Running npx without Node.js installed**
+`npx` comes with Node.js. If the command fails with "command not found," install Node.js from nodejs.org first.
+
+**Mistake 5: Giving MCP servers access to entire directories**
+For the Filesystem MCP, only allow access to the specific folder(s) Claude needs. Don't point it at your home directory or desktop — keep access scoped to a dedicated business-docs folder.
+
+---
+
+## FAQ
+
+### Are MCP servers free?
+
+The MCP servers themselves are free and open source. You don't pay for the software. What you do pay for is the underlying tool's API access. For example, Google Calendar API is free within generous usage limits (well above what most small businesses would need). Notion's API is free for personal/small team use. Supabase has a free tier. Slack's bot API is free. The main cost is Claude API usage — roughly $0.003–$0.015 per 1,000 tokens, depending on the model you use.
+
+### Do I need Claude Pro to use MCP?
+
+For Claude Desktop MCP (the desktop app), you need either a Claude Pro subscription or Claude Team plan. Claude.ai free tier does not support MCP. If you're using Claude via the API (building your own tools with Python or JavaScript), you just need an Anthropic API key — no Pro subscription required, you pay per token instead. For most small business owners starting out, Claude Pro ($20/month) is the easiest entry point for trying MCP.
+
+### Can MCP servers access my private data?
+
+Yes — that's the point, and it's why you should be careful about which MCP servers you install and how you configure them. Each MCP server only has access to what you explicitly grant it. Google Calendar MCP can only access calendars on the Google account you authenticate with. Filesystem MCP can only access directories you specify in the config. Never install MCP servers from untrusted sources, and review what permissions each server requests. Treat MCP server access like granting an employee access to a tool — give minimum necessary access.
+
+### How many MCP servers can I run at once?
+
+There's no hard technical limit. Claude Desktop can handle multiple MCP servers simultaneously — the config file supports any number of named servers. In practice, running 5–10 servers simultaneously is common and works smoothly. The main constraint is your computer's memory (each server is a small Node.js process) and the complexity of keeping many credentials current. For most small businesses, 3–5 servers cover everything needed.
+
+### What if an MCP server goes offline or crashes?
+
+If an MCP server fails, Claude will report that it can't access that tool — your other MCP servers and Claude itself continue working normally. MCP servers running via `npx` in Claude Desktop restart automatically with Claude. If you're running MCP servers as part of a standalone AI agent (outside Claude Desktop), you'll want process management (like `pm2` for Node.js) to auto-restart crashed processes. Always test your setup with a simple query before relying on it for business-critical automations.
+
+---
+
+## Related Articles
+
+- [What Is MCP (Model Context Protocol)? Plain-Language Guide for Business Owners](/blog/what-is-mcp-model-context-protocol-explained)
+- [Claude + MCP Google Calendar: Auto-Book Appointments with AI](/blog/claude-mcp-google-calendar-booking-automation)
+- [MCP Notion Connector: Build a Client CRM for Your Local Business](/blog/mcp-notion-connector-client-crm-local-business)
+- [MCP Slack Connector: Automate Business Alerts and Reports](/blog/mcp-slack-connector-business-alerts-automation)
+- [MCP Supabase Connector: Give Your AI Agent a Persistent Database](/blog/mcp-supabase-connector-ai-agent-database)
