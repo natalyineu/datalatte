@@ -1,0 +1,434 @@
+---
+title: "MCP + Supabase: Give Your AI Agent a Persistent Database"
+date: "2026-06-13"
+lastModified: "2026-06-13"
+description: "Connect your AI agent to Supabase via MCP for persistent memory — store client data, bookings, and marketing metrics that survive between sessions."
+author: "Nataliia"
+category: "AI Automation"
+tags: ["MCP", "Supabase", "AI agent", "database"]
+slug: "mcp-supabase-connector-ai-agent-database"
+image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=800&q=80&auto=format&fit=crop"
+readTime: "11 min read"
+---
+
+Every time you close a chat window with your AI assistant, it forgets everything. Every client name. Every appointment it helped you book. Every marketing insight it surfaced last Tuesday. You start fresh, re-explaining your business, re-uploading spreadsheets, re-entering context that you already gave it a hundred times before.
+
+This is the core limitation of stateless AI agents — and it is the single biggest reason small business owners stop using them after a week. The novelty fades fast when you realize you are doing more work re-briefing the AI than it is saving you.
+
+**MCP + Supabase solves this completely.**
+
+By connecting your AI agent to a Supabase database through the Model Context Protocol, you give it a persistent memory that survives every session, every browser refresh, every software update. Your clients are remembered. Your bookings are tracked. Your marketing metrics accumulate over time. The AI walks into every conversation already knowing your business — like a staff member who never forgets a face.
+
+This guide walks you through the complete setup, from creating your Supabase project to designing your database schema to running four real-world AI agent workflows that local businesses use every day.
+
+---
+
+## The Real Problem: AI Agents Have No Memory
+
+Here is what happens without persistent storage:
+
+- A client books an appointment through your AI agent on Monday. By Thursday, the agent has no record of it.
+- You train your AI on your service menu and pricing. Next session, you repeat the same setup from scratch.
+- Your agent analyzes your Google Ads performance and gives you recommendations. A week later, it cannot compare to the previous week because that data is gone.
+
+This is not a bug — it is how large language models work by design. Each API call is independent. Context windows are ephemeral. Nothing persists unless you explicitly store it somewhere external.
+
+The solution is to give your AI agent a proper database backend. And for small businesses, Supabase is the best choice available.
+
+---
+
+## Why Supabase for Local Business AI Agents
+
+Supabase is an open-source Firebase alternative built on top of PostgreSQL. It gives you a production-grade relational database with a clean API, a generous free tier, and zero infrastructure management. Here is why it fits perfectly:
+
+**Free tier is genuinely useful:**
+- 500 MB database storage
+- 2 active projects
+- 50,000 monthly active users (for auth)
+- Unlimited API requests
+- 7-day log retention
+
+**PostgreSQL under the hood.** Not a proprietary NoSQL format. Your data is stored in standard SQL tables you can query directly, export anytime, and migrate to any other system.
+
+**Row-Level Security (RLS).** Built-in access control that lets you restrict exactly which rows an AI agent can read or modify. Critical for preventing accidental data exposure.
+
+**Real-time subscriptions.** Your agent can subscribe to table changes and react instantly when a new booking comes in or a review is posted.
+
+**REST and GraphQL APIs auto-generated.** Every table you create is instantly available via a REST endpoint — no backend code required.
+
+---
+
+## Step 1: Create Your Supabase Project
+
+1. Go to [supabase.com](https://supabase.com) and create a free account
+2. Click **New Project**, name it something like `datalatte-agent`
+3. Choose a strong database password (store it in your password manager)
+4. Select your region — choose the one closest to your customers
+5. Wait ~2 minutes for provisioning
+
+Once created, navigate to **Project Settings → API** and note down:
+
+- **Project URL**: `YOUR_SUPABASE_URL` (looks like `https://abcdefghijklm.supabase.co`)
+- **Anon/Public Key**: `YOUR_SUPABASE_ANON_KEY` (safe to use in client-side code)
+- **Service Role Key**: `YOUR_SUPABASE_SERVICE_KEY` (keep this private — full database access)
+
+For AI agent server-side scripts, you will use the **service role key** so the agent can read and write all rows regardless of RLS policies. Never expose this key in front-end code or public repositories.
+
+---
+
+## Step 2: Install and Configure the Supabase MCP Server
+
+The Supabase MCP server lets Claude (or any MCP-compatible AI) interact with your database using natural language commands translated into SQL operations.
+
+Install the MCP server globally:
+
+```bash
+npm install -g @supabase/mcp-server-supabase
+```
+
+Then add it to your Claude Desktop configuration at `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) or `%APPDATA%\Claude\claude_desktop_config.json` (Windows):
+
+```json
+{
+  "mcpServers": {
+    "supabase": {
+      "command": "npx",
+      "args": ["-y", "@supabase/mcp-server-supabase"],
+      "env": {
+        "SUPABASE_URL": "YOUR_SUPABASE_URL",
+        "SUPABASE_SERVICE_ROLE_KEY": "YOUR_SUPABASE_SERVICE_KEY"
+      }
+    }
+  }
+}
+```
+
+Restart Claude Desktop. You should now see a Supabase icon in the toolbar, confirming the connection is live.
+
+---
+
+## Step 3: Design Your Database Schema
+
+Before writing any SQL, think about what data your AI agent needs to remember. For a local business, four tables cover 90% of use cases.
+
+### The Four Core Tables
+
+**clients** — who your customers are and their history  
+**appointments** — every booking, past and future  
+**reviews** — customer reviews from Google, Yelp, or direct feedback  
+**marketing_metrics** — ad spend, clicks, revenue by campaign and week
+
+Here is the complete SQL to create all four tables. Run this in the Supabase SQL Editor (**Project → SQL Editor → New Query**):
+
+```sql
+-- Clients table: persistent customer memory
+CREATE TABLE clients (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  phone TEXT UNIQUE,
+  email TEXT,
+  first_name TEXT NOT NULL,
+  last_name TEXT,
+  total_visits INTEGER DEFAULT 0,
+  lifetime_value DECIMAL(10,2) DEFAULT 0,
+  loyalty_points INTEGER DEFAULT 0,
+  preferred_service TEXT,
+  notes TEXT,
+  first_seen DATE DEFAULT CURRENT_DATE,
+  last_seen DATE,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Appointments table: bookings tracking
+CREATE TABLE appointments (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  client_id UUID REFERENCES clients(id) ON DELETE SET NULL,
+  service TEXT NOT NULL,
+  staff_member TEXT,
+  scheduled_at TIMESTAMPTZ NOT NULL,
+  duration_minutes INTEGER DEFAULT 60,
+  status TEXT DEFAULT 'confirmed' CHECK (status IN ('confirmed', 'completed', 'cancelled', 'no_show')),
+  price DECIMAL(8,2),
+  notes TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Reviews table: feedback and sentiment tracking
+CREATE TABLE reviews (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  client_id UUID REFERENCES clients(id) ON DELETE SET NULL,
+  platform TEXT DEFAULT 'google' CHECK (platform IN ('google', 'yelp', 'facebook', 'direct')),
+  rating INTEGER CHECK (rating BETWEEN 1 AND 5),
+  content TEXT,
+  sentiment_score DECIMAL(3,2), -- -1.0 to 1.0
+  responded_at TIMESTAMPTZ,
+  response_text TEXT,
+  review_date DATE DEFAULT CURRENT_DATE,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Marketing metrics table: campaign ROI tracking
+CREATE TABLE marketing_metrics (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  week_start DATE NOT NULL,
+  campaign_name TEXT NOT NULL,
+  platform TEXT CHECK (platform IN ('google_ads', 'meta_ads', 'email', 'sms', 'organic')),
+  spend DECIMAL(10,2) DEFAULT 0,
+  impressions INTEGER DEFAULT 0,
+  clicks INTEGER DEFAULT 0,
+  bookings_attributed INTEGER DEFAULT 0,
+  revenue_attributed DECIMAL(10,2) DEFAULT 0,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(week_start, campaign_name)
+);
+
+-- Indexes for common query patterns
+CREATE INDEX idx_appointments_scheduled ON appointments(scheduled_at);
+CREATE INDEX idx_appointments_status ON appointments(status);
+CREATE INDEX idx_reviews_rating ON reviews(rating);
+CREATE INDEX idx_marketing_metrics_week ON marketing_metrics(week_start);
+```
+
+This schema covers every major AI agent workflow a local business needs. The relationships between tables let you answer questions like "What is the lifetime value of clients who leave 5-star reviews?" without any extra configuration.
+
+---
+
+## Step 4: Four AI Agent Workflows Using Supabase MCP
+
+### Workflow 1: Client Memory — Greet Returning Customers by Name
+
+Before every client interaction, your AI agent queries Supabase to check if this person has visited before. If yes, it surfaces their history. If no, it creates a new record.
+
+**Agent prompt template:**
+> "Check if a client with phone [PHONE] exists in Supabase. If they do, tell me their name, total visits, preferred service, and any notes. If they are new, create a record for them."
+
+The agent translates this into SQL via MCP:
+```sql
+SELECT first_name, last_name, total_visits, preferred_service, loyalty_points, notes
+FROM clients
+WHERE phone = '+1-555-0123'
+LIMIT 1;
+```
+
+If the client exists, the agent greets them: *"Welcome back, Sarah! This is your 7th visit. Last time you had the highlights service — shall we book the same today?"*
+
+### Workflow 2: Appointment Tracking — Write Bookings, Read Today's Schedule
+
+When a client books through any channel (WhatsApp, phone, website chat), the agent writes the appointment directly to Supabase:
+
+```sql
+INSERT INTO appointments (client_id, service, staff_member, scheduled_at, duration_minutes, price)
+VALUES (
+  (SELECT id FROM clients WHERE phone = '+1-555-0123'),
+  'Balayage',
+  'Maria',
+  '2026-06-16 14:00:00+00',
+  120,
+  180.00
+)
+RETURNING id;
+```
+
+Every morning, the agent reads the day's schedule:
+```sql
+SELECT c.first_name, c.last_name, a.service, a.scheduled_at, a.staff_member, a.price
+FROM appointments a
+JOIN clients c ON a.client_id = c.id
+WHERE DATE(a.scheduled_at) = CURRENT_DATE
+AND a.status = 'confirmed'
+ORDER BY a.scheduled_at;
+```
+
+### Workflow 3: Review Analytics — Sentiment Trend Tracking
+
+Each time a new review comes in, the agent stores it with a sentiment score and checks for trends:
+
+```sql
+-- Store new review
+INSERT INTO reviews (client_id, platform, rating, content, sentiment_score, review_date)
+VALUES (
+  (SELECT id FROM clients WHERE email = 'sarah@example.com'),
+  'google',
+  5,
+  'Amazing service, Maria was incredible!',
+  0.92,
+  CURRENT_DATE
+);
+
+-- Weekly sentiment trend
+SELECT 
+  DATE_TRUNC('week', review_date) as week,
+  AVG(rating) as avg_rating,
+  AVG(sentiment_score) as avg_sentiment,
+  COUNT(*) as review_count
+FROM reviews
+WHERE review_date >= NOW() - INTERVAL '90 days'
+GROUP BY week
+ORDER BY week;
+```
+
+### Workflow 4: Campaign ROI Tracker — Weekly Ad Spend vs Revenue
+
+Every Monday, the agent calculates the previous week's marketing ROI:
+
+```sql
+SELECT 
+  campaign_name,
+  platform,
+  spend,
+  bookings_attributed,
+  revenue_attributed,
+  ROUND((revenue_attributed / NULLIF(spend, 0)), 2) as roas,
+  ROUND(((revenue_attributed - spend) / NULLIF(spend, 0)) * 100, 1) as roi_percent
+FROM marketing_metrics
+WHERE week_start = DATE_TRUNC('week', NOW() - INTERVAL '1 week')
+ORDER BY roi_percent DESC;
+```
+
+The agent surfaces this as: *"Your Google Ads campaign generated $2,340 revenue on $480 spend last week — a 4.9x ROAS. Your Meta Ads campaign had a 2.1x ROAS. Recommend shifting $100/week from Meta to Google."*
+
+---
+
+## Step 5: Python Agent With Supabase Client Lookup
+
+Here is a complete Python example of an AI agent that greets returning clients by name before responding to their query:
+
+```python
+import os
+from anthropic import Anthropic
+from supabase import create_client, Client
+
+# Initialize clients
+anthropic = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+supabase: Client = create_client(
+    os.environ["YOUR_SUPABASE_URL"],
+    os.environ["YOUR_SUPABASE_SERVICE_KEY"]
+)
+
+def get_client_context(phone: str) -> str:
+    """Look up client history in Supabase before responding."""
+    result = supabase.table("clients").select(
+        "first_name, total_visits, preferred_service, loyalty_points, notes"
+    ).eq("phone", phone).execute()
+    
+    if result.data:
+        client = result.data[0]
+        return (
+            f"Returning client: {client['first_name']}, "
+            f"{client['total_visits']} previous visits, "
+            f"preferred service: {client['preferred_service']}, "
+            f"loyalty points: {client['loyalty_points']}. "
+            f"Notes: {client.get('notes', 'none')}."
+        )
+    else:
+        return "New client — no history on file."
+
+def chat_with_context(phone: str, user_message: str) -> str:
+    """Send a message with client context injected into the system prompt."""
+    client_context = get_client_context(phone)
+    
+    system_prompt = f"""You are a helpful assistant for a local hair salon.
+    
+Current client context: {client_context}
+
+Use this context to personalize your response. Greet returning clients by first name.
+If they have many loyalty points, mention that they are close to a reward.
+Keep responses warm, professional, and under 100 words."""
+    
+    response = anthropic.messages.create(
+        model="claude-opus-4-5",
+        max_tokens=300,
+        system=system_prompt,
+        messages=[{"role": "user", "content": user_message}]
+    )
+    
+    return response.content[0].text
+
+# Example usage
+if __name__ == "__main__":
+    phone = "+1-555-0187"
+    message = "Hi, I'd like to book an appointment for next week"
+    reply = chat_with_context(phone, message)
+    print(reply)
+    # Output: "Welcome back, Emma! Great to hear from you — 
+    # your 12th visit is coming up. You've got 240 loyalty points, 
+    # just 60 away from a free treatment! When works best for you next week?"
+```
+
+---
+
+## Step 6: Row-Level Security — Limiting What the AI Can Access
+
+You do not want your AI agent to have unrestricted access to every row in your database. A client-facing chatbot should only see the current client's data, not every client in your system.
+
+Enable RLS on sensitive tables and create policies:
+
+```sql
+-- Enable RLS
+ALTER TABLE clients ENABLE ROW LEVEL SECURITY;
+ALTER TABLE appointments ENABLE ROW LEVEL SECURITY;
+
+-- Allow service role (your AI agent backend) full access
+CREATE POLICY "service_role_all" ON clients
+  FOR ALL TO service_role USING (true);
+
+-- Allow anon role (client-facing chatbot) to only see their own record
+CREATE POLICY "clients_own_record" ON clients
+  FOR SELECT TO anon
+  USING (phone = current_setting('request.jwt.claims', true)::json->>'phone');
+```
+
+For your internal AI agent (running server-side), use the service role key. For any client-facing AI chatbot embedded on your website, use the anon key with RLS policies that restrict access to each client's own data only.
+
+---
+
+## Comparison: Supabase Free vs Alternatives
+
+| Feature | Supabase Free | Firebase Spark | PlanetScale Free | Self-hosted Postgres |
+|---|---|---|---|---|
+| Storage | 500 MB | 1 GB Firestore | 5 GB | Unlimited |
+| Database type | PostgreSQL | NoSQL | MySQL | PostgreSQL |
+| Projects | 2 | Unlimited | 1 | Unlimited |
+| Real-time | Yes | Yes | No | Requires setup |
+| Row-level security | Built-in | Rules-based | No | Via pg_rls |
+| REST API auto-gen | Yes | Yes | No | Requires PostgREST |
+| SQL queries | Full SQL | No | Full SQL | Full SQL |
+| Free tier limits | Generous | Limited writes | 1B row reads/mo | Your server cost |
+| MCP server | Official | Community | None | None |
+| Setup complexity | Low | Low | Medium | High |
+| Best for | AI agents, prototypes | Mobile apps | High-traffic reads | Full control |
+
+Supabase wins for AI agent use cases specifically because of its official MCP server, real-time capabilities, and SQL support — which makes it far easier for AI models to query compared to NoSQL alternatives.
+
+---
+
+## FAQ
+
+**Is Supabase really free, or will I get surprise bills?**
+
+Supabase's free tier is genuinely free with hard limits — not a free trial that converts. You get 500 MB storage and 2 projects with no credit card required. If you exceed limits, your project pauses (you get a warning first) rather than charging you automatically. The Pro plan at $25/month unlocks 8 GB storage and removes the project limit. For most local businesses running 1-2 AI agent projects, the free tier is sufficient for 12–18 months of growth.
+
+**Do I need SQL knowledge to use Supabase with an AI agent?**
+
+Not much. The Supabase dashboard has a Table Editor (like a spreadsheet interface) where you can create tables without writing SQL. For the AI agent workflows above, you can paste the CREATE TABLE statements directly into the SQL Editor without understanding every line. The AI agent itself translates natural language into SQL automatically via MCP. That said, basic SQL knowledge (SELECT, INSERT, WHERE) helps you verify what the agent is doing and debug issues when they arise.
+
+**Can multiple AI agents share one Supabase project?**
+
+Yes, and this is actually a powerful pattern. You might have one AI agent handling client bookings, another managing your Google Ads reporting, and a third responding to customer reviews — all reading from and writing to the same Supabase database. Since they share the same data, the booking agent knows about the same clients as the review agent. Use separate service accounts or API keys for each agent if you want to track which agent made which changes (Supabase logs all operations with the key used).
+
+**How do I back up my data?**
+
+Supabase free tier includes 7-day point-in-time recovery. For additional peace of mind, schedule a weekly export: go to **Project → Database → Backups** and download a `.sql` dump file. You can also use the Supabase CLI to automate backups: `supabase db dump --project-ref YOUR_PROJECT_REF > backup.sql`. Store backups in Google Drive or Dropbox. On the Pro plan, daily automated backups are included.
+
+**What happens when I exceed the free tier storage limit?**
+
+Supabase sends you an email warning when you hit 80% of the 500 MB storage limit. If you reach 100%, new writes are blocked (reads still work). Your data is never deleted. To stay within limits: archive old appointment records after 2 years, store review text in an external file storage service rather than the database, and keep marketing_metrics aggregated weekly rather than daily. In practice, 500 MB holds roughly 1 million appointment records — more than enough for any local small business running for years.
+
+---
+
+## Related Articles
+
+- [What Is MCP? The Model Context Protocol Explained for Non-Developers](/blog/what-is-mcp-model-context-protocol-explained)
+- [The Best MCP Servers for Local Business AI Setup](/blog/best-mcp-servers-local-business-setup-guide)
+- [MCP + Notion: Build a Client CRM for Your Local Business](/blog/mcp-notion-connector-client-crm-local-business)
+- [Build Your Own MCP Server: Custom Data for Your Local Business AI Agent](/blog/build-mcp-server-custom-data-local-business)
+- [MCP + Google Sheets: AI That Reads and Writes Your Bookings Spreadsheet](/blog/mcp-google-sheets-ai-agent-bookings-local-business)
