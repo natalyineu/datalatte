@@ -1,0 +1,498 @@
+---
+title: "CrewAI for Local Business: Build a Team of AI Agents"
+date: "2026-06-13"
+lastModified: "2026-06-13"
+description: "Build a team of AI agents with CrewAI for your local business — automate marketing, reviews, social media, and reporting with coordinated AI agents."
+author: "Nataliia"
+category: "AI Automation"
+tags: ["CrewAI", "multi-agent", "AI automation", "local business"]
+slug: "crewai-local-business-multi-agent-automation"
+image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80&auto=format&fit=crop"
+readTime: "12 min read"
+---
+
+Running a local business in 2026 means wearing every hat at once — marketing manager, customer service rep, social media coordinator, and analyst all before lunchtime. AI tools help, but a single chatbot handling all of that is like hiring one overloaded employee and expecting miracles.
+
+That's the insight behind **CrewAI**: instead of one AI doing everything badly, you build a *team* of specialized AI agents, each with a defined role, that collaborate to get complex jobs done. Think of it as your first fully automated marketing department — minus the payroll.
+
+This guide walks you through exactly how to set up a Local Business Marketing Crew using CrewAI — covering review monitoring, response drafting, social content creation, and weekly digest reporting. All from a single Python script you can schedule to run every Monday morning.
+
+---
+
+## What Is CrewAI?
+
+**CrewAI** is an open-source Python framework for orchestrating multiple AI agents that work together as a team. It was built specifically to address a core limitation of single-agent systems: one agent trying to handle a complex, multi-step workflow ends up losing context, making errors, and producing generic output.
+
+With CrewAI, each agent has:
+- **A role**: "Senior Review Analyst" or "Instagram Content Creator"
+- **A goal**: what this agent is trying to achieve
+- **A backstory**: persona context that shapes tone and judgment
+- **Tools**: functions the agent can call (search the web, read files, call APIs)
+
+Agents are assigned **Tasks** — specific jobs with expected outputs. A **Crew** is the team that runs those tasks, either sequentially (one after another) or hierarchically (a manager agent delegates to others).
+
+The result: a coordinated workflow where specialized agents hand off context to each other, producing higher-quality output than any single agent could achieve alone.
+
+---
+
+## Why Multi-Agent Beats Single-Agent for Local Business
+
+Before diving into code, it's worth understanding *why* this architecture matters.
+
+**Specialization**: A Review Monitor agent trained to detect negative sentiment will outperform a generic assistant asked to "also handle reviews." Focused role = focused output.
+
+**Parallelism**: In a hierarchical crew, tasks that don't depend on each other can run simultaneously. Your social media agent writes captions while the review agent flags problems — cutting total runtime.
+
+**Checks and balances**: You can configure one agent to critique another's output. A "QA Agent" that reviews the response writer's drafts before they go into the digest catches errors a solo agent would miss.
+
+**Clear accountability**: When output is wrong, you know which agent produced it. Debugging a single monolithic prompt is much harder.
+
+For a local business owner, this translates to: better reviews handled professionally, more consistent social content, and a weekly digest that actually saves you time instead of adding to it.
+
+---
+
+## CrewAI Core Concepts
+
+| Concept | What It Is | Local Business Example |
+|---|---|---|
+| **Agent** | An AI worker with a role, goal, backstory, and tools | "Marketing Copywriter" |
+| **Task** | A specific job assigned to an agent, with expected output | "Write 5 Instagram captions for this week" |
+| **Crew** | The team of agents + tasks + execution process | Your Monday morning marketing crew |
+| **Tool** | A function an agent can call during its task | `search_reviews()`, `read_bookings_csv()` |
+| **Process** | How tasks execute: `sequential` or `hierarchical` | Sequential for our example |
+
+**Sequential process**: Tasks run one after another, each output feeding the next. Perfect for workflows where order matters (you need the review list before you can write responses).
+
+**Hierarchical process**: A manager agent reads all tasks and delegates them to workers, potentially in parallel. Better for large crews where independence is possible.
+
+---
+
+## Installation and Setup
+
+```bash
+pip install crewai crewai-tools langchain-anthropic python-dotenv
+```
+
+Create a `.env` file in your project root:
+
+```bash
+# .env — never commit this file to Git
+ANTHROPIC_API_KEY=YOUR_API_KEY
+# Or if using OpenAI:
+# OPENAI_API_KEY=sk-YOUR-KEY
+```
+
+Verify installation:
+
+```python
+import crewai
+print(crewai.__version__)  # Should print 0.80.0 or later
+```
+
+---
+
+## The Local Business Marketing Crew: Full Example
+
+Here's the complete crew we're building:
+
+1. **Review Monitor Agent** — reads new Google reviews, flags any with 3 stars or below
+2. **Response Writer Agent** — drafts professional, empathetic replies to flagged reviews
+3. **Social Media Agent** — writes 5 Instagram captions based on the week's top services
+4. **Weekly Report Agent** — compiles all outputs into a Monday morning email digest
+
+### Step 1: Define Your Tools
+
+Tools are Python functions wrapped with CrewAI's `@tool` decorator. For this example we use mock data — in production you'd connect to the Google My Business API and your booking system.
+
+```python
+# tools.py
+from crewai.tools import tool
+import json
+from datetime import datetime, timedelta
+
+@tool("Read Recent Google Reviews")
+def read_recent_reviews() -> str:
+    """Reads Google reviews from the past 7 days and returns them as JSON."""
+    # In production: call Google My Business API
+    # For demo: return mock reviews
+    reviews = [
+        {
+            "id": "rev_001",
+            "author": "Sarah M.",
+            "rating": 5,
+            "text": "Amazing blowout! My hair has never looked better. Booked again already.",
+            "date": "2026-06-12"
+        },
+        {
+            "id": "rev_002",
+            "author": "James T.",
+            "rating": 2,
+            "text": "Waited 25 minutes past my appointment time with no apology. The cut was fine but the wait ruined my morning.",
+            "date": "2026-06-11"
+        },
+        {
+            "id": "rev_003",
+            "author": "Priya K.",
+            "rating": 4,
+            "text": "Great colour work, really happy with the result. Parking can be tricky though.",
+            "date": "2026-06-10"
+        },
+        {
+            "id": "rev_004",
+            "author": "Mike D.",
+            "rating": 1,
+            "text": "Terrible experience. Wrong colour applied, had to come back next day. Still not fully fixed.",
+            "date": "2026-06-09"
+        }
+    ]
+    return json.dumps(reviews, indent=2)
+
+@tool("Read Weekly Bookings")
+def read_weekly_bookings() -> str:
+    """Returns this week's most popular services from the booking system."""
+    # In production: query your booking software's API (Acuity, Fresha, etc.)
+    bookings = {
+        "week": "June 9–13, 2026",
+        "top_services": [
+            {"service": "Full Balayage", "count": 14},
+            {"service": "Keratin Treatment", "count": 9},
+            {"service": "Precision Cut & Blow-dry", "count": 22},
+            {"service": "Brow Tint + Shape", "count": 11},
+            {"service": "Wedding Trial Hair", "count": 3}
+        ],
+        "total_appointments": 59,
+        "new_clients": 8
+    }
+    return json.dumps(bookings, indent=2)
+
+@tool("Save Report to File")
+def save_report(content: str) -> str:
+    """Saves the weekly digest to a markdown file."""
+    filename = f"weekly_digest_{datetime.now().strftime('%Y_%m_%d')}.md"
+    with open(filename, "w") as f:
+        f.write(content)
+    return f"Report saved to {filename}"
+```
+
+### Step 2: Define the Agents
+
+```python
+# agents.py
+from crewai import Agent
+from langchain_anthropic import ChatAnthropic
+from tools import read_recent_reviews, read_weekly_bookings, save_report
+
+# LLM — using Claude Sonnet for cost/quality balance
+llm = ChatAnthropic(
+    model="claude-sonnet-4-5",
+    api_key="YOUR_API_KEY",  # Load from env in production
+    temperature=0.7
+)
+
+review_monitor = Agent(
+    role="Google Reviews Monitor",
+    goal="Identify all reviews with a rating of 3 stars or below and summarise the key complaints.",
+    backstory=(
+        "You are a reputation management specialist for local service businesses. "
+        "You have 10 years of experience identifying patterns in negative customer feedback "
+        "and distilling them into actionable insights for business owners."
+    ),
+    tools=[read_recent_reviews],
+    llm=llm,
+    verbose=True
+)
+
+response_writer = Agent(
+    role="Customer Response Specialist",
+    goal=(
+        "Write professional, warm, and empathetic replies to negative Google reviews. "
+        "Each reply should acknowledge the issue, apologise sincerely, and invite the customer back."
+    ),
+    backstory=(
+        "You are a customer service expert who has helped hundreds of salons, cafés, and small businesses "
+        "recover from negative reviews. Your replies are always specific, never generic, "
+        "and consistently increase the chance of the reviewer returning."
+    ),
+    tools=[],
+    llm=llm,
+    verbose=True
+)
+
+social_media_agent = Agent(
+    role="Instagram Content Creator",
+    goal=(
+        "Write 5 Instagram captions for this week's most popular services. "
+        "Each caption must be engaging, include a call to action, and be under 150 words."
+    ),
+    backstory=(
+        "You are a social media strategist specialising in local beauty and wellness businesses. "
+        "You know how to write captions that drive bookings — not just likes. "
+        "Your tone is warm, aspirational, and always authentic."
+    ),
+    tools=[read_weekly_bookings],
+    llm=llm,
+    verbose=True
+)
+
+report_agent = Agent(
+    role="Weekly Marketing Digest Compiler",
+    goal=(
+        "Compile all outputs — flagged reviews, draft responses, and social media captions — "
+        "into a clean Monday morning email digest the business owner can act on immediately."
+    ),
+    backstory=(
+        "You are a marketing operations specialist. You turn raw AI outputs into polished, "
+        "structured reports that busy business owners can read in under 5 minutes and act on immediately. "
+        "You prioritise clarity, action items, and brevity."
+    ),
+    tools=[save_report],
+    llm=llm,
+    verbose=True
+)
+```
+
+### Step 3: Define the Tasks
+
+```python
+# tasks.py
+from crewai import Task
+from agents import review_monitor, response_writer, social_media_agent, report_agent
+
+task_monitor_reviews = Task(
+    description=(
+        "Use the Read Recent Google Reviews tool to fetch this week's reviews. "
+        "Identify every review with a rating of 3 stars or below. "
+        "For each flagged review, extract: the author name, rating, date, and a one-sentence summary of the core complaint."
+    ),
+    expected_output=(
+        "A structured list of flagged reviews with author, rating, date, and complaint summary. "
+        "Example format: '⚠️ James T. (2★, June 11) — Complaint: waited 25 min past appointment, no acknowledgment.'"
+    ),
+    agent=review_monitor
+)
+
+task_write_responses = Task(
+    description=(
+        "Using the list of flagged reviews from the previous task, write a professional Google review reply for each one. "
+        "Each reply must: (1) address the reviewer by first name, (2) specifically acknowledge their complaint, "
+        "(3) apologise sincerely without being defensive, (4) offer a resolution or invitation back, "
+        "(5) be signed 'Warm regards, [Your Name] and the Team'. Keep each reply under 120 words."
+    ),
+    expected_output=(
+        "One polished reply per flagged review, clearly labelled by reviewer name. "
+        "Ready to copy-paste directly into Google Business Profile."
+    ),
+    agent=response_writer,
+    context=[task_monitor_reviews]
+)
+
+task_social_captions = Task(
+    description=(
+        "Use the Read Weekly Bookings tool to see this week's most popular services. "
+        "Write 5 Instagram captions — one per top service. Each caption must: "
+        "(1) highlight the benefit to the customer (not just the feature), "
+        "(2) include a relevant emoji or two, "
+        "(3) end with a call to action (e.g. 'Book your slot — link in bio'), "
+        "(4) include 5–8 relevant hashtags. Max 150 words per caption."
+    ),
+    expected_output=(
+        "5 complete Instagram captions, numbered 1–5, each ready to post. "
+        "Include hashtags at the end of each caption."
+    ),
+    agent=social_media_agent
+)
+
+task_compile_digest = Task(
+    description=(
+        "Compile the outputs from all previous tasks into a clean Monday morning email digest. "
+        "Structure it as follows:\n"
+        "## 📊 Monday Marketing Digest — [Date]\n"
+        "### 🔴 Reviews Requiring Attention ([count] reviews)\n"
+        "[Flagged reviews list]\n"
+        "### ✉️ Draft Responses (ready to post)\n"
+        "[Review responses]\n"
+        "### 📸 This Week's Instagram Captions\n"
+        "[5 captions]\n"
+        "### ✅ This Week's Action Checklist\n"
+        "[3–5 bullet points the owner should do today]\n"
+        "Save this digest to a file using the Save Report to File tool."
+    ),
+    expected_output=(
+        "A complete, formatted markdown digest saved to file and also returned as output. "
+        "The action checklist must be specific and prioritised."
+    ),
+    agent=report_agent,
+    context=[task_monitor_reviews, task_write_responses, task_social_captions]
+)
+```
+
+### Step 4: Assemble and Run the Crew
+
+```python
+# main.py
+from crewai import Crew, Process
+from agents import review_monitor, response_writer, social_media_agent, report_agent
+from tasks import (
+    task_monitor_reviews,
+    task_write_responses,
+    task_social_captions,
+    task_compile_digest
+)
+from dotenv import load_dotenv
+
+load_dotenv()
+
+marketing_crew = Crew(
+    agents=[review_monitor, response_writer, social_media_agent, report_agent],
+    tasks=[task_monitor_reviews, task_write_responses, task_social_captions, task_compile_digest],
+    process=Process.sequential,
+    verbose=True
+)
+
+if __name__ == "__main__":
+    print("🚀 Starting Monday Marketing Crew...")
+    result = marketing_crew.kickoff()
+    print("\n✅ Crew complete. Digest saved.")
+    print(result)
+```
+
+---
+
+## What the Monday Digest Looks Like
+
+Here's an example of the output you'd get:
+
+```
+## 📊 Monday Marketing Digest — June 13, 2026
+
+### 🔴 Reviews Requiring Attention (2 reviews)
+⚠️ James T. (2★, June 11) — Complaint: waited 25 min past appointment time with no acknowledgment
+⚠️ Mike D. (1★, June 9) — Complaint: wrong colour applied, return visit required, still not resolved
+
+### ✉️ Draft Responses (ready to post)
+
+**Reply to James T.:**
+Hi James, thank you for taking the time to share your experience. We're truly sorry you waited 25 minutes — that's not the standard we hold ourselves to, and we completely understand your frustration. We'd love the opportunity to make it right. Please DM us and we'll arrange a complimentary styling service at your next visit. Warm regards, Nataliia and the Team
+
+**Reply to Mike D.:**
+Hi Mike, we're so sorry about your colour experience — this should never have happened and we take full responsibility. We'd like to correct this completely at no charge. Please call us directly at [PHONE] so we can arrange this as a priority. We genuinely value your trust and want to earn it back. Warm regards, Nataliia and the Team
+
+### 📸 This Week's Instagram Captions
+[5 ready-to-post captions with hashtags]
+
+### ✅ This Week's Action Checklist
+1. Post both review responses on Google Business Profile today (before 12pm)
+2. Schedule 3 of the 5 Instagram captions for Tue/Thu/Sat
+3. Follow up with Mike D. directly by phone — priority
+4. Check wait time procedures with front desk team
+5. Send thank-you DM to Sarah M. (5-star review)
+```
+
+---
+
+## Running the Crew on a Schedule
+
+### Option A: Cron Job (Linux/Mac)
+
+```bash
+# Run every Monday at 7:00 AM
+crontab -e
+
+# Add this line:
+0 7 * * 1 cd /path/to/your/project && /usr/bin/python3 main.py >> /var/log/marketing_crew.log 2>&1
+```
+
+### Option B: GitHub Actions (cloud, free tier)
+
+```yaml
+# .github/workflows/weekly_digest.yml
+name: Weekly Marketing Crew
+
+on:
+  schedule:
+    - cron: '0 7 * * 1'  # Every Monday at 7:00 AM UTC
+  workflow_dispatch:       # Also allow manual trigger
+
+jobs:
+  run-crew:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install crewai crewai-tools langchain-anthropic python-dotenv
+      - name: Run Marketing Crew
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python main.py
+      - name: Upload digest
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-digest
+          path: weekly_digest_*.md
+```
+
+Add your `ANTHROPIC_API_KEY` (or `OPENAI_API_KEY`) as a repository secret in GitHub → Settings → Secrets → Actions.
+
+---
+
+## Comparison: CrewAI vs LangGraph vs AutoGen vs n8n
+
+| Feature | CrewAI | LangGraph | AutoGen | n8n |
+|---|---|---|---|---|
+| **Python required** | Yes | Yes | Yes | No (visual UI) |
+| **Learning curve** | Low–Medium | Medium–High | Medium | Low |
+| **Multi-agent support** | Native (core feature) | Yes (manual wiring) | Yes | Limited |
+| **State/memory** | Basic | Excellent | Good | Via integrations |
+| **LLM flexibility** | Any (OpenAI, Anthropic, local) | Any | Any | GPT-focused |
+| **Scheduling** | Via cron/GitHub Actions | Via cron/GitHub Actions | Via cron | Built-in |
+| **Cost to run (4-agent crew, weekly)** | ~$0.15–0.40 | ~$0.10–0.30 | ~$0.20–0.50 | Free (self-hosted) |
+| **Best use case** | Structured team workflows | Complex stateful agents | Research/debate agents | Non-coders, integrations |
+| **Ideal for local business** | ✅ Great fit | Good for booking agents | Overkill for most | Best for no-code owners |
+
+**Bottom line**: CrewAI wins for local business owners who have basic Python skills and want structured, repeatable workflows. n8n wins if you want zero coding. LangGraph wins if you need persistent conversation state (like a booking agent).
+
+---
+
+## Common Mistakes to Avoid
+
+**1. Agents going off-task.** If your backstory is too vague, agents drift. Be specific: instead of "You are a marketing expert," write "You are a reputation management specialist for hair salons with 10 years experience in service recovery."
+
+**2. Token costs exploding.** Every agent reads the full context from previous tasks. With 4 agents and verbose=True in production, costs climb fast. Disable verbose in production and keep task `expected_output` concise — it limits how much context is passed forward.
+
+**3. Poor task dependencies.** If `task_compile_digest` doesn't list the other three tasks in its `context` parameter, the report agent won't see their outputs. Always explicitly wire context.
+
+**4. Running too many agents.** Start with 2–3 agents. Add more only when you have a clear reason. A 10-agent crew sounds impressive but produces diminishing returns and costs 5× more.
+
+**5. No error handling.** API calls fail. Wrap your `crew.kickoff()` in try/except and add alerting (even just an email to yourself) so you know when Monday's digest didn't run.
+
+---
+
+## FAQ
+
+**Is CrewAI free to use?**
+Yes — CrewAI itself is open-source and free. You pay only for the LLM API calls (Anthropic, OpenAI, etc.). For a 4-agent weekly crew like this example, expect costs of $0.15–0.40 per run using Claude Sonnet or GPT-4o. That's under $2/month — less than one cup of coffee.
+
+**How much does running a crew cost per month?**
+For a local business running this exact crew once per week: roughly $0.60–$1.60/month at current API pricing. If you add daily review checks (using a smaller, cheaper 2-agent crew), add another $2–4/month. Still far cheaper than a social media manager's hourly rate.
+
+**Can I use CrewAI without coding?**
+Not meaningfully. CrewAI is a Python framework — you need to write Python to use it. If coding isn't your thing, consider n8n (visual workflow builder) or a CrewAI-powered SaaS tool built on top of the framework. That said, the code in this article is largely copy-paste ready.
+
+**How many agents should I use?**
+Start with 2–3 for your first crew. The sweet spot for most local business workflows is 3–5 agents. Beyond 6, you'll find debugging becomes painful and costs rise without proportional quality gains. Quality of task definitions matters far more than quantity of agents.
+
+**Does CrewAI work with Claude (Anthropic)?**
+Yes — CrewAI is LLM-agnostic. Use `langchain-anthropic` as shown in the code above and pass your Anthropic API key. Claude models work exceptionally well for local business copywriting tasks because of their nuanced tone and instruction-following quality. Claude Sonnet is the recommended balance of cost and capability for this use case.
+
+---
+
+## Related Articles
+
+- [LangGraph: Build an AI Booking Agent with Memory and State](/blog/langgraph-ai-booking-agent-memory-local-business)
+- [LangChain RAG: Answer Customer FAQs Automatically](/blog/langchain-rag-customer-faq-local-business)
+- [AutoGen Multi-Agent Marketing Automation for Local Business](/blog/autogen-multi-agent-marketing-automation-local-business)
+- [AgentOps: Monitor and Debug Your AI Agents](/blog/agentops-monitor-debug-ai-agents-local-business)
+- [OpenRouter Guide for Local Business Automation 2026](/blog/openrouter-guide-local-business-automation-2026)
