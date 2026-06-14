@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Zap, MessageSquare, Star, Phone, Calendar, Bot, RotateCcw, Bell, Code2, Cpu, GitBranch, Webhook } from "lucide-react";
+import { ArrowRight, CheckCircle2, Zap, MessageSquare, Star, Phone, Calendar, Bot, RotateCcw, Bell, Code2, Cpu, GitBranch, Webhook, Share2 } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
 import { faqSchema, breadcrumbSchema, serviceSchema } from "@/lib/schema";
@@ -214,6 +214,30 @@ const AGENTS = [
     "send_delay_mins": "integer"
   }
 }`,
+  },
+  {
+    id: "social-media-poster",
+    icon: Share2,
+    name: "Social Media Poster",
+    tagline: "Posts daily — zero manual effort",
+    color: "text-pink-600",
+    bg: "bg-pink-50 border-pink-100",
+    trigger: "Cron (9am daily) · Booking webhook · Review event",
+    model: "Claude 3.5 Sonnet + GPT-4o Vision",
+    actions: ["Generate platform-native caption", "Select & resize image", "Publish via Meta Graph API + GBP API"],
+    desc: "Monitors your booking system, new reviews, and seasonal events — then writes and publishes on-brand content to Instagram, Facebook, and Google Business Profile. Before/afters for salons, daily specials for cafés, class schedules for gyms. Each platform gets native content, not copy-paste.",
+    schema: `{
+  "name": "generate_social_post",
+  "parameters": {
+    "business_type": "enum[salon,cafe,gym,pet_groomer]",
+    "post_type": "enum[promotion,before_after,review_highlight,seasonal,class_schedule]",
+    "platform": "enum[instagram,facebook,gbp]",
+    "tone": "enum[warm,professional,playful,urgent]",
+    "include_cta": "boolean",
+    "cta_type": "enum[book_now,call_us,visit_link,dm_us]"
+  }
+}`,
+    href: "/services/ai-agents/social-media",
   },
 ];
 
