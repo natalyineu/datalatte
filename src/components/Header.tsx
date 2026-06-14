@@ -42,8 +42,9 @@ const services = [
 ];
 
 const learn = [
-  { label: "Blog",           href: "/blog" },
-  { label: "Resources",      href: "/resources" },
+  { label: "Blog",                  href: "/blog" },
+  { label: "Country Guides 🌍",     href: "/blog/local-marketing-guides" },
+  { label: "Resources",             href: "/resources" },
   { label: "Client Results", href: "/results" },
   { label: "Case Studies",   href: "/case-studies" },
   { label: "Reporting",      href: "/reporting" },

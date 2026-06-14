@@ -96,6 +96,7 @@ export default function GoogleAdsPage() {
         "SaaS and B2B companies running lead generation campaigns",
         "Enterprise brands requiring structured campaign hierarchies",
         "Any business where customers actively search before buying",
+        "Local businesses in any country — we cover 130+ markets in our worldwide marketing guides",
       ]}
       faqs={[
         {
@@ -142,6 +143,7 @@ export default function GoogleAdsPage() {
         { label: "Local SEO", href: "/services/local-seo" },
         { label: "Google Business Profile", href: "/services/google-business-profile" },
         { label: "Analytics & Reporting", href: "/services/analytics" },
+        { label: "130+ Country Marketing Guides", href: "/blog/local-marketing-guides" },
       ]}
     />
   );

@@ -526,12 +526,21 @@ export default function HomePage() {
               <span className="gradient-text">explained plainly</span>
             </h2>
           </div>
-          <Link
-            href="/blog"
-            className="hidden md:flex items-center gap-1.5 text-coffee-700 font-semibold hover:gap-3 transition-all text-sm"
-          >
-            All posts <ArrowRight size={15} />
-          </Link>
+          <div className="hidden md:flex items-center gap-4">
+            <Link
+              href="/blog/local-marketing-guides"
+              className="flex items-center gap-1.5 text-xs font-semibold text-coffee-700 bg-coffee-50 border border-coffee-200 px-3 py-1.5 rounded-full hover:bg-coffee-100 transition-colors"
+            >
+              <Globe size={13} />
+              Browse 130+ country guides
+            </Link>
+            <Link
+              href="/blog"
+              className="flex items-center gap-1.5 text-coffee-700 font-semibold hover:gap-3 transition-all text-sm"
+            >
+              All posts <ArrowRight size={15} />
+            </Link>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
