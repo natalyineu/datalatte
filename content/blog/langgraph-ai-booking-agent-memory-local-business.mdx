@@ -373,6 +373,10 @@ Yes, and it's used in production by companies at scale. The key production consi
 **How do I add human escalation to LangGraph?**
 LangGraph has native "interrupt" support for human-in-the-loop. Add `interrupt_before=["create_booking"]` to your graph compile call, and the graph will pause before the final booking step, waiting for a human to review and approve. This is ideal for high-value services where you want a staff member to confirm before the AI commits. Alternatively, route to a `transfer_to_human` node that sends an SMS to the owner: "Customer wants to book [service] for [datetime]. Reply YES to confirm or call them at [phone]."
 
+## Ready to Automate Your Bookings?
+
+[DataLatte's AI Booking Agent](/services/ai-agents/booking) handles appointment scheduling, reminder sequences, and no-show follow-ups automatically — built specifically for local businesses like yours.
+
 ## Related Articles
 
 - [CrewAI for Local Business: Build a Team of AI Agents](/blog/crewai-local-business-multi-agent-automation)
@@ -380,3 +384,4 @@ LangGraph has native "interrupt" support for human-in-the-loop. Add `interrupt_b
 - [Claude + MCP Google Calendar: Auto-Book Appointments with AI](/blog/claude-mcp-google-calendar-booking-automation)
 - [Vapi AI Phone Agent: Never Miss a Call at Your Salon or Coffee Shop](/blog/vapi-ai-phone-agent-local-business-setup)
 - [WhatsApp Business API: Automated Messages for Local Business 2026](/blog/whatsapp-business-api-local-marketing-automation)
+- [AI Booking Agent for Local Business](/services/ai-agents/booking)
