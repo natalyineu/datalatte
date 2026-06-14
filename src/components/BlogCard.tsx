@@ -1,6 +1,8 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { useState } from "react";
 import { getGroup, GROUP_CONFIG } from "./blogCategories";
 
 interface BlogCardProps {
@@ -16,16 +18,18 @@ interface BlogCardProps {
 }
 
 export default function BlogCard({ title, excerpt, slug, category, date, rawDate, image, readTime, featured }: BlogCardProps) {
+  const [imgError, setImgError] = useState(false);
   const group = getGroup(category);
   const { Icon, gradient } = GROUP_CONFIG[group];
   const unoptimized = image?.startsWith("http");
+  const showImage = image && !imgError;
 
   if (featured) {
     return (
       <Link href={`/blog/${slug}`} className="col-span-full card overflow-hidden group flex flex-col sm:flex-row">
         {/* Image panel */}
         <div className="relative sm:w-72 shrink-0 h-52 sm:h-auto overflow-hidden">
-          {image ? (
+          {showImage ? (
             <Image
               src={image}
               alt={title}
@@ -33,6 +37,7 @@ export default function BlogCard({ title, excerpt, slug, category, date, rawDate
               unoptimized={unoptimized}
               className="object-cover group-hover:scale-105 transition-transform duration-500"
               sizes="(max-width: 640px) 100vw, 288px"
+              onError={() => setImgError(true)}
             />
           ) : (
             <div className={`bg-gradient-to-br ${gradient} w-full h-full`} />
@@ -67,7 +72,7 @@ export default function BlogCard({ title, excerpt, slug, category, date, rawDate
     <Link href={`/blog/${slug}`} className="card overflow-hidden group flex flex-col">
       {/* Image */}
       <div className="relative h-44 overflow-hidden">
-        {image ? (
+        {showImage ? (
           <Image
             src={image}
             alt={title}
@@ -75,6 +80,7 @@ export default function BlogCard({ title, excerpt, slug, category, date, rawDate
             unoptimized={unoptimized}
             className="object-cover group-hover:scale-105 transition-transform duration-500"
             sizes="(max-width: 768px) 100vw, 33vw"
+            onError={() => setImgError(true)}
           />
         ) : (
           <div className={`bg-gradient-to-br ${gradient} w-full h-full`} />
