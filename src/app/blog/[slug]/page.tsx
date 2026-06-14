@@ -91,6 +91,8 @@ const CLUSTER_TO_SERVICE: Record<string, { label: string; href: string }> = {
   "Influencer & Creator Marketing":       { label: "Social Media Management", href: "/services/social-media" },
   // Website & CRO
   "Website & CRO":                        { label: "Website & Landing Pages", href: "/services/website" },
+  // Local Marketing country guides
+  "Local Marketing":                      { label: "Google Ads Management", href: "/services/google-ads" },
   // Strategy — default to analytics
   "Marketing Strategy":                   { label: "Analytics & Reporting", href: "/services/analytics" },
   "Local Business Strategy":              { label: "Analytics & Reporting", href: "/services/analytics" },
@@ -677,6 +679,19 @@ export default async function BlogPostPage({
             </div>
           ) : null;
         })()}
+
+        {/* Secondary service link for Local Marketing posts */}
+        {frontmatter.category === "Local Marketing" && (
+          <div className="mt-4 p-5 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-between gap-4">
+            <div>
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">📱 Social Media Ads</p>
+              <p className="text-sm text-gray-700">Facebook & Instagram ad campaigns managed for local businesses worldwide.</p>
+            </div>
+            <Link href="/services/meta-ads" className="flex-shrink-0 inline-flex items-center gap-1.5 text-sm font-bold text-coffee-800 hover:text-coffee-950 hover:underline">
+              Meta Ads <ArrowRight size={14} />
+            </Link>
+          </div>
+        )}
 
         {/* Niche page link */}
         {(() => {

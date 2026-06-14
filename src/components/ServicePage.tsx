@@ -353,6 +353,21 @@ export default function ServicePage({
         </div>
       </SectionWrapper>
 
+      {/* ── From the Blog ── */}
+      <SectionWrapper>
+        <div className="max-w-4xl mx-auto text-center">
+          <span className="section-label">Free Guides</span>
+          <h2 className="section-title mb-2">Learn from our <span className="gradient-text">blog</span></h2>
+          <p className="text-gray-500 text-sm mb-8 max-w-xl mx-auto">Practical digital marketing guides for local businesses — country-by-country strategies, budgets, and platform breakdowns.</p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link href="/blog" className="btn-outline text-sm py-2 px-5">All articles <ArrowRight size={13} /></Link>
+            <Link href="/blog/local-marketing-guides" className="btn-outline text-sm py-2 px-5">Country guides <ArrowRight size={13} /></Link>
+            <Link href="/blog/local-marketing-budget-guide" className="btn-outline text-sm py-2 px-5">Budget guide <ArrowRight size={13} /></Link>
+            <Link href="/blog/google-business-profile-optimization-checklist" className="btn-outline text-sm py-2 px-5">GBP checklist <ArrowRight size={13} /></Link>
+          </div>
+        </div>
+      </SectionWrapper>
+
       <CTABanner />
     </>
   );

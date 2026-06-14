@@ -290,6 +290,21 @@ export default function NichePage({
         </div>
       </SectionWrapper>
 
+      {/* ── Blog resources ── */}
+      <SectionWrapper className="bg-gray-50">
+        <div className="max-w-4xl mx-auto text-center">
+          <span className="section-label">Free Reading</span>
+          <h2 className="section-title mb-2">Guides & <span className="gradient-text">strategies</span></h2>
+          <p className="text-gray-500 text-sm mb-8 max-w-xl mx-auto">Deep-dive marketing guides to help your {niche.toLowerCase()} business grow — from Google Ads budgets to local SEO tactics.</p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link href="/blog" className="btn-outline text-sm py-2 px-5">All articles <ArrowRight size={13} /></Link>
+            <Link href="/blog/local-marketing-budget-guide" className="btn-outline text-sm py-2 px-5">Marketing budget guide <ArrowRight size={13} /></Link>
+            <Link href="/blog/google-business-profile-optimization-checklist" className="btn-outline text-sm py-2 px-5">Google Business checklist <ArrowRight size={13} /></Link>
+            <Link href="/blog/local-marketing-guides" className="btn-outline text-sm py-2 px-5">Country guides <ArrowRight size={13} /></Link>
+          </div>
+        </div>
+      </SectionWrapper>
+
       <CTABanner headline={ctaHeadline} />
     </>
   );
