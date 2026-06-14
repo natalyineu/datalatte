@@ -43,11 +43,12 @@ function getBlogRoutes(): MetadataRoute.Sitemap {
       const { data } = matter(raw);
       const parsed = new Date(data.date as string);
       const impressions = popularity[slug] ?? 0;
+      const isCountryGuide = /^local-marketing-.+-small-business-2026$/.test(slug);
       return {
         url: `${baseUrl}/blog/${slug}`,
         lastModified: !isNaN(parsed.getTime()) ? parsed : new Date(),
         changeFrequency: "monthly" as const,
-        priority: impressions > 100 ? 0.9 : impressions >= 10 ? 0.8 : 0.7,
+        priority: isCountryGuide ? 0.8 : (impressions > 100 ? 0.9 : impressions >= 10 ? 0.8 : 0.7),
       };
     })
     .sort((a, b) => b.lastModified.getTime() - a.lastModified.getTime());
@@ -75,6 +76,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: baseUrl,                                        lastModified: today,      changeFrequency: "weekly",  priority: 1.0 },
     { url: `${baseUrl}/blog`,                              lastModified: latestPost, changeFrequency: "daily",   priority: 0.9 },
+    { url: `${baseUrl}/blog/local-marketing-guides`,      lastModified: today,      changeFrequency: "monthly", priority: 0.9 },
     { url: `${baseUrl}/contact`,                           lastModified: today,      changeFrequency: "monthly", priority: 0.9 },
     { url: `${baseUrl}/about`,                             lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/radar`,                             lastModified: today,      changeFrequency: "daily",   priority: 0.8 },
