@@ -50,6 +50,13 @@ const contactSchema = {
     url: "https://datalatte.pro",
     email: "hi@datalatte.pro",
     telephone: "+48503589781",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Franklina Roosevelta 22",
+      postalCode: "61-700",
+      addressLocality: "Poznań",
+      addressCountry: "PL",
+    },
     contactPoint: {
       "@type": "ContactPoint",
       telephone: "+48503589781",
@@ -135,15 +142,21 @@ export default function ContactPage() {
                   <ArrowRight size={16} className="text-gray-400 group-hover:text-coffee-700 ml-auto transition-colors" />
                 </a>
 
-                <div className="flex items-center gap-4 p-5 rounded-xl border border-gray-200 bg-gray-50">
+                <a
+                  href="https://maps.app.goo.gl/oexZRcsD7fFEAS2u8"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 p-5 rounded-xl border border-gray-200 hover:border-coffee-300 hover:bg-coffee-50 transition-all group"
+                >
                   <div className="w-11 h-11 bg-coffee-100 rounded-xl flex items-center justify-center shrink-0">
                     <MapPin size={20} className="text-coffee-700" />
                   </div>
                   <div>
-                    <div className="font-semibold text-gray-900">Office</div>
-                    <div className="text-sm text-gray-500">Bałtyk Business Square, Poznań, Poland</div>
+                    <div className="font-semibold text-gray-900 group-hover:text-coffee-700 transition-colors">Office</div>
+                    <div className="text-sm text-gray-500">Franklina Roosevelta 22, 61-700 Poznań, Poland</div>
                   </div>
-                </div>
+                  <ArrowRight size={16} className="text-gray-400 group-hover:text-coffee-700 ml-auto transition-colors" />
+                </a>
 
                 <a
                   href="https://calendly.com/hi-datalatte/new-meeting"
@@ -212,6 +225,27 @@ export default function ContactPage() {
           </div>
         </div>
       </SectionWrapper>
+
+      {/* Google Maps */}
+      <section className="px-4 sm:px-6 lg:px-8 pb-16">
+        <div className="max-w-5xl mx-auto">
+          <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
+            <iframe
+              src="https://maps.google.com/maps?q=Franklina+Roosevelta+22,+61-700+Pozna%C5%84,+Polska&t=&z=15&ie=UTF8&iwloc=B&output=embed"
+              width="100%"
+              height="380"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="DataLatte office — Poznań, Poland"
+            />
+          </div>
+          <p className="text-center text-sm text-gray-400 mt-3">
+            Franklina Roosevelta 22, 61-700 Poznań, Poland · Bałtyk Business Square
+          </p>
+        </div>
+      </section>
     </>
   );
 }

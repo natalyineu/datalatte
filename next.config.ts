@@ -23,7 +23,7 @@ const nextConfig: NextConfig = {
               "img-src * data: blob:",
               "font-src 'self'",
               "connect-src 'self' https://vitals.vercel-insights.com https://www.google-analytics.com",
-              "frame-src 'none'",
+              "frame-src https://www.google.com https://maps.google.com https://www.youtube.com https://calendly.com",
             ].join("; "),
           },
           {
