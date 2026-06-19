@@ -123,7 +123,7 @@ function LocationNichePage({ niche: nicheData, city }: {
 
       <section className={`relative overflow-hidden ${nicheData!.accentClass} py-24`}>
         <div className="absolute inset-0 opacity-15">
-          <Image src={nicheData!.heroImage} alt={nicheData!.labelPlural} fill className="object-cover" sizes="100vw" />
+          <Image src={nicheData!.heroImage} alt={nicheData!.labelPlural} fill className="object-cover" sizes="100vw" unoptimized={nicheData!.heroImage.startsWith("http")} />
         </div>
         <div className="absolute inset-0 bg-black/55" />
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -283,7 +283,7 @@ function NicheServicePage({ niche: nicheData, service }: {
       {/* Hero */}
       <section className={`relative overflow-hidden ${nicheData.accentClass} py-24`}>
         <div className="absolute inset-0 opacity-15">
-          <Image src={nicheData.heroImage} alt={nicheData.labelPlural} fill className="object-cover" sizes="100vw" />
+          <Image src={nicheData.heroImage} alt={nicheData.labelPlural} fill className="object-cover" sizes="100vw" unoptimized={nicheData.heroImage.startsWith("http")} />
         </div>
         <div className="absolute inset-0 bg-black/55" />
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">

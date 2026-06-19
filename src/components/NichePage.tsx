@@ -56,7 +56,7 @@ export default function NichePage({
       <section className={`relative overflow-hidden ${accentColor} pt-24 pb-28`}>
         {/* Background image */}
         <div className="absolute inset-0 opacity-20">
-          <Image src={heroImage} alt={niche} fill className="object-cover" sizes="100vw" />
+          <Image src={heroImage} alt={niche} fill className="object-cover" sizes="100vw" unoptimized={heroImage.startsWith("http")} />
         </div>
         <div className="absolute inset-0 bg-black/55" />
         {/* Grid overlay */}

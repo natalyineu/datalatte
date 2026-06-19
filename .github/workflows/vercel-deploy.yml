@@ -1,10 +1,12 @@
 name: Hourly Vercel Deploy
 
 on:
-  schedule:
-    # Fire the deploy hook once per hour. All bot commits now use [vercel skip],
-    # so Vercel only builds when this webhook fires — not on every git push.
-    - cron: '0 * * * *'
+  # Disabled: commits with [vercel skip] in the message already trigger a
+  # build directly via the git push integration (see vercel.json ignoreCommand
+  # and CLAUDE.md). The hourly cron was forcing a redundant full rebuild every
+  # hour on top of that — 24 extra builds/day — which blew through the Hobby
+  # plan's Build CPU Minutes. Kept as workflow_dispatch for manual use
+  # (e.g. to re-ping IndexNow/sitemaps without a fresh deploy).
   workflow_dispatch:
 
 jobs:
