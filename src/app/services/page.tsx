@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
-import { breadcrumbSchema, faqSchema } from "@/lib/schema";
+import { breadcrumbSchema } from "@/lib/schema";
 
 const BASE = "https://datalatte.pro";
 const PAGE_URL = `${BASE}/services`;
@@ -184,7 +184,6 @@ export default function ServicesPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(FAQS)) }} />
 
       {/* Hero */}
       <section className="bg-gradient-to-br from-coffee-900 via-coffee-800 to-coffee-700 py-24 px-4 sm:px-6 lg:px-8">

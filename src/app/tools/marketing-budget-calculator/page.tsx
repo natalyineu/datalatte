@@ -43,16 +43,6 @@ const FAQ = [
 ];
 
 export default function MarketingBudgetCalculatorPage() {
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: FAQ.map(({ q, a }) => ({
-      "@type": "Question",
-      name: q,
-      acceptedAnswer: { "@type": "Answer", text: a },
-    })),
-  };
-
   const toolSchema = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
@@ -72,10 +62,6 @@ export default function MarketingBudgetCalculatorPage() {
   return (
     <>
       {/* Structured data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(toolSchema) }}

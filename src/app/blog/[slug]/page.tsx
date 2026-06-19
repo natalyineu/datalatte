@@ -21,7 +21,7 @@ import CTABanner from "@/components/CTABanner";
 import { ArrowRight } from "lucide-react";
 import ReadingProgress from "@/components/ReadingProgress";
 import TableOfContents from "@/components/TableOfContents";
-import { articleSchema, faqSchema, breadcrumbSchema } from "@/lib/schema";
+import { articleSchema, breadcrumbSchema } from "@/lib/schema";
 
 /** Convert heading text to an anchor id (mirrors TableOfContents slugify). */
 function headingId(text: string): string {
@@ -258,74 +258,6 @@ interface PostFrontmatter {
   readTime: string;
 }
 
-/** Strip markdown / MDX syntax to plain text. */
-function stripMarkdown(text: string): string {
-  return text
-    .replace(/<[^>]+>/g, "")           // strip MDX/HTML tags
-    .replace(/\*\*([^*]+)\*\*/g, "$1") // bold
-    .replace(/\*([^*]+)\*/g, "$1")     // italic
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1") // links → text
-    .replace(/`[^`]+`/g, (m) => m.slice(1, -1)) // inline code
-    .trim();
-}
-
-/** Extract FAQ Q&A pairs from MDX content for FAQPage structured data.
- *  Handles three formats:
- *   1. ### heading per question (most common in new articles)
- *   2. Q: / A: plain or list style  (older articles)
- *   3. **Bold question?** followed by answer paragraph
- */
-function extractFaqItems(content: string): { q: string; a: string }[] {
-  // Find the FAQ section (handles variations in heading text)
-  const faqSectionMatch = content.match(
-    /##\s+(?:Frequently Asked Questions|FAQ)[^\n]*\n([\s\S]*?)(?=\n##\s|\n---|\n<\/|$)/i
-  );
-  if (!faqSectionMatch) return [];
-
-  const faqBody = faqSectionMatch[1];
-  const results: { q: string; a: string }[] = [];
-
-  // ── Format 1: ### Sub-headings ────────────────────────────────────────────
-  const hashChunks = faqBody.split(/\n###\s+/).slice(1);
-  if (hashChunks.length > 0) {
-    for (const chunk of hashChunks) {
-      const lines = chunk.split("\n");
-      const rawQ = lines[0].trim();
-      const q = stripMarkdown(rawQ).replace(/\?*$/, "") + "?";
-      const answerLines = lines
-        .slice(1)
-        .filter((l) => l.trim() && !l.trim().startsWith("<") && !l.trim().startsWith("#"))
-        .map((l) => stripMarkdown(l))
-        .filter(Boolean);
-      const a = answerLines.join(" ").slice(0, 500);
-      if (q && a) results.push({ q, a });
-    }
-    if (results.length > 0) return results.slice(0, 10);
-  }
-
-  // ── Format 2: Q: / A: plain or list style ────────────────────────────────
-  // Handles: "Q: question\nA: answer", "* **Q: question**\n  A: answer",
-  //          "**Q: question**\nA: answer", "Q: question\n\nA: answer"
-  const qaPattern = /(?:^|\n)\s*(?:\*\s*)?(?:\*{1,2})?Q(?:uestion)?:\s*\*{0,2}\s*(.+?)(?:\*{0,2})\s*\n+\s*(?:\*\s*)?(?:\*{1,2})?A(?:nswer)?:\s*\*{0,2}\s*([\s\S]+?)(?=\n\s*(?:\*\s*)?(?:\*{0,2})?Q(?:uestion)?:|$)/gi;
-  let m: RegExpExecArray | null;
-  while ((m = qaPattern.exec(faqBody)) !== null && results.length < 10) {
-    const q = stripMarkdown(m[1]).replace(/\?*$/, "") + "?";
-    const a = stripMarkdown(m[2].split("\n")[0]).slice(0, 500); // first paragraph of answer
-    if (q.length > 10 && a.length > 10) results.push({ q, a });
-  }
-  if (results.length > 0) return results;
-
-  // ── Format 3: **Bold question?** + paragraph answer ──────────────────────
-  const boldQPattern = /\*\*([^*]{10,}?\?)\*\*\s*\n+([^\n*#]{20,})/g;
-  while ((m = boldQPattern.exec(faqBody)) !== null && results.length < 10) {
-    const q = stripMarkdown(m[1]).replace(/\?*$/, "") + "?";
-    const a = stripMarkdown(m[2]).slice(0, 500);
-    if (q && a) results.push({ q, a });
-  }
-
-  return results.slice(0, 10); // Google shows max ~10 FAQ entries
-}
-
 export async function generateStaticParams() {
   // Pre-build only the 50 most recently modified posts at deploy time.
   // All other slugs are generated on first request (dynamicParams = true)
@@ -520,9 +452,6 @@ export default async function BlogPostPage({
     { name: frontmatter.title, url: `https://datalatte.pro/blog/${slug}` },
   ]);
 
-  const faqItems = extractFaqItems(content);
-  const faqStructuredData = faqItems.length > 0 ? faqSchema(faqItems) : null;
-
   // Format date for display
   const displayDate = new Date(frontmatter.date).toLocaleDateString("en-US", {
     year: "numeric",
@@ -537,12 +466,6 @@ export default async function BlogPostPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
-      {faqStructuredData && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
-        />
-      )}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}

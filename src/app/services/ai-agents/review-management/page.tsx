@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Star, TrendingUp, Shield, CheckCircle2 } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
-import { faqSchema, breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema } from "@/lib/schema";
 
 const PAGE_URL = "https://datalatte.pro/services/ai-agents/review-management";
 const PAGE_TITLE = "AI Review Management Agent: Automate Google Reviews for Local Businesses in 2026";
@@ -115,7 +115,6 @@ const faqs = [
 
 export default function AIReviewManagementPage() {
   const schema = [
-    faqSchema(faqs),
     breadcrumbSchema([
       { name: "Home", url: "https://datalatte.pro" },
       { name: "AI Agents", url: "https://datalatte.pro/services/ai-agents" },

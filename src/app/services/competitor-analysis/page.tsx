@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
-import { faqSchema, breadcrumbSchema, serviceSchema } from "@/lib/schema";
+import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
 
 const PAGE_URL = "https://datalatte.pro/services/competitor-analysis";
 
@@ -163,13 +163,11 @@ export default function CompetitorAnalysisPage() {
     description: "Automated competitor tracking powered by AI — covering Google rankings, reviews, social media, ads, and website changes. Weekly and monthly reports delivered to email or WhatsApp.",
     url: PAGE_URL,
   });
-  const faq = faqSchema(FAQS);
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(service) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }} />
 
       {/* ── Hero ── */}
       <section className="relative bg-gray-900 overflow-hidden py-24 px-4 sm:px-6 lg:px-8">

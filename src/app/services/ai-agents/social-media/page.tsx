@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Instagram, Calendar, CheckCircle2, Zap, Image, BarChart2 } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
-import { faqSchema, breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema } from "@/lib/schema";
 
 const PAGE_URL = "https://datalatte.pro/services/ai-agents/social-media";
 const PAGE_TITLE =
@@ -182,7 +182,6 @@ const toolSchema = `{
 
 export default function AISocialMediaAgentPage() {
   const schema = [
-    faqSchema(faqs),
     breadcrumbSchema([
       { name: "Home", url: "https://datalatte.pro" },
       { name: "AI Agents", url: "https://datalatte.pro/services/ai-agents" },

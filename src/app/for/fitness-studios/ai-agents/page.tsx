@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Calendar, Phone, Star, RefreshCw, UserCheck } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
-import { faqSchema, breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema } from "@/lib/schema";
 
 const PAGE_URL = "https://datalatte.pro/for/fitness-studios/ai-agents";
 const PAGE_TITLE = "AI Agents for Fitness Studios: Automate Class Bookings, Trials & Member Retention in 2026";
@@ -121,7 +121,6 @@ const faqs = [
 
 export default function FitnessStudioAIAgentsPage() {
   const schema = [
-    faqSchema(faqs),
     breadcrumbSchema([
       { name: "Home", url: "https://datalatte.pro" },
       { name: "Fitness Studios", url: "https://datalatte.pro/for/fitness-studios" },

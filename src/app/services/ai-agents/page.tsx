@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2, Zap, MessageSquare, Star, Phone, Calendar, Bot, RotateCcw, Bell, Code2, Cpu, GitBranch, Webhook, Share2 } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
-import { faqSchema, breadcrumbSchema, serviceSchema } from "@/lib/schema";
+import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   alternates: {
@@ -310,7 +310,6 @@ export default function AIAgentsPage() {
   return (
     <>
       {/* Structured data */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs)) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(service) }} />
 

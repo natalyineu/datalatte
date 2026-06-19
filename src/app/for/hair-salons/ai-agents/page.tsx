@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Calendar, Phone, Star, RefreshCw, MessageSquare } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
-import { faqSchema, breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema } from "@/lib/schema";
 
 const PAGE_URL = "https://datalatte.pro/for/hair-salons/ai-agents";
 const PAGE_TITLE = "AI Agents for Hair Salons: Automate Bookings, No-Shows & Google Reviews in 2026";
@@ -116,7 +116,6 @@ const faqs = [
 
 export default function HairSalonAIAgentsPage() {
   const schema = [
-    faqSchema(faqs),
     breadcrumbSchema([
       { name: "Home", url: "https://datalatte.pro" },
       { name: "Hair Salons", url: "https://datalatte.pro/for/hair-salons" },

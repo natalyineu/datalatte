@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Calendar, Clock, RefreshCw, CheckCircle2, ArrowRight } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
-import { faqSchema, breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema } from "@/lib/schema";
 
 const PAGE_URL = "https://datalatte.pro/services/ai-agents/booking";
 const PAGE_TITLE = "AI Booking Agent for Local Businesses: 24/7 Appointment Automation in 2026";
@@ -100,7 +100,6 @@ const faqs = [
 
 export default function AIBookingAgentPage() {
   const schema = [
-    faqSchema(faqs),
     breadcrumbSchema([
       { name: "Home", url: "https://datalatte.pro" },
       { name: "AI Agents", url: "https://datalatte.pro/services/ai-agents" },

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { CheckCircle2, ArrowRight, X, BarChart3, TrendingUp, BookOpen, Zap, PieChart, Calculator } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
-import { faqSchema, breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema } from "@/lib/schema";
 
 const PAGE_URL = "https://datalatte.pro/pricing";
 const PAGE_TITLE = "Marketing Consultant Pricing for Small Businesses | DataLatte";
@@ -202,7 +202,6 @@ export default function PricingPage() {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs)) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
 
       {/* Hero */}

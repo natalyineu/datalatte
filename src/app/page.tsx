@@ -3,7 +3,6 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import Link from "next/link";
-import { faqSchema } from "@/lib/schema";
 import Image from "next/image";
 import {
   ArrowRight,
@@ -561,10 +560,6 @@ export default function HomePage() {
 
       {/* FAQ */}
       <SectionWrapper>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(homeFaqs)) }}
-        />
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-10">
             <span className="section-label">Common Questions</span>

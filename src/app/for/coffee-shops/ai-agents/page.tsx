@@ -3,7 +3,7 @@ import Link from "next/link";
 import { CheckCircle2, ArrowRight, MessageSquare, Phone, Star, RefreshCw, Calendar } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
-import { faqSchema, breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema } from "@/lib/schema";
 
 const PAGE_URL = "https://datalatte.pro/for/coffee-shops/ai-agents";
 const PAGE_TITLE = "AI Agents for Coffee Shops: Automate Bookings, Reviews & Customer Replies in 2026";
@@ -118,7 +118,6 @@ const faqs = [
 
 export default function CoffeeShopAIAgentsPage() {
   const schema = [
-    faqSchema(faqs),
     breadcrumbSchema([
       { name: "Home", url: "https://datalatte.pro" },
       { name: "Coffee Shops", url: "https://datalatte.pro/for/coffee-shops" },

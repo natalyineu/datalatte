@@ -5,7 +5,7 @@ import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
 import TestimonialCard from "@/components/TestimonialCard";
 import ScrollReveal from "@/components/ScrollReveal";
-import { faqSchema, breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema } from "@/lib/schema";
 
 interface NichePageProps {
   niche: string;
@@ -49,7 +49,6 @@ export default function NichePage({
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faq)) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
 
       {/* ── Hero ── */}

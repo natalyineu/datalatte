@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
-import { faqSchema, breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema } from "@/lib/schema";
 import {
   CITIES, NICHES, NICHE_DATA, SERVICE_SEGMENTS, SERVICE_SEGMENT_SLUGS,
   cityCurrency, type NicheSlug,
@@ -118,7 +118,6 @@ function LocationNichePage({ niche: nicheData, city }: {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqItems)) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
 
       <section className={`relative overflow-hidden ${nicheData!.accentClass} py-24`}>
@@ -277,7 +276,6 @@ function NicheServicePage({ niche: nicheData, service }: {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs)) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
 
       {/* Hero */}

@@ -5,7 +5,7 @@ import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
 import ReportingFlow from "@/components/ReportingFlow";
 import DashboardTabs from "@/components/DashboardTabs";
-import { breadcrumbSchema, faqSchema } from "@/lib/schema";
+import { breadcrumbSchema } from "@/lib/schema";
 
 const BASE = "https://datalatte.pro";
 const PAGE_URL = `${BASE}/reporting`;
@@ -174,7 +174,6 @@ export default function ReportingPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb)      }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(FAQS)) }} />
 
       {/* ── Hero ── */}
       <section className="bg-gradient-to-br from-gray-950 via-coffee-950 to-coffee-900 pt-24 pb-28 px-4 sm:px-6 lg:px-8 overflow-hidden relative">

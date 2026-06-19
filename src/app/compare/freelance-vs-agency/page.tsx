@@ -3,7 +3,7 @@ import Link from "next/link";
 import { CheckCircle2, X, ArrowRight } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
-import { faqSchema, breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema } from "@/lib/schema";
 
 const PAGE_URL = "https://datalatte.pro/compare/freelance-vs-agency";
 const PAGE_TITLE = "Freelance Marketing Consultant vs Agency: Which Is Right for You?";
@@ -126,7 +126,6 @@ export default function FreelanceVsAgencyPage() {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs)) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
 
       {/* Hero */}

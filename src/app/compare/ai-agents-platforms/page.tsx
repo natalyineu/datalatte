@@ -3,7 +3,7 @@ import Link from "next/link";
 import { CheckCircle2, X, Minus, ArrowRight, Zap, Brain, Workflow } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
-import { faqSchema, breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema } from "@/lib/schema";
 
 const PAGE_URL = "https://datalatte.pro/compare/ai-agents-platforms";
 const PAGE_TITLE = "Best AI Agent Platforms for Local Business 2026: Claude vs ChatGPT vs Gemini + n8n vs Zapier vs Make";
@@ -242,7 +242,6 @@ const faqs = [
 
 export default function AIAgentsPlatformsComparePage() {
   const schema = [
-    faqSchema(faqs),
     breadcrumbSchema([
       { name: "Home", url: "https://datalatte.pro" },
       { name: "Compare", url: "https://datalatte.pro/compare/ai-agents-platforms" },

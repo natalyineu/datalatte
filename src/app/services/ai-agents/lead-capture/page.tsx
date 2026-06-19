@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Users, Zap, BarChart2, CheckCircle2, ArrowRight } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
-import { faqSchema, breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema } from "@/lib/schema";
 
 const PAGE_URL = "https://datalatte.pro/services/ai-agents/lead-capture";
 const PAGE_TITLE = "AI Lead Capture Agent for Local Businesses: Qualify & Convert Enquiries Automatically in 2026";
@@ -92,7 +92,6 @@ const faqs = [
 
 export default function AILeadCapturePage() {
   const schema = [
-    faqSchema(faqs),
     breadcrumbSchema([
       { name: "Home", url: "https://datalatte.pro" },
       { name: "AI Agents", url: "https://datalatte.pro/services/ai-agents" },
