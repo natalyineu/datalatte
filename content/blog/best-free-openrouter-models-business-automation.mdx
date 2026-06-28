@@ -290,7 +290,7 @@ For customer-facing responses (chatbots, review replies, email responses), Llama
 
 **Can I use free models in production?**
 
-Yes, with appropriate architecture. The key is building fallback logic (as shown in the code above) and not relying on a single model. A production automation using a 3-model chain on free tier will have near-100% task completion, just with variable response times during peak hours. Businesses running chatbots with strict latency SLAs (<1 second response time) should use paid models for customer-facing requests. Batch automations (overnight processing, daily report generation) work excellently on free models in production.
+Yes, with appropriate architecture. The key is building fallback logic (as shown in the code above) and not relying on a single model. A production automation using a 3-model chain on free tier will have near-100% task completion, just with variable response times during peak hours. Businesses running chatbots with strict latency SLAs (&lt;1 second response time) should use paid models for customer-facing requests. Batch automations (overnight processing, daily report generation) work excellently on free models in production.
 
 **How do I avoid rate limiting?**
 
