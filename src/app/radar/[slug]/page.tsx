@@ -11,7 +11,7 @@ import {
 } from "@/lib/radar-signals";
 import SignalNavigator from "@/components/SignalNavigator";
 
-export const revalidate = 21600; // 6 hours
+export const dynamic = "force-static";
 export const dynamicParams = true;
 
 const CATEGORY_BAR: Record<string, string> = {

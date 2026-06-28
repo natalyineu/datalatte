@@ -8,7 +8,7 @@ import SectionWrapper from "@/components/SectionWrapper";
 import BlogGrid from "@/components/BlogGrid";
 import { breadcrumbSchema } from "@/lib/schema";
 
-export const revalidate = 3600;
+export const dynamic = "force-static";
 
 const contentDir = path.join(process.cwd(), "content/blog");
 

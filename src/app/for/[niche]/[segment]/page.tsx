@@ -11,7 +11,7 @@ import {
   cityCurrency, type NicheSlug,
 } from "@/lib/locationData";
 
-export const revalidate = 86400;
+export const dynamic = "force-static";
 
 function getCity(slug: string) {
   return CITIES.find((c) => c.slug === slug) ?? null;

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import RadarFeed from "@/components/RadarFeed";
 import { fetchPublishedSignals } from "@/lib/radar-signals";
 
-export const revalidate = 21600; // 6 hours
+export const dynamic = "force-static";
 
 export const metadata: Metadata = {
   title: "Value Radar — Daily Marketing Intelligence for Local Businesses",

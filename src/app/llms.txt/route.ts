@@ -1,4 +1,4 @@
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
 
 import fs from "fs";
 import path from "path";

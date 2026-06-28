@@ -8,7 +8,7 @@ import NewsletterForm from "@/components/NewsletterForm";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-export const revalidate = 3600;
+export const dynamic = "force-static";
 
 const contentDir = path.join(process.cwd(), "content/blog");
 const imageCachePath = path.join(contentDir, "image-cache.json");

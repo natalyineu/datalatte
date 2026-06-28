@@ -33,7 +33,7 @@ function headingId(text: string): string {
     .trim();
 }
 
-export const revalidate = 86400;
+export const dynamic = "force-static";
 export const dynamicParams = true;
 
 const contentDir = path.join(process.cwd(), "content/blog");

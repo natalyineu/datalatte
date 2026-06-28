@@ -1,11 +1,5 @@
 {
   "ignoreCommand": "git log -1 --pretty=%B | grep -q '\\[vercel skip\\]' && exit 1 || exit 0",
-  "crons": [
-    {
-      "path": "/api/radar/ingest",
-      "schedule": "0 8 * * *"
-    }
-  ],
   "rewrites": [
     { "source": "/sitemap.xml", "destination": "/sitemap/route" }
   ],
