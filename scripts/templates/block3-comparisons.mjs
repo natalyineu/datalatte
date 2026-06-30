@@ -1,0 +1,104 @@
+export function comparisonArticle(c) {
+  const today = '2026-06-30';
+  return `---
+title: "${c.a} vs ${c.b}: Which Lead Gen Platform Is Worth It for ${c.industry.charAt(0).toUpperCase() + c.industry.slice(1)}?"
+date: "${today}"
+lastModified: "${today}"
+description: "A real cost and conversion comparison between ${c.a} and ${c.b} for ${c.industry} — which platform delivers better ROI, and how to choose."
+author: "Nataliia"
+category: "Review Platform Ads"
+tags: ["${c.a.toLowerCase()} vs ${c.b.toLowerCase()}", "${c.a.toLowerCase()}", "${c.b.toLowerCase()}", "lead generation", "${c.industry}"]
+slug: "${c.slug}"
+image: "https://images.unsplash.com/photo-${c.unsplashId}?w=800&q=80&auto=format&fit=crop"
+readTime: "7 min read"
+---
+
+If you run a service business and you're choosing between ${c.a} and ${c.b} for lead generation, the honest answer is: it depends on your average job value and how much qualification work you're willing to do yourself. Here's the real comparison, with cost and conversion data.
+
+<StatRow
+  values="$${c.aCostLow}-$${c.aCostHigh}|$${c.bCostLow}-$${c.bCostHigh}|${c.aConv}%|${c.bConv}%"
+  labels="${c.a} cost per lead|${c.b} cost per lead|${c.a} lead-to-job conversion|${c.b} lead-to-job conversion"
+  subs="Typical range|Typical range|Industry estimate|Industry estimate"
+  trends="neutral|neutral|up|up"
+/>
+
+## What Are ${c.a} and ${c.b}?
+
+**${c.a}** is ${c.aDesc}
+
+**${c.b}** is ${c.bDesc}
+
+A ${c.exampleNiche} in ${c.exampleCity} testing both platforms over a 90-day period typically sees a clear pattern emerge: ${c.a} tends to deliver ${c.aStrength}, while ${c.b} tends to deliver ${c.bStrength}.
+
+<Callout type="tip">If you're just starting out, test both with a small budget — $200-$300 each. The data you collect in the first 30 days tells you far more than any general comparison.</Callout>
+
+## Cost Comparison
+
+| Platform | Cost per lead | Subscription required? |
+|----------|---------------|------------------------|
+| ${c.a} | $${c.aCostLow}-$${c.aCostHigh} | Varies by category |
+| ${c.b} | $${c.bCostLow}-$${c.bCostHigh} | Often yes, plus per-lead fee |
+
+<BarChart
+  title="Lead-to-Job Conversion Rate"
+  labels="${c.a}|${c.b}"
+  values="${c.aConv}|${c.bConv}"
+  unit="%"
+  caption="Approximate conversion from lead to signed job, based on aggregated platform data"
+  highlights="${c.bConv > c.aConv ? c.b : c.a}"
+/>
+
+Lower cost per lead doesn't automatically mean better ROI. A platform with a higher cost per lead but a higher conversion rate can still produce a lower **cost per closed job** — that's the number that actually matters.
+
+## Lead Quality: What the Numbers Don't Tell You
+
+Response time matters more than the platform you choose. Leads contacted within 5 minutes convert at dramatically higher rates than leads contacted after 30 minutes, regardless of which platform they came from. Before blaming a platform for "bad leads," audit your own response speed first.
+
+<Callout type="warning">Watch for hidden fees on both platforms — some charge a "service fee" on top of the lead cost once a job is booked. Always confirm the full cost structure before committing a monthly budget.</Callout>
+
+## Setting Up a Fair Test
+
+1. **Budget evenly**: Allocate the same dollar amount to each platform for at least 30 days — don't judge after a handful of leads.
+2. **Qualify consistently**: Use the same response script and qualification questions for leads from both sources.
+3. **Track everything**: Date, source, cost, response time, outcome, and final job value in a simple spreadsheet.
+4. **Calculate cost per closed job** — not cost per lead — as your real comparison metric.
+5. **Re-evaluate quarterly**: Platform performance shifts as advertiser competition and lead volume change.
+
+## Which Platform Should You Choose?
+
+- **High-ticket, lower-volume work**: The platform with stronger conversion (often the more curated, verified-review-driven option) tends to justify its higher cost per lead.
+- **Lower-ticket, higher-volume work**: The platform with lower cost per lead and higher raw volume tends to win, even with a lower conversion rate.
+- **New to lead-gen platforms entirely**: Start with whichever platform has the lower minimum spend to test the channel before committing real budget to either.
+
+<Callout type="coffee">Treat each platform like a test kitchen. Run a controlled test, look at the actual numbers for your business, and double down on whichever one produces a lower cost per closed job — not whichever one "feels" better.</Callout>
+
+## Frequently Asked Questions
+
+### Is ${c.a} or ${c.b} cheaper?
+
+${c.a} typically runs $${c.aCostLow}-$${c.aCostHigh} per lead versus $${c.bCostLow}-$${c.bCostHigh} for ${c.b}. But cost per lead alone is misleading — always compare cost per closed job, which factors in conversion rate.
+
+### Which platform has better lead quality?
+
+Neither platform has uniformly "better" leads — quality varies by category and market. ${c.a} tends toward ${c.aStrength}, while ${c.b} tends toward ${c.bStrength}. Test both in your specific market before committing.
+
+### Can I use both ${c.a} and ${c.b} at the same time?
+
+Yes, and many successful ${c.industry} do exactly that — splitting budget between platforms to diversify lead sources and avoid over-reliance on any single channel.
+
+### How long should I test before deciding?
+
+Run both platforms for at least 60-90 days. Seasonality affects lead volume and quality, so a single month of data can be misleading.
+
+## Related Articles
+
+- [Angi Ads vs HomeAdvisor: Which Lead Gen Platform Is Worth It for Contractors?](/blog/angi-ads-vs-homeadvisor-contractors)
+- [Houzz Ads for Home Services: How Contractors and Designers Win Local Clients](/blog/houzz-ads-home-services-contractors)
+- [How to Set Up Yelp Ads: Step-by-Step Guide for Local Business Owners](/blog/how-to-set-up-yelp-ads-local-business)
+- [Thumbtack Leads Cost: What You Pay Per Job in 2026](/blog/thumbtack-leads-cost-what-you-pay-per-job-2026)
+
+<Callout type="coffee" title="Want More Local Customers?">
+DataLatte helps local service businesses build a profitable, diversified lead generation mix. [Book a free 30-minute strategy call](/contact) or explore [Google Ads management](/services/google-ads).
+</Callout>
+`;
+}
