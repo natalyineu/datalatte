@@ -20,6 +20,7 @@ interface NichePageProps {
   testimonial: { quote: string; author: string; role: string; rating?: number };
   faq: { q: string; a: string }[];
   ctaHeadline: string;
+  cityGuideLinks?: { label: string; href: string }[];
 }
 
 const NICHE_SLUGS: Record<string, string> = {
@@ -40,6 +41,7 @@ const NICHE_SLUGS: Record<string, string> = {
 export default function NichePage({
   niche, headline, subheadline, heroImage, accentColor,
   problems, services, kpis, tactics, testimonial, faq, ctaHeadline,
+  cityGuideLinks,
 }: NichePageProps) {
   const slug = NICHE_SLUGS[niche] ?? niche.toLowerCase().replace(/[\s&]+/g, "-").replace(/[^a-z0-9-]/g, "");
   const breadcrumb = breadcrumbSchema([
@@ -303,6 +305,35 @@ export default function NichePage({
           </div>
         </div>
       </SectionWrapper>
+
+      {/* ── City Guides ── */}
+      {cityGuideLinks && cityGuideLinks.length > 0 && (
+        <SectionWrapper className="bg-white">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-8">
+              <span className="section-label">Google Ads by City</span>
+              <h2 className="section-title mb-2">
+                {niche} Google Ads guides for <span className="gradient-text">your city</span>
+              </h2>
+              <p className="text-gray-500 text-sm max-w-xl mx-auto">
+                Local search competition and ad costs vary significantly by market. Find the guide for your city.
+              </p>
+            </div>
+            <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+              {cityGuideLinks.map(({ label, href }) => (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    className="block text-sm text-coffee-700 hover:text-coffee-900 hover:underline py-1 px-2 rounded hover:bg-coffee-50 transition-colors"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </SectionWrapper>
+      )}
 
       <CTABanner headline={ctaHeadline} />
     </>
