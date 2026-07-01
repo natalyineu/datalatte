@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { gtag } from "@/lib/gtag";
 import { ArrowRight, ArrowLeft, CheckCircle2, Copy, Check } from "lucide-react";
 import {
   motion,
@@ -232,6 +233,7 @@ export default function BudgetCalculator() {
     navigator.clipboard.writeText(
       `My recommended marketing budget: ${fmt(totalBudget)}/month\n\n${text}\n\nCalculated at datalatte.pro/tools/marketing-budget-calculator`
     );
+    gtag.budgetCalculatorCopied(totalBudget);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   }
@@ -492,7 +494,7 @@ export default function BudgetCalculator() {
               <ArrowLeft size={14} /> Back
             </button>
             <button
-              onClick={() => { if (goal) goTo(4); }}
+              onClick={() => { if (goal) { goTo(4); gtag.budgetCalculatorCompleted(totalBudget, niche!, goal); } }}
               disabled={!goal}
               className="flex-1 btn-primary justify-center py-2.5 text-sm group disabled:opacity-50 disabled:cursor-not-allowed"
             >
@@ -624,6 +626,7 @@ export default function BudgetCalculator() {
             </p>
             <Link
               href={`/contact?budget=${totalBudget}&niche=${niche}&goal=${goal}`}
+              onClick={() => gtag.budgetCalculatorCtaClicked(totalBudget, niche!)}
               className="flex items-center justify-center gap-2 w-full bg-coffee-600 hover:bg-coffee-500 text-white font-semibold py-3 rounded-xl transition-colors group"
             >
               Book my free audit

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { gtag } from "@/lib/gtag";
 
 const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -55,6 +56,7 @@ export default function HeroAnimated() {
       <FadeUp delay={0.3} className="flex flex-col sm:flex-row gap-3">
         <Link
           href="/free-audit"
+          onClick={() => gtag.freeAuditClicked("hero")}
           className="inline-flex items-center justify-center gap-2 bg-white text-coffee-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5"
         >
           Get a Free Marketing Audit

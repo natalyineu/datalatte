@@ -1,5 +1,7 @@
+"use client";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { gtag } from "@/lib/gtag";
 
 interface CTABannerProps {
   headline?: string;
@@ -23,6 +25,7 @@ export default function CTABanner({
         <p className="text-coffee-200 text-lg mb-8">{sub}</p>
         <Link
           href={ctaHref}
+          onClick={() => ctaHref === "/free-audit" && gtag.freeAuditClicked("cta_banner")}
           className="inline-flex items-center gap-2 bg-white text-coffee-900 font-bold px-8 py-4 rounded-xl hover:bg-coffee-100 transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 text-lg"
         >
           {ctaLabel}

@@ -1,13 +1,15 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, X } from "lucide-react";
+import { gtag } from "@/lib/gtag";
 
 export default function FloatingCTA() {
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(false);
+  const shownRef = useRef(false);
 
   useEffect(() => {
     if (sessionStorage.getItem("floating-cta-dismissed")) {
@@ -15,7 +17,12 @@ export default function FloatingCTA() {
       return;
     }
     const onScroll = () => {
-      setVisible(window.scrollY > 400);
+      const shouldShow = window.scrollY > 400;
+      setVisible(shouldShow);
+      if (shouldShow && !shownRef.current) {
+        shownRef.current = true;
+        gtag.floatingCtaShown();
+      }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -24,6 +31,7 @@ export default function FloatingCTA() {
   function dismiss() {
     setDismissed(true);
     sessionStorage.setItem("floating-cta-dismissed", "1");
+    gtag.floatingCtaDismissed();
   }
 
   if (dismissed) return null;
@@ -47,6 +55,7 @@ export default function FloatingCTA() {
               </div>
               <Link
                 href="/free-audit"
+                onClick={() => gtag.freeAuditClicked("floating_cta")}
                 className="bg-coffee-700 text-white font-semibold text-sm px-4 py-2.5 rounded-xl flex items-center gap-1.5 shrink-0"
               >
                 Book now <ArrowRight size={14} />
@@ -80,6 +89,7 @@ export default function FloatingCTA() {
             <div className="flex items-center gap-2">
               <Link
                 href="/free-audit"
+                onClick={() => gtag.freeAuditClicked("floating_cta")}
                 className="bg-coffee-700 hover:bg-coffee-800 text-white font-semibold text-sm px-5 py-3 rounded-xl flex items-center gap-2 shadow-lg hover:shadow-xl transition-all group"
               >
                 Get Free Audit

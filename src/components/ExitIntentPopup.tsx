@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowRight, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
+import { gtag } from "@/lib/gtag";
 
 export default function ExitIntentPopup() {
   const [visible, setVisible] = useState(false);
@@ -19,7 +20,7 @@ export default function ExitIntentPopup() {
     const onMouseLeave = (e: MouseEvent) => {
       if (e.clientY <= 0 && !shown.current) {
         shown.current = true;
-        setTimeout(() => setVisible(true), 100);
+        setTimeout(() => { setVisible(true); gtag.exitIntentShown("mouse_leave"); }, 100);
       }
     };
 
@@ -28,6 +29,7 @@ export default function ExitIntentPopup() {
       if (!shown.current && window.innerWidth < 768) {
         shown.current = true;
         setVisible(true);
+        gtag.exitIntentShown("timer_40s");
       }
     }, 40000);
 
@@ -36,7 +38,7 @@ export default function ExitIntentPopup() {
       const scrolled = window.scrollY / (document.body.scrollHeight - window.innerHeight);
       if (scrolled > 0.6 && !shown.current) {
         shown.current = true;
-        setTimeout(() => setVisible(true), 500);
+        setTimeout(() => { setVisible(true); gtag.exitIntentShown("scroll_60"); }, 500);
       }
     };
 
@@ -52,6 +54,7 @@ export default function ExitIntentPopup() {
   function dismiss() {
     setVisible(false);
     sessionStorage.setItem("exit-popup-dismissed", "1");
+    gtag.exitIntentDismissed();
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -65,6 +68,7 @@ export default function ExitIntentPopup() {
       });
       if (res.ok) {
         setStatus("done");
+        gtag.emailSubscribed("exit_popup");
         setTimeout(() => dismiss(), 2500);
       } else {
         setStatus("error");
@@ -133,7 +137,7 @@ export default function ExitIntentPopup() {
                     <div className="space-y-3 mb-5">
                       <Link
                         href="/free-audit"
-                        onClick={dismiss}
+                        onClick={() => { dismiss(); gtag.freeAuditClicked("exit_popup"); }}
                         className="flex items-center justify-between w-full bg-coffee-700 hover:bg-coffee-800 text-white font-semibold px-5 py-3.5 rounded-xl transition-colors group"
                       >
                         <span>Book my free audit</span>

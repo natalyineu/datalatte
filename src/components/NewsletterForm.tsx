@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { gtag } from "@/lib/gtag";
 
 export default function NewsletterForm({ source = "blog" }: { source?: string }) {
   const [email, setEmail] = useState("");
@@ -22,6 +23,7 @@ export default function NewsletterForm({ source = "blog" }: { source?: string })
       if (res.ok) {
         setStatus("success");
         setEmail("");
+        gtag.emailSubscribed(source);
       } else {
         const data = await res.json();
         setErrorMsg(data.error ?? "Something went wrong. Please try again.");

@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { gtag } from "@/lib/gtag";
 import { X, Send, RotateCcw, ExternalLink, ArrowRight, Calculator } from "lucide-react";
 import Link from "next/link";
 
@@ -162,6 +163,7 @@ export default function AIChatWidget() {
 
     const userMsg: Message = { role: "user", content: trimmed };
     const next = [...messages, userMsg];
+    gtag.chatMessageSent(messages.length);
     setMessages(next);
     setInput("");
     setLoading(true);
@@ -217,7 +219,7 @@ export default function AIChatWidget() {
         </AnimatePresence>
 
         <motion.button
-          onClick={() => setOpen(v => !v)}
+          onClick={() => setOpen(v => { if (!v) gtag.chatWidgetOpened(); return !v; })}
           className="relative w-14 h-14 bg-coffee-700 hover:bg-coffee-800 rounded-full shadow-lg hover:shadow-xl transition-all flex items-center justify-center"
           whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.95 }}

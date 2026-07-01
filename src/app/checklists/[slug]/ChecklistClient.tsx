@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { gtag } from "@/lib/gtag";
 import { motion, AnimatePresence } from "framer-motion";
 import { Clock, BarChart2, CheckSquare, RotateCcw, Printer, ArrowRight, Check } from "lucide-react";
 import { type Checklist, getTotalItems } from "@/lib/checklists";
@@ -106,6 +107,7 @@ export default function ChecklistClient({
     const isComplete = checkedCount === totalItems && totalItems > 0;
     if (isComplete && !prevComplete) {
       setShowCelebration(true);
+      gtag.checklistCompleted(checklist.slug);
     }
     setPrevComplete(isComplete);
   }, [checkedCount, totalItems, prevComplete, mounted]);

@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { gtag } from "@/lib/gtag";
 import { CheckCircle2, XCircle, AlertCircle, ArrowRight, BarChart3 } from "lucide-react";
 
 interface GradeItem {
@@ -155,6 +156,7 @@ export default function LocalSeoGrader() {
       setResult(runGrader(name, city, niche));
       setStep("result");
       setLoading(false);
+      gtag.seoGraderSubmitted(niche, city);
     }, 1800);
   }
 

@@ -2,12 +2,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, CheckCircle2, Sparkles, Zap } from "lucide-react";
+import { gtag } from "@/lib/gtag";
 
-declare global {
-  interface Window {
-    gtag?: (command: string, action: string, params?: Record<string, string>) => void;
-  }
-}
 
 type Mode = "explore" | "ready";
 type Status = "idle" | "loading" | "success" | "error";
@@ -79,9 +75,10 @@ async function submit(data: Record<string, string>, setStatus: (s: Status) => vo
     });
     if (res.ok) {
       setStatus("success");
-      if (typeof window !== "undefined" && window.gtag) {
-        window.gtag("event", "generate_lead", { event_category: "contact_form" });
-      }
+      gtag.contactFormSubmitted(
+        data.form_type as "explore" | "ready",
+        data.niche || undefined
+      );
     } else { setStatus("error"); }
   } catch { setStatus("error"); }
 }

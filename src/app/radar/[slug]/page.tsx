@@ -10,6 +10,7 @@ import {
   CATEGORY_LABEL,
 } from "@/lib/radar-signals";
 import SignalNavigator from "@/components/SignalNavigator";
+import SignalViewTracker from "@/components/SignalViewTracker";
 
 export const dynamic = "force-static";
 export const dynamicParams = true;
@@ -117,6 +118,7 @@ export default async function SignalPage({
 
   return (
     <main className="bg-gray-950 min-h-screen text-white">
+      <SignalViewTracker category={signal.category} impact={signal.impact} slug={signal.slug} />
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
       <div className={`h-1 w-full ${CATEGORY_BAR[signal.category]}`} />
 
