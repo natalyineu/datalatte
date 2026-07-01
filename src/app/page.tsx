@@ -197,7 +197,7 @@ function getLatestPosts(count = 3) {
   } catch { /* ignore */ }
 
   const all = fs.readdirSync(dir)
-    .filter(f => f.endsWith(".mdx"))
+    .filter(f => f.endsWith(".mdx") && !f.startsWith("google-ads-for-"))
     .map(file => {
       const raw = fs.readFileSync(path.join(dir, file), "utf8");
       const { data } = matter(raw);

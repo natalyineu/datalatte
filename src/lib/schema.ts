@@ -189,6 +189,10 @@ export function articleSchema({
       "@id": `${BASE}/#founder`,
       name: "Nataliia Makota",
       url: `${BASE}/about`,
+      sameAs: [
+        "https://www.linkedin.com/in/nataliia-makota",
+        "https://x.com/datalattepro",
+      ],
     },
     mainEntityOfPage: {
       "@type": "WebPage",
@@ -207,6 +211,11 @@ export function articleSchema({
       url: BASE,
       logo: { "@type": "ImageObject", url: `${BASE}/opengraph-image` },
     },
-    image: image ? (image.startsWith("http") ? image : `${BASE}${image}`) : `${BASE}/opengraph-image`,
+    image: {
+      "@type": "ImageObject",
+      url: image ? (image.startsWith("http") ? image : `${BASE}${image}`) : `${BASE}/opengraph-image`,
+      width: 1200,
+      height: 630,
+    },
   };
 }
