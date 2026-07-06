@@ -1,60 +1,41 @@
-const CITY_LABELS: Record<string, string> = {
-  "albuquerque-nm": "Albuquerque, NM",
-  "anaheim-ca": "Anaheim, CA",
-  "anchorage-ak": "Anchorage, AK",
-  "atlanta-ga": "Atlanta, GA",
-  "austin-tx": "Austin, TX",
-  "baltimore-md": "Baltimore, MD",
-  "boston-ma": "Boston, MA",
-  "charlotte-nc": "Charlotte, NC",
-  "chicago-il": "Chicago, IL",
-  "cleveland-oh": "Cleveland, OH",
-  "colorado-springs-co": "Colorado Springs, CO",
-  "columbus-oh": "Columbus, OH",
-  "dallas-tx": "Dallas, TX",
-  "denver-co": "Denver, CO",
-  "el-paso-tx": "El Paso, TX",
-  "fort-worth-tx": "Fort Worth, TX",
-  "fresno-ca": "Fresno, CA",
-  "honolulu-hi": "Honolulu, HI",
-  "houston-tx": "Houston, TX",
-  "indianapolis-in": "Indianapolis, IN",
-  "jacksonville-fl": "Jacksonville, FL",
-  "kansas-city-mo": "Kansas City, MO",
-  "las-vegas-nv": "Las Vegas, NV",
-  "lexington-ky": "Lexington, KY",
-  "long-beach-ca": "Long Beach, CA",
-  "los-angeles-ca": "Los Angeles, CA",
-  "louisville-ky": "Louisville, KY",
-  "memphis-tn": "Memphis, TN",
-  "mesa-az": "Mesa, AZ",
-  "miami-fl": "Miami, FL",
-  "milwaukee-wi": "Milwaukee, WI",
-  "minneapolis-mn": "Minneapolis, MN",
-  "nashville-tn": "Nashville, TN",
-  "new-orleans-la": "New Orleans, LA",
-  "new-york-city-ny": "New York City, NY",
-  "oklahoma-city-ok": "Oklahoma City, OK",
-  "omaha-ne": "Omaha, NE",
-  "philadelphia-pa": "Philadelphia, PA",
-  "phoenix-az": "Phoenix, AZ",
-  "pittsburgh-pa": "Pittsburgh, PA",
-  "portland-or": "Portland, OR",
-  "raleigh-nc": "Raleigh, NC",
-  "sacramento-ca": "Sacramento, CA",
-  "san-antonio-tx": "San Antonio, TX",
-  "san-diego-ca": "San Diego, CA",
-  "san-francisco-ca": "San Francisco, CA",
-  "seattle-wa": "Seattle, WA",
-  "st-louis-mo": "St. Louis, MO",
-  "tampa-fl": "Tampa, FL",
-  "tucson-az": "Tucson, AZ",
-  "virginia-beach-va": "Virginia Beach, VA",
-};
+import { CITIES } from "./locationData";
+
+const US_CITIES = CITIES.filter((c) => !c.country || c.country === "US");
 
 export function getCityGuideLinks(niche: string): { label: string; href: string }[] {
-  return Object.entries(CITY_LABELS).map(([citySlug, label]) => ({
-    label,
-    href: `/blog/google-ads-for-${niche}-in-${citySlug}`,
+  return US_CITIES.map(({ city, stateCode, slug }) => ({
+    label: `${city}, ${stateCode}`,
+    href: `/blog/google-ads-for-${niche}-in-${slug}`,
   }));
+}
+
+export interface CityServiceGroup {
+  service: string;
+  links: { label: string; href: string }[];
+}
+
+export function getCityServiceGroups(niche: string): CityServiceGroup[] {
+  return [
+    {
+      service: "Google Ads",
+      links: US_CITIES.map(({ city, stateCode, slug }) => ({
+        label: `${city}, ${stateCode}`,
+        href: `/blog/google-ads-for-${niche}-in-${slug}`,
+      })),
+    },
+    {
+      service: "Meta Ads",
+      links: US_CITIES.map(({ city, stateCode, slug }) => ({
+        label: `${city}, ${stateCode}`,
+        href: `/blog/meta-ads-for-${niche}-in-${slug}`,
+      })),
+    },
+    {
+      service: "Local SEO",
+      links: US_CITIES.map(({ city, stateCode, slug }) => ({
+        label: `${city}, ${stateCode}`,
+        href: `/blog/local-seo-for-${niche}-in-${slug}`,
+      })),
+    },
+  ];
 }

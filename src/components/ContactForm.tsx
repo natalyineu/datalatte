@@ -96,6 +96,7 @@ function ExploreForm() {
   return (
     <form
       className="space-y-5"
+      data-webmcp-form="send_message"
       onSubmit={e => {
         e.preventDefault();
         submit({ email, message, form_type: "explore" }, setStatus);
@@ -109,6 +110,7 @@ function ExploreForm() {
         </label>
         <input
           id="ex-email" name="email" type="email"
+          data-webmcp-field="email"
           placeholder="you@yourbusiness.com"
           value={email} onChange={e => setEmail(e.target.value)}
           className={inputCls} required
@@ -122,6 +124,7 @@ function ExploreForm() {
         </label>
         <textarea
           id="ex-message" name="message" rows={3}
+          data-webmcp-field="message"
           placeholder="e.g. I want more customers from Google, or I'm not sure where to start…"
           value={message} onChange={e => setMessage(e.target.value)}
           className={`${inputCls} resize-none`}
@@ -158,6 +161,7 @@ function ReadyForm() {
   return (
     <form
       className="space-y-5"
+      data-webmcp-form="request_free_audit"
       onSubmit={e => {
         e.preventDefault();
         submit({ email, name, niche, message, form_type: "ready" }, setStatus);
@@ -172,6 +176,7 @@ function ReadyForm() {
           </label>
           <input
             id="rd-email" name="email" type="email"
+            data-webmcp-field="email"
             placeholder="you@yourbusiness.com"
             value={email} onChange={e => setEmail(e.target.value)}
             className={inputCls} required
@@ -183,6 +188,7 @@ function ReadyForm() {
           </label>
           <input
             id="rd-name" name="name" type="text"
+            data-webmcp-field="name"
             placeholder="Jane Smith"
             value={name} onChange={e => setName(e.target.value)}
             className={inputCls} required
@@ -222,6 +228,7 @@ function ReadyForm() {
         </label>
         <textarea
           id="rd-message" name="message" rows={2}
+          data-webmcp-field="message"
           placeholder="e.g. Google Ads setup, local SEO, full audit…"
           value={message} onChange={e => setMessage(e.target.value)}
           className={`${inputCls} resize-none`}

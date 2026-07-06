@@ -68,7 +68,7 @@ export async function fetchPublishedSignals(): Promise<Signal[]> {
     .eq("status", "published")
     .order("published_at", { ascending: false });
 
-  if (error) throw new Error(`Supabase fetch error: ${error.message}`);
+  if (error) return [];
   return (data ?? []).map(rowToSignal);
 }
 

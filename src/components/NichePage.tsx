@@ -6,6 +6,7 @@ import CTABanner from "@/components/CTABanner";
 import TestimonialCard from "@/components/TestimonialCard";
 import ScrollReveal from "@/components/ScrollReveal";
 import { breadcrumbSchema } from "@/lib/schema";
+import type { CityServiceGroup } from "@/lib/cityGuides";
 
 interface NichePageProps {
   niche: string;
@@ -21,6 +22,7 @@ interface NichePageProps {
   faq: { q: string; a: string }[];
   ctaHeadline: string;
   cityGuideLinks?: { label: string; href: string }[];
+  cityServiceGroups?: CityServiceGroup[];
 }
 
 const NICHE_SLUGS: Record<string, string> = {
@@ -41,7 +43,7 @@ const NICHE_SLUGS: Record<string, string> = {
 export default function NichePage({
   niche, headline, subheadline, heroImage, accentColor,
   problems, services, kpis, tactics, testimonial, faq, ctaHeadline,
-  cityGuideLinks,
+  cityGuideLinks, cityServiceGroups,
 }: NichePageProps) {
   const slug = NICHE_SLUGS[niche] ?? niche.toLowerCase().replace(/[\s&]+/g, "-").replace(/[^a-z0-9-]/g, "");
   const breadcrumb = breadcrumbSchema([
@@ -307,7 +309,43 @@ export default function NichePage({
       </SectionWrapper>
 
       {/* ── City Guides ── */}
-      {cityGuideLinks && cityGuideLinks.length > 0 && (
+      {cityServiceGroups && cityServiceGroups.length > 0 && (
+        <SectionWrapper className="bg-white">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-8">
+              <span className="section-label">Marketing Guides by City</span>
+              <h2 className="section-title mb-2">
+                {niche} marketing guides for <span className="gradient-text">your city</span>
+              </h2>
+              <p className="text-gray-500 text-sm max-w-xl mx-auto">
+                Ad costs, keyword competition, and local search dynamics vary by market. Find the guide for your city.
+              </p>
+            </div>
+            <div className="space-y-8">
+              {cityServiceGroups.map((group) => (
+                <div key={group.service}>
+                  <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">
+                    {group.service} guides
+                  </h3>
+                  <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+                    {group.links.map(({ label, href }) => (
+                      <li key={href}>
+                        <Link
+                          href={href}
+                          className="block text-sm text-coffee-700 hover:text-coffee-900 hover:underline py-1 px-2 rounded hover:bg-coffee-50 transition-colors"
+                        >
+                          {label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </SectionWrapper>
+      )}
+      {!cityServiceGroups && cityGuideLinks && cityGuideLinks.length > 0 && (
         <SectionWrapper className="bg-white">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-8">

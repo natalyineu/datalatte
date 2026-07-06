@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import NichePage from "@/components/NichePage";
-import { getCityGuideLinks } from "@/lib/cityGuides";
+import { getCityServiceGroups } from "@/lib/cityGuides";
 
 export const metadata: Metadata = {
   alternates: {
@@ -147,7 +147,7 @@ export default function HairSalonsPage() {
         },
       ]}
       ctaHeadline="Ready to fill your appointment book with new clients?"
-      cityGuideLinks={getCityGuideLinks("hair-salons")}
+      cityServiceGroups={getCityServiceGroups("hair-salons")}
     />
   );
 }

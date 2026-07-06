@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0",
+  "name": "DataLatte",
+  "description": "Data-driven local marketing for small businesses — coffee shops, hair salons, pet groomers, and fitness studios.",
+  "contact_email": "hi@datalatte.pro",
+  "tools": [
+    {
+      "name": "request_free_audit",
+      "description": "Request a free marketing audit for a local business. Nataliia personally reviews and delivers findings within 48 hours.",
+      "url": "https://datalatte.pro/free-audit",
+      "form_selector": "form",
+      "method": "POST",
+      "parameters": {
+        "type": "object",
+        "required": ["email"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Business owner's email address"
+          },
+          "name": {
+            "type": "string",
+            "description": "Business owner's full name"
+          },
+          "message": {
+            "type": "string",
+            "description": "Brief description of the business and what they'd like to improve"
+          }
+        }
+      }
+    },
+    {
+      "name": "send_message",
+      "description": "Send a message to Nataliia at DataLatte about local marketing services.",
+      "url": "https://datalatte.pro/contact",
+      "form_selector": "form",
+      "method": "POST",
+      "parameters": {
+        "type": "object",
+        "required": ["email"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Sender's email address"
+          },
+          "message": {
+            "type": "string",
+            "description": "Message content"
+          }
+        }
+      }
+    },
+    {
+      "name": "calculate_marketing_budget",
+      "description": "Calculate a recommended monthly marketing budget for a local business based on business type, location, and goals.",
+      "url": "https://datalatte.pro/tools/marketing-budget-calculator",
+      "method": "GET",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "business_type": {
+            "type": "string",
+            "enum": ["coffee-shop", "hair-salon", "pet-groomer", "fitness-studio", "restaurant", "other"],
+            "description": "Type of local business"
+          },
+          "monthly_revenue": {
+            "type": "number",
+            "description": "Approximate monthly revenue in USD"
+          },
+          "goal": {
+            "type": "string",
+            "enum": ["more-customers", "more-bookings", "brand-awareness", "online-reviews"],
+            "description": "Primary marketing goal"
+          }
+        }
+      }
+    }
+  ]
+}
