@@ -200,12 +200,12 @@ def send_email(to_email: str, client_name: str, message: str, appointment: dict)
       <p>Hi {first_name},</p>
       <p>{message}</p>
       <div style="background: #f9f5f0; border-left: 3px solid #5c3317; padding: 15px; margin: 20px 0;">
-        <strong>Service:</strong> {appointment['service']}<br>
-        <strong>Date & Time:</strong> {appt_time}<br>
+        <strong>Service:</strong> {appointment['service']}<br />
+        <strong>Date & Time:</strong> {appt_time}<br />
         <strong>With:</strong> {appointment.get('stylist', 'your stylist')}
       </div>
       <p>Need to reschedule? Reply to this email or call us.</p>
-      <p>See you soon,<br><strong>{BUSINESS_NAME}</strong></p>
+      <p>See you soon,<br /><strong>{BUSINESS_NAME}</strong></p>
     </div>
     """
 

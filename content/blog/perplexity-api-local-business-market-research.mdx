@@ -352,8 +352,8 @@ def send_html_report(sections: dict, config: dict, biz_config: dict):
 
     for section_title, content in sections.items():
         # Convert markdown-ish content to basic HTML
-        content_html = content.replace("\n\n", "</p><p>").replace("\n", "<br>")
-        html_parts.append(f"<h2>{section_title}</h2><p>{content_html}</p><hr>")
+        content_html = content.replace("\n\n", "</p><p>").replace("\n", "<br />")
+        html_parts.append(f"<h2>{section_title}</h2><p>{content_html}</p><hr />")
 
     html_body = "<html><body>" + "".join(html_parts) + "</body></html>"
 
