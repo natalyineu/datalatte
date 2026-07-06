@@ -9,6 +9,12 @@ const nextConfig: NextConfig = {
         destination: "https://datalatte.pro/:path*",
         permanent: true,
       },
+      // Slug alias Google indexed under a shorter URL
+      {
+        source: "/blog/is-google-ads-worth-it-small-business",
+        destination: "/blog/is-google-ads-worth-it-for-small-businesses-honest-answer-with-real-data",
+        permanent: true,
+      },
     ];
   },
   images: {
