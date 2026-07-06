@@ -78,7 +78,6 @@ export default function robots(): MetadataRoute.Robots {
     ],
     sitemap: [
       "https://datalatte.pro/sitemap.xml",
-      "https://datalatte.pro/llms.txt",
     ],
   };
 }
