@@ -52,10 +52,10 @@ const CLUSTER_TO_SERVICE: Record<string, { label: string; href: string }> = {
   "Microsoft Ads":                        { label: "Google Ads Management", href: "/services/google-ads" },
   "Yahoo Advertising":                    { label: "Google Ads Management", href: "/services/google-ads" },
   "YouTube Ads":                          { label: "Google Ads Management", href: "/services/google-ads" },
-  "Programmatic Advertising":             { label: "Google Ads Management", href: "/services/google-ads" },
+  "Programmatic Advertising":             { label: "CTV Advertising", href: "/services/ctv-advertising" },
   "Retargeting":                          { label: "Google Ads Management", href: "/services/google-ads" },
-  "CTV & OTT":                            { label: "Google Ads Management", href: "/services/google-ads" },
-  "CTV Advertising":                      { label: "Google Ads Management", href: "/services/google-ads" },
+  "CTV & OTT":                            { label: "CTV Advertising", href: "/services/ctv-advertising" },
+  "CTV Advertising":                      { label: "CTV Advertising", href: "/services/ctv-advertising" },
   "Audio Advertising":                    { label: "Google Ads Management", href: "/services/google-ads" },
   // Meta Ads variants
   "Meta Ads":                             { label: "Meta Ads Management", href: "/services/meta-ads" },
