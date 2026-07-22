@@ -1,0 +1,224 @@
+---
+title: "Make.com Automation for Local Businesses: 10 Workflows That Save 5hr/Week"
+date: "2026-07-22"
+description: "10 Make.com automations local businesses can implement today — from lead follow-up and review requests to social scheduling and appointment reminders. No coding required."
+author: "Nataliia"
+category: "AI & Automation"
+tags: ["make.com", "automation", "local business automation", "no-code", "workflow automation"]
+slug: "make-com-automation-local-business-workflows"
+image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80&auto=format&fit=crop"
+readTime: "12 min read"
+---
+
+Make.com (formerly Integromat) is the most powerful no-code automation platform available, and most local business owners either haven't heard of it or think it's for software engineers. It's not. If you can understand what you want to happen and when, you can build it in Make.
+
+This guide walks through 10 specific automations with the exact setup for each.
+
+## What Make.com Does
+
+Make.com connects apps and runs automated workflows called "scenarios." A scenario is: "When [trigger event] happens, do [action 1] and then [action 2]."
+
+Example: "When a new booking is made in Vagaro [trigger], send a welcome text message via Twilio [action 1] and create a task in Trello for the assigned stylist [action 2]."
+
+Make is more powerful than Zapier for complex automations and has a generous free tier (1,000 operations/month). Most local businesses can run 5–8 useful automations within the free tier.
+
+**Setup**: Create a free account at make.com. Each automation below assumes you have the mentioned apps and basic familiarity with creating a new scenario (click "Create a new scenario" → search for the app → connect your account).
+
+## Workflow 1: New Lead Instant Follow-Up
+
+**Time saved**: 30–45 min/day
+**Apps**: Your CRM or form tool (Typeform, JotForm, Google Forms) + Gmail or Twilio SMS
+
+**What it does**: When someone submits a contact form or lead form, automatically send a personalized response within 60 seconds — before they've opened another browser tab to contact your competitor.
+
+**Setup**:
+1. Trigger: New form submission (connect your form tool)
+2. Action 1: Gmail — Send email with: "Hi [First Name], thanks for reaching out to [Business Name]! I'll be in touch within [X hours]. In the meantime, here's a link to book a time that works for you: [booking link]"
+3. Action 2 (optional): Create a follow-up reminder task in Google Tasks or Notion to personally call the lead within 2 hours
+
+**Impact**: Businesses that respond to leads within 5 minutes convert at 9x higher rates than those that respond within an hour. This automation makes 60-second response time standard without any manual effort.
+
+## Workflow 2: Post-Appointment Review Request
+
+**Time saved**: 1–2 hr/week
+**Apps**: Your booking software (Vagaro, Square, Mindbody) + Twilio SMS
+
+**What it does**: 4 hours after an appointment is marked as completed in your booking system, automatically send a personalized review request text.
+
+**Message**: "Hi [Client Name], thank you for visiting [Business Name] today! If you enjoyed your experience, a quick Google review means the world to a small business: [your Google review link]. Takes 2 minutes and helps us grow. — [Your Name]"
+
+**Setup**:
+1. Trigger: Appointment status changed to "completed" in your booking software
+2. Wait: 4 hours (Make has a delay module)
+3. Action: Twilio — Send SMS to client's phone number
+
+**Why 4 hours**: Immediately after an appointment feels transactional. The next day can feel late. 4 hours hits the sweet spot when the client is relaxed at home and the experience is still fresh.
+
+## Workflow 3: Missed Call → Instant Text
+
+**Time saved**: Prevents revenue loss from missed opportunities
+**Apps**: Your phone system or missed call alert + Twilio or your SMS tool
+
+**What it does**: When your business phone receives a missed call, automatically send a text to the caller's number within 2 minutes.
+
+**Message**: "Hi! This is [Business Name]. Sorry we missed your call. We're with a client right now — can we help you via text or would you like to [book online here: link]?"
+
+**Setup**:
+1. Trigger: Missed call webhook from your phone system (Google Voice, RingCentral, and most VoIP systems support this)
+2. Action: Twilio — Send SMS to the caller's number
+
+**Impact**: 85% of callers who don't reach a business will not call back. An instant text converts 30–40% of missed calls into booked appointments.
+
+## Workflow 4: No-Show Recovery
+
+**Time saved**: Recovers revenue otherwise lost
+**Apps**: Booking software + Twilio/Gmail
+
+**What it does**: When an appointment is marked as "no-show," automatically reach out 2 hours later with a rebooking offer.
+
+**Message**: "Hi [Name], we had you scheduled for [appointment type] today at [time] — we hope everything is okay! If you'd like to rebook, here's a link to find the next available time: [booking link]. We've waived the no-show fee this time."
+
+**Setup**:
+1. Trigger: Appointment status changed to "no-show"
+2. Wait: 2 hours
+3. Action: SMS via Twilio
+
+**Note on the waived fee**: You don't have to waive it — but the message converts at higher rates when it leads with understanding rather than accusation. For clients who no-show repeatedly, you can add a filter step that checks their no-show history before sending the waiver message.
+
+## Workflow 5: Birthday Message With Offer
+
+**Time saved**: 1 hr/week of manual calendar checking
+**Apps**: Your CRM or client database + Gmail or Twilio
+
+**What it does**: Every morning, check your client database for birthdays today. For each birthday, send a personalized offer.
+
+**Message**: "Happy birthday, [Name]! 🎂 As a small thank-you, enjoy 20% off your next [service] this month. Book here: [link]. Hope you have a great day! — [Your Name]"
+
+**Setup**:
+1. Trigger: Schedule — runs every morning at 9am
+2. Action: Google Sheets or your CRM — search for records where birthday = today's date
+3. Action: For each matching record, send a birthday text via Twilio or email via Gmail
+
+**Revenue impact**: Birthday offers in salons and spas typically generate 2–4x the response rate of regular promotions because they feel personal. A 20% birthday discount drives rebooking from clients who might otherwise drift.
+
+## Workflow 6: Instagram New Post → Facebook Cross-Post
+
+**Time saved**: 20 min/day of manual reposting
+**Apps**: Instagram Business + Facebook Page
+
+**What it does**: When you publish a new Instagram post, automatically share it to your Facebook Business Page.
+
+**Setup**:
+1. Trigger: New Instagram Business post (Make watches your account)
+2. Action: Facebook Pages — Create a post with the same caption and image
+
+**Why this matters**: 87% of small businesses that post on Instagram also want to post on Facebook. Doing it manually doubles your posting time. This automation cuts that to zero.
+
+**Limitation**: Facebook/Meta's API restricts some sharing. If Make's native Instagram→Facebook doesn't work for your account due to permissions, the alternative is Make.com's Buffer or Later integration as a middle layer.
+
+## Workflow 7: New Review Alert + Owner Notification
+
+**Time saved**: Eliminates manually checking review platforms
+**Apps**: Google Business Profile API or a review monitoring tool (ReviewTrackers, Podium) + Slack or Gmail
+
+**What it does**: When a new Google (or Yelp) review appears, immediately notify you with the review text and a link to respond.
+
+**Message (sent to your Slack or email)**: "New [star rating] review on Google: '[Review text]' — [Link to respond]"
+
+**Setup**:
+1. Trigger: Webhook from ReviewTrackers, Podium, or a similar tool when a new review appears (these services have Make integrations)
+2. Action: Gmail — send notification email OR Slack — post to #reviews channel
+
+**Why immediate notification matters**: Google's research shows that responding to reviews within 24 hours improves your overall review rating and local search ranking. Same-day responses also convert fence-sitting potential clients who read reviews — seeing that you actively respond shows you care.
+
+## Workflow 8: Lapsed Client Re-Engagement
+
+**Time saved**: Replaces manual client win-back outreach
+**Apps**: Your booking software + Twilio/Gmail
+
+**What it does**: Every Monday morning, check for clients who visited 90 days ago but haven't booked since. Send each a personalized "we miss you" message with a win-back offer.
+
+**Message**: "Hi [Name], we haven't seen you since [date of last visit] — we miss you! Here's 15% off your next [service] if you book this month: [link]. We'd love to catch you up on what's new. — [Your Name]"
+
+**Setup**:
+1. Trigger: Schedule — every Monday at 10am
+2. Action: Query your booking software (via API) for clients with last visit = 85–95 days ago and no future booking
+3. Action: For each result, send SMS via Twilio
+
+**Win-back rate**: Well-crafted lapsed client messages convert at 15–25%. At 20 lapsed clients per month and 20% re-engagement, that's 4 clients per month recovered from zero effort.
+
+## Workflow 9: New Client Welcome Sequence (Multi-Step)
+
+**Time saved**: Replaces a 3–5 email manual onboarding sequence
+**Apps**: Your booking software + Gmail/Mailchimp
+
+**What it does**: When a new client completes their first booking, automatically enroll them in a 5-message welcome sequence.
+
+**Sequence**:
+- Immediately: "Welcome! Here's what to expect at your first visit" (confirmation + parking, what to bring, etc.)
+- Day 3: "How was your visit?" (post-appointment check-in)
+- Day 10: "Ready to rebook?" with scheduling link
+- Day 21: "We wanted to share this with you" (tip, tutorial, or recommendation related to their service)
+- Day 30: "You've been with us a month — what do you think?" with review request
+
+**Setup**:
+1. Trigger: New client booking (first booking for this contact ID)
+2. Action: Add client to an email sequence in Mailchimp or use Make's delay modules to schedule each message
+
+## Workflow 10: Weekly Business Performance Report
+
+**Time saved**: 2–3 hr/week of manual reporting
+**Apps**: Your booking software + Google Sheets + Gmail
+
+**What it does**: Every Monday morning at 8am, automatically pull the previous week's data and send you a summary email.
+
+**Report includes**:
+- Total appointments completed
+- Revenue (if your booking software exposes this via API)
+- New clients vs. returning clients
+- No-show count and rate
+- Most popular services
+- Comparison to previous week
+
+**Setup**:
+1. Trigger: Schedule — every Monday at 8am
+2. Action: Query your booking software API for last week's data (Monday–Sunday)
+3. Action: Compile into Google Sheets row for historical tracking
+4. Action: Send summary email to yourself via Gmail
+
+**Why this matters**: Most business owners have a vague sense of how business is going but no consistent data. This automation gives you 5 minutes of insight every Monday instead of an hour of digging.
+
+## Getting Started With Make.com
+
+**Free tier**: 1,000 operations/month. Each action in a scenario = 1 operation. Most of the above scenarios use 2–4 operations per trigger event. At 50 bookings/month, workflow 2 (review requests) uses 100–200 operations per month. Most small businesses can run 4–6 automations within the free tier.
+
+**Where to start**: Workflows 1 (instant lead follow-up) and 2 (review requests) have the highest immediate ROI. Set those up first.
+
+**What you'll need**: A Make.com account, accounts in each connected app, and 1–2 hours to set up each scenario. Make's interface is visual (drag-and-drop modules) — most people with no coding experience can set up a functional scenario in 60 minutes.
+
+## Frequently Asked Questions
+
+**Q: How is Make.com different from Zapier?**
+
+Both connect apps and automate workflows. Make is generally more powerful for complex, multi-step, or conditional scenarios. Zapier is simpler for basic two-step automations. Make's free tier includes 1,000 operations/month; Zapier's free tier is more limited. Most local businesses find Make provides better value as automations get more complex.
+
+**Q: Do I need to know how to code?**
+
+No. Make uses a visual drag-and-drop interface. You connect modules (apps) by drawing lines between them. The most technical thing you'll encounter is copying an API key from one app into Make's connection setup — which involves copy-pasting, not coding.
+
+**Q: What if an automation breaks or sends the wrong message?**
+
+Make logs every scenario run with full details of what happened. You can see exactly what triggered, what data was sent, and what response came back. Error notifications can be sent to your email automatically. When testing new scenarios, use Make's "Run once" feature to test with one record before enabling it for all data.
+
+---
+
+## Related Articles
+
+- [Make.com AI Agent Workflow for Local Business: Complete Blueprint](/blog/make-com-ai-agent-workflow-local-business)
+- [Make.com vs Zapier for Local Business Automation](/blog/make-com-vs-zapier-for-local-business-automation)
+- [Marketing Automation for Local Businesses: The Complete Guide](/blog/marketing-automation-for-local-businesses)
+- [AI Agents & Automation for Small Businesses](/services/ai-agents)
+
+<Callout type="coffee" title="Want These Set Up For Your Business?">
+DataLatte builds custom Make.com automation stacks for local businesses — lead follow-up, review requests, client retention, and reporting. [Book a free consultation](/free-audit) to see which automations will save you the most time.
+</Callout>
