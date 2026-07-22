@@ -256,6 +256,7 @@ interface PostFrontmatter {
   slug: string;
   image: string;
   readTime: string;
+  noindex?: boolean;
 }
 
 export async function generateStaticParams() {
@@ -299,6 +300,7 @@ export async function generateMetadata({
   return {
     title: seoTitle,
     description: frontmatter.description,
+    ...(frontmatter.noindex && { robots: { index: false, follow: false } }),
     // ── Canonical + hreflang per article ──────────────────────────────────
     alternates: {
       canonical: url,
