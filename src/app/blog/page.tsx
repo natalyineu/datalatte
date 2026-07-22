@@ -286,7 +286,7 @@ export default async function BlogPage({
 
       {/* Hero — only show on page 1 */}
       {currentPage === 1 ? (
-        <section className="bg-gray-50 py-20 px-4 sm:px-6 lg:px-8 border-b border-gray-100">
+        <section className="bg-gray-50 dark:bg-gray-900 py-20 px-4 sm:px-6 lg:px-8 border-b border-gray-100 dark:border-gray-800">
           <div className="max-w-3xl mx-auto text-center">
             <span className="section-label">The DataLatte Blog</span>
             <h1 className="section-title mb-4">
@@ -300,14 +300,14 @@ export default async function BlogPage({
           </div>
         </section>
       ) : (
-        <section className="bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 border-b border-gray-100">
+        <section className="bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8 border-b border-gray-100 dark:border-gray-800">
           <div className="max-w-3xl mx-auto text-center">
             <Link href={BLOG_URL} className="text-coffee-700 text-sm hover:underline mb-3 inline-block">
               ← Back to all articles
             </Link>
-            <h1 className="text-2xl font-bold text-gray-900">
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-50">
               Blog — Page {currentPage}
-              <span className="text-gray-400 font-normal text-lg ml-2">of {totalPages}</span>
+              <span className="text-gray-400 dark:text-gray-500 font-normal text-lg ml-2">of {totalPages}</span>
             </h1>
           </div>
         </section>

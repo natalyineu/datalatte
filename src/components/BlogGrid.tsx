@@ -102,11 +102,11 @@ export default function BlogGrid({ posts }: { posts: Post[] }) {
           value={query}
           onChange={e => setQuery(e.target.value)}
           placeholder="Search articles…"
-          className="w-full max-w-md px-4 py-2.5 rounded-full border border-coffee-200 bg-white text-gray-700 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-coffee-500 focus:border-transparent transition"
+          className="w-full max-w-md px-4 py-2.5 rounded-full border border-coffee-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 text-sm placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-coffee-500 focus:border-transparent transition"
         />
         <button
           onClick={() => setSortAsc(v => !v)}
-          className="flex items-center gap-1.5 px-4 py-2.5 rounded-full border border-coffee-200 bg-white text-sm font-medium text-gray-600 hover:bg-gray-50 transition whitespace-nowrap"
+          className="flex items-center gap-1.5 px-4 py-2.5 rounded-full border border-coffee-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition whitespace-nowrap"
         >
           <svg className="w-3.5 h-3.5" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8">
             <path d="M2 4h8M2 8h5M2 12h3" strokeLinecap="round"/>
@@ -121,7 +121,7 @@ export default function BlogGrid({ posts }: { posts: Post[] }) {
       <div className="flex flex-wrap gap-2 mb-10">
         <button
           onClick={() => setActiveGroup("All")}
-          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeGroup === "All" ? "bg-coffee-700 text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}
+          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeGroup === "All" ? "bg-coffee-700 text-white" : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"}`}
         >
           All
           <span className={`ml-1.5 text-xs ${activeGroup === "All" ? "text-white/70" : "text-gray-400"}`}>
@@ -148,7 +148,7 @@ export default function BlogGrid({ posts }: { posts: Post[] }) {
       </div>
 
       {filtered.length === 0 ? (
-        <p className="text-gray-500 text-sm">No articles found. Try a different search or category.</p>
+        <p className="text-gray-500 dark:text-gray-400 text-sm">No articles found. Try a different search or category.</p>
       ) : (
         <>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

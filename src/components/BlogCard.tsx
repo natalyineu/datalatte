@@ -42,7 +42,6 @@ export default function BlogCard({ title, excerpt, slug, category, date, rawDate
           ) : (
             <div className={`bg-gradient-to-br ${gradient} w-full h-full`} />
           )}
-          {/* Group badge */}
           <div className={`absolute top-3 left-3 bg-gradient-to-br ${gradient} flex items-center gap-1.5 px-3 py-1.5 rounded-full`}>
             <Icon size={13} strokeWidth={2} className="text-white" />
             <span className="text-white text-xs font-semibold tracking-wide">{group}</span>
@@ -50,17 +49,17 @@ export default function BlogCard({ title, excerpt, slug, category, date, rawDate
         </div>
         {/* Content */}
         <div className="p-7 flex flex-col justify-center">
-          <span className="text-xs font-medium text-gray-400 mb-2">{category}</span>
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 group-hover:text-coffee-700 transition-colors leading-snug">
+          <span className="text-xs font-medium text-gray-400 dark:text-gray-500 mb-2">{category}</span>
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-50 mb-3 group-hover:text-coffee-700 dark:group-hover:text-coffee-300 transition-colors leading-snug">
             {title}
           </h2>
-          <p className="text-gray-500 text-sm line-clamp-3 mb-4">{excerpt}</p>
-          <div className="flex items-center gap-3 text-xs text-gray-500">
-            <time dateTime={rawDate} className="font-medium text-coffee-700">{date}</time>
+          <p className="text-gray-500 dark:text-gray-400 text-sm line-clamp-3 mb-4">{excerpt}</p>
+          <div className="flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400">
+            <time dateTime={rawDate} className="font-medium text-coffee-700 dark:text-coffee-400">{date}</time>
             <span>·</span>
             <span>{readTime}</span>
           </div>
-          <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-coffee-700 group-hover:gap-2 transition-all">
+          <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-coffee-700 dark:text-coffee-400 group-hover:gap-2 transition-all">
             Read more <ArrowRight size={14} />
           </span>
         </div>
@@ -85,7 +84,6 @@ export default function BlogCard({ title, excerpt, slug, category, date, rawDate
         ) : (
           <div className={`bg-gradient-to-br ${gradient} w-full h-full`} />
         )}
-        {/* Group icon badge */}
         <div className={`absolute top-3 left-3 bg-gradient-to-br ${gradient} flex items-center gap-1.5 px-2.5 py-1 rounded-full`}>
           <Icon size={11} strokeWidth={2} className="text-white" />
           <span className="text-white text-xs font-semibold tracking-wide">{group}</span>
@@ -94,18 +92,18 @@ export default function BlogCard({ title, excerpt, slug, category, date, rawDate
 
       {/* Body */}
       <div className="p-5 flex flex-col flex-1">
-        <span className="text-xs font-medium text-gray-400 mb-1">{category}</span>
-        <h3 className="font-bold text-gray-900 mb-2 group-hover:text-coffee-700 transition-colors leading-snug flex-1">
+        <span className="text-xs font-medium text-gray-400 dark:text-gray-500 mb-1">{category}</span>
+        <h3 className="font-bold text-gray-900 dark:text-gray-50 mb-2 group-hover:text-coffee-700 dark:group-hover:text-coffee-300 transition-colors leading-snug flex-1">
           {title}
         </h3>
-        <p className="text-sm text-gray-500 line-clamp-2 mb-4">{excerpt}</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400 line-clamp-2 mb-4">{excerpt}</p>
         <div className="flex items-center justify-between mt-auto">
-          <div className="flex items-center gap-2 text-xs text-gray-500">
-            <time dateTime={rawDate} className="font-medium text-coffee-700">{date}</time>
+          <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+            <time dateTime={rawDate} className="font-medium text-coffee-700 dark:text-coffee-400">{date}</time>
             <span>·</span>
             <span>{readTime}</span>
           </div>
-          <span className="inline-flex items-center gap-1 text-xs font-semibold text-coffee-700 group-hover:gap-1.5 transition-all">
+          <span className="inline-flex items-center gap-1 text-xs font-semibold text-coffee-700 dark:text-coffee-400 group-hover:gap-1.5 transition-all">
             Read <ArrowRight size={12} />
           </span>
         </div>

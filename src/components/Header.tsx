@@ -62,7 +62,7 @@ function DropdownMenu({ label, items }: { label: string; items: { label: string;
       onMouseLeave={() => setOpen(false)}
     >
       <button
-        className="flex items-center gap-1 text-gray-600 hover:text-gray-900 font-medium transition-colors py-2"
+        className="flex items-center gap-1 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium transition-colors py-2"
         onClick={() => setOpen(!open)}
         aria-expanded={open}
       >
@@ -72,12 +72,12 @@ function DropdownMenu({ label, items }: { label: string; items: { label: string;
 
       {open && (
         <div className="absolute top-full left-0 pt-1 w-52 z-50">
-          <div className="bg-white rounded-xl shadow-xl border border-gray-100 py-2 animate-fade-in">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 py-2 animate-fade-in">
             {items.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="block px-4 py-2 text-sm text-gray-600 hover:text-coffee-700 hover:bg-coffee-50 transition-colors"
+                className="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 hover:text-coffee-700 dark:hover:text-coffee-300 hover:bg-coffee-50 dark:hover:bg-gray-700 transition-colors"
               >
                 {item.label}
               </Link>
@@ -99,13 +99,13 @@ export default function Header() {
   const isRadar = pathname.startsWith("/radar");
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
+    <header className="sticky top-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-100 dark:border-gray-800 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-1 font-display font-bold text-xl">
-            <span className="text-coffee-800">Data</span>
+            <span className="text-coffee-800 dark:text-coffee-300">Data</span>
             <span className="text-coffee-500">Latte</span>
             <span className="text-coffee-400 text-2xl leading-none">☕</span>
           </Link>
@@ -123,8 +123,8 @@ export default function Header() {
               className={clsx(
                 "flex items-center gap-1.5 font-semibold text-sm px-3 py-1.5 rounded-full border transition-all",
                 isRadar
-                  ? "bg-gray-950 text-white border-gray-950"
-                  : "text-gray-800 border-gray-300 hover:border-gray-950 hover:bg-gray-950 hover:text-white"
+                  ? "bg-gray-950 text-white border-gray-950 dark:bg-white dark:text-gray-900 dark:border-white"
+                  : "text-gray-800 dark:text-gray-200 border-gray-300 dark:border-gray-600 hover:border-gray-950 hover:bg-gray-950 hover:text-white dark:hover:border-gray-200 dark:hover:bg-white dark:hover:text-gray-900"
               )}
             >
               <span className="relative flex h-1.5 w-1.5">
@@ -144,7 +144,7 @@ export default function Header() {
 
           {/* Mobile toggle */}
           <button
-            className="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100"
+            className="md:hidden p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
@@ -155,11 +155,11 @@ export default function Header() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden border-t border-gray-100 bg-white px-4 pb-6 pt-2 space-y-1">
-          {/* Radar first on mobile — most distinctive */}
+        <div className="md:hidden border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 px-4 pb-6 pt-2 space-y-1">
+          {/* Radar first on mobile */}
           <Link
             href="/radar"
-            className="flex items-center gap-2 py-3 font-semibold text-gray-900"
+            className="flex items-center gap-2 py-3 font-semibold text-gray-900 dark:text-gray-50"
             onClick={() => setMobileOpen(false)}
           >
             <span className="relative flex h-2 w-2">
@@ -170,7 +170,7 @@ export default function Header() {
           </Link>
 
           <button
-            className="flex items-center justify-between w-full py-3 text-gray-700 font-medium"
+            className="flex items-center justify-between w-full py-3 text-gray-700 dark:text-gray-200 font-medium"
             onClick={() => setMobileNicheOpen(!mobileNicheOpen)}
           >
             For Your Business
@@ -179,7 +179,7 @@ export default function Header() {
           {mobileNicheOpen && (
             <div className="pl-4 space-y-1">
               {niches.map((n) => (
-                <Link key={n.href} href={n.href} className="block py-2 text-sm text-gray-600 hover:text-coffee-700" onClick={() => setMobileOpen(false)}>
+                <Link key={n.href} href={n.href} className="block py-2 text-sm text-gray-600 dark:text-gray-300 hover:text-coffee-700 dark:hover:text-coffee-300" onClick={() => setMobileOpen(false)}>
                   {n.label}
                 </Link>
               ))}
@@ -187,7 +187,7 @@ export default function Header() {
           )}
 
           <button
-            className="flex items-center justify-between w-full py-3 text-gray-700 font-medium"
+            className="flex items-center justify-between w-full py-3 text-gray-700 dark:text-gray-200 font-medium"
             onClick={() => setMobileServOpen(!mobileServOpen)}
           >
             Services
@@ -196,7 +196,7 @@ export default function Header() {
           {mobileServOpen && (
             <div className="pl-4 space-y-1">
               {services.map((s) => (
-                <Link key={s.href} href={s.href} className="block py-2 text-sm text-gray-600 hover:text-coffee-700" onClick={() => setMobileOpen(false)}>
+                <Link key={s.href} href={s.href} className="block py-2 text-sm text-gray-600 dark:text-gray-300 hover:text-coffee-700 dark:hover:text-coffee-300" onClick={() => setMobileOpen(false)}>
                   {s.label}
                 </Link>
               ))}
@@ -204,11 +204,11 @@ export default function Header() {
           )}
 
           {tools.map((t) => (
-            <Link key={t.href} href={t.href} className="block py-3 text-gray-700 font-medium" onClick={() => setMobileOpen(false)}>{t.label}</Link>
+            <Link key={t.href} href={t.href} className="block py-3 text-gray-700 dark:text-gray-200 font-medium" onClick={() => setMobileOpen(false)}>{t.label}</Link>
           ))}
 
           <button
-            className="flex items-center justify-between w-full py-3 text-gray-700 font-medium"
+            className="flex items-center justify-between w-full py-3 text-gray-700 dark:text-gray-200 font-medium"
             onClick={() => setMobileLearnOpen(!mobileLearnOpen)}
           >
             Learn
@@ -217,7 +217,7 @@ export default function Header() {
           {mobileLearnOpen && (
             <div className="pl-4 space-y-1">
               {learn.map((l) => (
-                <Link key={l.href} href={l.href} className="block py-2 text-sm text-gray-600 hover:text-coffee-700" onClick={() => setMobileOpen(false)}>
+                <Link key={l.href} href={l.href} className="block py-2 text-sm text-gray-600 dark:text-gray-300 hover:text-coffee-700 dark:hover:text-coffee-300" onClick={() => setMobileOpen(false)}>
                   {l.label}
                 </Link>
               ))}

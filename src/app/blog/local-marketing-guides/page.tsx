@@ -439,7 +439,7 @@ export default function LocalMarketingGuidesPage() {
       />
 
       {/* ── Hero ── */}
-      <section className="bg-gray-50 py-20 px-4 sm:px-6 lg:px-8 border-b border-gray-100">
+      <section className="bg-gray-50 dark:bg-gray-900 py-20 px-4 sm:px-6 lg:px-8 border-b border-gray-100 dark:border-gray-800">
         <div className="max-w-3xl mx-auto text-center">
           <span className="section-label">Worldwide Coverage</span>
           <h1 className="section-title mb-4">
@@ -481,7 +481,7 @@ export default function LocalMarketingGuidesPage() {
                 <span className="section-label">
                   {region.emoji} {region.name}
                 </span>
-                <p className="text-gray-500 text-sm mt-1">
+                <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">
                   {region.countries.length}{" "}
                   {region.countries.length === 1 ? "guide" : "guides"}{" "}
                   available
@@ -499,7 +499,7 @@ export default function LocalMarketingGuidesPage() {
                     <span className="font-semibold text-gray-800 group-hover:text-coffee-700 transition-colors text-sm leading-tight">
                       {country.displayName}
                     </span>
-                    <span className="text-xs text-gray-400 line-clamp-2 leading-snug">
+                    <span className="text-xs text-gray-400 dark:text-gray-500 line-clamp-2 leading-snug">
                       {country.description}
                     </span>
                   </Link>

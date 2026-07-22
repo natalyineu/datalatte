@@ -211,7 +211,7 @@ export default function CTVHubPage() {
       />
 
       {/* ── Hero ── */}
-      <section className="bg-gray-50 py-20 px-4 sm:px-6 lg:px-8 border-b border-gray-100">
+      <section className="bg-gray-50 dark:bg-gray-900 py-20 px-4 sm:px-6 lg:px-8 border-b border-gray-100 dark:border-gray-800">
         <div className="max-w-3xl mx-auto text-center">
           <span className="section-label">CTV Advertising Hub</span>
           <h1 className="section-title mb-4">
@@ -256,7 +256,7 @@ export default function CTVHubPage() {
             <div className="mb-6">
               <span className="section-label">Start here</span>
               <h2 className="text-2xl font-bold text-gray-900 mt-1">The Essentials</h2>
-              <p className="text-gray-500 text-sm mt-1">
+              <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">
                 Platform comparisons, pricing breakdowns, and strategy guides
               </p>
             </div>
@@ -270,7 +270,7 @@ export default function CTVHubPage() {
                   <span className="font-semibold text-gray-800 group-hover:text-coffee-700 transition-colors text-sm leading-snug">
                     {a.title}
                   </span>
-                  <span className="text-xs text-gray-400 line-clamp-2 leading-snug">
+                  <span className="text-xs text-gray-400 dark:text-gray-500 line-clamp-2 leading-snug">
                     {a.description}
                   </span>
                 </Link>
@@ -283,7 +283,7 @@ export default function CTVHubPage() {
             <div className="mb-6">
               <span className="section-label">By Business Type</span>
               <h2 className="text-2xl font-bold text-gray-900 mt-1">CTV Ads by Niche</h2>
-              <p className="text-gray-500 text-sm mt-1">
+              <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">
                 Industry-specific guides with targeting, budgets, and creative tips
               </p>
             </div>
@@ -297,7 +297,7 @@ export default function CTVHubPage() {
                   <span className="font-semibold text-gray-800 group-hover:text-coffee-700 transition-colors text-sm leading-tight">
                     {a.label}
                   </span>
-                  <span className="text-xs text-gray-400 line-clamp-2 leading-snug">
+                  <span className="text-xs text-gray-400 dark:text-gray-500 line-clamp-2 leading-snug">
                     {a.description}
                   </span>
                 </Link>
@@ -312,7 +312,7 @@ export default function CTVHubPage() {
               <h2 className="text-2xl font-bold text-gray-900 mt-1">
                 CTV Advertising by City
               </h2>
-              <p className="text-gray-500 text-sm mt-1">
+              <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">
                 Local market guides — CPM rates, top DMAs, and campaign tips for {cities.length} US markets
               </p>
             </div>
@@ -338,7 +338,7 @@ export default function CTVHubPage() {
               <h2 className="text-2xl font-bold text-gray-900 mt-1">
                 CTV Advertising by Country
               </h2>
-              <p className="text-gray-500 text-sm mt-1">
+              <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">
                 Market-specific guides for streaming TV advertising outside the US
               </p>
             </div>
