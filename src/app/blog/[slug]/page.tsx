@@ -280,7 +280,7 @@ function truncateSeoTitle(title: string, max = 55): string {
   if (title.length <= max) return title;
   const cut = title.slice(0, max - 1);
   const lastSpace = cut.lastIndexOf(" ");
-  return (lastSpace > 30 ? cut.slice(0, lastSpace) : cut) + "…";
+  return (lastSpace > 30 ? cut.slice(0, lastSpace) : cut) + "...";
 }
 
 export async function generateMetadata({

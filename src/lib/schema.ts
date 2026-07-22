@@ -7,8 +7,14 @@ export function localBusinessSchema() {
     "@id": `${BASE}/#business`,
     name: "DataLatte",
     url: BASE,
-    logo: `${BASE}/icon`,
+    logo: { "@type": "ImageObject", url: `${BASE}/icon`, width: 512, height: 512 },
     image: `${BASE}/opengraph-image`,
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer service",
+      email: "hi@datalatte.pro",
+      availableLanguage: ["English"],
+    },
     description:
       "Data-driven digital marketing for local small businesses in the US, UK, Australia, and Canada. Google Ads, Meta Ads, Local SEO, Google Business Profile optimization, and AI marketing automation — run by an ex-agency strategist.",
     email: "hi@datalatte.pro",

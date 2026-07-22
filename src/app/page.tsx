@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     absolute: "DataLatte — Data-Driven Local Marketing for Small Businesses",
   },
   description:
-    "Freelance marketing & analytics built for local SMBs. Google Ads, Meta Ads, local SEO, and Google Business Profile optimization — with real data behind every decision.",
+    "Google Ads, Meta Ads & Local SEO for coffee shops, salons, pet groomers and gyms. Real data, transparent results. Free marketing audit.",
 };
 
 const niches = [
