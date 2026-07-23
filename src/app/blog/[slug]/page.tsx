@@ -342,7 +342,7 @@ const mdxComponents = {
   h2: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => {
     const id = headingId(String(children));
     return (
-      <h2 id={id} className="text-2xl font-bold text-gray-900 mt-10 mb-4 scroll-mt-24" {...props}>
+      <h2 id={id} className="text-2xl font-bold text-gray-900 dark:text-gray-50 mt-10 mb-4 scroll-mt-24" {...props}>
         {children}
       </h2>
     );
@@ -350,33 +350,33 @@ const mdxComponents = {
   h3: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => {
     const id = headingId(String(children));
     return (
-      <h3 id={id} className="text-xl font-semibold text-gray-800 mt-8 mb-3 scroll-mt-24" {...props}>
+      <h3 id={id} className="text-xl font-semibold text-gray-800 dark:text-gray-100 mt-8 mb-3 scroll-mt-24" {...props}>
         {children}
       </h3>
     );
   },
   p: (props: React.HTMLAttributes<HTMLParagraphElement>) => (
-    <div className="text-gray-600 leading-relaxed mb-4" {...props} />
+    <div className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4" {...props} />
   ),
   ul: (props: React.HTMLAttributes<HTMLUListElement>) => (
-    <ul className="list-disc list-inside mb-5 space-y-2 text-gray-600" {...props} />
+    <ul className="list-disc list-inside mb-5 space-y-2 text-gray-600 dark:text-gray-300" {...props} />
   ),
   ol: (props: React.HTMLAttributes<HTMLOListElement>) => (
-    <ol className="list-decimal list-inside mb-5 space-y-2 text-gray-600" {...props} />
+    <ol className="list-decimal list-inside mb-5 space-y-2 text-gray-600 dark:text-gray-300" {...props} />
   ),
   li: (props: React.HTMLAttributes<HTMLLIElement>) => (
-    <li className="text-gray-600 mb-1" {...props} />
+    <li className="text-gray-600 dark:text-gray-300 mb-1" {...props} />
   ),
   strong: (props: React.HTMLAttributes<HTMLElement>) => (
-    <strong className="font-semibold text-gray-800" {...props} />
+    <strong className="font-semibold text-gray-800 dark:text-gray-100" {...props} />
   ),
   a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
-    <a className="text-coffee-700 underline hover:text-coffee-900" {...props} />
+    <a className="text-coffee-700 dark:text-coffee-400 underline hover:text-coffee-900 dark:hover:text-coffee-200" {...props} />
   ),
   blockquote: (props: React.HTMLAttributes<HTMLQuoteElement>) => (
-    <blockquote className="border-l-4 border-coffee-300 pl-4 italic text-gray-500 my-6" {...props} />
+    <blockquote className="border-l-4 border-coffee-300 dark:border-coffee-700 pl-4 italic text-gray-500 dark:text-gray-400 my-6" {...props} />
   ),
-  hr: () => <hr className="my-8 border-gray-200" />,
+  hr: () => <hr className="my-8 border-gray-200 dark:border-gray-700" />,
   Callout,
   BarChart,
   StatRow,
@@ -392,30 +392,30 @@ const mdxComponents = {
   Stat: ({ children }: { children: React.ReactNode }) => <Callout type="stat">{children}</Callout>,
   Faq: ({ children }: { children: React.ReactNode }) => <Callout type="faq">{children}</Callout>,
   code: (props: React.HTMLAttributes<HTMLElement>) => (
-    <code className="bg-coffee-50 text-coffee-800 text-xs font-mono px-1.5 py-0.5 rounded" {...props} />
+    <code className="bg-coffee-50 dark:bg-gray-800 text-coffee-800 dark:text-coffee-300 text-xs font-mono px-1.5 py-0.5 rounded" {...props} />
   ),
   pre: (props: React.HTMLAttributes<HTMLPreElement>) => (
     <pre className="bg-gray-900 text-gray-100 text-sm font-mono rounded-xl p-5 overflow-x-auto my-6" {...props} />
   ),
   table: (props: React.HTMLAttributes<HTMLTableElement>) => (
-    <div className="overflow-x-auto my-6 rounded-xl border border-gray-200 shadow-sm">
+    <div className="overflow-x-auto my-6 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
       <table className="w-full text-sm text-left border-collapse" {...props} />
     </div>
   ),
   thead: (props: React.HTMLAttributes<HTMLTableSectionElement>) => (
-    <thead className="bg-coffee-50 text-coffee-900" {...props} />
+    <thead className="bg-coffee-50 dark:bg-gray-800 text-coffee-900 dark:text-coffee-200" {...props} />
   ),
   tbody: (props: React.HTMLAttributes<HTMLTableSectionElement>) => (
-    <tbody className="divide-y divide-gray-100" {...props} />
+    <tbody className="divide-y divide-gray-100 dark:divide-gray-700" {...props} />
   ),
   tr: (props: React.HTMLAttributes<HTMLTableRowElement>) => (
-    <tr className="hover:bg-gray-50 transition-colors" {...props} />
+    <tr className="hover:bg-gray-50 dark:hover:bg-gray-800/60 transition-colors" {...props} />
   ),
   th: (props: React.HTMLAttributes<HTMLTableCellElement>) => (
-    <th className="px-4 py-3 font-semibold text-coffee-800 text-xs uppercase tracking-wide border-b border-coffee-100 whitespace-nowrap" {...props} />
+    <th className="px-4 py-3 font-semibold text-coffee-800 dark:text-coffee-200 text-xs uppercase tracking-wide border-b border-coffee-100 dark:border-gray-700 whitespace-nowrap" {...props} />
   ),
   td: (props: React.HTMLAttributes<HTMLTableCellElement>) => (
-    <td className="px-4 py-3 text-gray-600 align-top" {...props} />
+    <td className="px-4 py-3 text-gray-600 dark:text-gray-300 align-top" {...props} />
   ),
 };
 
@@ -474,14 +474,14 @@ export default async function BlogPostPage({
       />
 
       {/* Breadcrumb nav */}
-      <nav aria-label="Breadcrumb" className="bg-white border-b border-gray-100 py-3">
+      <nav aria-label="Breadcrumb" className="bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 py-3">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ol className="flex items-center gap-1.5 text-sm text-gray-500 flex-wrap">
-            <li><Link href="/" className="hover:text-coffee-700 transition-colors">Home</Link></li>
-            <li className="text-gray-300" aria-hidden="true">/</li>
-            <li><Link href="/blog" className="hover:text-coffee-700 transition-colors">Blog</Link></li>
-            <li className="text-gray-300" aria-hidden="true">/</li>
-            <li className="text-gray-700 truncate max-w-[240px] sm:max-w-none" aria-current="page">{frontmatter.title}</li>
+          <ol className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 flex-wrap">
+            <li><Link href="/" className="hover:text-coffee-700 dark:hover:text-coffee-400 transition-colors">Home</Link></li>
+            <li className="text-gray-300 dark:text-gray-600" aria-hidden="true">/</li>
+            <li><Link href="/blog" className="hover:text-coffee-700 dark:hover:text-coffee-400 transition-colors">Blog</Link></li>
+            <li className="text-gray-300 dark:text-gray-600" aria-hidden="true">/</li>
+            <li className="text-gray-700 dark:text-gray-200 truncate max-w-[240px] sm:max-w-none" aria-current="page">{frontmatter.title}</li>
           </ol>
         </div>
       </nav>
@@ -514,7 +514,7 @@ export default async function BlogPostPage({
       {/* Wide wrapper for content + sidebar */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Meta row — full width */}
-        <div className="max-w-3xl mx-auto flex items-center gap-4 text-sm text-gray-500 mb-8 pb-8 border-b border-gray-100">
+        <div className="max-w-3xl mx-auto flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-8 pb-8 border-b border-gray-100 dark:border-gray-800">
           <span className="flex items-center gap-1.5">
             <Calendar size={14} /> {displayDate}
           </span>
@@ -575,7 +575,7 @@ export default async function BlogPostPage({
               <Link
                 key={tag}
                 href={`/blog?q=${encodeURIComponent(tag)}`}
-                className="text-xs bg-coffee-50 text-coffee-700 px-3 py-1 rounded-full font-medium hover:bg-coffee-100 hover:text-coffee-900 transition-colors"
+                className="text-xs bg-coffee-50 dark:bg-coffee-900/30 text-coffee-700 dark:text-coffee-300 px-3 py-1 rounded-full font-medium hover:bg-coffee-100 dark:hover:bg-coffee-900/50 hover:text-coffee-900 dark:hover:text-coffee-100 transition-colors"
               >
                 {tag}
               </Link>
@@ -587,10 +587,10 @@ export default async function BlogPostPage({
         {(() => {
           const svc = getServiceLink(frontmatter.category);
           return svc ? (
-            <div className="mt-10 p-5 rounded-xl bg-coffee-50 border border-coffee-100 flex items-center justify-between gap-4">
+            <div className="mt-10 p-5 rounded-xl bg-coffee-50 dark:bg-coffee-900/20 border border-coffee-100 dark:border-coffee-800/40 flex items-center justify-between gap-4">
               <div>
-                <p className="text-xs font-semibold text-coffee-600 uppercase tracking-wide mb-1">Want hands-on help?</p>
-                <p className="text-sm text-gray-700">
+                <p className="text-xs font-semibold text-coffee-600 dark:text-coffee-400 uppercase tracking-wide mb-1">Want hands-on help?</p>
+                <p className="text-sm text-gray-700 dark:text-gray-300">
                   See how DataLatte handles{" "}
                   <span className="font-semibold">{svc.label}</span> for local businesses.
                 </p>
@@ -607,10 +607,10 @@ export default async function BlogPostPage({
 
         {/* Secondary service link for Local Marketing posts */}
         {frontmatter.category === "Local Marketing" && (
-          <div className="mt-4 p-5 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-between gap-4">
+          <div className="mt-4 p-5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 flex items-center justify-between gap-4">
             <div>
-              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">📱 Social Media Ads</p>
-              <p className="text-sm text-gray-700">Facebook & Instagram ad campaigns managed for local businesses worldwide.</p>
+              <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-1">📱 Social Media Ads</p>
+              <p className="text-sm text-gray-700 dark:text-gray-300">Facebook & Instagram ad campaigns managed for local businesses worldwide.</p>
             </div>
             <Link href="/services/meta-ads" className="flex-shrink-0 inline-flex items-center gap-1.5 text-sm font-bold text-coffee-800 hover:text-coffee-950 hover:underline">
               Meta Ads <ArrowRight size={14} />
@@ -622,10 +622,10 @@ export default async function BlogPostPage({
         {(() => {
           const niche = getNicheLink(frontmatter.tags ?? [], frontmatter.title);
           return niche ? (
-            <div className="mt-4 p-5 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-between gap-4">
+            <div className="mt-4 p-5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 flex items-center justify-between gap-4">
               <div>
-                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">{niche.emoji} Industry Guide</p>
-                <p className="text-sm text-gray-700 font-medium">{niche.label}</p>
+                <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-1">{niche.emoji} Industry Guide</p>
+                <p className="text-sm text-gray-700 dark:text-gray-300 font-medium">{niche.label}</p>
               </div>
               <Link
                 href={niche.href}
@@ -638,16 +638,16 @@ export default async function BlogPostPage({
         })()}
 
         {/* Author */}
-        <div className="mt-12 pt-8 border-t border-gray-100">
+        <div className="mt-12 pt-8 border-t border-gray-100 dark:border-gray-800">
           <div className="flex items-start gap-4">
             <Link href="/about" className="shrink-0">
-              <Image src="/images/founder.png" alt="Nataliia — local marketing expert" width={56} height={56} className="rounded-full object-cover w-14 h-14 ring-2 ring-coffee-100" />
+              <Image src="/images/founder.png" alt="Nataliia — local marketing expert" width={56} height={56} className="rounded-full object-cover w-14 h-14 ring-2 ring-coffee-100 dark:ring-coffee-800" />
             </Link>
             <div>
-              <Link href="/about" className="font-bold text-gray-900 hover:text-coffee-700 transition-colors">
+              <Link href="/about" className="font-bold text-gray-900 dark:text-gray-50 hover:text-coffee-700 dark:hover:text-coffee-400 transition-colors">
                 {frontmatter.author}
               </Link>
-              <p className="text-sm text-gray-500 mt-0.5 leading-relaxed">
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5 leading-relaxed">
                 Local marketing strategist with 10+ years at global agencies — OMD, Dentsu, GroupM, and BBDO. Now helping small businesses get the same data-driven edge. Based in Europe, working with clients in the US, UK, Australia, and beyond.
               </p>
               <Link href="/about" className="inline-flex items-center gap-1 text-xs text-coffee-700 font-semibold mt-2 hover:underline">
@@ -665,15 +665,15 @@ export default async function BlogPostPage({
 
       {/* Related Posts */}
       {relatedPosts.length > 0 && (
-        <section className="bg-gray-50 border-t border-gray-100 py-14 px-4 sm:px-6 lg:px-8">
+        <section className="bg-gray-50 dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 py-14 px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-xl font-bold text-gray-900 mb-8">Related articles</h2>
+            <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50 mb-8">Related articles</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {relatedPosts.map((rp) => (
                 <Link
                   key={rp.slug}
                   href={`/blog/${rp.slug}`}
-                  className="group flex flex-col bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow overflow-hidden"
+                  className="group flex flex-col bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow overflow-hidden"
                 >
                   <div className="relative h-40 w-full flex-shrink-0">
                     <Image
@@ -686,9 +686,9 @@ export default async function BlogPostPage({
                     />
                   </div>
                   <div className="p-4 flex flex-col flex-1">
-                    <span className="text-xs font-semibold text-coffee-600 uppercase tracking-wide mb-2">{rp.category}</span>
-                    <h3 className="text-sm font-semibold text-gray-900 leading-snug line-clamp-2 group-hover:text-coffee-700 transition-colors">{rp.title}</h3>
-                    <span className="mt-auto pt-3 text-xs text-gray-400">{rp.readTime}</span>
+                    <span className="text-xs font-semibold text-coffee-600 dark:text-coffee-400 uppercase tracking-wide mb-2">{rp.category}</span>
+                    <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 leading-snug line-clamp-2 group-hover:text-coffee-700 dark:group-hover:text-coffee-400 transition-colors">{rp.title}</h3>
+                    <span className="mt-auto pt-3 text-xs text-gray-400 dark:text-gray-500">{rp.readTime}</span>
                   </div>
                 </Link>
               ))}
@@ -699,17 +699,17 @@ export default async function BlogPostPage({
 
       {/* Prev / Next navigation */}
       {(prevPost || nextPost) && (
-        <nav aria-label="Article navigation" className="border-t border-gray-100 bg-white py-8 px-4 sm:px-6 lg:px-8">
+        <nav aria-label="Article navigation" className="border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 py-8 px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
             {prevPost ? (
               <Link
                 href={`/blog/${prevPost.slug}`}
-                className="group flex flex-col gap-1 p-4 rounded-xl border border-gray-200 hover:border-coffee-300 hover:bg-coffee-50 transition-colors"
+                className="group flex flex-col gap-1 p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-coffee-300 dark:hover:border-coffee-700 hover:bg-coffee-50 dark:hover:bg-coffee-900/20 transition-colors"
               >
-                <span className="flex items-center gap-1 text-xs font-semibold text-coffee-600 uppercase tracking-wide">
+                <span className="flex items-center gap-1 text-xs font-semibold text-coffee-600 dark:text-coffee-400 uppercase tracking-wide">
                   <ArrowLeft size={12} /> Newer
                 </span>
-                <span className="text-sm font-medium text-gray-800 group-hover:text-coffee-800 line-clamp-2 leading-snug">
+                <span className="text-sm font-medium text-gray-800 dark:text-gray-200 group-hover:text-coffee-800 dark:group-hover:text-coffee-300 line-clamp-2 leading-snug">
                   {prevPost.title}
                 </span>
               </Link>
@@ -717,12 +717,12 @@ export default async function BlogPostPage({
             {nextPost && (
               <Link
                 href={`/blog/${nextPost.slug}`}
-                className="group flex flex-col gap-1 p-4 rounded-xl border border-gray-200 hover:border-coffee-300 hover:bg-coffee-50 transition-colors sm:text-right"
+                className="group flex flex-col gap-1 p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-coffee-300 dark:hover:border-coffee-700 hover:bg-coffee-50 dark:hover:bg-coffee-900/20 transition-colors sm:text-right"
               >
-                <span className="flex items-center gap-1 text-xs font-semibold text-coffee-600 uppercase tracking-wide sm:justify-end">
+                <span className="flex items-center gap-1 text-xs font-semibold text-coffee-600 dark:text-coffee-400 uppercase tracking-wide sm:justify-end">
                   Older <ArrowRight size={12} />
                 </span>
-                <span className="text-sm font-medium text-gray-800 group-hover:text-coffee-800 line-clamp-2 leading-snug">
+                <span className="text-sm font-medium text-gray-800 dark:text-gray-200 group-hover:text-coffee-800 dark:group-hover:text-coffee-300 line-clamp-2 leading-snug">
                   {nextPost.title}
                 </span>
               </Link>

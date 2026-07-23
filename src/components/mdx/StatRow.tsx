@@ -27,7 +27,7 @@ export default function StatRow({ title, values, labels, subs = "", trends = "" 
 
   return (
     <div className="my-8">
-      {title && <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">{title}</p>}
+      {title && <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-3">{title}</p>}
       <div className={`grid gap-3 ${cols}`}>
         {valArr.map((val, i) => {
           const trend = trendArr[i] as keyof typeof TREND | "";
@@ -35,17 +35,17 @@ export default function StatRow({ title, values, labels, subs = "", trends = "" 
           return (
             <div
               key={i}
-              className="mdx-fade-up bg-coffee-50 border border-coffee-100 rounded-2xl p-4 text-center"
+              className="mdx-fade-up bg-coffee-50 dark:bg-gray-800 border border-coffee-100 dark:border-gray-700 rounded-2xl p-4 text-center"
               style={{ animationDelay: `${i * 70}ms` } as React.CSSProperties}
             >
               <div className="flex items-center justify-center gap-1">
-                <span className="text-2xl font-bold text-coffee-800 leading-none">{val}</span>
+                <span className="text-2xl font-bold text-coffee-800 dark:text-coffee-200 leading-none">{val}</span>
                 {trend && TREND[trend] && (
                   <span className={`text-sm font-bold ${TREND[trend].cls}`}>{TREND[trend].icon}</span>
                 )}
               </div>
-              <p className="text-xs font-semibold text-coffee-700 mt-1.5 leading-tight">{labelArr[i] ?? ""}</p>
-              {sub && <p className="text-[10px] text-coffee-500 mt-0.5 leading-tight">{sub}</p>}
+              <p className="text-xs font-semibold text-coffee-700 dark:text-coffee-300 mt-1.5 leading-tight">{labelArr[i] ?? ""}</p>
+              {sub && <p className="text-[10px] text-coffee-500 dark:text-coffee-400 mt-0.5 leading-tight">{sub}</p>}
             </div>
           );
         })}
