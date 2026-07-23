@@ -15,10 +15,10 @@ export default function TestimonialCard({ quote, author, role, rating = 5 }: Tes
           <Star key={i} size={16} className="fill-coffee-400 text-coffee-400" />
         ))}
       </div>
-      <blockquote className="text-gray-600 italic leading-relaxed">"{quote}"</blockquote>
+      <blockquote className="text-gray-600 dark:text-gray-300 italic leading-relaxed">"{quote}"</blockquote>
       <div>
-        <div className="font-semibold text-gray-900">{author}</div>
-        <div className="text-sm text-gray-500">{role}</div>
+        <div className="font-semibold text-gray-900 dark:text-gray-100">{author}</div>
+        <div className="text-sm text-gray-500 dark:text-gray-400">{role}</div>
       </div>
     </div>
   );

@@ -121,11 +121,11 @@
   }
 
   .btn-secondary {
-    @apply inline-flex items-center gap-2 bg-coffee-100 hover:bg-coffee-200 text-coffee-900 font-semibold px-6 py-3 rounded-xl transition-all duration-200;
+    @apply inline-flex items-center gap-2 bg-coffee-100 dark:bg-coffee-900/30 hover:bg-coffee-200 dark:hover:bg-coffee-900/50 text-coffee-900 dark:text-coffee-200 font-semibold px-6 py-3 rounded-xl transition-all duration-200;
   }
 
   .btn-outline {
-    @apply inline-flex items-center gap-2 border-2 border-coffee-700 text-coffee-700 hover:bg-coffee-700 hover:text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200;
+    @apply inline-flex items-center gap-2 border-2 border-coffee-700 dark:border-coffee-400 text-coffee-700 dark:text-coffee-300 hover:bg-coffee-700 dark:hover:bg-coffee-800 hover:text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200;
   }
 
   /* ── Typography ── */

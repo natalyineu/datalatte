@@ -85,63 +85,63 @@ const services = [
     title: "Google Ads",
     desc: "Show up when locals are actively searching for what you offer. Every dollar tracked.",
     href: "/services/google-ads",
-    color: "text-coffee-700 bg-coffee-100",
+    color: "text-coffee-700 dark:text-coffee-300 bg-coffee-100 dark:bg-coffee-900/40",
   },
   {
     icon: TrendingUp,
     title: "Meta Ads",
     desc: "Reach your ideal local customer on Facebook & Instagram with scroll-stopping creative.",
     href: "/services/meta-ads",
-    color: "text-coffee-600 bg-coffee-50",
+    color: "text-coffee-600 dark:text-coffee-400 bg-coffee-50 dark:bg-coffee-900/20",
   },
   {
     icon: MapPin,
     title: "Google Business Profile",
     desc: "Win the local map pack. More calls, directions, and clicks — from free organic traffic.",
     href: "/services/google-business-profile",
-    color: "text-gray-700 bg-gray-100",
+    color: "text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700",
   },
   {
     icon: Search,
     title: "Local SEO",
     desc: "Rank for the searches that bring in real customers, not just traffic for vanity metrics.",
     href: "/services/local-seo",
-    color: "text-coffee-800 bg-coffee-100",
+    color: "text-coffee-800 dark:text-coffee-200 bg-coffee-100 dark:bg-coffee-900/40",
   },
   {
     icon: BarChart3,
     title: "Analytics & Reporting",
     desc: "Know exactly what's working. Clear dashboards, plain English — no data overwhelm.",
     href: "/services/analytics",
-    color: "text-gray-600 bg-gray-100",
+    color: "text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700",
   },
   {
     icon: Bot,
     title: "AI Agents & Automation",
     desc: "Instant lead follow-up, review replies, and booking reminders — running 24/7 without hiring anyone.",
     href: "/services/ai-agents",
-    color: "text-coffee-700 bg-coffee-100",
+    color: "text-coffee-700 dark:text-coffee-300 bg-coffee-100 dark:bg-coffee-900/40",
   },
   {
     icon: Mail,
     title: "Email & SMS Marketing",
     desc: "Turn one-time visitors into loyal regulars. Your list is the highest-ROI channel you own.",
     href: "/services/email-sms",
-    color: "text-gray-700 bg-gray-100",
+    color: "text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700",
   },
   {
     icon: Share2,
     title: "Social Media Management",
     desc: "Consistent content, real engagement, and a feed that turns followers into regulars.",
     href: "/services/social-media",
-    color: "text-gray-700 bg-gray-100",
+    color: "text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700",
   },
   {
     icon: Globe,
     title: "Website & Landing Pages",
     desc: "Conversion-focused pages built to get you calls and bookings — not just look good.",
     href: "/services/website",
-    color: "text-coffee-600 bg-coffee-50",
+    color: "text-coffee-600 dark:text-coffee-400 bg-coffee-50 dark:bg-coffee-900/20",
   },
 ];
 
@@ -272,7 +272,7 @@ export default function HomePage() {
       </section>
 
       {/* Stats bar */}
-      <div className="bg-white border-y border-gray-100 py-8">
+      <div className="bg-white dark:bg-gray-900 border-y border-gray-100 dark:border-gray-800 py-8">
         <div className="max-w-4xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           {[
             { value: 10, suffix: "+", label: "Years experience" },
@@ -281,17 +281,17 @@ export default function HomePage() {
             { value: 100, suffix: "%", label: "Data-driven" },
           ].map((s) => (
             <div key={s.label}>
-              <div className="text-3xl font-bold text-coffee-700">
+              <div className="text-3xl font-bold text-coffee-700 dark:text-coffee-300">
                 <AnimatedCounter to={s.value} suffix={s.suffix} />
               </div>
-              <div className="text-sm text-gray-500 mt-1">{s.label}</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">{s.label}</div>
             </div>
           ))}
         </div>
       </div>
 
       {/* Niches */}
-      <SectionWrapper className="bg-gray-50">
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-900/40">
         <ScrollReveal>
         <div className="text-center mb-12">
           <span className="section-label">Industries We Serve</span>
@@ -356,8 +356,8 @@ export default function HomePage() {
           <p className="section-subtitle mt-4 max-w-xl mx-auto">
             From getting found on Google Maps to converting that interest into paying customers.
           </p>
-          <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 mt-5 text-sm text-gray-500">
-            <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-coffee-500" /> Starting from <Link href="/pricing" className="font-semibold text-coffee-700 hover:underline">$500/month</Link></span>
+          <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 mt-5 text-sm text-gray-500 dark:text-gray-400">
+            <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-coffee-500" /> Starting from <Link href="/pricing" className="font-semibold text-coffee-700 dark:text-coffee-300 hover:underline">$500/month</Link></span>
             <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-coffee-500" /> No lock-in contracts</span>
             <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-coffee-500" /> Direct access to Nataliia</span>
             <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-coffee-500" /> Free audit to start</span>
@@ -374,11 +374,11 @@ export default function HomePage() {
               <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-4 ${svc.color}`}>
                 <svc.icon size={22} />
               </div>
-              <h3 className="font-bold text-gray-900 text-lg mb-2 group-hover:text-coffee-700 transition-colors">
+              <h3 className="font-bold text-gray-900 dark:text-white text-lg mb-2 group-hover:text-coffee-700 dark:group-hover:text-coffee-300 transition-colors">
                 {svc.title}
               </h3>
-              <p className="text-gray-500 text-sm leading-relaxed mb-4">{svc.desc}</p>
-              <span className="inline-flex items-center gap-1 text-sm font-semibold text-coffee-700 group-hover:gap-2 transition-all">
+              <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-4">{svc.desc}</p>
+              <span className="inline-flex items-center gap-1 text-sm font-semibold text-coffee-700 dark:text-coffee-300 group-hover:gap-2 transition-all">
                 Explore <ArrowRight size={13} />
               </span>
             </Link>
@@ -406,7 +406,7 @@ export default function HomePage() {
       </SectionWrapper>
 
       {/* Why DataLatte */}
-      <SectionWrapper id="how-it-works" className="bg-coffee-50">
+      <SectionWrapper id="how-it-works" className="bg-coffee-50 dark:bg-gray-900/40">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div>
             <span className="section-label">Why DataLatte</span>
@@ -415,7 +415,7 @@ export default function HomePage() {
               <span className="text-coffee-700">warm as your latte</span>,
               as sharp as your data
             </h2>
-            <p className="text-gray-500 leading-relaxed mb-5">
+            <p className="text-gray-500 dark:text-gray-300 leading-relaxed mb-5">
               I'm not a big agency. I'm a one-person shop with deep expertise in local marketing
               and a genuine obsession with analytics. That means you get my full attention —
               not handed off to a junior account manager.
@@ -423,10 +423,10 @@ export default function HomePage() {
 
             {/* Agency credentials */}
             <div className="mb-8">
-              <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3">10+ years experience at</p>
+              <p className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-3">10+ years experience at</p>
               <div className="flex flex-wrap gap-2">
                 {["OMD", "Dentsu", "BBDO", "GroupM"].map((agency) => (
-                  <span key={agency} className="inline-flex items-center px-3 py-1.5 rounded-lg bg-white border border-coffee-100 text-sm font-semibold text-gray-700 shadow-sm">
+                  <span key={agency} className="inline-flex items-center px-3 py-1.5 rounded-lg bg-white dark:bg-gray-800 border border-coffee-100 dark:border-gray-700 text-sm font-semibold text-gray-700 dark:text-gray-300 shadow-sm">
                     {agency}
                   </span>
                 ))}
@@ -436,12 +436,12 @@ export default function HomePage() {
             <div className="space-y-6">
               {whyCards.map((item) => (
                 <div key={item.title} className="flex gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-coffee-100 flex items-center justify-center shrink-0">
-                    <item.icon size={19} className="text-coffee-700" />
+                  <div className="w-10 h-10 rounded-lg bg-coffee-100 dark:bg-coffee-900/40 flex items-center justify-center shrink-0">
+                    <item.icon size={19} className="text-coffee-700 dark:text-coffee-300" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">{item.title}</h3>
-                    <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
+                    <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-1">{item.title}</h3>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -478,14 +478,14 @@ export default function HomePage() {
             ].map((item, i) => (
               <ScrollReveal key={item.step} delay={i * 0.1} direction="left">
               <div
-                className="flex gap-4 bg-white rounded-xl p-5 border border-coffee-100 hover:border-coffee-300 hover:shadow-md transition-all duration-200"
+                className="flex gap-4 bg-white dark:bg-gray-800 rounded-xl p-5 border border-coffee-100 dark:border-gray-700 hover:border-coffee-300 dark:hover:border-coffee-700 hover:shadow-md transition-all duration-200"
               >
                 <div className="text-2xl font-bold text-coffee-400 font-display shrink-0 w-10">
                   {item.step}
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-1">{item.title}</h3>
-                  <p className="text-sm text-gray-500">{item.desc}</p>
+                  <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-1">{item.title}</h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">{item.desc}</p>
                 </div>
               </div>
               </ScrollReveal>
@@ -517,11 +517,11 @@ export default function HomePage() {
       </SectionWrapper>
 
       {/* Blog */}
-      <SectionWrapper className="bg-gray-50">
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-900/40">
         <div className="flex items-end justify-between mb-10">
           <div>
             <span className="section-label">From the Blog</span>
-            <h2 className="text-3xl font-bold text-gray-900">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
               Local marketing,{" "}
               <span className="gradient-text">explained plainly</span>
             </h2>
@@ -567,20 +567,20 @@ export default function HomePage() {
           </div>
           <div className="space-y-4">
             {homeFaqs.map((faq, i) => (
-              <details key={i} className="group border border-gray-200 rounded-xl overflow-hidden">
-                <summary className="flex items-center justify-between gap-4 px-6 py-4 cursor-pointer list-none font-semibold text-gray-900 hover:bg-coffee-50 transition-colors">
+              <details key={i} className="group border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
+                <summary className="flex items-center justify-between gap-4 px-6 py-4 cursor-pointer list-none font-semibold text-gray-900 dark:text-gray-100 hover:bg-coffee-50 dark:hover:bg-gray-800 transition-colors">
                   {faq.q}
-                  <span className="text-coffee-500 shrink-0 text-xl font-light group-open:rotate-45 transition-transform duration-200">+</span>
+                  <span className="text-coffee-500 dark:text-coffee-400 shrink-0 text-xl font-light group-open:rotate-45 transition-transform duration-200">+</span>
                 </summary>
-                <div className="px-6 pb-5 text-gray-500 text-sm leading-relaxed border-t border-gray-100 pt-4">
+                <div className="px-6 pb-5 text-gray-500 dark:text-gray-400 text-sm leading-relaxed border-t border-gray-100 dark:border-gray-700 pt-4">
                   {faq.a}
                 </div>
               </details>
             ))}
           </div>
-          <p className="text-center mt-8 text-sm text-gray-500">
+          <p className="text-center mt-8 text-sm text-gray-500 dark:text-gray-400">
             Still have questions?{" "}
-            <Link href="/contact" className="text-coffee-700 font-semibold hover:underline">
+            <Link href="/contact" className="text-coffee-700 dark:text-coffee-300 font-semibold hover:underline">
               Send me a message
             </Link>{" "}
             — I reply within one business day.
