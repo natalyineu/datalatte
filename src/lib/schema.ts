@@ -48,6 +48,8 @@ export function localBusinessSchema() {
       "https://www.linkedin.com/company/datalattepro",
       "https://www.instagram.com/datalatte.pro",
       "https://medium.com/@datalatte.pro",
+      "https://clutch.co/profile/datalatte",
+      "https://www.crunchbase.com/organization/datalatte-pro",
     ],
     founder: {
       "@type": "Person",
@@ -100,6 +102,8 @@ export function personSchema() {
       "https://www.linkedin.com/company/datalattepro",
       "https://www.instagram.com/datalatte.pro",
       "https://medium.com/@datalatte.pro",
+      "https://clutch.co/profile/datalatte",
+      "https://www.crunchbase.com/organization/datalatte-pro",
     ],
   };
 }

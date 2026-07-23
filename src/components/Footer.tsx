@@ -125,6 +125,30 @@ export default function Footer() {
                   <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
                 </svg>
               </a>
+              <a
+                href="https://clutch.co/profile/datalatte"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="DataLatte on Clutch"
+                className="w-9 h-9 rounded-lg bg-coffee-900 hover:bg-coffee-700 flex items-center justify-center transition-colors"
+              >
+                {/* Clutch logo mark */}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="text-gray-300">
+                  <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 3a7 7 0 110 14A7 7 0 0112 5zm0 2a5 5 0 100 10A5 5 0 0012 7zm0 2a3 3 0 110 6 3 3 0 010-6z"/>
+                </svg>
+              </a>
+              <a
+                href="https://www.crunchbase.com/organization/datalatte-pro"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="DataLatte on Crunchbase"
+                className="w-9 h-9 rounded-lg bg-coffee-900 hover:bg-coffee-700 flex items-center justify-center transition-colors"
+              >
+                {/* Crunchbase CB monogram */}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="text-gray-300">
+                  <path d="M21 4H3a1 1 0 00-1 1v14a1 1 0 001 1h18a1 1 0 001-1V5a1 1 0 00-1-1zM9.5 15.5A3.5 3.5 0 016 12a3.5 3.5 0 013.5-3.5c1.1 0 2.07.51 2.7 1.3l-1.44 1.44A1.5 1.5 0 009.5 10.5 1.5 1.5 0 008 12a1.5 1.5 0 001.5 1.5c.57 0 1.07-.32 1.33-.79l1.44 1.44A3.47 3.47 0 019.5 15.5zm8.5-.5h-1.5v-1H15v1h-1.5V9H15v1h1.5V9H18v6z"/>
+                </svg>
+              </a>
             </div>
           </div>
 
