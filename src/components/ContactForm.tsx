@@ -18,23 +18,23 @@ const NICHES = [
   { value: "other",      emoji: "🏪", label: "Other" },
 ];
 
-const inputCls = "w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-coffee-500 focus:ring-2 focus:ring-coffee-100 outline-none transition text-sm bg-white";
+const inputCls = "w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 focus:border-coffee-500 focus:ring-2 focus:ring-coffee-100 dark:focus:ring-coffee-800/30 outline-none transition text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500";
 
 function ProgressBar({ pct }: { pct: number }) {
   return (
     <div className="space-y-1.5">
       <div className="flex justify-between items-center">
-        <span className="text-xs text-gray-400">Progress</span>
+        <span className="text-xs text-gray-400 dark:text-gray-500">Progress</span>
         <motion.span
           key={pct}
           initial={{ opacity: 0, y: -4 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-xs font-semibold text-coffee-700"
+          className="text-xs font-semibold text-coffee-700 dark:text-coffee-300"
         >
           {pct}%
         </motion.span>
       </div>
-      <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+      <div className="h-1.5 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
         <motion.div
           className="h-full rounded-full bg-gradient-to-r from-coffee-500 to-coffee-700"
           initial={{ width: 0 }}
@@ -54,11 +54,11 @@ function SuccessState() {
       animate={{ opacity: 1, scale: 1 }}
       transition={{ type: "spring", damping: 20 }}
     >
-      <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-4">
+      <div className="w-16 h-16 bg-green-50 dark:bg-green-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
         <CheckCircle2 size={36} className="text-green-500" />
       </div>
-      <h3 className="text-xl font-bold text-gray-900 mb-2">You're all set ☕</h3>
-      <p className="text-gray-500 text-sm max-w-xs mx-auto leading-relaxed">
+      <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">You're all set ☕</h3>
+      <p className="text-gray-500 dark:text-gray-400 text-sm max-w-xs mx-auto leading-relaxed">
         I'll get back to you within one business day — usually sooner.
       </p>
     </motion.div>
@@ -105,7 +105,7 @@ function ExploreForm() {
       <ProgressBar pct={pct} />
 
       <div>
-        <label htmlFor="ex-email" className="block text-sm font-medium text-gray-700 mb-1.5">
+        <label htmlFor="ex-email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
           Your email <span className="text-coffee-600">*</span>
         </label>
         <input
@@ -118,9 +118,9 @@ function ExploreForm() {
       </div>
 
       <div>
-        <label htmlFor="ex-message" className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-1.5">
+        <label htmlFor="ex-message" className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
           What are you curious about?
-          <span className="text-[11px] text-gray-400 font-normal">optional</span>
+          <span className="text-[11px] text-gray-400 dark:text-gray-500 font-normal">optional</span>
         </label>
         <textarea
           id="ex-message" name="message" rows={3}
@@ -171,7 +171,7 @@ function ReadyForm() {
 
       <div className="grid sm:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="rd-email" className="block text-sm font-medium text-gray-700 mb-1.5">
+          <label htmlFor="rd-email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
             Email <span className="text-coffee-600">*</span>
           </label>
           <input
@@ -183,7 +183,7 @@ function ReadyForm() {
           />
         </div>
         <div>
-          <label htmlFor="rd-name" className="block text-sm font-medium text-gray-700 mb-1.5">
+          <label htmlFor="rd-name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
             Your name <span className="text-coffee-600">*</span>
           </label>
           <input
@@ -198,8 +198,8 @@ function ReadyForm() {
 
       {/* Niche tiles — compact row */}
       <div>
-        <p className="text-sm font-medium text-gray-700 mb-2">
-          Your business type <span className="text-gray-400 font-normal text-xs ml-1">optional</span>
+        <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          Your business type <span className="text-gray-400 dark:text-gray-500 font-normal text-xs ml-1">optional</span>
         </p>
         <div className="flex flex-wrap gap-2">
           {NICHES.map(n => (
@@ -208,8 +208,8 @@ function ReadyForm() {
               onClick={() => setNiche(n.value === niche ? "" : n.value)}
               className={`flex items-center gap-1.5 px-3 py-2 rounded-xl border-2 text-xs font-medium transition-all cursor-pointer
                 ${niche === n.value
-                  ? "border-coffee-600 bg-coffee-50 text-coffee-800"
-                  : "border-gray-200 text-gray-600 hover:border-coffee-300 hover:bg-coffee-50/50"}`}
+                  ? "border-coffee-600 bg-coffee-50 dark:bg-coffee-900/30 text-coffee-800 dark:text-coffee-200"
+                  : "border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-coffee-300 hover:bg-coffee-50/50 dark:hover:bg-coffee-900/20"}`}
             >
               <span>{n.emoji}</span> {n.label}
               {niche === n.value && (
@@ -223,8 +223,8 @@ function ReadyForm() {
       </div>
 
       <div>
-        <label htmlFor="rd-message" className="block text-sm font-medium text-gray-700 mb-1.5">
-          What do you need help with? <span className="text-gray-400 font-normal text-xs ml-1">optional</span>
+        <label htmlFor="rd-message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+          What do you need help with? <span className="text-gray-400 dark:text-gray-500 font-normal text-xs ml-1">optional</span>
         </label>
         <textarea
           id="rd-message" name="message" rows={2}
@@ -269,7 +269,7 @@ export default function ContactForm() {
   return (
     <div>
       {/* Mode toggle */}
-      <div className="flex gap-2 mb-6 p-1 bg-gray-100 rounded-2xl">
+      <div className="flex gap-2 mb-6 p-1 bg-gray-100 dark:bg-gray-800 rounded-2xl">
         {([
           { id: "explore", icon: <ArrowRight size={14} />, label: "Just exploring" },
           { id: "ready",   icon: <Zap size={14} />,        label: "Ready to start" },
@@ -280,8 +280,8 @@ export default function ContactForm() {
             onClick={() => setMode(tab.id)}
             className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-xl text-sm font-medium transition-all duration-200
               ${mode === tab.id
-                ? "bg-white text-coffee-800 shadow-sm"
-                : "text-gray-500 hover:text-gray-700"}`}
+                ? "bg-white dark:bg-gray-700 text-coffee-800 dark:text-coffee-300 shadow-sm"
+                : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"}`}
           >
             {tab.icon} {tab.label}
           </button>

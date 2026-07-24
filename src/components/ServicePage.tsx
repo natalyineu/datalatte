@@ -156,9 +156,9 @@ export default function ServicePage({
           <span className="section-label">The Difference</span>
           <h2 className="section-title">Sound familiar? <span className="gradient-text">Here&apos;s the fix.</span></h2>
         </div>
-        <div className="max-w-3xl mx-auto divide-y divide-gray-100 border border-gray-100 rounded-2xl overflow-hidden shadow-sm">
-          <div className="grid grid-cols-2 bg-gray-50 text-xs font-bold text-gray-400 uppercase tracking-widest">
-            <div className="px-5 py-3 border-r border-gray-100 flex items-center gap-2">
+        <div className="max-w-3xl mx-auto divide-y divide-gray-100 dark:divide-gray-700 border border-gray-100 dark:border-gray-700 rounded-2xl overflow-hidden shadow-sm">
+          <div className="grid grid-cols-2 bg-gray-50 dark:bg-gray-800 text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
+            <div className="px-5 py-3 border-r border-gray-100 dark:border-gray-700 flex items-center gap-2">
               <X size={13} className="text-red-400" /> Before
             </div>
             <div className="px-5 py-3 flex items-center gap-2">
@@ -166,12 +166,12 @@ export default function ServicePage({
             </div>
           </div>
           {beforeAfter.map((row, i) => (
-            <div key={i} className="grid grid-cols-2 text-sm hover:bg-gray-50 transition-colors">
-              <div className="px-5 py-3.5 text-gray-400 border-r border-gray-100 flex items-start gap-2">
+            <div key={i} className="grid grid-cols-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+              <div className="px-5 py-3.5 text-gray-400 dark:text-gray-500 border-r border-gray-100 dark:border-gray-700 flex items-start gap-2">
                 <X size={13} className="text-red-400 shrink-0 mt-0.5" />
                 {row.before}
               </div>
-              <div className="px-5 py-3.5 text-gray-800 flex items-start gap-2">
+              <div className="px-5 py-3.5 text-gray-800 dark:text-gray-200 flex items-start gap-2">
                 <Check size={13} className="text-green-500 shrink-0 mt-0.5" />
                 {row.after}
               </div>
@@ -181,7 +181,7 @@ export default function ServicePage({
       </SectionWrapper>
 
       {/* ── What it is ── */}
-      <SectionWrapper className="bg-gray-50">
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-900/40">
         <div className="max-w-5xl mx-auto">
           <div className={`grid gap-10 items-start ${stats && stats.length > 0 ? "md:grid-cols-[1fr_300px]" : ""}`}>
             {/* Text column */}
@@ -191,18 +191,18 @@ export default function ServicePage({
               <div className="space-y-6">
                 {whatItIs.split("\\n\\n").map((para, i) => {
                   if (i === 0) return (
-                    <p key={i} className="text-gray-800 leading-relaxed text-xl">{para}</p>
+                    <p key={i} className="text-gray-800 dark:text-gray-200 leading-relaxed text-xl">{para}</p>
                   );
                   if (i === 1) return (
-                    <div key={i} className="flex gap-4 bg-white rounded-xl p-5 border border-coffee-100 shadow-sm">
+                    <div key={i} className="flex gap-4 bg-white dark:bg-gray-800 rounded-xl p-5 border border-coffee-100 dark:border-gray-700 shadow-sm">
                       <div className="shrink-0 w-1 rounded-full bg-coffee-400 self-stretch" />
-                      <p className="text-gray-600 leading-relaxed text-sm">{para}</p>
+                      <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm">{para}</p>
                     </div>
                   );
                   return (
-                    <div key={i} className="bg-amber-50 border border-amber-200 rounded-xl px-5 py-4">
-                      <p className="text-xs font-semibold text-amber-700 uppercase tracking-widest mb-2">Common mistake to avoid</p>
-                      <p className="text-gray-700 leading-relaxed text-sm">{para}</p>
+                    <div key={i} className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl px-5 py-4">
+                      <p className="text-xs font-semibold text-amber-700 dark:text-amber-400 uppercase tracking-widest mb-2">Common mistake to avoid</p>
+                      <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">{para}</p>
                     </div>
                   );
                 })}
@@ -213,9 +213,9 @@ export default function ServicePage({
             {stats && stats.length > 0 && (
               <div className="space-y-3 md:sticky md:top-24">
                 {stats.map((stat) => (
-                  <div key={stat.label} className="bg-white rounded-xl px-5 py-4 border border-coffee-100 shadow-sm">
-                    <div className="text-3xl font-bold text-coffee-800 mb-1">{stat.value}</div>
-                    <div className="text-xs text-gray-500 leading-snug">{stat.label}</div>
+                  <div key={stat.label} className="bg-white dark:bg-gray-800 rounded-xl px-5 py-4 border border-coffee-100 dark:border-gray-700 shadow-sm">
+                    <div className="text-3xl font-bold text-coffee-800 dark:text-coffee-300 mb-1">{stat.value}</div>
+                    <div className="text-xs text-gray-500 dark:text-gray-400 leading-snug">{stat.label}</div>
                   </div>
                 ))}
               </div>
@@ -286,9 +286,9 @@ export default function ServicePage({
           <div className="grid sm:grid-cols-2 gap-3">
             {included.map((item, i) => (
               <ScrollReveal key={item} delay={i * 0.05}>
-              <div className="flex items-start gap-3 bg-white rounded-xl px-5 py-4 border border-gray-100 shadow-sm hover:border-coffee-300 hover:shadow-md transition-all group h-full">
+              <div className="flex items-start gap-3 bg-white dark:bg-gray-800 rounded-xl px-5 py-4 border border-gray-100 dark:border-gray-700 shadow-sm hover:border-coffee-300 dark:hover:border-coffee-700 hover:shadow-md transition-all group h-full">
                 <CheckCircle2 size={17} className="text-coffee-500 shrink-0 mt-0.5 group-hover:text-coffee-600 transition-colors" />
-                <span className="text-gray-700 text-sm">{item}</span>
+                <span className="text-gray-700 dark:text-gray-300 text-sm">{item}</span>
               </div>
               </ScrollReveal>
             ))}
@@ -297,7 +297,7 @@ export default function ServicePage({
       </SectionWrapper>
 
       {/* ── Best for ── */}
-      <SectionWrapper className="bg-coffee-50">
+      <SectionWrapper className="bg-coffee-50 dark:bg-gray-900/40">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-10">
             <span className="section-label">Is This Right for You?</span>
@@ -307,11 +307,11 @@ export default function ServicePage({
             {bestFor.map((item, i) => (
               <div
                 key={item}
-                className="flex items-start gap-3 bg-white rounded-xl p-5 border border-coffee-100 hover:border-coffee-400 hover:shadow-md transition-all animate-card-rise"
+                className="flex items-start gap-3 bg-white dark:bg-gray-800 rounded-xl p-5 border border-coffee-100 dark:border-gray-700 hover:border-coffee-400 dark:hover:border-coffee-600 hover:shadow-md transition-all animate-card-rise"
                 style={{ animationDelay: `${i * 0.06}s` }}
               >
                 <CheckCircle2 size={17} className="text-coffee-600 shrink-0 mt-0.5" />
-                <span className="text-gray-700 text-sm">{item}</span>
+                <span className="text-gray-700 dark:text-gray-300 text-sm">{item}</span>
               </div>
             ))}
           </div>
@@ -329,8 +329,8 @@ export default function ServicePage({
             {faqs.map((item, i) => (
               <ScrollReveal key={item.q} delay={i * 0.07}>
               <div className="card p-6 hover:border-coffee-300 hover:shadow-md transition-all">
-                <h4 className="font-semibold text-gray-900 mb-2">{item.q}</h4>
-                <p className="text-gray-500 text-sm leading-relaxed">{item.a}</p>
+                <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">{item.q}</h4>
+                <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{item.a}</p>
               </div>
               </ScrollReveal>
             ))}
@@ -339,9 +339,9 @@ export default function ServicePage({
       </SectionWrapper>
 
       {/* ── Related ── */}
-      <SectionWrapper className="bg-gray-50">
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-900/40">
         <div className="text-center mb-8">
-          <h3 className="text-xl font-bold text-gray-900">Explore related services</h3>
+          <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">Explore related services</h3>
         </div>
         <div className="flex flex-wrap justify-center gap-3">
           {relatedLinks.map((link) => (
@@ -357,7 +357,7 @@ export default function ServicePage({
         <div className="max-w-4xl mx-auto text-center">
           <span className="section-label">Free Guides</span>
           <h2 className="section-title mb-2">Learn from our <span className="gradient-text">blog</span></h2>
-          <p className="text-gray-500 text-sm mb-8 max-w-xl mx-auto">Practical digital marketing guides for local businesses — country-by-country strategies, budgets, and platform breakdowns.</p>
+          <p className="text-gray-500 dark:text-gray-400 text-sm mb-8 max-w-xl mx-auto">Practical digital marketing guides for local businesses — country-by-country strategies, budgets, and platform breakdowns.</p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link href="/blog" className="btn-outline text-sm py-2 px-5">All articles <ArrowRight size={13} /></Link>
             <Link href="/blog/local-marketing-guides" className="btn-outline text-sm py-2 px-5">Country guides <ArrowRight size={13} /></Link>

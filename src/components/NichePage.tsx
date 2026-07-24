@@ -144,9 +144,9 @@ export default function NichePage({
             <span className="gradient-text">{niche.toLowerCase()} owner</span> knows
           </h2>
         </div>
-        <div className="max-w-3xl mx-auto divide-y divide-gray-100 border border-gray-100 rounded-2xl overflow-hidden shadow-sm">
-          <div className="grid grid-cols-2 bg-gray-50 text-xs font-bold text-gray-400 uppercase tracking-widest">
-            <div className="px-5 py-3 border-r border-gray-100 flex items-center gap-2">
+        <div className="max-w-3xl mx-auto divide-y divide-gray-100 dark:divide-gray-700 border border-gray-100 dark:border-gray-700 rounded-2xl overflow-hidden shadow-sm">
+          <div className="grid grid-cols-2 bg-gray-50 dark:bg-gray-800 text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
+            <div className="px-5 py-3 border-r border-gray-100 dark:border-gray-700 flex items-center gap-2">
               <X size={13} className="text-red-400" /> Right now
             </div>
             <div className="px-5 py-3 flex items-center gap-2">
@@ -154,12 +154,12 @@ export default function NichePage({
             </div>
           </div>
           {problems.map((p, i) => (
-            <div key={i} className="grid grid-cols-2 text-sm hover:bg-gray-50 transition-colors">
-              <div className="px-5 py-3.5 text-gray-400 border-r border-gray-100 flex items-start gap-2">
+            <div key={i} className="grid grid-cols-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+              <div className="px-5 py-3.5 text-gray-400 dark:text-gray-500 border-r border-gray-100 dark:border-gray-700 flex items-start gap-2">
                 <X size={13} className="text-red-400 shrink-0 mt-0.5" />
                 {p}
               </div>
-              <div className="px-5 py-3.5 text-gray-800 flex items-start gap-2">
+              <div className="px-5 py-3.5 text-gray-800 dark:text-gray-200 flex items-start gap-2">
                 <Check size={13} className="text-green-500 shrink-0 mt-0.5" />
                 {
                   [
@@ -192,9 +192,9 @@ export default function NichePage({
             <ScrollReveal key={kpi.metric} delay={i * 0.1}>
             <div className="card p-6 text-center hover:border-coffee-300 hover:shadow-lg hover:-translate-y-1 transition-all h-full">
               <TrendingUp size={28} className="text-coffee-600 mx-auto mb-3" />
-              <div className="text-3xl font-bold text-coffee-700 mb-1">{kpi.improvement}</div>
-              <div className="font-semibold text-gray-900 mb-2">{kpi.metric}</div>
-              <p className="text-sm text-gray-500">{kpi.desc}</p>
+              <div className="text-3xl font-bold text-coffee-700 dark:text-coffee-300 mb-1">{kpi.improvement}</div>
+              <div className="font-semibold text-gray-900 dark:text-gray-100 mb-2">{kpi.metric}</div>
+              <p className="text-sm text-gray-500 dark:text-gray-400">{kpi.desc}</p>
             </div>
             </ScrollReveal>
           ))}
@@ -215,8 +215,8 @@ export default function NichePage({
             <ScrollReveal key={svc.title} delay={i * 0.07}>
             <div className="card p-6 hover:border-coffee-300 hover:shadow-md hover:-translate-y-1 transition-all h-full">
               <div className="text-3xl mb-4 animate-float" style={{ animationDelay: `${i * 0.3}s` }}>{svc.icon}</div>
-              <h3 className="font-bold text-gray-900 text-lg mb-2">{svc.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">{svc.desc}</p>
+              <h3 className="font-bold text-gray-900 dark:text-gray-100 text-lg mb-2">{svc.title}</h3>
+              <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{svc.desc}</p>
             </div>
             </ScrollReveal>
           ))}
@@ -281,11 +281,11 @@ export default function NichePage({
             {faq.map((item, i) => (
               <ScrollReveal key={item.q} delay={i * 0.07}>
               <div className="card p-6 hover:border-coffee-300 hover:shadow-md transition-all">
-                <h4 className="font-semibold text-gray-900 mb-2 flex items-start gap-2">
+                <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2 flex items-start gap-2">
                   <CheckCircle2 size={18} className="text-coffee-600 mt-0.5 shrink-0" />
                   {item.q}
                 </h4>
-                <p className="text-gray-500 text-sm leading-relaxed pl-6">{item.a}</p>
+                <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed pl-6">{item.a}</p>
               </div>
               </ScrollReveal>
             ))}
@@ -298,7 +298,7 @@ export default function NichePage({
         <div className="max-w-4xl mx-auto text-center">
           <span className="section-label">Free Reading</span>
           <h2 className="section-title mb-2">Guides & <span className="gradient-text">strategies</span></h2>
-          <p className="text-gray-500 text-sm mb-8 max-w-xl mx-auto">Deep-dive marketing guides to help your {niche.toLowerCase()} business grow — from Google Ads budgets to local SEO tactics.</p>
+          <p className="text-gray-500 dark:text-gray-400 text-sm mb-8 max-w-xl mx-auto">Deep-dive marketing guides to help your {niche.toLowerCase()} business grow — from Google Ads budgets to local SEO tactics.</p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link href="/blog" className="btn-outline text-sm py-2 px-5">All articles <ArrowRight size={13} /></Link>
             <Link href="/blog/local-marketing-budget-guide" className="btn-outline text-sm py-2 px-5">Marketing budget guide <ArrowRight size={13} /></Link>
@@ -310,21 +310,21 @@ export default function NichePage({
 
       {/* ── City Guides ── */}
       {cityServiceGroups && cityServiceGroups.length > 0 && (
-        <SectionWrapper className="bg-white">
+        <SectionWrapper className="bg-white dark:bg-gray-900">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-8">
               <span className="section-label">Marketing Guides by City</span>
               <h2 className="section-title mb-2">
                 {niche} marketing guides for <span className="gradient-text">your city</span>
               </h2>
-              <p className="text-gray-500 text-sm max-w-xl mx-auto">
+              <p className="text-gray-500 dark:text-gray-400 text-sm max-w-xl mx-auto">
                 Ad costs, keyword competition, and local search dynamics vary by market. Find the guide for your city.
               </p>
             </div>
             <div className="space-y-8">
               {cityServiceGroups.map((group) => (
                 <div key={group.service}>
-                  <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">
+                  <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">
                     {group.service} guides
                   </h3>
                   <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
@@ -346,14 +346,14 @@ export default function NichePage({
         </SectionWrapper>
       )}
       {!cityServiceGroups && cityGuideLinks && cityGuideLinks.length > 0 && (
-        <SectionWrapper className="bg-white">
+        <SectionWrapper className="bg-white dark:bg-gray-900">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-8">
               <span className="section-label">Google Ads by City</span>
               <h2 className="section-title mb-2">
                 {niche} Google Ads guides for <span className="gradient-text">your city</span>
               </h2>
-              <p className="text-gray-500 text-sm max-w-xl mx-auto">
+              <p className="text-gray-500 dark:text-gray-400 text-sm max-w-xl mx-auto">
                 Local search competition and ad costs vary significantly by market. Find the guide for your city.
               </p>
             </div>

@@ -174,7 +174,7 @@ export default function ResourcesPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
 
       {/* Hero */}
-      <section className="bg-gray-50 py-20 px-4 sm:px-6 lg:px-8 border-b border-gray-100">
+      <section className="bg-gray-50 dark:bg-gray-900 py-20 px-4 sm:px-6 lg:px-8 border-b border-gray-100 dark:border-gray-800">
         <div className="max-w-3xl mx-auto text-center">
           <span className="section-label">Free Resources</span>
           <h1 className="section-title mb-4">
@@ -202,16 +202,16 @@ export default function ResourcesPage() {
               className="card p-6 flex flex-col gap-4 hover:shadow-md transition-shadow group"
             >
               <div className="flex items-start justify-between">
-                <div className="w-10 h-10 rounded-xl bg-coffee-100 flex items-center justify-center shrink-0">
-                  <tool.icon size={19} className="text-coffee-700" />
+                <div className="w-10 h-10 rounded-xl bg-coffee-100 dark:bg-coffee-900/40 flex items-center justify-center shrink-0">
+                  <tool.icon size={19} className="text-coffee-700 dark:text-coffee-300" />
                 </div>
                 <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${tool.tagColor}`}>{tool.tag}</span>
               </div>
               <div>
-                <h3 className="font-bold text-gray-900 mb-1 group-hover:text-coffee-700 transition-colors">{tool.title}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{tool.desc}</p>
+                <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-1 group-hover:text-coffee-700 dark:group-hover:text-coffee-300 transition-colors">{tool.title}</h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{tool.desc}</p>
               </div>
-              <span className="inline-flex items-center gap-1 text-xs font-semibold text-coffee-700 group-hover:gap-1.5 transition-all mt-auto">
+              <span className="inline-flex items-center gap-1 text-xs font-semibold text-coffee-700 dark:text-coffee-400 group-hover:gap-1.5 transition-all mt-auto">
                 Open tool <ArrowRight size={12} />
               </span>
             </Link>
@@ -227,9 +227,9 @@ export default function ResourcesPage() {
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
           {nicheResources.map((nr) => (
-            <div key={nr.niche} className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+            <div key={nr.niche} className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 p-6 shadow-sm">
               <div className="text-2xl mb-3">{nr.emoji}</div>
-              <h3 className="font-bold text-gray-900 mb-4">{nr.niche}</h3>
+              <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-4">{nr.niche}</h3>
               <ul className="space-y-2">
                 {nr.links.map((link) => (
                   <li key={link.href}>
@@ -258,7 +258,7 @@ export default function ResourcesPage() {
                 <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${g.color}`}>
                   <g.icon size={17} />
                 </div>
-                <h3 className="font-bold text-gray-900">{g.topic}</h3>
+                <h3 className="font-bold text-gray-900 dark:text-gray-100">{g.topic}</h3>
               </div>
               <ul className="space-y-2.5">
                 {g.links.map((link) => (
@@ -276,11 +276,11 @@ export default function ResourcesPage() {
       </SectionWrapper>
 
       {/* Blog CTA */}
-      <SectionWrapper className="bg-coffee-50">
+      <SectionWrapper className="bg-coffee-50 dark:bg-gray-900/40">
         <div className="max-w-3xl mx-auto text-center">
           <span className="section-label">1,000+ Articles</span>
           <h2 className="section-title mb-4">The full blog</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-600 dark:text-gray-300 mb-6">
             Browse over 1,000 articles on every aspect of local digital marketing — searchable by topic,
             channel, and business type.
           </p>

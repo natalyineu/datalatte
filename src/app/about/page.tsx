@@ -65,12 +65,12 @@ function Photo({ src, alt, caption, priority = false }: {
 
 
 function Prose({ children }: { children: React.ReactNode }) {
-  return <div className="space-y-4 text-gray-600 leading-relaxed text-[17px]">{children}</div>;
+  return <div className="space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed text-[17px]">{children}</div>;
 }
 
 function Pullquote({ children }: { children: React.ReactNode }) {
   return (
-    <blockquote className="border-l-4 border-coffee-300 pl-4 my-6 text-gray-700 font-medium italic text-lg leading-relaxed">
+    <blockquote className="border-l-4 border-coffee-300 pl-4 my-6 text-gray-700 dark:text-gray-300 font-medium italic text-lg leading-relaxed">
       {children}
     </blockquote>
   );
@@ -112,7 +112,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Credentials strip ── */}
-      <section className="bg-gray-50 border-b border-gray-200 py-8 px-4 sm:px-6">
+      <section className="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 py-8 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto">
           <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-5 text-center">
             10+ years of senior strategy at
@@ -120,12 +120,12 @@ export default function AboutPage() {
           <div className="flex flex-wrap justify-center items-center gap-6">
             {agencies.map((a) => (
               <div key={a.name} className="text-center">
-                <div className="text-lg font-bold text-gray-800">{a.name}</div>
-                <div className="text-xs text-gray-400">{a.desc}</div>
+                <div className="text-lg font-bold text-gray-800 dark:text-gray-200">{a.name}</div>
+                <div className="text-xs text-gray-400 dark:text-gray-500">{a.desc}</div>
               </div>
             ))}
           </div>
-          <p className="text-center text-sm text-gray-500 mt-5 max-w-xl mx-auto">
+          <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-5 max-w-xl mx-auto">
             Fortune 500 clients, multi-million dollar budgets, full-funnel campaigns across Europe and the US —
             now applied to local businesses that talk to me like a human.
           </p>
@@ -138,7 +138,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Story ── */}
-      <div className="bg-white">
+      <div className="bg-white dark:bg-gray-900">
 
         {/* Opening */}
         <div className="max-w-2xl mx-auto px-4 sm:px-6 py-14">
@@ -429,19 +429,19 @@ export default function AboutPage() {
         </div>
 
         {/* ── Professional ── */}
-        <div className="bg-gray-50 border-t border-gray-200 py-16 px-4 sm:px-6 mt-8">
+        <div className="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 py-16 px-4 sm:px-6 mt-8">
           <div className="max-w-2xl mx-auto">
-            <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">
+            <p className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-2">
               The professional bit
             </p>
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">
               Oh, and I do marketing.{" "}
               <span className="text-coffee-700">Seriously good marketing.</span>
             </h2>
-            <div className="space-y-4 text-gray-600 leading-relaxed text-[17px]">
+            <div className="space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed text-[17px]">
               <p>
                 Before DataLatte, I spent 10+ years at{" "}
-                <strong className="text-gray-800">OMD, Dentsu, BBDO, and GroupM</strong> —
+                <strong className="text-gray-800 dark:text-gray-100">OMD, Dentsu, BBDO, and GroupM</strong> —
                 some of the biggest media networks in the world. Fortune 500 clients,
                 multi-million dollar budgets, full-funnel strategies across Europe and the US.
                 I know how to build marketing that works because I&apos;ve built a lot of it.
@@ -455,9 +455,9 @@ export default function AboutPage() {
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-8">
               {agencies.map((a) => (
-                <div key={a.name} className="bg-white border border-gray-200 rounded-xl px-4 py-3 text-center shadow-sm">
-                  <p className="font-bold text-gray-900">{a.name}</p>
-                  <p className="text-xs text-gray-400 mt-0.5">{a.desc}</p>
+                <div key={a.name} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 text-center shadow-sm">
+                  <p className="font-bold text-gray-900 dark:text-gray-100">{a.name}</p>
+                  <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">{a.desc}</p>
                 </div>
               ))}
             </div>

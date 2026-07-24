@@ -496,7 +496,7 @@ export default function LocalMarketingGuidesPage() {
                     href={`/blog/${country.fullSlug}`}
                     className="card group flex flex-col gap-1 p-4 hover:border-coffee-300 hover:shadow-md transition-all duration-200"
                   >
-                    <span className="font-semibold text-gray-800 group-hover:text-coffee-700 transition-colors text-sm leading-tight">
+                    <span className="font-semibold text-gray-800 dark:text-gray-200 group-hover:text-coffee-700 dark:group-hover:text-coffee-300 transition-colors text-sm leading-tight">
                       {country.displayName}
                     </span>
                     <span className="text-xs text-gray-400 dark:text-gray-500 line-clamp-2 leading-snug">
@@ -510,24 +510,24 @@ export default function LocalMarketingGuidesPage() {
         </div>
 
         {/* ── Coverage stats ── */}
-        <div className="mt-16 bg-coffee-50 rounded-2xl p-8 text-center">
-          <p className="text-sm font-semibold text-coffee-700 uppercase tracking-widest mb-4">
+        <div className="mt-16 bg-coffee-50 dark:bg-gray-800 rounded-2xl p-8 text-center">
+          <p className="text-sm font-semibold text-coffee-700 dark:text-coffee-300 uppercase tracking-widest mb-4">
             Coverage at a glance
           </p>
           <div className="flex flex-wrap justify-center gap-8">
             {regionData.map((r) => (
               <div key={r.name} className="text-center">
-                <div className="text-2xl font-bold text-coffee-800">
+                <div className="text-2xl font-bold text-coffee-800 dark:text-coffee-300">
                   {r.countries.length}
                 </div>
-                <div className="text-xs text-gray-500 mt-0.5">{r.name}</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{r.name}</div>
               </div>
             ))}
             <div className="text-center">
-              <div className="text-2xl font-bold text-coffee-800">
+              <div className="text-2xl font-bold text-coffee-800 dark:text-coffee-300">
                 {totalCount}
               </div>
-              <div className="text-xs text-gray-500 mt-0.5">Total guides</div>
+              <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Total guides</div>
             </div>
           </div>
         </div>

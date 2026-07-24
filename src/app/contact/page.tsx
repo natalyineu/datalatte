@@ -94,8 +94,8 @@ export default function ContactPage() {
         <div className="grid lg:grid-cols-2 gap-16">
           {/* Contact form */}
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Send a message</h2>
-            <p className="text-gray-500 mb-7 text-sm">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">Send a message</h2>
+            <p className="text-gray-500 dark:text-gray-400 mb-7 text-sm">
               I typically respond within one business day.
             </p>
 
@@ -105,21 +105,21 @@ export default function ContactPage() {
           {/* Other options + what to expect */}
           <div className="space-y-8">
             <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Other ways to reach me</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">Other ways to reach me</h2>
 
               <div className="space-y-4">
                 <a
                   href="mailto:hi@datalatte.pro"
-                  className="flex items-center gap-4 p-5 rounded-xl border border-gray-200 hover:border-coffee-300 hover:bg-coffee-50 transition-all group"
+                  className="flex items-center gap-4 p-5 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-coffee-300 dark:hover:border-coffee-700 hover:bg-coffee-50 dark:hover:bg-gray-800 transition-all group"
                 >
-                  <div className="w-11 h-11 bg-coffee-100 rounded-xl flex items-center justify-center shrink-0">
+                  <div className="w-11 h-11 bg-coffee-100 dark:bg-coffee-900/40 rounded-xl flex items-center justify-center shrink-0">
                     <Mail size={20} className="text-coffee-700" />
                   </div>
                   <div>
-                    <div className="font-semibold text-gray-900 group-hover:text-coffee-700 transition-colors">
+                    <div className="font-semibold text-gray-900 dark:text-gray-100 group-hover:text-coffee-700 dark:group-hover:text-coffee-300 transition-colors">
                       Email
                     </div>
-                    <div className="text-sm text-gray-500">hi@datalatte.pro</div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">hi@datalatte.pro</div>
                   </div>
                   <ArrowRight size={16} className="text-gray-400 group-hover:text-coffee-700 ml-auto transition-colors" />
                 </a>
@@ -128,16 +128,16 @@ export default function ContactPage() {
                   href="https://wa.me/48503589781"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-5 rounded-xl border border-gray-200 hover:border-coffee-300 hover:bg-coffee-50 transition-all group"
+                  className="flex items-center gap-4 p-5 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-coffee-300 dark:hover:border-coffee-700 hover:bg-coffee-50 dark:hover:bg-gray-800 transition-all group"
                 >
-                  <div className="w-11 h-11 bg-coffee-100 rounded-xl flex items-center justify-center shrink-0">
+                  <div className="w-11 h-11 bg-coffee-100 dark:bg-coffee-900/40 rounded-xl flex items-center justify-center shrink-0">
                     <MessageCircle size={20} className="text-coffee-700" />
                   </div>
                   <div>
-                    <div className="font-semibold text-gray-900 group-hover:text-coffee-700 transition-colors">
+                    <div className="font-semibold text-gray-900 dark:text-gray-100 group-hover:text-coffee-700 dark:group-hover:text-coffee-300 transition-colors">
                       WhatsApp
                     </div>
-                    <div className="text-sm text-gray-500">+48 503 589 781</div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">+48 503 589 781</div>
                   </div>
                   <ArrowRight size={16} className="text-gray-400 group-hover:text-coffee-700 ml-auto transition-colors" />
                 </a>
@@ -146,14 +146,14 @@ export default function ContactPage() {
                   href="https://maps.app.goo.gl/oexZRcsD7fFEAS2u8"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-5 rounded-xl border border-gray-200 hover:border-coffee-300 hover:bg-coffee-50 transition-all group"
+                  className="flex items-center gap-4 p-5 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-coffee-300 dark:hover:border-coffee-700 hover:bg-coffee-50 dark:hover:bg-gray-800 transition-all group"
                 >
-                  <div className="w-11 h-11 bg-coffee-100 rounded-xl flex items-center justify-center shrink-0">
+                  <div className="w-11 h-11 bg-coffee-100 dark:bg-coffee-900/40 rounded-xl flex items-center justify-center shrink-0">
                     <MapPin size={20} className="text-coffee-700" />
                   </div>
                   <div>
-                    <div className="font-semibold text-gray-900 group-hover:text-coffee-700 transition-colors">Office</div>
-                    <div className="text-sm text-gray-500">Franklina Roosevelta 22, 61-700 Poznań, Poland</div>
+                    <div className="font-semibold text-gray-900 dark:text-gray-100 group-hover:text-coffee-700 dark:group-hover:text-coffee-300 transition-colors">Office</div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">Franklina Roosevelta 22, 61-700 Poznań, Poland</div>
                   </div>
                   <ArrowRight size={16} className="text-gray-400 group-hover:text-coffee-700 ml-auto transition-colors" />
                 </a>
@@ -162,16 +162,16 @@ export default function ContactPage() {
                   href="https://calendly.com/hi-datalatte/new-meeting"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-5 rounded-xl border border-coffee-300 bg-coffee-50 hover:border-coffee-400 hover:bg-coffee-100 transition-all group"
+                  className="flex items-center gap-4 p-5 rounded-xl border border-coffee-300 dark:border-coffee-700 bg-coffee-50 dark:bg-coffee-900/20 hover:border-coffee-400 dark:hover:border-coffee-600 hover:bg-coffee-100 dark:hover:bg-coffee-900/30 transition-all group"
                 >
-                  <div className="w-11 h-11 bg-coffee-200 rounded-xl flex items-center justify-center shrink-0">
+                  <div className="w-11 h-11 bg-coffee-200 dark:bg-coffee-900/60 rounded-xl flex items-center justify-center shrink-0">
                     <Calendar size={20} className="text-coffee-700" />
                   </div>
                   <div>
-                    <div className="font-semibold text-gray-900 group-hover:text-coffee-700 transition-colors">
+                    <div className="font-semibold text-gray-900 dark:text-gray-100 group-hover:text-coffee-700 dark:group-hover:text-coffee-300 transition-colors">
                       Book a call
                     </div>
-                    <div className="text-sm text-gray-500">30-minute intro or audit call</div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">30-minute intro or audit call</div>
                   </div>
                   <ArrowRight size={16} className="text-gray-400 group-hover:text-coffee-700 ml-auto transition-colors" />
                 </a>
@@ -180,16 +180,16 @@ export default function ContactPage() {
                   href="https://clutch.co/profile/datalatte"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-5 rounded-xl border border-gray-200 hover:border-coffee-300 hover:bg-coffee-50 transition-all group"
+                  className="flex items-center gap-4 p-5 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-coffee-300 dark:hover:border-coffee-700 hover:bg-coffee-50 dark:hover:bg-gray-800 transition-all group"
                 >
-                  <div className="w-11 h-11 bg-coffee-100 rounded-xl flex items-center justify-center shrink-0">
+                  <div className="w-11 h-11 bg-coffee-100 dark:bg-coffee-900/40 rounded-xl flex items-center justify-center shrink-0">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-coffee-700">
                       <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 3a7 7 0 110 14A7 7 0 0112 5zm0 2a5 5 0 100 10A5 5 0 0012 7zm0 2a3 3 0 110 6 3 3 0 010-6z"/>
                     </svg>
                   </div>
                   <div>
-                    <div className="font-semibold text-gray-900 group-hover:text-coffee-700 transition-colors">Clutch</div>
-                    <div className="text-sm text-gray-500">Reviews &amp; agency profile</div>
+                    <div className="font-semibold text-gray-900 dark:text-gray-100 group-hover:text-coffee-700 dark:group-hover:text-coffee-300 transition-colors">Clutch</div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">Reviews &amp; agency profile</div>
                   </div>
                   <ArrowRight size={16} className="text-gray-400 group-hover:text-coffee-700 ml-auto transition-colors" />
                 </a>
@@ -198,16 +198,16 @@ export default function ContactPage() {
                   href="https://www.crunchbase.com/organization/datalatte-pro"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-5 rounded-xl border border-gray-200 hover:border-coffee-300 hover:bg-coffee-50 transition-all group"
+                  className="flex items-center gap-4 p-5 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-coffee-300 dark:hover:border-coffee-700 hover:bg-coffee-50 dark:hover:bg-gray-800 transition-all group"
                 >
-                  <div className="w-11 h-11 bg-coffee-100 rounded-xl flex items-center justify-center shrink-0">
+                  <div className="w-11 h-11 bg-coffee-100 dark:bg-coffee-900/40 rounded-xl flex items-center justify-center shrink-0">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-coffee-700">
                       <path d="M21 4H3a1 1 0 00-1 1v14a1 1 0 001 1h18a1 1 0 001-1V5a1 1 0 00-1-1zM9.5 15.5A3.5 3.5 0 016 12a3.5 3.5 0 013.5-3.5c1.1 0 2.07.51 2.7 1.3l-1.44 1.44A1.5 1.5 0 009.5 10.5 1.5 1.5 0 008 12a1.5 1.5 0 001.5 1.5c.57 0 1.07-.32 1.33-.79l1.44 1.44A3.47 3.47 0 019.5 15.5zm8.5-.5h-1.5v-1H15v1h-1.5V9H15v1h1.5V9H18v6z"/>
                     </svg>
                   </div>
                   <div>
-                    <div className="font-semibold text-gray-900 group-hover:text-coffee-700 transition-colors">Crunchbase</div>
-                    <div className="text-sm text-gray-500">Company profile</div>
+                    <div className="font-semibold text-gray-900 dark:text-gray-100 group-hover:text-coffee-700 dark:group-hover:text-coffee-300 transition-colors">Crunchbase</div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">Company profile</div>
                   </div>
                   <ArrowRight size={16} className="text-gray-400 group-hover:text-coffee-700 ml-auto transition-colors" />
                 </a>
@@ -215,8 +215,8 @@ export default function ContactPage() {
             </div>
 
             {/* What happens next */}
-            <div className="bg-gray-50 rounded-2xl p-6">
-              <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-6">
+              <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
                 <Clock size={17} className="text-coffee-600" />
                 What happens after you reach out
               </h3>
@@ -227,8 +227,8 @@ export default function ContactPage() {
                   "I give you honest feedback: what's working, what's not, and what I'd prioritize",
                   "If it seems like a good fit, I'll share a clear proposal. No pressure, no hard sell.",
                 ].map((step, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm text-gray-600">
-                    <span className="w-5 h-5 rounded-full bg-coffee-100 text-coffee-700 font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">
+                  <li key={i} className="flex items-start gap-3 text-sm text-gray-600 dark:text-gray-300">
+                    <span className="w-5 h-5 rounded-full bg-coffee-100 dark:bg-coffee-900/40 text-coffee-700 dark:text-coffee-300 font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">
                       {i + 1}
                     </span>
                     {step}
@@ -238,8 +238,8 @@ export default function ContactPage() {
             </div>
 
             {/* Niches */}
-            <div className="bg-coffee-50 rounded-2xl p-6">
-              <h3 className="font-bold text-gray-900 mb-3">I specialize in:</h3>
+            <div className="bg-coffee-50 dark:bg-gray-800 rounded-2xl p-6">
+              <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-3">I specialize in:</h3>
               <div className="grid grid-cols-2 gap-2">
                 {[
                   { label: "Coffee Shops", href: "/for/coffee-shops", emoji: "☕" },
@@ -250,7 +250,7 @@ export default function ContactPage() {
                   <Link
                     key={n.href}
                     href={n.href}
-                    className="flex items-center gap-2 text-sm text-gray-600 hover:text-coffee-700 transition-colors"
+                    className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-coffee-700 dark:hover:text-coffee-300 transition-colors"
                   >
                     <CheckCircle2 size={13} className="text-coffee-500 shrink-0" />
                     {n.emoji} {n.label}
@@ -265,7 +265,7 @@ export default function ContactPage() {
       {/* Google Maps */}
       <section className="px-4 sm:px-6 lg:px-8 pb-16">
         <div className="max-w-5xl mx-auto">
-          <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
+          <div className="rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-sm">
             <iframe
               src="https://maps.google.com/maps?q=Franklina+Roosevelta+22,+61-700+Pozna%C5%84,+Polska&t=&z=15&ie=UTF8&iwloc=B&output=embed"
               width="100%"

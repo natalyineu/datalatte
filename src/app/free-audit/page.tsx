@@ -120,7 +120,7 @@ export default function FreeAuditPage() {
             Six areas we review —{" "}
             <span className="gradient-text">completely free</span>
           </h2>
-          <p className="text-gray-500 max-w-xl mx-auto mt-4">
+          <p className="text-gray-500 dark:text-gray-400 max-w-xl mx-auto mt-4">
             This isn&apos;t an automated report. Nataliia personally researches your business and delivers findings tailored to your specific situation.
           </p>
         </div>
@@ -128,15 +128,15 @@ export default function FreeAuditPage() {
           {auditItems.map((item) => (
             <div key={item.title} className="card p-6">
               <item.icon size={26} className="text-coffee-600 mb-4" />
-              <h3 className="font-bold text-gray-900 text-lg mb-2">{item.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+              <h3 className="font-bold text-gray-900 dark:text-white text-lg mb-2">{item.title}</h3>
+              <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
       </SectionWrapper>
 
       {/* How it works */}
-      <SectionWrapper className="bg-gray-50">
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-900/40">
         <div className="text-center mb-12">
           <span className="section-label">How It Works</span>
           <h2 className="section-title">Simple, fast, and genuinely useful</h2>
@@ -144,27 +144,27 @@ export default function FreeAuditPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
           {steps.map((s) => (
             <div key={s.step} className="text-center">
-              <div className="w-12 h-12 rounded-full bg-coffee-100 text-coffee-700 font-bold text-xl flex items-center justify-center mx-auto mb-4">
+              <div className="w-12 h-12 rounded-full bg-coffee-100 dark:bg-coffee-900/40 text-coffee-700 dark:text-coffee-300 font-bold text-xl flex items-center justify-center mx-auto mb-4">
                 {s.step}
               </div>
-              <h3 className="font-bold text-gray-900 mb-2">{s.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">{s.desc}</p>
+              <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-2">{s.title}</h3>
+              <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{s.desc}</p>
             </div>
           ))}
         </div>
       </SectionWrapper>
 
       {/* Social proof strip */}
-      <div className="bg-coffee-50/60 border-y border-coffee-100 py-6">
+      <div className="bg-coffee-50/60 dark:bg-gray-800/60 border-y border-coffee-100 dark:border-gray-700 py-6">
         <div className="max-w-4xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
           {[
             { quote: "GBP impressions doubled in 6 weeks. Getting calls from people who'd never heard of us.", author: "Sarah M., The Daily Grind Coffee Co." },
             { quote: "Cut my cost per booking in half. Finally understood where every dollar was going.", author: "Priya K., Studio Flow Yoga" },
             { quote: "Honest, explains things in plain language. Feels like working with someone who genuinely cares.", author: "Marcus T., Paws & Polish Grooming" },
           ].map((t) => (
-            <div key={t.author} className="bg-white rounded-xl p-4 shadow-sm border border-coffee-100">
-              <p className="text-sm text-gray-700 leading-relaxed mb-2 italic">&ldquo;{t.quote}&rdquo;</p>
-              <p className="text-xs text-coffee-700 font-semibold">{t.author}</p>
+            <div key={t.author} className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm border border-coffee-100 dark:border-gray-700">
+              <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-2 italic">&ldquo;{t.quote}&rdquo;</p>
+              <p className="text-xs text-coffee-700 dark:text-coffee-300 font-semibold">{t.author}</p>
             </div>
           ))}
         </div>
@@ -179,7 +179,7 @@ export default function FreeAuditPage() {
               Get your free audit —{" "}
               <span className="gradient-text">takes 2 minutes</span>
             </h2>
-            <p className="text-gray-500 mt-4">
+            <p className="text-gray-500 dark:text-gray-400 mt-4">
               No credit card. No commitment. Just honest analysis of where you stand and what to do next.
             </p>
           </div>
@@ -188,11 +188,11 @@ export default function FreeAuditPage() {
       </SectionWrapper>
 
       {/* Social proof + reassurance */}
-      <SectionWrapper className="bg-coffee-50">
+      <SectionWrapper className="bg-coffee-50 dark:bg-gray-900/40">
         <div className="max-w-3xl mx-auto text-center">
           <span className="section-label">Why It&apos;s Free</span>
           <h2 className="section-title mb-4">No catch — here&apos;s why</h2>
-          <p className="text-gray-600 leading-relaxed mb-6">
+          <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
             I offer free audits because the best clients are those who already understand the problem. If the audit shows you have serious gaps, you might want help fixing them — and we can talk about that. If you can fix everything yourself, that&apos;s great too. Either way, you leave with something genuinely useful.
           </p>
           <p className="text-coffee-700 font-semibold mb-8">
@@ -204,9 +204,9 @@ export default function FreeAuditPage() {
               { value: "100%", label: "Personal — not automated" },
               { value: "0", label: "Sales calls required" },
             ].map((s) => (
-              <div key={s.label} className="bg-white rounded-2xl p-6 shadow-sm">
-                <p className="text-3xl font-bold text-coffee-700 mb-1">{s.value}</p>
-                <p className="text-sm text-gray-500">{s.label}</p>
+              <div key={s.label} className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm">
+                <p className="text-3xl font-bold text-coffee-700 dark:text-coffee-300 mb-1">{s.value}</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">{s.label}</p>
               </div>
             ))}
           </div>
@@ -240,11 +240,11 @@ export default function FreeAuditPage() {
               },
             ].map((item) => (
               <div key={item.q} className="card p-6">
-                <h4 className="font-semibold text-gray-900 mb-2 flex items-start gap-2">
+                <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2 flex items-start gap-2">
                   <CheckCircle2 size={18} className="text-coffee-600 mt-0.5 shrink-0" />
                   {item.q}
                 </h4>
-                <p className="text-gray-500 text-sm leading-relaxed pl-6">{item.a}</p>
+                <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed pl-6">{item.a}</p>
               </div>
             ))}
           </div>

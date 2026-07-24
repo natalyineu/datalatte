@@ -231,7 +231,7 @@ export default function PricingPage() {
           {tiers.map((tier) => (
             <div
               key={tier.name}
-              className={`rounded-2xl border-2 bg-white p-8 flex flex-col relative ${tier.accentClass} ${tier.highlight ? "shadow-xl" : "shadow-sm"}`}
+              className={`rounded-2xl border-2 bg-white dark:bg-gray-800 p-8 flex flex-col relative ${tier.accentClass} ${tier.highlight ? "shadow-xl" : "shadow-sm"}`}
             >
               {tier.highlight && (
                 <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
@@ -244,25 +244,25 @@ export default function PricingPage() {
                 <span className={`inline-block text-xs font-bold px-3 py-1 rounded-full mb-3 ${tier.badgeClass}`}>
                   {tier.tagline}
                 </span>
-                <h2 className="text-2xl font-bold text-gray-900 mb-1">{tier.name}</h2>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-1">{tier.name}</h2>
                 <div className="flex items-end gap-1 mb-4">
-                  <span className="text-3xl font-extrabold text-coffee-800">{tier.price}</span>
-                  <span className="text-gray-500 text-sm mb-1">{tier.period}</span>
+                  <span className="text-3xl font-extrabold text-coffee-800 dark:text-coffee-300">{tier.price}</span>
+                  <span className="text-gray-500 dark:text-gray-400 text-sm mb-1">{tier.period}</span>
                 </div>
-                <p className="text-gray-500 text-sm leading-relaxed">{tier.description}</p>
+                <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{tier.description}</p>
               </div>
 
               <div className="flex-1 space-y-2.5 mb-8">
                 {tier.included.map((item) => (
                   <div key={item} className="flex items-start gap-2.5">
                     <CheckCircle2 size={16} className="text-coffee-600 shrink-0 mt-0.5" />
-                    <span className="text-gray-700 text-sm">{item}</span>
+                    <span className="text-gray-700 dark:text-gray-300 text-sm">{item}</span>
                   </div>
                 ))}
                 {tier.notIncluded.map((item) => (
                   <div key={item} className="flex items-start gap-2.5 opacity-40">
                     <X size={16} className="text-gray-400 shrink-0 mt-0.5" />
-                    <span className="text-gray-500 text-sm">{item}</span>
+                    <span className="text-gray-500 dark:text-gray-400 text-sm">{item}</span>
                   </div>
                 ))}
               </div>
@@ -286,12 +286,12 @@ export default function PricingPage() {
       </SectionWrapper>
 
       {/* Benefits */}
-      <SectionWrapper className="bg-coffee-50/40">
+      <SectionWrapper className="bg-coffee-50/40 dark:bg-gray-900/40">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-10">
             <span className="section-label">Included in every package</span>
             <h2 className="section-title">More than just campaign management</h2>
-            <p className="text-gray-500 mt-3 max-w-2xl mx-auto text-base leading-relaxed">
+            <p className="text-gray-500 dark:text-gray-400 mt-3 max-w-2xl mx-auto text-base leading-relaxed">
               Every client gets a senior strategist — not a junior account manager — plus the tools,
               reports, and transparency to know exactly what their money is doing.
             </p>
@@ -301,14 +301,14 @@ export default function PricingPage() {
               <Link
                 key={b.href}
                 href={b.href}
-                className="group bg-white rounded-2xl border border-gray-200 p-6 hover:border-coffee-400 hover:shadow-md transition-all flex flex-col"
+                className="group bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-6 hover:border-coffee-400 dark:hover:border-coffee-600 hover:shadow-md transition-all flex flex-col"
               >
-                <div className="w-10 h-10 bg-coffee-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-coffee-200 transition-colors">
-                  <b.icon size={20} className="text-coffee-700" />
+                <div className="w-10 h-10 bg-coffee-100 dark:bg-coffee-900/40 rounded-xl flex items-center justify-center mb-4 group-hover:bg-coffee-200 dark:group-hover:bg-coffee-900/60 transition-colors">
+                  <b.icon size={20} className="text-coffee-700 dark:text-coffee-300" />
                 </div>
-                <h3 className="font-semibold text-gray-900 mb-2 text-base">{b.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed flex-1">{b.desc}</p>
-                <span className="inline-flex items-center gap-1 text-coffee-700 text-sm font-medium mt-4 group-hover:gap-2 transition-all">
+                <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2 text-base">{b.title}</h3>
+                <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed flex-1">{b.desc}</p>
+                <span className="inline-flex items-center gap-1 text-coffee-700 dark:text-coffee-400 text-sm font-medium mt-4 group-hover:gap-2 transition-all">
                   {b.linkText} <ArrowRight size={14} />
                 </span>
               </Link>
@@ -324,20 +324,20 @@ export default function PricingPage() {
             <span className="section-label">Compare</span>
             <h2 className="section-title">What&apos;s in each package</h2>
           </div>
-          <div className="overflow-x-auto rounded-2xl border border-gray-200 shadow-sm">
-            <table className="w-full bg-white text-sm">
+          <div className="overflow-x-auto rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm">
+            <table className="w-full bg-white dark:bg-gray-800 text-sm">
               <thead>
-                <tr className="border-b border-gray-100">
-                  <th className="text-left p-4 text-gray-600 font-medium w-1/2">Feature</th>
-                  <th className="p-4 text-center text-gray-700 font-bold">Espresso</th>
-                  <th className="p-4 text-center text-coffee-700 font-bold">Americano</th>
-                  <th className="p-4 text-center text-gray-700 font-bold">Pumpkin Spice Latte</th>
+                <tr className="border-b border-gray-100 dark:border-gray-700">
+                  <th className="text-left p-4 text-gray-600 dark:text-gray-400 font-medium w-1/2">Feature</th>
+                  <th className="p-4 text-center text-gray-700 dark:text-gray-300 font-bold">Espresso</th>
+                  <th className="p-4 text-center text-coffee-700 dark:text-coffee-300 font-bold">Americano</th>
+                  <th className="p-4 text-center text-gray-700 dark:text-gray-300 font-bold">Pumpkin Spice Latte</th>
                 </tr>
               </thead>
               <tbody>
                 {comparisonRows.map((row, i) => (
-                  <tr key={row.feature} className={i % 2 === 0 ? "bg-gray-50/50" : "bg-white"}>
-                    <td className="p-4 text-gray-700">{row.feature}</td>
+                  <tr key={row.feature} className={i % 2 === 0 ? "bg-gray-50/50 dark:bg-gray-700/30" : "bg-white dark:bg-gray-800"}>
+                    <td className="p-4 text-gray-700 dark:text-gray-300">{row.feature}</td>
                     <td className="p-4 text-center">{row.starter ? <CheckCircle2 size={17} className="text-coffee-500 mx-auto" /> : <X size={15} className="text-gray-300 mx-auto" />}</td>
                     <td className="p-4 text-center">{row.growth ? <CheckCircle2 size={17} className="text-coffee-600 mx-auto" /> : <X size={15} className="text-gray-300 mx-auto" />}</td>
                     <td className="p-4 text-center">{row.full ? <CheckCircle2 size={17} className="text-coffee-700 mx-auto" /> : <X size={15} className="text-gray-300 mx-auto" />}</td>
@@ -359,8 +359,8 @@ export default function PricingPage() {
           <div className="space-y-4">
             {faqs.map((item) => (
               <div key={item.q} className="card p-6">
-                <h3 className="font-semibold text-gray-900 mb-2">{item.q}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{item.a}</p>
+                <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">{item.q}</h3>
+                <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{item.a}</p>
               </div>
             ))}
           </div>
