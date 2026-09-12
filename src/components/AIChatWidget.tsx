@@ -377,7 +377,7 @@ export default function AIChatWidget() {
                 onChange={e => setInput(e.target.value)}
                 placeholder="Ask me anything about your marketing…"
                 disabled={loading}
-                className="flex-1 text-sm bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-coffee-200 focus:border-coffee-400 disabled:opacity-50 transition-all"
+                className="flex-1 text-sm text-gray-900 placeholder:text-gray-400 bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-coffee-200 focus:border-coffee-400 disabled:opacity-50 transition-all"
               />
               <button
                 type="submit"
