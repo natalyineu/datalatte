@@ -73,7 +73,7 @@ function detectProvider() {
       name: "Groq",
       key: process.env.GROQ_API_KEY,
       url: "https://api.groq.com/openai/v1/chat/completions",
-      model: process.env.EXPAND_MODEL || "llama-3.3-70b-versatile",
+      model: process.env.EXPAND_MODEL || "groq/compound",
       extraHeaders: {},
     };
   }

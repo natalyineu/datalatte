@@ -213,7 +213,7 @@ Use only data from above. No generic advice."""
     try:
         key = GROQ_API_KEY or __import__("os").environ.get("GROQ_API_KEY", "")
         payload = json.dumps({
-            "model": "llama-3.3-70b-versatile",
+            "model": "groq/compound",
             "messages": [{"role": "user", "content": prompt}],
             "max_tokens": 600,
             "temperature": 0.4,
