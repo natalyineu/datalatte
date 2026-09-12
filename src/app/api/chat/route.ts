@@ -75,9 +75,9 @@ export async function POST(req: NextRequest) {
     const trimmed = messages.slice(-10);
 
     const CHAT_MODELS = [
-      "llama-3.1-8b-instant",
-      "llama3-8b-8192",
-      "gemma2-9b-it",
+      "groq/compound",
+      "groq/compound-mini",
+      "qwen/qwen3.6-27b",
     ];
 
     let rawReply = "";
