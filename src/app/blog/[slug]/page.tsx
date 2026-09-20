@@ -194,10 +194,13 @@ interface RelatedPost {
   date: string;
 }
 
-function getRelatedPosts(currentSlug: string, category: string, limit = 3): RelatedPost[] {
+function getRelatedPosts(currentSlug: string, category: string, limit = 3, currentTags: string[] = []): RelatedPost[] {
   const files = fs.readdirSync(contentDir).filter((f) => f.endsWith(".mdx"));
-  const candidates: RelatedPost[] = [];
-  const fallbacks: RelatedPost[] = [];
+  const scored: { post: RelatedPost; score: number }[] = [];
+
+  // Deterministic seed from slug so the same page always shows the same related posts
+  const seed = currentSlug.split("").reduce((acc, c) => acc + c.charCodeAt(0), 0);
+  const seededRandom = (i: number) => ((seed * 1103515245 + 12345 * (i + 1)) & 0x7fffffff) / 0x7fffffff;
 
   for (const file of files) {
     const slug = file.replace(".mdx", "");
@@ -205,6 +208,8 @@ function getRelatedPosts(currentSlug: string, category: string, limit = 3): Rela
     try {
       const raw = fs.readFileSync(path.join(contentDir, file), "utf8");
       const { data, content } = matter(raw);
+      if (data.noindex) continue;
+
       const post: RelatedPost = {
         slug,
         title: data.title || slug,
@@ -214,18 +219,25 @@ function getRelatedPosts(currentSlug: string, category: string, limit = 3): Rela
         readTime: data.readTime || `${Math.max(1, Math.ceil(content.split(/\s+/).length / 200))} min read`,
         date: data.date || "",
       };
-      if (data.category === category) candidates.push(post);
-      else fallbacks.push(post);
+
+      // Score: same category = 10pts, each shared tag = 3pts, small random jitter for distribution
+      let score = 0;
+      if (data.category === category) score += 10;
+      const candidateTags: string[] = Array.isArray(data.tags) ? data.tags : [];
+      for (const t of currentTags) {
+        if (candidateTags.includes(t)) score += 3;
+      }
+      // Jitter so that ties are broken differently per page — distributes links across older articles
+      score += seededRandom(scored.length) * 2;
+
+      scored.push({ post, score });
     } catch {
       // skip unreadable files
     }
   }
 
-  // Sort same-category candidates by date desc (most recent first), then fill with fallbacks
-  candidates.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-  fallbacks.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-  const pool = candidates.length >= limit ? candidates : [...candidates, ...fallbacks];
-  return pool.slice(0, limit);
+  scored.sort((a, b) => b.score - a.score);
+  return scored.slice(0, limit).map((s) => s.post);
 }
 
 function calcReadTime(wordCount: number): string {
@@ -429,7 +441,7 @@ export default async function BlogPostPage({
   if (!post) notFound();
 
   const { frontmatter, content } = post;
-  const relatedPosts = getRelatedPosts(slug, frontmatter.category, 4);
+  const relatedPosts = getRelatedPosts(slug, frontmatter.category, 4, frontmatter.tags ?? []);
   const { prev: prevPost, next: nextPost } = getAdjacentPosts(slug);
 
   // Word count and reading time for schema
