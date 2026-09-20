@@ -21,7 +21,7 @@ import CTABanner from "@/components/CTABanner";
 import { ArrowRight } from "lucide-react";
 import ReadingProgress from "@/components/ReadingProgress";
 import TableOfContents from "@/components/TableOfContents";
-import { articleSchema, breadcrumbSchema } from "@/lib/schema";
+import { articleSchema, breadcrumbSchema, faqSchema } from "@/lib/schema";
 
 /** Convert heading text to an anchor id (mirrors TableOfContents slugify). */
 function headingId(text: string): string {
@@ -454,6 +454,24 @@ export default async function BlogPostPage({
     { name: frontmatter.title, url: `https://datalatte.pro/blog/${slug}` },
   ]);
 
+  // Extract FAQ items from markdown content for FAQPage schema
+  const faqItems = (() => {
+    const items: { q: string; a: string }[] = [];
+    // Match H3 headings followed by paragraph text inside a FAQ section
+    const faqSectionMatch = content.match(/#{2,3}\s+Frequently Asked Questions[\s\S]*$/i);
+    if (!faqSectionMatch) return items;
+    const faqSection = faqSectionMatch[0];
+    // Extract each Q&A pair: ### Question\n\nAnswer paragraph
+    const qaRegex = /###\s+(.+?)\n+([\s\S]+?)(?=\n###|\n##|$)/g;
+    let m;
+    while ((m = qaRegex.exec(faqSection)) !== null) {
+      const q = m[1].trim();
+      const a = m[2].replace(/<[^>]+>/g, "").replace(/\*\*/g, "").trim().split("\n\n")[0].trim();
+      if (q && a) items.push({ q, a });
+    }
+    return items;
+  })();
+
   // Format date for display
   const displayDate = new Date(frontmatter.date).toLocaleDateString("en-US", {
     year: "numeric",
@@ -472,6 +490,12 @@ export default async function BlogPostPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
+      {faqItems.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqItems)) }}
+        />
+      )}
 
       {/* Breadcrumb nav */}
       <nav aria-label="Breadcrumb" className="bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 py-3">
