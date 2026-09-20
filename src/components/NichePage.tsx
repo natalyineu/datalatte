@@ -23,6 +23,7 @@ interface NichePageProps {
   ctaHeadline: string;
   cityGuideLinks?: { label: string; href: string }[];
   cityServiceGroups?: CityServiceGroup[];
+  relatedArticles?: { title: string; href: string; description?: string }[];
 }
 
 const NICHE_SLUGS: Record<string, string> = {
@@ -43,7 +44,7 @@ const NICHE_SLUGS: Record<string, string> = {
 export default function NichePage({
   niche, headline, subheadline, heroImage, accentColor,
   problems, services, kpis, tactics, testimonial, faq, ctaHeadline,
-  cityGuideLinks, cityServiceGroups,
+  cityGuideLinks, cityServiceGroups, relatedArticles,
 }: NichePageProps) {
   const slug = NICHE_SLUGS[niche] ?? niche.toLowerCase().replace(/[\s&]+/g, "-").replace(/[^a-z0-9-]/g, "");
   const breadcrumb = breadcrumbSchema([
@@ -366,6 +367,32 @@ export default function NichePage({
                   >
                     {label}
                   </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </SectionWrapper>
+      )}
+
+      {relatedArticles && relatedArticles.length > 0 && (
+        <SectionWrapper className="bg-white dark:bg-gray-900">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-50 mb-6">
+              Further Reading
+            </h2>
+            <ul className="grid gap-4 sm:grid-cols-2">
+              {relatedArticles.map((article) => (
+                <li key={article.href} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:border-coffee-400 transition-colors">
+                  <a href={article.href} className="block group">
+                    <span className="font-medium text-gray-900 dark:text-gray-50 group-hover:text-coffee-700 dark:group-hover:text-coffee-400 text-sm leading-snug block mb-1">
+                      {article.title}
+                    </span>
+                    {article.description && (
+                      <span className="text-xs text-gray-500 dark:text-gray-400 line-clamp-2">
+                        {article.description}
+                      </span>
+                    )}
+                  </a>
                 </li>
               ))}
             </ul>

@@ -148,6 +148,14 @@ export default function PetGroomersPage() {
       ]}
       ctaHeadline="Ready to grow your grooming business with real marketing?"
       cityServiceGroups={getCityServiceGroups("pet-groomers")}
+      relatedArticles={[
+        { href: "/blog/pet-groomer-google-ads-mistakes", title: "Pet Groomer Google Ads Mistakes That Waste Your Budget", description: "The 7 most common Google Ads mistakes pet groomers make — and how to fix them." },
+        { href: "/blog/bark-vs-thumbtack-local-business", title: "Bark vs Thumbtack for Local Service Businesses", description: "Cost per lead, conversion rates, and which lead gen platform is worth your money." },
+        { href: "/blog/google-business-profile-optimization-checklist", title: "Google Business Profile Optimization Checklist", description: "Complete GBP checklist for local businesses — fully applicable to pet groomers." },
+        { href: "/blog/local-marketing-budget-guide", title: "Local Marketing Budget Guide: How Much to Spend", description: "Real marketing spend benchmarks for local service businesses at every growth stage." },
+        { href: "/blog/nextdoor-ads-setup-guide-local-business", title: "Nextdoor Ads for Local Businesses: Complete Setup Guide", description: "How to set up Nextdoor advertising to reach pet owners in your exact neighborhood." },
+        { href: "/blog/small-business-marketing-washington", title: "Local Marketing for Small Businesses: What Works", description: "Practical local marketing strategies for service businesses including pet groomers." },
+      ]}
     />
   );
 }

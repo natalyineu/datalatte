@@ -148,6 +148,14 @@ export default function HairSalonsPage() {
       ]}
       ctaHeadline="Ready to fill your appointment book with new clients?"
       cityServiceGroups={getCityServiceGroups("hair-salons")}
+      relatedArticles={[
+        { href: "/blog/hair-salon-instagram-bookings", title: "How Hair Salons Get Bookings from Instagram", description: "The Instagram strategy that drives real appointment bookings, not just followers." },
+        { href: "/blog/google-ads-keywords-hair-salons-2026", title: "Best Google Ads Keywords for Hair Salons (2026)", description: "High-intent search terms, CPCs, match types, and campaign structure for salons." },
+        { href: "/blog/best-google-ad-keywords-for-hair-salons-in-2026", title: "Hair Salon Google Ads Keywords: Complete List", description: "The exact keywords that drive hair salon bookings in 2026 with real data." },
+        { href: "/blog/bark-vs-thumbtack-local-business", title: "Bark vs Thumbtack for Service Businesses", description: "Cost per lead, conversion rates, and which platform is worth your budget." },
+        { href: "/blog/google-business-profile-optimization-checklist", title: "Google Business Profile Optimization Checklist", description: "Complete GBP checklist for local businesses including hair salons." },
+        { href: "/blog/local-marketing-budget-guide", title: "Local Marketing Budget Guide: How Much to Spend", description: "Real benchmarks for salon marketing spend at every stage of growth." },
+      ]}
     />
   );
 }

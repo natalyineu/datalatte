@@ -148,6 +148,14 @@ export default function CoffeeShopsPage() {
       ]}
       ctaHeadline="Ready to fill more seats and build more regulars?"
       cityServiceGroups={getCityServiceGroups("coffee-shops")}
+      relatedArticles={[
+        { href: "/blog/coffee-shops-dominate-google-maps", title: "How Coffee Shops Dominate Google Maps in 2026", description: "Step-by-step guide to winning the local map pack for coffee-related searches." },
+        { href: "/blog/coffee-shop-google-ads-guide", title: "Google Ads for Coffee Shops: Complete Setup Guide", description: "Keywords, bidding, and campaign structure that drives foot traffic for cafés." },
+        { href: "/blog/best-google-ad-keywords-for-coffee-shops-in-2026", title: "Best Google Ads Keywords for Coffee Shops (2026)", description: "The exact search terms that bring coffee shop customers through your door." },
+        { href: "/blog/coffee-shop-tiktok-marketing-guide", title: "TikTok Marketing for Coffee Shops: What Actually Works", description: "How independent cafés build loyal communities and drive traffic with short video." },
+        { href: "/blog/google-business-profile-optimization-checklist", title: "Google Business Profile Optimization Checklist", description: "The complete GBP checklist for local businesses — including coffee shops." },
+        { href: "/blog/local-marketing-budget-guide", title: "Local Marketing Budget Guide: How Much to Spend", description: "Real benchmarks for coffee shop ad spend at every growth stage." },
+      ]}
     />
   );
 }

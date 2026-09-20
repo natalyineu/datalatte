@@ -148,6 +148,14 @@ export default function FitnessStudiosPage() {
       ]}
       ctaHeadline="Ready to fill your classes and grow your membership base?"
       cityServiceGroups={getCityServiceGroups("fitness-studios")}
+      relatedArticles={[
+        { href: "/blog/fitness-studio-year-round-marketing", title: "Year-Round Marketing for Fitness Studios That Keeps Members Coming", description: "How to market your studio in every season — not just January." },
+        { href: "/blog/dooh-advertising-for-fitness-studios", title: "DOOH Advertising for Fitness Studios", description: "How fitness studios use digital out-of-home screens to drive trial sign-ups." },
+        { href: "/blog/dooh-advertising-for-yoga-studios", title: "DOOH Advertising for Yoga Studios", description: "Screen placement guide, creative strategy, and budget benchmarks for yoga studio DOOH." },
+        { href: "/blog/spotify-vs-pandora-vs-iheart-best-audio-ad-platform-local-business", title: "Spotify vs Pandora vs iHeart: Best Audio Ad Platform for Local Businesses", description: "Which audio advertising platform works best for fitness and wellness businesses." },
+        { href: "/blog/google-business-profile-optimization-checklist", title: "Google Business Profile Optimization Checklist", description: "Complete GBP checklist for local businesses including fitness studios." },
+        { href: "/blog/local-marketing-budget-guide", title: "Local Marketing Budget Guide: How Much to Spend", description: "Real marketing spend benchmarks for fitness studios at every membership level." },
+      ]}
     />
   );
 }
