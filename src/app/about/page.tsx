@@ -143,7 +143,7 @@ export default function AboutPage() {
         {/* Opening */}
         <div className="max-w-2xl mx-auto px-4 sm:px-6 py-14">
           <Prose>
-            <p className="text-xl text-gray-800 font-medium leading-relaxed">
+            <p className="text-xl text-gray-800 dark:text-gray-100 font-medium leading-relaxed">
               The best way to understand someone is to know what they do on a Saturday morning.
               Mine almost always involves walking somewhere in Poznań, ordering a flat white,
               and spending however long I want just being somewhere nice.
