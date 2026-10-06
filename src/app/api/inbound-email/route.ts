@@ -24,6 +24,17 @@ function authorized(req: NextRequest): boolean {
   return got.length === want.length && timingSafeEqual(got, want);
 }
 
+// Zoho sends the body as HTML: reduce it to readable text
+function htmlToText(v: unknown): string {
+  if (typeof v !== "string") return "";
+  return v
+    .replace(/<(style|script)[\s\S]*?<\/\1>/gi, " ")
+    .replace(/<br\s*\/?>|<\/(p|div|li|tr)>/gi, "\n")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'")
+    .replace(/[ \t]+/g, " ").replace(/\n\s*\n+/g, "\n\n").trim();
+}
+
 // Bare address from `Name <addr@x.com>` or `addr@x.com`
 function parseFrom(raw: string): { email: string; name: string } {
   const m = raw.match(/^(.*?)<([^>]+)>\s*$/);
@@ -38,7 +49,7 @@ export async function POST(req: NextRequest) {
   let body: Record<string, unknown>;
   try { body = await req.json(); } catch { return NextResponse.json({ error: "Bad JSON" }, { status: 400 }); }
 
-  const { email, name } = parseFrom(clip(body.from, 300));
+  const { email, name } = parseFrom(htmlToText(body.from).slice(0, 300));
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return NextResponse.json({ error: "Invalid sender" }, { status: 400 });
 
   // Skip our own mail (site notifications, auto-replies, bounces)
@@ -47,7 +58,7 @@ export async function POST(req: NextRequest) {
   }
 
   const subject = clip(body.subject, 200);
-  const snippet = clip(body.snippet, 1500);
+  const snippet = htmlToText(body.snippet).slice(0, 1500);
   const message = [subject && `Subject: ${subject}`, snippet].filter(Boolean).join("\n\n");
 
   const tasks: Promise<unknown>[] = [];
