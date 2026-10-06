@@ -1,0 +1,57 @@
+{
+  "_help": "Cities to collect Google Maps stats for. Edit and push to run the 'Collect city stats' workflow. Already collected combos are skipped. limitPerRun caps niche x city searches per run (each search = up to maxPlaces places on Apify, ~$2 per 1,000 places).",
+  "maxPlaces": 50,
+  "cities": [
+    {
+      "city": "Austin",
+      "stateCode": "TX",
+      "slug": "austin-tx"
+    },
+    {
+      "city": "Seattle",
+      "stateCode": "WA",
+      "slug": "seattle-wa"
+    },
+    {
+      "city": "Nashville",
+      "stateCode": "TN",
+      "slug": "nashville-tn"
+    },
+    {
+      "city": "Chicago",
+      "stateCode": "IL",
+      "slug": "chicago-il"
+    },
+    {
+      "city": "Phoenix",
+      "stateCode": "AZ",
+      "slug": "phoenix-az"
+    },
+    {
+      "city": "San Diego",
+      "stateCode": "CA",
+      "slug": "san-diego-ca"
+    },
+    {
+      "city": "Dallas",
+      "stateCode": "TX",
+      "slug": "dallas-tx"
+    },
+    {
+      "city": "Charlotte",
+      "stateCode": "NC",
+      "slug": "charlotte-nc"
+    },
+    {
+      "city": "Los Angeles",
+      "stateCode": "CA",
+      "slug": "los-angeles-ca"
+    },
+    {
+      "city": "New York",
+      "stateCode": "NY",
+      "slug": "new-york-ny"
+    }
+  ],
+  "limitPerRun": 4
+}

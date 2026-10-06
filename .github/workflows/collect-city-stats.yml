@@ -1,0 +1,41 @@
+name: Collect city stats
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["data/city-queue.json", "scripts/collect-city-stats.mjs"]   # edit the queue and push to run
+
+concurrency:
+  group: collect-city-stats
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Collect Google Maps stats (Apify)
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: node scripts/collect-city-stats.mjs
+
+      - name: Commit data (triggers a deploy)
+        run: |
+          git config user.name  "analytics-bot"
+          git config user.email "analytics-bot@datalatte.pro"
+          git add data/city-stats.json
+          if git diff --cached --quiet; then
+            echo "No new data"
+          else
+            git commit -m "data: city stats from Google Maps [vercel skip]"
+            git pull --rebase --autostash -X theirs origin main
+            git push
+          fi

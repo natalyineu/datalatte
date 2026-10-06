@@ -192,7 +192,7 @@ function LocationNichePage({ niche: nicheData, city }: {
             </h2>
             <p className="text-gray-600 leading-relaxed mb-6">
               We analyzed {stats.businesses} {nicheData!.labelPlural.toLowerCase()} in the {city.city} area that are listed on Google Maps
-              with a website (our own data, {stats.asOf}). Here is what the local market looks like.
+              (our own data, {stats.asOf}). Here is what the local market looks like.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
               <div className="card p-4 text-center">
