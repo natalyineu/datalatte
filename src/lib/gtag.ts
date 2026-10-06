@@ -28,7 +28,7 @@ export const gtag = {
     track("free_audit_clicked", { source }),
 
   // ── Link clicks (fired by EventTracker, one named event per destination type) ──
-  calendlyClicked: (page: string) => track("calendly_clicked", { page }),
+  bookCallClicked: (page: string) => track("book_call_clicked", { page }),
   emailLinkClicked: (page: string) => track("email_link_clicked", { page }),
   phoneLinkClicked: (page: string) => track("phone_link_clicked", { page }),
   contactCtaClicked: (page: string, label: string) => track("contact_cta_clicked", { page, label }),

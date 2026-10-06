@@ -159,7 +159,7 @@ export default function ContactPage() {
                 </a>
 
                 <a
-                  href="https://calendly.com/hi-datalatte/new-meeting"
+                  href="https://calendar.app.google/EPMpXYGtFjKMDkcr6"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-4 p-5 rounded-xl border border-coffee-300 dark:border-coffee-700 bg-coffee-50 dark:bg-coffee-900/20 hover:border-coffee-400 dark:hover:border-coffee-600 hover:bg-coffee-100 dark:hover:bg-coffee-900/30 transition-all group"
@@ -171,7 +171,7 @@ export default function ContactPage() {
                     <div className="font-semibold text-gray-900 dark:text-gray-100 group-hover:text-coffee-700 dark:group-hover:text-coffee-300 transition-colors">
                       Book a call
                     </div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">30-minute intro or audit call</div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">Intro or audit call</div>
                   </div>
                   <ArrowRight size={16} className="text-gray-400 group-hover:text-coffee-700 ml-auto transition-colors" />
                 </a>

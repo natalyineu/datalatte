@@ -207,7 +207,7 @@ async function fetchGA4() {
       dimensions: [{ name: "eventName" }],
       metrics: [{ name: "eventCount" }],
       dimensionFilter: { filter: { fieldName: "eventName", inListFilter: { values: ["contact_form_submitted", "generate_lead", "form_submit", "scroll", "scroll_25", "scroll_50", "scroll_75",
-        "free_audit_clicked", "calendly_clicked", "email_link_clicked", "phone_link_clicked", "contact_cta_clicked", "service_link_clicked",
+        "free_audit_clicked", "book_call_clicked", "calendly_clicked", "email_link_clicked", "phone_link_clicked", "contact_cta_clicked", "service_link_clicked",
         "chat_widget_opened", "chat_message_sent", "form_start", "email_subscribed", "exit_intent_popup_shown", "floating_cta_shown"] } } },
     },
   });
@@ -491,13 +491,13 @@ function buildReport(gsc, ga4, leads, bing) {
   // Engagement funnel (GA4 events, all tracked traffic)
   if (ev.length) {
     const e = (n, r) => evCount(n, r);
-    const ctaNames = ["free_audit_clicked", "contact_cta_clicked", "calendly_clicked", "email_link_clicked", "phone_link_clicked"];
+    const ctaNames = ["free_audit_clicked", "contact_cta_clicked", "book_call_clicked", "email_link_clicked", "phone_link_clicked"];
     const cta = (r) => sum(ctaNames, n => e(n, r));
     const has50 = e("scroll_50", 0) + e("scroll_50", 1) > 0;
     L.push("", "🔁 ENGAGEMENT (events)");
     if (has50) L.push(row("Scrolled 50%", e("scroll_50", 0), e("scroll_50", 1)));
     L.push(row("Scrolled 90%", e("scroll", 0), e("scroll", 1)));
-    L.push(row("CTA clicks (audit, contact, Calendly, email)", cta(0), cta(1)));
+    L.push(row("CTA clicks (audit, contact, book call, email)", cta(0), cta(1)));
     L.push(row("Chat opened → messages", e("chat_widget_opened", 0), e("chat_widget_opened", 1)) + `, messages ${e("chat_message_sent", 0)}`);
     L.push(row("Form started", e("form_start", 0), e("form_start", 1)));
     L.push(row("Newsletter signups", e("email_subscribed", 0), e("email_subscribed", 1)));

@@ -7,7 +7,7 @@ import { gtag } from "@/lib/gtag";
 /**
  * Site-wide behaviour tracking without touching individual components:
  *  - scroll depth 25 / 50 / 75 % (GA4 already reports 90 % as "scroll")
- *  - clicks on Calendly, email, phone, /contact and service links
+ *  - clicks on the booking link (Google Calendar), email, phone, /contact and service links
  * /free-audit clicks are tracked per component (free_audit_clicked), not here.
  */
 export default function EventTracker() {
@@ -43,7 +43,7 @@ export default function EventTracker() {
       if (src) { gtag.freeAuditClicked(src); return; } // server-rendered CTAs opt in with data-track-source
       if (href.startsWith("mailto:")) gtag.emailLinkClicked(pathname);
       else if (href.startsWith("tel:")) gtag.phoneLinkClicked(pathname);
-      else if (href.includes("calendly.com")) gtag.calendlyClicked(pathname);
+      else if (href.includes("calendar.app.google") || href.includes("calendly.com")) gtag.bookCallClicked(pathname);
       else if (href === "/contact" || href.startsWith("/contact?") || href.startsWith("/contact#"))
         gtag.contactCtaClicked(pathname, (a.textContent || "").trim().slice(0, 40));
       else if (href.startsWith("/services/") && pathname.startsWith("/blog/"))
