@@ -363,7 +363,7 @@ export async function generateMetadata({
 
 // MDX component overrides — maps markdown elements to Tailwind-styled JSX
 // Put one CTA after the second section of long articles (needs ≥ 4 H2s so it is not intrusive).
-function withInlineCta(source: string): string {
+function withInlineCta(source: string, category = ""): string {
   if (source.includes("<InlineCta")) return source;
   const lines = source.split("\n");
   const h2: number[] = [];
@@ -373,23 +373,24 @@ function withInlineCta(source: string): string {
     else if (!fenced && /^## /.test(l)) h2.push(i);
   });
   if (h2.length < 4) return source;
-  lines.splice(h2[2], 0, "<InlineCta />", "");
+  lines.splice(h2[2], 0, category === "Programmatic Advertising" ? '<InlineCta variant="programmatic" />' : "<InlineCta />", "");
   return lines.join("\n");
 }
 
-function InlineCta() {
+function InlineCta({ variant }: { variant?: "programmatic" }) {
+  const programmatic = variant === "programmatic";
   return (
     <aside className="not-prose my-8 rounded-xl border border-coffee-200 dark:border-coffee-800/50 bg-coffee-50 dark:bg-coffee-900/20 p-5 flex flex-col sm:flex-row sm:items-center gap-4">
       <div className="flex-1 min-w-0">
-        <p className="font-bold text-gray-900 dark:text-gray-50">Want a free review of your Google presence?</p>
-        <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">Send your business name. I reply with a short action plan within 48 hours.</p>
+        <p className="font-bold text-gray-900 dark:text-gray-50">{programmatic ? "Not sure CTV, DOOH or audio ads fit your budget?" : "Want a free review of your Google presence?"}</p>
+        <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">{programmatic ? "Tell me your city and monthly budget. I reply with an honest answer on what to run first, including when to skip these channels." : "Send your business name. I reply with a short action plan within 48 hours."}</p>
       </div>
       <Link
-        href="/free-audit"
-        data-track-source="blog_inline"
+        href={programmatic ? "/contact" : "/free-audit"}
+        data-track-source={programmatic ? "blog_inline_programmatic" : "blog_inline"}
         className="inline-flex items-center justify-center gap-2 bg-coffee-700 text-white font-bold px-5 py-2.5 rounded-lg hover:bg-coffee-800 transition-colors text-sm whitespace-nowrap"
       >
-        Get my free audit <ArrowRight size={15} />
+        {programmatic ? "Get an honest answer" : "Get my free audit"} <ArrowRight size={15} />
       </Link>
     </aside>
   );
@@ -622,7 +623,7 @@ export default async function BlogPostPage({
             {/* MDX Content */}
             <div className="prose-datalatte">
               <MDXRemote
-                source={withInlineCta(content)}
+                source={withInlineCta(content, frontmatter.category)}
                 components={mdxComponents}
                 options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
               />
