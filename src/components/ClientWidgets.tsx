@@ -6,6 +6,7 @@ const FloatingCTA     = dynamic(() => import("@/components/FloatingCTA"),     { 
 const ExitIntentPopup = dynamic(() => import("@/components/ExitIntentPopup"), { ssr: false });
 const BackToTop       = dynamic(() => import("@/components/BackToTop"),       { ssr: false });
 const AIChatWidget    = dynamic(() => import("@/components/AIChatWidget"),    { ssr: false });
+const EventTracker    = dynamic(() => import("@/components/EventTracker"),    { ssr: false });
 
 export default function ClientWidgets() {
   return (
@@ -14,6 +15,7 @@ export default function ClientWidgets() {
       <ExitIntentPopup />
       <BackToTop />
       <AIChatWidget />
+      <EventTracker />
     </>
   );
 }

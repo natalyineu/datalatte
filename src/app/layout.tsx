@@ -135,7 +135,9 @@ export default function RootLayout({
           strategy="lazyOnload"
         />
         <Script id="ga4-init" strategy="lazyOnload">
-          {`window.dataLayer = window.dataLayer || [];
+          {`// Do not count headless/automated browsers (the bulk of "Direct" traffic)
+if (navigator.webdriver || /HeadlessChrome|PhantomJS|bot|crawl|spider/i.test(navigator.userAgent)) { window['ga-disable-G-M4L8HJGRCH'] = true; }
+window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-M4L8HJGRCH');`}

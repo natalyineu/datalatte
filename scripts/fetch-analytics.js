@@ -206,7 +206,9 @@ async function fetchGA4() {
       dateRanges: [{ startDate: "7daysAgo", endDate: "yesterday" }, { startDate: "14daysAgo", endDate: "8daysAgo" }],
       dimensions: [{ name: "eventName" }],
       metrics: [{ name: "eventCount" }],
-      dimensionFilter: { filter: { fieldName: "eventName", inListFilter: { values: ["contact_form_submitted", "generate_lead", "form_submit"] } } },
+      dimensionFilter: { filter: { fieldName: "eventName", inListFilter: { values: ["contact_form_submitted", "generate_lead", "form_submit", "scroll", "scroll_25", "scroll_50", "scroll_75",
+        "free_audit_clicked", "calendly_clicked", "email_link_clicked", "phone_link_clicked", "contact_cta_clicked", "service_link_clicked",
+        "chat_widget_opened", "chat_message_sent", "form_start", "email_subscribed", "exit_intent_popup_shown", "floating_cta_shown"] } } },
     },
   });
 
@@ -319,6 +321,7 @@ const num = (n) => Math.round(n).toLocaleString("en-US");
 const arrow = (cur, prev) => {
   if (!prev) return cur ? "▲ new" : "–";
   const d = (cur / prev - 1) * 100;
+  if (Math.round(d) === 0) return "→ 0%";
   return `${d >= 0 ? "▲" : "▼"}${Math.abs(d).toFixed(0)}%`;
 };
 const row = (label, cur, prev, fmt = num) => `${label}: ${fmt(cur)} ${arrow(cur, prev)} (was ${fmt(prev)})`;
@@ -470,6 +473,20 @@ function buildReport(gsc, ga4, leads, bing) {
   L.push("", `🎯 LEADS${leads ? "" : " (GA4 events)"}`, row("New leads", leads1, leads0));
   if (leads) L.push(`Ready-to-start: ${leads.ready1} · Unanswered: ${leads.unanswered}${leads.unanswered ? ` (oldest ${leads.oldestDays}d)` : ""}`);
   if (why.length) L.push("", "💡 WHY IT MOVED", ...why.map(t => `• ${t}`));
+  // Engagement funnel (GA4 events, all tracked traffic)
+  if (ev.length) {
+    const e = (n, r) => evCount(n, r);
+    const ctaNames = ["free_audit_clicked", "contact_cta_clicked", "calendly_clicked", "email_link_clicked", "phone_link_clicked"];
+    const cta = (r) => sum(ctaNames, n => e(n, r));
+    const has50 = e("scroll_50", 0) + e("scroll_50", 1) > 0;
+    L.push("", "🔁 ENGAGEMENT (events)");
+    if (has50) L.push(row("Scrolled 50%", e("scroll_50", 0), e("scroll_50", 1)));
+    L.push(row("Scrolled 90%", e("scroll", 0), e("scroll", 1)));
+    L.push(row("CTA clicks (audit, contact, Calendly, email)", cta(0), cta(1)));
+    L.push(row("Chat opened → messages", e("chat_widget_opened", 0), e("chat_widget_opened", 1)) + `, messages ${e("chat_message_sent", 0)}`);
+    L.push(row("Form started", e("form_start", 0), e("form_start", 1)));
+    L.push(row("Newsletter signups", e("email_subscribed", 0), e("email_subscribed", 1)));
+  }
   if (movers) L.push(movers);
   if (pageOpps) L.push(pageOpps);
   if (queryOpps) L.push(queryOpps);

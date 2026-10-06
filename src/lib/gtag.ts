@@ -14,8 +14,11 @@ function track(event: string, params?: GtagParams) {
 
 export const gtag = {
   // ── Conversions ─────────────────────────────────────────────────────────
-  contactFormSubmitted: (formType: "explore" | "ready", niche?: string) =>
-    track("contact_form_submitted", { form_type: formType, ...(niche && { niche }) }),
+  contactFormSubmitted: (formType: "explore" | "ready", niche?: string) => {
+    track("contact_form_submitted", { form_type: formType, ...(niche && { niche }) });
+    // GA4 recommended event name; mark ONE of the two as a Key event in GA4 to avoid double counting
+    track("generate_lead", { form_type: formType, ...(niche && { niche }) });
+  },
 
   emailSubscribed: (source: string) =>
     track("email_subscribed", { source }),
@@ -23,6 +26,16 @@ export const gtag = {
   // ── CTA clicks ──────────────────────────────────────────────────────────
   freeAuditClicked: (source: string) =>
     track("free_audit_clicked", { source }),
+
+  // ── Link clicks (fired by EventTracker, one named event per destination type) ──
+  calendlyClicked: (page: string) => track("calendly_clicked", { page }),
+  emailLinkClicked: (page: string) => track("email_link_clicked", { page }),
+  phoneLinkClicked: (page: string) => track("phone_link_clicked", { page }),
+  contactCtaClicked: (page: string, label: string) => track("contact_cta_clicked", { page, label }),
+  serviceLinkClicked: (page: string, destination: string) => track("service_link_clicked", { page, destination }),
+
+  // ── Scroll depth (separate event names so they can be counted without custom dimensions) ──
+  scrollDepth: (percent: 25 | 50 | 75, page: string) => track(`scroll_${percent}`, { page }),
 
   // ── Popups ──────────────────────────────────────────────────────────────
   exitIntentShown: (trigger: "mouse_leave" | "scroll_60" | "timer_40s") =>
