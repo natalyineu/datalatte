@@ -81,8 +81,12 @@ export async function POST(req: NextRequest) {
     // 0. Save to CRM (non-blocking)
     await saveSubmission({ email, name: name ?? null, niche: niche ?? null, message: message ?? null, form_type });
 
-    // 1. Add to Resend audience (fire-and-forget)
-    addToResendAudience(email, name).catch(() => {});
+    // Serverless freezes after the response is sent, so un-awaited fetches get cut off.
+    // Collect side-effects and await them (allSettled) before returning.
+    const tasks: Promise<unknown>[] = [];
+
+    // 1. Add to Resend audience
+    tasks.push(addToResendAudience(email, name).catch(() => {}));
 
     // 2. Notify Nataliia via Resend
     const safeEmail     = escapeHtml(email);
@@ -155,7 +159,7 @@ export async function POST(req: NextRequest) {
       </div>
     `;
 
-    fetch("https://api.resend.com/emails", {
+    tasks.push(fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: { Authorization: `Bearer ${RESEND_API_KEY}`, "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -165,7 +169,7 @@ export async function POST(req: NextRequest) {
         subject: confirmSubject,
         html: confirmHtml,
       }),
-    }).catch((err) => console.error("Confirmation email failed:", err));
+    }).catch((err) => console.error("Confirmation email failed:", err)));
 
     // 4. Telegram notification (use escaped values to avoid breaking HTML parse mode)
     if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID) {
@@ -178,7 +182,7 @@ export async function POST(req: NextRequest) {
         msgPreview    && `💬 ${escapeHtml(msgPreview)}`,
       ].filter(Boolean);
 
-      fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+      tasks.push(fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -188,11 +192,12 @@ export async function POST(req: NextRequest) {
         }),
       })
         .then(async (r) => { if (!r.ok) console.error("Telegram notify failed:", r.status, await r.text()); })
-        .catch((err) => console.error("Telegram notify error:", err));
+        .catch((err) => console.error("Telegram notify error:", err)));
     } else {
       console.warn("Telegram notify skipped: TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID not set");
     }
 
+    await Promise.allSettled(tasks);
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error("Contact form error:", err);

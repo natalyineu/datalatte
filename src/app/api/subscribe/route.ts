@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
     }
 
     // 1. Add to Resend audience (fire-and-forget)
-    addToResendAudience(email).catch(() => {});
+    await addToResendAudience(email).catch(() => {});
 
     // 2. Send welcome email
     const emailRes = await fetch("https://api.resend.com/emails", {
@@ -83,7 +83,7 @@ export async function POST(req: NextRequest) {
 
     // 3. Telegram notification (optional)
     if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID) {
-      fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+      await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
