@@ -186,7 +186,11 @@ export async function POST(req: NextRequest) {
           text: parts.join("\n"),
           parse_mode: "HTML",
         }),
-      }).catch(() => {});
+      })
+        .then(async (r) => { if (!r.ok) console.error("Telegram notify failed:", r.status, await r.text()); })
+        .catch((err) => console.error("Telegram notify error:", err));
+    } else {
+      console.warn("Telegram notify skipped: TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID not set");
     }
 
     return NextResponse.json({ success: true });
