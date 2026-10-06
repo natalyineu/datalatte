@@ -4,6 +4,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
+import { getCityStats } from "@/lib/cityStats";
 import CTABanner from "@/components/CTABanner";
 import { breadcrumbSchema } from "@/lib/schema";
 import {
@@ -54,13 +55,19 @@ export async function generateMetadata({
 
   const city = getCity(segment);
   if (city) {
-    const title = `${niche.label} Marketing in ${city.city}, ${city.stateCode} | DataLatte`;
-    const description = `Data-driven marketing for ${niche.labelPlural.toLowerCase()} in ${city.city}, ${city.state}. Local SEO, Google Ads, and reputation management to grow your business.`;
+    const stats = getCityStats(niche.slug, city.slug);
+    const title = stats
+      ? `${niche.label} Marketing in ${city.city}: ${stats.businesses} Businesses Analyzed | DataLatte`
+      : `${niche.label} Marketing in ${city.city}, ${city.stateCode} | DataLatte`;
+    const description = stats
+      ? `We analyzed ${stats.businesses} ${niche.labelPlural.toLowerCase()} in ${city.city}: median ${stats.medianReviews} Google reviews, ${stats.avgRating.toFixed(2)}★ average. See what it takes to stand out and how we help.`
+      : `Data-driven marketing for ${niche.labelPlural.toLowerCase()} in ${city.city}, ${city.state}. Local SEO, Google Ads, and reputation management to grow your business.`;
     const url = `https://datalatte.pro/for/${nicheSlug}/${segment}`;
     return {
       title,
       description,
-      robots: { index: false, follow: true },
+      // City pages without real local data are thin duplicates: keep them out of the index
+      robots: { index: !!stats, follow: true },
       alternates: {
         canonical: url,
         languages: {
@@ -111,6 +118,7 @@ function LocationNichePage({ niche: nicheData, city }: {
   city: NonNullable<ReturnType<typeof getCity>>;
 }) {
   const faqItems = nicheData!.faq(city.city, city.state, cityCurrency(city));
+  const stats = getCityStats(nicheData!.slug, city.slug);
   const breadcrumb = breadcrumbSchema([
     { name: "Home", url: "https://datalatte.pro" },
     { name: `${nicheData!.labelPlural} Marketing`, url: `https://datalatte.pro/for/${nicheData!.slug}` },
@@ -174,6 +182,55 @@ function LocationNichePage({ niche: nicheData, city }: {
           </div>
         </div>
       </div>
+
+      {stats && (
+        <SectionWrapper>
+          <div className="max-w-3xl mx-auto">
+            <span className="section-label">{city.city} by the numbers</span>
+            <h2 className="section-title mb-4">
+              How {nicheData!.labelPlural.toLowerCase()} in {city.city} compete on Google
+            </h2>
+            <p className="text-gray-600 leading-relaxed mb-6">
+              We analyzed {stats.businesses} {nicheData!.labelPlural.toLowerCase()} in the {city.city} area that are listed on Google Maps
+              with a website (our own data, {stats.asOf}). Here is what the local market looks like.
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+              <div className="card p-4 text-center">
+                <p className="text-2xl font-bold text-coffee-700">{stats.businesses}</p>
+                <p className="text-xs text-gray-500 mt-1">businesses analyzed</p>
+              </div>
+              <div className="card p-4 text-center">
+                <p className="text-2xl font-bold text-coffee-700">{stats.avgRating.toFixed(2)}★</p>
+                <p className="text-xs text-gray-500 mt-1">average Google rating</p>
+              </div>
+              <div className="card p-4 text-center">
+                <p className="text-2xl font-bold text-coffee-700">{stats.medianReviews}</p>
+                <p className="text-xs text-gray-500 mt-1">median reviews</p>
+              </div>
+              <div className="card p-4 text-center">
+                <p className="text-2xl font-bold text-coffee-700">{stats.over200}</p>
+                <p className="text-xs text-gray-500 mt-1">have 200+ reviews</p>
+              </div>
+            </div>
+            <ul className="space-y-3 text-gray-700 leading-relaxed">
+              <li>
+                <strong>The bar to beat:</strong> a typical {nicheData!.label.toLowerCase()} in {city.city} has {stats.medianReviews} Google
+                reviews and a {stats.avgRating.toFixed(2)} rating. Appearing in the map pack means matching that social proof.
+              </li>
+              <li>
+                <strong>The opening:</strong>{" "}
+                {stats.under50 > 0
+                  ? `${stats.under50} of ${stats.businesses} have fewer than 50 reviews, so a steady review process can move a newer business up quickly.`
+                  : `almost every business already has 50+ reviews, so differentiation comes from photos, posts, offers and fast review replies.`}
+              </li>
+              <li>
+                <strong>What we do about it:</strong> a review-request flow, a fully optimized Google Business Profile and local ads aimed at
+                {" "}{city.city} searches. See the numbers for your own business with a free audit.
+              </li>
+            </ul>
+          </div>
+        </SectionWrapper>
+      )}
 
       <SectionWrapper>
         <div className="max-w-3xl mx-auto">

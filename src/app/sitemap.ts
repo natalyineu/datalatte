@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { CITIES, NICHES, SERVICE_SEGMENT_SLUGS } from "@/lib/locationData";
+import { getCityStats } from "@/lib/cityStats";
 import { fetchPublishedSignals } from "@/lib/radar-signals";
 
 const baseUrl = "https://datalatte.pro";
@@ -174,6 +175,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const locationRoutes: MetadataRoute.Sitemap = [];
   for (const niche of NICHES) {
     for (const city of CITIES) {
+      if (!getCityStats(niche, city.slug)) continue; // pages without real local data are noindex
       locationRoutes.push({
         url: `${baseUrl}/for/${niche}/${city.slug}`,
         lastModified: today,
