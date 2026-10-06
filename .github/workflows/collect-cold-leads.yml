@@ -1,0 +1,27 @@
+name: Collect cold leads
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["data/cold-queue.json", "scripts/collect-cold-leads.mjs"]   # edit the queue and push to run
+
+concurrency:
+  group: collect-cold-leads
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Scrape Google Maps (Apify) and save leads to Supabase
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: node scripts/collect-cold-leads.mjs

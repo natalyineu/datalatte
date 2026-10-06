@@ -1,0 +1,19 @@
+{
+  "_help": "Cold outreach lead collection. Edit and push to run the 'Collect cold leads' workflow: it scrapes Google Maps (Apify, with contact emails) and saves NEW businesses with an email to the Supabase leads table (status new). It never sends anything. Stops at target emails or maxPlacesTotal places. Apify cost is roughly 3-6 USD per 1,000 places incl. contact scraping.",
+  "target": 500,
+  "maxPlacesPerSearch": 100,
+  "maxPlacesTotal": 3000,
+  "niches": { "coffee": "coffee shops", "salon": "hair salons", "pet": "pet groomers", "fitness": "fitness studios" },
+  "cities": [
+    { "city": "Denver", "stateCode": "CO" },
+    { "city": "Austin", "stateCode": "TX" },
+    { "city": "Seattle", "stateCode": "WA" },
+    { "city": "Nashville", "stateCode": "TN" },
+    { "city": "Chicago", "stateCode": "IL" },
+    { "city": "Portland", "stateCode": "OR" },
+    { "city": "Atlanta", "stateCode": "GA" },
+    { "city": "Phoenix", "stateCode": "AZ" },
+    { "city": "Minneapolis", "stateCode": "MN" },
+    { "city": "Charlotte", "stateCode": "NC" }
+  ]
+}
