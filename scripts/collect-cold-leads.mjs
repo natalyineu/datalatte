@@ -41,7 +41,7 @@ async function scrape(term, city) {
     method: "POST", headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ searchStringsArray: [`${term} in ${city.city}, ${city.stateCode}`], maxCrawledPlacesPerSearch: q.maxPlacesPerSearch, language: "en", countryCode: "us", scrapeContacts: true, maxReviews: 0 }),
   });
-  if (!run.ok) throw new Error(`Apify start ${run.status}`);
+  if (!run.ok) { const t = (await run.text()).slice(0, 300); if (run.status === 403 || run.status === 402) { console.error(`Apify refused to start (${run.status}): ${t}`); process.exit(2); } throw new Error(`Apify start ${run.status}: ${t}`); }
   const { data } = await run.json();
   for (let i = 0; i < 120; i++) {
     await new Promise((r) => setTimeout(r, 10000));
