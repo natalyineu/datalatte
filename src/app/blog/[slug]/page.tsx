@@ -18,6 +18,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import CTABanner from "@/components/CTABanner";
+import { hubForPost, getHubCopy } from "@/lib/hubs";
 import { ArrowRight } from "lucide-react";
 import ReadingProgress from "@/components/ReadingProgress";
 import TableOfContents from "@/components/TableOfContents";
@@ -597,6 +598,15 @@ export default async function BlogPostPage({
 
       {/* Wide wrapper for content + sidebar */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {(() => {
+          const hub = hubForPost(slug);
+          if (!hub || !getHubCopy(hub.slug).intro?.length) return null;
+          return (
+            <p className="max-w-3xl mx-auto text-sm text-gray-500 dark:text-gray-400 mb-4">
+              Part of the guide: <Link href={`/guides/${hub.slug}`} className="text-coffee-700 dark:text-coffee-300 font-semibold hover:underline">{hub.title.replace(": Complete Guide for Local Businesses", "").replace(": Complete Guide", "")}</Link>
+            </p>
+          );
+        })()}
         {/* Meta row — full width */}
         <div className="max-w-3xl mx-auto flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-8 pb-8 border-b border-gray-100 dark:border-gray-800">
           <span className="flex items-center gap-1.5">

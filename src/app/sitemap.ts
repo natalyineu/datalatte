@@ -56,6 +56,15 @@ function getBlogRoutes(): MetadataRoute.Sitemap {
     .sort((a, b) => b.lastModified.getTime() - a.lastModified.getTime());
 }
 
+function getGuideRoutes(): MetadataRoute.Sitemap {
+  const copyDir = path.join(process.cwd(), "data/hub-copy");
+  const done = new Set(fs.existsSync(copyDir) ? fs.readdirSync(copyDir).map((f) => f.replace(".json", "")) : []);
+  return [
+    { url: `${baseUrl}/guides`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.8 },
+    ...hubs.filter((h: { slug: string }) => done.has(h.slug)).map((h: { slug: string }) => ({ url: `${baseUrl}/guides/${h.slug}`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.8 })),
+  ];
+}
+
 async function getRadarRoutes(): Promise<MetadataRoute.Sitemap> {
   try {
     const signals = await fetchPublishedSignals();
@@ -69,6 +78,8 @@ async function getRadarRoutes(): Promise<MetadataRoute.Sitemap> {
     return [];
   }
 }
+
+import hubs from "../../data/hubs.json";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const blogRoutes = getBlogRoutes();
@@ -198,5 +209,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  return [...staticRoutes, ...radarRoutes, ...locationRoutes, ...nicheServiceRoutes, ...categoryRoutes, ...blogRoutes];
+  return [...staticRoutes, ...getGuideRoutes(), ...radarRoutes, ...locationRoutes, ...nicheServiceRoutes, ...categoryRoutes, ...blogRoutes];
 }

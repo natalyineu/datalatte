@@ -4,9 +4,24 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowRight, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { gtag } from "@/lib/gtag";
 
+const MAGNETS: { match: RegExp; slug: string; title: string }[] = [
+  { match: /coffee|cafe/, slug: "coffee-shop-marketing", title: "Coffee Shop Marketing Checklist" },
+  { match: /salon|barber|hair|beauty|nail/, slug: "hair-salon-marketing", title: "Hair Salon Marketing Checklist" },
+  { match: /pet|dog|groom/, slug: "pet-groomer-marketing", title: "Pet Groomer Marketing Checklist" },
+  { match: /fitness|gym|yoga|pilates|studio/, slug: "fitness-studio-marketing", title: "Fitness Studio Marketing Checklist" },
+  { match: /google-ads|ppc|keyword/, slug: "google-ads-setup", title: "Google Ads Setup Checklist" },
+  { match: /facebook|meta|instagram|social|tiktok/, slug: "meta-ads-setup", title: "Meta Ads Setup Checklist" },
+  { match: /email|sms|newsletter/, slug: "email-marketing", title: "Email Marketing Setup Checklist" },
+  { match: /website|landing|conversion|cro/, slug: "website-cro", title: "Website Conversion Checklist" },
+];
+const DEFAULT_MAGNET = { slug: "google-business-profile", title: "Google Business Profile Checklist" };
+
 export default function ExitIntentPopup() {
+  const pathname = usePathname() || "";
+  const magnet = MAGNETS.find((m) => m.match.test(pathname.toLowerCase())) ?? DEFAULT_MAGNET;
   const [visible, setVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
@@ -64,11 +79,11 @@ export default function ExitIntentPopup() {
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, source: "exit-popup" }),
+        body: JSON.stringify({ email, source: "exit-popup", magnet: magnet.slug }),
       });
       if (res.ok) {
         setStatus("done");
-        gtag.emailSubscribed("exit_popup");
+        gtag.emailSubscribed(`exit_popup_${magnet.slug}`);
         setTimeout(() => dismiss(), 2500);
       } else {
         setStatus("error");
@@ -120,62 +135,45 @@ export default function ExitIntentPopup() {
                   >
                     <CheckCircle2 size={48} className="text-green-500 mx-auto mb-3" />
                     <h3 className="text-xl font-bold text-gray-900 mb-1 dark:text-gray-50">You're in! ☕</h3>
-                    <p className="text-gray-500 text-sm dark:text-gray-400">Check your inbox for a welcome email.</p>
+                    <p className="text-gray-500 text-sm dark:text-gray-400">Check your inbox: the checklist link is on its way.</p>
                   </motion.div>
                 ) : (
                   <>
                     <div className="text-4xl mb-4 text-center">☕</div>
                     <h2 className="text-2xl font-bold text-gray-900 text-center mb-2 dark:text-gray-50">
-                      Before you go — get a free audit
+                      Free checklist: {magnet.title.replace(" Checklist", "")}
                     </h2>
-                    <p className="text-gray-500 text-sm text-center mb-6 dark:text-gray-400">
-                      I'll review your Google presence and tell you exactly what's holding you back.
-                      Takes me 20 minutes. Costs you nothing.
+                    <p className="text-gray-500 text-sm text-center mb-5 dark:text-gray-400">
+                      A step-by-step list you can finish in an afternoon. I will email you the link right away. No spam, unsubscribe any time.
                     </p>
-
-                    {/* Options */}
-                    <div className="space-y-3 mb-5">
-                      <Link
-                        href="/free-audit"
-                        onClick={() => { dismiss(); gtag.freeAuditClicked("exit_popup"); }}
-                        className="flex items-center justify-between w-full bg-coffee-700 hover:bg-coffee-800 text-white font-semibold px-5 py-3.5 rounded-xl transition-colors group"
+                    <form onSubmit={handleSubmit} className="space-y-3 mb-4">
+                      <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="your@email.com"
+                        required
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-coffee-500 focus:ring-2 focus:ring-coffee-100 outline-none text-sm dark:border-gray-700"
+                      />
+                      <button
+                        type="submit"
+                        disabled={status === "loading"}
+                        className="w-full bg-coffee-700 hover:bg-coffee-800 text-white font-semibold px-5 py-3.5 rounded-xl transition-colors disabled:opacity-60"
                       >
-                        <span>Book my free audit</span>
-                        <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                        {status === "loading" ? "Sending…" : "Email me the checklist"}
+                      </button>
+                    </form>
+                    {status === "error" && (
+                      <p className="text-red-500 text-xs mb-3 text-center">
+                        Something went wrong — try <a href="mailto:hi@datalatte.pro" className="underline">emailing us</a> directly.
+                      </p>
+                    )}
+                    <p className="text-center text-xs text-gray-500 dark:text-gray-400 mb-4">
+                      Prefer a personal review?{" "}
+                      <Link href="/free-audit" onClick={() => { dismiss(); gtag.freeAuditClicked("exit_popup"); }} className="underline text-coffee-700 dark:text-coffee-300">
+                        Get a free audit
                       </Link>
-
-                      <div className="relative">
-                        <div className="absolute inset-0 flex items-center">
-                          <div className="w-full border-t border-gray-100 dark:border-gray-700" />
-                        </div>
-                        <div className="relative text-center text-xs text-gray-400 bg-white px-2 inline-block mx-auto w-full dark:bg-gray-900">
-                          or just get weekly tips
-                        </div>
-                      </div>
-
-                      <form onSubmit={handleSubmit} className="flex gap-2">
-                        <input
-                          type="email"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          placeholder="your@email.com"
-                          required
-                          className="flex-1 px-4 py-2.5 rounded-xl border border-gray-200 focus:border-coffee-500 focus:ring-2 focus:ring-coffee-100 outline-none text-sm dark:border-gray-700"
-                        />
-                        <button
-                          type="submit"
-                          disabled={status === "loading"}
-                          className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold px-4 py-2.5 rounded-xl text-sm transition-colors whitespace-nowrap disabled:opacity-60 dark:bg-gray-800 dark:text-gray-200"
-                        >
-                          {status === "loading" ? "…" : "Subscribe"}
-                        </button>
-                      </form>
-                      {status === "error" && (
-                        <p className="text-red-500 text-xs mt-1 text-center">
-                          Something went wrong — try <a href="mailto:hi@datalatte.pro" className="underline">emailing us</a> directly.
-                        </p>
-                      )}
-                    </div>
+                    </p>
 
                     <button
                       onClick={dismiss}

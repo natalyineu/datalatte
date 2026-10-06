@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { saveLead } from "@/lib/crm";
+import { getChecklist } from "@/lib/checklists";
 
 const RESEND_API_KEY      = process.env.RESEND_API_KEY!;
 const RESEND_AUDIENCE_ID  = process.env.RESEND_AUDIENCE_ID;
@@ -33,14 +34,15 @@ async function addToResendAudience(email: string) {
 
 export async function POST(req: NextRequest) {
   try {
-    const { email, source = "blog" } = await req.json();
+    const { email, source = "blog", magnet } = await req.json();
+    const checklist = typeof magnet === "string" ? getChecklist(magnet) : undefined;
 
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json({ error: "Invalid email" }, { status: 400 });
     }
 
     // 0. Store in CRM (so every signup is kept even if e-mail steps fail)
-    await saveLead({ email, form_type: "newsletter", notes: `source: ${source}` });
+    await saveLead({ email, form_type: "newsletter", notes: `source: ${source}${checklist ? `, checklist: ${checklist.slug}` : ""}` });
 
     // 1. Add to Resend audience
     await addToResendAudience(email).catch(() => {});
@@ -55,11 +57,12 @@ export async function POST(req: NextRequest) {
       body: JSON.stringify({
         from: "Nataliia at DataLatte <hi@datalatte.pro>",
         to: email,
-        subject: "You're in ☕ — Welcome to DataLatte",
+        subject: checklist ? `Your checklist: ${checklist.title}` : "You're in ☕ — Welcome to DataLatte",
         html: `
           <div style="font-family:sans-serif;max-width:560px;margin:0 auto;color:#333">
-            <h2 style="color:#5c3317">Welcome to DataLatte ☕</h2>
-            <p>Hey! Thanks for subscribing.</p>
+            <h2 style="color:#5c3317">${checklist ? "Here is your checklist ☕" : "Welcome to DataLatte ☕"}</h2>
+            ${checklist ? `<p>Thanks for asking! Here it is: <a href="https://datalatte.pro/checklists/${checklist.slug}?utm_source=email&utm_medium=welcome&utm_campaign=exit-popup" style="color:#7c4a2d;font-weight:600">${escapeHtml(checklist.title)}</a>. Tick items off as you go; your progress is saved in your browser.</p>` : ""}
+            <p>${checklist ? "I will also send practical local marketing tips from time to time." : "Hey! Thanks for subscribing."}</p>
             <p>Every week I share practical, no-fluff local marketing tips — things that actually move the needle for small businesses like yours.</p>
             <p>In the meantime, here are a few places to start:</p>
             <ul>
