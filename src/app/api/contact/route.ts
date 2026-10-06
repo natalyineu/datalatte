@@ -45,6 +45,21 @@ async function addToResendAudience(email: string, name?: string) {
   }
 }
 
+async function saveInquiry(row: Record<string, unknown>) {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) return;
+  try {
+    await fetch(`${url}/rest/v1/inquiries`, {
+      method: "POST",
+      headers: { apikey: key, Authorization: `Bearer ${key}`, "Content-Type": "application/json", Prefer: "return=minimal" },
+      body: JSON.stringify(row),
+    });
+  } catch (err) {
+    console.error("Supabase inquiry save failed:", err);
+  }
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json() as {
@@ -62,6 +77,9 @@ export async function POST(req: NextRequest) {
     }
 
     const nicheLabel = niche ? (NICHE_LABELS[niche] ?? niche) : null;
+
+    // 0. Save to CRM (non-blocking)
+    await saveInquiry({ email, name: name ?? null, niche: niche ?? null, message: message ?? null, form_type });
 
     // 1. Add to Resend audience (fire-and-forget)
     addToResendAudience(email, name).catch(() => {});
