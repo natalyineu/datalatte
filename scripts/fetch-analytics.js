@@ -258,8 +258,30 @@ async function main() {
     process.exit(1);
   }
 
+  await fetchBing();
+
   // Send Telegram summary
   await sendTelegramReport();
+}
+
+// ── Bing Webmaster Tools (optional: needs BING_WEBMASTER_API_KEY) ────────────
+async function fetchBing() {
+  const key = process.env.BING_WEBMASTER_API_KEY;
+  if (!key) return null;
+  try {
+    const site = encodeURIComponent("https://datalatte.pro/");
+    const res = await fetch(`https://ssl.bing.com/webmaster/api.svc/json/GetRankAndTrafficStats?apikey=${key}&siteUrl=${site}`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const rows = ((await res.json()).d || [])
+      .map(r => ({ date: new Date(parseInt(String(r.Date).replace(/\D/g, ""), 10)).toISOString().slice(0, 10), clicks: r.Clicks || 0, impressions: r.Impressions || 0 }))
+      .sort((a, b) => a.date.localeCompare(b.date));
+    fs.writeFileSync(path.join(OUT_DIR, "bing-latest.json"), JSON.stringify({ fetchedAt: new Date().toISOString(), rows: rows.slice(-60) }, null, 2));
+    console.log(`✓ Bing saved (${rows.length} days)`);
+    return rows;
+  } catch (e) {
+    console.error("✗ Bing error (skipped):", e.message);
+    return null;
+  }
 }
 
 // ── Leads (Supabase contact_submissions) ─────────────────────────────────────
@@ -306,7 +328,7 @@ const fmtDay = (d) => `${+d.slice(8, 10)} ${MON[+d.slice(5, 7) - 1]}`;
 const shortPath = (u) => { const p = u.replace(/^https?:\/\/[^/]+/, "") || "/"; return p.length > 46 ? p.slice(0, 45) + "…" : p; };
 const TARGET = new Set(["usa", "gbr", "can", "aus", "nzl", "irl"]);
 
-function buildReport(gsc, ga4, leads) {
+function buildReport(gsc, ga4, leads, bing) {
   // ---- GSC: last 7 full days vs previous 7 ----
   const gd = gsc.dailyTrend;
   const g1 = gd.slice(-7), g0 = gd.slice(-14, -7);
@@ -440,6 +462,11 @@ function buildReport(gsc, ga4, leads) {
   } else {
     L.push(row("Sessions", s1, s0), row("Users", u1, u0));
   }
+  if (bing && bing.length >= 14) {
+    const bs = (a) => ({ imp: sum(a, d => d.impressions), clk: sum(a, d => d.clicks) });
+    const b1 = bs(bing.slice(-7)), b0 = bs(bing.slice(-14, -7));
+    L.push("", "🅱️ BING", row("Impressions", b1.imp, b0.imp), row("Clicks", b1.clk, b0.clk));
+  }
   L.push("", `🎯 LEADS${leads ? "" : " (GA4 events)"}`, row("New leads", leads1, leads0));
   if (leads) L.push(`Ready-to-start: ${leads.ready1} · Unanswered: ${leads.unanswered}${leads.unanswered ? ` (oldest ${leads.oldestDays}d)` : ""}`);
   if (why.length) L.push("", "💡 WHY IT MOVED", ...why.map(t => `• ${t}`));
@@ -461,7 +488,9 @@ async function sendTelegramReport() {
 
   const gsc = JSON.parse(fs.readFileSync(path.join(OUT_DIR, "gsc-latest.json"), "utf8"));
   const ga4 = JSON.parse(fs.readFileSync(path.join(OUT_DIR, "ga4-latest.json"), "utf8"));
-  const msg = buildReport(gsc, ga4, await fetchLeads());
+  let bing = null;
+  try { bing = JSON.parse(fs.readFileSync(path.join(OUT_DIR, "bing-latest.json"), "utf8")).rows; } catch { /* optional */ }
+  const msg = buildReport(gsc, ga4, await fetchLeads(), bing);
 
   const body = JSON.stringify({ chat_id: tgChat, text: msg });
   await new Promise((resolve, reject) => {
