@@ -244,8 +244,17 @@ async function sendTelegramReport() {
   const avgSec    = overview[4] ? Math.round(parseFloat(overview[4].value)) : 0;
   const avgMin    = `${Math.floor(avgSec / 60)}m ${avgSec % 60}s`;
 
-  const totalClicks      = gsc.queries.reduce((s, q) => s + q.clicks, 0);
-  const totalImpressions = gsc.queries.reduce((s, q) => s + q.impressions, 0);
+  // Totals from the daily trend — summing top queries undercounts ~30x (anonymized queries are hidden).
+  const days             = gsc.dailyTrend;
+  const totalClicks      = days.reduce((s, d) => s + d.clicks, 0);
+  const totalImpressions = days.reduce((s, d) => s + d.impressions, 0);
+  const ctr              = totalImpressions ? (totalClicks / totalImpressions * 100).toFixed(2) : "0";
+  const avgPos           = totalImpressions
+    ? (days.reduce((s, d) => s + d.position * d.impressions, 0) / totalImpressions).toFixed(1) : "—";
+  const sumImp = (a) => a.reduce((s, d) => s + d.impressions, 0);
+  const impLast7 = sumImp(days.slice(-7));
+  const impPrev7 = sumImp(days.slice(-14, -7));
+  const impDelta = impPrev7 ? ((impLast7 / impPrev7 - 1) * 100).toFixed(0) : "—";
   const topQueries = gsc.queries
     .filter(q => q.clicks > 0)
     .sort((a, b) => b.clicks - a.clicks)
@@ -266,6 +275,10 @@ async function sendTelegramReport() {
   const organic = ga4.trafficSources.find(s => s.dimensionValues[0].value === "Organic Search");
   const organicSessions = organic?.metricValues[0]?.value || "0";
 
+  const direct = ga4.trafficSources.find(s => s.dimensionValues[0].value === "Direct");
+  const directSessions = direct?.metricValues[0]?.value || "0";
+  const directShare = sessions !== "0" ? (parseInt(directSessions) / parseInt(sessions) * 100).toFixed(0) : "0";
+
   const date = new Date().toLocaleDateString("ru-RU", { day: "2-digit", month: "2-digit", year: "numeric" });
 
   const msg = [
@@ -275,11 +288,12 @@ async function sendTelegramReport() {
     `🌐 GA4 (28 дней)`,
     `  Sessions: ${sessions} | Users: ${users}`,
     `  Bounce: ${bounce} | Avg session: ${avgMin}`,
-    `  Organic sessions: ${organicSessions}`,
+    `  Organic sessions: ${organicSessions} | Direct: ${directSessions} (${directShare}%)`,
     `  Last 7 days: ${trend7sessions} sessions`,
     "",
     `🔍 Search Console`,
-    `  Clicks: ${totalClicks} | Impressions: ${totalImpressions}`,
+    `  Clicks: ${totalClicks} | Impressions: ${totalImpressions} | CTR: ${ctr}% | Pos: ${avgPos}`,
+    `  Impressions last 7d: ${impLast7} (${impDelta}% vs prev 7d)`,
     `  Top queries:`,
     topQueries,
     "",
