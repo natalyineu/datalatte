@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { timingSafeEqual } from "crypto";
+import { saveLead } from "@/lib/crm";
 
 /**
  * Receives direct e-mails to hi@datalatte.pro from a Zoho Mail filter + custom function
@@ -9,8 +10,6 @@ import { timingSafeEqual } from "crypto";
  * Body (JSON): { from, subject, snippet?, messageId?, date? }
  */
 const SECRET = process.env.INBOUND_EMAIL_SECRET;
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
@@ -67,18 +66,10 @@ export async function POST(req: NextRequest) {
   const message = [subject && `Subject: ${subject}`, snippet].filter(Boolean).join("\n\n");
 
   const tasks: Promise<unknown>[] = [];
-  if (SUPABASE_URL && SUPABASE_KEY) {
-    tasks.push(
-      fetch(`${SUPABASE_URL}/rest/v1/contact_submissions`, {
-        method: "POST",
-        headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, "Content-Type": "application/json", Prefer: "return=minimal" },
-        body: JSON.stringify({
-          email, name: name || null, message, form_type: "direct_email", status: "new",
-          notes: clip(body.messageId, 200) ? `zoho-message-id: ${clip(body.messageId, 200)}` : null,
-        }),
-      }).catch((e) => console.error("inbound-email: Supabase save failed", e)),
-    );
-  }
+  const saved = await saveLead({
+    email, name: name || null, message, form_type: "direct_email",
+    notes: clip(body.messageId, 200) ? `zoho-message-id: ${clip(body.messageId, 200)}` : null,
+  });
   if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID) {
     tasks.push(
       fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
@@ -86,7 +77,7 @@ export async function POST(req: NextRequest) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           chat_id: TELEGRAM_CHAT_ID, parse_mode: "HTML",
-          text: `✉️ <b>New e-mail to hi@</b>\n📨 ${esc(email)}${name ? `\n👤 ${esc(name)}` : ""}${subject ? `\n📌 ${esc(subject)}` : ""}`,
+          text: `✉️ <b>New e-mail to hi@</b>${saved ? "" : "\n⚠️ <b>NOT saved to CRM</b>"}\n📨 ${esc(email)}${name ? `\n👤 ${esc(name)}` : ""}${subject ? `\n📌 ${esc(subject)}` : ""}`,
         }),
       }).catch((e) => console.error("inbound-email: Telegram failed", e)),
     );

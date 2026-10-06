@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { saveLead } from "@/lib/crm";
 
 const RESEND_API_KEY      = process.env.RESEND_API_KEY!;
 const RESEND_AUDIENCE_ID  = process.env.RESEND_AUDIENCE_ID;
@@ -38,7 +39,10 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid email" }, { status: 400 });
     }
 
-    // 1. Add to Resend audience (fire-and-forget)
+    // 0. Store in CRM (so every signup is kept even if e-mail steps fail)
+    await saveLead({ email, form_type: "newsletter", notes: `source: ${source}` });
+
+    // 1. Add to Resend audience
     await addToResendAudience(email).catch(() => {});
 
     // 2. Send welcome email

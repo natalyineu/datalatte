@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { saveLead } from "@/lib/crm";
 
 const RESEND_API_KEY     = process.env.RESEND_API_KEY!;
 const RESEND_AUDIENCE_ID = process.env.RESEND_AUDIENCE_ID;
@@ -45,21 +46,6 @@ async function addToResendAudience(email: string, name?: string) {
   }
 }
 
-async function saveSubmission(row: Record<string, unknown>) {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !key) return;
-  try {
-    await fetch(`${url}/rest/v1/contact_submissions`, {
-      method: "POST",
-      headers: { apikey: key, Authorization: `Bearer ${key}`, "Content-Type": "application/json", Prefer: "return=minimal" },
-      body: JSON.stringify(row),
-    });
-  } catch (err) {
-    console.error("Supabase inquiry save failed:", err);
-  }
-}
-
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json() as {
@@ -79,7 +65,7 @@ export async function POST(req: NextRequest) {
     const nicheLabel = niche ? (NICHE_LABELS[niche] ?? niche) : null;
 
     // 0. Save to CRM (non-blocking)
-    await saveSubmission({ email, name: name ?? null, niche: niche ?? null, message: message ?? null, form_type });
+    const saved = await saveLead({ email, name: name ?? null, niche: niche ?? null, message: message ?? null, form_type });
 
     // Serverless freezes after the response is sent, so un-awaited fetches get cut off.
     // Collect side-effects and await them (allSettled) before returning.
@@ -176,6 +162,7 @@ export async function POST(req: NextRequest) {
       const msgPreview = message ? message.slice(0, 120) + (message.length > 120 ? "…" : "") : null;
       const parts = [
         form_type === "ready" ? "🔥 <b>New lead (ready to start)</b>" : "📧 <b>New enquiry</b>",
+        !saved && "⚠️ <b>NOT saved to CRM</b> — reply from the e-mail notification",
         `📨 ${safeEmail}`,
         safeName      && `👤 ${safeName}`,
         safeNicheLabel && `🏪 ${safeNicheLabel}`,
