@@ -289,11 +289,24 @@ export async function generateStaticParams() {
   return withMtime.slice(0, 50).map(({ slug }) => ({ slug }));
 }
 
-function truncateSeoTitle(title: string, max = 55): string {
+// Browser/SERP title. The layout template appends " | DataLatte" (12 chars), so a base ≤ 48 fits in 60.
+// Order: short enough → as is; part before a subtitle separator (":", "—", "|", " - ") → that;
+// whole title ≤ 60 → shown without the brand suffix (absolute); else cut at a word boundary.
+// A hand-written `seoTitle` in frontmatter always wins.
+function truncateSeoTitle(title: string, max = 48): string | { absolute: string } {
   if (title.length <= max) return title;
-  const cut = title.slice(0, max - 1);
-  const lastSpace = cut.lastIndexOf(" ");
-  return (lastSpace > 30 ? cut.slice(0, lastSpace) : cut) + "...";
+  const first = title.split(/\s*(?::|—|–|\||\s-\s)\s*/)[0].trim();
+  if (first.length >= 22 && first.length <= max) {
+    return /2026/.test(title) && !/2026/.test(first) && first.length + 7 <= max ? `${first} (2026)` : first;
+  }
+  if (title.length <= 60) return { absolute: title };
+  const base = first.length > max ? first : title;
+  let cut = base.slice(0, max + 1);
+  cut = cut.slice(0, Math.max(cut.lastIndexOf(" "), 30));
+  return cut
+    .replace(/[\s,&:;(-]+$/, "")
+    .replace(/\s+(and|or|for|the|to|with|of|in|a|an|vs|your|how|that|can|win|more)$/i, "")
+    .trim();
 }
 
 export async function generateMetadata({
