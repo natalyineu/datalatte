@@ -325,7 +325,7 @@ export async function generateMetadata({
   return {
     title: seoTitle,
     description: frontmatter.description,
-    ...(frontmatter.noindex && { robots: { index: false, follow: false } }),
+    ...(frontmatter.noindex && { robots: { index: false, follow: true } }),
     // ── Canonical + hreflang per article ──────────────────────────────────
     alternates: {
       canonical: url,

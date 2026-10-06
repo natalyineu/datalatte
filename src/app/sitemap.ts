@@ -37,19 +37,20 @@ function getBlogRoutes(): MetadataRoute.Sitemap {
   return fs
     .readdirSync(contentDir)
     .filter((f) => f.endsWith(".mdx"))
-    .map((file) => {
+    .flatMap((file) => {
       const slug = file.replace(".mdx", "");
       const raw = fs.readFileSync(path.join(contentDir, file), "utf8");
       const { data } = matter(raw);
+      if (data.noindex) return []; // never list noindex pages in the sitemap
       const parsed = new Date(data.date as string);
       const impressions = popularity[slug] ?? 0;
       const isCountryGuide = /^local-marketing-.+-small-business-2026$/.test(slug);
-      return {
+      return [{
         url: `${baseUrl}/blog/${slug}`,
         lastModified: !isNaN(parsed.getTime()) ? parsed : new Date(),
         changeFrequency: "monthly" as const,
         priority: isCountryGuide ? 0.8 : (impressions > 100 ? 0.9 : impressions >= 10 ? 0.8 : 0.7),
-      };
+      }];
     })
     .sort((a, b) => b.lastModified.getTime() - a.lastModified.getTime());
 }

@@ -14,8 +14,8 @@ export async function GET(request: Request) {
       return `
   <url>
     <loc>${url}</loc>
-    <lastModified>${dateString}</lastModified>
-    <changeFrequency>${changeFrequency}</changeFrequency>
+    <lastmod>${dateString}</lastmod>
+    <changefreq>${changeFrequency}</changefreq>
     <priority>${priority}</priority>
   </url>`;
     })
