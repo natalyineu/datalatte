@@ -267,7 +267,7 @@ async function main() {
 // ── Bing Webmaster Tools (optional: needs BING_WEBMASTER_API_KEY) ────────────
 async function fetchBing() {
   const key = process.env.BING_WEBMASTER_API_KEY;
-  if (!key) return null;
+  if (!key) { console.log("– Bing skipped: BING_WEBMASTER_API_KEY not set"); return null; }
   try {
     const site = encodeURIComponent("https://datalatte.pro/");
     const res = await fetch(`https://ssl.bing.com/webmaster/api.svc/json/GetRankAndTrafficStats?apikey=${key}&siteUrl=${site}`);
