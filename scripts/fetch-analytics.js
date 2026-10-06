@@ -4,6 +4,7 @@
  * Uses OAuth2 refresh token (works for both GSC and GA4).
  *
  * Required secrets:
+ *   GOOGLE_SA_KEY             — service-account JSON (preferred), OR the three OAuth vars below
  *   GSC_OAUTH_CLIENT_ID
  *   GSC_OAUTH_CLIENT_SECRET
  *   GSC_OAUTH_REFRESH_TOKEN
@@ -18,6 +19,16 @@ const path = require("path");
 const OUT_DIR = path.join(__dirname, "../data/analytics");
 
 function getAuth() {
+  // Preferred: service account (key never expires). Secret GOOGLE_SA_KEY = full JSON key.
+  if (process.env.GOOGLE_SA_KEY) {
+    return new google.auth.GoogleAuth({
+      credentials: JSON.parse(process.env.GOOGLE_SA_KEY),
+      scopes: [
+        "https://www.googleapis.com/auth/webmasters.readonly",
+        "https://www.googleapis.com/auth/analytics.readonly",
+      ],
+    });
+  }
   const clientId     = process.env.GSC_OAUTH_CLIENT_ID;
   const clientSecret = process.env.GSC_OAUTH_CLIENT_SECRET;
   const refreshToken = process.env.GSC_OAUTH_REFRESH_TOKEN;
