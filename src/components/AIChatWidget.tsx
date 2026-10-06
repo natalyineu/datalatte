@@ -141,6 +141,57 @@ function CtaButtons({ cta }: { cta: string | null | undefined }) {
   );
 }
 
+// ─── Lead capture inside the chat ───────────────────────────────────────────
+
+function ChatLeadForm({ messages }: { messages: Message[] }) {
+  const [email,  setEmail]  = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    if (status === "loading" || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) return;
+    setStatus("loading");
+    // Send the visitor's side of the conversation so the follow-up is specific
+    const transcript = messages
+      .filter((m) => m.role === "user")
+      .map((m) => m.content)
+      .join(" | ")
+      .slice(0, 1500);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.trim(), form_type: "explore", message: `[From AI chat] ${transcript}` }),
+      });
+      if (res.ok) { setStatus("done"); gtag.chatLeadCaptured(); } else setStatus("error");
+    } catch { setStatus("error"); }
+  }
+
+  if (status === "done") {
+    return <p className="text-xs text-coffee-700 bg-coffee-50 rounded-xl px-3 py-2.5">Thanks! Nataliia will email you within one business day ☕</p>;
+  }
+  return (
+    <form onSubmit={submit} className="bg-coffee-50 border border-coffee-100 rounded-xl p-3">
+      <p className="text-xs font-semibold text-coffee-900 mb-2">Want a personal plan by email? Leave your address.</p>
+      <div className="flex gap-2">
+        <input
+          id="chat-lead-email"
+          type="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="you@business.com"
+          className="flex-1 min-w-0 text-xs px-3 py-2 rounded-lg border border-gray-200 bg-white text-gray-900 focus:outline-none focus:border-coffee-400"
+        />
+        <button type="submit" disabled={status === "loading"} className="text-xs font-semibold px-3 py-2 rounded-lg bg-coffee-700 hover:bg-coffee-800 text-white disabled:opacity-60">
+          {status === "loading" ? "…" : "Send"}
+        </button>
+      </div>
+      {status === "error" && <p className="text-[11px] text-red-600 mt-1.5">Could not send. Please try again or email hi@datalatte.pro</p>}
+    </form>
+  );
+}
+
 // ─── Main widget ─────────────────────────────────────────────────────────────
 
 export default function AIChatWidget() {
@@ -332,6 +383,11 @@ export default function AIChatWidget() {
                   </div>
                 </div>
               ))}
+
+              {/* Email capture after the visitor has engaged (2+ messages) */}
+              {!loading && messages.filter((m) => m.role === "user").length >= 2 && (
+                <ChatLeadForm messages={messages} />
+              )}
 
               {/* Typing indicator */}
               {loading && (

@@ -57,6 +57,8 @@ export const gtag = {
   chatMessageSent: (messageIndex: number) =>
     track("chat_message_sent", { message_index: messageIndex }),
 
+  chatLeadCaptured: () => track("chat_lead_captured"),
+
   // ── Tools ────────────────────────────────────────────────────────────────
   budgetCalculatorCompleted: (budget: number, niche: string, goal: string) =>
     track("budget_calculator_completed", { budget, niche, goal }),

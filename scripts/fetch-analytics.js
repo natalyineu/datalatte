@@ -208,7 +208,7 @@ async function fetchGA4() {
       metrics: [{ name: "eventCount" }],
       dimensionFilter: { filter: { fieldName: "eventName", inListFilter: { values: ["contact_form_submitted", "generate_lead", "form_submit", "scroll", "scroll_25", "scroll_50", "scroll_75",
         "free_audit_clicked", "book_call_clicked", "calendly_clicked", "email_link_clicked", "phone_link_clicked", "contact_cta_clicked", "service_link_clicked",
-        "chat_widget_opened", "chat_message_sent", "form_start", "email_subscribed", "exit_intent_popup_shown", "floating_cta_shown"] } } },
+        "chat_widget_opened", "chat_message_sent", "chat_lead_captured", "form_start", "email_subscribed", "exit_intent_popup_shown", "floating_cta_shown"] } } },
     },
   });
 
@@ -498,7 +498,7 @@ function buildReport(gsc, ga4, leads, bing) {
     if (has50) L.push(row("Scrolled 50%", e("scroll_50", 0), e("scroll_50", 1)));
     L.push(row("Scrolled 90%", e("scroll", 0), e("scroll", 1)));
     L.push(row("CTA clicks (audit, contact, book call, email)", cta(0), cta(1)));
-    L.push(row("Chat opened → messages", e("chat_widget_opened", 0), e("chat_widget_opened", 1)) + `, messages ${e("chat_message_sent", 0)}`);
+    L.push(row("Chat opened → messages", e("chat_widget_opened", 0), e("chat_widget_opened", 1)) + `, messages ${e("chat_message_sent", 0)}, emails left ${e("chat_lead_captured", 0)}`);
     L.push(row("Form started", e("form_start", 0), e("form_start", 1)));
     L.push(row("Newsletter signups", e("email_subscribed", 0), e("email_subscribed", 1)));
   }
