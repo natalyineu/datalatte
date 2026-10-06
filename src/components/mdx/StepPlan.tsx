@@ -32,7 +32,7 @@ export default function StepPlan({ steps: stepsProp, title }: StepPlanProps) {
   };
 
   return (
-    <div className="my-8 rounded-2xl border border-coffee-200 bg-coffee-50 overflow-hidden">
+    <div className="my-8 rounded-2xl border border-coffee-200 bg-coffee-50 overflow-hidden dark:border-coffee-800 dark:bg-coffee-900/20">
       {title && (
         <div className="px-6 py-4 bg-coffee-700 text-white">
           <h3 className="text-lg font-bold m-0">{title}</h3>
@@ -58,7 +58,7 @@ export default function StepPlan({ steps: stepsProp, title }: StepPlanProps) {
           return (
             <div
               key={i}
-              className={`transition-colors duration-200 ${isDone ? "bg-green-50" : "bg-white"}`}
+              className={`transition-colors duration-200 ${isDone ? "bg-green-50 dark:bg-green-900/30" : "bg-white dark:bg-gray-900"}`}
             >
               {/* Step header — clickable */}
               <button
@@ -72,14 +72,14 @@ export default function StepPlan({ steps: stepsProp, title }: StepPlanProps) {
                       ? "bg-green-500 text-white"
                       : isOpen
                       ? "bg-coffee-700 text-white"
-                      : "bg-coffee-100 text-coffee-700"
+                      : "bg-coffee-100 text-coffee-700 dark:bg-coffee-900/30 dark:text-coffee-300"
                   }`}
                 >
                   {isDone ? "✓" : i + 1}
                 </div>
 
                 <div className="flex-1 min-w-0">
-                  <p className={`font-semibold text-sm ${isDone ? "line-through text-gray-400" : "text-gray-800"}`}>
+                  <p className={`font-semibold text-sm ${isDone ? "line-through text-gray-400" : "text-gray-800 dark:text-gray-100"}`}>
                     {step.title}
                   </p>
                   {step.timeframe && !isOpen && (
@@ -105,28 +105,28 @@ export default function StepPlan({ steps: stepsProp, title }: StepPlanProps) {
                 <div className="px-6 pb-5 ml-13">
                   <div className="ml-13 pl-[52px]">
                     {step.timeframe && (
-                      <span className="inline-block text-xs font-medium text-coffee-600 bg-coffee-100 px-2.5 py-0.5 rounded-full mb-3">
+                      <span className="inline-block text-xs font-medium text-coffee-600 bg-coffee-100 px-2.5 py-0.5 rounded-full mb-3 dark:text-coffee-400 dark:bg-coffee-900/30">
                         ⏱ {step.timeframe}
                       </span>
                     )}
 
-                    <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                    <p className="text-gray-600 text-sm leading-relaxed mb-4 dark:text-gray-300">
                       {step.description}
                     </p>
 
                     {/* Result box */}
-                    <div className="bg-green-50 border border-green-200 rounded-xl p-4">
-                      <p className="text-xs font-semibold text-green-700 uppercase tracking-wide mb-1">
+                    <div className="bg-green-50 border border-green-200 rounded-xl p-4 dark:bg-green-900/30 dark:border-green-800">
+                      <p className="text-xs font-semibold text-green-700 uppercase tracking-wide mb-1 dark:text-green-300">
                         📈 Expected Result
                       </p>
-                      <p className="text-sm text-green-800">{step.result}</p>
+                      <p className="text-sm text-green-800 dark:text-green-300">{step.result}</p>
                     </div>
 
                     <button
                       onClick={(e) => markDone(e, i)}
                       className={`mt-4 text-xs font-medium px-4 py-2 rounded-full transition-colors ${
                         isDone
-                          ? "bg-gray-100 text-gray-500 hover:bg-gray-200"
+                          ? "bg-gray-100 text-gray-500 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400"
                           : "bg-coffee-700 text-white hover:bg-coffee-800"
                       }`}
                     >

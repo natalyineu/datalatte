@@ -11,9 +11,9 @@ export default function PrivacyPage() {
     <SectionWrapper>
       <div className="max-w-3xl mx-auto">
         <h1 className="section-title mb-4">Privacy Policy</h1>
-        <p className="text-gray-500 mb-8">Last updated: April 2026</p>
+        <p className="text-gray-500 mb-8 dark:text-gray-400">Last updated: April 2026</p>
 
-        <div className="prose-datalatte space-y-6 text-gray-600">
+        <div className="prose-datalatte space-y-6 text-gray-600 dark:text-gray-300">
           <p>
             DataLatte ("we", "our", "us") is committed to protecting your privacy.
             This policy explains how we collect and use information when you visit datalatte.pro.
@@ -41,7 +41,7 @@ export default function PrivacyPage() {
           <h2>Contact</h2>
           <p>
             Questions? Email us at{" "}
-            <a href="mailto:hi@datalatte.pro" className="text-coffee-700 underline">
+            <a href="mailto:hi@datalatte.pro" className="text-coffee-700 underline dark:text-coffee-300">
               hi@datalatte.pro
             </a>
             .

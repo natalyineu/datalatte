@@ -96,7 +96,7 @@ export default function FreeAuditPage() {
             <div className="flex flex-col sm:flex-row gap-4 mb-6">
               <Link
                 href="#audit-form"
-                className="inline-flex items-center justify-center gap-2 bg-white text-coffee-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg text-base"
+                className="inline-flex items-center justify-center gap-2 bg-white text-coffee-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg text-base dark:bg-gray-900 dark:text-coffee-100"
               >
                 Request my free audit <ChevronDown size={18} />
               </Link>
@@ -127,7 +127,7 @@ export default function FreeAuditPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {auditItems.map((item) => (
             <div key={item.title} className="card p-6">
-              <item.icon size={26} className="text-coffee-600 mb-4" />
+              <item.icon size={26} className="text-coffee-600 mb-4 dark:text-coffee-400" />
               <h3 className="font-bold text-gray-900 dark:text-white text-lg mb-2">{item.title}</h3>
               <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{item.desc}</p>
             </div>
@@ -195,7 +195,7 @@ export default function FreeAuditPage() {
           <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
             I offer free audits because the best clients are those who already understand the problem. If the audit shows you have serious gaps, you might want help fixing them — and we can talk about that. If you can fix everything yourself, that&apos;s great too. Either way, you leave with something genuinely useful.
           </p>
-          <p className="text-coffee-700 font-semibold mb-8">
+          <p className="text-coffee-700 font-semibold mb-8 dark:text-coffee-300">
             — Nataliia, Founder of DataLatte
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
@@ -241,7 +241,7 @@ export default function FreeAuditPage() {
             ].map((item) => (
               <div key={item.q} className="card p-6">
                 <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2 flex items-start gap-2">
-                  <CheckCircle2 size={18} className="text-coffee-600 mt-0.5 shrink-0" />
+                  <CheckCircle2 size={18} className="text-coffee-600 mt-0.5 shrink-0 dark:text-coffee-400" />
                   {item.q}
                 </h4>
                 <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed pl-6">{item.a}</p>

@@ -152,7 +152,7 @@ function LocationNichePage({ niche: nicheData, city }: {
             {nicheData!.intro(city.city, city.state)}
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
-            <Link href="/free-audit" className="inline-flex items-center justify-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg">
+            <Link href="/free-audit" className="inline-flex items-center justify-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg dark:bg-gray-900 dark:text-gray-50">
               Get a Free Audit <ArrowRight size={17} />
             </Link>
             <Link href={`/for/${nicheData!.slug}`} className="inline-flex items-center justify-center gap-2 border-2 border-white/40 text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-white/10 transition-all">
@@ -162,23 +162,23 @@ function LocationNichePage({ niche: nicheData, city }: {
         </div>
       </section>
 
-      <div className="border-b border-gray-100">
+      <div className="border-b border-gray-100 dark:border-gray-700">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
           <div>
-            <p className="text-2xl font-bold text-coffee-700">3–5×</p>
-            <p className="text-sm text-gray-500 mt-1">avg. return on ad spend</p>
+            <p className="text-2xl font-bold text-coffee-700 dark:text-coffee-300">3–5×</p>
+            <p className="text-sm text-gray-500 mt-1 dark:text-gray-400">avg. return on ad spend</p>
           </div>
           <div>
-            <p className="text-2xl font-bold text-coffee-700">30 days</p>
-            <p className="text-sm text-gray-500 mt-1">to first leads from Google Ads</p>
+            <p className="text-2xl font-bold text-coffee-700 dark:text-coffee-300">30 days</p>
+            <p className="text-sm text-gray-500 mt-1 dark:text-gray-400">to first leads from Google Ads</p>
           </div>
           <div>
-            <p className="text-2xl font-bold text-coffee-700">$0</p>
-            <p className="text-sm text-gray-500 mt-1">cost for an initial audit</p>
+            <p className="text-2xl font-bold text-coffee-700 dark:text-coffee-300">$0</p>
+            <p className="text-sm text-gray-500 mt-1 dark:text-gray-400">cost for an initial audit</p>
           </div>
           <div>
-            <p className="text-2xl font-bold text-coffee-700">No contracts</p>
-            <p className="text-sm text-gray-500 mt-1">month-to-month, cancel anytime</p>
+            <p className="text-2xl font-bold text-coffee-700 dark:text-coffee-300">No contracts</p>
+            <p className="text-sm text-gray-500 mt-1 dark:text-gray-400">month-to-month, cancel anytime</p>
           </div>
         </div>
       </div>
@@ -190,29 +190,29 @@ function LocationNichePage({ niche: nicheData, city }: {
             <h2 className="section-title mb-4">
               How {nicheData!.labelPlural.toLowerCase()} in {city.city} compete on Google
             </h2>
-            <p className="text-gray-600 leading-relaxed mb-6">
+            <p className="text-gray-600 leading-relaxed mb-6 dark:text-gray-300">
               We analyzed {stats.businesses} {nicheData!.labelPlural.toLowerCase()} in the {city.city} area that are listed on Google Maps
               (our own data, {stats.asOf}). Here is what the local market looks like.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
               <div className="card p-4 text-center">
-                <p className="text-2xl font-bold text-coffee-700">{stats.businesses}</p>
-                <p className="text-xs text-gray-500 mt-1">businesses analyzed</p>
+                <p className="text-2xl font-bold text-coffee-700 dark:text-coffee-300">{stats.businesses}</p>
+                <p className="text-xs text-gray-500 mt-1 dark:text-gray-400">businesses analyzed</p>
               </div>
               <div className="card p-4 text-center">
-                <p className="text-2xl font-bold text-coffee-700">{stats.avgRating.toFixed(2)}★</p>
-                <p className="text-xs text-gray-500 mt-1">average Google rating</p>
+                <p className="text-2xl font-bold text-coffee-700 dark:text-coffee-300">{stats.avgRating.toFixed(2)}★</p>
+                <p className="text-xs text-gray-500 mt-1 dark:text-gray-400">average Google rating</p>
               </div>
               <div className="card p-4 text-center">
-                <p className="text-2xl font-bold text-coffee-700">{stats.medianReviews}</p>
-                <p className="text-xs text-gray-500 mt-1">median reviews</p>
+                <p className="text-2xl font-bold text-coffee-700 dark:text-coffee-300">{stats.medianReviews}</p>
+                <p className="text-xs text-gray-500 mt-1 dark:text-gray-400">median reviews</p>
               </div>
               <div className="card p-4 text-center">
-                <p className="text-2xl font-bold text-coffee-700">{stats.over200}</p>
-                <p className="text-xs text-gray-500 mt-1">have 200+ reviews</p>
+                <p className="text-2xl font-bold text-coffee-700 dark:text-coffee-300">{stats.over200}</p>
+                <p className="text-xs text-gray-500 mt-1 dark:text-gray-400">have 200+ reviews</p>
               </div>
             </div>
-            <ul className="space-y-3 text-gray-700 leading-relaxed">
+            <ul className="space-y-3 text-gray-700 leading-relaxed dark:text-gray-200">
               <li>
                 <strong>The bar to beat:</strong> a typical {nicheData!.label.toLowerCase()} in {city.city} has {stats.medianReviews} Google
                 reviews and a {stats.avgRating.toFixed(2)} rating. Appearing in the map pack means matching that social proof.
@@ -241,8 +241,8 @@ function LocationNichePage({ niche: nicheData, city }: {
           <ul className="space-y-4">
             {nicheData!.services.map((service, i) => (
               <li key={i} className="flex items-start gap-3">
-                <CheckCircle2 className="text-coffee-600 mt-0.5 flex-shrink-0" size={20} />
-                <span className="text-gray-700 leading-relaxed">
+                <CheckCircle2 className="text-coffee-600 mt-0.5 flex-shrink-0 dark:text-coffee-400" size={20} />
+                <span className="text-gray-700 leading-relaxed dark:text-gray-200">
                   {service.replace(/\${city}/g, city.city)}
                 </span>
               </li>
@@ -251,25 +251,25 @@ function LocationNichePage({ niche: nicheData, city }: {
         </div>
       </SectionWrapper>
 
-      <SectionWrapper className="bg-gray-50">
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-800/60">
         <div className="max-w-3xl mx-auto">
           <span className="section-label">Why Location Matters</span>
           <h2 className="section-title mb-6">
             Marketing for {nicheData!.labelPlural.toLowerCase()} in {city.city} is different
           </h2>
-          <p className="text-gray-600 leading-relaxed text-lg mb-6">
+          <p className="text-gray-600 leading-relaxed text-lg mb-6 dark:text-gray-300">
             Local search in {city.city} has its own competitive landscape — different keyword volumes, different CPCs,
             and different consumer behaviours than the national average. A campaign that works in a small town
             won&apos;t necessarily perform the same way in {city.city}.
           </p>
-          <p className="text-gray-600 leading-relaxed text-lg mb-6">
+          <p className="text-gray-600 leading-relaxed text-lg mb-6 dark:text-gray-300">
             DataLatte builds campaigns that reflect how {city.city} customers actually search and buy —
             not generic templates applied across every market. That means tighter targeting, better
             quality scores, and lower cost per acquisition.
           </p>
           <Link
             href={`/for/${nicheData!.slug}`}
-            className="inline-flex items-center gap-2 text-coffee-700 font-semibold hover:underline"
+            className="inline-flex items-center gap-2 text-coffee-700 font-semibold hover:underline dark:text-coffee-300"
           >
             Read our full {nicheData!.label.toLowerCase()} marketing guide <ArrowRight size={16} />
           </Link>
@@ -284,9 +284,9 @@ function LocationNichePage({ niche: nicheData, city }: {
           </h2>
           <div className="space-y-6">
             {faqItems.map(({ q, a }, i) => (
-              <div key={i} className="border-b border-gray-100 pb-6 last:border-0">
-                <h3 className="font-semibold text-gray-900 mb-2">{q}</h3>
-                <p className="text-gray-600 leading-relaxed">{a}</p>
+              <div key={i} className="border-b border-gray-100 pb-6 last:border-0 dark:border-gray-700">
+                <h3 className="font-semibold text-gray-900 mb-2 dark:text-gray-50">{q}</h3>
+                <p className="text-gray-600 leading-relaxed dark:text-gray-300">{a}</p>
               </div>
             ))}
           </div>
@@ -362,7 +362,7 @@ function NicheServicePage({ niche: nicheData, service }: {
             {service.intro(nicheData.label, nicheData.labelPlural)}
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
-            <Link href="/free-audit" className="inline-flex items-center justify-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg">
+            <Link href="/free-audit" className="inline-flex items-center justify-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg dark:bg-gray-900 dark:text-gray-50">
               Get a Free Audit <ArrowRight size={17} />
             </Link>
             <Link href={`/for/${nicheData.slug}`} className="inline-flex items-center justify-center gap-2 border-2 border-white/40 text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-white/10 transition-all">
@@ -381,9 +381,9 @@ function NicheServicePage({ niche: nicheData, service }: {
           </h2>
           <ul className="space-y-4">
             {service.bullets(nicheData.label).map((bullet, i) => (
-              <li key={i} className="flex items-start gap-3 bg-coffee-50 rounded-xl px-5 py-4 border border-coffee-100">
-                <CheckCircle2 className="text-coffee-600 mt-0.5 flex-shrink-0" size={18} />
-                <span className="text-gray-700 leading-relaxed text-sm">{bullet}</span>
+              <li key={i} className="flex items-start gap-3 bg-coffee-50 rounded-xl px-5 py-4 border border-coffee-100 dark:bg-coffee-900/20 dark:border-coffee-800">
+                <CheckCircle2 className="text-coffee-600 mt-0.5 flex-shrink-0 dark:text-coffee-400" size={18} />
+                <span className="text-gray-700 leading-relaxed text-sm dark:text-gray-200">{bullet}</span>
               </li>
             ))}
           </ul>
@@ -391,13 +391,13 @@ function NicheServicePage({ niche: nicheData, service }: {
       </SectionWrapper>
 
       {/* Why niche-specific */}
-      <SectionWrapper className="bg-gray-50">
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-800/60">
         <div className="max-w-3xl mx-auto">
           <span className="section-label">Why it matters</span>
           <h2 className="section-title mb-6">
             {service.shortLabel} for {nicheData.labelPlural.toLowerCase()} is different
           </h2>
-          <div className="space-y-4 text-gray-600 leading-relaxed">
+          <div className="space-y-4 text-gray-600 leading-relaxed dark:text-gray-300">
             <p className="text-lg">
               A generic {service.shortLabel.toLowerCase()} campaign applied to a {nicheData.label.toLowerCase()} without
               understanding the audience, seasonality, and competitive landscape will underperform.{" "}
@@ -413,7 +413,7 @@ function NicheServicePage({ niche: nicheData, service }: {
           </div>
           <Link
             href={service.href}
-            className="inline-flex items-center gap-2 text-coffee-700 font-semibold mt-6 hover:underline"
+            className="inline-flex items-center gap-2 text-coffee-700 font-semibold mt-6 hover:underline dark:text-coffee-300"
           >
             Read the full {service.label} service page <ArrowRight size={16} />
           </Link>
@@ -432,8 +432,8 @@ function NicheServicePage({ niche: nicheData, service }: {
           <div className="space-y-4">
             {faqs.map((item) => (
               <div key={item.q} className="card p-6">
-                <h3 className="font-semibold text-gray-900 mb-2">{item.q}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{item.a}</p>
+                <h3 className="font-semibold text-gray-900 mb-2 dark:text-gray-50">{item.q}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed dark:text-gray-400">{item.a}</p>
               </div>
             ))}
           </div>
@@ -441,9 +441,9 @@ function NicheServicePage({ niche: nicheData, service }: {
       </SectionWrapper>
 
       {/* Related */}
-      <SectionWrapper className="bg-gray-50">
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-800/60">
         <div className="text-center mb-8">
-          <h3 className="text-xl font-bold text-gray-900">Explore more</h3>
+          <h3 className="text-xl font-bold text-gray-900 dark:text-gray-50">Explore more</h3>
         </div>
         <div className="flex flex-wrap justify-center gap-3">
           <Link href={`/for/${nicheData.slug}`} className="btn-outline text-sm py-2 px-5">

@@ -66,7 +66,7 @@ export default function SignalNavigator({ prev, next, index, total }: Props) {
             }`}
           />
         ))}
-        <span className="ml-3 text-xs text-gray-600 tabular-nums">
+        <span className="ml-3 text-xs text-gray-600 tabular-nums dark:text-gray-300">
           {index + 1} / {total}
         </span>
       </div>
@@ -79,9 +79,9 @@ export default function SignalNavigator({ prev, next, index, total }: Props) {
           className="fixed left-3 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col items-center gap-2 group"
         >
           <div className="w-10 h-10 rounded-full bg-gray-900 border border-gray-700 flex items-center justify-center group-hover:border-coffee-500 group-hover:bg-gray-800 transition-all shadow-lg">
-            <ChevronLeft size={18} className="text-gray-500 group-hover:text-coffee-400 transition-colors" />
+            <ChevronLeft size={18} className="text-gray-500 group-hover:text-coffee-400 transition-colors dark:text-gray-400" />
           </div>
-          <span className="max-w-[80px] text-center text-xs text-gray-700 group-hover:text-gray-400 transition-colors leading-tight line-clamp-2 hidden xl:block">
+          <span className="max-w-[80px] text-center text-xs text-gray-700 group-hover:text-gray-400 transition-colors leading-tight line-clamp-2 hidden xl:block dark:text-gray-200">
             {prev.headline}
           </span>
         </button>
@@ -94,9 +94,9 @@ export default function SignalNavigator({ prev, next, index, total }: Props) {
           className="fixed right-3 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col items-center gap-2 group"
         >
           <div className="w-10 h-10 rounded-full bg-gray-900 border border-gray-700 flex items-center justify-center group-hover:border-coffee-500 group-hover:bg-gray-800 transition-all shadow-lg">
-            <ChevronRight size={18} className="text-gray-500 group-hover:text-coffee-400 transition-colors" />
+            <ChevronRight size={18} className="text-gray-500 group-hover:text-coffee-400 transition-colors dark:text-gray-400" />
           </div>
-          <span className="max-w-[80px] text-center text-xs text-gray-700 group-hover:text-gray-400 transition-colors leading-tight line-clamp-2 hidden xl:block">
+          <span className="max-w-[80px] text-center text-xs text-gray-700 group-hover:text-gray-400 transition-colors leading-tight line-clamp-2 hidden xl:block dark:text-gray-200">
             {next.headline}
           </span>
         </button>
@@ -104,7 +104,7 @@ export default function SignalNavigator({ prev, next, index, total }: Props) {
 
       {/* Swipe hint on mobile — subtle */}
       {(prev || next) && (
-        <p className="text-center text-xs text-gray-800 mt-1 lg:hidden select-none">
+        <p className="text-center text-xs text-gray-800 mt-1 lg:hidden select-none dark:text-gray-100">
           swipe ← → to navigate
         </p>
       )}

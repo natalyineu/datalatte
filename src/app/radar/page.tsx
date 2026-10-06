@@ -53,10 +53,10 @@ export default async function RadarPage() {
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
               </span>
               <span className="text-red-400 font-bold uppercase tracking-widest">Live</span>
-              <span className="text-gray-600">|</span>
+              <span className="text-gray-600 dark:text-gray-300">|</span>
               <span className="text-gray-400">{new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
             </div>
-            <div className="hidden sm:flex items-center gap-4 text-gray-500">
+            <div className="hidden sm:flex items-center gap-4 text-gray-500 dark:text-gray-400">
               <span>Meta</span><span>·</span>
               <span>Google</span><span>·</span>
               <span>AI Tools</span><span>·</span>
@@ -71,8 +71,8 @@ export default async function RadarPage() {
           <div className="flex flex-col md:flex-row md:items-end gap-6 justify-between">
             <div>
               <div className="flex items-center gap-2 mb-3">
-                <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500">DataLatte</span>
-                <span className="text-gray-700">/</span>
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400">DataLatte</span>
+                <span className="text-gray-700 dark:text-gray-200">/</span>
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-coffee-400">Intelligence Feed</span>
               </div>
               <h1 className="text-5xl md:text-7xl font-black tracking-tight leading-none">
@@ -90,7 +90,7 @@ export default async function RadarPage() {
             {/* Live signal count panel */}
             <div className="flex-shrink-0 border border-gray-800 rounded-2xl p-5 bg-gray-900/50 backdrop-blur-sm">
               <div className="text-4xl font-black text-white tabular-nums">{todayCount > 0 ? todayCount : weekCount}</div>
-              <div className="text-xs text-gray-500 mt-1 font-medium uppercase tracking-wider">{todayCount > 0 ? "New today" : "This week"}</div>
+              <div className="text-xs text-gray-500 mt-1 font-medium uppercase tracking-wider dark:text-gray-400">{todayCount > 0 ? "New today" : "This week"}</div>
               <div className="mt-3 space-y-1">
                 {signals.filter(s => s.impact === "breaking").length > 0 && (
                   <div className="flex items-center gap-1.5 text-xs">
@@ -122,9 +122,9 @@ export default async function RadarPage() {
                   s.impact === "medium" ? "bg-amber-400" : "bg-gray-600"
                 }`} />
                 <span className="font-semibold text-gray-300">{s.source.toUpperCase()}</span>
-                <span className="text-gray-500">—</span>
+                <span className="text-gray-500 dark:text-gray-400">—</span>
                 <span>{s.headline}</span>
-                <span className="text-gray-700 mx-4">◆</span>
+                <span className="text-gray-700 mx-4 dark:text-gray-200">◆</span>
               </span>
             ))}
           </div>

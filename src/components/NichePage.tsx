@@ -106,7 +106,7 @@ export default function NichePage({
             </h1>
             <p className="text-white/70 text-lg mb-10 leading-relaxed">{subheadline}</p>
             <div className="flex flex-col sm:flex-row gap-3">
-              <Link href="/free-audit" className="inline-flex items-center justify-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg">
+              <Link href="/free-audit" className="inline-flex items-center justify-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg dark:bg-gray-900 dark:text-gray-50">
                 Get a Free Audit <ArrowRight size={17} />
               </Link>
               <Link href="/pricing" className="inline-flex items-center justify-center gap-2 bg-white/10 border border-white/25 text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-white/15 transition-all">
@@ -129,7 +129,7 @@ export default function NichePage({
             <ScrollReveal key={s.label} delay={i * 0.08} direction="up">
               <div>
                 <div className="text-xl font-bold text-coffee-300">{s.value}</div>
-                <div className="text-xs text-gray-500 mt-0.5">{s.label}</div>
+                <div className="text-xs text-gray-500 mt-0.5 dark:text-gray-400">{s.label}</div>
               </div>
             </ScrollReveal>
           ))}
@@ -179,7 +179,7 @@ export default function NichePage({
       </SectionWrapper>
 
       {/* ── KPIs ── */}
-      <SectionWrapper className="bg-gray-50">
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-800/60">
         <div className="text-center mb-12">
           <span className="section-label">What Good Looks Like</span>
           <h2 className="section-title">
@@ -192,7 +192,7 @@ export default function NichePage({
           {kpis.map((kpi, i) => (
             <ScrollReveal key={kpi.metric} delay={i * 0.1}>
             <div className="card p-6 text-center hover:border-coffee-300 hover:shadow-lg hover:-translate-y-1 transition-all h-full">
-              <TrendingUp size={28} className="text-coffee-600 mx-auto mb-3" />
+              <TrendingUp size={28} className="text-coffee-600 mx-auto mb-3 dark:text-coffee-400" />
               <div className="text-3xl font-bold text-coffee-700 dark:text-coffee-300 mb-1">{kpi.improvement}</div>
               <div className="font-semibold text-gray-900 dark:text-gray-100 mb-2">{kpi.metric}</div>
               <p className="text-sm text-gray-500 dark:text-gray-400">{kpi.desc}</p>
@@ -234,7 +234,7 @@ export default function NichePage({
               Specific tactics that work for{" "}
               <span className="text-coffee-400">{niche.toLowerCase()}</span>
             </h2>
-            <p className="text-gray-500 max-w-xl mx-auto text-sm leading-relaxed">
+            <p className="text-gray-500 max-w-xl mx-auto text-sm leading-relaxed dark:text-gray-400">
               Every niche has its own seasonality, customer journey, and competitive landscape.
               Here&apos;s what I focus on for {niche.toLowerCase()} specifically.
             </p>
@@ -261,7 +261,7 @@ export default function NichePage({
       </section>
 
       {/* ── Testimonial ── */}
-      <SectionWrapper className="bg-coffee-50">
+      <SectionWrapper className="bg-coffee-50 dark:bg-coffee-900/20">
         <div className="max-w-2xl mx-auto text-center">
           <span className="section-label">What Clients Say</span>
           <TestimonialCard {...testimonial} />
@@ -283,7 +283,7 @@ export default function NichePage({
               <ScrollReveal key={item.q} delay={i * 0.07}>
               <div className="card p-6 hover:border-coffee-300 hover:shadow-md transition-all">
                 <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2 flex items-start gap-2">
-                  <CheckCircle2 size={18} className="text-coffee-600 mt-0.5 shrink-0" />
+                  <CheckCircle2 size={18} className="text-coffee-600 mt-0.5 shrink-0 dark:text-coffee-400" />
                   {item.q}
                 </h4>
                 <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed pl-6">{item.a}</p>
@@ -295,7 +295,7 @@ export default function NichePage({
       </SectionWrapper>
 
       {/* ── Blog resources ── */}
-      <SectionWrapper className="bg-gray-50">
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-800/60">
         <div className="max-w-4xl mx-auto text-center">
           <span className="section-label">Free Reading</span>
           <h2 className="section-title mb-2">Guides & <span className="gradient-text">strategies</span></h2>
@@ -333,7 +333,7 @@ export default function NichePage({
                       <li key={href}>
                         <Link
                           href={href}
-                          className="block text-sm text-coffee-700 hover:text-coffee-900 hover:underline py-1 px-2 rounded hover:bg-coffee-50 transition-colors"
+                          className="block text-sm text-coffee-700 hover:text-coffee-900 hover:underline py-1 px-2 rounded hover:bg-coffee-50 transition-colors dark:text-coffee-300"
                         >
                           {label}
                         </Link>
@@ -363,7 +363,7 @@ export default function NichePage({
                 <li key={href}>
                   <Link
                     href={href}
-                    className="block text-sm text-coffee-700 hover:text-coffee-900 hover:underline py-1 px-2 rounded hover:bg-coffee-50 transition-colors"
+                    className="block text-sm text-coffee-700 hover:text-coffee-900 hover:underline py-1 px-2 rounded hover:bg-coffee-50 transition-colors dark:text-coffee-300"
                   >
                     {label}
                   </Link>

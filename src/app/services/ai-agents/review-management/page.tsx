@@ -151,13 +151,13 @@ export default function AIReviewManagementPage() {
       </section>
 
       {/* Impact stats */}
-      <div className="bg-coffee-50 border-b border-coffee-100 py-8">
+      <div className="bg-coffee-50 border-b border-coffee-100 py-8 dark:bg-coffee-900/20 dark:border-coffee-800">
         <SectionWrapper>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {impact.map((s) => (
               <div key={s.label}>
-                <p className="text-3xl font-bold text-coffee-700">{s.metric}</p>
-                <p className="text-sm text-gray-600 mt-1">{s.label}</p>
+                <p className="text-3xl font-bold text-coffee-700 dark:text-coffee-300">{s.metric}</p>
+                <p className="text-sm text-gray-600 mt-1 dark:text-gray-300">{s.label}</p>
               </div>
             ))}
           </div>
@@ -167,29 +167,29 @@ export default function AIReviewManagementPage() {
       {/* Pipeline */}
       <SectionWrapper className="py-20">
         <h2 className="section-title mb-3">The 6-step review pipeline</h2>
-        <p className="text-gray-600 max-w-2xl mb-14">Fully automated from appointment completion to published Google review — with a private recovery path for any negative feedback.</p>
+        <p className="text-gray-600 max-w-2xl mb-14 dark:text-gray-300">Fully automated from appointment completion to published Google review — with a private recovery path for any negative feedback.</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {pipeline.map((p) => (
-            <div key={p.step} className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+            <div key={p.step} className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm dark:bg-gray-900 dark:border-gray-700">
               <span className="text-3xl font-bold text-coffee-200">{p.step}</span>
-              <h3 className="text-base font-semibold text-gray-900 mt-2 mb-2">{p.title}</h3>
-              <p className="text-sm text-gray-600">{p.body}</p>
+              <h3 className="text-base font-semibold text-gray-900 mt-2 mb-2 dark:text-gray-50">{p.title}</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300">{p.body}</p>
             </div>
           ))}
         </div>
       </SectionWrapper>
 
       {/* Conversation demos */}
-      <section className="bg-gray-50 py-20">
+      <section className="bg-gray-50 py-20 dark:bg-gray-800/60">
         <SectionWrapper>
           <h2 className="section-title mb-3">Both paths in action</h2>
-          <p className="text-gray-600 max-w-2xl mb-12">The 5-star path converts happy customers into published reviews. The recovery path turns a dissatisfied customer into a loyal one.</p>
+          <p className="text-gray-600 max-w-2xl mb-12 dark:text-gray-300">The 5-star path converts happy customers into published reviews. The recovery path turns a dissatisfied customer into a loyal one.</p>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {conversations.map((conv) => (
               <div key={conv.label}>
-                <p className="text-sm font-semibold text-gray-700 mb-3">{conv.label}</p>
+                <p className="text-sm font-semibold text-gray-700 mb-3 dark:text-gray-200">{conv.label}</p>
                 <div className="bg-gray-900 rounded-2xl p-6 shadow-xl">
-                  <p className="text-xs text-gray-500 mb-4 flex items-center gap-2">
+                  <p className="text-xs text-gray-500 mb-4 flex items-center gap-2 dark:text-gray-400">
                     <span className="w-2 h-2 bg-green-400 rounded-full inline-block" />
                     Live conversation example
                   </p>
@@ -215,14 +215,14 @@ export default function AIReviewManagementPage() {
       {/* Trigger integrations */}
       <SectionWrapper className="py-20">
         <h2 className="section-title mb-3">Works with your point-of-sale and booking system</h2>
-        <p className="text-gray-600 max-w-2xl mb-10">The review pipeline is triggered by a real business event — not a time-based blast. This makes the timing feel natural and improves response rates.</p>
+        <p className="text-gray-600 max-w-2xl mb-10 dark:text-gray-300">The review pipeline is triggered by a real business event — not a time-based blast. This makes the timing feel natural and improves response rates.</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {triggers.map((t) => (
-            <div key={t.system} className="flex items-start gap-3 bg-gray-50 rounded-xl p-4">
+            <div key={t.system} className="flex items-start gap-3 bg-gray-50 rounded-xl p-4 dark:bg-gray-800/60">
               <CheckCircle2 size={16} className="text-coffee-500 mt-0.5 shrink-0" />
               <div>
-                <p className="text-sm font-semibold text-gray-900">{t.system}</p>
-                <p className="text-xs text-gray-500 mt-0.5">{t.detail}</p>
+                <p className="text-sm font-semibold text-gray-900 dark:text-gray-50">{t.system}</p>
+                <p className="text-xs text-gray-500 mt-0.5 dark:text-gray-400">{t.detail}</p>
               </div>
             </div>
           ))}
@@ -230,14 +230,14 @@ export default function AIReviewManagementPage() {
       </SectionWrapper>
 
       {/* FAQ */}
-      <section className="bg-gray-50 py-20">
+      <section className="bg-gray-50 py-20 dark:bg-gray-800/60">
         <SectionWrapper>
           <h2 className="section-title mb-10">Review management questions</h2>
           <div className="max-w-3xl space-y-6">
             {faqs.map((faq) => (
-              <div key={faq.q} className="border-b border-gray-200 pb-6">
-                <h3 className="text-base font-semibold text-gray-900 mb-2">{faq.q}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{faq.a}</p>
+              <div key={faq.q} className="border-b border-gray-200 pb-6 dark:border-gray-700">
+                <h3 className="text-base font-semibold text-gray-900 mb-2 dark:text-gray-50">{faq.q}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed dark:text-gray-300">{faq.a}</p>
               </div>
             ))}
           </div>

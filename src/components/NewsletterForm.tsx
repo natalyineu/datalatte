@@ -37,10 +37,10 @@ export default function NewsletterForm({ source = "blog" }: { source?: string })
 
   if (status === "success") {
     return (
-      <div className="bg-coffee-50 rounded-2xl p-8 max-w-lg mx-auto text-center">
+      <div className="bg-coffee-50 rounded-2xl p-8 max-w-lg mx-auto text-center dark:bg-coffee-900/20">
         <div className="text-3xl mb-3">☕</div>
-        <h3 className="font-bold text-gray-900 text-lg mb-1">You're in!</h3>
-        <p className="text-gray-500 text-sm">
+        <h3 className="font-bold text-gray-900 text-lg mb-1 dark:text-gray-50">You're in!</h3>
+        <p className="text-gray-500 text-sm dark:text-gray-400">
           Check your inbox — a welcome email is on its way. See you next week!
         </p>
       </div>
@@ -48,9 +48,9 @@ export default function NewsletterForm({ source = "blog" }: { source?: string })
   }
 
   return (
-    <div className="bg-coffee-50 rounded-2xl p-8 max-w-lg mx-auto">
-      <h3 className="font-bold text-gray-900 text-lg mb-2">Stay in the loop</h3>
-      <p className="text-gray-500 text-sm mb-5">
+    <div className="bg-coffee-50 rounded-2xl p-8 max-w-lg mx-auto dark:bg-coffee-900/20">
+      <h3 className="font-bold text-gray-900 text-lg mb-2 dark:text-gray-50">Stay in the loop</h3>
+      <p className="text-gray-500 text-sm mb-5 dark:text-gray-400">
         New posts weekly. No spam, no fluff — just practical local marketing tips.
       </p>
       <form onSubmit={handleSubmit} className="flex gap-2">
@@ -61,7 +61,7 @@ export default function NewsletterForm({ source = "blog" }: { source?: string })
           placeholder="your@email.com"
           required
           disabled={status === "loading"}
-          className="flex-1 px-4 py-2.5 rounded-xl border border-gray-200 focus:border-coffee-500 focus:ring-2 focus:ring-coffee-100 outline-none text-sm disabled:opacity-60"
+          className="flex-1 px-4 py-2.5 rounded-xl border border-gray-200 focus:border-coffee-500 focus:ring-2 focus:ring-coffee-100 outline-none text-sm disabled:opacity-60 dark:border-gray-700"
         />
         <button
           type="submit"

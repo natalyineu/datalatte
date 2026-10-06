@@ -26,11 +26,11 @@ export default function BarChart({
   const maxVal = maxValue ? parseFloat(maxValue) : Math.max(...valueArr) * 1.1;
 
   return (
-    <div className="my-8 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+    <div className="my-8 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden dark:bg-gray-900 dark:border-gray-700">
       {title && (
-        <div className="px-5 pt-4 pb-3 border-b border-gray-100 flex items-center gap-2">
+        <div className="px-5 pt-4 pb-3 border-b border-gray-100 flex items-center gap-2 dark:border-gray-700">
           <Lightbulb size={14} className="text-coffee-500 shrink-0" />
-          <p className="font-semibold text-gray-800 text-sm">{title}</p>
+          <p className="font-semibold text-gray-800 text-sm dark:text-gray-100">{title}</p>
         </div>
       )}
       <div className="px-5 py-4 space-y-3.5">
@@ -43,17 +43,17 @@ export default function BarChart({
             <div key={i}>
               <div className="flex items-center justify-between mb-1.5">
                 <div className="flex items-center gap-2 min-w-0">
-                  <span className={`text-sm font-medium truncate ${isHighlight ? "text-coffee-800" : "text-gray-700"}`}>
+                  <span className={`text-sm font-medium truncate ${isHighlight ? "text-coffee-800 dark:text-coffee-200" : "text-gray-700 dark:text-gray-200"}`}>
                     {label}
                   </span>
                   {sub && <span className="text-xs text-gray-400 shrink-0">{sub}</span>}
                   {isHighlight && (
-                    <span className="shrink-0 text-[10px] bg-coffee-100 text-coffee-700 font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wide">
+                    <span className="shrink-0 text-[10px] bg-coffee-100 text-coffee-700 font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wide dark:bg-coffee-900/30 dark:text-coffee-300">
                       Best
                     </span>
                   )}
                 </div>
-                <span className={`text-sm font-bold tabular-nums shrink-0 ml-3 ${isHighlight ? "text-coffee-700" : "text-gray-500"}`}>
+                <span className={`text-sm font-bold tabular-nums shrink-0 ml-3 ${isHighlight ? "text-coffee-700 dark:text-coffee-300" : "text-gray-500 dark:text-gray-400"}`}>
                   {(() => {
                     const u = unitsArr[i] !== undefined ? unitsArr[i] : unit;
                     if (u === "%") return `${val}%`;
@@ -62,7 +62,7 @@ export default function BarChart({
                   })()}
                 </span>
               </div>
-              <div className="h-2.5 bg-gray-100 rounded-full overflow-hidden">
+              <div className="h-2.5 bg-gray-100 rounded-full overflow-hidden dark:bg-gray-800">
                 <div
                   className={`h-full rounded-full mdx-bar-grow ${isHighlight
                     ? "bg-gradient-to-r from-coffee-500 to-coffee-700"

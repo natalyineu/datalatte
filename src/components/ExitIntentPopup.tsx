@@ -99,7 +99,7 @@ export default function ExitIntentPopup() {
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ type: "spring", duration: 0.4 }}
           >
-            <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden relative">
+            <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden relative dark:bg-gray-900">
               {/* Close */}
               <button
                 onClick={dismiss}
@@ -119,16 +119,16 @@ export default function ExitIntentPopup() {
                     className="text-center py-4"
                   >
                     <CheckCircle2 size={48} className="text-green-500 mx-auto mb-3" />
-                    <h3 className="text-xl font-bold text-gray-900 mb-1">You're in! ☕</h3>
-                    <p className="text-gray-500 text-sm">Check your inbox for a welcome email.</p>
+                    <h3 className="text-xl font-bold text-gray-900 mb-1 dark:text-gray-50">You're in! ☕</h3>
+                    <p className="text-gray-500 text-sm dark:text-gray-400">Check your inbox for a welcome email.</p>
                   </motion.div>
                 ) : (
                   <>
                     <div className="text-4xl mb-4 text-center">☕</div>
-                    <h2 className="text-2xl font-bold text-gray-900 text-center mb-2">
+                    <h2 className="text-2xl font-bold text-gray-900 text-center mb-2 dark:text-gray-50">
                       Before you go — get a free audit
                     </h2>
-                    <p className="text-gray-500 text-sm text-center mb-6">
+                    <p className="text-gray-500 text-sm text-center mb-6 dark:text-gray-400">
                       I'll review your Google presence and tell you exactly what's holding you back.
                       Takes me 20 minutes. Costs you nothing.
                     </p>
@@ -146,9 +146,9 @@ export default function ExitIntentPopup() {
 
                       <div className="relative">
                         <div className="absolute inset-0 flex items-center">
-                          <div className="w-full border-t border-gray-100" />
+                          <div className="w-full border-t border-gray-100 dark:border-gray-700" />
                         </div>
-                        <div className="relative text-center text-xs text-gray-400 bg-white px-2 inline-block mx-auto w-full">
+                        <div className="relative text-center text-xs text-gray-400 bg-white px-2 inline-block mx-auto w-full dark:bg-gray-900">
                           or just get weekly tips
                         </div>
                       </div>
@@ -160,12 +160,12 @@ export default function ExitIntentPopup() {
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="your@email.com"
                           required
-                          className="flex-1 px-4 py-2.5 rounded-xl border border-gray-200 focus:border-coffee-500 focus:ring-2 focus:ring-coffee-100 outline-none text-sm"
+                          className="flex-1 px-4 py-2.5 rounded-xl border border-gray-200 focus:border-coffee-500 focus:ring-2 focus:ring-coffee-100 outline-none text-sm dark:border-gray-700"
                         />
                         <button
                           type="submit"
                           disabled={status === "loading"}
-                          className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold px-4 py-2.5 rounded-xl text-sm transition-colors whitespace-nowrap disabled:opacity-60"
+                          className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold px-4 py-2.5 rounded-xl text-sm transition-colors whitespace-nowrap disabled:opacity-60 dark:bg-gray-800 dark:text-gray-200"
                         >
                           {status === "loading" ? "…" : "Subscribe"}
                         </button>

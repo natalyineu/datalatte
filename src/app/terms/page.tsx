@@ -10,8 +10,8 @@ export default function TermsPage() {
   return (
     <SectionWrapper>
       <div className="max-w-3xl mx-auto prose prose-gray">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Terms of Service</h1>
-        <p className="text-gray-500 text-sm mb-8">Last updated: May 2026</p>
+        <h1 className="text-3xl font-bold text-gray-900 mb-2 dark:text-gray-50">Terms of Service</h1>
+        <p className="text-gray-500 text-sm mb-8 dark:text-gray-400">Last updated: May 2026</p>
 
         <h2>1. Agreement to Terms</h2>
         <p>
@@ -67,7 +67,7 @@ export default function TermsPage() {
         <h2>9. Contact</h2>
         <p>
           Questions about these terms? Email us at{" "}
-          <a href="mailto:hi@datalatte.pro" className="text-coffee-700 hover:underline">
+          <a href="mailto:hi@datalatte.pro" className="text-coffee-700 hover:underline dark:text-coffee-300">
             hi@datalatte.pro
           </a>
           .

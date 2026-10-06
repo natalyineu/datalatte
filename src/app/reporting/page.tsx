@@ -261,7 +261,7 @@ export default function ReportingPage() {
           ].map((s) => (
             <div key={s.label}>
               <div className="text-xl font-bold text-coffee-300">{s.value}</div>
-              <div className="text-xs text-gray-500 mt-0.5">{s.label}</div>
+              <div className="text-xs text-gray-500 mt-0.5 dark:text-gray-400">{s.label}</div>
             </div>
           ))}
         </div>
@@ -276,9 +276,9 @@ export default function ReportingPage() {
             <span className="gradient-text">Here&apos;s the fix.</span>
           </h2>
         </div>
-        <div className="max-w-3xl mx-auto divide-y divide-gray-100 border border-gray-100 rounded-2xl overflow-hidden shadow-sm">
-          <div className="grid grid-cols-2 bg-gray-50 text-xs font-bold text-gray-400 uppercase tracking-widest">
-            <div className="px-5 py-3 border-r border-gray-100 flex items-center gap-2">
+        <div className="max-w-3xl mx-auto divide-y divide-gray-100 border border-gray-100 rounded-2xl overflow-hidden shadow-sm dark:border-gray-700">
+          <div className="grid grid-cols-2 bg-gray-50 text-xs font-bold text-gray-400 uppercase tracking-widest dark:bg-gray-800/60">
+            <div className="px-5 py-3 border-r border-gray-100 flex items-center gap-2 dark:border-gray-700">
               <X size={13} className="text-red-400" /> Before
             </div>
             <div className="px-5 py-3 flex items-center gap-2">
@@ -287,11 +287,11 @@ export default function ReportingPage() {
           </div>
           {BEFORE_AFTER.map((row, i) => (
             <div key={i} className="grid grid-cols-2 text-sm hover:bg-gray-50 transition-colors">
-              <div className="px-5 py-3.5 text-gray-400 border-r border-gray-100 flex items-start gap-2">
+              <div className="px-5 py-3.5 text-gray-400 border-r border-gray-100 flex items-start gap-2 dark:border-gray-700">
                 <X size={13} className="text-red-400 shrink-0 mt-0.5" />
                 {row.before}
               </div>
-              <div className="px-5 py-3.5 text-gray-800 flex items-start gap-2">
+              <div className="px-5 py-3.5 text-gray-800 flex items-start gap-2 dark:text-gray-100">
                 <Check size={13} className="text-green-500 shrink-0 mt-0.5" />
                 {row.after}
               </div>
@@ -301,7 +301,7 @@ export default function ReportingPage() {
       </SectionWrapper>
 
       {/* ── Data Sources Grid ── */}
-      <SectionWrapper className="bg-gray-50">
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-800/60">
         <div className="text-center mb-12">
           <span className="section-label">Data Sources</span>
           <h2 className="section-title">
@@ -317,7 +317,7 @@ export default function ReportingPage() {
             <div key={group.label}>
               <div className="flex items-center gap-3 mb-5">
                 <div className="w-3 h-3 rounded-full shrink-0" style={{ backgroundColor: group.color }} />
-                <h3 className="text-sm font-bold text-gray-700 uppercase tracking-widest">{group.label}</h3>
+                <h3 className="text-sm font-bold text-gray-700 uppercase tracking-widest dark:text-gray-200">{group.label}</h3>
                 <div className="flex-1 h-px bg-gray-200" />
                 <span className="text-xs text-gray-400">{group.sources.length} sources</span>
               </div>
@@ -325,7 +325,7 @@ export default function ReportingPage() {
                 {group.sources.map((source, i) => (
                   <div
                     key={source.name}
-                    className="bg-white rounded-2xl border border-gray-100 p-5 hover:shadow-lg transition-all duration-300 group relative overflow-hidden animate-card-rise"
+                    className="bg-white rounded-2xl border border-gray-100 p-5 hover:shadow-lg transition-all duration-300 group relative overflow-hidden animate-card-rise dark:bg-gray-900 dark:border-gray-700"
                     style={{ animationDelay: `${i * 0.06}s` }}
                   >
                     <div
@@ -340,7 +340,7 @@ export default function ReportingPage() {
                         {source.abbr}
                       </div>
                       <div className="min-w-0">
-                        <div className="font-semibold text-gray-900 text-sm leading-tight truncate">{source.name}</div>
+                        <div className="font-semibold text-gray-900 text-sm leading-tight truncate dark:text-gray-50">{source.name}</div>
                         <span
                           className="text-xs font-medium px-1.5 py-0.5 rounded mt-0.5 inline-block"
                           style={{ backgroundColor: source.bg, color: source.color }}
@@ -356,7 +356,7 @@ export default function ReportingPage() {
                     <p className="text-gray-400 text-xs mb-3 leading-relaxed relative">{source.description}</p>
                     <div className="flex flex-wrap gap-1 relative">
                       {source.metrics.map((m) => (
-                        <span key={m} className="text-xs text-gray-500 bg-gray-50 border border-gray-100 px-1.5 py-0.5 rounded">
+                        <span key={m} className="text-xs text-gray-500 bg-gray-50 border border-gray-100 px-1.5 py-0.5 rounded dark:text-gray-400 dark:bg-gray-800/60 dark:border-gray-700">
                           {m}
                         </span>
                       ))}
@@ -380,7 +380,7 @@ export default function ReportingPage() {
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
               Your data pipeline, visualised
             </h2>
-            <p className="text-gray-500 max-w-xl mx-auto text-sm leading-relaxed">
+            <p className="text-gray-500 max-w-xl mx-auto text-sm leading-relaxed dark:text-gray-400">
               Data flows in from every channel, gets normalised and cross-referenced in the DataLatte hub,
               then comes out as clear, actionable reports.
             </p>
@@ -399,7 +399,7 @@ export default function ReportingPage() {
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
               What your dashboard looks like
             </h2>
-            <p className="text-gray-500 max-w-xl mx-auto text-sm leading-relaxed">
+            <p className="text-gray-500 max-w-xl mx-auto text-sm leading-relaxed dark:text-gray-400">
               Five views, one bookmark. Switch between channels, ads performance, SEO, social, and your Monday brief.
             </p>
           </div>
@@ -418,7 +418,7 @@ export default function ReportingPage() {
               DataLatte flags issues{" "}
               <span className="text-coffee-400">before you notice them</span>
             </h2>
-            <p className="text-gray-500 max-w-xl mx-auto text-sm leading-relaxed">
+            <p className="text-gray-500 max-w-xl mx-auto text-sm leading-relaxed dark:text-gray-400">
               Rules-based monitoring across all 21 channels. Budget spikes, CTR drops, ranking shifts, and
               review gaps — surfaced instantly, with context.
             </p>
@@ -442,14 +442,14 @@ export default function ReportingPage() {
                 >
                   <span className="text-lg shrink-0 mt-0.5">{alert.icon}</span>
                   <p className="text-gray-300 text-sm leading-relaxed">{alert.text}</p>
-                  <span className="text-gray-600 text-xs whitespace-nowrap shrink-0 mt-0.5">
+                  <span className="text-gray-600 text-xs whitespace-nowrap shrink-0 mt-0.5 dark:text-gray-300">
                     {["2m ago", "14m ago", "1h ago", "3h ago", "6h ago", "Yesterday"][i]}
                   </span>
                 </div>
               ))}
             </div>
             <div className="px-5 py-3 bg-gray-900/50 border-t border-gray-800 flex items-center justify-between">
-              <span className="text-gray-600 text-xs">Alerts delivered via email or Telegram</span>
+              <span className="text-gray-600 text-xs dark:text-gray-300">Alerts delivered via email or Telegram</span>
               <div className="flex items-center gap-1.5 text-xs text-coffee-400 font-medium">
                 <Zap size={12} /> 47 alerts this month
               </div>
@@ -471,7 +471,7 @@ export default function ReportingPage() {
           </p>
         </div>
 
-        <div className="max-w-3xl mx-auto bg-white rounded-2xl border border-gray-200 shadow-2xl overflow-hidden">
+        <div className="max-w-3xl mx-auto bg-white rounded-2xl border border-gray-200 shadow-2xl overflow-hidden dark:bg-gray-900 dark:border-gray-700">
           {/* Header */}
           <div className="bg-gradient-to-r from-coffee-900 to-coffee-700 px-6 py-5 flex items-center justify-between">
             <div>
@@ -488,8 +488,8 @@ export default function ReportingPage() {
             {MOCK_METRICS.map((m) => (
               <div key={m.label} className="p-5 group hover:bg-gray-50 transition-colors">
                 <div className="text-xs text-gray-400 mb-1">{m.label}</div>
-                <div className="text-2xl font-bold text-gray-900 tabular-nums">{m.value}</div>
-                <div className={`text-xs font-medium mt-1 flex items-center gap-0.5 ${m.positive ? "text-green-600" : "text-red-500"}`}>
+                <div className="text-2xl font-bold text-gray-900 tabular-nums dark:text-gray-50">{m.value}</div>
+                <div className={`text-xs font-medium mt-1 flex items-center gap-0.5 ${m.positive ? "text-green-600 dark:text-green-300" : "text-red-500"}`}>
                   {m.positive ? <TrendingUp size={11} /> : <TrendingDown size={11} />}
                   {Math.abs(m.change)}% {m.note}
                 </div>
@@ -517,13 +517,13 @@ export default function ReportingPage() {
 
           {/* Channel table */}
           <div className="px-6 pb-2">
-            <div className="text-xs font-semibold text-gray-400 uppercase tracking-widest py-4 border-t border-gray-100">
+            <div className="text-xs font-semibold text-gray-400 uppercase tracking-widest py-4 border-t border-gray-100 dark:border-gray-700">
               Channel Breakdown
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="text-left text-xs text-gray-400 border-b border-gray-100">
+                  <tr className="text-left text-xs text-gray-400 border-b border-gray-100 dark:border-gray-700">
                     <th className="pb-2 font-medium">Channel</th>
                     <th className="pb-2 font-medium text-right">Spend</th>
                     <th className="pb-2 font-medium text-right">Leads</th>
@@ -534,8 +534,8 @@ export default function ReportingPage() {
                 </thead>
                 <tbody className="divide-y divide-gray-50">
                   {MOCK_CHANNELS.map((ch) => (
-                    <tr key={ch.name} className="text-gray-700 hover:bg-gray-50 transition-colors">
-                      <td className="py-2.5 font-medium text-gray-900">{ch.name}</td>
+                    <tr key={ch.name} className="text-gray-700 hover:bg-gray-50 transition-colors dark:text-gray-200">
+                      <td className="py-2.5 font-medium text-gray-900 dark:text-gray-50">{ch.name}</td>
                       <td className="py-2.5 text-right tabular-nums">{ch.spend}</td>
                       <td className="py-2.5 text-right tabular-nums font-semibold">{ch.leads}</td>
                       <td className="py-2.5 text-right tabular-nums">{ch.cpl}</td>
@@ -550,8 +550,8 @@ export default function ReportingPage() {
           </div>
 
           {/* 3 priorities */}
-          <div className="mx-6 my-5 bg-coffee-50 rounded-xl p-5 border border-coffee-100">
-            <div className="text-xs font-bold text-coffee-700 uppercase tracking-widest mb-4">
+          <div className="mx-6 my-5 bg-coffee-50 rounded-xl p-5 border border-coffee-100 dark:bg-coffee-900/20 dark:border-coffee-800">
+            <div className="text-xs font-bold text-coffee-700 uppercase tracking-widest mb-4 dark:text-coffee-300">
               This week&apos;s 3 priorities
             </div>
             <ol className="space-y-3">
@@ -560,8 +560,8 @@ export default function ReportingPage() {
                 "Test a new Meta creative for the hair treatment offer — CTR on the current set has dropped 22% in 10 days.",
                 "Reply to the 2 unanswered Google reviews from this week — response rate directly affects your Maps ranking.",
               ].map((item, i) => (
-                <li key={i} className="flex items-start gap-3 text-sm text-gray-700">
-                  <span className="w-6 h-6 rounded-full bg-coffee-200 text-coffee-800 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
+                <li key={i} className="flex items-start gap-3 text-sm text-gray-700 dark:text-gray-200">
+                  <span className="w-6 h-6 rounded-full bg-coffee-200 text-coffee-800 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5 dark:text-coffee-200">
                     {i + 1}
                   </span>
                   {item}
@@ -577,7 +577,7 @@ export default function ReportingPage() {
       </SectionWrapper>
 
       {/* ── Setup Timeline ── */}
-      <SectionWrapper className="bg-gray-50">
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-800/60">
         <div className="text-center mb-12">
           <span className="section-label">Onboarding</span>
           <h2 className="section-title">Live in 5 days</h2>
@@ -593,15 +593,15 @@ export default function ReportingPage() {
           ].map((step, i) => (
             <div key={step.day} className="flex gap-5 mb-6 last:mb-0">
               <div className="flex flex-col items-center">
-                <div className="w-10 h-10 rounded-full bg-coffee-100 text-xl flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-full bg-coffee-100 text-xl flex items-center justify-center shrink-0 dark:bg-coffee-900/30">
                   {step.icon}
                 </div>
-                {i < 4 && <div className="w-px flex-1 bg-coffee-100 my-2" />}
+                {i < 4 && <div className="w-px flex-1 bg-coffee-100 my-2 dark:bg-coffee-900/30" />}
               </div>
               <div className="pb-6">
-                <div className="text-xs font-bold text-coffee-600 uppercase tracking-widest mb-1">{step.day}</div>
-                <div className="font-semibold text-gray-900 mb-1">{step.title}</div>
-                <p className="text-gray-500 text-sm leading-relaxed">{step.desc}</p>
+                <div className="text-xs font-bold text-coffee-600 uppercase tracking-widest mb-1 dark:text-coffee-400">{step.day}</div>
+                <div className="font-semibold text-gray-900 mb-1 dark:text-gray-50">{step.title}</div>
+                <p className="text-gray-500 text-sm leading-relaxed dark:text-gray-400">{step.desc}</p>
               </div>
             </div>
           ))}
@@ -618,26 +618,26 @@ export default function ReportingPage() {
           {REPORT_OUTPUTS.map((output, i) => (
             <div
               key={output.name}
-              className="bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-md hover:border-coffee-200 hover:-translate-y-1 transition-all duration-300 animate-card-rise"
+              className="bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-md hover:border-coffee-200 hover:-translate-y-1 transition-all duration-300 animate-card-rise dark:bg-gray-900 dark:border-gray-700"
               style={{ animationDelay: `${i * 0.09}s` }}
             >
               <div className="text-3xl mb-3 animate-float" style={{ animationDelay: `${i * 0.4}s` }}>
                 {output.emoji}
               </div>
               <div className="flex items-center justify-between mb-2">
-                <h3 className="font-bold text-gray-900 text-sm">{output.name}</h3>
-                <span className="text-xs bg-coffee-100 text-coffee-700 px-2 py-0.5 rounded-full font-medium whitespace-nowrap">
+                <h3 className="font-bold text-gray-900 text-sm dark:text-gray-50">{output.name}</h3>
+                <span className="text-xs bg-coffee-100 text-coffee-700 px-2 py-0.5 rounded-full font-medium whitespace-nowrap dark:bg-coffee-900/30 dark:text-coffee-300">
                   {output.timing}
                 </span>
               </div>
-              <p className="text-gray-500 text-sm leading-relaxed">{output.desc}</p>
+              <p className="text-gray-500 text-sm leading-relaxed dark:text-gray-400">{output.desc}</p>
             </div>
           ))}
         </div>
       </SectionWrapper>
 
       {/* ── FAQ ── */}
-      <SectionWrapper className="bg-gray-50">
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-800/60">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-10">
             <span className="section-label">FAQ</span>
@@ -646,8 +646,8 @@ export default function ReportingPage() {
           <div className="space-y-4">
             {FAQS.map((f) => (
               <div key={f.q} className="card p-6">
-                <h4 className="font-semibold text-gray-900 mb-2">{f.q}</h4>
-                <p className="text-gray-500 text-sm leading-relaxed">{f.a}</p>
+                <h4 className="font-semibold text-gray-900 mb-2 dark:text-gray-50">{f.q}</h4>
+                <p className="text-gray-500 text-sm leading-relaxed dark:text-gray-400">{f.a}</p>
               </div>
             ))}
           </div>

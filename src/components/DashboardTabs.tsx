@@ -91,7 +91,7 @@ function Sparkline({ type, color }: { type: string; color: string }) {
 }
 
 function PctBadge({ pct, good }: { pct: string; good: boolean | null }) {
-  const cls = good === true ? "text-green-400" : good === false ? "text-red-400" : "text-gray-500";
+  const cls = good === true ? "text-green-400" : good === false ? "text-red-400" : "text-gray-500 dark:text-gray-400";
   return <span className={`text-xs font-semibold ${cls}`}>{pct}</span>;
 }
 
@@ -108,8 +108,8 @@ function ChannelCard({ ch }: { ch: typeof LIVE_PAID[0] }) {
       <div className="text-white font-bold text-lg leading-tight mb-1">{ch.primary}</div>
       <div className="flex items-center justify-between">
         <div className="space-y-0.5">
-          <div className="text-gray-500 text-xs">{ch.s1}</div>
-          <div className="text-gray-500 text-xs">{ch.s2}</div>
+          <div className="text-gray-500 text-xs dark:text-gray-400">{ch.s1}</div>
+          <div className="text-gray-500 text-xs dark:text-gray-400">{ch.s2}</div>
         </div>
         <Sparkline type={ch.spark} color={ch.color} />
       </div>
@@ -128,11 +128,11 @@ function LiveOverview() {
           <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" /> Live · updated 2 min ago
         </span>
       </div>
-      <div className="mb-3 text-xs font-semibold text-gray-500 uppercase tracking-widest">Paid Channels</div>
+      <div className="mb-3 text-xs font-semibold text-gray-500 uppercase tracking-widest dark:text-gray-400">Paid Channels</div>
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
         {LIVE_PAID.map(ch => <ChannelCard key={ch.name} ch={ch} />)}
       </div>
-      <div className="mb-3 text-xs font-semibold text-gray-500 uppercase tracking-widest">Organic &amp; Owned</div>
+      <div className="mb-3 text-xs font-semibold text-gray-500 uppercase tracking-widest dark:text-gray-400">Organic &amp; Owned</div>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {LIVE_ORGANIC.map(ch => <ChannelCard key={ch.name} ch={ch} />)}
       </div>
@@ -146,7 +146,7 @@ function PaidAds() {
     <div>
       <div className="flex items-center justify-between mb-5">
         <span className="text-white font-semibold">ROAS by Channel</span>
-        <span className="text-gray-500 text-xs">This week vs last week</span>
+        <span className="text-gray-500 text-xs dark:text-gray-400">This week vs last week</span>
       </div>
       <div className="space-y-3 mb-8">
         {ROAS_BARS.map(b => (
@@ -166,7 +166,7 @@ function PaidAds() {
       <div className="text-white font-semibold mb-3">Top Performing Keywords (Google Ads)</div>
       <div className="overflow-x-auto">
         <table className="w-full text-xs">
-          <thead><tr className="text-gray-500 border-b border-gray-700">
+          <thead><tr className="text-gray-500 border-b border-gray-700 dark:text-gray-400">
             <th className="text-left pb-2 font-medium">Keyword</th>
             <th className="text-right pb-2 font-medium">Pos.</th>
             <th className="text-right pb-2 font-medium">Clicks</th>
@@ -211,7 +211,7 @@ function SeoOrganic() {
         <div className="space-y-2">
           {RANK_DIST.map(r => (
             <div key={r.range} className="flex items-center gap-3">
-              <div className="w-20 text-gray-500 text-xs shrink-0">{r.range}</div>
+              <div className="w-20 text-gray-500 text-xs shrink-0 dark:text-gray-400">{r.range}</div>
               <div className="flex-1 bg-gray-800 rounded-full h-5 overflow-hidden">
                 <div className="h-full rounded-full mdx-bar-grow flex items-center px-2" style={{ width: `${r.pct}%`, backgroundColor: r.color, "--bar-target": `${r.pct}%` } as React.CSSProperties}>
                   <span className="text-white text-xs font-bold">{r.count}</span>
@@ -226,7 +226,7 @@ function SeoOrganic() {
         {[{ l: "Profile Views", v: "4,821", d: "+6%" }, { l: "Phone Calls", v: "47", d: "+18%" }, { l: "Direction Requests", v: "23", d: "+4%" }].map(s => (
           <div key={s.l} className="bg-gray-800/60 rounded-xl border border-gray-700/60 p-3 text-center">
             <div className="text-white font-bold text-lg">{s.v}</div>
-            <div className="text-gray-500 text-xs">{s.l}</div>
+            <div className="text-gray-500 text-xs dark:text-gray-400">{s.l}</div>
             <div className="text-green-400 text-xs font-medium">{s.d}</div>
           </div>
         ))}
@@ -251,7 +251,7 @@ function SocialMedia() {
               <div className="flex items-center gap-4 mt-1">
                 <span className="text-gray-400 text-xs">{s.followers} followers</span>
                 <span className="text-gray-400 text-xs">{s.eng} eng.</span>
-                <span className="text-gray-500 text-xs">{s.posts} posts</span>
+                <span className="text-gray-500 text-xs dark:text-gray-400">{s.posts} posts</span>
               </div>
             </div>
             <Sparkline type={s.spark} color={s.color} />
@@ -264,7 +264,7 @@ function SocialMedia() {
           const pct = parseFloat(s.eng);
           return (
             <div key={s.platform} className="flex items-center gap-3">
-              <div className="w-24 text-gray-500 text-xs shrink-0">{s.platform.split(" ")[0]}</div>
+              <div className="w-24 text-gray-500 text-xs shrink-0 dark:text-gray-400">{s.platform.split(" ")[0]}</div>
               <div className="flex-1 bg-gray-800 rounded-full h-4 overflow-hidden">
                 <div className="h-full rounded-full mdx-bar-grow" style={{ width: `${(pct / 8) * 100}%`, backgroundColor: s.color, "--bar-target": `${(pct / 8) * 100}%` } as React.CSSProperties} />
               </div>
@@ -332,7 +332,7 @@ export default function DashboardTabs() {
           <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
           <div className="w-3 h-3 rounded-full bg-green-500/70" />
         </div>
-        <span className="text-gray-500 text-xs mx-auto">DataLatte Analytics · datalatte.pro/dashboard</span>
+        <span className="text-gray-500 text-xs mx-auto dark:text-gray-400">DataLatte Analytics · datalatte.pro/dashboard</span>
       </div>
 
       {/* Tabs */}
@@ -344,7 +344,7 @@ export default function DashboardTabs() {
             className={`px-4 py-2.5 text-xs font-medium whitespace-nowrap transition-all border-b-2 ${
               active === tab.id
                 ? "text-white border-coffee-500 bg-gray-900/80"
-                : "text-gray-500 border-transparent hover:text-gray-300 hover:border-gray-700"
+                : "text-gray-500 border-transparent hover:text-gray-300 hover:border-gray-700 dark:text-gray-400"
             }`}
           >
             {tab.label}

@@ -196,14 +196,14 @@ export default function CaseStudiesPage() {
 
               {/* Body */}
               <div className="p-6 flex flex-col flex-1">
-                <p className="text-gray-600 text-sm leading-relaxed mb-5 flex-1">{cs.summary}</p>
+                <p className="text-gray-600 text-sm leading-relaxed mb-5 flex-1 dark:text-gray-300">{cs.summary}</p>
 
                 {/* Metrics */}
                 <div className="grid grid-cols-3 gap-2 mb-5">
                   {cs.metrics.map((m) => (
-                    <div key={m.label} className="bg-coffee-50 rounded-xl p-3 text-center border border-coffee-100">
-                      <div className="font-extrabold text-coffee-800 text-lg leading-none">{m.value}</div>
-                      <div className="text-xs text-gray-500 mt-1 leading-tight">{m.label}</div>
+                    <div key={m.label} className="bg-coffee-50 rounded-xl p-3 text-center border border-coffee-100 dark:bg-coffee-900/20 dark:border-coffee-800">
+                      <div className="font-extrabold text-coffee-800 text-lg leading-none dark:text-coffee-200">{m.value}</div>
+                      <div className="text-xs text-gray-500 mt-1 leading-tight dark:text-gray-400">{m.label}</div>
                     </div>
                   ))}
                 </div>
@@ -211,11 +211,11 @@ export default function CaseStudiesPage() {
                 {/* Services */}
                 <div className="flex flex-wrap gap-1.5 mb-4">
                   {cs.services.map((s) => (
-                    <span key={s} className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">{s}</span>
+                    <span key={s} className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full dark:bg-gray-800 dark:text-gray-300">{s}</span>
                   ))}
                 </div>
 
-                <span className="inline-flex items-center gap-1 text-sm font-semibold text-coffee-700 group-hover:gap-2 transition-all">
+                <span className="inline-flex items-center gap-1 text-sm font-semibold text-coffee-700 group-hover:gap-2 transition-all dark:text-coffee-300">
                   Read case study <ArrowRight size={14} />
                 </span>
               </div>
@@ -225,14 +225,14 @@ export default function CaseStudiesPage() {
       </SectionWrapper>
 
       {/* Social proof band */}
-      <SectionWrapper className="bg-coffee-50">
+      <SectionWrapper className="bg-coffee-50 dark:bg-coffee-900/20">
         <div className="max-w-3xl mx-auto text-center">
           <span className="section-label">Why it works</span>
           <h2 className="section-title mb-6">
             Enterprise strategy applied to
             <span className="gradient-text"> local businesses</span>
           </h2>
-          <p className="text-gray-600 leading-relaxed text-lg mb-8">
+          <p className="text-gray-600 leading-relaxed text-lg mb-8 dark:text-gray-300">
             The same analytical frameworks used at OMD, Dentsu, BBDO, and GroupM for Fortune 500
             brands work just as well for a local coffee shop or yoga studio — they just need to be
             applied at the right scale, with the right budget discipline.
@@ -243,9 +243,9 @@ export default function CaseStudiesPage() {
               { label: "Niche-specific", desc: "Strategies built for your exact business type, not copy-pasted from a generic playbook." },
               { label: "Full attribution", desc: "You know exactly which channel drove which bookings, calls, or revenue." },
             ].map((item) => (
-              <div key={item.label} className="bg-white rounded-xl p-5 border border-coffee-100 text-left">
-                <div className="font-bold text-gray-900 mb-2">{item.label}</div>
-                <div className="text-sm text-gray-500 leading-relaxed">{item.desc}</div>
+              <div key={item.label} className="bg-white rounded-xl p-5 border border-coffee-100 text-left dark:bg-gray-900 dark:border-coffee-800">
+                <div className="font-bold text-gray-900 mb-2 dark:text-gray-50">{item.label}</div>
+                <div className="text-sm text-gray-500 leading-relaxed dark:text-gray-400">{item.desc}</div>
               </div>
             ))}
           </div>

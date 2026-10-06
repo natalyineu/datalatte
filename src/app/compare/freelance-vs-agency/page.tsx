@@ -152,21 +152,21 @@ export default function FreelanceVsAgencyPage() {
             <span className="section-label">Head-to-head</span>
             <h2 className="section-title">What you actually get</h2>
           </div>
-          <div className="overflow-x-auto rounded-2xl border border-gray-200 shadow-sm">
-            <table className="w-full bg-white text-sm">
+          <div className="overflow-x-auto rounded-2xl border border-gray-200 shadow-sm dark:border-gray-700">
+            <table className="w-full bg-white text-sm dark:bg-gray-900">
               <thead>
-                <tr className="border-b border-gray-100">
-                  <th className="text-left p-4 text-gray-500 font-medium w-1/4">Factor</th>
-                  <th className="p-4 text-center text-gray-700 font-bold w-3/8">Marketing agency</th>
-                  <th className="p-4 text-center text-coffee-700 font-bold w-3/8">Freelance consultant</th>
+                <tr className="border-b border-gray-100 dark:border-gray-700">
+                  <th className="text-left p-4 text-gray-500 font-medium w-1/4 dark:text-gray-400">Factor</th>
+                  <th className="p-4 text-center text-gray-700 font-bold w-3/8 dark:text-gray-200">Marketing agency</th>
+                  <th className="p-4 text-center text-coffee-700 font-bold w-3/8 dark:text-coffee-300">Freelance consultant</th>
                 </tr>
               </thead>
               <tbody>
                 {comparisonRows.map((row, i) => (
-                  <tr key={row.factor} className={i % 2 === 0 ? "bg-gray-50/40" : "bg-white"}>
-                    <td className="p-4 font-semibold text-gray-900 text-sm align-top">{row.factor}</td>
-                    <td className="p-4 text-gray-500 text-sm align-top">{row.agency}</td>
-                    <td className="p-4 text-gray-700 text-sm align-top">{row.freelancer}</td>
+                  <tr key={row.factor} className={i % 2 === 0 ? "bg-gray-50/40 dark:bg-gray-800/40" : "bg-white dark:bg-gray-900"}>
+                    <td className="p-4 font-semibold text-gray-900 text-sm align-top dark:text-gray-50">{row.factor}</td>
+                    <td className="p-4 text-gray-500 text-sm align-top dark:text-gray-400">{row.agency}</td>
+                    <td className="p-4 text-gray-700 text-sm align-top dark:text-gray-200">{row.freelancer}</td>
                   </tr>
                 ))}
               </tbody>
@@ -176,35 +176,35 @@ export default function FreelanceVsAgencyPage() {
       </SectionWrapper>
 
       {/* When each wins */}
-      <SectionWrapper className="bg-gray-50">
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-800/60">
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
           {/* Agency wins */}
           <div className="card p-7">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-xl">🏢</div>
-              <h3 className="text-xl font-bold text-gray-900">Choose an agency when…</h3>
+              <div className="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-xl dark:bg-gray-800">🏢</div>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-gray-50">Choose an agency when…</h3>
             </div>
             <div className="space-y-3">
               {agencyWins.map((item) => (
                 <div key={item} className="flex items-start gap-2.5">
                   <CheckCircle2 size={16} className="text-gray-400 shrink-0 mt-0.5" />
-                  <span className="text-gray-600 text-sm">{item}</span>
+                  <span className="text-gray-600 text-sm dark:text-gray-300">{item}</span>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Freelancer wins */}
-          <div className="card p-7 border-coffee-200 bg-coffee-50/40">
+          <div className="card p-7 border-coffee-200 bg-coffee-50/40 dark:border-coffee-800 dark:bg-coffee-900/40">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-xl bg-coffee-100 flex items-center justify-center text-xl">👩‍💻</div>
-              <h3 className="text-xl font-bold text-gray-900">Choose a freelancer when…</h3>
+              <div className="w-10 h-10 rounded-xl bg-coffee-100 flex items-center justify-center text-xl dark:bg-coffee-900/30">👩‍💻</div>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-gray-50">Choose a freelancer when…</h3>
             </div>
             <div className="space-y-3">
               {freelancerWins.map((item) => (
                 <div key={item} className="flex items-start gap-2.5">
-                  <CheckCircle2 size={16} className="text-coffee-600 shrink-0 mt-0.5" />
-                  <span className="text-gray-700 text-sm">{item}</span>
+                  <CheckCircle2 size={16} className="text-coffee-600 shrink-0 mt-0.5 dark:text-coffee-400" />
+                  <span className="text-gray-700 text-sm dark:text-gray-200">{item}</span>
                 </div>
               ))}
             </div>
@@ -220,7 +220,7 @@ export default function FreelanceVsAgencyPage() {
             Why agencies assign juniors to
             <span className="gradient-text"> your account</span>
           </h2>
-          <div className="space-y-5 text-gray-600 leading-relaxed text-lg">
+          <div className="space-y-5 text-gray-600 leading-relaxed text-lg dark:text-gray-300">
             <p>
               Agencies are structured to make money on margin. A senior strategist billing at £200/hr
               is only profitable if they&apos;re sold to clients at £350/hr. To scale that, agencies build
@@ -239,14 +239,14 @@ export default function FreelanceVsAgencyPage() {
               every decision, every optimisation, every report.
             </p>
           </div>
-          <Link href="/about" className="inline-flex items-center gap-2 text-coffee-700 font-semibold mt-6 hover:underline">
+          <Link href="/about" className="inline-flex items-center gap-2 text-coffee-700 font-semibold mt-6 hover:underline dark:text-coffee-300">
             About Nataliia&apos;s agency background <ArrowRight size={16} />
           </Link>
         </div>
       </SectionWrapper>
 
       {/* FAQ */}
-      <SectionWrapper className="bg-gray-50">
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-800/60">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-10">
             <span className="section-label">FAQ</span>
@@ -255,8 +255,8 @@ export default function FreelanceVsAgencyPage() {
           <div className="space-y-4">
             {faqs.map((item) => (
               <div key={item.q} className="card p-6">
-                <h3 className="font-semibold text-gray-900 mb-2">{item.q}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{item.a}</p>
+                <h3 className="font-semibold text-gray-900 mb-2 dark:text-gray-50">{item.q}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed dark:text-gray-400">{item.a}</p>
               </div>
             ))}
           </div>

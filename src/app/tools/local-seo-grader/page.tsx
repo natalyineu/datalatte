@@ -111,7 +111,7 @@ export default function LocalSeoGraderPage() {
       </SectionWrapper>
 
       {/* What we check */}
-      <SectionWrapper className="bg-gray-50">
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-800/60">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-8">
             <span className="section-label">What we grade</span>
@@ -119,9 +119,9 @@ export default function LocalSeoGraderPage() {
           </div>
           <div className="grid sm:grid-cols-2 gap-3">
             {factors.map((f) => (
-              <div key={f} className="flex items-center gap-2.5 bg-white rounded-xl px-4 py-3 border border-gray-100 shadow-sm">
+              <div key={f} className="flex items-center gap-2.5 bg-white rounded-xl px-4 py-3 border border-gray-100 shadow-sm dark:bg-gray-900 dark:border-gray-700">
                 <CheckCircle2 size={15} className="text-coffee-500 shrink-0" />
-                <span className="text-sm text-gray-700">{f}</span>
+                <span className="text-sm text-gray-700 dark:text-gray-200">{f}</span>
               </div>
             ))}
           </div>
@@ -136,27 +136,27 @@ export default function LocalSeoGraderPage() {
           <div className="grid sm:grid-cols-2 gap-6 text-left mt-8">
             <div className="card p-6">
               <div className="text-2xl mb-3">⚡</div>
-              <h3 className="font-bold text-gray-900 mb-2">This SEO grader</h3>
-              <p className="text-gray-500 text-sm mb-4">Instant automated score across common local SEO factors. Great for a quick health check and prioritising where to focus.</p>
-              <ul className="space-y-1.5 text-sm text-gray-600">
+              <h3 className="font-bold text-gray-900 mb-2 dark:text-gray-50">This SEO grader</h3>
+              <p className="text-gray-500 text-sm mb-4 dark:text-gray-400">Instant automated score across common local SEO factors. Great for a quick health check and prioritising where to focus.</p>
+              <ul className="space-y-1.5 text-sm text-gray-600 dark:text-gray-300">
                 <li>✓ Instant results</li>
                 <li>✓ No email required</li>
                 <li>✓ 10 key factors scored</li>
                 <li>✓ Actionable fix for each issue</li>
               </ul>
             </div>
-            <div className="card p-6 border-coffee-200 bg-coffee-50/30">
+            <div className="card p-6 border-coffee-200 bg-coffee-50/30 dark:border-coffee-800 dark:bg-coffee-900/30">
               <div className="text-2xl mb-3">🔍</div>
-              <h3 className="font-bold text-gray-900 mb-2">Free full audit</h3>
-              <p className="text-gray-500 text-sm mb-4">Manually reviewed by Nataliia — your specific GBP, competitor analysis, keyword gaps, and a prioritised action plan.</p>
-              <ul className="space-y-1.5 text-sm text-gray-600">
+              <h3 className="font-bold text-gray-900 mb-2 dark:text-gray-50">Free full audit</h3>
+              <p className="text-gray-500 text-sm mb-4 dark:text-gray-400">Manually reviewed by Nataliia — your specific GBP, competitor analysis, keyword gaps, and a prioritised action plan.</p>
+              <ul className="space-y-1.5 text-sm text-gray-600 dark:text-gray-300">
                 <li>✓ Personal review of your actual GBP</li>
                 <li>✓ Top 3 competitor analysis</li>
                 <li>✓ Keyword gap report</li>
                 <li>✓ Ad account health check (if applicable)</li>
                 <li>✓ Delivered within 48 hours</li>
               </ul>
-              <Link href="/free-audit" className="inline-flex items-center gap-1.5 text-sm font-semibold text-coffee-700 mt-4 hover:underline">
+              <Link href="/free-audit" className="inline-flex items-center gap-1.5 text-sm font-semibold text-coffee-700 mt-4 hover:underline dark:text-coffee-300">
                 Request the full audit <ArrowRight size={14} />
               </Link>
             </div>
@@ -165,7 +165,7 @@ export default function LocalSeoGraderPage() {
       </SectionWrapper>
 
       {/* FAQ */}
-      <SectionWrapper className="bg-gray-50">
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-800/60">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-10">
             <span className="section-label">FAQ</span>
@@ -174,8 +174,8 @@ export default function LocalSeoGraderPage() {
           <div className="space-y-4">
             {faqs.map((item) => (
               <div key={item.q} className="card p-6">
-                <h3 className="font-semibold text-gray-900 mb-2">{item.q}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{item.a}</p>
+                <h3 className="font-semibold text-gray-900 mb-2 dark:text-gray-50">{item.q}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed dark:text-gray-400">{item.a}</p>
               </div>
             ))}
           </div>

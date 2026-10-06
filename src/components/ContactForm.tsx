@@ -106,7 +106,7 @@ function ExploreForm() {
 
       <div>
         <label htmlFor="ex-email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
-          Your email <span className="text-coffee-600">*</span>
+          Your email <span className="text-coffee-600 dark:text-coffee-400">*</span>
         </label>
         <input
           id="ex-email" name="email" type="email"
@@ -172,7 +172,7 @@ function ReadyForm() {
       <div className="grid sm:grid-cols-2 gap-4">
         <div>
           <label htmlFor="rd-email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
-            Email <span className="text-coffee-600">*</span>
+            Email <span className="text-coffee-600 dark:text-coffee-400">*</span>
           </label>
           <input
             id="rd-email" name="email" type="email"
@@ -184,7 +184,7 @@ function ReadyForm() {
         </div>
         <div>
           <label htmlFor="rd-name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
-            Your name <span className="text-coffee-600">*</span>
+            Your name <span className="text-coffee-600 dark:text-coffee-400">*</span>
           </label>
           <input
             id="rd-name" name="name" type="text"

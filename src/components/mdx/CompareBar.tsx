@@ -28,20 +28,20 @@ export default function CompareBar({
     unit === "%" ? `${v}%` : unit === "$" ? `$${v}` : String(v);
 
   return (
-    <div className="my-8 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+    <div className="my-8 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden dark:bg-gray-900 dark:border-gray-700">
       {title && (
-        <div className="px-5 pt-4 pb-3 border-b border-gray-100">
-          <p className="font-semibold text-gray-800 text-sm">{title}</p>
+        <div className="px-5 pt-4 pb-3 border-b border-gray-100 dark:border-gray-700">
+          <p className="font-semibold text-gray-800 text-sm dark:text-gray-100">{title}</p>
         </div>
       )}
 
       {/* legend */}
       <div className="px-5 pt-3 flex gap-5">
-        <span className="flex items-center gap-1.5 text-xs font-semibold text-gray-700">
+        <span className="flex items-center gap-1.5 text-xs font-semibold text-gray-700 dark:text-gray-200">
           <span className="w-3 h-3 rounded-sm inline-block" style={{ background: LEFT_COLOR }} />
           {leftLabel}
         </span>
-        <span className="flex items-center gap-1.5 text-xs font-semibold text-gray-700">
+        <span className="flex items-center gap-1.5 text-xs font-semibold text-gray-700 dark:text-gray-200">
           <span className="w-3 h-3 rounded-sm inline-block" style={{ background: RIGHT_COLOR }} />
           {rightLabel}
         </span>
@@ -59,12 +59,12 @@ export default function CompareBar({
           return (
             <div key={i}>
               <div className="flex items-center justify-between mb-1.5">
-                <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">{metric}</span>
+                <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide dark:text-gray-400">{metric}</span>
               </div>
               {/* left bar */}
               <div className="flex items-center gap-2 mb-1">
-                <span className="text-xs text-gray-500 w-24 truncate text-right">{leftLabel}</span>
-                <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+                <span className="text-xs text-gray-500 w-24 truncate text-right dark:text-gray-400">{leftLabel}</span>
+                <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden dark:bg-gray-800">
                   <div
                     className="h-full rounded-full"
                     style={{ width: `${lPct}%`, background: LEFT_COLOR }}
@@ -79,8 +79,8 @@ export default function CompareBar({
               </div>
               {/* right bar */}
               <div className="flex items-center gap-2">
-                <span className="text-xs text-gray-500 w-24 truncate text-right">{rightLabel}</span>
-                <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+                <span className="text-xs text-gray-500 w-24 truncate text-right dark:text-gray-400">{rightLabel}</span>
+                <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden dark:bg-gray-800">
                   <div
                     className="h-full rounded-full"
                     style={{ width: `${rPct}%`, background: RIGHT_COLOR }}

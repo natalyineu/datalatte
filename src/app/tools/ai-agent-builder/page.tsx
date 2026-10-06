@@ -42,7 +42,7 @@ const AGENT_TYPES = [
     description: "Answers FAQs, handles booking enquiries, and follows up with leads automatically.",
     tags: ["24/7 support", "lead follow-up", "FAQ handling"],
     color: "from-coffee-100 to-coffee-50",
-    border: "border-coffee-200",
+    border: "border-coffee-200 dark:border-coffee-800",
   },
   {
     icon: "📢",
@@ -50,7 +50,7 @@ const AGENT_TYPES = [
     description: "Creates and schedules posts across Instagram, Facebook, and Google Business Profile.",
     tags: ["content creation", "scheduling", "multi-platform"],
     color: "from-amber-50 to-orange-50",
-    border: "border-amber-200",
+    border: "border-amber-200 dark:border-amber-800",
   },
   {
     icon: "📧",
@@ -58,7 +58,7 @@ const AGENT_TYPES = [
     description: "Writes campaigns, segments your audience, and sends follow-up sequences.",
     tags: ["email campaigns", "segmentation", "automation"],
     color: "from-coffee-100 to-coffee-50",
-    border: "border-coffee-200",
+    border: "border-coffee-200 dark:border-coffee-800",
   },
   {
     icon: "📊",
@@ -66,7 +66,7 @@ const AGENT_TYPES = [
     description: "Pulls data from Google Ads, Meta, and Analytics — gives you a plain-English weekly summary.",
     tags: ["weekly reports", "ad performance", "insights"],
     color: "from-amber-50 to-orange-50",
-    border: "border-amber-200",
+    border: "border-amber-200 dark:border-amber-800",
   },
   {
     icon: "🔍",
@@ -74,7 +74,7 @@ const AGENT_TYPES = [
     description: "Researches keywords, writes blog posts, and updates your Google Business Profile.",
     tags: ["blog writing", "keyword research", "GBP updates"],
     color: "from-coffee-100 to-coffee-50",
-    border: "border-coffee-200",
+    border: "border-coffee-200 dark:border-coffee-800",
   },
   {
     icon: "⭐",
@@ -82,7 +82,7 @@ const AGENT_TYPES = [
     description: "Monitors new reviews, drafts responses, and alerts you to negative feedback instantly.",
     tags: ["review responses", "reputation", "alerts"],
     color: "from-amber-50 to-orange-50",
-    border: "border-amber-200",
+    border: "border-amber-200 dark:border-amber-800",
   },
 ];
 
@@ -95,7 +95,7 @@ const STEPS = [
 
 export default function AIAgentBuilderPage() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white dark:bg-gray-900">
       {/* Hero */}
       <section className="relative bg-gradient-to-br from-coffee-800 via-coffee-700 to-coffee-600 text-white py-20 px-4 overflow-hidden">
         <div className="absolute inset-0 opacity-10 pointer-events-none">
@@ -117,7 +117,7 @@ export default function AIAgentBuilderPage() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/free-audit"
-              className="inline-block bg-white text-coffee-700 font-bold px-8 py-3.5 rounded-xl hover:bg-coffee-50 transition-colors"
+              className="inline-block bg-white text-coffee-700 font-bold px-8 py-3.5 rounded-xl hover:bg-coffee-50 transition-colors dark:bg-gray-900 dark:text-coffee-300"
             >
               Get early access →
             </Link>
@@ -135,8 +135,8 @@ export default function AIAgentBuilderPage() {
       <section className="max-w-5xl mx-auto px-4 py-16">
         <div className="text-center mb-10">
           <p className="text-sm font-semibold text-coffee-500 uppercase tracking-widest mb-2">Choose your agent</p>
-          <h2 className="text-3xl font-bold text-gray-900">What should your agent do?</h2>
-          <p className="text-gray-500 mt-2 max-w-xl mx-auto">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-50">What should your agent do?</h2>
+          <p className="text-gray-500 mt-2 max-w-xl mx-auto dark:text-gray-400">
             Each agent template is pre-built for local businesses. Pick one (or combine several) and configure it to match your workflow.
           </p>
         </div>
@@ -148,16 +148,16 @@ export default function AIAgentBuilderPage() {
               className={`relative rounded-2xl border ${agent.border} bg-gradient-to-br ${agent.color} p-6 group cursor-default`}
             >
               <div className="text-4xl mb-3">{agent.icon}</div>
-              <h3 className="text-lg font-bold text-gray-900 mb-1">{agent.name}</h3>
-              <p className="text-gray-600 text-sm mb-4 leading-relaxed">{agent.description}</p>
+              <h3 className="text-lg font-bold text-gray-900 mb-1 dark:text-gray-50">{agent.name}</h3>
+              <p className="text-gray-600 text-sm mb-4 leading-relaxed dark:text-gray-300">{agent.description}</p>
               <div className="flex flex-wrap gap-1.5">
                 {agent.tags.map((tag) => (
-                  <span key={tag} className="text-xs bg-white/70 text-coffee-700 font-medium px-2.5 py-1 rounded-full border border-coffee-100">
+                  <span key={tag} className="text-xs bg-white/70 text-coffee-700 font-medium px-2.5 py-1 rounded-full border border-coffee-100 dark:text-coffee-300 dark:border-coffee-800 dark:bg-gray-900/70">
                     {tag}
                   </span>
                 ))}
               </div>
-              <div className="absolute top-4 right-4 text-xs font-semibold text-coffee-400 bg-white/60 px-2 py-0.5 rounded-full">
+              <div className="absolute top-4 right-4 text-xs font-semibold text-coffee-400 bg-white/60 px-2 py-0.5 rounded-full dark:bg-gray-900/60">
                 Soon
               </div>
             </div>
@@ -166,19 +166,19 @@ export default function AIAgentBuilderPage() {
       </section>
 
       {/* How it works */}
-      <section className="bg-coffee-50 py-16 px-4">
+      <section className="bg-coffee-50 py-16 px-4 dark:bg-coffee-900/20">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-10">
             <p className="text-sm font-semibold text-coffee-500 uppercase tracking-widest mb-2">How it works</p>
-            <h2 className="text-3xl font-bold text-gray-900">From zero to running agent in 10 minutes</h2>
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-50">From zero to running agent in 10 minutes</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {STEPS.map((step) => (
-              <div key={step.num} className="bg-white rounded-2xl p-6 border border-coffee-100 flex gap-4 items-start">
+              <div key={step.num} className="bg-white rounded-2xl p-6 border border-coffee-100 flex gap-4 items-start dark:bg-gray-900 dark:border-coffee-800">
                 <span className="text-3xl font-black text-coffee-200 leading-none">{step.num}</span>
                 <div>
-                  <h3 className="font-bold text-gray-900 mb-1">{step.label}</h3>
-                  <p className="text-gray-500 text-sm leading-relaxed">{step.desc}</p>
+                  <h3 className="font-bold text-gray-900 mb-1 dark:text-gray-50">{step.label}</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed dark:text-gray-400">{step.desc}</p>
                 </div>
               </div>
             ))}
@@ -189,8 +189,8 @@ export default function AIAgentBuilderPage() {
       {/* Waitlist CTA */}
       <section className="max-w-2xl mx-auto px-4 py-16 text-center">
         <div className="text-5xl mb-4">☕🤖</div>
-        <h2 className="text-3xl font-bold text-gray-900 mb-3">Be first in line</h2>
-        <p className="text-gray-500 mb-8">
+        <h2 className="text-3xl font-bold text-gray-900 mb-3 dark:text-gray-50">Be first in line</h2>
+        <p className="text-gray-500 mb-8 dark:text-gray-400">
           The AI Agent Builder is in development. Join the waitlist and get free early access plus a 1-on-1 setup session with Nataliia.
         </p>
         <Link
@@ -201,7 +201,7 @@ export default function AIAgentBuilderPage() {
         </Link>
         <p className="text-gray-400 text-sm mt-4">
           Already want an AI agent?{" "}
-          <Link href="/services/ai-agents" className="text-coffee-600 hover:underline font-medium">
+          <Link href="/services/ai-agents" className="text-coffee-600 hover:underline font-medium dark:text-coffee-400">
             We build it for you →
           </Link>
         </p>

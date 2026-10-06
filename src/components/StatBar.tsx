@@ -8,8 +8,8 @@ export default function StatBar({ stats }: { stats: Stat[] }) {
     <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
       {stats.map((stat) => (
         <div key={stat.label} className="text-center">
-          <div className="text-3xl md:text-4xl font-bold text-coffee-700 mb-1">{stat.value}</div>
-          <div className="text-sm text-gray-500">{stat.label}</div>
+          <div className="text-3xl md:text-4xl font-bold text-coffee-700 mb-1 dark:text-coffee-300">{stat.value}</div>
+          <div className="text-sm text-gray-500 dark:text-gray-400">{stat.label}</div>
         </div>
       ))}
     </div>

@@ -10,8 +10,8 @@ const COLORS = [
   "bg-coffee-800 text-white",
   "bg-coffee-700 text-white",
   "bg-coffee-500 text-white",
-  "bg-coffee-300 text-coffee-900",
-  "bg-coffee-100 text-coffee-800",
+  "bg-coffee-300 text-coffee-900 dark:text-coffee-100",
+  "bg-coffee-100 text-coffee-800 dark:bg-coffee-900/30 dark:text-coffee-200",
 ];
 
 export default function Funnel({ title, caption, stages, stepLabels, values = "" }: FunnelProps) {
@@ -25,7 +25,7 @@ export default function Funnel({ title, caption, stages, stepLabels, values = ""
   return (
     <div className="my-8">
       {title && (
-        <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-4 text-center">{title}</p>
+        <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-4 text-center dark:text-gray-400">{title}</p>
       )}
       <div className="flex flex-col items-center gap-0">
         {stageArr.map((stage, i) => {

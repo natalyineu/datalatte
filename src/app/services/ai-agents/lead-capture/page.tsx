@@ -19,22 +19,22 @@ export const metadata: Metadata = {
 
 const useCases = [
   {
-    icon: <Users size={20} className="text-coffee-600" />,
+    icon: <Users size={20} className="text-coffee-600 dark:text-coffee-400" />,
     title: "Website visitors who don't book",
     body: "A visitor lands on your pricing page but doesn't convert. The lead capture agent engages them: 'Looking for something specific? I can help find the right option for you.' Collects their name, need, and contact — then routes to your CRM or directly books a consultation.",
   },
   {
-    icon: <Zap size={20} className="text-coffee-600" />,
+    icon: <Zap size={20} className="text-coffee-600 dark:text-coffee-400" />,
     title: "Paid ad click traffic",
     body: "Someone clicks your Google Ad or Meta Ad, lands on your page, but leaves without converting. The agent catches them before they bounce: 'Hi! You came from our ad — can I answer any questions about [service]?' Reduces wasted ad spend by converting more clicks into contacts.",
   },
   {
-    icon: <BarChart2 size={20} className="text-coffee-600" />,
+    icon: <BarChart2 size={20} className="text-coffee-600 dark:text-coffee-400" />,
     title: "Instagram and Facebook DM enquiries",
     body: "Someone DMs 'how much does X cost?' The lead capture agent responds immediately, qualifies their budget and timeline, captures their contact, and either books them or routes them to your sales process — even if the DM arrived at 11pm.",
   },
   {
-    icon: <CheckCircle2 size={20} className="text-coffee-600" />,
+    icon: <CheckCircle2 size={20} className="text-coffee-600 dark:text-coffee-400" />,
     title: "Free resource and checklist leads",
     body: "Someone downloads your free marketing checklist or audit template. The lead capture agent follows up immediately: a personalised message referencing the resource they downloaded, a qualifying question, and an offer of a free consultation. Turns cold downloads into warm conversations.",
   },
@@ -128,7 +128,7 @@ export default function AILeadCapturePage() {
       </section>
 
       {/* Stats */}
-      <div className="bg-coffee-50 border-b border-coffee-100 py-8">
+      <div className="bg-coffee-50 border-b border-coffee-100 py-8 dark:bg-coffee-900/20 dark:border-coffee-800">
         <SectionWrapper>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
@@ -138,8 +138,8 @@ export default function AILeadCapturePage() {
               { value: "24/7", label: "Lead qualification running even when you're unavailable" },
             ].map((s) => (
               <div key={s.label}>
-                <p className="text-3xl font-bold text-coffee-700">{s.value}</p>
-                <p className="text-sm text-gray-600 mt-1">{s.label}</p>
+                <p className="text-3xl font-bold text-coffee-700 dark:text-coffee-300">{s.value}</p>
+                <p className="text-sm text-gray-600 mt-1 dark:text-gray-300">{s.label}</p>
               </div>
             ))}
           </div>
@@ -149,43 +149,43 @@ export default function AILeadCapturePage() {
       {/* Use cases */}
       <SectionWrapper className="py-20">
         <h2 className="section-title mb-3">Every lead source, captured</h2>
-        <p className="text-gray-600 max-w-2xl mb-14">Leads arrive through multiple channels. The lead capture agent works across all of them — qualifying and routing each one.</p>
+        <p className="text-gray-600 max-w-2xl mb-14 dark:text-gray-300">Leads arrive through multiple channels. The lead capture agent works across all of them — qualifying and routing each one.</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {useCases.map((uc) => (
-            <div key={uc.title} className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+            <div key={uc.title} className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm dark:bg-gray-900 dark:border-gray-700">
               <div className="flex items-center gap-3 mb-3">
-                <div className="bg-coffee-50 p-2 rounded-lg">{uc.icon}</div>
-                <h3 className="font-semibold text-gray-900">{uc.title}</h3>
+                <div className="bg-coffee-50 p-2 rounded-lg dark:bg-coffee-900/20">{uc.icon}</div>
+                <h3 className="font-semibold text-gray-900 dark:text-gray-50">{uc.title}</h3>
               </div>
-              <p className="text-sm text-gray-600">{uc.body}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-300">{uc.body}</p>
             </div>
           ))}
         </div>
       </SectionWrapper>
 
       {/* Qualification framework */}
-      <section className="bg-gray-50 py-20">
+      <section className="bg-gray-50 py-20 dark:bg-gray-800/60">
         <SectionWrapper>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             <div>
               <h2 className="section-title mb-3">What the agent qualifies</h2>
-              <p className="text-gray-600 mb-8">Every lead is scored against your qualification criteria — so you only spend time on prospects who are actually ready and right for your business.</p>
+              <p className="text-gray-600 mb-8 dark:text-gray-300">Every lead is scored against your qualification criteria — so you only spend time on prospects who are actually ready and right for your business.</p>
               <div className="space-y-4">
                 {qualificationFlow.map((item) => (
                   <div key={item.q} className="flex gap-4">
                     <CheckCircle2 size={18} className="text-coffee-500 mt-0.5 shrink-0" />
                     <div>
-                      <p className="text-sm font-semibold text-gray-900">{item.q}</p>
-                      <p className="text-sm text-gray-500">{item.a}</p>
+                      <p className="text-sm font-semibold text-gray-900 dark:text-gray-50">{item.q}</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">{item.a}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
             <div>
-              <p className="text-sm font-semibold text-gray-700 mb-3">Live conversation example — local marketing enquiry</p>
+              <p className="text-sm font-semibold text-gray-700 mb-3 dark:text-gray-200">Live conversation example — local marketing enquiry</p>
               <div className="bg-gray-900 rounded-2xl p-6 shadow-xl">
-                <p className="text-xs text-gray-500 mb-4 flex items-center gap-2">
+                <p className="text-xs text-gray-500 mb-4 flex items-center gap-2 dark:text-gray-400">
                   <span className="w-2 h-2 bg-green-400 rounded-full inline-block" />
                   Website chat — visitor on pricing page
                 </p>
@@ -210,23 +210,23 @@ export default function AILeadCapturePage() {
       {/* CRM integrations */}
       <SectionWrapper className="py-20">
         <h2 className="section-title mb-3">Qualified leads flow into your CRM automatically</h2>
-        <p className="text-gray-600 max-w-2xl mb-10">Every qualified lead is pushed as a new contact with all data pre-filled. Hot leads trigger real-time Slack or SMS notifications so you can follow up personally within minutes.</p>
+        <p className="text-gray-600 max-w-2xl mb-10 dark:text-gray-300">Every qualified lead is pushed as a new contact with all data pre-filled. Hot leads trigger real-time Slack or SMS notifications so you can follow up personally within minutes.</p>
         <div className="flex flex-wrap gap-2">
           {crms.map((c) => (
-            <span key={c} className="text-sm bg-gray-100 text-gray-700 px-4 py-2 rounded-full">{c}</span>
+            <span key={c} className="text-sm bg-gray-100 text-gray-700 px-4 py-2 rounded-full dark:bg-gray-800 dark:text-gray-200">{c}</span>
           ))}
         </div>
       </SectionWrapper>
 
       {/* FAQ */}
-      <section className="bg-gray-50 py-20">
+      <section className="bg-gray-50 py-20 dark:bg-gray-800/60">
         <SectionWrapper>
           <h2 className="section-title mb-10">Lead capture agent questions</h2>
           <div className="max-w-3xl space-y-6">
             {faqs.map((faq) => (
-              <div key={faq.q} className="border-b border-gray-200 pb-6">
-                <h3 className="text-base font-semibold text-gray-900 mb-2">{faq.q}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{faq.a}</p>
+              <div key={faq.q} className="border-b border-gray-200 pb-6 dark:border-gray-700">
+                <h3 className="text-base font-semibold text-gray-900 mb-2 dark:text-gray-50">{faq.q}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed dark:text-gray-300">{faq.a}</p>
               </div>
             ))}
           </div>

@@ -71,15 +71,15 @@ export default function MarketingBudgetCalculatorPage() {
       <section className="hero-shimmer relative pt-16 pb-10 px-4">
         <HeroFloaters />
         <div className="max-w-2xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 bg-coffee-100 text-coffee-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-4">
+          <div className="inline-flex items-center gap-2 bg-coffee-100 text-coffee-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-4 dark:bg-coffee-900/30 dark:text-coffee-300">
             ☕ Free Tool — No sign-up required
           </div>
-          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
+          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 dark:text-gray-50">
             Marketing Budget Calculator
             <br />
-            <span className="text-coffee-600">for Local Businesses</span>
+            <span className="text-coffee-600 dark:text-coffee-400">for Local Businesses</span>
           </h1>
-          <p className="text-gray-500 text-base max-w-lg mx-auto">
+          <p className="text-gray-500 text-base max-w-lg mx-auto dark:text-gray-400">
             Answer 4 quick questions and get a personalised monthly marketing budget
             with a channel-by-channel breakdown — in under 60 seconds.
           </p>
@@ -88,24 +88,24 @@ export default function MarketingBudgetCalculatorPage() {
 
       {/* Calculator */}
       <section className="max-w-xl mx-auto px-4 pb-16">
-        <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-6 sm:p-8 -mt-4">
+        <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-6 sm:p-8 -mt-4 dark:bg-gray-900 dark:border-gray-700">
           <BudgetCalculator />
         </div>
       </section>
 
       {/* How it works */}
       <section className="max-w-3xl mx-auto px-4 pb-16">
-        <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">How the calculator works</h2>
+        <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center dark:text-gray-50">How the calculator works</h2>
         <div className="grid sm:grid-cols-3 gap-6">
           {[
             { n: "1", title: "Industry benchmarks", body: "Budget percentages are based on industry data across thousands of local businesses. New businesses typically invest more (15–20%) to build awareness, while established ones maintain at 5–10%." },
             { n: "2", title: "Goal-based allocation", body: "Your primary goal determines how to split spend. Customer acquisition favours paid ads. Local visibility favours SEO. Retention favours email. We weight the channels accordingly." },
             { n: "3", title: "Minimum floors", body: "Paid ad channels need a minimum budget to generate enough data for optimisation. We set a $500/month floor so your budget can actually produce meaningful results — not just impressions." },
           ].map(card => (
-            <div key={card.n} className="bg-gray-50 rounded-2xl p-5">
+            <div key={card.n} className="bg-gray-50 rounded-2xl p-5 dark:bg-gray-800/60">
               <div className="w-8 h-8 bg-coffee-700 text-white rounded-full flex items-center justify-center font-bold text-sm mb-3">{card.n}</div>
-              <h3 className="font-semibold text-gray-900 mb-2">{card.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">{card.body}</p>
+              <h3 className="font-semibold text-gray-900 mb-2 dark:text-gray-50">{card.title}</h3>
+              <p className="text-gray-500 text-sm leading-relaxed dark:text-gray-400">{card.body}</p>
             </div>
           ))}
         </div>
@@ -113,12 +113,12 @@ export default function MarketingBudgetCalculatorPage() {
 
       {/* FAQ */}
       <section className="max-w-2xl mx-auto px-4 pb-16">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Marketing budget FAQs</h2>
+        <h2 className="text-2xl font-bold text-gray-900 mb-6 dark:text-gray-50">Marketing budget FAQs</h2>
         <div className="space-y-4">
           {FAQ.map(({ q, a }) => (
-            <div key={q} className="border border-gray-100 rounded-2xl p-5">
-              <h3 className="font-semibold text-gray-900 mb-2 text-sm">{q}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">{a}</p>
+            <div key={q} className="border border-gray-100 rounded-2xl p-5 dark:border-gray-700">
+              <h3 className="font-semibold text-gray-900 mb-2 text-sm dark:text-gray-50">{q}</h3>
+              <p className="text-gray-500 text-sm leading-relaxed dark:text-gray-400">{a}</p>
             </div>
           ))}
         </div>
@@ -135,7 +135,7 @@ export default function MarketingBudgetCalculatorPage() {
           </p>
           <Link
             href="/free-audit"
-            className="inline-flex items-center gap-2 bg-white text-coffee-700 font-bold px-6 py-3 rounded-xl hover:bg-coffee-50 transition-colors"
+            className="inline-flex items-center gap-2 bg-white text-coffee-700 font-bold px-6 py-3 rounded-xl hover:bg-coffee-50 transition-colors dark:bg-gray-900 dark:text-coffee-300"
           >
             Book my free audit →
           </Link>
@@ -144,7 +144,7 @@ export default function MarketingBudgetCalculatorPage() {
 
       {/* Related tools / internal links */}
       <section className="max-w-2xl mx-auto px-4 pb-20">
-        <h2 className="text-lg font-bold text-gray-900 mb-4">Explore by business type</h2>
+        <h2 className="text-lg font-bold text-gray-900 mb-4 dark:text-gray-50">Explore by business type</h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {[
             { emoji: "☕", label: "Coffee Shops",   href: "/for/coffee-shops"   },
@@ -155,10 +155,10 @@ export default function MarketingBudgetCalculatorPage() {
             <Link
               key={n.href}
               href={n.href}
-              className="flex flex-col items-center gap-1 p-4 rounded-2xl border border-gray-100 hover:border-coffee-200 hover:bg-coffee-50 transition-colors text-center"
+              className="flex flex-col items-center gap-1 p-4 rounded-2xl border border-gray-100 hover:border-coffee-200 hover:bg-coffee-50 transition-colors text-center dark:border-gray-700"
             >
               <span className="text-2xl">{n.emoji}</span>
-              <span className="text-xs font-medium text-gray-700">{n.label}</span>
+              <span className="text-xs font-medium text-gray-700 dark:text-gray-200">{n.label}</span>
             </Link>
           ))}
         </div>

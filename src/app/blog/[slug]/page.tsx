@@ -608,7 +608,7 @@ export default async function BlogPostPage({
           <span className="flex items-center gap-1.5">
             <Clock size={14} /> {frontmatter.readTime}
           </span>
-          <Link href="/blog" className="flex items-center gap-1 text-coffee-700 hover:underline ml-auto text-sm">
+          <Link href="/blog" className="flex items-center gap-1 text-coffee-700 hover:underline ml-auto text-sm dark:text-coffee-300">
             <ArrowLeft size={14} /> All posts
           </Link>
         </div>
@@ -640,7 +640,7 @@ export default async function BlogPostPage({
             <Link
               href="/free-audit"
               data-track-source="blog_end"
-              className="inline-flex items-center justify-center gap-2 bg-white text-coffee-900 font-bold px-6 py-3 rounded-xl hover:bg-coffee-100 transition-colors text-sm"
+              className="inline-flex items-center justify-center gap-2 bg-white text-coffee-900 font-bold px-6 py-3 rounded-xl hover:bg-coffee-100 transition-colors text-sm dark:bg-gray-900 dark:text-coffee-100"
             >
               Get my free audit <ArrowRight size={15} />
             </Link>
@@ -682,7 +682,7 @@ export default async function BlogPostPage({
               </div>
               <Link
                 href={svc.href}
-                className="flex-shrink-0 inline-flex items-center gap-1.5 text-sm font-bold text-coffee-800 hover:text-coffee-950 hover:underline"
+                className="flex-shrink-0 inline-flex items-center gap-1.5 text-sm font-bold text-coffee-800 hover:text-coffee-950 hover:underline dark:text-coffee-200"
               >
                 Learn more <ArrowRight size={14} />
               </Link>
@@ -697,7 +697,7 @@ export default async function BlogPostPage({
               <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-1">📱 Social Media Ads</p>
               <p className="text-sm text-gray-700 dark:text-gray-300">Facebook & Instagram ad campaigns managed for local businesses worldwide.</p>
             </div>
-            <Link href="/services/meta-ads" className="flex-shrink-0 inline-flex items-center gap-1.5 text-sm font-bold text-coffee-800 hover:text-coffee-950 hover:underline">
+            <Link href="/services/meta-ads" className="flex-shrink-0 inline-flex items-center gap-1.5 text-sm font-bold text-coffee-800 hover:text-coffee-950 hover:underline dark:text-coffee-200">
               Meta Ads <ArrowRight size={14} />
             </Link>
           </div>
@@ -714,7 +714,7 @@ export default async function BlogPostPage({
               </div>
               <Link
                 href={niche.href}
-                className="flex-shrink-0 inline-flex items-center gap-1.5 text-sm font-bold text-coffee-800 hover:text-coffee-950 hover:underline"
+                className="flex-shrink-0 inline-flex items-center gap-1.5 text-sm font-bold text-coffee-800 hover:text-coffee-950 hover:underline dark:text-coffee-200"
               >
                 View guide <ArrowRight size={14} />
               </Link>
@@ -735,7 +735,7 @@ export default async function BlogPostPage({
               <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5 leading-relaxed">
                 Local marketing strategist with 10+ years at global agencies — OMD, Dentsu, GroupM, and BBDO. Now helping small businesses get the same data-driven edge. Based in Europe, working with clients in the US, UK, Australia, and beyond.
               </p>
-              <Link href="/about" className="inline-flex items-center gap-1 text-xs text-coffee-700 font-semibold mt-2 hover:underline">
+              <Link href="/about" className="inline-flex items-center gap-1 text-xs text-coffee-700 font-semibold mt-2 hover:underline dark:text-coffee-300">
                 About Nataliia <ArrowRight size={12} />
               </Link>
             </div>

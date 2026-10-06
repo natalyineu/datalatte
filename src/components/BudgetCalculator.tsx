@@ -157,7 +157,7 @@ function StepIndicator({ step, total }: { step: number; total: number }) {
             className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300
               ${i < step  ? "bg-coffee-700 text-white" : ""}
               ${i === step ? "bg-coffee-600 text-white ring-4 ring-coffee-100" : ""}
-              ${i > step  ? "bg-gray-100 text-gray-400" : ""}`}
+              ${i > step  ? "bg-gray-100 text-gray-400 dark:bg-gray-800" : ""}`}
           >
             {i < step ? <Check size={13} /> : i + 1}
           </motion.div>
@@ -268,8 +268,8 @@ export default function BudgetCalculator() {
           exit="exit"
         >
           <StepIndicator step={0} total={4} />
-          <h2 className="text-xl font-bold text-gray-900 mb-1">What type of business do you run?</h2>
-          <p className="text-gray-500 text-sm mb-5">We&apos;ll tailor your budget to your industry.</p>
+          <h2 className="text-xl font-bold text-gray-900 mb-1 dark:text-gray-50">What type of business do you run?</h2>
+          <p className="text-gray-500 text-sm mb-5 dark:text-gray-400">We&apos;ll tailor your budget to your industry.</p>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {NICHES.map((n, i) => {
               const isSelecting = selecting === n.value;
@@ -293,8 +293,8 @@ export default function BudgetCalculator() {
                     transition={{ duration: 0.35 }}
                     className={`w-full flex flex-col items-center gap-2 p-4 rounded-2xl border-2 transition-all cursor-pointer
                       ${isSelected
-                        ? "border-coffee-600 bg-coffee-50 text-coffee-800"
-                        : "border-gray-200 hover:border-coffee-300 hover:bg-coffee-50/50 text-gray-700"}`}
+                        ? "border-coffee-600 bg-coffee-50 text-coffee-800 dark:bg-coffee-900/20 dark:text-coffee-200"
+                        : "border-gray-200 hover:border-coffee-300 hover:bg-coffee-50/50 text-gray-700 dark:border-gray-700 dark:text-gray-200"}`}
                   >
                     <span className="text-3xl">{n.emoji}</span>
                     <span className="text-sm font-medium">{n.label}</span>
@@ -328,17 +328,17 @@ export default function BudgetCalculator() {
           exit="exit"
         >
           <StepIndicator step={1} total={4} />
-          <h2 className="text-xl font-bold text-gray-900 mb-1">What&apos;s your approximate monthly revenue?</h2>
-          <p className="text-gray-500 text-sm mb-6">This helps us recommend a realistic budget. Don&apos;t worry — it&apos;s just a guide.</p>
+          <h2 className="text-xl font-bold text-gray-900 mb-1 dark:text-gray-50">What&apos;s your approximate monthly revenue?</h2>
+          <p className="text-gray-500 text-sm mb-6 dark:text-gray-400">This helps us recommend a realistic budget. Don&apos;t worry — it&apos;s just a guide.</p>
 
           <div className="mb-6">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm text-gray-500">Monthly revenue</span>
+              <span className="text-sm text-gray-500 dark:text-gray-400">Monthly revenue</span>
               <motion.span
                 key={revenue}
                 initial={{ scale: 0.85, opacity: 0.6 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="text-2xl font-bold text-coffee-700"
+                className="text-2xl font-bold text-coffee-700 dark:text-coffee-300"
               >
                 {fmt(revenue)}
               </motion.span>
@@ -383,8 +383,8 @@ export default function BudgetCalculator() {
                 onClick={() => setRevenue(v)}
                 className={`py-2 px-3 rounded-xl text-xs font-medium border transition-all
                   ${revenue === v
-                    ? "border-coffee-600 bg-coffee-50 text-coffee-700"
-                    : "border-gray-200 text-gray-500 hover:border-coffee-300"}`}
+                    ? "border-coffee-600 bg-coffee-50 text-coffee-700 dark:bg-coffee-900/20 dark:text-coffee-300"
+                    : "border-gray-200 text-gray-500 hover:border-coffee-300 dark:border-gray-700 dark:text-gray-400"}`}
               >
                 {fmt(v)}
               </motion.button>
@@ -392,7 +392,7 @@ export default function BudgetCalculator() {
           </div>
 
           <div className="flex gap-3">
-            <button onClick={() => goTo(0)} className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-gray-200 text-gray-600 text-sm hover:bg-gray-50 transition-colors">
+            <button onClick={() => goTo(0)} className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-gray-200 text-gray-600 text-sm hover:bg-gray-50 transition-colors dark:border-gray-700 dark:text-gray-300">
               <ArrowLeft size={14} /> Back
             </button>
             <button onClick={() => goTo(2)} className="flex-1 btn-primary justify-center py-2.5 text-sm group">
@@ -412,8 +412,8 @@ export default function BudgetCalculator() {
           exit="exit"
         >
           <StepIndicator step={2} total={4} />
-          <h2 className="text-xl font-bold text-gray-900 mb-1">How long have you been in business?</h2>
-          <p className="text-gray-500 text-sm mb-5">Newer businesses typically invest a higher % of revenue in marketing.</p>
+          <h2 className="text-xl font-bold text-gray-900 mb-1 dark:text-gray-50">How long have you been in business?</h2>
+          <p className="text-gray-500 text-sm mb-5 dark:text-gray-400">Newer businesses typically invest a higher % of revenue in marketing.</p>
 
           <div className="space-y-3 mb-8">
             {STAGES.map((s, i) => (
@@ -425,14 +425,14 @@ export default function BudgetCalculator() {
                 onClick={() => setStage(s.value)}
                 className={`w-full flex items-center justify-between p-4 rounded-2xl border-2 transition-all text-left
                   ${stage === s.value
-                    ? "border-coffee-600 bg-coffee-50"
-                    : "border-gray-200 hover:border-coffee-300 hover:bg-coffee-50/50"}`}
+                    ? "border-coffee-600 bg-coffee-50 dark:bg-coffee-900/20"
+                    : "border-gray-200 hover:border-coffee-300 hover:bg-coffee-50/50 dark:border-gray-700"}`}
               >
                 <div>
-                  <p className={`font-semibold ${stage === s.value ? "text-coffee-800" : "text-gray-800"}`}>{s.label}</p>
-                  <p className="text-xs text-gray-500 mt-0.5">{s.desc}</p>
+                  <p className={`font-semibold ${stage === s.value ? "text-coffee-800 dark:text-coffee-200" : "text-gray-800 dark:text-gray-100"}`}>{s.label}</p>
+                  <p className="text-xs text-gray-500 mt-0.5 dark:text-gray-400">{s.desc}</p>
                 </div>
-                <div className={`text-xs font-bold px-2.5 py-1 rounded-full ${stage === s.value ? "bg-coffee-700 text-white" : "bg-gray-100 text-gray-500"}`}>
+                <div className={`text-xs font-bold px-2.5 py-1 rounded-full ${stage === s.value ? "bg-coffee-700 text-white" : "bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400"}`}>
                   ~{Math.round(s.pct * 100)}% of revenue
                 </div>
               </motion.button>
@@ -440,7 +440,7 @@ export default function BudgetCalculator() {
           </div>
 
           <div className="flex gap-3">
-            <button onClick={() => goTo(1)} className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-gray-200 text-gray-600 text-sm hover:bg-gray-50 transition-colors">
+            <button onClick={() => goTo(1)} className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-gray-200 text-gray-600 text-sm hover:bg-gray-50 transition-colors dark:border-gray-700 dark:text-gray-300">
               <ArrowLeft size={14} /> Back
             </button>
             <button
@@ -464,8 +464,8 @@ export default function BudgetCalculator() {
           exit="exit"
         >
           <StepIndicator step={3} total={4} />
-          <h2 className="text-xl font-bold text-gray-900 mb-1">What&apos;s your #1 marketing goal?</h2>
-          <p className="text-gray-500 text-sm mb-5">This determines how we split your budget across channels.</p>
+          <h2 className="text-xl font-bold text-gray-900 mb-1 dark:text-gray-50">What&apos;s your #1 marketing goal?</h2>
+          <p className="text-gray-500 text-sm mb-5 dark:text-gray-400">This determines how we split your budget across channels.</p>
 
           <div className="grid sm:grid-cols-2 gap-3 mb-8">
             {GOALS.map((g, i) => (
@@ -477,20 +477,20 @@ export default function BudgetCalculator() {
                 onClick={() => setGoal(g.value)}
                 className={`flex items-start gap-3 p-4 rounded-2xl border-2 transition-all text-left
                   ${goal === g.value
-                    ? "border-coffee-600 bg-coffee-50"
-                    : "border-gray-200 hover:border-coffee-300 hover:bg-coffee-50/50"}`}
+                    ? "border-coffee-600 bg-coffee-50 dark:bg-coffee-900/20"
+                    : "border-gray-200 hover:border-coffee-300 hover:bg-coffee-50/50 dark:border-gray-700"}`}
               >
                 <span className="text-2xl leading-none">{g.emoji}</span>
                 <div>
-                  <p className={`font-semibold text-sm ${goal === g.value ? "text-coffee-800" : "text-gray-800"}`}>{g.label}</p>
-                  <p className="text-xs text-gray-500 mt-0.5">{g.desc}</p>
+                  <p className={`font-semibold text-sm ${goal === g.value ? "text-coffee-800 dark:text-coffee-200" : "text-gray-800 dark:text-gray-100"}`}>{g.label}</p>
+                  <p className="text-xs text-gray-500 mt-0.5 dark:text-gray-400">{g.desc}</p>
                 </div>
               </motion.button>
             ))}
           </div>
 
           <div className="flex gap-3">
-            <button onClick={() => goTo(2)} className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-gray-200 text-gray-600 text-sm hover:bg-gray-50 transition-colors">
+            <button onClick={() => goTo(2)} className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-gray-200 text-gray-600 text-sm hover:bg-gray-50 transition-colors dark:border-gray-700 dark:text-gray-300">
               <ArrowLeft size={14} /> Back
             </button>
             <button
@@ -520,13 +520,13 @@ export default function BudgetCalculator() {
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center shrink-0"
+              className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center shrink-0 dark:bg-green-900/30"
             >
-              <CheckCircle2 size={22} className="text-green-600" />
+              <CheckCircle2 size={22} className="text-green-600 dark:text-green-300" />
             </motion.div>
             <div>
-              <p className="font-bold text-gray-900 text-lg">Your recommended budget</p>
-              <p className="text-gray-500 text-xs">Based on your {NICHES.find(n => n.value === niche)?.label} business</p>
+              <p className="font-bold text-gray-900 text-lg dark:text-gray-50">Your recommended budget</p>
+              <p className="text-gray-500 text-xs dark:text-gray-400">Based on your {NICHES.find(n => n.value === niche)?.label} business</p>
             </div>
           </div>
 
@@ -554,7 +554,7 @@ export default function BudgetCalculator() {
 
           {/* Channel breakdown */}
           <div className="mb-5">
-            <h3 className="font-semibold text-gray-900 mb-3 text-sm">Budget breakdown by channel</h3>
+            <h3 className="font-semibold text-gray-900 mb-3 text-sm dark:text-gray-50">Budget breakdown by channel</h3>
             <div className="space-y-3">
               {channels.map((ch, i) => {
                 const amount = Math.round(totalBudget * ch.pct / 100);
@@ -568,14 +568,14 @@ export default function BudgetCalculator() {
                     <div className="flex items-center justify-between mb-1">
                       <div className="flex items-center gap-2">
                         <span className="text-base">{ch.emoji}</span>
-                        <Link href={ch.href} className="text-sm font-medium text-gray-700 hover:text-coffee-700 transition-colors">
+                        <Link href={ch.href} className="text-sm font-medium text-gray-700 hover:text-coffee-700 transition-colors dark:text-gray-200">
                           {ch.label}
                         </Link>
                         <span className="text-xs text-gray-400">{ch.pct}%</span>
                       </div>
-                      <span className="text-sm font-bold text-gray-900">{fmt(amount)}</span>
+                      <span className="text-sm font-bold text-gray-900 dark:text-gray-50">{fmt(amount)}</span>
                     </div>
-                    <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                    <div className="h-2 bg-gray-100 rounded-full overflow-hidden dark:bg-gray-800">
                       <motion.div
                         className={`h-full rounded-full ${ch.color}`}
                         initial={{ width: 0 }}
@@ -594,21 +594,21 @@ export default function BudgetCalculator() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="bg-coffee-50 border border-coffee-100 rounded-xl p-4 mb-5"
+            className="bg-coffee-50 border border-coffee-100 rounded-xl p-4 mb-5 dark:bg-coffee-900/20 dark:border-coffee-800"
           >
-            <p className="text-xs font-semibold text-coffee-700 mb-1">☕ Pro tip for {NICHES.find(n => n.value === niche)?.label}s</p>
-            <p className="text-xs text-gray-600 leading-relaxed">{nicheTip}</p>
+            <p className="text-xs font-semibold text-coffee-700 mb-1 dark:text-coffee-300">☕ Pro tip for {NICHES.find(n => n.value === niche)?.label}s</p>
+            <p className="text-xs text-gray-600 leading-relaxed dark:text-gray-300">{nicheTip}</p>
           </motion.div>
 
           {/* Actions */}
           <div className="flex gap-2 mb-5">
             <button
               onClick={handleCopy}
-              className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-gray-200 text-gray-600 text-sm hover:bg-gray-50 transition-colors"
+              className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-gray-200 text-gray-600 text-sm hover:bg-gray-50 transition-colors dark:border-gray-700 dark:text-gray-300"
             >
               {copied ? <><Check size={14} className="text-green-500" /> Copied!</> : <><Copy size={14} /> Copy results</>}
             </button>
-            <button onClick={() => goTo(0)} className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-gray-200 text-gray-600 text-sm hover:bg-gray-50 transition-colors">
+            <button onClick={() => goTo(0)} className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-gray-200 text-gray-600 text-sm hover:bg-gray-50 transition-colors dark:border-gray-700 dark:text-gray-300">
               Start over
             </button>
           </div>
@@ -640,10 +640,10 @@ export default function BudgetCalculator() {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.75 }}
-              className="border border-gray-100 rounded-2xl p-4"
+              className="border border-gray-100 rounded-2xl p-4 dark:border-gray-700"
             >
-              <p className="text-sm font-medium text-gray-700 mb-1">📧 Email yourself these results</p>
-              <p className="text-xs text-gray-500 mb-3">We&apos;ll also send you a free weekly marketing tip for {NICHES.find(n => n.value === niche)?.label}s.</p>
+              <p className="text-sm font-medium text-gray-700 mb-1 dark:text-gray-200">📧 Email yourself these results</p>
+              <p className="text-xs text-gray-500 mb-3 dark:text-gray-400">We&apos;ll also send you a free weekly marketing tip for {NICHES.find(n => n.value === niche)?.label}s.</p>
               <form onSubmit={handleLeadSubmit} className="flex gap-2">
                 <input
                   type="email"
@@ -651,7 +651,7 @@ export default function BudgetCalculator() {
                   onChange={e => setEmail(e.target.value)}
                   placeholder="your@email.com"
                   required
-                  className="flex-1 px-3 py-2 rounded-xl border border-gray-200 focus:border-coffee-400 focus:ring-2 focus:ring-coffee-100 outline-none text-sm"
+                  className="flex-1 px-3 py-2 rounded-xl border border-gray-200 focus:border-coffee-400 focus:ring-2 focus:ring-coffee-100 outline-none text-sm dark:border-gray-700"
                 />
                 <button
                   type="submit"
@@ -672,10 +672,10 @@ export default function BudgetCalculator() {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="bg-green-50 border border-green-100 rounded-xl p-3 text-center"
+              className="bg-green-50 border border-green-100 rounded-xl p-3 text-center dark:bg-green-900/30 dark:border-green-800"
             >
               <CheckCircle2 size={18} className="text-green-500 mx-auto mb-1" />
-              <p className="text-sm text-green-700 font-medium">Results sent! Check your inbox ☕</p>
+              <p className="text-sm text-green-700 font-medium dark:text-green-300">Results sent! Check your inbox ☕</p>
             </motion.div>
           )}
         </motion.div>

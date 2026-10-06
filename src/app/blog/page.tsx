@@ -162,7 +162,7 @@ function Pagination({ currentPage, totalPages }: { currentPage: number; totalPag
       {currentPage > 1 ? (
         <Link
           href={pageUrl(currentPage - 1)}
-          className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors"
+          className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors dark:text-gray-300"
           aria-label="Previous page"
         >
           <ChevronLeft size={15} /> Prev
@@ -189,7 +189,7 @@ function Pagination({ currentPage, totalPages }: { currentPage: number; totalPag
           <Link
             key={p}
             href={pageUrl(p)}
-            className="w-9 h-9 flex items-center justify-center rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors"
+            className="w-9 h-9 flex items-center justify-center rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors dark:text-gray-300"
             aria-label={`Page ${p}`}
           >
             {p}
@@ -201,7 +201,7 @@ function Pagination({ currentPage, totalPages }: { currentPage: number; totalPag
       {currentPage < totalPages ? (
         <Link
           href={pageUrl(currentPage + 1)}
-          className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors"
+          className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors dark:text-gray-300"
           aria-label="Next page"
         >
           Next <ChevronRight size={15} />
@@ -302,7 +302,7 @@ export default async function BlogPage({
       ) : (
         <section className="bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8 border-b border-gray-100 dark:border-gray-800">
           <div className="max-w-3xl mx-auto text-center">
-            <Link href={BLOG_URL} className="text-coffee-700 text-sm hover:underline mb-3 inline-block">
+            <Link href={BLOG_URL} className="text-coffee-700 text-sm hover:underline mb-3 inline-block dark:text-coffee-300">
               ← Back to all articles
             </Link>
             <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-50">

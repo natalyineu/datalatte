@@ -136,7 +136,7 @@ export default function AIBookingAgentPage() {
       </section>
 
       {/* Stats */}
-      <div className="bg-coffee-50 border-b border-coffee-100 py-8">
+      <div className="bg-coffee-50 border-b border-coffee-100 py-8 dark:bg-coffee-900/20 dark:border-coffee-800">
         <SectionWrapper>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
@@ -146,8 +146,8 @@ export default function AIBookingAgentPage() {
               { value: "6", label: "Channels monitored simultaneously from one agent" },
             ].map((s) => (
               <div key={s.label}>
-                <p className="text-3xl font-bold text-coffee-700">{s.value}</p>
-                <p className="text-sm text-gray-600 mt-1">{s.label}</p>
+                <p className="text-3xl font-bold text-coffee-700 dark:text-coffee-300">{s.value}</p>
+                <p className="text-sm text-gray-600 mt-1 dark:text-gray-300">{s.label}</p>
               </div>
             ))}
           </div>
@@ -157,30 +157,30 @@ export default function AIBookingAgentPage() {
       {/* How it works */}
       <SectionWrapper className="py-20">
         <h2 className="section-title mb-3">How the booking agent works</h2>
-        <p className="text-gray-600 max-w-2xl mb-14">A real LLM pipeline — not a chatbot with decision trees. It handles natural language, understands context, and takes action in your booking system.</p>
+        <p className="text-gray-600 max-w-2xl mb-14 dark:text-gray-300">A real LLM pipeline — not a chatbot with decision trees. It handles natural language, understands context, and takes action in your booking system.</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {steps.map((step) => (
-            <div key={step.n} className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+            <div key={step.n} className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm dark:bg-gray-900 dark:border-gray-700">
               <span className="text-3xl font-bold text-coffee-200">{step.n}</span>
-              <h3 className="text-base font-semibold text-gray-900 mt-2 mb-2">{step.title}</h3>
-              <p className="text-sm text-gray-600">{step.body}</p>
+              <h3 className="text-base font-semibold text-gray-900 mt-2 mb-2 dark:text-gray-50">{step.title}</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300">{step.body}</p>
             </div>
           ))}
         </div>
       </SectionWrapper>
 
       {/* Channels */}
-      <section className="bg-gray-50 py-20">
+      <section className="bg-gray-50 py-20 dark:bg-gray-800/60">
         <SectionWrapper>
           <h2 className="section-title mb-3">Every channel, one agent</h2>
-          <p className="text-gray-600 max-w-2xl mb-12">Customers contact you in different ways. The booking agent handles all of them — consistently, immediately, and with the same quality of response.</p>
+          <p className="text-gray-600 max-w-2xl mb-12 dark:text-gray-300">Customers contact you in different ways. The booking agent handles all of them — consistently, immediately, and with the same quality of response.</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {channels.map((ch) => (
-              <div key={ch.name} className="bg-white rounded-xl border border-gray-100 p-5 shadow-sm flex gap-3">
+              <div key={ch.name} className="bg-white rounded-xl border border-gray-100 p-5 shadow-sm flex gap-3 dark:bg-gray-900 dark:border-gray-700">
                 <CheckCircle2 size={18} className="text-coffee-500 mt-0.5 shrink-0" />
                 <div>
-                  <p className="font-semibold text-gray-900 text-sm">{ch.name}</p>
-                  <p className="text-xs text-gray-500 mt-0.5">{ch.desc}</p>
+                  <p className="font-semibold text-gray-900 text-sm dark:text-gray-50">{ch.name}</p>
+                  <p className="text-xs text-gray-500 mt-0.5 dark:text-gray-400">{ch.desc}</p>
                 </div>
               </div>
             ))}
@@ -191,25 +191,25 @@ export default function AIBookingAgentPage() {
       {/* Platform integrations */}
       <SectionWrapper className="py-20">
         <h2 className="section-title mb-3">Works with your booking platform</h2>
-        <p className="text-gray-600 max-w-2xl mb-10">We integrate with 20+ booking systems — reading real-time availability and writing confirmed bookings directly. No manual sync, no double-entry.</p>
+        <p className="text-gray-600 max-w-2xl mb-10 dark:text-gray-300">We integrate with 20+ booking systems — reading real-time availability and writing confirmed bookings directly. No manual sync, no double-entry.</p>
         <div className="flex flex-wrap gap-2">
           {platforms.map((p) => (
-            <span key={p} className="text-sm bg-gray-100 text-gray-700 px-4 py-2 rounded-full">{p}</span>
+            <span key={p} className="text-sm bg-gray-100 text-gray-700 px-4 py-2 rounded-full dark:bg-gray-800 dark:text-gray-200">{p}</span>
           ))}
         </div>
       </SectionWrapper>
 
       {/* Niche versions */}
-      <section className="bg-coffee-50 py-20">
+      <section className="bg-coffee-50 py-20 dark:bg-coffee-900/20">
         <SectionWrapper>
           <h2 className="section-title mb-3">Booking agents built for your industry</h2>
-          <p className="text-gray-600 max-w-2xl mb-12">Different businesses need different intake flows. We build booking agents configured for your specific niche — not a generic template.</p>
+          <p className="text-gray-600 max-w-2xl mb-12 dark:text-gray-300">Different businesses need different intake flows. We build booking agents configured for your specific niche — not a generic template.</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {niches.map((n) => (
-              <Link key={n.href} href={n.href} className="bg-white rounded-xl border border-gray-100 p-5 shadow-sm hover:shadow-md hover:border-coffee-200 transition-all group">
-                <p className="font-semibold text-gray-900 group-hover:text-coffee-700 transition-colors">{n.label}</p>
-                <p className="text-xs text-gray-500 mt-1 mb-3">{n.detail}</p>
-                <span className="text-xs text-coffee-600 font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
+              <Link key={n.href} href={n.href} className="bg-white rounded-xl border border-gray-100 p-5 shadow-sm hover:shadow-md hover:border-coffee-200 transition-all group dark:bg-gray-900 dark:border-gray-700">
+                <p className="font-semibold text-gray-900 group-hover:text-coffee-700 transition-colors dark:text-gray-50">{n.label}</p>
+                <p className="text-xs text-gray-500 mt-1 mb-3 dark:text-gray-400">{n.detail}</p>
+                <span className="text-xs text-coffee-600 font-semibold flex items-center gap-1 group-hover:gap-2 transition-all dark:text-coffee-400">
                   See booking agent <ArrowRight size={12} />
                 </span>
               </Link>
@@ -219,14 +219,14 @@ export default function AIBookingAgentPage() {
       </section>
 
       {/* FAQ */}
-      <section className="bg-gray-50 py-20">
+      <section className="bg-gray-50 py-20 dark:bg-gray-800/60">
         <SectionWrapper>
           <h2 className="section-title mb-10">Booking agent questions</h2>
           <div className="max-w-3xl space-y-6">
             {faqs.map((faq) => (
-              <div key={faq.q} className="border-b border-gray-200 pb-6">
-                <h3 className="text-base font-semibold text-gray-900 mb-2">{faq.q}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{faq.a}</p>
+              <div key={faq.q} className="border-b border-gray-200 pb-6 dark:border-gray-700">
+                <h3 className="text-base font-semibold text-gray-900 mb-2 dark:text-gray-50">{faq.q}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed dark:text-gray-300">{faq.a}</p>
               </div>
             ))}
           </div>

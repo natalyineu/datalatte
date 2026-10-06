@@ -48,10 +48,10 @@ export default function FloatingCTA() {
             exit={{ y: 100 }}
             transition={{ type: "spring", damping: 20 }}
           >
-            <div className="bg-white border-t border-gray-200 px-4 py-3 flex items-center gap-3 shadow-2xl">
+            <div className="bg-white border-t border-gray-200 px-4 py-3 flex items-center gap-3 shadow-2xl dark:bg-gray-900 dark:border-gray-700">
               <div className="flex-1">
-                <p className="text-xs text-gray-500 leading-tight">Free marketing audit</p>
-                <p className="text-sm font-semibold text-gray-900">Find out what's holding you back</p>
+                <p className="text-xs text-gray-500 leading-tight dark:text-gray-400">Free marketing audit</p>
+                <p className="text-sm font-semibold text-gray-900 dark:text-gray-50">Find out what's holding you back</p>
               </div>
               <Link
                 href="/free-audit"
@@ -82,7 +82,7 @@ export default function FloatingCTA() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3 }}
-              className="bg-white text-xs text-gray-600 px-3 py-1.5 rounded-full shadow-md border border-gray-100 whitespace-nowrap"
+              className="bg-white text-xs text-gray-600 px-3 py-1.5 rounded-full shadow-md border border-gray-100 whitespace-nowrap dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700"
             >
               Free audit — no strings attached ☕
             </motion.div>
@@ -97,7 +97,7 @@ export default function FloatingCTA() {
               </Link>
               <button
                 onClick={dismiss}
-                className="bg-white text-gray-400 hover:text-gray-600 w-9 h-9 rounded-xl shadow-md border border-gray-100 flex items-center justify-center transition-colors"
+                className="bg-white text-gray-400 hover:text-gray-600 w-9 h-9 rounded-xl shadow-md border border-gray-100 flex items-center justify-center transition-colors dark:bg-gray-900 dark:border-gray-700"
               >
                 <X size={16} />
               </button>

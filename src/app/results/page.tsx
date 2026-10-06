@@ -173,12 +173,12 @@ export default function ResultsPage() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {stats.map((s) => (
             <div key={s.label} className="card p-6 flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-coffee-100 flex items-center justify-center shrink-0">
-                <s.icon size={22} className="text-coffee-700" />
+              <div className="w-12 h-12 rounded-xl bg-coffee-100 flex items-center justify-center shrink-0 dark:bg-coffee-900/30">
+                <s.icon size={22} className="text-coffee-700 dark:text-coffee-300" />
               </div>
               <div>
-                <div className="text-3xl font-extrabold text-gray-900 leading-none mb-1">{s.value}</div>
-                <div className="font-semibold text-gray-800 text-sm">{s.label}</div>
+                <div className="text-3xl font-extrabold text-gray-900 leading-none mb-1 dark:text-gray-50">{s.value}</div>
+                <div className="font-semibold text-gray-800 text-sm dark:text-gray-100">{s.label}</div>
                 <div className="text-xs text-gray-400 mt-0.5">{s.sub}</div>
               </div>
             </div>
@@ -187,7 +187,7 @@ export default function ResultsPage() {
       </SectionWrapper>
 
       {/* Testimonials */}
-      <SectionWrapper className="bg-gray-50">
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-800/60">
         <div className="text-center mb-12">
           <span className="section-label">Client Testimonials</span>
           <h2 className="section-title">
@@ -202,12 +202,12 @@ export default function ResultsPage() {
                 <div className="text-2xl">{t.emoji}</div>
                 <StarRating rating={t.rating} />
               </div>
-              <blockquote className="text-gray-600 text-sm leading-relaxed flex-1 italic">
+              <blockquote className="text-gray-600 text-sm leading-relaxed flex-1 italic dark:text-gray-300">
                 &ldquo;{t.quote}&rdquo;
               </blockquote>
-              <div className="pt-2 border-t border-gray-100">
-                <div className="font-bold text-gray-900 text-sm">{t.author}</div>
-                <div className="text-xs text-gray-500 mt-0.5">{t.role}</div>
+              <div className="pt-2 border-t border-gray-100 dark:border-gray-700">
+                <div className="font-bold text-gray-900 text-sm dark:text-gray-50">{t.author}</div>
+                <div className="text-xs text-gray-500 mt-0.5 dark:text-gray-400">{t.role}</div>
               </div>
             </div>
           ))}

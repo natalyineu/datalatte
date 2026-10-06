@@ -436,7 +436,7 @@ export default function AboutPage() {
             </p>
             <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">
               Oh, and I do marketing.{" "}
-              <span className="text-coffee-700">Seriously good marketing.</span>
+              <span className="text-coffee-700 dark:text-coffee-300">Seriously good marketing.</span>
             </h2>
             <div className="space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed text-[17px]">
               <p>

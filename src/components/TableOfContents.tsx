@@ -79,18 +79,18 @@ export default function TableOfContents({ source, variant }: TableOfContentsProp
         aria-label="Table of contents"
         className="hidden xl:block sticky top-24 self-start w-56 shrink-0 text-sm"
       >
-        <p className="flex items-center gap-1.5 font-semibold text-gray-700 mb-3 text-xs uppercase tracking-wide">
+        <p className="flex items-center gap-1.5 font-semibold text-gray-700 mb-3 text-xs uppercase tracking-wide dark:text-gray-200">
           <List size={13} /> On this page
         </p>
-        <ul className="space-y-1 border-l border-gray-200 pl-3">
+        <ul className="space-y-1 border-l border-gray-200 pl-3 dark:border-gray-700">
           {headings.map((h) => (
             <li key={h.id} className={h.level === 3 ? "pl-3" : ""}>
               <a
                 href={`#${h.id}`}
                 className={`block py-0.5 leading-snug transition-colors hover:text-coffee-700 ${
                   active === h.id
-                    ? "text-coffee-700 font-medium border-l-2 border-coffee-500 -ml-[13px] pl-[11px]"
-                    : "text-gray-500"
+                    ? "text-coffee-700 font-medium border-l-2 border-coffee-500 -ml-[13px] pl-[11px] dark:text-coffee-300"
+                    : "text-gray-500 dark:text-gray-400"
                 }`}
               >
                 {h.text}
@@ -103,10 +103,10 @@ export default function TableOfContents({ source, variant }: TableOfContentsProp
   }
 
   return (
-    <div className="xl:hidden mb-8 rounded-xl border border-gray-200 bg-gray-50 overflow-hidden">
+    <div className="xl:hidden mb-8 rounded-xl border border-gray-200 bg-gray-50 overflow-hidden dark:border-gray-700 dark:bg-gray-800/60">
         <button
           onClick={() => setOpen((o) => !o)}
-          className="w-full flex items-center justify-between px-4 py-3 text-sm font-semibold text-gray-700"
+          className="w-full flex items-center justify-between px-4 py-3 text-sm font-semibold text-gray-700 dark:text-gray-200"
           aria-expanded={open}
         >
           <span className="flex items-center gap-2">
@@ -115,13 +115,13 @@ export default function TableOfContents({ source, variant }: TableOfContentsProp
           <span className="text-gray-400 text-xs">{open ? "▲" : "▼"}</span>
         </button>
         {open && (
-          <ul className="px-4 pb-4 space-y-2 border-t border-gray-200 pt-3">
+          <ul className="px-4 pb-4 space-y-2 border-t border-gray-200 pt-3 dark:border-gray-700">
             {headings.map((h) => (
               <li key={h.id} className={h.level === 3 ? "pl-4" : ""}>
                 <a
                   href={`#${h.id}`}
                   onClick={() => setOpen(false)}
-                  className="text-sm text-gray-600 hover:text-coffee-700 transition-colors"
+                  className="text-sm text-gray-600 hover:text-coffee-700 transition-colors dark:text-gray-300"
                 >
                   {h.text}
                 </a>

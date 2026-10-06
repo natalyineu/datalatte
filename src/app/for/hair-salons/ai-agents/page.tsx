@@ -150,7 +150,7 @@ export default function HairSalonAIAgentsPage() {
         </SectionWrapper>
       </section>
 
-      <div className="bg-coffee-50 border-b border-coffee-100 py-8">
+      <div className="bg-coffee-50 border-b border-coffee-100 py-8 dark:bg-coffee-900/20 dark:border-coffee-800">
         <SectionWrapper>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
@@ -160,8 +160,8 @@ export default function HairSalonAIAgentsPage() {
               { value: "15%", label: "Of lapsed clients rebook when you reach out within 8 weeks" },
             ].map((s) => (
               <div key={s.label}>
-                <p className="text-3xl font-bold text-coffee-700">{s.value}</p>
-                <p className="text-sm text-gray-600 mt-1">{s.label}</p>
+                <p className="text-3xl font-bold text-coffee-700 dark:text-coffee-300">{s.value}</p>
+                <p className="text-sm text-gray-600 mt-1 dark:text-gray-300">{s.label}</p>
               </div>
             ))}
           </div>
@@ -170,34 +170,34 @@ export default function HairSalonAIAgentsPage() {
 
       <SectionWrapper className="py-20">
         <h2 className="section-title mb-3">5 AI Agents Built for Hair Salons</h2>
-        <p className="text-gray-600 max-w-2xl mb-14">Real LLM pipelines that understand natural language, integrate with your booking system, and handle real-world salon scenarios — not scripted chatbot menus.</p>
+        <p className="text-gray-600 max-w-2xl mb-14 dark:text-gray-300">Real LLM pipelines that understand natural language, integrate with your booking system, and handle real-world salon scenarios — not scripted chatbot menus.</p>
 
         <div className="space-y-16">
           {agents.map((agent, i) => (
             <div key={agent.name} className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
               <div>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="bg-coffee-100 text-coffee-700 p-2 rounded-lg">{agent.icon}</div>
-                  <span className="text-xs font-semibold text-coffee-600 uppercase tracking-wide">Agent {i + 1}</span>
+                  <div className="bg-coffee-100 text-coffee-700 p-2 rounded-lg dark:bg-coffee-900/30 dark:text-coffee-300">{agent.icon}</div>
+                  <span className="text-xs font-semibold text-coffee-600 uppercase tracking-wide dark:text-coffee-400">Agent {i + 1}</span>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">{agent.name}</h3>
-                <p className="text-sm text-gray-500 mb-3"><span className="font-semibold">Triggered by:</span> {agent.trigger}</p>
-                <p className="text-gray-700 mb-5">{agent.whatItDoes}</p>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3 dark:text-gray-50">{agent.name}</h3>
+                <p className="text-sm text-gray-500 mb-3 dark:text-gray-400"><span className="font-semibold">Triggered by:</span> {agent.trigger}</p>
+                <p className="text-gray-700 mb-5 dark:text-gray-200">{agent.whatItDoes}</p>
                 <div className="mb-5">
-                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Integrates with</p>
+                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2 dark:text-gray-400">Integrates with</p>
                   <div className="flex flex-wrap gap-2">
                     {agent.integrations.map((int) => (
-                      <span key={int} className="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full">{int}</span>
+                      <span key={int} className="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full dark:bg-gray-800 dark:text-gray-200">{int}</span>
                     ))}
                   </div>
                 </div>
-                <div className="bg-green-50 border border-green-200 rounded-xl p-4">
-                  <p className="text-sm font-semibold text-green-800 mb-1">Typical impact</p>
-                  <p className="text-sm text-green-700">{agent.impact}</p>
+                <div className="bg-green-50 border border-green-200 rounded-xl p-4 dark:bg-green-900/30 dark:border-green-800">
+                  <p className="text-sm font-semibold text-green-800 mb-1 dark:text-green-300">Typical impact</p>
+                  <p className="text-sm text-green-700 dark:text-green-300">{agent.impact}</p>
                 </div>
               </div>
               <div className="bg-gray-900 rounded-2xl p-6 shadow-xl">
-                <p className="text-xs text-gray-500 mb-4 flex items-center gap-2">
+                <p className="text-xs text-gray-500 mb-4 flex items-center gap-2 dark:text-gray-400">
                   <span className="w-2 h-2 bg-green-400 rounded-full inline-block" />
                   Live conversation example
                 </p>
@@ -219,14 +219,14 @@ export default function HairSalonAIAgentsPage() {
         </div>
       </SectionWrapper>
 
-      <section className="bg-gray-50 py-20">
+      <section className="bg-gray-50 py-20 dark:bg-gray-800/60">
         <SectionWrapper>
           <h2 className="section-title mb-10">Questions from salon owners</h2>
           <div className="max-w-3xl space-y-6">
             {faqs.map((faq) => (
-              <div key={faq.q} className="border-b border-gray-200 pb-6">
-                <h3 className="text-base font-semibold text-gray-900 mb-2">{faq.q}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{faq.a}</p>
+              <div key={faq.q} className="border-b border-gray-200 pb-6 dark:border-gray-700">
+                <h3 className="text-base font-semibold text-gray-900 mb-2 dark:text-gray-50">{faq.q}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed dark:text-gray-300">{faq.a}</p>
               </div>
             ))}
           </div>

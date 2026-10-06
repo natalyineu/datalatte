@@ -131,9 +131,9 @@ export default async function CategoryPage({
       />
 
       {/* Hero */}
-      <section className="bg-gray-50 py-20 px-4 sm:px-6 lg:px-8 border-b border-gray-100">
+      <section className="bg-gray-50 py-20 px-4 sm:px-6 lg:px-8 border-b border-gray-100 dark:bg-gray-800/60 dark:border-gray-700">
         <div className="max-w-3xl mx-auto text-center">
-          <Link href="/blog" className="text-sm text-coffee-700 hover:underline mb-4 inline-block">
+          <Link href="/blog" className="text-sm text-coffee-700 hover:underline mb-4 inline-block dark:text-coffee-300">
             ← All posts
           </Link>
           <span className="section-label">{posts.length} articles</span>

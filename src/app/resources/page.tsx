@@ -41,7 +41,7 @@ const tools = [
     desc: "Find out exactly how much to spend on Google Ads, Meta Ads, SEO, and more. Personalised channel recommendations for coffee shops, salons, and fitness studios.",
     href: "/tools/marketing-budget-calculator",
     tag: "Tool",
-    tagColor: "bg-coffee-100 text-coffee-700",
+    tagColor: "bg-coffee-100 text-coffee-700 dark:bg-coffee-900/30 dark:text-coffee-300",
   },
   {
     icon: BarChart3,
@@ -49,7 +49,7 @@ const tools = [
     desc: "Instantly score your local SEO across 10 key factors — GBP optimisation, review velocity, keyword targeting, and more. Get specific fixes for every failing item.",
     href: "/tools/local-seo-grader",
     tag: "Tool",
-    tagColor: "bg-coffee-100 text-coffee-700",
+    tagColor: "bg-coffee-100 text-coffee-700 dark:bg-coffee-900/30 dark:text-coffee-300",
   },
   {
     icon: Cpu,
@@ -57,7 +57,7 @@ const tools = [
     desc: "Build a custom AI agent for your local business in minutes — automate customer replies, social media, email marketing, and more. No coding required.",
     href: "/tools/ai-agent-builder",
     tag: "Tool",
-    tagColor: "bg-coffee-100 text-coffee-700",
+    tagColor: "bg-coffee-100 text-coffee-700 dark:bg-coffee-900/30 dark:text-coffee-300",
   },
   {
     icon: BookOpen,
@@ -65,7 +65,7 @@ const tools = [
     desc: "Personal review of your GBP, local SEO, competitors, and ad accounts — delivered within 48 hours by Nataliia. No sales call required.",
     href: "/free-audit",
     tag: "Free Audit",
-    tagColor: "bg-green-100 text-green-700",
+    tagColor: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300",
   },
 ];
 
@@ -120,7 +120,7 @@ const guidesByTopic = [
   {
     icon: CheckSquare,
     topic: "Checklists",
-    color: "text-green-600 bg-green-50",
+    color: "text-green-600 bg-green-50 dark:text-green-300 dark:bg-green-900/30",
     links: [
       { label: "Google Business Profile optimisation checklist", href: "/blog/google-business-profile-optimization-checklist" },
       { label: "Local SEO audit checklist", href: "/blog/local-seo-audit-checklist" },
@@ -131,7 +131,7 @@ const guidesByTopic = [
   {
     icon: BarChart3,
     topic: "Pricing & Cost Guides",
-    color: "text-coffee-700 bg-coffee-50",
+    color: "text-coffee-700 bg-coffee-50 dark:text-coffee-300 dark:bg-coffee-900/20",
     links: [
       { label: "How much do Google Ads cost?", href: "/blog/how-much-does-google-ads-cost-for-small-businesses-real-2026-pricing-breakdown" },
       { label: "How much does local SEO cost?", href: "/blog/how-much-does-local-seo-cost-for-a-small-business-honest-pricing-guide" },
@@ -142,7 +142,7 @@ const guidesByTopic = [
   {
     icon: Layers,
     topic: "Platform Comparisons",
-    color: "text-slate-700 bg-slate-50",
+    color: "text-slate-700 bg-slate-50 dark:text-slate-300 dark:bg-slate-900/30",
     links: [
       { label: "Google Ads vs Meta Ads for local business", href: "/blog/google-ads-vs-facebook-ads-local-business-which-wins" },
       { label: "Google Business Profile vs Yelp", href: "/blog/google-business-profile-vs-yelp-which-matters-more" },
@@ -153,7 +153,7 @@ const guidesByTopic = [
   {
     icon: BookOpen,
     topic: "Beginner Guides",
-    color: "text-amber-700 bg-amber-50",
+    color: "text-amber-700 bg-amber-50 dark:text-amber-300 dark:bg-amber-900/30",
     links: [
       { label: "What is local SEO? Plain English guide", href: "/blog/what-is-local-seo-and-why-does-it-matter-plain-english-guide-for-small-businesses" },
       { label: "What is programmatic advertising?", href: "/blog/what-is-programmatic-advertising-plain-english-guide-for-business-owners" },
@@ -220,7 +220,7 @@ export default function ResourcesPage() {
       </SectionWrapper>
 
       {/* By niche */}
-      <SectionWrapper className="bg-gray-50">
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-800/60">
         <div className="text-center mb-10">
           <span className="section-label">By Business Type</span>
           <h2 className="section-title">Resources for your niche</h2>
@@ -233,7 +233,7 @@ export default function ResourcesPage() {
               <ul className="space-y-2">
                 {nr.links.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href} className="text-sm text-coffee-700 hover:text-coffee-900 hover:underline flex items-start gap-1.5">
+                    <Link href={link.href} className="text-sm text-coffee-700 hover:text-coffee-900 hover:underline flex items-start gap-1.5 dark:text-coffee-300">
                       <ArrowRight size={12} className="shrink-0 mt-0.5" />
                       {link.label}
                     </Link>
@@ -263,7 +263,7 @@ export default function ResourcesPage() {
               <ul className="space-y-2.5">
                 {g.links.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href} className="text-sm text-coffee-700 hover:text-coffee-900 hover:underline flex items-start gap-1.5">
+                    <Link href={link.href} className="text-sm text-coffee-700 hover:text-coffee-900 hover:underline flex items-start gap-1.5 dark:text-coffee-300">
                       <ArrowRight size={12} className="shrink-0 mt-1" />
                       {link.label}
                     </Link>

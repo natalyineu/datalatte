@@ -17,18 +17,18 @@ const CATEGORIES: { label: string; value: "All" | ChecklistCategory }[] = [
 ];
 
 const CATEGORY_COLORS: Record<ChecklistCategory, string> = {
-  SEO: "bg-coffee-100 text-coffee-800",
-  Ads: "bg-gray-100 text-gray-800",
-  Social: "bg-coffee-50 text-coffee-700",
-  Website: "bg-gray-100 text-gray-700",
-  Email: "bg-coffee-100 text-coffee-700",
-  Niche: "bg-coffee-200 text-coffee-900",
+  SEO: "bg-coffee-100 text-coffee-800 dark:bg-coffee-900/30 dark:text-coffee-200",
+  Ads: "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-100",
+  Social: "bg-coffee-50 text-coffee-700 dark:bg-coffee-900/20 dark:text-coffee-300",
+  Website: "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-200",
+  Email: "bg-coffee-100 text-coffee-700 dark:bg-coffee-900/30 dark:text-coffee-300",
+  Niche: "bg-coffee-200 text-coffee-900 dark:bg-coffee-800 dark:text-coffee-100",
 };
 
 const DIFFICULTY_COLORS: Record<string, string> = {
-  Beginner: "text-coffee-600",
-  Intermediate: "text-coffee-700",
-  Advanced: "text-coffee-900",
+  Beginner: "text-coffee-600 dark:text-coffee-400",
+  Intermediate: "text-coffee-700 dark:text-coffee-300",
+  Advanced: "text-coffee-900 dark:text-coffee-100",
 };
 
 function useLocalProgress(slug: string, totalItems: number) {
@@ -64,7 +64,7 @@ function ChecklistCard({
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: index * 0.07 }}
-      className="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col overflow-hidden"
+      className="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col overflow-hidden dark:bg-gray-900 dark:border-gray-700"
     >
       <div className="p-6 flex flex-col flex-1">
         {/* Category badge */}
@@ -75,7 +75,7 @@ function ChecklistCard({
             {checklist.category}
           </span>
           {progress > 0 && (
-            <span className="text-xs font-medium text-coffee-600">
+            <span className="text-xs font-medium text-coffee-600 dark:text-coffee-400">
               {progress}% done
             </span>
           )}
@@ -83,15 +83,15 @@ function ChecklistCard({
 
         {/* Icon + Title */}
         <div className="text-4xl mb-3 leading-none">{checklist.icon}</div>
-        <h2 className="text-lg font-bold text-gray-900 leading-snug mb-2 group-hover:text-coffee-700 transition-colors">
+        <h2 className="text-lg font-bold text-gray-900 leading-snug mb-2 group-hover:text-coffee-700 transition-colors dark:text-gray-50">
           {checklist.title}
         </h2>
-        <p className="text-sm text-gray-500 leading-relaxed mb-4 flex-1">
+        <p className="text-sm text-gray-500 leading-relaxed mb-4 flex-1 dark:text-gray-400">
           {checklist.description}
         </p>
 
         {/* Stats row */}
-        <div className="flex items-center gap-4 text-xs text-gray-500 mb-4">
+        <div className="flex items-center gap-4 text-xs text-gray-500 mb-4 dark:text-gray-400">
           <span className="flex items-center gap-1">
             <CheckSquare size={12} className="text-coffee-500" />
             {totalItems} items
@@ -108,7 +108,7 @@ function ChecklistCard({
 
         {/* Progress bar */}
         <div className="mb-4">
-          <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+          <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden dark:bg-gray-800">
             <div
               className="h-full bg-coffee-600 rounded-full transition-all duration-500"
               style={{ width: `${progress}%` }}
@@ -138,7 +138,7 @@ export default function ChecklistsPage() {
       : checklists.filter((c) => c.category === activeCategory);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-800/60">
       {/* Hero */}
       <section className="bg-gray-900 text-white py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
@@ -163,7 +163,7 @@ export default function ChecklistsPage() {
       </section>
 
       {/* Filter tabs */}
-      <div className="sticky top-0 z-20 bg-white border-b border-gray-100 shadow-sm">
+      <div className="sticky top-0 z-20 bg-white border-b border-gray-100 shadow-sm dark:bg-gray-900 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-1 overflow-x-auto py-3 scrollbar-hide">
             {CATEGORIES.map((cat) => (
@@ -173,7 +173,7 @@ export default function ChecklistsPage() {
                 className={`flex-shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-150 ${
                   activeCategory === cat.value
                     ? "bg-coffee-700 text-white"
-                    : "text-gray-600 hover:bg-gray-100"
+                    : "text-gray-600 hover:bg-gray-100 dark:text-gray-300"
                 }`}
               >
                 {cat.label}
@@ -212,7 +212,7 @@ export default function ChecklistsPage() {
           </p>
           <Link
             href="/free-audit"
-            className="inline-flex items-center gap-2 bg-white text-coffee-800 font-bold px-8 py-3.5 rounded-xl hover:bg-coffee-50 transition-colors duration-200 text-base"
+            className="inline-flex items-center gap-2 bg-white text-coffee-800 font-bold px-8 py-3.5 rounded-xl hover:bg-coffee-50 transition-colors duration-200 text-base dark:bg-gray-900 dark:text-coffee-200"
           >
             Get a Free Marketing Audit
             <ArrowRight size={16} />

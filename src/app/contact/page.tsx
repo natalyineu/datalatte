@@ -113,7 +113,7 @@ export default function ContactPage() {
                   className="flex items-center gap-4 p-5 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-coffee-300 dark:hover:border-coffee-700 hover:bg-coffee-50 dark:hover:bg-gray-800 transition-all group"
                 >
                   <div className="w-11 h-11 bg-coffee-100 dark:bg-coffee-900/40 rounded-xl flex items-center justify-center shrink-0">
-                    <Mail size={20} className="text-coffee-700" />
+                    <Mail size={20} className="text-coffee-700 dark:text-coffee-300" />
                   </div>
                   <div>
                     <div className="font-semibold text-gray-900 dark:text-gray-100 group-hover:text-coffee-700 dark:group-hover:text-coffee-300 transition-colors">
@@ -131,7 +131,7 @@ export default function ContactPage() {
                   className="flex items-center gap-4 p-5 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-coffee-300 dark:hover:border-coffee-700 hover:bg-coffee-50 dark:hover:bg-gray-800 transition-all group"
                 >
                   <div className="w-11 h-11 bg-coffee-100 dark:bg-coffee-900/40 rounded-xl flex items-center justify-center shrink-0">
-                    <MessageCircle size={20} className="text-coffee-700" />
+                    <MessageCircle size={20} className="text-coffee-700 dark:text-coffee-300" />
                   </div>
                   <div>
                     <div className="font-semibold text-gray-900 dark:text-gray-100 group-hover:text-coffee-700 dark:group-hover:text-coffee-300 transition-colors">
@@ -149,7 +149,7 @@ export default function ContactPage() {
                   className="flex items-center gap-4 p-5 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-coffee-300 dark:hover:border-coffee-700 hover:bg-coffee-50 dark:hover:bg-gray-800 transition-all group"
                 >
                   <div className="w-11 h-11 bg-coffee-100 dark:bg-coffee-900/40 rounded-xl flex items-center justify-center shrink-0">
-                    <MapPin size={20} className="text-coffee-700" />
+                    <MapPin size={20} className="text-coffee-700 dark:text-coffee-300" />
                   </div>
                   <div>
                     <div className="font-semibold text-gray-900 dark:text-gray-100 group-hover:text-coffee-700 dark:group-hover:text-coffee-300 transition-colors">Office</div>
@@ -165,7 +165,7 @@ export default function ContactPage() {
                   className="flex items-center gap-4 p-5 rounded-xl border border-coffee-300 dark:border-coffee-700 bg-coffee-50 dark:bg-coffee-900/20 hover:border-coffee-400 dark:hover:border-coffee-600 hover:bg-coffee-100 dark:hover:bg-coffee-900/30 transition-all group"
                 >
                   <div className="w-11 h-11 bg-coffee-200 dark:bg-coffee-900/60 rounded-xl flex items-center justify-center shrink-0">
-                    <Calendar size={20} className="text-coffee-700" />
+                    <Calendar size={20} className="text-coffee-700 dark:text-coffee-300" />
                   </div>
                   <div>
                     <div className="font-semibold text-gray-900 dark:text-gray-100 group-hover:text-coffee-700 dark:group-hover:text-coffee-300 transition-colors">
@@ -183,7 +183,7 @@ export default function ContactPage() {
                   className="flex items-center gap-4 p-5 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-coffee-300 dark:hover:border-coffee-700 hover:bg-coffee-50 dark:hover:bg-gray-800 transition-all group"
                 >
                   <div className="w-11 h-11 bg-coffee-100 dark:bg-coffee-900/40 rounded-xl flex items-center justify-center shrink-0">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-coffee-700">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-coffee-700 dark:text-coffee-300">
                       <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 3a7 7 0 110 14A7 7 0 0112 5zm0 2a5 5 0 100 10A5 5 0 0012 7zm0 2a3 3 0 110 6 3 3 0 010-6z"/>
                     </svg>
                   </div>
@@ -201,7 +201,7 @@ export default function ContactPage() {
                   className="flex items-center gap-4 p-5 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-coffee-300 dark:hover:border-coffee-700 hover:bg-coffee-50 dark:hover:bg-gray-800 transition-all group"
                 >
                   <div className="w-11 h-11 bg-coffee-100 dark:bg-coffee-900/40 rounded-xl flex items-center justify-center shrink-0">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-coffee-700">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-coffee-700 dark:text-coffee-300">
                       <path d="M21 4H3a1 1 0 00-1 1v14a1 1 0 001 1h18a1 1 0 001-1V5a1 1 0 00-1-1zM9.5 15.5A3.5 3.5 0 016 12a3.5 3.5 0 013.5-3.5c1.1 0 2.07.51 2.7 1.3l-1.44 1.44A1.5 1.5 0 009.5 10.5 1.5 1.5 0 008 12a1.5 1.5 0 001.5 1.5c.57 0 1.07-.32 1.33-.79l1.44 1.44A3.47 3.47 0 019.5 15.5zm8.5-.5h-1.5v-1H15v1h-1.5V9H15v1h1.5V9H18v6z"/>
                     </svg>
                   </div>
@@ -217,7 +217,7 @@ export default function ContactPage() {
             {/* What happens next */}
             <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-6">
               <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
-                <Clock size={17} className="text-coffee-600" />
+                <Clock size={17} className="text-coffee-600 dark:text-coffee-400" />
                 What happens after you reach out
               </h3>
               <ul className="space-y-3">

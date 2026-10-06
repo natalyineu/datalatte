@@ -50,7 +50,7 @@ function gradeColor(grade: string) {
   if (grade === "B") return "text-coffee-700 bg-coffee-50 border-coffee-200";
   if (grade === "C") return "text-amber-600 bg-amber-50 border-amber-200";
   if (grade === "D") return "text-orange-600 bg-orange-50 border-orange-200";
-  return "text-red-600 bg-red-50 border-red-200";
+  return "text-red-600 bg-red-50 border-red-200 dark:text-red-300 dark:bg-red-900/30 dark:border-red-800";
 }
 
 function scoreIcon(score: number) {
@@ -164,20 +164,20 @@ export default function LocalSeoGrader() {
 
   if (step === "form") {
     return (
-      <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-lg border border-coffee-100 p-8 max-w-lg mx-auto">
+      <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-lg border border-coffee-100 p-8 max-w-lg mx-auto dark:bg-gray-900 dark:border-coffee-800">
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 rounded-xl bg-coffee-100 flex items-center justify-center">
-            <BarChart3 size={20} className="text-coffee-700" />
+          <div className="w-10 h-10 rounded-xl bg-coffee-100 flex items-center justify-center dark:bg-coffee-900/30">
+            <BarChart3 size={20} className="text-coffee-700 dark:text-coffee-300" />
           </div>
           <div>
-            <div className="font-bold text-gray-900">Local SEO Grader</div>
-            <div className="text-xs text-gray-500">Get your score in 30 seconds</div>
+            <div className="font-bold text-gray-900 dark:text-gray-50">Local SEO Grader</div>
+            <div className="text-xs text-gray-500 dark:text-gray-400">Get your score in 30 seconds</div>
           </div>
         </div>
 
         <div className="space-y-4">
           <div>
-            <label htmlFor="bname" className="block text-sm font-semibold text-gray-700 mb-1.5">
+            <label htmlFor="bname" className="block text-sm font-semibold text-gray-700 mb-1.5 dark:text-gray-200">
               Business name <span className="text-red-400">*</span>
             </label>
             <input
@@ -187,11 +187,11 @@ export default function LocalSeoGrader() {
               onChange={(e) => setName(e.target.value)}
               placeholder="e.g. Sunrise Coffee"
               required
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-coffee-500 focus:border-transparent"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-coffee-500 focus:border-transparent dark:border-gray-700"
             />
           </div>
           <div>
-            <label htmlFor="city" className="block text-sm font-semibold text-gray-700 mb-1.5">
+            <label htmlFor="city" className="block text-sm font-semibold text-gray-700 mb-1.5 dark:text-gray-200">
               City <span className="text-red-400">*</span>
             </label>
             <input
@@ -201,11 +201,11 @@ export default function LocalSeoGrader() {
               onChange={(e) => setCity(e.target.value)}
               placeholder="e.g. Austin, TX"
               required
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-coffee-500 focus:border-transparent"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-coffee-500 focus:border-transparent dark:border-gray-700"
             />
           </div>
           <div>
-            <label htmlFor="niche" className="block text-sm font-semibold text-gray-700 mb-1.5">
+            <label htmlFor="niche" className="block text-sm font-semibold text-gray-700 mb-1.5 dark:text-gray-200">
               Business type <span className="text-red-400">*</span>
             </label>
             <select
@@ -213,7 +213,7 @@ export default function LocalSeoGrader() {
               value={niche}
               onChange={(e) => setNiche(e.target.value)}
               required
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-coffee-500 focus:border-transparent bg-white"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-coffee-500 focus:border-transparent bg-white dark:border-gray-700 dark:bg-gray-900"
             >
               <option value="">Select your business type…</option>
               {NICHES.map((n) => (
@@ -250,11 +250,11 @@ export default function LocalSeoGrader() {
   return (
     <div className="max-w-2xl mx-auto">
       {/* Score header */}
-      <div className="bg-white rounded-2xl shadow-lg border border-coffee-100 p-8 mb-6">
+      <div className="bg-white rounded-2xl shadow-lg border border-coffee-100 p-8 mb-6 dark:bg-gray-900 dark:border-coffee-800">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <div className="text-sm font-medium text-gray-500 mb-1">{result.businessName} · {result.city}</div>
-            <div className="text-2xl font-extrabold text-gray-900">Local SEO Score</div>
+            <div className="text-sm font-medium text-gray-500 mb-1 dark:text-gray-400">{result.businessName} · {result.city}</div>
+            <div className="text-2xl font-extrabold text-gray-900 dark:text-gray-50">Local SEO Score</div>
           </div>
           <div className={`w-20 h-20 rounded-2xl border-2 flex flex-col items-center justify-center font-extrabold text-3xl ${gradeColor(result.grade)}`}>
             {result.grade}
@@ -263,11 +263,11 @@ export default function LocalSeoGrader() {
 
         {/* Progress bar */}
         <div className="mb-4">
-          <div className="flex justify-between text-xs text-gray-500 mb-1.5">
+          <div className="flex justify-between text-xs text-gray-500 mb-1.5 dark:text-gray-400">
             <span>{result.total} / {result.max} points</span>
             <span>{pct}%</span>
           </div>
-          <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
+          <div className="h-3 bg-gray-100 rounded-full overflow-hidden dark:bg-gray-800">
             <div
               className="h-full bg-coffee-600 rounded-full transition-all duration-1000"
               style={{ width: `${pct}%` }}
@@ -275,27 +275,27 @@ export default function LocalSeoGrader() {
           </div>
         </div>
 
-        <p className="text-gray-600 text-sm leading-relaxed">{result.summary}</p>
+        <p className="text-gray-600 text-sm leading-relaxed dark:text-gray-300">{result.summary}</p>
       </div>
 
       {/* Item breakdown */}
-      <div className="bg-white rounded-2xl shadow-lg border border-coffee-100 p-8 mb-6">
-        <h3 className="font-bold text-gray-900 mb-5">Score breakdown</h3>
+      <div className="bg-white rounded-2xl shadow-lg border border-coffee-100 p-8 mb-6 dark:bg-gray-900 dark:border-coffee-800">
+        <h3 className="font-bold text-gray-900 mb-5 dark:text-gray-50">Score breakdown</h3>
         <div className="space-y-4">
           {result.items.map((item) => (
-            <div key={item.label} className={`rounded-xl p-4 border ${item.score === 2 ? "bg-green-50 border-green-100" : item.score === 1 ? "bg-amber-50 border-amber-100" : "bg-red-50 border-red-100"}`}>
+            <div key={item.label} className={`rounded-xl p-4 border ${item.score === 2 ? "bg-green-50 border-green-100 dark:bg-green-900/30 dark:border-green-800" : item.score === 1 ? "bg-amber-50 border-amber-100 dark:bg-amber-900/30 dark:border-amber-800" : "bg-red-50 border-red-100 dark:bg-red-900/30 dark:border-red-800"}`}>
               <div className="flex items-start gap-3">
                 {scoreIcon(item.score)}
                 <div className="flex-1 min-w-0">
-                  <div className="font-semibold text-gray-900 text-sm">{item.label}</div>
-                  <p className="text-xs text-gray-500 mt-0.5 mb-2">{item.detail}</p>
+                  <div className="font-semibold text-gray-900 text-sm dark:text-gray-50">{item.label}</div>
+                  <p className="text-xs text-gray-500 mt-0.5 mb-2 dark:text-gray-400">{item.detail}</p>
                   {item.score < 2 && (
-                    <p className="text-xs text-gray-700 bg-white/70 rounded-lg px-3 py-2 border border-gray-100">
+                    <p className="text-xs text-gray-700 bg-white/70 rounded-lg px-3 py-2 border border-gray-100 dark:text-gray-200 dark:border-gray-700 dark:bg-gray-900/70">
                       <span className="font-semibold">Fix: </span>{item.tip}
                     </p>
                   )}
                 </div>
-                <span className={`text-xs font-bold shrink-0 mt-0.5 ${item.score === 2 ? "text-green-600" : item.score === 1 ? "text-amber-600" : "text-red-500"}`}>
+                <span className={`text-xs font-bold shrink-0 mt-0.5 ${item.score === 2 ? "text-green-600 dark:text-green-300" : item.score === 1 ? "text-amber-600 dark:text-amber-300" : "text-red-500"}`}>
                   {item.score}/2
                 </span>
               </div>
@@ -311,7 +311,7 @@ export default function LocalSeoGrader() {
           This score is based on common patterns. A full free audit includes a manual review of
           your actual GBP, competitor analysis, and a prioritised action plan — delivered within 48 hours.
         </p>
-        <Link href="/free-audit" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3 rounded-xl hover:bg-coffee-100 transition-colors">
+        <Link href="/free-audit" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3 rounded-xl hover:bg-coffee-100 transition-colors dark:bg-gray-900 dark:text-gray-50">
           Get the full free audit <ArrowRight size={16} />
         </Link>
         <div className="mt-4">

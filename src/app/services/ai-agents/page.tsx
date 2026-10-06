@@ -41,8 +41,8 @@ const AGENTS = [
     icon: Zap,
     name: "Lead Responder",
     tagline: "< 60s response, 24/7",
-    color: "text-amber-600",
-    bg: "bg-amber-50 border-amber-100",
+    color: "text-amber-600 dark:text-amber-300",
+    bg: "bg-amber-50 border-amber-100 dark:bg-amber-900/30 dark:border-amber-800",
     trigger: "Webhook · Form submit · GBP message",
     model: "GPT-4o-mini",
     actions: ["Send personalised SMS/email", "Create CRM contact", "Notify owner"],
@@ -62,8 +62,8 @@ const AGENTS = [
     icon: Star,
     name: "Review Monitor",
     tagline: "Responds in < 2 hours",
-    color: "text-yellow-600",
-    bg: "bg-yellow-50 border-yellow-100",
+    color: "text-yellow-600 dark:text-yellow-300",
+    bg: "bg-yellow-50 border-yellow-100 dark:bg-yellow-900/30 dark:border-yellow-800",
     trigger: "GBP webhook · Yelp RSS · Facebook API",
     model: "Claude 3.5 Haiku",
     actions: ["Draft personalised reply", "Flag negatives for owner", "Log to sheet"],
@@ -84,8 +84,8 @@ const AGENTS = [
     icon: Calendar,
     name: "Booking Agent",
     tagline: "Fully conversational scheduling",
-    color: "text-blue-600",
-    bg: "bg-blue-50 border-blue-100",
+    color: "text-blue-600 dark:text-blue-300",
+    bg: "bg-blue-50 border-blue-100 dark:bg-blue-900/30 dark:border-blue-800",
     trigger: "Website chat · SMS · WhatsApp",
     model: "GPT-4o",
     actions: ["Check calendar availability", "Create booking", "Send confirmation"],
@@ -107,8 +107,8 @@ const AGENTS = [
     icon: Phone,
     name: "Missed Call Text-Back",
     tagline: "Recaptures 40% of lost calls",
-    color: "text-green-600",
-    bg: "bg-green-50 border-green-100",
+    color: "text-green-600 dark:text-green-300",
+    bg: "bg-green-50 border-green-100 dark:bg-green-900/30 dark:border-green-800",
     trigger: "Twilio missed-call webhook",
     model: "GPT-4o-mini",
     actions: ["Send SMS within 30s", "Offer booking link", "Escalate if urgent"],
@@ -129,8 +129,8 @@ const AGENTS = [
     icon: Bell,
     name: "No-Show Reducer",
     tagline: "Cuts no-shows by 30–50%",
-    color: "text-purple-600",
-    bg: "bg-purple-50 border-purple-100",
+    color: "text-purple-600 dark:text-purple-300",
+    bg: "bg-purple-50 border-purple-100 dark:bg-purple-900/30 dark:border-purple-800",
     trigger: "Cron · Booking system API",
     model: "Rule-based + GPT-4o-mini",
     actions: ["48h reminder SMS", "2h reminder", "Reschedule if no confirm"],
@@ -152,8 +152,8 @@ const AGENTS = [
     icon: MessageSquare,
     name: "FAQ / Website Chat",
     tagline: "Handles 80% of inbound questions",
-    color: "text-coffee-700",
-    bg: "bg-coffee-50 border-coffee-100",
+    color: "text-coffee-700 dark:text-coffee-300",
+    bg: "bg-coffee-50 border-coffee-100 dark:bg-coffee-900/20 dark:border-coffee-800",
     trigger: "Website widget · Facebook Messenger",
     model: "Claude 3.5 Sonnet (RAG)",
     actions: ["Answer from knowledge base", "Capture contact", "Escalate to human"],
@@ -174,8 +174,8 @@ const AGENTS = [
     icon: RotateCcw,
     name: "Reactivation Agent",
     tagline: "Wins back lapsed clients",
-    color: "text-rose-600",
-    bg: "bg-rose-50 border-rose-100",
+    color: "text-rose-600 dark:text-rose-300",
+    bg: "bg-rose-50 border-rose-100 dark:bg-rose-900/30 dark:border-rose-800",
     trigger: "CRM cron · Last visit > 60 days",
     model: "GPT-4o-mini",
     actions: ["Segment by last service", "Send personalised offer", "Track re-bookings"],
@@ -197,8 +197,8 @@ const AGENTS = [
     icon: Bot,
     name: "Reputation Pipeline",
     tagline: "Automates review generation",
-    color: "text-teal-600",
-    bg: "bg-teal-50 border-teal-100",
+    color: "text-teal-600 dark:text-teal-300",
+    bg: "bg-teal-50 border-teal-100 dark:bg-teal-900/30 dark:border-teal-800",
     trigger: "Post-visit webhook · POS API",
     model: "GPT-4o-mini + conditional logic",
     actions: ["Send review request", "Route happy → Google", "Route unhappy → private"],
@@ -220,8 +220,8 @@ const AGENTS = [
     icon: Share2,
     name: "Social Media Poster",
     tagline: "Posts daily — zero manual effort",
-    color: "text-pink-600",
-    bg: "bg-pink-50 border-pink-100",
+    color: "text-pink-600 dark:text-pink-300",
+    bg: "bg-pink-50 border-pink-100 dark:bg-pink-900/30 dark:border-pink-800",
     trigger: "Cron (9am daily) · Booking webhook · Review event",
     model: "Claude 3.5 Sonnet + GPT-4o Vision",
     actions: ["Generate platform-native caption", "Select & resize image", "Publish via Meta Graph API + GBP API"],
@@ -314,9 +314,9 @@ export default function AIAgentsPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(service) }} />
 
       {/* Tool promo banner */}
-      <div className="bg-coffee-50 border-b border-coffee-100 py-3 px-4 text-center text-sm">
-        <span className="text-gray-600">Want to explore AI agents yourself? </span>
-        <Link href="/tools/ai-agent-builder" className="font-semibold text-coffee-700 hover:underline">
+      <div className="bg-coffee-50 border-b border-coffee-100 py-3 px-4 text-center text-sm dark:bg-coffee-900/20 dark:border-coffee-800">
+        <span className="text-gray-600 dark:text-gray-300">Want to explore AI agents yourself? </span>
+        <Link href="/tools/ai-agent-builder" className="font-semibold text-coffee-700 hover:underline dark:text-coffee-300">
           Try our free AI Agent Builder →
         </Link>
       </div>
@@ -342,7 +342,7 @@ export default function AIAgentsPage() {
             trigger → classify → LLM call → structured action → human escalation path
           </p>
           <div className="flex flex-wrap justify-center gap-3">
-            <Link href="/free-audit" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg">
+            <Link href="/free-audit" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg dark:bg-gray-900 dark:text-gray-50">
               Request a Free Audit <ArrowRight size={17} />
             </Link>
             <Link href="/tools/ai-agent-builder" className="inline-flex items-center gap-2 border border-white/25 text-white/80 font-medium px-6 py-3.5 rounded-xl hover:bg-white/10 transition-all">
@@ -387,7 +387,7 @@ export default function AIAgentsPage() {
         <div className="text-center mb-12">
           <span className="section-label">The Agent Catalog</span>
           <h2 className="section-title">8 agents I build for local businesses</h2>
-          <p className="text-gray-500 max-w-xl mx-auto mt-3">
+          <p className="text-gray-500 max-w-xl mx-auto mt-3 dark:text-gray-400">
             Each card shows the real trigger, model, and function schema. These are deployed pipelines — not demos.
           </p>
         </div>
@@ -400,35 +400,35 @@ export default function AIAgentsPage() {
                 {/* Header */}
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-3">
-                    <div className={`w-9 h-9 rounded-lg bg-white flex items-center justify-center shadow-sm`}>
+                    <div className={`w-9 h-9 rounded-lg bg-white flex items-center justify-center shadow-sm dark:bg-gray-900`}>
                       <Icon size={18} className={agent.color} />
                     </div>
                     <div>
-                      <div className="font-bold text-gray-900 text-sm">{agent.name}</div>
+                      <div className="font-bold text-gray-900 text-sm dark:text-gray-50">{agent.name}</div>
                       <div className={`text-xs font-semibold ${agent.color}`}>{agent.tagline}</div>
                     </div>
                   </div>
                 </div>
 
                 {/* Description */}
-                <p className="text-gray-600 text-sm leading-relaxed">{agent.desc}</p>
+                <p className="text-gray-600 text-sm leading-relaxed dark:text-gray-300">{agent.desc}</p>
 
                 {/* Technical details */}
                 <div className="grid grid-cols-2 gap-2 text-xs">
-                  <div className="bg-white/70 rounded-lg px-3 py-2">
+                  <div className="bg-white/70 rounded-lg px-3 py-2 dark:bg-gray-900/70">
                     <div className="text-gray-400 font-mono mb-0.5">TRIGGER</div>
-                    <div className="text-gray-700 font-medium">{agent.trigger}</div>
+                    <div className="text-gray-700 font-medium dark:text-gray-200">{agent.trigger}</div>
                   </div>
-                  <div className="bg-white/70 rounded-lg px-3 py-2">
+                  <div className="bg-white/70 rounded-lg px-3 py-2 dark:bg-gray-900/70">
                     <div className="text-gray-400 font-mono mb-0.5">MODEL</div>
-                    <div className="text-gray-700 font-medium">{agent.model}</div>
+                    <div className="text-gray-700 font-medium dark:text-gray-200">{agent.model}</div>
                   </div>
                 </div>
 
                 {/* Actions */}
                 <div className="flex flex-wrap gap-1.5">
                   {agent.actions.map((a) => (
-                    <span key={a} className="text-xs bg-white/80 border border-white/60 text-gray-600 px-2.5 py-1 rounded-full font-medium">
+                    <span key={a} className="text-xs bg-white/80 border border-white/60 text-gray-600 px-2.5 py-1 rounded-full font-medium dark:text-gray-300 dark:bg-gray-900/80">
                       {a}
                     </span>
                   ))}
@@ -436,7 +436,7 @@ export default function AIAgentsPage() {
 
                 {/* Function schema */}
                 <details className="group">
-                  <summary className="flex items-center gap-1.5 text-xs font-mono text-gray-500 cursor-pointer hover:text-gray-700 select-none list-none">
+                  <summary className="flex items-center gap-1.5 text-xs font-mono text-gray-500 cursor-pointer hover:text-gray-700 select-none list-none dark:text-gray-400">
                     <Code2 size={12} />
                     <span>function schema</span>
                     <span className="ml-auto text-gray-400 group-open:rotate-90 transition-transform inline-block">›</span>
@@ -463,7 +463,7 @@ export default function AIAgentsPage() {
               <div key={tool.name} className="bg-gray-900 border border-gray-800 rounded-xl p-4">
                 <div className="text-xs font-mono text-coffee-500 mb-1 uppercase tracking-widest">{tool.category}</div>
                 <div className="text-white font-semibold text-sm mb-1">{tool.name}</div>
-                <div className="text-gray-500 text-xs leading-relaxed">{tool.detail}</div>
+                <div className="text-gray-500 text-xs leading-relaxed dark:text-gray-400">{tool.detail}</div>
               </div>
             ))}
           </div>
@@ -476,19 +476,19 @@ export default function AIAgentsPage() {
           <div className="mb-8">
             <span className="section-label">Live Example</span>
             <h2 className="section-title">Lead Responder — full pipeline config</h2>
-            <p className="text-gray-500 mt-3">
+            <p className="text-gray-500 mt-3 dark:text-gray-400">
               This is an abbreviated version of the n8n workflow + OpenAI function definition used in a real hair salon deployment. The agent handles 40–60 inbound leads per month, responds within 45 seconds, and books ~28% into consultations.
             </p>
           </div>
 
           {/* Pipeline config block */}
-          <div className="rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+          <div className="rounded-2xl border border-gray-200 overflow-hidden shadow-sm dark:border-gray-700">
             {/* Tab bar */}
             <div className="bg-gray-950 flex items-center gap-1 px-4 py-3 border-b border-gray-800">
               <div className="w-3 h-3 rounded-full bg-red-500/60" />
               <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
               <div className="w-3 h-3 rounded-full bg-green-500/60" />
-              <span className="ml-3 text-xs text-gray-500 font-mono">lead_responder_agent.json</span>
+              <span className="ml-3 text-xs text-gray-500 font-mono dark:text-gray-400">lead_responder_agent.json</span>
             </div>
             <pre className="bg-gray-950 text-gray-300 text-xs p-5 overflow-x-auto leading-relaxed font-mono">
 {`{
@@ -583,10 +583,10 @@ export default function AIAgentsPage() {
       </SectionWrapper>
 
       {/* ── What's included ───────────────────────────────────────────────── */}
-      <SectionWrapper className="bg-coffee-50">
+      <SectionWrapper className="bg-coffee-50 dark:bg-coffee-900/20">
         <div className="max-w-4xl mx-auto">
-          <h3 className="font-bold text-gray-900 text-xl mb-6 flex items-center gap-2">
-            <span className="text-coffee-600">✓</span> What you get
+          <h3 className="font-bold text-gray-900 text-xl mb-6 flex items-center gap-2 dark:text-gray-50">
+            <span className="text-coffee-600 dark:text-coffee-400">✓</span> What you get
           </h3>
           <div className="grid sm:grid-cols-2 gap-3">
             {[
@@ -602,9 +602,9 @@ export default function AIAgentsPage() {
               "Full documentation + recorded walkthrough so you can extend it",
               "30-day post-launch support — fix anything that surfaces in production",
             ].map((item) => (
-              <div key={item} className="flex items-start gap-2.5 bg-white rounded-xl px-4 py-3 border border-coffee-100">
+              <div key={item} className="flex items-start gap-2.5 bg-white rounded-xl px-4 py-3 border border-coffee-100 dark:bg-gray-900 dark:border-coffee-800">
                 <CheckCircle2 size={17} className="text-coffee-500 shrink-0 mt-0.5" />
-                <span className="text-gray-700 text-sm">{item}</span>
+                <span className="text-gray-700 text-sm dark:text-gray-200">{item}</span>
               </div>
             ))}
           </div>
@@ -615,7 +615,7 @@ export default function AIAgentsPage() {
       <SectionWrapper>
         <div className="max-w-3xl mx-auto">
           <span className="section-label">Is This Right for You?</span>
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">This engagement is best for:</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 dark:text-gray-50">This engagement is best for:</h2>
           <div className="grid sm:grid-cols-2 gap-3">
             {[
               "Businesses handling 20+ inbound leads per month",
@@ -625,9 +625,9 @@ export default function AIAgentsPage() {
               "Tech-comfortable owners who want to understand what they're running",
               "Anyone who's ever lost a lead to a competitor who replied faster",
             ].map((item) => (
-              <div key={item} className="flex items-start gap-3 bg-coffee-50 rounded-xl p-4 border border-coffee-100">
-                <CheckCircle2 size={17} className="text-coffee-600 shrink-0 mt-0.5" />
-                <span className="text-gray-700 text-sm">{item}</span>
+              <div key={item} className="flex items-start gap-3 bg-coffee-50 rounded-xl p-4 border border-coffee-100 dark:bg-coffee-900/20 dark:border-coffee-800">
+                <CheckCircle2 size={17} className="text-coffee-600 shrink-0 mt-0.5 dark:text-coffee-400" />
+                <span className="text-gray-700 text-sm dark:text-gray-200">{item}</span>
               </div>
             ))}
           </div>
@@ -635,7 +635,7 @@ export default function AIAgentsPage() {
       </SectionWrapper>
 
       {/* ── FAQ ───────────────────────────────────────────────────────────── */}
-      <SectionWrapper className="bg-gray-50">
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-800/60">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-10">
             <span className="section-label">FAQ</span>
@@ -644,8 +644,8 @@ export default function AIAgentsPage() {
           <div className="space-y-4">
             {faqs.map((item) => (
               <div key={item.q} className="card p-6">
-                <h4 className="font-semibold text-gray-900 mb-2">{item.q}</h4>
-                <p className="text-gray-500 text-sm leading-relaxed">{item.a}</p>
+                <h4 className="font-semibold text-gray-900 mb-2 dark:text-gray-50">{item.q}</h4>
+                <p className="text-gray-500 text-sm leading-relaxed dark:text-gray-400">{item.a}</p>
               </div>
             ))}
           </div>
@@ -655,7 +655,7 @@ export default function AIAgentsPage() {
       {/* ── Related ───────────────────────────────────────────────────────── */}
       <SectionWrapper>
         <div className="text-center mb-8">
-          <h3 className="text-xl font-bold text-gray-900">Explore related services</h3>
+          <h3 className="text-xl font-bold text-gray-900 dark:text-gray-50">Explore related services</h3>
         </div>
         <div className="flex flex-wrap justify-center gap-3">
           {[

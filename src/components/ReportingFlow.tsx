@@ -112,7 +112,7 @@ export default function ReportingFlow() {
                 <span className="text-2xl shrink-0">{output.emoji}</span>
                 <div>
                   <div className="text-white text-sm font-semibold leading-tight">{output.name}</div>
-                  <div className="text-gray-500 text-xs mt-0.5">{output.timing}</div>
+                  <div className="text-gray-500 text-xs mt-0.5 dark:text-gray-400">{output.timing}</div>
                 </div>
               </div>
             </div>
@@ -123,7 +123,7 @@ export default function ReportingFlow() {
       {/* ── Mobile: stacked layout ── */}
       <div className="lg:hidden space-y-6">
         <div className="space-y-3">
-          <div className="text-xs font-semibold text-gray-500 uppercase tracking-widest text-center">Your Channels</div>
+          <div className="text-xs font-semibold text-gray-500 uppercase tracking-widest text-center dark:text-gray-400">Your Channels</div>
           {CHANNEL_GROUPS.map((group) => (
             <div
               key={group.label}
@@ -147,13 +147,13 @@ export default function ReportingFlow() {
         </div>
 
         <div className="space-y-3">
-          <div className="text-xs font-semibold text-gray-500 uppercase tracking-widest text-center">Your Reports</div>
+          <div className="text-xs font-semibold text-gray-500 uppercase tracking-widest text-center dark:text-gray-400">Your Reports</div>
           {OUTPUTS.map((output) => (
             <div key={output.name} className="bg-gray-900 border border-gray-700/60 rounded-xl p-3.5 flex items-center gap-3">
               <span className="text-xl">{output.emoji}</span>
               <div>
                 <div className="text-white text-sm font-semibold">{output.name}</div>
-                <div className="text-gray-500 text-xs">{output.timing}</div>
+                <div className="text-gray-500 text-xs dark:text-gray-400">{output.timing}</div>
               </div>
             </div>
           ))}

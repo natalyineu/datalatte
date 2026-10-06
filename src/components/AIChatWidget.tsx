@@ -105,7 +105,7 @@ function RenderText({ text }: { text: string }) {
           <p key={i} className="leading-relaxed">
             {parts.map((part, j) =>
               part.startsWith("**") && part.endsWith("**")
-                ? <strong key={j} className="font-semibold text-gray-900">{part.slice(2, -2)}</strong>
+                ? <strong key={j} className="font-semibold text-gray-900 dark:text-gray-50">{part.slice(2, -2)}</strong>
                 : <span key={j}>{part}</span>
             )}
           </p>
@@ -128,7 +128,7 @@ function CtaButtons({ cta }: { cta: string | null | undefined }) {
           className={`flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-all group
             ${btn.primary
               ? "bg-coffee-700 hover:bg-coffee-800 text-white"
-              : "bg-white border border-gray-200 hover:border-coffee-300 hover:bg-coffee-50 text-gray-700"
+              : "bg-white border border-gray-200 hover:border-coffee-300 hover:bg-coffee-50 text-gray-700 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-200"
             }`}
         >
           <span>{btn.label}</span>
@@ -168,11 +168,11 @@ function ChatLeadForm({ messages }: { messages: Message[] }) {
   }
 
   if (status === "done") {
-    return <p className="text-xs text-coffee-700 bg-coffee-50 rounded-xl px-3 py-2.5">Thanks! Nataliia will email you within one business day ☕</p>;
+    return <p className="text-xs text-coffee-700 bg-coffee-50 rounded-xl px-3 py-2.5 dark:text-coffee-300 dark:bg-coffee-900/20">Thanks! Nataliia will email you within one business day ☕</p>;
   }
   return (
-    <form onSubmit={submit} className="bg-coffee-50 border border-coffee-100 rounded-xl p-3">
-      <p className="text-xs font-semibold text-coffee-900 mb-2">Want a personal plan by email? Leave your address.</p>
+    <form onSubmit={submit} className="bg-coffee-50 border border-coffee-100 rounded-xl p-3 dark:bg-coffee-900/20 dark:border-coffee-800">
+      <p className="text-xs font-semibold text-coffee-900 mb-2 dark:text-coffee-100">Want a personal plan by email? Leave your address.</p>
       <div className="flex gap-2">
         <input
           id="chat-lead-email"
@@ -181,13 +181,13 @@ function ChatLeadForm({ messages }: { messages: Message[] }) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="you@business.com"
-          className="flex-1 min-w-0 text-xs px-3 py-2 rounded-lg border border-gray-200 bg-white text-gray-900 focus:outline-none focus:border-coffee-400"
+          className="flex-1 min-w-0 text-xs px-3 py-2 rounded-lg border border-gray-200 bg-white text-gray-900 focus:outline-none focus:border-coffee-400 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-50"
         />
         <button type="submit" disabled={status === "loading"} className="text-xs font-semibold px-3 py-2 rounded-lg bg-coffee-700 hover:bg-coffee-800 text-white disabled:opacity-60">
           {status === "loading" ? "…" : "Send"}
         </button>
       </div>
-      {status === "error" && <p className="text-[11px] text-red-600 mt-1.5">Could not send. Please try again or email hi@datalatte.pro</p>}
+      {status === "error" && <p className="text-[11px] text-red-600 mt-1.5 dark:text-red-300">Could not send. Please try again or email hi@datalatte.pro</p>}
     </form>
   );
 }
@@ -316,7 +316,7 @@ export default function AIChatWidget() {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed bottom-24 left-4 sm:left-6 z-50 w-[calc(100vw-32px)] sm:w-[400px] flex flex-col bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden"
+            className="fixed bottom-24 left-4 sm:left-6 z-50 w-[calc(100vw-32px)] sm:w-[400px] flex flex-col bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden dark:bg-gray-900 dark:border-gray-700"
             style={{ maxHeight: "min(580px, calc(100vh - 110px))" }}
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -342,13 +342,13 @@ export default function AIChatWidget() {
             </div>
 
             {/* Persistent free audit banner */}
-            <div className="bg-coffee-50 border-b border-coffee-100 px-3 py-2 shrink-0">
+            <div className="bg-coffee-50 border-b border-coffee-100 px-3 py-2 shrink-0 dark:bg-coffee-900/20 dark:border-coffee-800">
               <Link href="/free-audit" className="flex items-center justify-between group">
                 <div>
-                  <p className="text-xs font-semibold text-coffee-800">🎯 Free 20-min marketing audit</p>
-                  <p className="text-[10px] text-coffee-600">Nataliia reviews your setup personally — no obligation</p>
+                  <p className="text-xs font-semibold text-coffee-800 dark:text-coffee-200">🎯 Free 20-min marketing audit</p>
+                  <p className="text-[10px] text-coffee-600 dark:text-coffee-400">Nataliia reviews your setup personally — no obligation</p>
                 </div>
-                <ArrowRight size={14} className="text-coffee-600 group-hover:translate-x-0.5 transition-transform shrink-0" />
+                <ArrowRight size={14} className="text-coffee-600 group-hover:translate-x-0.5 transition-transform shrink-0 dark:text-coffee-400" />
               </Link>
             </div>
 
@@ -357,7 +357,7 @@ export default function AIChatWidget() {
               {messages.map((msg, i) => (
                 <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"} gap-2`}>
                   {msg.role === "assistant" && (
-                    <div className="w-6 h-6 bg-coffee-100 rounded-full flex items-center justify-center text-sm shrink-0 mt-1">
+                    <div className="w-6 h-6 bg-coffee-100 rounded-full flex items-center justify-center text-sm shrink-0 mt-1 dark:bg-coffee-900/30">
                       ☕
                     </div>
                   )}
@@ -367,7 +367,7 @@ export default function AIChatWidget() {
                       className={`rounded-2xl px-3 py-2.5 text-sm
                         ${msg.role === "user"
                           ? "bg-coffee-700 text-white rounded-tr-sm"
-                          : "bg-gray-50 border border-gray-100 text-gray-700 rounded-tl-sm"
+                          : "bg-gray-50 border border-gray-100 text-gray-700 rounded-tl-sm dark:bg-gray-800/60 dark:border-gray-700 dark:text-gray-200"
                         }`}
                     >
                       {msg.role === "user"
@@ -392,8 +392,8 @@ export default function AIChatWidget() {
               {/* Typing indicator */}
               {loading && (
                 <div className="flex gap-2 items-end">
-                  <div className="w-6 h-6 bg-coffee-100 rounded-full flex items-center justify-center text-sm shrink-0">☕</div>
-                  <div className="bg-gray-50 border border-gray-100 rounded-2xl rounded-tl-sm px-4 py-3 flex gap-1 items-center">
+                  <div className="w-6 h-6 bg-coffee-100 rounded-full flex items-center justify-center text-sm shrink-0 dark:bg-coffee-900/30">☕</div>
+                  <div className="bg-gray-50 border border-gray-100 rounded-2xl rounded-tl-sm px-4 py-3 flex gap-1 items-center dark:bg-gray-800/60 dark:border-gray-700">
                     {[0, 1, 2].map(d => (
                       <span key={d} className="w-1.5 h-1.5 bg-coffee-400 rounded-full animate-bounce" style={{ animationDelay: `${d * 0.15}s` }} />
                     ))}
@@ -413,7 +413,7 @@ export default function AIChatWidget() {
                     <button
                       key={s.label}
                       onClick={() => send(s.msg)}
-                      className="text-left text-xs bg-gray-50 hover:bg-coffee-50 border border-gray-100 hover:border-coffee-200 text-gray-600 hover:text-coffee-700 rounded-xl px-2.5 py-2 transition-all leading-tight"
+                      className="text-left text-xs bg-gray-50 hover:bg-coffee-50 border border-gray-100 hover:border-coffee-200 text-gray-600 hover:text-coffee-700 rounded-xl px-2.5 py-2 transition-all leading-tight dark:bg-gray-800/60 dark:border-gray-700 dark:text-gray-300"
                     >
                       {s.label}
                     </button>
@@ -425,7 +425,7 @@ export default function AIChatWidget() {
             {/* Input */}
             <form
               onSubmit={e => { e.preventDefault(); send(input); }}
-              className="flex items-center gap-2 px-3 py-2.5 border-t border-gray-100 shrink-0 bg-white"
+              className="flex items-center gap-2 px-3 py-2.5 border-t border-gray-100 shrink-0 bg-white dark:border-gray-700 dark:bg-gray-900"
             >
               <input
                 ref={inputRef}
@@ -433,7 +433,7 @@ export default function AIChatWidget() {
                 onChange={e => setInput(e.target.value)}
                 placeholder="Ask me anything about your marketing…"
                 disabled={loading}
-                className="flex-1 text-sm text-gray-900 placeholder:text-gray-400 bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-coffee-200 focus:border-coffee-400 disabled:opacity-50 transition-all"
+                className="flex-1 text-sm text-gray-900 placeholder:text-gray-400 bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-coffee-200 focus:border-coffee-400 disabled:opacity-50 transition-all dark:text-gray-50 dark:bg-gray-800/60 dark:border-gray-700"
               />
               <button
                 type="submit"

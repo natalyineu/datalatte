@@ -219,13 +219,13 @@ export default function AISocialMediaAgentPage() {
       </section>
 
       {/* ── Impact stats ────────────────────────────────────────────────────── */}
-      <div className="bg-coffee-50 border-b border-coffee-100 py-8">
+      <div className="bg-coffee-50 border-b border-coffee-100 py-8 dark:bg-coffee-900/20 dark:border-coffee-800">
         <SectionWrapper>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {impact.map((s) => (
               <div key={s.label}>
-                <p className="text-3xl font-bold text-coffee-700">{s.metric}</p>
-                <p className="text-sm text-gray-600 mt-1">{s.label}</p>
+                <p className="text-3xl font-bold text-coffee-700 dark:text-coffee-300">{s.metric}</p>
+                <p className="text-sm text-gray-600 mt-1 dark:text-gray-300">{s.label}</p>
               </div>
             ))}
           </div>
@@ -235,16 +235,16 @@ export default function AISocialMediaAgentPage() {
       {/* ── How it works pipeline ───────────────────────────────────────────── */}
       <SectionWrapper className="py-20">
         <h2 className="section-title mb-3">The 6-step social posting pipeline</h2>
-        <p className="text-gray-600 max-w-2xl mb-14">
+        <p className="text-gray-600 max-w-2xl mb-14 dark:text-gray-300">
           Triggered by real business events — completed appointments, new reviews, daily cron — not just a
           content calendar someone has to fill in. Every step is fully automated.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {pipeline.map((p) => (
-            <div key={p.step} className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+            <div key={p.step} className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm dark:bg-gray-900 dark:border-gray-700">
               <span className="text-3xl font-bold text-coffee-200">{p.step}</span>
-              <h3 className="text-base font-semibold text-gray-900 mt-2 mb-2">{p.title}</h3>
-              <p className="text-sm text-gray-600">{p.body}</p>
+              <h3 className="text-base font-semibold text-gray-900 mt-2 mb-2 dark:text-gray-50">{p.title}</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300">{p.body}</p>
             </div>
           ))}
         </div>
@@ -264,7 +264,7 @@ export default function AISocialMediaAgentPage() {
             <pre className="bg-gray-900 border border-gray-800 text-green-400 text-sm rounded-2xl p-6 overflow-x-auto leading-relaxed font-mono whitespace-pre-wrap">
               {toolSchema}
             </pre>
-            <p className="text-gray-500 text-xs mt-4">
+            <p className="text-gray-500 text-xs mt-4 dark:text-gray-400">
               Model: Claude 3.5 Sonnet for caption writing · GPT-4o Vision for image analysis and selection
             </p>
           </div>
@@ -274,22 +274,22 @@ export default function AISocialMediaAgentPage() {
       {/* ── Niche content examples ──────────────────────────────────────────── */}
       <SectionWrapper className="py-20">
         <h2 className="section-title mb-3">What it creates for your business type</h2>
-        <p className="text-gray-600 max-w-2xl mb-12">
+        <p className="text-gray-600 max-w-2xl mb-12 dark:text-gray-300">
           Content is tailored to your industry — not generic marketing filler.
           The agent knows what converts for your niche and writes accordingly.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {nicheExamples.map((niche) => (
-            <div key={niche.niche} className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+            <div key={niche.niche} className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm dark:bg-gray-900 dark:border-gray-700">
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-2xl">{niche.icon}</span>
-                <h3 className="text-base font-semibold text-gray-900">{niche.niche}</h3>
+                <h3 className="text-base font-semibold text-gray-900 dark:text-gray-50">{niche.niche}</h3>
               </div>
               <ul className="space-y-2.5">
                 {niche.examples.map((ex) => (
                   <li key={ex} className="flex items-start gap-2.5">
                     <CheckCircle2 size={15} className="text-coffee-500 mt-0.5 shrink-0" />
-                    <span className="text-sm text-gray-600">{ex}</span>
+                    <span className="text-sm text-gray-600 dark:text-gray-300">{ex}</span>
                   </li>
                 ))}
               </ul>
@@ -299,10 +299,10 @@ export default function AISocialMediaAgentPage() {
       </SectionWrapper>
 
       {/* ── What's included ─────────────────────────────────────────────────── */}
-      <section className="bg-gray-50 py-20">
+      <section className="bg-gray-50 py-20 dark:bg-gray-800/60">
         <SectionWrapper>
           <h2 className="section-title mb-3">Everything included</h2>
-          <p className="text-gray-600 max-w-2xl mb-12">
+          <p className="text-gray-600 max-w-2xl mb-12 dark:text-gray-300">
             Not just caption generation — a complete content operation that handles
             writing, image prep, scheduling, API publishing, and performance reporting.
           </p>
@@ -310,20 +310,20 @@ export default function AISocialMediaAgentPage() {
             {included.map((item) => {
               const Icon = item.icon;
               return (
-                <div key={item.label} className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
-                  <div className="w-9 h-9 rounded-lg bg-coffee-50 flex items-center justify-center mb-3">
-                    <Icon size={18} className="text-coffee-600" />
+                <div key={item.label} className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm dark:bg-gray-900 dark:border-gray-700">
+                  <div className="w-9 h-9 rounded-lg bg-coffee-50 flex items-center justify-center mb-3 dark:bg-coffee-900/20">
+                    <Icon size={18} className="text-coffee-600 dark:text-coffee-400" />
                   </div>
-                  <h3 className="text-sm font-semibold text-gray-900 mb-1">{item.label}</h3>
-                  <p className="text-xs text-gray-500 leading-relaxed">{item.detail}</p>
+                  <h3 className="text-sm font-semibold text-gray-900 mb-1 dark:text-gray-50">{item.label}</h3>
+                  <p className="text-xs text-gray-500 leading-relaxed dark:text-gray-400">{item.detail}</p>
                 </div>
               );
             })}
           </div>
           {/* A/B caption testing callout */}
-          <div className="mt-8 bg-coffee-50 border border-coffee-100 rounded-2xl p-6 max-w-2xl">
-            <h3 className="text-sm font-semibold text-gray-900 mb-2">A/B caption testing (included)</h3>
-            <p className="text-sm text-gray-600">
+          <div className="mt-8 bg-coffee-50 border border-coffee-100 rounded-2xl p-6 max-w-2xl dark:bg-coffee-900/20 dark:border-coffee-800">
+            <h3 className="text-sm font-semibold text-gray-900 mb-2 dark:text-gray-50">A/B caption testing (included)</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
               For high-value posts (promotions, seasonal campaigns), the agent generates two caption
               variants. Version A goes live first. 24 hours later, engagement data is pulled — the
               stronger performer's approach is fed back into your voice profile for future posts.
@@ -335,17 +335,17 @@ export default function AISocialMediaAgentPage() {
       {/* ── Integrations ────────────────────────────────────────────────────── */}
       <SectionWrapper className="py-20">
         <h2 className="section-title mb-3">Integrations the agent connects to</h2>
-        <p className="text-gray-600 max-w-2xl mb-10">
+        <p className="text-gray-600 max-w-2xl mb-10 dark:text-gray-300">
           Every integration uses official APIs — no scraping, no third-party schedulers that break
           when platforms update. Built on the same infrastructure Meta and Google provide to enterprise customers.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {integrations.map((t) => (
-            <div key={t.name} className="flex items-start gap-3 bg-gray-50 rounded-xl p-4">
+            <div key={t.name} className="flex items-start gap-3 bg-gray-50 rounded-xl p-4 dark:bg-gray-800/60">
               <CheckCircle2 size={16} className="text-coffee-500 mt-0.5 shrink-0" />
               <div>
-                <p className="text-sm font-semibold text-gray-900">{t.name}</p>
-                <p className="text-xs text-gray-500 mt-0.5">{t.detail}</p>
+                <p className="text-sm font-semibold text-gray-900 dark:text-gray-50">{t.name}</p>
+                <p className="text-xs text-gray-500 mt-0.5 dark:text-gray-400">{t.detail}</p>
               </div>
             </div>
           ))}
@@ -353,14 +353,14 @@ export default function AISocialMediaAgentPage() {
       </SectionWrapper>
 
       {/* ── FAQ ─────────────────────────────────────────────────────────────── */}
-      <section className="bg-gray-50 py-20">
+      <section className="bg-gray-50 py-20 dark:bg-gray-800/60">
         <SectionWrapper>
           <h2 className="section-title mb-10">Social media agent questions</h2>
           <div className="max-w-3xl space-y-6">
             {faqs.map((faq) => (
-              <div key={faq.q} className="border-b border-gray-200 pb-6">
-                <h3 className="text-base font-semibold text-gray-900 mb-2">{faq.q}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{faq.a}</p>
+              <div key={faq.q} className="border-b border-gray-200 pb-6 dark:border-gray-700">
+                <h3 className="text-base font-semibold text-gray-900 mb-2 dark:text-gray-50">{faq.q}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed dark:text-gray-300">{faq.a}</p>
               </div>
             ))}
           </div>
@@ -368,14 +368,14 @@ export default function AISocialMediaAgentPage() {
       </section>
 
       {/* ── Related links ───────────────────────────────────────────────────── */}
-      <SectionWrapper className="py-14 border-t border-gray-100">
-        <p className="text-sm font-semibold text-gray-500 mb-4 uppercase tracking-wider">Explore related pages</p>
+      <SectionWrapper className="py-14 border-t border-gray-100 dark:border-gray-700">
+        <p className="text-sm font-semibold text-gray-500 mb-4 uppercase tracking-wider dark:text-gray-400">Explore related pages</p>
         <div className="flex flex-wrap gap-3">
           {relatedLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-coffee-700 bg-coffee-50 border border-coffee-200 px-4 py-2 rounded-full hover:bg-coffee-100 transition-colors"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-coffee-700 bg-coffee-50 border border-coffee-200 px-4 py-2 rounded-full hover:bg-coffee-100 transition-colors dark:text-coffee-300 dark:bg-coffee-900/20 dark:border-coffee-800"
             >
               {link.label} →
             </Link>

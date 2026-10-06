@@ -124,7 +124,7 @@ export default function AIPhoneAnsweringPage() {
       </section>
 
       {/* Stats */}
-      <div className="bg-coffee-50 border-b border-coffee-100 py-8">
+      <div className="bg-coffee-50 border-b border-coffee-100 py-8 dark:bg-coffee-900/20 dark:border-coffee-800">
         <SectionWrapper>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
@@ -134,8 +134,8 @@ export default function AIPhoneAnsweringPage() {
               { value: "78%", label: "Of people prefer texting a business over waiting on hold" },
             ].map((s) => (
               <div key={s.label}>
-                <p className="text-3xl font-bold text-coffee-700">{s.value}</p>
-                <p className="text-sm text-gray-600 mt-1">{s.label}</p>
+                <p className="text-3xl font-bold text-coffee-700 dark:text-coffee-300">{s.value}</p>
+                <p className="text-sm text-gray-600 mt-1 dark:text-gray-300">{s.label}</p>
               </div>
             ))}
           </div>
@@ -145,15 +145,15 @@ export default function AIPhoneAnsweringPage() {
       {/* Real scenarios */}
       <SectionWrapper className="py-20">
         <h2 className="section-title mb-3">Every missed call scenario, handled</h2>
-        <p className="text-gray-600 max-w-2xl mb-14">Calls go unanswered for real reasons. The agent handles all of them — without you needing to change how you work.</p>
+        <p className="text-gray-600 max-w-2xl mb-14 dark:text-gray-300">Calls go unanswered for real reasons. The agent handles all of them — without you needing to change how you work.</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {scenarios.map((s) => (
-            <div key={s.trigger} className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
-              <p className="text-xs font-semibold text-coffee-600 uppercase tracking-wide mb-2">{s.trigger}</p>
-              <p className="text-sm text-gray-500 mb-3 italic">"{s.problem}"</p>
+            <div key={s.trigger} className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm dark:bg-gray-900 dark:border-gray-700">
+              <p className="text-xs font-semibold text-coffee-600 uppercase tracking-wide mb-2 dark:text-coffee-400">{s.trigger}</p>
+              <p className="text-sm text-gray-500 mb-3 italic dark:text-gray-400">"{s.problem}"</p>
               <div className="flex gap-2">
                 <CheckCircle2 size={16} className="text-green-500 mt-0.5 shrink-0" />
-                <p className="text-sm text-gray-700">{s.solution}</p>
+                <p className="text-sm text-gray-700 dark:text-gray-200">{s.solution}</p>
               </div>
             </div>
           ))}
@@ -161,13 +161,13 @@ export default function AIPhoneAnsweringPage() {
       </SectionWrapper>
 
       {/* Conversation demo */}
-      <section className="bg-gray-50 py-20">
+      <section className="bg-gray-50 py-20 dark:bg-gray-800/60">
         <SectionWrapper>
           <div className="max-w-2xl mx-auto">
             <h2 className="section-title mb-3 text-center">What the conversation looks like</h2>
-            <p className="text-gray-600 mb-10 text-center">A missed call on a Saturday afternoon. What happens next.</p>
+            <p className="text-gray-600 mb-10 text-center dark:text-gray-300">A missed call on a Saturday afternoon. What happens next.</p>
             <div className="bg-gray-900 rounded-2xl p-6 shadow-xl">
-              <p className="text-xs text-gray-500 mb-4 flex items-center gap-2">
+              <p className="text-xs text-gray-500 mb-4 flex items-center gap-2 dark:text-gray-400">
                 <span className="w-2 h-2 bg-green-400 rounded-full inline-block" />
                 Live SMS conversation — triggered by missed call
               </p>
@@ -191,26 +191,26 @@ export default function AIPhoneAnsweringPage() {
       {/* Capabilities */}
       <SectionWrapper className="py-20">
         <h2 className="section-title mb-3">What the phone answering agent does</h2>
-        <p className="text-gray-600 max-w-xl mb-10">Full capability stack — not just a text-back, but a complete conversational agent that handles the entire customer interaction.</p>
+        <p className="text-gray-600 max-w-xl mb-10 dark:text-gray-300">Full capability stack — not just a text-back, but a complete conversational agent that handles the entire customer interaction.</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-2xl">
           {capabilities.map((c) => (
             <div key={c} className="flex items-start gap-2">
               <CheckCircle2 size={16} className="text-coffee-500 mt-0.5 shrink-0" />
-              <p className="text-sm text-gray-700">{c}</p>
+              <p className="text-sm text-gray-700 dark:text-gray-200">{c}</p>
             </div>
           ))}
         </div>
       </SectionWrapper>
 
       {/* FAQ */}
-      <section className="bg-gray-50 py-20">
+      <section className="bg-gray-50 py-20 dark:bg-gray-800/60">
         <SectionWrapper>
           <h2 className="section-title mb-10">Phone answering agent questions</h2>
           <div className="max-w-3xl space-y-6">
             {faqs.map((faq) => (
-              <div key={faq.q} className="border-b border-gray-200 pb-6">
-                <h3 className="text-base font-semibold text-gray-900 mb-2">{faq.q}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{faq.a}</p>
+              <div key={faq.q} className="border-b border-gray-200 pb-6 dark:border-gray-700">
+                <h3 className="text-base font-semibold text-gray-900 mb-2 dark:text-gray-50">{faq.q}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed dark:text-gray-300">{faq.a}</p>
               </div>
             ))}
           </div>

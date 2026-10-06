@@ -53,10 +53,10 @@ export default function LineChart({
   }));
 
   return (
-    <div className="my-8 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+    <div className="my-8 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden dark:bg-gray-900 dark:border-gray-700">
       {title && (
-        <div className="px-5 pt-4 pb-3 border-b border-gray-100">
-          <p className="font-semibold text-gray-800 text-sm">{title}</p>
+        <div className="px-5 pt-4 pb-3 border-b border-gray-100 dark:border-gray-700">
+          <p className="font-semibold text-gray-800 text-sm dark:text-gray-100">{title}</p>
         </div>
       )}
       <div className="px-4 py-4">

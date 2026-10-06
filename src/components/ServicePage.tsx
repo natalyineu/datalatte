@@ -121,12 +121,12 @@ export default function ServicePage({
             {howItWorks.map((s, i) => (
               <span key={s.step}>
                 {s.title}
-                {i < howItWorks.length - 1 && <span className="mx-2 text-coffee-600">→</span>}
+                {i < howItWorks.length - 1 && <span className="mx-2 text-coffee-600 dark:text-coffee-400">→</span>}
               </span>
             ))}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href="/free-audit" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg">
+            <Link href="/free-audit" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg dark:bg-gray-900 dark:text-gray-50">
               Request a Free Audit <ArrowRight size={17} />
             </Link>
             <Link href="/pricing" className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-white/15 transition-all">
@@ -143,7 +143,7 @@ export default function ServicePage({
             <ScrollReveal key={s.label} delay={i * 0.08} direction="up">
               <div>
                 <div className="text-xl font-bold text-coffee-300">{s.value}</div>
-                <div className="text-xs text-gray-500 mt-0.5">{s.label}</div>
+                <div className="text-xs text-gray-500 mt-0.5 dark:text-gray-400">{s.label}</div>
               </div>
             </ScrollReveal>
           ))}
@@ -233,7 +233,7 @@ export default function ServicePage({
             <h2 className="text-3xl md:text-4xl font-bold text-white mt-2 mb-3">
               How I approach <span className="text-coffee-400">{service}</span>
             </h2>
-            <p className="text-gray-500 max-w-xl mx-auto text-sm leading-relaxed">
+            <p className="text-gray-500 max-w-xl mx-auto text-sm leading-relaxed dark:text-gray-400">
               A clear, repeatable process — so you always know where things stand.
             </p>
           </div>
@@ -260,9 +260,9 @@ export default function ServicePage({
               {howItWorks.slice(4).map((item, i) => (
                 <div key={item.step} className="flex-1 relative">
                   <div className="bg-gray-900/60 border border-gray-800/60 rounded-xl p-5 h-full mx-1 first:ml-0">
-                    <div className="text-xs font-mono text-coffee-600 mb-2 uppercase tracking-widest">{item.step}</div>
+                    <div className="text-xs font-mono text-coffee-600 mb-2 uppercase tracking-widest dark:text-coffee-400">{item.step}</div>
                     <div className="text-white/80 font-semibold mb-2 text-sm">{item.title}</div>
-                    <div className="text-gray-500 text-xs leading-relaxed">{item.desc}</div>
+                    <div className="text-gray-500 text-xs leading-relaxed dark:text-gray-400">{item.desc}</div>
                   </div>
                   {i < howItWorks.slice(4).length - 1 && (
                     <div className="hidden sm:flex absolute -right-2 top-1/2 -translate-y-1/2 z-10 w-4 h-4 bg-coffee-800 rounded-full items-center justify-center">
@@ -310,7 +310,7 @@ export default function ServicePage({
                 className="flex items-start gap-3 bg-white dark:bg-gray-800 rounded-xl p-5 border border-coffee-100 dark:border-gray-700 hover:border-coffee-400 dark:hover:border-coffee-600 hover:shadow-md transition-all animate-card-rise"
                 style={{ animationDelay: `${i * 0.06}s` }}
               >
-                <CheckCircle2 size={17} className="text-coffee-600 shrink-0 mt-0.5" />
+                <CheckCircle2 size={17} className="text-coffee-600 shrink-0 mt-0.5 dark:text-coffee-400" />
                 <span className="text-gray-700 dark:text-gray-300 text-sm">{item}</span>
               </div>
             ))}

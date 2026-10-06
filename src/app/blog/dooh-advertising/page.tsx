@@ -179,21 +179,21 @@ export default function DOOHHubPage() {
           <div className="mt-8 flex flex-wrap gap-3 justify-center text-sm">
             <Link
               href="/blog"
-              className="text-coffee-700 hover:text-coffee-900 hover:underline font-medium transition-colors"
+              className="text-coffee-700 hover:text-coffee-900 hover:underline font-medium transition-colors dark:text-coffee-300"
             >
               ← All articles
             </Link>
             <span className="text-gray-300">|</span>
             <Link
               href="/services/programmatic"
-              className="text-coffee-700 hover:text-coffee-900 hover:underline font-medium transition-colors"
+              className="text-coffee-700 hover:text-coffee-900 hover:underline font-medium transition-colors dark:text-coffee-300"
             >
               Programmatic advertising service →
             </Link>
             <span className="text-gray-300">|</span>
             <Link
               href="/blog/ctv-advertising"
-              className="text-coffee-700 hover:text-coffee-900 hover:underline font-medium transition-colors"
+              className="text-coffee-700 hover:text-coffee-900 hover:underline font-medium transition-colors dark:text-coffee-300"
             >
               CTV advertising guides →
             </Link>
@@ -209,7 +209,7 @@ export default function DOOHHubPage() {
             <section>
               <div className="mb-6">
                 <span className="section-label">Start here</span>
-                <h2 className="text-2xl font-bold text-gray-900 mt-1">The Essentials</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mt-1 dark:text-gray-50">The Essentials</h2>
                 <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">
                   Complete guide and strategy overview
                 </p>
@@ -221,7 +221,7 @@ export default function DOOHHubPage() {
                     href={`/blog/${a.slug}`}
                     className="card group flex flex-col gap-2 p-5 hover:border-coffee-300 hover:shadow-md transition-all duration-200"
                   >
-                    <span className="font-semibold text-gray-800 group-hover:text-coffee-700 transition-colors text-sm leading-snug">
+                    <span className="font-semibold text-gray-800 group-hover:text-coffee-700 transition-colors text-sm leading-snug dark:text-gray-100">
                       {a.title}
                     </span>
                     <span className="text-xs text-gray-400 dark:text-gray-500 line-clamp-2 leading-snug">
@@ -237,7 +237,7 @@ export default function DOOHHubPage() {
           <section>
             <div className="mb-6">
               <span className="section-label">By Business Type</span>
-              <h2 className="text-2xl font-bold text-gray-900 mt-1">DOOH by Niche</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mt-1 dark:text-gray-50">DOOH by Niche</h2>
               <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">
                 Industry-specific guides with screen recommendations, budgets, and creative tips
               </p>
@@ -249,7 +249,7 @@ export default function DOOHHubPage() {
                   href={`/blog/${a.slug}`}
                   className="card group flex flex-col gap-1 p-4 hover:border-coffee-300 hover:shadow-md transition-all duration-200"
                 >
-                  <span className="font-semibold text-gray-800 group-hover:text-coffee-700 transition-colors text-sm leading-tight">
+                  <span className="font-semibold text-gray-800 group-hover:text-coffee-700 transition-colors text-sm leading-tight dark:text-gray-100">
                     {a.label}
                   </span>
                   <span className="text-xs text-gray-400 dark:text-gray-500 line-clamp-2 leading-snug">
@@ -264,7 +264,7 @@ export default function DOOHHubPage() {
           <section>
             <div className="mb-6">
               <span className="section-label">United States</span>
-              <h2 className="text-2xl font-bold text-gray-900 mt-1">
+              <h2 className="text-2xl font-bold text-gray-900 mt-1 dark:text-gray-50">
                 DOOH Advertising by City
               </h2>
               <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">
@@ -278,7 +278,7 @@ export default function DOOHHubPage() {
                   href={`/blog/${a.slug}`}
                   className="card group flex flex-col gap-1 p-4 hover:border-coffee-300 hover:shadow-md transition-all duration-200"
                 >
-                  <span className="font-semibold text-gray-800 group-hover:text-coffee-700 transition-colors text-sm leading-tight">
+                  <span className="font-semibold text-gray-800 group-hover:text-coffee-700 transition-colors text-sm leading-tight dark:text-gray-100">
                     {a.label}
                   </span>
                 </Link>
@@ -289,8 +289,8 @@ export default function DOOHHubPage() {
         </div>
 
         {/* Stats bar */}
-        <div className="mt-16 bg-coffee-50 rounded-2xl p-8 text-center">
-          <p className="text-sm font-semibold text-coffee-700 uppercase tracking-widest mb-6">
+        <div className="mt-16 bg-coffee-50 rounded-2xl p-8 text-center dark:bg-coffee-900/20">
+          <p className="text-sm font-semibold text-coffee-700 uppercase tracking-widest mb-6 dark:text-coffee-300">
             What&apos;s covered
           </p>
           <div className="flex flex-wrap justify-center gap-10">
@@ -301,8 +301,8 @@ export default function DOOHHubPage() {
               { n: "$3–10", label: "Typical CPM range" },
             ].map(({ n, label }) => (
               <div key={label} className="text-center">
-                <div className="text-3xl font-bold text-coffee-800">{n}</div>
-                <div className="text-xs text-gray-500 mt-1">{label}</div>
+                <div className="text-3xl font-bold text-coffee-800 dark:text-coffee-200">{n}</div>
+                <div className="text-xs text-gray-500 mt-1 dark:text-gray-400">{label}</div>
               </div>
             ))}
           </div>

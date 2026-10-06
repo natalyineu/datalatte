@@ -139,7 +139,7 @@ export default function FreelancersPage() {
             personal brand and lead generation system that makes that happen consistently.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link href="/free-audit" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg">
+            <Link href="/free-audit" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg dark:bg-gray-900 dark:text-gray-50">
               Get a Free Brand Audit <ArrowRight size={17} />
             </Link>
             <Link href="/services/local-seo" className="inline-flex items-center gap-2 border border-white/30 text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-white/10 transition-all">
@@ -168,12 +168,12 @@ export default function FreelancersPage() {
         <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {challenges.map((c) => (
             <div key={c.title} className="card p-6 flex gap-4">
-              <div className="w-11 h-11 rounded-xl bg-coffee-100 flex items-center justify-center shrink-0">
-                <c.icon size={20} className="text-coffee-700" />
+              <div className="w-11 h-11 rounded-xl bg-coffee-100 flex items-center justify-center shrink-0 dark:bg-coffee-900/30">
+                <c.icon size={20} className="text-coffee-700 dark:text-coffee-300" />
               </div>
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">{c.title}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{c.desc}</p>
+                <h3 className="font-semibold text-gray-900 mb-2 dark:text-gray-50">{c.title}</h3>
+                <p className="text-sm text-gray-500 leading-relaxed dark:text-gray-400">{c.desc}</p>
               </div>
             </div>
           ))}
@@ -181,7 +181,7 @@ export default function FreelancersPage() {
       </SectionWrapper>
 
       {/* By persona */}
-      <SectionWrapper className="bg-gray-50">
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-800/60">
         <div className="text-center mb-12">
           <span className="section-label">Built for Your Type of Work</span>
           <h2 className="section-title">Different freelancers, different playbooks</h2>
@@ -191,13 +191,13 @@ export default function FreelancersPage() {
         </div>
         <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {personas.map((p) => (
-            <div key={p.type} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+            <div key={p.type} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 dark:bg-gray-900 dark:border-gray-700">
               <div className="text-3xl mb-3">{p.icon}</div>
-              <div className="font-bold text-gray-900 mb-1">{p.type}</div>
-              <p className="text-xs text-coffee-600 font-medium mb-4">{p.challenge}</p>
+              <div className="font-bold text-gray-900 mb-1 dark:text-gray-50">{p.type}</div>
+              <p className="text-xs text-coffee-600 font-medium mb-4 dark:text-coffee-400">{p.challenge}</p>
               <ul className="space-y-2">
                 {p.tactics.map((t) => (
-                  <li key={t} className="flex items-start gap-2 text-sm text-gray-600">
+                  <li key={t} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
                     <CheckCircle2 size={13} className="text-coffee-500 shrink-0 mt-0.5" />
                     {t}
                   </li>
@@ -217,29 +217,29 @@ export default function FreelancersPage() {
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-5xl mx-auto">
           {services.map((s) => (
-            <div key={s} className="flex items-start gap-2.5 bg-white rounded-xl px-4 py-3 border border-gray-100 shadow-sm">
+            <div key={s} className="flex items-start gap-2.5 bg-white rounded-xl px-4 py-3 border border-gray-100 shadow-sm dark:bg-gray-900 dark:border-gray-700">
               <CheckCircle2 size={15} className="text-coffee-500 shrink-0 mt-0.5" />
-              <span className="text-sm text-gray-700">{s}</span>
+              <span className="text-sm text-gray-700 dark:text-gray-200">{s}</span>
             </div>
           ))}
         </div>
       </SectionWrapper>
 
       {/* Process */}
-      <SectionWrapper className="bg-gray-50">
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-800/60">
         <div className="text-center mb-12">
           <span className="section-label">How We Work Together</span>
           <h2 className="section-title">From invisible to <span className="gradient-text">in-demand</span></h2>
         </div>
         <div className="max-w-3xl mx-auto space-y-4">
           {process.map((item) => (
-            <div key={item.step} className="flex gap-5 bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
-              <div className="w-10 h-10 rounded-full bg-coffee-100 text-coffee-700 font-bold text-sm flex items-center justify-center shrink-0">
+            <div key={item.step} className="flex gap-5 bg-white rounded-xl p-6 border border-gray-100 shadow-sm dark:bg-gray-900 dark:border-gray-700">
+              <div className="w-10 h-10 rounded-full bg-coffee-100 text-coffee-700 font-bold text-sm flex items-center justify-center shrink-0 dark:bg-coffee-900/30 dark:text-coffee-300">
                 {item.step}
               </div>
               <div>
-                <h4 className="font-semibold text-gray-900 mb-2">{item.title}</h4>
-                <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+                <h4 className="font-semibold text-gray-900 mb-2 dark:text-gray-50">{item.title}</h4>
+                <p className="text-gray-500 text-sm leading-relaxed dark:text-gray-400">{item.desc}</p>
               </div>
             </div>
           ))}
@@ -247,11 +247,11 @@ export default function FreelancersPage() {
       </SectionWrapper>
 
       {/* LinkedIn callout */}
-      <SectionWrapper className="bg-coffee-50">
+      <SectionWrapper className="bg-coffee-50 dark:bg-coffee-900/20">
         <div className="max-w-3xl mx-auto text-center">
           <span className="section-label">The #1 Channel for Most Freelancers</span>
           <h2 className="section-title mb-4">LinkedIn isn't optional — it's your portfolio, CV, and sales funnel in one</h2>
-          <p className="text-gray-600 mb-8 leading-relaxed">
+          <p className="text-gray-600 mb-8 leading-relaxed dark:text-gray-300">
             A well-optimised LinkedIn profile with consistent, expert content can generate 3–5 warm inbound enquiries per month without spending a penny on ads.
             Most freelancers' profiles are missing the fundamentals — headline, social proof, and a clear call-to-action.
           </p>
@@ -261,9 +261,9 @@ export default function FreelancersPage() {
               { label: "Content strategy", desc: "Post topics, frequency, and format that build authority without eating your day" },
               { label: "Outreach playbook", desc: "How to connect, follow up, and convert conversations into consultations — without spamming" },
             ].map((item) => (
-              <div key={item.label} className="bg-white rounded-xl p-4 border border-coffee-100">
-                <div className="font-semibold text-gray-900 text-sm mb-1">{item.label}</div>
-                <p className="text-xs text-gray-500 leading-relaxed">{item.desc}</p>
+              <div key={item.label} className="bg-white rounded-xl p-4 border border-coffee-100 dark:bg-gray-900 dark:border-coffee-800">
+                <div className="font-semibold text-gray-900 text-sm mb-1 dark:text-gray-50">{item.label}</div>
+                <p className="text-xs text-gray-500 leading-relaxed dark:text-gray-400">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -273,7 +273,7 @@ export default function FreelancersPage() {
       {/* Related links */}
       <SectionWrapper>
         <div className="text-center mb-8">
-          <h3 className="text-xl font-bold text-gray-900">Explore by service</h3>
+          <h3 className="text-xl font-bold text-gray-900 dark:text-gray-50">Explore by service</h3>
         </div>
         <div className="flex flex-wrap justify-center gap-3">
           {[

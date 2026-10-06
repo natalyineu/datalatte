@@ -18,10 +18,10 @@ export default function Error({
     <div className="min-h-[60vh] flex items-center justify-center px-4">
       <div className="text-center max-w-md">
         <div className="text-5xl mb-6">☕</div>
-        <h1 className="text-2xl font-bold text-gray-900 mb-3">
+        <h1 className="text-2xl font-bold text-gray-900 mb-3 dark:text-gray-50">
           Something went wrong
         </h1>
-        <p className="text-gray-500 mb-8 leading-relaxed">
+        <p className="text-gray-500 mb-8 leading-relaxed dark:text-gray-400">
           We hit an unexpected error. Please try again — if the issue persists,
           head back to the homepage.
         </p>

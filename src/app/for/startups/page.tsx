@@ -139,7 +139,7 @@ export default function StartupsPage() {
             rapid experiments, clear data, and a bias toward action over process.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link href="/free-audit" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg">
+            <Link href="/free-audit" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg dark:bg-gray-900 dark:text-gray-50">
               Get a Free Growth Audit <ArrowRight size={17} />
             </Link>
             <Link href="/services/analytics" className="inline-flex items-center gap-2 border border-white/30 text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-white/10 transition-all">
@@ -168,12 +168,12 @@ export default function StartupsPage() {
         <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {challenges.map((c) => (
             <div key={c.title} className="card p-6 flex gap-4">
-              <div className="w-11 h-11 rounded-xl bg-coffee-100 flex items-center justify-center shrink-0">
-                <c.icon size={20} className="text-coffee-700" />
+              <div className="w-11 h-11 rounded-xl bg-coffee-100 flex items-center justify-center shrink-0 dark:bg-coffee-900/30">
+                <c.icon size={20} className="text-coffee-700 dark:text-coffee-300" />
               </div>
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">{c.title}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{c.desc}</p>
+                <h3 className="font-semibold text-gray-900 mb-2 dark:text-gray-50">{c.title}</h3>
+                <p className="text-sm text-gray-500 leading-relaxed dark:text-gray-400">{c.desc}</p>
               </div>
             </div>
           ))}
@@ -181,7 +181,7 @@ export default function StartupsPage() {
       </SectionWrapper>
 
       {/* Growth by stage */}
-      <SectionWrapper className="bg-gray-50">
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-800/60">
         <div className="text-center mb-12">
           <span className="section-label">Right Strategy, Right Stage</span>
           <h2 className="section-title">Marketing that evolves with your funding</h2>
@@ -189,15 +189,15 @@ export default function StartupsPage() {
         </div>
         <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {stages.map((s) => (
-            <div key={s.stage} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-              <div className="inline-block bg-coffee-100 text-coffee-700 text-xs font-bold px-3 py-1 rounded-full mb-3">
+            <div key={s.stage} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 dark:bg-gray-900 dark:border-gray-700">
+              <div className="inline-block bg-coffee-100 text-coffee-700 text-xs font-bold px-3 py-1 rounded-full mb-3 dark:bg-coffee-900/30 dark:text-coffee-300">
                 {s.stage}
               </div>
-              <div className="text-lg font-bold text-gray-900 mb-1">{s.focus}</div>
+              <div className="text-lg font-bold text-gray-900 mb-1 dark:text-gray-50">{s.focus}</div>
               <p className="text-xs text-gray-400 mb-4">{s.goal}</p>
               <ul className="space-y-2">
                 {s.tactics.map((t) => (
-                  <li key={t} className="flex items-start gap-2 text-sm text-gray-600">
+                  <li key={t} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
                     <Rocket size={13} className="text-coffee-500 shrink-0 mt-0.5" />
                     {t}
                   </li>
@@ -217,29 +217,29 @@ export default function StartupsPage() {
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-5xl mx-auto">
           {services.map((s) => (
-            <div key={s} className="flex items-start gap-2.5 bg-white rounded-xl px-4 py-3 border border-gray-100 shadow-sm">
+            <div key={s} className="flex items-start gap-2.5 bg-white rounded-xl px-4 py-3 border border-gray-100 shadow-sm dark:bg-gray-900 dark:border-gray-700">
               <CheckCircle2 size={15} className="text-coffee-500 shrink-0 mt-0.5" />
-              <span className="text-sm text-gray-700">{s}</span>
+              <span className="text-sm text-gray-700 dark:text-gray-200">{s}</span>
             </div>
           ))}
         </div>
       </SectionWrapper>
 
       {/* Process */}
-      <SectionWrapper className="bg-gray-50">
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-800/60">
         <div className="text-center mb-12">
           <span className="section-label">How We Work Together</span>
           <h2 className="section-title">Move fast, measure everything, <span className="gradient-text">scale what works</span></h2>
         </div>
         <div className="max-w-3xl mx-auto space-y-4">
           {process.map((item) => (
-            <div key={item.step} className="flex gap-5 bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
-              <div className="w-10 h-10 rounded-full bg-coffee-100 text-coffee-700 font-bold text-sm flex items-center justify-center shrink-0">
+            <div key={item.step} className="flex gap-5 bg-white rounded-xl p-6 border border-gray-100 shadow-sm dark:bg-gray-900 dark:border-gray-700">
+              <div className="w-10 h-10 rounded-full bg-coffee-100 text-coffee-700 font-bold text-sm flex items-center justify-center shrink-0 dark:bg-coffee-900/30 dark:text-coffee-300">
                 {item.step}
               </div>
               <div>
-                <h4 className="font-semibold text-gray-900 mb-2">{item.title}</h4>
-                <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+                <h4 className="font-semibold text-gray-900 mb-2 dark:text-gray-50">{item.title}</h4>
+                <p className="text-gray-500 text-sm leading-relaxed dark:text-gray-400">{item.desc}</p>
               </div>
             </div>
           ))}
@@ -247,7 +247,7 @@ export default function StartupsPage() {
       </SectionWrapper>
 
       {/* Key metrics callout */}
-      <SectionWrapper className="bg-coffee-50">
+      <SectionWrapper className="bg-coffee-50 dark:bg-coffee-900/20">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-10">
             <span className="section-label">What Investors Want to See</span>
@@ -260,10 +260,10 @@ export default function StartupsPage() {
               { metric: "MoM growth rate", icon: "📈", desc: "Compound growth rate month-over-month across key cohorts" },
               { metric: "Retention curves", icon: "🔁", desc: "D7, D30, D90 retention — the real signal of product-market fit" },
             ].map((m) => (
-              <div key={m.metric} className="bg-white rounded-2xl p-5 border border-coffee-100 text-center">
+              <div key={m.metric} className="bg-white rounded-2xl p-5 border border-coffee-100 text-center dark:bg-gray-900 dark:border-coffee-800">
                 <div className="text-3xl mb-2">{m.icon}</div>
-                <div className="font-bold text-gray-900 mb-1 text-sm">{m.metric}</div>
-                <p className="text-xs text-gray-500 leading-relaxed">{m.desc}</p>
+                <div className="font-bold text-gray-900 mb-1 text-sm dark:text-gray-50">{m.metric}</div>
+                <p className="text-xs text-gray-500 leading-relaxed dark:text-gray-400">{m.desc}</p>
               </div>
             ))}
           </div>
@@ -273,7 +273,7 @@ export default function StartupsPage() {
       {/* Related links */}
       <SectionWrapper>
         <div className="text-center mb-8">
-          <h3 className="text-xl font-bold text-gray-900">Explore by service</h3>
+          <h3 className="text-xl font-bold text-gray-900 dark:text-gray-50">Explore by service</h3>
         </div>
         <div className="flex flex-wrap justify-center gap-3">
           {[

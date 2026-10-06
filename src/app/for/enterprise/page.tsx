@@ -106,7 +106,7 @@ export default function EnterprisePage() {
             experience that enterprise work demands, without the complexity and overhead of a full agency.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link href="/contact" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg">
+            <Link href="/contact" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg dark:bg-gray-900 dark:text-gray-50">
               Start a conversation <ArrowRight size={17} />
             </Link>
             <Link href="/about" className="inline-flex items-center gap-2 border border-white/30 text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-white/10 transition-all">
@@ -119,14 +119,14 @@ export default function EnterprisePage() {
       {/* Agency credentials bar */}
       <div className="bg-gray-900 py-6 px-4">
         <div className="max-w-3xl mx-auto">
-          <p className="text-center text-xs font-semibold text-gray-500 uppercase tracking-widest mb-4">
+          <p className="text-center text-xs font-semibold text-gray-500 uppercase tracking-widest mb-4 dark:text-gray-400">
             Agency experience
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {credentials.map((c) => (
               <div key={c.label} className="text-center border border-gray-700 rounded-xl px-4 py-3">
                 <p className="font-bold text-white text-base">{c.label}</p>
-                <p className="text-xs text-gray-500 mt-0.5">{c.sub}</p>
+                <p className="text-xs text-gray-500 mt-0.5 dark:text-gray-400">{c.sub}</p>
               </div>
             ))}
           </div>
@@ -142,12 +142,12 @@ export default function EnterprisePage() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {capabilities.map((c) => (
             <div key={c.title} className="card p-6 flex gap-4">
-              <div className="w-11 h-11 rounded-xl bg-coffee-100 flex items-center justify-center shrink-0">
-                <c.icon size={20} className="text-coffee-700" />
+              <div className="w-11 h-11 rounded-xl bg-coffee-100 flex items-center justify-center shrink-0 dark:bg-coffee-900/30">
+                <c.icon size={20} className="text-coffee-700 dark:text-coffee-300" />
               </div>
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2 text-sm">{c.title}</h3>
-                <p className="text-xs text-gray-500 leading-relaxed">{c.desc}</p>
+                <h3 className="font-semibold text-gray-900 mb-2 text-sm dark:text-gray-50">{c.title}</h3>
+                <p className="text-xs text-gray-500 leading-relaxed dark:text-gray-400">{c.desc}</p>
               </div>
             </div>
           ))}
@@ -155,16 +155,16 @@ export default function EnterprisePage() {
       </SectionWrapper>
 
       {/* Full services */}
-      <SectionWrapper className="bg-gray-50">
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-800/60">
         <div className="text-center mb-10">
           <span className="section-label">Service Scope</span>
           <h2 className="section-title">Full enterprise service catalogue</h2>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-5xl mx-auto">
           {services.map((s) => (
-            <div key={s} className="flex items-start gap-2.5 bg-white rounded-xl px-4 py-3 border border-gray-100 shadow-sm">
+            <div key={s} className="flex items-start gap-2.5 bg-white rounded-xl px-4 py-3 border border-gray-100 shadow-sm dark:bg-gray-900 dark:border-gray-700">
               <CheckCircle2 size={15} className="text-coffee-500 shrink-0 mt-0.5" />
-              <span className="text-sm text-gray-700">{s}</span>
+              <span className="text-sm text-gray-700 dark:text-gray-200">{s}</span>
             </div>
           ))}
         </div>
@@ -182,9 +182,9 @@ export default function EnterprisePage() {
           </div>
           <div className="space-y-3">
             {whitelabel.map((item) => (
-              <div key={item} className="flex items-start gap-3 bg-coffee-50 rounded-xl px-5 py-4 border border-coffee-100">
-                <CheckCircle2 size={17} className="text-coffee-600 shrink-0 mt-0.5" />
-                <span className="text-gray-700 text-sm">{item}</span>
+              <div key={item} className="flex items-start gap-3 bg-coffee-50 rounded-xl px-5 py-4 border border-coffee-100 dark:bg-coffee-900/20 dark:border-coffee-800">
+                <CheckCircle2 size={17} className="text-coffee-600 shrink-0 mt-0.5 dark:text-coffee-400" />
+                <span className="text-gray-700 text-sm dark:text-gray-200">{item}</span>
               </div>
             ))}
           </div>
@@ -192,7 +192,7 @@ export default function EnterprisePage() {
       </SectionWrapper>
 
       {/* Why not a full agency */}
-      <SectionWrapper className="bg-coffee-50">
+      <SectionWrapper className="bg-coffee-50 dark:bg-coffee-900/20">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-10">
             <span className="section-label">The Difference</span>
@@ -213,9 +213,9 @@ export default function EnterprisePage() {
                 desc: "No inflated reporting decks designed to justify retainers. You see exactly what's working, what isn't, and what we're doing about it. Your budget is treated like my own.",
               },
             ].map((item) => (
-              <div key={item.title} className="bg-white rounded-2xl p-6 border border-coffee-100">
-                <h3 className="font-bold text-gray-900 mb-3">{item.title}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
+              <div key={item.title} className="bg-white rounded-2xl p-6 border border-coffee-100 dark:bg-gray-900 dark:border-coffee-800">
+                <h3 className="font-bold text-gray-900 mb-3 dark:text-gray-50">{item.title}</h3>
+                <p className="text-sm text-gray-500 leading-relaxed dark:text-gray-400">{item.desc}</p>
               </div>
             ))}
           </div>

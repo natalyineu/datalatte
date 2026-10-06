@@ -116,7 +116,7 @@ export default function MediumBusinessPage() {
             That's where I come in.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link href="/free-audit" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg">
+            <Link href="/free-audit" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg dark:bg-gray-900 dark:text-gray-50">
               Get a Free Strategy Review <ArrowRight size={17} />
             </Link>
             <Link href="/about" className="inline-flex items-center gap-2 border border-white/30 text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-white/10 transition-all">
@@ -145,12 +145,12 @@ export default function MediumBusinessPage() {
         <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {challenges.map((c) => (
             <div key={c.title} className="card p-6 flex gap-4">
-              <div className="w-11 h-11 rounded-xl bg-coffee-100 flex items-center justify-center shrink-0">
-                <c.icon size={20} className="text-coffee-700" />
+              <div className="w-11 h-11 rounded-xl bg-coffee-100 flex items-center justify-center shrink-0 dark:bg-coffee-900/30">
+                <c.icon size={20} className="text-coffee-700 dark:text-coffee-300" />
               </div>
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">{c.title}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{c.desc}</p>
+                <h3 className="font-semibold text-gray-900 mb-2 dark:text-gray-50">{c.title}</h3>
+                <p className="text-sm text-gray-500 leading-relaxed dark:text-gray-400">{c.desc}</p>
               </div>
             </div>
           ))}
@@ -158,7 +158,7 @@ export default function MediumBusinessPage() {
       </SectionWrapper>
 
       {/* Services */}
-      <SectionWrapper className="bg-gray-50">
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-800/60">
         <div className="text-center mb-10">
           <span className="section-label">Full-Service Scope</span>
           <h2 className="section-title">Everything on the table</h2>
@@ -166,9 +166,9 @@ export default function MediumBusinessPage() {
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-5xl mx-auto">
           {services.map((s) => (
-            <div key={s} className="flex items-start gap-2.5 bg-white rounded-xl px-4 py-3 border border-gray-100 shadow-sm">
+            <div key={s} className="flex items-start gap-2.5 bg-white rounded-xl px-4 py-3 border border-gray-100 shadow-sm dark:bg-gray-900 dark:border-gray-700">
               <CheckCircle2 size={15} className="text-coffee-500 shrink-0 mt-0.5" />
-              <span className="text-sm text-gray-700">{s}</span>
+              <span className="text-sm text-gray-700 dark:text-gray-200">{s}</span>
             </div>
           ))}
         </div>
@@ -182,13 +182,13 @@ export default function MediumBusinessPage() {
         </div>
         <div className="max-w-3xl mx-auto space-y-4">
           {process.map((item) => (
-            <div key={item.step} className="flex gap-5 bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
-              <div className="w-10 h-10 rounded-full bg-coffee-100 text-coffee-700 font-bold text-sm flex items-center justify-center shrink-0">
+            <div key={item.step} className="flex gap-5 bg-white rounded-xl p-6 border border-gray-100 shadow-sm dark:bg-gray-900 dark:border-gray-700">
+              <div className="w-10 h-10 rounded-full bg-coffee-100 text-coffee-700 font-bold text-sm flex items-center justify-center shrink-0 dark:bg-coffee-900/30 dark:text-coffee-300">
                 {item.step}
               </div>
               <div>
-                <h4 className="font-semibold text-gray-900 mb-2">{item.title}</h4>
-                <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+                <h4 className="font-semibold text-gray-900 mb-2 dark:text-gray-50">{item.title}</h4>
+                <p className="text-gray-500 text-sm leading-relaxed dark:text-gray-400">{item.desc}</p>
               </div>
             </div>
           ))}
@@ -196,7 +196,7 @@ export default function MediumBusinessPage() {
       </SectionWrapper>
 
       {/* Industries */}
-      <SectionWrapper className="bg-coffee-50">
+      <SectionWrapper className="bg-coffee-50 dark:bg-coffee-900/20">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-10">
             <span className="section-label">Industries</span>
@@ -204,7 +204,7 @@ export default function MediumBusinessPage() {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
             {industries.map((ind) => (
-              <div key={ind} className="bg-white rounded-xl px-4 py-3 text-center border border-coffee-100 text-sm font-medium text-gray-700">
+              <div key={ind} className="bg-white rounded-xl px-4 py-3 text-center border border-coffee-100 text-sm font-medium text-gray-700 dark:bg-gray-900 dark:border-coffee-800 dark:text-gray-200">
                 {ind}
               </div>
             ))}
@@ -215,7 +215,7 @@ export default function MediumBusinessPage() {
       {/* Related */}
       <SectionWrapper>
         <div className="text-center mb-8">
-          <h3 className="text-xl font-bold text-gray-900">Explore by service</h3>
+          <h3 className="text-xl font-bold text-gray-900 dark:text-gray-50">Explore by service</h3>
         </div>
         <div className="flex flex-wrap justify-center gap-3">
           {[

@@ -57,7 +57,7 @@ export default function HeroAnimated() {
         <Link
           href="/free-audit"
           onClick={() => gtag.freeAuditClicked("hero")}
-          className="inline-flex items-center justify-center gap-2 bg-white text-coffee-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5"
+          className="inline-flex items-center justify-center gap-2 bg-white text-coffee-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 dark:bg-gray-900 dark:text-coffee-100"
         >
           Get a Free Marketing Audit
           <ArrowRight size={18} />

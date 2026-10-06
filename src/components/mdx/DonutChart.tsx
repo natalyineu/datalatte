@@ -56,10 +56,10 @@ export default function DonutChart({
     unit === "%" ? `${v}%` : unit ? `${unit}${v}` : String(v);
 
   return (
-    <div className="my-8 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+    <div className="my-8 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden dark:bg-gray-900 dark:border-gray-700">
       {title && (
-        <div className="px-5 pt-4 pb-3 border-b border-gray-100">
-          <p className="font-semibold text-gray-800 text-sm">{title}</p>
+        <div className="px-5 pt-4 pb-3 border-b border-gray-100 dark:border-gray-700">
+          <p className="font-semibold text-gray-800 text-sm dark:text-gray-100">{title}</p>
         </div>
       )}
       <div className="px-5 py-4 flex flex-col sm:flex-row items-center gap-6">
@@ -101,8 +101,8 @@ export default function DonutChart({
                 className="w-3 h-3 rounded-full shrink-0"
                 style={{ background: s.color }}
               />
-              <span className="text-sm text-gray-700 flex-1 truncate">{s.label}</span>
-              <span className="text-sm font-bold text-gray-800 tabular-nums">{fmt(s.raw)}</span>
+              <span className="text-sm text-gray-700 flex-1 truncate dark:text-gray-200">{s.label}</span>
+              <span className="text-sm font-bold text-gray-800 tabular-nums dark:text-gray-100">{fmt(s.raw)}</span>
               <span className="text-xs text-gray-400 w-10 text-right tabular-nums">{Math.round(s.pct)}%</span>
             </div>
           ))}

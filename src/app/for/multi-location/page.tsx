@@ -129,7 +129,7 @@ export default function MultiLocationPage() {
             Most agencies treat it the same — you need someone who knows the difference.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
-            <Link href="/free-audit" className="inline-flex items-center justify-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg">
+            <Link href="/free-audit" className="inline-flex items-center justify-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg dark:bg-gray-900 dark:text-gray-50">
               Get a free multi-location audit <ArrowRight size={17} />
             </Link>
             <Link href="/about" className="inline-flex items-center justify-center gap-2 border-2 border-white/30 text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-white/10 transition-all">
@@ -149,9 +149,9 @@ export default function MultiLocationPage() {
           </h2>
           <div className="space-y-3">
             {painPoints.map((p) => (
-              <div key={p} className="flex items-start gap-3 bg-gray-50 rounded-xl px-5 py-4 border border-gray-100">
+              <div key={p} className="flex items-start gap-3 bg-gray-50 rounded-xl px-5 py-4 border border-gray-100 dark:bg-gray-800/60 dark:border-gray-700">
                 <span className="text-red-400 mt-0.5 shrink-0 font-bold">✗</span>
-                <span className="text-gray-700 text-sm leading-relaxed">{p}</span>
+                <span className="text-gray-700 text-sm leading-relaxed dark:text-gray-200">{p}</span>
               </div>
             ))}
           </div>
@@ -159,7 +159,7 @@ export default function MultiLocationPage() {
       </SectionWrapper>
 
       {/* Services */}
-      <SectionWrapper className="bg-gray-50">
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-800/60">
         <div className="text-center mb-12">
           <span className="section-label">How I Help</span>
           <h2 className="section-title">
@@ -170,12 +170,12 @@ export default function MultiLocationPage() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
           {services.map((s) => (
             <div key={s.title} className="card p-6 flex gap-4">
-              <div className="w-10 h-10 rounded-xl bg-coffee-100 flex items-center justify-center shrink-0">
-                <s.icon size={19} className="text-coffee-700" />
+              <div className="w-10 h-10 rounded-xl bg-coffee-100 flex items-center justify-center shrink-0 dark:bg-coffee-900/30">
+                <s.icon size={19} className="text-coffee-700 dark:text-coffee-300" />
               </div>
               <div>
-                <h3 className="font-bold text-gray-900 mb-2">{s.title}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{s.desc}</p>
+                <h3 className="font-bold text-gray-900 mb-2 dark:text-gray-50">{s.title}</h3>
+                <p className="text-sm text-gray-500 leading-relaxed dark:text-gray-400">{s.desc}</p>
               </div>
             </div>
           ))}
@@ -198,9 +198,9 @@ export default function MultiLocationPage() {
               "Dental or medical practices with satellite sites",
               "Retail brands scaling into new cities",
             ].map((item) => (
-              <div key={item} className="flex items-start gap-2.5 bg-coffee-50 rounded-xl px-4 py-3 border border-coffee-100">
-                <CheckCircle2 size={16} className="text-coffee-600 shrink-0 mt-0.5" />
-                <span className="text-gray-700 text-sm">{item}</span>
+              <div key={item} className="flex items-start gap-2.5 bg-coffee-50 rounded-xl px-4 py-3 border border-coffee-100 dark:bg-coffee-900/20 dark:border-coffee-800">
+                <CheckCircle2 size={16} className="text-coffee-600 shrink-0 mt-0.5 dark:text-coffee-400" />
+                <span className="text-gray-700 text-sm dark:text-gray-200">{item}</span>
               </div>
             ))}
           </div>
@@ -208,7 +208,7 @@ export default function MultiLocationPage() {
       </SectionWrapper>
 
       {/* FAQ */}
-      <SectionWrapper className="bg-gray-50">
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-800/60">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-10">
             <span className="section-label">FAQ</span>
@@ -217,8 +217,8 @@ export default function MultiLocationPage() {
           <div className="space-y-4">
             {faqs.map((item) => (
               <div key={item.q} className="card p-6">
-                <h3 className="font-semibold text-gray-900 mb-2">{item.q}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{item.a}</p>
+                <h3 className="font-semibold text-gray-900 mb-2 dark:text-gray-50">{item.q}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed dark:text-gray-400">{item.a}</p>
               </div>
             ))}
           </div>
@@ -228,7 +228,7 @@ export default function MultiLocationPage() {
       {/* Related */}
       <SectionWrapper>
         <div className="text-center mb-8">
-          <h3 className="text-xl font-bold text-gray-900">Explore more options</h3>
+          <h3 className="text-xl font-bold text-gray-900 dark:text-gray-50">Explore more options</h3>
         </div>
         <div className="flex flex-wrap justify-center gap-3">
           {[

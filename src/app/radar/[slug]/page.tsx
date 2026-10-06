@@ -128,12 +128,12 @@ export default async function SignalPage({
       <div className="max-w-3xl mx-auto px-4 pt-6 pb-16">
 
         {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-xs text-gray-600 mb-8">
+        <nav className="flex items-center gap-2 text-xs text-gray-600 mb-8 dark:text-gray-300">
           <Link href="/" className="hover:text-gray-400 transition-colors">Home</Link>
           <span>/</span>
           <Link href="/radar" className="hover:text-gray-400 transition-colors">Value Radar</Link>
           <span>/</span>
-          <span className="text-gray-500 truncate max-w-xs">{signal.headline}</span>
+          <span className="text-gray-500 truncate max-w-xs dark:text-gray-400">{signal.headline}</span>
         </nav>
 
         {/* Meta row */}
@@ -143,14 +143,14 @@ export default async function SignalPage({
             {impact.label}
           </span>
 
-          <span className="text-xs text-gray-600 font-medium uppercase tracking-wider">
+          <span className="text-xs text-gray-600 font-medium uppercase tracking-wider dark:text-gray-300">
             {CATEGORY_LABEL[signal.category]}
           </span>
 
-          <span className="text-gray-700">·</span>
-          <span className="text-xs text-gray-600">{signal.timeAgo}</span>
+          <span className="text-gray-700 dark:text-gray-200">·</span>
+          <span className="text-xs text-gray-600 dark:text-gray-300">{signal.timeAgo}</span>
 
-          <span className="flex items-center gap-1 text-xs text-gray-700 ml-auto">
+          <span className="flex items-center gap-1 text-xs text-gray-700 ml-auto dark:text-gray-200">
             <Clock size={11} /> {readMinutes} min read
           </span>
         </div>
@@ -208,7 +208,7 @@ export default async function SignalPage({
             {CATEGORY_SERVICE[signal.category] && (
               <Link
                 href={CATEGORY_SERVICE[signal.category].href}
-                className="inline-flex items-center justify-center gap-1.5 text-xs text-gray-500 hover:text-gray-300 transition-colors"
+                className="inline-flex items-center justify-center gap-1.5 text-xs text-gray-500 hover:text-gray-300 transition-colors dark:text-gray-400"
               >
                 Learn about {CATEGORY_SERVICE[signal.category].label} <ArrowRight size={10} />
               </Link>
@@ -219,7 +219,7 @@ export default async function SignalPage({
         {/* Niche relevance */}
         <div className="flex flex-wrap gap-2 mb-8">
           {signal.niches.map((n) => (
-            <span key={n} className="text-xs text-gray-500 bg-gray-900 border border-gray-800 px-3 py-1.5 rounded-full">
+            <span key={n} className="text-xs text-gray-500 bg-gray-900 border border-gray-800 px-3 py-1.5 rounded-full dark:text-gray-400">
               {NICHE_LABELS[n]}
             </span>
           ))}
@@ -227,13 +227,13 @@ export default async function SignalPage({
 
         {/* Source attribution — end of article */}
         <div className="border-t border-gray-800/60 pt-6 mb-10">
-          <p className="text-xs text-gray-600">
+          <p className="text-xs text-gray-600 dark:text-gray-300">
             Source:{" "}
             <a
               href={signal.sourceUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-500 hover:text-gray-300 underline underline-offset-2 transition-colors"
+              className="text-gray-500 hover:text-gray-300 underline underline-offset-2 transition-colors dark:text-gray-400"
             >
               {signal.source}
             </a>
@@ -245,11 +245,11 @@ export default async function SignalPage({
         <div className="flex items-center justify-between gap-3 pt-2">
           <Link
             href="/radar"
-            className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-white transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-white transition-colors dark:text-gray-300"
           >
             <ArrowLeft size={14} /> All signals
           </Link>
-          <span className="text-xs text-gray-700">{index + 1} / {total}</span>
+          <span className="text-xs text-gray-700 dark:text-gray-200">{index + 1} / {total}</span>
         </div>
       </div>
 
@@ -259,13 +259,13 @@ export default async function SignalPage({
           <div className="border-t border-gray-800 bg-gray-900 hover:bg-gray-800 transition-colors px-4 py-10">
             <div className="max-w-3xl mx-auto flex items-center justify-between gap-6">
               <div className="min-w-0">
-                <p className="text-xs font-bold text-gray-600 uppercase tracking-widest mb-2">
+                <p className="text-xs font-bold text-gray-600 uppercase tracking-widest mb-2 dark:text-gray-300">
                   Up next
                 </p>
                 <h3 className="text-lg md:text-2xl font-bold text-white leading-snug group-hover:text-coffee-300 transition-colors">
                   {next.headline}
                 </h3>
-                <p className="text-sm text-gray-500 mt-2">
+                <p className="text-sm text-gray-500 mt-2 dark:text-gray-400">
                   {next.source} · {next.timeAgo}
                 </p>
               </div>
@@ -281,7 +281,7 @@ export default async function SignalPage({
       {related.length > 0 && (
         <section className="border-t border-gray-800 py-12 px-4">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-sm font-bold text-gray-500 uppercase tracking-widest mb-6">
+            <h2 className="text-sm font-bold text-gray-500 uppercase tracking-widest mb-6 dark:text-gray-400">
               Related signals
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -292,11 +292,11 @@ export default async function SignalPage({
                   className="group border border-gray-800 hover:border-gray-600 rounded-xl p-4 transition-all"
                 >
                   <div className={`h-0.5 w-8 rounded mb-3 ${CATEGORY_BAR[s.category]}`} />
-                  <p className="text-xs text-gray-600 mb-1">{s.timeAgo}</p>
+                  <p className="text-xs text-gray-600 mb-1 dark:text-gray-300">{s.timeAgo}</p>
                   <h3 className="text-sm font-semibold text-gray-300 group-hover:text-white transition-colors leading-snug line-clamp-3">
                     {s.headline}
                   </h3>
-                  <span className="inline-flex items-center gap-1 text-xs text-gray-600 group-hover:text-coffee-400 transition-colors mt-3">
+                  <span className="inline-flex items-center gap-1 text-xs text-gray-600 group-hover:text-coffee-400 transition-colors mt-3 dark:text-gray-300">
                     Read <ArrowRight size={10} />
                   </span>
                 </Link>

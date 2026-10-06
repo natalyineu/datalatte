@@ -456,14 +456,14 @@ export default function LocalMarketingGuidesPage() {
           <div className="mt-8 flex flex-wrap gap-3 justify-center text-sm">
             <Link
               href="/blog"
-              className="text-coffee-700 hover:text-coffee-900 hover:underline font-medium transition-colors"
+              className="text-coffee-700 hover:text-coffee-900 hover:underline font-medium transition-colors dark:text-coffee-300"
             >
               ← Back to blog
             </Link>
             <span className="text-gray-300">|</span>
             <Link
               href="/services/local-seo"
-              className="text-coffee-700 hover:text-coffee-900 hover:underline font-medium transition-colors"
+              className="text-coffee-700 hover:text-coffee-900 hover:underline font-medium transition-colors dark:text-coffee-300"
             >
               Local SEO services →
             </Link>

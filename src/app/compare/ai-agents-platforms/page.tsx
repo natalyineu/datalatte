@@ -285,20 +285,20 @@ export default function AIAgentsPlatformsComparePage() {
       </section>
 
       {/* Quick verdict */}
-      <section className="bg-coffee-50 border-b border-coffee-100 py-10">
+      <section className="bg-coffee-50 border-b border-coffee-100 py-10 dark:bg-coffee-900/20 dark:border-coffee-800">
         <SectionWrapper>
-          <p className="text-sm text-coffee-600 font-semibold uppercase tracking-wide mb-4">TL;DR — The DataLatte Stack</p>
+          <p className="text-sm text-coffee-600 font-semibold uppercase tracking-wide mb-4 dark:text-coffee-400">TL;DR — The DataLatte Stack</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               { icon: "🤖", label: "Booking & voice agents", verdict: "GPT-4o-mini", reason: "Fastest function calling, lowest latency for real-time conversations" },
               { icon: "💬", label: "FAQ, review & reactivation agents", verdict: "Claude 3.5 Haiku", reason: "Warmest tone, best at nuanced customer communication" },
               { icon: "⚙️", label: "Orchestration & workflows", verdict: "n8n (self-hosted)", reason: "Instant webhooks, complex LLM pipelines, no per-task cost" },
             ].map((v) => (
-              <div key={v.label} className="bg-white rounded-xl p-5 border border-coffee-200">
+              <div key={v.label} className="bg-white rounded-xl p-5 border border-coffee-200 dark:bg-gray-900 dark:border-coffee-800">
                 <div className="text-2xl mb-2">{v.icon}</div>
-                <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">{v.label}</p>
-                <p className="text-xl font-bold text-coffee-800 mb-1">{v.verdict}</p>
-                <p className="text-sm text-gray-600">{v.reason}</p>
+                <p className="text-xs text-gray-500 uppercase tracking-wide mb-1 dark:text-gray-400">{v.label}</p>
+                <p className="text-xl font-bold text-coffee-800 mb-1 dark:text-coffee-200">{v.verdict}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-300">{v.reason}</p>
               </div>
             ))}
           </div>
@@ -308,32 +308,32 @@ export default function AIAgentsPlatformsComparePage() {
       {/* LLM Comparison */}
       <SectionWrapper className="py-20">
         <div className="flex items-center gap-3 mb-3">
-          <Brain className="text-coffee-600" size={24} />
+          <Brain className="text-coffee-600 dark:text-coffee-400" size={24} />
           <p className="section-label">Part 1</p>
         </div>
         <h2 className="section-title mb-4">Claude vs ChatGPT vs Gemini for Local Business Agents</h2>
-        <p className="text-gray-600 max-w-2xl mb-10">
+        <p className="text-gray-600 max-w-2xl mb-10 dark:text-gray-300">
           All three can power a local business AI agent. The differences matter when you're choosing
           what to build long-term — cost, tone, and reliability add up at scale.
         </p>
 
-        <div className="overflow-x-auto rounded-2xl border border-gray-200 shadow-sm">
+        <div className="overflow-x-auto rounded-2xl border border-gray-200 shadow-sm dark:border-gray-700">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-gray-50 border-b border-gray-200">
-                <th className="text-left px-5 py-4 font-semibold text-gray-700 w-44">Factor</th>
-                <th className="text-left px-5 py-4 font-semibold text-coffee-700">Claude (Anthropic)</th>
-                <th className="text-left px-5 py-4 font-semibold text-gray-700">ChatGPT (OpenAI)</th>
-                <th className="text-left px-5 py-4 font-semibold text-gray-700">Gemini (Google)</th>
+              <tr className="bg-gray-50 border-b border-gray-200 dark:bg-gray-800/60 dark:border-gray-700">
+                <th className="text-left px-5 py-4 font-semibold text-gray-700 w-44 dark:text-gray-200">Factor</th>
+                <th className="text-left px-5 py-4 font-semibold text-coffee-700 dark:text-coffee-300">Claude (Anthropic)</th>
+                <th className="text-left px-5 py-4 font-semibold text-gray-700 dark:text-gray-200">ChatGPT (OpenAI)</th>
+                <th className="text-left px-5 py-4 font-semibold text-gray-700 dark:text-gray-200">Gemini (Google)</th>
               </tr>
             </thead>
             <tbody>
               {llmRows.map((row, i) => (
-                <tr key={row.factor} className={i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}>
-                  <td className="px-5 py-4 font-medium text-gray-800 text-xs">{row.factor}</td>
-                  <td className="px-5 py-4 text-gray-700 border-l border-coffee-100 bg-coffee-50/30">{row.claude}</td>
-                  <td className="px-5 py-4 text-gray-600">{row.chatgpt}</td>
-                  <td className="px-5 py-4 text-gray-600">{row.gemini}</td>
+                <tr key={row.factor} className={i % 2 === 0 ? "bg-white dark:bg-gray-900" : "bg-gray-50/50 dark:bg-gray-800/50"}>
+                  <td className="px-5 py-4 font-medium text-gray-800 text-xs dark:text-gray-100">{row.factor}</td>
+                  <td className="px-5 py-4 text-gray-700 border-l border-coffee-100 bg-coffee-50/30 dark:text-gray-200 dark:border-coffee-800 dark:bg-coffee-900/30">{row.claude}</td>
+                  <td className="px-5 py-4 text-gray-600 dark:text-gray-300">{row.chatgpt}</td>
+                  <td className="px-5 py-4 text-gray-600 dark:text-gray-300">{row.gemini}</td>
                 </tr>
               ))}
             </tbody>
@@ -353,30 +353,30 @@ export default function AIAgentsPlatformsComparePage() {
               <div key={m.model} className="bg-gray-800 rounded-xl p-5">
                 <p className="text-sm text-gray-400 mb-1">{m.model}</p>
                 <p className="text-3xl font-bold text-white mb-1">{m.cost}</p>
-                <p className="text-xs text-gray-500 mb-3">{m.detail}</p>
+                <p className="text-xs text-gray-500 mb-3 dark:text-gray-400">{m.detail}</p>
                 <span className="text-xs bg-coffee-800 text-coffee-200 px-2 py-1 rounded-full">{m.badge}</span>
               </div>
             ))}
           </div>
-          <p className="text-gray-500 text-xs mt-4">Note: At typical local business conversation volumes, LLM costs are negligible. Infrastructure (n8n server, SMS, vector DB) usually costs more than the AI API itself.</p>
+          <p className="text-gray-500 text-xs mt-4 dark:text-gray-400">Note: At typical local business conversation volumes, LLM costs are negligible. Infrastructure (n8n server, SMS, vector DB) usually costs more than the AI API itself.</p>
         </div>
       </SectionWrapper>
 
       {/* Automation Platform Comparison */}
-      <section className="bg-gray-50 py-20">
+      <section className="bg-gray-50 py-20 dark:bg-gray-800/60">
         <SectionWrapper>
           <div className="flex items-center gap-3 mb-3">
-            <Workflow className="text-coffee-600" size={24} />
+            <Workflow className="text-coffee-600 dark:text-coffee-400" size={24} />
             <p className="section-label">Part 2</p>
           </div>
           <h2 className="section-title mb-4">n8n vs Zapier vs Make.com for AI Agent Workflows</h2>
-          <p className="text-gray-600 max-w-2xl mb-10">
+          <p className="text-gray-600 max-w-2xl mb-10 dark:text-gray-300">
             The AI model is the brain. The automation platform is the nervous system — routing triggers,
             calling APIs, writing to databases, sending SMS. This choice matters more for agent
             performance and cost than the LLM itself.
           </p>
 
-          <div className="overflow-x-auto rounded-2xl border border-gray-200 shadow-sm">
+          <div className="overflow-x-auto rounded-2xl border border-gray-200 shadow-sm dark:border-gray-700">
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-gray-800 text-white">
@@ -388,11 +388,11 @@ export default function AIAgentsPlatformsComparePage() {
               </thead>
               <tbody>
                 {automationRows.map((row, i) => (
-                  <tr key={row.factor} className={i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}>
-                    <td className="px-5 py-4 font-medium text-gray-800 text-xs">{row.factor}</td>
-                    <td className="px-5 py-4 text-gray-700 border-l border-coffee-100 bg-coffee-50/30">{row.n8n}</td>
-                    <td className="px-5 py-4 text-gray-600">{row.zapier}</td>
-                    <td className="px-5 py-4 text-gray-600">{row.make}</td>
+                  <tr key={row.factor} className={i % 2 === 0 ? "bg-white dark:bg-gray-900" : "bg-gray-50/50 dark:bg-gray-800/50"}>
+                    <td className="px-5 py-4 font-medium text-gray-800 text-xs dark:text-gray-100">{row.factor}</td>
+                    <td className="px-5 py-4 text-gray-700 border-l border-coffee-100 bg-coffee-50/30 dark:text-gray-200 dark:border-coffee-800 dark:bg-coffee-900/30">{row.n8n}</td>
+                    <td className="px-5 py-4 text-gray-600 dark:text-gray-300">{row.zapier}</td>
+                    <td className="px-5 py-4 text-gray-600 dark:text-gray-300">{row.make}</td>
                   </tr>
                 ))}
               </tbody>
@@ -404,25 +404,25 @@ export default function AIAgentsPlatformsComparePage() {
       {/* Pre-built vs custom */}
       <SectionWrapper className="py-20">
         <div className="flex items-center gap-3 mb-3">
-          <Zap className="text-coffee-600" size={24} />
+          <Zap className="text-coffee-600 dark:text-coffee-400" size={24} />
           <p className="section-label">Part 3</p>
         </div>
         <h2 className="section-title mb-4">Custom-Built vs GoHighLevel vs Off-the-Shelf Chatbots</h2>
-        <p className="text-gray-600 max-w-2xl mb-10">
+        <p className="text-gray-600 max-w-2xl mb-10 dark:text-gray-300">
           Beyond the AI model and automation platform, you need to decide how the whole agent
           is assembled. Here are the three realistic options for local businesses.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {stackOptions.map((opt) => (
-            <div key={opt.name} className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm flex flex-col">
+            <div key={opt.name} className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm flex flex-col dark:bg-gray-900 dark:border-gray-700">
               <div className="text-3xl mb-3">{opt.icon}</div>
-              <h3 className="text-lg font-bold text-gray-900 mb-4">{opt.name}</h3>
+              <h3 className="text-lg font-bold text-gray-900 mb-4 dark:text-gray-50">{opt.name}</h3>
               <div className="mb-4 flex-1">
-                <p className="text-xs font-semibold text-green-700 uppercase tracking-wide mb-2">Advantages</p>
+                <p className="text-xs font-semibold text-green-700 uppercase tracking-wide mb-2 dark:text-green-300">Advantages</p>
                 <ul className="space-y-2">
                   {opt.pros.map((p) => (
-                    <li key={p} className="flex items-start gap-2 text-sm text-gray-700">
+                    <li key={p} className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-200">
                       <CheckCircle2 size={14} className="text-green-500 mt-0.5 shrink-0" />
                       {p}
                     </li>
@@ -430,19 +430,19 @@ export default function AIAgentsPlatformsComparePage() {
                 </ul>
               </div>
               <div className="mb-4">
-                <p className="text-xs font-semibold text-red-600 uppercase tracking-wide mb-2">Limitations</p>
+                <p className="text-xs font-semibold text-red-600 uppercase tracking-wide mb-2 dark:text-red-300">Limitations</p>
                 <ul className="space-y-2">
                   {opt.cons.map((c) => (
-                    <li key={c} className="flex items-start gap-2 text-sm text-gray-600">
+                    <li key={c} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
                       <X size={14} className="text-red-400 mt-0.5 shrink-0" />
                       {c}
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="border-t border-gray-100 pt-4 mt-auto">
-                <p className="text-xs text-gray-500 mb-1"><span className="font-semibold">Best for:</span> {opt.bestFor}</p>
-                <p className="text-xs text-coffee-700 font-semibold">{opt.cost}</p>
+              <div className="border-t border-gray-100 pt-4 mt-auto dark:border-gray-700">
+                <p className="text-xs text-gray-500 mb-1 dark:text-gray-400"><span className="font-semibold">Best for:</span> {opt.bestFor}</p>
+                <p className="text-xs text-coffee-700 font-semibold dark:text-coffee-300">{opt.cost}</p>
               </div>
             </div>
           ))}
@@ -487,9 +487,9 @@ export default function AIAgentsPlatformsComparePage() {
         <h2 className="section-title mb-10">Frequently Asked Questions</h2>
         <div className="max-w-3xl space-y-6">
           {faqs.map((faq) => (
-            <div key={faq.q} className="border-b border-gray-200 pb-6">
-              <h3 className="text-base font-semibold text-gray-900 mb-2">{faq.q}</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">{faq.a}</p>
+            <div key={faq.q} className="border-b border-gray-200 pb-6 dark:border-gray-700">
+              <h3 className="text-base font-semibold text-gray-900 mb-2 dark:text-gray-50">{faq.q}</h3>
+              <p className="text-gray-600 text-sm leading-relaxed dark:text-gray-300">{faq.a}</p>
             </div>
           ))}
         </div>

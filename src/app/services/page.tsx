@@ -202,7 +202,7 @@ export default function ServicesPage() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/free-audit"
-              className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg"
+              className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg dark:bg-gray-900 dark:text-gray-50"
             >
               Get a free audit <ArrowRight size={17} />
             </Link>
@@ -217,7 +217,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Stats bar */}
-      <div className="bg-coffee-50 border-b border-coffee-100">
+      <div className="bg-coffee-50 border-b border-coffee-100 dark:bg-coffee-900/20 dark:border-coffee-800">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-5 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
           {[
             { value: "15", label: "Services" },
@@ -226,8 +226,8 @@ export default function ServicesPage() {
             { value: "1 week", label: "To first report" },
           ].map((s) => (
             <div key={s.label}>
-              <div className="text-2xl font-bold text-coffee-800">{s.value}</div>
-              <div className="text-sm text-gray-500">{s.label}</div>
+              <div className="text-2xl font-bold text-coffee-800 dark:text-coffee-200">{s.value}</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">{s.label}</div>
             </div>
           ))}
         </div>
@@ -235,24 +235,24 @@ export default function ServicesPage() {
 
       {/* Service categories */}
       {SERVICE_CATEGORIES.map((cat, i) => (
-        <SectionWrapper key={cat.label} className={i % 2 === 1 ? "bg-gray-50" : ""}>
+        <SectionWrapper key={cat.label} className={i % 2 === 1 ? "bg-gray-50 dark:bg-gray-800/60" : ""}>
           <div className="mb-8">
             <span className="section-label">{cat.label}</span>
-            <p className="text-gray-500 mt-1 text-sm">{cat.description}</p>
+            <p className="text-gray-500 mt-1 text-sm dark:text-gray-400">{cat.description}</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {cat.services.map((svc) => (
               <Link
                 key={svc.slug}
                 href={`/services/${svc.slug}`}
-                className="group bg-white rounded-2xl border border-gray-100 p-6 hover:border-coffee-200 hover:shadow-md transition-all"
+                className="group bg-white rounded-2xl border border-gray-100 p-6 hover:border-coffee-200 hover:shadow-md transition-all dark:bg-gray-900 dark:border-gray-700"
               >
                 <div className="text-3xl mb-3">{svc.icon}</div>
-                <h3 className="font-bold text-gray-900 mb-2 group-hover:text-coffee-700 transition-colors leading-snug">
+                <h3 className="font-bold text-gray-900 mb-2 group-hover:text-coffee-700 transition-colors leading-snug dark:text-gray-50">
                   {svc.name}
                 </h3>
-                <p className="text-gray-500 text-sm leading-relaxed mb-4">{svc.tagline}</p>
-                <span className="inline-flex items-center gap-1 text-coffee-600 text-sm font-medium">
+                <p className="text-gray-500 text-sm leading-relaxed mb-4 dark:text-gray-400">{svc.tagline}</p>
+                <span className="inline-flex items-center gap-1 text-coffee-600 text-sm font-medium dark:text-coffee-400">
                   Learn more <ChevronRight size={14} />
                 </span>
               </Link>
@@ -262,7 +262,7 @@ export default function ServicesPage() {
       ))}
 
       {/* FAQ */}
-      <SectionWrapper className="bg-coffee-50">
+      <SectionWrapper className="bg-coffee-50 dark:bg-coffee-900/20">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-10">
             <span className="section-label">FAQ</span>
@@ -270,9 +270,9 @@ export default function ServicesPage() {
           </div>
           <div className="space-y-4">
             {FAQS.map((f) => (
-              <div key={f.q} className="bg-white rounded-xl p-6 border border-coffee-100">
-                <h4 className="font-semibold text-gray-900 mb-2">{f.q}</h4>
-                <p className="text-gray-500 text-sm leading-relaxed">{f.a}</p>
+              <div key={f.q} className="bg-white rounded-xl p-6 border border-coffee-100 dark:bg-gray-900 dark:border-coffee-800">
+                <h4 className="font-semibold text-gray-900 mb-2 dark:text-gray-50">{f.q}</h4>
+                <p className="text-gray-500 text-sm leading-relaxed dark:text-gray-400">{f.a}</p>
               </div>
             ))}
           </div>

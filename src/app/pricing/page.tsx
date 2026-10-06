@@ -56,8 +56,8 @@ const tiers = [
       "Analytics dashboards",
     ],
     cta: "Get started",
-    accentClass: "border-coffee-200",
-    badgeClass: "bg-coffee-100 text-coffee-700",
+    accentClass: "border-coffee-200 dark:border-coffee-800",
+    badgeClass: "bg-coffee-100 text-coffee-700 dark:bg-coffee-900/30 dark:text-coffee-300",
   },
   {
     name: "Americano",
@@ -105,7 +105,7 @@ const tiers = [
     notIncluded: [],
     cta: "Let's talk",
     accentClass: "border-gray-300",
-    badgeClass: "bg-gray-100 text-gray-700",
+    badgeClass: "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-200",
   },
 ];
 
@@ -218,7 +218,7 @@ export default function PricingPage() {
             Every package includes direct access to a senior marketer with 10+ years at the world&apos;s
             top agencies — without the agency overhead. Month-to-month. No lock-in.
           </p>
-          <Link href="/free-audit" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg">
+          <Link href="/free-audit" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg dark:bg-gray-900 dark:text-gray-50">
             Get your free audit first <ArrowRight size={17} />
           </Link>
           <p className="text-coffee-400 text-sm mt-4">Not sure what you need? Start with a free 48-hour audit — I&apos;ll recommend the right package for your business.</p>
@@ -255,7 +255,7 @@ export default function PricingPage() {
               <div className="flex-1 space-y-2.5 mb-8">
                 {tier.included.map((item) => (
                   <div key={item} className="flex items-start gap-2.5">
-                    <CheckCircle2 size={16} className="text-coffee-600 shrink-0 mt-0.5" />
+                    <CheckCircle2 size={16} className="text-coffee-600 shrink-0 mt-0.5 dark:text-coffee-400" />
                     <span className="text-gray-700 dark:text-gray-300 text-sm">{item}</span>
                   </div>
                 ))}
@@ -269,7 +269,7 @@ export default function PricingPage() {
 
               <Link
                 href="/free-audit"
-                className={`w-full text-center font-bold py-3 px-6 rounded-xl transition-all ${tier.highlight ? "bg-coffee-700 hover:bg-coffee-600 text-white" : "bg-coffee-100 hover:bg-coffee-200 text-coffee-800"}`}
+                className={`w-full text-center font-bold py-3 px-6 rounded-xl transition-all ${tier.highlight ? "bg-coffee-700 hover:bg-coffee-600 text-white" : "bg-coffee-100 hover:bg-coffee-200 text-coffee-800 dark:bg-coffee-900/30 dark:text-coffee-200"}`}
               >
                 {tier.cta} — free audit first
               </Link>
@@ -277,9 +277,9 @@ export default function PricingPage() {
           ))}
         </div>
 
-        <p className="text-center text-gray-500 text-sm mt-8">
+        <p className="text-center text-gray-500 text-sm mt-8 dark:text-gray-400">
           All fees are management fees only. Ad spend is a separate budget set by you.{" "}
-          <Link href="/tools/marketing-budget-calculator" className="text-coffee-700 hover:underline">
+          <Link href="/tools/marketing-budget-calculator" className="text-coffee-700 hover:underline dark:text-coffee-300">
             Use the budget calculator →
           </Link>
         </p>
@@ -318,7 +318,7 @@ export default function PricingPage() {
       </SectionWrapper>
 
       {/* Feature comparison */}
-      <SectionWrapper className="bg-gray-50">
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-800/60">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-10">
             <span className="section-label">Compare</span>
@@ -339,8 +339,8 @@ export default function PricingPage() {
                   <tr key={row.feature} className={i % 2 === 0 ? "bg-gray-50/50 dark:bg-gray-700/30" : "bg-white dark:bg-gray-800"}>
                     <td className="p-4 text-gray-700 dark:text-gray-300">{row.feature}</td>
                     <td className="p-4 text-center">{row.starter ? <CheckCircle2 size={17} className="text-coffee-500 mx-auto" /> : <X size={15} className="text-gray-300 mx-auto" />}</td>
-                    <td className="p-4 text-center">{row.growth ? <CheckCircle2 size={17} className="text-coffee-600 mx-auto" /> : <X size={15} className="text-gray-300 mx-auto" />}</td>
-                    <td className="p-4 text-center">{row.full ? <CheckCircle2 size={17} className="text-coffee-700 mx-auto" /> : <X size={15} className="text-gray-300 mx-auto" />}</td>
+                    <td className="p-4 text-center">{row.growth ? <CheckCircle2 size={17} className="text-coffee-600 mx-auto dark:text-coffee-400" /> : <X size={15} className="text-gray-300 mx-auto" />}</td>
+                    <td className="p-4 text-center">{row.full ? <CheckCircle2 size={17} className="text-coffee-700 mx-auto dark:text-coffee-300" /> : <X size={15} className="text-gray-300 mx-auto" />}</td>
                   </tr>
                 ))}
               </tbody>
