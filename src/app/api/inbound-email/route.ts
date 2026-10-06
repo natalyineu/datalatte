@@ -52,7 +52,9 @@ export async function POST(req: NextRequest) {
   let body: Record<string, unknown>;
   try { body = await req.json(); } catch { return NextResponse.json({ error: "Bad JSON" }, { status: 400 }); }
 
-  const { email, name } = parseFrom(htmlToText(body.from).slice(0, 300));
+  // `from` keeps its <addr> brackets; only HTML entities are decoded (Zoho may send &lt;addr&gt;)
+  const fromRaw = clip(body.from, 300).replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&amp;/g, "&");
+  const { email, name } = parseFrom(fromRaw);
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return NextResponse.json({ error: "Invalid sender" }, { status: 400 });
 
   // Skip our own mail (site notifications, auto-replies, bounces)
