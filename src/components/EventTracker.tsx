@@ -39,6 +39,8 @@ export default function EventTracker() {
       const a = (e.target as Element | null)?.closest?.("a");
       const href = a?.getAttribute("href");
       if (!a || !href) return;
+      const src = a.getAttribute("data-track-source");
+      if (src) { gtag.freeAuditClicked(src); return; } // server-rendered CTAs opt in with data-track-source
       if (href.startsWith("mailto:")) gtag.emailLinkClicked(pathname);
       else if (href.startsWith("tel:")) gtag.phoneLinkClicked(pathname);
       else if (href.includes("calendly.com")) gtag.calendlyClicked(pathname);

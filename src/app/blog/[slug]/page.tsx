@@ -362,8 +362,42 @@ export async function generateMetadata({
 }
 
 // MDX component overrides — maps markdown elements to Tailwind-styled JSX
+// Put one CTA after the second section of long articles (needs ≥ 4 H2s so it is not intrusive).
+function withInlineCta(source: string): string {
+  if (source.includes("<InlineCta")) return source;
+  const lines = source.split("\n");
+  const h2: number[] = [];
+  let fenced = false;
+  lines.forEach((l, i) => {
+    if (/^```/.test(l)) fenced = !fenced;
+    else if (!fenced && /^## /.test(l)) h2.push(i);
+  });
+  if (h2.length < 4) return source;
+  lines.splice(h2[2], 0, "<InlineCta />", "");
+  return lines.join("\n");
+}
+
+function InlineCta() {
+  return (
+    <aside className="not-prose my-8 rounded-xl border border-coffee-200 dark:border-coffee-800/50 bg-coffee-50 dark:bg-coffee-900/20 p-5 flex flex-col sm:flex-row sm:items-center gap-4">
+      <div className="flex-1 min-w-0">
+        <p className="font-bold text-gray-900 dark:text-gray-50">Want a free review of your Google presence?</p>
+        <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">Send your business name. I reply with a short action plan within 48 hours.</p>
+      </div>
+      <Link
+        href="/free-audit"
+        data-track-source="blog_inline"
+        className="inline-flex items-center justify-center gap-2 bg-coffee-700 text-white font-bold px-5 py-2.5 rounded-lg hover:bg-coffee-800 transition-colors text-sm whitespace-nowrap"
+      >
+        Get my free audit <ArrowRight size={15} />
+      </Link>
+    </aside>
+  );
+}
+
 const mdxComponents = {
   StepPlan,
+  InlineCta,
   h2: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => {
     const id = headingId(String(children));
     return (
@@ -588,7 +622,7 @@ export default async function BlogPostPage({
             {/* MDX Content */}
             <div className="prose-datalatte">
               <MDXRemote
-                source={content}
+                source={withInlineCta(content)}
                 components={mdxComponents}
                 options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
               />
@@ -604,6 +638,7 @@ export default async function BlogPostPage({
           <div className="flex flex-col sm:flex-row gap-3">
             <Link
               href="/free-audit"
+              data-track-source="blog_end"
               className="inline-flex items-center justify-center gap-2 bg-white text-coffee-900 font-bold px-6 py-3 rounded-xl hover:bg-coffee-100 transition-colors text-sm"
             >
               Get my free audit <ArrowRight size={15} />
