@@ -53,6 +53,6 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "chore: daily analytics snapshot [vercel skip]"
-            git pull --rebase -X theirs origin main
+            git pull --rebase --autostash -X theirs origin main
             git push
           fi
