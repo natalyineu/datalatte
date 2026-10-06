@@ -116,10 +116,17 @@ async function fetchGSC() {
     wk("page", ...w1), wk("page", ...w0), wk("query", ...w1), wk("query", ...w0),
   ]);
 
+  // Whole history since launch (daily), for all-time totals and the weekly sparkline
+  const allDailyRes = await sc.searchanalytics.query({
+    siteUrl,
+    requestBody: { startDate: "2026-05-01", endDate, dimensions: ["date"], rowLimit: 1000, dataState: "all" },
+  });
+
   return {
     fetchedAt: new Date().toISOString(),
     period: { startDate, endDate },
     siteUrl,
+    allDaily: (allDailyRes.data.rows || []).map(r => ({ d: r.keys[0], clicks: r.clicks, impressions: r.impressions, position: r.position })),
     weekly: { pagesW1, pagesW0, queriesW1, queriesW0 },
     queries: queriesRes.data.rows || [],
     pages: pagesRes.data.rows || [],
@@ -212,10 +219,32 @@ async function fetchGA4() {
     },
   });
 
+  // Whole history since launch: sessions by day x channel, and total key events
+  const allChanRes = await analytics.properties.runReport({
+    property: propertyId,
+    requestBody: {
+      dateRanges: [{ startDate: "2026-05-01", endDate: "yesterday" }],
+      dimensions: [{ name: "date" }, { name: "sessionDefaultChannelGroup" }],
+      metrics: [{ name: "sessions" }],
+      limit: 100000,
+    },
+  });
+  const allEvRes = await analytics.properties.runReport({
+    property: propertyId,
+    requestBody: {
+      dateRanges: [{ startDate: "2026-05-01", endDate: "yesterday" }],
+      dimensions: [{ name: "eventName" }],
+      metrics: [{ name: "eventCount" }],
+      dimensionFilter: { filter: { fieldName: "eventName", inListFilter: { values: ["scroll", "scroll_50", "free_audit_clicked", "book_call_clicked", "contact_cta_clicked", "chat_widget_opened", "chat_message_sent", "form_start", "contact_form_submitted", "chat_lead_captured"] } } },
+    },
+  });
+
   return {
     fetchedAt: new Date().toISOString(),
     period: { startDate, endDate },
     propertyId,
+    allTimeChannels: (allChanRes.data.rows || []).map(r => ({ d: r.dimensionValues[0].value, ch: r.dimensionValues[1].value, s: +r.metricValues[0].value })),
+    allTimeEvents: Object.fromEntries((allEvRes.data.rows || []).map(r => [r.dimensionValues[0].value, +r.metricValues[0].value])),
     events: evRes.data.rows || [],
     dailyChannels: chanRes.data.rows || [],
     overview: overviewRes.data,
@@ -302,27 +331,45 @@ async function fetchBing() {
 }
 
 // ── Leads (Supabase contact_submissions) ─────────────────────────────────────
+// Real lead = enquiry that is not test / spam / bounced / partnership / newsletter signup.
+const IGNORE = new Set(["test", "spam", "bounced"]);
+const DONE = new Set(["replied", "call", "won", "lost"]);
+function classify(r) {
+  if (IGNORE.has(r.status)) return "ignore";
+  if (r.status === "partnership") return "partner";
+  if (r.form_type === "newsletter") return "sub";
+  return "lead";
+}
 async function fetchLeads() {
   const url = process.env.SUPABASE_URL || "https://olsxxfwvwsycwzihbmdn.supabase.co";
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!key) return null;
   try {
-    const since = new Date(Date.now() - 14 * 864e5).toISOString();
-    const res = await fetch(`${url}/rest/v1/contact_submissions?select=created_at,form_type,status&created_at=gte.${since}&limit=1000`,
+    const res = await fetch(`${url}/rest/v1/contact_submissions?select=created_at,form_type,status,replied_at&order=created_at.asc&limit=5000`,
       { headers: { apikey: key, Authorization: `Bearer ${key}` } });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const rows = await res.json();
-    const wkAgo = Date.now() - 7 * 864e5;
-    const w1 = rows.filter(r => new Date(r.created_at).getTime() >= wkAgo), w0 = rows.filter(r => new Date(r.created_at).getTime() < wkAgo);
-    // unanswered across all time
-    const ur = await fetch(`${url}/rest/v1/contact_submissions?select=created_at&status=eq.new&order=created_at.asc&limit=1000`,
-      { headers: { apikey: key, Authorization: `Bearer ${key}` } });
-    const unanswered = ur.ok ? await ur.json() : [];
+    const rows = (await res.json()).map(r => ({ ...r, t: new Date(r.created_at).getTime(), cls: classify(r) }));
+    const now = Date.now(), wk = 7 * 864e5;
+    const bucket = (from, to) => {
+      const x = rows.filter(r => r.t >= from && r.t < to);
+      const leads = x.filter(r => r.cls === "lead");
+      return {
+        leads: leads.length,
+        ready: leads.filter(r => r.form_type === "ready").length,
+        replied: leads.filter(r => DONE.has(r.status) || r.replied_at).length,
+        waiting: leads.filter(r => r.status === "new").length,
+        partner: x.filter(r => r.cls === "partner").length,
+        subs: x.filter(r => r.cls === "sub").length,
+      };
+    };
+    const all = bucket(0, Infinity), w1 = bucket(now - wk, Infinity), w0 = bucket(now - 2 * wk, now - wk);
+    const waiting = rows.filter(r => r.cls === "lead" && r.status === "new").sort((a, b) => a.t - b.t);
+    const days = rows.filter(r => r.cls === "lead" && r.replied_at).map(r => (new Date(r.replied_at).getTime() - r.t) / 864e5).sort((a, b) => a - b);
     return {
-      w1: w1.length, w0: w0.length,
-      ready1: w1.filter(r => r.form_type === "ready").length,
-      unanswered: unanswered.length,
-      oldestDays: unanswered.length ? Math.floor((Date.now() - new Date(unanswered[0].created_at).getTime()) / 864e5) : 0,
+      all, w1, w0,
+      oldestWaitingDays: waiting.length ? Math.floor((now - waiting[0].t) / 864e5) : 0,
+      medianReplyDays: days.length ? days[Math.floor(days.length / 2)] : null,
+      first: rows.find(r => r.cls === "lead")?.created_at || null,
     };
   } catch (e) {
     console.error("✗ Leads fetch error:", e.message);
@@ -378,7 +425,7 @@ function buildReport(gsc, ga4, leads, bing) {
   const ev = ga4.events || [];
   const evCount = (name, r) => sum(ev.filter(x => x.dimensionValues[0].value === name && x.dimensionValues[1]?.value === `date_range_${r}`), x => +x.metricValues[0].value);
   const evLead = (r) => evCount("contact_form_submitted", r) + evCount("generate_lead", r) + evCount("form_submit", r);
-  const leads1 = leads ? leads.w1 : evLead(0), leads0 = leads ? leads.w0 : evLead(1);
+  const leads1 = leads ? leads.w1.leads : evLead(0), leads0 = leads ? leads.w0.leads : evLead(1);
 
   // ---- Movers & opportunities (GSC weekly) ----
   const wkd = gsc.weekly;
@@ -423,7 +470,7 @@ function buildReport(gsc, ga4, leads, bing) {
     if (Math.abs(c1.pos - c0.pos) >= 1.5) {
       if (ls1 - ls0 >= 5 && c1.pos > c0.pos) {
         lowShareDilution = true;
-        why.push(`Position ${c0.pos.toFixed(1)} → ${c1.pos.toFixed(1)}: ${ls1.toFixed(0)}% of impressions now come from pages ranking below #20 (was ${ls0.toFixed(0)}%). Pages inside top 20 ${Math.abs(tp1 - tp0) < 1.5 ? "held steady" : "moved"} (${tp0.toFixed(1)} → ${tp1.toFixed(1)}), so this is dilution from new/weak pages, not lost rankings.`);
+        why.push(`Position ${c0.pos.toFixed(1)} → ${c1.pos.toFixed(1)}: ${ls1.toFixed(0)}% of impressions now come from pages ranking below #20 (was ${ls0.toFixed(0)}%). Pages inside top 20 ${Math.abs(tp1 - tp0) < 1.5 ? "held steady" : "moved"} (${tp0.toFixed(1)} → ${tp1.toFixed(1)}), check the page movers below.`);
       } else {
         why.push(`Position ${c0.pos.toFixed(1)} → ${c1.pos.toFixed(1)}: pages inside top 20 went ${tp0.toFixed(1)} → ${tp1.toFixed(1)}.`);
       }
@@ -453,60 +500,108 @@ function buildReport(gsc, ga4, leads, bing) {
   if (topLoser && -topLoser.d >= 20) recs.push(`Check ${shortPath(topLoser.k)} (−${num(-topLoser.d)} imp): refresh content and date, confirm it is still indexed.`);
   if (lowShareDilution) recs.push("Pause mass publishing; improve and interlink existing pages ranking 8–20 before adding new ones.");
   if (hasChan && directShare1 > 80) recs.push("Filter bot traffic in GA4 (exclude known bots/internal) and add bot protection, otherwise sessions are not trustworthy.");
-  if (leads && leads.unanswered > 0) recs.unshift(`Reply to ${leads.unanswered} unanswered lead(s) — oldest waiting ${leads.oldestDays} days. Speed of reply decides who wins the client.`);
+  if (leads && leads.all.waiting > 0) recs.unshift(`Reply to ${leads.all.waiting} unanswered lead(s) — oldest waiting ${leads.oldestWaitingDays} days. Speed of reply decides who wins the client.`);
   if (leads1 === 0) recs.push("Zero new leads this week: add a CTA block (free audit) to the top real-traffic pages and check the /contact form works.");
   if (offTarget > 40) recs.push(`${offTarget.toFixed(0)}% of impressions come from non-target countries: shift content toward US/UK/CA/AU niches (coffee, salons, groomers, fitness).`);
 
+  // ---------- presentation (Telegram HTML) ----------
+  const esc = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const SP = "▁▂▃▄▅▆▇█";
+  const spark = (a) => { const m = Math.max(...a, 1); return a.map(v => SP[Math.min(7, Math.round((v / m) * 7))]).join(""); };
+  const pad = (v, n) => String(v).padStart(n);
+  const lab = (t, n = 15) => String(t).padEnd(n);
+  const pctOf = (a, b) => (b ? (a / b * 100) : 0);
+  const fp = (v) => (v >= 10 ? v.toFixed(0) : v.toFixed(1)) + "%";
+  const tbl = (head, rows) => `<pre>${esc([head, ...rows].join("\n"))}</pre>`;
+
   const date = new Date().toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
-  const verdict = `Search ${arrow(c1.imp, c0.imp)} impressions, ${arrow(c1.clk, c0.clk)} clicks · real visitors ${real1} ${arrow(real1, real0)} · ${leads1} new lead${leads1 === 1 ? "" : "s"}`;
-  const L = [
-    `📊 DATALATTE WEEKLY · ${date}`,
-    `${fmtDay(g1[0].keys[0])} – ${fmtDay(g1[g1.length - 1].keys[0])} vs previous 7 days`,
-    "",
-    `➡️ ${verdict}`,
-    "",
-    "🔍 SEARCH (Google)",
-    row("Impressions", c1.imp, c0.imp),
-    row("Clicks", c1.clk, c0.clk),
-    row("CTR", c1.ctr, c0.ctr, v => v.toFixed(2) + "%"),
-    `Avg position: ${c1.pos.toFixed(1)} ${c1.pos < c0.pos ? "▲ better" : "▼ worse"} (was ${c0.pos.toFixed(1)})`,
-    "",
-    "🌐 TRAFFIC (GA4)",
-  ];
-  if (hasChan) {
-    L.push(row("Real visitors (excl. Direct)", real1, real0));
-    L.push(`  Organic: ${chSum(wk1, "Organic Search")} ${arrow(chSum(wk1, "Organic Search"), chSum(wk0, "Organic Search"))} · AI: ${chSum(wk1, "AI Assistant")} ${arrow(chSum(wk1, "AI Assistant"), chSum(wk0, "AI Assistant"))}`);
-    L.push(row("Bot-like Direct", direct1, chSum(wk0, "Direct")));
-  } else {
-    L.push(row("Sessions", s1, s0), row("Users", u1, u0));
+  const periodTxt = `${fmtDay(g1[0].keys[0])} – ${fmtDay(g1[g1.length - 1].keys[0])}`;
+
+  // ---- all-time (since launch) ----
+  const gAll = gsc.allDaily || [];
+  const allImp = sum(gAll, d => d.impressions), allClk = sum(gAll, d => d.clicks);
+  const allSessRows = ga4.allTimeChannels || [];
+  const SPIKE = 2000; // single day x channel above this is a one-day spam burst (e.g. 6 Jun)
+  const allReal = sum(allSessRows.filter(r => r.ch !== "Direct" && r.s <= SPIKE), r => r.s);
+  const allDirect = sum(allSessRows.filter(r => r.ch === "Direct"), r => r.s);
+  const launch = gAll.length ? fmtDay(gAll[0].d) : "launch";
+
+  // ---- weekly sparklines (last 8 weeks) ----
+  const weeklySeries = (key) => {
+    const m = new Map();
+    for (const d of gAll) {
+      const t = new Date(d.d + "T00:00:00Z"); const dow = (t.getUTCDay() + 6) % 7; t.setUTCDate(t.getUTCDate() - dow);
+      const k = t.toISOString().slice(0, 10); m.set(k, (m.get(k) || 0) + d[key]);
+    }
+    return [...m.entries()].sort((a, b) => a[0].localeCompare(b[0])).slice(-9, -1).map(x => x[1]); // drop the current partial week
+  };
+  const sparkImp = gAll.length > 14 ? spark(weeklySeries("impressions")) : "";
+  const sparkClk = gAll.length > 14 ? spark(weeklySeries("clicks")) : "";
+
+  const L = [];
+  L.push(`<b>📊 DATALATTE WEEKLY</b>`, `<i>${esc(periodTxt)} · compared with the previous 7 days · ${esc(date)}</i>`, "");
+
+  // ---- LEADS ----
+  if (leads) {
+    const A = leads.all, W1 = leads.w1, W0 = leads.w0;
+    const convW = real1 ? W1.leads / real1 * 100 : 0, convAll = allReal ? A.leads / allReal * 100 : 0;
+    L.push(`<b>🎯 LEADS</b>`);
+    L.push(tbl("                This wk  Prev wk  All time", [
+      `${lab("Leads")}${pad(W1.leads, 7)}${pad(W0.leads, 9)}${pad(A.leads, 10)}`,
+      `${lab("  ready to start")}${pad(W1.ready, 7)}${pad("", 9)}${pad(A.ready, 10)}`,
+      `${lab("  answered")}${pad(W1.replied, 7)}${pad(W0.replied, 9)}${pad(`${A.replied} (${fp(pctOf(A.replied, A.leads))})`, 10)}`,
+      `${lab("  waiting reply")}${pad(W1.waiting, 7)}${pad("", 9)}${pad(A.waiting, 10)}`,
+      `${lab("Partnerships")}${pad(W1.partner, 7)}${pad(W0.partner, 9)}${pad(A.partner, 10)}`,
+      `${lab("Newsletter subs")}${pad(W1.subs, 7)}${pad(W0.subs, 9)}${pad(A.subs, 10)}`,
+    ]));
+    L.push(`<b>Conversion</b> (real visitor → lead): <b>${fp(convW)}</b> this week · <b>${fp(convAll)}</b> since launch`);
+    L.push(`<i>${num(allReal)} real visitors and ${A.leads} leads since ${esc(launch)}</i>`);
+    if (A.waiting) L.push(`⚠️ <b>${A.waiting} lead(s) waiting for a reply</b>, oldest ${leads.oldestWaitingDays}d`);
+    L.push("");
   }
-  if (bing && bing.length >= 14) {
-    const bs = (a) => ({ imp: sum(a, d => d.impressions), clk: sum(a, d => d.clicks) });
-    const b1 = bs(bing.slice(-7)), b0 = bs(bing.slice(-14, -7));
-    L.push("", "🅱️ BING", row("Impressions", b1.imp, b0.imp), row("Clicks", b1.clk, b0.clk));
-  }
-  L.push("", `🎯 LEADS${leads ? "" : " (GA4 events)"}`, row("New leads", leads1, leads0));
-  if (leads) L.push(`Ready-to-start: ${leads.ready1} · Unanswered: ${leads.unanswered}${leads.unanswered ? ` (oldest ${leads.oldestDays}d)` : ""}`);
-  if (why.length) L.push("", "💡 WHY IT MOVED", ...why.map(t => `• ${t}`));
-  // Engagement funnel (GA4 events, all tracked traffic)
+
+  // ---- FUNNEL ----
   if (ev.length) {
     const e = (n, r) => evCount(n, r);
     const ctaNames = ["free_audit_clicked", "contact_cta_clicked", "book_call_clicked", "email_link_clicked", "phone_link_clicked"];
     const cta = (r) => sum(ctaNames, n => e(n, r));
-    const has50 = e("scroll_50", 0) + e("scroll_50", 1) > 0;
-    L.push("", "🔁 ENGAGEMENT (events)");
-    if (has50) L.push(row("Scrolled 50%", e("scroll_50", 0), e("scroll_50", 1)));
-    L.push(row("Scrolled 90%", e("scroll", 0), e("scroll", 1)));
-    L.push(row("CTA clicks (audit, contact, book call, email)", cta(0), cta(1)));
-    L.push(row("Chat opened → messages", e("chat_widget_opened", 0), e("chat_widget_opened", 1)) + `, messages ${e("chat_message_sent", 0)}, emails left ${e("chat_lead_captured", 0)}`);
-    L.push(row("Form started", e("form_start", 0), e("form_start", 1)));
-    L.push(row("Newsletter signups", e("email_subscribed", 0), e("email_subscribed", 1)));
+    const stages = [["Real visitors", real1], ["Scrolled 50%", e("scroll_50", 0) || null], ["Clicked a CTA", cta(0)], ["Started the form", e("form_start", 0)], ["Became a lead", leads ? leads.w1.leads : leads1]].filter(x => x[1] !== null);
+    const top = Math.max(...stages.map(x => x[1]), 1);
+    L.push(`<b>🔁 VISITOR FUNNEL (last 7 days)</b>`);
+    L.push(`<pre>${esc(stages.map(([n, v]) => `${lab(n, 17)}${pad(num(v), 5)}  ${"█".repeat(Math.max(v ? 1 : 0, Math.round(v / top * 12)))}`).join("\n"))}</pre>`, "");
   }
-  if (movers) L.push(movers);
-  if (pageOpps) L.push(pageOpps);
-  if (queryOpps) L.push(queryOpps);
-  if (recs.length) L.push("", "⚡ DO THIS WEEK", ...recs.slice(0, 4).map((t, i) => `${i + 1}. ${t}`));
-  L.push("", `28d: ${num(gTot.imp)} imp · ${gTot.clk} clicks · ${num(+(ov[0]?.value || 0))} sessions (bounce ${bounce}%)`);
+
+  // ---- SEARCH ----
+  const bz = (bing && bing.length >= 14) ? (() => { const b1 = sum(bing.slice(-7), d => d.clicks), b0 = sum(bing.slice(-14, -7), d => d.clicks); return { b1, b0 }; })() : null;
+  L.push(`<b>🔍 SEARCH</b>`);
+  L.push(tbl("                This wk  Prev wk       Δ", [
+    `${lab("Impressions")}${pad(num(c1.imp), 7)}${pad(num(c0.imp), 9)}${pad(arrow(c1.imp, c0.imp), 8)}`,
+    `${lab("Clicks")}${pad(num(c1.clk), 7)}${pad(num(c0.clk), 9)}${pad(arrow(c1.clk, c0.clk), 8)}`,
+    `${lab("CTR")}${pad(c1.ctr.toFixed(2) + "%", 7)}${pad(c0.ctr.toFixed(2) + "%", 9)}${pad("", 8)}`,
+    `${lab("Avg position")}${pad(c1.pos.toFixed(1), 7)}${pad(c0.pos.toFixed(1), 9)}${pad(c1.pos < c0.pos ? "▲ better" : "▼ worse", 8)}`,
+    ...(bz ? [`${lab("Bing clicks")}${pad(bz.b1, 7)}${pad(bz.b0, 9)}${pad(arrow(bz.b1, bz.b0), 8)}`] : []),
+  ]));
+  if (sparkImp) L.push(`8 weeks  impressions ${sparkImp}   clicks ${sparkClk}`);
+  L.push(`<i>Since launch: ${num(allImp)} impressions · ${num(allClk)} clicks · CTR ${fp(pctOf(allClk, allImp))}</i>`, "");
+
+  // ---- TRAFFIC ----
+  L.push(`<b>🌐 TRAFFIC (GA4)</b>`);
+  if (hasChan) {
+    L.push(tbl("                This wk  Prev wk       Δ", [
+      `${lab("Real visitors")}${pad(num(real1), 7)}${pad(num(real0), 9)}${pad(arrow(real1, real0), 8)}`,
+      `${lab("  organic")}${pad(chSum(wk1, "Organic Search"), 7)}${pad(chSum(wk0, "Organic Search"), 9)}${pad(arrow(chSum(wk1, "Organic Search"), chSum(wk0, "Organic Search")), 8)}`,
+      `${lab("  AI assistants")}${pad(chSum(wk1, "AI Assistant"), 7)}${pad(chSum(wk0, "AI Assistant"), 9)}${pad(arrow(chSum(wk1, "AI Assistant"), chSum(wk0, "AI Assistant")), 8)}`,
+      `${lab("Bots (Direct)")}${pad(num(direct1), 7)}${pad(num(chSum(wk0, "Direct")), 9)}${pad(arrow(direct1, chSum(wk0, "Direct")), 8)}`,
+    ]));
+  } else {
+    L.push(tbl("                This wk  Prev wk       Δ", [`${lab("Sessions")}${pad(num(s1), 7)}${pad(num(s0), 9)}${pad(arrow(s1, s0), 8)}`]));
+  }
+  L.push(`<i>Since launch: ${num(allReal)} real visitors vs ${num(allDirect)} bot-like Direct sessions</i>`, "");
+
+  // ---- WHY / DO ----
+  if (why.length) L.push(`<b>💡 WHY IT MOVED</b>`, ...why.slice(0, 3).map(t => `• ${esc(t)}`), "");
+  if (movers) L.push(`<b>📈 PAGE MOVERS</b>`, `<pre>${esc(movers.split("\n").slice(2).join("\n"))}</pre>`, "");
+  if (recs.length) L.push(`<b>⚡ DO THIS WEEK</b>`, ...recs.slice(0, 4).map((t, i) => `${i + 1}. ${esc(t)}`));
   return L.join("\n");
 }
 
@@ -524,7 +619,7 @@ async function sendTelegramReport() {
   try { bing = JSON.parse(fs.readFileSync(path.join(OUT_DIR, "bing-latest.json"), "utf8")).rows; } catch { /* optional */ }
   const msg = buildReport(gsc, ga4, await fetchLeads(), bing);
 
-  const body = JSON.stringify({ chat_id: tgChat, text: msg });
+  const body = JSON.stringify({ chat_id: tgChat, text: msg.slice(0, 4000), parse_mode: "HTML", disable_web_page_preview: true });
   await new Promise((resolve, reject) => {
     const https = require("https");
     const url = `https://api.telegram.org/bot${tgToken}/sendMessage`;
@@ -543,4 +638,4 @@ async function sendTelegramReport() {
 }
 
 if (require.main === module) main();
-module.exports = { buildReport };
+module.exports = { buildReport, fetchLeads };
