@@ -277,7 +277,22 @@ async function fetchBing() {
     const rows = ((await res.json()).d || [])
       .map(r => ({ date: new Date(parseInt(String(r.Date).replace(/\D/g, ""), 10)).toISOString().slice(0, 10), clicks: r.Clicks || 0, impressions: r.Impressions || 0 }))
       .sort((a, b) => a.date.localeCompare(b.date));
-    fs.writeFileSync(path.join(OUT_DIR, "bing-latest.json"), JSON.stringify({ fetchedAt: new Date().toISOString(), rows: rows.slice(-60) }, null, 2));
+    // Top queries / pages (Bing returns per-day rows; aggregate by key over the window it gives us)
+    const agg = async (method, keyName) => {
+      try {
+        const r = await fetch(`https://ssl.bing.com/webmaster/api.svc/json/${method}?apikey=${key}&siteUrl=${site}`);
+        if (!r.ok) return [];
+        const m = new Map();
+        for (const x of (await r.json()).d || []) {
+          const k = x[keyName]; if (!k) continue;
+          const a = m.get(k) || { key: k, impressions: 0, clicks: 0 };
+          a.impressions += x.Impressions || 0; a.clicks += x.Clicks || 0; m.set(k, a);
+        }
+        return [...m.values()].sort((a, b) => b.clicks - a.clicks || b.impressions - a.impressions).slice(0, 25);
+      } catch { return []; }
+    };
+    const [queries, pages] = await Promise.all([agg("GetQueryStats", "Query"), agg("GetPageStats", "Query")]);
+    fs.writeFileSync(path.join(OUT_DIR, "bing-latest.json"), JSON.stringify({ fetchedAt: new Date().toISOString(), rows: rows.slice(-400), queries, pages }, null, 2));
     console.log(`✓ Bing saved (${rows.length} days)`);
     return rows;
   } catch (e) {
