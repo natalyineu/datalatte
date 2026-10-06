@@ -44,7 +44,10 @@ function parseFrom(raw: string): { email: string; name: string } {
 }
 
 export async function POST(req: NextRequest) {
-  if (!authorized(req)) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!authorized(req)) {
+    console.warn(`inbound-email: unauthorized (secret ${SECRET ? "set" : "NOT SET in this deployment"}, header ${req.headers.get("x-inbound-secret") ? "present" : "missing"})`);
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
 
   let body: Record<string, unknown>;
   try { body = await req.json(); } catch { return NextResponse.json({ error: "Bad JSON" }, { status: 400 }); }
@@ -87,5 +90,6 @@ export async function POST(req: NextRequest) {
     );
   }
   await Promise.allSettled(tasks);
+  console.warn(`inbound-email: accepted from ${email}`);
   return NextResponse.json({ success: true });
 }
