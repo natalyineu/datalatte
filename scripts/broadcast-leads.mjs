@@ -3,8 +3,16 @@
  * Create per-niche Resend Audiences → add ALL leads → send Broadcast
  *
  * Usage:
- *   node scripts/broadcast-leads.mjs            # add contacts + send to 'new'
- *   node scripts/broadcast-leads.mjs --dry-run  # preview only
+ *   node scripts/broadcast-leads.mjs            # DRY RUN (default): preview only
+ *   node scripts/broadcast-leads.mjs --send     # really add contacts + send to 'new'
+ *   --include-subscribers                       # allow sending even if the audience has non-lead contacts
+ *
+ * Safety (added after the 31 May duplicate sends):
+ *  - sends only with an explicit --send (before, a bare run sent immediately)
+ *  - refuses to send if the audience contains contacts that are not leads (site subscribers, form
+ *    enquirers, real clients), because a Resend broadcast goes to EVERYONE in the audience
+ *  - leads are claimed (status "sending") BEFORE the broadcast is created and released on failure,
+ *    so a rerun or a crash cannot send the same lead twice
  */
 
 import { createClient } from "@supabase/supabase-js";
@@ -14,7 +22,8 @@ const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const FROM = "Nataliia at DataLatte <hi@datalatte.pro>";
 
-const DRY_RUN = process.argv.includes("--dry-run");
+const DRY_RUN = !process.argv.includes("--send");
+const INCLUDE_SUBSCRIBERS = process.argv.includes("--include-subscribers");
 
 const NICHE_CONFIG = {
   coffee: {
@@ -89,6 +98,20 @@ async function resend(path, method = "GET", body = null) {
   const data = await res.json();
   if (!res.ok) throw new Error(`Resend ${method} ${path}: ${JSON.stringify(data)}`);
   return data;
+}
+
+async function audienceEmails(audienceId) {
+  const emails = new Set();
+  let after = null;
+  for (let page = 0; page < 50; page++) {
+    const q = `/audiences/${audienceId}/contacts?limit=100${after ? `&after=${after}` : ""}`;
+    const r = await resend(q);
+    const rows = r.data || [];
+    rows.forEach(c => emails.add(String(c.email).toLowerCase()));
+    if (!r.has_more || !rows.length) break;
+    after = rows[rows.length - 1].id;
+  }
+  return emails;
 }
 
 // Free plan = 3 audiences max. Map niches to existing audience IDs.
@@ -185,26 +208,50 @@ async function main() {
     }
     console.log(`  ✅ ${added} contacts ready, ${failed} failed`);
 
+    // 2b. Safety: the broadcast goes to everyone in the audience — make sure they are all leads
+    if (!INCLUDE_SUBSCRIBERS) {
+      const { data: everyLead } = await supabase.from("leads").select("email").not("email", "is", null);
+      const leadEmails = new Set((everyLead || []).map(l => String(l.email).toLowerCase()));
+      const inAudience = await audienceEmails(audienceId);
+      const strangers = [...inAudience].filter(e => !leadEmails.has(e));
+      if (strangers.length) {
+        console.log(`  🛑 ABORT ${niche}: audience has ${strangers.length} contact(s) that are not leads (e.g. ${strangers.slice(0, 3).join(", ")}).`);
+        console.log("     They would receive this cold email. Use a separate audience, or pass --include-subscribers to override.");
+        continue;
+      }
+    }
+
     // 3. Create broadcast — skip if already sent today for this niche
     const broadcastName = `Denver ${niche} — ${new Date().toISOString().slice(0, 10)}`;
     if (sentToday.has(broadcastName)) {
       console.log(`  ⏭️  Broadcast "${broadcastName}" already sent today — skipping to prevent duplicate.`);
       continue;
     }
-    console.log(`Creating broadcast "${broadcastName}"...`);
-    const broadcast = await resend("/broadcasts", "POST", {
-      audience_id: audienceId,
-      from: FROM,
-      name: broadcastName,
-      subject: cfg.subject,
-      html: buildHtml(cfg),
-    });
-    console.log(`  ✅ Broadcast created: ${broadcast.id}`);
+    // Claim the leads first: a crash or a rerun can no longer pick them up again
+    const claimIds = leads.map(l => l.id);
+    await supabase.from("leads").update({ status: "sending" }).in("id", claimIds);
 
-    // 4. Send to ALL contacts in audience
-    console.log("Sending broadcast to ALL contacts...");
-    await resend(`/broadcasts/${broadcast.id}/send`, "POST");
-    console.log(`  ✅ Broadcast sent!`);
+    let broadcast;
+    try {
+      console.log(`Creating broadcast "${broadcastName}"...`);
+      broadcast = await resend("/broadcasts", "POST", {
+        audience_id: audienceId,
+        from: FROM,
+        name: broadcastName,
+        subject: cfg.subject,
+        html: buildHtml(cfg),
+      });
+      console.log(`  ✅ Broadcast created: ${broadcast.id}`);
+
+      // 4. Send to ALL contacts in audience
+      console.log("Sending broadcast to ALL contacts...");
+      await resend(`/broadcasts/${broadcast.id}/send`, "POST");
+      console.log(`  ✅ Broadcast sent!`);
+    } catch (e) {
+      await supabase.from("leads").update({ status: "new" }).in("id", claimIds); // release the claim
+      console.error(`  ❌ Broadcast failed, leads released: ${e.message}`);
+      continue;
+    }
 
     // 5. Mark all leads as emailed
     const allIds = leads.map(l => l.id);
