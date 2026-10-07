@@ -42,6 +42,7 @@ const services = [
 ];
 
 const learn = [
+  { label: "Guides",                href: "/guides" },
   { label: "Blog",                  href: "/blog" },
   { label: "Country Guides 🌍",     href: "/blog/local-marketing-guides" },
   { label: "Resources",             href: "/resources" },

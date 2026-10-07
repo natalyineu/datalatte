@@ -42,6 +42,7 @@ const footerLinks = {
   ],
   "Company": [
     { label: "About Nataliia",          href: "/about" },
+    { label: "Guides",                  href: "/guides" },
     { label: "Blog",                    href: "/blog" },
     { label: "Client Results",          href: "/results" },
     { label: "Case Studies",            href: "/case-studies" },

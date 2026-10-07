@@ -3,7 +3,7 @@ import { ArrowRight, CheckCircle2, X, Check, ChevronRight } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
 import ScrollReveal from "@/components/ScrollReveal";
-import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
+import { breadcrumbSchema, serviceSchema, faqSchema } from "@/lib/schema";
 
 interface ServicePageProps {
   service: string;
@@ -73,6 +73,7 @@ export default function ServicePage({
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema({ name: service, description, url: serviceUrl })) }} />
+      {faqs?.length > 0 && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs)) }} />}
 
       {/* ── Hero ── */}
       <section className={`relative overflow-hidden ${accentClass} pt-24 pb-28 px-4 sm:px-6 lg:px-8`}>

@@ -5,7 +5,10 @@ import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
 import TestimonialCard from "@/components/TestimonialCard";
 import ScrollReveal from "@/components/ScrollReveal";
-import { breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema, faqSchema } from "@/lib/schema";
+import { HUBS, getHubCopy } from "@/lib/hubs";
+
+const HUB_NICHE: Record<string, string> = { "coffee-shops": "coffee", "hair-salons": "salon", "pet-groomers": "pet", "fitness-studios": "fitness" };
 import type { CityServiceGroup } from "@/lib/cityGuides";
 
 interface NichePageProps {
@@ -55,6 +58,7 @@ export default function NichePage({
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      {faq?.length > 0 && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faq)) }} />}
 
       {/* ── Hero ── */}
       <section className={`relative overflow-hidden ${accentColor} pt-24 pb-28`}>
@@ -399,6 +403,24 @@ export default function NichePage({
           </div>
         </SectionWrapper>
       )}
+
+      {(() => {
+        const hubs = HUBS.filter((h) => h.niche === HUB_NICHE[slug] && getHubCopy(h.slug).intro?.length);
+        if (!hubs.length) return null;
+        return (
+          <SectionWrapper>
+            <h2 className="section-title !text-2xl md:!text-3xl mb-6">Free guides for {niche.toLowerCase()}</h2>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {hubs.map((h) => (
+                <Link key={h.slug} href={`/guides/${h.slug}`} className="card p-5 hover:-translate-y-0.5 transition">
+                  <p className="font-semibold text-gray-900 dark:text-gray-50">{h.title.replace(": Complete Guide", "")}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{h.count} articles</p>
+                </Link>
+              ))}
+            </div>
+          </SectionWrapper>
+        );
+      })()}
 
       <CTABanner headline={ctaHeadline} />
     </>
