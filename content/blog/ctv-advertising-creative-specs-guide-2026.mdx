@@ -14,6 +14,10 @@ readTime: "9 min read"
 
 Export one 16:9, 1920x1080 MP4 using H.264 video and AAC stereo audio at 48 kHz, 15 or 30 seconds long, with constant frame rate (29.97 fps is safe everywhere). That master file meets the published specs of Hulu, Roku and Amazon, and it is the standard fullscreen CTV size in the IAB Tech Lab guidelines. The details below (file size, bitrate, length) differ by platform, so check the current spec page before every upload.
 
+Here is the scene. You paid a freelancer for a 15-second spot, you booked the flight, and the platform bounces your file at the last step. Wrong frame rate. Or the file is too big. Or the audio is clipped. Now the start date slips and you pay for edits twice.
+
+Every one of those failures is on a published spec page. The numbers are short: Hulu caps self-served files at 250 MB, Amazon at 500 MB, Roku at 1 GB. Frame rate, bitrate and audio have fixed ranges. Check them once, export once, and the spot goes through.
+
 ## The Common Core
 
 Based on the official spec pages of Hulu (Disney Advertising), Roku Ads Manager and Amazon Ads, checked October 2026:
@@ -61,7 +65,23 @@ Per [Amazon Ads' Streaming TV and Prime Video specs](https://advertising.amazon.
 
 ### Peacock and other platforms
 
-Peacock follows NBCUniversal's creative guidelines, which change often, so download the current sheet from your sales contact or DSP. The same goes for Tubi, Pluto TV, YouTube TV and DSPs such as The Trade Desk or StackAdapt: their requirements depend on the inventory you buy, and we have not listed numbers we could not confirm on an official page.
+Peacock follows NBCUniversal's creative guidelines, which change often, so download the current sheet from your sales contact or DSP. The same goes for Tubi, Pluto TV, YouTube TV and DSPs such as The Trade Desk or StackAdapt. Their requirements depend on the inventory you buy, and we have not listed numbers we could not confirm on an official page.
+
+## The Math: Will Your File Fit?
+
+File size is bitrate times length. Divide by 8 to turn megabits into megabytes. The formula: size in MB = Mbps x seconds / 8 (video only; audio adds a small amount, so leave some headroom).
+
+Here are worked examples using the bitrates from the spec pages above. The bitrate and length choices are examples. Plug in your own export settings.
+
+| Example export | Calculation | Video size | Fits Hulu-served (250 MB)? | Fits Amazon (500 MB)? |
+|---|---|---|---|---|
+| 15 s at 10 Mbps (Hulu minimum) | 10 x 15 / 8 | 18.75 MB | Yes | Yes |
+| 30 s at 15 Mbps (Prime Video minimum) | 15 x 30 / 8 | 56.25 MB | Yes | Yes |
+| 30 s at 40 Mbps (Hulu maximum) | 40 x 30 / 8 | 150 MB | Yes | Yes |
+| 30 s at 50 Mbps (Amazon recommended) | 50 x 30 / 8 | 187.5 MB | Yes | Yes |
+| 60 s at 50 Mbps | 50 x 60 / 8 | 375 MB | No | Yes |
+
+The takeaway: a :15 or :30 at these bitrates is nowhere near any platform's size cap. The cap only bites on 60-second spots at very high bitrates. Amazon's 15 Mbps minimum for Prime Video is higher than Hulu's 10 Mbps floor and Roku's 6 Mbps, so an export at 15 to 40 Mbps clears the video minimums of all three, and Hulu's 40 Mbps ceiling too. Only Amazon's recommended 50 Mbps would exceed Hulu's range, so keep a second export if you buy both directly.
 
 ## Which Length: :15 or :30?
 
@@ -69,13 +89,13 @@ Platforms accept a range of lengths (Roku, for instance, accepts 6 to 92 seconds
 
 ## Loudness
 
-US broadcasters must keep commercials at the same loudness as the programs around them under the CALM Act, using the ATSC A/85 recommended practice with a target of -24 LKFS, plus or minus 2 dB ([TV Technology](https://www.tvtechnology.com/news/fcc-issues-rules-to-calm-tv-ads), checked Oct 2026). Streaming platforms set their own audio rules, but mixing your ad to about -24 LKFS (what many loudness meters call LUFS) is a safe default. Avoid clipping and keep voiceover clear over music.
+US broadcasters must keep commercials at the same loudness as the programs around them under the CALM Act, using the ATSC A/85 recommended practice with a target of -24 LKFS, plus or minus 2 dB ([TV Technology](https://www.tvtechnology.com/news/fcc-issues-rules-to-calm-tv-ads), checked Oct 2026). That means a window of -26 to -22 LKFS. Streaming platforms set their own audio rules, but mixing your ad to about -24 LKFS (what many loudness meters call LUFS) is a safe default. Avoid clipping and keep voiceover clear over music.
 
 ## Closed Captions and Safe Margins
 
-Captions help viewers who watch with the sound off and make the ad accessible. Some platforms require a caption file, and the Hulu, Roku and Amazon pages above do not specify caption rules, so ask your platform or DSP what file type they want (SRT is the most common simple format). Keep logos and text well inside the edges of the frame, because TVs can crop the picture. Amazon publishes downloadable safe-zone guides for its ads.
+Captions help viewers who watch with the sound off. Some platforms require a caption file, and the Hulu, Roku and Amazon pages above do not specify caption rules, so ask your platform or DSP what file type they want (SRT is the most common simple format). Keep logos and text well inside the edges of the frame, because TVs can crop the picture. Amazon publishes downloadable safe-zone guides for its ads.
 
-A simple SRT file looks like this:
+A simple SRT file for a :15 spot looks like this:
 
 ```
 1
@@ -99,26 +119,29 @@ We're [service] in [neighborhood], [city].
 
 You do not need a production company to make a CTV-ready spot.
 
-- **Shoot:** A recent smartphone shooting at its highest quality setting is enough. Export at 1920x1080.
-- **Light:** Shoot near a window or use a soft lamp in front of your subject, and avoid mixed color temperatures.
+- **Shoot:** A recent smartphone at its highest quality setting is enough. Export at 1920x1080.
 - **Sound:** Do not rely on the phone's built-in mic for voiceover. A small clip-on or shotgun microphone, or a hired voiceover artist (request quotes), records far cleaner audio.
-- **Edit:** A free editor is usually enough for a 15-second spot with a hero shot, text overlay, logo and call to action.
+- **Edit:** A free editor handles a 15-second spot: hero shot, text overlay, logo, call to action.
 - **Music:** Use properly licensed music. Unlicensed tracks can be flagged or rejected.
 
-**Before you submit:**
-- [ ] 16:9, 1920x1080, constant frame rate
+## Do This Before You Upload
+
+Run this list on the final file. It takes about 5 minutes.
+
+- [ ] 16:9, 1920x1080, constant frame rate (29.97 fps)
 - [ ] MP4, H.264, AAC stereo 48 kHz
-- [ ] File size under the platform's limit (Hulu-served ads: 250 MB; Amazon: 500 MB)
+- [ ] Length is exactly 15 or 30 seconds
+- [ ] Bitrate at or above the minimum for the platform (Roku 6, Hulu 10, Prime Video 15 Mbps)
+- [ ] File size under the platform's limit (Hulu-served ads: 250 MB; Amazon: 500 MB; Roku: 1 GB)
 - [ ] Captions file ready if the platform asks for it
 - [ ] Text and logos inside the safe area
-- [ ] Mixed to about -24 LKFS
+- [ ] Mixed to about -24 LKFS, no clipping
 
 ## Common Rejection Reasons
 
 - **Wrong specs.** Frame rate, bitrate or file size outside the platform's limits is the easiest problem to avoid. Compare your export against the lists above.
-- **Audio too loud or distorted.** Meter your mix and leave headroom.
-- **Text too close to the edge.** Keep a generous margin.
-- **Unsubstantiated or competitor claims.** "Best in town" claims often need proof. Prefer a verifiable fact, such as your review count, and do not name competitors.
+- **Audio too loud or distorted, text too close to the edge.** Meter your mix, keep a generous margin.
+- **Unsubstantiated or competitor claims.** "Best in town" claims often need proof. Use a verifiable fact, such as your review count, and do not name competitors.
 
 ## FAQ
 
