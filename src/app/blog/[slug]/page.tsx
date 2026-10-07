@@ -525,7 +525,7 @@ export default async function BlogPostPage({
     };
     const clean = (t: string) => t.replace(/<[^>]+>/g, "").replace(/\*\*/g, "").replace(/^A:\s*/i, "").trim().split("\n\n")[0].trim();
     // Only the FAQ section (stops at the next H2), so other bold text is never picked up
-    const faqSectionMatch = content.match(/^#{2,3}\s+(?:Frequently Asked Questions|FAQs?)\b[^\n]*\n([\s\S]*?)(?=\n## (?!#)|$)/im);
+    const faqSectionMatch = content.match(/^#{2,3}\s+(?:Frequently Asked Questions|FAQs?)\b[^\n]*\n([\s\S]*?)(?=\n## (?!#)|(?![\s\S]))/im);
     if (!faqSectionMatch) return items;
     const faqSection = faqSectionMatch[1];
     // Format 1: ### Question \n\n Answer
