@@ -518,18 +518,23 @@ export default async function BlogPostPage({
   // Extract FAQ items from markdown content for FAQPage schema
   const faqItems = (() => {
     const items: { q: string; a: string }[] = [];
-    // Match H3 headings followed by paragraph text inside a FAQ section
-    const faqSectionMatch = content.match(/#{2,3}\s+Frequently Asked Questions[\s\S]*$/i);
+    const seen = new Set<string>();
+    const add = (q: string, a: string) => {
+      const key = q.toLowerCase().replace(/\s+/g, " ").trim();
+      if (q && a && !seen.has(key)) { seen.add(key); items.push({ q, a }); }
+    };
+    const clean = (t: string) => t.replace(/<[^>]+>/g, "").replace(/\*\*/g, "").replace(/^A:\s*/i, "").trim().split("\n\n")[0].trim();
+    // Only the FAQ section (stops at the next H2), so other bold text is never picked up
+    const faqSectionMatch = content.match(/^#{2,3}\s+(?:Frequently Asked Questions|FAQs?)\b[^\n]*\n([\s\S]*?)(?=\n## (?!#)|$)/im);
     if (!faqSectionMatch) return items;
-    const faqSection = faqSectionMatch[0];
-    // Extract each Q&A pair: ### Question\n\nAnswer paragraph
+    const faqSection = faqSectionMatch[1];
+    // Format 1: ### Question \n\n Answer
     const qaRegex = /###\s+(.+?)\n+([\s\S]+?)(?=\n###|\n##|$)/g;
     let m;
-    while ((m = qaRegex.exec(faqSection)) !== null) {
-      const q = m[1].trim();
-      const a = m[2].replace(/<[^>]+>/g, "").replace(/\*\*/g, "").trim().split("\n\n")[0].trim();
-      if (q && a) items.push({ q, a });
-    }
+    while ((m = qaRegex.exec(faqSection)) !== null) add(m[1].trim(), clean(m[2]));
+    // Format 2: **Q: Question?** \n A: Answer
+    const boldRegex = /\*\*Q:\s*(.+?)\*\*\s*\n+([\s\S]+?)(?=\n\*\*Q:|\n##|$)/g;
+    while ((m = boldRegex.exec(faqSection)) !== null) add(m[1].trim(), clean(m[2]));
     return items;
   })();
 
