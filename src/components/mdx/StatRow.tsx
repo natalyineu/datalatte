@@ -51,7 +51,7 @@ export default function StatRow({ title, values, labels, subs = "", trends = "",
           );
         })}
       </div>
-      <p className="mt-2 text-[11px] text-gray-400 dark:text-gray-500 text-right">{source ? `Source: ${source}` : "Estimates for illustration; actual numbers vary."}</p>
+      <p className="mt-2 text-[11px] text-gray-500 dark:text-gray-400 text-right">{source ? `Source: ${source}` : "Estimates for illustration; actual numbers vary."}</p>
     </div>
   );
 }

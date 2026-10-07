@@ -177,7 +177,7 @@ export default function ExitIntentPopup() {
 
                     <button
                       onClick={dismiss}
-                      className="text-xs text-gray-400 hover:text-gray-600 transition-colors w-full text-center"
+                      className="text-xs text-gray-500 hover:text-gray-600 transition-colors w-full text-center dark:text-gray-400"
                     >
                       No thanks, I'll figure it out myself
                     </button>

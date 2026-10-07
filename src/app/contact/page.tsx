@@ -277,7 +277,7 @@ export default function ContactPage() {
               title="DataLatte office — Poznań, Poland"
             />
           </div>
-          <p className="text-center text-sm text-gray-400 mt-3">
+          <p className="text-center text-sm text-gray-500 mt-3 dark:text-gray-400">
             Franklina Roosevelta 22, 61-700 Poznań, Poland · Bałtyk Business Square
           </p>
         </div>

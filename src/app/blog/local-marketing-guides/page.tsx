@@ -499,7 +499,7 @@ export default function LocalMarketingGuidesPage() {
                     <span className="font-semibold text-gray-800 dark:text-gray-200 group-hover:text-coffee-700 dark:group-hover:text-coffee-300 transition-colors text-sm leading-tight">
                       {country.displayName}
                     </span>
-                    <span className="text-xs text-gray-400 dark:text-gray-500 line-clamp-2 leading-snug">
+                    <span className="text-xs text-gray-500 dark:text-gray-400 line-clamp-2 leading-snug">
                       {country.description}
                     </span>
                   </Link>

@@ -24,7 +24,7 @@ function ProgressBar({ pct }: { pct: number }) {
   return (
     <div className="space-y-1.5">
       <div className="flex justify-between items-center">
-        <span className="text-xs text-gray-400 dark:text-gray-500">Progress</span>
+        <span className="text-xs text-gray-500 dark:text-gray-400">Progress</span>
         <motion.span
           key={pct}
           initial={{ opacity: 0, y: -4 }}
@@ -120,7 +120,7 @@ function ExploreForm() {
       <div>
         <label htmlFor="ex-message" className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
           What are you curious about?
-          <span className="text-[11px] text-gray-400 dark:text-gray-500 font-normal">optional</span>
+          <span className="text-[11px] text-gray-500 dark:text-gray-400 font-normal">optional</span>
         </label>
         <textarea
           id="ex-message" name="message" rows={3}
@@ -141,7 +141,7 @@ function ExploreForm() {
       </button>
 
       {status === "error" && <ErrorMsg />}
-      <p className="text-xs text-gray-400 text-center">No spam. Just a friendly reply. ☕</p>
+      <p className="text-xs text-gray-500 text-center dark:text-gray-400">No spam. Just a friendly reply. ☕</p>
     </form>
   );
 }
@@ -199,7 +199,7 @@ function ReadyForm() {
       {/* Niche tiles — compact row */}
       <div>
         <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-          Your business type <span className="text-gray-400 dark:text-gray-500 font-normal text-xs ml-1">optional</span>
+          Your business type <span className="text-gray-500 dark:text-gray-400 font-normal text-xs ml-1">optional</span>
         </p>
         <div className="flex flex-wrap gap-2">
           {NICHES.map(n => (
@@ -224,7 +224,7 @@ function ReadyForm() {
 
       <div>
         <label htmlFor="rd-message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
-          What do you need help with? <span className="text-gray-400 dark:text-gray-500 font-normal text-xs ml-1">optional</span>
+          What do you need help with? <span className="text-gray-500 dark:text-gray-400 font-normal text-xs ml-1">optional</span>
         </label>
         <textarea
           id="rd-message" name="message" rows={2}
@@ -245,7 +245,7 @@ function ReadyForm() {
       </button>
 
       {status === "error" && <ErrorMsg />}
-      <p className="text-xs text-gray-400 text-center">Free audit, no commitment. Back to you within one business day. ☕</p>
+      <p className="text-xs text-gray-500 text-center dark:text-gray-400">Free audit, no commitment. Back to you within one business day. ☕</p>
     </form>
   );
 }

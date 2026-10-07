@@ -238,7 +238,7 @@ export default function LocalSeoGrader() {
           )}
         </button>
 
-        <p className="text-center text-xs text-gray-400 mt-3">
+        <p className="text-center text-xs text-gray-500 mt-3 dark:text-gray-400">
           Free · Instant results · No email required
         </p>
       </form>

@@ -287,7 +287,7 @@ export default function ReportingPage() {
           </div>
           {BEFORE_AFTER.map((row, i) => (
             <div key={i} className="grid grid-cols-2 text-sm hover:bg-gray-50 transition-colors">
-              <div className="px-5 py-3.5 text-gray-400 border-r border-gray-100 flex items-start gap-2 dark:border-gray-700">
+              <div className="px-5 py-3.5 text-gray-500 border-r border-gray-100 flex items-start gap-2 dark:border-gray-700 dark:text-gray-400">
                 <X size={13} className="text-red-400 shrink-0 mt-0.5" />
                 {row.before}
               </div>
@@ -319,7 +319,7 @@ export default function ReportingPage() {
                 <div className="w-3 h-3 rounded-full shrink-0" style={{ backgroundColor: group.color }} />
                 <h3 className="text-sm font-bold text-gray-700 uppercase tracking-widest dark:text-gray-200">{group.label}</h3>
                 <div className="flex-1 h-px bg-gray-200" />
-                <span className="text-xs text-gray-400">{group.sources.length} sources</span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">{group.sources.length} sources</span>
               </div>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                 {group.sources.map((source, i) => (
@@ -351,7 +351,7 @@ export default function ReportingPage() {
                     </div>
                     <div className="flex items-center gap-1.5 mb-2.5 relative">
                       <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse shrink-0" />
-                      <span className="text-xs text-gray-400">{source.freshness} refresh</span>
+                      <span className="text-xs text-gray-500 dark:text-gray-400">{source.freshness} refresh</span>
                     </div>
                     <p className="text-gray-400 text-xs mb-3 leading-relaxed relative">{source.description}</p>
                     <div className="flex flex-wrap gap-1 relative">
@@ -487,7 +487,7 @@ export default function ReportingPage() {
           <div className="grid grid-cols-2 sm:grid-cols-4 divide-x divide-y sm:divide-y-0 divide-gray-100">
             {MOCK_METRICS.map((m) => (
               <div key={m.label} className="p-5 group hover:bg-gray-50 transition-colors">
-                <div className="text-xs text-gray-400 mb-1">{m.label}</div>
+                <div className="text-xs text-gray-500 mb-1 dark:text-gray-400">{m.label}</div>
                 <div className="text-2xl font-bold text-gray-900 tabular-nums dark:text-gray-50">{m.value}</div>
                 <div className={`text-xs font-medium mt-1 flex items-center gap-0.5 ${m.positive ? "text-green-600 dark:text-green-300" : "text-red-500"}`}>
                   {m.positive ? <TrendingUp size={11} /> : <TrendingDown size={11} />}
@@ -499,7 +499,7 @@ export default function ReportingPage() {
 
           {/* Spend bar */}
           <div className="px-6 pt-4 pb-2">
-            <div className="text-xs text-gray-400 mb-2 font-medium">Budget allocation this week</div>
+            <div className="text-xs text-gray-500 mb-2 font-medium dark:text-gray-400">Budget allocation this week</div>
             <div className="flex rounded-full overflow-hidden h-3">
               <div className="bg-[#4285F4]" style={{ width: "49%" }} title="Google Ads 49%" />
               <div className="bg-[#0866FF]" style={{ width: "35%" }} title="Meta Ads 35%"   />
@@ -507,7 +507,7 @@ export default function ReportingPage() {
             </div>
             <div className="flex gap-4 mt-2">
               {[{ c: "#4285F4", l: "Google Ads 49%" }, { c: "#0866FF", l: "Meta Ads 35%" }, { c: "#333", l: "TikTok 16%" }].map(x => (
-                <div key={x.l} className="flex items-center gap-1.5 text-xs text-gray-400">
+                <div key={x.l} className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400">
                   <span className="w-2.5 h-2.5 rounded-sm shrink-0" style={{ backgroundColor: x.c }} />
                   {x.l}
                 </div>
@@ -517,7 +517,7 @@ export default function ReportingPage() {
 
           {/* Channel table */}
           <div className="px-6 pb-2">
-            <div className="text-xs font-semibold text-gray-400 uppercase tracking-widest py-4 border-t border-gray-100 dark:border-gray-700">
+            <div className="text-xs font-semibold text-gray-500 uppercase tracking-widest py-4 border-t border-gray-100 dark:border-gray-700 dark:text-gray-400">
               Channel Breakdown
             </div>
             <div className="overflow-x-auto">
@@ -546,7 +546,7 @@ export default function ReportingPage() {
                 </tbody>
               </table>
             </div>
-            <p className="text-xs text-gray-400 mt-2 pb-2">* Organic SEO leads tracked via GA4 goal completions — no ad spend.</p>
+            <p className="text-xs text-gray-500 mt-2 pb-2 dark:text-gray-400">* Organic SEO leads tracked via GA4 goal completions — no ad spend.</p>
           </div>
 
           {/* 3 priorities */}

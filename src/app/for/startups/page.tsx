@@ -194,7 +194,7 @@ export default function StartupsPage() {
                 {s.stage}
               </div>
               <div className="text-lg font-bold text-gray-900 mb-1 dark:text-gray-50">{s.focus}</div>
-              <p className="text-xs text-gray-400 mb-4">{s.goal}</p>
+              <p className="text-xs text-gray-500 mb-4 dark:text-gray-400">{s.goal}</p>
               <ul className="space-y-2">
                 {s.tactics.map((t) => (
                   <li key={t} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">

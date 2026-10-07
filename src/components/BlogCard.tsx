@@ -49,7 +49,7 @@ export default function BlogCard({ title, excerpt, slug, category, date, rawDate
         </div>
         {/* Content */}
         <div className="p-7 flex flex-col justify-center">
-          <span className="text-xs font-medium text-gray-400 dark:text-gray-500 mb-2">{category}</span>
+          <span className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-2">{category}</span>
           <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-50 mb-3 group-hover:text-coffee-700 dark:group-hover:text-coffee-300 transition-colors leading-snug">
             {title}
           </h2>
@@ -92,7 +92,7 @@ export default function BlogCard({ title, excerpt, slug, category, date, rawDate
 
       {/* Body */}
       <div className="p-5 flex flex-col flex-1">
-        <span className="text-xs font-medium text-gray-400 dark:text-gray-500 mb-1">{category}</span>
+        <span className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">{category}</span>
         <h3 className="font-bold text-gray-900 dark:text-gray-50 mb-2 group-hover:text-coffee-700 dark:group-hover:text-coffee-300 transition-colors leading-snug flex-1">
           {title}
         </h3>

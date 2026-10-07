@@ -788,7 +788,7 @@ export default async function BlogPostPage({
                   <div className="p-4 flex flex-col flex-1">
                     <span className="text-xs font-semibold text-coffee-600 dark:text-coffee-400 uppercase tracking-wide mb-2">{rp.category}</span>
                     <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 leading-snug line-clamp-2 group-hover:text-coffee-700 dark:group-hover:text-coffee-400 transition-colors">{rp.title}</h3>
-                    <span className="mt-auto pt-3 text-xs text-gray-400 dark:text-gray-500">{rp.readTime}</span>
+                    <span className="mt-auto pt-3 text-xs text-gray-500 dark:text-gray-400">{rp.readTime}</span>
                   </div>
                 </Link>
               ))}

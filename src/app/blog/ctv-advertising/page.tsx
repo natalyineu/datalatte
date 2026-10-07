@@ -270,7 +270,7 @@ export default function CTVHubPage() {
                   <span className="font-semibold text-gray-800 group-hover:text-coffee-700 transition-colors text-sm leading-snug dark:text-gray-100">
                     {a.title}
                   </span>
-                  <span className="text-xs text-gray-400 dark:text-gray-500 line-clamp-2 leading-snug">
+                  <span className="text-xs text-gray-500 dark:text-gray-400 line-clamp-2 leading-snug">
                     {a.description}
                   </span>
                 </Link>
@@ -297,7 +297,7 @@ export default function CTVHubPage() {
                   <span className="font-semibold text-gray-800 group-hover:text-coffee-700 transition-colors text-sm leading-tight dark:text-gray-100">
                     {a.label}
                   </span>
-                  <span className="text-xs text-gray-400 dark:text-gray-500 line-clamp-2 leading-snug">
+                  <span className="text-xs text-gray-500 dark:text-gray-400 line-clamp-2 leading-snug">
                     {a.description}
                   </span>
                 </Link>

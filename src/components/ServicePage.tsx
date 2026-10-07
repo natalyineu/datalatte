@@ -158,7 +158,7 @@ export default function ServicePage({
           <h2 className="section-title">Sound familiar? <span className="gradient-text">Here&apos;s the fix.</span></h2>
         </div>
         <div className="max-w-3xl mx-auto divide-y divide-gray-100 dark:divide-gray-700 border border-gray-100 dark:border-gray-700 rounded-2xl overflow-hidden shadow-sm">
-          <div className="grid grid-cols-2 bg-gray-50 dark:bg-gray-800 text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
+          <div className="grid grid-cols-2 bg-gray-50 dark:bg-gray-800 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest">
             <div className="px-5 py-3 border-r border-gray-100 dark:border-gray-700 flex items-center gap-2">
               <X size={13} className="text-red-400" /> Before
             </div>
@@ -168,7 +168,7 @@ export default function ServicePage({
           </div>
           {beforeAfter.map((row, i) => (
             <div key={i} className="grid grid-cols-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
-              <div className="px-5 py-3.5 text-gray-400 dark:text-gray-500 border-r border-gray-100 dark:border-gray-700 flex items-start gap-2">
+              <div className="px-5 py-3.5 text-gray-500 dark:text-gray-400 border-r border-gray-100 dark:border-gray-700 flex items-start gap-2">
                 <X size={13} className="text-red-400 shrink-0 mt-0.5" />
                 {row.before}
               </div>

@@ -416,11 +416,11 @@ export default function AIAgentsPage() {
                 {/* Technical details */}
                 <div className="grid grid-cols-2 gap-2 text-xs">
                   <div className="bg-white/70 rounded-lg px-3 py-2 dark:bg-gray-900/70">
-                    <div className="text-gray-400 font-mono mb-0.5">TRIGGER</div>
+                    <div className="text-gray-500 font-mono mb-0.5 dark:text-gray-400">TRIGGER</div>
                     <div className="text-gray-700 font-medium dark:text-gray-200">{agent.trigger}</div>
                   </div>
                   <div className="bg-white/70 rounded-lg px-3 py-2 dark:bg-gray-900/70">
-                    <div className="text-gray-400 font-mono mb-0.5">MODEL</div>
+                    <div className="text-gray-500 font-mono mb-0.5 dark:text-gray-400">MODEL</div>
                     <div className="text-gray-700 font-medium dark:text-gray-200">{agent.model}</div>
                   </div>
                 </div>
@@ -576,7 +576,7 @@ export default function AIAgentsPage() {
             </pre>
           </div>
 
-          <p className="text-xs text-gray-400 mt-3 font-mono">
+          <p className="text-xs text-gray-500 mt-3 font-mono dark:text-gray-400">
             * Simplified for clarity. Production config includes retry logic, PII scrubbing, and audit logging.
           </p>
         </div>

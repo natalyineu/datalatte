@@ -394,7 +394,7 @@ export default function CompetitorAnalysisPage() {
                 <CheckCircle2 size={15} className="text-green-500 flex-shrink-0 mt-0.5" />
                 <p className="text-sm text-gray-700 dark:text-gray-200">{tier.includes}</p>
               </div>
-              <p className="text-xs text-gray-400 border-t border-gray-100 pt-3 mt-3 dark:border-gray-700">{tier.addon}</p>
+              <p className="text-xs text-gray-500 border-t border-gray-100 pt-3 mt-3 dark:border-gray-700 dark:text-gray-400">{tier.addon}</p>
             </div>
           ))}
         </div>

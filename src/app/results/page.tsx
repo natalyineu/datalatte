@@ -179,7 +179,7 @@ export default function ResultsPage() {
               <div>
                 <div className="text-3xl font-extrabold text-gray-900 leading-none mb-1 dark:text-gray-50">{s.value}</div>
                 <div className="font-semibold text-gray-800 text-sm dark:text-gray-100">{s.label}</div>
-                <div className="text-xs text-gray-400 mt-0.5">{s.sub}</div>
+                <div className="text-xs text-gray-500 mt-0.5 dark:text-gray-400">{s.sub}</div>
               </div>
             </div>
           ))}

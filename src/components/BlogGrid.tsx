@@ -114,7 +114,7 @@ export default function BlogGrid({ posts }: { posts: Post[] }) {
           </svg>
           {sortAsc ? "Oldest first" : "Newest first"}
         </button>
-        <span className="text-xs text-gray-400 sm:ml-auto">{filtered.length} article{filtered.length !== 1 ? "s" : ""}</span>
+        <span className="text-xs text-gray-500 sm:ml-auto dark:text-gray-400">{filtered.length} article{filtered.length !== 1 ? "s" : ""}</span>
       </div>
 
       {/* Group filter chips */}

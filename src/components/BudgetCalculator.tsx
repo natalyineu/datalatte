@@ -173,7 +173,7 @@ function StepIndicator({ step, total }: { step: number; total: number }) {
           )}
         </div>
       ))}
-      <span className="text-xs text-gray-400 ml-1">Step {step + 1} of {total}</span>
+      <span className="text-xs text-gray-500 ml-1 dark:text-gray-400">Step {step + 1} of {total}</span>
     </div>
   );
 }
@@ -571,7 +571,7 @@ export default function BudgetCalculator() {
                         <Link href={ch.href} className="text-sm font-medium text-gray-700 hover:text-coffee-700 transition-colors dark:text-gray-200">
                           {ch.label}
                         </Link>
-                        <span className="text-xs text-gray-400">{ch.pct}%</span>
+                        <span className="text-xs text-gray-500 dark:text-gray-400">{ch.pct}%</span>
                       </div>
                       <span className="text-sm font-bold text-gray-900 dark:text-gray-50">{fmt(amount)}</span>
                     </div>
@@ -662,7 +662,7 @@ export default function BudgetCalculator() {
                 </button>
               </form>
               {leadStatus === "error" && <p className="text-red-500 text-xs mt-1">Something went wrong — try again.</p>}
-              <button onClick={() => setShowLeadForm(false)} className="text-xs text-gray-400 mt-2 hover:text-gray-600 transition-colors">
+              <button onClick={() => setShowLeadForm(false)} className="text-xs text-gray-500 mt-2 hover:text-gray-600 transition-colors dark:text-gray-400">
                 No thanks
               </button>
             </motion.div>

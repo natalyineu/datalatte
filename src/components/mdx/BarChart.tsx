@@ -46,7 +46,7 @@ export default function BarChart({
                   <span className={`text-sm font-medium truncate ${isHighlight ? "text-coffee-800 dark:text-coffee-200" : "text-gray-700 dark:text-gray-200"}`}>
                     {label}
                   </span>
-                  {sub && <span className="text-xs text-gray-400 shrink-0">{sub}</span>}
+                  {sub && <span className="text-xs text-gray-500 shrink-0 dark:text-gray-400">{sub}</span>}
                   {isHighlight && (
                     <span className="shrink-0 text-[10px] bg-coffee-100 text-coffee-700 font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wide dark:bg-coffee-900/30 dark:text-coffee-300">
                       Best

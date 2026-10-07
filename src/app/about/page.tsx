@@ -58,7 +58,7 @@ function Photo({ src, alt, caption, priority = false }: {
           priority={priority}
         />
       </div>
-      <p className="text-sm text-gray-400 italic mt-3 text-center leading-snug">{caption}</p>
+      <p className="text-sm text-gray-500 italic mt-3 text-center leading-snug dark:text-gray-400">{caption}</p>
     </div>
   );
 }
@@ -114,14 +114,14 @@ export default function AboutPage() {
       {/* ── Credentials strip ── */}
       <section className="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 py-8 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto">
-          <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-5 text-center">
+          <p className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-5 text-center dark:text-gray-400">
             10+ years of senior strategy at
           </p>
           <div className="flex flex-wrap justify-center items-center gap-6">
             {agencies.map((a) => (
               <div key={a.name} className="text-center">
                 <div className="text-lg font-bold text-gray-800 dark:text-gray-200">{a.name}</div>
-                <div className="text-xs text-gray-400 dark:text-gray-500">{a.desc}</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400">{a.desc}</div>
               </div>
             ))}
           </div>
@@ -431,7 +431,7 @@ export default function AboutPage() {
         {/* ── Professional ── */}
         <div className="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 py-16 px-4 sm:px-6 mt-8">
           <div className="max-w-2xl mx-auto">
-            <p className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-2">
+            <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-2">
               The professional bit
             </p>
             <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">
@@ -457,7 +457,7 @@ export default function AboutPage() {
               {agencies.map((a) => (
                 <div key={a.name} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 text-center shadow-sm">
                   <p className="font-bold text-gray-900 dark:text-gray-100">{a.name}</p>
-                  <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">{a.desc}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{a.desc}</p>
                 </div>
               ))}
             </div>

@@ -103,7 +103,7 @@ export default function DonutChart({
               />
               <span className="text-sm text-gray-700 flex-1 truncate dark:text-gray-200">{s.label}</span>
               <span className="text-sm font-bold text-gray-800 tabular-nums dark:text-gray-100">{fmt(s.raw)}</span>
-              <span className="text-xs text-gray-400 w-10 text-right tabular-nums">{Math.round(s.pct)}%</span>
+              <span className="text-xs text-gray-500 w-10 text-right tabular-nums dark:text-gray-400">{Math.round(s.pct)}%</span>
             </div>
           ))}
         </div>

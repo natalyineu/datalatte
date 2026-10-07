@@ -199,7 +199,7 @@ export default function AIAgentBuilderPage() {
         >
           Join the waitlist →
         </Link>
-        <p className="text-gray-400 text-sm mt-4">
+        <p className="text-gray-500 text-sm mt-4 dark:text-gray-400">
           Already want an AI agent?{" "}
           <Link href="/services/ai-agents" className="text-coffee-600 hover:underline font-medium dark:text-coffee-400">
             We build it for you →

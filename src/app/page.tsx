@@ -423,7 +423,7 @@ export default function HomePage() {
 
             {/* Agency credentials */}
             <div className="mb-8">
-              <p className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-3">10+ years experience at</p>
+              <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-3">10+ years experience at</p>
               <div className="flex flex-wrap gap-2">
                 {["OMD", "Dentsu", "BBDO", "GroupM"].map((agency) => (
                   <span key={agency} className="inline-flex items-center px-3 py-1.5 rounded-lg bg-white dark:bg-gray-800 border border-coffee-100 dark:border-gray-700 text-sm font-semibold text-gray-700 dark:text-gray-300 shadow-sm">

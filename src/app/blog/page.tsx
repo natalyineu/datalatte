@@ -307,7 +307,7 @@ export default async function BlogPage({
             </Link>
             <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-50">
               Blog — Page {currentPage}
-              <span className="text-gray-400 dark:text-gray-500 font-normal text-lg ml-2">of {totalPages}</span>
+              <span className="text-gray-500 dark:text-gray-400 font-normal text-lg ml-2">of {totalPages}</span>
             </h1>
           </div>
         </section>
