@@ -152,7 +152,7 @@ function LocationNichePage({ niche: nicheData, city }: {
             {nicheData!.intro(city.city, city.state)}
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
-            <Link href="/free-audit" className="inline-flex items-center justify-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg dark:bg-gray-900 dark:text-gray-50">
+            <Link href="/free-audit" className="inline-flex items-center justify-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg dark:bg-gray-900 dark:text-gray-50 dark:hover:bg-gray-800 dark:hover:text-white">
               Get a Free Audit <ArrowRight size={17} />
             </Link>
             <Link href={`/for/${nicheData!.slug}`} className="inline-flex items-center justify-center gap-2 border-2 border-white/40 text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-white/10 transition-all">
@@ -362,7 +362,7 @@ function NicheServicePage({ niche: nicheData, service }: {
             {service.intro(nicheData.label, nicheData.labelPlural)}
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
-            <Link href="/free-audit" className="inline-flex items-center justify-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg dark:bg-gray-900 dark:text-gray-50">
+            <Link href="/free-audit" className="inline-flex items-center justify-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg dark:bg-gray-900 dark:text-gray-50 dark:hover:bg-gray-800 dark:hover:text-white">
               Get a Free Audit <ArrowRight size={17} />
             </Link>
             <Link href={`/for/${nicheData.slug}`} className="inline-flex items-center justify-center gap-2 border-2 border-white/40 text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-white/10 transition-all">

@@ -281,7 +281,7 @@ export default function ChecklistClient({
                   sectionComplete
                     ? "border-coffee-200 dark:border-coffee-800"
                     : "border-gray-100 dark:border-gray-700"
-                }`}
+                } dark:bg-gray-900`}
               >
                 {/* Section header */}
                 <div

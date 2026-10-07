@@ -311,7 +311,7 @@ export default function LocalSeoGrader() {
           This score is based on common patterns. A full free audit includes a manual review of
           your actual GBP, competitor analysis, and a prioritised action plan — delivered within 48 hours.
         </p>
-        <Link href="/free-audit" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3 rounded-xl hover:bg-coffee-100 transition-colors dark:bg-gray-900 dark:text-gray-50">
+        <Link href="/free-audit" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3 rounded-xl hover:bg-coffee-100 transition-colors dark:bg-gray-900 dark:text-gray-50 dark:hover:bg-gray-800 dark:hover:text-white">
           Get the full free audit <ArrowRight size={16} />
         </Link>
         <div className="mt-4">

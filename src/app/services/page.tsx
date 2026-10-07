@@ -202,7 +202,7 @@ export default function ServicesPage() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/free-audit"
-              className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg dark:bg-gray-900 dark:text-gray-50"
+              className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg dark:bg-gray-900 dark:text-gray-50 dark:hover:bg-gray-800 dark:hover:text-white"
             >
               Get a free audit <ArrowRight size={17} />
             </Link>

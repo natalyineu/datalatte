@@ -218,7 +218,7 @@ export default function PricingPage() {
             Every package includes direct access to a senior marketer with 10+ years at the world&apos;s
             top agencies — without the agency overhead. Month-to-month. No lock-in.
           </p>
-          <Link href="/free-audit" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg dark:bg-gray-900 dark:text-gray-50">
+          <Link href="/free-audit" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg dark:bg-gray-900 dark:text-gray-50 dark:hover:bg-gray-800 dark:hover:text-white">
             Get your free audit first <ArrowRight size={17} />
           </Link>
           <p className="text-coffee-400 text-sm mt-4">Not sure what you need? Start with a free 48-hour audit — I&apos;ll recommend the right package for your business.</p>

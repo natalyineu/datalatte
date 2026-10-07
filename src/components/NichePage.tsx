@@ -110,7 +110,7 @@ export default function NichePage({
             </h1>
             <p className="text-white/70 text-lg mb-10 leading-relaxed">{subheadline}</p>
             <div className="flex flex-col sm:flex-row gap-3">
-              <Link href="/free-audit" className="inline-flex items-center justify-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg dark:bg-gray-900 dark:text-gray-50">
+              <Link href="/free-audit" className="inline-flex items-center justify-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg dark:bg-gray-900 dark:text-gray-50 dark:hover:bg-gray-800 dark:hover:text-white">
                 Get a Free Audit <ArrowRight size={17} />
               </Link>
               <Link href="/pricing" className="inline-flex items-center justify-center gap-2 bg-white/10 border border-white/25 text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-white/15 transition-all">

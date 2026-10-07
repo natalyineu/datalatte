@@ -96,7 +96,7 @@ export default function FreeAuditPage() {
             <div className="flex flex-col sm:flex-row gap-4 mb-6">
               <Link
                 href="#audit-form"
-                className="inline-flex items-center justify-center gap-2 bg-white text-coffee-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg text-base dark:bg-gray-900 dark:text-coffee-100"
+                className="inline-flex items-center justify-center gap-2 bg-white text-coffee-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg text-base dark:bg-gray-900 dark:text-coffee-100 dark:hover:bg-gray-800 dark:hover:text-white"
               >
                 Request my free audit <ChevronDown size={18} />
               </Link>

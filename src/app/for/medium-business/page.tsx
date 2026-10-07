@@ -116,7 +116,7 @@ export default function MediumBusinessPage() {
             That's where I come in.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link href="/free-audit" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg dark:bg-gray-900 dark:text-gray-50">
+            <Link href="/free-audit" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all hover:shadow-lg dark:bg-gray-900 dark:text-gray-50 dark:hover:bg-gray-800 dark:hover:text-white">
               Get a Free Strategy Review <ArrowRight size={17} />
             </Link>
             <Link href="/about" className="inline-flex items-center gap-2 border border-white/30 text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-white/10 transition-all">

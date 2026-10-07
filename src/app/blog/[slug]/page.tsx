@@ -655,7 +655,7 @@ export default async function BlogPostPage({
             <Link
               href="/free-audit"
               data-track-source="blog_end"
-              className="inline-flex items-center justify-center gap-2 bg-white text-coffee-900 font-bold px-6 py-3 rounded-xl hover:bg-coffee-100 transition-colors text-sm dark:bg-gray-900 dark:text-coffee-100"
+              className="inline-flex items-center justify-center gap-2 bg-white text-coffee-900 font-bold px-6 py-3 rounded-xl hover:bg-coffee-100 transition-colors text-sm dark:bg-gray-900 dark:text-coffee-100 dark:hover:bg-gray-800 dark:hover:text-white"
             >
               Get my free audit <ArrowRight size={15} />
             </Link>

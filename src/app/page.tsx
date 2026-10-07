@@ -397,7 +397,7 @@ export default function HomePage() {
             </p>
             <Link
               href="/free-audit"
-              className="inline-flex items-center gap-1 bg-white text-coffee-900 font-bold text-sm px-5 py-2.5 rounded-lg hover:bg-coffee-100 transition-colors dark:bg-gray-900 dark:text-coffee-100"
+              className="inline-flex items-center gap-1 bg-white text-coffee-900 font-bold text-sm px-5 py-2.5 rounded-lg hover:bg-coffee-100 transition-colors dark:bg-gray-900 dark:text-coffee-100 dark:hover:bg-gray-800 dark:hover:text-white"
             >
               Get a free audit <ArrowRight size={13} />
             </Link>
@@ -529,7 +529,7 @@ export default function HomePage() {
           <div className="hidden md:flex items-center gap-4">
             <Link
               href="/blog/local-marketing-guides"
-              className="flex items-center gap-1.5 text-xs font-semibold text-coffee-700 bg-coffee-50 border border-coffee-200 px-3 py-1.5 rounded-full hover:bg-coffee-100 transition-colors dark:text-coffee-300 dark:bg-coffee-900/20 dark:border-coffee-800"
+              className="flex items-center gap-1.5 text-xs font-semibold text-coffee-700 bg-coffee-50 border border-coffee-200 px-3 py-1.5 rounded-full hover:bg-coffee-100 transition-colors dark:text-coffee-300 dark:bg-coffee-900/20 dark:border-coffee-800 dark:hover:bg-gray-800 dark:hover:text-white"
             >
               <Globe size={13} />
               Browse 130+ country guides

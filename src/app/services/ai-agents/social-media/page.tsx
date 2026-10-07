@@ -375,7 +375,7 @@ export default function AISocialMediaAgentPage() {
             <Link
               key={link.href}
               href={link.href}
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-coffee-700 bg-coffee-50 border border-coffee-200 px-4 py-2 rounded-full hover:bg-coffee-100 transition-colors dark:text-coffee-300 dark:bg-coffee-900/20 dark:border-coffee-800"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-coffee-700 bg-coffee-50 border border-coffee-200 px-4 py-2 rounded-full hover:bg-coffee-100 transition-colors dark:text-coffee-300 dark:bg-coffee-900/20 dark:border-coffee-800 dark:hover:bg-gray-800 dark:hover:text-white"
             >
               {link.label} →
             </Link>

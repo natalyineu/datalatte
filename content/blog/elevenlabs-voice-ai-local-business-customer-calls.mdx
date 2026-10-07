@@ -2,7 +2,7 @@
 title: "ElevenLabs Voice AI for Local Business: Human-Sounding Calls, Reminders & Receptionist"
 seoTitle: "ElevenLabs Voice AI for Local Business Calls"
 date: "2026-06-13"
-lastModified: "2026-10-06"
+lastModified: "2026-10-07"
 description: "Can ElevenLabs Voice AI handle customer calls for a local business? How it works for appointment reminders and inbound calls, costs to check."
 author: "Nataliia"
 category: "AI & Automation"
@@ -12,23 +12,23 @@ image: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=800&q=80&
 readTime: "8 min read"
 ---
 
-Yes, ElevenLabs Voice AI can handle customer calls for a local business. Its Conversational AI product lets you build a voice agent that answers inbound calls, makes outbound reminder calls and books appointments through integrations, using realistic synthetic voices. It is best for businesses where voice quality matters and you have someone who can set up integrations. Pricing, features and phone-number support change, so check ElevenLabs' current documentation and pricing before you build.
+Yes, ElevenLabs can handle customer calls for a local business. Its agent platform (previously branded Conversational AI) lets you build a voice agent that answers inbound calls, places outbound calls and triggers actions such as bookings through tools and integrations, using synthetic voices. It suits businesses where voice quality matters and where someone can set up the integrations. Pricing, features and phone-number support change, so check ElevenLabs' current documentation before you build.
 
 ## What ElevenLabs Is
 
-ElevenLabs started as a text-to-speech company known for natural-sounding voices. It now offers a Conversational AI platform for real-time voice agents. Typical capabilities include:
+ElevenLabs started as a text-to-speech company. It now also offers a platform for real-time voice agents. According to its [agents documentation](https://elevenlabs.io/docs/agents-platform/overview) (checked Oct 2026), the platform includes:
 
-- **Natural voices** in many languages (check the current list for your market).
-- **Real-time conversation** where customers can interrupt and the agent responds.
-- **Voice cloning**, if you want the agent to sound like you, with explicit consent.
-- **Tools and webhooks** so the agent can trigger actions such as booking, texting a confirmation or sending data to your CRM.
-- **Knowledge and prompts** so it can answer questions about hours, prices and policies.
+- **A large voice library** across 31 languages, per the docs. Check that your market's language and accent are covered.
+- **Low-latency speech recognition and generation** for real-time conversation.
+- **Tools that call APIs**, so the agent can trigger actions such as booking or sending data to your CRM.
+- **Document upload** (a knowledge base) so it can answer questions about hours, prices and policies.
+- **Telephony options**: a native Twilio integration, SIP trunk connectivity and batch outbound calling.
 
 ## Two Core Use Cases
 
 ### 1. Appointment reminders and confirmations
 
-Reminder calls from a friendly voice can reduce no-shows for businesses where each missed slot costs money, such as salons, groomers, clinics and studios. A reminder call can confirm, offer to reschedule or capture a cancellation so you can fill the slot. Compare it with a simple SMS reminder first, since text messages are cheaper and many customers prefer them. See our guide to [AI agents for appointment reminders](/blog/ai-agent-for-appointment-reminders-reduce-no-shows).
+Reminder calls from a friendly voice can reduce no-shows for businesses where each missed slot costs money, such as salons, groomers, clinics and studios. A reminder call can confirm, offer to reschedule or capture a cancellation so you can fill the slot. Compare it with a simple SMS reminder first, which is a lower-effort option to test. See our guide to [AI agents for appointment reminders](/blog/ai-agent-for-appointment-reminders-reduce-no-shows).
 
 ### 2. Inbound receptionist
 
@@ -38,9 +38,9 @@ An AI voice agent can answer calls when you are busy or closed: hours, services,
 
 1. **Define the job.** Reminders, FAQs or booking. Start with one.
 2. **Write the system prompt.** Describe the agent's role, tone, what it knows and what it must never do.
-3. **Choose a voice** from the library, or clone your own with explicit consent.
+3. **Choose a voice** from the library, or clone your own voice (see the warning below).
 4. **Connect your tools.** Booking system, calendar or CRM through the platform's tool or webhook options.
-5. **Connect a phone number.** Check which numbers and telephony options are supported for your country.
+5. **Connect a phone number.** ElevenLabs documents importing a Twilio number in its dashboard. Purchased Twilio numbers can take inbound and outbound calls, while a verified caller ID supports outbound calls only ([ElevenLabs docs](https://elevenlabs.io/docs/agents-platform/phone-numbers/twilio-integration/native-integration), checked Oct 2026). Check support for your country before you commit.
 6. **Test with real calls,** including interruptions, accents and unexpected questions.
 7. **Review transcripts weekly** and refine the prompt.
 
@@ -62,20 +62,11 @@ and take a message. Never make up prices or policies.
 
 For automated outbound reminder campaigns, you will need a developer or a no-code tool such as Zapier or Make to pass appointment data to the agent. Use the current API documentation from ElevenLabs for endpoints and fields instead of copying older code samples.
 
-<Callout type="warning">Only clone a voice with the explicit, written consent of the person it belongs to. Disclose to callers that they may be speaking with an AI, and check the call recording and automated-calling rules in your country or state before launching outbound campaigns.</Callout>
+<Callout type="warning">ElevenLabs says you can only create a Professional Voice Clone of your own voice, and it verifies this; even with someone's consent you cannot clone their voice that way ([ElevenLabs docs](https://elevenlabs.io/docs/help-center/product/voices/voice-cloning/can-i-create-a-professional-voice-clone-of-someone-elses-voice), checked Oct 2026). In the US, the FCC ruled in February 2024 that calls made with AI-generated voices count as "artificial" voices under the TCPA, so its robocall rules apply to them ([FCC](https://docs.fcc.gov/public/attachments/DOC-400393A1.pdf), checked Oct 2026). Disclose to callers that they may be speaking with an AI, and check call recording and automated-calling rules in your country or state before launching outbound campaigns.</Callout>
 
-## Platform Comparison
+## Other Platforms to Compare
 
-Several platforms offer AI phone agents. This table shows where each is typically positioned, not a ranking. Check current features and pricing before choosing.
-
-| Platform | Typically known for |
-|----------|--------------------|
-| ElevenLabs | Voice quality and voice cloning |
-| Vapi | Developer flexibility and custom tool calling |
-| Bland AI | Structured call flows and quick setup |
-| Retell AI | Reliability for high call volumes |
-
-If you want a deeper look at one alternative, see our [Bland AI guide for local business](/blog/bland-ai-phone-answering-local-business-2026).
+Several vendors sell AI phone agents, including Vapi, Bland AI and Retell AI. Their features and pricing change quickly, so compare them on the same test call script, your booking integration and the total monthly cost rather than on marketing claims. For deeper looks, see our [Bland AI guide for local business](/blog/bland-ai-phone-answering-local-business-2026) and [Retell AI vs Vapi](/blog/retell-ai-vs-vapi-local-business-comparison).
 
 ## When ElevenLabs Fits and When It Does Not
 
@@ -93,7 +84,7 @@ If you want a deeper look at one alternative, see our [Bland AI guide for local 
 
 ## Costs to Check
 
-Pricing is typically usage-based (per minute of conversation), with plans and add-ons that change often. Before committing, estimate your monthly call minutes (number of calls times average length), then compare the cost with your current cost of missed calls and no-shows. Also include telephony charges for your phone number and any developer time for integrations.
+ElevenLabs sets its own pricing and changes plans often, so read its current pricing page for how agent conversations are billed and what is included. Before committing, estimate your monthly call minutes (number of calls times average length), then compare the cost with your current cost of missed calls and no-shows. Also include telephony charges for your phone number, any separate language-model or add-on costs, and developer time for integrations.
 
 ## Rollout Tips for Small Businesses
 
@@ -116,16 +107,24 @@ Voice calls are one tool. A simple sequence of SMS and email reminders, a deposi
 A: Yes. Text-to-speech converts text into audio. Conversational AI runs live, two-way calls with reasoning and tool use. You can also use ElevenLabs voices inside other voice-agent platforms.
 
 **Q: How realistic is ElevenLabs voice cloning?**
-A: It is among the more convincing options available, with quality depending on the audio you provide and the tier you use. Test with your own voice and listen on a real phone line before launching.
+A: Quality depends on the audio you provide and the clone type you use. ElevenLabs offers Instant and Professional clones, and Professional clones require verification that the voice is yours ([ElevenLabs docs](https://elevenlabs.io/docs/eleven-creative/voices/voice-cloning/professional-voice-cloning), checked Oct 2026). Listen on a real phone line before launching.
 
 **Q: Can I make outbound calls without coding?**
-A: You can usually test calls from the dashboard, but automated campaigns generally need an integration through the API or a no-code tool.
+A: ElevenLabs documents batch outbound calling through its telephony integrations. Pulling live appointment data into those calls generally needs the API or a no-code tool such as Zapier or Make, so plan for some setup.
 
 **Q: Is it legal to use AI voice calls to my customers?**
-A: Rules vary by country and state, especially for outbound automated calls and call recording. Get consent, disclose AI use where required and consult a local professional.
+A: Rules vary by country and state. In the US, the FCC treats AI-generated voices as artificial voices under the TCPA, which affects outbound calls ([FCC](https://docs.fcc.gov/public/attachments/DOC-400393A1.pdf)). Get consent, disclose AI use where required, and ask a local professional about recording rules.
 
 **Q: Will an AI voice agent replace my receptionist?**
 A: For simple, repetitive calls it can take a lot of load, but it should hand off complex or sensitive calls to a person.
+
+## Sources
+
+- [ElevenLabs docs: Agents platform overview](https://elevenlabs.io/docs/agents-platform/overview)
+- [ElevenLabs docs: Twilio native integration](https://elevenlabs.io/docs/agents-platform/phone-numbers/twilio-integration/native-integration)
+- [ElevenLabs docs: Professional Voice Cloning](https://elevenlabs.io/docs/eleven-creative/voices/voice-cloning/professional-voice-cloning)
+- [ElevenLabs help: Can I create a Professional Voice Clone of someone else's voice?](https://elevenlabs.io/docs/help-center/product/voices/voice-cloning/can-i-create-a-professional-voice-clone-of-someone-elses-voice)
+- [FCC: AI-generated voices in robocalls are illegal under the TCPA (Feb 2024 news release)](https://docs.fcc.gov/public/attachments/DOC-400393A1.pdf)
 
 ## Next Step
 
