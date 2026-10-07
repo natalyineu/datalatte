@@ -62,7 +62,7 @@ const AGENTS = [
     icon: Star,
     name: "Review Monitor",
     tagline: "Responds in < 2 hours",
-    color: "text-yellow-600 dark:text-yellow-300",
+    color: "text-yellow-700 dark:text-yellow-300",
     bg: "bg-yellow-50 border-yellow-100 dark:bg-yellow-900/30 dark:border-yellow-800",
     trigger: "GBP webhook · Yelp RSS · Facebook API",
     model: "Claude 3.5 Haiku",

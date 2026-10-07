@@ -272,7 +272,7 @@ export default function CompetitorAnalysisPage() {
 
               {/* Competitor cards */}
               <div>
-                <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">Competitor Activity</p>
+                <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-4">Competitor Activity</p>
                 <div className="space-y-3">
                   {[
                     { name: "Bean & Grind", change: "Started Google Ads · 3 new 5★ reviews · Posted 4x on Instagram", alert: true },

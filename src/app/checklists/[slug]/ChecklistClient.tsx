@@ -13,7 +13,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   Social: "bg-coffee-50 text-coffee-700 border-coffee-100 dark:bg-coffee-900/20 dark:text-coffee-300 dark:border-coffee-800",
   Website: "bg-gray-100 text-gray-700 border-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700",
   Email: "bg-coffee-100 text-coffee-700 border-coffee-200 dark:bg-coffee-900/30 dark:text-coffee-300 dark:border-coffee-800",
-  Niche: "bg-coffee-200 text-coffee-900 border-coffee-300 dark:text-coffee-100",
+  Niche: "bg-coffee-200 text-coffee-900 border-coffee-300 dark:bg-coffee-800 dark:text-coffee-100 dark:border-coffee-700",
 };
 
 function getLocalKey(slug: string) {
@@ -378,7 +378,7 @@ export default function ChecklistClient({
         <div className="mt-8 text-center print:hidden">
           <Link
             href="/checklists"
-            className="text-sm text-gray-400 hover:text-coffee-700 transition-colors"
+            className="text-sm text-gray-500 hover:text-coffee-700 transition-colors dark:text-gray-400"
           >
             ← Back to all checklists
           </Link>

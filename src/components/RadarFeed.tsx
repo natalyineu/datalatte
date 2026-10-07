@@ -179,7 +179,7 @@ export default function RadarFeed({ signals }: { signals: Signal[] }) {
                   className={`text-xs font-semibold px-3.5 py-1.5 rounded-full border transition-all ${
                     category === c.id
                       ? "bg-white text-gray-950 border-white"
-                      : "bg-transparent text-gray-500 border-gray-800 hover:border-gray-600 hover:text-gray-300 dark:text-gray-400"
+                      : "bg-transparent text-gray-400 border-gray-800 hover:border-gray-600 hover:text-gray-200"
                   }`}
                 >
                   {c.label}
@@ -196,14 +196,14 @@ export default function RadarFeed({ signals }: { signals: Signal[] }) {
                   className={`text-xs font-semibold px-3.5 py-1.5 rounded-full border transition-all ${
                     niche === n.id
                       ? "bg-coffee-600 text-white border-coffee-600"
-                      : "bg-transparent text-gray-600 border-gray-800 hover:border-gray-600 hover:text-gray-400 dark:text-gray-300"
+                      : "bg-transparent text-gray-400 border-gray-800 hover:border-gray-600 hover:text-gray-200"
                   }`}
                 >
                   {n.label}
                 </button>
               ))}
 
-              <span className="ml-auto flex items-center gap-1.5 text-xs text-gray-600 dark:text-gray-300">
+              <span className="ml-auto flex items-center gap-1.5 text-xs text-gray-400">
                 <Zap size={11} />
                 {visible.length} signal{visible.length !== 1 ? "s" : ""}
               </span>
@@ -213,7 +213,7 @@ export default function RadarFeed({ signals }: { signals: Signal[] }) {
 
         {/* Cards grid */}
         {visible.length === 0 ? (
-          <div className="border border-gray-800 rounded-2xl p-16 text-center text-gray-600 text-sm dark:text-gray-300">
+          <div className="border border-gray-800 rounded-2xl p-16 text-center text-gray-400 text-sm dark:text-gray-300">
             No signals match this filter.
           </div>
         ) : (
