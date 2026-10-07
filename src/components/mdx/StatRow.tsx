@@ -4,6 +4,7 @@ interface StatRowProps {
   labels: string;   // pipe-separated: "Typical CPM|Completion rate|..."
   subs?: string;    // pipe-separated (empty = no sub): "per 1,000|vs 70%||vs TV"
   trends?: string;  // pipe-separated: "up|down|neutral|up" (empty = none)
+  source?: string;  // set only when the figures are verified; otherwise a generic estimate note is shown
 }
 
 const TREND = {
@@ -12,7 +13,7 @@ const TREND = {
   neutral: { icon: "→", cls: "text-gray-400"  },
 } as const;
 
-export default function StatRow({ title, values, labels, subs = "", trends = "" }: StatRowProps) {
+export default function StatRow({ title, values, labels, subs = "", trends = "", source }: StatRowProps) {
   const valArr   = values.split("|").map(s => s.trim());
   const labelArr = labels.split("|").map(s => s.trim());
   const subArr   = subs.split("|").map(s => s.trim());
@@ -50,6 +51,7 @@ export default function StatRow({ title, values, labels, subs = "", trends = "" 
           );
         })}
       </div>
+      <p className="mt-2 text-[11px] text-gray-400 dark:text-gray-500 text-right">{source ? `Source: ${source}` : "Estimates for illustration; actual numbers vary."}</p>
     </div>
   );
 }

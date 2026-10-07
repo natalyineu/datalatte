@@ -97,7 +97,7 @@ export default function CompareBar({
           );
         })}
       </div>
-      {caption && <p className="px-5 pb-4 text-xs text-gray-400">{caption}</p>}
+      <p className="px-5 pb-4 text-xs text-gray-400">{caption ?? "Illustrative estimate. Actual results vary by market and business."}</p>
     </div>
   );
 }

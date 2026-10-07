@@ -55,7 +55,7 @@ export default function Funnel({ title, caption, stages, stepLabels, values = ""
           );
         })}
       </div>
-      {caption && <p className="text-xs text-gray-400 text-center mt-3">{caption}</p>}
+      <p className="text-xs text-gray-400 text-center mt-3">{caption ?? "Illustrative estimate. Actual results vary by market and business."}</p>
     </div>
   );
 }
