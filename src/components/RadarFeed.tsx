@@ -251,7 +251,7 @@ export default function RadarFeed({ signals }: { signals: Signal[] }) {
         </div>
 
         {/* Footer */}
-        <p className="text-center text-xs text-gray-700 mt-8 pb-4 dark:text-gray-200">
+        <p className="text-center text-xs text-gray-400 mt-8 pb-4">
           Curated daily by Nataliia · DataLatte · Sources linked on each signal
         </p>
       </div>
