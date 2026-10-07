@@ -5,6 +5,13 @@ on:
     # Run daily at 04:00 UTC (after GSC data updates overnight)
     - cron: '0 4 * * *'
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['scripts/update_popularity.py', '.github/workflows/update-popularity.yml']
+
+concurrency:
+  group: update-popularity
+  cancel-in-progress: false
 
 jobs:
   update:
@@ -32,11 +39,13 @@ jobs:
         env:
           GOOGLE_TOKEN_JSON: ${{ secrets.GOOGLE_TOKEN_JSON }}
         run: |
-          echo "$GOOGLE_TOKEN_JSON" > scripts/google_token.json
+          # Only needed as a fallback when GOOGLE_SA_KEY is not set
+          if [ -n "$GOOGLE_TOKEN_JSON" ]; then echo "$GOOGLE_TOKEN_JSON" > scripts/google_token.json; fi
 
       - name: Fetch GSC popularity
         env:
           GSC_SITE_URL: ${{ secrets.GSC_SITE_URL }}
+          GOOGLE_SA_KEY: ${{ secrets.GOOGLE_SA_KEY }}
         run: python3 scripts/update_popularity.py
 
       - name: Commit popularity.json if changed
@@ -48,5 +57,6 @@ jobs:
             echo "No changes to popularity.json"
           else
             git commit -m "data: refresh blog popularity from GSC [vercel skip]"
+            git pull --rebase --autostash -X theirs origin main
             git push
           fi

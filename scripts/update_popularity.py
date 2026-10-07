@@ -32,6 +32,12 @@ def get_credentials():
     from google.auth.transport.requests import Request
     from google_auth_oauthlib.flow import Flow
 
+    # Preferred in CI: a service account (does not expire like a user refresh token)
+    sa_json = os.environ.get("GOOGLE_SA_KEY")
+    if sa_json:
+        from google.oauth2 import service_account
+        return service_account.Credentials.from_service_account_info(json.loads(sa_json), scopes=SCOPES)
+
     # CI: read token from env var
     token_json = os.environ.get("GOOGLE_TOKEN_JSON")
     if token_json:
