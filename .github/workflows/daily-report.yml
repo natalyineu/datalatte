@@ -25,11 +25,13 @@ jobs:
 
       - name: Write Google token
         run: |
-          echo '${{ secrets.GOOGLE_TOKEN_JSON }}' > scripts/google_token.json
+          # Fallback only; the report uses GOOGLE_SA_KEY when it is set
+          if [ -n "${{ secrets.GOOGLE_TOKEN_JSON }}" ]; then echo '${{ secrets.GOOGLE_TOKEN_JSON }}' > scripts/google_token.json; fi
 
       - name: Run daily report
         env:
           PYTHONUNBUFFERED: "1"
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          GOOGLE_SA_KEY: ${{ secrets.GOOGLE_SA_KEY }}
         run: python3 scripts/daily_report.py

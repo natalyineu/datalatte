@@ -36,6 +36,11 @@ D28_PEND   = D28_START - timedelta(days=1)
 
 # ── Auth ──────────────────────────────────────────────────────────────────────
 def get_creds():
+    # Preferred in CI: service account (a user refresh token expires and fails with invalid_grant)
+    sa = __import__("os").environ.get("GOOGLE_SA_KEY")
+    if sa:
+        from google.oauth2 import service_account
+        return service_account.Credentials.from_service_account_info(json.loads(sa), scopes=SCOPES)
     from google.oauth2.credentials import Credentials
     from google.auth.transport.requests import Request
     creds = Credentials.from_authorized_user_file(TOKEN_FILE, SCOPES)
