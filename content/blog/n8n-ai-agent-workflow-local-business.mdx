@@ -1,19 +1,20 @@
 ---
-title: "n8n AI Agent Workflow for Local Business: Self-Hosted Automation (2026)"
+title: "n8n AI Agent Workflow for Local Business: Build a Lead Follow-Up Bot (2026)"
+seoTitle: "n8n AI Agent Workflow for Local Business (2026)"
 date: "2026-06-13"
-lastModified: "2026-06-13"
-description: "Build an AI agent in n8n that handles lead follow-ups, appointment confirmations, and review responses — with real workflow JSON you can import and run on your own server."
+lastModified: "2026-10-07"
+description: "Build an n8n AI agent workflow for a local business: classify new leads, draft replies and log everything, with importable JSON and self-hosting tips."
 author: "Nataliia"
 category: "AI & Automation"
 tags: ["n8n", "ai agents", "automation", "workflow", "self-hosted", "local business", "open source"]
 slug: "n8n-ai-agent-workflow-local-business"
 image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&q=80&auto=format&fit=crop"
-readTime: "13 min read"
+readTime: "10 min read"
 ---
 
-n8n is the self-hosted alternative to Make.com and Zapier — open-source, runs on your own server, and completely free if you host it yourself. For local businesses that want automation without per-operation pricing or data going through third-party servers, n8n is worth the extra setup effort.
+An n8n AI agent workflow for a local business can watch your inbox for new inquiries, classify each lead with an LLM, draft a personalized reply, and log everything to a spreadsheet. n8n is an open-source automation tool you can self-host or run in the cloud, which makes it a good fit if you want more control over data and costs than per-operation tools offer. The workflow below is a starting template: test it carefully before letting it email real customers.
 
-This article covers a specific, production-ready workflow: an AI agent that monitors your email inbox for new leads, classifies them, generates personalized replies using an LLM, and sends responses — all without human input. Same logic as our Make.com workflow, but running on infrastructure you control.
+This article covers a specific workflow: an AI agent that monitors your email inbox for new leads, classifies them, generates a reply using an LLM, and logs the result. It uses the same logic as our [Make.com workflow](/blog/make-com-ai-agent-workflow-local-business), but runs on infrastructure you control. We recommend having the agent create drafts at first, so you can review replies before anything is sent.
 
 ---
 
@@ -21,12 +22,12 @@ This article covers a specific, production-ready workflow: an AI agent that moni
 
 | Factor | n8n | Make.com |
 |---|---|---|
-| Cost | Free (self-hosted) or $20/mo cloud | Free tier (limited), $9–$16/mo |
+| Cost | Free community edition if self-hosted (you pay for the server), or paid cloud plans | Free tier (limited), paid plans |
 | Setup complexity | Higher (needs server or cloud setup) | Low (cloud-native) |
 | Data privacy | Full control (self-hosted) | Data goes through Make servers |
-| Execution limits | None (self-hosted) | 10,000 ops/month on basic plan |
+| Execution limits | No per-execution fees when self-hosted | Operation limits depend on plan |
 | AI integration | Native AI Agent nodes | Via HTTP modules |
-| Community | 40,000+ shared workflows | Large, but proprietary |
+| Community | Large library of shared workflow templates | Large, but proprietary |
 
 **Choose n8n if**: You care about data privacy, need unlimited operations, or want to avoid per-operation costs as you scale.
 
@@ -38,11 +39,11 @@ This article covers a specific, production-ready workflow: an AI agent that moni
 
 ### Option 1: n8n Cloud (Easiest Start)
 
-Sign up at [n8n.io](https://n8n.io). Free trial, then $20/month. No server needed.
+Sign up at [n8n.io](https://n8n.io). There is typically a free trial and then a paid plan; check current pricing. No server needed.
 
 ### Option 2: Self-Hosted on a VPS (Free)
 
-Run n8n on a $5–$6/month DigitalOcean or Hetzner VPS:
+Run n8n on a small VPS (entry-level plans from providers like DigitalOcean or Hetzner usually cost a few dollars a month; confirm current prices). This is a minimal example, so follow n8n's current docs for production settings:
 
 ```bash
 # Install Docker
@@ -80,16 +81,16 @@ Access at `http://your-server-ip:5678`. Set up SSL with Nginx or Caddy for produ
 ## The Workflow: AI Lead Follow-Up Agent
 
 This workflow:
-1. Watches your Gmail inbox for new inquiry emails
+1. Watches your Gmail inbox for new inquiry emails (use a dedicated inquiries address if you can)
 2. Uses an LLM to classify lead quality (GOOD_FIT / MAYBE / NOT_FIT)
 3. Generates a personalized reply for GOOD_FIT leads
-4. Sends the email reply automatically
+4. Sends the email reply (or, safer at first, saves it as a draft for you to approve)
 5. Logs everything to a Google Sheet
 6. Sends you a Slack/email alert for high-priority leads only
 
 ### Workflow JSON (Import Directly into n8n)
 
-Go to n8n → New Workflow → click the three dots → Import from JSON → paste this:
+Go to n8n → New Workflow → click the three dots → Import from JSON → paste this. Node names, versions and parameters change between n8n releases, so treat this JSON as a template: after importing, reconnect credentials, replace placeholders like `YOUR_GOOGLE_SHEET_ID` and the Calendly link, and run it with test emails before enabling it.
 
 ```json
 {
@@ -261,7 +262,7 @@ n8n 1.x+ includes a dedicated **AI Agent** node that's more powerful than chaini
 - Maintains conversation context
 - Can call multiple tools in sequence
 - Supports function calling (takes actions based on LLM decisions)
-- Works with any OpenAI-compatible API (including Groq, which is free)
+- Works with many LLM providers, including OpenAI-compatible APIs such as Groq
 
 For a lead follow-up agent using the AI Agent node:
 
@@ -278,42 +279,51 @@ The AI Agent node handles all the classification, drafting, and action-taking in
 
 ---
 
-## Connecting to Groq (Free LLM)
+## Connecting to Groq (Low-Cost LLM Option)
 
-n8n works with any OpenAI-compatible API. To use Groq instead of OpenAI (saving $20–$30/month in LLM costs):
+n8n works with any OpenAI-compatible API. To use Groq instead of OpenAI (this can reduce LLM costs, depending on usage):
 
 1. In n8n, go to Credentials → New → OpenAI API
 2. Set API key: your Groq API key
 3. Set base URL: `https://api.groq.com/openai/v1`
 4. In any LLM node, set model to: `llama-3.3-70b-versatile`
 
-Groq's free tier: 14,400 requests/day on LLaMA 3.3. For most local business automation, this is unlimited for practical purposes.
+Groq has offered a free tier with daily request limits; limits and available models change, so check their current terms. For many small local-business workflows, a free or low-cost tier is enough, but plan for what happens if limits are reached.
 
 ---
 
-## Frequently Asked Questions
+## Safety Checklist Before Going Live
+
+* Start with **draft mode** or send replies only to yourself for the first week.
+* Never let the agent promise prices, availability or guarantees you have not approved. Put those rules in the system prompt.
+* Route complaints, refunds and sensitive messages to a human.
+* Keep API keys in n8n credentials, not in the workflow text.
+* Tell customers they may be talking to an automated assistant where the law or good practice requires it.
+
+For the broader strategy, see [AI agent for lead generation](/blog/ai-agent-for-lead-generation-local-business) and our [AI agents service](/services/ai-agents).
+
+## FAQ
 
 **Q: Do I need programming knowledge to use n8n?**
-
-Less than you'd think. The visual interface is similar to Make.com — you drag nodes and connect them. The workflow JSON I've provided can be imported and run without editing code. Where you need basic programming is: the Code node (JavaScript) for data transformation, and occasionally debugging webhook payloads. If you're comfortable with Excel formulas, you can handle n8n. If the self-hosted setup is intimidating, start with n8n Cloud ($20/month) where they handle infrastructure.
+A: Less than you might expect. The visual interface is similar to Make.com — you drag nodes and connect them. The workflow JSON I've provided can be imported and run without editing code. Where you need basic programming is: the Code node (JavaScript) for data transformation, and occasionally debugging webhook payloads. If you're comfortable with Excel formulas, you can handle n8n. If the self-hosted setup is intimidating, start with n8n Cloud, where they handle infrastructure.
 
 **Q: How does n8n compare to Zapier for this use case?**
+A: Zapier is simpler to set up but can become more expensive at scale, because pricing is based on tasks. n8n self-hosted has no per-execution fee, though you pay for the server and your time. For a low-volume AI lead follow-up workflow, Zapier's cost may be manageable. See our comparison of [Make.com and Zapier](/blog/make-com-vs-zapier-for-local-business-automation). For higher volume or complex multi-branch workflows, n8n's economics improve significantly. Zapier also doesn't have native AI Agent nodes — complex AI workflows require chaining multiple Zap steps vs. n8n's single agent node.
 
-Zapier is simpler to set up but more expensive at scale ($20–$50/month for multi-step Zaps with sufficient operations). n8n self-hosted is free. For an AI lead follow-up workflow that runs 50–100 times/month, Zapier's cost is manageable. For higher volume or complex multi-branch workflows, n8n's economics improve significantly. Zapier also doesn't have native AI Agent nodes — complex AI workflows require chaining multiple Zap steps vs. n8n's single agent node.
-
-**Q: Can I run n8n on a $6/month server reliably?**
-
-Yes. n8n's base memory usage is 200–400MB. A $6/month Hetzner CX11 (1 vCPU, 2GB RAM) or DigitalOcean Basic Droplet runs n8n reliably for small-to-medium workflow volumes. For a local business running 20–50 workflow executions/day, this is completely sufficient. At 500+ executions/day, upgrade to a 4GB RAM instance ($12–$15/month).
+**Q: Can I run n8n on a small, cheap server reliably?**
+A: Yes. A small VPS with about 2GB of RAM can usually run n8n for light workflow volumes, such as a local business handling a modest number of executions a day. If you see slowdowns or memory errors, move to a larger instance. Check n8n's current system recommendations.
 
 **Q: How do I handle webhook security on self-hosted n8n?**
-
-n8n generates unique webhook URLs with random tokens by default. For additional security: 1) Enable basic auth on the n8n interface, 2) Use environment variables for all credentials (never hardcode), 3) Run behind an Nginx reverse proxy with SSL, 4) Restrict the server's incoming connections to known IP ranges if your webhook sources are fixed. For most local business automations, the default token-based security is sufficient.
+A: n8n generates unique webhook URLs with random tokens by default. For additional security: 1) Enable basic auth on the n8n interface, 2) Use environment variables for all credentials (never hardcode), 3) Run behind an Nginx reverse proxy with SSL, 4) Restrict the server's incoming connections to known IP ranges if your webhook sources are fixed. For many small automations the default token-based security is a reasonable baseline, but review n8n's current security guidance before exposing the server publicly.
 
 **Q: Can n8n send SMS messages for appointment reminders?**
-
-Yes. n8n has native nodes for Twilio, MessageBird, and Vonage. Build a workflow: Google Sheets (read upcoming appointments) → Code node (filter for 48h window) → Groq AI (generate message) → Twilio (send SMS). This is the n8n version of the Python reminder script elsewhere in this blog. The visual builder makes it easier to modify and debug without touching code.
+A: Yes. n8n has integrations for SMS providers such as Twilio. Remember to collect consent and follow local texting rules. Build a workflow: Google Sheets (read upcoming appointments) → Code node (filter for 48h window) → an LLM node (generate message) → Twilio (send SMS). This is the n8n version of the Python reminder script elsewhere in this blog. The visual builder makes it easier to modify and debug without touching code.
 
 ---
+
+## Next Step
+
+If you would rather have this built and tested for you, explore our [AI agents service](/services/ai-agents) or [contact us](/contact) and we will scope a workflow for your business. You may also like our guide to [automating your local business with AI](/blog/how-to-automate-your-local-business-with-ai-complete-guide).
 
 ## Related Articles
 

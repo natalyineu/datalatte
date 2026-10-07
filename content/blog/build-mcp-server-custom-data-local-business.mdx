@@ -1,8 +1,9 @@
 ---
-title: "Build Your Own MCP Server: Custom Data for Your Local Business AI Agent"
+title: "Build an MCP Server for Your Local Business: Step-by-Step Python Guide (Menu, Hours, Loyalty)"
 date: "2026-06-13"
-lastModified: "2026-06-13"
-description: "Build a custom MCP server to give your AI agent access to your business data — menu prices, service list, client FAQs, and booking rules. Step-by-step guide."
+lastModified: "2026-10-07"
+seoTitle: "Build an MCP Server for Your Local Business (Python)"
+description: "How do you build an MCP server for a local business? Use Python to expose your menu, hours and loyalty data to an AI agent. Full code and security tips."
 author: "Nataliia"
 category: "AI & Automation"
 tags: ["MCP server", "build MCP", "AI agent", "local business"]
@@ -10,6 +11,8 @@ slug: "build-mcp-server-custom-data-local-business"
 image: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800&q=80&auto=format&fit=crop"
 readTime: "13 min read"
 ---
+
+To build an MCP server for a local business, you write a small Python program using the official `mcp` SDK that exposes your own data (menu, hours, policies, loyalty points) as tools an AI agent can call, then register it with an MCP-compatible client such as Claude Desktop. It takes a few hours for someone comfortable with basic Python, and the example below builds a complete coffee shop server you can adapt.
 
 Off-the-shelf MCP servers can connect your AI to Google Calendar, Notion, Supabase, and a dozen other tools. They're useful — but they don't know anything about *your* business.
 
@@ -33,7 +36,7 @@ Before getting into code, let's be clear about when this is worth doing.
 - A general-purpose MCP server already handles your use case (Supabase, Google Sheets, Notion)
 - You only need one-way information flow from a static document
 
-The investment is a few hours of setup. The payoff is an AI that knows your business as well as your best employee does.
+The investment is a few hours of setup. The payoff is an AI that answers from your real, current data instead of guessing. For a wider view of what agents can do, read our overview of [AI agents for local business](/blog/ai-agents-for-local-business-what-they-are-and-how-they-work).
 
 ## MCP Server Architecture: Three Core Concepts
 
@@ -130,9 +133,9 @@ touch server.py menu.json customers.csv hours.json
 
 ```
 phone,name,points,tier,joined
-+15550123,Maria Chen,340,Gold,2024-03-15
-+15550456,Tom Wilson,85,Bronze,2025-11-02
-+15550789,Sarah Kim,1240,Platinum,2023-07-20
++15550123,Sample Customer A,340,Gold,2024-03-15
++15550456,Sample Customer B,85,Bronze,2025-11-02
++15550789,Sample Customer C,1240,Platinum,2023-07-20
 ```
 
 ### The MCP Server Code
@@ -419,13 +422,13 @@ Sample test session:
 # Should return hot drinks list from menu.json
 
 > call check_loyalty_points {"phone": "+15550123"}
-# Should return Maria Chen's 340 points
+# Should return Sample Customer A's 340 points
 
 > call check_loyalty_points {"phone": "invalid"}
 # Should return validation error, not a crash
 
 > call add_loyalty_points {"phone": "+15550456", "points": 15}
-# Should add 15 points to Tom Wilson's account
+# Should add 15 points to Sample Customer B's account
 ```
 
 Fix any errors before connecting to Claude Desktop. A crashing MCP server will silently fail from Claude's perspective.
@@ -436,7 +439,7 @@ Local setup works for Claude Desktop on your personal computer. But if you want 
 
 **Option 1: Always-on process on a VPS**
 
-Get a cheap VPS ($5/month on DigitalOcean or Linode). SSH in and run:
+Get a small VPS (entry-level plans from providers such as DigitalOcean or Linode are typically a few dollars a month; check current pricing). SSH in and run:
 
 ```bash
 # Install dependencies
@@ -469,7 +472,7 @@ sudo systemctl start coffeeshop-mcp
 
 **Option 2: Serverless via Cloudflare Workers**
 
-For serverless deployment, you'd port the server to use the MCP HTTP transport instead of stdio. This is more advanced — see the [MCP documentation on HTTP transport](https://modelcontextprotocol.io) for details. Cloudflare Workers free tier handles millions of requests per month, making it cost-effective for customer-facing deployments.
+For serverless deployment, you'd port the server to use the MCP HTTP transport instead of stdio. This is more advanced — see the [MCP documentation on HTTP transport](https://modelcontextprotocol.io) for details. Serverless platforms often have free or low-cost tiers that can suit small customer-facing deployments; check current limits and pricing.
 
 ## Security: What Not to Expose
 
@@ -491,35 +494,34 @@ Custom MCP servers are powerful, which means you need to think carefully about w
 
 | Approach | Setup Time | Flexibility | Cost | Maintenance | Best For |
 |---|---|---|---|---|---|
-| Custom MCP server | 4-8 hours | Maximum — your logic | $0 (local) / $5/mo (VPS) | Low (update JSON/CSV files) | Unique business data |
-| n8n workflow | 1-2 hours | High — visual builder | $20/mo (cloud) or self-host | Low | Complex multi-step flows |
-| Zapier | 30 min | Moderate — preset connectors | $20-50/mo | Very low | Simple trigger-action automations |
-| Direct API integration | 2-4 hours | High — any API | Varies | Medium (API changes) | Well-documented external services |
-| General MCP server (Supabase, Sheets) | 1-2 hours | Moderate — generic DB ops | $0-25/mo | Very low | Standard data storage |
+| Custom MCP server | A few hours | Maximum — your logic | Free locally; small hosting fee if deployed | Low (update JSON/CSV files) | Unique business data |
+| n8n workflow | Hours | High — visual builder | Paid cloud plans or self-host | Low | Complex multi-step flows |
+| Zapier | Under an hour | Moderate — preset connectors | Free tier, then paid plans | Very low | Simple trigger-action automations |
+| Direct API integration | Hours | High — any API | Varies | Medium (API changes) | Well-documented external services |
+| General MCP server (Supabase, Sheets) | Hours | Moderate — generic DB ops | Free tiers, then paid | Very low | Standard data storage |
 
 The custom MCP server wins when your data or logic is unique — which it always is for a local business. n8n is a good middle ground if you want more flexibility than Zapier but don't want to write Python.
 
 ## FAQ
 
-**Do I need to be a developer to build an MCP server?**
+**Q: Do I need to be a developer to build an MCP server?**
+A: You need basic Python skills: reading and modifying code, running commands in a terminal and understanding what a function does. If you have never written Python, plan extra time to learn the basics first. The example here is deliberately straightforward.
 
-You need basic Python skills — the ability to read and modify Python code, understand what a function does, and run commands in a terminal. If you've never written Python, it will take an extra 4-6 hours to learn the basics first. There are excellent free resources (Python.org's tutorial, freeCodeCamp). The code in this article is deliberately straightforward — no advanced Python concepts are required. No Django, no Flask, no async complexity beyond what the `mcp` library handles for you.
+**Q: Can my MCP server connect to the internet?**
+A: Yes. Tool handlers can call external APIs, for example to fetch today's specials from your website or check the weather. Keep calls fast, because tool calls can time out.
 
-**Can my MCP server connect to the internet?**
+**Q: How do I update the data my MCP server exposes?**
+A: Edit the data files. Because the example reads `menu.json`, `hours.json` and `customers.csv` on every tool call, changes show up without code changes. For frequently changing data like inventory, replace the files with a database query.
 
-Yes, absolutely. You can call external APIs from within your tool handlers. For example, `get_current_specials()` could fetch today's special from your website CMS, or `check_weather()` could call a weather API to automatically adjust your seasonal menu suggestions. The MCP server is just Python — it can import `requests`, `httpx`, or any other HTTP library and call whatever APIs you need. Just be careful about latency: MCP tool calls time out, so don't call slow APIs from within a tool.
+**Q: Can multiple AI clients use my MCP server?**
+A: Yes, if you run it with an HTTP-based transport rather than stdio. In stdio mode one client launches the server directly. Check the current MCP documentation for transport options, since the SDK evolves.
 
-**How do I update the data my MCP server exposes?**
+**Q: Is my MCP server secure?**
+A: In stdio mode the server is not network accessible. If you deploy it over HTTP you must add authentication, for example a long random bearer token, and never expose credentials or unrestricted write tools. Review the Security section above.
 
-That's the beautiful part of this architecture. To update your menu, just edit `menu.json` — no code change, no restart required (the server reads the file on every tool call). To update business hours for an upcoming holiday, edit `hours.json`. To add a new customer, append a row to `customers.csv`. The MCP server always serves the current state of those files. For data that changes frequently (like real-time inventory), you'd replace the flat files with a database query — but the MCP server code itself doesn't change.
+## Next Step
 
-**Can multiple AI clients use my MCP server?**
-
-Yes, if you deploy it as an HTTP server rather than running it via stdio. In stdio mode (the setup in this article), one Claude Desktop instance connects to the server directly. In HTTP/SSE mode, multiple clients can connect simultaneously — Claude Desktop, a custom web app, another AI model entirely. The `mcp` library supports both modes. Switching from stdio to HTTP requires changing the transport layer in the `main()` function, but all your tool handlers remain identical.
-
-**Is my MCP server secure? Could someone else connect to it?**
-
-In stdio mode, no — the server only communicates via stdin/stdout with the process that started it. It's not network-accessible at all. In HTTP/SSE mode (deployed on a VPS), you must add authentication — the `mcp` library supports bearer token auth. Generate a long random token (`python3 -c "import secrets; print(secrets.token_hex(32))"`) and require it in every HTTP request. Never deploy an MCP server over HTTP without authentication.
+If you would rather have this built and maintained for you, see our [AI agents and automation service](/services/ai-agents) or [contact us](/contact) to talk through your use case.
 
 ## Related Articles
 
@@ -527,4 +529,5 @@ In stdio mode, no — the server only communicates via stdin/stdout with the pro
 - [Best MCP Servers for Local Business: The Complete Setup Guide](/blog/best-mcp-servers-local-business-setup-guide)
 - [MCP + Supabase: Give Your AI Agent a Persistent Database](/blog/mcp-supabase-connector-ai-agent-database)
 - [MCP + Notion: Build a Client CRM for Your Local Business](/blog/mcp-notion-connector-client-crm-local-business)
+- [AI Agents for Coffee Shops](/blog/ai-agents-for-coffee-shops)
 - [Claude + MCP + Google Calendar: Automate Your Booking Confirmations](/blog/claude-mcp-google-calendar-booking-automation)
