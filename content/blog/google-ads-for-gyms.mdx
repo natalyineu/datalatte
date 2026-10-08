@@ -1,149 +1,181 @@
 ---
-title: "Google Ads for Gyms: Sign Up New Members With Local Search Ads"
-seoTitle: "Google Ads for Gyms: Get New Members From Local Search"
+title: "Google Ads for Gyms: What a New Member Really Costs (With the Math)"
+seoTitle: "Google Ads for Gyms: Cost Per Member and Setup"
 date: "2026-05-21"
-lastModified: "2026-06-02"
-description: "Google Ads for gyms and fitness studios: which keywords to bid on, how to build local search campaigns, what to budget and how to track member sign-ups."
+lastModified: "2026-10-08"
+description: "Google Ads for gyms and fitness studios: real CPC and lead benchmarks, campaign setup, keywords, tracking and the math from ad budget to paying members."
 author: "Nataliia"
 category: "Google Ads"
 tags: ["google ads", "local search ads", "fitness studio marketing"]
 slug: "google-ads-for-gyms"
 image: "https://images.unsplash.com/photo-1585944285915-a8d07f3f0a1a?w=800&q=80&auto=format&fit=crop"
-readTime: '11 min read'
+readTime: '10 min read'
 ---
 
-Google Ads can bring new members to a gym or fitness studio by showing your ad to people searching phrases like "gym near me" or "yoga classes in [town]". Set a tight radius, send people to a page built for one offer such as a free trial, and track calls and sign-ups so you know what each new member costs.
+Here is a number to hold onto. If a click costs you $4, 5 in 100 clicks become an enquiry, and 1 in 5 enquiries joins, a new member costs $400 in ads. Change any one of those three inputs and the answer swings between roughly $140 and $1,300. Those inputs are my assumptions, not benchmarks, and we will work through them below. The point: a gym ad account is a funnel with three dials, and you control more of them than you think.
 
-Search ads suit gyms because people searching for a gym are often ready to act, especially in January, after a move or when their current membership ends. The challenge is cost: fitness keywords can be competitive in cities. The guide below shows how to run a focused campaign without wasting money.
+This guide is for gym and studio owners in the US, UK, Australia and Canada. It covers what clicks and leads tend to cost, how to set up a search campaign, how to track calls and forms, and how to work out whether the whole thing pays back. Dollar figures are US-based benchmarks; for pounds or Australian and Canadian dollars, run the same math with your own local click prices.
 
-## Is Google Ads right for your gym yet?
+## What the Benchmarks Say (and Why to Distrust Them a Little)
 
-Run ads when:
+Public fitness benchmarks disagree with each other, because each provider measures a different mix of advertisers. A 2026 roundup by [Webtonic](https://www.webtonic.io/blog/fitness-google-ads-statistics) lists these figures, each credited to a different source:
 
-- Your Google Business Profile is complete, with photos, hours and recent reviews
-- Your website works well on mobile and has a clear sign-up or booking path
-- You have an offer worth clicking (free trial week, intro class, no joining fee)
-- You can answer calls and messages quickly
-- You know roughly what a new member is worth to you over time
+<StatRow
+  values="$6.17|5.81%|6.94%|$67.36"
+  labels="Avg. CPC|Avg. CTR|Conversion rate|Cost per lead"
+  subs="TheAdSpend, Health & Fitness|TheAdSpend|TheAdSpend|TheAdSpend"
+  trends="up|neutral|neutral|neutral"
+/>
 
-If any of these are missing, fix them first. Our [Google Ads for fitness studios guide](/blog/google-ads-for-fitness-studios) goes deeper on offers and landing pages.
+The same roundup shows how wide the spread is: CPC from $2.77 (WordStream, Sports & Recreation) to $6.17, conversion rate from 4.10% (CuFinder, Fitness & Wellness) to 6.94%, and cost per lead from $47 to $85 (PPCChief, Health & Fitness). It also reports that TheAdSpend's CPC is up 23% year over year.
 
-## Choose keywords by intent
+What to take from this:
 
-Search campaigns work from keywords. Group them by what the person wants:
+- A "normal" click for fitness is somewhere between about $3 and $6. Your own city will sit inside or outside that.
+- A cost per lead of roughly $45 to $85 is a reasonable thing to expect to test against, not a promise.
+- These are averages across advertisers of all sizes, including apps and online coaches. A single-location gym with a tight radius and a clear offer can land anywhere in that range.
 
-| Intent | Example searches | Notes |
+Webtonic also reports a 90-day funnel from an agency called Pilotium for mid-size markets: 25 to 45 leads, then 10 to 18 booked trials, then 4 to 8 new paying members, on $1,000 to $1,500 a month. Pilotium's original is not public, so treat that as a rough second-hand picture of the shape of a funnel, not a target.
+
+## Pick the Right Campaign Type
+
+**Start with a Search campaign.** Search ads show when someone types "gym near me" or "yoga classes [town]". They catch people who are already looking, which is why they usually beat everything else for a single-location gym. Keep it to one campaign per location.
+
+**Performance Max is a later experiment, not a starting point.** Google's [help page on Performance Max store goals](https://support.google.com/google-ads/answer/13717300) says you define the locations to promote by linking your Business Profile, and that the goals available are store visits, store sales, contacts and directions. You cannot pick store visits and store sales in the same campaign. That is useful for chains with data to feed it. A single studio with a handful of conversions a month usually gives Performance Max too little to learn from, so prove Search first.
+
+## Set Up the Campaign Step by Step
+
+### 1. Location: a radius that matches where members live
+
+Most members live or work within a short trip of the gym. Draw a radius around your address based on your real member postcodes or zip codes: pull your last 50 sign-ups and see where they come from. Cities may need a small radius; suburbs and rural areas a bigger one.
+
+Check the location options setting. Google's [location targeting help](https://support.google.com/google-ads/answer/6317) describes the combined "presence and interest" option as the default (confirm the Search default in your own account). For a gym, I recommend choosing presence only: people in or regularly in your area. That is my advice, not a Google rule. It stops you paying for clicks from someone in another city who merely searched for your town.
+
+### 2. Keywords and match types
+
+Google's [match type guide](https://support.google.com/google-ads/answer/2497836) defines three types. Broad match reaches related searches and, per Google, needs Smart Bidding. Phrase match (in quotes) reaches searches that include your keyword's meaning. Exact match (in square brackets) reaches the fewest searches and gives the most control.
+
+With a small budget, start with phrase and exact. Build ad groups by what the person wants:
+
+| Ad group | Example keywords | Match type |
 | --- | --- | --- |
-| Generic gym | "gym near me", "gyms in [town]" | Competitive, high volume |
-| Class type | "spin classes [town]", "pilates studio near me", "boxing gym" | Often higher quality leads |
-| Offer-led | "gym free trial", "gym no contract" | Good if you offer it |
-| Specialty | "women only gym", "kids gymnastics", "personal trainer [area]" | Less competition |
-| Brand | Your own gym name | Cheap, protects your name |
+| Generic gym | "gym near me", [gym in your town], "gyms open now" | Phrase + exact |
+| Class type | "pilates classes your town", [boxing gym near me], "spin class near me" | Phrase + exact |
+| Offer-led | "gym free trial", "gym no joining fee", "no contract gym" | Phrase |
+| Specialty | "women only gym", "kids gymnastics classes", "personal trainer near me" | Phrase + exact |
+| Your brand | [your gym name] | Exact |
 
-Use phrase and exact match types to keep control. Broad match, combined with smart bidding, can work but needs conversion data and close monitoring. Start with a small, tightly themed set.
+Keep each ad group to a handful of tightly related keywords so the ad can match the search word for word.
 
-## Add negative keywords
+### 3. Negative keywords
 
-Negative keywords stop your ads showing for the wrong searches. For gyms, common exclusions include "jobs", "careers", "equipment", "free" (unless you offer it), "home gym", "workout plan", "gym bag", "wholesale" and "franchise". Review your search terms report weekly at first and add new negatives as you find irrelevant queries.
+Negatives stop wasted clicks. Add these on day one, then review the search terms report weekly: `jobs`, `careers`, `salary`, `equipment`, `machine`, `home gym`, `diy`, `workout plan`, `app`, `youtube`, `franchise`, `for sale`, `second hand`, `physio`, `free` (unless you offer a free trial, in which case keep "free trial" as a keyword and consider exact-match negatives for plain "free gym"). Our [negative keywords guide](/blog/negative-keywords-google-ads) explains how to apply them at campaign level and by list.
 
-## Structure your campaign
+### 4. Ads that mirror the search
 
-A simple structure for one location:
+Responsive search ads accept up to 15 headlines (30 characters each) and up to 4 descriptions (90 characters each), according to Google's [responsive search ad requirements](https://support.google.com/google-ads/answer/7684791). Fill them. Use real, specific text:
 
-1. **Campaign**: Search, location-targeted to a radius around the gym that matches your real catchment area, often a few miles in cities and larger in suburbs.
-2. **Ad groups**: One per theme, such as "General gym", "Yoga", "Personal training", "Free trial".
-3. **Ads**: Responsive search ads with up to 15 headlines and 4 descriptions per group. Include the keyword, your location, your offer and a call to action.
-4. **Extensions (assets)**: Call, location, sitelinks (Timetable, Prices, Free Trial, Tour) and callouts (No contract, Open 24/7, Showers, Parking).
+- Headlines: `Free 7-Day Trial in [Town]`, `No Contract. Cancel Anytime.`, `Small Group Pilates Classes`, `Pool, Sauna and 24/7 Access`, `Beginner Classes Start Mondays`
+- Descriptions: `Friendly coaches, classes under 12 people and flexible plans. Book your free tour today.`
 
-Set location targeting to people "in or regularly in" your area and exclude people merely "interested in" it, which avoids wasted clicks from far away.
+Put the town name and the offer in at least a few headlines, so they match what people typed.
 
-## Write ads that match the search
+**Watch your claims.** Google's [unreliable claims policy](https://support.google.com/adspolicy/answer/15936857) bans claims that entice the user with an improbable result, even if that result is possible. Its own example is a weight loss ad that says you can eat whatever you want and lose 10 pounds in a month. "Lose 10 kg in 30 days" is the kind of line that gets ads disapproved. "Beginner-friendly classes with a coach" is safe.
 
-Good gym ads state a benefit and an action:
+### 5. Assets: calls, location, sitelinks
 
-- Headline ideas: "Free 7 Day Trial", "Boutique Pilates in [Town]", "Gym With Pool and Sauna", "Beginner Friendly Classes"
-- Description ideas: "Friendly coaches, small classes and flexible memberships. Book your free tour today."
+Add a call asset, a location asset linked to your Business Profile, sitelinks (Timetable, Prices, Free Trial, Book a Tour) and short callouts (No Contract, Showers, Free Parking). They make the ad bigger and give mobile searchers a one-tap way to ring you.
 
-Avoid claims you cannot support (guaranteed weight loss, specific results), and follow Google's advertising policies, which restrict some health and weight-loss claims.
+## Landing Page: One Offer, One Action
 
-## Send traffic to the right page
+Send clicks to a page built for one offer, not your home page. It needs a headline that repeats the offer, one button ("Claim my free trial"), a short form (name, phone, email), three or four photos of the real space, two or three real reviews, opening hours, a map and a tap-to-call number. Our [landing page best practices](/blog/landing-page-best-practices) go through the layout in detail.
 
-Do not send clicks to a busy home page. Build a landing page for each offer with:
+## Tracking: Count Calls and Forms, Not Just Clicks
 
-- A headline that repeats the offer
-- One main call to action, such as "Claim your free trial"
-- A short form (name, phone, email) or an online booking widget
-- Photos of your space and real members, with their permission
-- A few reviews, opening hours and a map
-- A visible phone number that works with tap-to-call on mobile
+Without conversion tracking, you are just paying for traffic. Set up three conversion actions:
 
-Our [landing page best practices](/blog/landing-page-best-practices) cover this in detail.
+1. **Form or trial sign-up.** Track the thank-you page or the form submit event. Our [conversion tracking setup guide](/blog/google-ads-conversion-tracking-setup) covers the steps.
+2. **Calls from the ad.** Google's call-tracking help says you can count a call only if it lasts longer than a minimum length you set, which filters out misdials. Pick a duration that matches a real enquiry (for example 30 to 60 seconds; that number is my suggestion, not Google's default).
+3. **Calls from the landing page.** Google's [website call conversions help](https://support.google.com/google-ads/answer/6095883) explains that a phone snippet swaps your number on the page for a Google forwarding number. It also notes the default tag tracks only one number per page and that Google Tag Manager is not recommended if you use dynamic number insertion or third-party call tracking. See [call tracking for local business](/blog/call-tracking-for-local-business) for the options.
 
-## Budget: how much to expect
+Then close the loop by hand: every new member gets asked how they found you, and you log which enquiries paid. Ad platforms count leads; only your front desk knows which became members.
 
-Costs per click vary by city, season and competition. In our experience, many gym owners start with roughly $15 to $40 a day (or the local equivalent) for a single location and adjust after a few weeks. Spending too little can prevent you from collecting enough data. To estimate:
+## The Math
 
-- Work out what a new member is worth to you (average monthly fee multiplied by how long members tend to stay, less your costs).
-- Decide what you are willing to pay to acquire one member.
-- Estimate how many leads become tours, and how many tours become members. Use your own numbers.
+Take a $1,000 monthly budget and run three scenarios. Every row below is an **assumption** for illustration, except that the CPC range is chosen to sit inside the $2.77 to $6.17 spread above. Replace them with your own numbers after a month of data.
 
-See our [Google Ads budget guide](/blog/google-ads-budget-for-small-business) for a worked method. Plan for a seasonal peak in January, and again before summer in many markets.
+| | Tough | Base | Strong |
+| --- | --- | --- | --- |
+| Monthly budget (assumption) | $1,000 | $1,000 | $1,000 |
+| Cost per click (assumption) | $6.00 | $4.00 | $3.00 |
+| Clicks | 167 | 250 | 333 |
+| Click to enquiry rate (assumption) | 3% | 5% | 7% |
+| Enquiries | 5 | 12.5 | 23 |
+| Cost per enquiry | $200 | $80 | $43 |
+| Enquiry to member rate (assumption) | 15% | 20% | 30% |
+| New members | 0.75 | 2.5 | 7 |
+| Ad cost per member | $1,333 | $400 | $143 |
+| Monthly fee (assumption) | $55 | $55 | $55 |
+| Months of fees to pay back the ad cost | 24 | 7.3 | 2.6 |
 
-## Track what matters
+How to read it: payback months is ad cost per member divided by the monthly fee. It uses revenue, not profit, so real payback is slower once you count staff and rent. The Base scenario's $80 cost per enquiry lands inside the $47 to $85 range PPCChief reports; the Strong one is better than any benchmark above, so do not plan around it.
 
-Without tracking you are guessing. Set up conversions for:
+Two things follow:
 
-- Form submissions and trial sign-ups
-- Phone calls from ads and from your landing page (see [call tracking](/blog/call-tracking-for-local-business))
-- Direction requests from your Google Business Profile
-- Booking widget completions
+- **Your break-even click price.** Maximum CPC = target cost per member x enquiry rate x member rate. If you will pay $300 per member, at 5% and 20% your ceiling is $300 x 0.05 x 0.20 = $3.00 a click. Above that, you lose money on average.
+- **The lever that moves most is your close rate.** Going from 15% to 30% enquiry-to-member halves your cost per member without touching the ad account. That is a phone-answering and tour-booking problem.
 
-Then close the loop offline: ask each new member how they found you, and record which leads become paying members. Our [conversion tracking setup guide](/blog/google-ads-conversion-tracking-setup) walks through the technical side.
+Also check how long members actually stay. If your average member leaves after 5 months, the Base scenario's 7.3-month payback loses money. Pull your own numbers from your billing system before you scale spend.
 
-## Optimise weekly, not daily
+## Optimise Weekly, Not Daily
 
-A simple routine:
+Clicks are noisy at gym budgets, so avoid daily tinkering. Each week:
 
-1. Check the search terms report and add negative keywords.
-2. Pause keywords with lots of spend and no leads after a fair test period.
-3. Test a new headline or offer every two weeks.
-4. Compare device performance, since most gym searches happen on mobile.
-5. Adjust schedules if calls come when no one answers the phone.
-6. Raise budget slowly on campaigns that produce members at an acceptable cost.
+1. Read the search terms report and add negatives.
+2. Pause keywords that spent more than about twice your target cost per enquiry with no enquiries.
+3. Rotate in one new headline or offer every two weeks.
+4. Check calls by time of day and match ad hours to when someone answers the phone.
+5. Raise the budget by 20% or so only on campaigns that hit your target cost per member.
 
-## Pair ads with the free local basics
+Pair this with a complete [Google Business Profile](/blog/google-business-profile-optimization-for-fitness-studios), because people compare reviews and photos before they click anything. For city-by-city detail, our [Google Ads for fitness studios guide](/blog/google-ads-for-fitness-studios) goes deeper on offers.
 
-Ads work better when your free presence supports them:
+<Callout type="coffee" title="Speed Beats Everything">
+Someone searching "gym near me" often contacts two or three gyms in the same hour. Reply to forms within minutes and ring back missed calls the same day. It is the cheapest improvement on this page.
+</Callout>
 
-- Keep your Google Business Profile current, with fresh photos and class updates
-- Collect reviews from happy members regularly
-- Follow up with leads by phone or text within minutes
-- Use email to nurture people who did not sign up yet
+## Do This Today
 
-For niche advice on each business type, visit our [fitness studio marketing page](/for/fitness-studios).
-
-## Seasonal timing for gyms
-
-Demand is not flat. Searches for gyms and classes typically rise in January and again before summer, with smaller peaks after school terms begin. Plan budgets and offers around those windows: a stronger free-trial offer and a higher daily cap in peak weeks, then a leaner always-on campaign for the rest of the year. Many studios also run a short campaign for each new class launch or timetable change. Review last year's membership sign-ups by month to see your own pattern before deciding where to concentrate spend.
-
-## Handling leads when they arrive
-
-Paid leads often come from people comparing two or three gyms in the same hour, so the first reply tends to win. Answer calls promptly, reply to form enquiries within minutes during opening hours, and offer a specific time for a tour rather than asking them to get back to you. Send a confirmation message with the address, parking details and what to bring. If someone does not book, follow up once or twice over the next few days with a helpful note, not a hard sell. These simple habits often matter as much as anything inside the ad account.
+1. Pull your last 50 new members and note the town or zip code of each. Draw your ad radius from that map.
+2. Work out your numbers: monthly fee, average months a member stays, and the most you will pay for one new member. Use the break-even formula above.
+3. Create one Search campaign for one location with five tight ad groups, phrase and exact match, and the negative list from this article.
+4. Build one landing page for one offer, then set up form, ad-call and landing-page-call conversions before turning the ads on.
+5. Put a 15-minute reply rule in place for every enquiry, and book a weekly 20-minute slot to read the search terms report.
 
 ## FAQ
 
-**Q: How much do Google Ads cost for a gym?**
-A: It varies widely by location and competition. Many single-location gyms test with a few hundred dollars a month at minimum, then adjust based on cost per member.
+**Q: How much should a gym spend on Google Ads per month?**
+A: There is no official number. Pilotium's funnel, as reported by Webtonic, used $1,000 to $1,500 a month for mid-size markets. At an assumed $4 click that buys roughly 250 to 375 clicks. Use the break-even formula to see what your own market supports.
 
-**Q: Should I bid on "gym near me"?**
-A: It can work because intent is high, but the term is competitive. Pair it with class-specific and offer-based keywords and monitor cost per lead closely.
+**Q: Is "gym near me" worth bidding on?**
+A: It can be, because the intent is high, but it is often your most expensive keyword. Run it alongside class-specific and offer-led keywords, and judge it by cost per member, not cost per click.
 
-**Q: Are Google Ads better than Facebook ads for gyms?**
-A: They target different moments. Google captures people already searching, while Facebook and Instagram can reach people who might join after seeing an offer. Many gyms use both. See [Facebook ads for fitness studios](/blog/facebook-ads-for-fitness-studios).
+**Q: Should I use Performance Max?**
+A: Not first. Google says store-goal Performance Max campaigns need your Business Profile linked and optimise toward goals such as store visits or local actions. Run a Search campaign until you have steady conversions, then test.
 
-**Q: How long until ads bring members?**
-A: Leads can appear in days, but allow several weeks to collect data, refine keywords and see how many leads become paying members.
+**Q: Google Ads or Facebook ads for a gym?**
+A: They catch different moments. Google reaches people already searching; Meta can reach people who might join after seeing an offer. Many gyms run Google first, then add Meta. See [Facebook ads for fitness studios](/blog/facebook-ads-for-fitness-studios).
 
-## Next step
+**Q: How long before ads bring in members?**
+A: Enquiries can arrive within days. Give it four to six weeks, my rule of thumb rather than a Google figure, to collect enough clicks and trial-to-member outcomes before judging.
 
-If you would like a gym-focused campaign built and managed with proper tracking, see our [Google Ads service](/services/google-ads) and [contact DataLatte](/contact) to discuss your studio.
+## Sources
+
+- [Webtonic: Fitness Google Ads Statistics 2026](https://www.webtonic.io/blog/fitness-google-ads-statistics) (roundup of CPC, CTR, conversion and CPL figures from TheAdSpend, WordStream, CuFinder, PPCChief and Pilotium)
+- [Google Ads Help: Performance Max campaign with store goals](https://support.google.com/google-ads/answer/13717300)
+- [Google Ads Help: Location targeting](https://support.google.com/google-ads/answer/6317)
+- [Google Ads Help: Keyword match types](https://support.google.com/google-ads/answer/2497836)
+- [Google Ads Help: Responsive search ad requirements](https://support.google.com/google-ads/answer/7684791)
+- [Google Ads Help: Website call conversions](https://support.google.com/google-ads/answer/6095883)
+- [Google Advertising Policies: Unreliable claims](https://support.google.com/adspolicy/answer/15936857)
+
+Want a gym campaign built with proper call and form tracking? See our [Google Ads service](/services/google-ads), the [fitness studio marketing page](/for/fitness-studios), or [contact DataLatte](/contact).
