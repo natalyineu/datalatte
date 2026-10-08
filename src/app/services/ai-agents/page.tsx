@@ -3,7 +3,8 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2, Zap, MessageSquare, Star, Phone, Calendar, Bot, RotateCcw, Bell, Code2, Cpu, GitBranch, Webhook, Share2 } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
-import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
+import { breadcrumbSchema, serviceSchema, faqSchema } from "@/lib/schema";
+import { WhyFast, MathBlock, Process, Pricing, Honest, ByNiche, Guides, EXTRA_FAQS } from "@/components/AIAgentsExtra";
 
 export const metadata: Metadata = {
   alternates: {
@@ -292,6 +293,8 @@ const faqs = [
   },
 ];
 
+const allFaqs = [...faqs, ...EXTRA_FAQS];
+
 const breadcrumb = breadcrumbSchema([
   { name: "Home", url: "https://datalatte.pro" },
   { name: "Services", url: "https://datalatte.pro/services/google-ads" },
@@ -312,6 +315,7 @@ export default function AIAgentsPage() {
       {/* Structured data */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(service) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(allFaqs)) }} />
 
       {/* Tool promo banner */}
       <div className="bg-coffee-50 border-b border-coffee-100 py-3 px-4 text-center text-sm dark:bg-coffee-900/20 dark:border-coffee-800">
@@ -351,6 +355,8 @@ export default function AIAgentsPage() {
           </div>
         </div>
       </section>
+
+      <WhyFast />
 
       {/* ── Architecture ──────────────────────────────────────────────────── */}
       <SectionWrapper className="bg-gray-950 border-b border-gray-800">
@@ -582,6 +588,12 @@ export default function AIAgentsPage() {
         </div>
       </SectionWrapper>
 
+      <MathBlock />
+      <Process />
+      <Honest />
+      <ByNiche />
+      <Pricing />
+
       {/* ── What's included ───────────────────────────────────────────────── */}
       <SectionWrapper className="bg-coffee-50 dark:bg-coffee-900/20">
         <div className="max-w-4xl mx-auto">
@@ -642,7 +654,7 @@ export default function AIAgentsPage() {
             <h2 className="section-title">Technical questions answered</h2>
           </div>
           <div className="space-y-4">
-            {faqs.map((item) => (
+            {allFaqs.map((item) => (
               <div key={item.q} className="card p-6">
                 <h4 className="font-semibold text-gray-900 mb-2 dark:text-gray-50">{item.q}</h4>
                 <p className="text-gray-500 text-sm leading-relaxed dark:text-gray-400">{item.a}</p>
@@ -651,6 +663,8 @@ export default function AIAgentsPage() {
           </div>
         </div>
       </SectionWrapper>
+
+      <Guides />
 
       {/* ── Related ───────────────────────────────────────────────────────── */}
       <SectionWrapper>
