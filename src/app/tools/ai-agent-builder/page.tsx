@@ -157,7 +157,7 @@ export default function AIAgentBuilderPage() {
                   </span>
                 ))}
               </div>
-              <div className="absolute top-4 right-4 text-xs font-semibold text-coffee-400 bg-white/60 px-2 py-0.5 rounded-full dark:bg-gray-900/60">
+              <div className="absolute top-4 right-4 text-xs font-semibold text-coffee-700 bg-white/60 dark:text-coffee-300 px-2 py-0.5 rounded-full dark:bg-gray-900/60">
                 Soon
               </div>
             </div>

@@ -96,7 +96,7 @@ export default function NichePage({
           <div className="bg-black/50 backdrop-blur border border-white/15 rounded-xl px-3 py-2 text-xs text-white flex items-center gap-2 shadow-lg">
             <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse shrink-0" />
             <span className="text-white/70">Weekly report</span>
-            <span className="text-blue-300 font-bold">Every Monday ✓</span>
+            <span className="text-blue-200 font-bold">Every Monday ✓</span>
           </div>
         </div>
 

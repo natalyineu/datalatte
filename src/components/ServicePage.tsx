@@ -106,7 +106,7 @@ export default function ServicePage({
           <div className="bg-black/40 backdrop-blur border border-white/15 rounded-xl px-3 py-2 text-xs text-white flex items-center gap-2 shadow-lg">
             <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse shrink-0" />
             <span className="text-white/70">Setup</span>
-            <span className="text-blue-300 font-bold">Live in 5 days ✓</span>
+            <span className="text-blue-200 font-bold">Live in 5 days ✓</span>
           </div>
         </div>
 
@@ -118,7 +118,7 @@ export default function ServicePage({
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 text-balance">{tagline}</h1>
           <p className="text-white/80 max-w-2xl mx-auto mb-5 leading-relaxed text-lg">{description}</p>
           {/* Monospace flow indicator */}
-          <p className="text-white/60 text-xs font-mono mb-10 max-w-2xl mx-auto tracking-wide">
+          <p className="text-white/80 text-xs font-mono mb-10 max-w-2xl mx-auto tracking-wide">
             {howItWorks.map((s, i) => (
               <span key={s.step}>
                 {s.title}
