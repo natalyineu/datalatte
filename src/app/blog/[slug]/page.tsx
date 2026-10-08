@@ -587,7 +587,7 @@ export default async function BlogPostPage({
           unoptimized={(imageCache[slug] ?? frontmatter.image)?.startsWith("http")}
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 max-w-4xl mx-auto">
           <Link
             href={`/blog/category/${frontmatter.category.toLowerCase().replace(/\s*&\s*/g, "-").replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}`}

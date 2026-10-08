@@ -277,7 +277,7 @@ export default function ReportingPage() {
           </h2>
         </div>
         <div className="max-w-3xl mx-auto divide-y divide-gray-100 border border-gray-100 rounded-2xl overflow-hidden shadow-sm dark:border-gray-700">
-          <div className="grid grid-cols-2 bg-gray-50 text-xs font-bold text-gray-400 uppercase tracking-widest dark:bg-gray-800/60">
+          <div className="grid grid-cols-2 bg-gray-50 text-xs font-bold text-gray-600 dark:text-gray-400 uppercase tracking-widest dark:bg-gray-800/60">
             <div className="px-5 py-3 border-r border-gray-100 flex items-center gap-2 dark:border-gray-700">
               <X size={13} className="text-red-400" /> Before
             </div>
@@ -335,7 +335,7 @@ export default function ReportingPage() {
                     <div className="flex items-center gap-3 mb-3 relative">
                       <div
                         className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm text-white shrink-0 shadow-sm group-hover:scale-110 transition-transform duration-200"
-                        style={{ backgroundColor: source.color }}
+                        style={{ backgroundColor: source.color, color: source.abbr === "GBP" ? "#3b2a00" : undefined }}
                       >
                         {source.abbr}
                       </div>
@@ -449,7 +449,7 @@ export default function ReportingPage() {
               ))}
             </div>
             <div className="px-5 py-3 bg-gray-900/50 border-t border-gray-800 flex items-center justify-between">
-              <span className="text-gray-600 text-xs dark:text-gray-300">Alerts delivered via email or Telegram</span>
+              <span className="text-gray-300 text-xs">Alerts delivered via email or Telegram</span>
               <div className="flex items-center gap-1.5 text-xs text-coffee-400 font-medium">
                 <Zap size={12} /> 47 alerts this month
               </div>
@@ -523,7 +523,7 @@ export default function ReportingPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="text-left text-xs text-gray-400 border-b border-gray-100 dark:border-gray-700">
+                  <tr className="text-left text-xs text-gray-500 dark:text-gray-400 border-b border-gray-100 dark:border-gray-700">
                     <th className="pb-2 font-medium">Channel</th>
                     <th className="pb-2 font-medium text-right">Spend</th>
                     <th className="pb-2 font-medium text-right">Leads</th>

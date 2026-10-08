@@ -188,7 +188,7 @@ export default function CaseStudiesPage() {
               {/* Gradient header */}
               <div className={`bg-gradient-to-br ${cs.color} p-6 text-white`}>
                 <span className="text-3xl mb-3 block">{cs.emoji}</span>
-                <span className="text-xs font-semibold text-white/60 uppercase tracking-widest">{cs.niche}</span>
+                <span className="text-xs font-semibold text-white/85 uppercase tracking-widest">{cs.niche}</span>
                 <h2 className="text-lg font-bold mt-1 leading-snug group-hover:text-coffee-200 transition-colors text-balance">
                   {cs.title}
                 </h2>

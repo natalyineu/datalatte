@@ -85,28 +85,28 @@ export default function ServicePage({
           <div className="bg-black/40 backdrop-blur border border-white/15 rounded-xl px-3 py-2 text-xs text-white flex items-center gap-2 shadow-lg">
             <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse shrink-0" />
             <span className="text-white/70">Free audit</span>
-            <span className="text-green-400 font-bold">48 h turnaround</span>
+            <span className="text-green-300 font-bold">48 h turnaround</span>
           </div>
         </div>
         <div className="absolute right-6 top-24 lg:right-20 lg:top-28 hidden sm:block animate-float-r opacity-90" style={{ animationDelay: "0.8s" }}>
           <div className="bg-black/40 backdrop-blur border border-white/15 rounded-xl px-3 py-2 text-xs text-white flex items-center gap-2 shadow-lg">
             <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse shrink-0" />
             <span className="text-white/70">Month-to-month</span>
-            <span className="text-green-400 font-bold">No lock-in</span>
+            <span className="text-green-300 font-bold">No lock-in</span>
           </div>
         </div>
         <div className="absolute left-12 bottom-16 lg:left-28 hidden lg:block animate-float opacity-75" style={{ animationDelay: "1.5s" }}>
           <div className="bg-black/40 backdrop-blur border border-white/15 rounded-xl px-3 py-2 text-xs text-white flex items-center gap-2 shadow-lg">
             <span className="w-2 h-2 rounded-full bg-coffee-400 animate-pulse shrink-0" />
             <span className="text-white/70">Weekly report</span>
-            <span className="text-coffee-300 font-bold">Every Monday</span>
+            <span className="text-coffee-200 font-bold">Every Monday</span>
           </div>
         </div>
         <div className="absolute right-10 bottom-20 lg:right-24 hidden lg:block animate-float-r opacity-75" style={{ animationDelay: "0.4s" }}>
           <div className="bg-black/40 backdrop-blur border border-white/15 rounded-xl px-3 py-2 text-xs text-white flex items-center gap-2 shadow-lg">
             <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse shrink-0" />
             <span className="text-white/70">Setup</span>
-            <span className="text-blue-400 font-bold">Live in 5 days ✓</span>
+            <span className="text-blue-300 font-bold">Live in 5 days ✓</span>
           </div>
         </div>
 
@@ -116,7 +116,7 @@ export default function ServicePage({
             {service}
           </span>
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 text-balance">{tagline}</h1>
-          <p className="text-white/60 max-w-2xl mx-auto mb-5 leading-relaxed text-lg">{description}</p>
+          <p className="text-white/80 max-w-2xl mx-auto mb-5 leading-relaxed text-lg">{description}</p>
           {/* Monospace flow indicator */}
           <p className="text-white/60 text-xs font-mono mb-10 max-w-2xl mx-auto tracking-wide">
             {howItWorks.map((s, i) => (

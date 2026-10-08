@@ -75,28 +75,28 @@ export default function NichePage({
           <div className="bg-black/50 backdrop-blur border border-white/15 rounded-xl px-3 py-2 text-xs text-white flex items-center gap-2 shadow-lg">
             <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse shrink-0" />
             <span className="text-white/70">New clients</span>
-            <span className="text-green-400 font-bold">↑ 40%</span>
+            <span className="text-green-300 font-bold">↑ 40%</span>
           </div>
         </div>
         <div className="absolute right-6 top-24 lg:right-24 lg:top-28 hidden sm:block animate-float-r opacity-90" style={{ animationDelay: "0.9s" }}>
           <div className="bg-black/50 backdrop-blur border border-white/15 rounded-xl px-3 py-2 text-xs text-white flex items-center gap-2 shadow-lg">
             <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse shrink-0" />
             <span className="text-white/70">Cost per lead</span>
-            <span className="text-green-400 font-bold">↓ 35%</span>
+            <span className="text-green-300 font-bold">↓ 35%</span>
           </div>
         </div>
         <div className="absolute left-10 bottom-16 lg:left-32 hidden lg:block animate-float opacity-75" style={{ animationDelay: "1.6s" }}>
           <div className="bg-black/50 backdrop-blur border border-white/15 rounded-xl px-3 py-2 text-xs text-white flex items-center gap-2 shadow-lg">
             <span className="w-2 h-2 rounded-full bg-coffee-400 animate-pulse shrink-0" />
             <span className="text-white/70">Google Maps</span>
-            <span className="text-coffee-300 font-bold">Top 3 position</span>
+            <span className="text-coffee-200 font-bold">Top 3 position</span>
           </div>
         </div>
         <div className="absolute right-10 bottom-20 lg:right-28 hidden lg:block animate-float-r opacity-75" style={{ animationDelay: "0.5s" }}>
           <div className="bg-black/50 backdrop-blur border border-white/15 rounded-xl px-3 py-2 text-xs text-white flex items-center gap-2 shadow-lg">
             <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse shrink-0" />
             <span className="text-white/70">Weekly report</span>
-            <span className="text-blue-400 font-bold">Every Monday ✓</span>
+            <span className="text-blue-300 font-bold">Every Monday ✓</span>
           </div>
         </div>
 
@@ -248,7 +248,7 @@ export default function NichePage({
               <ScrollReveal key={t.title} delay={i * 0.09} direction="left">
               <div className="flex gap-5">
                 <div className="flex flex-col items-center">
-                  <div className="w-9 h-9 rounded-full bg-coffee-800 border border-coffee-600 text-coffee-300 font-bold text-sm flex items-center justify-center shrink-0">
+                  <div className="w-9 h-9 rounded-full bg-coffee-800 border border-coffee-600 text-coffee-200 font-bold text-sm flex items-center justify-center shrink-0">
                     {i + 1}
                   </div>
                   {i < tactics.length - 1 && <div className="w-px flex-1 bg-coffee-900 my-2" />}
