@@ -293,8 +293,8 @@ export default function BudgetCalculator() {
                     transition={{ duration: 0.35 }}
                     className={`w-full flex flex-col items-center gap-2 p-4 rounded-2xl border-2 transition-all cursor-pointer
                       ${isSelected
-                        ? "border-coffee-600 bg-coffee-50 text-coffee-800 dark:bg-coffee-900/20 dark:text-coffee-200"
-                        : "border-gray-200 hover:border-coffee-300 hover:bg-coffee-50/50 text-gray-700 dark:border-gray-700 dark:text-gray-200"}`}
+                        ? "border-coffee-600 bg-coffee-50 text-coffee-800 dark:bg-coffee-900 dark:border-coffee-400 dark:text-coffee-200"
+                        : "border-gray-200 hover:border-coffee-300 hover:bg-coffee-50/50 text-gray-700 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-coffee-900/60"}`}
                   >
                     <span className="text-3xl">{n.emoji}</span>
                     <span className="text-sm font-medium">{n.label}</span>
@@ -368,8 +368,8 @@ export default function BudgetCalculator() {
               </motion.div>
             </div>
             <div className="flex justify-between text-xs text-gray-400 mt-8">
-              <span>$1,000</span>
-              <span>$150,000+</span>
+              <span className="text-gray-500 dark:text-gray-400">$1,000</span>
+              <span className="text-gray-500 dark:text-gray-400">$150,000+</span>
             </div>
           </div>
 
@@ -383,7 +383,7 @@ export default function BudgetCalculator() {
                 onClick={() => setRevenue(v)}
                 className={`py-2 px-3 rounded-xl text-xs font-medium border transition-all
                   ${revenue === v
-                    ? "border-coffee-600 bg-coffee-50 text-coffee-700 dark:bg-coffee-900/20 dark:text-coffee-300"
+                    ? "border-coffee-600 bg-coffee-50 text-coffee-700 dark:bg-coffee-900 dark:text-coffee-300"
                     : "border-gray-200 text-gray-500 hover:border-coffee-300 dark:border-gray-700 dark:text-gray-400"}`}
               >
                 {fmt(v)}
@@ -392,7 +392,7 @@ export default function BudgetCalculator() {
           </div>
 
           <div className="flex gap-3">
-            <button onClick={() => goTo(0)} className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-gray-200 text-gray-600 text-sm hover:bg-gray-50 transition-colors dark:border-gray-700 dark:text-gray-300">
+            <button onClick={() => goTo(0)} className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-gray-200 text-gray-600 text-sm hover:bg-gray-50 transition-colors dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800">
               <ArrowLeft size={14} /> Back
             </button>
             <button onClick={() => goTo(2)} className="flex-1 btn-primary justify-center py-2.5 text-sm group">
@@ -425,12 +425,12 @@ export default function BudgetCalculator() {
                 onClick={() => setStage(s.value)}
                 className={`w-full flex items-center justify-between p-4 rounded-2xl border-2 transition-all text-left
                   ${stage === s.value
-                    ? "border-coffee-600 bg-coffee-50 dark:bg-coffee-900/20"
-                    : "border-gray-200 hover:border-coffee-300 hover:bg-coffee-50/50 dark:border-gray-700"}`}
+                    ? "border-coffee-600 bg-coffee-50 dark:border-coffee-400 dark:bg-coffee-900"
+                    : "border-gray-200 hover:border-coffee-300 hover:bg-coffee-50/50 dark:border-gray-700 dark:hover:bg-coffee-900/60"}`}
               >
                 <div>
                   <p className={`font-semibold ${stage === s.value ? "text-coffee-800 dark:text-coffee-200" : "text-gray-800 dark:text-gray-100"}`}>{s.label}</p>
-                  <p className="text-xs text-gray-500 mt-0.5 dark:text-gray-400">{s.desc}</p>
+                  <p className="text-xs text-gray-500 mt-0.5 dark:text-gray-300">{s.desc}</p>
                 </div>
                 <div className={`text-xs font-bold px-2.5 py-1 rounded-full ${stage === s.value ? "bg-coffee-700 text-white" : "bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400"}`}>
                   ~{Math.round(s.pct * 100)}% of revenue
@@ -440,7 +440,7 @@ export default function BudgetCalculator() {
           </div>
 
           <div className="flex gap-3">
-            <button onClick={() => goTo(1)} className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-gray-200 text-gray-600 text-sm hover:bg-gray-50 transition-colors dark:border-gray-700 dark:text-gray-300">
+            <button onClick={() => goTo(1)} className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-gray-200 text-gray-600 text-sm hover:bg-gray-50 transition-colors dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800">
               <ArrowLeft size={14} /> Back
             </button>
             <button
@@ -477,8 +477,8 @@ export default function BudgetCalculator() {
                 onClick={() => setGoal(g.value)}
                 className={`flex items-start gap-3 p-4 rounded-2xl border-2 transition-all text-left
                   ${goal === g.value
-                    ? "border-coffee-600 bg-coffee-50 dark:bg-coffee-900/20"
-                    : "border-gray-200 hover:border-coffee-300 hover:bg-coffee-50/50 dark:border-gray-700"}`}
+                    ? "border-coffee-600 bg-coffee-50 dark:border-coffee-400 dark:bg-coffee-900"
+                    : "border-gray-200 hover:border-coffee-300 hover:bg-coffee-50/50 dark:border-gray-700 dark:hover:bg-coffee-900/60"}`}
               >
                 <span className="text-2xl leading-none">{g.emoji}</span>
                 <div>
@@ -490,7 +490,7 @@ export default function BudgetCalculator() {
           </div>
 
           <div className="flex gap-3">
-            <button onClick={() => goTo(2)} className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-gray-200 text-gray-600 text-sm hover:bg-gray-50 transition-colors dark:border-gray-700 dark:text-gray-300">
+            <button onClick={() => goTo(2)} className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-gray-200 text-gray-600 text-sm hover:bg-gray-50 transition-colors dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800">
               <ArrowLeft size={14} /> Back
             </button>
             <button
@@ -594,7 +594,7 @@ export default function BudgetCalculator() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="bg-coffee-50 border border-coffee-100 rounded-xl p-4 mb-5 dark:bg-coffee-900/20 dark:border-coffee-800"
+            className="bg-coffee-50 border border-coffee-100 rounded-xl p-4 mb-5 dark:bg-coffee-900 dark:border-coffee-800"
           >
             <p className="text-xs font-semibold text-coffee-700 mb-1 dark:text-coffee-300">☕ Pro tip for {NICHES.find(n => n.value === niche)?.label}s</p>
             <p className="text-xs text-gray-600 leading-relaxed dark:text-gray-300">{nicheTip}</p>
@@ -604,11 +604,11 @@ export default function BudgetCalculator() {
           <div className="flex gap-2 mb-5">
             <button
               onClick={handleCopy}
-              className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-gray-200 text-gray-600 text-sm hover:bg-gray-50 transition-colors dark:border-gray-700 dark:text-gray-300"
+              className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-gray-200 text-gray-600 text-sm hover:bg-gray-50 transition-colors dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
             >
               {copied ? <><Check size={14} className="text-green-500" /> Copied!</> : <><Copy size={14} /> Copy results</>}
             </button>
-            <button onClick={() => goTo(0)} className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-gray-200 text-gray-600 text-sm hover:bg-gray-50 transition-colors dark:border-gray-700 dark:text-gray-300">
+            <button onClick={() => goTo(0)} className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-gray-200 text-gray-600 text-sm hover:bg-gray-50 transition-colors dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800">
               Start over
             </button>
           </div>

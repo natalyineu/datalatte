@@ -337,7 +337,7 @@ export default function NichePage({
                       <li key={href}>
                         <Link
                           href={href}
-                          className="block text-sm text-coffee-700 hover:text-coffee-900 hover:underline py-1 px-2 rounded hover:bg-coffee-50 transition-colors dark:text-coffee-300"
+                          className="block text-sm text-coffee-700 hover:text-coffee-900 hover:underline py-1 px-2 rounded hover:bg-coffee-50 transition-colors dark:text-coffee-300 dark:hover:bg-coffee-900/60"
                         >
                           {label}
                         </Link>
@@ -367,7 +367,7 @@ export default function NichePage({
                 <li key={href}>
                   <Link
                     href={href}
-                    className="block text-sm text-coffee-700 hover:text-coffee-900 hover:underline py-1 px-2 rounded hover:bg-coffee-50 transition-colors dark:text-coffee-300"
+                    className="block text-sm text-coffee-700 hover:text-coffee-900 hover:underline py-1 px-2 rounded hover:bg-coffee-50 transition-colors dark:text-coffee-300 dark:hover:bg-coffee-900/60"
                   >
                     {label}
                   </Link>

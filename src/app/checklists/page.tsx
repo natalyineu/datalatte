@@ -173,7 +173,7 @@ export default function ChecklistsPage() {
                 className={`flex-shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-150 ${
                   activeCategory === cat.value
                     ? "bg-coffee-700 text-white"
-                    : "text-gray-600 hover:bg-gray-100 dark:text-gray-300"
+                    : "text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
                 }`}
               >
                 {cat.label}
@@ -212,7 +212,7 @@ export default function ChecklistsPage() {
           </p>
           <Link
             href="/free-audit"
-            className="inline-flex items-center gap-2 bg-white text-coffee-800 font-bold px-8 py-3.5 rounded-xl hover:bg-coffee-50 transition-colors duration-200 text-base dark:bg-gray-900 dark:text-coffee-200"
+            className="inline-flex items-center gap-2 bg-white text-coffee-800 font-bold px-8 py-3.5 rounded-xl hover:bg-coffee-50 transition-colors duration-200 text-base dark:bg-gray-900 dark:text-coffee-200 dark:hover:bg-coffee-900/60"
           >
             Get a Free Marketing Audit
             <ArrowRight size={16} />

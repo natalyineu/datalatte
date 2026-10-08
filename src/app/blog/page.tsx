@@ -162,7 +162,7 @@ function Pagination({ currentPage, totalPages }: { currentPage: number; totalPag
       {currentPage > 1 ? (
         <Link
           href={pageUrl(currentPage - 1)}
-          className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors dark:text-gray-300"
+          className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors dark:text-gray-300 dark:hover:bg-gray-800"
           aria-label="Previous page"
         >
           <ChevronLeft size={15} /> Prev
@@ -189,7 +189,7 @@ function Pagination({ currentPage, totalPages }: { currentPage: number; totalPag
           <Link
             key={p}
             href={pageUrl(p)}
-            className="w-9 h-9 flex items-center justify-center rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors dark:text-gray-300"
+            className="w-9 h-9 flex items-center justify-center rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors dark:text-gray-300 dark:hover:bg-gray-800"
             aria-label={`Page ${p}`}
           >
             {p}
@@ -201,7 +201,7 @@ function Pagination({ currentPage, totalPages }: { currentPage: number; totalPag
       {currentPage < totalPages ? (
         <Link
           href={pageUrl(currentPage + 1)}
-          className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors dark:text-gray-300"
+          className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors dark:text-gray-300 dark:hover:bg-gray-800"
           aria-label="Next page"
         >
           Next <ChevronRight size={15} />

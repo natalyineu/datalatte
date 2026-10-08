@@ -135,7 +135,7 @@ export default function MarketingBudgetCalculatorPage() {
           </p>
           <Link
             href="/free-audit"
-            className="inline-flex items-center gap-2 bg-white text-coffee-700 font-bold px-6 py-3 rounded-xl hover:bg-coffee-50 transition-colors dark:bg-gray-900 dark:text-coffee-300"
+            className="inline-flex items-center gap-2 bg-white text-coffee-700 font-bold px-6 py-3 rounded-xl hover:bg-coffee-50 transition-colors dark:bg-gray-900 dark:text-coffee-300 dark:hover:bg-coffee-900/60"
           >
             Book my free audit →
           </Link>
@@ -155,7 +155,7 @@ export default function MarketingBudgetCalculatorPage() {
             <Link
               key={n.href}
               href={n.href}
-              className="flex flex-col items-center gap-1 p-4 rounded-2xl border border-gray-100 hover:border-coffee-200 hover:bg-coffee-50 transition-colors text-center dark:border-gray-700"
+              className="flex flex-col items-center gap-1 p-4 rounded-2xl border border-gray-100 hover:border-coffee-200 hover:bg-coffee-50 transition-colors text-center dark:border-gray-700 dark:hover:bg-coffee-900/60"
             >
               <span className="text-2xl">{n.emoji}</span>
               <span className="text-xs font-medium text-gray-700 dark:text-gray-200">{n.label}</span>

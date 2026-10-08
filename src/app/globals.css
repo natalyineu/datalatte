@@ -279,6 +279,12 @@
   background-size: 200% 200%;
   animation: shimmer 8s ease infinite;
 }
+@media (prefers-color-scheme: dark) {
+  .hero-shimmer {
+    background: linear-gradient(135deg, #1a1210 0%, #241811 40%, #1a1210 100%);
+    background-size: 200% 200%;
+  }
+}
 @keyframes shimmer {
   0%   { background-position: 0% 50%; }
   50%  { background-position: 100% 50%; }

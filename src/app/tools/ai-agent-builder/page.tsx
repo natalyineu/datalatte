@@ -41,7 +41,7 @@ const AGENT_TYPES = [
     name: "Customer Reply Agent",
     description: "Answers FAQs, handles booking enquiries, and follows up with leads automatically.",
     tags: ["24/7 support", "lead follow-up", "FAQ handling"],
-    color: "from-coffee-100 to-coffee-50",
+    color: "from-coffee-100 to-coffee-50 dark:from-coffee-900 dark:to-gray-900",
     border: "border-coffee-200 dark:border-coffee-800",
   },
   {
@@ -49,7 +49,7 @@ const AGENT_TYPES = [
     name: "Social Media Agent",
     description: "Creates and schedules posts across Instagram, Facebook, and Google Business Profile.",
     tags: ["content creation", "scheduling", "multi-platform"],
-    color: "from-amber-50 to-orange-50",
+    color: "from-amber-50 to-orange-50 dark:from-gray-900 dark:to-coffee-900",
     border: "border-amber-200 dark:border-amber-800",
   },
   {
@@ -57,7 +57,7 @@ const AGENT_TYPES = [
     name: "Email Marketing Agent",
     description: "Writes campaigns, segments your audience, and sends follow-up sequences.",
     tags: ["email campaigns", "segmentation", "automation"],
-    color: "from-coffee-100 to-coffee-50",
+    color: "from-coffee-100 to-coffee-50 dark:from-coffee-900 dark:to-gray-900",
     border: "border-coffee-200 dark:border-coffee-800",
   },
   {
@@ -65,7 +65,7 @@ const AGENT_TYPES = [
     name: "Reporting Agent",
     description: "Pulls data from Google Ads, Meta, and Analytics — gives you a plain-English weekly summary.",
     tags: ["weekly reports", "ad performance", "insights"],
-    color: "from-amber-50 to-orange-50",
+    color: "from-amber-50 to-orange-50 dark:from-gray-900 dark:to-coffee-900",
     border: "border-amber-200 dark:border-amber-800",
   },
   {
@@ -73,7 +73,7 @@ const AGENT_TYPES = [
     name: "SEO & Content Agent",
     description: "Researches keywords, writes blog posts, and updates your Google Business Profile.",
     tags: ["blog writing", "keyword research", "GBP updates"],
-    color: "from-coffee-100 to-coffee-50",
+    color: "from-coffee-100 to-coffee-50 dark:from-coffee-900 dark:to-gray-900",
     border: "border-coffee-200 dark:border-coffee-800",
   },
   {
@@ -81,7 +81,7 @@ const AGENT_TYPES = [
     name: "Review & Reputation Agent",
     description: "Monitors new reviews, drafts responses, and alerts you to negative feedback instantly.",
     tags: ["review responses", "reputation", "alerts"],
-    color: "from-amber-50 to-orange-50",
+    color: "from-amber-50 to-orange-50 dark:from-gray-900 dark:to-coffee-900",
     border: "border-amber-200 dark:border-amber-800",
   },
 ];
@@ -117,7 +117,7 @@ export default function AIAgentBuilderPage() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/free-audit"
-              className="inline-block bg-white text-coffee-700 font-bold px-8 py-3.5 rounded-xl hover:bg-coffee-50 transition-colors dark:bg-gray-900 dark:text-coffee-300"
+              className="inline-block bg-white text-coffee-700 font-bold px-8 py-3.5 rounded-xl hover:bg-coffee-50 transition-colors dark:bg-gray-900 dark:text-coffee-300 dark:hover:bg-coffee-900/60"
             >
               Get early access →
             </Link>

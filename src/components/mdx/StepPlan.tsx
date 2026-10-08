@@ -63,7 +63,7 @@ export default function StepPlan({ steps: stepsProp, title }: StepPlanProps) {
               {/* Step header — clickable */}
               <button
                 onClick={() => toggle(i)}
-                className="w-full flex items-center gap-4 px-6 py-4 text-left hover:bg-coffee-50 transition-colors"
+                className="w-full flex items-center gap-4 px-6 py-4 text-left hover:bg-coffee-50 transition-colors dark:hover:bg-coffee-900/60"
               >
                 {/* Step number / done indicator */}
                 <div
@@ -126,7 +126,7 @@ export default function StepPlan({ steps: stepsProp, title }: StepPlanProps) {
                       onClick={(e) => markDone(e, i)}
                       className={`mt-4 text-xs font-medium px-4 py-2 rounded-full transition-colors ${
                         isDone
-                          ? "bg-gray-100 text-gray-500 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400"
+                          ? "bg-gray-100 text-gray-500 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-800"
                           : "bg-coffee-700 text-white hover:bg-coffee-800"
                       }`}
                     >

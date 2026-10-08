@@ -46,14 +46,14 @@ export default function BarChart({
                   <span className={`text-sm font-medium truncate ${isHighlight ? "text-coffee-800 dark:text-coffee-200" : "text-gray-700 dark:text-gray-200"}`}>
                     {label}
                   </span>
-                  {sub && <span className="text-xs text-gray-500 shrink-0 dark:text-gray-400">{sub}</span>}
+                  {sub && <span className="text-xs text-gray-500 shrink-0 dark:text-gray-500 dark:text-gray-400">{sub}</span>}
                   {isHighlight && (
                     <span className="shrink-0 text-[10px] bg-coffee-100 text-coffee-700 font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wide dark:bg-coffee-900/30 dark:text-coffee-300">
                       Best
                     </span>
                   )}
                 </div>
-                <span className={`text-sm font-bold tabular-nums shrink-0 ml-3 ${isHighlight ? "text-coffee-700 dark:text-coffee-300" : "text-gray-500 dark:text-gray-400"}`}>
+                <span className={`text-sm font-bold tabular-nums shrink-0 ml-3 ${isHighlight ? "text-coffee-700 dark:text-coffee-300" : "text-gray-500 dark:text-gray-500 dark:text-gray-400"}`}>
                   {(() => {
                     const u = unitsArr[i] !== undefined ? unitsArr[i] : unit;
                     if (u === "%") return `${val}%`;
@@ -78,7 +78,7 @@ export default function BarChart({
           );
         })}
       </div>
-      <p className="px-5 pb-4 text-xs text-gray-400">{caption ?? "Illustrative estimate. Actual results vary by market and business."}</p>
+      <p className="px-5 pb-4 text-xs text-gray-500 dark:text-gray-400">{caption ?? "Illustrative estimate. Actual results vary by market and business."}</p>
     </div>
   );
 }

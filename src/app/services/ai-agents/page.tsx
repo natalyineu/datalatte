@@ -338,7 +338,7 @@ export default function AIAgentsPage() {
           <p className="text-xl text-white/70 mb-4 max-w-2xl mx-auto">
             Real LLM pipelines — not chatbot toys. Built on OpenAI function calling, Claude, n8n, and Twilio — integrated into your booking system, CRM, and Google Business Profile.
           </p>
-          <p className="text-white/45 text-sm font-mono mb-10 max-w-xl mx-auto">
+          <p className="text-white/60 text-sm font-mono mb-10 max-w-xl mx-auto">
             trigger → classify → LLM call → structured action → human escalation path
           </p>
           <div className="flex flex-wrap justify-center gap-3">

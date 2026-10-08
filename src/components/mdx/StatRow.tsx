@@ -10,7 +10,7 @@ interface StatRowProps {
 const TREND = {
   up:      { icon: "↑", cls: "text-green-600" },
   down:    { icon: "↓", cls: "text-red-500"   },
-  neutral: { icon: "→", cls: "text-gray-400"  },
+  neutral: { icon: "→", cls: "text-gray-500 dark:text-gray-400"  },
 } as const;
 
 export default function StatRow({ title, values, labels, subs = "", trends = "", source }: StatRowProps) {
@@ -28,7 +28,7 @@ export default function StatRow({ title, values, labels, subs = "", trends = "",
 
   return (
     <div className="my-8">
-      {title && <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-3">{title}</p>}
+      {title && <p className="text-xs font-semibold text-gray-500 dark:text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-3">{title}</p>}
       <div className={`grid gap-3 ${cols}`}>
         {valArr.map((val, i) => {
           const trend = trendArr[i] as keyof typeof TREND | "";
@@ -51,7 +51,7 @@ export default function StatRow({ title, values, labels, subs = "", trends = "",
           );
         })}
       </div>
-      <p className="mt-2 text-[11px] text-gray-500 dark:text-gray-400 text-right">{source ? `Source: ${source}` : "Estimates for illustration; actual numbers vary."}</p>
+      <p className="mt-2 text-[11px] text-gray-500 dark:text-gray-500 dark:text-gray-400 text-right">{source ? `Source: ${source}` : "Estimates for illustration; actual numbers vary."}</p>
     </div>
   );
 }

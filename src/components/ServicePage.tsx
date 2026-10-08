@@ -118,7 +118,7 @@ export default function ServicePage({
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 text-balance">{tagline}</h1>
           <p className="text-white/60 max-w-2xl mx-auto mb-5 leading-relaxed text-lg">{description}</p>
           {/* Monospace flow indicator */}
-          <p className="text-white/35 text-xs font-mono mb-10 max-w-2xl mx-auto tracking-wide">
+          <p className="text-white/60 text-xs font-mono mb-10 max-w-2xl mx-auto tracking-wide">
             {howItWorks.map((s, i) => (
               <span key={s.step}>
                 {s.title}

@@ -269,7 +269,7 @@ export default function PricingPage() {
 
               <Link
                 href="/free-audit"
-                className={`w-full text-center font-bold py-3 px-6 rounded-xl transition-all ${tier.highlight ? "bg-coffee-700 hover:bg-coffee-600 text-white" : "bg-coffee-100 hover:bg-coffee-200 text-coffee-800 dark:bg-coffee-900/30 dark:text-coffee-200"}`}
+                className={`w-full text-center font-bold py-3 px-6 rounded-xl transition-all ${tier.highlight ? "bg-coffee-700 hover:bg-coffee-600 text-white" : "bg-coffee-100 hover:bg-coffee-200 text-coffee-800 dark:bg-coffee-900/30 dark:text-coffee-200 dark:hover:bg-coffee-900/60"}`}
               >
                 {tier.cta} — free audit first
               </Link>

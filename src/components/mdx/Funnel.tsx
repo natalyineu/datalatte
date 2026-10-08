@@ -25,7 +25,7 @@ export default function Funnel({ title, caption, stages, stepLabels, values = ""
   return (
     <div className="my-8">
       {title && (
-        <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-4 text-center dark:text-gray-400">{title}</p>
+        <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-4 text-center dark:text-gray-500 dark:text-gray-400">{title}</p>
       )}
       <div className="flex flex-col items-center gap-0">
         {stageArr.map((stage, i) => {
@@ -55,7 +55,7 @@ export default function Funnel({ title, caption, stages, stepLabels, values = ""
           );
         })}
       </div>
-      <p className="text-xs text-gray-500 text-center mt-3 dark:text-gray-400">{caption ?? "Illustrative estimate. Actual results vary by market and business."}</p>
+      <p className="text-xs text-gray-500 text-center mt-3 dark:text-gray-500 dark:text-gray-400">{caption ?? "Illustrative estimate. Actual results vary by market and business."}</p>
     </div>
   );
 }

@@ -113,7 +113,7 @@ export default function LineChart({
           })}
         </svg>
       </div>
-      <p className="px-5 pb-4 text-xs text-gray-400">{caption ?? "Illustrative estimate. Actual results vary by market and business."}</p>
+      <p className="px-5 pb-4 text-xs text-gray-500 dark:text-gray-400">{caption ?? "Illustrative estimate. Actual results vary by market and business."}</p>
     </div>
   );
 }

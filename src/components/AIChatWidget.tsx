@@ -128,7 +128,7 @@ function CtaButtons({ cta }: { cta: string | null | undefined }) {
           className={`flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-all group
             ${btn.primary
               ? "bg-coffee-700 hover:bg-coffee-800 text-white"
-              : "bg-white border border-gray-200 hover:border-coffee-300 hover:bg-coffee-50 text-gray-700 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-200"
+              : "bg-white border border-gray-200 hover:border-coffee-300 hover:bg-coffee-50 text-gray-700 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-coffee-900/60"
             }`}
         >
           <span>{btn.label}</span>
@@ -413,7 +413,7 @@ export default function AIChatWidget() {
                     <button
                       key={s.label}
                       onClick={() => send(s.msg)}
-                      className="text-left text-xs bg-gray-50 hover:bg-coffee-50 border border-gray-100 hover:border-coffee-200 text-gray-600 hover:text-coffee-700 rounded-xl px-2.5 py-2 transition-all leading-tight dark:bg-gray-800/60 dark:border-gray-700 dark:text-gray-300"
+                      className="text-left text-xs bg-gray-50 hover:bg-coffee-50 border border-gray-100 hover:border-coffee-200 text-gray-600 hover:text-coffee-700 rounded-xl px-2.5 py-2 transition-all leading-tight dark:bg-gray-800/60 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-coffee-900/60"
                     >
                       {s.label}
                     </button>

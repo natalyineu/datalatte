@@ -16,7 +16,7 @@ const allow = (() => { try { return JSON.parse(fs.readFileSync(new URL("./allowl
 const xml = await (await fetch(`${BASE}/sitemap.xml`)).text();
 const all = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => new URL(m[1]).pathname);
 const pick = (re, n) => all.filter((p) => re.test(p)).sort(() => 0.5 - Math.random()).slice(0, n);
-const pages = [...new Set(["/", ...all.filter((p) => !p.startsWith("/blog/") && !p.startsWith("/radar/") && !/^\/(for|checklists)\/[^/]+\/[^/]+/.test(p)), ...pick(/^\/blog\//, 12), ...pick(/^\/for\/[^/]+\/[^/]+/, 4), ...pick(/^\/checklists\/[^/]+/, 4)])].slice(0, 70);
+const pages = [...new Set(["/", ...all.filter((p) => !p.startsWith("/blog/") && !p.startsWith("/radar/") && !/^\/(for|checklists)\/[^/]+\/[^/]+/.test(p)), ...pick(/^\/blog\//, 12), ...pick(/^\/for\/[^/]+\/[^/]+/, 4), ...pick(/^\/checklists\/[^/]+/, 4)])].slice(0, +(process.env.MAX_PAGES || 70));
 
 const browser = await chromium.launch(EXE ? { executablePath: EXE } : {});
 const problems = [];
@@ -38,17 +38,18 @@ for (const scheme of ["light", "dark"]) {
         const num = (c) => (c.match(/[\d.]+/g) || [0, 0, 0, 1]).map(Number);
         const lum = ([r, g, b]) => { const f = (v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }; return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b); };
         const dark = matchMedia("(prefers-color-scheme: dark)").matches;
-        const bgOf = (el) => { const stack = []; for (let e = el; e; e = e.parentElement) { const c = getComputedStyle(e); if (c.backgroundImage && c.backgroundImage !== "none") return null; const [r, g, b, a = 1] = num(c.backgroundColor); if (a > 0) { stack.push([r, g, b, a]); if (a >= 1) break; } } let [r, g, b] = dark ? [10, 10, 10] : [255, 255, 255]; if (stack.length && stack[stack.length - 1][3] >= 1) { [r, g, b] = stack.pop(); } for (let i = stack.length - 1; i >= 0; i--) { const [R, G, B, A] = stack[i]; r = R * A + r * (1 - A); g = G * A + g * (1 - A); b = B * A + b * (1 - A); } return [r, g, b]; };
+        const stops = (img) => (img.match(/rgba?\([^)]+\)/g) || []).map((x) => num(x).slice(0, 3)); const bgOf = (el, all) => { const stack = []; for (let e = el; e; e = e.parentElement) { const c = getComputedStyle(e); if (c.backgroundImage && c.backgroundImage !== "none") { if (/gradient/.test(c.backgroundImage) && stops(c.backgroundImage).length && !/url\(/.test(c.backgroundImage)) { return { gradient: stops(c.backgroundImage) }; } return null; } const [r, g, b, a = 1] = num(c.backgroundColor); if (a > 0) { stack.push([r, g, b, a]); if (a >= 1) break; } } let [r, g, b] = dark ? [10, 10, 10] : [255, 255, 255]; if (stack.length && stack[stack.length - 1][3] >= 1) { [r, g, b] = stack.pop(); } for (let i = stack.length - 1; i >= 0; i--) { const [R, G, B, A] = stack[i]; r = R * A + r * (1 - A); g = G * A + g * (1 - A); b = B * A + b * (1 - A); } return [r, g, b]; };
         const seen = new Set(); const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
         while (w.nextNode()) {
           const t = w.currentNode, txt = t.textContent.trim(); if (txt.length < 3) continue;
           const el = t.parentElement; if (!el || el.closest("script,style,noscript,svg,[aria-hidden='true']")) continue;
           const cs = getComputedStyle(el); if (cs.visibility === "hidden" || cs.display === "none") continue;
+          if (cs.webkitTextFillColor === "rgba(0, 0, 0, 0)" || /text/.test(cs.webkitBackgroundClip || cs.backgroundClip || "")) continue; // gradient text
           const rc = el.getBoundingClientRect(); if (rc.width < 2 || rc.height < 2) continue;
           let o = 1; for (let e = el; e; e = e.parentElement) o *= parseFloat(getComputedStyle(e).opacity); if (o < 0.5) continue;
-          const bg = bgOf(el); if (!bg) continue;
-          const [fr, fg, fb, fa = 1] = num(cs.color); const f = [fr * fa + bg[0] * (1 - fa), fg * fa + bg[1] * (1 - fa), fb * fa + bg[2] * (1 - fa)];
-          const L1 = lum(f), L2 = lum(bg); const cr = (Math.max(L1, L2) + 0.05) / (Math.min(L1, L2) + 0.05);
+          const bgr = bgOf(el); if (!bgr) continue;
+          const bgs = bgr.gradient || [bgr]; let cr = 99;
+          for (const bg of bgs) { const [fr, fg, fb, fa = 1] = num(cs.color); const f = [fr * fa + bg[0] * (1 - fa), fg * fa + bg[1] * (1 - fa), fb * fa + bg[2] * (1 - fa)]; const L1 = lum(f), L2 = lum(bg); cr = Math.min(cr, (Math.max(L1, L2) + 0.05) / (Math.min(L1, L2) + 0.05)); }
           if (cr < MIN) { const k = txt.slice(0, 40); if (!seen.has(k)) { seen.add(k); out.bad.push(`${cr.toFixed(2)} "${k}" <${el.tagName.toLowerCase()} class="${String(el.className).slice(0, 70)}">`); } }
         }
         return out;

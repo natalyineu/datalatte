@@ -198,14 +198,14 @@ export default function ChecklistClient({
             <div className="flex gap-2 flex-shrink-0 print:hidden">
               <button
                 onClick={reset}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 text-sm font-medium transition-colors dark:border-gray-700 dark:text-gray-300"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 text-sm font-medium transition-colors dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
               >
                 <RotateCcw size={14} />
                 Reset
               </button>
               <button
                 onClick={handlePrint}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 text-sm font-medium transition-colors dark:border-gray-700 dark:text-gray-300"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 text-sm font-medium transition-colors dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
               >
                 <Printer size={14} />
                 Print
@@ -253,7 +253,7 @@ export default function ChecklistClient({
               </div>
               <Link
                 href="/free-audit"
-                className="flex-shrink-0 inline-flex items-center gap-2 bg-white text-coffee-800 font-bold px-5 py-2.5 rounded-xl hover:bg-coffee-50 transition-colors text-sm dark:bg-gray-900 dark:text-coffee-200"
+                className="flex-shrink-0 inline-flex items-center gap-2 bg-white text-coffee-800 font-bold px-5 py-2.5 rounded-xl hover:bg-coffee-50 transition-colors text-sm dark:bg-gray-900 dark:text-coffee-200 dark:hover:bg-coffee-900/60"
               >
                 Get a Free Audit
                 <ArrowRight size={14} />

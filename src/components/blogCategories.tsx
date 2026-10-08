@@ -80,7 +80,7 @@ export interface GroupConfig {
 export const GROUP_CONFIG: Record<GroupName, GroupConfig> = {
   "Paid Ads": {
     Icon: Target,
-    gradient: "from-amber-400 to-orange-500",
+    gradient: "from-amber-600 to-orange-700",
     chipActive: "bg-orange-600 text-white",
     chipInactive: "bg-orange-50 text-orange-700 border border-orange-200 hover:bg-orange-100 dark:bg-orange-900/30 dark:text-orange-300 dark:border-orange-800",
   },
@@ -88,11 +88,11 @@ export const GROUP_CONFIG: Record<GroupName, GroupConfig> = {
     Icon: Search,
     gradient: "from-coffee-500 to-coffee-700",
     chipActive: "bg-coffee-700 text-white",
-    chipInactive: "bg-coffee-50 text-coffee-700 border border-coffee-200 hover:bg-coffee-100 dark:bg-coffee-900/20 dark:text-coffee-300 dark:border-coffee-800",
+    chipInactive: "bg-coffee-50 text-coffee-700 border border-coffee-200 hover:bg-coffee-100 dark:bg-coffee-900/20 dark:text-coffee-300 dark:border-coffee-800 dark:hover:bg-coffee-900/60",
   },
   "Social": {
     Icon: Share2,
-    gradient: "from-rose-400 to-rose-600",
+    gradient: "from-rose-600 to-rose-700",
     chipActive: "bg-rose-600 text-white",
     chipInactive: "bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100 dark:bg-rose-900/30 dark:text-rose-300 dark:border-rose-800",
   },
@@ -104,7 +104,7 @@ export const GROUP_CONFIG: Record<GroupName, GroupConfig> = {
   },
   "Email & SMS": {
     Icon: Mail,
-    gradient: "from-orange-300 to-amber-500",
+    gradient: "from-orange-600 to-amber-700",
     chipActive: "bg-amber-600 text-white",
     chipInactive: "bg-amber-50 text-amber-700 border border-amber-200 hover:bg-amber-100 dark:bg-amber-900/30 dark:text-amber-300 dark:border-amber-800",
   },
@@ -124,7 +124,7 @@ export const GROUP_CONFIG: Record<GroupName, GroupConfig> = {
     Icon: Compass,
     gradient: "from-gray-500 to-gray-700",
     chipActive: "bg-gray-700 text-white",
-    chipInactive: "bg-gray-50 text-gray-700 border border-gray-200 hover:bg-gray-100 dark:bg-gray-800/60 dark:text-gray-200 dark:border-gray-700",
+    chipInactive: "bg-gray-50 text-gray-700 border border-gray-200 hover:bg-gray-100 dark:bg-gray-800/60 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800",
   },
 };
 

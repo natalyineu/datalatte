@@ -59,11 +59,11 @@ export default function CompareBar({
           return (
             <div key={i}>
               <div className="flex items-center justify-between mb-1.5">
-                <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide dark:text-gray-400">{metric}</span>
+                <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide dark:text-gray-500 dark:text-gray-400">{metric}</span>
               </div>
               {/* left bar */}
               <div className="flex items-center gap-2 mb-1">
-                <span className="text-xs text-gray-500 w-24 truncate text-right dark:text-gray-400">{leftLabel}</span>
+                <span className="text-xs text-gray-500 w-24 truncate text-right dark:text-gray-500 dark:text-gray-400">{leftLabel}</span>
                 <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden dark:bg-gray-800">
                   <div
                     className="h-full rounded-full"
@@ -79,7 +79,7 @@ export default function CompareBar({
               </div>
               {/* right bar */}
               <div className="flex items-center gap-2">
-                <span className="text-xs text-gray-500 w-24 truncate text-right dark:text-gray-400">{rightLabel}</span>
+                <span className="text-xs text-gray-500 w-24 truncate text-right dark:text-gray-500 dark:text-gray-400">{rightLabel}</span>
                 <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden dark:bg-gray-800">
                   <div
                     className="h-full rounded-full"
@@ -97,7 +97,7 @@ export default function CompareBar({
           );
         })}
       </div>
-      <p className="px-5 pb-4 text-xs text-gray-400">{caption ?? "Illustrative estimate. Actual results vary by market and business."}</p>
+      <p className="px-5 pb-4 text-xs text-gray-500 dark:text-gray-400">{caption ?? "Illustrative estimate. Actual results vary by market and business."}</p>
     </div>
   );
 }

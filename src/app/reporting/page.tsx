@@ -286,7 +286,7 @@ export default function ReportingPage() {
             </div>
           </div>
           {BEFORE_AFTER.map((row, i) => (
-            <div key={i} className="grid grid-cols-2 text-sm hover:bg-gray-50 transition-colors">
+            <div key={i} className="grid grid-cols-2 text-sm hover:bg-gray-50 transition-colors dark:hover:bg-gray-800">
               <div className="px-5 py-3.5 text-gray-500 border-r border-gray-100 flex items-start gap-2 dark:border-gray-700 dark:text-gray-400">
                 <X size={13} className="text-red-400 shrink-0 mt-0.5" />
                 {row.before}
@@ -486,7 +486,7 @@ export default function ReportingPage() {
           {/* Metrics */}
           <div className="grid grid-cols-2 sm:grid-cols-4 divide-x divide-y sm:divide-y-0 divide-gray-100">
             {MOCK_METRICS.map((m) => (
-              <div key={m.label} className="p-5 group hover:bg-gray-50 transition-colors">
+              <div key={m.label} className="p-5 group hover:bg-gray-50 transition-colors dark:hover:bg-gray-800">
                 <div className="text-xs text-gray-500 mb-1 dark:text-gray-400">{m.label}</div>
                 <div className="text-2xl font-bold text-gray-900 tabular-nums dark:text-gray-50">{m.value}</div>
                 <div className={`text-xs font-medium mt-1 flex items-center gap-0.5 ${m.positive ? "text-green-600 dark:text-green-300" : "text-red-500"}`}>
@@ -534,7 +534,7 @@ export default function ReportingPage() {
                 </thead>
                 <tbody className="divide-y divide-gray-50">
                   {MOCK_CHANNELS.map((ch) => (
-                    <tr key={ch.name} className="text-gray-700 hover:bg-gray-50 transition-colors dark:text-gray-200">
+                    <tr key={ch.name} className="text-gray-700 hover:bg-gray-50 transition-colors dark:text-gray-200 dark:hover:bg-gray-800">
                       <td className="py-2.5 font-medium text-gray-900 dark:text-gray-50">{ch.name}</td>
                       <td className="py-2.5 text-right tabular-nums">{ch.spend}</td>
                       <td className="py-2.5 text-right tabular-nums font-semibold">{ch.leads}</td>
