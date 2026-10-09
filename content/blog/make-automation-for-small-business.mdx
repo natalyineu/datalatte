@@ -1,132 +1,140 @@
 ---
-title: "Make (Integromat) for Small Businesses: Build Powerful Marketing Automations"
-seoTitle: "Make (Integromat) for Small Business Automation"
+title: "Make.com for Small Businesses: 5 Automations and What They Really Cost in Credits"
+seoTitle: "Make.com for Small Business: Automations and Cost"
 date: "2026-05-21"
-lastModified: "2026-06-02"
-description: "How small businesses use Make (formerly Integromat) to automate leads, bookings, reviews and reporting: scenarios, pricing tiers, setup steps and pitfalls."
+lastModified: "2026-10-08"
+description: "A Make.com lead alert can run on $0 to $12 a month. See five local-business automations, how credits are counted, and the math that decides your plan."
 author: "Nataliia"
 category: "AI & Automation"
 tags: ["ai", "automation", "marketing", "small business"]
 slug: "make-automation-for-small-business"
 image: "https://images.unsplash.com/photo-1483058772813-a6a5a6ca68a4?w=800&q=80&auto=format&fit=crop"
-readTime: '11 min read'
+readTime: '9 min read'
 ---
-Make (formerly Integromat) is a visual automation platform that connects the apps your small business already uses, so that tasks such as saving new leads to a spreadsheet, sending booking follow-ups or alerting you to new reviews happen on their own. It is a good fit if you want more flexibility than simple one-step tools offer and you are willing to spend a few hours learning how it works.
 
-This guide explains how Make works, shows practical automations for local businesses, covers pricing in broad terms and lists the mistakes to avoid.
+Make's free plan gives you 1,000 credits a month. A "new lead to spreadsheet, text me, email them" scenario uses about 4 credits per lead if it starts from a webhook, so 100 leads cost around 400 credits. But set the same scenario to check a spreadsheet every 15 minutes and it burns roughly 2,880 credits a month doing nothing but looking. The tool is cheap. The trigger you choose decides whether it stays cheap.
 
-## How Make works in plain English
+This guide is for local owners in the US, UK, Australia and Canada who want to know what Make (formerly Integromat) does, what it costs on the pricing page today, and which five automations are worth an afternoon. Prices below are in US dollars as shown on Make's pricing page; check it for your currency and any tax.
 
-Make uses **scenarios**. A scenario is a flowchart you build on a canvas:
+## What You Are Actually Paying For
 
-- **Trigger:** the event that starts it, such as "new form submission" or "new row in Google Sheets".
-- **Modules:** steps that do something, such as "create a contact", "send an email" or "add a calendar event".
-- **Routers and filters:** logic that sends data down different paths ("if the enquiry is about weddings, do this").
-- **Data mapping:** you drag values, like a name or email, from one step into the next.
+Make bills in credits. According to Make's [credits help page](https://help.make.com/credits), for non-AI apps one operation equals one credit, and some AI modules use more. Its [operations help page](https://help.make.com/operations) defines an operation as one module run, with non-trigger modules running once per bundle (item) they receive, and a trigger that checks for data counting as one operation per check.
 
-Scenarios can run on a schedule (for example every 15 minutes), on instant webhooks or when something changes in a connected app. Make shows each run's history, which makes it easier to see what went wrong.
+Here is the plan table from [Make's pricing page](https://www.make.com/en/pricing) at the time of writing:
 
-## Make vs Zapier, in short
+| Plan | Price per month | Credits | Shortest schedule | Active scenarios | Log history |
+| --- | --- | --- | --- | --- | --- |
+| Free | $0 | up to 1,000 | 15 minutes | 2 | 7 days |
+| Core | $12 | 10,000 | 1 minute | Unlimited | 30 days |
+| Pro | $21 | 10,000 | 1 minute | Unlimited | 30 days |
+| Teams | $38 | 10,000 | 1 minute | Unlimited | 30 days |
 
-Both tools connect apps. Make tends to give you more control over data and branching at a lower cost per operation, while Zapier is usually quicker to start with and has a very large app library. Our comparison, [Make.com vs Zapier for local business automation](/blog/make-com-vs-zapier-for-local-business-automation), goes into detail. If you want a gentler first step, read about [Zapier for local business](/blog/zapier-for-local-business).
+The page lists 10,000 credits as the base volume for the paid plans and shows larger tiers on a slider without prices. It says annual billing saves "15% or more" but gives no per-plan annual price. Core adds unlimited active scenarios, minute-level scheduling and Make API access; priority execution appears under Pro. For a single-location business, Free or Core is almost always the right place to start.
 
-## Pricing in broad terms
+<Callout type="coffee" title="The Bundle Trap">
+Make's help page gives an example: a trigger returns 10 form responses, followed by three modules. That is 1 operation for the trigger plus 10 for each of the other three, so 31 operations in one run. Anything that loops over a list multiplies your usage. Filter early, and process only what you need.
+</Callout>
 
-Make's pricing is based on **operations** (each module run counts) rather than on the number of automations. As of this writing, there is a free tier with a limited number of operations, and paid plans that start at roughly the price of a few coffees per month and rise with volume. Features such as shorter run intervals, more active scenarios and extended logs differ by plan. Prices and limits change, so check Make's pricing page and estimate your usage first.
+## Five Automations Worth Building
 
-How to estimate: count how many times a scenario will run per month and how many modules it has. A scenario with five modules that runs 200 times uses about 1,000 operations.
+Each of these is a common pattern, not a promise of results. They work with whatever form, booking and email tools you already use.
 
-## Six automations that suit local businesses
+### 1. New enquiry: save it, alert you, thank them
 
-### 1. New enquiry to CRM and instant alert
+Trigger: a webhook from your website form (Make's Custom webhook module gives you a URL to paste into the form tool). Steps: add a row to Google Sheets, send yourself an email or Slack message, send the lead an acknowledgement ("We got your message and will reply within one working day"). That is 4 operations per lead.
 
-Trigger: a contact form, Facebook lead ad or Instagram DM tool submits a new lead.
-Steps: add the lead to a Google Sheet or CRM such as HubSpot (free tier), send yourself a text or Slack message, and email the lead a confirmation.
-Why it helps: speed matters with enquiries. Responding in minutes rather than hours generally improves your chances of winning the booking.
+Why it matters: people who enquire usually contact several businesses. Replying in minutes is a habit you can build, and the alert is what builds it.
 
-### 2. Booking confirmation and reminder flow
+### 2. Booking confirmation and reminder
 
-Trigger: a new booking in Calendly, Acuity, Square Appointments or Google Calendar.
-Steps: send a confirmation, schedule a reminder email or SMS (through Twilio, for example) and add a "how was your visit?" message after the appointment.
-Why it helps: reminders reduce no-shows, and follow-ups encourage rebooking and reviews. See [reducing no-shows](/blog/reduce-no-shows-appointment-business).
+Trigger: a new booking in Calendly, Acuity, Square Appointments or Google Calendar. Steps: send a confirmation, schedule a reminder, send a "how was your visit?" message with your review link. For the reasoning behind reminders, see our guide to [reducing no-shows](/blog/reduce-no-shows-appointment-business).
 
-### 3. Review alert and reply drafting
+### 3. Review alert with a drafted reply
 
-Trigger: a new Google review (through a connector or review-management tool).
-Steps: post the review into Slack or email, optionally send it to an AI model to draft a reply, and save the draft for a human to edit and publish.
-Why it helps: you never miss a review. Keep a human in the loop for sending replies.
+Trigger: a new Google review arriving via a review tool or connector you already use. Steps: post it to Slack or email, optionally send the text to an AI module to draft a reply, save the draft for you to edit. A human sends the reply. Never auto-publish AI replies to a complaint.
 
-### 4. Weekly marketing report
+### 4. Weekly numbers email
 
-Trigger: a schedule, such as Monday morning.
-Steps: pull numbers from Google Analytics, Google Ads or Meta Ads, add them to a Google Sheet and send yourself a summary email.
-Why it helps: you check performance consistently without logging into several dashboards.
+Trigger: a schedule, Monday 8 a.m. Steps: pull last week's figures from Google Analytics, Google Ads or Meta Ads into a sheet, then email yourself a summary. This one runs about once a week, so it uses almost no credits, but it saves you logging into three dashboards.
 
-### 5. Social content pipeline
+### 5. New customer to email list (with consent)
 
-Trigger: a new row in a content-calendar sheet marked "approved".
-Steps: post to Facebook Pages or Instagram through supported connectors, or send to a scheduler such as Buffer, then mark the row as published.
-Why it helps: planning stays in one place, and publishing is consistent. Check each platform's current API rules, since they change.
+Trigger: a new customer in your booking or POS system. Steps: add them to Mailchimp, Brevo or similar with a tag for the service they bought, only where they agreed to marketing, and send a welcome email. In the UK, EU, Canada and Australia that means consent; in the US, CAN-SPAM and, for texts, TCPA rules apply. Ask a professional if unsure.
 
-### 6. Email list growth
+For more worked examples, read our [Make.com workflows for local business](/blog/make-com-automation-local-business-workflows) and the [Make.com vs Zapier comparison](/blog/make-com-vs-zapier-for-local-business-automation).
 
-Trigger: a new customer in your booking or POS system.
-Steps: add them to Mailchimp, Brevo or Klaviyo with tags such as service type, only where you have consent, and send a welcome email.
-Why it helps: your list builds itself from real customers.
+## Build the First One: Lead Alert in 8 Steps
 
-For more detailed workflow examples, see [Make.com automation for local business workflows](/blog/make-com-automation-local-business-workflows).
+1. Create a Make account and a new scenario.
+2. Add a **Webhooks > Custom webhook** module and copy its URL.
+3. Paste that URL into your website form's webhook or integration setting.
+4. Submit one test form, then click **Run once** in Make so it learns the field names.
+5. Add **Google Sheets > Add a row** and map name, email, phone, message and a timestamp.
+6. Add an email or Slack module that alerts you with the name and message.
+7. Add a second email module to the lead with the acknowledgement text.
+8. Switch the scenario on, submit another real test, and check the run history the next day.
 
-## Step-by-step: build your first scenario
+Budget two or three hours the first time. Name each module clearly ("Lead to Sheet", "Alert me") so you can read the history later.
 
-We suggest starting with the lead-alert automation, because it is simple and useful.
+## Habits That Prevent Silent Failures
 
-1. **Create an account** and a new scenario.
-2. **Choose the trigger.** If your form tool has a Make connector, select it. Otherwise use a **Custom webhook** and paste the webhook URL into your form's settings.
-3. **Run once** to capture a sample submission so Make can see the fields.
-4. **Add a Google Sheets module** and map name, email, phone and message to columns.
-5. **Add an email or Slack module** to alert you, mapping the name and message into the text.
-6. **Add a second email module** to send the lead an acknowledgement. Keep it honest: "We received your message and will reply within one working day."
-7. **Test** with a real submission and check every step.
-8. **Switch on scheduling** and let it run.
-9. **Check the history** after a few days to confirm there are no errors.
+- **Add error notifications.** A scenario that stops quietly means lost leads. Route errors to an email.
+- **Use instant triggers where you can.** Polling triggers check on a schedule, and Make's help page counts each check as one operation.
+- **Duplicate before editing.** Test changes on a copy of a live scenario.
+- **Send only needed fields.** Fewer fields means less personal data moved between tools.
+- **Write down what each scenario does.** Three lines in a doc, with the owner's name.
 
-Plan on a couple of hours the first time, less for later scenarios.
+## The Math
 
-## Good habits that save you pain
+All volumes below are **assumptions** for a small business. The plan prices and credit rules come from Make's pages above. The polling figure is an inference: Make's help page counts a trigger check as one operation, and the table applies that to every check, including ones that find nothing. Make's page does not address the empty-check case or webhook triggers explicitly, so confirm on your own scenario's history.
 
-- **Name everything.** Give scenarios and modules clear names such as "Lead form to Sheet and Slack".
-- **Add error handling.** Use Make's error-handler routes or notifications so that a failed run does not go unnoticed.
-- **Watch operations.** Looping through large lists can burn your allowance quickly.
-- **Limit data.** Send only the fields you need, especially with personal data.
-- **Document it.** Keep a short note of what each scenario does and who owns it.
-- **Test changes on a copy.** Duplicate a scenario before you edit one that is live.
+| Scenario | Trigger | Runs per month (assumption) | Operations per run | Credits per month |
+| --- | --- | --- | --- | --- |
+| Lead alert | Webhook | 100 leads | 4 (assumed 1 for trigger) | 400 |
+| Lead alert, polling a sheet every 15 min | Schedule | 2,880 checks (96 a day x 30) | 1 per check, plus 3 per new lead | about 3,180 |
+| Booking reminders | Webhook | 200 bookings | 3 | 600 |
+| Weekly report | Schedule | 4 | 6 | 24 |
+| Review alert | Webhook | 20 reviews | 3 | 60 |
 
-## Privacy and consent
+Add up the webhook-based set (lead alert, reminders, weekly report, review alert): 400 + 600 + 24 + 60 = 1,084 credits. That is just over the free allowance, so you would either trim a scenario or move to Core at $12 for 10,000 credits. The polling version of the lead alert alone would exceed the free tier by itself.
 
-If you automate emails or SMS, you must have a lawful basis. That generally means consent in the UK, EU, Canada and Australia, and compliance with CAN-SPAM, TCPA and carrier rules in the US. Include unsubscribe options, and avoid moving customer data into tools you have not vetted. If in doubt, ask a professional.
+What does $12 a month buy? If you value the time at, say, $30 an hour (assumption) and the automations save you 2 hours a month of copying leads and sending reminders by hand, that is $60 of time for $12. If they save 20 minutes, it is break-even. The honest test is whether you will still be using it in three months.
 
-## When Make is not the right tool
+## When Make Is the Wrong Tool
 
-- Your needs are one simple connection: native integrations or Zapier might be quicker.
-- You need heavy custom logic or very high volume: consider a developer-built solution.
-- Nobody on your team has time to maintain it: broken automations can silently fail, so consider a managed service.
+- You need one simple connection, such as form to email: a native integration is quicker.
+- You want AI that reads and decides, not just moves data. See our [n8n AI agent workflow](/blog/n8n-ai-agent-workflow-local-business) or the wider [guide to automating a local business with AI](/blog/how-to-automate-your-local-business-with-ai-complete-guide).
+- Nobody has time to check the run history. Unwatched automations fail silently, and a managed setup may suit you better. For a gentler starting point, read about [Zapier for local business](/blog/zapier-for-local-business).
 
-If you want to go beyond rule-based flows, look at [AI agents for local business](/services/ai-agents), which add language understanding on top of automations.
+## Do This Today
+
+1. Write down the three tasks you repeat most each week (copying leads, sending reminders, checking reviews).
+2. Open [Make's pricing page](https://www.make.com/en/pricing), start a Free account, and note the credit allowance you see.
+3. Build the lead-alert scenario using a webhook, not a polling trigger.
+4. Turn on error notifications, then submit three test enquiries from your phone.
+5. After one week, look at the credits used in your scenario history and compare with the table above. Upgrade only if you are near the limit.
 
 ## FAQ
 
 **Q: Is Make the same as Integromat?**
-A: Yes. Integromat was renamed Make, and the platform has since added features, though the core idea is the same.
+A: Yes. Make is the renamed Integromat. The platform is the same idea: visual scenarios made of modules.
 
 **Q: Is Make free?**
-A: There is a free tier with limited operations, suitable for testing and light use. Heavier use needs a paid plan.
+A: There is a Free plan at $0 with up to 1,000 credits a month, 2 active scenarios and a 15-minute minimum interval, per Make's pricing page.
 
-**Q: Do I need to know how to code?**
-A: No. Most small-business scenarios use drag-and-drop modules. A basic understanding of data fields and webhooks helps, and some advanced steps use simple formulas.
+**Q: Do I need to code?**
+A: No for most small-business scenarios, which are drag-and-drop. Knowing what a field and a webhook are helps.
 
-**Q: Which automation should I build first?**
-A: A new-lead alert that saves the enquiry and notifies you. It is simple, valuable and a good way to learn.
+**Q: Which automation first?**
+A: The lead alert. It is short, useful the same day, and teaches you triggers and field mapping.
 
-## Want us to build it for you?
+**Q: Why did I run out of credits so fast?**
+A: Usually a polling trigger checking too often, or a loop over many items. Each module runs once per item, so lists multiply usage.
 
-If you would prefer a working setup instead of a weekend of learning, our [AI agents and automation service](/services/ai-agents) designs and maintains automations for local businesses. [Get in touch](/contact) and tell us which tasks eat up your week.
+## Sources
+
+- [Make: Pricing](https://www.make.com/en/pricing)
+- [Make Help Center: Credits](https://help.make.com/credits)
+- [Make Help Center: Operations](https://help.make.com/operations)
+
+Want a working setup instead of a weekend of learning? See our [AI agents and automation service](/services/ai-agents) or [contact DataLatte](/contact).
