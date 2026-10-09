@@ -1,149 +1,202 @@
 ---
-title: "Schema Markup for Local Businesses: Get Rich Snippets in Search"
+title: "Add LocalBusiness Schema to Your Site: A Copy-Paste JSON-LD Walkthrough"
 date: "2026-05-12"
-lastModified: "2026-06-02"
-description: "Get rich snippets in search results with schema markup for local businesses. Improve visibility, drive more customers, and increase conversions."
+lastModified: "2026-10-08"
+description: "Add LocalBusiness JSON-LD in about an hour: copy the template, set hours and sameAs, then test it with Google's tools. Only name and address are required."
 author: "Nataliia"
 category: "Local SEO"
 tags: ["schema markup", "local SEO", "rich snippets"]
 slug: "schema-markup-for-local-business"
 image: "https://images.unsplash.com/photo-1686191082931-7a17cf04ace5?w=800&q=80&auto=format&fit=crop"
-readTime: '12 min read'
+readTime: '10 min read'
 ---
 
-Local businesses are missing out on a massive opportunity to stand out in search results. Did you know that 68% of online experiences begin with a search engine, and 61% of those searches result in a visit to a store within 24 hours? Yet, many local businesses are not leveraging schema markup to get rich snippets in search.
+Google's LocalBusiness documentation lists two required properties: `name` and `address`. Everything else, from opening hours to a phone number, is recommended. So the real job is not "learn schema". It is to write one block of JSON-LD that matches your Google Business Profile, put it on one page, and check it with three free tools. This walkthrough does exactly that for a single-location business, start to finish.
 
-<StatRow
-  values="68%|61%|45%|25%"
-  labels="Search experiences starting with a search engine|Visits to a store within 24 hours|Local searches with directions|Local searches with reviews"
-  subs="Source: BrightEdge, Google|Source: BrightEdge, Google|Source: BrightEdge, Google|Source: BrightEdge, Google"
-  trends="up|up|neutral|down"
-/>
+If you want the bigger picture, including why rich snippets are never guaranteed and which schema features Google has retired, read our [guide to LocalBusiness schema and rich snippets](/blog/local-business-schema-markup-rich-snippets-google). This article is the hands-on companion: the file you paste, the edge cases in opening hours, and the testing routine. It is written for owners of cafés, salons, studios and shops in the US, UK, Australia and Canada. Where something is my assumption rather than Google's documented behaviour, I say so.
 
-Schema markup is a type of microdata that helps search engines understand the context and structure of your website's content. By adding schema markup to your website, you can increase your chances of getting rich snippets in search results, which can drive more customers to your business.
+## Before You Write Any Code: Gather Four Things
 
-**Getting Started with Schema Markup**
+Schema describes facts that already exist on your page and your listing. Google's [structured data guidelines](https://developers.google.com/search/docs/appearance/structured-data/sd-policies) say not to "mark up content that is not visible to readers of the page" and that structured data "must be a true representation of the page content." So collect the facts first:
 
-To get started with schema markup, you'll need to choose a schema type that best fits your business. For local businesses, the following schema types are most relevant:
+1. **Exact business name, address and phone number**, copied from your Google Business Profile. Our [NAP consistency guide](/blog/nap-consistency-local-seo) explains why these should match everywhere.
+2. **Opening hours**, including any split shifts and any closed days.
+3. **Social and listing URLs** that genuinely belong to you (Instagram, Facebook, Yelp, your Business Profile).
+4. **Coordinates**, if you want to add `geo`. Google says precision "must be at least 5 decimal places".
 
-* Local Business: This schema type is used for businesses with a physical location, such as coffee shops, salons, and pet groomers.
-* Service Provider: This schema type is used for businesses that offer services, such as fitness studios and dog walkers.
-* Event: This schema type is used for events, such as concerts and workshops.
+Put them in a note. That note is your single source of truth, and the JSON-LD is just the same facts in a machine-readable shape.
 
-Once you've chosen a schema type, you'll need to add the relevant properties to your website's HTML code. This can be done using a schema generator tool or by working with a developer.
+## The Template: A Coffee Shop, Line by Line
 
-**Adding Schema Markup to Your Website**
+Here is a complete block for a made-up café. Every value is a placeholder. I chose `CafeOrCoffeeShop` because Google says to use "the most specific subtype", and [schema.org](https://schema.org/FoodEstablishment) lists CafeOrCoffeeShop under FoodEstablishment, alongside Bakery, BarOrPub, Restaurant and others.
 
-Adding schema markup to your website can be a complex process, but it's essential to get it right. Here are some best practices to keep in mind:
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "CafeOrCoffeeShop",
+  "@id": "https://www.example-cafe.com/#business",
+  "name": "Example Corner Coffee",
+  "url": "https://www.example-cafe.com/",
+  "telephone": "+1-555-010-0199",
+  "priceRange": "$$",
+  "servesCuisine": "Coffee, pastries",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "45 Oak Avenue",
+    "addressLocality": "Springfield",
+    "addressRegion": "IL",
+    "postalCode": "62701",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 39.80123,
+    "longitude": -89.65012
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "07:00",
+      "closes": "17:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Saturday", "Sunday"],
+      "opens": "08:00",
+      "closes": "15:00"
+    }
+  ],
+  "sameAs": [
+    "https://www.instagram.com/example-corner-coffee",
+    "https://www.facebook.com/example-corner-coffee"
+  ]
+}
+```
 
-* Use a schema generator tool to create the schema markup code.
-* Add the schema markup code to the header section of your website's HTML code.
-* Use the correct schema type and properties for your business.
-* Test the schema markup code using tools like Google's Structured Data Testing Tool.
+What each part does:
 
-**Benefits of Schema Markup for Local Businesses**
+- **`@context` and `@type`** tell parsers this is schema.org vocabulary and which kind of thing it is.
+- **`@id`** is an optional label for this entity. Google's guidelines say you can "use `@id` to link related separate items", which becomes useful if you later add other blocks, such as an Article that points back to the business. It does not need to be a live page.
+- **`name`, `address`** are the two required properties. Google's page says to "include as many properties as possible" inside the address.
+- **`telephone`, `url`, `priceRange`, `geo`, `openingHoursSpecification`** are on Google's recommended list.
+- **`servesCuisine`** is a FoodEstablishment property. Delete it if you are not a food business.
+- **`sameAs`** is defined on schema.org as a "URL of a reference Web page that unambiguously indicates the item's identity". Use it for official profiles only. Google's Organization documentation describes it as a page "on another website with additional information about your organization", such as a social media or review profile.
 
-Schema markup can have a significant impact on your local business's online visibility. Here are some benefits to consider:
+One more food-business note. Google's page lists `menu` as the recommended property, while schema.org says `hasMenu` "replaces the older `menu` property". I have not tested how the validators treat each, so if you add a menu link, pick one and see what the tools report.
 
-* Increased visibility in search results: Schema markup can help your business stand out in search results, increasing the chances of getting more customers.
-* Improved click-through rates: Rich snippets can increase click-through rates, driving more traffic to your website.
-* Better local search rankings: Schema markup can help improve your business's local search rankings, making it more visible to customers in your area.
+## Opening Hours: The Part Most People Get Wrong
 
-<BarChart
-  title="Benefits of Schema Markup for Local Businesses"
-  labels="Increased visibility|Improved click-through rates|Better local search rankings"
-  values="75|62|55"
-  unit="%"
-  caption="Illustrative estimate. Actual results vary by market and business."
-  highlights="Increased visibility"
-/>
+Google's LocalBusiness page spells out the rules. Using them, here are the cases a small business actually meets.
 
-**Common Schema Markup Mistakes to Avoid**
+**Weekdays and weekends differ.** Use one `OpeningHoursSpecification` per pattern, as in the template. Google says a single object or an array are both supported, and that `dayOfWeek` accepts short names like "Monday".
 
-While schema markup can be a powerful tool for local businesses, there are some common mistakes to avoid:
+**Open past midnight.** A bar or late-night shop that closes at 3 a.m. on Saturday uses a single specification for that day. Google's example is Saturday 18:00 to 03:00. Schema.org agrees that if `closes` is earlier than `opens`, the hours are assumed to run into the next day.
 
-* Not using the correct schema type and properties for your business.
-* Not testing the schema markup code using tools like Google's Structured Data Testing Tool.
-* Not updating the schema markup code regularly to reflect changes to your business.
+**Open 24 hours.** Google says `opens` "00:00" and `closes` "23:59".
 
-<Callout type="tip">Use a schema generator tool to create the schema markup code and avoid common mistakes.</Callout>
+**Closed all day.** Google says to set both `opens` and `closes` to "00:00".
 
-**Implementing Schema Markup for Your Local Business**
+**Seasonal or holiday closures.** Google says to use `validFrom` and `validThrough` in YYYY-MM-DD format, and to leave them out for year-round hours. Here is how I would mark a one-day closure on Friday, 25 December 2026:
 
-Implementing schema markup for your local business can be a complex process, but it's essential to get it right. Here are some steps to follow:
+```json
+{
+  "@type": "OpeningHoursSpecification",
+  "dayOfWeek": "Friday",
+  "opens": "00:00",
+  "closes": "00:00",
+  "validFrom": "2026-12-25",
+  "validThrough": "2026-12-25"
+}
+```
 
-* Choose a schema type that best fits your business.
-* Add the relevant properties to your website's HTML code using a schema generator tool.
-* Test the schema markup code using tools like Google's Structured Data Testing Tool.
-* Update the schema markup code regularly to reflect changes to your business.
+That is my reading of the rules, not an example Google publishes. Google does not say how it resolves a one-day closure that overlaps your normal Friday hours, so treat this as an assumption, and keep the hours on your Business Profile as the source customers rely on. Remove expired closures after the date passes.
 
-<Callout type="warning">Schema markup is not a one-time task. Regularly update the schema markup code to reflect changes to your business.</Callout>
+**Lunch break or split shift.** Add two specifications for the same days, one for each block. Google does not show a split-shift example, so this is again standard use of the array rather than a documented pattern.
 
-**Frequently Asked Questions**
+## Where to Put It
 
-Q: What is schema markup?
-A: Schema markup is a type of microdata that helps search engines understand the context and structure of your website's content.
+Place the block on the page that describes the business, normally the home page or a contact page, inside a script tag in the `<head>` or `<body>`:
 
-Q: How do I add schema markup to my website?
-A: You can use a schema generator tool or work with a developer to add schema markup to your website.
+```html
+<script type="application/ld+json">
+  { ...your JSON-LD... }
+</script>
+```
 
-Q: What are the benefits of schema markup for local businesses?
-A: Schema markup can increase visibility in search results, improve click-through rates, and better local search rankings.
+Google recommends JSON-LD over Microdata and RDFa, and says all three formats are "equally fine for Google, as long as the markup is valid and properly implemented". For which platform lets you do that, see our companion piece on [schema by page type and CMS](/blog/schema-markup-local-business-website). If you have more than one location, Google says to define each one as its own LocalBusiness, covered in our [multi-location SEO guide](/blog/local-seo-for-multi-location-businesses).
 
-Q: What are some common schema markup mistakes to avoid?
-A: Not using the correct schema type and properties for your business, not testing the schema markup code, and not updating the schema markup code regularly.
+## Validate in Three Steps
 
-Q: How do I implement schema markup for my local business?
-A: Choose a schema type that best fits your business, add the relevant properties to your website's HTML code, test the schema markup code, and update the schema markup code regularly.
+Google's [introduction to structured data](https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data) tells you to check markup with the Rich Results Test during development and to monitor pages with Search Console reports afterward. A routine that covers both:
 
-Q: Can I do schema markup myself?
-A: Yes, you can use a schema generator tool to create the schema markup code and add it to your website.
+1. **Rich Results Test.** Paste your code or live URL. Google's LocalBusiness page says to validate with it and "fix critical errors". Warnings about optional fields can wait.
+2. **Schema Markup Validator** at validator.schema.org. It is a separate tool for general schema.org syntax. It is useful as a second opinion because Google's tools focus on the features Google supports; the URL Inspection documentation notes that unsupported rich result types "may be valid but won't appear in the tool".
+3. **Search Console URL Inspection.** Inspect the live page, then use Test live URL. Google's help page says this fetches the page "in real time", and the Enhancements section lists detected rich results with valid items, warnings and errors. If the page is not indexed yet, you can request indexing, though Google states a request "does not guarantee that the page will appear in the Google Index". The page also gives two timeframes, "a day or so" in one place and "up to a week or two" in another, so budget a couple of weeks before judging.
 
-Q: Do I need to hire a developer to implement schema markup?
-A: No, you can use a schema generator tool to create the schema markup code and add it to your website.
+Also confirm the page is not blocked by robots.txt, `noindex` or a login, since Google's LocalBusiness page lists those as reasons it cannot read your markup.
 
-**Get Started with Schema Markup for Your Local Business**
+In Search Console's rich result status reports, an item is "valid" if it has no critical issues and "can appear on Google as a rich result". That wording is deliberate: eligible is not the same as shown.
 
-If you want to improve your local business's online visibility and drive more customers, consider implementing schema markup on your website. At DataLatte, we can help you implement schema markup and improve your local SEO efforts. Contact us today to schedule a free audit and take the first step towards getting rich snippets in search.
+## What to Leave Out
 
-[Local SEO services](/services/local-seo) can help you improve your online visibility and drive more customers. Contact us today to schedule a free audit and take the first step towards getting rich snippets in search.
+- **Self-written star ratings.** Google's review snippet documentation says pages about an entity that controls its own reviews, using LocalBusiness or other Organization markup, are ineligible for the star review feature. The LocalBusiness page limits `aggregateRating` and `review` to sites that capture reviews about other local businesses.
+- **FAQPage markup for search results.** Google's changelog says the FAQ rich result would stop appearing from May 7, 2026, and that the documentation was removed on June 15, 2026.
+- **Anything not on the page.** If hours or services are not visible to visitors, do not put them in the markup.
 
+## The Math
 
-## Frequently Asked Questions
+This job is cheap, but it is not free. The table uses my assumptions: your time valued at $40 an hour, a freelancer rate of $60 an hour, and 30 minutes per quarter for a recheck. None of these come from a source.
 
-**Q: Do I need to hire a developer to add schema? Or can I use a plugin?**
+| Item | DIY | Freelancer |
+| --- | --- | --- |
+| Gather facts and fill the template | 1 hour | 1 hour of their time |
+| Place on site and test | 1 hour | 1 hour of their time |
+| First-year setup cost | $80 | $120 |
+| Four quarterly rechecks (30 min each) | $80 | $80 (your time) |
+| Total first year | $160 | $200 |
+| Extra customers to break even at $60 gross profit each | 3 | 4 |
 
-For WordPress, use a plugin like Schema Pro or Rank Math. They cost $50-$100/year and handle 90% of what you need. I've used Rank Math with twelve local business clients and it works well. For Squarespace and Wix, you're better off editing the code manually because their built-in schema is basic. If you're on a custom site, hire a developer for one hour. Expect to pay $75-$150. That one hour will save you months of frustration if you try to DIY it.
+Reading it: three extra customers over a year pays for the DIY route, but I cannot point to evidence that schema alone brings them. Google's documentation describes structured data as helping with how results appear, not as a ranking factor. The honest case is lower risk and clean data: fewer wrong hours in front of customers, and a website that agrees with your listing.
 
-**Q: Will schema help me rank higher, or just get rich snippets?**
+## Do This Today
 
-Schema will not directly improve your ranking position. I've had clients ask, "Will I go from page 2 to page 1?" The answer is no. Schema helps Google understand your content, which can indirectly improve click-through rates, which can signal relevance. But the primary benefit is the rich snippet itself—the star rating, the "Book Now" button, the hours displayed directly in search results. That drives more clicks, not higher rankings. Focus on the CTR gain, not the ranking gain.
+1. Copy your exact name, address, phone, hours and social links from your Google Business Profile into a note.
+2. Copy the template above, swap in your values, and choose the most specific schema.org subtype from the [LocalBusiness list](https://schema.org/LocalBusiness). Delete any line you cannot fill truthfully.
+3. Paste the block into your home or contact page, or ask your web person to.
+4. Run the Rich Results Test and the Schema Markup Validator on the live page, fix critical errors, then use URL Inspection in Search Console.
+5. Add a quarterly reminder to compare schema, website and Business Profile, and remove expired holiday closures.
 
-**Q: Can I get penalized for using schema incorrectly?**
+## FAQ
 
-Yes, but not in the way you're fearing. Google gives out manual actions for structured data spam. I've seen it happen when a business marked up their product prices at $10 when they were actually $50—Google caught the mismatch and stripped all their rich snippets. The fix was resubmitting accurate data and filing a reconsideration request. It took three weeks. If you're honest, you're fine. If you try to game the system, you'll get caught.
+**Q: What is the minimum I need for LocalBusiness schema?**
+A: Google's documentation lists `name` and `address` as required. Telephone, URL, hours, geo and price range are recommended.
 
-**Q: My business doesn't have a physical address—I'm a mobile pet groomer. Can I use LocalBusiness schema?**
+**Q: Do I need `sameAs`?**
+A: It is not required. Schema.org defines it as a URL of a reference page that identifies the item, and Google's Organization page names social and review profiles as examples. Only list profiles you actually own.
 
-Use `@type: LocalBusiness` with `@type: PostalAddress` but set `addressRegion` and `addressLocality` to your service area. Do NOT put a fake physical address. Google allows service-area businesses to use schema without a street address. Add `areaServed` with `@type: City` and your city name. This tells Google you're a mobile business serving a specific area, not a storefront.
+**Q: How do I show different hours on weekends?**
+A: Add a second `OpeningHoursSpecification` object for those days, as in the template. Google says a single object or an array are both supported.
 
-**Q: How do I get the "Book Now" button in search results?**
+**Q: Will valid markup give me rich results?**
+A: Not necessarily. Google says it "does not guarantee that features that consume structured data will show up in search results".
 
-You need `potentialAction` with `@type: BookAction`. The `target` must be a URL that allows online booking. Your booking page must have a clear path to book—no dead links, no error pages. I've tested this with Booksy, Square Appointments, and Acuity Scheduling—all worked. Google also requires the booking action to be available on the same device. If your booking page is only desktop-friendly, it won't show up on mobile search.
+**Q: How often should I check it?**
+A: After any change to hours, address, phone or website theme, and at least quarterly. Search Console's reports help you catch breakage after site changes.
 
-**Q: Is schema a one-time setup, or do I need to update it?**
+## Sources
 
-It's not one-time. Every time you change your hours, move locations, add a new service, or update your pricing, update your schema. I had a client in NYC whose bakery schema said they were open until 9 PM, but they changed to 7 PM in winter. Google kept showing 9 PM for three months after the change. Customers showed up at 8:30 PM to a locked door. That's a preventable problem.
+- [Google Search Central: Local business structured data](https://developers.google.com/search/docs/appearance/structured-data/local-business)
+- [Google Search Central: Introduction to structured data](https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data)
+- [Google Search Central: General structured data guidelines](https://developers.google.com/search/docs/appearance/structured-data/sd-policies)
+- [Google Search Central: Review snippet structured data](https://developers.google.com/search/docs/appearance/structured-data/review-snippet)
+- [Google Search Central: Organization structured data](https://developers.google.com/search/docs/appearance/structured-data/organization)
+- [Google Search Central: Search documentation updates](https://developers.google.com/search/updates)
+- [Google Search Console Help: URL Inspection tool](https://support.google.com/webmasters/answer/9012289)
+- [Google Search Console Help: Rich result status reports](https://support.google.com/webmasters/answer/7552505)
+- [Schema.org: OpeningHoursSpecification](https://schema.org/OpeningHoursSpecification)
+- [Schema.org: FoodEstablishment](https://schema.org/FoodEstablishment)
+- [Schema.org: sameAs](https://schema.org/sameAs)
+- [Schema Markup Validator](https://validator.schema.org/)
 
----
-
-Let me tell you something I learned the hard way at GroupM. We had a client spending $2.4 million a year on local search ads across 300 locations. Their schema was a mess—inconsistent, outdated, full of placeholder data copied from the corporate template. We fixed it for one test market, got a 14% lift in organic click-through rate, and the client never authorized the rollout across all locations because the local franchisees didn't want to "waste time on code stuff." That $2.4 million got worse results than it could have, because nobody wanted to touch the schema. Don't let that be you. Schema is a 30-minute fix that pays for itself in the first week.
-
-If you want to know whether your current schema is working—or if you even have any—email me. I'll look at your site and tell you what's missing, no charge. [Book a free consultation](/free-audit)
-
-## Related Articles
-
-- [Boost Your Local SEO with AI-Powered Keyword Research Tools](/blog/ai-boost-local-seo)
-- [Unlocking AI-Driven Local SEO Strategies for Fitness Studios](/blog/ai-driven-local-seo-strategies-for-fitness-studios)
-- [How to Use AI to Optimize Your Google Business Profile in 30 Minutes](/blog/ai-for-google-business-profile-optimization)
-- [The Benefits of AI-Powered Local Listing Management for Small Businesses](/blog/ai-powered-local-listing-management)
+Want the schema, your Business Profile and your website checked against each other? See our [local SEO service](/services/local-seo) or [contact DataLatte](/contact).

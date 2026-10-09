@@ -1,106 +1,165 @@
 ---
-title: "Schema Markup for Local Business Websites: What It Is and How to Add It"
+title: "Schema Markup by Page Type: What to Mark Up on a Local Business Website"
 date: "2026-05-21"
-lastModified: "2026-06-02"
-description: "Add schema markup to your local business website to boost search engine visibility and drive more customers to your door."
+lastModified: "2026-10-08"
+description: "Which schema belongs on which page of a local business site, and how WordPress, Wix and Squarespace handle it. Organization goes on one page, not all."
 author: "Nataliia"
 category: "Website & CRO"
 tags: ["schema markup", "local business website", "search engine visibility", "small business owners"]
 slug: "schema-markup-local-business-website"
 image: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=800&q=80&auto=format&fit=crop"
-readTime: '12 min read'
+readTime: '10 min read'
 ---
 
-**You're losing customers to your competitors because of a simple website feature.**
+A common mistake with schema is pasting the same block on every page of the site. Google's Organization documentation says the opposite: place the markup on your home page or a single page describing your organization, such as an about page, because "you don't need to include it on every page of your site." Different pages have different jobs, and the markup should follow.
 
-Did you know that 72% of users take action on a website immediately after searching for a local business? But, if your website doesn't provide essential information, you risk losing those customers to competitors who do.
+This guide is a page-by-page map for a small local business website, followed by what three common platforms (WordPress, Wix and Squarespace) actually let you do. It assumes you have already seen what LocalBusiness markup looks like; if not, start with our [copy-paste JSON-LD walkthrough](/blog/schema-markup-for-local-business) and the [overview of LocalBusiness schema and rich snippets](/blog/local-business-schema-markup-rich-snippets-google). Here the question is different: which page gets which markup, and how do you add it on the platform you already have.
 
-<StatRow
-  values="72|62|45|30"
-  labels="Users take action on a website|Competitors with schema markup|Local search visibility|Average search engine ranking"
-  subs="immediately after searching for a local business|have implemented schema markup|have improved their local search visibility|have improved their search engine ranking"
-  trends="up|down|neutral|up"
-/>
+A caution that applies throughout. Google's documentation says it "does not guarantee that features that consume structured data will show up in search results", so none of this promises a visual change in search. The goal is accurate labelling, not a trick.
 
-**What is schema markup and why do I need it?**
+## The Page-by-Page Map
 
-Schema markup is a way to provide search engines with additional information about your business, such as name, address, phone number, and hours of operation. This helps search engines understand the structure and content of your website, making it easier for them to display relevant information in search results.
+| Page | What to mark up | What Google says |
+| --- | --- | --- |
+| Home | Organization or LocalBusiness, and WebSite | Organization has no required properties; WebSite needs `name` and `url` and "must be on the home page of the site" |
+| Contact or location page | LocalBusiness, one per location | `name` and `address` required; define each location as its own LocalBusiness |
+| About page | Optional home for Organization details | Organization markup can go on the home page or "a single page describing your organization" |
+| Service pages | Usually nothing extra required | I found no Google feature in the search gallery list I checked that depends on service-page markup (my reading; verify in the gallery) |
+| Blog posts | Article, if you want it | Article appears in the search gallery under News and Sports categories |
+| Any page below the home page | BreadcrumbList | Needs at least two `ListItem` entries; desktop feature |
 
-Schema markup can improve your website's visibility in search results, increase the likelihood of appearing in Google's knowledge panel, and drive more customers to your door.
+Now each one in turn.
 
-**Adding schema markup to your local business website**
+### Home page
 
-Adding schema markup to your website is a relatively simple process that can be done by anyone with basic HTML knowledge. However, for small business owners with limited technical expertise, it's recommended to hire a professional to ensure accuracy and proper implementation.
+This is where the business is introduced, so it is the natural place for your core business block. Two pieces of markup fit here.
 
-Here are the basic steps to add schema markup to your website:
+**Organization or LocalBusiness.** Google's Organization page says no properties are required and recommends adding as many relevant ones as possible, naming `address`, `contactPoint`, `logo`, `name`, `sameAs`, `telephone` and `url` among them. It says `logo` can affect what appears in results and knowledge panels, and the image must be at least 112x112 px, crawlable, indexable and look right on a white background. For a business with a storefront, LocalBusiness is the more specific type, and Google lists only `name` and `address` as required for it.
 
-1. **Choose the right schema markup type**: There are several types of schema markup, including LocalBusiness, Organization, and Person. For local businesses, the most relevant type is LocalBusiness.
-2. **Add schema markup to your website's HTML**: You can add schema markup to your website's HTML using a plugin or a code snippet.
-3. **Verify your schema markup with Google**: Once you've added schema markup to your website, you can verify it with Google using the Google Search Console.
+**WebSite.** Google's site names documentation says the WebSite markup needs `name` and `url`, and must be on the home page. It also says Google "generally tries to use" the preferred name you give, but cannot be forced, and may show something else. A minimal version:
 
-**Benefits of schema markup for local business websites**
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Example Corner Coffee",
+  "url": "https://www.example-cafe.com/"
+}
+```
 
-Adding schema markup to your local business website can have a significant impact on your search engine visibility and customer acquisition.
+If you add both a business block and a WebSite block, Google's guidelines say you can list items as separate blocks and "use `@id` to link related separate items". Give the business an `@id` such as `https://www.example-cafe.com/#business` and reuse that reference in other blocks, so tools see one business rather than several.
 
-Here are some benefits of schema markup for local business websites:
+### Contact or location page
 
-* **Improved local search visibility**: Schema markup can improve your website's visibility in local search results, increasing the likelihood of appearing in Google's map pack.
-* **Increased customer acquisition**: By providing essential information about your business, schema markup can drive more customers to your door.
-* **Better search engine ranking**: Schema markup can improve your website's search engine ranking, making it easier for customers to find you online.
+If you have one location, you can put the full LocalBusiness block on the home page or the contact page. Pick one as the main home for it and keep the details identical wherever else they appear.
 
-<BarChart
-  title="Impact of schema markup on search engine ranking"
-  labels="Local businesses without schema markup|Local businesses with schema markup"
-  values="45|70"
-  unit="% increase in search engine ranking"
-  caption="Illustrative estimate. Actual results vary by market and business."
-  highlights="Local businesses with schema markup"
-/>
+If you have several locations, Google is explicit: "Define each location as its own LocalBusiness type". Give each location its own page with its own address, phone and hours, and its own markup. Do not copy one location's block onto all the pages. Departments follow a naming rule from the same page: include the store name with the department name in the format "[store name] [department name]", unless the department has a distinct brand name. Our guide to [local SEO for multi-location businesses](/blog/local-seo-for-multi-location-businesses) covers the page and listing setup that goes with it.
 
-**Common mistakes to avoid when adding schema markup**
+For businesses that travel to customers, see our note on [service area businesses](/blog/local-seo-for-service-area-businesses). Google's LocalBusiness page marks `address` as required, so if you truly have no public address, check how your markup and your listing line up before publishing anything. I have not found a Google statement on service-area markup without an address, so treat that case as unresolved and ask an expert.
 
-While adding schema markup to your website is a relatively simple process, there are some common mistakes to avoid:
+### Service pages
 
-* **Inconsistent schema markup**: Make sure to use consistent schema markup across all pages of your website.
-* **Incorrect schema markup**: Double-check your schema markup to ensure accuracy and avoid errors.
-* **Lack of schema markup verification**: Verify your schema markup with Google to ensure it's working correctly.
+Our own [services page guide](/blog/website-services-page-examples-local-business) is about writing for customers. For markup, I did not find a Google feature in the search gallery items I reviewed that depends on markup for a service page. That is a limit of what I checked, not a proof, so if you want to describe services in schema, Schema.org has a Service type, but treat it as descriptive labelling and not a route to a special result.
 
-## Related Articles
+What you should not do is add markup that is not visible on the page. Google's guidelines say: "Don't mark up content that is not visible to readers of the page."
 
-- [How to Measure the ROI of Your Local Business Website](/blog/website-roi-local-business)
-- [Designing a Website for Your Hair Salon](/blog/hair-salon-website-design)
-- [Schema Markup for Local Business: How to Get Rich Snippets on Google](/blog/local-business-schema-markup-rich-snippets-google)
-- [Improving Conversion Rates for Pet Groomers through Website Optimization](/blog/pet-groomer-website-cro)
-- [Website Design for Massage Therapists: Make Booking Easy and Relaxing](/blog/website-design-for-massage-therapists)
+### Blog posts
 
-<Callout type="tip">Use a schema markup plugin to simplify the process and ensure accuracy.</Callout>
+The search gallery lists Article, with a description of news, sports and blog articles with larger-than-thumbnail images. If your platform or SEO plugin generates it, check that the author, date and headline match the visible page. Do not spend an afternoon hand-writing Article markup for a small blog unless a developer can template it for every post.
 
-**
+### Breadcrumbs
 
+Google's breadcrumb documentation says the feature is available on desktop, that a `BreadcrumbList` must contain at least two `ListItem` entries, and that for each `ListItem` you supply `item` (the URL) and `name`. The last item in the trail does not need `item`, in which case Google uses the page's own URL. Breadcrumbs only make sense if your site really has a hierarchy, such as Home, Services, Dog Grooming.
 
-## Frequently Asked Questions
+### Two things to leave off every page
 
-**Q: Do I really need schema if my business already shows up on Google Maps?**  
-Yes. Showing up on Google Maps means your Google Business Profile is working. But schema helps you show up in the organic search results with rich snippets—star ratings, hours, price range. That extra information increases click-through rates by 20–30%. Without schema, your snippet is just a blue link. With it, you stand out against competitors.
+- **Self-published review stars.** Google's review snippet documentation says pages whose entity controls its own reviews, using LocalBusiness or other Organization markup, are ineligible for the star review feature, including reviews shown through an embedded third-party widget.
+- **FAQPage for search results.** Google's changelog says the FAQ rich result would no longer appear from May 7, 2026, and that the documentation was removed on June 15, 2026. A visible FAQ for customers is still fine, as this article's own FAQ shows.
 
-**Q: Will schema guarantee I rank #1 in local search?**  
-No. Schema is one of many ranking signals, not a magic bullet. But it’s a signal that costs you nothing once implemented. If you and a competitor have similar reviews, proximity, and GMB optimization, schema can tip the scale. I’ve seen it push businesses from position 4 to position 2 multiple times.
+## How the Big Platforms Handle It
 
-**Q: Is it safe to use a WordPress plugin, or will it break my site?**  
-Plugins like Yoast and Rank Math are safe in the sense they won’t crash your site. But they often generate incomplete or incorrect schema. Always validate the output with Google’s Rich Results Test. If you see errors, override the plugin’s auto-generated schema with a custom JSON-LD block in your theme’s header. I’ve had to do this for 8 out of 10 client sites using plugins.
+Platforms change quickly. Everything below comes from vendor documentation I opened, and the dates of those pages are not always shown, so check the current version before you rely on a menu path.
 
-**Q: If I change my phone number or address, do I need to update schema?**  
-Absolutely. Schema is a live data structure. If you move locations or change your number, update both your Google Business Profile and your schema markup within 24 hours. Otherwise, you’ll have mismatched signals that hurt your ranking. Set a calendar reminder for any business info change.
+### WordPress with Yoast SEO
 
-**Q: How often should I update schema?**  
-Review it at least once per quarter. Also update when you add new services, change hours seasonally, or if you get a new round of reviews (for aggregateRating schema). I recommend adding a 15-minute “schema check” to your monthly SEO to-do list. Use Search Console to spot errors.
+Yoast's developer documentation for its Local SEO add-on describes how it builds on the base schema output. If you define a Primary Location, its properties are merged into the main Organization to extend it into a LocalBusiness. Without a Primary Location, shared properties go on the Organization, except `geo`, `areaServed` and `priceRange`.
 
-**Q: I have multiple locations – what’s the best approach?**  
-Create a separate page for each location with unique LocalBusiness schema. Do not use the same schema on every page—Google expects each location to have its own address, phone, and hours. I helped a pet store chain in Chicago with five locations. We made a separate “Find a Store” page with a list of each, and each store’s schema only appeared on its respective subpage. That took one afternoon and cost $150 in freelance editing time. It doubled their organic local search traffic in three months.
+For multi-location sites, a page for a location that is not the Primary Location gets a separate LocalBusiness piece, and if the site is one business with several locations it carries a `branchOf` property pointing to the main Organization. Yoast also documents shared opening hours for locations of the same company, with a per-location override. So on a single-location site the plugin handles most of the job from settings; on multi-location sites you want to open each location page's output and check it.
 
----
+### WordPress with Rank Math
 
-I spent ten years at agencies watching teams over-engineer SEO strategies while clients ignored the small, high-leverage fixes. Schema markup is one of those fixes. It takes an afternoon, costs nothing but your attention, and pays for itself in weeks. Most small business owners skip it because they think it’s technical. It’s not. It’s just structured data. And it works.
+Rank Math's documentation says multiple locations are available "only in Rank Math PRO". With the option on, locations are created as a custom post type, and per-location LocalBusiness schema is set in the Schema tab using the Schema Generator, then "Save for this Post". The fields include name, business type, address, geo coordinates, phone numbers, opening hours and area served. The article does not show the exact markup output, and recommends the Rich Results Test, which is also what I would do.
 
-If you want me to look at your current setup and tell you exactly what to fix, I’ll do it in a 30-minute call. No fluff, no upsell. Just the specific changes that will move your local ranking.  
-[Book a free consultation](/free-audit)
+One WordPress warning, which is my assumption rather than something these docs state: if your theme and a plugin both print LocalBusiness data, you can end up with two competing blocks. Open the page source or run the Rich Results Test and count them.
+
+### Wix
+
+Wix's help centre says it only accepts structured data as JSON-LD, each markup must be under 7,000 characters, and you can add up to five markups per page. In the Editor the path is Pages & Menu, More Actions next to the page, SEO basics, the Advanced SEO tab, then Structured Data Markup and Add New Markup. Paste the JSON-LD and click Apply.
+
+Wix also says some pages already come with preset markup, naming Wix Stores product pages, Wix Bookings services, Wix Blog posts and Wix Events, which you can customise in SEO Settings. Wix Customer Care "cannot help you with any changes to your markup". Because each markup is capped at 7,000 characters, split a large block, such as a LocalBusiness with many hours, into more than one markup rather than trimming accuracy.
+
+### Squarespace
+
+Squarespace's code injection page says it is available on "Core, Plus, Advanced, and some legacy billing plans". For one page, hover over it in the Pages panel, click the gear icon, open Advanced and use Page Header Code Injection, which adds code to that page's `<head>`. The page warns that custom code "might break your site's appearance or behavior", and that Squarespace's support team "can't help you add custom code to your site or troubleshoot issues".
+
+Third-party sources say Squarespace also generates some structured data of its own that you cannot edit. I could not open Squarespace's own documentation on this, so treat that as unverified, and after adding your block run the Rich Results Test to see whether another LocalBusiness block is already present. Our [Wix vs Squarespace vs WordPress comparison](/blog/wix-vs-squarespace-vs-wordpress-local-business-website) covers the wider trade-offs beyond schema.
+
+## Audit What You Already Have
+
+Before adding anything, find out what your site already outputs. Google's guidelines recommend the Rich Results Test and the URL Inspection tool to catch most technical errors. For each key page: run the live URL, note which types appear, and compare name, address, phone and hours with your Business Profile and with the visible page. If the site shows two LocalBusiness blocks with different details, remove one. Duplicates and mismatches are more likely to cause trouble than missing optional fields.
+
+## The Math
+
+Here is the time cost of doing this by page type for a typical five-page site (home, contact, two services, about). All times and rates are my assumptions, with your time at $40 an hour and a freelancer at $60.
+
+| Task | Time (assumption) | DIY cost | Freelancer cost |
+| --- | --- | --- | --- |
+| Audit current output on 5 pages | 45 min | $30 | $45 |
+| Fix or add home and contact markup | 90 min | $60 | $90 |
+| Add breadcrumbs through plugin or theme setting | 30 min | $20 | $30 |
+| Re-test and note results | 30 min | $20 | $30 |
+| Total | 3 hours 15 min | $130 | $195 |
+
+If one extra customer is worth $60 in gross profit (assumption), that is about 3 customers to cover the freelancer route. Google does not promise rich results, so the realistic return is less duplicate and conflicting data across your site, not a guaranteed lift.
+
+## Do This Today
+
+1. List your site's pages and write beside each one the schema it should have, using the map above. Most small sites need LocalBusiness on one page and nothing special elsewhere.
+2. Run the Rich Results Test on your home page and contact page. Write down every structured data type it finds.
+3. Remove duplicates: if a theme and plugin both output LocalBusiness, switch one off. Remove self-review ratings and FAQPage markup added for rich results.
+4. Add or correct the main business block using your platform's method: plugin settings on WordPress, Structured Data Markup on Wix, or Page Header Code Injection on Squarespace.
+5. Re-test, then check Search Console for new errors after a couple of weeks, and again whenever you change theme, plugins or hours.
+
+## FAQ
+
+**Q: Should the same schema be on every page?**
+A: No. Google's Organization page says you do not need to include it on every page, only the home page or one page describing your organization. Location pages should each carry their own LocalBusiness data.
+
+**Q: Where does WebSite markup go?**
+A: Google says it must be on the home page of the site, with `name` and `url`. Google may still choose a different site name.
+
+**Q: Can I add custom JSON-LD on Wix?**
+A: Yes. Wix accepts JSON-LD only, under 7,000 characters per markup, up to five markups per page, through the page's Advanced SEO tab.
+
+**Q: Does Squarespace allow custom schema?**
+A: Squarespace documents Page Header Code Injection on Core, Plus and Advanced plans, which is where a JSON-LD script can go. It does not provide support for custom code.
+
+**Q: Do I need a plugin?**
+A: Not necessarily. A plugin saves time if it outputs correct data from settings. Verify the output with Google's tools either way, as plugins can be misconfigured or conflict with a theme.
+
+## Sources
+
+- [Google Search Central: Organization structured data](https://developers.google.com/search/docs/appearance/structured-data/organization)
+- [Google Search Central: Local business structured data](https://developers.google.com/search/docs/appearance/structured-data/local-business)
+- [Google Search Central: Site names (WebSite structured data)](https://developers.google.com/search/docs/appearance/site-names)
+- [Google Search Central: Breadcrumb structured data](https://developers.google.com/search/docs/appearance/structured-data/breadcrumb)
+- [Google Search Central: Structured data search gallery](https://developers.google.com/search/docs/appearance/structured-data/search-gallery)
+- [Google Search Central: General structured data guidelines](https://developers.google.com/search/docs/appearance/structured-data/sd-policies)
+- [Google Search Central: Review snippet structured data](https://developers.google.com/search/docs/appearance/structured-data/review-snippet)
+- [Google Search Central: Search documentation updates](https://developers.google.com/search/updates)
+- [Yoast developer docs: Local SEO schema](https://developer.yoast.com/features/schema/plugins/local-seo/)
+- [Rank Math: Multiple locations with schema](https://rankmath.com/kb/multiple-locations/)
+- [Wix Help Center: Adding structured data to your site](https://support.wix.com/en/article/adding-structured-data-to-your-site)
+- [Squarespace Help: Using code injection](https://support.squarespace.com/hc/en-us/articles/205815908-Using-code-injection)
+
+Need your pages mapped and the markup fixed without breaking your theme? See our [website service](/services/website) or [contact DataLatte](/contact).
