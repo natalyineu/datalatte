@@ -1,107 +1,154 @@
 ---
-title: "Website Maintenance for Small Businesses: What It Costs and What You Actually Need"
+title: "Website Maintenance Cost for Small Businesses: What You Pay and What You Can Skip"
 date: "2026-05-21"
-lastModified: "2026-06-02"
-description: "Cut website maintenance costs without sacrificing performance - learn what you need to keep your small business site running smoothly."
+lastModified: "2026-10-08"
+description: "Website maintenance for small business runs $50-$500 a month per GoDaddy's 2026 guide. What that buys, what to skip, and the math on a 6-week broken form."
 author: "Nataliia"
 category: "Website & CRO"
 tags: ["website maintenance", "small business", "cost savings", "website performance"]
 slug: "website-maintenance-cost-small-business"
 image: "https://images.unsplash.com/photo-1485893086445-ed75865251e0?w=800&q=80&auto=format&fit=crop"
-readTime: '13 min read'
+readTime: '10 min read'
 ---
 
-As a small business owner, you know how crucial it is to have a professional website. But once it's built, the work doesn't stop there. Ongoing website maintenance is essential to ensure your site remains secure, fast, and functional. However, with limited budgets and technical expertise, it can be challenging to know what you need and how much it will cost.
+Picture a salon site whose contact form quietly stopped sending emails in March. Nobody notices until May. If that site normally produces 20 enquiries a month, a quarter of them book, and a first booking is worth $60, six silent weeks cost about $450. Those numbers are assumptions, not data, but the shape is real: the expensive part of website maintenance is rarely the hosting bill. It is the thing that breaks while nobody is looking. A maintenance plan is partly insurance against that, and partly a way to avoid paying for features you do not need.
 
+This guide is for owners of cafés, salons, studios and groomers in the US, UK, Australia and Canada. It covers what maintenance actually involves, what published guides say it costs, which of those costs you can drop, a 15-minute weekly routine, and the math to decide between doing it yourself and paying someone. Dollar figures are US-based; for pounds or Australian and Canadian dollars, use local quotes in the same formulas.
 
-## What is Website Maintenance and Why is it Important?
+## What the Published Numbers Say
 
-Website maintenance encompasses a range of tasks, including software updates, security monitoring, backups, and performance optimization. These tasks are crucial to prevent security breaches, ensure website availability, and maintain user experience. For example, a coffee shop in Portland might need to update their website's online ordering system to prevent downtime during peak hours.
+GoDaddy's [website maintenance cost guide](https://www.godaddy.com/resources/skills/website-maintenance-cost) breaks 2026 monthly costs down by site type:
 
+<StatRow
+  values="$5-$75|$50-$500|$300-$1,000|$100-$1,500"
+  labels="Personal site or blog|Small to medium business|E-commerce store|Freelancer retainer"
+  subs="GoDaddy, monthly|GoDaddy, monthly|GoDaddy, monthly|GoDaddy, monthly"
+  trends="neutral|neutral|neutral|neutral"
+/>
 
-<Callout type="tip">Want expert help? DataLatte's [website & landing page services](/services/website) service is built specifically for local small businesses.</Callout>
+The same page prices the do-it-yourself components: shared hosting $5 to $15 a month, security tools $5 to $50 or more, automated backups $0 to $20 or more, and uptime monitoring $0 to $30 or more. Freelancer hourly rates are listed at $50 to $150 or more.
 
-## How Much Does Website Maintenance Cost for Small Businesses?
+A second source, [UENI's 2026 maintenance cost article](https://ueni.com/blog/website-maintenance-cost/), cites that GoDaddy guide and agrees that most small business sites land at $50 to $500 a month. UENI sells done-for-you websites, so treat its comparisons as marketing. Its useful contribution is the list of five recurring jobs behind any maintenance bill: hosting with SSL, domain and email, software updates, security and backups, and content edits. When you compare quotes, check which of those five each one covers.
 
-The cost of website maintenance for small businesses varies widely, depending on the scope of services and the size of the website. On average, you can expect to pay between $50 to $500 per month for basic maintenance tasks. However, if you require more extensive services, such as custom development or ongoing SEO, costs can range from $1,000 to $5,000 or more per year.
+What to take from this:
 
-## What are the Essential Website Maintenance Tasks for Small Businesses?
+- If your site is a simple brochure for a local shop, the realistic range is the low end: tens of dollars, not hundreds.
+- If you take bookings, sell online or run custom features, you are in the upper bands, because more moving parts means more that can break.
+- Published ranges are vendor content. Treat them as ballpark, and ask for a written scope.
 
-To keep your website running smoothly, focus on the following essential tasks:
-* Regular software updates and security patches
-* Backup and disaster recovery
-* Performance optimization and monitoring
-* Content updates and SEO
+## Where the Risk Actually Is
 
-<Callout type="tip">Consider allocating 10% to 20% of your website development budget for ongoing maintenance.</Callout>
+Maintenance sounds abstract until you see where sites fail. Patchstack's [State of WordPress Security in 2026](https://patchstack.com/whitepaper/state-of-wordpress-security-in-2026/) reports 11,334 new vulnerabilities in the WordPress ecosystem in 2025, up 42% on 2024. About 91% were in plugins and 9% in themes, with only 6 in WordPress core. It also reports that 46% had no developer fix at the time of public disclosure, and that for heavily exploited flaws the median time to first exploitation was 5 hours.
 
-## How to Choose the Right Website Maintenance Services for Your Small Business
+For a small business, three practical points follow:
 
-When selecting a website maintenance service provider, consider the following factors:
-* Experience working with small businesses in your industry
-* Range of services offered
-* Pricing and scalability
-* Communication and support
+1. **Plugins are the risk, not WordPress itself.** Every plugin you add is something to update and something that can be abandoned. A simple site with five plugins is cheaper to keep safe than one with thirty.
+2. **Updates matter more on WordPress than anywhere else.** The WordPress developer docs on [upgrading](https://developer.wordpress.org/advanced-administration/upgrade/upgrading/) state that existing sites receive minor core updates automatically by default, that major releases are not automatic for existing sites, and that plugins and themes update automatically only in special cases such as critical security fixes. In plain terms, someone has to look at your plugins.
+3. **Back up before you update.** The same docs recommend a backup of your database and files before upgrading, and checking that the backup is usable.
 
+The security of a hosted builder works differently. [Squarespace's pricing page](https://www.squarespace.com/pricing) states that all plans include managed cloud hosting and free SSL certificates, and [Wix's plans page](https://www.wix.com/plans) lists hosting on every plan. Neither page describes plugin patching, because you do not manage plugins in the same way. That removes one category of work. It does not remove content, forms and accuracy.
 
-## How to Save on Website Maintenance Costs Without Sacrificing Performance
+## What You Actually Need (and What You Can Skip)
 
-To save on website maintenance costs, consider the following strategies:
-* Prioritize essential tasks and delegate responsibilities
-* Use website maintenance platforms and tools
-* Negotiate with service providers for discounts
+**Essential**
+- **HTTPS.** Most hosts include it, and [Let's Encrypt](https://letsencrypt.org/about/) offers certificates at no cost, run by a nonprofit. If a host charges extra for a basic certificate, look elsewhere. Our guide to [SSL and HTTPS](/blog/website-ssl-https-why-it-matters) explains setup.
+- **Backups you have tested.** Automated, stored off the server, and restored at least once as a drill.
+- **Updates.** Core, theme and plugin updates on WordPress. For builders, check that your integrations (booking, forms, embeds) still work.
+- **Uptime monitoring.** Free tools exist. You want an email within minutes if the site is down.
+- **A form and booking test.** See below.
 
-<Callout type="warning">Be cautious of extremely low-cost website maintenance services, as they may not provide adequate security and performance.</Callout>
+**Nice to have**
+- Monthly speed check. Our [website speed guide](/blog/website-speed-optimization-small-business) and [Core Web Vitals article](/blog/core-web-vitals-local-business-website) explain what matters.
+- Content refresh: opening hours, prices, photos, offers. An expired "Christmas special" on a July homepage looks careless.
 
-## Real-World Example: Website Maintenance for a Pet Grooming Business
+**Often skippable at small scale**
+- Daily malware scans on top of a good host's protection, if you run few plugins.
+- Premium page builders and add-ons you do not use.
+- Monthly SEO retainers bundled into a maintenance plan. SEO is a separate decision; see our [local SEO](/services/local-seo) service.
 
-A pet grooming business in New York City might pay around $300 per month for basic website maintenance, including software updates, backups, and performance monitoring. However, if they require custom development for their online booking system, costs could increase to $1,500 per year.
+## The 15-Minute Weekly Routine
 
-## Related Articles
+Do this every Monday and put it in the calendar:
 
-- [Call Tracking for Local Businesses: Know Which Ads Drive Phone Calls](/blog/call-tracking-for-local-business)
-- [DIY Website vs Hiring a Developer: What Small Businesses Get Wrong](/blog/diy-website-vs-professional-developer)
-- [Framer for Small Business Websites: Fast, Beautiful, and Worth It?](/blog/framer-website-builder-small-business)
-- [Google Analytics 4 for Small Businesses: Track What Actually Matters](/blog/google-analytics-4-for-small-business)
+1. Submit your own contact form and booking form. Confirm the email arrives in the inbox, not spam.
+2. Open the site on your phone over mobile data. Tap the call button.
+3. Check that opening hours, prices and holiday notices are right.
+4. Glance at the uptime monitor and the backup log.
+5. Look at last week's enquiries in your inbox against your analytics. If forms show 12 submissions and you received 8, something is eating leads.
 
-<Callout type="coffee">At DataLatte, we recommend allocating a small budget for website maintenance to ensure your site remains secure, fast, and functional.</Callout>
+For deeper contact-form advice, see [website contact form best practices](/blog/website-contact-form-best-practices), and for a full checklist the [local business website checklist](/blog/local-business-website-checklist).
 
+## DIY, Freelancer or Plan?
 
+| Option | Best for | Watch out for |
+| --- | --- | --- |
+| Builder (Squarespace, Wix) | Simple sites, owners who want no technical work | Content still needs care; limited custom features |
+| WordPress, you maintain it | Owners who enjoy tinkering and run few plugins | Missed updates, untested backups |
+| WordPress with a freelancer care plan | Sites with bookings, ecommerce or custom features | Unclear scope; ask what is included and what extra edits cost |
+| Done-for-you bundle | Owners who want one bill | Lock-in; check what happens if you leave |
 
-## Frequently Asked Questions
+Our comparisons of [Wix, Squarespace and WordPress](/blog/wix-vs-squarespace-vs-wordpress-local-business-website) and [DIY vs hiring a developer](/blog/diy-website-vs-professional-developer) help with the choice, and the [website cost guide](/blog/how-much-does-a-website-cost-small-business) covers the build price. For hosting detail see [website hosting for small business](/blog/website-hosting-for-small-business).
 
-**Q: Can I just use Wix or Squarespace and avoid maintenance entirely?**
+## The Math
 
-You can avoid plugin updates and server management. What you can't avoid: keeping your content accurate, updating your menu or price list, refreshing photos, and checking that your contact form actually works. Wix and Squarespace don't fix broken content. I've audited Wix sites where the "Specials" page showed discounts from 2021. Worse than no specials — it tells customers you don't pay attention.
+Compare three setups over a year. Every row is an **assumption** for illustration, except that the price ranges used sit inside the GoDaddy bands above and the Squarespace plan price matches its pricing page (Core on annual billing, as read there; that page does not clearly label billing periods, so check yours). Your own time is valued at $30 an hour, which is also an assumption.
 
-**Q: What if I don't update my site for a year? How bad is it really?**
+| | Builder site | WordPress, DIY | WordPress, freelancer care plan |
+| --- | --- | --- | --- |
+| Platform or hosting per month (assumption) | $29 | $10 | $10 |
+| Security tool and backups per month (assumption) | included in plan | $15 | included in plan |
+| Care plan per month (assumption) | none | none | $150 |
+| Your time per month | 1 hour | 3 hours | 0.5 hour |
+| Cost of your time at $30 per hour | $30 | $90 | $15 |
+| Total per month | $59 | $115 | $175 |
+| Total per year | $708 | $1,380 | $2,100 |
 
-Depends on luck. Best case: nothing happens, your site just gets slower and more vulnerable over time. Worst case: your site gets hacked, Google blacklists it, and you pay someone $500–1,500 to clean it and rebuild trust. The average small business website gets scanned by automated bots within 24 hours of going live. An unpatched vulnerability is an invitation.
+Domain registration is left out of all three; it is a similar cost for each.
 
-**Q: How do I know if my current maintenance provider is actually doing the work?**
+Now put the failure on the other side of the ledger. With 20 enquiries a month, a 25% booking rate and a $60 first booking (all assumptions), the site produces about $300 a month in first bookings. A six-week outage costs about $450. A tested weekly routine costs about an hour a month and catches that outage in a week, limiting the loss to roughly $75.
 
-Ask for a monthly report. A real provider sends you a brief email each month: "Updated 4 plugins, ran backups, uptime was 99.9%, no issues detected." If they can't produce that, they're either not doing the work or they don't know what they're doing. Both are reasons to leave.
+Two things follow:
 
-**Q: Is it cheaper to just rebuild my site every few years instead of maintaining it?**
+- **Your break-even for a paid plan.** The care plan costs $60 a month more than DIY in the table ($720 a year). It pays for itself only if it prevents roughly $720 of losses or saves more than the extra time. For a simple brochure site, it often does not. For a booking-driven site that makes $3,000 a month in first bookings, one outage of two weeks costs more than the whole year's plan.
+- **The biggest saver is fewer moving parts.** Cutting plugins, ditching a homemade booking widget for a hosted one, and keeping content short lowers every row.
 
-I've seen business owners try this. They let the site rot for three years, then pay $2,000 to rebuild it. That sounds cheaper than $100/month for three years ($3,600). But here's what they forget: the rebuild doesn't bring back the SEO authority, the backlinks, or the local search rankings. A new site on a new platform starts from zero. The $1,600 they "saved" costs them months of lost organic traffic. Not worth it.
+<Callout type="tip" title="Ask for a monthly report">
+Any provider you pay should send a short monthly note: what was updated, when the last backup ran, uptime, and anything found. If they cannot produce one, you do not know what you are paying for.
+</Callout>
 
-**Q: Do I really need SSL? My site doesn't take payments.**
+## Do This Today
 
-Yes. Google Chrome flags any site without HTTPS as "Not Secure." That warning scares visitors away. It also hurts your search ranking. Most hosting plans include a free SSL certificate via Let's Encrypt. If yours doesn't, switch hosts. It's not 2015 anymore.
+1. List every plugin, integration and embed on your site. Delete anything you do not use.
+2. Check that you have an automated backup and restore it once to a test location, or ask your host or builder how restores work.
+3. Submit your contact form and booking form and confirm the emails arrive. Do it again after any change.
+4. Set up a free uptime monitor with an email alert to a real inbox.
+5. Put the 15-minute Monday routine in your calendar, and write down the monthly total you are paying for hosting, domain, tools and help.
 
-**Q: What's the single most important maintenance task I should never skip?**
+## FAQ
 
-Testing your contact form or booking widget. Do it weekly. Send a test submission, make sure it arrives in your inbox, and check that spam filters aren't eating your leads. I've seen businesses lose months of inquiries because the form was broken and nobody noticed. That's not a technical problem — it's a business problem.
+**Q: How much does website maintenance cost per month?**
+A: GoDaddy's 2026 guide puts small to medium business sites at $50 to $500 a month, simple blogs at $5 to $75, and e-commerce at $300 to $1,000. A simple local brochure site usually belongs near the bottom of the small-business band. Always get the scope in writing.
 
----
+**Q: Do Wix or Squarespace need maintenance?**
+A: Less. Squarespace states that every plan includes managed cloud hosting and free SSL, and Wix lists hosting on every plan. You still need to keep content accurate, test forms and bookings, and renew your domain.
 
-Let me be direct with you: I've spent a decade watching agencies pitch "maintenance packages" that are either overpriced checklists or glorified support tickets. And I've watched small business owners lose real money from things that could have been prevented by someone who just looked at the site once a month.
+**Q: What happens if I never update a WordPress site?**
+A: WordPress applies minor core updates automatically by default, but plugin and theme updates are mostly your responsibility, and Patchstack reports that 91% of new WordPress vulnerabilities in 2025 were in plugins. An unpatched plugin is the typical way in.
 
-I started DataLatte specifically because the middle ground — affordable, no-nonsense maintenance that actually gets done — barely exists. Most companies either charge you agency rates for junior work or leave you to figure it out alone. Both options cost you more than they should.
+**Q: Is it cheaper to rebuild every few years than to maintain?**
+A: Not reliably. Rebuilding costs a lump sum and can reset your rankings if URLs change, so plan redirects. See our guide to [when and why to redesign](/blog/website-redesign-when-and-why).
 
-If you're running a local service business — coffee shop, salon, fitness studio, pet groomer, whatever — your website doesn't need to be a masterpiece. It needs to load fast, stay secure, and not break your booking flow. That's it. And that's achievable for less than you probably think.
+**Q: Do I need SSL if I do not take payments?**
+A: Yes, and it should cost nothing. Let's Encrypt offers certificates at no cost, and Squarespace says it provides free SSL on every plan.
 
-I'll be honest: I don't take every client who calls. If you're better off with a DIY approach or a local freelancer, I'll tell you. But if you're tired of wondering whether your site is actually working for you, or if you've already paid for maintenance you're not sure you're getting, let's talk for 20 minutes. No pitch deck. No "partnership" language. Just a real conversation about what your site needs and what it should cost.
+## Sources
 
-[Book a free consultation](/free-audit) — I'll tell you what you actually need, not what I can sell you.
+- [GoDaddy: Website Maintenance Cost 2026](https://www.godaddy.com/resources/skills/website-maintenance-cost) (monthly cost ranges by site type; DIY component costs; freelancer rates)
+- [UENI: Website Maintenance Cost in 2026](https://ueni.com/blog/website-maintenance-cost/) (five recurring jobs; cites GoDaddy; vendor content)
+- [Patchstack: State of WordPress Security in 2026](https://patchstack.com/whitepaper/state-of-wordpress-security-in-2026/) (2025 vulnerability counts and plugin share)
+- [WordPress Developer Resources: Upgrading WordPress](https://developer.wordpress.org/advanced-administration/upgrade/upgrading/) (automatic update defaults; backup advice)
+- [Squarespace: Pricing](https://www.squarespace.com/pricing) (plans include hosting and SSL)
+- [Wix: Plans](https://www.wix.com/plans) (hosting included on all plans)
+- [Let's Encrypt: About](https://letsencrypt.org/about/) (free certificates; run by a nonprofit)
+
+Want someone to set up monitoring and backups, then tell you honestly what your site needs? See our [website and landing page service](/services/website) or [contact DataLatte](/contact).
