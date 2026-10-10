@@ -51,6 +51,25 @@ function toSlug(headline) {
     .slice(0, 75);
 }
 
+const GROQ_MODELS = (process.env.GROQ_SIGNAL_MODELS || "llama-3.3-70b-versatile,openai/gpt-oss-120b,llama-3.1-8b-instant")
+  .split(",").map((m) => m.trim()).filter(Boolean);
+
+/** POST a chat completion to Groq, trying each model in turn (models get retired: "groq/compound" 404'd and silently stopped the Radar). */
+async function groqChat(body) {
+  let lastErr = "";
+  for (const model of GROQ_MODELS) {
+    const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${GROQ_API_KEY}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ ...body, model }),
+    });
+    if (res.ok) return { ok: true, res, model };
+    lastErr = `${model}: ${res.status} ${(await res.text().catch(() => "")).slice(0, 160)}`;
+    console.error(`  Groq model failed -> ${lastErr}`);
+  }
+  return { ok: false, status: 0, err: lastErr };
+}
+
 async function fetchArticleText(url) {
   try {
     const controller = new AbortController();
@@ -106,20 +125,13 @@ Write a complete signal with 5 body paragraphs minimum. Return JSON:
   "niches": ${JSON.stringify(signal.niches)}
 }`;
 
-  const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${GROQ_API_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      model: "groq/compound",
+  const call = await groqChat({
       messages: [{ role: "user", content: prompt }],
       temperature: 0.3,
       max_tokens: 2000,
       response_format: { type: "json_object" },
-    }),
-  });
+    });
+  const res = call.ok ? call.res : { ok: false, status: "all-models-failed", text: async () => call.err };
 
   if (!res.ok) {
     const err = await res.text().catch(() => "");

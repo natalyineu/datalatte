@@ -69,6 +69,26 @@ function toSlug(headline) {
     .slice(0, 75);
 }
 
+const GROQ_MODELS = (process.env.GROQ_SIGNAL_MODELS || "llama-3.3-70b-versatile,openai/gpt-oss-120b,llama-3.1-8b-instant")
+  .split(",").map((m) => m.trim()).filter(Boolean);
+
+/** POST a chat completion to Groq, trying each model in turn (models get retired: "groq/compound" 404'd and silently stopped the Radar). */
+let groqHardFails = 0; // batches where every model failed
+async function groqChat(body) {
+  let lastErr = "";
+  for (const model of GROQ_MODELS) {
+    const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${GROQ_API_KEY}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ ...body, model }),
+    });
+    if (res.ok) return { ok: true, res, model };
+    lastErr = `${model}: ${res.status} ${(await res.text().catch(() => "")).slice(0, 160)}`;
+    console.error(`  Groq model failed -> ${lastErr}`);
+  }
+  return { ok: false, status: 0, err: lastErr };
+}
+
 async function fetchFeed(source) {
   try {
     const controller = new AbortController();
@@ -141,24 +161,18 @@ Return a JSON object:
 Articles:
 ${list}`;
 
-  const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${GROQ_API_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      model: "groq/compound",
+  const call = await groqChat({
       messages: [{ role: "user", content: prompt }],
       temperature: 0.3,
       max_tokens: 6000,
       response_format: { type: "json_object" },
-    }),
-  });
+    });
+  const res = call.ok ? call.res : { ok: false, status: "all-models-failed", text: async () => call.err };
 
   if (!res.ok) {
     const err = await res.text().catch(() => "");
     console.error(`  Groq error ${res.status}: ${err.slice(0, 200)}`);
+    groqHardFails++;
     return articles.map((_, i) => ({ index: i, relevant: false }));
   }
 
@@ -239,6 +253,10 @@ async function main() {
   }
 
   console.log(`\n✨ Collected ${signals.length} relevant signals`);
+  if (groqHardFails > 0 && signals.length === 0) {
+    console.error(`\n❌ Groq failed on ${groqHardFails} batch(es) and nothing was collected. Failing the run so it is not silently green.`);
+    process.exitCode = 1;
+  }
 
   const outPath = path.join(__dirname, "signals-output.json");
   fs.writeFileSync(outPath, JSON.stringify(signals, null, 2));
