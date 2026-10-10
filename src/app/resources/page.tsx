@@ -44,6 +44,14 @@ const tools = [
     tagColor: "bg-coffee-100 text-coffee-700 dark:bg-coffee-900/30 dark:text-coffee-300",
   },
   {
+    icon: Calculator,
+    title: "Ad Break-Even Calculator",
+    desc: "See the most you can pay per click, lead and customer before ads lose money, checked against published cost-per-lead medians.",
+    href: "/tools/ad-break-even-calculator",
+    tag: "Tool",
+    tagColor: "bg-coffee-100 text-coffee-700 dark:bg-coffee-900/30 dark:text-coffee-300",
+  },
+  {
     icon: Layers,
     title: "Rates & Benchmarks Library",
     desc: "Sourced ad benchmarks and tool prices for local businesses, each with a confidence label and the guide behind it.",

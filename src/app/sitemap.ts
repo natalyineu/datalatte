@@ -153,6 +153,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/tools/marketing-budget-calculator`, lastModified: today,      changeFrequency: "monthly", priority: 0.9 },
     { url: `${baseUrl}/tools/ai-agent-builder`,            lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/tools/local-seo-grader`,            lastModified: today,      changeFrequency: "monthly", priority: 0.9 },
+    { url: `${baseUrl}/tools/ad-break-even-calculator`,    lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     // New content pages
     { url: `${baseUrl}/pricing`,                           lastModified: today,      changeFrequency: "monthly", priority: 0.9 },
     { url: `${baseUrl}/case-studies`,                      lastModified: today,      changeFrequency: "monthly", priority: 0.8 },

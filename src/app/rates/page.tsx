@@ -62,6 +62,7 @@ export default function RatesPage() {
               <p className="text-sm text-gray-700 dark:text-gray-200">
                 Industry medians include advertisers of every size. Plug them into the{" "}
                 <Link href="/tools/marketing-budget-calculator" className="text-coffee-700 underline dark:text-coffee-300">budget calculator</Link>
+                {" "}or the{" "}<Link href="/tools/ad-break-even-calculator" className="text-coffee-700 underline dark:text-coffee-300">ad break-even calculator</Link>
                 {" "}as a starting point, then replace them with your own cost per lead after 30 days. See something out of date? Email{" "}
                 <a href="mailto:hi@datalatte.pro" className="text-coffee-700 underline dark:text-coffee-300">hi@datalatte.pro</a> and we will check it.
               </p>

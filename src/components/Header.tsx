@@ -22,6 +22,7 @@ const tools = [
   { label: "Budget Calculator ✨", href: "/tools/marketing-budget-calculator" },
   { label: "AI Agent Builder 🤖",  href: "/tools/ai-agent-builder" },
   { label: "Local SEO Grader 📊",  href: "/tools/local-seo-grader" },
+  { label: "Ad Break-Even 🧮",    href: "/tools/ad-break-even-calculator" },
 ];
 
 const services = [

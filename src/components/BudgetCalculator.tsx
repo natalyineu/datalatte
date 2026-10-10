@@ -606,11 +606,11 @@ export default function BudgetCalculator() {
             }}
             transition={{ repeat: Infinity, duration: 2.5 }}
           >
-            <p className="text-coffee-200 text-sm mb-1">Recommended monthly marketing budget</p>
+            <p className="text-white/90 text-sm mb-1">Recommended monthly marketing budget</p>
             <p className="text-4xl font-bold">
               <AnimatedNumber value={totalBudget} fmt={fmt} />
             </p>
-            <p className="text-coffee-200 text-sm mt-1">
+            <p className="text-white/90 text-sm mt-1">
               ~{Math.round((totalBudget / revenue) * 100)}% of your {fmt(revenue)}/month revenue
               {totalBudget === 500 && " (minimum recommended)"}
             </p>
