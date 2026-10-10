@@ -1,9 +1,9 @@
 ---
-title: "AI Agent for Google Reviews: Auto-Reply Python Script with Example Replies"
+title: "AI Agent for Google Reviews: A Python Reply-Drafting Script (Untested Starting Point)"
 seoTitle: "AI Agent Google Reviews Auto-Reply Script (Python)"
 date: "2026-06-13"
-lastModified: "2026-10-07"
-description: "AI agent for Google reviews: a Python auto-reply script that drafts personalized responses, with prompts, examples and safety checks before anything is posted."
+lastModified: "2026-10-10"
+description: "Replying to a Google review takes one API call, but access needs a 60-day-old verified profile. A Python script that drafts replies, dry-run by default."
 author: "Nataliia"
 category: "AI & Automation"
 tags: ["ai agents", "google reviews", "python", "automation", "reputation management", "google business profile"]
@@ -12,371 +12,296 @@ image: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=800&q=80&
 readTime: "10 min read"
 ---
 
-An AI agent can auto-reply to Google reviews by fetching unanswered reviews through the Google Business Profile API, asking a language model to draft a personalized response based on the star rating and text, and posting it back. The script below does exactly that, but we recommend a dry-run first and manual approval for negative reviews, because a bad automated reply is worse than a slow one.
+Posting a reply to a Google review through the API is a single request. Getting permission to send that request is the hard part: Google requires a verified Business Profile that has been active for 60 or more days, a website on the profile, and an approved "Application for Basic API Access". Reading reviews is also one request, returning up to 50 per page, and a reply can be at most 4,096 bytes. Everything else in this article is a Python script that wraps those two calls, drafts replies with a language model, and refuses to post anything risky.
 
-Replying to reviews matters: it shows future customers you are paying attention, and Google encourages businesses to respond. But writing thoughtful replies for every review is hard to keep up when you run a salon or coffee shop. This script reads new Google reviews, generates replies using Groq's LLaMA 3.3 (any compatible model will do), and handles 4-5 star, 3 star and 1-2 star reviews differently so it avoids a generic "Thanks for your feedback!"
+<Callout type="warning" title="Untested starting point">
+The script below is a template written from Google's and Groq's published documentation. It has not been run against a live Business Profile. Read it, run it with `DRY_RUN=1` (the default) and test on your own reviews before you let it post anything. Treat it as a starting point, not a finished product.
+</Callout>
 
-<Callout type="warning">Google Business Profile API access can require an approval request, and endpoint names and versions change. Check the current Google Business Profile API documentation before building on the code below, and treat it as a template rather than a drop-in product.</Callout>
+This page covers the code. For the strategy side (what Google and the FTC allow, which reviews a human should always handle), read our [AI agent for Google reviews management](/blog/ai-agent-for-google-reviews-management) guide first. For wording that works on bad reviews, see our [negative review reply scripts](/blog/how-to-respond-negative-google-reviews-scripts). It is written for owners and developers serving customers in the US, UK, Australia and Canada.
 
----
+## Get Access First
 
-## How the System Works
+Per Google's [prerequisites page](https://developers.google.com/my-business/content/prereqs), you need:
+
+1. A Google Cloud project.
+2. A verified Business Profile, yours or a client's, that has been active for 60 or more days, with a website listed on it.
+3. A submitted "Application for Basic API Access" through Google's contact form, with your project number, from an email address that owns or manages the profile.
+4. After approval, the Business Profile APIs enabled for the project.
+
+You can check approval in the Cloud console: Google says a quota of 0 queries per minute means you are not yet approved, and 300 means you are. Google's [usage limits page](https://developers.google.com/my-business/content/limits) adds that a quota of 0 means you should submit the access application rather than request a quota increase, and that requests over quota return HTTP 429, for which it recommends exponential backoff with jitter. Its [review data page](https://developers.google.com/my-business/content/review-data) also says that to use the reply functionality, a Google Workspace administrator must enable Search and/or Maps with Business Profile for the account. Google's [basic setup page](https://developers.google.com/my-business/content/basic-setup) says Workspace accounts without Business Profile enabled get a 403 error.
+
+The review endpoints we use live in the older v4 API on `mybusiness.googleapis.com`. Google's REST reference for [listing reviews](https://developers.google.com/my-business/reference/rest/v4/accounts.locations.reviews/list) and [replying](https://developers.google.com/my-business/reference/rest/v4/accounts.locations.reviews/updateReply) shows no deprecation notice for these methods at the time of writing, but the docs link to a general deprecation schedule, so check it before you build anything long-lived.
+
+If this sounds like a lot of admin for a coffee shop, it is. Many small businesses use a hosted tool that already has approval. Our [AI review management service](/services/ai-agents/review-management) works that way.
+
+## How the Script Works
 
 ```
-Google Business Profile API
-        ↓
-  Fetch new reviews (unanswered)
-        ↓
-  Classify: positive / negative / neutral
-        ↓
-  Generate personalized reply via Groq AI
-        ↓
-  Post reply via Google Business Profile API
-        ↓
-  Log to JSON (avoid double-replying)
+Refresh OAuth access token
+        |
+GET reviews (50 per page, newest first)
+        |
+Skip any review that already has a reviewReply
+        |
+Stop words (refund, lawyer, injured ...) -> flag for the owner, no draft
+        |
+Draft a reply with the LLM (model may answer HOLD -> flag for the owner)
+        |
+1-3 stars, or DRY_RUN on -> print the draft, post nothing
+        |
+4-5 stars and DRY_RUN off -> PUT the reply, log the review
 ```
 
-This can run daily via GitHub Actions or a cron job. The Google Business Profile API has historically had no usage fee, and the LLM provider may offer a free or low-cost tier, but check current terms and limits for both.
+Design choices worth copying even if you rewrite the code:
 
----
+- **Dry run is the default.** Nothing posts until you set `DRY_RUN=0`.
+- **Only 4 to 5 star reviews can ever be auto-posted.** Everything lower is draft-only.
+- **The model can say HOLD.** The prompt tells it to output HOLD for health, money, legal or safety content, and the script treats that as "owner decides".
+- **No generic fallback reply.** If the model fails, the script skips the review rather than posting boilerplate.
+- **A log file prevents double replies.**
 
-## What You'll Need
+## Find Your Account and Location IDs
 
-- Google Cloud project with the Google Business Profile APIs enabled (you may need to request access)
-- OAuth2 credentials (service account or user OAuth flow)
-- A Groq API key (or another LLM provider key). Free-tier limits change, so check current terms
-- Python 3.10+
+Google's [basic setup page](https://developers.google.com/my-business/content/basic-setup) shows listing accounts with a GET to the Account Management API. Its [locations list reference](https://developers.google.com/my-business/reference/businessinformation/rest/v1/accounts.locations/list) says the Business Information API needs a `readMask`. Replace `ACCESS_TOKEN` with a token from the OAuth flow (scope `https://www.googleapis.com/auth/business.manage`):
 
----
+```bash
+# 1. List accounts (the "name" looks like accounts/123...)
+curl -H "Authorization: Bearer ACCESS_TOKEN" \
+  "https://mybusinessaccountmanagement.googleapis.com/v1/accounts"
 
-## The Complete Script
+# 2. List that account's locations (the "name" looks like locations/456...)
+curl -H "Authorization: Bearer ACCESS_TOKEN" \
+  "https://mybusinessbusinessinformation.googleapis.com/v1/accounts/ACCOUNT_ID/locations?readMask=name,title"
+```
+
+The v4 review path combines the two: `accounts/ACCOUNT_ID/locations/LOCATION_ID`. That is the value for `LOCATION_NAME` below. The review resource's own `name` field comes back in the form `accounts/{accountId}/locations/{locationId}/reviews/{reviewId}`, which is what the reply call needs.
+
+## The Script
+
+Environment variables hold secrets. Never commit them. The Groq endpoint and response shape follow Groq's [API reference](https://console.groq.com/docs/api-reference), where `llama-3.3-70b-versatile` is the example model; check Groq's [models page](https://console.groq.com/docs/models) for the current list. Any OpenAI-style chat provider works with small changes.
 
 ```python
 #!/usr/bin/env python3
-"""
-Google Reviews AI Reply Agent
-Fetches unanswered reviews and posts AI-generated personalized replies.
-"""
+"""Draft (and optionally post) replies to Google reviews.
+UNTESTED STARTING POINT. Run with DRY_RUN=1 first and read every draft."""
 
-import os
 import json
-import urllib.request
+import os
+import re
 import urllib.parse
-from datetime import datetime
+import urllib.request
+from datetime import datetime, timezone
 from pathlib import Path
 
-# ── Config ────────────────────────────────────────────────────────────────────
-GROQ_API_KEY      = os.environ.get("GROQ_API_KEY", "")
-GROQ_MODEL        = "llama-3.3-70b-versatile"
+GROQ_API_KEY = os.environ["GROQ_API_KEY"]
+GROQ_MODEL = os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile")
+CLIENT_ID = os.environ["GOOGLE_CLIENT_ID"]
+CLIENT_SECRET = os.environ["GOOGLE_CLIENT_SECRET"]
+REFRESH_TOKEN = os.environ["GOOGLE_REFRESH_TOKEN"]
+LOCATION_NAME = os.environ["LOCATION_NAME"]  # accounts/ACCOUNT_ID/locations/LOCATION_ID
+BUSINESS_NAME = os.environ.get("BUSINESS_NAME", "our business")
+OWNER_NAME = os.environ.get("OWNER_NAME", "The team")
+DRY_RUN = os.environ.get("DRY_RUN", "1") != "0"  # anything but "0" means dry run
 
-GOOGLE_TOKEN_FILE = os.environ.get("GOOGLE_TOKEN_FILE", "google_token.json")
-LOCATION_NAME     = os.environ.get("LOCATION_NAME", "")  # accounts/{id}/locations/{id}
-BUSINESS_NAME     = os.environ.get("BUSINESS_NAME", "our business")
-OWNER_NAME        = os.environ.get("OWNER_NAME", "")
+LOG_FILE = Path("replied_reviews.json")
+MAX_PAGES = 3  # 3 pages x 50 reviews; raise if you have a backlog
+STARS = {"ONE": 1, "TWO": 2, "THREE": 3, "FOUR": 4, "FIVE": 5}
+STOP_WORDS = re.compile(
+    r"refund|lawyer|attorney|sue|injur|sick|poison|police|discriminat|allerg",
+    re.IGNORECASE,
+)
 
-REPLIED_LOG_FILE  = "replied_reviews.json"
-DRY_RUN           = os.environ.get("DRY_RUN", "1") == "1"  # default: print drafts, post nothing
 
-# ── Token management ──────────────────────────────────────────────────────────
-def get_access_token() -> str:
-    """Refresh OAuth2 token using stored credentials."""
-    token_data = json.loads(Path(GOOGLE_TOKEN_FILE).read_text())
-    
-    # If token is still valid, return it
-    if token_data.get("access_token") and token_data.get("expiry"):
-        expiry = datetime.fromisoformat(token_data["expiry"].replace("Z", "+00:00"))
-        if expiry > datetime.now(expiry.tzinfo):
-            return token_data["access_token"]
-    
-    # Refresh
-    payload = urllib.parse.urlencode({
-        "client_id":     token_data["client_id"],
-        "client_secret": token_data["client_secret"],
-        "refresh_token": token_data["refresh_token"],
-        "grant_type":    "refresh_token",
+def call(url, method="GET", headers=None, body=None, timeout=20):
+    data = body if isinstance(body, bytes) else (json.dumps(body).encode() if body else None)
+    req = urllib.request.Request(url, data=data, method=method, headers=headers or {})
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        raw = resp.read()
+    return json.loads(raw) if raw else {}
+
+
+def get_access_token():
+    body = urllib.parse.urlencode({
+        "client_id": CLIENT_ID,
+        "client_secret": CLIENT_SECRET,
+        "refresh_token": REFRESH_TOKEN,
+        "grant_type": "refresh_token",
     }).encode()
+    resp = call("https://oauth2.googleapis.com/token", "POST",
+                {"Content-Type": "application/x-www-form-urlencoded"}, body)
+    return resp["access_token"]
 
-    req = urllib.request.Request(
-        "https://oauth2.googleapis.com/token",
-        data=payload,
-        headers={"Content-Type": "application/x-www-form-urlencoded"},
-        method="POST",
+
+def fetch_unanswered(token):
+    reviews, page_token = [], None
+    for _ in range(MAX_PAGES):
+        params = {"pageSize": 50}
+        if page_token:
+            params["pageToken"] = page_token
+        url = f"https://mybusiness.googleapis.com/v4/{LOCATION_NAME}/reviews?" + urllib.parse.urlencode(params)
+        data = call(url, headers={"Authorization": f"Bearer {token}"})
+        reviews += data.get("reviews", [])
+        page_token = data.get("nextPageToken")
+        if not page_token:
+            break
+    return [r for r in reviews if "reviewReply" not in r]
+
+
+def draft_reply(review):
+    reviewer = review.get("reviewer", {})
+    first_name = ""
+    if not reviewer.get("isAnonymous") and reviewer.get("displayName"):
+        first_name = reviewer["displayName"].split()[0]
+    stars = STARS.get(review.get("starRating"), 0)
+    prompt = (
+        f"You write Google review replies for {BUSINESS_NAME}. Tone: warm, brief, human.\n"
+        f"Rules: use the reviewer's first name if given, mention one specific detail from the review, "
+        f"under 90 words, no discounts, no admitting legal fault, no private details, "
+        f"sign off as {OWNER_NAME}. For 1-3 stars, thank them, apologise that the visit fell short "
+        f"and invite them to contact us directly. If the review mentions health, safety, money or "
+        f"legal action, output exactly HOLD. Output only the reply text.\n\n"
+        f"First name: {first_name or '(not given)'}\nStars: {stars}\n"
+        f"Review: {review.get('comment') or '(no text)'}"
     )
-
-    with urllib.request.urlopen(req) as resp:
-        new_token = json.loads(resp.read())
-    
-    token_data["access_token"] = new_token["access_token"]
-    Path(GOOGLE_TOKEN_FILE).write_text(json.dumps(token_data, indent=2))
-    return new_token["access_token"]
-
-# ── Fetch reviews ─────────────────────────────────────────────────────────────
-def fetch_reviews(access_token: str) -> list[dict]:
-    """Get reviews for the location that haven't been replied to yet."""
-    url = f"https://mybusinessreviews.googleapis.com/v1/{LOCATION_NAME}/reviews"
-    
-    req = urllib.request.Request(
-        url,
-        headers={"Authorization": f"Bearer {access_token}"},
-    )
-
-    with urllib.request.urlopen(req, timeout=15) as resp:
-        data = json.loads(resp.read())
-    
-    reviews = data.get("reviews", [])
-    # Filter to reviews without a reply
-    unanswered = [r for r in reviews if "reviewReply" not in r]
-    
-    print(f"Found {len(reviews)} total reviews, {len(unanswered)} unanswered")
-    return unanswered
-
-# ── Classify review sentiment ─────────────────────────────────────────────────
-def classify_review(review: dict) -> str:
-    rating = review.get("starRating", "FIVE")
-    rating_map = {"ONE": 1, "TWO": 2, "THREE": 3, "FOUR": 4, "FIVE": 5}
-    stars = rating_map.get(rating, 5)
-    
-    if stars >= 4:
-        return "positive"
-    elif stars == 3:
-        return "neutral"
-    else:
-        return "negative"
-
-# ── Generate AI reply ─────────────────────────────────────────────────────────
-def generate_reply(review: dict, sentiment: str) -> str:
-    reviewer_name = review.get("reviewer", {}).get("displayName", "")
-    first_name = reviewer_name.split()[0] if reviewer_name else ""
-    review_text = review.get("comment", "(no text provided)")
-    rating = review.get("starRating", "FIVE")
-    
-    if sentiment == "positive":
-        instructions = """
-Write a warm, genuine thank-you reply to this positive Google review.
-- Start with their first name if available
-- Reference 1–2 specific things they mentioned (don't be vague)
-- Express that we look forward to seeing them again
-- Keep it under 100 words — longer replies feel like templates
-- Sound like a real person, not a corporation
-- Do NOT use: "We appreciate your feedback", "Thank you for taking the time", 
-  "Your satisfaction is our priority", or any other generic phrases
-"""
-    elif sentiment == "negative":
-        instructions = """
-Write a professional, empathetic reply to this negative Google review.
-- Acknowledge their experience without being defensive
-- Apologize for falling short of expectations (even if you disagree with their account)
-- Offer a specific next step: "Please call us at [number] or email us directly so we can make this right"
-- Keep it under 120 words
-- Do NOT make excuses, argue, or ask for the review to be changed
-- The goal is to show OTHER readers that you handle problems professionally
-"""
-    else:  # neutral
-        instructions = """
-Write a friendly, conversational reply to this neutral Google review.
-- Thank them genuinely (not generically)
-- Address anything specific they mentioned — especially any constructive feedback
-- Invite them to return and suggest what they might enjoy next time
-- Keep it under 80 words
-"""
-
-    prompt = f"""You're the owner of {BUSINESS_NAME}. Reply to this Google review.
-
-Reviewer: {first_name or 'Anonymous'}
-Rating: {rating} stars
-Review text: "{review_text}"
-
-Owner name for signing off: {OWNER_NAME or 'The team'}
-
-{instructions}
-
-Write only the reply text. No quotes around it. No "Reply:" prefix."""
-
-    payload = json.dumps({
+    payload = {
         "model": GROQ_MODEL,
         "messages": [{"role": "user", "content": prompt}],
-        "max_tokens": 200,
+        "max_completion_tokens": 250,
         "temperature": 0.6,
-    }).encode()
-
-    req = urllib.request.Request(
-        "https://api.groq.com/openai/v1/chat/completions",
-        data=payload,
-        headers={
-            "Authorization": f"Bearer {GROQ_API_KEY}",
-            "Content-Type": "application/json",
-        },
-        method="POST",
-    )
-
+    }
     try:
-        with urllib.request.urlopen(req, timeout=20) as resp:
-            result = json.loads(resp.read())
-            return result["choices"][0]["message"]["content"].strip()
-    except Exception as e:
-        print(f"  ✗ AI generation failed: {e}")
-        # Fallback replies
-        if sentiment == "positive":
-            return f"Thank you so much{', ' + first_name if first_name else ''}! We're thrilled you had a great experience and look forward to seeing you again soon. — {OWNER_NAME or 'The Team'}"
-        elif sentiment == "negative":
-            return f"We're sorry to hear about your experience. Please reach out to us directly so we can make this right. Your feedback is important to us. — {OWNER_NAME or 'The Team'}"
-        else:
-            return f"Thank you for sharing your experience{', ' + first_name if first_name else ''}! We appreciate your feedback and hope to see you again. — {OWNER_NAME or 'The Team'}"
+        resp = call("https://api.groq.com/openai/v1/chat/completions", "POST",
+                    {"Authorization": f"Bearer {GROQ_API_KEY}", "Content-Type": "application/json"},
+                    payload)
+        text = resp["choices"][0]["message"]["content"].strip()
+    except Exception as exc:  # no generic fallback: skip instead
+        print(f"  model call failed, skipping: {exc}")
+        return None
+    if text.upper().startswith("HOLD") or len(text.encode()) > 4096:
+        return None
+    return text
 
-# ── Post reply to Google ──────────────────────────────────────────────────────
-def post_reply(review_name: str, reply_text: str, access_token: str) -> bool:
-    """Post reply via Google Business Profile API."""
-    url = f"https://mybusinessreviews.googleapis.com/v1/{review_name}/reply"
-    
-    payload = json.dumps({"comment": reply_text}).encode()
-    
-    req = urllib.request.Request(
-        url,
-        data=payload,
-        headers={
-            "Authorization": f"Bearer {access_token}",
-            "Content-Type": "application/json",
-        },
-        method="PUT",
-    )
 
-    try:
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            resp.read()
-            print(f"  ✓ Reply posted to {review_name}")
-            return True
-    except Exception as e:
-        print(f"  ✗ Failed to post reply: {e}")
-        return False
+def post_reply(token, review_name, text):
+    url = f"https://mybusiness.googleapis.com/v4/{review_name}/reply"
+    call(url, "PUT", {"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
+         {"comment": text})
 
-# ── Main ──────────────────────────────────────────────────────────────────────
+
 def main():
-    replied_log = json.loads(Path(REPLIED_LOG_FILE).read_text()) if Path(REPLIED_LOG_FILE).exists() else {}
-    
-    print("Getting access token...")
-    access_token = get_access_token()
-    
-    print("Fetching reviews...")
-    reviews = fetch_reviews(access_token)
-    
-    replied_count = 0
+    log = json.loads(LOG_FILE.read_text()) if LOG_FILE.exists() else {}
+    token = get_access_token()
+    reviews = fetch_unanswered(token)
+    print(f"{len(reviews)} unanswered review(s). DRY_RUN={DRY_RUN}")
+
     for review in reviews:
-        review_name = review.get("name", "")
-        
-        if review_name in replied_log:
-            continue  # Already handled this review
-        
-        reviewer = review.get("reviewer", {}).get("displayName", "Anonymous")
-        rating   = review.get("starRating", "?")
-        sentiment = classify_review(review)
-        
-        print(f"\nProcessing: {reviewer} ({rating} stars / {sentiment})")
-        
-        reply = generate_reply(review, sentiment)
-        print(f"  Draft reply: {reply}")
-        
-        # Safety: never auto-post to negative reviews, and never post in dry-run mode
-        if DRY_RUN or sentiment == "negative":
-            print("  (draft only: review and post manually)")
+        name = review["name"]
+        if name in log:
             continue
-        
-        success = post_reply(review_name, reply, access_token)
-        
-        if success:
-            replied_log[review_name] = {
-                "replied_at":  datetime.now().isoformat(),
-                "reviewer":    reviewer,
-                "rating":      rating,
-                "sentiment":   sentiment,
-                "reply_preview": reply[:100],
-            }
-            replied_count += 1
-    
-    Path(REPLIED_LOG_FILE).write_text(json.dumps(replied_log, indent=2))
-    print(f"\n✓ Done. Replied to {replied_count} new review(s).")
+        stars = STARS.get(review.get("starRating"), 0)
+        comment = review.get("comment", "")
+        print(f"\n{stars} stars: {comment[:120]!r}")
+
+        if STOP_WORDS.search(comment):
+            print("  FLAGGED: stop word found. Owner replies personally.")
+            continue
+        text = draft_reply(review)
+        if text is None:
+            print("  No draft (HOLD or error). Owner decides.")
+            continue
+        print(f"  DRAFT: {text}")
+
+        if DRY_RUN or stars < 4:
+            print("  Draft only. Review and post manually.")
+            continue
+        try:
+            post_reply(token, name, text)
+        except Exception as exc:
+            print(f"  post failed: {exc}")
+            continue
+        log[name] = {"at": datetime.now(timezone.utc).isoformat(), "stars": stars}
+        print("  posted")
+
+    LOG_FILE.write_text(json.dumps(log, indent=2))
+
 
 if __name__ == "__main__":
     main()
 ```
 
----
+What to check before you rely on it:
 
-Set `DRY_RUN=0` only after you have read a week of drafts and are happy with the tone. Note that the fallback replies in `generate_reply()` are deliberately generic; consider skipping the review instead of posting a fallback.
+- **Moderation.** Google's [reply help page](https://support.google.com/business/answer/3474050) says each reply is checked against content policies before it posts, usually in about 10 minutes but sometimes up to 30 days, and that a rejected reply must be edited. The review resource includes a `reviewReplyState` of `PENDING`, `APPROVED` or `REJECTED` and a `policyViolation` field when a reply is rejected. The script does not read these yet; adding a check is a sensible next step.
+- **Error handling.** It stops on the first Google error when fetching and does not retry. Add exponential backoff for 429 responses, as Google recommends.
+- **Scheduling.** Run it once a day from cron or a scheduled GitHub Action, not in a tight loop.
+- **Stop words.** The list above is a starting point. Add words that matter in your trade.
 
----
+## Example Replies (Illustrative)
 
-## Example AI-Generated Replies (Illustrative)
+These show the tone the prompt aims for. They are examples we wrote, not real customer reviews.
 
-These examples are illustrative, written to show the tone the prompt aims for, not real customer reviews.
+**5 stars, from Sarah:** "Best balayage I've ever had. Emma understood what I wanted without a million photos."
+**Draft:** Hi Sarah, Emma will be delighted to read this. Getting the colour right without a reference board is exactly what we aim for. See you at your next appointment. Nataliia
 
-**5-star review from Sarah:** "Best balayage I've ever had. Emma really understood what I wanted without me having to show a million photos."
+**2 stars, from Mike:** "Waited 20 minutes past my appointment time. Good cut but the wait was frustrating."
+**Draft (owner edits, never auto-posted):** Hi Mike, you're right that 20 minutes is too long and I'm sorry it happened. Please email or call us so we can look at your booking and make your next visit smoother. Nataliia
 
-**AI reply:** Hi Sarah! Emma will be so happy to hear this — she genuinely loves the consultation process. Getting the color right without needing a reference board is exactly what we aim for. See you at your next appointment!
+## The Math
 
----
+The script is cheap to run; the cost is your time to build and maintain it. Every figure below is an **assumption**, so substitute your own. Check your model provider's current pricing, which this article does not quote.
 
-**2-star review from Mike:** "Waited 20 minutes past my appointment time. Good cut but the wait was frustrating."
+| | Quiet | Typical | Busy |
+| --- | --- | --- | --- |
+| Reviews per month (assumption) | 30 | 60 | 120 |
+| Minutes saved per reply: 4 by hand vs 1 to review a draft (assumption) | 3 | 3 | 3 |
+| Hours saved per month | 1.5 | 3.0 | 6.0 |
+| Value of your time at $30 per hour (assumption) | $45 | $90 | $180 |
+| Upkeep: 1 hour per month (assumption) | $30 | $30 | $30 |
+| Net monthly gain | $15 | $60 | $150 |
+| One-off build and approval time: 6 hours (assumption) | $180 | $180 | $180 |
+| Months to pay back | 12 | 3 | 1.2 |
 
-**AI reply:** Mike, you're completely right and we apologize — your time matters and 20 minutes is a real inconvenience. We've been working on improving our scheduling and this is a reminder we need to do better. If you'd like to give us another try, please book directly with us and mention this — we'll make sure you're in the chair on time.
+Read it honestly. At 30 reviews a month the payback is a year, and a saved-replies document may beat a script. The case gets stronger at volume or across several locations, and the Google access application can add weeks on top.
 
----
+## Do This Today
 
-**3-star review (no name):** "Decent coffee, nothing special. Service was friendly though."
-
-**AI reply:** Thanks for stopping in! Friendly service is something we work hard at, so that means a lot. If you're up for it next time, ask about our single-origin pour-overs — it's a different experience from the standard drip. We'd love another chance to impress on the coffee side too.
-
----
-
-## Setting Up the Google Business Profile API
-
-1. Go to [Google Cloud Console](https://console.cloud.google.com)
-2. Create a project → Enable "My Business Reviews API" and "My Business Business Information API"
-3. Create OAuth2 credentials (Desktop app type)
-4. Run the OAuth flow once to generate `google_token.json` with a refresh token
-5. Get your Location Name: `accounts/{account_id}/locations/{location_id}` — visible in the GBP API Explorer
-
----
-
-## Best Practices for Review Replies
-
-* **Reply promptly** but not robotically. A delay of a day while you review drafts is fine.
-* **Never include private details** about a customer's visit, booking or payment in a public reply.
-* **Move negative conversations offline** with a phone number or email, and keep the public reply short and calm.
-* **Don't offer incentives for changed reviews.** Google's policies prohibit asking for or paying for specific review outcomes.
-* **Keep your own voice.** Edit the prompt with phrases you actually use.
-
-For a no-code approach and strategy, see [AI agent for Google reviews management](/blog/ai-agent-for-google-reviews-management) and our [Google Business Profile service](/services/google-business-profile).
+1. Check whether your Business Profile is verified, has a website listed and is at least 60 days old.
+2. Create a Google Cloud project, submit the "Application for Basic API Access", and note the project number you used.
+3. Count your unanswered reviews from the last 90 days. That is your volume and your backlog.
+4. Write a voice guide: three replies you are proud of and three phrases you never use. Paste them into the prompt.
+5. When access arrives, run the script with `DRY_RUN=1` for a week and compare each draft with what you would have written. Only then consider `DRY_RUN=0`, and keep 1 to 3 star reviews manual.
 
 ## FAQ
 
-**Q: Will Google penalize me for using AI-generated review replies?**
-A: We are not aware of a rule that bans AI-assisted replies, but check Google's current policies. Replies post as coming from the business owner. Google's content rules apply: replies must be genuine, relevant and not spammy or keyword-stuffed. Use the `DRY_RUN` mode to read drafts before anything is posted.
+**Q: Is it allowed to post AI-written replies to Google reviews?**
+A: Google's help pages say replies are checked against its content policies and that unapproved replies must be edited. We have not found a Google rule that specifically bans AI-drafted replies, but you are responsible for what posts. Read every draft at first and follow the rules in our [management guide](/blog/ai-agent-for-google-reviews-management).
 
-**Q: What happens if the AI generates a bad reply to a negative review?**
-A: That is why the script never auto-posts to negative reviews. It prints the draft for you to edit and post yourself. Even for positive reviews, keep dry-run on until you trust the tone.
+**Q: How do I find my location ID?**
+A: List accounts with the Account Management API, then list locations with the Business Information API (see the curl commands above). Combine them as `accounts/ACCOUNT_ID/locations/LOCATION_ID`.
 
-**Q: How do I get my Location Name for the API?**
-A: The format is `accounts/{account_id}/locations/{location_id}`. The easiest way: use the [Google Business Profile APIs Explorer](https://developers.google.com/my-business/reference/businessinformation/rest/v1/accounts.locations/list) to list your locations. Alternatively, your location ID appears in the URL when you're in the Google Business Profile dashboard.
+**Q: Can I use a different model provider?**
+A: Yes. Replace the URL, auth header and model name in `draft_reply()`. Keep the HOLD rule and the length check.
 
-**Q: Does this work for businesses with multiple locations?**
-A: Yes. Store a list of `LOCATION_NAME` values and loop through them. The script runs the same logic for each location. For different locations with different owners, pass different `OWNER_NAME` and `BUSINESS_NAME` values per location.
+**Q: Can I delay replies so I can handle some personally?**
+A: Yes. Each review has a `createTime` in RFC 3339 format. Parse it, compare it with the current time, and skip reviews newer than your chosen delay.
 
-**Q: Can I add a rule to wait before replying?**
-A: Yes. Add a check in the main loop: parse `review.get("createTime")`, compare to `datetime.now()`, and skip if it is newer than your chosen delay (for example 72 hours). This gives you time to catch any reviews you want to handle personally before the script processes them.
+**Q: Should I also automate asking for reviews?**
+A: Only with one neutral request sent to every customer. Google prohibits selectively soliciting positive reviews. See our [review request automation guide](/blog/how-to-automate-google-review-requests).
 
----
+## Sources
 
-## Next Step
+- [Google Business Profile APIs: Prerequisites](https://developers.google.com/my-business/content/prereqs)
+- [Google Business Profile APIs: Basic setup](https://developers.google.com/my-business/content/basic-setup)
+- [Google Business Profile APIs: Review data](https://developers.google.com/my-business/content/review-data)
+- [Google Business Profile APIs: Usage limits](https://developers.google.com/my-business/content/limits)
+- [REST reference: reviews.list (v4)](https://developers.google.com/my-business/reference/rest/v4/accounts.locations.reviews/list)
+- [REST reference: reviews resource (v4)](https://developers.google.com/my-business/reference/rest/v4/accounts.locations.reviews)
+- [REST reference: reviews.updateReply (v4)](https://developers.google.com/my-business/reference/rest/v4/accounts.locations.reviews/updateReply)
+- [REST reference: Business Information locations.list](https://developers.google.com/my-business/reference/businessinformation/rest/v1/accounts.locations/list)
+- [Google Identity: OAuth 2.0 for installed apps, refreshing tokens](https://developers.google.com/identity/protocols/oauth2/native-app)
+- [Google Business Profile Help: Reply to reviews](https://support.google.com/business/answer/3474050)
+- [Groq: API reference](https://console.groq.com/docs/api-reference)
+- [Groq: Models](https://console.groq.com/docs/models)
 
-If you would rather not maintain scripts, our [AI agents service](/services/ai-agents) can set up review monitoring and drafted replies for you, with you approving anything sensitive. [Contact us](/contact) to talk it through, or read our [Google Business Profile optimization checklist](/blog/google-business-profile-optimization-checklist).
-
-## Related Articles
-
-- [AI Appointment Reminder Agent: Python Script That Cuts No-Shows](/blog/ai-agent-appointment-reminder-python-script)
-- [AI Agent for Google Reviews Management](/blog/ai-agent-for-google-reviews-management)
-- [Google Business Profile Optimization Checklist](/blog/google-business-profile-optimization-checklist)
-- [AI Agents for Local Business: What They Are and How They Work](/blog/ai-agents-for-local-business-what-they-are-and-how-they-work)
-
-<Callout type="coffee" title="Want More Local Customers?">
-Nataliia at DataLatte runs data-driven local marketing campaigns for local businesses — coffee shops, salons, pet groomers, and fitness studios. [Book a free 30-minute strategy call](/contact) or explore [Google Ads management](/services/google-ads).
-</Callout>
+Prefer not to maintain scripts? See our [AI agents service](/services/ai-agents) or [contact DataLatte](/contact). Our [Business Profile checklist](/blog/google-business-profile-optimization-checklist) covers the profile side.
