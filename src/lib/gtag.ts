@@ -66,6 +66,9 @@ export const gtag = {
   budgetCalculatorCopied: (budget: number) =>
     track("budget_calculator_copied", { budget }),
 
+  budgetCalculatorShared: (network: string, budget: number) =>
+    track("budget_calculator_shared", { network, budget }),
+
   budgetCalculatorCtaClicked: (budget: number, niche: string) =>
     track("budget_calculator_cta_clicked", { budget, niche }),
 

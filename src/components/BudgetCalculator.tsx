@@ -265,6 +265,30 @@ export default function BudgetCalculator() {
     setTimeout(() => setCopied(false), 2000);
   }
 
+  const shareUrl = "https://www.datalatte.pro/tools/marketing-budget-calculator";
+  const nicheLabel = NICHES.find(n => n.value === niche)?.label ?? "business";
+  const shareText = `My recommended marketing budget for my ${nicheLabel.toLowerCase()}: ${fmt(totalBudget)}/month. Calculate yours free:`;
+
+  function handleShare(network: "x" | "linkedin" | "facebook" | "whatsapp") {
+    const u = encodeURIComponent(`${shareUrl}?utm_source=${network}&utm_medium=social&utm_campaign=calculator-share`);
+    const tx = encodeURIComponent(shareText);
+    const links = {
+      x: `https://twitter.com/intent/tweet?text=${tx}&url=${u}`,
+      linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${u}`,
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${u}`,
+      whatsapp: `https://wa.me/?text=${encodeURIComponent(`${shareText} ${shareUrl}?utm_source=whatsapp&utm_medium=social&utm_campaign=calculator-share`)}`,
+    } as const;
+    gtag.budgetCalculatorShared(network, totalBudget);
+    window.open(links[network], "_blank", "noopener,noreferrer,width=640,height=560");
+  }
+
+  async function handleNativeShare() {
+    try {
+      await navigator.share({ title: "Marketing Budget Calculator", text: shareText, url: `${shareUrl}?utm_source=native&utm_medium=social&utm_campaign=calculator-share` });
+      gtag.budgetCalculatorShared("native", totalBudget);
+    } catch { /* user cancelled */ }
+  }
+
   async function handleLeadSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLeadStatus("loading");
@@ -272,7 +296,20 @@ export default function BudgetCalculator() {
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, source: "budget-calculator" }),
+        body: JSON.stringify({
+          email,
+          source: "budget-calculator",
+          result: {
+            niche: nicheLabel,
+            revenue,
+            budget: totalBudget,
+            goal: GOALS.find(g => g.value === goal)?.label ?? "",
+            channels: channels.map(c => ({ label: c.label, pct: c.pct, amount: Math.round(totalBudget * c.pct / 100) })),
+            estimates: estimates.map(e => ({ label: e.label, amount: e.amount, cpl: e.bench.cpl, benchLabel: e.bench.label, leads: Math.round(e.leads * 10) / 10, customers: Math.round(e.customers * 10) / 10 })),
+            customerValue: cv,
+            closeRate,
+          },
+        }),
       });
       setLeadStatus(res.ok ? "done" : "error");
     } catch {
@@ -698,6 +735,33 @@ export default function BudgetCalculator() {
             </button>
           </div>
 
+          {/* Share */}
+          <div className="mb-5">
+            <p className="text-xs font-semibold text-gray-600 mb-2 dark:text-gray-300">Share your result</p>
+            <div className="flex flex-wrap gap-2">
+              {([["x", "X"], ["linkedin", "LinkedIn"], ["facebook", "Facebook"], ["whatsapp", "WhatsApp"]] as const).map(([key, label]) => (
+                <button
+                  key={key}
+                  type="button"
+                  onClick={() => handleShare(key)}
+                  aria-label={`Share on ${label}`}
+                  className="px-3.5 py-2 rounded-xl border border-gray-200 text-gray-700 text-sm hover:bg-gray-50 transition-colors dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800"
+                >
+                  {label}
+                </button>
+              ))}
+              {typeof navigator !== "undefined" && "share" in navigator && (
+                <button
+                  type="button"
+                  onClick={handleNativeShare}
+                  className="px-3.5 py-2 rounded-xl border border-gray-200 text-gray-700 text-sm hover:bg-gray-50 transition-colors dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800"
+                >
+                  More…
+                </button>
+              )}
+            </div>
+          </div>
+
           {/* CTA — Free audit */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -728,7 +792,7 @@ export default function BudgetCalculator() {
               className="border border-gray-100 rounded-2xl p-4 dark:border-gray-700"
             >
               <p className="text-sm font-medium text-gray-700 mb-1 dark:text-gray-200">📧 Email yourself these results</p>
-              <p className="text-xs text-gray-500 mb-3 dark:text-gray-400">We&apos;ll also send you a free weekly marketing tip for {NICHES.find(n => n.value === niche)?.label}s.</p>
+              <p className="text-xs text-gray-500 mb-3 dark:text-gray-400">We&apos;ll send your budget, the channel split and the estimate to your inbox, plus a free weekly tip for {NICHES.find(n => n.value === niche)?.label}s.</p>
               <form onSubmit={handleLeadSubmit} className="flex gap-2">
                 <input
                   type="email"
