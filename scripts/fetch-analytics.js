@@ -345,8 +345,8 @@ async function fetchBing() {
 }
 
 // ── Leads (Supabase contact_submissions) ─────────────────────────────────────
-// Real lead = enquiry that is not test / spam / bounced / partnership / newsletter signup.
-const IGNORE = new Set(["test", "spam", "bounced"]);
+// Real lead = enquiry that is not system (DMARC etc.) / test / spam / bounced / archived / partnership / newsletter signup.
+const IGNORE = new Set(["system", "test", "spam", "bounced", "archived"]);
 const DONE = new Set(["replied", "call", "won", "lost"]);
 function classify(r) {
   if (IGNORE.has(r.status)) return "ignore";
