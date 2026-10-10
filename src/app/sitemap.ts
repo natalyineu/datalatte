@@ -158,6 +158,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/case-studies`,                      lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/results`,                           lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/resources`,                         lastModified: today,      changeFrequency: "weekly",  priority: 0.8 },
+    { url: `${baseUrl}/rates`,                             lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/for/multi-location`,                lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/compare/freelance-vs-agency`,       lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/compare/ai-agents-platforms`,       lastModified: today,      changeFrequency: "monthly", priority: 0.8 },

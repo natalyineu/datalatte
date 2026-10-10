@@ -44,6 +44,14 @@ const tools = [
     tagColor: "bg-coffee-100 text-coffee-700 dark:bg-coffee-900/30 dark:text-coffee-300",
   },
   {
+    icon: Layers,
+    title: "Rates & Benchmarks Library",
+    desc: "Sourced ad benchmarks and tool prices for local businesses, each with a confidence label and the guide behind it.",
+    href: "/rates",
+    tag: "Data",
+    tagColor: "bg-coffee-100 text-coffee-700 dark:bg-coffee-900/30 dark:text-coffee-300",
+  },
+  {
     icon: BarChart3,
     title: "Local SEO Grader",
     desc: "Instantly score your local SEO across 10 key factors — GBP optimisation, review velocity, keyword targeting, and more. Get specific fixes for every failing item.",
