@@ -39,6 +39,10 @@ export default async function RadarPage() {
     const now = new Date();
     return (now.getTime() - d.getTime()) < 7 * 24 * 60 * 60 * 1000;
   }).length;
+  // The panel must never show a misleading "0 this week" when the feed is merely stale: fall back to the archive.
+  const panelSignals = todayCount > 0 ? signals.filter(s => s.date === today) : weekCount > 0 ? signals.filter(s => (new Date().getTime() - new Date(s.date).getTime()) < 7 * 24 * 60 * 60 * 1000) : signals;
+  const panelLabel = todayCount > 0 ? "New today" : weekCount > 0 ? "This week" : "In the archive";
+  const latest = signals[0]?.date;
 
   return (
     <main>
@@ -89,22 +93,23 @@ export default async function RadarPage() {
 
             {/* Live signal count panel */}
             <div className="flex-shrink-0 border border-gray-800 rounded-2xl p-5 bg-gray-900/50 backdrop-blur-sm">
-              <div className="text-4xl font-black text-white tabular-nums">{todayCount > 0 ? todayCount : weekCount}</div>
-              <div className="text-xs text-gray-500 mt-1 font-medium uppercase tracking-wider dark:text-gray-400">{todayCount > 0 ? "New today" : "This week"}</div>
+              <div className="text-4xl font-black text-white tabular-nums">{panelSignals.length}</div>
+              <div className="text-xs text-gray-500 mt-1 font-medium uppercase tracking-wider dark:text-gray-400">{panelLabel}</div>
+              {weekCount === 0 && latest && <div className="text-[11px] text-gray-500 mt-1 dark:text-gray-400">Latest signal: {latest}</div>}
               <div className="mt-3 space-y-1">
-                {signals.filter(s => s.impact === "breaking").length > 0 && (
+                {panelSignals.filter(s => s.impact === "breaking").length > 0 && (
                   <div className="flex items-center gap-1.5 text-xs">
                     <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-                    <span className="text-red-400 font-semibold">{signals.filter(s => s.impact === "breaking").length} breaking</span>
+                    <span className="text-red-400 font-semibold">{panelSignals.filter(s => s.impact === "breaking").length} breaking</span>
                   </div>
                 )}
                 <div className="flex items-center gap-1.5 text-xs">
                   <span className="w-1.5 h-1.5 rounded-full bg-orange-400" />
-                  <span className="text-gray-400">{signals.filter(s => s.impact === "high").length} high impact</span>
+                  <span className="text-gray-400">{panelSignals.filter(s => s.impact === "high").length} high impact</span>
                 </div>
                 <div className="flex items-center gap-1.5 text-xs">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                  <span className="text-gray-400">{signals.filter(s => s.impact === "medium").length} watch</span>
+                  <span className="text-gray-400">{panelSignals.filter(s => s.impact === "medium").length} watch</span>
                 </div>
               </div>
             </div>
