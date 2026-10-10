@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { gtag } from "@/lib/gtag";
+import { CPL_BY_NICHE } from "@/data/rates";
 import { ArrowRight, ArrowLeft, CheckCircle2, Copy, Check } from "lucide-react";
 import {
   motion,
@@ -86,14 +87,20 @@ const ALLOCATIONS: Record<Goal, Channel[]> = {
 
 // Niche-specific tips
 const NICHE_TIPS: Record<Niche, string> = {
-  coffee:     "Coffee shops see the best ROI from Google Maps ads and loyalty email campaigns — regulars spend 67% more than new visitors.",
-  salon:      "Salons convert best with Instagram/Meta Ads showing before & after photos. Google Ads works well for 'hair salon near me' searches.",
-  pet:        "Pet businesses benefit from Google Business Profile reviews and local SEO — 82% of pet owners search locally before booking.",
-  fitness:    "Fitness studios see January peaks — budget 30% more in Dec–Jan. Retargeting lapsed members via email has the highest ROI.",
-  startup:    "Startups should front-load brand awareness (Meta Ads) before converting to performance. Allocate 20% to testing new channels.",
-  freelancer: "Freelancers convert best through LinkedIn + email nurture. A content + SEO strategy compounds over time with low ongoing cost.",
-  other:      "Mix paid and organic channels. Start with Google Ads for fast results, then invest in SEO for long-term compounding returns.",
+  coffee:     "For cafés, reviews and your Google Business Profile do the heavy lifting: in BrightLocal's 2026 survey of 1,002 US adults, 47% said they skip businesses with fewer than 20 reviews.",
+  salon:      "Beauty lead campaigns on Meta cost about $50.91 per lead (LocaliQ 2026), almost double the $27.39 all-industry median, so rebooking existing clients is usually the cheaper win.",
+  pet:        "Pet businesses live on repeat visits. Meta lead campaigns in personal services cost about $38.09 per lead (LocaliQ 2026), so a rebooking reminder beats a cold ad.",
+  fitness:    "Fitness search clicks are pricey (about $6.17 per click in one roundup, second-hand), so keep members you already have: lapsed-member email and SMS is the cheapest channel to test first.",
+  startup:    "Start with one paid channel and one measured goal. Test a second channel only after the first one shows a cost per customer you can live with.",
+  freelancer: "Freelancers usually win on referrals and a clear niche. Put the first dollars into one channel where your ideal client already looks.",
+  other:      "Mix paid and organic channels. Start with Google Ads for fast feedback, then invest in local SEO for compounding returns.",
 };
+
+// Assumption defaults for the "what could this buy" estimate: the user is asked to replace them.
+const DEFAULT_VALUE: Record<Niche, number> = {
+  coffee: 120, salon: 255, pet: 280, fitness: 600, startup: 400, freelancer: 1500, other: 300,
+};
+const DEFAULT_CLOSE = 25; // % of leads that become customers (assumption)
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -198,6 +205,8 @@ export default function BudgetCalculator() {
   const [stage,     setStage]     = useState<Stage | null>(null);
   const [goal,      setGoal]      = useState<Goal | null>(null);
   const [copied,    setCopied]    = useState(false);
+  const [custValue, setCustValue] = useState<number | null>(null);
+  const [closeRate, setCloseRate] = useState<number>(DEFAULT_CLOSE);
   const [selecting, setSelecting] = useState<Niche | null>(null);
 
   // Lead capture
@@ -210,6 +219,24 @@ export default function BudgetCalculator() {
   const totalBudget = stage ? calcBudget(revenue, stageConfig!.pct) : 0;
   const channels    = goal  ? ALLOCATIONS[goal]  : [];
   const nicheTip    = niche ? NICHE_TIPS[niche]  : "";
+
+  // What the paid-channel budget could buy, from published cost-per-lead medians (see /rates)
+  const cv = custValue ?? (niche ? DEFAULT_VALUE[niche] : 0);
+  const estimates = niche
+    ? channels
+        .filter(c => c.label === "Google Ads" || c.label === "Meta Ads")
+        .map(c => {
+          const bench = c.label === "Google Ads" ? CPL_BY_NICHE[niche].google : CPL_BY_NICHE[niche].meta;
+          const amount = Math.round(totalBudget * c.pct / 100);
+          const leads = amount / bench.cpl;
+          const customers = (leads * closeRate) / 100;
+          return { label: c.label, emoji: c.emoji, amount, bench, leads, customers };
+        })
+    : [];
+  const paidSpend = estimates.reduce((s, e) => s + e.amount, 0);
+  const paidCustomers = estimates.reduce((s, e) => s + e.customers, 0);
+  const paidReturn = paidSpend > 0 ? (paidCustomers * cv) / paidSpend : 0;
+  const one = (n: number) => (n < 10 ? (Math.round(n * 10) / 10).toString() : Math.round(n).toString());
 
   function goTo(next: number) {
     setDirection(next > step ? 1 : -1);
@@ -413,7 +440,7 @@ export default function BudgetCalculator() {
         >
           <StepIndicator step={2} total={4} />
           <h2 className="text-xl font-bold text-gray-900 mb-1 dark:text-gray-50">How long have you been in business?</h2>
-          <p className="text-gray-500 text-sm mb-5 dark:text-gray-400">Newer businesses typically invest a higher % of revenue in marketing.</p>
+          <p className="text-gray-500 text-sm mb-5 dark:text-gray-400">Planning ranges, not an official benchmark: newer businesses usually invest a higher share of revenue.</p>
 
           <div className="space-y-3 mb-8">
             {STAGES.map((s, i) => (
@@ -588,6 +615,64 @@ export default function BudgetCalculator() {
               })}
             </div>
           </div>
+
+          {/* What this budget could buy */}
+          {estimates.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.45 }}
+              className="bg-gray-50 border border-gray-200 rounded-xl p-4 mb-5 dark:bg-gray-800/60 dark:border-gray-700"
+            >
+              <p className="text-xs font-semibold text-coffee-700 mb-1 dark:text-coffee-300">📈 What your paid budget could buy</p>
+              <p className="text-xs text-gray-600 mb-3 dark:text-gray-300">Estimate from published cost-per-lead medians. Replace our assumptions with your numbers.</p>
+
+              <div className="grid grid-cols-2 gap-3 mb-4">
+                <label className="text-xs text-gray-600 dark:text-gray-300">
+                  Value of a new customer ($)
+                  <input
+                    type="number" min={0} inputMode="numeric"
+                    value={cv}
+                    onChange={e => setCustValue(Math.max(0, Number(e.target.value) || 0))}
+                    className="mt-1 w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm font-semibold text-gray-900 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-50"
+                  />
+                </label>
+                <label className="text-xs text-gray-600 dark:text-gray-300">
+                  Leads that become customers (%)
+                  <input
+                    type="number" min={1} max={100} inputMode="numeric"
+                    value={closeRate}
+                    onChange={e => setCloseRate(Math.min(100, Math.max(1, Number(e.target.value) || 1)))}
+                    className="mt-1 w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm font-semibold text-gray-900 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-50"
+                  />
+                </label>
+              </div>
+
+              <div className="space-y-3">
+                {estimates.map(e => (
+                  <div key={e.label}>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-medium text-gray-700 dark:text-gray-200">{e.emoji} {e.label} · {fmt(e.amount)}</span>
+                      <span className="text-sm font-bold text-gray-900 dark:text-gray-50">≈ {one(e.leads)} leads → ≈ {one(e.customers)} customers</span>
+                    </div>
+                    <p className="text-[11px] text-gray-500 mt-0.5 dark:text-gray-400">
+                      At ${e.bench.cpl.toFixed(2)} per lead: {e.bench.label}.
+                      {e.leads < 5 && " Under 5 leads a month is too few to measure; concentrate this on one channel."}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-4 pt-3 border-t border-gray-200 dark:border-gray-700 flex items-center justify-between">
+                <span className="text-sm font-semibold text-gray-800 dark:text-gray-100">Paid ads in total</span>
+                <span className="text-sm font-bold text-gray-900 dark:text-gray-50">≈ {one(paidCustomers)} customers · ≈ ${paidReturn.toFixed(1)} back per $1</span>
+              </div>
+              <p className="text-[11px] text-gray-500 mt-2 leading-relaxed dark:text-gray-400">
+                Revenue (customers × your value), not profit. SEO, Business Profile, email and social are not estimated because they build over months and have no comparable cost per lead. Benchmarks are medians across advertisers; yours will differ.{" "}
+                <Link href="/rates" className="underline text-coffee-700 dark:text-coffee-300">See all sources and rates</Link>
+              </p>
+            </motion.div>
+          )}
 
           {/* Niche tip */}
           <motion.div

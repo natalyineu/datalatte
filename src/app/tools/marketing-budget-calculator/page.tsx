@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 const FAQ = [
   {
     q: "How much should a small business spend on marketing?",
-    a: "Most small businesses should spend 7–15% of monthly revenue on marketing. New businesses in growth mode often invest 15–20%, while established businesses with steady revenue can maintain presence at 5–10%. The right number depends on your industry, competition, and goals.",
+    a: "There is no official rule. Small-business surveys quoted by the US SBA (2018 data, second-hand) put the average near 8% of revenue, with about 12% for consumer services. This calculator uses 16%, 12% and 7% by business age as a planning rule of thumb: newer businesses usually spend a larger share to build awareness. Treat the result as a starting point and adjust it to your margins and goals.",
   },
   {
     q: "How do I split my marketing budget between channels?",
@@ -38,7 +38,7 @@ const FAQ = [
   },
   {
     q: "How long does it take to see results from marketing?",
-    a: "Google Ads can deliver results within days. Local SEO typically takes 3–6 months to gain traction. Email marketing shows results within weeks for existing customers. Plan your budget with a 90-day runway to measure true channel performance.",
+    a: "Paid search can send clicks within days, but Google gives no guaranteed timeline for local ranking improvements. Email to existing customers is the fastest to test. Plan at least one full month per channel, and judge it on cost per customer rather than clicks.",
   },
 ];
 
@@ -98,7 +98,7 @@ export default function MarketingBudgetCalculatorPage() {
         <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center dark:text-gray-50">How the calculator works</h2>
         <div className="grid sm:grid-cols-3 gap-6">
           {[
-            { n: "1", title: "Industry benchmarks", body: "Budget percentages are based on industry data across thousands of local businesses. New businesses typically invest more (15–20%) to build awareness, while established ones maintain at 5–10%." },
+            { n: "1", title: "Industry benchmarks", body: "The share of revenue is a planning rule of thumb by business age (16%, 12%, 7%), not an official benchmark. The new results card turns your paid budget into expected leads using published cost-per-lead medians." },
             { n: "2", title: "Goal-based allocation", body: "Your primary goal determines how to split spend. Customer acquisition favours paid ads. Local visibility favours SEO. Retention favours email. We weight the channels accordingly." },
             { n: "3", title: "Minimum floors", body: "Paid ad channels need a minimum budget to generate enough data for optimisation. We set a $500/month floor so your budget can actually produce meaningful results — not just impressions." },
           ].map(card => (

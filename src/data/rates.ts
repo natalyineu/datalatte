@@ -78,3 +78,20 @@ export const CONFIDENCE_LABEL: Record<Confidence, { label: string; hint: string 
   "second-hand": { label: "Second-hand", hint: "Quoted by a roundup; original not opened" },
   estimate: { label: "Estimate", hint: "Vendor or agency estimate, not measured" },
 };
+
+// ── Cost per lead used by the budget calculator (single source of truth with the tables above) ──
+export type CalcNiche = "coffee" | "salon" | "pet" | "fitness" | "startup" | "freelancer" | "other";
+export interface CplBenchmark { cpl: number; label: string; confidence: Confidence }
+
+const ALL_GOOGLE: CplBenchmark = { cpl: 66.69, label: "all-industry Google Search median (LocaliQ 2026)", confidence: "report" };
+const ALL_META: CplBenchmark = { cpl: 27.39, label: "all-industry Meta lead-campaign median (LocaliQ 2026)", confidence: "report" };
+
+export const CPL_BY_NICHE: Record<CalcNiche, { google: CplBenchmark; meta: CplBenchmark }> = {
+  coffee: { google: { cpl: 30.57, label: "Restaurants & food Google Search median (LocaliQ 2026)", confidence: "report" }, meta: ALL_META },
+  salon: { google: ALL_GOOGLE, meta: { cpl: 50.91, label: "Beauty & personal care Meta lead median (LocaliQ 2026)", confidence: "report" } },
+  pet: { google: ALL_GOOGLE, meta: { cpl: 38.09, label: "Personal services Meta lead median (LocaliQ 2026, proxy)", confidence: "report" } },
+  fitness: { google: { cpl: 67.36, label: "Health & fitness Google Search (Webtonic roundup, second-hand)", confidence: "second-hand" }, meta: ALL_META },
+  startup: { google: ALL_GOOGLE, meta: ALL_META },
+  freelancer: { google: ALL_GOOGLE, meta: ALL_META },
+  other: { google: ALL_GOOGLE, meta: ALL_META },
+};
