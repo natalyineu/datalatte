@@ -36,6 +36,11 @@ const nextConfig: NextConfig = {
         destination: "/blog/meta-ads-for-coffee-shops-2026",
         permanent: true,
       },
+      {
+        source: "/blog/tiktok-marketing-for-coffee-shops",
+        destination: "/blog/coffee-shop-tiktok-marketing-guide",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
