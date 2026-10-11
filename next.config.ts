@@ -41,6 +41,31 @@ const nextConfig: NextConfig = {
         destination: "/blog/coffee-shop-tiktok-marketing-guide",
         permanent: true,
       },
+      {
+        source: "/blog/ai-powered-chatbots-for-local-businesses",
+        destination: "/blog/ai-chatbot-for-local-business-booking-and-faqs",
+        permanent: true,
+      },
+      {
+        source: "/blog/ai-driven-chatbots-for-local-businesses",
+        destination: "/blog/ai-chatbot-for-local-business-booking-and-faqs",
+        permanent: true,
+      },
+      {
+        source: "/blog/instagram-story-ads-for-fitness-studios",
+        destination: "/blog/instagram-stories-ads-fitness-studios",
+        permanent: true,
+      },
+      {
+        source: "/blog/fitness-studio-instagram-story-ads",
+        destination: "/blog/instagram-stories-ads-fitness-studios",
+        permanent: true,
+      },
+      {
+        source: "/blog/fitness-studio-marketing-instagram-stories",
+        destination: "/blog/instagram-stories-ads-fitness-studios",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
