@@ -35,7 +35,6 @@ const RSS_SOURCES = [
   { url: "https://searchengineland.com/feed",                 name: "Search Engine Land",     category: "seo" },
   { url: "https://feeds.feedburner.com/blogspot/amDG",        name: "Google Search Central",  category: "google" },
   { url: "https://ads-developers.googleblog.com/feeds/posts/default", name: "Google Ads Blog", category: "google" },
-  { url: "https://moz.com/blog/feed",                         name: "Moz Blog",               category: "seo" },
   { url: "https://www.semrush.com/blog/feed/",                name: "Semrush Blog",           category: "seo" },
   { url: "https://www.brightlocal.com/blog/feed/",            name: "BrightLocal Blog",       category: "seo" },
   { url: "https://martech.org/feed/",                         name: "MarTech",                category: "seo" },
@@ -50,7 +49,11 @@ const RSS_SOURCES = [
   { url: "https://www.wordstream.com/blog/feed",              name: "WordStream Blog",        category: "google" },
   { url: "https://www.adexchanger.com/feed/",                 name: "AdExchanger",            category: "ctv" },
   { url: "https://digiday.com/feed/",                         name: "Digiday",                category: "ctv" },
-  { url: "https://www.nexttv.com/rss",                        name: "Next TV",                category: "ctv" },
+  { url: "https://www.socialmediatoday.com/feeds/news/",      name: "Social Media Today",     category: "meta" },
+  { url: "https://about.fb.com/news/feed/",                   name: "Meta Newsroom",          category: "meta" },
+  { url: "https://localsearchforum.com/forums/-/index.rss",   name: "Local Search Forum",     category: "seo" },
+  { url: "https://www.adweek.com/feed/",                      name: "Adweek",                 category: "ctv" },
+  { url: "https://ppc.land/rss/",                             name: "PPC Land",               category: "google" },
 ];
 
 const MAX_AGE_HOURS = parseInt(process.env.MAX_AGE_HOURS || "26"); // override: MAX_AGE_HOURS=168 for catch-up runs
@@ -95,20 +98,25 @@ async function fetchFeed(source) {
     const timer = setTimeout(() => controller.abort(), 12000);
     const res = await fetch(source.url, {
       signal: controller.signal,
-      headers: { "User-Agent": "DataLatte-Radar/1.0" },
+      headers: { "User-Agent": "Mozilla/5.0 (compatible; DataLatte-Radar/1.0; +https://datalatte.pro)" },
     });
     clearTimeout(timer);
     const xml = await res.text();
 
     const items = [];
-    const itemRegex = /<item>([\s\S]*?)<\/item>/g;
+    // RSS <item> and Atom <entry>
+    const itemRegex = /<(item|entry)\b[^>]*>([\s\S]*?)<\/\1>/g;
     let match;
+    const pick = (s, ...res) => { for (const re of res) { const m = re.exec(s); if (m && m[1]) return m[1].trim(); } return undefined; };
     while ((match = itemRegex.exec(xml)) !== null) {
-      const item = match[1];
-      const title = (/<title><!\[CDATA\[(.*?)\]\]><\/title>/.exec(item) || /<title>(.*?)<\/title>/.exec(item))?.[1]?.trim();
-      const link = (/<link>(.*?)<\/link>/.exec(item) || /<link[^>]+href="(.*?)"/.exec(item))?.[1]?.trim();
-      const pubDate = (/<pubDate>(.*?)<\/pubDate>/.exec(item) || /<published>(.*?)<\/published>/.exec(item))?.[1]?.trim();
-      const desc = (/<description><!\[CDATA\[([\s\S]*?)\]\]><\/description>/.exec(item) || /<description>([\s\S]*?)<\/description>/.exec(item))?.[1]?.trim()?.replace(/<[^>]+>/g, "")?.slice(0, 800);
+      const item = match[2];
+      const title = pick(item, /<title[^>]*><!\[CDATA\[([\s\S]*?)\]\]><\/title>/, /<title[^>]*>([\s\S]*?)<\/title>/)?.replace(/<[^>]+>/g, "");
+      const link = pick(item, /<link[^>]+rel="alternate"[^>]+href="(.*?)"/, /<link>(.*?)<\/link>/, /<link[^>]+href="(.*?)"/);
+      const pubDate = pick(item, /<pubDate>(.*?)<\/pubDate>/, /<published>(.*?)<\/published>/, /<updated>(.*?)<\/updated>/, /<dc:date>(.*?)<\/dc:date>/);
+      const desc = pick(item,
+        /<description><!\[CDATA\[([\s\S]*?)\]\]><\/description>/, /<description>([\s\S]*?)<\/description>/,
+        /<summary[^>]*><!\[CDATA\[([\s\S]*?)\]\]><\/summary>/, /<summary[^>]*>([\s\S]*?)<\/summary>/,
+        /<content:encoded><!\[CDATA\[([\s\S]*?)\]\]><\/content:encoded>/)?.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").slice(0, 1200);
       if (title && link) items.push({ title, link, pubDate, desc });
     }
     return items;
