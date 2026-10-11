@@ -1,9 +1,9 @@
 ---
-title: "CTV Ad Specs 2026: Video Sizes, File Formats and Length Requirements for Local Business"
+title: "CTV Ad Specs 2026: Hulu, Roku, Amazon Video Sizes"
 seoTitle: "CTV Ad Specs 2026: Video Size, Format & Length"
 date: "2026-06-13"
 lastModified: "2026-10-11"
-description: "What are the CTV ad specs in 2026? Resolution, file format, codec, audio and length requirements for Hulu, Roku, Amazon and Peacock, checked against official pages."
+description: "CTV ad specs for 2026: one 1920x1080 MP4 fits Hulu, Roku and Amazon. File size caps of 250 MB, 500 MB and 1 GB, checked on official spec pages."
 author: "Nataliia"
 category: "Programmatic Advertising"
 tags: ["CTV advertising", "ad specs", "creative production", "connected TV", "local advertising", "video ads"]
@@ -12,9 +12,13 @@ image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80&
 readTime: "9 min read"
 ---
 
-Export one 16:9, 1920x1080 MP4 using H.264 video and AAC stereo audio at 48 kHz, 15 or 30 seconds long, with constant frame rate (29.97 fps is safe everywhere). That master file meets the published specs of Hulu, Roku and Amazon, and it is the standard fullscreen CTV size in the IAB Tech Lab guidelines. The details below (file size, bitrate, length) differ by platform, so check the current spec page before every upload.
+Export one 16:9, 1920x1080 MP4 using H.264 video and AAC stereo audio at 48 kHz, 15 or 30 seconds long, with constant frame rate (29.97 fps is safe everywhere). That master file meets the published specs of Hulu, Roku and Amazon, and it is the standard fullscreen CTV size in the IAB Tech Lab guidelines.
 
-Here is the scene. You paid a freelancer for a 15-second spot, you booked the flight, and the platform bounces your file at the last step. Wrong frame rate. Or the file is too big. Or the audio is clipped. Now the start date slips and you pay for edits twice.
+The details below (file size, bitrate, length) differ by platform, so check the current spec page before every upload.
+
+Here is the scene. You paid a freelancer for a 15-second spot, you booked the flight, and the platform bounces your file at the last step. Wrong frame rate. Or the file is too big. Or the audio is clipped.
+
+Now the start date slips and you pay for edits twice.
 
 Every one of those failures is on a published spec page. The numbers are short: Hulu caps self-served files at 250 MB, Amazon at 500 MB, Roku at 1 GB. Frame rate, bitrate and audio have fixed ranges. Check them once, export once, and the spot goes through.
 
@@ -25,7 +29,7 @@ Every one of those failures is on a published spec page. The numbers are short: 
   trends="neutral|neutral|neutral|neutral"
 />
 
-## The Common Core
+## What Specs Do Hulu, Roku and Amazon Share?
 
 Based on the official spec pages of Hulu (Disney Advertising), Roku Ads Manager and Amazon Ads, checked October 2026:
 
@@ -40,7 +44,7 @@ Based on the official spec pages of Hulu (Disney Advertising), Roku Ads Manager 
 
 The IAB Tech Lab's CTV ad format guidelines also use 1920x1080 as the standard fullscreen size, with 16:9 preferred ([IAB Canada summary](https://iabcanada.com/?p=19700), checked Oct 2026).
 
-## Platform-by-Platform Specs
+## What Are the Specs for Each Platform?
 
 ### Hulu (Disney Advertising)
 
@@ -74,7 +78,7 @@ Per [Amazon Ads' Streaming TV and Prime Video specs](https://advertising.amazon.
 
 Peacock follows NBCUniversal's creative guidelines, which change often, so download the current sheet from your sales contact or DSP. The same goes for Tubi, Pluto TV, YouTube TV and DSPs such as The Trade Desk or StackAdapt. Their requirements depend on the inventory you buy, and we have not listed numbers we could not confirm on an official page.
 
-## The Math: Will Your File Fit?
+## Will Your CTV Ad File Fit the Size Limit?
 
 File size is bitrate times length. Divide by 8 to turn megabits into megabytes. The formula: size in MB = Mbps x seconds / 8 (video only; audio adds a small amount, so leave some headroom).
 
@@ -88,19 +92,27 @@ Here are worked examples using the bitrates from the spec pages above. The bitra
 | 30 s at 50 Mbps (Amazon recommended) | 50 x 30 / 8 | 187.5 MB | Yes | Yes |
 | 60 s at 50 Mbps | 50 x 60 / 8 | 375 MB | No | Yes |
 
-The takeaway: a :15 or :30 at these bitrates is nowhere near any platform's size cap. The cap only bites on 60-second spots at very high bitrates. Amazon's 15 Mbps minimum for Prime Video is higher than Hulu's 10 Mbps floor and Roku's 6 Mbps, so an export at 15 to 40 Mbps clears the video minimums of all three, and Hulu's 40 Mbps ceiling too. Only Amazon's recommended 50 Mbps would exceed Hulu's range, so keep a second export if you buy both directly.
+The takeaway: a :15 or :30 at these bitrates is nowhere near any platform's size cap. The cap only bites on 60-second spots at very high bitrates.
 
-## Which Length: :15 or :30?
+Amazon's 15 Mbps minimum for Prime Video is higher than Hulu's 10 Mbps floor and Roku's 6 Mbps, so an export at 15 to 40 Mbps clears the video minimums of all three, and Hulu's 40 Mbps ceiling too. Only Amazon's recommended 50 Mbps would exceed Hulu's range, so keep a second export if you buy both directly.
+
+## Should a CTV Ad Be :15 or :30?
 
 Platforms accept a range of lengths (Roku, for instance, accepts 6 to 92 seconds), but :15 and :30 are the standard units. For a local business with one offer and one location, :15 is usually enough and forces a single clear message. Use :30 only when the offer needs explanation. Costs and rules on skippable formats depend on the platform and buying method, so confirm them before you plan.
 
-## Loudness
+## How Loud Should a CTV Ad Be?
 
-US broadcasters must keep commercials at the same loudness as the programs around them under the CALM Act, using the ATSC A/85 recommended practice with a target of -24 LKFS, plus or minus 2 dB ([TV Technology](https://www.tvtechnology.com/news/fcc-issues-rules-to-calm-tv-ads), checked Oct 2026). That means a window of -26 to -22 LKFS. Streaming platforms set their own audio rules, but mixing your ad to about -24 LKFS (what many loudness meters call LUFS) is a safe default. Avoid clipping and keep voiceover clear over music.
+US broadcasters must keep commercials at the same loudness as the programs around them under the CALM Act, using the ATSC A/85 recommended practice with a target of -24 LKFS, plus or minus 2 dB ([TV Technology](https://www.tvtechnology.com/news/fcc-issues-rules-to-calm-tv-ads), checked Oct 2026). That means a window of -26 to -22 LKFS.
 
-## Closed Captions and Safe Margins
+Streaming platforms set their own audio rules, but mixing your ad to about -24 LKFS (what many loudness meters call LUFS) is a safe default.
 
-Captions help viewers who watch with the sound off. Some platforms require a caption file, and the Hulu, Roku and Amazon pages above do not specify caption rules, so ask your platform or DSP what file type they want (SRT is the most common simple format). Keep logos and text well inside the edges of the frame, because TVs can crop the picture. Amazon publishes downloadable safe-zone guides for its ads.
+Avoid clipping and keep voiceover clear over music.
+
+## Do CTV Ads Need Captions and Safe Margins?
+
+Captions help viewers who watch with the sound off. Some platforms require a caption file, and the Hulu, Roku and Amazon pages above do not specify caption rules, so ask your platform or DSP what file type they want (SRT is the most common simple format).
+
+Keep logos and text well inside the edges of the frame, because TVs can crop the picture. Amazon publishes downloadable safe-zone guides for its ads.
 
 A simple SRT file for a :15 spot looks like this:
 
@@ -122,7 +134,7 @@ We're [service] in [neighborhood], [city].
 [YourWebsite.com]
 ```
 
-## Production on a Small Business Budget
+## How Do You Produce a CTV Ad on a Small Budget?
 
 You do not need a production company to make a CTV-ready spot.
 
@@ -131,7 +143,7 @@ You do not need a production company to make a CTV-ready spot.
 - **Edit:** A free editor handles a 15-second spot: hero shot, text overlay, logo, call to action.
 - **Music:** Use properly licensed music. Unlicensed tracks can be flagged or rejected.
 
-## Do This Before You Upload
+## What Should You Check Before You Upload?
 
 Run this list on the final file. It takes about 5 minutes.
 
@@ -144,7 +156,7 @@ Run this list on the final file. It takes about 5 minutes.
 - [ ] Text and logos inside the safe area
 - [ ] Mixed to about -24 LKFS, no clipping
 
-## Common Rejection Reasons
+## Why Do Platforms Reject CTV Ads?
 
 - **Wrong specs.** Frame rate, bitrate or file size outside the platform's limits is the easiest problem to avoid. Compare your export against the lists above.
 - **Audio too loud or distorted, text too close to the edge.** Meter your mix, keep a generous margin.
