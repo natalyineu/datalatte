@@ -15,6 +15,27 @@ const nextConfig: NextConfig = {
         destination: "/blog/is-google-ads-worth-it-for-small-businesses-honest-answer-with-real-data",
         permanent: true,
       },
+      // Duplicate guides merged into the stronger article
+      {
+        source: "/blog/google-ads-for-hair-salons-complete-2026-guide",
+        destination: "/blog/google-ads-for-hair-salons-complete-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/hair-salon-google-ads-complete-guide",
+        destination: "/blog/google-ads-for-hair-salons-complete-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/facebook-ads-for-coffee-shops",
+        destination: "/blog/meta-ads-for-coffee-shops-2026",
+        permanent: true,
+      },
+      {
+        source: "/blog/facebook-ads-for-coffee-shops-complete-guide",
+        destination: "/blog/meta-ads-for-coffee-shops-2026",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
