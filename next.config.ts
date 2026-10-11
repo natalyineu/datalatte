@@ -66,6 +66,21 @@ const nextConfig: NextConfig = {
         destination: "/blog/instagram-stories-ads-fitness-studios",
         permanent: true,
       },
+      {
+        source: "/blog/tiktok-ads-for-pet-groomers",
+        destination: "/blog/tiktok-ads-for-local-pet-groomers",
+        permanent: true,
+      },
+      {
+        source: "/blog/tiktok-ads-for-pet-groomers-cute-content-that-converts",
+        destination: "/blog/tiktok-ads-for-local-pet-groomers",
+        permanent: true,
+      },
+      {
+        source: "/blog/tiktok-marketing-for-pet-groomers",
+        destination: "/blog/tiktok-ads-for-local-pet-groomers",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
