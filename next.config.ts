@@ -81,6 +81,21 @@ const nextConfig: NextConfig = {
         destination: "/blog/tiktok-ads-for-local-pet-groomers",
         permanent: true,
       },
+      {
+        source: "/blog/ai-powered-chabot-for-local-coffee-shops",
+        destination: "/blog/ai-driven-customer-service-for-local-coffee-shops",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-business-profile-ai-potential",
+        destination: "/blog/google-business-profile-ai-powered-optimization",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-business-profile-ai-integration",
+        destination: "/blog/google-business-profile-ai-powered-optimization",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
