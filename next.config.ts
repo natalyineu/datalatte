@@ -141,6 +141,21 @@ const nextConfig: NextConfig = {
         destination: "/blog/using-tiktok-for-fitness-studio-marketing",
         permanent: true,
       },
+      {
+        source: "/blog/salon-rebooking-strategy-that-gets-clients-back",
+        destination: "/blog/salon-rebooking-script-that-gets-clients-back",
+        permanent: true,
+      },
+      {
+        source: "/blog/website-cro-optimization-for-coffee-shops",
+        destination: "/blog/coffee-shop-cro-techniques",
+        permanent: true,
+      },
+      {
+        source: "/blog/how-much-do-spotify-ads-cost-pricing-for-local-businesses",
+        destination: "/blog/how-much-do-spotify-ads-cost-pricing-for-local-business",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
@@ -155,11 +170,6 @@ const nextConfig: NextConfig = {
       {
         source: "/blog/marketing-automation-for-coffee-shops-save-5-hours-a-week",
         destination: "/blog/marketing-automation-for-coffee-shops-save-5-hours-every-week",
-        permanent: true,
-      },
-      {
-        source: "/blog/salon-rebooking-script-that-gets-clients-back",
-        destination: "/blog/salon-rebooking-strategy-that-gets-clients-back",
         permanent: true,
       },
       // Truncated slug names → full names
