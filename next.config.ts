@@ -96,6 +96,51 @@ const nextConfig: NextConfig = {
         destination: "/blog/google-business-profile-ai-powered-optimization",
         permanent: true,
       },
+      {
+        source: "/blog/hair-salon-tiktok-marketing",
+        destination: "/blog/tiktok-marketing-for-hair-salons",
+        permanent: true,
+      },
+      {
+        source: "/blog/tiktok-ads-for-local-hair-salons",
+        destination: "/blog/tiktok-ads-for-hair-salons",
+        permanent: true,
+      },
+      {
+        source: "/blog/pet-groomer-marketing-with-instagram-reels",
+        destination: "/blog/pet-groomer-marketing-with-instagram-reels-and-ai",
+        permanent: true,
+      },
+      {
+        source: "/blog/using-meta-ads-for-local-businesses",
+        destination: "/blog/local-business-meta-ads",
+        permanent: true,
+      },
+      {
+        source: "/blog/coffee-shop-instagram-marketing",
+        destination: "/blog/coffee-shop-instagram-marketing-strategy",
+        permanent: true,
+      },
+      {
+        source: "/blog/instagram-marketing-for-coffee-shops",
+        destination: "/blog/coffee-shop-instagram-marketing-strategy",
+        permanent: true,
+      },
+      {
+        source: "/blog/wix-vs-squarespace-vs-wordpress-local-business-website",
+        destination: "/blog/wix-vs-squarespace-small-business",
+        permanent: true,
+      },
+      {
+        source: "/blog/fitness-studio-tiktok-marketing",
+        destination: "/blog/using-tiktok-for-fitness-studio-marketing",
+        permanent: true,
+      },
+      {
+        source: "/blog/tiktok-marketing-for-fitness-studios",
+        destination: "/blog/using-tiktok-for-fitness-studio-marketing",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
