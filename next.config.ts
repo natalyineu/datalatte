@@ -156,6 +156,66 @@ const nextConfig: NextConfig = {
         destination: "/blog/how-much-do-spotify-ads-cost-pricing-for-local-business",
         permanent: true,
       },
+      {
+        source: "/blog/ai-driven-marketing-automation",
+        destination: "/blog/ai-for-marketing-automation",
+        permanent: true,
+      },
+      {
+        source: "/blog/using-ai-for-marketing-automation",
+        destination: "/blog/ai-for-marketing-automation",
+        permanent: true,
+      },
+      {
+        source: "/blog/ai-for-local-marketing-automation",
+        destination: "/blog/ai-for-marketing-automation",
+        permanent: true,
+      },
+      {
+        source: "/blog/how-much-do-tiktok-ads-cost-real-2026-pricing-benchmarks",
+        destination: "/blog/tiktok-ads-cost-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/coffee-shop-marketing-with-klaviyo",
+        destination: "/blog/using-klaviyo-for-coffee-shop-email-marketing",
+        permanent: true,
+      },
+      {
+        source: "/blog/ai-driven-local-seo-audit-tool",
+        destination: "/blog/ai-driven-local-seo-audit",
+        permanent: true,
+      },
+      {
+        source: "/blog/responsive-search-ads-explained-what-they-are-and-how-to-use-them-in-2026",
+        destination: "/blog/google-responsive-search-ads-best-practices-10-tips-to-improve-your-ad-strength",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-business-profile-posts",
+        destination: "/blog/how-to-automate-google-posts-local-business",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-posts-for-local-seo-how-to-use-them",
+        destination: "/blog/how-to-automate-google-posts-local-business",
+        permanent: true,
+      },
+      {
+        source: "/blog/marketing-for-pool-builders",
+        destination: "/blog/google-ads-for-pool-builders",
+        permanent: true,
+      },
+      {
+        source: "/blog/pinterest-marketing-for-local-business",
+        destination: "/blog/pinterest-marketing-for-local-businesses-worth-it",
+        permanent: true,
+      },
+      {
+        source: "/blog/zapier-for-local-business",
+        destination: "/blog/zapier-for-small-business-10-automations-that-save-time",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
