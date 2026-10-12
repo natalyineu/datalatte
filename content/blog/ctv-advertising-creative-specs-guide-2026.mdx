@@ -2,7 +2,7 @@
 title: "CTV Ad Specs 2026: Hulu, Roku, Amazon Video Sizes"
 seoTitle: "CTV Ad Specs 2026: Video Size, Format & Length"
 date: "2026-06-13"
-lastModified: "2026-10-11"
+lastModified: "2026-10-12"
 description: "CTV ad specs for 2026: one 1920x1080 MP4 fits Hulu, Roku and Amazon. File size caps of 250 MB, 500 MB and 1 GB, checked on official spec pages."
 author: "Nataliia"
 category: "Programmatic Advertising"
@@ -16,11 +16,7 @@ Export one 16:9, 1920x1080 MP4 using H.264 video and AAC stereo audio at 48 kHz,
 
 The details below (file size, bitrate, length) differ by platform, so check the current spec page before every upload.
 
-Here is the scene. You paid a freelancer for a 15-second spot, you booked the flight, and the platform bounces your file at the last step. Wrong frame rate. Or the file is too big. Or the audio is clipped.
-
-Now the start date slips and you pay for edits twice.
-
-Every one of those failures is on a published spec page. The numbers are short: Hulu caps self-served files at 250 MB, Amazon at 500 MB, Roku at 1 GB. Frame rate, bitrate and audio have fixed ranges. Check them once, export once, and the spot goes through.
+A file bounced at upload delays the start date and can mean paying for edits twice. The usual causes (frame rate, file size, audio) are all listed on published spec pages. The numbers are short: Hulu caps self-served files at 250 MB, Amazon at 500 MB, Roku at 1 GB. Frame rate, bitrate and audio have fixed ranges. Check them once, export once, and the spot goes through.
 
 <StatRow
   values="250 MB|500 MB|1 GB|6 Mbps"
@@ -42,7 +38,7 @@ Based on the official spec pages of Hulu (Disney Advertising), Roku Ads Manager 
 | **Frame rate** | Constant frame rate. Hulu: 23.98, 24, 25, 29.97 or 30. Roku: 23.98, 25 or 29.97. Amazon: 23.976, 24, 25 or 29.97 |
 | **Audio** | AAC (Hulu and Roku also take PCM), stereo, 48 kHz is accepted by all |
 
-The IAB Tech Lab's CTV ad format guidelines also use 1920x1080 as the standard fullscreen size, with 16:9 preferred ([IAB Canada summary](https://iabcanada.com/?p=19700), checked Oct 2026).
+The IAB Tech Lab's CTV ad format guidelines also use 1920x1080 as the standard fullscreen size, with 16:9 preferred (secondary: [PPC Land report on the December 2025 draft](https://ppc.land/iab-tech-lab-releases-ctv-ad-format-standards-for-public-comment/), checked Oct 2026; the IAB Tech Lab document itself was not read).
 
 ## What Are the Specs for Each Platform?
 
@@ -76,13 +72,13 @@ Per [Amazon Ads' Streaming TV and Prime Video specs](https://advertising.amazon.
 
 ### Peacock and other platforms
 
-Peacock follows NBCUniversal's creative guidelines, which change often, so download the current sheet from your sales contact or DSP. The same goes for Tubi, Pluto TV, YouTube TV and DSPs such as The Trade Desk or StackAdapt. Their requirements depend on the inventory you buy, and we have not listed numbers we could not confirm on an official page.
+Peacock follows NBCUniversal's creative guidelines, which change often, so download the current sheet from your sales contact or DSP. The same goes for Tubi, Pluto TV, YouTube TV and DSPs such as The Trade Desk or StackAdapt. Their requirements depend on the inventory you buy, so no numbers are listed here for them: none could be confirmed on an official page.
 
 ## Will Your CTV Ad File Fit the Size Limit?
 
 File size is bitrate times length. Divide by 8 to turn megabits into megabytes. The formula: size in MB = Mbps x seconds / 8 (video only; audio adds a small amount, so leave some headroom).
 
-Here are worked examples using the bitrates from the spec pages above. The bitrate and length choices are examples. Plug in your own export settings.
+Worked example. Assumption: the bitrates are the minimums or recommended values from the spec pages above, and the lengths (15, 30 and 60 seconds) are assumed example lengths. Plug in your own export settings.
 
 | Example export | Calculation | Video size | Fits Hulu-served (250 MB)? | Fits Amazon (500 MB)? |
 |---|---|---|---|---|
@@ -112,7 +108,7 @@ Avoid clipping and keep voiceover clear over music.
 
 Captions help viewers who watch with the sound off. Some platforms require a caption file, and the Hulu, Roku and Amazon pages above do not specify caption rules, so ask your platform or DSP what file type they want (SRT is the most common simple format).
 
-Keep logos and text well inside the edges of the frame, because TVs can crop the picture. Amazon publishes downloadable safe-zone guides for its ads.
+Keep logos and text well inside the edges of the frame, because TVs can crop the picture. Ask your platform for its safe-zone guide.
 
 A simple SRT file for a :15 spot looks like this:
 
@@ -174,7 +170,7 @@ A: Often not. If you buy through a DSP, upload your best 1920x1080 file and ask 
 A: Usually the loudness is out of range or the audio is distorted, clipped or noisy. Re-export with a limiter, aim for about -24 LKFS, and re-record any voiceover captured in a noisy room.
 
 **Q: Can I include a QR code in my CTV ad?**
-A: Support varies by platform. The IAB Tech Lab lists QR codes among the possible interactive components of its CTV formats, but check your platform's rules. If it is allowed, make the code large and keep it on screen long enough to scan, and use a unique tracking link.
+A: Support varies by platform. The IAB Tech Lab draft guidelines list QR codes among the possible interactive components of CTV formats (per the secondary PPC Land report), but check your platform's rules. If it is allowed, make the code large and keep it on screen long enough to scan, and use a unique tracking link.
 
 **Q: Is a :15 or :30 better for local business CTV?**
 A: For most local businesses with a simple offer, :15. It is quicker to produce and forces one clear message. Choose :30 only if you need to explain a complex service or show a testimonial.
@@ -184,7 +180,7 @@ A: For most local businesses with a simple offer, :15. It is quicker to produce 
 - [Video Commercial specs, Disney Advertising (Hulu)](https://products.disneyadvertising.com/video-commercial/)
 - [Video creative specifications, Roku Ads Manager Help](https://help.ads.roku.com/en/articles/7154647)
 - [Streaming TV and Prime Video ad specs, Amazon Ads](https://advertising.amazon.com/resources/ad-specs/dsp/video/streaming-tv-prime-video-ads)
-- [IAB Tech Lab ad format guidelines for digital video and CTV, via IAB Canada](https://iabcanada.com/?p=19700)
+- [IAB Tech Lab CTV ad format guidelines (draft, Dec 2025), via PPC Land](https://ppc.land/iab-tech-lab-releases-ctv-ad-format-standards-for-public-comment/) (secondary source)
 - [FCC Issues Rules to CALM TV Ads, TV Technology](https://www.tvtechnology.com/news/fcc-issues-rules-to-calm-tv-ads)
 
 ## Related Articles
