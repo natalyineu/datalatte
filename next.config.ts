@@ -266,6 +266,11 @@ const nextConfig: NextConfig = {
         destination: "/blog/pet-groomer-instagram-marketing-strategy",
         permanent: true,
       },
+      {
+        source: "/blog/google-ads-for-dog-groomers",
+        destination: "/blog/google-ads-for-dog-groomers-complete-2026-guide",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
