@@ -135,6 +135,28 @@ async function fetchGSC() {
   };
 }
 
+// Weekly per-URL snapshots (clicks/impressions/position) so rewritten pages can be
+// compared before/after. One entry per ISO week; keeps the last 30 weeks.
+async function saveGscPageHistory() {
+  const auth = getAuth();
+  const siteUrl = process.env.GSC_SITE_URL;
+  if (!siteUrl) return;
+  const file = path.join(OUT_DIR, "gsc-pages-history.json");
+  let hist = [];
+  try { hist = JSON.parse(fs.readFileSync(file, "utf8")); } catch { /* first run */ }
+  const end = dateStr(-3);                     // GSC data is stable after ~3 days
+  const last = hist[hist.length - 1];
+  if (last && (new Date(end) - new Date(last.end)) / 864e5 < 7) return;
+  const sc = google.searchconsole({ version: "v1", auth });
+  const rows = (await sc.searchanalytics.query({
+    siteUrl,
+    requestBody: { startDate: dateStr(-9), endDate: end, dimensions: ["page"], rowLimit: 5000, dataState: "final" },
+  })).data.rows || [];
+  hist.push({ end, pages: rows.map(r => [r.keys[0].replace("https://datalatte.pro", ""), r.clicks, r.impressions, +r.position.toFixed(1)]) });
+  fs.writeFileSync(file, JSON.stringify(hist.slice(-30)));
+  console.log(`✓ GSC page history saved (${rows.length} pages, week ending ${end})`);
+}
+
 async function fetchGA4() {
   const auth = getAuth();
   const propertyId = process.env.GA4_PROPERTY_ID;
@@ -281,6 +303,7 @@ async function main() {
     fs.writeFileSync(gscPath, JSON.stringify(gsc, null, 2));
     console.log(`✓ GSC saved → ${gscPath}`);
     console.log(`  Queries: ${gsc.queries.length}, Pages: ${gsc.pages.length}`);
+    try { await saveGscPageHistory(); } catch (e) { console.error("page history:", e.message); }
   } catch (err) {
     console.error("✗ GSC error:", err.message);
     errors.push("GSC: " + err.message);
