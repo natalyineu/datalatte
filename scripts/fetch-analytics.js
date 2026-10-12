@@ -145,6 +145,14 @@ async function saveGscPageHistory() {
   let hist = [];
   try { hist = JSON.parse(fs.readFileSync(file, "utf8")); } catch { /* first run */ }
   const end = dateStr(-3);                     // GSC data is stable after ~3 days
+  // Full 90-day per-page pull (overwritten daily) — the 250-row weekly lists miss low-impression pages
+  const sc90 = google.searchconsole({ version: "v1", auth });
+  const rows90 = (await sc90.searchanalytics.query({
+    siteUrl,
+    requestBody: { startDate: dateStr(-93), endDate: end, dimensions: ["page"], rowLimit: 25000, dataState: "final" },
+  })).data.rows || [];
+  fs.writeFileSync(path.join(OUT_DIR, "gsc-pages-90d.json"), JSON.stringify({ end, pages: rows90.map(r => [r.keys[0].replace("https://datalatte.pro", ""), r.clicks, r.impressions, +r.position.toFixed(1)]) }));
+  console.log(`✓ GSC 90d page list saved (${rows90.length} pages)`);
   const last = hist[hist.length - 1];
   if (last && (new Date(end) - new Date(last.end)) / 864e5 < 7) return;
   const sc = google.searchconsole({ version: "v1", auth });
