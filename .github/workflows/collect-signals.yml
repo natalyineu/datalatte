@@ -3,9 +3,6 @@ name: Daily Radar Signal Collection
 on:
   schedule:
     - cron: '0 7 * * *'   # 7am UTC daily — after overnight news cycle
-  push:
-    paths:
-      - '.github/radar-backfill.txt'   # touch this file to run a catch-up collection (720h window)
   workflow_dispatch:        # allow manual trigger from GitHub Actions UI
     inputs:
       max_age_hours:

@@ -216,6 +216,26 @@ const nextConfig: NextConfig = {
         destination: "/blog/zapier-for-small-business-10-automations-that-save-time",
         permanent: true,
       },
+      {
+        source: "/blog/whatsapp-marketing-for-local-business",
+        destination: "/blog/whatsapp-business-marketing-local-business",
+        permanent: true,
+      },
+      {
+        source: "/blog/pet-groomer-email-marketing-tips",
+        destination: "/blog/pet-groomer-email-marketing-with-mailchimp",
+        permanent: true,
+      },
+      {
+        source: "/blog/ai-powered-social-media-management",
+        destination: "/blog/ai-powered-social-media-management-tools",
+        permanent: true,
+      },
+      {
+        source: "/blog/ai-driven-customer-service",
+        destination: "/blog/ai-customer-service-for-small-business",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
