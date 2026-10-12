@@ -1,112 +1,127 @@
 ---
-title: "How to Use Make.com to Automate Your Salon Marketing in 1 Weekend"
+title: "Make.com for Salon Marketing Automation: 4 Workflows"
 date: "2026-05-18"
-lastModified: "2026-06-02"
-description: "Automate your salon marketing with Make.com in just one weekend and boost bookings by up to 30%."
+lastModified: "2026-10-11"
+description: "Make.com's free plan gives 1,000 credits a month. See 4 salon workflows, how credits are counted, email rules and a break-even example."
 author: "Nataliia"
 category: "AI & Automation"
 tags: ["marketing automation", "salon marketing", "make.com"]
 slug: "how-to-use-make-com-for-salon-marketing-automation"
 image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&q=80&auto=format&fit=crop"
-readTime: '16 min read'
+readTime: '8 min read'
 ---
 
-As a salon owner, you wear many hats: stylist, manager, and marketer. But with a packed schedule and limited budget, marketing often takes a backseat. You're not alone – 60% of small businesses struggle to find time for marketing. But what if you could automate repetitive tasks and focus on what matters: making clients look and feel great?
+You can automate salon marketing with Make.com by building scenarios that watch your booking tool and then send a message, add a row to a sheet or alert you. Make's free plan includes 1,000 credits a month, and most actions cost 1 credit. A salon with a few hundred bookings a month can start on that allowance. The cost depends less on the plan than on how you design the trigger.
+
+This guide covers four workflows for a salon, how Make counts usage, the email rules you must follow, and a break-even example where every figure is labelled as an assumption.
 
 <StatRow
-  values="60|30|80|50"
-  labels="Percentage of small businesses struggling with marketing|Potential increase in bookings with automation|Percentage of businesses using automation tools|Average time saved per week with automation"
-  subs="Source: Small Business Trends|Source: Make.com|Source: Statista|Source: Forbes"
-  trends="up|up|up|up"
+  values="1,000|1 credit|31|$53,088"
+  labels="Credits on Make's Free plan each month|Default cost of one operation|Operations in Make's own 10-response example|Maximum penalty per non-compliant marketing email"
+  subs="Make pricing page|Make credits help page|Make operations help page: 1 trigger plus 3 modules x 10 bundles|FTC CAN-SPAM compliance guide"
+  trends="flat|flat|flat|flat"
 />
 
-## What is Make.com and Why Should You Care?
-Make.com (formerly Integromat) is a powerful automation tool that helps you streamline your marketing tasks without needing to code. For a salon owner, this means you can automate tasks like email marketing, social media posting, and even client follow-ups.
+## What Does Make.com Do for a Salon?
 
-Here are some benefits of using Make.com for your salon marketing:
-* Save time: Automate repetitive tasks and focus on high-leverage activities
-* Increase efficiency: Connect different apps and tools to streamline your workflow
-* Boost bookings: Use automation to nurture leads and encourage bookings
+Make connects apps with visual workflows called scenarios. A scenario starts with a trigger (a new booking, a new customer, a schedule) and then runs steps (send an email, write to a spreadsheet, post a Slack message). It does not replace your booking software. It joins your booking software to everything else.
 
+Make lists a Calendly app whose trigger fires when an event is created or canceled, and a Square app with triggers such as Watch Customers and Watch Payments. Check that your own booking tool has a connector before you plan anything. If it does not, a webhook or a Google Calendar trigger is the usual fallback.
 
-<Callout type="tip">Want expert help? DataLatte's [AI agents & automation](/services/ai-agents) service is built specifically for local small businesses.</Callout>
+## How Does Make Count Credits?
 
-## Setting Up Your Make.com Account
-To get started with Make.com, you'll need to create an account. Don't worry; it's free to sign up, and you can start exploring the platform right away. Once you're logged in, take some time to familiarize yourself with the interface. You'll see a dashboard with various modules and templates to help you get started.
+Make's [credits help page](https://help.make.com/credits) says that by default one operation equals one credit, whatever the size of the data. Some AI features use more. According to the [operations help page](https://help.make.com/operations), a trigger counts as one operation per check, and every other module runs once for each bundle (item) it receives.
 
-## Automating Your Salon Marketing with Make.com
-Now that you have an account, let's dive into some practical examples of how you can automate your salon marketing with Make.com.
+Make's own example: a trigger returns 10 form responses, followed by three modules. That is 1 + (3 x 10) = 31 operations in one run. For a salon, the lesson is simple: process one booking at a time, filter early, and avoid loops over your whole client list.
 
-For instance, you can create a workflow that:
-* Automatically sends a follow-up email to clients who haven't booked an appointment in a while
-* Posts updates on your social media channels when you have a new service or promotion
-* Adds new leads to your CRM and sends them a welcome email
+If you run out of credits mid-month, Make's help page says you can upgrade, buy extra credits or turn on auto-purchase. Check paid plan prices and limits on the [pricing page](https://www.make.com/en/pricing), because they change.
 
-<Callout type="tip">Start small and focus on one workflow at a time. This will help you get comfortable with the platform and avoid feeling overwhelmed.</Callout>
+## Which Four Salon Workflows Should You Build First?
 
-## Creating a Workflow: A Step-by-Step Guide
-Creating a workflow in Make.com is surprisingly straightforward. Here's a step-by-step guide to get you started:
-* Log in to your Make.com account and click on the "Scenarios" tab
-* Click on the "Create a new scenario" button
-* Choose a template or start from scratch
-* Add modules to your workflow by dragging and dropping them onto the canvas
-* Configure each module according to your needs
+Build one, test it for two weeks, then add the next.
 
-## Measuring the Effectiveness of Your Automation Efforts
-To measure the effectiveness of your automation efforts, you'll need to track key metrics like:
-* Open rates and click-through rates for your emails
-* Engagement metrics on social media
-* Conversion rates for your workflows
+| Workflow | Trigger | Steps |
+| --- | --- | --- |
+| Booking confirmation and reminder | New booking | Send confirmation, schedule reminder |
+| Review request | Appointment marked complete | Wait a day, send a short message with your review link |
+| Lapsed client list | Weekly schedule | Find clients with no visit in 90 days (your choice), add them to a sheet |
+| Monday numbers email | Weekly schedule | Pull last week's bookings into a summary and email it to you |
 
-<BarChart
-  title="Average Conversion Rates for Automated Workflows"
-  labels="Email Marketing|Social Media Posting|Lead Nurturing|Booking Reminders"
-  values="25|15|30|40"
-  unit="%"
-  caption="Illustrative estimate. Actual results vary by market and business."
-  highlights="Booking Reminders"
-/>
+The weekly schedules run once a week, so they use very few credits. The booking and review workflows scale with your bookings. For booking tool choices see our [Booksy, Vagaro and Fresha comparison](/blog/booksy-vs-vagaro-vs-fresha-best-booking-app-salons-2026) and the [Calendly alternatives for salons](/blog/best-calendly-alternative-for-salons-spas).
 
+## How Do You Build a Scenario Step by Step?
 
+1. Write the goal in one line: "Every completed appointment gets a review request the next day."
+2. Create a scenario and choose the trigger module for your booking tool.
+3. Add a filter so the scenario only continues for the cases you want (for example, completed appointments with a client email).
+4. Add the action: an email module, a Google Sheets row or a Slack message.
+5. Run it once with test data and check the result.
+6. Send a test to yourself, read it as a client, then turn the schedule on.
 
+Keep a simple log sheet of what the scenario sent. If something goes wrong, you will know who received what.
 
-## Frequently Asked Questions
+## What Rules Apply to Automated Emails?
 
-**Q: I only have an iPhone and no computer. Can I still set this up?**
+The FTC's [CAN-SPAM guide](https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business) lists the main requirements for US marketing email:
 
-Technically yes — Make.com has a mobile browser interface, but it’s miserable for building workflows on a phone screen. You need to copy-paste API keys, drag modules, and test connections. I’ve tried it; I gave up after 20 minutes and found my laptop. If you don’t own a computer, borrow one from a friend for a weekend, or hire a teenager to do the setup while you direct them. The actual management (checking errors, adding new triggers) works fine on a phone after the initial build.
+- Make header information accurate, and keep subject lines honest.
+- Clearly disclose that the message is an ad.
+- Include a valid physical postal address.
+- Provide a clear way to opt out, and honour requests within 10 business days.
+- You remain responsible even if another company sends the email for you.
 
-**Q: What if I mess up and accidentally send a wrong email to all my clients?**
+The guide states penalties of up to $53,088 for each separate email in violation. Other countries have their own rules, so check them if you email clients in the UK, EU, Canada or Australia. Text messages carry separate consent rules. Get legal advice before you automate SMS.
 
-You will. Every person I’ve ever trained has sent at least one embarrassing test email to real clients. The fix is simple: never activate a scenario until you’ve tested it with a fake account first. Use a separate email address (set up a free Gmail alias) and create a test client in your booking app. Run the automation on that fake booking and check every message. Also, set your Mailchimp list to “double opt-in” initially — that way even if you send something weird, only subscribed clients see it. Still paranoid? Start with a segment of 10 trusted clients and get their feedback before scaling.
+## Will the Automation Pay for Itself? A Worked Example
 
-**Q: How long does it actually take to set up from scratch, realistically?**
+Every figure below is an **assumption** for a small salon, not a result.
 
-If you’ve never used Make.com before, plan for a full weekend — maybe 8–12 hours total. That includes account setup, connecting apps, building the reminder flow, testing, and fixing mistakes. If you’re tech-savvy and follow a template, cut that to 4–6 hours. The mistake people make is rushing and skipping testing, which adds hours of cleanup later. Go slow, test each step. I once spent 2 hours debugging a flow because I forgot to set the time zone in Booksy. That’s 2 hours I could have saved by reading the setup instructions first.
+| Item | Assumption |
+| --- | --- |
+| Active clients | 300 |
+| Lapsed clients (no visit in 90 days) | 60 |
+| Win-back message rebooking rate | 5% |
+| Clients rebooked per month | 3 |
+| Average ticket | $60 |
+| Extra revenue | $180 a month |
+| Make plan | Free, $0 |
+| Your setup time, one-off | 4 hours |
 
-**Q: Does Make.com cost extra on top of the apps I already use?**
+On the free plan the tool costs nothing, so the extra revenue is the upper bound on the gain. Subtract staff time and product cost to see the real margin. If the rebooking rate is 1%, only one or two clients return, and you still gain more than the tool cost. Test one segment for 60 days before you add more.
 
-Yes, but it’s cheap. Make’s free plan covers 1,000 operations per month — enough for a solo salon with about 30–40 appointments and few follow-up emails. If you send more emails or add multiple triggers, you’ll need the $9.99/month starter plan. The apps themselves (Mailchimp, Twilio, Square) have their own costs — Mailchimp’s free tier allows up to 500 contacts, Twilio charges about $7 per 1,000 SMS messages, and Square has a transaction fee. Budget $30–$50/month total for a small salon.
+## What Mistakes Should You Avoid?
 
-**Q: Will automation make me seem impersonal to clients?**
+- Polling a spreadsheet every few minutes. The trigger check itself uses credits.
+- Messaging clients who visited yesterday. Exclude recent visits.
+- Sending in the middle of the night. Set a send window.
+- Skipping consent. Only message people who agreed.
 
-It can — if you write robotic messages. I’ve seen salons send “Dear Valued Client, your appointment is scheduled…” — that sounds like a dentist office form letter. Write in your voice. Use the client’s name and stylist’s name. Add a line like “We’ve got your favorite chair ready.” One barbershop in Nashville added a custom field for “preferred conversation topic” (sports, movies, or quiet) and referenced it in follow-ups. Their clients loved it. Automation handles the delivery; you control the tone. Make it personal or it will feel like spam.
+For a wider view of tools and costs, read our [Make.com guide for small businesses](/blog/make-automation-for-small-business), the [Make.com workflows for local businesses](/blog/make-com-automation-local-business-workflows), [AI automation for hair salons](/blog/ai-automation-for-hair-salons) and the [salon marketing automation guide](/blog/marketing-automation-for-hair-salons-guide).
 
-**Q: I already use Booksy’s built-in reminders. Why do I need Make?**
+## FAQ
 
-Booksy’s built-in reminders are fine for a basic text and email. But they’re limited — you can’t add a post-visit email sequence, send a coupon code based on service type, or automatically add reviewers to a VIP list. Make lets you connect Booksy to other tools and build custom logic. For example, if a client books a color service, you can automatically tag them in Mailchimp and send a “How to maintain your color” guide 3 days later, then a rebooking offer at week 6. Booksy alone can’t do that. The question isn’t “should I replace Booksy’s reminders?” It’s “should I add a layer on top?” For most salons, yes — the ROI on that extra layer is within the first month.
+**Q: Is Make.com free for a salon?**
+A: Make's pricing page lists a Free plan with 1,000 credits a month. Check the page for current limits and for paid plan prices.
 
----
+**Q: Do I need to code?**
+A: No. Scenarios are built visually, but you still need to understand your booking tool's data and test every step.
 
-I once spent an entire weekend building a gorgeous 12-step automation for a salon in Brooklyn. Connected everything, tested twice, and felt like a genius. Then the client called me Monday morning: she had 43 clients who received a “Your hair appointment is next week” email — except the date was correct and the time was correct, but the *year* was 2022. We had set the date field to pull from the calendar in a way that defaulted to the start year of the event instead of the current year. That was four months ago, and I still check year fields twice before hitting activate.
+**Q: What if my booking tool is not on Make?**
+A: Look for a webhook, email or Google Calendar option instead. Otherwise automate in the booking tool itself.
 
-The truth is, automation saves time only if you give it the right instructions. It won’t fix bad data, bad timing, or bad copy. But if you start small, test ruthlessly, and keep your client’s experience at the center, you’ll free up hours every week and probably see your booking rate climb faster than a fresh blowout on a humid day.
+**Q: Can I automate text messages?**
+A: Technically yes, but SMS has separate consent rules. Get proper advice first.
 
-If you want help building a flow that’s actually tested for your specific setup, [book a free consultation](/free-audit). I’ll look at your current tools, show you where Make fits, and tell you the one thing you should not automate (hint: it’s the “how was your service?” question — some things need a human voice). No pressure, no jargon, just a straight conversation with someone who’s made all the mistakes so you don’t have to.
+**Q: How long does the first scenario take?**
+A: Plan a few hours for setup and testing. That is an estimate, not a vendor promise.
 
-## Related Articles
+## Sources
 
-- [Simplifying Hair Salon Operations with AI Automation](/blog/ai-automation-for-hair-salons)
-- [AI Booking Assistant for Salons: Automate Appointments 24/7](/blog/ai-booking-assistant-for-salons)
-- [How AI-Powered Chatbots Can Enhance Customer Experience for Hair Salons](/blog/ai-powered-chatbots-for-hair-salons)
-- [AI Marketing Tools for Salons: Automate Bookings, Reviews and Social in 2026](/blog/ai-tools-for-salon-marketing-automation)
+- [Make: Pricing](https://www.make.com/en/pricing)
+- [Make Help: Credits](https://help.make.com/credits)
+- [Make Help: Operations](https://help.make.com/operations)
+- [Make: Calendly integrations](https://www.make.com/en/integrations/calendly)
+- [Make: Square integrations](https://www.make.com/en/integrations/square)
+- [FTC: CAN-SPAM Act compliance guide for business](https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business)
+
+Want these workflows set up and tested for your salon? See our [email and SMS marketing service](/services/email-sms).

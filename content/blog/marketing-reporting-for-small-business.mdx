@@ -1,110 +1,106 @@
 ---
-title: "Marketing Reporting for Small Businesses: Build a Dashboard That Matters"
+title: "Marketing Reporting for Small Business: A 1-Page Report"
 date: "2026-05-21"
-lastModified: "2026-06-02"
-description: "Get a clear picture of your marketing performance with actionable insights for small business marketing reporting"
+lastModified: "2026-10-11"
+description: "Marketing reporting for small business: one page, 6 numbers, monthly. Learn GA4's 14-month data limit, free Google dashboard tools and a worked example."
 author: "Nataliia"
 category: "Website & CRO"
 tags: ["marketing reporting", "small business", "local marketing"]
 slug: "marketing-reporting-for-small-business"
 image: "https://images.unsplash.com/photo-1548767797-d8c844163c4a?w=800&q=80&auto=format&fit=crop"
-readTime: '14 min read'
+readTime: '8 min read'
 ---
 
-Small businesses often struggle to track the performance of their marketing efforts. According to a recent study, 60% of small business owners don't have a clear understanding of their marketing ROI. Meanwhile, 70% of businesses with a clear marketing strategy experience significant growth. This is where a well-crafted marketing report can make all the difference.
+Marketing reporting for a small business should fit on one page and answer one question: what did we spend, and what came back? Pick about six numbers, pull them on the same day each month, and compare them with the last month. A report nobody reads is worse than none, so keep yours short enough to review in ten minutes.
 
-<StatRow values="60|70|25|90" labels="Small businesses without clear marketing ROI|Small businesses with clear marketing strategy|Average marketing budget|Average growth rate" subs="Percentage of respondents|Percentage of businesses experiencing growth|Average monthly expenditure|Average annual revenue increase" trends="down|up|neutral|up"/>
+This guide shows which numbers belong on the page, where each one comes from, what Google's tools can and cannot keep, and a worked example with every figure labelled as an assumption.
 
-A marketing report should provide a comprehensive overview of your business's marketing performance, highlighting areas of success and areas for improvement. It should be a living document, regularly updated to reflect changes in the market and your business strategy.
+<StatRow
+  values="14 months|2 months|$0|1 per day"
+  labels="Longest GA4 event data retention on a standard property|GA4 default option for event data retention|Cost of Google's dashboard tool|How often Google counts the same person in Business Profile views"
+  subs="Google Analytics Help: data retention|Google Analytics Help: choose 14 months instead of 2|Google Cloud docs: Data Studio (formerly Looker Studio) is a no-cost tool|Google Business Profile Help: a person can only be counted once a day"
+  trends="flat|flat|flat|flat"
+/>
 
-### Setting Up Your Marketing Dashboard
+## What Should a Small Business Marketing Report Include?
 
-To create an effective marketing report, you'll need to set up a dashboard that tracks key performance indicators (KPIs). This will help you stay on top of your marketing efforts and make data-driven decisions.
+Choose numbers that tie to money. A useful one-page report has six lines:
 
-A good marketing dashboard should include the following metrics:
+1. **Spend:** total ad spend and any tool or agency fees.
+2. **Enquiries:** calls, form fills, bookings and messages, counted the same way every month.
+3. **Cost per enquiry:** spend divided by enquiries.
+4. **Revenue from new customers:** from your till or booking system, not from the ad platform.
+5. **Google Business Profile actions:** calls, direction requests and website clicks.
+6. **One note:** what changed this month and what you will do next.
 
-* Website traffic and engagement
-* Social media reach and engagement
-* Email marketing open and click-through rates
-* Lead generation and conversion rates
-* Return on investment (ROI) for each marketing channel
+Reach, impressions and follower counts can sit in an appendix. They explain why something moved. They do not show whether the business gained.
 
-<BarChart title="Marketing Channel ROI" labels="Google Ads|Facebook Ads|Email Marketing|Influencer Marketing" values="300|150|200|100" unit="$" caption="ROI for each marketing channel over the past quarter" highlights="Google Ads"/>
+## Where Does Each Number Come From?
 
-### Building a Customized Report
+Each source has quirks, so know them before you trust a trend.
 
-Your marketing report should be tailored to your business's specific needs and goals. Here are some steps to build a customized report:
+**Google Business Profile.** According to Google's [Business Profile help](https://support.google.com/business/answer/9918094), the performance metrics include views, calls, directions, website clicks, messages and bookings. Calls count clicks on the call button, not completed calls. Views count unique visitors and a person is counted once a day, so the total can be lower than your notification emails. Performance data is only available for verified profiles.
 
-1. **Define your goals and objectives**: Determine what you want to achieve with your marketing efforts and what metrics will help you measure success.
-2. **Choose your KPIs**: Select the metrics that align with your goals and objectives.
-3. **Set up a data tracking system**: Use tools like Google Analytics or Excel to track your KPIs.
-4. **Regularly review and update your report**: Schedule regular review sessions to analyze your data and make adjustments to your marketing strategy.
+**Google Analytics 4.** The [data retention page](https://support.google.com/analytics/answer/7667196) says standard properties can keep event data for 2 months or 14 months, and the setting affects Explorations and funnel reports but not standard aggregated reports. Check Admin, then Data Settings, then Data Retention, and choose 14 months. Reducing retention later deletes older data in the next monthly process.
 
-<Callout type="tip">Use a template to create a consistent and easy-to-follow report structure.</Callout>
+**Ad platforms.** Export spend and conversions each month and save the file. Platforms can restate numbers later, so your own copy matters.
 
-### Common Reporting Mistakes
+**Your till or booking system.** This is the number you trust most. Record how each new customer heard about you.
 
-While creating a marketing report can be a valuable tool for tracking performance, there are several common mistakes to avoid:
+## How Do You Build the Report for Free?
 
-* **Not setting clear goals and objectives**: Without clear goals, your report will lack direction and purpose.
-* **Not tracking the right metrics**: Focus on metrics that align with your goals and objectives.
-* **Not regularly reviewing and updating your report**: A stagnant report will provide little value.
+Use a spreadsheet first. A Google Sheet with one row per month and one column per metric is enough for most single-location shops. Our [dashboard guide](/blog/how-to-create-marketing-dashboard-small-business) walks through the layout.
 
-<Callout type="warning">Don't rely solely on automated reporting tools. Human analysis and interpretation are crucial for making informed decisions.</Callout>
+When you want charts that update, Google's free dashboard tool helps. Google's [documentation](https://docs.cloud.google.com/looker/docs/studio) says it is now called Data Studio (formerly Looker Studio) and states it is a no-cost tool, with a paid Pro tier for collaboration and administration. The page names no specific connectors, so check which of your data sources it can connect to before you commit. For a walk-through, see [local SEO reports with Google Data Studio](/blog/ai-driven-local-seo-reports-with-google-data-studio).
 
-### Real-World Example
+Automation can also fill your sheet each month, but only after you trust the manual version.
 
-Let's take a look at how a coffee shop in New York City might use a marketing report to track their performance:
+## How Do You Read the Report? A Worked Example
 
-* **Website traffic**: The coffee shop's website receives an average of 500 visitors per month, with a bounce rate of 20%.
-* **Social media engagement**: Their Instagram account has 5,000 followers, with an average engagement rate of 2%.
-* **Email marketing**: Their email list has 1,000 subscribers, with an open rate of 30% and a click-through rate of 10%.
+All figures are **assumptions** for a small café or salon.
 
-<Callout type="coffee">As a local marketing consultant, I've helped numerous coffee shops like this one increase their website traffic and social media engagement by up to 500%.</Callout>
+| Metric | Last month | This month |
+| --- | --- | --- |
+| Ad spend | $400 | $400 |
+| Enquiries (calls, forms, bookings) | 40 | 50 |
+| Cost per enquiry | $10.00 | $8.00 |
+| New customers (from intake question) | 12 | 15 |
+| Average first-visit spend | $45 | $45 |
+| Revenue from new customers | $540 | $675 |
 
-## Frequently Asked Questions
+Cost per enquiry fell from $10 to $8, and new-customer revenue rose by $135. That is not proof the ads caused the change. It is a signal to check. If direction requests also rose on your profile, local visibility may have helped. If they fell while ads rose, ask which part of the change you can explain. Note it in the report, then test one change next month.
 
-**Q: I only have $500/month to spend on marketing. Is this dashboard stuff even worth my time?**
+## What Reporting Mistakes Should You Avoid?
 
-Yes, because that $500 is a significant chunk of your revenue. If you're spending $500/month and getting back $200, you need to know that by week two, not month six. Start with the Daily Pulse dashboard (revenue vs. spend). That's 30 seconds a day and it will tell you if your money is working. I've seen businesses with $300/month budgets find the one channel that returns $1,500. You don't need expensive tools for this. Google Sheets and your POS report will do.
+- Changing how you count enquiries from month to month.
+- Treating ad-platform conversions as sales.
+- Reporting too many metrics.
+- Forgetting to set GA4 retention and losing history.
+- Comparing a quiet month with a holiday month without saying so.
 
-**Q: Can't I just use the free dashboards inside Yelp, Facebook, or Google Ads?**
+For more on tracking, read [local business analytics and tracking](/blog/local-business-analytics-and-tracking), [Google Business Profile analytics](/blog/google-my-business-analytics) and the [Google Business Profile checklist](/blog/google-business-profile-optimization-checklist).
 
-You can, but you shouldn't rely on them alone. Every platform's dashboard will tell you their ads are working. Facebook shows you "reach" and "engagement." Yelp shows you "profile views." Google shows you "clicks." None of them show you "revenue." They can't, because they don't know if someone walked in your store and paid cash. You need to connect the platform data to your actual revenue data. The platforms give you the "what happened on their site." You need to know what happened in your business.
+## FAQ
 
-**Q: How often should I actually review my dashboard?**
+**Q: How often should I report?**
+A: Monthly for most local businesses, with a quick weekly check if you run ads.
 
-Daily: check spend vs. revenue. 30 seconds. Weekly: check cost per lead by channel and make one decision. 2 minutes. Monthly: full review with a notebook. 15 minutes. The mistake people make is trying to do a full review every day. You'll get overwhelmed and stop checking at all. The daily check exists to catch fires while they're small. The weekly check exists to optimize. The monthly check exists to see the big picture.
+**Q: Which tool should I start with?**
+A: A spreadsheet. Add a dashboard tool when the manual process is stable.
 
-**Q: My business doesn't have an online booking system. Can I still track marketing?**
+**Q: What if my numbers disagree between tools?**
+A: Expect it. Each tool counts differently. Pick one source of truth per metric and stick to it.
 
-Yes. Use the coupon code method I described above. Use unique promo codes per channel. Track them on a whiteboard or a piece of paper. It's not fancy, but it works. A pizza shop in Chicago did this with paper punch cards. Google Ads cards had a "G" sticker. Facebook cards had an "F" sticker. They counted the returned cards at the end of each month. $0 in software cost. Clear data on which channel drove the most new customers.
+**Q: Do I need to keep old data?**
+A: Yes. Export key numbers monthly, because platform retention limits can remove detail.
 
-**Q: I'm using Square for payments. What reporting should I be looking at?**
+**Q: Who should read the report?**
+A: You, plus anyone who spends your marketing budget.
 
-Square reports are actually pretty good for small businesses. Look at three reports: Sales Summary (daily revenue), Item Sales (what people are buying), and Customer Directory (new vs returning customers). The Customer Directory report is the most useful — it shows you how many new customers you got each month. Pair that with your ad spend and you have your customer acquisition cost. Square also has a "Marketing" tab that can show you email campaign results if you use their email tool.
+## Sources
 
-**Q: Is Google Analytics worth setting up for a small business?**
+- [Google Business Profile Help: Understand your Business Profile performance](https://support.google.com/business/answer/9918094)
+- [Google Analytics Help: Data retention](https://support.google.com/analytics/answer/7667196)
+- [Google Cloud docs: Data Studio (formerly Looker Studio)](https://docs.cloud.google.com/looker/docs/studio)
 
-Only if you have high intent to actually look at it. Google Analytics is powerful but it's also overwhelming. If you're a coffee shop or hair salon, it might tell you "200 people visited your website this month." That number is interesting but not actionable. What's more actionable: "17 people submitted the catering inquiry form" or "12 people clicked the 'book now' button." Focus on the actions that make you money, not the total traffic number. If you're already paying for Google Ads, set up conversion tracking. That's the one thing worth doing.
-
-**Q: What's the one metric I should focus on if I ignore everything else?**
-
-Cost per acquisition (CPA). How much money do you have to spend to get one new paying customer? If your average customer spends $75, and your CPA is $20, you're in good shape. If your CPA is $80, you're losing money on every new customer. Everything else — clicks, impressions, reach, engagement — is noise. CPA is the signal.
-
----
-
-I've been doing this for over a decade. I've seen data that told a beautiful story that was completely wrong. I've seen a $200 monthly ad spend outperform a $2,000 spend because the cheaper campaign was tracking the right thing. I've seen owners quit marketing entirely because they thought it didn't work, when really their dashboard was measuring the wrong numbers.
-
-The uncomfortable truth is this: your marketing is either working or it's not, and most of you can't tell which. Not because you're bad at business. Because the tools you're using don't give you the answer. They give you a chart.
-
-If you want to stop guessing, I'll show you how to build a dashboard that actually tells you what to do next. No complicated software. No 50-column spreadsheets. Just the numbers that matter, in a format you'll actually check.
-
-[Book a free consultation](/free-audit)
-
-## Related Articles
-
-- [DIY Website vs Hiring a Developer: What Small Businesses Get Wrong](/blog/diy-website-vs-professional-developer)
-- [Website Conversion Rate Optimization: 25 Fixes That Boost Sales](/blog/website-conversion-rate-optimization)
-- [Call Tracking for Local Businesses: Know Which Ads Drive Phone Calls](/blog/call-tracking-for-local-business)
-- [Unlocking High-Converting Coffee Shop Websites with CRO](/blog/coffee-shop-website-conversion-rate-optimization)
+Need a report you can read in ten minutes? See our [analytics and reporting service](/services/analytics).
