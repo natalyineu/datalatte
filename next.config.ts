@@ -236,6 +236,36 @@ const nextConfig: NextConfig = {
         destination: "/blog/ai-customer-service-for-small-business",
         permanent: true,
       },
+      {
+        source: "/blog/google-ads-for-yoga-studios",
+        destination: "/blog/google-ads-for-yoga-studios-complete-2026-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/bark-vs-thumbtack-for-small-business",
+        destination: "/blog/bark-vs-thumbtack-local-business",
+        permanent: true,
+      },
+      {
+        source: "/blog/what-is-programmatic-advertising-small-business-guide",
+        destination: "/blog/what-is-programmatic-advertising-plain-english-guide-for-business-owners",
+        permanent: true,
+      },
+      {
+        source: "/blog/coffee-shop-google-my-business-optimization",
+        destination: "/blog/google-my-business-optimization-for-coffee-shops",
+        permanent: true,
+      },
+      {
+        source: "/blog/marketing-strategy-for-coffee-shops",
+        destination: "/blog/how-to-market-a-coffee-shop-the-complete-2026-strategy-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/pet-groomer-instagram-marketing",
+        destination: "/blog/pet-groomer-instagram-marketing-strategy",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
