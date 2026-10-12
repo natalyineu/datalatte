@@ -1,0 +1,26 @@
+name: IndexNow on content push
+
+on:
+  push:
+    branches: [main]
+    paths: ['content/blog/**']
+
+concurrency:
+  group: indexnow
+  cancel-in-progress: true
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "npm"
+      - run: npm ci
+      - name: Wait for Vercel deploy
+        run: sleep 240
+      - name: Submit recently modified posts (noindex skipped)
+        run: node scripts/submit-indexnow.mjs --since "$(date -u -d '2 days ago' +%F)"

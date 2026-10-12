@@ -5,6 +5,7 @@
  * Usage:
  *   node scripts/submit-indexnow.mjs            # submit all blog posts
  *   node scripts/submit-indexnow.mjs --new 50   # submit 50 newest posts only
+ *   node scripts/submit-indexnow.mjs --since 2026-09-20   # only posts modified since a date (noindex always skipped)
  */
 
 import fs from "fs";
@@ -23,17 +24,19 @@ const KEY_LOCATION = `${BASE_URL}/${KEY}.txt`;
 // IndexNow API — single endpoint covers Bing, Yandex, Seznam, Naver, Yep
 const INDEXNOW_API = "https://api.indexnow.org/indexnow";
 
-async function getBlogUrls(limit) {
+async function getBlogUrls(limit, since) {
   const files = fs.readdirSync(CONTENT_DIR).filter((f) => f.endsWith(".mdx"));
 
   const posts = files.map((f) => {
     const raw = fs.readFileSync(path.join(CONTENT_DIR, f), "utf8");
     const { data } = matter(raw);
+    if (data.noindex) return null; // never submit noindexed posts
+    if (since && String(data.lastModified || data.date || "") < since) return null;
     return {
       url: `${BASE_URL}/blog/${f.replace(".mdx", "")}`,
       date: new Date(data.date || "2024-01-01"),
     };
-  });
+  }).filter(Boolean);
 
   // Sort newest first
   posts.sort((a, b) => b.date - a.date);
@@ -92,13 +95,15 @@ async function main() {
   const args = process.argv.slice(2);
   const limitIdx = args.indexOf("--new");
   const limit = limitIdx !== -1 ? parseInt(args[limitIdx + 1]) : null;
+  const sinceIdx = args.indexOf("--since"); // e.g. --since 2026-09-20: only posts modified since then
+  const since = sinceIdx !== -1 ? args[sinceIdx + 1] : null;
 
   console.log("🔍 IndexNow Submission — datalatte.pro");
   console.log(`   Key: ${KEY}`);
   console.log(`   API: ${INDEXNOW_API}\n`);
 
-  const blogUrls = await getBlogUrls(limit);
-  const staticUrls = getStaticUrls();
+  const blogUrls = await getBlogUrls(limit, since);
+  const staticUrls = since ? [] : getStaticUrls();
   const allUrls = [...staticUrls, ...blogUrls];
 
   console.log(`📋 URLs to submit: ${allUrls.length}`);
