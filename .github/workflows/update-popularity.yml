@@ -2,8 +2,8 @@ name: Update Blog Popularity (GSC)
 
 on:
   schedule:
-    # Run daily at 04:00 UTC (after GSC data updates overnight)
-    - cron: '0 4 * * *'
+    # Weekly (Mon 04:00 UTC): each run triggers a Vercel build, daily was costing ~24 build-CPU min/day
+    - cron: '0 4 * * 1'
   workflow_dispatch:
   push:
     branches: [main]

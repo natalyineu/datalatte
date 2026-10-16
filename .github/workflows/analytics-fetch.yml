@@ -52,7 +52,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "chore: daily analytics snapshot [vercel skip]"
+            git commit -m "chore: daily analytics snapshot"   # no [vercel skip]: data/analytics is not used by the site, so no rebuild
             git pull --rebase --autostash -X theirs origin main
             git push
           fi
