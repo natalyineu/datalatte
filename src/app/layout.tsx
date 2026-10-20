@@ -5,8 +5,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ClientWidgets from "@/components/ClientWidgets";
 import { localBusinessSchema, websiteSchema } from "@/lib/schema";
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const BASE = "https://datalatte.pro";
 
@@ -119,8 +117,6 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <ClientWidgets />
-        <Analytics />
-        <SpeedInsights />
         {/* Microsoft Clarity */}
         <Script id="clarity-init" strategy="lazyOnload">
           {`(function(c,l,a,r,i,t,y){
