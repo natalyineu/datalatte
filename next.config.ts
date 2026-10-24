@@ -271,6 +271,16 @@ const nextConfig: NextConfig = {
         destination: "/blog/google-ads-for-dog-groomers-complete-2026-guide",
         permanent: true,
       },
+      {
+        source: "/blog/local-seo-audit-tool-review",
+        destination: "/blog/best-local-seo-audit-tools-small-business",
+        permanent: true,
+      },
+      {
+        source: "/blog/programmatic-vs-google-display-ads-whats-the-difference",
+        destination: "/blog/display-vs-programmatic-advertising-local-business",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
