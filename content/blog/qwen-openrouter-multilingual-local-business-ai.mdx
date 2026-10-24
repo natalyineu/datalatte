@@ -1,8 +1,8 @@
 ---
-title: "Qwen 2.5 via OpenRouter: Multilingual AI for Global Local Business"
+title: "Qwen on OpenRouter: Multilingual AI for Local Business"
 date: "2026-06-13"
-lastModified: "2026-06-13"
-description: "Use Qwen 2.5 via OpenRouter for multilingual local business automation — Chinese, Spanish, Arabic, and more. Setup guide and real use cases."
+lastModified: "2026-10-24"
+description: "Qwen3.5 covers 201 languages and Qwen 2.5 72B costs $0.36 per million input tokens on OpenRouter. How to use Qwen for multilingual replies."
 author: "Nataliia"
 category: "AI & Automation"
 tags: ["Qwen", "multilingual AI", "OpenRouter", "local business"]
@@ -11,319 +11,144 @@ image: "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?w=800&q=80&
 readTime: "9 min read"
 ---
 
-If your local business serves customers who speak languages other than English, you are leaving money on the table every single day. A customer who leaves a Google review in Mandarin and gets no reply is a customer who feels invisible. A Spanish-speaking client who receives a promotional email only in English is less likely to book again. Multilingual communication is not a luxury reserved for global corporations — it is a competitive advantage that small local businesses can now access for pennies per interaction, using Qwen 2.5 via OpenRouter.
+Qwen is a good model family to try through OpenRouter when your customers write in several languages, because one API key and one endpoint reach many Qwen versions at low prices. Alibaba's Qwen3.5 lists support for 201 languages and dialects, Qwen3 lists 119, and Qwen 2.5 lists more than 29.
 
-This guide shows you exactly how to set it up, what it costs, where it excels, and four concrete ways to deploy it in a real local business.
+Prices on OpenRouter start at $0.03 per million input tokens for Qwen3.7 Flash.
 
----
+This guide covers review replies, booking messages and bilingual emails for local businesses. Figures were checked on 24 October 2026 from vendor pages and OpenRouter's live model list. There is no verified head-to-head language score here, because none could be found in an open source. A short test method is included instead.
 
-## What Is Qwen 2.5?
+<StatRow
+  values="201|119|$0.36|$0.03"
+  labels="Languages listed for Qwen3.5|Languages listed for Qwen3|Qwen 2.5 72B input price per 1M tokens|Qwen3.7 Flash input price per 1M tokens"
+  subs="Hugging Face model card|Qwen3 announcement|OpenRouter models API|OpenRouter models API"
+  trends="up|up|neutral|neutral"
+/>
 
-Qwen 2.5 is Alibaba Cloud's flagship open-weight language model family, released in late 2024 and updated through early 2026. Unlike Western models that treat English as the primary language and layer other languages on top, Qwen was trained from the ground up with Chinese, Japanese, Korean, Arabic, and Spanish as first-class citizens alongside English. The result is a model that genuinely understands cultural context in those languages — not just vocabulary and grammar, but idiom, register, and social norms.
+## Which Qwen Models Are Available on OpenRouter?
 
-The Qwen 2.5 family includes several variants suited to different business needs:
+OpenRouter's models API listed these Qwen text models on 24 October 2026. Prices are per million tokens and can change.
 
-- **Qwen2.5-7B-Instruct** — Lightweight, fast, and cheap. Ideal for high-volume reply automation where you need sub-second responses. Fits on a consumer GPU if you self-host.
-- **Qwen2.5-72B-Instruct** — The workhorse. Near-GPT-4 quality in English, and clearly superior to GPT-4o Mini in Chinese, Japanese, and Korean. Best for nuanced customer-facing content where tone matters.
-- **Qwen2.5-Turbo** — Alibaba's hosted, optimized version. Slightly different weights, tuned for instruction-following in business contexts with faster latency.
-- **Qwen2.5-Coder-32B** — Specialized for code generation. Not the focus here, but worth knowing exists.
+| Model ID | Input | Output | Context on OpenRouter |
+| --- | --- | --- | --- |
+| qwen/qwen-2.5-7b-instruct | $0.10 | $0.20 | 32,768 |
+| qwen/qwen-2.5-72b-instruct | $0.36 | $0.40 | 32,768 |
+| qwen/qwen3-32b | $0.08 | $0.28 | 131,072 |
+| qwen/qwen3.5-9b | $0.17 | $0.25 | 262,144 |
+| qwen/qwen3.5-flash-02-23 | $0.065 | $0.26 | 1,000,000 |
+| qwen/qwen3.7-flash | $0.03 | $0.13 | 1,000,000 |
 
-For local business automation, you will primarily use Qwen2.5-72B-Instruct for quality-sensitive tasks like customer emails and review replies, and Qwen2.5-7B-Instruct for high-volume, lower-stakes tasks like FAQ answers and appointment confirmations.
+Qwen 2.5 is the older generation, released on 19 September 2024. Its 72B model uses the "qwen" licence, not Apache 2.0, while the 7B model is Apache 2.0. The 72B model is also not available through OpenRouter's EU in-region routing. The Qwen3 dense models and Qwen3.5-9B are listed under Apache 2.0 on their pages. Licences for the hosted Flash models were not checked.
 
----
+## How Does Qwen Compare on Price With Other Small Models?
 
-## Why Multilingual Matters for Local Businesses
+From the same OpenRouter list on the same day:
 
-Consider the demographics of major English-speaking cities. In Los Angeles, roughly 40% of residents speak a language other than English at home. In London's Tower Hamlets, Bengali is the second most widely spoken language. In Dubai, English-speaking customers are actually the minority — Arabic, Hindi, Tagalog, and Urdu together account for the majority of the population. In Singapore, English, Mandarin, Malay, and Tamil are all official languages and all four are used in everyday commerce.
+| Model | Input per 1M | Output per 1M |
+| --- | --- | --- |
+| openai/gpt-4o-mini | $0.15 | $0.60 |
+| mistralai/mistral-small-2603 | $0.15 | $0.60 |
+| deepseek/deepseek-v3.2 | $0.28 | $0.42 |
+| qwen/qwen-2.5-72b-instruct | $0.36 | $0.40 |
+| qwen/qwen3.7-flash | $0.03 | $0.13 |
 
-For businesses operating in these environments, the question is not whether to communicate in multiple languages. It is how to do so consistently without hiring a multilingual team.
+Price is not quality, and no verified language scores for these models were found, so none are shown. Test the models on your own messages before choosing. Our [OpenRouter guide](/blog/openrouter-guide-local-business-automation-2026) and [Mistral guide](/blog/mistral-ai-small-business-use-cases-2026) cover the alternatives.
 
-A nail salon in Flushing, Queens that auto-replies to Google reviews in both English and Simplified Chinese will stand out from every competitor who responds only in English — or not at all. A barbershop in East London that sends Eid promotions in both English and Bengali builds the kind of cultural connection that corporate chains simply cannot manufacture.
+## Why Does Language Matter for a Local Business?
 
-Businesses that move first on multilingual AI automation will own local trust in their communities. Those who wait will spend years catching up.
+Census data shows how many customers may write in another language. In the 2018 to 2022 US Census survey, 78.3% of people aged 5 and over spoke only English at home, and Spanish made up 61.1% of the rest.
 
----
+The ONS says 91.1% of residents of England and Wales aged three and over had English (or Welsh in Wales) as their main language in 2021, with Polish at 1.1%, Romanian 0.8%, Panjabi 0.5% and Urdu 0.5%.
 
-## Accessing Qwen 2.5 via OpenRouter
+In Australia's 2021 Census the top non-English languages at home were Mandarin 2.7%, Arabic 1.4%, Vietnamese 1.3%, Cantonese 1.2% and Punjabi 0.9%. Local shares vary a lot by suburb, so check your own area's census profile before you add a language.
 
-[OpenRouter](https://openrouter.ai) is an API aggregator that provides access to dozens of models — including all Qwen 2.5 variants — through a single OpenAI-compatible endpoint. This means you can swap between models by changing one line of code, with no need to manage separate API keys for each provider.
+## How Do You Call Qwen From OpenRouter?
 
-**Pricing as of mid-2026 (OpenRouter):**
+OpenRouter's base URL is https://openrouter.ai/api/v1 and its chat completions endpoint follows the OpenAI format. The OpenAI SDK works as a drop-in replacement: change the base URL and use your OpenRouter key as a bearer token. A request needs a model ID and a list of messages, each with a role and content.
 
-| Model | Input (per 1M tokens) | Output (per 1M tokens) |
-|---|---|---|
-| qwen/qwen-2.5-7b-instruct | ~$0.15 | ~$0.15 |
-| qwen/qwen-2.5-72b-instruct | ~$0.56 | ~$0.77 |
-| qwen/qwen-2.5-turbo | ~$0.14 | ~$0.60 |
+In a no-code tool such as Make or n8n, use the HTTP module with the same fields. Put your instructions, tone and language rule in the system message, and the customer text in the user message. See our [Make.com workflow guide](/blog/make-com-ai-agent-workflow-local-business) for the surrounding steps.
 
-To get started: sign up at openrouter.ai, add credits (minimum $5), and retrieve your API key from the dashboard. The base URL is `https://openrouter.ai/api/v1` and the endpoint accepts the same JSON structure as the OpenAI API, so any code you have written for OpenAI will work with a two-line change.
+## What Can You Automate With Multilingual Qwen?
 
----
+Four tasks fit local businesses well. In each, keep a person in charge of anything sensitive.
 
-## Language Benchmark: Qwen 2.5 vs the Competition
+- **Review replies.** Detect the review language and reply in the same language. Google's Business Profile API lets an application reply to a review, but it requires API access. Many owners paste drafts by hand. See our [review auto-reply script](/blog/ai-agent-google-reviews-auto-reply-script).
+- **Bilingual emails.** Ask for a culturally adapted version in each language, not a literal translation, and have a native speaker approve the first batch.
+- **Booking enquiries.** Classify the language and intent, then draft a reply from your real opening hours and prices.
+- **FAQ drafts.** Generate answers in each language from a document you supply, so the model does not invent policies.
 
-Before committing to any model for multilingual work, you need to understand where it performs and where it falls short. The table below rates each model 1–5 for fluency and cultural accuracy across six languages, based on community benchmarks and real-world testing as of Q2 2026. A score of 5 means native-quality output that a fluent speaker would be comfortable sending to customers.
+For messaging apps, read the [WhatsApp Business automation guide](/blog/whatsapp-business-api-local-marketing-automation) and, for a multilingual market, the [Singapore guide](/blog/local-marketing-singapore-small-business-guide).
 
-| Language | Qwen 2.5-72B | GPT-4o Mini | Mistral Large | DeepSeek-V3 |
-|---|---|---|---|---|
-| English | 4.5 | 4.5 | 4.3 | 4.4 |
-| Chinese (Simplified) | **5.0** | 3.8 | 2.9 | 4.7 |
-| Spanish | 4.3 | 4.4 | 4.2 | 4.1 |
-| Arabic | **4.6** | 3.5 | 3.0 | 3.8 |
-| French | 4.1 | 4.3 | **4.5** | 4.0 |
-| Japanese | **4.8** | 3.7 | 3.1 | 4.2 |
+## What Does WhatsApp Automation Cost Now?
 
-Key takeaways:
+Meta's documentation says it has used per-message pricing since 1 July 2025, with rates based on message category and the recipient's country calling code. A 24-hour customer service window opens when a customer messages you, and outside it only template messages are allowed. Service messages are free only up to 1,000 per business phone number per month.
 
-- For Chinese and Japanese, Qwen 2.5-72B is the clear winner by a significant margin.
-- For Arabic, Qwen leads all Western alternatives substantially. Mistral's Arabic output often reads like rough machine translation.
-- For Spanish and French, GPT-4o Mini and Mistral are competitive with Qwen. The choice should come down to cost and integration simplicity, not quality.
-- For English-only work, all four models are roughly equivalent. Cost should be the deciding factor.
+Meta also states that from 1 October 2026 it charges again for utility messages sent inside an open service window. Check the current rate card before promising customers automated replies, because older conversation-based pricing no longer applies.
 
-If your business serves Chinese, Japanese, Korean, or Arabic-speaking customers, Qwen 2.5-72B is the model to deploy. For Spanish and French, it is a strong choice but not uniquely superior to cheaper alternatives.
+## What Does a Reply Cost? A Worked Example
 
----
+All inputs are **assumptions**: each review reply uses 400 input tokens (instructions plus the review) and 150 output tokens. The estimate ignores any hidden reasoning tokens that some newer models produce.
 
-## Python: Multilingual Review Reply System
+| Model | Cost per reply | Cost for 1,000 replies |
+| --- | --- | --- |
+| qwen/qwen3.7-flash | about $0.00003 | about $0.03 |
+| openai/gpt-4o-mini | about $0.00015 | about $0.15 |
+| qwen/qwen-2.5-72b-instruct | about $0.0002 | about $0.20 |
 
-The following script auto-detects the language of an incoming Google review and generates a contextually appropriate reply in the same language. It uses `langdetect` for language identification and calls Qwen 2.5-72B via OpenRouter for the actual reply.
+Even the dearest option is cents per thousand replies. The real cost is review time. If a native speaker spends two minutes checking each of 50 replies a month (assumption), that is about 100 minutes, far more than the API bill.
 
-```python
-import os
-import requests
-from langdetect import detect
+<Callout type="tip" title="Do This Today">
+Collect 20 real customer messages in your second language, run them through two models, and ask a native speaker to mark each reply as send, edit or reject.
+</Callout>
 
-OPENROUTER_API_KEY = os.environ["OPENROUTER_API_KEY"]
-OPENROUTER_BASE = "https://openrouter.ai/api/v1/chat/completions"
+## How Should You Test Language Quality?
 
-BUSINESS_CONTEXT = {
-    "name": "Golden Dragon Restaurant",
-    "type": "Chinese restaurant",
-    "location": "Flushing, NYC",
-    "tone": "warm, grateful, professional"
-}
+Use a small blind test. Take 20 real messages per language, generate replies from two or three models with the same prompt, remove the model names, and have a fluent speaker rate each reply for correctness, tone and local wording. Count how many they would send unedited.
 
-LANGUAGE_PROMPTS = {
-    "zh-cn": "You are a customer service rep for {name}, a {type} in {location}. Reply in Simplified Chinese only. Be {tone}.",
-    "zh-tw": "You are a customer service rep for {name}, a {type} in {location}. Reply in Traditional Chinese only. Be {tone}.",
-    "en": "You are a customer service rep for {name}, a {type} in {location}. Reply in English. Be {tone}.",
-    "es": "Eres representante de {name}, un {type} en {location}. Responde en español. Sé {tone}.",
-    "ar": "أنت ممثل خدمة عملاء لـ {name}، وهو {type} في {location}. رد باللغة العربية فقط. كن {tone}.",
-    "ja": "あなたは{location}の{type}、{name}のカスタマーサービス担当者です。日本語のみで返信してください。{tone}な対応を。",
-}
+Check dialect and script too. Qwen can produce Simplified Chinese by default, so state Traditional Chinese in the prompt if you need it. For Arabic, say which dialect you want. These behaviours were not benchmarked in the sources above, so confirm them yourself.
 
-DEFAULT_PROMPT = (
-    "You are a customer service rep for {name}, a {type} in {location}. "
-    "Detect the language of the review and reply in the same language. Be {tone}."
-)
-
-def detect_language(text: str) -> str:
-    try:
-        lang = detect(text)
-        if lang in ["zh-cn", "zh-tw", "zh"]:
-            return "zh-cn"
-        return lang
-    except Exception:
-        return "en"
+## Is It Safe to Send Customer Data Through OpenRouter?
 
-def generate_review_reply(review_text: str, star_rating: int) -> dict:
-    lang = detect_language(review_text)
-    system_template = LANGUAGE_PROMPTS.get(lang, DEFAULT_PROMPT)
-    system_prompt = system_template.format(**BUSINESS_CONTEXT)
+OpenRouter says each provider has its own data policy. You can block routing to providers that may train on your data in account settings, and filter by data policy per request. Its privacy page does not describe a dedicated zero-retention setting.
 
-    if star_rating <= 2:
-        sentiment_note = " This is a negative review. Apologize sincerely and offer to make it right. Do not be defensive."
-    elif star_rating == 3:
-        sentiment_note = " This is a neutral review. Thank them and invite them to return."
-    else:
-        sentiment_note = " This is a positive review. Express genuine gratitude and reinforce what they enjoyed."
-
-    user_prompt = (
-        f"Write a reply to this {star_rating}-star review.{sentiment_note}\n\n"
-        f"Review: {review_text}\n\nKeep the reply under 100 words."
-    )
-
-    payload = {
-        "model": "qwen/qwen-2.5-72b-instruct",
-        "messages": [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_prompt}
-        ],
-        "temperature": 0.7,
-        "max_tokens": 200
-    }
-
-    headers = {
-        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-        "Content-Type": "application/json",
-        "HTTP-Referer": "https://datalatte.pro",
-        "X-Title": "DataLatte Review Bot"
-    }
-
-    response = requests.post(OPENROUTER_BASE, json=payload, headers=headers)
-    response.raise_for_status()
-    result = response.json()
-
-    return {
-        "original_review": review_text,
-        "detected_language": lang,
-        "star_rating": star_rating,
-        "suggested_reply": result["choices"][0]["message"]["content"]
-    }
-
-# --- Example usage ---
-if __name__ == "__main__":
-    test_reviews = [
-        ("The dim sum was amazing! Will definitely come back.", 5),
-        ("点心非常好吃！服务也很周到，下次一定再来。", 5),
-        ("La comida estaba buena pero el servicio fue un poco lento.", 3),
-        ("الطعام كان رائعاً لكن المكان كان مزدحماً جداً", 4),
-    ]
-
-    for review_text, rating in test_reviews:
-        result = generate_review_reply(review_text, rating)
-        print(f"\n[{result['detected_language'].upper()}] {rating}★")
-        print(f"Review: {result['original_review'][:60]}...")
-        print(f"Reply:  {result['suggested_reply']}")
-```
-
-Install the required dependencies and run:
-
-```bash
-pip install requests langdetect
-export OPENROUTER_API_KEY="sk-or-your-key-here"
-python review_bot.py
-```
-
-At approximately $0.56 per million input tokens for Qwen2.5-72B, replying to 1,000 reviews costs roughly $0.03 in API costs. At 100,000 replies per month, you are still spending under $5. Compare this to the cost of a part-time bilingual employee who can handle perhaps 30–40 replies per hour at $15+ per hour, and the economics are stark.
-
----
-
-## 4 Real Use Cases for Multilingual Local Businesses
-
-### 1. Chinese Restaurant in NYC Auto-Replying to Google Reviews in Two Languages
-
-Flushing, Queens has one of the highest concentrations of Chinese restaurants in North America. Many receive reviews in both Simplified Chinese and English, but most owners lack the time — and sometimes the written English fluency — to craft thoughtful replies in both languages. The review bot above solves this precisely: every review gets a personalized, culturally appropriate reply within minutes of posting, regardless of the language it was written in.
-
-The impact extends beyond customer satisfaction. Google's local ranking algorithm rewards businesses that actively respond to reviews. A restaurant that consistently replies in both Chinese and English signals greater engagement than a competitor who ignores half its reviewers — and that signal compounds over months of consistent activity.
-
-### 2. Spanish-Speaking Salon in LA Generating Bilingual Promotional Emails
-
-A hair salon in East Los Angeles with a predominantly Spanish-speaking clientele can use Qwen 2.5-72B to generate promotional emails in both English and Spanish simultaneously — not a translation of one into the other, but a culturally adapted version of each. Promotions for Mother's Day land differently when framed as "Día de las Madres." Quinceañera season packages resonate more in Spanish. The language is not just a communication vehicle; it is a signal of belonging.
-
-The practical workflow: write a brief description of the promotion in English, ask Qwen to generate both an English version and a Spanish cultural adaptation (explicitly requesting cultural adaptation, not literal translation), then send each to the appropriate segment of your email list. Mailchimp, Klaviyo, and ActiveCampaign all support language-based audience segmentation.
-
-### 3. Dubai Coffee Shop Responding to Arabic and English WhatsApp Messages
-
-Dubai's customer base is genuinely bilingual — many customers message in Arabic, others in English, and a significant number mix both languages in the same message (a phenomenon called code-switching that is highly common in Gulf Arabic communication). A coffee shop using the WhatsApp Business API can route all incoming messages through a Qwen-powered middleware layer that detects the primary language, generates an appropriate reply, and optionally flags ambiguous or sensitive messages for human review.
-
-For a busy café receiving 50–100 WhatsApp inquiries daily (table reservations, menu questions, event bookings, dietary accommodations), this automation saves 1–2 hours of staff time per day while delivering faster responses than a barista typing one-handed between orders. The quality of Arabic output from Qwen 2.5-72B is specifically relevant here — at 4.6/5 versus GPT-4o Mini's 3.5/5, the difference in reply naturalness is immediately noticeable to native speakers.
-
-### 4. Singapore Pet Groomer Handling English, Mandarin, and Malay
-
-Singapore's linguistic landscape is one of the most complex in the world for a small business to navigate. A pet grooming studio in Tampines or Jurong might receive booking inquiries in English ("Do you have slots this Saturday for a Golden Retriever?"), Mandarin ("请问这个星期六还有位置吗？我的金毛需要洗澡"), and Malay ("Adakah anda ada slot Sabtu ini untuk grooming anjing?"). Qwen 2.5-72B handles all three reliably — Malay in particular is a language that most Western models handle poorly, making Qwen's performance here genuinely differentiated.
-
-The architecture for this implementation is straightforward: a WhatsApp Business API webhook delivers each incoming message to a lightweight Python Flask server, which passes the message through Qwen and returns the response. Booking confirmations can be written to a shared Google Calendar or a simple SQLite database, creating a full end-to-end automated booking channel for three languages with no human intervention required for routine inquiries.
-
----
-
-## Integrating with WhatsApp Business API
-
-WhatsApp Business API (via Meta's Cloud API) is the most reliable channel for high-volume multilingual messaging at the local business scale. Here is the core webhook integration:
-
-```python
-from flask import Flask, request, jsonify
-import requests, os
-
-app = Flask(__name__)
-VERIFY_TOKEN = os.environ["WA_VERIFY_TOKEN"]
-WA_ACCESS_TOKEN = os.environ["WA_ACCESS_TOKEN"]
-PHONE_NUMBER_ID = os.environ["WA_PHONE_NUMBER_ID"]
-
-@app.route("/webhook", methods=["GET"])
-def verify_webhook():
-    if request.args.get("hub.verify_token") == VERIFY_TOKEN:
-        return request.args.get("hub.challenge"), 200
-    return "Unauthorized", 403
-
-@app.route("/webhook", methods=["POST"])
-def handle_incoming():
-    data = request.json
-    try:
-        entry = data["entry"][0]["changes"][0]["value"]
-        msg = entry["messages"][0]
-        sender = msg["from"]
-        text = msg["text"]["body"]
-        reply_data = generate_review_reply(text, 5)
-        send_whatsapp_reply(sender, reply_data["suggested_reply"])
-    except (KeyError, IndexError):
-        pass
-    return jsonify({"status": "received"})
-
-def send_whatsapp_reply(to: str, body: str):
-    url = f"https://graph.facebook.com/v19.0/{PHONE_NUMBER_ID}/messages"
-    headers = {
-        "Authorization": f"Bearer {WA_ACCESS_TOKEN}",
-        "Content-Type": "application/json"
-    }
-    payload = {
-        "messaging_product": "whatsapp",
-        "to": to,
-        "type": "text",
-        "text": {"body": body}
-    }
-    requests.post(url, json=payload, headers=headers)
-
-if __name__ == "__main__":
-    app.run(port=5000)
-```
-
-Deploy this on a $5/month DigitalOcean Droplet or a free-tier Railway instance. WhatsApp requires HTTPS for webhooks, so add an SSL certificate using Certbot (Let's Encrypt) — the process takes under 10 minutes on any Ubuntu server.
-
----
-
-## Limitations and Honest Trade-offs
-
-Qwen 2.5 is not perfect for every use case. Here is what to watch for before going all-in:
-
-**Cultural assumptions in Chinese**: Qwen defaults to Mainland Chinese cultural norms and Simplified characters. For Traditional Chinese contexts (Taiwan, Hong Kong, many overseas Chinese communities), explicitly specify "Traditional Chinese" in your system prompt. Otherwise you may send Simplified Chinese to customers who find it jarring or condescending.
-
-**Arabic dialect variance**: Qwen produces Modern Standard Arabic (MSA) by default. MSA is appropriate for most formal Gulf business contexts, but Egyptian Arabic, Moroccan Darija, and Levantine Arabic differ significantly. For informal customer messaging in Egypt or Morocco, have a native speaker review outputs periodically to catch awkward formality.
-
-**Cost versus Claude Sonnet for complex tasks**: For pure English tasks requiring deep reasoning, nuanced tone matching, or complex complaint handling, Claude Sonnet 3.7 still outperforms Qwen 2.5-72B. Qwen's advantage is specifically in non-English languages and in high-volume, cost-sensitive applications. Use the right tool for the right job.
-
-**Data privacy routing**: OpenRouter routes Qwen requests through Alibaba's infrastructure. Do not include full customer names combined with contact details, payment information, or health data in your prompts. Use customer IDs and first names only. Review OpenRouter's current data processing agreement before deploying in any context where GDPR, PDPA (Singapore), or similar regulations apply.
-
----
+So send as little personal data as possible: a first name and the message text, not phone numbers, payment details or health information. If you need regional processing, OpenRouter offers in-region routing on eu.openrouter.ai for eligible models on Business and Enterprise plans, and the Qwen 2.5 72B model is not eligible.
 
 ## FAQ
 
-**How many languages does Qwen 2.5 support?**
+### How many languages does Qwen support?
 
-Qwen 2.5 was trained on data spanning 29 languages. Its highest-quality performance is in Chinese (Simplified and Traditional), Japanese, Korean, Arabic, Spanish, French, German, Russian, and Portuguese. It also handles Thai, Vietnamese, Indonesian, Malay, and several other Asian languages at a functional but lower quality level. For languages in its top tier, Qwen 2.5-72B is the best API-accessible model available as of mid-2026. For languages outside that tier, use it for low-stakes tasks and have a native speaker review outputs on a sample basis.
+Alibaba lists more than 29 for Qwen 2.5, 119 languages and dialects for Qwen3, and 201 for Qwen3.5. Listed support is not the same as equal quality in each language.
 
-**Is Qwen better than ChatGPT for Chinese language tasks?**
+### Is Qwen better than ChatGPT for Chinese?
 
-Yes, and not by a small margin. GPT-4o Mini scores approximately 3.8/5 on Chinese fluency benchmarks versus Qwen 2.5-72B's 5.0/5. Even GPT-4o (not Mini) sits around 4.5, below Qwen's ceiling. The gap is most visible in idiomatic expressions, formal business correspondence, and culturally specific references where Chinese requires precise understanding of context that Western models were simply not trained on at the same depth. For any customer-facing Chinese-language communication, Qwen 2.5-72B is the clear choice.
+No verified comparison was found, so this guide makes no claim. Test both on your own messages.
 
-**How much does Qwen cost via OpenRouter?**
+### How much does Qwen cost on OpenRouter?
 
-At current OpenRouter pricing, Qwen 2.5-72B costs approximately $0.56 per million input tokens and $0.77 per million output tokens. A typical review reply uses roughly 300–500 tokens total, meaning 10,000 automated replies costs under $5 in API fees. The 7B variant costs about one-quarter of that for applications where slightly lower quality is acceptable — for appointment confirmations and FAQ answers, the 7B is entirely sufficient. Compare this to a part-time human at $15/hour who handles perhaps 30 replies per hour: the cost difference is roughly 500x in favor of AI automation.
+Between $0.03 and $0.36 per million input tokens for the models in the table above, as of 24 October 2026. Check the live list before you budget.
 
-**Is Qwen safe for business customer data?**
+### Can I run Qwen myself?
 
-Treat Qwen via OpenRouter the same as you would any third-party AI API: do not send sensitive personal data in plaintext prompts. Customer first names, review text, and general inquiry content are generally fine. Full names combined with contact details, payment data, or health-related information (relevant for spas, gyms, and veterinary businesses) should be excluded from prompts. OpenRouter does not train on your data by default under their current terms, but you should verify this against their latest policy before deploying in any context where data protection regulations apply to your jurisdiction.
+Many Qwen models are open-weight. The 7B and Qwen3 dense models are listed under Apache 2.0, while Qwen 2.5 72B uses the Qwen licence, so read the licence first.
 
-**Can I fine-tune Qwen for my specific business?**
+### Should I use the newest Qwen model?
 
-Yes. The Qwen 2.5 base weights are open-source (available on Hugging Face under Qwen's license), which means you can fine-tune them on your own historical customer interactions to match your exact tone, vocabulary, and FAQ patterns. This requires a GPU machine or a service like Modal, RunPod, or AWS SageMaker, plus a training dataset of at least 500–1,000 example interactions with your preferred responses. For most small businesses, few-shot prompting — providing 5–10 examples of your ideal replies directly in the system prompt — achieves 80–90% of the benefit of fine-tuning with none of the infrastructure complexity. Start with few-shot prompting and revisit fine-tuning only if you are processing 50,000+ customer interactions per month.
+Not automatically. Newer models may add reasoning tokens that raise cost and delay. Test one small, cheap model first.
 
----
+## Sources
 
-## Related Articles
+- [Qwen2.5 announcement](https://qwenlm.github.io/blog/qwen2.5/) (29 languages, sizes, release date)
+- [Qwen3 announcement](https://qwenlm.github.io/blog/qwen3/) (119 languages and dialects)
+- [Hugging Face: Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B) (201 languages, Apache-2.0)
+- [Hugging Face: Qwen2.5-72B-Instruct](https://huggingface.co/Qwen/Qwen2.5-72B-Instruct) (licence "qwen")
+- [OpenRouter: models API](https://openrouter.ai/api/v1/models) (prices and context, read 24 October 2026)
+- [OpenRouter: quickstart](https://openrouter.ai/docs/quickstart)
+- [OpenRouter: privacy and logging](https://openrouter.ai/docs/features/privacy-and-logging)
+- [OpenRouter: Qwen 2.5 72B Instruct](https://openrouter.ai/qwen/qwen-2.5-72b-instruct) (EU routing note)
+- [US Census Bureau: language at home, 2018-2022 ACS](https://www.census.gov/newsroom/press-releases/2023/language-at-home-acs-5-year.html)
+- [ONS: language in England and Wales, Census 2021](https://www.ons.gov.uk/peoplepopulationandcommunity/culturalidentity/language/bulletins/languageenglandandwales/census2021)
+- [ABS: cultural diversity, Census 2021](https://www.abs.gov.au/statistics/people/people-and-communities/cultural-diversity-census/latest-release)
+- [Meta: WhatsApp Business pricing](https://developers.facebook.com/docs/whatsapp/pricing)
+- [Google: Business Profile API, review data](https://developers.google.com/my-business/content/review-data)
+- Not used: language quality scores and Chinese-versus-ChatGPT comparisons (no open source found)
 
-- [OpenRouter Complete Guide for Local Business Automation 2026](/blog/openrouter-guide-local-business-automation-2026)
-- [Best Free OpenRouter Models for Business Automation](/blog/best-free-openrouter-models-business-automation)
-- [Mistral AI: Small Business Use Cases for 2026](/blog/mistral-ai-small-business-use-cases-2026)
-- [WhatsApp Business API for Local Marketing Automation](/blog/whatsapp-business-api-local-marketing-automation)
-- [Local Marketing in Singapore: A Small Business Guide](/blog/local-marketing-singapore-small-business-guide)
+Need a multilingual reply workflow built and tested? See our [AI agents service](/services/ai-agents) or [book a free audit](/free-audit).

@@ -1,292 +1,154 @@
 ---
-title: "Make.com AI Agent Workflow for Local Business: Complete Blueprint (2026)"
+title: "Make.com AI Agent Workflow for Local Business"
 date: "2026-06-13"
-lastModified: "2026-06-13"
-description: "Step-by-step Make.com workflow that turns new leads into booked clients automatically — using AI for personalized follow-ups."
+lastModified: "2026-10-24"
+description: "A Make.com lead workflow with an AI step costs about 7 credits per lead, so the free 1,000 credits cover roughly 140 leads a month. Setup and costs."
 author: "Nataliia"
 category: "AI & Automation"
 tags: ["make.com", "ai agents", "automation", "workflow", "lead generation", "local business"]
 slug: "make-com-ai-agent-workflow-local-business"
 image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&auto=format&fit=crop"
-readTime: "12 min read"
+readTime: "9 min read"
 ---
 
-Make.com (formerly Integromat) is one of the most powerful no-code automation tools available to small businesses. When you connect it to an AI model, it stops being just an automation platform and becomes an AI agent — a system that reads context, makes decisions, and takes personalized action without human input.
+To build an AI lead workflow in Make.com, connect a form to a custom webhook, send the lead details to an AI model that classifies the enquiry, split the result with a router, draft a reply, have a person approve it for high-value leads, send it with an email service and log everything in a spreadsheet.
 
-This article walks through a specific, working workflow: a lead follow-up agent that triggers when someone fills out your contact form, qualifies the lead, generates a personalized reply using AI, sends the email, and notifies you only if it can't handle the lead itself.
+On the free plan, Make includes 1,000 credits a month, and each lead in this design uses about 7.
 
----
-
-## What This Workflow Does
-
-```
-New form submission (Typeform / Gravity Forms / any webhook)
-      ↓
-  Extract: name, service interest, budget, location
-      ↓
-  AI qualification (is this a good fit?)
-      ↓
-  Good fit → Generate personalized email → Send via Resend → Log to Google Sheets
-  Poor fit → Send polite "not right for us" email → Log reason
-      ↓
-  Notify owner via Slack/email only if lead is high-value or needs human input
-```
-
-This workflow handles 80% of inbound leads fully automatically. You only get notified when a lead is genuinely worth your personal attention.
-
----
+This is an automation with an AI step, not a fully autonomous agent. Make also has a separate AI Agents app where agents use instructions, knowledge and tools. Details below were checked on 24 October 2026 against vendor pages that opened. Anything that did not open is marked.
 
-## Module-by-Module Setup
+<StatRow
+  values="1,000|about 7|5 MB|3,000"
+  labels="Make free plan credits per month|Credits per lead in this design|Maximum webhook payload|Resend free emails per month"
+  subs="Make pricing page|Assumption, see example|Make webhook docs|Resend pricing page"
+  trends="neutral|neutral|neutral|neutral"
+/>
 
-### Module 1: Webhook Trigger
+## What Does This Workflow Do?
 
-Add a **Webhooks → Custom webhook** module. This is the entry point — any form submission, Typeform response, or manual API call will trigger the workflow.
+A visitor fills in your contact form. The form sends the answers to Make, an AI model sorts the lead into good fit, maybe or not a fit, and a router sends each type down its own path. Good fits get a personalised reply for you to approve, maybes get a softer template, and poor fits get a polite decline. Every lead lands in a sheet.
 
-**Get the webhook URL** and paste it into your form's "webhook" or "notification" settings.
+The point is speed and consistency, not removing yourself. For the first weeks, review every message before it goes out. Our overview of [AI agents for local business](/blog/ai-agents-for-local-business-what-they-are-and-how-they-work) explains where this fits.
 
-The webhook receives JSON like this:
+## What Do You Need Before You Start?
 
-```json
-{
-  "name": "Sarah Johnson",
-  "email": "sarah@coffeeshop.com",
-  "phone": "+15551234567",
-  "business_type": "Coffee shop",
-  "service_interest": "Google Ads + Local SEO",
-  "monthly_budget": "$500-1000",
-  "city": "Austin, TX",
-  "message": "We opened 3 months ago and need help getting found on Google Maps"
-}
-```
+- A Make account. The free plan has 1,000 credits a month, 1 MB of data storage and 1 data store.
+- A form tool that can send a webhook, such as Tally, Typeform, Fillout or Gravity Forms. Webhook support varies by plan, so check yours.
+- An account with an AI provider and its API key.
+- An email sending service with a verified domain.
+- A Google Sheet for the log.
 
-### Module 2: OpenAI / Groq — Lead Qualification
+Make's pricing page now lists credits as the billing unit. Its help page says one operation uses one credit for non-AI apps and for third-party AI apps such as OpenAI, Claude and Gemini. If you connect your own AI provider, you pay Make credits for operations and pay the provider for tokens.
 
-Add an **HTTP → Make an API Key Request** module (use this for Groq — it's cheaper and faster than OpenAI for classification tasks).
+## How Do You Set Up Each Step?
 
-**URL:** `https://api.groq.com/openai/v1/chat/completions`
+| Step | Make module type | What to do |
+| --- | --- | --- |
+| 1 | Custom webhook | Create the webhook, copy its URL into your form, send a test and let Make detect the data structure. |
+| 2 | HTTP request or your AI provider's app | Send the lead fields with a classification prompt. Ask for one of three labels and a short reason. |
+| 3 | Parse JSON | Turn the model's reply into separate fields. |
+| 4 | Router | One route per label, plus a fallback route for anything unexpected. |
+| 5 | HTTP request or AI app | On the good-fit route, draft a reply from the lead's own words. |
+| 6 | Approval step | Save the draft to the sheet and notify yourself before sending. |
+| 7 | Email service | Send the approved message. |
+| 8 | Google Sheets | Add a row with time, lead details, label, reason and whether a reply was sent. |
 
-**Method:** POST
+Make's docs say each scenario needs its own webhook, and callers can send query string, form data or JSON. You can require an API key sent in the x-make-apikey header and define a data structure so bad requests are rejected with HTTP 400. An accepted request returns HTTP 200 with the body "Accepted."
 
-**Headers:**
-```
-Authorization: Bearer {{GROQ_API_KEY}}
-Content-Type: application/json
-```
+## How Does the Router Behave?
 
-**Body (raw JSON):**
-```json
-{
-  "model": "llama-3.3-70b-versatile",
-  "messages": [
-    {
-      "role": "system",
-      "content": "You are a lead qualification assistant for a local marketing agency. Classify leads as GOOD_FIT, MAYBE, or NOT_FIT. Reply with only a JSON object: {\"classification\": \"GOOD_FIT\", \"reason\": \"one sentence\", \"priority\": \"high/medium/low\"}"
-    },
-    {
-      "role": "user",
-      "content": "Lead details:\nName: {{1.name}}\nBusiness: {{1.business_type}}\nService interest: {{1.service_interest}}\nBudget: {{1.monthly_budget}}\nMessage: {{1.message}}\n\nGOOD_FIT: local business, budget $300+/month, clear need\nNOT_FIT: wants free work, huge enterprise, completely wrong service, budget under $200\nMAYBE: everything else"
-    }
-  ],
-  "max_tokens": 100,
-  "temperature": 0.2
-}
-```
+Make's help says a router splits a scenario into routes, each with a filter, and that routes run one after another, not in parallel. A fallback route handles anything that matches no other filter. Use it: if the AI returns an unexpected label, the lead still reaches you instead of vanishing.
 
-**Parse the response:** Use a **JSON → Parse JSON** module on `choices[0].message.content`.
+Write the classification rules in plain words in your prompt, for example the minimum monthly budget you accept, the business types you serve and what counts as a clear need. Keep the prompt short and test it on ten real past enquiries before going live.
 
-### Module 3: Router — Branch by Classification
+## Which AI Model Should You Use?
 
-Add a **Router** module with 3 paths:
+Pick a model that is cheap, fast and available on your plan. One caution from this check: Groq's deprecations page says llama-3.3-70b-versatile was scheduled for shutdown on 16 August 2026 for free and developer use, with openai/gpt-oss-120b and qwen/qwen3.6-27b as recommended replacements. Many older tutorials still use that model name, so do not copy it blindly.
 
-- **Path A:** `classification = GOOD_FIT`
-- **Path B:** `classification = MAYBE`  
-- **Path C:** `classification = NOT_FIT`
+OpenRouter exposes many models behind one OpenAI-compatible endpoint, with the base URL https://openrouter.ai/api/v1. Its live catalogue on 24 October 2026 listed these per-million-token prices.
 
-### Module 4A: AI Email Generation (Good Fit)
+| Model on OpenRouter | Input per 1M tokens | Output per 1M tokens |
+| --- | --- | --- |
+| openai/gpt-5-nano | $0.05 | $0.40 |
+| openai/gpt-4o-mini | $0.15 | $0.60 |
+| qwen/qwen3.5-9b | $0.17 | $0.25 |
+| openai/gpt-5-mini | $0.25 | $2.00 |
 
-For GOOD_FIT leads, generate a personalized outreach email.
+Prices change often, so check the catalogue before you commit. See our [OpenRouter guide](/blog/openrouter-guide-local-business-automation-2026) for how to pick one.
 
-Add another HTTP module calling Groq:
+## How Much Does It Cost? A Worked Example
 
-```json
-{
-  "model": "llama-3.3-70b-versatile",
-  "messages": [
-    {
-      "role": "system",
-      "content": "You write personalized, conversational business emails. Sound like a real person, not a marketing robot. No buzzwords. Under 200 words. Sign off as Nataliia from DataLatte."
-    },
-    {
-      "role": "user", 
-      "content": "Write a reply to this inquiry:\n\nFrom: {{1.name}} ({{1.business_type}} in {{1.city}})\nInterested in: {{1.service_interest}}\nBudget: {{1.monthly_budget}}\nTheir message: {{1.message}}\n\nMake it:\n- Acknowledge their specific situation (mention their business type and city)\n- Reference 1 specific thing from their message\n- Suggest a quick 20-min call to see if we're the right fit\n- Include a Calendly link: https://calendly.com/datalatte/discovery\n- Warm but concise"
-    }
-  ],
-  "max_tokens": 300,
-  "temperature": 0.7
-}
-```
-
-### Module 4B: Template Email (Maybe / Not Fit)
-
-For MAYBE leads, use a softer template. For NOT_FIT, a polite decline.
-
-You can hardcode these or use light AI generation. A simple template for NOT_FIT:
-
-```
-Hi {{1.name}},
-
-Thanks for reaching out to DataLatte! After reviewing your inquiry, I don't think we're the best fit for what you need right now — our services are focused on [specific gap in their request].
-
-I'd recommend checking out [alternative resource].
-
-Wishing you the best with {{1.business_type}}!
-
-Nataliia
-DataLatte.pro
-```
-
-### Module 5: Send Email via Resend
-
-Add an **HTTP → Make an API Request** module:
-
-**URL:** `https://api.resend.com/emails`
-
-**Headers:**
-```
-Authorization: Bearer {{RESEND_API_KEY}}
-Content-Type: application/json
-```
-
-**Body:**
-```json
-{
-  "from": "Nataliia at DataLatte <hello@datalatte.pro>",
-  "to": ["{{1.email}}"],
-  "subject": "Re: Your inquiry about {{1.service_interest}}",
-  "html": "<p>{{4A.choices[0].message.content}}</p>"
-}
-```
-
-### Module 6: Log to Google Sheets
-
-Add a **Google Sheets → Add a Row** module. Log:
-- Timestamp
-- Name, email, business type, city
-- Service interest, budget
-- Classification + reason
-- Email sent (yes/no)
-- Priority level
-
-This gives you a live lead database without any CRM.
+All inputs are **assumptions** for a small business that gets 100 enquiries a month. Credit use per lead depends on how many modules run.
 
-### Module 7: Slack / Email Notification (High Value Only)
+| Input | Value (assumption) |
+| --- | --- |
+| Modules that run per lead | 7 (webhook, classify, parse, draft, save draft, send, log row) |
+| Credits per lead | 7 |
+| Leads per month | 100 |
+| Credits used | 700 of the free 1,000 |
+| AI tokens per lead | 1,500 in and 400 out |
+| AI cost per lead on gpt-5-nano | about $0.0002 |
+| AI cost per lead on gpt-4o-mini | about $0.0005 |
+| AI cost for 100 leads | about $0.02 to $0.05 |
 
-Add a filter: only continue if `priority = high`. Then send yourself a Slack message or email with the lead summary and a link to their row in Google Sheets.
+At that volume the free Make plan and the free Resend plan, which allows 3,000 emails a month but only 100 a day, would cover the workflow. If you reach about 140 leads a month you hit the 1,000-credit limit. The official page did not show paid plan prices when opened, so check Make's pricing before you upgrade.
 
-This is the key design principle: **you only hear about leads worth acting on immediately.** Everything else is handled and logged.
+If you spend 10 minutes on each manual reply (assumption), 100 leads take about 17 hours a month. Even with approval, a draft in front of you cuts that sharply, but measure your own time.
 
----
+## How Do You Keep a Human in the Loop?
 
-## Full Workflow JSON (Import into Make.com)
+Do not let an AI send first-contact emails unseen. A simple approval pattern works: Make writes the draft to a sheet column, notifies you, and a second small scenario sends only rows you mark as approved. Make's AI Agents docs also list best practices on tools, prompts and data security, which are worth reading before you give an agent more freedom.
 
-You can import this as a blueprint. Create a new scenario in Make.com → click the three dots → Import Blueprint → paste this JSON:
+Use an email service with duplicate protection. Resend's API requires from, to and subject, accepts up to 50 recipients in the to field, and supports an optional idempotency key that expires after 24 hours, which helps prevent duplicate sends if a scenario retries.
 
-```json
-{
-  "name": "Lead Follow-Up AI Agent",
-  "flow": [
-    {
-      "id": 1,
-      "module": "gateway:CustomWebHook",
-      "version": 1,
-      "metadata": {
-        "designer": {"x": 0, "y": 0}
-      }
-    },
-    {
-      "id": 2,
-      "module": "http:ActionSendData",
-      "version": 3,
-      "parameters": {
-        "handleErrors": false,
-        "useNewZLibDecompression": true
-      },
-      "mapper": {
-        "url": "https://api.groq.com/openai/v1/chat/completions",
-        "method": "post",
-        "headers": [
-          {"name": "Authorization", "value": "Bearer {{GROQ_API_KEY}}"},
-          {"name": "Content-Type", "value": "application/json"}
-        ],
-        "bodyType": "raw",
-        "contentType": "application/json",
-        "body": "{\"model\":\"llama-3.3-70b-versatile\",\"messages\":[{\"role\":\"user\",\"content\":\"Classify this lead as GOOD_FIT, MAYBE, or NOT_FIT. Reply with JSON only: {classification, reason, priority}. Lead: {{1.name}}, {{1.business_type}}, Budget: {{1.monthly_budget}}\"}],\"max_tokens\":100}"
-      }
-    },
-    {
-      "id": 3,
-      "module": "json:ParseJSON",
-      "mapper": {
-        "string": "{{2.body.choices[].message.content}}"
-      }
-    }
-  ],
-  "metadata": {
-    "version": 1,
-    "scenario": {"roundtrips": 1, "maxErrors": 3, "autoCommit": true}
-  }
-}
-```
-
-Replace `{{GROQ_API_KEY}}` with your actual key stored in Make.com's data stores or as a scenario variable.
-
----
-
-## Real Results: What This Workflow Replaces
-
-Before building this workflow, a typical local marketing consultant spends:
-- 30–60 min/day replying to inbound inquiries
-- 10–15 min qualifying each lead manually  
-- Inconsistent follow-up timing (some leads wait 4+ hours)
-
-After: the system responds to 80% of leads within 2 minutes. You check the Google Sheets log every morning and the Slack notification for high-value leads. The only manual work left is the discovery calls.
-
-For a solo consultant handling 10–20 leads/week, this saves 3–5 hours per week and increases reply-rate conversion by 20–30% because of faster response time.
-
----
-
-## Frequently Asked Questions
-
-**Q: Do I need a paid Make.com plan for this workflow?**
-
-The free Make.com plan includes 1,000 operations/month. Each lead that runs through this workflow uses about 6–8 operations. At 1,000 operations, that's 125–166 leads per month on the free plan. If you're getting more than that, upgrade to the Core plan ($9/month). Groq is free up to 14,400 API requests/day on LLaMA 3.3. Resend is free up to 3,000 emails/month. The total cost to run this workflow for most local businesses: under $10/month.
-
-**Q: What form tools work as the webhook trigger?**
-
-Any tool that supports webhooks: Typeform, Tally (free), Gravity Forms, WPForms, JotForm, Fillout, or a simple HTML form with a fetch() call. Make.com's webhook URL accepts any POST request with JSON or form-encoded data. If your form tool doesn't support webhooks directly, use Zapier's webhook step as a bridge, or switch to Tally (which has native Make.com integration and is free).
-
-**Q: Can I add a follow-up sequence — like if they don't respond in 3 days?**
-
-Yes. Add a delay module after logging to Google Sheets. Set it to 72 hours. Then check Google Sheets to see if a "replied" column is still empty. If so, trigger a second follow-up email. This requires Make.com to run on a schedule (add a second scenario triggered by the Google Sheets log). It's more advanced but very doable with Make.com's native scheduling.
-
-**Q: How do I handle leads that come from different sources (Instagram DMs, email, web form)?**
-
-Create separate webhook triggers for each source, all routing into the same core workflow. Or use Make.com's Gmail module to watch your inbox for new inquiry emails, parse the content with AI, and route them through the same qualification logic. The core AI qualification step works regardless of the lead source.
-
-**Q: What if the AI generates a bad email and sends it before I can review it?**
-
-Add a manual approval step for high-value leads. Instead of sending immediately, log the AI-generated draft to a Google Sheet and send yourself a notification. Only after you approve (click a link that updates the sheet) does the system actually send the email. You can build this with a Make.com scenario triggered by the sheet update. It adds a manual step but gives you a human review gate for important leads.
-
----
-
-## Related Articles
-
-- [AI Appointment Reminder Agent: Python Script That Cuts No-Shows](/blog/ai-agent-appointment-reminder-python-script)
-- [Make.com vs Zapier for Local Business: Which Platform Is Better?](/blog/make-com-vs-zapier-for-local-business-automation)
-- [AI Agent for Lead Generation: How to Automate Your Follow-Ups](/blog/ai-agent-for-lead-generation-local-business)
-- [How to Build an AI Agent for Local Business (No-Code Guide)](/blog/how-to-build-ai-agent-local-business-no-code)
-- [AI Agents for Local Business: What They Are and How They Work](/blog/ai-agents-for-local-business-what-they-are-and-how-they-work)
-
-<Callout type="coffee" title="Want More Local Customers?">
-Nataliia at DataLatte runs data-driven local marketing campaigns for local businesses — coffee shops, salons, pet groomers, and fitness studios. [Book a free 30-minute strategy call](/contact) or explore [Google Ads management](/services/google-ads).
+<Callout type="tip" title="Do This Today">
+Write the three rules that define a good-fit lead for your business, then test them by hand on your last ten enquiries before you build anything in Make.
 </Callout>
+
+## What Mistakes Break This Workflow?
+
+- No fallback route, so unexpected AI output silently stops the scenario.
+- No data structure on the webhook, so a changed form field breaks later modules.
+- Pasting API keys into prompts or shared notes instead of using connections or stored variables.
+- Sending marketing follow-ups with no unsubscribe. The FTC's CAN-SPAM guide asks for accurate sender details, a physical postal address and an opt-out honoured within 10 business days for commercial messages.
+- Treating a low-credit warning as noise and losing leads at month end.
+
+For ready-made scenarios in other areas, see [10 Make.com workflows for local business](/blog/make-com-automation-local-business-workflows), [Make.com for salons](/blog/how-to-use-make-com-for-salon-marketing-automation) and our [no-code AI agent guide](/blog/how-to-build-ai-agent-local-business-no-code). For reminders, read the [appointment reminder script](/blog/ai-agent-appointment-reminder-python-script).
+
+## FAQ
+
+### Do I need a paid Make plan for this workflow?
+
+Not at low volume. The free plan includes 1,000 credits a month. If each lead uses about 7 credits, that covers roughly 140 leads. Paid prices could not be confirmed on the official page, so check it.
+
+### What form tools can trigger the webhook?
+
+Any tool that can send a POST request to the webhook URL, in query string, form data or JSON. Check whether webhooks are on your form plan.
+
+### Can I send a follow-up if the lead does not reply?
+
+Yes, with a second scheduled scenario that reads the sheet and checks a replied column. Make's Sleep delay limit was not verified, so avoid long waits inside one scenario.
+
+### What if the AI sends a bad email?
+
+Use the approval step described above and review each draft until you trust the prompt.
+
+### Is this the same as Make AI Agents?
+
+No. Make AI Agents is a separate app where an agent has instructions, knowledge and tools. The workflow here is a fixed scenario with an AI step.
+
+## Sources
+
+- [Make: pricing](https://www.make.com/en/pricing) (free plan credits; paid prices were not shown when opened)
+- [Make Help: credits](https://help.make.com/credits)
+- [Make: custom webhook module](https://apps.make.com/gateway)
+- [Make Help: router](https://help.make.com/router)
+- [Make Help: Make AI Agents](https://help.make.com/make-ai-agents)
+- [Groq: deprecations](https://console.groq.com/docs/deprecations)
+- [OpenRouter: quickstart](https://openrouter.ai/docs/quickstart) and [models API](https://openrouter.ai/api/v1/models) (prices read on 24 October 2026)
+- [Resend: pricing](https://resend.com/pricing)
+- [Resend: send email API](https://resend.com/docs/api-reference/emails/send-email)
+- [FTC: CAN-SPAM Act compliance guide](https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business)
+- Not used: Make paid plan prices (seen only in third-party blogs via search, not on an official page); Groq free-plan limits (not shown on the page)
+
+Want this built and tested for your business? See our [AI agents service](/services/ai-agents) or [book a free audit](/free-audit).
