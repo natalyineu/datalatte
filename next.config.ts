@@ -281,6 +281,21 @@ const nextConfig: NextConfig = {
         destination: "/blog/display-vs-programmatic-advertising-local-business",
         permanent: true,
       },
+      {
+        source: "/blog/local-marketing-russia-small-business-2026",
+        destination: "/blog/small-business-marketing-russia-2026",
+        permanent: true,
+      },
+      {
+        source: "/blog/sms-marketing-for-hair-salons-guide",
+        destination: "/blog/sms-marketing-for-hair-salons",
+        permanent: true,
+      },
+      {
+        source: "/blog/thumbtack-vs-homeadvisor-local-business",
+        destination: "/blog/angi-vs-thumbtack-for-local-business",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
