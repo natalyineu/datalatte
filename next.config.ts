@@ -296,6 +296,11 @@ const nextConfig: NextConfig = {
         destination: "/blog/angi-vs-thumbtack-for-local-business",
         permanent: true,
       },
+      {
+        source: "/blog/local-marketing-brazil-small-business-2026",
+        destination: "/blog/local-marketing-brazil-small-business-whatsapp-meta",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
