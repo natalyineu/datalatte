@@ -311,6 +311,21 @@ const nextConfig: NextConfig = {
         destination: "/blog/local-seo-france-small-business",
         permanent: true,
       },
+      {
+        source: "/blog/semrush-vs-ahrefs-small-business",
+        destination: "/blog/semrush-vs-ahrefs-local-seo-which-to-use",
+        permanent: true,
+      },
+      {
+        source: "/blog/retargeting-ads-for-small-business-complete-guide-2026",
+        destination: "/blog/retargeting-ads-for-local-business",
+        permanent: true,
+      },
+      {
+        source: "/blog/retargeting-ads-local-business-complete-guide-2026",
+        destination: "/blog/retargeting-ads-for-local-business",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
