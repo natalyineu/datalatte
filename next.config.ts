@@ -301,6 +301,16 @@ const nextConfig: NextConfig = {
         destination: "/blog/local-marketing-brazil-small-business-whatsapp-meta",
         permanent: true,
       },
+      {
+        source: "/blog/local-marketing-spain-small-business-2026",
+        destination: "/blog/small-business-marketing-spain-beginners-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/local-marketing-france-small-business-2026",
+        destination: "/blog/local-seo-france-small-business",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
