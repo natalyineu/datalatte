@@ -326,6 +326,11 @@ const nextConfig: NextConfig = {
         destination: "/blog/retargeting-ads-for-local-business",
         permanent: true,
       },
+      {
+        source: "/blog/local-marketing-china-small-business-2026",
+        destination: "/blog/small-business-marketing-china-2026",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
