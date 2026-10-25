@@ -336,6 +336,11 @@ const nextConfig: NextConfig = {
         destination: "/blog/small-business-marketing-new-york",
         permanent: true,
       },
+      {
+        source: "/blog/7-best-marketing-automation-platforms-for-small-businesses-in-2026-compared",
+        destination: "/blog/best-marketing-automation-tools-small-business",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
