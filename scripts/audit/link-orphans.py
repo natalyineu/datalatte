@@ -22,10 +22,10 @@ try:
         if u.startswith('/blog/'): imp[u[6:].strip('/')]=i
 except Exception: pass
 cfg=open('next.config.ts').read()
-redir=dict(re.findall(r'source:\s*"/blog/([a-z0-9-]+)",\s*destination:\s*"/blog/([a-z0-9-]+)"',cfg))
+redir=dict(re.findall(r'source:\s*"/blog/([A-Za-z0-9-]+)",\s*destination:\s*"/blog/([A-Za-z0-9-]+)"',cfg))
 inb=collections.Counter()
 for s,m in meta.items():
-    for t in set(re.findall(r'\]\(/blog/([a-z0-9-]+)',m['body'])):
+    for t in set(re.findall(r'\]\(/blog/([A-Za-z0-9-]+)',m['body'])):
         t=redir.get(t,t)
         if t!=s and t in meta: inb[t]+=1
 orph=[s for s in meta if inb[s]==0]

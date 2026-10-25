@@ -1,0 +1,26 @@
+name: Content quality gate
+
+on:
+  push:
+    branches: [main]
+    paths: ['content/blog/**.mdx']
+  pull_request:
+    paths: ['content/blog/**.mdx']
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      # Fails on: MDX that does not compile, first-person/invented-case anecdotes, links from indexable posts to
+      # noindex/missing posts. Title/description length are warnings here (legacy debt); new rewrites follow
+      # scripts/audit/check-article.mjs which enforces them strictly.
+      - name: Check changed posts
+        run: node scripts/audit/content-quality.mjs --lenient-seo --base "${{ github.event.before || 'HEAD~1' }}"

@@ -33,6 +33,13 @@ for f in sorted(glob.glob('content/blog/*.mdx')):
     if ext<2:
         nb,k=COMP.subn('',nb); removed_c+=k
     nb=VAGUE.sub('',nb)
+    # Callout blocks (single or multi-line) that carry anecdotes/invented cases
+    def callout(m):
+        nonlocal_removed.append(1)
+        return '' if (FIRST.search(m.group(0)) or CASE.search(m.group(0))) else m.group(0)
+    nonlocal_removed=[]
+    nb=re.sub(r'<Callout\b[^>]*>.*?</Callout>',callout,nb,flags=re.S)
+    removed_p+=sum(1 for _ in nonlocal_removed)*0
     out=[]
     for para in re.split(r'\n{2,}',nb):
         p=para.strip()
@@ -42,6 +49,9 @@ for f in sorted(glob.glob('content/blog/*.mdx')):
         if bad and (isprose or p.startswith(('-','*','>'))):
             removed_p+=1; continue
         out.append(p)
+    # last resort: any remaining single line (list item, table row, quote) with an anecdote pattern
+    out=[ '\n'.join(l for l in p.split('\n') if not (FIRST.search(l) or CASE.search(l))) if (FIRST.search(p) or CASE.search(p)) else p for p in out]
+    out=[p for p in out if p.strip()]
     # drop headings with no content after them (next block is another heading or end)
     clean=[]
     for i,p in enumerate(out):
