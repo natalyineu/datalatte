@@ -1,75 +1,115 @@
 ---
 title: "How to Get More Phone Calls From Your Website"
 date: "2026-05-20"
-lastModified: "2026-06-02"
-description: "Get more phone calls from your local business website: make your number prominent, load fast, keep navigation clear and add a starting-from price."
+lastModified: "2026-10-25"
+description: "Get more phone calls from your website with 7 fixes: tap-to-call links, a Google profile that matches, a page loading in 2.5 seconds and call tracking."
 author: "Nataliia"
 category: "Website & CRO"
 tags: ["local business website phone calls", "SEO", "Google My Business", "customer experience"]
 slug: "how-to-get-more-phone-calls-from-your-website"
 image: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&q=80&auto=format&fit=crop"
-readTime: '14 min read'
----
-You're a local business owner, pouring your heart and soul into your coffee shop, salon, or pet grooming studio. But despite your best efforts, phone calls from potential customers just aren't coming in. It's time to take a closer look at your website and figure out what's going wrong.
-
-According to a recent study:
-
-Your website is often the first impression potential customers have of your business, and it's crucial that it's making a good one. In this guide, we'll walk you through the steps you can take to get more phone calls from your website.
-
-### Step 1: Optimize Your Google My Business Listing
-
-Your Google My
-
-## Frequently Asked Questions
-
-**Q: I own a carpet cleaning business. Will more phone calls actually help if my team is already busy?**
-
-Yes, but you need to think about which calls you want. If you're fully booked, you don't need more calls — you need better calls. Add a "starting from" price to your website and GMB to pre-qualify callers. Track which jobs generate the highest profit and start turning away the low-value ones.
-
-I had a carpet cleaner in Phoenix add a $95 minimum to his website. Call volume dropped 20%, but average job value went from $130 to $210. He made more money from fewer calls.
-
-**Q: Won't putting my phone number everywhere make me get spam calls?**
-
-It will attract some spam, but less than you think. Your GMB listing already has your number if you've claimed it. Spammers scrape GMB, not individual websites. The bigger risk is missing real customer calls because you made your number hard to find. Use a call screening service if spam becomes a problem.
-
-**Q: Do I really need call tracking, or can I just ask customers how they found me?**
-
-You can ask, but the data will be unreliable. Studies consistently show that 60–70% of customers either don't remember how they found you or will say "Google" regardless of whether it was a search ad, a map listing, or a review they read.
-
-Relying on what customers say is like navigating with a compass that points to whatever direction you're already facing. Spend the $30/month on call tracking for three months. The insights will pay for itself in the first week.
-
-**Q: My website was built five years ago. Do I need a whole new site, or can I just add a phone number?**
-
-**Q: What's the single fastest way to get more calls starting tomorrow?**
-
-Fix your Google Business Profile. Claim it if you haven't. Verify it. Make sure the phone number matches your website exactly. Add photos. Respond to every review. Set up Google's free call tracking so you can see how many calls come from your listing. Most local businesses I audit have an incomplete or inaccurate GMB. Fixing this takes two hours and generates results within a week.
-
-**Q: I already get calls but they don't convert. How do I fix that?**
-
-This is a sales problem, not a website problem. Record your own phone calls (with the customer's consent) and listen to them. You'll hear if you're talking too much, not answering the question they actually asked, or failing to ask for the booking.
-
-Conversion rate went from 15% to 40% in two weeks. No change to the website.
-
+readTime: "8 min read"
 ---
 
-The uncomfortable truth I've learned from ten years of running campaigns across six agencies is this: most local businesses don't need more traffic. They need to stop making it hard for the traffic they already have to call them.
+To get more phone calls from your website, put a tap-to-call number at the top of every page, make the number match your Google Business Profile, keep the page fast on a phone, and measure calls so you can see what works. No fix is magic. Each one removes a step between a visitor who wants to talk and the phone ringing.
 
-The coffee shop owner who reads this and changes their mobile header today will get a call tomorrow from someone who would have bounced off their site. The salon owner who sets up call tracking this week will discover a channel they've been ignoring for years.
+This guide is for local businesses such as salons, groomers, cafes and trades that take bookings by phone. It uses Google's and MDN's documentation for the technical parts. Where no benchmark is published, the text says so, and the worked example is an assumption.
 
-The locksmith who compresses their images this afternoon will answer a call tonight from someone locked out of their car — and they'll remember that feeling of being the business that actually answered.
+<StatRow
+  values="2.5s|200ms|0.1|July 31, 2024"
+  labels="Good Largest Contentful Paint|Good Interaction to Next Paint|Good Cumulative Layout Shift|Google ended Business Profile call history"
+  subs="web.dev, 75th percentile|web.dev, 75th percentile|web.dev, 75th percentile|Google Business Profile Help"
+  trends="neutral|neutral|neutral|neutral"
+/>
 
-I've been on both sides of this, and I still screw it up. Last month, I realized my own website's phone number was hidden behind a FAQ accordion on mobile. I ordered a second coffee I did not need. No regrets. Then I fixed it.
+## Why Is Your Website Not Getting Phone Calls?
 
-If you want me to look at your site and tell you exactly where you're losing calls, I'm brutally honest and I don't charge for the first conversation. [Book a free consultation](/free-audit) — bring screenshots of your mobile site and your GMB listing. I'll bring the opinions.
+Usually the number is hard to find, does not work with a tap, or does not match what people see on Google. The three common causes are a number only in the footer, plain text that is not a link on mobile, and a slow page that visitors leave before they see the number.
 
-## Related Articles
+Check your own site on your phone. Open it on mobile data, not Wi-Fi, and try to call within five seconds. If you cannot, a customer will not try. Then look at what Google shows about you, because many callers never reach your website at all.
 
-- [How to Write Website Copy for a Local Business (With Examples)](/blog/how-to-write-website-copy-local-business-examples)
-- Page Speed and SEO for Local Businesses: Why Every Second Counts
-- [Product Listing Optimization: Write Descriptions That Rank and Sell](/blog/product-listing-optimization)
-- [Brewing a Personalized Experience with Website Personalization for Coffee Shops](/blog/website-personalization-for-coffee-shops)
-- [Wix vs Squarespace for Small Business Websites: Which Wins?](/blog/wix-vs-squarespace-small-business)
+## How Do You Make Your Number Easy to Tap?
 
-<Callout type="coffee" title="Turn Visitors Into Customers">
-DataLatte designs and optimises local business websites for conversions. [Book a free audit](/contact) or learn more about [Website & CRO services](/services/website).
-</Callout>
+Use a telephone link. MDN documents `tel:` URLs in the href of a link, and says cellular devices autodial the number while other devices may open a calling app or offer to save the contact. Write the number with the country code, and put it in a header button as well as the page body.
+
+- Add a "Call now" button in the header on every page
+- Show the number as text next to the button, so desktop visitors can read it
+- Repeat the button after the pricing or services section
+- List opening hours near the button so no one calls a closed shop
+
+Keep the same number on every page. Our [Google Business Profile checklist](/blog/google-business-profile-optimization-checklist) shows where else it must match.
+
+## Does Your Google Business Profile Match Your Website?
+
+It should, and fix it first. Google says local results rank on relevance, distance and prominence, and that complete, accurate information makes a business more likely to appear. It also says you cannot pay for a better local ranking.
+
+Check the phone number, hours and category. Google's performance report counts Calls as the number of times a customer clicked the call button on your Business Profile, and requires a phone number on the profile. That figure counts taps, not completed calls. Google also removed chat and call history from Business Profile on July 31, 2024, so you can no longer see individual callers there.
+
+## How Fast Should the Page Load?
+
+Google's web.dev lists targets for a good experience: Largest Contentful Paint within 2.5 seconds, Interaction to Next Paint of 200 milliseconds or less, and Cumulative Layout Shift of 0.1 or lower. A page passes when it meets all three at the 75th percentile of visits, measured separately for mobile and desktop.
+
+Test your page in PageSpeed Insights, which reports these numbers from real visits when enough data exists. Common fixes are smaller images, fewer scripts and a simple layout so the call button does not jump while the page loads. No published figure links these thresholds to call volume for local businesses.
+
+## What Else Helps People Decide to Call?
+
+Give visitors what they need before they dial. Put what you offer, where you are, your hours and a starting price near the top. A starting price filters out callers who cannot afford you, so you get fewer but better calls.
+
+Add reviews and a short answer to the most common question. BrightLocal's 2026 survey of 1,002 US consumers found 97% read reviews of local businesses and 47% will not use a business with fewer than 20. Add LocalBusiness structured data, too. Google's documentation lists telephone as a recommended property, with the country and area code included. It does not guarantee a rich result.
+
+## How Do You Track Calls From Your Website?
+
+Track two things: taps and answered calls. Google Ads can count several kinds of call conversions (see our [Google Ads guide for dog groomers](/blog/google-ads-for-dog-groomers-complete-2026-guide) for a call-asset setup example). These include calls from call assets, calls to a number on your website after an ad click, and clicks on a number on your mobile website, which tracks the click and not the call. You set the minimum call length that counts as a conversion.
+
+Calls from ads and calls to a website number use Google forwarding numbers. If you do not run ads, ask every caller how they found you and log the answer. A free spreadsheet works. Our pieces on [AI voice agents for local business phone calls](/blog/voice-ai-agent-local-business-phone-calls) and [AI phone answering with Bland](/blog/bland-ai-phone-answering-local-business-2026) cover answering after hours.
+
+## What Does a Worked Example Look Like?
+
+All inputs below are **assumptions** to show the maths, not benchmarks.
+
+| Input | Before | After |
+| --- | --- | --- |
+| Mobile visits per month | 1,000 | 1,000 |
+| Share of visitors who call | 1.5% | 2.5% |
+| Calls | 15 | 25 |
+| Calls that become booked jobs | 40% | 40% |
+| Booked jobs | 6 | 10 |
+| Average job value | $120 | $120 |
+| Monthly revenue from website calls | $720 | $1,200 |
+
+Under these assumptions, a tap-to-call button and a faster page add four jobs and $480 a month. The point is the method: count visits, calls and booked jobs for a month, change one thing, then count again. Do not change five things at once.
+
+## FAQ
+
+### What is the fastest way to get more calls starting tomorrow?
+
+Fix your Google Business Profile. Confirm the phone number matches your website, add hours, photos and your category, and reply to reviews. Then add a tap-to-call button to your site header.
+
+### Will showing my number everywhere bring spam calls?
+
+No published data on this was found. The number is already public on your profile, and hiding it risks losing real calls. If spam becomes a problem, use your phone provider's call blocking.
+
+### Do I need call tracking?
+
+If you run Google Ads, yes, because you cannot judge the campaign without it. Google Ads can count calls from ads and calls to your website number through forwarding numbers. Without ads, a simple log of how each caller found you is enough to start.
+
+### Do I need a new website to get more calls?
+
+Not necessarily. Many of the fixes above, such as a tap-to-call header button, matching profile details and smaller images, can be made on an existing site. Replace the site only if it cannot be made fast on mobile.
+
+### Why do I get calls that do not turn into customers?
+
+That is usually a phone handling problem, not a website problem. Listen to a few calls with the caller's consent, note what was asked, and write a short script for pricing and booking.
+
+## Sources
+
+- [MDN: The anchor element, linking to telephone numbers](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a)
+- [web.dev: Web Vitals](https://web.dev/articles/vitals)
+- [Google Business Help: Improve your local ranking](https://support.google.com/business/answer/7091)
+- [Google Business Help: Understand your Business Profile performance](https://support.google.com/business/answer/9918094)
+- [Google Business Help: Changes to chat and call history](https://support.google.com/business/answer/14919769)
+- [Google Search Central: LocalBusiness structured data](https://developers.google.com/search/docs/appearance/structured-data/local-business)
+- [Google Ads Help: About phone call conversion tracking](https://support.google.com/google-ads/answer/6100664)
+- [BrightLocal: Local Consumer Review Survey 2026](https://www.brightlocal.com/research/local-consumer-review-survey/) (1,002 US adults)
+
+Want help turning your site into a call machine? See our [website service](/services/website) or [book a free audit](/free-audit).
