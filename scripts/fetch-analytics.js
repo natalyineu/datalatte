@@ -153,6 +153,21 @@ async function saveGscPageHistory() {
   })).data.rows || [];
   fs.writeFileSync(path.join(OUT_DIR, "gsc-pages-90d.json"), JSON.stringify({ end, pages: rows90.map(r => [r.keys[0].replace("https://datalatte.pro", ""), r.clicks, r.impressions, +r.position.toFixed(1)]) }));
   console.log(`✓ GSC 90d page list saved (${rows90.length} pages)`);
+  // Query x page pairs (top 5000 by impressions) — shows which search queries each page ranks for.
+  // Used to retarget titles/H2s and to find "position 8-20" opportunities. Overwritten daily.
+  try {
+    const qp = (await sc90.searchanalytics.query({
+      siteUrl,
+      requestBody: { startDate: dateStr(-93), endDate: end, dimensions: ["page", "query"], rowLimit: 25000, dataState: "final" },
+    })).data.rows || [];
+    qp.sort((a, b) => b.impressions - a.impressions);
+    fs.writeFileSync(path.join(OUT_DIR, "gsc-query-page-90d.json"), JSON.stringify({
+      end,
+      cols: ["page", "query", "clicks", "impressions", "position"],
+      rows: qp.slice(0, 5000).map(r => [r.keys[0].replace("https://datalatte.pro", ""), r.keys[1], r.clicks, r.impressions, +r.position.toFixed(1)]),
+    }));
+    console.log(`✓ GSC query x page saved (${Math.min(qp.length, 5000)} of ${qp.length} pairs)`);
+  } catch (e) { console.warn("query x page export failed:", e.message); }
   const last = hist[hist.length - 1];
   if (last && (new Date(end) - new Date(last.end)) / 864e5 < 7) return;
   const sc = google.searchconsole({ version: "v1", auth });
