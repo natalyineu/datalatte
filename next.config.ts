@@ -356,6 +356,26 @@ const nextConfig: NextConfig = {
         destination: "/blog/meta-ads-for-coffee-shops-2026",
         permanent: true,
       },
+      {
+        source: "/blog/tiktok-spark-ads-local-business-guide",
+        destination: "/blog/tiktok-spark-ads-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/facebook-ads-pet-groomers-guide",
+        destination: "/blog/pet-groomer-meta-ads",
+        permanent: true,
+      },
+      {
+        source: "/blog/pet-groomer-marketing-facebook-ads",
+        destination: "/blog/pet-groomer-meta-ads",
+        permanent: true,
+      },
+      {
+        source: "/blog/facebook-ads-for-pet-groomers-what-works-2026",
+        destination: "/blog/pet-groomer-meta-ads",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
