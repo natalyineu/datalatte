@@ -346,6 +346,11 @@ const nextConfig: NextConfig = {
         destination: "/blog/sms-marketing-for-coffee-shops-how-to-start",
         permanent: true,
       },
+      {
+        source: "/blog/pandora-ads-local-business",
+        destination: "/blog/digital-audio-advertising-2026-spotify-pandora-podcast-ads",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
