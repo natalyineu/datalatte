@@ -351,6 +351,11 @@ const nextConfig: NextConfig = {
         destination: "/blog/digital-audio-advertising-2026-spotify-pandora-podcast-ads",
         permanent: true,
       },
+      {
+        source: "/blog/coffee-shop-meta-ads-targeting-strategies",
+        destination: "/blog/meta-ads-for-coffee-shops-2026",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
