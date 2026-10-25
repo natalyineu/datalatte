@@ -70,7 +70,9 @@ Page views are rarely what pay your bills. The actions that matter are things li
 
 For each one, create a trigger, then create a GA4 Event tag that fires on that trigger, giving it a clear event name such as `phone_click` or `booking_click`. In GA4, mark the important events as key events (formerly called conversions) so they appear in your reports and can be imported to Google Ads.
 
-Third-party booking widgets (Fresha, Vagaro, Mindbody, Calendly, Square Appointments) are the tricky part. They often run in an iframe or on another domain, and GTM cannot see inside them. Check whether your booking tool offers its own Analytics or GTM integration or provides a confirmation page URL on your domain. If not, track the click on the booking button as a stand-in and be honest in your reporting that it measures intent, not completed bookings.
+Third-party booking widgets (Fresha, Vagaro, Mindbody, Calendly, Square Appointments) are the tricky part. They often run in an iframe or on another domain, and GTM cannot see inside them. Check whether your booking tool offers its own Analytics or GTM integration or provides a confirmation page URL on your domain.
+
+If not, track the click on the booking button as a stand-in and be honest in your reporting that it measures intent, not completed bookings.
 
 ## Step 5: Add advertising tags
 

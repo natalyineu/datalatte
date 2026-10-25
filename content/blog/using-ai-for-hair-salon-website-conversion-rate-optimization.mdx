@@ -10,8 +10,9 @@ slug: "using-ai-for-hair-salon-website-conversion-rate-optimization"
 image: "https://images.unsplash.com/photo-1583986795851-5c4f8ee28c4c?w=800&q=80&auto=format&fit=crop"
 readTime: '10 min read'
 ---
+Take a salon website with 400 visits a month. If 3% of visitors tap the booking button and 60% of those finish booking, that is about 7 bookings. Lift the tap rate to 4.5% and it is about 11, which is roughly 4 extra appointments a month, or $324 at a $90 ticket.
 
-Take a salon website with 400 visits a month. If 3% of visitors tap the booking button and 60% of those finish booking, that is about 7 bookings. Lift the tap rate to 4.5% and it is about 11, which is roughly 4 extra appointments a month, or $324 at a $90 ticket. All of those inputs are my assumptions, not benchmarks, and the full table is below. The honest takeaway is that a small site can only move so far on conversion alone, so the work has to be cheap, and AI is useful mostly because it makes the cheap part cheaper.
+All of those inputs are my assumptions, not benchmarks, and the full table is below. The honest takeaway is that a small site can only move so far on conversion alone, so the work has to be cheap, and AI is useful mostly because it makes the cheap part cheaper.
 
 This guide is for salon owners in the US, UK, Australia and Canada. It shows how to use an AI assistant to audit your site, rewrite the pages that matter, fix the booking path, and check your own numbers. It also explains why most salons should not run A/B tests, using a calculation you can do on the back of an envelope.
 
@@ -26,7 +27,11 @@ AI assistants are strong at reading a page the way a stranger would and telling 
 
 And these are jobs for you, not for AI: choosing what to charge, deciding which photos are honest, and confirming every fact.
 
-Google's guidance on generative AI content is blunt about that last point. It says models "don't retrieve facts, but predict a likely sequence of words", so outputs can contain hallucinations, and it advises you to "manually factcheck and review all AI-generated content for accuracy and trustworthiness before publishing". The review extends to title elements, meta descriptions, structured data and image alt text. Google also warns that generating many pages without adding value may violate its spam policy on scaled content abuse ([Google Search Central: Using generative AI content](https://developers.google.com/search/docs/fundamentals/using-gen-ai-content)). For a salon, the practical rule is simple: fix the pages you have, do not mass-produce "hair salon in every suburb" pages.
+Google's guidance on generative AI content is blunt about that last point. It says models "don't retrieve facts, but predict a likely sequence of words", so outputs can contain hallucinations, and it advises you to "manually factcheck and review all AI-generated content for accuracy and trustworthiness before publishing".
+
+The review extends to title elements, meta descriptions, structured data and image alt text. Google also warns that generating many pages without adding value may violate its spam policy on scaled content abuse ([Google Search Central: Using generative AI content](https://developers.google.com/search/docs/fundamentals/using-gen-ai-content)).
+
+For a salon, the practical rule is simple: fix the pages you have, do not mass-produce "hair salon in every suburb" pages.
 
 ## Step 1: Measure Your Baseline First
 
@@ -66,17 +71,27 @@ The cheapest gains on a salon site usually come from cutting the steps between "
 
 Visitors deciding on a stylist look for proof. Put two or three real reviews next to the booking button, name your stylists with photos, and state your policies in plain words. We cover the order of priority in [trust signals for small business websites](/blog/trust-signals-website).
 
-One AI warning belongs here. Never use AI to write reviews or testimonials. The US Federal Trade Commission's rule on fake reviews bars creating or selling fake reviews and testimonials, including those that misrepresent that they are by someone who does not exist, "such as AI-generated fake reviews", and lets the FTC seek civil penalties against knowing violators ([FTC press release, August 2024](https://www.ftc.gov/news-events/news/press-releases/2024/08/federal-trade-commission-announces-final-rule-banning-fake-reviews-testimonials)). Ask real clients for real reviews, and use AI only to draft the polite request message.
+One AI warning belongs here. Never use AI to write reviews or testimonials. The US Federal Trade Commission's rule on fake reviews bars creating or selling fake reviews and testimonials, including those that misrepresent that they are by someone who does not exist, "such as AI-generated fake reviews", and lets the FTC seek civil penalties against knowing violators ([FTC press release, August 2024](https://www.ftc.gov/news-events/news/press-releases/2024/08/federal-trade-commission-announces-final-rule-banning-fake-reviews-testimonials)).
+
+Ask real clients for real reviews, and use AI only to draft the polite request message.
 
 ## Step 5: Decide Whether a Chat Assistant Belongs on the Site
 
-A chat widget that answers hours, prices and availability can capture visitors who would otherwise leave. It is also the step most likely to go wrong, because a bot that invents a price or a time slot costs you a client. Before you buy one, read our guide to [AI agents for hair salons](/blog/ai-agents-for-hair-salons), which covers what such tools cost, what they should be allowed to do and the guardrails to write first. If your booking software already includes automated replies, test that before paying for a second tool.
+A chat widget that answers hours, prices and availability can capture visitors who would otherwise leave. It is also the step most likely to go wrong, because a bot that invents a price or a time slot costs you a client.
+
+Before you buy one, read our guide to [AI agents for hair salons](/blog/ai-agents-for-hair-salons), which covers what such tools cost, what they should be allowed to do and the guardrails to write first. If your booking software already includes automated replies, test that before paying for a second tool.
 
 ## Why Most Salons Should Not A/B Test
 
-An A/B test splits visitors between two versions of a page and compares conversion. It needs a lot of visitors, which a one-site salon does not have. A simple rule of thumb (Robert Lehr's, from a 1992 paper in Statistics in Medicine) estimates the sample for each version as n = 16 x s^2 / d^2, for 80% power at a 5% two-sided significance level, where for proportions s^2 is p x (1 - p) using the average of the two rates and d is the difference to detect ([Lehr, 1992](https://jhanley.biostat.mcgill.ca/c607/ch07/16_s_sq_over_d_sq.pdf)). It is a ballpark, as Lehr says, not a substitute for proper software.
+An A/B test splits visitors between two versions of a page and compares conversion. It needs a lot of visitors, which a one-site salon does not have.
 
-Apply it to a lift from 3% to 4%. The average rate is 3.5%, so s^2 = 0.035 x 0.965 = 0.0338, and d = 0.01. That gives n = 16 x 0.0338 / 0.0001, or about 5,400 visitors for each version, 10,800 in total. At 400 visits a month, that is more than two years. Meanwhile Google has stopped offering its free Optimize testing tool: Google Analytics Help says Optimize and Optimize 360 are no longer available as of September 30, 2023, and that Google is investing in third-party A/B testing integrations ([Google Analytics Help](https://support.google.com/analytics/answer/12979939)).
+A simple rule of thumb (Robert Lehr's, from a 1992 paper in Statistics in Medicine) estimates the sample for each version as n = 16 x s^2 / d^2, for 80% power at a 5% two-sided significance level, where for proportions s^2 is p x (1 - p) using the average of the two rates and d is the difference to detect ([Lehr, 1992](https://jhanley.biostat.mcgill.ca/c607/ch07/16_s_sq_over_d_sq.pdf)).
+
+It is a ballpark, as Lehr says, not a substitute for proper software.
+
+Apply it to a lift from 3% to 4%. The average rate is 3.5%, so s^2 = 0.035 x 0.965 = 0.0338, and d = 0.01. That gives n = 16 x 0.0338 / 0.0001, or about 5,400 visitors for each version, 10,800 in total.
+
+At 400 visits a month, that is more than two years. Meanwhile Google has stopped offering its free Optimize testing tool: Google Analytics Help says Optimize and Optimize 360 are no longer available as of September 30, 2023, and that Google is investing in third-party A/B testing integrations ([Google Analytics Help](https://support.google.com/analytics/answer/12979939)).
 
 So test the way a small site can:
 
@@ -102,7 +117,9 @@ Every figure here is an **assumption** for illustration; replace them with your 
 | One-off work: 6 hours at $40 (assumption) | | $240 | $240 |
 | Months to repay the work | | 1.5 | 0.7 |
 
-How to read it: payback is the one-off cost divided by extra monthly revenue, and it uses revenue, not profit. Even the Strong column is modest in absolute terms, because 400 visits is a small base. The bigger levers are usually the number of visitors (a complete Google profile and local search) and what happens after the tap: reply speed, reminders and rebooking. Do the cheap fixes here first, then put your effort where the volume is.
+How to read it: payback is the one-off cost divided by extra monthly revenue, and it uses revenue, not profit. Even the Strong column is modest in absolute terms, because 400 visits is a small base.
+
+The bigger levers are usually the number of visitors (a complete Google profile and local search) and what happens after the tap: reply speed, reminders and rebooking. Do the cheap fixes here first, then put your effort where the volume is.
 
 <Callout type="coffee" title="Fix the Leaks Before Buying Traffic">
 If 40% of people who tap "Book" never finish, a better booking page is worth more than a bigger ad budget. Check where the booking flow loses people before you pay for more visitors.

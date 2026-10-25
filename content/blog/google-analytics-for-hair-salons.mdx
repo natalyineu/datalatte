@@ -10,18 +10,27 @@ slug: "google-analytics-for-hair-salons"
 image: "https://images.unsplash.com/photo-1510972021-c0bff01843e3?w=800&q=80&auto=format&fit=crop"
 readTime: '10 min read'
 ---
+You do not need a dashboard full of charts. A salon needs four numbers: how many people tapped your booking button, how many tapped your phone number, how many finished a booking, and where those people came from.
 
-You do not need a dashboard full of charts. A salon needs four numbers: how many people tapped your booking button, how many tapped your phone number, how many finished a booking, and where those people came from. Set that up once, spend 15 minutes a week reading it, and you can tell which marketing is filling chairs and which is just making noise. This guide shows how to do it in Google Analytics 4 (GA4) without a developer, including the catch that trips up most salons: the booking page often lives on someone else's website.
+Set that up once, spend 15 minutes a week reading it, and you can tell which marketing is filling chairs and which is just making noise.
+
+This guide shows how to do it in Google Analytics 4 (GA4) without a developer, including the catch that trips up most salons: the booking page often lives on someone else's website.
 
 It is for salon owners in the US, UK, Australia and Canada. Every GA4 fact below comes from Google's own support pages, linked in the text. The cost and payback figures are my assumptions, labelled as such.
 
 ## What GA4 Can and Cannot Tell a Salon
 
-GA4 records activity as events. Google's help page groups them into four kinds: automatically collected events, enhanced measurement events, recommended events (predefined names you implement yourself) and custom events that you define. The same page notes that custom events do not show up in most standard reports, so you need custom reports or explorations to analyse them ([Google Analytics Help: About events](https://support.google.com/analytics/answer/9322688)). That is why we mark the important ones as key events, covered below.
+GA4 records activity as events. Google's help page groups them into four kinds: automatically collected events, enhanced measurement events, recommended events (predefined names you implement yourself) and custom events that you define.
+
+The same page notes that custom events do not show up in most standard reports, so you need custom reports or explorations to analyse them ([Google Analytics Help: About events](https://support.google.com/analytics/answer/9322688)). That is why we mark the important ones as key events, covered below.
 
 Enhanced measurement, when switched on, collects page views, scrolls, outbound clicks, site search, video engagement, file downloads and form interactions without extra code. Page views cannot be turned off. An outbound click is a click on a link that leads away from your domain, except for domains you have listed for cross-domain measurement ([Google Analytics Help: Enhanced measurement](https://support.google.com/analytics/answer/9216061)). That exception matters for salons, as you will see.
 
-What GA4 cannot do is see inside your booking app, or count a client who books through a marketplace app. The booking platform Fresha, for example, says its Google Analytics add-on cannot track bookings made in its iOS and Android marketplace apps, and that data is shared only when clients consent to cookies, so reported conversions may be lower than real online bookings ([Fresha Help Center](https://www.fresha.com/help-center/knowledge-base/online-presence/449-manage-google-analytics-tracking)). Other platforms differ, so check yours. Treat GA4 as a good sample of your website's behaviour, not a ledger.
+What GA4 cannot do is see inside your booking app, or count a client who books through a marketplace app.
+
+The booking platform Fresha, for example, says its Google Analytics add-on cannot track bookings made in its iOS and Android marketplace apps, and that data is shared only when clients consent to cookies, so reported conversions may be lower than real online bookings ([Fresha Help Center](https://www.fresha.com/help-center/knowledge-base/online-presence/449-manage-google-analytics-tracking)). Other platforms differ, so check yours.
+
+Treat GA4 as a good sample of your website's behaviour, not a ledger.
 
 ## The Four Events a Salon Should Track
 
@@ -32,13 +41,21 @@ What GA4 cannot do is see inside your booking app, or count a client who books t
 | Booking completed | Real bookings | A thank-you page, or the booking platform's own GA4 event |
 | Enquiry form submitted | Consultations, colour quotes, bridal | The enhanced measurement form event, or a thank-you page |
 
-Google's page on key events defines one as "an event that measures an action that's particularly important to the success of your business", and says any event you collect can become a key event. Key events appear in reports such as Landing pages and User acquisition, and you can create a Google Ads conversion from a key event, which Google says reduces the risk of data discrepancies between Google Ads and Analytics ([Google Analytics Help: Key events](https://support.google.com/analytics/answer/9267568)). If you run Google Ads for your salon, that link matters; our [hair salon Google Ads guide](/blog/google-ads-for-hair-salons-complete-guide) covers the conversion side.
+Google's page on key events defines one as "an event that measures an action that's particularly important to the success of your business", and says any event you collect can become a key event.
+
+Key events appear in reports such as Landing pages and User acquisition, and you can create a Google Ads conversion from a key event, which Google says reduces the risk of data discrepancies between Google Ads and Analytics ([Google Analytics Help: Key events](https://support.google.com/analytics/answer/9267568)).
+
+If you run Google Ads for your salon, that link matters; our [hair salon Google Ads guide](/blog/google-ads-for-hair-salons-complete-guide) covers the conversion side.
 
 Google's enhanced measurement page does not say whether clicks on `tel:` or email links are collected automatically, so do not assume they are. The easiest way to be sure is to create the tap events with Google Tag Manager, which our [Tag Manager guide for local websites](/blog/google-tag-manager-for-local-website-analytics) walks through, and then test them. For calls that do not come through your website, see call tracking for local business.
 
 ## The Booking-Page Problem
 
-Many salons send visitors from their own website to Fresha, Vagaro, Booksy, Square or a similar app. Google's cross-domain page explains what goes wrong: without cross-domain measurement each domain sets its own cookies, so one person moving between domains can look like two users and two sessions, and traffic can be misattributed as self-referrals ([Google Analytics Help: Cross-domain measurement](https://support.google.com/analytics/answer/10071811)). You can add the booking domain in your web data stream under Configure tag settings, then Configure your domains. But two cautions apply:
+Many salons send visitors from their own website to Fresha, Vagaro, Booksy, Square or a similar app.
+
+Google's cross-domain page explains what goes wrong: without cross-domain measurement each domain sets its own cookies, so one person moving between domains can look like two users and two sessions, and traffic can be misattributed as self-referrals ([Google Analytics Help: Cross-domain measurement](https://support.google.com/analytics/answer/10071811)).
+
+You can add the booking domain in your web data stream under Configure tag settings, then Configure your domains. But two cautions apply:
 
 - **It only helps if the booking platform also runs your Google tag.** Fresha's help page says you paste your GA4 measurement ID into its add-on and add fresha.com as a recognised domain, but it also says cross-domain tracking is not supported there. Check what your own platform says.
 - **Listed domains stop producing outbound click events.** Google's pages say links to domains set up for cross-domain measurement do not trigger the enhanced measurement outbound click. So if your booking link goes to a listed domain, your own booking-button tap event becomes the number to trust.
@@ -47,7 +64,11 @@ The simple, reliable fallback is to measure what you control. Count taps on your
 
 ## Tag the Links You Control
 
-GA4 can only report on a source it can see. Instagram, Facebook, email and QR codes on your window poster all arrive looking like "direct" traffic unless you tag the link. Google's UTM guidance says to always use utm_source, utm_medium and utm_campaign, warns that missing parameters result in "(not set)" values in reports, and says values are case-sensitive, so `utm_source=google` and `utm_source=Google` are different ([Google Analytics Help: UTM parameters](https://support.google.com/analytics/answer/10917952)). Follow its tips: use lowercase, one source name per platform, one medium per channel, and a campaign name that matches the exact campaign.
+GA4 can only report on a source it can see. Instagram, Facebook, email and QR codes on your window poster all arrive looking like "direct" traffic unless you tag the link.
+
+Google's UTM guidance says to always use utm_source, utm_medium and utm_campaign, warns that missing parameters result in "(not set)" values in reports, and says values are case-sensitive, so `utm_source=google` and `utm_source=Google` are different ([Google Analytics Help: UTM parameters](https://support.google.com/analytics/answer/10917952)).
+
+Follow its tips: use lowercase, one source name per platform, one medium per channel, and a campaign name that matches the exact campaign.
 
 A salon-sized set of links:
 
@@ -95,7 +116,9 @@ Tracking does not make money directly. It pays by showing you where to cut or do
 | Net monthly gain after the weekly check | -$40 | $110 | $260 |
 | Months to repay the setup | never | 1.1 | 0.5 |
 
-How to read it: in the Tough column everything you spend is already working, so tracking only confirms it, which is still useful but earns nothing. The Base and Strong columns assume you were paying for a channel that produced no bookings. The savings are only real if you move that money to something that works, and if your tracking is accurate. Check that by making a test booking and finding it in the Realtime report.
+How to read it: in the Tough column everything you spend is already working, so tracking only confirms it, which is still useful but earns nothing. The Base and Strong columns assume you were paying for a channel that produced no bookings.
+
+The savings are only real if you move that money to something that works, and if your tracking is accurate. Check that by making a test booking and finding it in the Realtime report.
 
 <Callout type="coffee" title="Test Your Own Booking">
 Book a test appointment on your phone, in a clean browser with no ad blocker, then look for it in Realtime. If it does not show, fix that before you trust a single report.

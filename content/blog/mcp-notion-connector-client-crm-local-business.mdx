@@ -402,23 +402,41 @@ The decisive differentiator is AI-generated personalization at low cost. Every o
 
 **Is Notion a good CRM for small businesses?**
 
-Yes, particularly for service businesses built around repeat client relationships. Notion's database structure is flexible enough to model exactly the properties your business tracks — unlike purpose-built CRMs that lock you into their schema. The free tier supports unlimited pages and databases, so you can run a full CRM for 500+ clients at zero platform cost. The trade-off is that Notion is not a CRM out of the box — you are building one using Notion's building blocks. The database structure in this guide removes that friction: it is pre-designed for local service businesses, so you are not starting from a blank page.
+Yes, particularly for service businesses built around repeat client relationships. Notion's database structure is flexible enough to model exactly the properties your business tracks — unlike purpose-built CRMs that lock you into their schema.
+
+The free tier supports unlimited pages and databases, so you can run a full CRM for 500+ clients at zero platform cost. The trade-off is that Notion is not a CRM out of the box — you are building one using Notion's building blocks.
+
+The database structure in this guide removes that friction: it is pre-designed for local service businesses, so you are not starting from a blank page.
 
 **Does MCP work with Notion's free plan?**
 
-Yes. The Notion MCP server authenticates using an Integration Token, which is available on all Notion plans including the free tier. The MCP server can read, create, and update database entries, search for records by property, and retrieve rich text fields — all without any paid Notion subscription. The only meaningful free-tier limit is that you can add up to 10 guest collaborators; for an internal CRM, this is not a constraint.
+Yes. The Notion MCP server authenticates using an Integration Token, which is available on all Notion plans including the free tier. The MCP server can read, create, and update database entries, search for records by property, and retrieve rich text fields — all without any paid Notion subscription.
+
+The only meaningful free-tier limit is that you can add up to 10 guest collaborators; for an internal CRM, this is not a constraint.
 
 **How much does this system actually cost to run per month?**
 
-For a 200-client business running the four workflows described here — daily follow-up check, birthday check, appointment webhook processing, and monthly reporting — expect roughly 60,000 to 90,000 tokens per month total. At Claude Haiku pricing ($0.80 per million input tokens, $4 per million output tokens), that is approximately $3–$8/month. If you prefer Sonnet-class quality for client-facing messages, budget $15–$25/month. Notion is free. The Python script runs cheaply on a $5/month VPS, a spare computer, or a Raspberry Pi. Total system cost for most small service businesses: under $30/month.
+For a 200-client business running the four workflows described here — daily follow-up check, birthday check, appointment webhook processing, and monthly reporting — expect roughly 60,000 to 90,000 tokens per month total. At Claude Haiku pricing ($0.80 per million input tokens, $4 per million output tokens), that is approximately $3–$8/month.
+
+If you prefer Sonnet-class quality for client-facing messages, budget $15–$25/month. Notion is free. The Python script runs cheaply on a $5/month VPS, a spare computer, or a Raspberry Pi. Total system cost for most small service businesses: under $30/month.
 
 **Can multiple staff members use and update this CRM?**
 
-Yes, in two ways. First, multiple staff can have direct Notion access — Notion is a collaborative tool and free-tier workspaces support up to 10 members. Anyone with access can open the database and edit records manually. Second, staff who do not need full database access can submit appointment notes through a shared form (Google Forms, Tally, or a custom HTML page) that posts to the webhook endpoint. Claude processes each submission regardless of who submitted it. If you want to track who made changes, add a "Last Updated By" property to the database and pass the staff member's name through the webhook payload.
+Yes, in two ways. First, multiple staff can have direct Notion access — Notion is a collaborative tool and free-tier workspaces support up to 10 members. Anyone with access can open the database and edit records manually.
+
+Second, staff who do not need full database access can submit appointment notes through a shared form (Google Forms, Tally, or a custom HTML page) that posts to the webhook endpoint. Claude processes each submission regardless of who submitted it.
+
+If you want to track who made changes, add a "Last Updated By" property to the database and pass the staff member's name through the webhook payload.
 
 **How do I migrate from spreadsheets to Notion CRM without losing my data?**
 
-The migration takes 30 to 60 minutes for most businesses. Export your existing spreadsheet as a CSV file. In your Notion Client CRM database, click the three-dot menu in the top right, select Import, then choose CSV. Notion will attempt to match your column headers to existing database properties — review the mapping carefully and correct any mismatches before confirming. After import, run one cleanup prompt in Claude: "Review the imported records in the Notion Client CRM and list any entries missing Phone number, Last Visit date, or Services data — I want to identify gaps to fill in manually." This surfaces the incomplete records without you having to scan 200 rows yourself. Plan to spend 15–20 minutes filling in gaps, and you will have a clean, structured CRM database ready for all four automations.
+The migration takes 30 to 60 minutes for most businesses. Export your existing spreadsheet as a CSV file. In your Notion Client CRM database, click the three-dot menu in the top right, select Import, then choose CSV.
+
+Notion will attempt to match your column headers to existing database properties — review the mapping carefully and correct any mismatches before confirming.
+
+After import, run one cleanup prompt in Claude: "Review the imported records in the Notion Client CRM and list any entries missing Phone number, Last Visit date, or Services data — I want to identify gaps to fill in manually." This surfaces the incomplete records without you having to scan 200 rows yourself.
+
+Plan to spend 15–20 minutes filling in gaps, and you will have a clean, structured CRM database ready for all four automations.
 
 ---
 

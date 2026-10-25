@@ -227,11 +227,17 @@ And the best time to start understanding it — and experimenting with it — is
 
 **What is MCP used for?**
 
-MCP (Model Context Protocol) is used to connect AI models like Claude to external tools and data sources. In practice, this means your AI assistant can read your Google Calendar, write to a Notion database, query a Postgres database, search your Google Drive, or post a Slack message — all without you writing custom integration code. For local businesses, the most common uses are appointment booking, client CRM management, automated reporting, and lead follow-up workflows.
+MCP (Model Context Protocol) is used to connect AI models like Claude to external tools and data sources.
+
+In practice, this means your AI assistant can read your Google Calendar, write to a Notion database, query a Postgres database, search your Google Drive, or post a Slack message — all without you writing custom integration code.
+
+For local businesses, the most common uses are appointment booking, client CRM management, automated reporting, and lead follow-up workflows.
 
 **Do I need to code to use MCP?**
 
-Not necessarily. If you're using Claude Desktop, adding an MCP server requires only editing a JSON configuration file — no programming skills needed. You will need to be comfortable with: opening a terminal, running an `npx` or `pip install` command, and editing a JSON file. If that sounds manageable, you can get started. For more advanced use cases — like building a custom booking agent in Python — some coding is required, or you'll need a developer's help for the initial setup.
+Not necessarily. If you're using Claude Desktop, adding an MCP server requires only editing a JSON configuration file — no programming skills needed. You will need to be comfortable with: opening a terminal, running an `npx` or `pip install` command, and editing a JSON file. If that sounds manageable, you can get started.
+
+For more advanced use cases — like building a custom booking agent in Python — some coding is required, or you'll need a developer's help for the initial setup.
 
 **Is MCP only for Claude?**
 
@@ -239,11 +245,15 @@ No. MCP is an open standard created by Anthropic, but it is **not exclusive to C
 
 **How much does MCP cost?**
 
-The MCP protocol itself is free and open source. Most MCP servers are free open-source software available on GitHub. What you pay for are the underlying services: if you connect MCP to Google Calendar, you use the Google Calendar API, which is free up to very high usage limits. If you connect to Supabase, you pay Supabase's standard pricing (free tier available). Claude Desktop with MCP access requires a Claude Pro subscription ($20/month) or using the Claude API ($3–$15 per million tokens depending on the model). There is no "MCP fee."
+The MCP protocol itself is free and open source. Most MCP servers are free open-source software available on GitHub. What you pay for are the underlying services: if you connect MCP to Google Calendar, you use the Google Calendar API, which is free up to very high usage limits.
+
+If you connect to Supabase, you pay Supabase's standard pricing (free tier available). Claude Desktop with MCP access requires a Claude Pro subscription ($20/month) or using the Claude API ($3–$15 per million tokens depending on the model). There is no "MCP fee."
 
 **What's the difference between MCP and plugins?**
 
-ChatGPT's plugin system (now largely replaced by GPTs and the Assistants API) was a proprietary standard owned by OpenAI. Plugins only worked with ChatGPT. MCP is an **open standard** that works with any AI model. Additionally, plugins were typically web-hosted services that OpenAI's servers called — meaning a third party was always in the middle. MCP servers can run **locally on your machine**, meaning your data never leaves your computer. This is a significant privacy and security advantage, especially for business data.
+ChatGPT's plugin system (now largely replaced by GPTs and the Assistants API) was a proprietary standard owned by OpenAI. Plugins only worked with ChatGPT. MCP is an **open standard** that works with any AI model. Additionally, plugins were typically web-hosted services that OpenAI's servers called — meaning a third party was always in the middle.
+
+MCP servers can run **locally on your machine**, meaning your data never leaves your computer. This is a significant privacy and security advantage, especially for business data.
 
 ---
 

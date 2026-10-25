@@ -13,7 +13,9 @@ readTime: '10 min read'
 
 A common mistake with schema is pasting the same block on every page of the site. Google's Organization documentation says the opposite: place the markup on your home page or a single page describing your organization, such as an about page, because "you don't need to include it on every page of your site." Different pages have different jobs, and the markup should follow.
 
-This guide is a page-by-page map for a small local business website, followed by what three common platforms (WordPress, Wix and Squarespace) actually let you do. It assumes you have already seen what LocalBusiness markup looks like; if not, start with our [copy-paste JSON-LD walkthrough](/blog/schema-markup-for-local-business) and the [overview of LocalBusiness schema and rich snippets](/blog/local-business-schema-markup-rich-snippets-google). Here the question is different: which page gets which markup, and how do you add it on the platform you already have.
+This guide is a page-by-page map for a small local business website, followed by what three common platforms (WordPress, Wix and Squarespace) actually let you do. It assumes you have already seen what LocalBusiness markup looks like; if not, start with our [copy-paste JSON-LD walkthrough](/blog/schema-markup-for-local-business) and the [overview of LocalBusiness schema and rich snippets](/blog/local-business-schema-markup-rich-snippets-google).
+
+Here the question is different: which page gets which markup, and how do you add it on the platform you already have.
 
 A caution that applies throughout. Google's documentation says it "does not guarantee that features that consume structured data will show up in search results", so none of this promises a visual change in search. The goal is accurate labelling, not a trick.
 
@@ -53,13 +55,17 @@ If you add both a business block and a WebSite block, Google's guidelines say yo
 
 If you have one location, you can put the full LocalBusiness block on the home page or the contact page. Pick one as the main home for it and keep the details identical wherever else they appear.
 
-If you have several locations, Google is explicit: "Define each location as its own LocalBusiness type". Give each location its own page with its own address, phone and hours, and its own markup. Do not copy one location's block onto all the pages. Departments follow a naming rule from the same page: include the store name with the department name in the format "[store name] [department name]", unless the department has a distinct brand name. Our guide to local SEO for multi-location businesses covers the page and listing setup that goes with it.
+If you have several locations, Google is explicit: "Define each location as its own LocalBusiness type". Give each location its own page with its own address, phone and hours, and its own markup. Do not copy one location's block onto all the pages.
+
+Departments follow a naming rule from the same page: include the store name with the department name in the format "[store name] [department name]", unless the department has a distinct brand name. Our guide to local SEO for multi-location businesses covers the page and listing setup that goes with it.
 
 For businesses that travel to customers, see our note on service area businesses. Google's LocalBusiness page marks `address` as required, so if you truly have no public address, check how your markup and your listing line up before publishing anything. I have not found a Google statement on service-area markup without an address, so treat that case as unresolved and ask an expert.
 
 ### Service pages
 
-Our own services page guide is about writing for customers. For markup, I did not find a Google feature in the search gallery items I reviewed that depends on markup for a service page. That is a limit of what I checked, not a proof, so if you want to describe services in schema, Schema.org has a Service type, but treat it as descriptive labelling and not a route to a special result.
+Our own services page guide is about writing for customers. For markup, I did not find a Google feature in the search gallery items I reviewed that depends on markup for a service page.
+
+That is a limit of what I checked, not a proof, so if you want to describe services in schema, Schema.org has a Service type, but treat it as descriptive labelling and not a route to a special result.
 
 What you should not do is add markup that is not visible on the page. Google's guidelines say: "Don't mark up content that is not visible to readers of the page."
 
@@ -84,11 +90,15 @@ Platforms change quickly. Everything below comes from vendor documentation I ope
 
 Yoast's developer documentation for its Local SEO add-on describes how it builds on the base schema output. If you define a Primary Location, its properties are merged into the main Organization to extend it into a LocalBusiness. Without a Primary Location, shared properties go on the Organization, except `geo`, `areaServed` and `priceRange`.
 
-For multi-location sites, a page for a location that is not the Primary Location gets a separate LocalBusiness piece, and if the site is one business with several locations it carries a `branchOf` property pointing to the main Organization. Yoast also documents shared opening hours for locations of the same company, with a per-location override. So on a single-location site the plugin handles most of the job from settings; on multi-location sites you want to open each location page's output and check it.
+For multi-location sites, a page for a location that is not the Primary Location gets a separate LocalBusiness piece, and if the site is one business with several locations it carries a `branchOf` property pointing to the main Organization. Yoast also documents shared opening hours for locations of the same company, with a per-location override.
+
+So on a single-location site the plugin handles most of the job from settings; on multi-location sites you want to open each location page's output and check it.
 
 ### WordPress with Rank Math
 
-Rank Math's documentation says multiple locations are available "only in Rank Math PRO". With the option on, locations are created as a custom post type, and per-location LocalBusiness schema is set in the Schema tab using the Schema Generator, then "Save for this Post". The fields include name, business type, address, geo coordinates, phone numbers, opening hours and area served. The article does not show the exact markup output, and recommends the Rich Results Test, which is also what I would do.
+Rank Math's documentation says multiple locations are available "only in Rank Math PRO". With the option on, locations are created as a custom post type, and per-location LocalBusiness schema is set in the Schema tab using the Schema Generator, then "Save for this Post".
+
+The fields include name, business type, address, geo coordinates, phone numbers, opening hours and area served. The article does not show the exact markup output, and recommends the Rich Results Test, which is also what I would do.
 
 One WordPress warning, which is my assumption rather than something these docs state: if your theme and a plugin both print LocalBusiness data, you can end up with two competing blocks. Open the page source or run the Rich Results Test and count them.
 
@@ -96,17 +106,23 @@ One WordPress warning, which is my assumption rather than something these docs s
 
 Wix's help centre says it only accepts structured data as JSON-LD, each markup must be under 7,000 characters, and you can add up to five markups per page. In the Editor the path is Pages & Menu, More Actions next to the page, SEO basics, the Advanced SEO tab, then Structured Data Markup and Add New Markup. Paste the JSON-LD and click Apply.
 
-Wix also says some pages already come with preset markup, naming Wix Stores product pages, Wix Bookings services, Wix Blog posts and Wix Events, which you can customise in SEO Settings. Wix Customer Care "cannot help you with any changes to your markup". Because each markup is capped at 7,000 characters, split a large block, such as a LocalBusiness with many hours, into more than one markup rather than trimming accuracy.
+Wix also says some pages already come with preset markup, naming Wix Stores product pages, Wix Bookings services, Wix Blog posts and Wix Events, which you can customise in SEO Settings. Wix Customer Care "cannot help you with any changes to your markup".
+
+Because each markup is capped at 7,000 characters, split a large block, such as a LocalBusiness with many hours, into more than one markup rather than trimming accuracy.
 
 ### Squarespace
 
-Squarespace's code injection page says it is available on "Core, Plus, Advanced, and some legacy billing plans". For one page, hover over it in the Pages panel, click the gear icon, open Advanced and use Page Header Code Injection, which adds code to that page's `<head>`. The page warns that custom code "might break your site's appearance or behavior", and that Squarespace's support team "can't help you add custom code to your site or troubleshoot issues".
+Squarespace's code injection page says it is available on "Core, Plus, Advanced, and some legacy billing plans". For one page, hover over it in the Pages panel, click the gear icon, open Advanced and use Page Header Code Injection, which adds code to that page's `<head>`.
+
+The page warns that custom code "might break your site's appearance or behavior", and that Squarespace's support team "can't help you add custom code to your site or troubleshoot issues".
 
 Third-party sources say Squarespace also generates some structured data of its own that you cannot edit. I could not open Squarespace's own documentation on this, so treat that as unverified, and after adding your block run the Rich Results Test to see whether another LocalBusiness block is already present. Our [Wix vs Squarespace vs WordPress comparison](/blog/wix-vs-squarespace-vs-wordpress-local-business-website) covers the wider trade-offs beyond schema.
 
 ## Audit What You Already Have
 
-Before adding anything, find out what your site already outputs. Google's guidelines recommend the Rich Results Test and the URL Inspection tool to catch most technical errors. For each key page: run the live URL, note which types appear, and compare name, address, phone and hours with your Business Profile and with the visible page. If the site shows two LocalBusiness blocks with different details, remove one. Duplicates and mismatches are more likely to cause trouble than missing optional fields.
+Before adding anything, find out what your site already outputs. Google's guidelines recommend the Rich Results Test and the URL Inspection tool to catch most technical errors. For each key page: run the live URL, note which types appear, and compare name, address, phone and hours with your Business Profile and with the visible page.
+
+If the site shows two LocalBusiness blocks with different details, remove one. Duplicates and mismatches are more likely to cause trouble than missing optional fields.
 
 ## The Math
 

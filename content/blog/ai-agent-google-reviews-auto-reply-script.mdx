@@ -11,8 +11,9 @@ slug: "ai-agent-google-reviews-auto-reply-script"
 image: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=800&q=80&auto=format&fit=crop"
 readTime: "10 min read"
 ---
+Posting a reply to a Google review through the API is a single request. Getting permission to send that request is the hard part: Google requires a verified Business Profile that has been active for 60 or more days, a website on the profile, and an approved "Application for Basic API Access".
 
-Posting a reply to a Google review through the API is a single request. Getting permission to send that request is the hard part: Google requires a verified Business Profile that has been active for 60 or more days, a website on the profile, and an approved "Application for Basic API Access". Reading reviews is also one request, returning up to 50 per page, and a reply can be at most 4,096 bytes. Everything else in this article is a Python script that wraps those two calls, drafts replies with a language model, and refuses to post anything risky.
+Reading reviews is also one request, returning up to 50 per page, and a reply can be at most 4,096 bytes. Everything else in this article is a Python script that wraps those two calls, drafts replies with a language model, and refuses to post anything risky.
 
 <Callout type="warning" title="Untested starting point">
 The script below is a template written from Google's and Groq's published documentation. It has not been run against a live Business Profile. Read it, run it with `DRY_RUN=1` (the default) and test on your own reviews before you let it post anything. Treat it as a starting point, not a finished product.
@@ -29,7 +30,11 @@ Per Google's [prerequisites page](https://developers.google.com/my-business/cont
 3. A submitted "Application for Basic API Access" through Google's contact form, with your project number, from an email address that owns or manages the profile.
 4. After approval, the Business Profile APIs enabled for the project.
 
-You can check approval in the Cloud console: Google says a quota of 0 queries per minute means you are not yet approved, and 300 means you are. Google's [usage limits page](https://developers.google.com/my-business/content/limits) adds that a quota of 0 means you should submit the access application rather than request a quota increase, and that requests over quota return HTTP 429, for which it recommends exponential backoff with jitter. Its [review data page](https://developers.google.com/my-business/content/review-data) also says that to use the reply functionality, a Google Workspace administrator must enable Search and/or Maps with Business Profile for the account. Google's [basic setup page](https://developers.google.com/my-business/content/basic-setup) says Workspace accounts without Business Profile enabled get a 403 error.
+You can check approval in the Cloud console: Google says a quota of 0 queries per minute means you are not yet approved, and 300 means you are.
+
+Google's [usage limits page](https://developers.google.com/my-business/content/limits) adds that a quota of 0 means you should submit the access application rather than request a quota increase, and that requests over quota return HTTP 429, for which it recommends exponential backoff with jitter.
+
+Its [review data page](https://developers.google.com/my-business/content/review-data) also says that to use the reply functionality, a Google Workspace administrator must enable Search and/or Maps with Business Profile for the account. Google's [basic setup page](https://developers.google.com/my-business/content/basic-setup) says Workspace accounts without Business Profile enabled get a 403 error.
 
 The review endpoints we use live in the older v4 API on `mybusiness.googleapis.com`. Google's REST reference for [listing reviews](https://developers.google.com/my-business/reference/rest/v4/accounts.locations.reviews/list) and [replying](https://developers.google.com/my-business/reference/rest/v4/accounts.locations.reviews/updateReply) shows no deprecation notice for these methods at the time of writing, but the docs link to a general deprecation schedule, so check it before you build anything long-lived.
 

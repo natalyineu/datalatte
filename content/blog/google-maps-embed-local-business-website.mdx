@@ -11,10 +11,13 @@ slug: "google-maps-embed-local-business-website"
 image: "https://images.unsplash.com/photo-1668228174390-e96f8e19e02e?w=800&q=80&auto=format&fit=crop"
 readTime: '10 min read'
 ---
+Google's own documentation says it plainly: "All Maps Embed API requests are available at no charge with unlimited usage." So the cost of putting a map on your contact page is $0 and about five minutes.
 
-Google's own documentation says it plainly: "All Maps Embed API requests are available at no charge with unlimited usage." So the cost of putting a map on your contact page is $0 and about five minutes. The real costs are quieter: a map that loads before it is needed, a frame a screen reader cannot name, a map that tells nobody your address in text, and a visitor who has to pinch and zoom to find out how to get to you.
+The real costs are quieter: a map that loads before it is needed, a frame a screen reader cannot name, a map that tells nobody your address in text, and a visitor who has to pinch and zoom to find out how to get to you.
 
-This guide is for owners of local businesses in the US, UK, Australia and Canada who run their own site on WordPress, Squarespace, Wix or similar. It covers three ways to show your location, the attributes worth adding to the code, a privacy check that matters most in the UK, and a way to measure whether the map earns its space. If you are wondering whether you need the paid developer API, read [our Google Maps API guide](/blog/using-google-maps-api-for-local-businesses) first. This article stays on the simple end.
+This guide is for owners of local businesses in the US, UK, Australia and Canada who run their own site on WordPress, Squarespace, Wix or similar.
+
+It covers three ways to show your location, the attributes worth adding to the code, a privacy check that matters most in the UK, and a way to measure whether the map earns its space. If you are wondering whether you need the paid developer API, read [our Google Maps API guide](/blog/using-google-maps-api-for-local-businesses) first. This article stays on the simple end.
 
 ## First, Be Honest About What a Map Does
 
@@ -34,7 +37,9 @@ Many small sites need only the first row. The third row is underrated, and we wi
 
 ## Method 1: Copy the Code From Google Maps
 
-Google's Maps help describes the steps for a computer (the page gives no steps for the phone apps). To embed a map of a place: open Google Maps, go to the part of the map you want, click Menu at the top left, choose "Share or embed map", then "Embed a map", then "Copy HTML." For directions, click Directions, enter the locations, choose a route, click Share, then "Embed a map", then "Copy HTML." Google's interface changes, so if a label has moved, search for your business name first and look for Share.
+Google's Maps help describes the steps for a computer (the page gives no steps for the phone apps).
+
+To embed a map of a place: open Google Maps, go to the part of the map you want, click Menu at the top left, choose "Share or embed map", then "Embed a map", then "Copy HTML." For directions, click Directions, enter the locations, choose a route, click Share, then "Embed a map", then "Copy HTML." Google's interface changes, so if a label has moved, search for your business name first and look for Share.
 
 Google also lists what you cannot embed: a map that includes your saved locations, a distance measurement, or an image of the map itself.
 
@@ -102,7 +107,9 @@ Accessibility detail: if a link opens in a new tab, say so in the link text, for
 
 ## Privacy Check: Does Your Map Need Consent?
 
-This is where UK owners especially should pause. Under the UK's PECR rules, the ICO's guidance says you must not store information on, or access information stored on, a visitor's device unless an exception applies. You must tell users what the technologies do and get prior consent, and "continuing to use a website is not valid consent." The ICO also says the rules cover technologies you incorporate from other organisations, and that you are responsible for understanding how third-party code in your service behaves.
+This is where UK owners especially should pause. Under the UK's PECR rules, the ICO's guidance says you must not store information on, or access information stored on, a visitor's device unless an exception applies.
+
+You must tell users what the technologies do and get prior consent, and "continuing to use a website is not valid consent." The ICO also says the rules cover technologies you incorporate from other organisations, and that you are responsible for understanding how third-party code in your service behaves.
 
 The ICO's exceptions page discusses embedded video and social plugins, and advises configuring embedded content not to set storage and access technologies "the instant someone visits the page." It does not mention maps. So there is no ICO ruling that says a map embed does or does not need consent. What you can do:
 
@@ -114,7 +121,9 @@ This is general information, not legal advice. US, Canadian and Australian rules
 
 ## A Note on Structured Data
 
-You can tell search engines your location with LocalBusiness markup. Google's documentation lists `address` and `name` as the required properties, and recommends `geo` (latitude and longitude with at least five decimal places), `openingHoursSpecification`, `telephone` and `url`. It also states that Google "does not guarantee that features that consume structured data will show up in search results." Schema.org defines a `hasMap` property as "A URL to a map of the place" for the Place type, but Google's LocalBusiness page does not list it, so treat it as optional and do not expect a visible change.
+You can tell search engines your location with LocalBusiness markup. Google's documentation lists `address` and `name` as the required properties, and recommends `geo` (latitude and longitude with at least five decimal places), `openingHoursSpecification`, `telephone` and `url`.
+
+It also states that Google "does not guarantee that features that consume structured data will show up in search results." Schema.org defines a `hasMap` property as "A URL to a map of the place" for the Place type, but Google's LocalBusiness page does not list it, so treat it as optional and do not expect a visible change.
 
 ## Measure It
 
@@ -136,7 +145,9 @@ Is a better map block worth an hour of your time? These figures are **assumption
 | Gain from the better layout | n/a | $120 a month |
 | One-off time to build (assumption) | n/a | 1 hour at $50 = $50 |
 
-How to read it: the 4-point lift in the second column is an assumption, not a measured effect of any map setup. If it were only 1 point, the gain would be $30 a month and still cover the $50 inside two months. The point of tracking is to replace these guesses with your own numbers. If the lift is zero, you spent an hour and learned your page is fine.
+How to read it: the 4-point lift in the second column is an assumption, not a measured effect of any map setup. If it were only 1 point, the gain would be $30 a month and still cover the $50 inside two months.
+
+The point of tracking is to replace these guesses with your own numbers. If the lift is zero, you spent an hour and learned your page is fine.
 
 ## Do This Today
 

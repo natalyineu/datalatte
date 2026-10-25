@@ -405,15 +405,21 @@ Supabase wins for AI agent use cases specifically because of its official MCP se
 
 **Is Supabase really free, or will I get surprise bills?**
 
-Supabase's free tier is genuinely free with hard limits — not a free trial that converts. You get 500 MB storage and 2 projects with no credit card required. If you exceed limits, your project pauses (you get a warning first) rather than charging you automatically. The Pro plan at $25/month unlocks 8 GB storage and removes the project limit. For most local businesses running 1-2 AI agent projects, the free tier is sufficient for 12–18 months of growth.
+Supabase's free tier is genuinely free with hard limits — not a free trial that converts. You get 500 MB storage and 2 projects with no credit card required. If you exceed limits, your project pauses (you get a warning first) rather than charging you automatically.
+
+The Pro plan at $25/month unlocks 8 GB storage and removes the project limit. For most local businesses running 1-2 AI agent projects, the free tier is sufficient for 12–18 months of growth.
 
 **Do I need SQL knowledge to use Supabase with an AI agent?**
 
-Not much. The Supabase dashboard has a Table Editor (like a spreadsheet interface) where you can create tables without writing SQL. For the AI agent workflows above, you can paste the CREATE TABLE statements directly into the SQL Editor without understanding every line. The AI agent itself translates natural language into SQL automatically via MCP. That said, basic SQL knowledge (SELECT, INSERT, WHERE) helps you verify what the agent is doing and debug issues when they arise.
+Not much. The Supabase dashboard has a Table Editor (like a spreadsheet interface) where you can create tables without writing SQL. For the AI agent workflows above, you can paste the CREATE TABLE statements directly into the SQL Editor without understanding every line. The AI agent itself translates natural language into SQL automatically via MCP.
+
+That said, basic SQL knowledge (SELECT, INSERT, WHERE) helps you verify what the agent is doing and debug issues when they arise.
 
 **Can multiple AI agents share one Supabase project?**
 
-Yes, and this is actually a powerful pattern. You might have one AI agent handling client bookings, another managing your Google Ads reporting, and a third responding to customer reviews — all reading from and writing to the same Supabase database. Since they share the same data, the booking agent knows about the same clients as the review agent. Use separate service accounts or API keys for each agent if you want to track which agent made which changes (Supabase logs all operations with the key used).
+Yes, and this is actually a powerful pattern. You might have one AI agent handling client bookings, another managing your Google Ads reporting, and a third responding to customer reviews — all reading from and writing to the same Supabase database.
+
+Since they share the same data, the booking agent knows about the same clients as the review agent. Use separate service accounts or API keys for each agent if you want to track which agent made which changes (Supabase logs all operations with the key used).
 
 **How do I back up my data?**
 
@@ -421,7 +427,9 @@ Supabase free tier includes 7-day point-in-time recovery. For additional peace o
 
 **What happens when I exceed the free tier storage limit?**
 
-Supabase sends you an email warning when you hit 80% of the 500 MB storage limit. If you reach 100%, new writes are blocked (reads still work). Your data is never deleted. To stay within limits: archive old appointment records after 2 years, store review text in an external file storage service rather than the database, and keep marketing_metrics aggregated weekly rather than daily. In practice, 500 MB holds roughly 1 million appointment records — more than enough for any local small business running for years.
+Supabase sends you an email warning when you hit 80% of the 500 MB storage limit. If you reach 100%, new writes are blocked (reads still work). Your data is never deleted.
+
+To stay within limits: archive old appointment records after 2 years, store review text in an external file storage service rather than the database, and keep marketing_metrics aggregated weekly rather than daily. In practice, 500 MB holds roughly 1 million appointment records — more than enough for any local small business running for years.
 
 ---
 

@@ -11,8 +11,9 @@ slug: "ai-agent-for-google-reviews-management"
 image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80&auto=format&fit=crop"
 readTime: '9 min read'
 ---
+In BrightLocal's 2026 Local Consumer Review Survey, 89% of consumers said they expect business owners to respond to reviews, and 19% expect that reply the same day. Most small owners cannot reply that fast by hand: you are cutting hair, pulling shots or coaching a class.
 
-In BrightLocal's 2026 Local Consumer Review Survey, 89% of consumers said they expect business owners to respond to reviews, and 19% expect that reply the same day. Most small owners cannot reply that fast by hand: you are cutting hair, pulling shots or coaching a class. An AI agent can close the gap by watching for new reviews, drafting a reply in your voice and holding anything risky for you. The catch is that Google and the FTC both have rules about reviews, and a badly configured agent can break them.
+An AI agent can close the gap by watching for new reviews, drafting a reply in your voice and holding anything risky for you. The catch is that Google and the FTC both have rules about reviews, and a badly configured agent can break them.
 
 This guide shows how a review agent actually works, what Google requires before you can connect one, which reviews it should never touch alone, and what it costs. It is for coffee shops, salons, groomers and studios in the US, UK, Australia and Canada.
 
@@ -48,7 +49,11 @@ You cannot just point software at Google reviews. Google's [Business Profile API
 - A website for the business, listed on the Profile
 - A Google Cloud project and a submitted "Application for Basic API Access" from an email that owns or manages the Profile
 
-Google says a quota of 0 queries per minute in the Cloud console means the project is not yet approved, and 300 means it is. The [review data page](https://developers.google.com/my-business/content/review-data) shows the two calls an agent uses: a GET to list reviews, and a PUT to the review's `/reply` endpoint with a JSON body such as `{"comment": "Thank you for visiting our business!"}`. It creates the reply if none exists or updates the existing one. To reply through the API, a Google Workspace administrator must also enable Search and/or Maps with Business Profile for the account.
+Google says a quota of 0 queries per minute in the Cloud console means the project is not yet approved, and 300 means it is.
+
+The [review data page](https://developers.google.com/my-business/content/review-data) shows the two calls an agent uses: a GET to list reviews, and a PUT to the review's `/reply` endpoint with a JSON body such as `{"comment": "Thank you for visiting our business!"}`. It creates the reply if none exists or updates the existing one.
+
+To reply through the API, a Google Workspace administrator must also enable Search and/or Maps with Business Profile for the account.
 
 If that sounds like a lot, it is the reason most small businesses use a hosted tool that has already been approved. Ask any vendor whether it connects through Google's official API; our [AI review management service](/services/ai-agents/review-management) is built that way.
 
@@ -66,7 +71,9 @@ So the agent should send the same request to every customer who visited, not onl
 
 ### Fake reviews
 
-The FTC's [final rule on fake reviews](https://www.ftc.gov/news-events/news/press-releases/2024/08/federal-trade-commission-announces-final-rule-banning-fake-reviews-testimonials) bans fake reviews that misrepresent who wrote them, "such as AI-generated fake reviews". The FTC's [Q&A](https://www.ftc.gov/business-guidance/resources/consumer-reviews-testimonials-rule-questions-answers) adds that incentives cannot be conditioned on the review being positive, and that businesses should not intimidate reviewers or make unfounded legal threats. It says the rule has no specific ban on asking only customers you think are happy, but that the practice could still violate the FTC Act. Never have an agent write a review as a customer. That includes "customers" who are staff.
+The FTC's [final rule on fake reviews](https://www.ftc.gov/news-events/news/press-releases/2024/08/federal-trade-commission-announces-final-rule-banning-fake-reviews-testimonials) bans fake reviews that misrepresent who wrote them, "such as AI-generated fake reviews". The FTC's [Q&A](https://www.ftc.gov/business-guidance/resources/consumer-reviews-testimonials-rule-questions-answers) adds that incentives cannot be conditioned on the review being positive, and that businesses should not intimidate reviewers or make unfounded legal threats.
+
+It says the rule has no specific ban on asking only customers you think are happy, but that the practice could still violate the FTC Act. Never have an agent write a review as a customer. That includes "customers" who are staff.
 
 ## What to Automate and What Not To
 
@@ -104,7 +111,9 @@ Model usage is the cheapest part. Anthropic's [pricing page](https://platform.cl
 | Hosted tool or setup cost per month (assumption) | $30 | $30 | $30 |
 | Net monthly gain | $0 | $60 | $195 |
 
-Read it honestly. If you get 20 reviews a month, an agent saves you very little, and a template list and ten minutes a week may beat any subscription. The agent pays off at volume, or when you have several locations. Its real value is speed: it can draft within hours, so replies land well inside the one-week window 81% of consumers expect. The review requests are a separate lever, since the more reviews you collect, the more replies you need to write. Our [review request automation guide](/blog/how-to-automate-google-review-requests) and 5-star reviews guide cover that side.
+Read it honestly. If you get 20 reviews a month, an agent saves you very little, and a template list and ten minutes a week may beat any subscription. The agent pays off at volume, or when you have several locations.
+
+Its real value is speed: it can draft within hours, so replies land well inside the one-week window 81% of consumers expect. The review requests are a separate lever, since the more reviews you collect, the more replies you need to write. Our [review request automation guide](/blog/how-to-automate-google-review-requests) and 5-star reviews guide cover that side.
 
 <Callout type="warning" title="The gating trap">
 Many "review funnel" tools ask customers how they felt and only send happy ones to Google. Google's policy against selectively soliciting positive reviews, and the FTC's warning about the same practice, are good reasons to avoid that design. Send one neutral request to everyone.

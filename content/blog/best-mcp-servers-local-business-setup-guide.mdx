@@ -347,15 +347,21 @@ For the Filesystem MCP, only allow access to the specific folder(s) Claude needs
 
 ### Are MCP servers free?
 
-The MCP servers themselves are free and open source. You don't pay for the software. What you do pay for is the underlying tool's API access. For example, Google Calendar API is free within generous usage limits (well above what most small businesses would need). Notion's API is free for personal/small team use. Supabase has a free tier. Slack's bot API is free. The main cost is Claude API usage — roughly $0.003–$0.015 per 1,000 tokens, depending on the model you use.
+The MCP servers themselves are free and open source. You don't pay for the software. What you do pay for is the underlying tool's API access. For example, Google Calendar API is free within generous usage limits (well above what most small businesses would need). Notion's API is free for personal/small team use.
+
+Supabase has a free tier. Slack's bot API is free. The main cost is Claude API usage — roughly $0.003–$0.015 per 1,000 tokens, depending on the model you use.
 
 ### Do I need Claude Pro to use MCP?
 
-For Claude Desktop MCP (the desktop app), you need either a Claude Pro subscription or Claude Team plan. Claude.ai free tier does not support MCP. If you're using Claude via the API (building your own tools with Python or JavaScript), you just need an Anthropic API key — no Pro subscription required, you pay per token instead. For most small business owners starting out, Claude Pro ($20/month) is the easiest entry point for trying MCP.
+For Claude Desktop MCP (the desktop app), you need either a Claude Pro subscription or Claude Team plan. Claude.ai free tier does not support MCP.
+
+If you're using Claude via the API (building your own tools with Python or JavaScript), you just need an Anthropic API key — no Pro subscription required, you pay per token instead. For most small business owners starting out, Claude Pro ($20/month) is the easiest entry point for trying MCP.
 
 ### Can MCP servers access my private data?
 
-Yes — that's the point, and it's why you should be careful about which MCP servers you install and how you configure them. Each MCP server only has access to what you explicitly grant it. Google Calendar MCP can only access calendars on the Google account you authenticate with. Filesystem MCP can only access directories you specify in the config. Never install MCP servers from untrusted sources, and review what permissions each server requests. Treat MCP server access like granting an employee access to a tool — give minimum necessary access.
+Yes — that's the point, and it's why you should be careful about which MCP servers you install and how you configure them. Each MCP server only has access to what you explicitly grant it. Google Calendar MCP can only access calendars on the Google account you authenticate with.
+
+Filesystem MCP can only access directories you specify in the config. Never install MCP servers from untrusted sources, and review what permissions each server requests. Treat MCP server access like granting an employee access to a tool — give minimum necessary access.
 
 ### How many MCP servers can I run at once?
 
@@ -363,7 +369,9 @@ There's no hard technical limit. Claude Desktop can handle multiple MCP servers 
 
 ### What if an MCP server goes offline or crashes?
 
-If an MCP server fails, Claude will report that it can't access that tool — your other MCP servers and Claude itself continue working normally. MCP servers running via `npx` in Claude Desktop restart automatically with Claude. If you're running MCP servers as part of a standalone AI agent (outside Claude Desktop), you'll want process management (like `pm2` for Node.js) to auto-restart crashed processes. Always test your setup with a simple query before relying on it for business-critical automations.
+If an MCP server fails, Claude will report that it can't access that tool — your other MCP servers and Claude itself continue working normally. MCP servers running via `npx` in Claude Desktop restart automatically with Claude.
+
+If you're running MCP servers as part of a standalone AI agent (outside Claude Desktop), you'll want process management (like `pm2` for Node.js) to auto-restart crashed processes. Always test your setup with a simple query before relying on it for business-critical automations.
 
 ---
 

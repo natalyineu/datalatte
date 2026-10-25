@@ -11,8 +11,9 @@ slug: "build-mcp-server-custom-data-local-business"
 image: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800&q=80&auto=format&fit=crop"
 readTime: "13 min read"
 ---
+To build an MCP server for a local business, you write a small Python program using the official `mcp` SDK that exposes your own data (menu, hours, policies, loyalty points) as tools an AI agent can call, then register it with an MCP-compatible client such as Claude Desktop.
 
-To build an MCP server for a local business, you write a small Python program using the official `mcp` SDK that exposes your own data (menu, hours, policies, loyalty points) as tools an AI agent can call, then register it with an MCP-compatible client such as Claude Desktop. It takes a few hours for someone comfortable with basic Python, and the example below builds a complete coffee shop server you can adapt.
+It takes a few hours for someone comfortable with basic Python, and the example below builds a complete coffee shop server you can adapt.
 
 Off-the-shelf MCP servers can connect your AI to Google Calendar, Notion, Supabase, and a dozen other tools. They're useful — but they don't know anything about *your* business.
 
