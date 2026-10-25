@@ -341,6 +341,11 @@ const nextConfig: NextConfig = {
         destination: "/blog/best-marketing-automation-tools-small-business",
         permanent: true,
       },
+      {
+        source: "/blog/sms-marketing-for-coffee-shops",
+        destination: "/blog/sms-marketing-for-coffee-shops-how-to-start",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",

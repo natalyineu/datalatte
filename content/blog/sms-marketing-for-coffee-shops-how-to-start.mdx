@@ -1,128 +1,117 @@
 ---
 title: "SMS Marketing for Coffee Shops: Fill Slow Hours"
 date: "2026-05-17"
-lastModified: "2026-06-02"
-description: "SMS marketing for coffee shops: build an opt-in customer list, personalize offers and send timed texts to fill slow hours. Step by step, with examples."
+lastModified: "2026-10-25"
+description: "SMS marketing for coffee shops: a text costs about $0.012 per segment via Twilio, but you need written consent first. Steps to fill slow hours."
 author: "Nataliia"
 category: "Email & SMS Marketing"
 tags: ["sms marketing for coffee shops", "coffee shop marketing", "local business marketing"]
 slug: "sms-marketing-for-coffee-shops-how-to-start"
 image: "https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?w=800&q=80&auto=format&fit=crop"
-readTime: '13 min read'
+readTime: '8 min read'
 ---
-Coffee shops are the heart of every neighborhood, but they're also incredibly tough to run. With thin profit margins and fierce competition from giant chains, it's a wonder any independent coffee shop stays afloat. But here's the thing: you're not just selling coffee – you're selling a community, a vibe, and a sense of belonging. And that's something that can be marketed.
+To start SMS marketing for a coffee shop, collect written opt-ins at the counter, pick a texting platform that handles opt-outs, and send one short offer for your slowest hour. Raw sending is cheap: Twilio lists $0.0083 per US message segment plus a carrier fee of $0.0035 to $0.005, so a 500-person list costs about $6 per send. The hard part is consent, not price.
 
-Imagine being able to send personalized deals to your loyal customers, or sending reminders about upcoming events to get them in the door. It's not just about driving sales – it's about building a relationship with your customers. And that's where SMS marketing comes in.
+This guide covers the United States first, with notes for the UK and Australia. Prices and rules were checked on 25 October 2026 and can change. Examples are labelled as assumptions.
 
-In this article, we'll show you how to build a list of engaged customers, tailor your messages to their preferences, and use SMS marketing to fill your slow hours and boost sales. We'll dive into real-world examples, provide actionable tips, and give you a clear roadmap to get started.
+<StatRow
+  values="$0.0083|$0.0035-$0.005|160|10 days"
+  labels="Twilio base price per US outbound SMS segment|Carrier fee per segment, by carrier|Characters in one plain-text SMS segment|Maximum time to honor a US opt-out request"
+  subs="Twilio US pricing page|Twilio US pricing page|Twilio documentation|47 CFR 64.1200 (eCFR)"
+  trends="neutral|neutral|neutral|neutral"
+/>
 
-### Step 1: Build a List of Engaged Customers
+## What Does SMS Marketing Cost a Coffee Shop?
 
-To start with, you'll need to build a list of customers who are interested in hearing from you. You can do this by:
+Twilio's [US pricing page](https://www.twilio.com/en-us/sms/pricing/us) lists $0.0083 per outbound segment for long codes, toll-free and short codes. Carrier fees are added: $0.0035 on AT&T, $0.0045 on T-Mobile and $0.005 on Verizon. A message to an AT&T customer costs about $0.0118. Twilio says registration fees apply to US business texting (A2P 10DLC) but the page does not state the amounts.
 
-* Asking customers to opt-in to your SMS list when they make a purchase
-* Creating a physical opt-in sheet at your cafe and encouraging customers to sign up
-* Offering incentives, such as discounts or freebies, to customers who join your list
+Twilio is a sending service, not a ready-made marketing tool. Marketing platforms charge their own monthly fees and credits, and those prices were not verified for this guide. For Australia, Twilio lists $0.0515 per outbound segment (currency not stated on the page).
 
-Once you have a list of subscribers, you can start sending them targeted messages. But here's the thing: you can't just spam your list with generic messages. You need to tailor your messages to their interests and preferences.
+## How Long Can a Text Be Before It Costs More?
 
-For example, if you're a coffee shop in a busy neighborhood, you might send messages like:
+A plain-text segment holds 160 characters, according to Twilio's [character limit page](https://www.twilio.com/docs/glossary/what-sms-character-limit). Longer messages are split into segments of 153 characters each, and you pay per segment. One emoji or curly quotation mark switches the whole message to a different encoding that fits only 70 characters.
 
-* "Hey, it's your favorite barista! Want to try our new seasonal coffee drink for 10% off?"
-* "Don't miss out on our live music night tonight! Join us for a free concert and enjoy a discounted drink"
-* "Happy birthday to you! Get a free drink on us today"
+For a coffee shop that means: keep offers under 160 characters, skip emoji if you want to stay in one segment, and check the text in a segment calculator before sending. Twilio recommends keeping messages under 320 characters.
 
-These messages are personal, relevant, and engaging. They make customers feel special and valued, which is exactly what you want.
+## What Consent Do You Need Before Texting Customers?
 
-<Callout type="tip">Make sure you're following the latest guidelines for SMS marketing, including obtaining explicit opt-in from customers and providing clear opt-out options.</Callout>
+In the US, marketing texts sent with automated systems need prior express written consent, under [47 CFR 64.1200](https://www.ecfr.gov/current/title-47/part-64/section-64.1200). The consent must be a written agreement signed by the person, electronic signatures included, and it must say they agree to automated marketing texts and that signing is not a condition of buying anything.
 
-### Step 2: Tailor Your Messages to Customer Preferences
+This is not legal advice, and a lawyer or your texting platform's compliance team should confirm your sign-up wording. A paper sheet with a phone number is weak evidence. A form or keyword opt-in that records the date and wording is stronger.
 
-Once you have a list of engaged customers, you need to tailor your messages to their preferences. This means:
+## How Do You Handle Opt-Outs?
 
-* Segmenting your list based on customer interests, purchase history, and other factors
-* Creating personalized messages that speak to each segment's unique needs and preferences
-* Testing and refining your messages to optimize engagement and conversion
+The same rule says people may revoke consent by any reasonable method. Replies of stop, quit, end, revoke, opt out, cancel or unsubscribe count as revocation. You must honor requests within a reasonable time, not more than ten business days, and may send one confirmation text that contains no marketing.
 
-For example, if you have a list of customers who have purchased coffee beans in the past year, you might send them messages like:
+Do not make one method the only way to opt out. Most platforms handle STOP replies automatically, so check that yours does before you send anything.
 
-* "Hey coffee lover! We've got a new shipment of beans in store – come check it out and get 10% off your next purchase"
-* "Don't miss out on our coffee tastings! Join us for a free event and learn about the latest roasts"
+## What Are the Rules in the UK and Australia?
 
-These messages are tailored to the interests and preferences of customers who have shown a clear interest in coffee beans.
+The UK's Information Commissioner says marketing texts generally need specific consent, such as a ticked opt-in box. A soft opt-in lets you market similar products to your own past customers if you gave a clear opt-out when collecting their details and in every message. See the [ICO guidance](https://ico.org.uk/for-organisations/direct-marketing-and-privacy-and-electronic-communications/guide-to-pecr/electronic-and-telephone-marketing/electronic-mail-marketing/).
 
-<Callout type="warning">Be careful not to over-segment your list or send too many messages. This can lead to fatigue and decreased engagement.</Callout>
+In Australia, [business.gov.au](https://business.gov.au/online/promoting-your-business-by-email-or-text-messages) says to get express or inferred permission, keep a record of who agreed, when and how, and process unsubscribes within 5 working days. Branded SMS needs a registered sender ID or it shows as "Unverified."
 
-### Step 3: Fill Slow Hours and Boost Sales
+## How Do You Build the List?
 
-Finally, you can use SMS marketing to fill your slow hours and boost sales. This means:
+Ask at the moment of purchase, with one clear benefit. Use a counter QR code or a keyword to a number, and show the sign-up wording: who you are, how often you will text, that message and data rates may apply, and how to stop. Offer a small reward only if your platform and law allow it. Our [coffee shop email list guide](/blog/coffee-shop-email-list-building) uses the same sign-up principles.
 
-* Sending targeted messages to customers who are likely to be in the area during slow hours
-* Offering incentives and promotions to draw in customers
-* Creating events and activities that drive foot traffic and engagement
+No published figure for what share of customers will opt in could be verified, so measure your own sign-up rate per week at the counter.
 
-For example, if you're a coffee shop with slow hours on Tuesdays, you might send messages like:
+## Which Texts Fill Slow Hours?
 
-* "Hey, it's a slow Tuesday! Come by and get 20% off all drinks and pastries"
-* "Join us for a free trivia night tonight and enjoy a discounted drink"
-* "Happy hour is here! Get a free drink with every purchase from 3-5pm"
+Send a short offer for a specific window, close to the time. Examples to adapt, each under 160 characters:
 
-These messages are designed to drive foot traffic and engagement during slow hours.
+- "Quiet Tuesday: show this text for a free cookie with any large coffee, 2-4pm today. Reply STOP to opt out."
+- "New oat latte on the menu. First one is half price until Friday. Reply STOP to opt out."
+- "Your loyalty stamp card is 1 away from a free drink. Stop in this week."
 
-## Related Articles
+Name your shop in the sign-up and, where rules require, in the message. Two to four texts a month is a sensible starting point, but no benchmark for the best frequency could be verified. Watch your opt-out rate and cut back if it climbs. Pair texts with your [loyalty program](/blog/coffee-shop-loyalty-program-ideas-without-an-app) so the offer has a reason to exist.
 
-- [Streamlining Email Marketing with AI for Coffee Shops](/blog/ai-assisted-email-marketing-for-coffee-shops)
-- [Building a Coffee Shop Email List: Tips, Tricks, and Best Practices](/blog/coffee-shop-email-list-building)
-- [Best Practices for Coffee Shop Email Marketing Campaigns](/blog/coffee-shop-email-marketing-best-practices)
-- [Build a Coffee Shop Email Marketing Sequence with Mailchimp](/blog/coffee-shop-email-marketing-sequence)
-- Effective Email Marketing Strategies for Coffee Shops to Engage Customers
+## Worked Example: One Slow Tuesday Text
 
-<Callout type="example">Check out our case study on how a local coffee shop used SMS marketing to fill slow hours and boost sales by 25%.</Callout>
+All inputs below are **assumptions** for a shop with a consented list. None is a benchmark.
 
-## Frequently Asked Questions
+| Input | Value |
+| --- | --- |
+| Subscribers (assumption) | 500 |
+| Cost per message, AT&T example from Twilio | $0.0118 |
+| Cost of one send | about $5.90 |
+| Share who redeem (assumption) | 4% |
+| Redemptions | 20 |
+| Margin per redemption after the offer (assumption) | $2.50 |
+| Margin from the send | $50 |
+| Net of sending cost | about $44 |
 
-**Q: Isn’t SMS marketing annoying? People hate spam texts.**
+The sending cost excludes your platform fee and registration fees, which were not verified. If only 1% redeem, the send brings in about $12.50 against $5.90, so the platform fee decides whether it pays. Redeem rates are yours to measure; start by counting how many people show the text.
 
-Only if you’re doing it wrong. If you’re buying lists or sending five messages a week, yes — you’ll get blocked. But if you’re sending 2–4 carefully timed, relevant offers per month to people who explicitly opted in, the data shows open rates above 95% and very few complaints. I’ve run SMS for shops where the unsubscribe rate stayed under 1% per month. The secret is value first, ask rarely.
+## Should You Choose SMS or Email?
 
-**Q: How many texts should I send per month?**
+Texts cost money per message, while email costs little per send. Email suits longer content, and SMS suits a single time-bound offer. Our [SMS vs email comparison](/blog/sms-vs-email-marketing-local-business-which-is-better) covers the trade-offs, and the [SMS marketing best practices](/blog/sms-marketing-best-practices) list is a checklist to run before your first send.
 
-Two to four. That’s it. More than four and you’ll start losing subscribers fast. Less than one and people forget they signed up. Two is a good baseline: one for a weekly special, one for a slow-hour flash sale. If you have a big event (like a latte art workshop), add a third that week but skip the next week.
+## FAQ
 
-**Q: What about compliance? Do I need consent?**
+### Is SMS marketing legal for a coffee shop?
+Yes, with consent. In the US, automated marketing texts need prior express written consent under 47 CFR 64.1200. The UK and Australia require consent too.
 
-Yes. In the US, the TCPA requires express written consent before you send promotional SMS. That means the customer must actively opt in — not a pre-checked box, not a “by texting you agree” buried in fine print. You also need to include an opt-out instruction in every message (typically “Reply STOP to unsubscribe”).
+### How much does it cost to send a text?
+Twilio lists $0.0083 per US segment plus a carrier fee of $0.0035 to $0.005. Platform and registration fees are extra and vary.
 
-If you’re in Canada or the UK, the rules are even stricter (CASL and GDPR). The good news: most SMS platforms (SimpleTexting, TextMagic, Klaviyo) enforce these rules for you. Don’t cut corners. I’ve seen a $10,000 fine handed down to a small business that ignored consent. Not worth it.
+### How long can a text be?
+160 plain characters in one segment. Emoji or curly quotes cut that to 70 per segment.
 
-**Q: How do I measure if it’s working?**
+### How often should I text customers?
+No verified benchmark exists. Start with a few texts a month and watch opt-outs.
 
-Track three numbers: redemption rate, revenue per text, and cost per subscriber. Use unique codes for each campaign. Redemption rate (number of times the code was used divided by number of texts sent) should be at least 15–20% for a good offer.
+### Do I have to honor STOP replies?
+Yes. Under US rules, replies like stop, quit and unsubscribe revoke consent, and you have at most ten business days to act.
 
-Revenue per text = total sales from that campaign divided by number of subscribers. If it’s under $0.50, your offer or timing is off. Cost per subscriber should be under $2 if you’re using ads to acquire them. If you’re using in-store sign-ups, it’s essentially zero.
+## Sources
 
-**Q: What if I have a small list? Is it even worth it?**
+- [Twilio: SMS pricing, United States](https://www.twilio.com/en-us/sms/pricing/us)
+- [Twilio: SMS pricing, Australia](https://www.twilio.com/en-us/sms/pricing/au)
+- [Twilio: How long can a message be?](https://www.twilio.com/docs/glossary/what-sms-character-limit)
+- [eCFR: 47 CFR 64.1200, Delivery restrictions](https://www.ecfr.gov/current/title-47/part-64/section-64.1200)
+- [ICO: Electronic mail marketing](https://ico.org.uk/for-organisations/direct-marketing-and-privacy-and-electronic-communications/guide-to-pecr/electronic-and-telephone-marketing/electronic-mail-marketing/)
+- [business.gov.au: Promoting your business by email or text messages](https://business.gov.au/online/promoting-your-business-by-email-or-text-messages)
 
-Absolutely. A list of 200 engaged customers who love your coffee will outperform a list of 2,000 apathetic ones. At 200 people, if you get a 25% redemption rate on a $5 offer, that’s $250 in extra revenue per campaign. Do that twice a month and you’re adding $500/month.
-
-That’s $6,000 a year from a list you can build in a week with a sign-up sheet. Start small, test offers, and grow from there.
-
-**Q: Can I use free tools?**
-
-Some SMS platforms offer free trials (SimpleTexting gives 50 free credits, TextMagic has a pay-as-you-go model). But for ongoing use, expect to pay $30–$100 per month depending on volume. It’s cheaper than a single Facebook ad campaign and usually yields higher ROI. If you’re using Square for POS, their built-in SMS feature starts at $15/month.
-
-Don’t use free group texting apps (like WhatsApp or Telegram) — they don’t comply with marketing regulations and you’ll look amateur.
-
----
-
-Here’s the thing I learned running campaigns across a dozen small businesses: most owners treat SMS like a megaphone. They blast, they hope, they measure nothing. That works for about three weeks until the list dies. The businesses that actually make money from SMS treat it like a conversation — they listen to what customers respond to, they adjust, they respect the inbox.
-
-If you want to set up SMS without the trial-and-error, I can walk you through the first campaign in 30 minutes — including choosing the right tool, building your first segment, and writing messages that don’t sound like an infomercial.
-
-[Book a free consultation](/free-audit)
-
-## Related guides
-
-- [Small Business Marketing in the GCC: 2026 Guide](/blog/small-business-marketing-gcc-region-2026)
-- ['SMS Marketing for Coffee Shops: Flash Deals That Drive Morning Rushes'](/blog/sms-marketing-for-coffee-shops)
-- [Direct Mail vs Digital Ads: Which Works Better for Local Business in 2026?](/blog/direct-mail-vs-digital-ads-local-business-2026)
+Want a compliant text program set up? See our [email and SMS service](/services/email-sms) or [book a free audit](/free-audit).
