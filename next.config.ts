@@ -277,8 +277,8 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: "/blog/programmatic-vs-google-display-ads-whats-the-difference",
-        destination: "/blog/display-vs-programmatic-advertising-local-business",
+        source: "/blog/display-vs-programmatic-advertising-local-business",
+        destination: "/blog/programmatic-vs-google-display-ads-whats-the-difference",
         permanent: true,
       },
       {
