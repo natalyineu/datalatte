@@ -1,138 +1,102 @@
 ---
 title: "Facebook Lookalike Audiences for Local Business"
 date: "2026-05-12"
-lastModified: "2026-06-02"
-description: "How to build a Facebook lookalike audience from your local customer data, layer it with other targeting, and find more customers like your best ones."
+lastModified: "2026-10-30"
+description: "A lookalike audience needs 100+ people from one country and spans 1% to 10% (Meta). How a local business builds a source list and tests one, with costs."
 author: "Nataliia"
 category: "Meta Ads"
 tags: ["Meta Ads", "Facebook Ads", "Lookalike Audiences", "Customer Acquisition"]
 slug: "facebook-lookalike-audiences-guide"
 image: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=800&q=80&auto=format&fit=crop"
-readTime: "10 min read"
----
-**Local businesses are struggling to find customers they can rely on.** If you're like most owners, you've tried everything from discounts to free trials, but it seems like no matter what you do, your customer base is always shifting. You need a way to find customers who are more likely to become loyal fans, and that's where Facebook lookalike audiences come in.
-
-**What are Facebook lookalike audiences?**
-
-Facebook lookalike audiences are a powerful targeting option that allows you to clone your best customers and find more people like them. By analyzing the characteristics of your existing customers, Facebook can identify new people who share similar traits, interests, and behaviors.
-
-This means you can reach people who are more likely to become loyal customers, reducing the risk of wasted ad spend and increasing the effectiveness of your marketing efforts.
-
-**Getting started with Facebook lookalike audiences**
-
-To get started with Facebook lookalike audiences, you'll need to follow these steps:
-
-1. **Create a custom audience**: Start by creating a custom audience based on your existing customers. You can do this by uploading a list of customer email addresses, phone numbers, or other identifying information.
-2. **Choose a source**: Choose a source for your lookalike audience. This can be your custom audience, a website or app, or even a CRM system.
-3. **Set the audience size**: Set the audience size to determine how many people you want to target.
-4. **Choose the location**: Choose the location(s) where you want to target people.
-5. **Set the interests**: Set the interests that you want to target.
-
-## How to Build a High-Quality Source Audience from Local Business Data
-
-The secret sauce of Lookalike Audiences isn’t the algorithm—it’s the ingredients you feed it. A mediocre seed audience yields mediocre results, no matter how clever your ad copy is. Let’s walk through three practical ways local businesses can assemble a powerful source audience using the data they already own.
-
-### Method 1: The “Superfan” Email List
-
-If you have a loyalty program or a simple email signup, you already have the foundation. But don’t just use every email. Instead, create a segment of “superfans”: customers who have opened your last five emails, made at least two purchases in the past six months, and have a total spend over a certain threshold.
-
-For a coffee shop, that threshold might be $50 in the last quarter; for a pet groomer, it could be $200 in the last six months.
-
-To pull this off in a tool like Mailchimp or Klaviyo, set up a filter: “Total spent > $X AND Orders > Y AND Last purchase date within Z days.” Export that list as a CSV, then upload it to Facebook as a custom audience.
-
-One bakery in Portland used a 400-person superfan list as their seed and saw a 3x return on ad spend within two weeks—compared to a previous campaign that had used their full 1,800-person newsletter list.
-
-### Method 2: Pixel-Based Custom Audiences (Website Visitors)
-
-If you don’t have a rich email database, your Facebook pixel can work wonders. Set up a custom audience of “Visitors who viewed a product page in the last 30 days but didn’t purchase.” That’s not ideal for a Lookalike source because it includes window-shoppers. Instead, create a custom audience of “Purchasers in the last 90 days” or “Add-to-cart users who also completed checkout.” The pixel tracks these events automatically.
-
-For a fitness studio, you can create a pixel event for “Completed booking form” (e.g., a trial class signup).
-
-Even if you have only 150 such events in a month, combine them with a broader “Page view” audience from the last 7 days (but limit to people who spent more than 10 seconds on your site—use the “Time on site” custom event). The key is to filter out casual browsers.
-
-One local yoga studio in Sydney used a pixel-based audience of “Visitors who viewed the pricing page AND visited the studio location page” as their Lookalike source. Their cost-per-trial dropped by 47%.
-
-### Method 3: Offline Purchase Data from Your POS System
-
-Many local businesses still operate primarily offline—coffee shops, hair salons, pet groomers. If you have a point-of-sale (POS) system like Square, Clover, or Lightspeed, you can export transaction data and match it to Facebook users. This is the gold standard because it captures real purchase behavior, not just online intent.
-
-Steps: Export your customer list from your POS (usually as a CSV with email, phone number, or name+address). Upload that list to Facebook’s “Custom Audiences” as a customer file. Facebook will match it against user profiles (privacy-compliant, of course). Then, filter that custom audience to include only customers who have purchased at least twice or spent more than a certain amount. Use that filtered list as your Lookalike source.
-
-A barbershop in Chicago with 800 offline purchases over six months uploaded their list, filtered for “spent >$100 in total,” and ended up with a 320-person seed. Their subsequent Lookalike campaign brought in 12 new regular clients in one month—each with an average LTV of $340. Worth the 15-minute data export.
-
-### Pro Tip: Combine Multiple Sources for a Richer Profile
-
-Don’t rely on just one source. Merge your email superfans with your pixel purchasers and your offline buyers. Facebook’s algorithm gets more signals when a person overlaps across multiple touchpoints. Create one “Master Customer” custom audience by using the “Audience overlap” tool or simply upload a combined CSV.
-
-A small pet supply store in Toronto combined their email list (1,200), pixel purchasers (350), and offline POS data (600) into one source of 1,200 unique customers (after deduplication). Their 1% Lookalike performed 25% better than any single-source Lookalike they’d tested.
-
+readTime: "7 min read"
 ---
 
-## Advanced Strategies: Layering Lookalikes with Other Targeting Options
+A Facebook lookalike audience is a group of people Meta picks because they resemble a source list you supply, such as past customers. Meta's help page says the source must include at least 100 people from one country, and the audience size runs from 1% to 10%. A local business should use its best customers as the source, test the narrow 1% setting first, and judge by cost per lead.
 
-Once your Lookalike is running smoothly, you can supercharge it by layering additional targeting parameters. Think of it like adding a shot of hazelnut syrup to an already good latte—it takes a solid drink to something memorable. Here are three advanced tactics that local businesses often overlook.
+This guide covers what to upload, which size to test and what to expect. Meta's own help pages were only partly readable, so some details come from a named secondary source and are marked. Examples are labelled as assumptions.
 
-### Strategy 1: Layer a Location Radius with Your Lookalike
+<StatRow
+  values="100|1-10%|$1.80|$27.39"
+  labels="Minimum source people from one country|Lookalike size range|Average CPC, Meta lead campaigns|Average cost per lead, Meta lead campaigns"
+  subs="Meta Business Help Center|Meta Business Help Center|LocaliQ, Sept 2026|LocaliQ, Sept 2026"
+  trends="neutral|neutral|neutral|neutral"
+/>
 
-A 1% Lookalike might include people from across the country—or even the world—if your source audience has a wide geographic footprint. But if you’re a single-location coffee shop in London, you only care about people within a few miles. The fix: Add a location layer to your Lookalike ad set.
+## What Is a Lookalike Audience?
 
-In the Facebook Ads Manager, under “Locations,” choose “People who live in this location” and set a radius of 5–15 miles around your store. Facebook will then find people within that radius who also match your Lookalike profile. This prevents wasted spend on lookalikes in another city or country.
+You give Meta a source audience, and Meta finds people with similar characteristics. The size setting sets how close the match is. Meta's page gives a range of 1% to 10%, and a lower percentage is a narrower, closer group, according to the secondary source below.
 
-A hair salon in Melbourne used a 5-mile radius layered on a 1% Lookalike. Their cost-per-booking dropped from $28 to $11 because they stopped serving ads to people who were 50 miles away. Pro tip: If you serve a wider metro area (e.g., a food truck that roams), set a 20-mile radius. Adjust based on your actual customer travel patterns.
+Quality of the source matters more than size. A list of customers who spent the most beats a list of everyone who ever liked your page. Our [custom audiences guide](/blog/how-to-create-facebook-custom-audiences-local-customers) shows how to build the source.
 
-### Strategy 2: Exclude Audiences You’ve Already Reached
+## What Should You Use as the Source?
 
-Your Lookalike audience is fresh and untapped—but after a few weeks, you’ll have shown ads to some of its members. If you keep hammering the same people, you’ll see frequency climb and performance decline. To avoid that, create a custom audience of “People who have seen your ad in the last 30 days” (via the pixel) and exclude them from your Lookalike ad set.
+Meta requires at least 100 people from a single country. Jon Loomer, an established Meta ads trainer (secondary source, last updated March 2025), says Meta recommends between 1,000 and 5,000 people. Treat both as limits to check in Ads Manager, because Meta changes them.
 
-This keeps your Lookalike campaign consistently “cold” (new prospects). A fitness studio in San Diego used this technique and reported that their cost-per-lead stayed below $12 for three months, while a control group that didn’t exclude saw their cost rise to $21 by week six.
+Useful sources for a local business:
 
-### Strategy 3: Combine Lookalikes with Interest or Behavioral Targeting
+- Customers who booked or bought more than once
+- Highest-spending customers, if you have spend data
+- People who submitted a lead form and showed up
 
-You can add another filter on top of your Lookalike—for example, people who have an interest in “yoga” or who are “frequent travelers.” This narrows the audience further and increases relevance. But be careful: Over-targeting can shrink your audience too much and increase costs.
+Avoid mixing buyers with people who only clicked. Remove staff, suppliers and duplicates before upload.
 
-The sweet spot is to test one or two highly relevant interests. A pet groomer in Brisbane layered a Lookalike (from superfan dog owners) with an interest in “dog grooming tools” and “raw dog food.” Their ads outperformed a plain Lookalike by 35% in click-through rate. The audience dropped from 50,000 to 8,000, but every impression was more valuable.
+## Which Size Should You Test First?
 
-### Strategy 4: Retarget Lookalike Visitors Who Don’t Convert
+Start with 1%, the closest match. Widen to 2% or 3% if delivery stalls, and only then go broader. This order is Loomer's advice rather than a Meta rule.
 
-Not everyone in your Lookalike will become a customer on the first visit. That’s normal. Set up a retargeting campaign for people who clicked your ad or visited your website but didn’t book or buy. Use a special offer—like “10% off your first visit”—to bring them back.
+For a local business the audience is built by country or region, and Loomer says at least one region or country must be selected. Set the ad set's location to your service area so the ad does not reach people who cannot visit. Check this in Ads Manager before you spend.
 
-This creates a two-step funnel: Lookalike ads drive top-of-funnel discovery, retargeting ads close the deal. A coffee roaster in Seattle ran a Lookalike campaign for 14 days, then retargeted anyone who visited the online store but didn’t check out. That retargeting segment converted at 4.8%, compared to the original Lookalike’s 2.1%. Their overall ROAS doubled.
+## Do Lookalikes Still Work in 2026?
 
----
+Loomer's page covers Advantage Lookalike, an option that lets Meta expand beyond the percentage you chose. It does not describe how Advantage+ audience settings relate to lookalikes, and the Meta help text available for this article did not state it. Meta's interface changes often, so test on a small budget and check the audience you selected is the one that delivered.
 
-## Frequently Asked Questions
+LocaliQ's benchmark report, updated September 23, 2026, gives context for results: across industries, Meta lead campaigns average $1.80 per click, 8.54% conversion and $27.39 per lead. Beauty and Personal Care lead campaigns average $2.97 per click and $50.91 per lead. Health and Fitness average $1.84 per click and $27.11 per lead.
 
-**Q: How many people do I need in my source audience to create a Lookalike?**
-Facebook recommends a minimum of 100 people from a single country, but for local businesses, 500 is the realistic baseline for decent results. With fewer than 100, the algorithm has too little data to generate meaningful similarity. If you have only 150 loyal customers, combine them with website visitors who made a purchase or added a payment method. The richer the source, the better the Lookalike.
+## What Might a Test Cost?
 
-**Q: Can I use a Lookalike audience for a very small geographic area, like a 2-mile radius?**
-Yes, but you need to ensure your source audience has enough people within that radius to start. If your seed audience is 1,000 people spread across the country, a 2-mile radius Lookalike might contain only 10–20 people—not enough to run ads effectively. The workaround: build a source audience specifically from customers who live within that radius. For example, export only your delivery-area customers from your POS. Then create a Lookalike with no location layer (Facebook will find people similar to those within your radius) and then add the radius as an additional layer to keep it tight.
+All inputs below are **assumptions** built on the all-industry lead benchmarks. A lead is a form submission, not a sale.
 
-**Q: What’s the difference between a 1% and a 10% Lookalike?**
-The percentage refers to the portion of the population in a country that is most similar to your source audience. A 1% Lookalike includes the top 1% most similar people (e.g., 1% of Facebook users in Australia). A 10% Lookalike includes the top 10%—which is 10 times larger but includes people with looser similarity. For local businesses, start with 1% to get the highest-quality matches. If you need more reach and can accept lower performance, test 2% or 3% before jumping all the way to 10%.
+| Input | Value | Basis |
+| --- | --- | --- |
+| Source list | 400 customers | Assumption |
+| Test budget | $300 | Assumption |
+| Average CPC | $1.80 | LocaliQ Sept 2026 |
+| Clicks | about 167 | $300 / $1.80 |
+| Conversion rate | 8.54% | LocaliQ Sept 2026 |
+| Leads | about 14 | 167 x 8.54% |
+| Cost per lead | about $21 | $300 / 14 |
+| Share who become customers | 25% | Assumption |
+| Cost per customer | about $86 | $300 / 3.6 |
 
-**Q: How often should I refresh my Lookalike audience?**
-Every 30–60 days is ideal because customer behavior and Facebook’s user base evolve. If your business has seasonal spikes (e.g., a bakery that sells more cakes near holidays), refresh your Lookalike right before that season using a source audience of last year’s holiday buyers. For steady-state businesses, monthly refreshes keep your targeting fresh. Make sure to rebuild the source custom audience first before generating a new Lookalike.
+For comparison, a test with Beauty lead numbers ($50.91 per lead) would cost about $204 per customer on the same 25% assumption. Compare the lookalike with a plain interest or broad audience at the same budget and see which gets a cheaper customer. See also our [Facebook ads budget guide](/blog/facebook-ads-budget-local-business-how-much-to-spend) and the [local-business lookalike playbook](/blog/facebook-lookalike-audiences-local-business).
 
-**Q: Can I create a Lookalike from a custom audience that includes only Facebook Page fans?**
-Yes, but proceed with caution. Facebook Page fans are a mixed bag—some are loyal customers, others are friends of friends who never bought. If you use Page fans alone, your Lookalike quality will be lower. Instead, create a custom audience of “Fans who also engaged with your posts in the last 90 days” or “Fans who visited your website.” That filters out inactive followers. A better approach is to combine Page fans with email lists or pixel data.
+## When Should You Skip Lookalikes?
 
----
+Skip them if your list is under 100 people from one country, if it is mostly cold leads or if you cannot track what happens after the form. A list of 60 customers is below Meta's 100-person minimum, and a bigger percentage does not fix a weak source.
 
-We’ve walked through the mistakes that can leave your ad dollars on the floor, built a source audience from your real-world loyalists, and stacked advanced targeting layers that turn good campaigns into great ones. But I know that getting started—or troubleshooting a stubborn campaign—can feel like grinding beans with a dull blade.
+In those cases, run a simple local campaign first, collect leads for a few weeks and then build the source. Retargeting website visitors is another low-cost step, covered in our [retargeting guide](/blog/retargeting-ads-for-local-business).
 
-That’s why I’d love to help you tailor these strategies to your specific storefront, whether you run a cozy café in Toronto, a pet spa in Sydney, or a barbershop in Austin. At DataLatte.pro, we don’t just preach data; we spend our mornings in local shops like yours, understanding the rhythm of your customers.
+## FAQ
 
-If you’re ready to clone your best buyers and stop gambling on cold audiences, [book a free consultation](/free-audit). Let’s brew something great together.
+### How big does a lookalike source need to be?
+Meta says at least 100 people from one country. A secondary source says Meta recommends 1,000 to 5,000.
 
-## Related Articles
+### What lookalike percentage should I choose?
+Meta allows 1% to 10%. Start at 1% and widen only if delivery is poor.
 
-- A Step-by-Step Guide to Facebook Ads for Coffee Shops
-- [Master Coffee Shop Meta Ads Targeting with Audience Insights](/blog/coffee-shop-meta-ads-targeting)
-- [Facebook Ads for Home Services: Target Homeowners in Your Area](/blog/facebook-ads-for-home-services)
-- Facebook Ads for Restaurant Delivery: How to Drive Orders with Meta Ads
-- Facebook Custom Audiences: Upload Your Customer List and Advertise to Them
+### Can I use lookalikes for a local shop?
+Yes, if you have a source list. Build it for your country or region and limit the ad set location to your service area.
 
-<Callout type="coffee" title="Ready to Grow With Paid Social?">
-DataLatte specialises in Meta Ads for local businesses. Get more customers without wasting budget. [Book a free strategy call](/contact) or learn more about [Meta Ads management](/services/meta-ads).
-</Callout>
+### Do lookalikes beat broad targeting?
+No source proves that for local business. Test both with the same budget.
+
+### What does a lead cost on Meta?
+LocaliQ's September 2026 benchmark shows $27.39 per lead across industries, and varies by sector.
+
+## Sources
+
+- [Meta Business Help Center: About Lookalike Audiences](https://www.facebook.com/business/help/164749007013531) (1% to 10%, minimum 100 people from one country; only partly readable)
+- [Jon Loomer Digital: Meta Ads Lookalike Audiences](https://www.jonloomer.com/meta-ads-lookalike-audiences/) (secondary source, last modified March 1, 2025; recommended source size, Advantage Lookalike)
+- [WordStream by LocaliQ: Facebook advertising benchmarks](https://localiq.com/blog/facebook-advertising-benchmarks/) (updated September 23, 2026)
+
+Want a lookalike test run properly? See our [Meta Ads service](/services/meta-ads) or [book a free audit](/free-audit).

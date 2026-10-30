@@ -376,6 +376,26 @@ const nextConfig: NextConfig = {
         destination: "/blog/pet-groomer-meta-ads",
         permanent: true,
       },
+      {
+        source: "/blog/hair-salon-meta-ads",
+        destination: "/blog/using-meta-ads-for-hair-salon-marketing",
+        permanent: true,
+      },
+      {
+        source: "/blog/peacock-live-sports-advertising-local-business",
+        destination: "/blog/peacock-ads-local-business",
+        permanent: true,
+      },
+      {
+        source: "/blog/spotify-ad-studio-minimum-budget-2026",
+        destination: "/blog/how-much-do-spotify-ads-cost-pricing-for-local-business",
+        permanent: true,
+      },
+      {
+        source: "/blog/wolt-advertising-strategy-restaurants",
+        destination: "/blog/wolt-ads-restaurant-guide-europe",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",

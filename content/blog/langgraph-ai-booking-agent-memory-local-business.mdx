@@ -1,387 +1,207 @@
 ---
 title: "LangGraph AI Booking Agent with Memory and State"
 date: "2026-06-13"
-lastModified: "2026-06-13"
-description: "Build a stateful salon booking agent in Python with LangGraph: core concepts, SqliteSaver persistence and deployment as a WhatsApp or Instagram webhook."
+lastModified: "2026-10-30"
+description: "Build a salon booking agent in Python with LangGraph: thread_id memory, SqliteSaver, a staff approval step and a WhatsApp webhook, for about $0.90 a month."
 author: "Nataliia"
 category: "AI & Automation"
 tags: ["LangGraph", "AI agent", "booking automation", "memory"]
 slug: "langgraph-ai-booking-agent-memory-local-business"
 image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80&auto=format&fit=crop"
-readTime: "13 min read"
+readTime: "9 min read"
 ---
 
-Most AI chatbots have a memory problem. Ask "What time is my appointment?" and a stateless bot says "I don't have access to that information" — even if you discussed it three messages ago. For booking automation, this is fatal. A customer who has to re-explain their request twice simply goes somewhere else.
+LangGraph gives a booking agent memory through a checkpointer: you compile the graph with one, pass a `thread_id` such as the customer's phone number, and the conversation resumes where it stopped, even after a restart if the checkpointer is stored on disk. The sketch below uses `SqliteSaver` for development and an `interrupt()` call so a staff member approves a booking before it is saved. The salon, prices and number are placeholders.
 
-LangGraph solves this. It's a framework for building AI agents that remember where they are in a conversation, maintain state across multiple turns, and follow conditional logic like a proper workflow. It's the difference between a chatbot that *responds* and an agent that *thinks and acts*.
+This is a starting point, not a finished product. Run it against test conversations before it speaks to customers. The monthly cost figure is an estimate built on stated assumptions.
 
-## What Makes LangGraph Different
+<StatRow
+  values="thread_id|SqliteSaver|interrupt()|$0.90"
+  labels="Key that links messages to one conversation|Local file checkpointer for development|Pause for staff approval|Estimated monthly model cost, 50 chats"
+  subs="LangGraph docs|PyPI, version 3.1.2|LangGraph docs|Assumption, Claude Haiku 4.5 pricing"
+  trends="neutral|neutral|neutral|neutral"
+/>
 
-LangGraph models your agent as a **directed graph** — a flowchart where each node is a function and each edge is a transition rule. State flows through the graph, accumulating information at each step.
+## What Does LangGraph Add to a Chatbot?
 
-| Feature | Simple Chatbot | LangGraph Agent |
-|---|---|---|
-| Memory across turns | ❌ None | ✅ Full state |
-| Conditional branching | ❌ Hard-coded | ✅ Dynamic edges |
-| Human-in-the-loop pause | ❌ No | ✅ Built-in |
-| Tool use | Limited | ✅ Native |
-| Persistence (survives restart) | ❌ No | ✅ With checkpointer |
-| Complex multi-step flows | ❌ Breaks down | ✅ Designed for this |
-| Production reliability | Medium | High |
-
-For a booking agent, you need all of those. The conversation has steps (collect service → collect date → confirm → book), and state needs to persist if a customer comes back tomorrow to reschedule.
-
-## LangGraph Core Concepts
-
-**StateGraph**: the main graph object. You define it with a state schema.
-
-**State**: a TypedDict that holds everything the agent knows — collected info, conversation stage, booking details.
-
-**Nodes**: Python functions that receive state, do something (call an LLM, check a calendar, write to a database), and return updated state.
-
-**Edges**: connections between nodes. Can be conditional — "if the customer confirmed, go to BOOK; if they said no, go to MODIFY".
-
-**Checkpointer**: saves state to a database (SQLite, Postgres) so conversations survive between sessions.
-
-## Installation
-
-```bash
-pip install langgraph langchain-anthropic langchain-core python-dotenv
-```
-
-Set your API key:
-
-```bash
-export ANTHROPIC_API_KEY="YOUR_ANTHROPIC_API_KEY"
-```
-
-## Building the Salon Booking Agent
-
-Here's a complete LangGraph booking agent for a hair salon. The graph has 6 nodes: greet → collect_service → collect_datetime → confirm → book → done.
+A plain chatbot call has no memory of its own: you must send the history each time. LangGraph's docs describe checkpointers that persist a thread's graph state as checkpoints, which is short-term, thread-scoped memory. You pass the thread in the config:
 
 ```python
-from typing import TypedDict, Optional, Literal
-from langgraph.graph import StateGraph, END
-from langgraph.checkpoint.sqlite import SqliteSaver
-from langchain_anthropic import ChatAnthropic
-from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
-import json
-from datetime import datetime
+config = dict(configurable=dict(thread_id="thread-1"))
+```
 
-# ---- State Definition ----
+If you use the same `thread_id` on the next call, LangGraph loads the saved state. A new `thread_id` starts an empty thread. The docs say `InMemorySaver` keeps checkpoints in RAM, so they are lost when the process restarts. For a booking agent you need a saver that writes to disk or a database.
+
+## Which Checkpointer Should You Use?
+
+| Checkpointer | Package | Use |
+| --- | --- | --- |
+| InMemorySaver | langgraph | Tests; lost on restart |
+| SqliteSaver | langgraph-checkpoint-sqlite | Local development and lightweight deployments |
+| PostgresSaver | langgraph-checkpoint-postgres | Several workers or a hosted database |
+
+The PyPI page for `langgraph-checkpoint-sqlite` (version 3.1.2, released October 12, 2026) describes it as useful for local development, testing or lightweight deployments. It also warns to set `LANGGRAPH_STRICT_MSGPACK=true`, or pass an explicit `allowed_msgpack_modules` list, to limit what checkpoints can deserialize. The LangGraph docs show `PostgresSaver.from_conn_string(...)` followed by `setup()` to create its tables. The package name for Postgres is from the docs' import path and should be checked on PyPI.
+
+## How Do You Build the Agent?
+
+Install the packages:
+
+```bash
+pip install langgraph langgraph-checkpoint-sqlite langchain-anthropic
+```
+
+Then a minimal graph. The assistant collects the service, time, name and phone. When it has all four it ends its message with the word READY. A router sends that case to a staff approval step.
+
+```python
+from typing import Annotated, TypedDict
+
+from langchain_anthropic import ChatAnthropic
+from langchain_core.messages import AnyMessage, SystemMessage
+from langgraph.checkpoint.sqlite import SqliteSaver
+from langgraph.graph import END, START, StateGraph
+from langgraph.graph.message import add_messages
+from langgraph.types import Command, interrupt
+
+# Check current model names in Anthropic's docs before you deploy.
+llm = ChatAnthropic(model="claude-haiku-4-5", temperature=0.2)
+
+SYSTEM = (
+    "You are the booking assistant for a hair salon (placeholder). "
+    "Collect: service, preferred date and time, name, phone. "
+    "Ask for one missing item at a time. Never invent prices or free slots. "
+    "When all four are known, summarise them and end your message with READY."
+)
+
 
 class BookingState(TypedDict):
-    messages: list          # Full conversation history
-    stage: str              # Current stage in the booking flow
-    service: Optional[str]  # Collected service type
-    preferred_datetime: Optional[str]  # Collected date/time preference
-    client_name: Optional[str]
-    client_phone: Optional[str]
-    booking_confirmed: bool
-    booking_id: Optional[str]
+    messages: Annotated[list[AnyMessage], add_messages]
+    approved: bool
 
-# ---- LLM Setup ----
 
-llm = ChatAnthropic(model="claude-haiku-4-5-20251001", temperature=0.3)
+def assistant(state: BookingState):
+    reply = llm.invoke([SystemMessage(content=SYSTEM), *state["messages"]])
+    return dict(messages=[reply])
 
-SYSTEM_PROMPT = """You are Maya, the booking assistant for The Loft Hair Studio.
 
-Services: Women's Cut ($65-95), Men's Cut ($35-45), Balayage ($150-250),
-Blow Out ($45-55), Color ($90-130), Keratin ($200-300).
+def route(state: BookingState):
+    last = state["messages"][-1].content
+    return "staff_review" if "READY" in str(last) else END
 
-Hours: Tue-Sat 9am-7pm, Sun 10am-5pm.
 
-Your job: Guide customers through booking step by step.
-Current stage: {stage}
-Already collected: service={service}, datetime={preferred_datetime}, 
-                   name={client_name}, phone={client_phone}
+def staff_review(state: BookingState):
+    # Pauses the graph and saves state until you resume with Command(resume=...)
+    decision = interrupt(dict(summary=str(state["messages"][-1].content)))
+    return dict(approved=bool(decision))
 
-Be warm, concise, and move the conversation forward.
-If you have all info (service + datetime + name + phone), summarize and ask to confirm.
-"""
 
-# ---- Nodes ----
+def save_booking(state: BookingState):
+    if state.get("approved"):
+        pass  # call your calendar or booking API here
+    return dict()
 
-def greet(state: BookingState) -> BookingState:
-    """Greet the customer and ask what they need."""
-    response = llm.invoke([
-        SystemMessage(content=SYSTEM_PROMPT.format(**state, stage="greeting")),
-        HumanMessage(content=state["messages"][-1]["content"] if state["messages"] else "Hello")
-    ])
-    state["messages"].append({"role": "assistant", "content": response.content})
-    state["stage"] = "collect_service"
-    return state
 
-def collect_info(state: BookingState) -> BookingState:
-    """Collect missing booking information one piece at a time."""
-    # Build context of what we still need
-    missing = []
-    if not state["service"]:
-        missing.append("service")
-    if not state["preferred_datetime"]:
-        missing.append("preferred date and time")
-    if not state["client_name"]:
-        missing.append("name")
-    if not state["client_phone"]:
-        missing.append("phone number")
-    
-    prompt = SYSTEM_PROMPT.format(**state, stage="collecting") + \
-             f"\nStill needed: {', '.join(missing) if missing else 'all info collected'}"
-    
-    # Get the latest customer message
-    last_user_msg = next(
-        (m["content"] for m in reversed(state["messages"]) if m["role"] == "user"),
-        ""
-    )
-    
-    # Extract information from the message
-    extract_prompt = f"""
-    Customer said: "{last_user_msg}"
-    
-    Extract any of these if mentioned (return JSON):
-    - service: (haircut type mentioned)
-    - preferred_datetime: (date/time mentioned, normalize to readable format)
-    - client_name: (name mentioned)
-    - client_phone: (phone number mentioned)
-    
-    Return only JSON with keys found. Example: {{"service": "balayage", "client_name": "Sarah"}}
-    """
-    
-    extracted_raw = llm.invoke([HumanMessage(content=extract_prompt)])
-    try:
-        extracted = json.loads(extracted_raw.content)
-        for key, value in extracted.items():
-            if value and key in state:
-                state[key] = value
-    except json.JSONDecodeError:
-        pass  # Continue with what we have
-    
-    # Generate response asking for next piece of info
-    response = llm.invoke([
-        SystemMessage(content=prompt),
-        *[HumanMessage(content=m["content"]) if m["role"] == "user" 
-          else AIMessage(content=m["content"]) 
-          for m in state["messages"][-6:]]  # Last 6 messages for context
-    ])
-    
-    state["messages"].append({"role": "assistant", "content": response.content})
-    
-    # Check if we have everything
-    if all([state["service"], state["preferred_datetime"], state["client_name"], state["client_phone"]]):
-        state["stage"] = "confirm"
-    
-    return state
-
-def confirm_booking(state: BookingState) -> BookingState:
-    """Present a summary and ask the customer to confirm."""
-    confirmation_msg = f"""Perfect! Here's your booking summary:
-    
-📍 **The Loft Hair Studio**
-✂️ Service: {state['service']}
-📅 Date/Time: {state['preferred_datetime']}
-👤 Name: {state['client_name']}
-📱 Phone: {state['client_phone']}
-
-Shall I confirm this booking? (Yes / No, I'd like to change something)"""
-    
-    state["messages"].append({"role": "assistant", "content": confirmation_msg})
-    state["stage"] = "awaiting_confirmation"
-    return state
-
-def process_confirmation(state: BookingState) -> BookingState:
-    """Process the customer's yes/no response."""
-    last_msg = next(
-        (m["content"] for m in reversed(state["messages"]) if m["role"] == "user"),
-        ""
-    ).lower()
-    
-    if any(word in last_msg for word in ["yes", "confirm", "book", "perfect", "great", "sure", "yep", "yeah"]):
-        state["booking_confirmed"] = True
-        state["stage"] = "book"
-    else:
-        # Customer wants to change something
-        state["stage"] = "collect_service"
-        state["messages"].append({
-            "role": "assistant", 
-            "content": "No problem! What would you like to change?"
-        })
-    
-    return state
-
-def create_booking(state: BookingState) -> BookingState:
-    """Actually create the booking in the system."""
-    # In production, call your booking API here
-    booking_id = f"BK{datetime.now().strftime('%Y%m%d%H%M%S')}"
-    state["booking_id"] = booking_id
-    
-    confirmation = f"""✅ You're all booked!
-
-**Booking #{booking_id}**
-📍 The Loft Hair Studio — 142 Music Row, Nashville
-✂️ {state['service']}
-📅 {state['preferred_datetime']}
-
-You'll receive a confirmation text at {state['client_phone']}.
-Please arrive 5 minutes early. To cancel or reschedule, call (615) 555-0123 at least 24 hours ahead.
-
-See you soon, {state['client_name'].split()[0]}! 💇"""
-    
-    state["messages"].append({"role": "assistant", "content": confirmation})
-    state["stage"] = "done"
-    return state
-
-# ---- Edge Logic ----
-
-def route_after_info(state: BookingState) -> Literal["collect_info", "confirm_booking"]:
-    if state["stage"] == "confirm":
-        return "confirm_booking"
-    return "collect_info"
-
-def route_after_confirmation(state: BookingState) -> Literal["create_booking", "collect_info"]:
-    if state["booking_confirmed"]:
-        return "create_booking"
-    return "collect_info"
-
-# ---- Build the Graph ----
-
-def build_booking_graph():
-    workflow = StateGraph(BookingState)
-    
-    workflow.add_node("greet", greet)
-    workflow.add_node("collect_info", collect_info)
-    workflow.add_node("confirm_booking", confirm_booking)
-    workflow.add_node("process_confirmation", process_confirmation)
-    workflow.add_node("create_booking", create_booking)
-    
-    workflow.set_entry_point("greet")
-    workflow.add_conditional_edges("greet", route_after_info)
-    workflow.add_conditional_edges("collect_info", route_after_info)
-    workflow.add_edge("confirm_booking", "process_confirmation")
-    workflow.add_conditional_edges("process_confirmation", route_after_confirmation)
-    workflow.add_edge("create_booking", END)
-    
-    # Add SQLite persistence
-    memory = SqliteSaver.from_conn_string("bookings.db")
-    return workflow.compile(checkpointer=memory)
-
-# ---- Run the Agent ----
-
-def chat(graph, session_id: str, user_message: str):
-    config = {"configurable": {"thread_id": session_id}}
-    
-    # Get or initialize state
-    current_state = graph.get_state(config)
-    if current_state.values:
-        state = current_state.values
-    else:
-        state = {
-            "messages": [],
-            "stage": "greet",
-            "service": None,
-            "preferred_datetime": None,
-            "client_name": None,
-            "client_phone": None,
-            "booking_confirmed": False,
-            "booking_id": None
-        }
-    
-    state["messages"].append({"role": "user", "content": user_message})
-    
-    result = graph.invoke(state, config)
-    
-    # Return the last assistant message
-    last_assistant = next(
-        (m["content"] for m in reversed(result["messages"]) if m["role"] == "assistant"),
-        ""
-    )
-    return last_assistant
-
-if __name__ == "__main__":
-    graph = build_booking_graph()
-    session_id = "test-session-001"
-    
-    print("Booking Agent Ready. Type 'quit' to exit.\n")
-    while True:
-        user_input = input("You: ").strip()
-        if user_input.lower() == "quit":
-            break
-        response = chat(graph, session_id, user_input)
-        print(f"Maya: {response}\n")
+builder = StateGraph(BookingState)
+builder.add_node("assistant", assistant)
+builder.add_node("staff_review", staff_review)
+builder.add_node("save_booking", save_booking)
+builder.add_edge(START, "assistant")
+builder.add_conditional_edges("assistant", route)
+builder.add_edge("staff_review", "save_booking")
+builder.add_edge("save_booking", END)
 ```
 
-## Adding Persistence with SqliteSaver
+The `interrupt()` call needs a checkpointer and a `thread_id`. According to the docs, you resume with `Command(resume=True)` using the same `thread_id`, and the node restarts from its beginning, so keep code before `interrupt()` free of side effects.
 
-The `SqliteSaver` in the code above stores all conversation state in a local SQLite file (`bookings.db`). This means:
-
-- A customer who starts booking, gets interrupted by a phone call, and comes back 20 minutes later picks up exactly where they left off
-- Each session gets a unique `thread_id` — use the customer's phone number for easy lookup
-- You can query `bookings.db` directly to see all in-progress conversations
-
-For production, replace `SqliteSaver` with `PostgresSaver` to use a proper database:
+## How Do You Run It With Memory?
 
 ```python
-from langgraph.checkpoint.postgres import PostgresSaver
+with SqliteSaver.from_conn_string("bookings.db") as saver:
+    graph = builder.compile(checkpointer=saver)
+    config = dict(configurable=dict(thread_id="+15550100"))  # placeholder number
 
-memory = PostgresSaver.from_conn_string("postgresql://user:password@localhost/bookings")
+    out = graph.invoke(dict(messages=[("user", "Hi, can I book a colour on Friday?")]), config)
+    print(out["messages"][-1].content)
+
+    # Later, even after a restart, the same thread_id continues the chat:
+    out = graph.invoke(dict(messages=[("user", "Make it 3pm. Name is Ana, phone 555 0100.")]), config)
+
+    # When the graph pauses, the payload is in out["__interrupt__"].
+    # Staff approve, and you resume:
+    graph.invoke(Command(resume=True), config)
 ```
 
-## Deploying as a WhatsApp/Instagram Webhook
+`SqliteSaver.from_conn_string` is a context manager, as the PyPI example shows, so keep the graph inside the `with` block.
 
-Wrap the graph in a FastAPI endpoint to accept messages from any channel:
+## How Do You Connect It to WhatsApp?
+
+Meta's WhatsApp Cloud API delivers messages to your endpoint as HTTP POST requests with JSON payloads. Incoming text is at `entry[].changes[].value.messages[].text.body`, the sender is `messages[].from`, and the message has an `id`. Meta retries for up to 7 days when your endpoint does not return HTTP 200, and retries can cause duplicates, so the handler should be idempotent.
 
 ```python
-from fastapi import FastAPI
-from pydantic import BaseModel
+from fastapi import FastAPI, Request
 
 app = FastAPI()
-graph = build_booking_graph()
+seen: set[str] = set()  # use a database table in production
 
-class MessageIn(BaseModel):
-    session_id: str   # Use customer phone number
-    message: str
 
-@app.post("/chat")
-async def handle_message(msg: MessageIn):
-    response = chat(graph, msg.session_id, msg.message)
-    return {"reply": response}
+@app.post("/whatsapp")
+async def inbound(request: Request):
+    body = await request.json()
+    for entry in body.get("entry", []):
+        for change in entry.get("changes", []):
+            for msg in change.get("value", dict()).get("messages", []):
+                if msg["id"] in seen or msg.get("type") != "text":
+                    continue
+                seen.add(msg["id"])
+                # run graph.invoke(...) with thread_id = msg["from"], then send the reply
+    return dict(ok=True)
 ```
 
-Connect this to WhatsApp via Twilio's WhatsApp API, or to Instagram DMs via the Meta Webhooks API. Every message from a customer routes through LangGraph, with full conversation memory maintained per phone number.
+Webhook verification and signature checks are not covered here. Follow Meta's documentation for them before going live. See our [WhatsApp Business customer service guide](/blog/how-to-use-whatsapp-business-for-customer-service) for the business side.
 
-## Cost Estimate for a Salon
+## What Will It Cost to Run?
 
-A salon handling 50 booking conversations per month, each averaging 8 exchanges:
+The estimate is an **assumption**. Anthropic's pricing page lists Claude Haiku 4.5 at $1 per million input tokens and $5 per million output tokens.
 
-- 50 conversations × 8 turns × ~500 tokens/turn = 200,000 tokens
-- Using Claude Haiku ($0.80/1M input + $4/1M output): approximately **$0.40/month**
-- That's 50 bookings automated for less than 50 cents
+| | Value |
+| --- | --- |
+| Conversations a month (assumption) | 50 |
+| Turns per conversation (assumption) | 8 |
+| Input tokens per turn, including history (assumption) | 1,500 |
+| Output tokens per turn (assumption) | 150 |
+| Input cost | 0.6M tokens x $1 = $0.60 |
+| Output cost | 0.06M tokens x $5 = $0.30 |
+| Total | about $0.90 a month |
+
+Hosting, the WhatsApp conversation fees and your time are not included. Check current WhatsApp pricing with Meta. For business context, read [AI agents for local business](/blog/ai-agents-for-local-business-what-they-are-and-how-they-work), [AI agents for hair salons](/blog/ai-agents-for-hair-salons) and [AI agent for appointment booking](/blog/ai-agent-for-appointment-booking-local-business).
 
 ## FAQ
 
-**Is LangGraph hard to learn?**
-LangGraph has a steeper learning curve than simple API calls. If you're comfortable with Python and have built a basic chatbot, expect 2-4 hours to get your first LangGraph agent working. The concepts (nodes, edges, state) map to familiar programming patterns once you see them in action. The official LangGraph documentation and tutorials are excellent.
+### What is a thread_id in LangGraph?
 
-**What's the difference between LangGraph and LangChain?**
-LangChain is the underlying library for connecting LLMs to tools and chains of prompts. LangGraph is built on top of LangChain specifically for stateful, graph-based agents. You use LangChain components (chat models, tools, prompts) inside LangGraph nodes. LangGraph handles the flow control and memory; LangChain handles the LLM interactions.
+It is the key in the config that tells LangGraph which saved conversation to load. The same thread_id continues a conversation, and a new one starts empty.
 
-**Can LangGraph use Claude?**
-Yes — Claude is an excellent choice for LangGraph agents. Use `langchain-anthropic` and the `ChatAnthropic` class as shown in the code above. Claude Haiku works well for simple booking flows (fast and cheap); Claude Sonnet is better for complex reasoning or handling difficult edge cases.
+### Is SqliteSaver safe for production?
 
-**Does LangGraph work in production?**
-Yes, and it's used in production by companies at scale. The key production considerations: use PostgresSaver instead of SQLiteSaver for concurrent sessions, add error handling around LLM calls (they occasionally fail), set timeouts so conversations don't hang, and monitor token usage with a tool like LangSmith or AgentOps.
+PyPI describes it as suited to local development, testing or lightweight deployments. For several workers or heavier traffic, the docs show PostgresSaver.
 
-**How do I add human escalation to LangGraph?**
-LangGraph has native "interrupt" support for human-in-the-loop. Add `interrupt_before=["create_booking"]` to your graph compile call, and the graph will pause before the final booking step, waiting for a human to review and approve. This is ideal for high-value services where you want a staff member to confirm before the AI commits. Alternatively, route to a `transfer_to_human` node that sends an SMS to the owner: "Customer wants to book [service] for [datetime]. Reply YES to confirm or call them at [phone]."
+### How do I add human approval?
 
-## Ready to Automate Your Bookings?
+Call `interrupt()` in a node and resume with `Command(resume=...)` using the same thread_id. A checkpointer is required.
 
-[DataLatte's AI Booking Agent](/services/ai-agents/booking) handles appointment scheduling, reminder sequences, and no-show follow-ups automatically — built specifically for local businesses like yours.
+### Can I use a model other than Claude?
 
-## Related Articles
+Yes. LangGraph is model-agnostic. This example uses `langchain-anthropic`.
 
-- [CrewAI for Local Business: Build a Team of AI Agents](/blog/crewai-local-business-multi-agent-automation)
-- [LangChain RAG: AI That Answers Customer FAQs from Your Own Data](/blog/langchain-rag-customer-faq-local-business)
-- [Claude + MCP Google Calendar: Auto-Book Appointments with AI](/blog/claude-mcp-google-calendar-booking-automation)
-- [Vapi AI Phone Agent: Never Miss a Call at Your Salon or Coffee Shop](/blog/vapi-ai-phone-agent-local-business-setup)
-- [WhatsApp Business API: Automated Messages for Local Business 2026](/blog/whatsapp-business-api-local-marketing-automation)
-- [AI Booking Agent for Local Business](/services/ai-agents/booking)
+### Should the agent confirm bookings by itself?
+
+For a small salon, no. Keep a staff approval step until the agent has handled enough test conversations.
+
+## Sources
+
+- [LangGraph docs: Persistence](https://docs.langchain.com/oss/python/langgraph/persistence)
+- [LangGraph docs: Interrupts](https://docs.langchain.com/oss/python/langgraph/interrupts)
+- [PyPI: langgraph-checkpoint-sqlite](https://pypi.org/project/langgraph-checkpoint-sqlite/)
+- [Meta for Developers: WhatsApp Cloud API webhooks](https://developers.facebook.com/docs/whatsapp/cloud-api/guides/set-up-webhooks)
+- [Anthropic docs: Pricing](https://platform.claude.com/docs/en/about-claude/pricing)
+
+Want a booking agent built and tested for your business? See our [AI agents service](/services/ai-agents) or [book a free audit](/free-audit).
