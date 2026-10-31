@@ -1,76 +1,101 @@
 ---
-title: "The Ultimate Guide to Using Klaviyo for Pet Groomer Email Marketing"
-date: "2026-05-22"
-lastModified: "2026-06-02"
-description: "Learn how to use Klaviyo for pet groomer email marketing and boost your sales with personalized campaigns, automation, and analytics"
+title: "Klaviyo for Pet Groomer Email Marketing: Setup Guide"
+date: "2026-05-21"
+lastModified: "2026-10-31"
+description: "Klaviyo's free plan covers 250 profiles and 500 emails a month. How a pet groomer sets up a welcome flow and a rebooking reminder, with the legal basics."
 author: "Nataliia"
-category: "Email & SMS Marketing"
-tags: ["klaviyo", "pet groomer", "email marketing", "local business"]
+category: "Email Marketing"
+tags: ["klaviyo", "pet groomer email marketing", "email automation"]
 slug: "using-klaviyo-for-pet-groomer-email-marketing"
-image: "https://images.unsplash.com/photo-1569025753-b69dd7958f1f?w=800&q=80&auto=format&fit=crop"
-readTime: '13 min read'
+image: "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?w=800&q=80&auto=format&fit=crop"
+readTime: "7 min read"
 ---
-As a pet groomer, you know how important it is to stay in touch with your customers and keep them coming back. But with so many marketing channels to choose from, it can be hard to know where to start.
 
-That's where Klaviyo comes in - a powerful email marketing platform designed specifically for e-commerce and local businesses like yours. Here's what I'd do: I'd use Klaviyo to create personalized email campaigns that drive real results for your pet grooming business.
+A pet groomer can start on Klaviyo's free plan, which Klaviyo lists at up to 250 active profiles and 500 email sends per month. Build two automations first: a welcome email for new clients and a rebooking reminder based on a date you store for each pet. Klaviyo flows can start from a list, a segment, an action or a date property, so a "last groom" date can trigger a reminder. Klaviyo is built around online-store events, so check whether your booking software connects before you commit.
 
-## Getting Started with Klaviyo
-To get started with Klaviyo, you'll need to create an account and set up your email list. This is easier than you think - just import your existing customer list or use Klaviyo's built-in forms to collect new subscribers. Once you're set up, you can start creating campaigns that drive real results for your business. For example, you could create a welcome series that introduces new customers to your services and offers them a discount on their first appointment.
+This guide is for solo groomers and small salons. Prices and limits were read from Klaviyo's pricing page on the date of update. Paid plan prices were not shown on that page, so none are quoted here.
 
-<Callout type="tip">Make sure to segment your list based on customer behavior and preferences - this will help you create more targeted and effective campaigns.</Callout>
+<StatRow
+  values="250|500|$5|$53,088"
+  labels="Active profiles on the free plan|Email sends per month on the free plan|SMS allowance per month on the free plan|Max CAN-SPAM penalty per violating email"
+  subs="Klaviyo pricing page|Klaviyo pricing page|Klaviyo pricing page, region and carrier dependent|FTC compliance guide"
+  trends="neutral|neutral|neutral|neutral"
+/>
 
-## Automating Your Email Marketing
-One of the most powerful features of Klaviyo is its automation capabilities. With Klaviyo, you can set up automated workflows that trigger based on customer behavior - like abandoning a shopping cart or completing a purchase. For example, you could set up a workflow that sends a reminder email to customers who have abandoned their cart, offering them a discount to complete their purchase. This can help drive sales and increase customer loyalty.
+## Is Klaviyo a Good Fit for a Pet Groomer?
 
-<Callout type="warning">Be careful not to over-automate - you want to make sure that your campaigns still feel personal and relevant to your customers.</Callout>
+It can be, with limits. The free plan is enough for a small client list, but 500 sends a month disappears fast: a list of 200 clients mailed twice uses 400. Klaviyo's help describes event data, such as orders and product views, from installed integrations, and says event variables work only in flows triggered by a metric.
 
-## Measuring and Optimizing Your Campaigns
-So how do you know if your campaigns are working? With Klaviyo, you can track key metrics like open rate, click-through rate, and conversion rate. You can also use A/B testing to compare different campaign variations and see which ones perform best. For example, you could test different subject lines or email copy to see which ones drive the most engagement.
+That design suits shops. A groomer with a booking tool may have no such events. If your tool does not connect, you can still import a client list and use a date property. Compare alternatives in our [Mailchimp vs Klaviyo guide](/blog/mailchimp-vs-klaviyo-small-business-which-is-better).
 
-<Callout type="example">Let's say you're a pet groomer in New York City, and you want to create a campaign that targets dog owners in the area. You could use Klaviyo's segmentation features to create a list of customers who have purchased dog grooming services in the past, and then create a campaign that offers them a discount on their next appointment.</Callout>
+## What Data Should You Collect About Each Client?
 
-## Frequently Asked Questions
+Keep it small. For each client collect email, pet name, breed or size, and the date of the last groom. Add consent for marketing at the time of booking.
 
-**Q: How much time does Klaviyo actually take to set up and maintain?**
+Klaviyo's flow help lists "date property" as a trigger: a profile enters when a date-based property matches, such as a birthday. Store the pet's birthday and the last appointment date as properties. The birthday gives you a yearly message and the last groom date drives the rebooking reminder. Do not collect more than you use.
 
-The initial setup takes about 3 to 5 hours, depending on how clean your customer data is. That includes connecting your booking system, importing your list, building your first three flows (welcome, rebooking, no-show prevention), and creating your first two segments.
+## Which Two Flows Should You Build First?
 
-After that, maintenance is about 2 hours a week: writing one email, reviewing your analytics, and adjusting segments. I've had clients do it in 90 minutes a week once the flows were built.
+Build these before any newsletter:
 
-**Q: I only have 200 email addresses. Is Klaviyo worth it for a small list?**
+1. **Welcome flow.** Trigger: a profile is added to your "new clients" list. Send one email right away with parking, what to bring, vaccination rules and how to reschedule. Add a second a few days later if the first has not been opened.
+2. **Rebooking reminder.** Trigger: a date property. Send a short email asking if it is time to book the next groom, with one booking button.
 
-Yes, but only if you're willing to grow it. Klaviyo's pricing starts at $20/month for 250 contacts. If you have 200 contacts and can turn 10% of them into repeat customers via email, you're looking at 20 incremental bookings per month. Even at $50 per booking, that's $1,000 in revenue. If you can't get 10%, your emails are the problem, not the list size.
+Klaviyo explains that flows can include time delays and branches. Keep yours short: one send, one delay, one follow-up. Our [pet groomer email marketing guide](/blog/pet-groomer-email-marketing) and [keep-clients-booking article](/blog/email-marketing-for-pet-groomers-keep-clients-booking) give copy ideas.
 
-**Q: What's the best way to actually get people to sign up for my email list?**
+## What Are the Legal Basics?
 
-**Q: Can I import my existing list from Mailchimp or Square into Klaviyo?**
+In the US, the FTC lists CAN-SPAM rules: accurate headers and subject lines, a clear ad disclosure, a valid postal address, a working opt-out, and honouring opt-outs within 10 business days. Each separate violating email can carry penalties of up to $53,088. Opted-out addresses cannot be sold.
 
-Yes. Klaviyo has native imports for Mailchimp, Square, and most other platforms. You export a CSV from your old tool, upload it into Klaviyo, and map the fields. Takes about 20 minutes. One warning: don't re-import people who unsubscribed from your old tool. Klaviyo will flag it, but it's a pain to clean up. Export your active subscribers only.
+Google's sender guidelines add rules for anyone who sends more than 5,000 messages a day to Gmail, including one-click unsubscribe and a spam rate under 0.30%. A groomer will not hit that volume, but the habits help. In the UK and EU, consent rules are stricter, see our [GDPR email guide](/blog/gdpr-compliant-email-marketing). This is not legal advice.
 
-**Q: What's the one email I should set up first if I have zero time?**
+## Should You Add SMS?
 
-**Q: How do I track if my emails are actually making money?**
+Klaviyo's free plan lists $5 of mobile messages a month, noted as region and carrier dependent, and the page shows no per-message rates. Text reminders are popular with appointment businesses, but they need separate opt-in consent. Start with email, and read our [SMS guide for pet groomers](/blog/sms-marketing-for-pet-groomers) before you add texts. Check Klaviyo's current rates in your account first.
 
-Use Klaviyo's revenue attribution. It's in the analytics tab. It shows you exactly how much revenue came from each flow and each campaign, with a 30-day attribution window. If an email doesn't show at least 5x your monthly Klaviyo subscription cost in attributed revenue, change the subject line, change the offer, or kill the email. Don't send emails just because you feel like you should.
+## The Math: What Is a Rebooking Reminder Worth?
 
-## Closing
+All inputs are **assumptions**, not benchmarks.
 
-The first time I saw a groomer make $4,000 from a single email, I was sitting in a coffee shop in Nashville, staring at a screen, and I ordered a second coffee I did not need. No regrets.
+| Input | Assumption |
+| --- | --- |
+| Clients on the list | 200 |
+| Reminder emails sent per month | 40 (clients due for a groom) |
+| Share who book after the email | 10% |
+| Extra bookings per month | 4 |
+| Average groom price | $70 |
+| Added revenue per month | 4 x $70 = $280 |
+| Plan cost | $0 (free plan, 40 sends) |
 
-The email was nothing fancy — a subject line that said "your poodle is due" and three sentences of text. No images. No discount. Just a reminder based on real data. That's the whole secret. Stop treating email marketing like advertising and start treating it like a calendar reminder for services your customers already want.
+Under these inputs the reminder adds $280 a month. Even if only 2 clients booked, it adds $140. Track bookings by asking new bookings how they heard, or use a unique booking link in the email.
 
-Most business owners overthink this. They stress about design, about copy, about the perfect welcome series. Meanwhile, their customers are sitting there thinking "I should probably book a groom for my dog, but I keep forgetting." Send the reminder. Collect the money.
+<Callout type="tip" title="Do This Today">
+Export your client list with email, pet name and last groom date. That one spreadsheet is all a first rebooking flow needs.
+</Callout>
 
-If you want me to look at your numbers and tell you which flows are leaving money on the table, I can do that. [Book a free consultation](/free-audit) and bring your booking data. I'll tell you exactly what to change.
+## FAQ
 
-## Related Articles
+### Is Klaviyo free for small businesses?
+Klaviyo lists a free plan with up to 250 active profiles and 500 email sends per month. Paid plan prices were not shown on its pricing page when checked.
 
-- [Using Constant Contact for Pet Groomer Marketing Success](/blog/pet-groomer-marketing-with-constant-contact)
-- Paws and Effect: A Beginner's Guide to Email Marketing for Local Pet Groomers
-- [Email Marketing for Pet Groomers: Keep Clients Booking Again and Again](/blog/email-marketing-for-pet-groomers-keep-clients-booking)
-- Email Marketing for Pet Groomers: Keep Clients Booked and Loyal
-- [5 Email Marketing Templates for Pet Groomers to Get More Clients](/blog/pet-groomer-email-marketing)
+### What is a date property flow?
+A flow that starts when a date on a profile matches, such as a birthday. Klaviyo lists it as one of four trigger types.
 
-## Related guides
+### Do I need a store integration to use Klaviyo?
+Not strictly. You can import contacts and use properties. Event-based personalisation needs an integration, per Klaviyo's help.
 
-- [The Power of Email Newsletters for Pet Groomer Marketing Success](/blog/pet-groomer-email-marketing)
+### Can I email clients without permission?
+In the US, CAN-SPAM allows marketing email with rules such as an opt-out. UK and EU rules require consent. Get consent at booking.
+
+### How many emails should a groomer send?
+No neutral benchmark exists. Start with automated emails plus one monthly message, then adjust to unsubscribes.
+
+## Sources
+
+- [Klaviyo: Pricing](https://www.klaviyo.com/pricing) (free plan limits; paid prices not shown)
+- [Klaviyo Help: Flows overview and triggers](https://help.klaviyo.com/hc/en-us/articles/115002774932)
+- [Klaviyo Help: Event variables in flows](https://help.klaviyo.com/hc/en-us/articles/115002779071)
+- [FTC: CAN-SPAM Act compliance guide for business](https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business)
+- [Google Workspace Admin Help: Email sender guidelines](https://support.google.com/a/answer/81126)
+
+Want email set up for your grooming business? See our [Email and SMS service](/services/email-sms) or [book a free audit](/free-audit).

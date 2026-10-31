@@ -511,6 +511,86 @@ const nextConfig: NextConfig = {
         destination: "/blog/google-business-profile-optimization-checklist",
         permanent: true,
       },
+      {
+        source: "/blog/programmatic-audio-advertising-local-business-guide",
+        destination: "/blog/digital-audio-advertising-2026-spotify-pandora-podcast-ads",
+        permanent: true,
+      },
+      {
+        source: "/blog/performance-max-campaigns-guide",
+        destination: "/blog/performance-max-vs-standard-google-ads-which-should-you-run",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-ads-for-pet-groomers-in-tampa-fl",
+        destination: "/blog/google-ads-for-pet-groomers-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-ads-for-pet-groomers-in-mesa-az",
+        destination: "/blog/google-ads-for-pet-groomers-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-ads-for-pet-groomers-in-seattle-wa",
+        destination: "/blog/google-ads-for-pet-groomers-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-ads-for-hair-salons-in-tampa-fl",
+        destination: "/blog/google-ads-for-hair-salons-complete-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-ads-for-hair-salons-in-raleigh-nc",
+        destination: "/blog/google-ads-for-hair-salons-complete-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-ads-for-coffee-shops-in-san-francisco-ca",
+        destination: "/blog/google-ads-for-coffee-shops-complete-2026-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/marketing-automation-for-local-pet-groomers-with-constant-contact",
+        destination: "/blog/pet-groomer-marketing-with-constant-contact",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-sgE-impact-local-business",
+        destination: "/blog/google-ai-mode-local-seo-2026",
+        permanent: true,
+      },
+      {
+        source: "/blog/podcast-advertising-for-pet-groomers",
+        destination: "/blog/podcast-advertising-for-local-business-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/youtube-ads-for-small-business-is-it-worth-it-2026",
+        destination: "/blog/how-to-run-youtube-ads-for-local-business-step-by-step",
+        permanent: true,
+      },
+      {
+        source: "/blog/wolt-for-dark-kitchens-guide-europe",
+        destination: "/blog/wolt-ads-restaurant-guide-europe",
+        permanent: true,
+      },
+      {
+        source: "/blog/website-conversion-local-business-europe",
+        destination: "/blog/website-conversion-rate-optimization",
+        permanent: true,
+      },
+      {
+        source: "/blog/pet-groomer-instagram-marketing-tips",
+        destination: "/blog/pet-groomers-guide-to-instagram-marketing",
+        permanent: true,
+      },
+      {
+        source: "/blog/personalized-facebook-ads-for-hair-salons",
+        destination: "/blog/hair-salon-facebook-ads-strategy",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
