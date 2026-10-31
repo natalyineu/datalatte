@@ -666,6 +666,111 @@ const nextConfig: NextConfig = {
         destination: "/blog/pet-groomer-email-marketing",
         permanent: true,
       },
+      {
+        source: "/blog/how-do-i-attract-customers-to-my-coffee-shop-complete-guide-for-2026",
+        destination: "/blog/coffee-shop-marketing-ideas-30-strategies-to-fill-every-seat-in-2026",
+        permanent: true,
+      },
+      {
+        source: "/blog/how-to-market-a-coffee-shop-the-complete-2026-strategy-guide",
+        destination: "/blog/coffee-shop-marketing-ideas-30-strategies-to-fill-every-seat-in-2026",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-ads-for-hair-salons-in-honolulu-hi",
+        destination: "/blog/google-ads-for-hair-salons-complete-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-ads-for-hair-salons-in-dallas-tx",
+        destination: "/blog/google-ads-for-hair-salons-complete-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-ads-for-hair-salons-in-chicago-il",
+        destination: "/blog/google-ads-for-hair-salons-complete-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-ads-for-hair-salons-in-charlotte-nc",
+        destination: "/blog/google-ads-for-hair-salons-complete-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-ads-for-hair-salons-in-new-york-city-ny",
+        destination: "/blog/google-ads-for-hair-salons-complete-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-ads-for-hair-salons-in-las-vegas-nv",
+        destination: "/blog/google-ads-for-hair-salons-complete-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-ads-for-hair-salons-in-houston-tx",
+        destination: "/blog/google-ads-for-hair-salons-complete-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-ads-for-pet-groomers-in-atlanta-ga",
+        destination: "/blog/google-ads-for-pet-groomers-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/email-marketing-automation-for-fitness-studios",
+        destination: "/blog/marketing-automation-for-fitness-studios",
+        permanent: true,
+      },
+      {
+        source: "/blog/programmatic-advertising-for-fitness-studios",
+        destination: "/blog/fitness-studio-programmatic-advertising-tips",
+        permanent: true,
+      },
+      {
+        source: "/blog/ott-ads-for-pet-groomers",
+        destination: "/blog/ctv-ads-for-pet-groomers",
+        permanent: true,
+      },
+      {
+        source: "/blog/ott-ads-for-coffee-shops",
+        destination: "/blog/ott-advertising-local-business",
+        permanent: true,
+      },
+      {
+        source: "/blog/pet-groomer-social-media-management-for-local-businesses",
+        destination: "/blog/using-ai-for-pet-groomer-social-media-management",
+        permanent: true,
+      },
+      {
+        source: "/blog/using-ai-for-local-seo",
+        destination: "/blog/ai-for-local-seo-how-to-use-it",
+        permanent: true,
+      },
+      {
+        source: "/blog/programmatic-advertising-for-hair-salons",
+        destination: "/blog/hair-salon-programmatic-advertising",
+        permanent: true,
+      },
+      {
+        source: "/blog/using-ai-for-local-customer-support",
+        destination: "/blog/ai-agent-for-customer-service-local-business",
+        permanent: true,
+      },
+      {
+        source: "/blog/ai-powered-customer-relationship-management",
+        destination: "/blog/crm-for-small-business",
+        permanent: true,
+      },
+      {
+        source: "/blog/hair-salon-website-design",
+        destination: "/blog/website-design-for-hair-salons",
+        permanent: true,
+      },
+      {
+        source: "/blog/how-to-rank-higher-on-glovo-algorithm-tips",
+        destination: "/blog/glovo-promoted-listings-restaurants-guide",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",

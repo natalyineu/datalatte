@@ -1,124 +1,113 @@
 ---
-title: "Drilling Down into Data: A Guide to Analytics and Tracking for Local Businesses"
+title: "Local Business Analytics and Tracking: What to Measure"
 date: "2026-05-23"
-lastModified: "2026-06-02"
-description: "Unlock the secrets to local business success with DataLatte's expert guide to analytics and tracking."
+lastModified: "2026-10-31"
+description: "Track 4 things: calls, directions, form leads and campaign sources. How GA4 key events, UTM links and Business Profile data fit together for a local shop."
 author: "Nataliia"
 category: "Analytics & Tracking"
 tags: ["local business analytics", "tracking", "small business growth"]
 slug: "local-business-analytics-and-tracking"
 image: "https://images.unsplash.com/photo-1599058917765-a780eda07a3e?w=800&q=80&auto=format&fit=crop"
-readTime: '15 min read'
----
-As a local business owner, you're constantly juggling multiple responsibilities, from managing staff to keeping up with customers. But with so much on your plate, it's easy to overlook the most important thing: data. Without a solid grasp of your analytics and tracking, you're essentially flying blind, making decisions based on gut feelings rather than hard facts.
-
-Here's the harsh reality: 71% of small businesses don't track their website traffic, 63% don't monitor their social media engagement, and 55% don't even keep tabs on their customer email lists. Don't let your business fall into this category.
-
-Now that we've got your attention, let's dive into the world of local business analytics and tracking.
-
-### Understanding Your Customers
-
-To create effective marketing strategies, you need to understand your customers inside and out. This means knowing their demographics, preferences, and behaviors. But how do you gather this information? Start by setting up a customer relationship management (CRM) system, which will help you track customer interactions, including phone calls, emails, and in-store visits.
-
-### Setting Up Google Analytics
-
-Google Analytics is a powerful tool that helps you understand your website traffic, including the number of visitors, bounce rates, and conversion rates. To set it up, follow these simple steps:
-
-1. Create a Google Analytics account.
-2. Install the tracking code on your website.
-3. Set up goals and events to track specific actions, such as form submissions or purchases.
-
-### The Importance of Social Media Monitoring
-
-Social media is a vital channel for local businesses, but it's not just about posting updates and engaging with customers. You need to monitor your social media performance to understand what's working and what's not. Use tools like Hootsuite or Sprout Social to track your social media metrics, including engagement rates, follower growth, and reach.
-
-Here's a tip: Use social media listening tools to stay on top of customer conversations about your brand. This will help you address any issues promptly and improve your customer service.
-
-<Callout type="tip">Use social media listening tools to stay on top of customer conversations about your brand.</Callout>
-
-### Local SEO Strategies
-
-Local SEO is crucial for local businesses, as it helps you rank higher in search engine results pages (SERPs) for location-based searches. Here are some strategies to improve your local SEO:
-
-1. Optimize your Google Business Profile.
-2. Use location-specific keywords on your website.
-3. Create high-quality, location-based content.
-
-### The Power of Email Marketing
-
-Email marketing is a highly effective channel for local businesses, but it's often overlooked. Here's why you should prioritize email marketing:
-
-1. It's cost-effective.
-2. It allows for targeted messaging.
-3. It helps you build customer loyalty.
-
-## Related Articles
-
-- [Unlock Customer Insights with AI-Driven Analytics](/blog/ai-driven-customer-insights-for-local-businesses)
-- [Unlock Deeper Insights with AI-Powered Social Media Analytics for Local Businesses](/blog/ai-powered-social-media-analytics-for-local-businesses)
-- Google Analytics 4 Setup for Local Business: Step-by-Step 2026
-- [How to Set Up Google Analytics 4 for Your Local Business Website](/blog/google-analytics-4-setup-local-business)
-
-<Callout type="coffee">At DataLatte, we specialize in helping local businesses like yours succeed with analytics and tracking. If you want help applying these strategies, [contact us](/free-audit) for a free audit.</Callout>
-
+readTime: "8 min read"
 ---
 
-Don't let your business fall behind the competition. Take control of your analytics and tracking today with DataLatte's expert guidance.
+A local business needs to track four things: calls, direction requests, form or booking leads, and which campaign sent each. Google Business Profile reports calls, directions and website clicks. Google Analytics 4 records leads as key events. UTM tags on your links show the source. Together they answer which marketing brings people through the door.
 
-## Frequently Asked Questions
+This guide is for owners of shops, clinics, salons and studios with a website and a Google Business Profile. Examples are labelled as assumptions.
 
-**Q: I run a one-person shop. I don’t have time to check analytics. Why should I bother?**
+<StatRow
+  values="6 months|14 months|3|2 months"
+  labels="Business Profile data window in GA4|Longest GA4 event retention, standard property|UTM parameters you should always set|Shortest GA4 event retention choice"
+  subs="Google Analytics Help|Google Analytics Help|Google Analytics Help|Google Analytics Help"
+  trends="neutral|neutral|neutral|neutral"
+/>
 
-If you’re a solo operator, you have even less margin for waste. A plumber in Chicago was spending $200/month on Yelp ads he never tracked. He assumed it was working because he got a few calls.
+## What Should a Local Business Track?
 
-When he finally set up call tracking, he discovered 14 of the 18 calls were wrong numbers or people asking for a different company. He turned off the ads, saved $2,400 a year, and his actual revenue didn’t change.
+Track actions that lead to revenue, not page views. For most local businesses that means:
 
-That’s the upside for a busy owner: find the stuff that doesn’t work, stop doing it, and get those hours back.
+- Phone calls from the Business Profile and the website
+- Direction requests
+- Booking, quote or contact form submissions
+- The source of each: search, maps, ads, email, social
 
-**Q: Google Ads sounds complicated. Can’t I just run Facebook ads instead?**
+Start there before adding anything else. Our [data analytics guide for small business](/blog/data-analytics-for-small-business) goes into reporting habits once the basics are in place.
 
-You can, but Facebook’s targeting is weaker for local service businesses. Facebook knows who you are; Google knows what you want right now. If someone searches “emergency plumber Austin,” they need a plumber in that moment.
+## What Does Google Business Profile Report?
 
-A Facebook ad showing a plumber to someone who happens to live in Austin but isn’t searching for plumbing is a cold call. Both can work, but most local businesses get 2–3x better ROAS on Google than Facebook for the first six months.
+Google's help says performance data is available only for verified profiles. It reports views (unique people, counted once per day), searches that brought people to your profile, direction requests, calls (clicks on the call button, which needs a phone number on the profile) and website clicks. Directions are adjusted to filter out repeated taps, cancelled requests and spam.
 
-Test both at $200/month each for 60 days and let the data decide.
+Other metrics such as messages, bookings, menus and offers appear when they apply to your business type. Read our [Business Profile analytics guide](/blog/google-my-business-analytics) for how to read each one. Note that a call-button click is not the same as an answered call.
 
-**Q: I already have a Mailchimp list. Do I really need a CRM?**
+## How Do You Set Up Key Events in GA4?
 
-If your email list is under 1,000 subscribers and you’re not segmenting, Mailchimp is fine. The problem is most people don’t segment. A pet groomer in Nashville had 800 email addresses but was sending the same “monthly special” to everyone.
+Google defines a key event as an event that measures an action particularly important to the success of your business. Any event you collect can be marked as one. Typical choices for a local site are form submit, click on a phone number, click on a booking button and a thank-you page view.
 
-People who bought grooming packages got the same email as people who only bought dog food. Open rate was 19%. We segmented the list into “grooming clients” and “retail buyers.” Open rate for grooming promotions went to 34%. Revenue from email doubled within 90 days.
+Key events then appear as a column in reports such as Landing pages and User acquisition, and can be turned into Google Ads conversions. For setup steps, follow our [GA4 guide for small business](/blog/google-analytics-4-for-small-business), or use [Google Tag Manager](/blog/google-tag-manager-for-local-website-analytics) to fire events without editing site code.
 
-Mailchimp can do this—you just have to tag people when they buy.
+## How Do UTM Links Show Which Campaign Worked?
 
-**Q: Yelp feels like a scam. Do I need to pay for Yelp ads?**
+Add campaign parameters to links you control, such as emails, social bios and ads. Google says you should always use utm_source, utm_medium and utm_campaign. Values are case-sensitive, so utm_source=google and utm_source=Google are recorded as different sources. Missing parameters show as "(not set)" in reports.
 
-Depends on your industry. For restaurants, coffee shops, and hair salons, Yelp is still a top-5 discovery channel. For plumbers, electricians, and home services, Yelp has become a lead-gen machine that charges $10–$30 per click with no guarantee of a qualified lead.
+Pick one lower-case naming scheme and write it in a shared sheet. Example: utm_source=newsletter, utm_medium=email, utm_campaign=november-offer. Do not tag links inside your own site, only links that come from outside.
 
-I’ve seen a dentist in Denver spend $600/month on Yelp ads for six months and generate exactly three booked appointments. That’s $1,200 per appointment. If your business lives or dies by reviews, claim your free Yelp page and ignore the upsell calls.
+## Can You See Business Profile Data in Google Analytics?
 
-Pay for ads only if you can track a phone call or online booking back to a specific ad.
+Yes. Google Analytics Help describes a link under Admin, Product links, Google Business Profile links. You need the Editor or Administrator role on the property and Owner or Manager permission on each profile. The shared metrics are interactions, website clicks, calls, directions, messages, bookings and menus.
 
-**Q: I don’t have a website. Can I still track customers?**
+Limits apply. Only the last six months are available, multiple linked profiles are combined and cannot be split, and the data cannot be used in custom explorations. Export monthly figures to a sheet if you want longer history.
 
-Yes. Use your POS system and a Google My Business page. Set up Google My Business with your correct hours, photos, and a link to online booking if you have one. Then track which customers mention “I found you on Google” during checkout. Write it down. Even a notebook on the counter beats nothing.
+## Which Settings Protect Your Data History?
 
-A bakery in Austin used this method for six months until they built a website. They discovered 40% of new customers came from Google, which was enough to justify a $500 website investment.
+GA4 lets you choose event data retention of 2 months or 14 months on standard properties, and the page does not state the default. Check the setting under Admin, then Data settings, and pick 14 months if you want year-over-year views in explorations. Shortening retention deletes older data in the next monthly process.
 
-**Q: How much should I spend on analytics tools if my revenue is under $100k?**
+For on-page behaviour, Microsoft's Clarity documentation lists session recordings and heatmaps, which show where visitors click and scroll.
 
-Less than $100/month. Free tools work for most of what you need: Google Analytics for your website, Google My Business for local search, your POS system reports, and a simple spreadsheet.
+## How Do You Calculate Cost per Lead? A Worked Example
 
-If you want to upgrade, spend $30/month on a call tracking number and $50/month on a tool like $99 per month for something like NinjaCat or a lightweight CRM like Pipedrive. Anything beyond that is overkill until you’re at $200k+ revenue.
+All numbers are **assumptions** for a salon spending on a local ad campaign.
 
----
+| Input | Value |
+| --- | --- |
+| Monthly ad spend | $400 |
+| Calls from Business Profile and site | 18 |
+| Form leads | 12 |
+| Total leads | 30 |
+| Cost per lead | about $13.33 |
+| Share of leads who book (assumption) | 50% |
+| Cost per booking | about $26.67 |
 
-## Closing
+If a booking is worth $60 in gross profit, each one leaves about $33 before overheads. Compare this to your Business Profile calls in the same month to see whether ads add leads or only claim ones you would have won anyway. Our [local SEO KPI guide](/blog/how-to-measure-local-seo-success-kpis) shows how to track that.
 
-I’ve sat in conference rooms at GroupM where we spent $50,000 on attribution modeling for a single client. The fix for most local businesses is not a $50,000 platform. It’s looking at the data you already own and being honest about what it tells you.
+<Callout type="tip" title="Do This Today">
+Mark your form submission and phone-click events as key events in GA4, then write down this month's Business Profile calls and directions for comparison.
+</Callout>
 
-I watched a coffee shop in Denver double its revenue in four months just by adding a loyalty program and checking the Square reports it already paid for. That’s not a fancy marketing strategy. That’s just paying attention.
+## FAQ
 
-The businesses that win are the ones willing to look at the number that makes them uncomfortable—and then change something.
+### What is the most important metric for a local business?
 
-If you want me to look at your numbers with you, no jargon, no upsell—just a real conversation about what’s working and what’s burning cash—[Book a free consultation](/free-audit).
+Leads that turn into customers. Count calls, direction requests and form submissions, then track how many become paying customers.
+
+### How long does GA4 keep my data?
+
+Event data retention can be set to 2 months or 14 months on standard properties. Age, gender and interest data always use 2 months.
+
+### What happens if I forget UTM tags?
+
+Traffic from those links shows "(not set)" for the missing values, so you cannot tell which email or post sent it.
+
+### Can I track phone calls?
+
+You can see call-button clicks in Business Profile and track phone-number clicks on your site as key events. Calls made after copying a number need call tracking software, which this guide does not cover.
+
+## Sources
+
+- [Google Analytics Help: Data retention](https://support.google.com/analytics/answer/7667196)
+- [Google Analytics Help: Key events](https://support.google.com/analytics/answer/9267568)
+- [Google Analytics Help: Collect campaign data with custom URLs](https://support.google.com/analytics/answer/10917952)
+- [Google Analytics Help: Connect Google Business Profile to Google Analytics](https://support.google.com/analytics/answer/16930347)
+- [Google Business Profile Help: Understand your performance and insights](https://support.google.com/business/answer/9918094)
+- [Microsoft Learn: Clarity documentation](https://learn.microsoft.com/en-us/clarity/) (feature list only)
+
+Want tracking set up properly? See our [analytics service](/services/analytics) or [book a free audit](/free-audit).
