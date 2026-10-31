@@ -1,8 +1,8 @@
 ---
-title: Why Your Small Business Website Needs HTTPS (And How to Get It Free)
+title: "Website SSL and HTTPS for Small Business: Get It Free"
 date: "2026-05-12"
-lastModified: "2026-06-02"
-description: "Protect your small business website with HTTPS and boost customer trust. Learn why HTTPS matters and how to get it for free."
+lastModified: "2026-10-31"
+description: "Chrome 154 (Oct 2026) warns before opening public HTTP sites by default. Why a small business site needs HTTPS and how to get it free, in 5 steps."
 author: "Nataliia"
 category: "Website & CRO"
 tags: ["website ssl https small business"]
@@ -10,131 +10,103 @@ slug: "website-ssl-https-why-it-matters"
 image: "https://images.unsplash.com/photo-1534368959876-26bf84f823b4?w=800&q=80&auto=format&fit=crop"
 readTime: '13 min read'
 ---
-**Your website is like a digital storefront. But is it welcoming your customers?**
 
-Many small business owners think their website is secure, but the truth is, a staggering 30% of websites are still using outdated HTTP protocols. This can lead to a 14% drop in search engine rankings and a 10% increase in bounce rates. Meanwhile, 75% of online consumers admit to avoiding websites with 'not secure' warnings.
+Every small business website should run on HTTPS, and it should cost nothing. Google's Chrome 154, scheduled for October 2026, turns on "Always Use Secure Connections" by default, so visitors get a warning dialog before opening a public site without HTTPS. Free certificates are available from Let's Encrypt and are built into many website builders.
 
-**Why HTTPS Matters for Small Businesses**
+This guide explains what HTTPS does, what it does and does not do for search rankings, how to get it for free and what breaks after the switch. Facts come from Google, Let's Encrypt and Squarespace documentation listed at the end. The example is labelled as an assumption.
 
-HTTPS (Hypertext Transfer Protocol Secure) is the secure version of HTTP. It encrypts data between your website and your customers' browsers, ensuring their sensitive information remains protected. This is especially crucial for small businesses handling sensitive data, such as:
+<StatRow
+  values="Chrome 154|95-99%|Free|90 days"
+  labels="Version that makes secure-connection warnings the default (Oct 2026)|Share of Chrome page loads over HTTPS around 2020|Let's Encrypt certificate price|Default Let's Encrypt certificate validity"
+  subs="Google Chrome security blog, Oct 28 2025|Google Chrome security blog|Let's Encrypt|Let's Encrypt FAQ"
+  trends="neutral|up|neutral|neutral"
+/>
 
-* Online payments and transactions
-* User credentials and login information
-* Personal data and contact information
+## What Does Chrome Do With Sites Without HTTPS?
 
-**The Benefits of HTTPS**
+Google's post of October 28, 2025 says Chrome 147 (April 2026) enabled the public-sites version of "Always Use Secure Connections" for users of Enhanced Safe Browsing, and Chrome 154 (October 2026) makes it the default for everyone. Before opening a public site that lacks HTTPS, Chrome shows a warning that attackers could view or change information sent or received, with "Continue to site" and "Return" buttons.
 
-HTTPS offers numerous benefits for small businesses, including:
+Chrome does not repeat the warning for sites a visitor opens regularly, and users can turn the setting off. Still, a first-time customer finding your cafe or salon through search could meet a warning page. Google's own testing found the median user saw fewer than one warning a week, which shows how rare insecure sites have become.
 
-* Improved search engine rankings and visibility
-* Increased customer trust and loyalty
-* Enhanced security and protection against cyber threats
-* Better protection against phishing and man-in-the-middle attacks
+| Chrome version | Date | Change |
+| --- | --- | --- |
+| 147 | April 2026 | Warning on for Enhanced Safe Browsing users |
+| 154 | October 2026 | Warning on by default for all users |
 
-**Getting HTTPS for Free**
+## Does HTTPS Help Your Google Rankings?
 
-You don't need to break the bank to get HTTPS for your small business website. Here are a few options:
+Not much, and Google says so. Its page experience documentation lists "Are your pages served in a secure fashion?" as a self-assessment question, but states that beyond Core Web Vitals, other page experience aspects do not directly help a site rank higher. Google announced HTTPS as a lightweight signal in 2014, though the current documentation is the better guide.
 
-* **Let's Encrypt**: A free, automated SSL certificate provider that issues certificates in minutes.
-* **Cloudflare**: A content delivery network (CDN) that offers free SSL certificates and other security features.
-* **Google's Site Kit**: A free plugin that offers SSL certificates and other security features for WordPress websites.
+So treat HTTPS as a trust and safety basic, not a ranking trick. The practical risk is lost visitors and lost form submissions when a browser warns people away. Search Console also has an HTTPS report that shows which pages are served securely. Pair this with the basics in our [Google Business Profile checklist](/blog/google-business-profile-optimization-checklist), since both affect first impressions.
 
-**Setting Up HTTPS**
+## How Do You Get HTTPS for Free?
 
-Setting up HTTPS is a straightforward process. Here are the general steps:
+Check your host first, because many include it. Squarespace says all domains correctly pointing to a Squarespace site get free SSL certificates automatically, and the update can take up to 48 hours. Other builders and hosts have their own help pages, and the sources here do not cover them, so check yours.
 
-1. **Obtain an SSL certificate**: Choose a provider and follow their instructions to obtain an SSL certificate.
-2. **Install the certificate**: Install the certificate on your website's server.
-3. **Update your website**: Update your website's configuration to use the new HTTPS protocol.
-4. **Test your website**: Test your website to ensure it's working correctly over HTTPS.
+If you run your own hosting, Let's Encrypt is a nonprofit certificate authority that charges no fee for certificates. Default certificates last 90 days and should be renewed about every 60 days, which is normally automated. Its FAQ notes that hosting providers who integrate Let's Encrypt may charge a small fee for their own management costs, so ask what you are paying for.
 
-<Callout type="tip">Tip: Make sure to update all internal links to use HTTPS to avoid any issues with search engine rankings.</Callout>
+1. Ask your host whether SSL is included and whether it is switched on.
+2. Turn on the secure option and wait for provisioning to finish.
+3. Make HTTP addresses redirect to HTTPS.
+4. Check every page for mixed content.
+5. Update links in your Business Profile, ads and email signatures.
 
-**Common HTTPS Mistakes to Avoid**
+## What Is Mixed Content and How Do You Fix It?
 
-While setting up HTTPS is relatively straightforward, there are some common mistakes to avoid:
+Mixed content happens when a page loads over HTTPS but some images, scripts or stylesheets still load over HTTP. Web.dev explains that active content such as scripts can let attackers take control of the page, and that most browsers block it. Chrome may upgrade images to HTTPS if a secure version exists, and if not, the asset does not load.
 
-* **Not updating internal links**: Failing to update internal links can lead to search engine ranking drops and other issues.
-* **Not testing your website**: Failing to test your website after setting up HTTPS can lead to issues with security and functionality.
-* **Not using a trusted SSL certificate**: Using a non-trusted SSL certificate can lead to security issues and decreased customer trust.
+The fix is to change hard-coded HTTP addresses to HTTPS, check the browser developer tools for blocked items and remove any asset that has no secure version. Squarespace notes that with the secure setting, visitors can see browser warnings when custom code or integrations load insecure content, and that fixing this is the site owner's job.
 
-<Callout type="warning">Warning: Make sure to use a trusted SSL certificate to avoid any security issues.</Callout>
+Also be careful with HSTS. Squarespace warns that turning it off can block access for visitors until their policy expires, which can take up to 48 hours.
 
-**Example: HTTPS in Action**
+## A Worked Example
 
-Take, for example, a small coffee shop in downtown Los Angeles. They recently set up HTTPS on their website to improve customer trust and security. As a result, they saw a 20% increase in online orders and a 15% increase in customer loyalty.
+All numbers are **assumptions**, not data.
 
-<Callout type="example">Example: Coffee shop in downtown LA sees 20% increase in online orders and 15% increase in customer loyalty after setting up HTTPS.</Callout>
+| Input | Assumption |
+| --- | --- |
+| Monthly visitors from search | 1,000 |
+| Share who see a security warning | 10% |
+| Share of those who leave | 50% |
+| Booking conversion of other visitors | 3% |
 
-**Frequently Asked Questions**
+On these assumptions, 100 visitors see a warning and 50 leave. At a 3% booking rate, those 50 would have produced about 1.5 bookings a month. At $60 per booking that is $90 a month lost, for a fix that costs nothing in most cases. The sources give no real figure for how many visitors leave at a warning, so test your own site instead of trusting this number.
 
-**Q: What is HTTPS and why do I need it?**
-A: HTTPS is the secure version of HTTP. It encrypts data between your website and your customers' browsers, ensuring their sensitive information remains protected.
+If you also want to see how visitors behave on your site, our guide to [Microsoft Clarity free heatmaps](/blog/microsoft-clarity-small-business-free-heatmaps) shows one free way. For conversion work, see [using AI for website CRO](/blog/using-ai-for-website-cro).
 
-**Q: How do I set up HTTPS on my website?**
-A: You can set up HTTPS by obtaining an SSL certificate from a provider like Let's Encrypt or Cloudflare, installing the certificate on your website's server, and updating your website's configuration to use the new HTTPS protocol.
+<Callout type="tip" title="Do This Today">
+Type your address with http:// at the start. If it does not jump to https:// and show a padlock, ask your host to turn SSL on.
+</Callout>
 
-**Q: What are the benefits of HTTPS for small businesses?**
-A: The benefits of HTTPS for small businesses include improved search engine rankings and visibility, increased customer trust and loyalty, enhanced security and protection against cyber threats, and better protection against phishing and man-in-the-middle attacks.
+## FAQ
 
-**Q: Can I get HTTPS for free?**
-A: Yes, you can get HTTPS for free using providers like Let's Encrypt or Cloudflare.
+### Is HTTPS free?
 
-**Q: How do I test my website after setting up HTTPS?**
-A: You can test your website by visiting it in a browser and checking that it loads correctly over HTTPS. You can also use tools like Google PageSpeed Insights to check for any issues.
+Let's Encrypt certificates are free, and some hosts include SSL at no extra cost, such as Squarespace for correctly connected domains. Some providers charge a management fee.
 
-**Get Help Applying HTTPS to Your Small Business Website**
+### Is SSL the same as HTTPS?
 
-At DataLatte, we specialize in helping small businesses like yours improve their online presence and security. If you're struggling to set up HTTPS or need help implementing other security features, contact us for a free audit.
+HTTPS is the secure web address scheme. SSL is the older name for the certificate technology behind it, now replaced by TLS, though people still say SSL.
 
-## Frequently Asked Questions
+### Will HTTPS improve my Google ranking?
 
-**Q: "I'm a coffee shop. I don't handle credit cards on my site. Do I really need HTTPS?"**
+Google says other page experience aspects beyond Core Web Vitals do not directly help rankings. Expect trust benefits, not a ranking jump.
 
-Short answer: yes. Even if you don't take payments, you still collect data. Contact form submissions. Email signups. Newsletter subscriptions. That's all personal data. Plus, Google penalizes HTTP sites in search results — that means fewer people find you when they search "coffee shop near me." The "Not Secure" warning in the browser makes people leave before they even read your menu. You need HTTPS for trust, not just payments.
+### How long does setup take?
 
-**Q: "My web developer said I need to pay $100/year for an SSL certificate. Is that real?"**
+Squarespace says up to 48 hours for changes to complete. Other hosts vary.
 
-No, unless you need a specific Extended Validation (EV) certificate (you don't). Let's Encrypt is free and works fine for 99% of small businesses. Your hosting provider might have a free option built in. If they're charging you $100, they're either on an old reseller plan or they're selling you something you don't need. Ask them to use Let's Encrypt or switch to a host that offers it free.
+### Do I need to renew the certificate?
 
-**Q: "I moved to HTTPS and my site broke — the images don't load and the layout is weird. What did I do wrong?"**
+Let's Encrypt certificates last 90 days by default and are normally renewed automatically. Most website builders handle renewal for you.
 
-You've got mixed content. Your page is loading over HTTPS, but it's trying to load images, scripts, or fonts over HTTP. Browsers block these for security reasons. Use a free tool like Why No Padlock (whynopadlock.com) to find the broken elements.
+## Sources
 
-Fix the URLs in your site's database — a plugin like Better Search Replace can do this in minutes if you're on WordPress. If you didn't backup before the move, you should have. But it's fixable.
+- [Google Chrome security blog: HTTPS by default (Oct 28, 2025)](https://blog.google/security/https-by-defau/)
+- [Google Search Central: Understanding page experience](https://developers.google.com/search/docs/appearance/page-experience)
+- [Let's Encrypt: About](https://letsencrypt.org/about/)
+- [Let's Encrypt: FAQ](https://letsencrypt.org/docs/faq/)
+- [Squarespace Help: Squarespace and SSL certificates](https://support.squarespace.com/hc/en-us/articles/205815898-Squarespace-and-SSL-certificates)
+- [web.dev: What is mixed content?](https://web.dev/articles/what-is-mixed-content)
 
-**Q: "Does HTTPS slow down my site?"**
-
-Negligibly. The initial SSL handshake adds maybe 50-200 milliseconds on the first visit. That's less than the blink of an eye. Modern protocols (TLS 1.3, HTTP/2) actually make HTTPS faster than HTTP for repeat visitors because they allow multiplexing — loading multiple files simultaneously. The security benefit far outweighs any tiny speed difference. Anyone telling you HTTPS slows down your site is repeating outdated advice from 2015.
-
-**Q: "I have a simple one-page site that just has my address and phone number. No forms, no orders. Still need HTTPS?"**
-
-Technically, you don't need encryption for static content. But Google still ranks HTTPS over HTTP. If someone searches your business name, the competitor with HTTPS will rank higher just for having that signal. Plus, 75% of consumers avoid "Not Secure" sites — they'll think you're out of business or sketchy.
-
-A one-pager is the easiest site to move to HTTPS. There's zero reason not to. You can do it in 10 minutes.
-
-**Q: "I use Wix/Squarespace/Shopify — isn't HTTPS already handled?"**
-
-Yes, those platforms include free SSL on all custom domains. But you need to make sure it's turned on. In Wix, go to Settings > Domains and verify SSL is enabled. In Squarespace, it's automatic. In Shopify, it's automatic.
-
-The mistake people make is using a third-party domain (like yourname.com) that they bought elsewhere and didn't connect properly — the SSL might work on your Shopify store but not on the main domain redirect. Test by typing "https://yourname.com" into a browser. If you get a warning, fix the domain connection.
-
----
-
-I spent years at GroupM running seven-figure campaigns where a $50 SSL certificate was a rounding error. Nobody thought about it. But the small businesses I work with now — the ones who are fighting for every customer — can't afford to lose 14% of their search traffic because of a $0 fix.
-
-Here's what actually happened with that Nashville pet groomer I mentioned: after we fixed the expired certificate, she saw a 22% increase in phone calls over the next month. She didn't change her ads. She didn't change her pricing. She didn't change her website content. She just stopped scaring people away.
-
-That's the most expensive mistake I see — spending money to bring people to your site and then making them leave because of a technical detail you didn't know about.
-
-If you want me to check whether your site is losing traffic right now because of an HTTPS issue, I'll do it for free. No pitch, no contract. I'll run the scan and send you a list of what's broken. Most small business owners are surprised at what they find.
-
-[Book a free consultation](/free-audit)
-
-## Related Articles
-
-- [A/B Testing for Local Business Websites: Double Your Conversion Rate](/blog/a-b-testing-for-local-business)
-- [Above the Fold Design for Local Businesses: What Visitors See First Decides Everything](/blog/above-the-fold-design-local-business)
-- [Elevate Your Coffee Shop Website with AI-Driven Optimization Strategies](/blog/ai-driven-website-optimization-for-coffee-shops)
-- AI-Powered Website Personalization: Elevating the Local Business Experience
-- Booking Form Optimization: Reduce Friction and Get More Submissions
+Need your site fixed and checked? See our [website service](/services/website) or [book a free audit](/free-audit).

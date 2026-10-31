@@ -591,6 +591,81 @@ const nextConfig: NextConfig = {
         destination: "/blog/hair-salon-facebook-ads-strategy",
         permanent: true,
       },
+      {
+        source: "/blog/google-ads-for-pet-groomers-in-las-vegas-nv",
+        destination: "/blog/google-ads-for-pet-groomers-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-ads-for-pet-groomers-in-honolulu-hi",
+        destination: "/blog/google-ads-for-pet-groomers-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-ads-for-pet-groomers-in-anchorage-ak",
+        destination: "/blog/google-ads-for-pet-groomers-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-ads-for-hair-salons-in-atlanta-ga",
+        destination: "/blog/google-ads-for-hair-salons-complete-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-ads-for-hair-salons-in-san-francisco-ca",
+        destination: "/blog/google-ads-for-hair-salons-complete-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/ctv-ads-for-yoga-studios",
+        destination: "/blog/ctv-ads-for-fitness-studios",
+        permanent: true,
+      },
+      {
+        source: "/blog/ai-powered-local-seo-tips",
+        destination: "/blog/ai-for-local-seo-how-to-use-it",
+        permanent: true,
+      },
+      {
+        source: "/blog/website-blog-for-local-business-seo",
+        destination: "/blog/blog-content-strategy-local-business",
+        permanent: true,
+      },
+      {
+        source: "/blog/ai-powered-chatbots-for-hair-salons",
+        destination: "/blog/ai-agents-for-hair-salons",
+        permanent: true,
+      },
+      {
+        source: "/blog/voice-ai-agent-local-business-phone-calls",
+        destination: "/blog/retell-ai-vs-vapi-local-business-comparison",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-business-profile-optimization-for-coffee-shops",
+        destination: "/blog/google-business-profile-coffee-shop-tips",
+        permanent: true,
+      },
+      {
+        source: "/blog/programmatic-advertising-for-local-business-beginners-guide",
+        destination: "/blog/programmatic-advertising-for-small-business-is-it-accessible-now",
+        permanent: true,
+      },
+      {
+        source: "/blog/programmatic-advertising-for-small-businesses",
+        destination: "/blog/programmatic-advertising-for-small-business-is-it-accessible-now",
+        permanent: true,
+      },
+      {
+        source: "/blog/local-influencer-marketing",
+        destination: "/blog/micro-influencer-marketing-local-business",
+        permanent: true,
+      },
+      {
+        source: "/blog/email-marketing-for-pet-groomers-keep-clients-booking",
+        destination: "/blog/pet-groomer-email-marketing",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
