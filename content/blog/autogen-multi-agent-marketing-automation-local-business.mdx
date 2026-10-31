@@ -1,308 +1,95 @@
 ---
-title: "AutoGen Multi-Agent Marketing Automation"
+title: "AutoGen Multi-Agent Marketing: Still Worth Using?"
 date: "2026-06-13"
-lastModified: "2026-06-13"
-description: "Use Microsoft AutoGen agents to draft review responses and compile weekly marketing reports for a local business, with two patterns and Python code."
+lastModified: "2026-10-30"
+description: "Microsoft AutoGen is archived and points new users to Agent Framework. What it means for review replies and reports, with a $0.21 vs $0.07 cost example."
 author: "Nataliia"
 category: "AI & Automation"
 tags: ["AutoGen", "multi-agent", "marketing automation", "local business"]
 slug: "autogen-multi-agent-marketing-automation-local-business"
 image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80&auto=format&fit=crop"
-readTime: "11 min read"
+readTime: "7 min read"
 ---
 
-Most automation tools run one task at a time. You generate your review responses. Then you create social posts. Then you compile your weekly report. Each task is isolated, and nothing learns from anything else.
+Microsoft's AutoGen repository now says the project is archived and no longer actively maintained, and tells new users to start with Microsoft Agent Framework. So a local business starting a multi-agent marketing workflow in 2026 should not begin with AutoGen. For simple jobs such as replying to reviews or compiling a weekly report, a single agent with a clear prompt is usually enough, and cheaper.
 
-Microsoft AutoGen takes a different approach: multiple AI agents that *talk to each other*, challenge each other's work, and collaborate until they produce the best output. A critic agent reviews what the writer agent produces. A data agent pulls the numbers that the analyst agent interprets. The result is better than any single agent could achieve alone.
+This page covers what AutoGen is, what changed, when several agents are worth the extra cost, and a token-cost example. It contains no tested benchmark, because none is published for these tasks.
 
-For local businesses, this translates into a marketing automation system that runs like a small (very cheap) team.
+<StatRow
+  values="Archived|MIT|Python 3.10+|3x"
+  labels="AutoGen repository status|AutoGen code license|AutoGen AgentChat requirement|Model calls in a writer-critic-writer loop (assumption)"
+  subs="GitHub README|GitHub README|AutoGen docs|Worked example below"
+  trends="down|neutral|neutral|up"
+/>
 
-## What AutoGen Is
+## What Is AutoGen and What Is Its Status?
 
-AutoGen is an open-source Python framework from Microsoft Research. The core idea: define multiple agents, each with a name, role, and capabilities. They exchange messages in a conversation until a task is complete.
+AutoGen is an open-source framework for building AI agents. Its documentation lists four parts: AgentChat for conversational single and multi-agent apps, Core for event-driven multi-agent systems, Extensions for connections to outside services, and Studio, a web interface for prototyping.
 
-Two core patterns:
-- **Two-agent chat**: One agent makes, the other critiques. Iterates until quality threshold is met.
-- **Group chat**: Multiple specialist agents collaborate on a complex task.
+The repository README now says the project is archived and in maintenance mode, limited to fixes and docs. It describes Microsoft Agent Framework as the enterprise-ready successor. That framework supports Python and C#/.NET, and a migration guide for AutoGen users is linked from its page.
 
-AutoGen works with any OpenAI-compatible API, including Anthropic via the compatibility endpoint, OpenRouter, and local models via Ollama.
+## What Are Multi-Agent Workflows For?
 
-## Installation
+In a multi-agent setup, one agent drafts, another checks, and a coordinator decides when to stop. For a local business that could mean a writer agent drafting a reply to a Google review and a critic agent checking tone and length before you see it. A second pattern splits a weekly report between a data agent, a reviews agent and a social agent.
 
-```bash
-pip install pyautogen python-dotenv
-```
+That structure helps when tasks have separate steps, tools or checks. It adds cost and complexity when one clear prompt would do the job. Start with one agent and add a second only after you see a repeatable error that a checker could catch.
 
-## Pattern 1: Two-Agent Review Response System
+## How Much More Does a Second Agent Cost?
 
-A common local business pain point: responding to all Google reviews takes 20-30 minutes per week, and responses often sound rushed or generic.
+Every extra agent turn is another model call. The example uses Claude Haiku 5.5's list prices of $0.10 per million input tokens and $0.50 per million output tokens (prompts up to 100K tokens).
 
-AutoGen's two-agent pattern: a **writer** drafts the response, a **critic** checks it for tone, accuracy, and helpfulness, then the writer revises. You only see the final output.
+The inputs are **assumptions**.
 
-```python
-import autogen
+| Input | Value |
+| --- | --- |
+| Review replies a month | 200 |
+| Input per call | 1,500 tokens |
+| Output per call | 400 tokens |
+| Single agent | 1 call per reply |
+| Writer, critic, revision | 3 calls per reply |
 
-config_list = [
-    {
-        "model": "claude-haiku-4-5-20251001",
-        "api_key": "YOUR_ANTHROPIC_API_KEY",
-        "base_url": "https://api.anthropic.com/v1",
-        "api_type": "anthropic",
-    }
-]
+| Setup | Tokens | Cost |
+| --- | --- | --- |
+| Single agent | 300,000 in, 80,000 out | 0.3 x $0.10 + 0.08 x $0.50 = about $0.07 |
+| Three-call loop | 900,000 in, 240,000 out | 0.9 x $0.10 + 0.24 x $0.50 = about $0.21 |
 
-llm_config = {"config_list": config_list, "temperature": 0.4}
+The loop costs three times as much but is still cents per month at this volume. In practice later calls carry more context, so the real figure is higher. The bigger cost is your time reviewing output. Our guide to [AI agents for Google review management](/blog/ai-agent-for-google-reviews-management) covers what to approve yourself.
 
-# The writer agent drafts responses
-response_writer = autogen.AssistantAgent(
-    name="ReviewResponseWriter",
-    system_message="""You write professional, warm Google review responses for The Loft Hair Studio.
-Rules:
-- Always thank the reviewer by name
-- Acknowledge specific details they mentioned
-- For 5-stars: celebrate their kind words, invite them back
-- For 3-4 stars: acknowledge the concern, explain what changed or how you'll improve
-- For 1-2 stars: apologize sincerely, offer to make it right, provide direct contact
-- Keep responses 3-5 sentences
-- Never be defensive or argumentative
-- Sign off as: Maya | The Loft Hair Studio Team""",
-    llm_config=llm_config,
-)
+## How Do You Install It Today?
 
-# The critic agent checks each response
-response_critic = autogen.AssistantAgent(
-    name="ReviewResponseCritic",
-    system_message="""You review AI-drafted Google review responses for quality.
-Check for:
-1. Does it use the reviewer's name?
-2. Does it mention specific details from the review?
-3. Is it warm but professional (not overly salesy)?
-4. Is it the right length (3-5 sentences)?
-5. For negative reviews: does it offer a path to resolution?
+The AutoGen README gives the install commands for AgentChat: `pip install -U "autogen-agentchat" "autogen-ext[openai]"`. Microsoft Agent Framework installs for Python with `pip install agent-framework` and for .NET with `dotnet add package Microsoft.Agents.AI`. Both are MIT-licensed.
 
-If the response passes all checks, say "APPROVED: [response]"
-If it needs changes, say "REVISION NEEDED: [specific feedback]" and the writer will try again.
-Maximum 2 revision rounds.""",
-    llm_config=llm_config,
-)
+This page includes no runnable code, because the older `pyautogen` examples found in many tutorials use an earlier version of the API than the current `autogen-agentchat` package. Follow the official docs for the version you install, and test with fake review text before connecting real accounts.
 
-# Human proxy to initiate and end conversations
-user_proxy = autogen.UserProxyAgent(
-    name="Manager",
-    human_input_mode="NEVER",
-    max_consecutive_auto_reply=5,
-    is_termination_msg=lambda x: "APPROVED:" in x.get("content", ""),
-    code_execution_config=False,
-)
+## What Should You Use Instead?
 
-def generate_review_response(review_text: str, star_rating: int, reviewer_name: str) -> str:
-    """Generate a polished review response using two AutoGen agents."""
-    
-    task = f"""
-Please write a Google review response for this review:
+For a first automation, a single scheduled script that drafts replies for your approval is simpler than any agent framework. Our [Google review auto-reply script](/blog/ai-agent-google-reviews-auto-reply-script) shows that approach. If you later need agents that call tools, hand off tasks or run for long periods, evaluate Microsoft Agent Framework or another framework.
 
-Reviewer: {reviewer_name}
-Stars: {star_rating}/5
-Review: "{review_text}"
-"""
-    
-    user_proxy.initiate_chat(
-        response_writer,
-        message=task,
-        max_turns=6,
-    )
-    
-    # Extract the approved response from conversation history
-    for msg in reversed(user_proxy.chat_messages[response_writer]):
-        if "APPROVED:" in msg.get("content", ""):
-            return msg["content"].replace("APPROVED:", "").strip()
-    
-    # Fallback to last writer message
-    for msg in reversed(user_proxy.chat_messages[response_writer]):
-        if msg.get("role") == "assistant":
-            return msg["content"]
-    
-    return "Thank you for your feedback!"
+Before you commit to any tool, check three things: whether it is maintained, what data it sends to the model provider, and who approves each message before it is published. For definitions, see [AI agent vs chatbot](/blog/ai-agent-vs-chatbot-whats-the-difference-local-business) and [how AI agents work for local businesses](/blog/ai-agents-for-local-business-what-they-are-and-how-they-work). To watch agents in production, read about [AgentOps](/blog/agentops-monitor-debug-ai-agents-local-business).
 
-# Example usage
-if __name__ == "__main__":
-    response = generate_review_response(
-        review_text="Sarah was amazing! She really listened to what I wanted for my highlights and the result was exactly what I had in mind. The salon is so cozy too.",
-        star_rating=5,
-        reviewer_name="Jennifer K."
-    )
-    print("Final Response:", response)
-```
-
-## Pattern 2: Marketing Report GroupChat
-
-Every Monday morning you want a digest: last week's bookings, top reviews, social performance, and this week's recommendations. AutoGen GroupChat with 4 specialist agents handles this automatically.
-
-```python
-import autogen
-from datetime import datetime, timedelta
-
-config_list = [{"model": "claude-haiku-4-5-20251001", "api_key": "YOUR_ANTHROPIC_API_KEY", "api_type": "anthropic"}]
-llm_config = {"config_list": config_list}
-
-# Agent 1: Data Analyst — summarizes the numbers
-data_analyst = autogen.AssistantAgent(
-    name="DataAnalyst",
-    system_message="You summarize business metrics. When given raw data, extract key insights: top services, revenue trends, busiest days, comparison to last week. Be concise with numbers.",
-    llm_config=llm_config,
-)
-
-# Agent 2: Reputation Manager — handles review insights
-reputation_manager = autogen.AssistantAgent(
-    name="ReputationManager",
-    system_message="You analyze customer reviews. Identify sentiment trends, recurring praises, recurring complaints, and suggest 1-2 specific improvements based on feedback patterns.",
-    llm_config=llm_config,
-)
-
-# Agent 3: Content Strategist — plans the week's social content
-content_strategist = autogen.AssistantAgent(
-    name="ContentStrategist",
-    system_message="You create a 5-post social media plan for Instagram. Base it on the week's services, seasonal trends, and any promotions. Provide caption drafts for each post.",
-    llm_config=llm_config,
-)
-
-# Agent 4: Report Writer — compiles everything into a readable digest
-report_writer = autogen.AssistantAgent(
-    name="ReportWriter",
-    system_message="""You compile everything the other agents say into a clean Monday Morning Digest.
-Format:
-## 📊 Last Week's Numbers (from DataAnalyst)
-## ⭐ Review Highlights (from ReputationManager)  
-## 📱 This Week's Social Plan (from ContentStrategist)
-## 🎯 Top 3 Priorities This Week
-
-When you've compiled everything, say REPORT_COMPLETE at the end.""",
-    llm_config=llm_config,
-)
-
-user_proxy = autogen.UserProxyAgent(
-    name="Manager",
-    human_input_mode="NEVER",
-    max_consecutive_auto_reply=15,
-    is_termination_msg=lambda x: "REPORT_COMPLETE" in x.get("content", ""),
-    code_execution_config=False,
-)
-
-def generate_weekly_report(bookings_data: dict, reviews_data: list) -> str:
-    """Generate the Monday digest using AutoGen GroupChat."""
-    
-    group_chat = autogen.GroupChat(
-        agents=[user_proxy, data_analyst, reputation_manager, content_strategist, report_writer],
-        messages=[],
-        max_round=12,
-        speaker_selection_method="round_robin",
-    )
-    
-    manager = autogen.GroupChatManager(groupchat=group_chat, llm_config=llm_config)
-    
-    prompt = f"""
-Generate the Monday Morning Marketing Digest for The Loft Hair Studio.
-
-LAST WEEK'S DATA:
-Bookings: {bookings_data}
-New Reviews: {reviews_data}
-Week of: {(datetime.now() - timedelta(days=7)).strftime('%B %d, %Y')}
-
-DataAnalyst: Summarize the booking metrics.
-ReputationManager: Analyze the reviews.
-ContentStrategist: Plan 5 Instagram posts for this week.
-ReportWriter: Compile everything into the digest.
-"""
-    
-    user_proxy.initiate_chat(manager, message=prompt, max_turns=12)
-    
-    for msg in reversed(user_proxy.chat_messages[manager]):
-        if "REPORT_COMPLETE" in msg.get("content", ""):
-            return msg["content"].replace("REPORT_COMPLETE", "").strip()
-    
-    return "Report generation failed — check AutoGen logs."
-
-# Example
-sample_bookings = {
-    "total_appointments": 47,
-    "revenue_estimate": 3820,
-    "top_services": ["Balayage (12)", "Cut & Style (15)", "Color (9)"],
-    "busiest_day": "Saturday (18 appointments)",
-    "no_shows": 3,
-    "new_clients": 8
-}
-
-sample_reviews = [
-    {"stars": 5, "text": "Best balayage I've ever gotten!", "name": "Amy L."},
-    {"stars": 4, "text": "Great cut but had to wait 20 mins past my appointment time.", "name": "David M."},
-    {"stars": 5, "text": "Sarah is a wizard with color. Highly recommend!", "name": "Priya S."},
-]
-
-if __name__ == "__main__":
-    report = generate_weekly_report(sample_bookings, sample_reviews)
-    print(report)
-```
-
-## Automating the Weekly Run
-
-Schedule this to run every Monday at 7am using a GitHub Actions cron job:
-
-```yaml
-# .github/workflows/weekly-report.yml
-name: Weekly Marketing Report
-
-on:
-  schedule:
-    - cron: '0 7 * * 1'  # Every Monday at 7am UTC
-
-jobs:
-  generate-report:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - run: pip install pyautogen requests
-      - run: python scripts/weekly_report.py
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          BOOKING_API_KEY: ${{ secrets.BOOKING_API_KEY }}
-```
-
-The script fetches last week's data from your booking system API, runs the AutoGen group chat, and emails the result to you.
-
-## Platform Comparison
-
-| Framework | Learning Curve | Best Pattern | LLM Support | Cost to Run | Best For |
-|---|---|---|---|---|---|
-| **AutoGen** | Medium | Multi-agent chat | Any (via config) | Low | Quality through agent debate |
-| **CrewAI** | Medium | Role-based teams | Any | Low | Structured task delegation |
-| **LangGraph** | High | Stateful workflows | Any | Low | Complex conditional flows |
-| **n8n** | Low | Visual workflows | Limited | Free/cheap | No-code automation |
-| **Zapier** | Very Low | Trigger-action | GPT-4 only | Medium | Simple automations |
+<Callout type="tip" title="Do This Today">
+List the three tasks you repeat every week. Mark which ones need a second check. Only those are candidates for a second agent.
+</Callout>
 
 ## FAQ
 
-**Is AutoGen free to use?**
-AutoGen is free and open-source. You pay only for LLM API calls. A typical two-agent review response uses about 1,000-2,000 tokens total — at Claude Haiku rates that's about $0.001 per review response. The weekly marketing report GroupChat uses about 10,000-15,000 tokens — around $0.01 per report.
+### Is Microsoft AutoGen still maintained?
+The README says the project is archived and no longer actively maintained by Microsoft, and it points new users to Microsoft Agent Framework.
 
-**How many agents should I use?**
-For local business automation, 2-4 agents is the sweet spot. More agents = more tokens = higher cost and slower runtime. The two-agent (writer + critic) pattern is ideal for content quality. GroupChat with 3-5 agents works for complex reports. Avoid very large groups — the conversations get unwieldy.
+### Do I need several agents to reply to Google reviews?
+No. One agent with a good prompt and your approval is enough for most local businesses. A critic agent adds cost and only helps if it catches errors you actually see.
 
-**Can I use AutoGen without coding?**
-AutoGen requires Python. If you're not comfortable coding, consider n8n (visual workflow builder) or Make.com instead — they have similar multi-step automation without code. However, if you can hire a developer to set up AutoGen once, the system runs on autopilot afterward and is very cost-effective.
+### Is Microsoft Agent Framework free?
+The code is MIT-licensed. You still pay the model provider for tokens.
 
-**Does AutoGen work with Claude?**
-Yes — AutoGen 0.4+ has native support for Anthropic's API via `api_type: "anthropic"` in the config. Alternatively, use Claude via OpenRouter with the standard OpenAI-compatible endpoint format. Claude Haiku works well for most local business tasks; use Claude Sonnet when you need more sophisticated reasoning (e.g., handling nuanced negative reviews).
+### Can I use Claude with these frameworks?
+Check the framework's current docs for supported model clients. This page did not test any integration.
 
-**How do I stop agents from going off-task?**
-Strong system prompts are key. Each agent should have a very specific role description and explicit constraints ("ONLY discuss review data, do not suggest social content"). Also use `max_consecutive_auto_reply` and `is_termination_msg` to stop conversations at the right point — otherwise agents will keep chatting indefinitely, burning tokens.
+## Sources
 
-## Related Articles
+- [GitHub: microsoft/autogen README](https://github.com/microsoft/autogen) (archived status, install commands, license)
+- [AutoGen documentation](https://microsoft.github.io/autogen/stable/) (packages, Python requirement)
+- [GitHub: microsoft/agent-framework](https://github.com/microsoft/agent-framework) (languages, install, license)
+- [Anthropic: pricing](https://platform.claude.com/docs/en/about-claude/pricing) (Claude Haiku 5.5 rates)
 
-- [CrewAI for Local Business: Build a Team of AI Agents](/blog/crewai-local-business-multi-agent-automation)
-- [LangGraph: Build an AI Booking Agent with Memory and State](/blog/langgraph-ai-booking-agent-memory-local-business)
-- [AgentOps: Monitor and Debug Your Local Business AI Agents](/blog/agentops-monitor-debug-ai-agents-local-business)
-- [OpenRouter Guide: Access 100+ AI Models for Local Business Automation](/blog/openrouter-guide-local-business-automation-2026)
-- [Best Free Models on OpenRouter for Business Automation 2026](/blog/best-free-openrouter-models-business-automation)
+Want review replies and reports automated safely? See our [AI agents service](/services/ai-agents) or [book a free audit](/free-audit).

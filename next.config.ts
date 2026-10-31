@@ -396,6 +396,46 @@ const nextConfig: NextConfig = {
         destination: "/blog/wolt-ads-restaurant-guide-europe",
         permanent: true,
       },
+      {
+        source: "/blog/spotify-ads-for-local-business",
+        destination: "/blog/spotify-ads-local-business-complete-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/ott-ads-for-fitness-studios",
+        destination: "/blog/ctv-ads-for-fitness-studios",
+        permanent: true,
+      },
+      {
+        source: "/blog/youtube-ads-for-local-business",
+        destination: "/blog/how-to-run-youtube-ads-for-local-business-step-by-step",
+        permanent: true,
+      },
+      {
+        source: "/blog/pet-groomer-email-marketing-template",
+        destination: "/blog/pet-groomer-email-marketing",
+        permanent: true,
+      },
+      {
+        source: "/blog/how-much-should-a-dog-groomer-spend-on-google-ads",
+        destination: "/blog/google-ads-for-dog-groomers-complete-2026-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/coffee-shop-marketing-with-google-my-business",
+        destination: "/blog/google-business-profile-coffee-shop-tips",
+        permanent: true,
+      },
+      {
+        source: "/blog/how-to-get-coffee-shop-walk-ins-from-google-maps",
+        destination: "/blog/coffee-shops-dominate-google-maps",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-ads-for-nail-salons",
+        destination: "/blog/google-ads-for-nail-salons-complete-2026-guide",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
