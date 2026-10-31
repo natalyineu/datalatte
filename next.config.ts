@@ -253,7 +253,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/blog/coffee-shop-google-my-business-optimization",
-        destination: "/blog/google-my-business-optimization-for-coffee-shops",
+        destination: "/blog/coffee-shop-google-business-profile-optimization",
         permanent: true,
       },
       {
@@ -454,6 +454,61 @@ const nextConfig: NextConfig = {
       {
         source: "/blog/tiktok-ads-for-coffee-shops-guide",
         destination: "/blog/tiktok-ads-for-coffee-shops-step-by-step-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-ads-for-pet-groomers-in-pittsburgh-pa",
+        destination: "/blog/google-ads-for-pet-groomers-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-ads-for-pet-groomers-in-los-angeles-ca",
+        destination: "/blog/google-ads-for-pet-groomers-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-ads-for-pet-groomers-in-kansas-city-mo",
+        destination: "/blog/google-ads-for-pet-groomers-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-ads-for-hair-salons-in-miami-fl",
+        destination: "/blog/google-ads-for-hair-salons-complete-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-ads-for-hair-salons-in-los-angeles-ca",
+        destination: "/blog/google-ads-for-hair-salons-complete-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-my-business-optimization-for-coffee-shops",
+        destination: "/blog/coffee-shop-google-business-profile-optimization",
+        permanent: true,
+      },
+      {
+        source: "/blog/coffee-shop-marketing-loyalty-programs",
+        destination: "/blog/coffee-shop-loyalty-program-ideas-without-an-app",
+        permanent: true,
+      },
+      {
+        source: "/blog/pet-groomer-marketing-automation",
+        destination: "/blog/marketing-automation-for-pet-groomers",
+        permanent: true,
+      },
+      {
+        source: "/blog/pet-groomer-marketing-with-email-newsletters",
+        destination: "/blog/pet-groomer-email-marketing",
+        permanent: true,
+      },
+      {
+        source: "/blog/how-to-get-more-orders-on-glovo-promotions-visibility",
+        destination: "/blog/how-to-grow-on-glovo-marketing-tips",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-business-profile-optimization-in-2026-the-complete-guide-25-point-checklist",
+        destination: "/blog/google-business-profile-optimization-checklist",
         permanent: true,
       },
       // Renamed posts — old slugs redirect to new canonical URLs

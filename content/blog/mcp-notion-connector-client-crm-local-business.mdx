@@ -1,449 +1,117 @@
 ---
-title: "MCP + Notion: Build a Self-Updating Client CRM with AI"
+title: "MCP + Notion: Build a Client CRM with AI"
 date: "2026-06-13"
-lastModified: "2026-06-13"
-description: "Build a self-updating client CRM for your local business using MCP and Notion — AI that logs client visits, preferences, and follow-ups automatically."
+lastModified: "2026-10-31"
+description: "Notion MCP works on every plan and connects Claude to a client database by OAuth. How a local business sets up a simple CRM and what to automate first."
 author: "Nataliia"
 category: "AI & Automation"
 tags: ["MCP", "Notion", "CRM", "local business automation"]
 slug: "mcp-notion-connector-client-crm-local-business"
 image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&q=80&auto=format&fit=crop"
-readTime: "10 min read"
+readTime: "7 min read"
 ---
 
-Every successful local business owner knows their regulars by name. The coffee shop owner who remembers that Sarah takes oat milk and no sugar. The groomer who knows that Max the golden retriever needs extra time because he hates the dryer. The salon stylist who knows not to suggest highlights to a client who is growing out her color.
+You can build a simple client CRM for a salon, groomer or studio in Notion and let Claude read and update it through Notion's hosted MCP server. Notion says MCP works on every plan and signs in with OAuth, so a non-developer can connect it in a few minutes. Claude then searches your client database, adds visit notes and lists who is due for a follow-up. You still check every message before it is sent.
 
-That personal touch is what keeps people coming back. But when you have 50, 100, or 200 clients, keeping it all in your head stops working. You start forgetting. Follow-ups slip through the cracks. A client who spent $800 with you last year quietly switches to a competitor — and you only notice when you run the year-end numbers.
+This guide replaces an earlier version that used a local server and a custom script. Notion's own README now says that local package is no longer actively maintained and recommends the hosted server. Statistics from the old version were removed because no source was given.
 
-Here is the data that makes this painfully concrete: **repeat customers spend 67% more per visit than new customers** and are worth roughly five times more in lifetime revenue than a single-visit client. Yet most local businesses track their regulars in a scattered mix of booking software notes, text messages, and fading memory.
+<StatRow
+  values="1|Every plan|OAuth|Business+"
+  labels="Hosted Notion MCP endpoint to connect|Plans where Notion MCP works|Default sign-in method|Plan needed to create MCP tokens for headless use"
+  subs="Notion developer docs|Notion developer docs|Notion developer docs|Notion developer docs"
+  trends="neutral|neutral|neutral|neutral"
+/>
 
-The problem is not that business owners do not want a CRM. It is that traditional CRMs are either built for enterprise sales teams (too complex) or require constant manual data entry (no one has time). The result: the CRM sits empty while the business owner goes back to their mental Rolodex.
+## What Is Notion MCP?
 
-This article shows you a better path — a self-updating client CRM built on Notion, powered by Claude AI, and connected through the Model Context Protocol (MCP). Once it is running, your AI logs every appointment, schedules follow-ups, and surfaces clients who are overdue for a visit — automatically.
+MCP is a standard way for an AI app to use outside tools. Notion MCP is a remote server hosted by Notion that works through the Notion API. After you authorise a connection with OAuth, the client can read and update content you can access. Only workspace members can connect it, so guests cannot.
 
----
+The tool list includes search, fetch, create pages, update pages, create databases and query data sources. For background, read our [explainer on the Model Context Protocol](/blog/what-is-mcp-model-context-protocol-explained) and the [MCP server roundup for local businesses](/blog/best-mcp-servers-local-business-setup-guide).
 
-## Why Most Local Businesses Skip the CRM
+## How Do You Connect It?
 
-Let us name the real friction points before we solve them.
+For Claude Code, Notion documents one command: `claude mcp add --transport http notion https://mcp.notion.com/mcp`, then `/mcp` to complete the OAuth flow. The endpoint is the Streamable HTTP address `https://mcp.notion.com/mcp`.
 
-**Data entry is a second job.** After a full day of cutting hair or grooming dogs, the last thing anyone wants to do is open a CRM and type in notes. Most appointment booking tools (Vagaro, Mindbody, Acuity) let you add client notes, but the interface is clunky and the data stays locked in their system.
+Notion's page covers Claude Code only. For Claude's desktop or web apps, add Notion as a connector in that app's settings and check Anthropic's current instructions. For unattended jobs, Notion says a workspace owner on a Business or Enterprise plan can create an MCP token in the Developer portal and send it as a bearer token. The old open-source `@notionhq/notion-mcp-server` still exists, but its README recommends the hosted one.
 
-**Off-the-shelf CRMs are designed for B2B sales.** HubSpot and Salesforce are built around deal pipelines and sales reps. A hair salon does not have "deals" — it has repeat service relationships. The terminology is wrong, the features are overkill, and the pricing is aggressive.
+## What Should the CRM Database Contain?
 
-**No intelligence.** Even if you do maintain a spreadsheet with client notes, it does not tell you anything. It does not flag that Rachel has not booked in 10 weeks. It does not draft a re-engagement text. It just sits there, static, consuming space.
+Keep it small. Every field you add is a field someone must fill in. A starting set for a service business:
 
-The solution we are building removes all three friction points. Data entry is handled by AI. The structure is built for service businesses, not sales teams. And the intelligence layer — Claude — turns your raw data into actionable follow-ups.
+| Property | Type | Why it is there |
+| --- | --- | --- |
+| Client name | Title | Search key |
+| Phone or email | Phone / Email | To send the follow-up |
+| Last visit | Date | Finds lapsed clients |
+| Service | Select | What they usually book |
+| Notes | Text | Preferences, sensitivities, pet details |
+| Next follow-up | Date | Drives reminders |
+| Consent to message | Checkbox | Only contact people who agreed |
 
----
+The consent field matters. Store only what you need, tell clients how you use their details, and check the privacy rules where you operate. Notion also warns that integrations only see content that has been shared with them, so keep client data in a clearly labelled workspace.
 
-## What You Are Building
+## What Should You Automate First?
 
-Here is the architecture at a glance:
+Start with read-only tasks, then add writing once you trust the results.
 
-1. A client finishes an appointment. Your booking system (or a simple form) sends appointment data to a webhook.
-2. A Python script receives that data and passes it to Claude via the API.
-3. Claude reads the appointment notes, extracts key details, and uses the Notion MCP server to update (or create) the client record in Notion.
-4. Scheduled automations run daily: Claude checks for upcoming follow-up dates, drafts reminder messages, scans for birthdays, and generates a weekly revenue summary.
+1. **After-visit note:** you dictate or type a line, Claude finds the client record and adds it to Notes.
+2. **Follow-up list:** ask Claude each Monday for clients whose last visit was more than a set number of weeks ago and who gave consent, with a draft message for each.
+3. **Weekly summary:** new clients, returning clients and clients not seen for a while, from the fields you recorded.
 
-**What you need:**
-- Notion account (free tier works fine)
-- Claude API key (Anthropic Console — light usage starts at roughly $5/month)
-- Python 3.10+
-- A way to trigger webhooks from your booking system (most platforms support this natively)
+A prompt such as this is enough to start:
 
----
-
-## Setting Up Your Notion CRM Database
-
-Create a new Notion database called **Client CRM**. Add these exact properties:
-
-| Property Name | Type | Notes |
-|---|---|---|
-| Client Name | Title | Full name |
-| Phone | Phone | Primary contact |
-| Email | Email | For follow-up messages |
-| Last Visit | Date | Updated after each appointment |
-| Services | Multi-select | Haircut, Color, Full Groom, Bath, etc. |
-| Staff Member | Select | Who served them |
-| Visit Notes | Text | Service details, preferences, reactions |
-| Next Follow-Up | Date | Auto-calculated from service type |
-| Birthday | Date | For birthday campaigns |
-| Lifetime Value | Number | Running total in dollars |
-| Status | Select | Active, Lapsed, VIP, New |
-| Total Visits | Number | Count of appointments |
-
-The JSON structure for a fully populated client record looks like this:
-
-```json
-{
-  "Client Name": {
-    "title": [{ "text": { "content": "Sarah Chen" } }]
-  },
-  "Phone": { "phone_number": "+1-555-842-1923" },
-  "Email": { "email": "sarah.chen@email.com" },
-  "Last Visit": { "date": { "start": "2026-05-28" } },
-  "Services": {
-    "multi_select": [
-      { "name": "Highlights" },
-      { "name": "Blowout" }
-    ]
-  },
-  "Visit Notes": {
-    "rich_text": [{
-      "text": {
-        "content": "Requested balayage with warm tones. Loves the result. Sensitive scalp — use gentle developer. Prefers appointments after 3pm."
-      }
-    }]
-  },
-  "Next Follow-Up": { "date": { "start": "2026-07-23" } },
-  "Lifetime Value": { "number": 1240 },
-  "Status": { "select": { "name": "VIP" } },
-  "Total Visits": { "number": 14 }
-}
+```text
+Search the Client CRM for clients with Consent checked and Last visit
+more than 8 weeks ago. For each, draft a two-sentence text that
+mentions their usual service. Do not send anything.
 ```
 
-Once the database is created, grab your Notion Integration Token from the Notion Developers portal and the database ID from the page URL. You will need both for the MCP configuration.
-
----
-
-## Installing the Notion MCP Server
-
-The Notion MCP server lets Claude read from and write to your Notion workspace directly, without any custom API integration code. Configure it in your `claude_desktop_config.json`:
-
-```json
-{
-  "mcpServers": {
-    "notion": {
-      "command": "npx",
-      "args": ["-y", "@notionhq/notion-mcp-server"],
-      "env": {
-        "OPENAPI_MCP_HEADERS": "{\"Authorization\": \"Bearer YOUR_NOTION_INTEGRATION_TOKEN\", \"Notion-Version\": \"2022-06-28\"}"
-      }
-    }
-  }
-}
-```
-
-On macOS, this file lives at `~/Library/Application Support/Claude/claude_desktop_config.json`. On Windows, find it at `%APPDATA%\Claude\claude_desktop_config.json`.
-
-After restarting Claude Desktop, Notion will appear as an available tool. Claude can now search, read, create, and update pages in your workspace — and because MCP is a standard protocol, you can add more servers later (Google Calendar, Slack, Supabase) without changing your Python code.
-
-**Make sure to share your Client CRM database with the integration** in Notion's settings, or Claude will not be able to see it.
-
----
-
-## The Four Core Automation Workflows
-
-### Workflow 1: After-Appointment Log
-
-This runs automatically when an appointment ends. The booking system sends a webhook, your Python script catches it, and Claude fills in the Notion record.
-
-```python
-import anthropic
-import json
-from flask import Flask, request, jsonify
-
-app = Flask(__name__)
-client = anthropic.Anthropic(api_key="YOUR_ANTHROPIC_API_KEY")
-
-NOTION_DATABASE_ID = "YOUR_DATABASE_ID"
-
-SYSTEM_PROMPT = """You are a CRM assistant for a local service business.
-When given appointment data, you:
-1. Search the Notion CRM database for the client by name or phone number
-2. If found, update the existing record with new visit details
-3. If not found, create a new client record with all available fields
-4. Always update: Last Visit date, Services, Visit Notes, Total Visits (increment by 1)
-5. Calculate Next Follow-Up date based on service type:
-   - Haircut: 6 weeks from today
-   - Highlights or Color: 8 weeks from today
-   - Full Groom (dog): 4 weeks from today
-   - Bath only: 3 weeks from today
-   - Fitness or personal training session: 1 week from today
-6. Add today's service cost to the existing Lifetime Value
-7. Set Status to VIP if Lifetime Value exceeds $500
-
-Respond with a plain-text summary of what was updated or created."""
-
-@app.route("/appointment-webhook", methods=["POST"])
-def handle_appointment():
-    data = request.json
-
-    appointment_context = f"""
-New appointment completed:
-Client: {data.get('client_name')}
-Phone: {data.get('phone')}
-Email: {data.get('email', 'Not provided')}
-Services today: {', '.join(data.get('services', []))}
-Staff member: {data.get('staff_member')}
-Appointment date: {data.get('appointment_date')}
-Duration: {data.get('duration_minutes')} minutes
-Cost today: ${data.get('cost')}
-Staff notes: {data.get('notes', 'None')}
-
-Please update the Notion CRM with this appointment information.
-"""
-
-    response = client.messages.create(
-        model="claude-opus-4-5",
-        max_tokens=1024,
-        system=SYSTEM_PROMPT,
-        messages=[{"role": "user", "content": appointment_context}]
-    )
-
-    return jsonify({
-        "status": "updated",
-        "client": data.get('client_name'),
-        "details": response.content[0].text
-    })
-
-if __name__ == "__main__":
-    app.run(port=5001)
-```
-
-Test this locally with `curl -X POST http://localhost:5001/appointment-webhook -H "Content-Type: application/json" -d '{"client_name": "Jane Smith", "phone": "+15551234567", "services": ["Haircut"], "staff_member": "Maria", "appointment_date": "2026-06-13", "duration_minutes": 45, "cost": 65, "notes": "Likes extra moisture treatment"}'`
-
-### Workflow 2: Follow-Up Scheduler
-
-This runs every morning via a cron job. Claude queries Notion for all clients whose Next Follow-Up date has passed and drafts personalized re-engagement messages ready for you to send.
-
-```python
-import anthropic
-import schedule
-import time
-from datetime import date
-
-client = anthropic.Anthropic(api_key="YOUR_ANTHROPIC_API_KEY")
-
-def run_followup_check():
-    today = date.today().isoformat()
-
-    prompt = f"""
-Today is {today}. Search the Notion Client CRM database and find all clients where:
-- The "Next Follow-Up" date is on or before today
-- Status is "Active" or "VIP"
-
-For each client found, draft a personalized follow-up SMS message that:
-- Uses their first name only
-- References their last service (pull from Services field)
-- Suggests booking without being pushy
-- Stays under 160 characters
-
-Format your output as a numbered list:
-1. [Client Name] — [Draft SMS]
-
-If no clients need follow-up today, say so clearly.
-"""
-
-    response = client.messages.create(
-        model="claude-opus-4-5",
-        max_tokens=2048,
-        messages=[{"role": "user", "content": prompt}]
-    )
-
-    print(f"=== Follow-Up Report: {today} ===")
-    print(response.content[0].text)
-    print("=" * 40)
-
-schedule.every().day.at("08:00").do(run_followup_check)
-
-while True:
-    schedule.run_pending()
-    time.sleep(60)
-```
-
-### Workflow 3: Birthday and Anniversary Reminders
-
-Birthdays are one of the highest-converting touchpoints for local businesses. A personalized message on a client's birthday with a small discount converts at two to three times the rate of generic promotions — and costs nothing but a text.
-
-```python
-def run_birthday_check():
-    today = date.today()
-    month_day = today.strftime("%m-%d")
-
-    prompt = f"""
-Today's month and day is {month_day} (ignore the year when checking birthdays).
-
-Search the Notion Client CRM database for any clients whose Birthday field 
-matches today's month and day.
-
-For each birthday client found, produce two things:
-1. A warm SMS under 160 characters offering 15% off their next visit, 
-   mentioning their name and the specific service they last had
-2. An email version with a subject line and 3-4 sentence body
-
-If no birthdays today, check for clients whose first-ever visit 
-(estimate from the date pattern in notes if available) was exactly 
-1 year ago this month — draft a "one year anniversary" loyalty message for those.
-
-List each client separately with clear SMS and Email sections.
-"""
-
-    response = client.messages.create(
-        model="claude-opus-4-5",
-        max_tokens=2048,
-        messages=[{"role": "user", "content": prompt}]
-    )
-
-    print(f"=== Birthday/Anniversary Check: {today} ===")
-    print(response.content[0].text)
-
-schedule.every().day.at("09:00").do(run_birthday_check)
-```
-
-### Workflow 4: Monthly Revenue Reporting
-
-Every first of the month, Claude queries Notion and generates a plain-English business summary. No formulas. No pivot tables. Just a clean report that tells you what happened.
-
-```python
-from datetime import datetime, timedelta
-
-def generate_monthly_report():
-    first_of_this_month = datetime.now().replace(day=1)
-    last_month_end = first_of_this_month - timedelta(days=1)
-    last_month_start = last_month_end.replace(day=1)
-    last_month_label = last_month_end.strftime("%B %Y")
-
-    prompt = f"""
-Generate a monthly client revenue and retention report for {last_month_label}
-using the Notion Client CRM database.
-
-Please calculate and clearly report:
-
-1. REVENUE SUMMARY
-   - Total revenue from all visits last month (sum of Lifetime Value increments)
-   - Average spend per visit
-   - Highest single-visit spend
-
-2. TOP CLIENTS
-   - Top 5 clients by total spend last month
-
-3. CLIENT ACTIVITY
-   - Total unique clients served
-   - New clients (first visit ever) vs returning clients
-   - Clients who visited 3+ times (highly loyal segment)
-
-4. SERVICE BREAKDOWN
-   - Which services generated the most revenue
-
-5. RETENTION RISK
-   - Clients who visited last month but whose Next Follow-Up date has now passed
-   - These are the people most at risk of churning — list their names
-
-6. MONTH-OVER-MONTH TREND
-   - Compare to the prior month if data is available
-   - Call out any significant changes
-
-Write this as a readable business narrative, not just a data dump.
-Start with a one-sentence executive summary.
-"""
-
-    response = client.messages.create(
-        model="claude-opus-4-5",
-        max_tokens=3000,
-        messages=[{"role": "user", "content": prompt}]
-    )
-
-    print(f"=== Monthly Business Report: {last_month_label} ===")
-    print(response.content[0].text)
-
-# Run on the 1st of every month at 7am
-schedule.every().day.at("07:00").do(
-    lambda: generate_monthly_report() if datetime.now().day == 1 else None
-)
-```
-
----
-
-## Real Example: A Pet Grooming Business with 200 Clients
-
-Paws & Claws is a one-stylist pet grooming studio in Austin, Texas. Before implementing this system, the owner kept client notes in a shared Google Sheet — updated maybe 40% of the time, with inconsistent formatting and no structure for follow-ups.
-
-**The before state:**
-- Average client visits per year: 3.1
-- Lapsed clients (no visit in 10+ weeks): estimated 35–40 at any time
-- Time spent on follow-up reminders per week: 2–3 hours of manual texting
-- Monthly revenue visibility: "roughly I think around X" level accuracy
-
-**After implementing the Notion + MCP + Claude pipeline:**
-
-- **Follow-up rate went from ad hoc to 100% automated.** Every pet gets a follow-up text at exactly the right interval for their coat and service type (bath-only dogs get 3-week nudges; full-groom clients get 4-week messages). Average visits per client climbed from 3.1 to 4.7 in the first 6 months.
-- **Lapsed clients recovered.** In the first 30 days, Claude identified 23 clients who had not booked in over 8 weeks. The owner sent the AI-drafted re-engagement messages. Nine rebooked within a week — roughly $720 in recovered revenue with 10 minutes of effort.
-- **Birthday messages converted at 31%.** Fourteen clients received birthday messages in the first month. Four booked a birthday bath package the same week. That is a 28% conversion rate on a zero-cost campaign.
-- **Time saved: approximately 45 minutes per day** that had previously been spent on manual follow-up reminders and memory-jogging before client calls.
-- **Total monthly cost: $11.40** in Claude API calls for 200 active clients with daily automations.
-
-The owner's comment after 90 days: "I feel like I finally have a real business system, not just vibes and a spreadsheet."
-
----
-
-## System Comparison: What Are Your Options?
-
-| Feature | Notion + MCP + Claude | HubSpot CRM | Vagaro | Mindbody |
-|---|---|---|---|---|
-| Monthly cost | ~$12 (API only) | $20–$890 | $30–$90 | $129–$349 |
-| Setup time | 2–4 hours | 1–2 days | 30 minutes | 2–3 days |
-| AI-written follow-up messages | Yes, personalized | No | No | No |
-| Auto follow-up scheduling | Yes (smart intervals) | Manual or paid add-on | Basic templates only | Basic templates only |
-| Custom fields for your business | Fully flexible | Limited in free tier | Fixed schema | Fixed schema |
-| Revenue reporting | AI-generated narrative | Complex dashboard setup | Basic | Moderate |
-| Birthday campaigns | Fully automated | Paid tier only | Limited | Yes |
-| Data ownership | 100% yours, exportable | Vendor-locked | Vendor-locked | Vendor-locked |
-| Multi-staff support | Yes (Notion collab) | Yes | Yes | Yes |
-| Works offline (data in Notion) | Yes | Cloud-only | Cloud-only | Cloud-only |
-| Learning curve | Medium (setup once) | High | Low | Medium |
-
-The decisive differentiator is AI-generated personalization at low cost. Every other tool on this list gives you templates. This system gives you individualized messages drafted from the client's actual history — and charges you cents per message.
-
----
+Our [Google Sheets MCP guide](/blog/mcp-google-sheets-ai-agent-bookings-local-business) shows the same idea with a spreadsheet, and the [Slack alerts guide](/blog/mcp-slack-connector-business-alerts-automation) covers notifications.
+
+## The Math: Is It Worth Setting Up?
+
+All numbers are **assumptions** for a small studio. Notion MCP has no separate fee on the page we read, but your Notion and Claude plans have their own prices, so check them.
+
+| | Assumption |
+| --- | --- |
+| Time spent writing client notes and follow-ups per week, by hand | 3 hours |
+| Time with Claude drafting, owner reviewing | 1 hour |
+| Hours saved per week | 2 |
+| Value of an hour | $25 |
+| Weekly value | $50 |
+| Clients who rebook from follow-ups per month | 4 |
+| Average booking | $60 |
+| Monthly extra revenue | $240 |
+
+The rebooking figure is a guess. If follow-ups bring back no one, you still save the time but no revenue. Run it for a month and count real rebookings before you build more. The [Supabase connector guide](/blog/mcp-supabase-connector-ai-agent-database) is the next step if you outgrow Notion.
 
 ## FAQ
 
-**Is Notion a good CRM for small businesses?**
+### Is Notion MCP free?
 
-Yes, particularly for service businesses built around repeat client relationships. Notion's database structure is flexible enough to model exactly the properties your business tracks — unlike purpose-built CRMs that lock you into their schema.
+Notion says MCP works on every plan, but some features depend on the plan. MCP tokens for headless use need Business or Enterprise.
 
-The free tier supports unlimited pages and databases, so you can run a full CRM for 500+ clients at zero platform cost. The trade-off is that Notion is not a CRM out of the box — you are building one using Notion's building blocks.
+### Do I need to code?
 
-The database structure in this guide removes that friction: it is pre-designed for local service businesses, so you are not starting from a blank page.
+Not for the hosted connection and manual prompts. Unattended automation needs a Business or Enterprise plan with an MCP token and some scripting.
 
-**Does MCP work with Notion's free plan?**
+### Is the old npx notion-mcp-server still the right choice?
 
-Yes. The Notion MCP server authenticates using an Integration Token, which is available on all Notion plans including the free tier. The MCP server can read, create, and update database entries, search for records by property, and retrieve rich text fields — all without any paid Notion subscription.
+Its README says it is no longer actively maintained and recommends the hosted Notion MCP server.
 
-The only meaningful free-tier limit is that you can add up to 10 guest collaborators; for an internal CRM, this is not a constraint.
+### Can Claude send messages to my clients?
 
-**How much does this system actually cost to run per month?**
+Notion MCP does not send texts. Claude drafts, and you send from your own phone or messaging tool after review.
 
-For a 200-client business running the four workflows described here — daily follow-up check, birthday check, appointment webhook processing, and monthly reporting — expect roughly 60,000 to 90,000 tokens per month total. At Claude Haiku pricing ($0.80 per million input tokens, $4 per million output tokens), that is approximately $3–$8/month.
+### Is it safe to put client details in Notion?
 
-If you prefer Sonnet-class quality for client-facing messages, budget $15–$25/month. Notion is free. The Python script runs cheaply on a $5/month VPS, a spare computer, or a Raspberry Pi. Total system cost for most small service businesses: under $30/month.
+Only store what you need, only contact clients who agreed, and follow your local privacy law. Limit workspace access to people who need it.
 
-**Can multiple staff members use and update this CRM?**
+## Sources
 
-Yes, in two ways. First, multiple staff can have direct Notion access — Notion is a collaborative tool and free-tier workspaces support up to 10 members. Anyone with access can open the database and edit records manually.
+- [Notion developers: Notion MCP overview](https://developers.notion.com/docs/mcp)
+- [Notion developers: Get started with Notion MCP](https://developers.notion.com/docs/get-started-with-mcp)
+- [Notion developers: Supported tools](https://developers.notion.com/docs/mcp-supported-tools)
+- [GitHub: makenotion/notion-mcp-server README](https://github.com/makenotion/notion-mcp-server) (local server, no longer actively maintained)
 
-Second, staff who do not need full database access can submit appointment notes through a shared form (Google Forms, Tally, or a custom HTML page) that posts to the webhook endpoint. Claude processes each submission regardless of who submitted it.
-
-If you want to track who made changes, add a "Last Updated By" property to the database and pass the staff member's name through the webhook payload.
-
-**How do I migrate from spreadsheets to Notion CRM without losing my data?**
-
-The migration takes 30 to 60 minutes for most businesses. Export your existing spreadsheet as a CSV file. In your Notion Client CRM database, click the three-dot menu in the top right, select Import, then choose CSV.
-
-Notion will attempt to match your column headers to existing database properties — review the mapping carefully and correct any mismatches before confirming.
-
-After import, run one cleanup prompt in Claude: "Review the imported records in the Notion Client CRM and list any entries missing Phone number, Last Visit date, or Services data — I want to identify gaps to fill in manually." This surfaces the incomplete records without you having to scan 200 rows yourself.
-
-Plan to spend 15–20 minutes filling in gaps, and you will have a clean, structured CRM database ready for all four automations.
-
----
-
-## Related Articles
-
-- [What Is MCP (Model Context Protocol)? A Plain-English Guide for Local Business Owners](/blog/what-is-mcp-model-context-protocol-explained)
-- [Best MCP Servers for Local Business: The Complete Setup Guide](/blog/best-mcp-servers-local-business-setup-guide)
-- [Claude + MCP + Google Calendar: Automate Your Booking System](/blog/claude-mcp-google-calendar-booking-automation)
-- [MCP Slack Connector: AI Business Alerts in Your Team Channel](/blog/mcp-slack-connector-business-alerts-automation)
-- [MCP + Supabase: Build an AI Agent with a Real Database Backend](/blog/mcp-supabase-connector-ai-agent-database)
+Want an AI-assisted client follow-up system for your business? See our [AI agents service](/services/ai-agents) or [book a free audit](/free-audit).
