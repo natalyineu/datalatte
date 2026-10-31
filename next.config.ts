@@ -436,6 +436,26 @@ const nextConfig: NextConfig = {
         destination: "/blog/google-ads-for-nail-salons-complete-2026-guide",
         permanent: true,
       },
+      {
+        source: "/blog/local-marketing-new-zealand-small-business-2026",
+        destination: "/blog/local-marketing-new-zealand-small-business-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/instagram-ads-for-coffee-shops",
+        destination: "/blog/instagram-ads-for-coffee-shops-step-by-step-playbook",
+        permanent: true,
+      },
+      {
+        source: "/blog/sales-funnel-for-local-business",
+        destination: "/blog/marketing-funnel-for-local-business",
+        permanent: true,
+      },
+      {
+        source: "/blog/tiktok-ads-for-coffee-shops-guide",
+        destination: "/blog/tiktok-ads-for-coffee-shops-step-by-step-guide",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
