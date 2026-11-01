@@ -1071,6 +1071,11 @@ const nextConfig: NextConfig = {
         destination: "/blog/using-meta-ads-for-hair-salon-marketing",
         permanent: true,
       },
+      {
+        source: "/blog/reddit-community-ads-local-service-business",
+        destination: "/blog/reddit-ads-for-local-business-guide",
+        permanent: true,
+      },
     // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
