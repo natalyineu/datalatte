@@ -3,9 +3,11 @@ import { fetchPublishedSignals } from "@/lib/radar-signals";
 const BASE = "https://datalatte.pro";
 
 export const dynamic = "force-static";
+// Re-read the signals from the database at most once an hour, so a cleanup or a new signal reaches the page without a deploy.
+export const revalidate = 3600;
 
 export async function GET() {
-  const signals = await fetchPublishedSignals();
+  const signals = await fetchPublishedSignals({ strict: true });
 
   const items = signals
     .slice(0, 50)

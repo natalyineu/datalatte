@@ -3,6 +3,8 @@ import RadarFeed from "@/components/RadarFeed";
 import { fetchPublishedSignals } from "@/lib/radar-signals";
 
 export const dynamic = "force-static";
+// Re-read the signals from the database at most once an hour, so a cleanup or a new signal reaches the page without a deploy.
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Value Radar — Daily Marketing Intelligence for Local Businesses",
@@ -30,7 +32,7 @@ export const metadata: Metadata = {
 };
 
 export default async function RadarPage() {
-  const allSignals = await fetchPublishedSignals();
+  const allSignals = await fetchPublishedSignals({ strict: true });
   // The page embeds every signal in its HTML, so show the latest 60 here; older ones keep their own pages and the RSS feed.
   const FEED_LIMIT = 60;
   const signals = allSignals.slice(0, FEED_LIMIT);

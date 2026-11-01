@@ -60,7 +60,11 @@ function rowToSignal(row: Record<string, unknown>): Signal {
   };
 }
 
-export async function fetchPublishedSignals(): Promise<Signal[]> {
+/**
+ * strict: for pages that are re-rendered on a timer (ISR). A database error or an empty result throws, so Next keeps
+ * serving the last good page instead of replacing it with an empty Radar. Without it, errors quietly return [].
+ */
+export async function fetchPublishedSignals(opts: { strict?: boolean } = {}): Promise<Signal[]> {
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) return [];
   const { data, error } = await supabase
     .from("radar_signals")
@@ -68,7 +72,11 @@ export async function fetchPublishedSignals(): Promise<Signal[]> {
     .eq("status", "published")
     .order("published_at", { ascending: false });
 
-  if (error) return [];
+  if (error) {
+    if (opts.strict) throw new Error(`radar_signals query failed: ${error.message}`);
+    return [];
+  }
+  if (opts.strict && (data ?? []).length === 0) throw new Error("radar_signals returned no published rows; keeping the previous page");
   return (data ?? []).map(rowToSignal);
 }
 

@@ -13,6 +13,8 @@ import SignalNavigator from "@/components/SignalNavigator";
 import SignalViewTracker from "@/components/SignalViewTracker";
 
 export const dynamic = "force-static";
+// Re-read the signals from the database at most once an hour, so a cleanup or a new signal reaches the page without a deploy.
+export const revalidate = 3600;
 export const dynamicParams = true;
 
 const CATEGORY_BAR: Record<string, string> = {
@@ -57,7 +59,7 @@ const IMPACT_CONFIG: Record<string, { dot: string; label: string; badge: string 
 };
 
 export async function generateStaticParams() {
-  const signals = await fetchPublishedSignals();
+  const signals = await fetchPublishedSignals({ strict: true });
   return signals.map((s) => ({ slug: s.slug }));
 }
 
@@ -102,7 +104,7 @@ export default async function SignalPage({
   const { slug } = await params;
   const [signal, allSignals] = await Promise.all([
     fetchSignalBySlug(slug),
-    fetchPublishedSignals(),
+    fetchPublishedSignals({ strict: true }),
   ]);
   if (!signal) notFound();
 
