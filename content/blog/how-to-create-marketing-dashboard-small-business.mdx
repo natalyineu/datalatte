@@ -1,49 +1,105 @@
 ---
-title: "How to Create a Simple Marketing Dashboard for Your Small Business"
+title: "How to Create a Marketing Dashboard for Small Business"
 date: "2026-05-20"
-lastModified: "2026-06-02"
-description: "Track your local business performance with a simple marketing dashboard - boost sales and growth with data-driven decisions"
+lastModified: "2026-11-01"
+description: "Build a free marketing dashboard in Looker Studio from GA4, Search Console and Google Ads. What each connector shows and where it falls short."
 author: "Nataliia"
 category: "Analytics & Tracking"
-tags: ["small business marketing", "marketing dashboard", "local SEO", "analytics"]
+tags: ["marketing dashboard", "looker studio", "google analytics 4", "search console", "small business marketing"]
 slug: "how-to-create-marketing-dashboard-small-business"
 image: "https://images.unsplash.com/photo-1599351431613-d3496169e4e7?w=800&q=80&auto=format&fit=crop"
-readTime: '13 min read'
----
-As a small business owner, you're likely no stranger to feeling overwhelmed by the sheer amount of data available to you. From website analytics to social media metrics, it can be tough to know what to track and how to use that data to drive growth. But what if you could create a simple marketing dashboard that gave you a clear picture of your business's performance?
-
-## Frequently Asked Questions
-
-**Q: "I'm already overwhelmed with running my business. Won't this add stress?"**
-Here's the thing — the stress of not knowing is worse than the stress of knowing. Right now, you're probably guessing which marketing works. That uncertainty costs you money and sleep. A dashboard replaces uncertainty with facts. Even if the facts are bad (like "my Facebook ads are losing money"), at least you know and can fix it. I'd rather know my ads are failing and stop them than keep spending $500/month hoping they'll magically work. That hope is expensive.
-
-**Q: "Do I need to pay for a tool, or can I do this for free?"**
-You can do this for free. Google Data Studio is free. Google Analytics is free. A Google Sheet is free. If you want to connect Square or your booking software, some data connectors cost a small monthly fee ($9–$20), but most businesses don't need that. Manual data entry once a week takes five minutes and costs nothing. The only thing you should pay for is someone to set it up for you if you truly don't have the time or patience. That's a one-time cost of $200–$500. Most owners recover that in the first month by killing a bad ad or improving a good one.
-
-**Q: "What if I look at the data and realize everything is bad?"**
-Great. Now you know what to fix. The worst outcome isn't discovering your marketing doesn't work — it's discovering you wasted money on marketing that doesn't work for six months because you didn't check. Data doesn't judge you. It just reports. If your dashboard says your Yelp reviews are dropping, you can fix it. If it says your Facebook ads are overpriced, you can change your strategy. The goal isn't a perfect dashboard. The goal is a dashboard that tells you the truth so you can do something about it. Bad news early is a gift. Bad news late is an expensive lesson.
-
+readTime: "7 min read"
 ---
 
-I've spent over a decade watching agencies and in-house teams treat data like a trophy — something to show off in quarterly meetings rather than use daily. The businesses that actually grow don't have the most sophisticated dashboards. They have the most honest ones.
+A small business can build a marketing dashboard for free in Looker Studio, which Google's docs now call Data Studio and describe as a no-cost tool for turning data into dashboards and reports. Connect Google Analytics 4 for site visits, Search Console for search impressions and Google Ads for paid results, then show 5 to 8 numbers on one page. Keep it to numbers you will act on.
 
-A coffee shop in Austin with a three-number dashboard and a 15-minute weekly review will outperform a chain with a 40-chart dashboard and a team of analysts who never talk to the owners.
+Connector details below were read from Google's documentation on 2026-11-01. Google's pages do not compare the free tool with the paid Pro tier, so that part is not covered here.
 
-The real magic isn't in the charts or the tools. It's in the decision you make on Wednesday morning when you see a number going somewhere you don't like and decide to do something about it before Thursday.
+<StatRow
+  values="3|50|2|0"
+  labels="Google connectors used in this guide|Sub-accounts one Google Ads data source can include under a manager account|Search Console tables: site and URL impressions (one per data source)|Cost of the standard tool"
+  subs="Google docs|Google docs|Google docs|Google docs, no-cost tool"
+  trends="neutral|neutral|neutral|neutral"
+/>
 
-If you want to set this up without spending a week learning Google Data Studio and figuring out which tools connect to which, I can help. We'll look at your business, figure out the three metrics that actually matter, and set it up in under two hours. No fluff.
+## What Should a Small Business Dashboard Show?
 
-No "we'll optimize your data ecosystem for maximum cross-channel synergy." Just a dashboard that tells you where your money's coming from and where it's going.
+Start from questions, not charts: Are people finding us? Are they contacting us? What did paid ads cost? Pick one number per question.
 
-[Book a free consultation](/free-audit)
+| Question | Number | Source |
+| --- | --- | --- |
+| Are people finding us in search? | Search impressions and clicks | Search Console |
+| Is the site being used? | Sessions and key actions | Google Analytics 4 |
+| What did ads cost and return? | Cost, clicks, conversions | Google Ads |
+| Are calls and bookings rising? | Calls, direction requests, bookings | Your own records (sheet) |
 
-## Related Articles
+Our guide to [local SEO KPIs](/blog/how-to-measure-local-seo-success-kpis) explains the search numbers, and the [reporting guide](/blog/marketing-reporting-for-small-business) covers a monthly routine.
 
-- Unlocking Insights with AI-Driven Analytics for Pet Groomers
-- [How to Set Up Google Analytics 4 for Your Local Business Website](/blog/google-analytics-4-setup-local-business)
-- [Unlocking Insights with Google Analytics for Hair Salons](/blog/google-analytics-for-hair-salons)
-- [How to Measure Local SEO Success: The KPIs That Actually Matter](/blog/how-to-measure-local-seo-success-kpis)
+## How Do the Google Connectors Work?
 
-<Callout type="coffee" title="Know What's Actually Working">
-Nataliia at DataLatte sets up Analytics & Reporting dashboards for local businesses so you can make smarter decisions. [Book a free call](/contact) or explore [Analytics & Reporting](/services/analytics).
+A connector links Looker Studio to your data. Each has limits worth knowing before you build.
+
+- **Google Analytics 4:** supports GA4 properties and needs at least Read & Analyze permission. Reports are subject to GA4 Data API quotas and may show an error if exceeded. GA4 segments and comparisons are not available through the connector.
+- **Search Console:** has a Site Impression table and a URL Impression table, and one data source can use only one. Google notes Search Analytics does not show all data, so some queries are grouped under a blank query.
+- **Google Ads:** one data source connects to one account you can access, or up to 50 sub-accounts under a manager account. Entities with zero impressions do not appear, and Auction Insights data has been removed.
+
+If a Search Console property does not appear, sign in to both tools with the same Google Account and make sure it has at least view permission.
+
+## How Do You Set It Up?
+
+1. Make sure GA4 is installed. Google's setup guide says data can take up to 30 minutes to start appearing in Realtime after the tag is installed. See our [GA4 guide](/blog/google-analytics-4-for-small-business).
+2. Create a new report in Looker Studio and add each data source.
+3. Put the four questions across the top as number tiles, each with a month-on-month comparison.
+4. Add one trend chart per source, with a date selector.
+5. Share the report link with whoever reviews it.
+
+Include a Google Sheet for numbers that no connector provides, such as bookings or calls counted by hand. A manual column is better than an empty tile.
+
+## A Worked Example: A Salon Dashboard
+
+All numbers are **assumptions** shown only to illustrate layout.
+
+| Tile | This month | Last month | Change |
+| --- | --- | --- | --- |
+| Search clicks | 220 | 190 | +16% |
+| Sessions | 640 | 600 | +7% |
+| Ad spend | $300 | $300 | 0% |
+| Bookings (sheet) | 42 | 38 | +11% |
+
+Divide ad spend by bookings only if you can tie bookings to ads; otherwise do not show a cost per booking. The honest number here is bookings per month and ad spend, side by side. Review it on the first of each month and write one decision under it, such as "move the offer higher on the page".
+
+<Callout type="tip" title="Do This Today">
+Write down the four questions above and the source of one number for each, before opening any tool.
 </Callout>
+
+## FAQ
+
+### Is Looker Studio free?
+
+Google's docs describe it as a no-cost tool for dashboards and reports. A Pro tier exists, but Google's page does not compare it.
+
+### Do I need Google Ads to use a dashboard?
+
+No. Start with GA4 and Search Console, and add ads later.
+
+### Why do my Search Console numbers look incomplete?
+
+Google says Search Analytics does not show all data, to protect privacy. Some queries are grouped under a blank row.
+
+### Can I compare segments from GA4?
+
+Not through the connector. Google states segments and comparisons are not available there.
+
+### How often should I check it?
+
+Monthly for decisions, weekly only while running a campaign. That is practice, not a Google rule.
+
+## Sources
+
+- [Google Cloud docs: Data Studio (Looker Studio) overview](https://docs.cloud.google.com/looker/docs/studio)
+- [Connect to Google Analytics](https://docs.cloud.google.com/looker/docs/studio/connect-to-google-analytics)
+- [Connect to Search Console](https://docs.cloud.google.com/looker/docs/studio/connect-to-search-console)
+- [Connect to Google Ads](https://docs.cloud.google.com/looker/docs/studio/connect-to-google-ads)
+- [Google Analytics Help: Set up Analytics for a website](https://support.google.com/analytics/answer/9304153)
+
+Want a dashboard built for you? See our [analytics service](/services/analytics) or [book a free audit](/free-audit).

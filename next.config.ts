@@ -946,6 +946,66 @@ const nextConfig: NextConfig = {
         destination: "/blog/programmatic-advertising-for-coffee-shops",
         permanent: true,
       },
+      {
+        source: "/blog/how-to-grow-email-list-1000-subscribers-local-business",
+        destination: "/blog/local-business-email-list-from-zero",
+        permanent: true,
+      },
+      {
+        source: "/blog/how-much-to-spend-on-facebook-ads-local-business",
+        destination: "/blog/facebook-ads-budget-local-business-how-much-to-spend",
+        permanent: true,
+      },
+      {
+        source: "/blog/marketing-automation-for-coffee-shops-complete-guide",
+        destination: "/blog/marketing-automation-for-coffee-shops-save-5-hours-every-week",
+        permanent: true,
+      },
+      {
+        source: "/blog/coffee-shop-marketing-automation",
+        destination: "/blog/marketing-automation-for-coffee-shops-save-5-hours-every-week",
+        permanent: true,
+      },
+      {
+        source: "/blog/influencer-marketing-for-hair-salons",
+        destination: "/blog/influencer-marketing-for-hair-salons-how-to-get-free-bookings-from-local-creator",
+        permanent: true,
+      },
+      {
+        source: "/blog/influencer-marketing-for-restaurants",
+        destination: "/blog/influencer-marketing-for-local-restaurants-and-cafes",
+        permanent: true,
+      },
+      {
+        source: "/blog/how-to-optimize-your-google-business-profile-step-by-step-for-local-businesses",
+        destination: "/blog/google-business-profile-optimization-checklist",
+        permanent: true,
+      },
+      {
+        source: "/blog/how-would-you-market-a-coffee-shop-complete-guide-for-2026",
+        destination: "/blog/coffee-shop-marketing-ideas-30-strategies-to-fill-every-seat-in-2026",
+        permanent: true,
+      },
+      {
+        source: "/blog/local-marketing-canada-small-business-2026",
+        destination: "/blog/local-business-marketing-canada-guide-2026",
+        permanent: true,
+      },
+      {
+        source: "/blog/local-ai-powered-chatbots",
+        destination: "/blog/ai-chatbot-for-local-business-booking-and-faqs",
+        permanent: true,
+      },
+      {
+        source: "/blog/local-business-strategy-for-hair-salons",
+        destination: "/blog/hair-salon-local-seo-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/live-chat-widget-local-business-website",
+        destination: "/blog/live-chat-for-local-business",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
