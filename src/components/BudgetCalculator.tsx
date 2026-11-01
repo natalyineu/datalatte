@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { gtag } from "@/lib/gtag";
 import { CPL_BY_NICHE } from "@/data/rates";
+import { useCurrency } from "@/lib/useCurrency";
+import CurrencyPicker from "@/components/CurrencyPicker";
 import { ArrowRight, ArrowLeft, CheckCircle2, Copy, Check } from "lucide-react";
 import {
   motion,
@@ -104,10 +106,6 @@ const DEFAULT_CLOSE = 25; // % of leads that become customers (assumption)
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
-function fmt(n: number) {
-  return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
-}
-
 function calcBudget(revenue: number, stagePct: number) {
   const raw = Math.round(revenue * stagePct);
   return Math.max(500, raw); // floor at $500/month
@@ -198,6 +196,7 @@ function stepVariants(dir: number): Variants {
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function BudgetCalculator() {
+  const { currency, setCurrency, fmt, fromUsd } = useCurrency();
   const [step,      setStep]      = useState(0);
   const [direction, setDirection] = useState(1);
   const [niche,     setNiche]     = useState<Niche | null>(null);
@@ -228,9 +227,10 @@ export default function BudgetCalculator() {
         .map(c => {
           const bench = c.label === "Google Ads" ? CPL_BY_NICHE[niche].google : CPL_BY_NICHE[niche].meta;
           const amount = Math.round(totalBudget * c.pct / 100);
-          const leads = amount / bench.cpl;
+          const localCpl = fromUsd(bench.cpl);
+          const leads = amount / localCpl;
           const customers = (leads * closeRate) / 100;
-          return { label: c.label, emoji: c.emoji, amount, bench, leads, customers };
+          return { label: c.label, emoji: c.emoji, amount, bench, localCpl, leads, customers };
         })
     : [];
   const paidSpend = estimates.reduce((s, e) => s + e.amount, 0);
@@ -305,9 +305,10 @@ export default function BudgetCalculator() {
             budget: totalBudget,
             goal: GOALS.find(g => g.value === goal)?.label ?? "",
             channels: channels.map(c => ({ label: c.label, pct: c.pct, amount: Math.round(totalBudget * c.pct / 100) })),
-            estimates: estimates.map(e => ({ label: e.label, amount: e.amount, cpl: e.bench.cpl, benchLabel: e.bench.label, leads: Math.round(e.leads * 10) / 10, customers: Math.round(e.customers * 10) / 10 })),
+            estimates: estimates.map(e => ({ label: e.label, amount: e.amount, cpl: Math.round(e.localCpl * 100) / 100, benchLabel: e.bench.label, leads: Math.round(e.leads * 10) / 10, customers: Math.round(e.customers * 10) / 10 })),
             customerValue: cv,
             closeRate,
+            currency: currency.code,
           },
         }),
       });
@@ -321,6 +322,8 @@ export default function BudgetCalculator() {
 
   // ── Rendering ────────────────────────────────────────────────────────────
   return (
+    <>
+    <CurrencyPicker value={currency.code} onChange={setCurrency} />
     <AnimatePresence mode="wait" initial={false}>
       {/* Step 0 — Niche */}
       {step === 0 && (
@@ -432,8 +435,8 @@ export default function BudgetCalculator() {
               </motion.div>
             </div>
             <div className="flex justify-between text-xs text-gray-400 mt-8">
-              <span className="text-gray-500 dark:text-gray-400">$1,000</span>
-              <span className="text-gray-500 dark:text-gray-400">$150,000+</span>
+              <span className="text-gray-500 dark:text-gray-400">{fmt(1000)}</span>
+              <span className="text-gray-500 dark:text-gray-400">{fmt(150000)}+</span>
             </div>
           </div>
 
@@ -666,7 +669,7 @@ export default function BudgetCalculator() {
 
               <div className="grid grid-cols-2 gap-3 mb-4">
                 <label className="text-xs text-gray-600 dark:text-gray-300">
-                  Value of a new customer ($)
+                  Value of a new customer ({currency.symbol})
                   <input
                     type="number" min={0} inputMode="numeric"
                     value={cv}
@@ -693,7 +696,7 @@ export default function BudgetCalculator() {
                       <span className="text-sm font-bold text-gray-900 dark:text-gray-50">≈ {one(e.leads)} leads → ≈ {one(e.customers)} customers</span>
                     </div>
                     <p className="text-[11px] text-gray-500 mt-0.5 dark:text-gray-400">
-                      At ${e.bench.cpl.toFixed(2)} per lead: {e.bench.label}.
+                      At {currency.code === "USD" ? `$${e.bench.cpl.toFixed(2)}` : `≈ ${fmt(e.localCpl, 2)} (US$${e.bench.cpl.toFixed(2)})`} per lead: {e.bench.label}.
                       {e.leads < 5 && " Under 5 leads a month is too few to measure; concentrate this on one channel."}
                     </p>
                   </div>
@@ -702,7 +705,7 @@ export default function BudgetCalculator() {
 
               <div className="mt-4 pt-3 border-t border-gray-200 dark:border-gray-700 flex items-center justify-between">
                 <span className="text-sm font-semibold text-gray-800 dark:text-gray-100">Paid ads in total</span>
-                <span className="text-sm font-bold text-gray-900 dark:text-gray-50">≈ {one(paidCustomers)} customers · ≈ ${paidReturn.toFixed(1)} back per $1</span>
+                <span className="text-sm font-bold text-gray-900 dark:text-gray-50">≈ {one(paidCustomers)} customers · ≈ {currency.symbol}{paidReturn.toFixed(1)} back per {currency.symbol}1</span>
               </div>
               <p className="text-[11px] text-gray-500 mt-2 leading-relaxed dark:text-gray-400">
                 Revenue (customers × your value), not profit. SEO, Business Profile, email and social are not estimated because they build over months and have no comparable cost per lead. Benchmarks are medians across advertisers; yours will differ.{" "}
@@ -830,5 +833,6 @@ export default function BudgetCalculator() {
         </motion.div>
       )}
     </AnimatePresence>
+    </>
   );
 }

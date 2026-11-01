@@ -18,7 +18,8 @@ function escapeHtml(str: string): string {
 
 
 // ── Budget-calculator result (sent from the client, so every value is sanitised) ──
-const money = (n: number) => `$${Math.round(n).toLocaleString("en-US")}`;
+const SYMBOLS: Record<string, string> = { USD: "$", GBP: "£", EUR: "€", AUD: "A$", CAD: "C$" };
+const money = (n: number, cur = "USD") => `${SYMBOLS[cur] ?? "$"}${Math.round(n).toLocaleString("en-US")}`;
 function num(v: unknown, max = 1e9): number {
   const n = Number(v);
   return Number.isFinite(n) ? Math.min(Math.max(n, 0), max) : 0;
@@ -31,7 +32,7 @@ interface CalcResult {
   niche: string; goal: string; revenue: number; budget: number;
   channels: { label: string; pct: number; amount: number }[];
   estimates: { label: string; amount: number; cpl: number; benchLabel: string; leads: number; customers: number }[];
-  customerValue: number; closeRate: number;
+  customerValue: number; closeRate: number; currency: string;
 }
 
 function parseResult(raw: unknown): CalcResult | null {
@@ -48,38 +49,39 @@ function parseResult(raw: unknown): CalcResult | null {
       leads: num(e?.leads, 1e6), customers: num(e?.customers, 1e6),
     })),
     customerValue: num(r.customerValue, 1e7), closeRate: num(r.closeRate, 100),
+    currency: typeof r.currency === "string" && r.currency in SYMBOLS ? r.currency : "USD",
   };
 }
 
 function resultEmailHtml(r: CalcResult): string {
   const td = 'style="padding:8px 0;border-bottom:1px solid #eee;font-size:14px;color:#333"';
   const tdr = 'style="padding:8px 0;border-bottom:1px solid #eee;font-size:14px;color:#333;text-align:right;font-weight:700"';
-  const rows = r.channels.map(c => `<tr><td ${td}>${c.label} <span style="color:#888;font-size:12px">${Math.round(c.pct)}%</span></td><td ${tdr}>${money(c.amount)}</td></tr>`).join("");
-  const est = r.estimates.map(e => `<tr><td ${td}>${e.label} · ${money(e.amount)}<br><span style="color:#888;font-size:12px">at $${e.cpl.toFixed(2)} per lead: ${e.benchLabel}</span></td><td ${tdr}>≈ ${e.leads} leads<br>≈ ${e.customers} customers</td></tr>`).join("");
+  const rows = r.channels.map(c => `<tr><td ${td}>${c.label} <span style="color:#888;font-size:12px">${Math.round(c.pct)}%</span></td><td ${tdr}>${money(c.amount, r.currency)}</td></tr>`).join("");
+  const est = r.estimates.map(e => `<tr><td ${td}>${e.label} · ${money(e.amount, r.currency)}<br><span style="color:#888;font-size:12px">at ${SYMBOLS[r.currency] ?? "$"}${e.cpl.toFixed(2)} per lead: ${e.benchLabel}</span></td><td ${tdr}>≈ ${e.leads} leads<br>≈ ${e.customers} customers</td></tr>`).join("");
   const custs = r.estimates.reduce((s, e) => s + e.customers, 0);
   const spend = r.estimates.reduce((s, e) => s + e.amount, 0);
   const back = spend > 0 ? ((custs * r.customerValue) / spend).toFixed(1) : "0.0";
   return `
     <div style="background:#5c3317;color:#fff;border-radius:14px;padding:20px 22px;margin:18px 0">
       <div style="font-size:13px;color:#e8d5c0">Your recommended monthly marketing budget${r.niche ? ` (${r.niche})` : ""}</div>
-      <div style="font-size:34px;font-weight:700;margin:4px 0">${money(r.budget)}</div>
-      ${r.revenue ? `<div style="font-size:13px;color:#e8d5c0">~${Math.round((r.budget / r.revenue) * 100)}% of your ${money(r.revenue)}/month revenue${r.goal ? ` · goal: ${r.goal}` : ""}</div>` : ""}
+      <div style="font-size:34px;font-weight:700;margin:4px 0">${money(r.budget, r.currency)}</div>
+      ${r.revenue ? `<div style="font-size:13px;color:#e8d5c0">~${Math.round((r.budget / r.revenue) * 100)}% of your ${money(r.revenue, r.currency)}/month revenue${r.goal ? ` · goal: ${r.goal}` : ""}</div>` : ""}
     </div>
     <h3 style="color:#5c3317;margin:22px 0 4px;font-size:16px">Budget by channel</h3>
     <table style="width:100%;border-collapse:collapse">${rows}</table>
     ${est ? `
     <h3 style="color:#5c3317;margin:24px 0 4px;font-size:16px">What your paid budget could buy</h3>
-    <p style="font-size:12px;color:#888;margin:0 0 6px">Your assumptions: a new customer is worth ${money(r.customerValue)} and ${Math.round(r.closeRate)}% of leads become customers. Cost per lead comes from published medians (LocaliQ 2026).</p>
+    <p style="font-size:12px;color:#888;margin:0 0 6px">Your assumptions: a new customer is worth ${money(r.customerValue, r.currency)} and ${Math.round(r.closeRate)}% of leads become customers. Cost per lead comes from published medians (LocaliQ 2026)${r.currency !== "USD" ? ", US figures converted to " + r.currency + " at fixed reference rates" : ""}.</p>
     <table style="width:100%;border-collapse:collapse">${est}
-      <tr><td style="padding:10px 0;font-size:14px;font-weight:700;color:#333">Paid ads in total</td><td style="padding:10px 0;font-size:14px;font-weight:700;color:#333;text-align:right">≈ ${Math.round(custs * 10) / 10} customers · ≈ $${back} back per $1</td></tr>
+      <tr><td style="padding:10px 0;font-size:14px;font-weight:700;color:#333">Paid ads in total</td><td style="padding:10px 0;font-size:14px;font-weight:700;color:#333;text-align:right">≈ ${Math.round(custs * 10) / 10} customers · ≈ ${SYMBOLS[r.currency] ?? "$"}${back} back per ${SYMBOLS[r.currency] ?? "$"}1</td></tr>
     </table>
     <p style="font-size:12px;color:#888;margin:8px 0 0">Revenue, not profit. SEO, Business Profile, email and social are not estimated because they build over months. Medians across advertisers; your numbers will differ. <a href="https://datalatte.pro/rates" style="color:#7c4a2d">See all sources and rates</a></p>` : ""}
     <p style="margin:22px 0 0"><a href="https://datalatte.pro/tools/marketing-budget-calculator" style="color:#7c4a2d">Recalculate with different numbers</a> · <a href="https://datalatte.pro/free-audit" style="color:#7c4a2d">Get a free audit of your marketing</a></p>`;
 }
 
 function resultNote(r: CalcResult): string {
-  return `calculator: ${r.niche || "n/a"}, budget ${money(r.budget)}/mo, revenue ${money(r.revenue)}/mo, goal ${r.goal || "n/a"}; ` +
-    r.channels.map(c => `${c.label} ${money(c.amount)}`).join(", ");
+  return `calculator: ${r.niche || "n/a"}, budget ${money(r.budget, r.currency)}/mo, revenue ${money(r.revenue, r.currency)}/mo, goal ${r.goal || "n/a"}; ` +
+    r.channels.map(c => `${c.label} ${money(c.amount, r.currency)}`).join(", ");
 }
 
 async function addToResendAudience(email: string) {
@@ -124,7 +126,7 @@ export async function POST(req: NextRequest) {
       body: JSON.stringify({
         from: "Nataliia at DataLatte <hi@datalatte.pro>",
         to: email,
-        subject: calc ? `Your marketing budget: ${money(calc.budget)}/month ☕` : checklist ? `Your checklist: ${checklist.title}` : "You're in ☕ — Welcome to DataLatte",
+        subject: calc ? `Your marketing budget: ${money(calc.budget, calc.currency)}/month ☕` : checklist ? `Your checklist: ${checklist.title}` : "You're in ☕ — Welcome to DataLatte",
         html: `
           <div style="font-family:sans-serif;max-width:560px;margin:0 auto;color:#333">
             <h2 style="color:#5c3317">${calc ? "Your budget plan ☕" : checklist ? "Here is your checklist ☕" : "Welcome to DataLatte ☕"}</h2>
@@ -163,7 +165,7 @@ export async function POST(req: NextRequest) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           chat_id: TELEGRAM_CHAT_ID,
-          text: `🎉 New subscriber!\n${email}\nSource: ${source}${calc ? `\nBudget: ${money(calc.budget)}/mo (${calc.niche})` : ""}`,
+          text: `🎉 New subscriber!\n${email}\nSource: ${source}${calc ? `\nBudget: ${money(calc.budget, calc.currency)}/mo (${calc.niche})` : ""}`,
         }),
       }).catch(() => {});
     }

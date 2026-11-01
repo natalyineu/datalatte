@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { CPL_BY_NICHE, type CalcNiche } from "@/data/rates";
+import { useCurrency } from "@/lib/useCurrency";
+import CurrencyPicker from "@/components/CurrencyPicker";
 
 const NICHES: { value: CalcNiche; emoji: string; label: string; value$: number }[] = [
   { value: "coffee", emoji: "☕", label: "Coffee shop", value$: 120 },
@@ -13,8 +15,6 @@ const NICHES: { value: CalcNiche; emoji: string; label: string; value$: number }
   { value: "freelancer", emoji: "💼", label: "Freelancer", value$: 1500 },
   { value: "other", emoji: "🏪", label: "Other", value$: 300 },
 ];
-
-const money = (n: number, d = 2) => `$${n.toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d })}`;
 
 function Field({ label, hint, children }: { label: string; hint?: string; children: React.ReactNode }) {
   return (
@@ -30,6 +30,8 @@ const inputCls =
   "mt-1 w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-base font-semibold text-gray-900 focus:border-coffee-400 focus:ring-2 focus:ring-coffee-100 outline-none dark:border-gray-700 dark:bg-gray-900 dark:text-gray-50";
 
 export default function AdBreakEven() {
+  const { currency, setCurrency, fmt, fromUsd } = useCurrency();
+  const money = (n: number, d = 2) => fmt(n, d);
   const [niche, setNiche] = useState<CalcNiche>("coffee");
   const [value, setValue] = useState<number | null>(null);
   const [margin, setMargin] = useState(60);
@@ -47,13 +49,17 @@ export default function AdBreakEven() {
   const rows = [
     { name: "Google Search", bench: b.google },
     { name: "Meta lead ads", bench: b.meta },
-  ].map(r => ({ ...r, ok: r.bench.cpl <= maxCpl, ratio: maxCpl > 0 ? r.bench.cpl / maxCpl : Infinity }));
+  ].map(r => {
+    const cpl = fromUsd(r.bench.cpl); // benchmark converted to the chosen currency
+    return { ...r, cpl, ok: cpl <= maxCpl, ratio: maxCpl > 0 ? cpl / maxCpl : Infinity };
+  });
 
   const num = (setter: (n: number) => void, min: number, max: number) => (e: React.ChangeEvent<HTMLInputElement>) =>
     setter(Math.min(max, Math.max(min, Number(e.target.value) || min)));
 
   return (
     <div>
+      <CurrencyPicker value={currency.code} onChange={setCurrency} />
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-6">
         {NICHES.map(n => (
           <button
@@ -73,7 +79,7 @@ export default function AdBreakEven() {
       </div>
 
       <div className="grid sm:grid-cols-2 gap-4 mb-6">
-        <Field label="Value of a new customer ($)" hint="Revenue from a typical new customer in the first year. Our default is an assumption: replace it.">
+        <Field label={`Value of a new customer (${currency.symbol})`} hint="Revenue from a typical new customer in the first year. Our default is an assumption: replace it.">
           <input type="number" min={1} inputMode="decimal" value={v} onChange={e => setValue(Math.max(0, Number(e.target.value) || 0))} className={inputCls} />
         </Field>
         <Field label="Profit margin (%)" hint="What is left after the cost of serving them.">
@@ -85,7 +91,7 @@ export default function AdBreakEven() {
         <Field label="Clicks that become leads (%)" hint="Website conversion rate. Medians sit near 6 to 8% in LocaliQ's 2026 search data.">
           <input type="number" min={0.5} max={100} step="0.5" inputMode="decimal" value={conv} onChange={num(setConv, 0.5, 100)} className={inputCls} />
         </Field>
-        <Field label="Return you want per $1 of ad spend" hint="1× = break even on first-year profit; 2× = you want to double it.">
+        <Field label={`Return you want per ${currency.symbol}1 of ad spend`} hint="1× = break even on first-year profit; 2× = you want to double it.">
           <select value={target} onChange={e => setTarget(Number(e.target.value))} className={inputCls}>
             <option value={1}>1× (break even)</option>
             <option value={1.5}>1.5×</option>
@@ -113,7 +119,7 @@ export default function AdBreakEven() {
               <div className="flex items-center justify-between gap-3">
                 <span className="text-sm font-medium text-gray-700 dark:text-gray-200">{r.name}</span>
                 <span className={`text-sm font-bold ${r.ok ? "text-green-700 dark:text-green-300" : "text-red-700 dark:text-red-300"}`}>
-                  {money(r.bench.cpl)} per lead · {r.ok ? "within your ceiling" : `${r.ratio.toFixed(1)}× too high`}
+                  {money(r.cpl)} per lead · {r.ok ? "within your ceiling" : `${r.ratio.toFixed(1)}× too high`}
                 </span>
               </div>
               <p className="text-[11px] text-gray-500 mt-0.5 dark:text-gray-400">{r.bench.label}</p>
