@@ -183,7 +183,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/blog/ai-driven-local-seo-audit-tool",
-        destination: "/blog/ai-driven-local-seo-audit",
+        destination: "/blog/local-seo-audit-tool-review",
         permanent: true,
       },
       {
@@ -269,11 +269,6 @@ const nextConfig: NextConfig = {
       {
         source: "/blog/google-ads-for-dog-groomers",
         destination: "/blog/google-ads-for-dog-groomers-complete-2026-guide",
-        permanent: true,
-      },
-      {
-        source: "/blog/local-seo-audit-tool-review",
-        destination: "/blog/best-local-seo-audit-tools-small-business",
         permanent: true,
       },
       {
@@ -1034,6 +1029,21 @@ const nextConfig: NextConfig = {
       {
         source: "/blog/google-business-profile-optimization",
         destination: "/blog/google-business-profile-optimization-checklist",
+        permanent: true,
+      },
+      {
+        source: "/blog/best-local-seo-audit-tools-small-business",
+        destination: "/blog/local-seo-audit-tool-review",
+        permanent: true,
+      },
+      {
+        source: "/blog/best-local-seo-audit-tool",
+        destination: "/blog/local-seo-audit-tool-review",
+        permanent: true,
+      },
+      {
+        source: "/blog/ai-driven-local-seo-audit",
+        destination: "/blog/local-seo-audit-tool-review",
         permanent: true,
       },
       // Renamed posts — old slugs redirect to new canonical URLs
