@@ -1,162 +1,118 @@
 ---
-title: "UTM Parameters Explained: How to Track Every Marketing Campaign"
+title: "UTM Parameters Explained: Track Every Campaign"
 seoTitle: "UTM Parameters Explained for Small Businesses"
 date: "2026-05-12"
-lastModified: "2026-06-02"
-description: "UTM parameters explained for small businesses: what the five tags mean, how to build tagged links, naming rules, and how to read results in Google Analytics 4."
+lastModified: "2026-11-01"
+description: "UTM parameters explained: 3 tags Google requires, 3 optional ones, naming rules and the GA4 channel traps that send your email clicks to Unassigned."
 author: "Nataliia"
 category: "Analytics & Tracking"
 tags: ["utm parameters", "small business", "marketing analytics", "google analytics"]
 slug: "utm-parameters-track-every-marketing-campaign"
 image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80&auto=format&fit=crop"
-readTime: '11 min read'
+readTime: "7 min read"
 ---
-UTM parameters are short tags you add to the end of a link so that Google Analytics can tell you exactly which email, post, ad or flyer sent each visitor to your website. Used consistently, they replace guesswork with a clear answer to the question every small business owner asks: which marketing is actually working?
+UTM parameters are tags added to the end of a link so Google Analytics can show which email, post, flyer QR code or ad sent each visitor. Google says to always use three of them: utm_source, utm_medium and utm_campaign. Three more are optional or recommended: utm_id, utm_term and utm_content. Any missing required tag shows up as "(not set)" in reports.
 
-This guide explains each tag, shows how to build links, gives you a naming system and walks through reading the results in Google Analytics 4 (GA4).
+This guide covers what each tag means, the naming rules that keep reports clean, how GA4 sorts tagged traffic into channels, and a worked example for a local business.
 
-## What a UTM link looks like
+<StatRow
+  values="3|6|20|1"
+  labels="Tags Google says to always use|Tags in total|Default channel groups in GA4|Place where case matters most"
+  subs="source, medium, campaign|plus id, term, content|Google Analytics Help|Values are case sensitive"
+  trends="neutral|neutral|neutral|neutral"
+/>
 
-A UTM link is your normal web address plus a few labels after a question mark:
+## What do the UTM parameters mean?
 
-`https://www.example.com/book?utm_source=instagram&utm_medium=social&utm_campaign=spring-promo`
+Google's Analytics Help lists the following. The examples are Google's own.
 
-When someone clicks it, the labels travel with the visitor and GA4 records them. Visitors do not need to do anything, and the page content is unchanged. The tags are named after Urchin, an early analytics tool Google acquired, which is why they begin with "utm".
+| Parameter | Status | What it identifies | Example |
+| --- | --- | --- | --- |
+| utm_source | Always use | The referrer | google, newsletter4, billboard |
+| utm_medium | Always use | The marketing medium | cpc, banner, email |
+| utm_campaign | Always use | Product, slogan or promo code | spring_sale |
+| utm_id | Strongly recommended | A specific campaign or promotion; match the IDs in your data uploads | not given |
+| utm_term | Optional | The paid keyword | not given |
+| utm_content | Optional | Which creative or link was clicked, such as two links in one email | toplink |
 
-## The five UTM parameters
+A tagged link is the normal page address, then a question mark, then pairs joined with equals signs and separated by ampersands. For example: yourshop.com/offer?utm_source=newsletter&utm_medium=email&utm_campaign=spring_sale.
 
-| Parameter | Question it answers | Example |
-|---|---|---|
-| utm_source | Where did the click come from? | instagram, newsletter, google |
-| utm_medium | What type of channel? | social, email, cpc, qr, flyer |
-| utm_campaign | Which campaign or promotion? | spring-promo, grand-opening |
-| utm_content | Which version or placement? | story-video, button-top |
-| utm_term | Which keyword (mainly paid search)? | dog-groomer-near-me |
+## Why do naming rules matter so much?
 
-The first three are the ones to use every time. GA4 treats source, medium and campaign as the core set, while content and term are optional extras for finer detail.
+Google states that parameter values are case sensitive. utm_source=google and utm_source=Google are different values, and SpringSale and Spring_Sale are reported separately. Google's own advice is to pick lowercase as a standard.
 
-## Why small businesses need them
+In practice, write down a short naming sheet before the first link goes out. Decide the exact words for each source (instagram, facebook, newsletter, flyer) and each medium (email, social, cpc, qr), then reuse them. One shared spreadsheet with a row per link is enough for a small team.
 
-Without tags, GA4 guesses where traffic came from. Common problems include:
+Untagged or half-tagged links cause the "(not set)" rows, so check each link before you publish it.
 
-- **Email and messaging apps** often show as "direct" because the click carries no referrer.
-- **Instagram bio links** can be mixed into general social traffic.
-- **Offline campaigns** (flyers, QR codes, menus) leave no digital trace at all.
-- **Google Business Profile** clicks can blend with organic search unless you tag the website link.
+## How does GA4 sort tagged traffic into channels?
 
-With UTMs, you can compare channels fairly and decide where to spend the next hour or the next dollar.
+GA4 assigns every session to a default channel group using source and medium. Your medium value decides where the traffic lands, so it is not a free-text field.
 
-## Step 1: Agree a naming convention
+- **Email:** source or medium is email, e-mail, e_mail or "e mail".
+- **Organic Social:** the source is a known social site, or the medium is social, social-network, social-media, sm, "social network" or "social media".
+- **Paid Social:** the source is a known social site and the medium contains "cp", equals ppc, or starts with retargeting or paid.
+- **Referral:** the medium is referral, app or link.
+- **Unassigned:** used when no rule matches the data.
 
-Inconsistent names are the biggest reason UTM reports become unusable. "Instagram", "instagram" and "IG" count as three different sources. Decide your rules once and write them down:
+Channel matching is not case sensitive, but the medium words must match exactly, except where a pattern is listed. A medium of "newsletter" would not count as Email, so a mailing would land in Unassigned. Use "email".
 
-- Use lowercase only.
-- Use hyphens instead of spaces: `spring-promo`, not `Spring Promo`.
-- Keep a short list of allowed sources and mediums.
-- Put dates or months in campaign names when useful: `loyalty-launch-2026-05`.
-- Never put personal information in a UTM tag, such as a customer's name or email.
+## Can you use UTM tags on Google Ads links?
 
-A simple starter list of mediums:
+Not usually. Google Ads auto-tagging adds a GCLID (Google Click Identifier) to the landing page address. Google's help states that in GA4 auto-tagging is prioritized over manual tagging, and there is no setting to override it. So leave auto-tagging on for Google Ads and use UTM tags for everything else: email, social posts, Business Profile links, partner sites and printed QR codes.
 
-- `email` for newsletters and automated emails
-- `social` for organic social posts
-- `paid-social` for Meta or TikTok ads
-- `cpc` for Google Ads
-- `qr` for QR codes on print materials
-- `referral` for partners and local sites
-- `gbp` for your Google Business Profile links
+For paid Meta or TikTok ads, UTM tags are the standard way to see the click in GA4. Google also suggests using the dynamic tags that an ad platform offers where possible, which saves typing. The dynamic fields differ per platform, so check each platform's own help page.
 
-## Step 2: Build links
+## Worked example: a salon tags four links
 
-You can build a link by hand, but a builder reduces typos:
+All inputs below are **assumptions** for illustration, not benchmarks.
 
-- Google's free Campaign URL Builder (search for it by name)
-- A shared Google Sheet with columns for base URL, source, medium, campaign and a formula that joins them
-- A link shortener such as Bitly or Rebrandly to make long links tidy for print and bios (check whether your plan includes QR code generation)
+A hair salon sends a monthly email, posts on Instagram, prints a QR code on window flyers and puts a booking link in its Google Business Profile. It tags each one:
 
-A simple Sheet formula approach: keep each part in its own column and combine them into one cell. Save every link you create in the same sheet, so you can see what you have used and avoid duplicate names later.
+| Where the link lives | utm_source | utm_medium | utm_campaign |
+| --- | --- | --- | --- |
+| Monthly email | newsletter | email | november_colour_offer |
+| Instagram bio | instagram | social | always_on_bio |
+| Window flyer QR | flyer | qr | november_colour_offer |
+| Business Profile booking link | google_business_profile | referral | always_on_profile |
 
-Test every link in a browser before publishing, to be sure the page still loads.
+Result in GA4: the email lands in the Email channel, the Instagram link in Organic Social and the Business Profile link in Referral, because those mediums match the rules above. The medium qr is not on the lists above, so the salon checks where flyer traffic lands and reads the source / medium report to compare the flyer with the email.
 
-## Step 3: Where to use UTM links
+One campaign name across email and flyer lets the owner compare both against the same offer.
 
-Use tagged links wherever you control the link:
+## What mistakes should you avoid?
 
-- **Email newsletters and automations:** tag every button and link. Many platforms, such as Mailchimp, Klaviyo and Brevo, have built-in options to add UTMs automatically, but check the settings.
-- **Social bios and posts:** tag the link in your Instagram or TikTok bio and any link stickers.
-- **Meta ads and TikTok ads:** use the ad platform's URL parameter fields, often with dynamic values, for campaign and ad names.
-- **Google Business Profile:** add UTMs to the Website and Appointment links, using a source such as `google` and a medium such as `gbp`.
-- **QR codes:** create one tagged link per placement, such as table tent, window poster or flyer, so you can compare them.
-- **Partner and influencer links:** give each partner their own tag.
+Three problems account for most broken reports. First, mixed case and spelling variants, which split one source into several rows. Second, a missing required tag. Third, medium values that do not match the channel rules above.
 
-Do not add UTMs to internal links on your own website. Doing so can overwrite the original source of a visit and distort reports.
-
-For Google Ads, turn on auto-tagging (gclid) rather than adding manual UTMs to your ad links, because auto-tagging connects Ads and GA4 more reliably. Manual UTMs are mainly for other channels.
-
-## Step 4: Read the results in GA4
-
-In GA4, the most useful reports for UTM data are:
-
-1. **Reports, Acquisition, Traffic acquisition:** shows sessions by channel. Change the primary dimension to Session source / medium or Session campaign to see your tags.
-2. **Explore:** build a simple table with Session campaign as rows and Key events (conversions) as values.
-3. **Advertising snapshot** or **Attribution** sections for paid channels.
-
-What to look at:
-
-- Sessions and engaged sessions per campaign
-- Key events, such as form submissions, phone-tap clicks or booking confirmations
-- Which source / medium combinations bring visitors who take action, not just visit
-
-Set up key events first. A visit alone is a weak signal; a booking request or call click is the goal. Our [Google Analytics 4 guide for small businesses](/blog/google-analytics-4-for-small-business) shows how.
-
-Remember that GA4 reports can take some time to update, and may omit data from visitors who decline cookies, depending on your consent settings.
-
-## Step 5: Connect UTM data to real results
-
-Link tags tell you how someone arrived, not whether they became a paying customer. To close the loop:
-
-- Track form submissions and booking-confirmation pages as key events.
-- Use call tracking if phone calls are your main goal. See call tracking for local business.
-- Ask new customers "How did you hear about us?" at booking and compare answers with your analytics.
-- For offline campaigns, use unique QR codes or short links and a dedicated landing page.
-
-If a campaign has plenty of visits and no conversions, check the landing page before blaming the channel.
-
-## Common mistakes
-
-- **Mixed capitalisation** that fractures reports.
-- **Tagging internal links** within your own site.
-- **Spaces and special characters** that break URLs.
-- **Reusing campaign names** for unrelated promotions.
-- **Forgetting to test** links on a phone.
-- **Ignoring the data** after setting everything up. Put a monthly review in your calendar.
-
-## A starter set for a local business
-
-If you are not sure where to begin, create tagged links for just these five places:
-
-1. Instagram or Facebook bio link
-2. Your main weekly or monthly email
-3. Google Business Profile website button
-4. One QR code on printed material
-5. Your biggest paid campaign, if you run one
-
-Review them after a month, then expand.
+Use tags only on links that bring people in from outside. For setting up the reports that read these tags, see our [GA4 guide for small business](/blog/google-analytics-4-for-small-business), the [Google Tag Manager guide](/blog/google-tag-manager-for-local-website-analytics) and the [local business tracking overview](/blog/local-business-analytics-and-tracking).
 
 ## FAQ
 
-**Q: Do UTM parameters hurt SEO?**
-A: Not when used for campaign links, as long as your pages have proper canonical tags, which most website platforms add by default. Avoid using UTMs on internal links.
+### Which UTM parameters are required?
 
-**Q: Are UTM parameters case sensitive?**
-A: Yes. GA4 treats "Email" and "email" as different values, so stick to lowercase.
+Google says to always use utm_source, utm_medium and utm_campaign. utm_id is strongly recommended. utm_term and utm_content are optional.
 
-**Q: Can I use UTMs for offline marketing?**
-A: Yes. Put a tagged link behind a QR code or a short link printed on flyers and menus, with one unique code per placement.
+### Are UTM values case sensitive?
 
-**Q: Do I need a paid tool?**
-A: No. Google's free URL builder, a spreadsheet and GA4 are enough for most small businesses.
+Yes. Google states that parameter values are case sensitive, so Google and google are separate values. Use lowercase throughout.
 
-## Get your tracking set up properly
+### Should I add UTM tags to Google Ads links?
 
-If you would like a clean tracking setup, with GA4 key events, tagged links and a simple monthly report, see our [analytics and reporting service](/services/analytics) or [contact us](/contact). Also see how to set up Google Ads conversion tracking if you run paid search.
+Normally no. In GA4, auto-tagging is prioritized over manual tagging, so manual tags on Google Ads clicks are overridden.
+
+### What does "(not set)" mean in my reports?
+
+Google states that missing UTM parameters result in "(not set)" values in reporting. Check that all three required tags are on the link.
+
+### Why is my email traffic in Unassigned?
+
+Probably the medium does not match a channel rule. Email is matched when the source or medium is email, e-mail, e_mail or "e mail". Other words, such as "newsletter", do not count.
+
+## Sources
+
+- [Google Analytics Help: Best practices to create custom campaigns](https://support.google.com/analytics/answer/10917952)
+- [Google Analytics Help: Default channel group](https://support.google.com/analytics/answer/9756891)
+- [Google Ads Help: About auto-tagging](https://support.google.com/google-ads/answer/3095550)
+- [Google Analytics Help: Campaign URL Builder (legacy article, parameter format)](https://support.google.com/analytics/answer/1033863)
+
+Want your campaigns tracked properly? See our [analytics service](/services/analytics) or [book a free audit](/free-audit).

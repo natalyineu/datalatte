@@ -771,6 +771,76 @@ const nextConfig: NextConfig = {
         destination: "/blog/glovo-promoted-listings-restaurants-guide",
         permanent: true,
       },
+      {
+        source: "/blog/tiktok-ads-for-coffee-shops",
+        destination: "/blog/tiktok-ads-for-coffee-shops-step-by-step-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/tiktok-ads-for-small-businesses",
+        destination: "/blog/tiktok-ads-for-small-business-complete-beginners-guide-2026",
+        permanent: true,
+      },
+      {
+        source: "/blog/tiktok-ads-for-beauty",
+        destination: "/blog/tiktok-marketing-for-beauty-salons",
+        permanent: true,
+      },
+      {
+        source: "/blog/telegram-ads-local-business-how-it-works",
+        destination: "/blog/telegram-sponsored-messages-cost-setup-guide-2026",
+        permanent: true,
+      },
+      {
+        source: "/blog/spotify-ads-for-small-business-complete-guide-2026",
+        destination: "/blog/spotify-ads-local-business-complete-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/social-media-strategy-europe-small-business",
+        destination: "/blog/social-media-marketing-in-europe",
+        permanent: true,
+      },
+      {
+        source: "/blog/ai-driven-social-media-scheduling-for-local-businesses",
+        destination: "/blog/ai-driven-social-media-management-tools",
+        permanent: true,
+      },
+      {
+        source: "/blog/ai-driven-customer-service-for-local-businesses",
+        destination: "/blog/ai-agent-for-customer-service-local-business",
+        permanent: true,
+      },
+      {
+        source: "/blog/ai-for-local-businesses-boost-conversions",
+        destination: "/blog/ai-marketing-tools-for-small-business",
+        permanent: true,
+      },
+      {
+        source: "/blog/tiktok-for-coffee-shops-20-video-ideas-that-go-viral",
+        destination: "/blog/tiktok-for-coffee-shops",
+        permanent: true,
+      },
+      {
+        source: "/blog/tiktok-shop-local-business-2026",
+        destination: "/blog/tiktok-shop-marketing-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/tiktok-for-small-business-beginners",
+        destination: "/blog/using-tiktok-for-local-businesses",
+        permanent: true,
+      },
+      {
+        source: "/blog/using-instagram-shopping-for-local-businesses",
+        destination: "/blog/instagram-shopping-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/website-cro-for-fitness-studios",
+        destination: "/blog/website-cro-for-local-fitness-studios",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",

@@ -1,142 +1,98 @@
 ---
-title: "Creating AI-Driven Local SEO Reports with Google Data Studio"
-date: "2026-05-12"
-description: "Build a local SEO report in Looker Studio (formerly Data Studio) using Search Console, GA4 and Business Profile data, with AI to summarise the trends."
+title: "Local SEO Reports in Google Data Studio: Setup Guide"
+date: "2026-05-20"
+lastModified: "2026-10-31"
+description: "Build a free local SEO report with Search Console, GA4 and Business Profile data. Which Google connectors exist, which do not, and a 4-section layout."
 author: "Nataliia"
 category: "Local SEO"
-tags: ["ai local seo", "google data studio", "local business"]
+tags: ["local seo reports", "google data studio", "looker studio", "reporting"]
 slug: "ai-driven-local-seo-reports-with-google-data-studio"
-image: "https://images.unsplash.com/photo-1467533003447-e295ff1b0435?w=800&q=80&auto=format&fit=crop"
-readTime: '10 min read'
-lastModified: "2026-05-22"
+image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&auto=format&fit=crop"
+readTime: "7 min read"
 ---
 
-You can build an AI-assisted local SEO report in Google's reporting tool (now called Looker Studio, formerly Data Studio) by connecting Google Search Console, Google Analytics 4 and your Google Business Profile data, then using an AI assistant to summarise the trends and suggest next steps. The charts come from real data; the AI helps you explain it in plain language.
+You can build a free local SEO report in Google's dashboard tool by connecting Search Console and Google Analytics, and by adding Business Profile numbers through a sheet or a partner connector. Google's connector catalog (checked 31 October 2026) lists Search Console, Google Analytics, Google Ads and Google Sheets. It does not list a Google Business Profile connector.
 
-The important point is that AI should interpret your numbers, not invent them. Done properly, you end up with a one-page monthly report that tells a local business owner what happened, why it probably happened and what to do next.
+Google's documentation now calls the tool Data Studio again, after the Looker Studio name. It describes it as a no-cost tool, and the older names refer to the same product. This guide shows what to put in the report and where each number comes from.
 
-## A quick note on the name
+<StatRow
+  values="0|4|8"
+  labels="Google-owned Business Profile connectors in the catalog|Connectors used here: Search Console, Analytics, Ads, Sheets|Core Profile metrics: interactions, searches, views, directions, calls, website clicks, messages, bookings"
+  subs="Data Studio available-connectors page, 31 Oct 2026|Data Studio available-connectors page, 31 Oct 2026|Business Profile Help, performance report"
+  trends="neutral|neutral|neutral"
+/>
 
-Google renamed Data Studio to Looker Studio in 2022. The tool is free for most uses, and the steps below apply to it. You may still see "Google Data Studio" in older tutorials and search results.
+## Which Data Can You Pull Into a Local SEO Report?
 
-## What a local SEO report should answer
+Google-owned sources cover web search and site traffic. Search Console gives queries, clicks and impressions for your site. Google Analytics gives sessions and conversions. Google Ads adds paid results if you run them. Google Sheets lets you add anything else, such as monthly Business Profile numbers you copy in.
 
-Owners rarely want a wall of charts. A useful report answers five questions:
-
-1. Are more people finding us on Google?
-2. Are they contacting us (calls, directions, bookings, forms)?
-3. Which searches and pages bring them in?
-4. How are our reviews and Google Business Profile doing?
-5. What are we doing next month?
-
-## Step 1: Gather your data sources
-
-| Source | What it tells you | Connection |
+| Source | Connector status in Google's catalog | What it adds |
 |---|---|---|
-| Google Search Console | Queries, impressions, clicks, average position, pages | Native connector |
-| Google Analytics 4 | Sessions, key events (calls, forms, bookings), traffic sources | Native connector |
-| Google Business Profile | Profile views, calls, direction requests, website clicks, search terms | Export or a third-party connector, since native connector support has changed over time |
-| Rank tracker (optional) | Local map and organic positions by location | CSV, Google Sheets or vendor connector |
-| Reviews (optional) | Count, average rating, recency | Manual entry in Sheets or a review tool export |
+| Search Console | Listed | Search queries, clicks, impressions |
+| Google Analytics | Listed | Sessions, conversions |
+| Google Ads | Listed | Paid clicks and spend |
+| Google Sheets | Listed | Any manual or exported data |
+| Google Business Profile | Not listed | Needs a sheet or a partner connector |
 
-Check each connector's current availability, as Google and third parties change integrations. A Google Sheet is a reliable bridge: paste or import exports there and connect the sheet to Looker Studio.
+Partner connectors exist for Business Profile, but they are third-party products with their own terms and limits. Treat their feature lists as vendor claims and check the current listing before paying.
 
-You also need conversion tracking in place, or the report will show traffic without outcomes. If you have not set that up, see our [Google Tag Manager guide](/blog/google-tag-manager-for-small-business).
+## What Does Business Profile Report?
 
-## Step 2: Build the report layout
+Business Profile Help describes a performance report with these items, shown only where they apply: interactions, searches, views on Search and Maps, directions, calls, website clicks, messages, bookings, and product, menu and offer views.
 
-1. Go to lookerstudio.google.com and create a blank report.
-2. Add your data sources one by one and authorise access with the Google account that owns them.
-3. Design a single page with a header, a row of headline numbers and a few supporting charts.
+Some counting rules matter in a report. Views count unique visitors, so they can be lower than notification numbers. Search terms update at the start of each month and can take up to five days to appear. Call tracking needs a phone number on the profile. Bookings need a booking provider.
 
-A layout that works for most local businesses:
+## How Do You Lay Out the Report?
 
-- **Top row:** total clicks from Search Console, GA4 sessions from organic search, key events (calls, bookings, forms), and profile actions.
-- **Trend chart:** clicks and impressions over the last 12 months, compared to the same period last year to account for seasonality.
-- **Top queries table:** with a filter for queries that include your town or "near me".
-- **Top pages table:** which pages are earning clicks and key events.
-- **Profile panel:** views, calls, directions and website clicks.
-- **Notes box:** space for your commentary.
+Keep it to four sections that a shop owner can read in two minutes:
 
-Use a date range control and a comparison period so the owner can see change at a glance. Keep colours and fonts consistent and limit yourself to a few charts. More charts rarely mean more insight.
+1. **Visibility:** Search Console clicks and impressions by month, plus Profile views.
+2. **Actions:** Profile calls, direction requests and website clicks.
+3. **Website:** Analytics sessions from organic search and form or booking conversions.
+4. **Notes:** Two lines on what changed and what you do next.
 
-## Step 3: Add filters that make it local
+Start with a single page and monthly date ranges. Add a comparison to the previous period so changes are visible. For which metrics to choose, see [how to measure local SEO success](/blog/how-to-measure-local-seo-success-kpis) and [marketing reporting for small business](/blog/marketing-reporting-for-small-business).
 
-Local reports need local views:
+## Where Does AI Fit In?
 
-- Filter Search Console queries by country, or by regex for your city and neighbourhoods.
-- Segment branded queries (your business name) from non-branded queries such as "dog groomer near me". Non-branded growth is a better signal of new demand.
-- For multiple locations, add a location dropdown, ideally with one profile or landing page per branch. See our multi-location SEO guide.
+AI is useful for the writing step, not for the numbers. Export the table, paste it into an AI assistant, and ask for a plain summary of what rose, what fell and which numbers are too small to trust. Then check each claim against the table.
 
-## Step 4: Where AI actually helps
+Do not paste customer names or private data. Do not let a tool state causes it cannot see, such as "rankings rose because of your new photos". Search Console shows what happened, not why.
 
-Looker Studio itself does not write commentary for you, but you can use a general AI assistant such as ChatGPT, Claude or Gemini on exported data. Here is a safe workflow:
+Worked example, all inputs are assumptions: a salon sees Search Console clicks go from 120 in September to 150 in October, and Profile calls from 18 to 22. The report shows +25% clicks and +4 calls. With counts this small, one busy week can explain it, so the note says "watch for two more months" instead of claiming a win.
 
-1. Export the key tables (for example, top queries and top pages for this month and last month) as CSV, anonymised if needed.
-2. Paste them into the assistant with a clear instruction.
-3. Review the draft against the charts. Correct anything that does not match.
+## How Often Should You Send It?
 
-Example prompt: "Here are Search Console numbers for a pet grooming salon for this month and last month. Summarise what changed in plain English in five bullet points, flag anything that looks unusual, and suggest three practical next steps. Do not invent numbers that are not in the data."
+Monthly is enough for most local businesses, because Profile search terms update monthly. Weekly dashboards can stay open for you, but send the client or owner one short monthly page. Set the date range to the last full month so the numbers do not shift after sending.
 
-Good uses of AI in reporting:
-
-- Turning tables into a short plain-English summary.
-- Spotting queries that are rising or falling.
-- Grouping search terms by theme (services, neighbourhoods, brand).
-- Drafting a next-steps list for you to edit.
-- Flagging possible anomalies, such as a sudden drop in clicks, for you to investigate.
-
-Poor uses:
-
-- Asking it to "predict" rankings.
-- Asking it to explain causes it cannot see (it does not know you changed your website or that a competitor opened).
-- Publishing its commentary without checking it against the data.
-
-## Step 5: Explain the numbers honestly
-
-Local SEO data is noisy. A few principles keep reports honest:
-
-- Compare like with like: month against the same month last year where possible.
-- Treat average position as a rough guide. Local results vary by searcher location and device.
-- Remember Search Console and GA4 will not match each other exactly, because they measure different things.
-- Show actions (calls, bookings), not just traffic.
-- Say "we think" when you are inferring a cause.
-
-<Callout type="coffee">A good report is like a good espresso: concentrated, nothing wasted, and it leaves you ready for action.</Callout>
-
-## Step 6: Schedule and share
-
-Looker Studio can email the report on a schedule (for example, on the first Monday of each month) as a PDF or a link. Add a short note at the top with the three key takeaways and the next actions. Consistency matters more than perfection, so pick a day and keep it.
-
-If you manage reports for clients, or just want a set-and-forget approach, consider a monthly review session, even a 20-minute call, so the numbers lead to decisions. Our AI-powered local SEO reporting guide covers adjacent tools, and our [analytics service](/services/analytics) can set up dashboards for you.
-
-## A simple monthly checklist
-
-- Are branded and non-branded clicks up or down versus last year?
-- Which three pages earned the most key events?
-- Did calls and direction requests move with profile views?
-- Did review count and rating change?
-- Are there pages with many impressions but few clicks (title or snippet issues)?
-- What are the top two actions for next month?
+If you want a deeper setup for tracking, start with our [Google Analytics 4 guide](/blog/google-analytics-4-for-small-business), the [Search Console guide](/blog/google-search-console-guide) and the [Business Profile checklist](/blog/google-business-profile-optimization-checklist).
 
 ## FAQ
 
-**Q: Is Google Data Studio still available?**
-A: It was renamed Looker Studio in 2022. The core tool is free, and older Data Studio tutorials mostly still apply.
+### Is Google Data Studio free?
 
-**Q: Can Looker Studio pull Google Business Profile data automatically?**
-A: Availability has changed over time. Check the current connector list, and if there is no direct option, use a Google Sheets bridge or a third-party connector.
+Google's documentation describes the base tool as no-cost. A paid Pro version exists for team and administration features. The pricing page was not readable when checked, so no Pro price is quoted here.
 
-**Q: Can AI write my whole SEO report?**
-A: It can draft commentary and summaries from data you provide, but you must verify it. AI cannot see your actual analytics unless you give it the data, and it can state incorrect conclusions confidently.
+### Is it called Looker Studio or Data Studio now?
 
-**Q: How often should a local business review SEO reports?**
-A: Monthly is typical, with a quick check after any major website or profile change. Local rankings fluctuate, so trends over several months are more meaningful than weekly changes.
+Google's current documentation page says the tool is called Data Studio, after the Looker Studio name. Older guides use Google Data Studio or Looker Studio for the same product.
 
-## Want a report you can act on?
+### Is there a Google Business Profile connector?
 
-If you want dashboards built, connected and explained for you, see our [local SEO service](/services/local-seo) or [contact us](/contact) and we will walk through what your reporting should look like.
+Not in Google's own connector catalog as checked on 31 October 2026. Use a Sheets export or a partner connector, and read the partner's current terms.
 
-## Related guides
+### Can AI write the report for me?
 
-- [Google AI Overviews for Local Business: How to Show Up When Nobody Clicks](/blog/google-ai-overviews-local-business-seo)
+It can summarize a table you give it. You still need to check the numbers and avoid claims about causes.
+
+### How many months of data do I need?
+
+The sources here give no minimum. Use at least three months to spot a pattern, and more if your business is seasonal.
+
+## Sources
+
+- [Google Cloud docs: Data Studio](https://docs.cloud.google.com/looker/docs/studio) (renamed; no-cost tool)
+- [Google Cloud docs: Available connectors](https://docs.cloud.google.com/looker/docs/studio/available-connectors) (Search Console, Analytics, Ads, Sheets listed; no Business Profile connector)
+- [Google Business Profile Help: Understand your Business Profile performance](https://support.google.com/business/answer/9918094)
+
+Want a monthly report set up for your business? See our [local SEO service](/services/local-seo) or [book a free audit](/free-audit).

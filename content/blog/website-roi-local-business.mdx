@@ -1,144 +1,103 @@
 ---
-title: "How to Measure the ROI of Your Local Business Website"
+title: "How to Measure the ROI of a Local Business Website"
 date: "2026-05-21"
-lastModified: "2026-06-02"
-description: "How to measure the ROI of your local business website: the formula, the costs to include, the tracking to set up and how to improve the return."
+lastModified: "2026-10-31"
+description: "Website ROI = (profit from the site minus its cost) / cost. Track calls, bookings and directions with GA4 key events, UTMs and a worked $ example."
 author: "Nataliia"
 category: "Website & CRO"
 tags: ["local business website", "return on investment", "roi calculation", "small business owners"]
 slug: "website-roi-local-business"
 image: "https://images.unsplash.com/photo-1534367610401-9f5ed68180aa?w=800&q=80&auto=format&fit=crop"
-readTime: '12 min read'
+readTime: '8 min read'
 ---
 
-To measure your local business website's ROI, subtract what the website costs you (build, hosting, tools, ads and your time) from the profit it brings in, then divide by that cost. The hard part is not the maths. It is tracking which bookings, calls and sales actually came from the website, which takes a few simple tools and some consistent habits.
+To measure your local business website's ROI, subtract what it costs you (build, hosting, tools, ads, your time) from the profit it brings in, then divide by that cost. The maths is easy. The hard part is knowing which calls, bookings and sales really came from the website, and that takes a few settings in Google Analytics and Google Business Profile.
 
-Here is a practical way to do it, even if you are not technical.
+This guide shows the formula, what to track, and a worked example. No benchmark for typical website ROI is quoted, because none we could verify exists for local businesses.
 
-## The Basic ROI Formula
+<StatRow
+  values="3|6 months|5"
+  labels="UTM parameters Google says to always use|Business Profile data window shown in Google Analytics|Business Profile metrics: calls, directions, website clicks, bookings, messages"
+  subs="Google Analytics Help|Google Analytics Help|Google Business Profile Help"
+  trends="neutral|neutral|neutral"
+/>
 
-**ROI = (Profit from website - Cost of website) / Cost of website**
+## What is the website ROI formula?
 
-Use profit (or gross margin), not revenue. A website that brings in $10,000 of sales at a 40 percent margin has produced $4,000 of profit, and that is the number to compare with costs.
+ROI = (profit attributed to the website - website cost) / website cost. Use profit, not revenue. If a booking brings $90 and costs you $40 to deliver, the profit is $50.
 
-Example with round numbers: if the website brought in $4,000 of profit over a quarter and cost $1,000 to run in that quarter, the ROI is ($4,000 - $1,000) / $1,000 = 3, or 300 percent. These figures are only an illustration of the method, not a benchmark.
+Website cost includes the build or monthly plan, domain and hosting, maintenance, paid ads that send traffic to it and your own time at a fair hourly rate. See our [website maintenance costs](/blog/website-maintenance-cost-small-business) and [hosting guide](/blog/website-hosting-for-small-business) for the usual line items.
 
-## Step 1: Add Up the Real Costs
+## Which actions should you count?
 
-Include everything, otherwise your ROI will look better than it is.
+Count the actions that lead to money, not visits. For most local businesses that is calls, booking-form submissions, direction requests and orders.
 
-| Cost | Examples |
-|---|---|
-| One-off | Design and build, branding, photography, copywriting |
-| Recurring | Domain (often around $10 to $20 a year), hosting (from a few dollars to $50 or more a month), website platform fees, booking software |
-| Marketing | Google Ads or Meta ad spend, SEO help, email software |
-| Time | Your hours or staff hours updating the site, at a fair hourly rate |
-| Maintenance | Updates, security, small fixes, developer help |
+Google Analytics defines a key event as "an event that measures an action that's particularly important to the success of your business". Create an event for each action, then mark it as a key event. Google Business Profile reports calls, direction requests, website clicks, bookings and messages. Bookings only appear when handled through a booking provider.
 
-Spread one-off costs across a sensible lifetime, such as 24 to 36 months, so each month carries a fair share.
+## How do you know where visitors came from?
 
-## Step 2: Decide What a "Win" Is
+Tag the links you control. Google says to always use utm_source, utm_medium and utm_campaign, and warns that missing values show up as "(not set)" in reports. Tag links in emails, social bios, ads and Google Business Profile website links.
 
-A website has different jobs for different businesses. Choose the actions that matter:
+Link your Business Profile to Google Analytics if you want those metrics in the same reports. Google notes the data goes back only six months, so export it regularly.
 
-- **Bookings or appointments** made online
-- **Phone calls** from the site (tap-to-call)
-- **Form submissions** or quote requests
-- **Direction requests** to your location
-- **Online orders or gift card sales**
-- **Email sign-ups** that lead to later purchases
+Our [marketing ROI tracking guide](/blog/how-to-track-marketing-roi-local-business-guide) covers offline sales and phone calls.
 
-Give each action a rough value. Your average sale, or the lifetime value of a customer, is a useful anchor. If you do not know it, work it out from your records: average spend per visit multiplied by typical visits per year.
+## What about calls and walk-ins?
 
-## Step 3: Set Up Tracking
+Calls from the website are easy to count if you track taps on the phone number as an event. Walk-ins are harder. Ask "How did you hear about us?" at checkout or booking and record the answer in a simple sheet. It will not be perfect, but a consistent question beats guessing.
 
-You cannot measure ROI without data. The essentials:
+Google Business Profile counts calls as taps on the call button, which is not the same as completed conversations. Treat it as demand, not confirmed customers.
 
-1. **Google Analytics 4 (free):** install it and mark key actions as conversions, such as booking confirmations and form submissions. See our [GA4 guide for small businesses](/blog/google-analytics-4-for-small-business).
-2. **Google Search Console (free):** shows what people searched before clicking to your site.
-3. **Call tracking:** services like CallRail or a Google forwarding number (typically from about $40 a month for third-party tools) show which calls came from the site or ads.
-4. **Booking platform reports:** Square, Fresha, Mindbody, Calendly and others often show how many bookings came via your website link.
-5. **Your Google Business Profile insights:** website clicks, calls and direction requests.
-6. **A simple question:** ask every new customer "How did you hear about us?" and log the answer.
+## Worked example: a salon website
 
-Our GA4 setup guide for local businesses walks through configuration step by step.
+All inputs are **assumptions** for illustration.
 
-## Step 4: Attribute Results Honestly
+| Input (assumption) | Value |
+| --- | --- |
+| Monthly website cost (plan, hosting, maintenance) | $60 |
+| Your time on updates, 2 hours at $25 | $50 |
+| Total monthly cost | $110 |
+| New bookings a month from website forms and taps | 14 |
+| Profit per booking after costs | $38 |
 
-Attribution is imperfect. Some customers see your Instagram, search your name, visit the site, and then call. Different tools will give different answers. Use more than one source and look for patterns.
+Profit from the website: 14 x $38 = $532. ROI = ($532 - $110) / $110 = 3.84, or 384%. If only 5 bookings can be traced, profit is $190 and ROI is 73%. The result depends on honest attribution, so label which bookings are confirmed and which are estimates.
 
-- **Direct attribution:** online bookings and form fills tracked in GA4 and your booking system.
-- **Phone and walk-in attribution:** call tracking plus customer surveys.
-- **Assisted value:** the website helped, even if the final step happened by phone or in person. Count a reasonable share, and be conservative.
+## What mistakes distort website ROI?
 
-If you need one rule: when unsure, under-count. A conservative ROI you can trust is more useful than a flattering guess.
-
-## Step 5: Calculate a Month at a Time
-
-Create a simple spreadsheet with one row per month:
-
-| Column | What goes in it |
-|---|---|
-| Website sessions | From GA4 |
-| Conversions | Bookings, calls, forms |
-| Conversion rate | Conversions divided by sessions |
-| Estimated customers won | Conversions that became paying customers |
-| Average profit per customer | From your own records |
-| Website profit | Customers won multiplied by profit per customer |
-| Total website cost | From step 1 |
-| ROI | (Profit - cost) / cost |
-
-Your own history matters far more than any industry average. Watch how the figures move over several months rather than overreacting to one slow or busy period.
-
-## Step 6: Look Beyond the Headline Number
-
-ROI is a summary. These supporting metrics tell you where to improve:
-
-- **Conversion rate:** the share of visitors who take a key action. Typical rates vary widely by business and traffic source, so compare against your own past performance.
-- **Traffic source quality:** do Google search visitors convert better than social visitors?
-- **Mobile experience:** if most visitors are on phones, test your booking flow on one.
-- **Page speed and clarity:** slow, confusing pages leak customers.
-- **Return visitors and repeat customers:** a site that helps retention has value beyond the first booking.
-
-## Step 7: Improve the Return
-
-You can raise ROI by increasing results or lowering costs. Common high-impact improvements:
-
-- **Make the booking button impossible to miss,** on every page and on mobile.
-- **Speed up the site** by compressing images and removing unused plugins.
-- **Add trust signals:** real reviews, photos and clear prices. See our [trust signals guide](/blog/trust-signals-website).
-- **Create service pages** for each core service and location, so search engines understand what you offer.
-- **Capture emails** with a useful offer and follow up. See email marketing for small business.
-- **Fix leaks:** broken forms, missing confirmation messages and slow replies.
-
-Our [local business website checklist](/blog/local-business-website-checklist) gives a fuller review.
-
-<Callout type="coffee">Measuring ROI is like checking the till after a busy morning: it is not about perfection, just knowing which drinks are actually making money.</Callout>
-
-## When a Website Is Not the Right Place to Look
-
-Some businesses get most of their customers from walk-ins, referrals or Google Maps. That does not make the website worthless. It often supports those channels by confirming you are legitimate, showing hours and prices, and giving people a booking path. In that case, measure the website's role in assists and enquiries, and consider whether improving your Google Business Profile first would deliver more.
+- Counting all revenue instead of profit.
+- Crediting the website with customers who would have booked anyway, such as repeat clients on a standing appointment.
+- Ignoring cost of time.
+- Judging after one month for a service with a long decision cycle.
+- Mixing paid-ad results into website results without separating the ad cost.
 
 ## FAQ
 
-**Q: What is a good ROI for a local business website?**
-A: There is no single benchmark. A good result is one where the profit it generates clearly exceeds what you spend on it, and trends upward over time. Track your own numbers month by month.
+### What is a good ROI for a small business website?
 
-**Q: How do I track phone calls from my website?**
-A: Use call tracking tools such as CallRail, or Google forwarding numbers if you run ads. Add a "How did you hear about us?" question for callers who do not use trackable numbers.
+No verified benchmark exists in the sources reviewed here, so compare the website with your other channels and your own break-even point instead.
 
-**Q: Should I include my time in the cost?**
-A: Yes, at a fair hourly rate. Otherwise a site that eats your evenings may look profitable when it is not.
+### Should I count Google Business Profile calls?
 
-**Q: How long before a new website shows a return?**
-A: It depends on whether you have traffic. A site with ads or existing audiences can show results in weeks, while an SEO-driven site often takes several months to build momentum.
+Count them as demand from your online presence, not as website results. Keep them separate from tracked website events.
 
-## Next Step
+### Do I need Google Analytics?
 
-If you want help setting up tracking and turning your website into a reliable source of bookings, see our [website service](/services/website) or [analytics service](/services/analytics), and feel free to [contact us](/contact).
+It is the most common free option, but any tool that records events and sources works. The method matters more than the tool.
 
-## A Note on Patience and Review Cadence
+### How long until a website pays back?
 
-Review your numbers monthly and do a deeper check each quarter. Short windows can mislead: a rainy fortnight, a school holiday or a one-off event can swing bookings without telling you anything about the website.
+It depends on your costs and booking value. Divide the total upfront cost by monthly profit from the site to get months to payback.
 
-Keep a short log of changes you make (new photos, a revised booking page, a new ad campaign) next to your monthly figures, so that when results move you have a good chance of understanding why.
+### How can I improve website ROI?
+
+Raise conversions with a clearer call to action, faster pages and better proof. See our [conversion rate guide](/blog/website-conversion-rate-optimization).
+
+## Sources
+
+- [Google Analytics Help: Key events](https://support.google.com/analytics/answer/9267568)
+- [Google Analytics Help: Campaign URL parameters (UTM)](https://support.google.com/analytics/answer/10917952)
+- [Google Business Profile Help: Performance and insights](https://support.google.com/business/answer/9918094)
+- [Google Analytics Help: Connect Google Business Profile](https://support.google.com/analytics/answer/16930347) (six-month data limit, via search result summary)
+- [PageSpeed Insights: About](https://developers.google.com/speed/docs/insights/v5/about)
+
+Want help tracking what your website really earns? See our [analytics service](/services/analytics) or [book a free audit](/free-audit).

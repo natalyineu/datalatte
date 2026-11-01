@@ -1,152 +1,116 @@
 ---
-title: "Website Accessibility for Small Businesses: Simple Fixes That Help Everyone"
-seoTitle: "Website Accessibility for Small Businesses: Simple Fixes"
+title: "Website Accessibility for Small Business: A Checklist"
+seoTitle: "Website Accessibility for Small Business: A Checklist"
 date: "2026-05-12"
-lastModified: "2026-06-02"
-description: "Website accessibility for small businesses: a practical checklist covering alt text, contrast, keyboard use, forms and captions, plus free tools to test."
+lastModified: "2026-11-01"
+description: "95.9% of home pages have detectable WCAG failures (WebAIM 2026). A checklist of the six most common fixes, plus free tests and what the ADA rule covers."
 author: "Nataliia"
 category: "Website & CRO"
 tags: ["website accessibility", "small business", "disability access"]
 slug: "website-accessibility-small-business"
 image: "https://images.unsplash.com/photo-1467003909585-2f8a72c4f4a3?w=800&q=80&auto=format&fit=crop"
-readTime: '14 min read'
+readTime: "7 min read"
 ---
+To make a small business website accessible, fix the failures that appear most often: low-contrast text, images without alt text, form fields without labels, empty links and empty buttons. WebAIM's 2026 analysis of one million home pages found detectable WCAG 2 failures on 95.9% of them, averaging 56.1 errors per page. Most of these fixes take minutes each.
 
-Making a small business website accessible means people with visual, hearing, motor or cognitive disabilities can use it, and the fixes also tend to help everyone on a phone, in bright sunlight or in a hurry. Start with a handful of high-impact changes: alt text, readable colour contrast, clear headings, keyboard-friendly navigation, labelled forms and captions.
+WCAG 2.2 sets the contrast minimum for normal text at 4.5:1 (success criterion 1.4.3, Level AA). This guide is general information, not legal advice. Examples are labelled as assumptions.
 
-Accessibility is partly about doing right by customers and partly about practicality. Many accessibility improvements overlap with good usability and good SEO. In some countries, businesses also face legal expectations around accessibility, though the rules vary by place and business type. This guide is practical guidance, not legal advice. If legal compliance is a concern, speak to a qualified professional.
+<StatRow
+  values="95.9%|56.1|83.9%|53.1%"
+  labels="Home pages with detectable WCAG 2 failures|Average detected errors per home page|Home pages with low-contrast text|Home pages with images missing alt text"
+  subs="WebAIM Million 2026|WebAIM Million 2026|WebAIM Million 2026|WebAIM Million 2026"
+  trends="neutral|neutral|neutral|neutral"
+/>
 
-## The standard to aim for
+## What Are the Most Common Accessibility Problems?
 
-The widely used reference is the Web Content Accessibility Guidelines (WCAG), published by the W3C. Most organisations aim for Level AA of WCAG 2.1 or 2.2. WCAG is organised around four ideas: content should be perceivable, operable, understandable and robust. You do not need to memorise it. The checklist below covers the issues small business sites most commonly have.
+WebAIM's analysis (conducted February 2026) lists the six most common failures by share of home pages. The same list is a good order for your own fixes.
 
-## Quick checklist
-
-| Area | What to check | Effort |
+| Failure | Share of home pages | Fix |
 | --- | --- | --- |
-| Images | Meaningful alt text on informative images | Low |
-| Colour | Text contrast of at least 4.5:1 for normal text | Low |
-| Headings | One H1, logical H2 and H3 order | Low |
-| Links and buttons | Descriptive text, not "click here" | Low |
-| Keyboard | Everything usable without a mouse, visible focus | Medium |
-| Forms | Visible labels, clear error messages | Medium |
-| Video and audio | Captions and transcripts | Medium |
-| Text size and zoom | Readable at 200% zoom, no horizontal scroll on mobile | Medium |
-| Motion | No auto-playing carousels or flashing content | Low |
-| Documents | Accessible menus and PDFs, or HTML alternatives | Medium |
+| Low-contrast text | 83.9% | Darken text or lighten the background until it reaches 4.5:1 |
+| Images missing alt text | 53.1% | Describe informative images; leave decorative alt empty |
+| Form inputs missing labels | 51% | Add a visible label tied to each field |
+| Empty links | 46.3% | Add link text or an accessible name, such as a name for a social icon |
+| Empty buttons | 30.6% | Give icon buttons a text label |
+| Missing document language | 13.5% | Set the page language attribute |
 
-## Fix 1: Add useful alt text
+These are failures that automated tools can detect. Automated scans cannot judge everything, such as whether alt text is meaningful, so a clean scan does not prove a page is fully accessible.
 
-Alt text is a short description that screen readers announce in place of an image. Describe what matters in context:
+## How Do You Test Your Own Site?
 
-- Informative image: "Barista pouring a flat white with leaf latte art"
-- Product photo: "Blue ceramic mug, 350ml, with handle"
-- Decorative image (background swirls, dividers): leave the alt empty so screen readers skip it
-- Images of text: avoid them, or repeat the text in alt text
+Start with free checks. Run the WebAIM contrast checker on your text and button colours, and use a browser extension that scans the page. Then test by hand: tab through the page with the keyboard only, zoom to 200%, and read the page with a screen reader for five minutes.
 
-A photo of your menu should not be the only place your menu exists. Publish it as real text too, so screen readers, search engines and translation tools can read it.
+Look for the points where a visitor could get stuck: a booking form, a menu, a pop-up you cannot close with the keyboard. These matter most for a local business, because the visitor is trying to book or call. Our guide to [website speed](/blog/website-speed-optimization-small-business) and [mobile-first design](/blog/mobile-first-website-design-local-businesses) cover related checks.
 
-## Fix 2: Check colour contrast
+## Which Fixes Should You Make First?
 
-Low-contrast text, such as light grey on white or white on a pale photo, is among the most common problems. WCAG asks for a contrast ratio of at least 4.5:1 for normal text and 3:1 for large text. Free checkers include the WebAIM Contrast Checker and the contrast tools in browser developer tools.
+Work in this order:
 
-Do not rely on colour alone to convey meaning, for example "required fields are in red". Add a symbol or text as well.
+1. Text and buttons: fix contrast across the template once.
+2. Forms: label every field and write error messages that say what to fix.
+3. Images: add alt text to photos that carry meaning, such as a menu or a service result.
+4. Links and buttons: replace "click here" with the destination, and name icon-only controls.
+5. Keyboard: make sure focus is visible and nothing traps it.
+6. Media: add captions to video you control.
 
-## Fix 3: Use headings properly
+Soft brand palettes are a frequent cause of contrast problems. Our [colour scheme guide](/blog/website-color-schemes-local-business) shows how to pick colours that stay readable.
 
-Screen reader users often navigate by headings, so they should form an outline of the page:
+## Does the ADA Require Your Website to Be Accessible?
 
-- One H1 for the page title
-- H2 for main sections, H3 for subsections beneath them
-- Do not skip levels or choose headings only for their visual size
+The ADA.gov first-steps page for the web rule covers state and local government entities under Title II and requires WCAG 2.1 Level AA. The page says a later 2026 interim final rule extended the compliance dates, so check it for current ones. It does not say whether the rule covers private businesses, which fall under Title III, so ask a lawyer whether your business faces a legal duty or demand letters in your state.
 
-If you use a website builder, use its heading styles rather than bolding text. This also helps search engines understand your pages.
+The legal question is separate from the practical one. Accessible pages work better for older visitors, people on phones in glare and anyone with a temporary injury.
 
-## Fix 4: Write meaningful link and button text
+## Do Accessibility Overlays Solve It?
 
-"Click here" and "Read more" mean nothing out of context, and screen reader users can list all links on a page. Use phrases such as "View our spring class timetable" or "Book a grooming appointment". Make buttons and links large enough to tap easily on a phone.
+Be careful. In April 2025 the FTC approved a final order requiring accessiBe to pay $1 million. The FTC alleged that the company's claims that its accessWidget made websites WCAG-compliant were false, misleading or unsubstantiated, and that it presented paid reviews as independent. The order bars such claims without evidence. It applies to that company, not to every overlay, but it shows why a one-line script is not proof of compliance.
 
-## Fix 5: Make the site keyboard friendly
+## Worked Example: A One-Afternoon Audit
 
-Some people cannot use a mouse and rely on the Tab, Enter and arrow keys. Test your own site:
+All inputs are **assumptions**.
 
-1. Put your mouse aside and press Tab repeatedly.
-2. Can you reach every link, button, menu and form field?
-3. Can you see where you are (a visible focus outline)?
-4. Can you open and close menus, pop-ups and booking widgets?
-5. Can you escape out of any pop-up?
+| Task | Time assumed |
+| --- | --- |
+| Contrast fix across the theme | 45 minutes |
+| Labels on the booking form | 30 minutes |
+| Alt text for 20 key images | 60 minutes |
+| Name icon buttons and social links | 20 minutes |
+| Keyboard and zoom test | 45 minutes |
 
-Do not remove the focus outline in your styles unless you replace it with something just as visible. Cookie banners and chat widgets are common culprits, so test them too.
+That is 3 hours 20 minutes. At your own hourly value, for example $40 an hour, the cost is about $133. It addresses the first five rows of the WebAIM list, which together account for most detected failures.
 
-## Fix 6: Label your forms
-
-Contact, booking and newsletter forms are the point of most small business websites, so they must work for everyone.
-
-- Give each field a visible label, not only placeholder text that disappears.
-- Mark required fields in text and not only colour.
-- Show clear error messages that say what went wrong and how to fix it.
-- Keep forms short.
-- Check that CAPTCHA options include an accessible alternative.
-
-## Fix 7: Add captions and transcripts
-
-If you publish video on your site or social channels, add captions. They help people who are deaf or hard of hearing, and also viewers watching without sound. Platforms like YouTube, Instagram and tools like Descript or CapCut can generate automatic captions, but you should review and correct them. For longer audio or video, offer a transcript.
-
-## Fix 8: Make text readable and layout flexible
-
-- Use a legible font at a comfortable size, typically 16px or larger for body text.
-- Leave generous line spacing and keep lines to a comfortable length.
-- Make sure the page still works when users zoom to 200% or increase the browser's text size.
-- Test on a phone, since layout problems often show up there first.
-- Avoid auto-playing carousels, sound and flashing content. If used, give users controls to pause.
-
-## Fix 9: Menus, flyers and PDFs
-
-Restaurants, salons and studios often publish menus or timetables as PDFs or images. Scanned PDFs are not readable by screen readers. Offer the same information as web text, or create PDFs from the original document with proper structure and text.
-
-## Test your site
-
-Free and low-cost tools help you find issues, though automated tests catch only a portion of problems:
-
-- **WAVE** (WebAIM) and **Lighthouse** (built into Chrome) for quick audits
-- **axe DevTools** browser extension for more detailed results
-- **WebAIM Contrast Checker** for colours
-- A screen reader such as NVDA (free, Windows), VoiceOver (built into Mac and iPhone) or TalkBack (Android) for a manual check
-- Ask a few real users, including people who use assistive technology, to try booking or ordering
-
-Combine automated checks with a manual walk-through of your most important journey, such as finding your hours and booking an appointment.
-
-## A word on accessibility overlays
-
-Some vendors sell widgets claiming to make a site accessible with one line of code. Accessibility professionals generally caution that overlays do not fix underlying problems and may not protect you legally. Fix the issues in your actual site or theme instead.
-
-## Plan the work
-
-You do not need to fix everything in one go. A sensible order is:
-
-1. Run a WAVE or Lighthouse scan on your home page, booking page and contact page.
-2. Fix contrast, alt text, headings and link text.
-3. Test keyboard navigation and forms.
-4. Add captions to videos.
-5. Add an accessibility statement saying how to get help if something does not work.
-6. Re-check whenever you redesign or add plugins.
-
-Accessibility also overlaps with performance and clarity, as in our guides to [above-the-fold design](/blog/above-the-fold-design-local-business) and [landing page best practices](/blog/landing-page-best-practices).
+<Callout type="tip" title="Do This Today">
+Open your home page, press Tab repeatedly and watch the focus outline. If you lose track of where you are, your keyboard users do too.
+</Callout>
 
 ## FAQ
 
-**Q: Is website accessibility a legal requirement for small businesses?**
-A: It depends on your country, region and business type. Laws such as the ADA in the US, the Equality Act in the UK and the European Accessibility Act in the EU can be relevant. Seek legal advice for your situation.
+### What WCAG level should a small business aim for?
 
-**Q: Will accessibility improve my SEO?**
-A: It can help indirectly. Clear headings, alt text, descriptive links and a fast, well-structured site are good for users and for search engines, though accessibility is not a magic ranking switch.
+Level AA is the usual target. The ADA web rule for public entities names WCAG 2.1 Level AA, and WCAG 2.2 adds further criteria.
 
-**Q: Do I need an expensive audit?**
-A: Not to begin. Free tools and a manual keyboard test will surface the biggest issues. A professional audit makes sense for complex sites or higher legal risk.
+### Is a free scanner enough?
 
-**Q: How do I make my website builder site accessible?**
-A: Use the builder's heading and alt text features, choose accessible themes, check contrast, test keyboard navigation and avoid plugins that add inaccessible pop-ups.
+No. Automated tools detect only some problems. Add manual keyboard and screen-reader checks.
 
-## Next step
+### Do I need to fix every PDF and menu?
 
-If you want a site that looks good, loads fast and works for everyone, see our [website design service](/services/website) and [contact DataLatte](/contact) for an honest review of your current site.
+Publish menus as real text where you can, so they are readable by screen readers. See the [FAQ page guide](/blog/website-faq-page-local-business) for how to answer common questions in text.
+
+### Can I just install an accessibility widget?
+
+Not as proof of compliance. See the FTC action above.
+
+### How does accessibility help SEO?
+
+Clear headings, alt text and link text help machines read the page. No study was verified for ranking impact, so treat it as a likely benefit, not a promise.
+
+## Sources
+
+- [WebAIM: The WebAIM Million (2026)](https://webaim.org/projects/million/)
+- [W3C: WCAG 2.2 quick reference](https://www.w3.org/WAI/WCAG22/quickref/)
+- [ADA.gov: Web rule first steps](https://www.ada.gov/resources/web-rule-first-steps/)
+- [FTC: accessiBe final order](https://www.ftc.gov/node/88115)
+
+Want your site checked and fixed? See our [website service](/services/website) or [book a free audit](/free-audit).
