@@ -1096,6 +1096,11 @@ const nextConfig: NextConfig = {
         destination: "/blog/ctv-advertising-usa-local-business-guide",
         permanent: true,
       },
+      {
+        source: "/blog/fitness-studio-marketing-with-google-my-business",
+        destination: "/blog/fitness-studio-google-business-profile-optimization",
+        permanent: true,
+      },
     // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
