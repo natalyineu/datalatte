@@ -1,0 +1,34 @@
+name: Price watch
+on:
+  schedule:
+    - cron: "17 5 * * 1"
+  workflow_dispatch:
+permissions:
+  contents: write
+  issues: write
+concurrency: price-watch
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: npm i --no-save playwright@1.56.1 && npx playwright install --with-deps chromium
+      - id: run
+        run: node scripts/price-watch.mjs
+      - name: Open or update issue
+        if: steps.run.outputs.missing != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          n=$(gh issue list --label price-watch --state open --json number -q '.[0].number')
+          if [ -n "$n" ]; then gh issue comment "$n" --body-file price-watch-report.md
+          else gh label create price-watch --color 6f4e37 2>/dev/null || true
+               gh issue create --title "Vendor prices changed" --label price-watch --body-file price-watch-report.md; fi
+      - name: Commit state
+        run: |
+          rm -f price-watch-report.md
+          git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/price-watch-state.json
+          git diff --cached --quiet || { git commit -m "chore: price watch state"; git pull --rebase origin main; git push origin HEAD:main; }

@@ -1,0 +1,22 @@
+{
+  "_note": "Prices we publish (on /rates and in comparison articles) and the vendor page each came from. 'expect' lists the figures that should still appear on that page; if one disappears the price probably changed. Keep in step with src/data/rates.ts and the articles.",
+  "entries": [
+    { "id": "semrush-toolkit", "url": "https://www.semrush.com/prices/", "expect": ["$139"], "article": "semrush-vs-ahrefs-small-business" },
+    { "id": "semrush-local", "url": "https://www.semrush.com/pricing/local/", "expect": ["$30", "$60"], "article": "semrush-vs-ahrefs-small-business" },
+    { "id": "ahrefs", "url": "https://ahrefs.com/pricing", "expect": ["$129", "$249"], "article": "ahrefs-local-seo-guide" },
+    { "id": "brightlocal", "url": "https://www.brightlocal.com/pricing/", "expect": ["$41", "$54", "$65"], "article": "best-local-seo-audit-tool" },
+    { "id": "fresha", "url": "https://www.fresha.com/pricing", "expect": ["$19.95"], "article": "ai-automation-for-hair-salons" },
+    { "id": "vagaro", "url": "https://www.vagaro.com/pro/pricing", "expect": ["$23.99"], "article": "fresha-vs-square-vs-vagaro-salon-booking-software" },
+    { "id": "moego", "url": "https://www.moego.pet/pricing", "expect": ["$49", "$99", "$159"], "article": "marketing-tools-for-pet-groomers" },
+    { "id": "squarespace", "url": "https://www.squarespace.com/pricing", "expect": ["$19", "$29", "$49", "$99"], "article": "wix-vs-squarespace-small-business" },
+    { "id": "make", "url": "https://www.make.com/en/pricing", "expect": ["$12", "$21", "$38"], "article": "make-com-automation-local-business-workflows" },
+    { "id": "spotify-ads", "url": "https://ads.spotify.com/en-US/small-business-advertising/", "expect": ["$250"], "article": "how-much-do-spotify-ads-cost-pricing-for-local-business" },
+    { "id": "nextdoor-budget", "url": "https://business.nextdoor.com/en-us/blog/tips-for-selecting-a-budget-for-nextdoor-ads", "expect": ["$3", "$5", "$10"], "article": "nextdoor-ads-cost-2026" },
+    { "id": "gohighlevel", "url": "https://www.gohighlevel.com/pricing", "expect": ["$97", "$297", "$497"], "article": "gohighlevel-pricing-for-local-business" },
+    { "id": "zapier", "url": "https://zapier.com/pricing", "expect": ["$19.99"], "article": "no-code-marketing-tools" },
+    { "id": "buffer", "url": "https://buffer.com/pricing", "expect": ["$5"], "article": "hootsuite-vs-buffer-vs-later-best-social-media-tool" },
+    { "id": "later", "url": "https://later.com/pricing/", "expect": ["$18.75"], "article": "hootsuite-vs-buffer-vs-later-best-social-media-tool" },
+    { "id": "hootsuite", "url": "https://www.hootsuite.com/plans", "expect": ["$99"], "article": "hootsuite-vs-buffer-vs-later-best-social-media-tool" },
+    { "id": "shopify", "url": "https://www.shopify.com/pricing", "expect": ["$39"], "article": "shopify-for-local-business-website" }
+  ]
+}
