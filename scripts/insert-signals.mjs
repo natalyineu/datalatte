@@ -54,17 +54,31 @@ if (signals.length === 0) {
   process.exit(0);
 }
 
+// One signal per source article: skip any whose source_url is already stored (a re-worded headline gets a new slug).
+const { data: existing, error: existingErr } = await supabase.from("radar_signals").select("source_url");
+if (existingErr) {
+  console.error("❌ Could not read existing signals:", existingErr.message);
+  process.exit(1);
+}
+const known = new Set((existing ?? []).map(r => r.source_url));
+const fresh = signals.filter(s => !known.has(s.source_url));
+console.log(`   ${signals.length - fresh.length} already stored by source_url, ${fresh.length} new`);
+if (fresh.length === 0) {
+  fs.unlinkSync(inputPath);
+  process.exit(0);
+}
+
 // Upsert on slug (unique constraint) — safe to re-run
 const { data, error } = await supabase
   .from("radar_signals")
-  .upsert(signals, { onConflict: "slug", ignoreDuplicates: true });
+  .upsert(fresh, { onConflict: "slug", ignoreDuplicates: true });
 
 if (error) {
   console.error("❌ Supabase error:", error.message);
   process.exit(1);
 }
 
-console.log(`✅ Upserted ${signals.length} signals (duplicates skipped)`);
+console.log(`✅ Upserted ${fresh.length} signals (duplicates skipped)`);
 
 // Clean up temp file
 fs.unlinkSync(inputPath);

@@ -30,7 +30,10 @@ export const metadata: Metadata = {
 };
 
 export default async function RadarPage() {
-  const signals = await fetchPublishedSignals();
+  const allSignals = await fetchPublishedSignals();
+  // The page embeds every signal in its HTML, so show the latest 60 here; older ones keep their own pages and the RSS feed.
+  const FEED_LIMIT = 60;
+  const signals = allSignals.slice(0, FEED_LIMIT);
   const tickerItems = [...signals, ...signals]; // duplicate for seamless loop
   const today = new Date().toISOString().slice(0, 10);
   const todayCount = signals.filter(s => s.date === today).length;
@@ -138,6 +141,11 @@ export default async function RadarPage() {
 
       {/* ── Feed ─────────────────────────────────────────────────────────── */}
       <RadarFeed signals={signals} />
+      {allSignals.length > signals.length && (
+        <p className="max-w-6xl mx-auto px-4 pb-10 text-center text-xs text-gray-500 dark:text-gray-400">
+          Showing the latest {signals.length} of {allSignals.length} signals. Older ones are in the <a href="/radar/feed.xml" className="underline">RSS feed</a>.
+        </p>
+      )}
     </main>
   );
 }

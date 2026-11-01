@@ -125,43 +125,64 @@ async function fetchFeed(source) {
   }
 }
 
+/** Guard rails on the model output: wrong year, too thin, duplicate source, or a guide dressed up as news. */
+function rejectReason(result, article, seenUrls) {
+  if (seenUrls.has(article.link)) return "duplicate source in this run";
+  if (!Array.isArray(result.body) || result.body.length < 2) return "body too thin";
+  const pub = article.pubDate ? new Date(article.pubDate) : null;
+  if (pub && !Number.isNaN(pub.getTime())) {
+    const y = pub.getUTCFullYear();
+    const text = [result.headline, result.summary, ...(result.body ?? []), result.insight].join(" ");
+    for (const m of text.matchAll(/\b(20\d\d)\b/g)) {
+      const year = Number(m[1]);
+      if (year < y - 1 || year > y + 1) return `year ${year} does not fit a ${y} article`;
+    }
+  }
+  if (/\b(how to|guide|tutorial|mistakes|tips|ways to|checklist)\b/i.test(article.title) && result.impact !== "fyi") {
+    result.impact = "fyi"; // evergreen-looking title: never above "fyi"
+  }
+  return null;
+}
+
 async function classifyBatch(articles) {
   const list = articles.map((a, i) =>
-    `[${i}] SOURCE: ${a.source}\nTITLE: ${a.title}\nCONTENT: ${(a.desc || "").slice(0, 800)}`
+    `[${i}] SOURCE: ${a.source}\nPUBLISHED: ${a.pubDate ? new Date(a.pubDate).toISOString().slice(0, 10) : "unknown"}\nURL: ${a.link}\nTITLE: ${a.title}\nCONTENT: ${(a.desc || "").slice(0, 800)}`
   ).join("\n\n---\n\n");
 
-  const prompt = `You are a marketing intelligence analyst for DataLatte — a local marketing agency for coffee shops, hair salons, pet groomers, and fitness studios in US/UK/AU.
+  const today = new Date().toISOString().slice(0, 10);
+  const prompt = `You are a marketing intelligence analyst for DataLatte, a local marketing agency for coffee shops, hair salons, pet groomers, and fitness studios in US/UK/AU. Today is ${today}.
 
-Evaluate these ${articles.length} articles. Be STRICT about relevance — only mark relevant if the article has a DIRECT, CONCRETE impact on how local small businesses should run their digital marketing RIGHT NOW.
+Evaluate these ${articles.length} articles. Mark one relevant ONLY if it reports a NEW, DATED development with a direct, concrete effect on how local small businesses run their digital marketing.
 
-RELEVANT: changes to Google/Meta/TikTok ad products, local SEO algorithm updates, Google Business Profile changes, AI tools that local businesses can actually use, review management, booking tools, CTV/OTT for local advertisers, social media feature changes affecting local reach.
-NOT RELEVANT: enterprise B2B tech, pure startup/VC news, stock markets, politics, AI research with no near-term product impact, "AI might pause development" think-pieces, abstract tech debates.
+RELEVANT (news): a change to a Google/Meta/TikTok/Microsoft/OpenAI product or policy, a local SEO or Business Profile change, a new tool or price change, a published study with numbers, CTV/OTT/DOOH news for local advertisers.
+NOT RELEVANT: evergreen guides, tutorials, listicles and "how to" or "mistakes to avoid" posts (even if useful), opinion pieces, enterprise B2B tech, VC/startup news, markets, politics, abstract AI debates, anything that does not describe something that just happened or was just announced.
 
-For relevant articles, write SUBSTANTIAL content — a business owner should finish reading and know exactly what to do differently. Minimum 5 body paragraphs.
+STRICT FACT RULES (the output is published as news; a wrong claim is worse than no signal):
+- Use ONLY facts stated in TITLE and CONTENT. Never invent a launch, date, number, feature, name or effect. If the source does not say it, leave it out.
+- Dates: the article was published on its PUBLISHED date. Do not state a different year. If the source describes a future date, write it in the future tense ("will", "from Nov 12"), never as something that already happened.
+- Do not turn a tutorial, review or opinion into an announcement ("X has rolled out ..."). If the source is not reporting a change, it is not relevant.
+- Write as much as the source supports: 2 to 4 short body paragraphs. No minimum length. Do not pad.
+- Niche advice must be phrased as what a business should CHECK or TEST, never as a predicted result ("a hair salon would see X" is not allowed).
+- impact: "breaking" or "high" only for a first-party announcement from the platform or a reported number from a study; "medium" for a reported change from a trade publication; "fyi" for everything else. A forum thread or an unconfirmed report is "fyi" and the summary must say "unconfirmed".
 
 Return a JSON object:
 {
   "results": [
-    {
-      "index": 0,
-      "relevant": false
-    },
+    { "index": 0, "relevant": false },
     {
       "index": 1,
       "relevant": true,
       "category": "meta"|"google"|"ai"|"tiktok"|"seo"|"ctv",
       "impact": "breaking"|"high"|"medium"|"fyi",
       "niches": ["coffee","salons","pet","fitness"],
-      "headline": "punchy, specific headline max 90 chars — name what changed",
-      "summary": "2-3 sentences — what specifically changed, which platform/product, and the concrete effect on local business revenue or visibility",
+      "headline": "specific, factual headline, max 90 chars, naming what changed and by whom",
+      "summary": "2 sentences: what the source says changed and who it affects",
       "body": [
-        "Background paragraph: what this platform/feature is and why local businesses use it",
-        "What changed: the specific update, rollout, or announcement with any numbers/dates mentioned in the source",
-        "Why it matters: how this affects a local business's ad spend, reach, bookings, or search ranking",
-        "Niche breakdown: 2-3 specific examples — e.g. a hair salon running Instagram ads would see X; a coffee shop relying on Google Maps would see Y",
-        "What to watch: timeline, whether this is a test or full rollout, what signals to monitor"
+        "What the source reports, with only the numbers and dates it gives",
+        "Why it matters for a local business, using only what follows from the source",
+        "What to check or test (optional)"
       ],
-      "insight": "2-3 sentences of SPECIFIC, ACTIONABLE advice — name the exact setting to change, the exact feature to enable, or the exact thing to do this week. Not generic. Not 'consider updating your strategy'."
+      "insight": "1-2 sentences: one concrete thing to check or do this week, tied to the source. Not a prediction."
     }
   ]
 }
@@ -171,7 +192,7 @@ ${list}`;
 
   const call = await groqChat({
       messages: [{ role: "user", content: prompt }],
-      temperature: 0.3,
+      temperature: 0.1,
       max_tokens: 6000,
       response_format: { type: "json_object" },
     });
@@ -231,6 +252,7 @@ async function main() {
   }
 
   const signals = [];
+  const seenUrls = new Set();
   for (let i = 0; i < allArticles.length; i += BATCH_SIZE) {
     const batch = allArticles.slice(i, i + BATCH_SIZE);
     console.log(`Batch ${Math.floor(i / BATCH_SIZE) + 1}/${Math.ceil(allArticles.length / BATCH_SIZE)} (${batch.length} articles)...`);
@@ -239,6 +261,9 @@ async function main() {
     for (const result of results) {
       const article = batch[result.index];
       if (!article || !result.relevant || !result.headline) continue;
+      const bad = rejectReason(result, article, seenUrls);
+      if (bad) { console.log(`  ⛔ skipped (${bad}): ${result.headline.slice(0, 60)}`); continue; }
+      seenUrls.add(article.link);
       const slug = toSlug(result.headline);
       signals.push({
         slug,
