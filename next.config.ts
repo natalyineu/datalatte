@@ -1006,6 +1006,21 @@ const nextConfig: NextConfig = {
         destination: "/blog/live-chat-for-local-business",
         permanent: true,
       },
+      {
+        source: "/blog/google-tag-manager-for-small-business",
+        destination: "/blog/google-tag-manager-for-local-website-analytics",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-maps-ranking-tips",
+        destination: "/blog/google-maps-ranking-factors-what-moves-needle-2026",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-my-business-insights",
+        destination: "/blog/google-my-business-analytics",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
