@@ -68,7 +68,7 @@ export async function fetchPublishedSignals(opts: { strict?: boolean } = {}): Pr
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) return [];
   const { data, error } = await supabase
     .from("radar_signals")
-    .select("slug,source,source_url,category,published_at,impact,headline,summary,body,insight,niches")
+    .select("slug,source,source_url,category,published_at,updated_at,impact,headline,summary,body,insight,niches")
     .eq("status", "published")
     .order("published_at", { ascending: false });
 
@@ -84,7 +84,7 @@ export async function fetchSignalBySlug(slug: string): Promise<Signal | null> {
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) return null;
   const { data, error } = await supabase
     .from("radar_signals")
-    .select("slug,source,source_url,category,published_at,impact,headline,summary,body,insight,niches")
+    .select("slug,source,source_url,category,published_at,updated_at,impact,headline,summary,body,insight,niches")
     .eq("status", "published")
     .eq("slug", slug)
     .single();
