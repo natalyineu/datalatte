@@ -1051,6 +1051,26 @@ const nextConfig: NextConfig = {
         destination: "/blog/hair-salon-instagram-ads",
         permanent: true,
       },
+      {
+        source: "/blog/how-to-run-spotify-ads-step-by-step-ad-studio-guide",
+        destination: "/blog/spotify-ads-for-local-business-how-to-start",
+        permanent: true,
+      },
+      {
+        source: "/blog/pandora-advertising-local-business-complete-guide-2026",
+        destination: "/blog/spotify-vs-pandora-vs-iheart-best-audio-ad-platform-local-business",
+        permanent: true,
+      },
+      {
+        source: "/blog/instagram-retargeting-how-to-re-engage-website-visitors",
+        destination: "/blog/retargeting-ads-for-local-business",
+        permanent: true,
+      },
+      {
+        source: "/blog/meta-ads-for-hair-salons-case-study",
+        destination: "/blog/using-meta-ads-for-hair-salon-marketing",
+        permanent: true,
+      },
     // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
