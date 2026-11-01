@@ -1046,7 +1046,12 @@ const nextConfig: NextConfig = {
         destination: "/blog/local-seo-audit-tool-review",
         permanent: true,
       },
-      // Renamed posts — old slugs redirect to new canonical URLs
+      {
+        source: "/blog/case-study-hair-salon-grew-40-percent-instagram-ads",
+        destination: "/blog/hair-salon-instagram-ads",
+        permanent: true,
+      },
+    // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
         destination: "/blog/how-to-ask-pet-grooming-clients-for-google-reviews",
