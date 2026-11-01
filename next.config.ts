@@ -263,7 +263,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/blog/pet-groomer-instagram-marketing",
-        destination: "/blog/pet-groomer-instagram-marketing-strategy",
+        destination: "/blog/pet-groomers-guide-to-instagram-marketing",
         permanent: true,
       },
       {
@@ -839,6 +839,111 @@ const nextConfig: NextConfig = {
       {
         source: "/blog/website-cro-for-fitness-studios",
         destination: "/blog/website-cro-for-local-fitness-studios",
+        permanent: true,
+      },
+      {
+        source: "/blog/sms-marketing-hair-salons-scripts-timing",
+        destination: "/blog/sms-marketing-for-hair-salons",
+        permanent: true,
+      },
+      {
+        source: "/blog/hair-salon-social-media-marketing",
+        destination: "/blog/social-media-marketing-for-hair-salons",
+        permanent: true,
+      },
+      {
+        source: "/blog/small-business-marketing-budget-guide-2026",
+        destination: "/blog/local-marketing-budget-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/predictive-analytics-local-business-what-it-means",
+        destination: "/blog/predictive-analytics-small-business",
+        permanent: true,
+      },
+      {
+        source: "/blog/pet-groomer-website-optimization-for-better-conversions",
+        destination: "/blog/pet-groomer-website-optimization-with-cro",
+        permanent: true,
+      },
+      {
+        source: "/blog/pet-groomer-website-cro-strategy",
+        destination: "/blog/pet-groomer-website-optimization-with-cro",
+        permanent: true,
+      },
+      {
+        source: "/blog/pet-groomer-website-cro-optimization",
+        destination: "/blog/pet-groomer-website-optimization-with-cro",
+        permanent: true,
+      },
+      {
+        source: "/blog/pet-groomer-website-cro",
+        destination: "/blog/pet-groomer-website-optimization-with-cro",
+        permanent: true,
+      },
+      {
+        source: "/blog/pet-groomer-facebook-ads",
+        destination: "/blog/pet-groomer-meta-ads",
+        permanent: true,
+      },
+      {
+        source: "/blog/pet-groomer-analytics-and-tracking",
+        destination: "/blog/pet-groomer-analytics-tracking",
+        permanent: true,
+      },
+      {
+        source: "/blog/pet-groomer-google-business-profile-optimization",
+        destination: "/blog/google-business-profile-for-pet-groomers",
+        permanent: true,
+      },
+      {
+        source: "/blog/pet-groomer-marketing-automation-strategy",
+        destination: "/blog/marketing-automation-for-pet-groomers",
+        permanent: true,
+      },
+      {
+        source: "/blog/pet-groomer-local-seo-with-ahrefs",
+        destination: "/blog/pet-groomer-local-seo-optimization",
+        permanent: true,
+      },
+      {
+        source: "/blog/pet-groomer-social-media-strategy",
+        destination: "/blog/pet-groomer-social-media-marketing",
+        permanent: true,
+      },
+      {
+        source: "/blog/pet-groomer-instagram-marketing-strategy",
+        destination: "/blog/pet-groomers-guide-to-instagram-marketing",
+        permanent: true,
+      },
+      {
+        source: "/blog/nextdoor-ads-for-local-business-complete-guide",
+        destination: "/blog/nextdoor-ads-cost-2026",
+        permanent: true,
+      },
+      {
+        source: "/blog/new-year-marketing-campaigns",
+        destination: "/blog/new-year-marketing-campaigns-local-businesses",
+        permanent: true,
+      },
+      {
+        source: "/blog/mobile-first-website-design-local-businesses",
+        destination: "/blog/mobile-optimization-local-business",
+        permanent: true,
+      },
+      {
+        source: "/blog/mothers-day-marketing-salons-spas-coffee-shops",
+        destination: "/blog/mothers-day-marketing-ideas",
+        permanent: true,
+      },
+      {
+        source: "/blog/online-reputation-management-small-businesses",
+        destination: "/blog/managing-online-reviews-small-business",
+        permanent: true,
+      },
+      {
+        source: "/blog/coffee-shop-programmatic-advertising",
+        destination: "/blog/programmatic-advertising-for-coffee-shops",
         permanent: true,
       },
       // Renamed posts — old slugs redirect to new canonical URLs
