@@ -1021,6 +1021,21 @@ const nextConfig: NextConfig = {
         destination: "/blog/google-my-business-analytics",
         permanent: true,
       },
+      {
+        source: "/blog/google-business-profile-optimization-with-ai",
+        destination: "/blog/ai-for-google-business-profile-optimization",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-business-profile-optimization-for-local-seo",
+        destination: "/blog/google-business-profile-optimization-checklist",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-business-profile-optimization",
+        destination: "/blog/google-business-profile-optimization-checklist",
+        permanent: true,
+      },
       // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
