@@ -1076,6 +1076,26 @@ const nextConfig: NextConfig = {
         destination: "/blog/reddit-ads-for-local-business-guide",
         permanent: true,
       },
+      {
+        source: "/blog/yelp-vs-google-business-profile-which-matters-more",
+        destination: "/blog/google-business-profile-vs-yelp-which-matters-more",
+        permanent: true,
+      },
+      {
+        source: "/blog/ctv-advertising-spain-small-business-guide",
+        destination: "/blog/ctv-advertising-europe-small-business-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/ctv-advertising-netherlands-small-business-guide",
+        destination: "/blog/ctv-advertising-europe-small-business-guide",
+        permanent: true,
+      },
+      {
+        source: "/blog/ctv-advertising-new-york-city-ny-local-business-guide",
+        destination: "/blog/ctv-advertising-usa-local-business-guide",
+        permanent: true,
+      },
     // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",

@@ -1,154 +1,101 @@
 ---
-title: "AppsFlyer for Small Business: Do You Actually Need Mobile Attribution?"
+title: "AppsFlyer for Small Business: Cost and When to Skip It"
 date: "2026-05-31"
-description: "AppsFlyer is the world's leading mobile attribution platform. But do local businesses with apps actually need it? Here's an honest breakdown of what AppsFlyer does, what it costs, and when it's worth it."
+lastModified: "2026-11-01"
+description: "AppsFlyer's Growth plan charges $0.07 per attributed conversion after 12,000 free ones. Whether a small business with an app needs mobile attribution."
 author: "Nataliia"
 category: "Analytics & Tracking"
 tags: ["appsflyer", "mobile attribution", "app marketing", "small business", "mobile analytics"]
 slug: "appsflyer-small-business-guide"
 image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80&auto=format&fit=crop"
-readTime: '11 min read'
-lastModified: "2026-05-31"
-noindex: true
+readTime: "7 min read"
 ---
 
-AppsFlyer is the world's most widely used mobile attribution platform — the tool that answers the question "which ad campaign led to this app install or in-app purchase?" Used by Coca-Cola, Uber, and thousands of mid-market companies, it sits at the centre of mobile marketing infrastructure for app-driven businesses.
+A small business needs AppsFlyer only if it has its own mobile app and pays for ads that send people to install it. If you do not run paid app-install campaigns, the free Google Analytics for Firebase is usually enough. AppsFlyer's pay-as-you-go Growth plan charges $0.07 per attributed conversion after a Welcome Package of 12,000 free conversions in the first 12 months, according to its pricing page checked on 1 November 2026.
 
-But here's the honest question for local small businesses: **do you actually need it?**
-
-The answer depends almost entirely on one factor: whether you have a mobile app and whether that app is a meaningful revenue driver for your business.
-
-## What AppsFlyer Actually Does
-
-Mobile attribution solves a specific problem. When someone installs your app or makes an in-app purchase, that action came from somewhere — a Google App Campaign, a Meta mobile ad, an influencer's Instagram story link, an organic App Store search. Without attribution, you see the installs but not which channel generated them.
-
-AppsFlyer places a Software Development Kit (SDK) inside your app. When a user installs your app after seeing an ad, the SDK communicates with AppsFlyer's platform to record which specific campaign, ad set, and creative led to that install. You get a clean picture of cost per install and in-app conversion by channel.
-
-**What this enables:**
-- Knowing your true CAC (customer acquisition cost) per marketing channel
-- Turning off campaigns that look productive but aren't driving quality users
-- Scaling campaigns that generate high-LTV customers
-- Detecting mobile ad fraud (fake installs from bots or click farms)
-
-**What it doesn't do:**
-- Track web-only behaviour (that's Google Analytics 4's territory)
-- Help businesses without apps
-- Improve ad performance on its own — it only provides the measurement data
-
-<Callout type="tip">
-AppsFlyer tracks mobile app events. If your entire business operates through a website (no app), you don't need AppsFlyer — GA4, Segment, or similar web analytics tools are the right solution. The question "do I need AppsFlyer?" is really "do I have an app where marketing attribution matters?"
-</Callout>
-
-## When Local Businesses Need AppsFlyer
-
-Most local small businesses don't need AppsFlyer. But these scenarios do warrant it:
-
-**You have a booking or loyalty app with paid marketing.** If your fitness studio, salon, or restaurant has an app for scheduling, ordering, or loyalty points — and you're running paid campaigns to drive app installs — you need attribution to understand which campaigns generate actual users vs. fake installs.
-
-**Your app generates significant revenue.** A coffee shop with a mobile ordering app doing $50,000/month in mobile revenue should be tracking which marketing drives that app usage. Without attribution, you're optimising blind.
-
-**You're running campaigns across multiple ad platforms.** If you run Google App Campaigns, Meta Mobile App Ads, and Apple Search Ads simultaneously, you need a neutral third-party to de-duplicate installs and provide unified reporting. Each platform claims credit for installs — AppsFlyer provides the impartial view.
-
-**You suspect mobile ad fraud.** Fake installs are a real problem at scale. If your app install numbers look suspicious (high installs, low engagement), AppsFlyer's fraud protection tools can identify and filter out fraudulent activity.
-
-## AppsFlyer Pricing: What You'll Actually Pay
-
-AppsFlyer's pricing structure has changed over the years. Current structure as of 2026:
-
-**Free tier:** Up to 1,000 non-organic (paid) installs per month free. Sufficient for businesses just starting mobile marketing or with very small app campaigns.
-
-**Growth plan:** Starts around $0.05–0.07 per non-organic install above the free tier threshold. For a business generating 5,000 installs/month, that's roughly $250–350/month.
-
-**Enterprise:** Custom pricing for large volumes (100,000+ installs/month), with advanced features including cohort analysis, raw data export, and dedicated support.
-
-Additional costs:
-- **Protect360 (fraud protection):** Add-on, typically adds 10–20% to base cost
-- **Audiences:** Ad audience management features — additional cost tier
+Most local businesses, such as cafes, salons and gyms, do not need a mobile attribution tool. They need booking, call and direction tracking, which is a different job.
 
 <StatRow
-  values="1,000|$0.05–0.07|75%|40%"
-  labels="Free installs/month|Free installs/month|Free installs/month|Free installs/month"
-  subs="Free tier threshold|Cost per additional install|Market share vs competitors|Avg. fraud detected in mobile"
-  trends="neutral|up|up|neutral"
+  values="$0.07|12,000|30 days|$0"
+  labels="Growth plan, per conversion|Free conversions in Welcome Package|Free trial of premium add-ons|Google Analytics for Firebase reporting"
+  subs="AppsFlyer pricing page|First 12 months|AppsFlyer pricing page|Firebase documentation"
+  trends="neutral|neutral|neutral|neutral"
 />
 
-## AppsFlyer Setup: What's Involved
+## What Does AppsFlyer Do?
 
-Setting up AppsFlyer requires developer involvement. It's not a plug-and-play tool — your development team needs to integrate the SDK into your app.
+AppsFlyer is a mobile attribution platform. AppsFlyer defines mobile attribution as "a method for determining which campaigns, media partners, and channels delivered specific app installs." It ties an install, and the actions that follow, to the ad that prompted it, so you can see which campaign produced users.
 
-**Technical requirements:**
-- iOS and Android SDK integration (separate for each platform)
-- Event mapping (defining which in-app actions to track: installs, registrations, purchases, bookings)
-- Link generation (OneLink deep links for cross-channel attribution)
-- Integration with each ad platform (Google, Meta, Apple Search Ads, etc.) through AppsFlyer's partner integrations
+Attribution can credit a click or a view. AppsFlyer says click windows are typically 7 or 30 days and view-through windows typically 24 hours. Where device IDs are not available, for example iOS users who have not given tracking consent, it says it uses probabilistic methods that estimate performance at campaign level.
 
-Implementation time for a simple app: 2–5 developer days. For complex apps with many custom events: 1–3 weeks.
+## Does a Local Business Need Mobile Attribution?
 
-**Non-technical setup:**
-- Dashboard configuration
-- Connecting to ad platforms for cost data import
-- Setting up conversion events and goals
-- Configuring fraud detection rules
+Usually not. Attribution answers one question: which paid campaign brought this app install? That matters when you spend on several networks, such as Meta, Google and Apple, to promote an app. It does not matter if customers book through your website, phone or Google Business Profile.
 
-## Related Articles
+You may need it if you run a loyalty or ordering app, advertise it on more than one network, and want to compare cost per install by source. If your app has a few hundred users who came through word of mouth, the tool tells you little. Our guide to [app marketing for local business](/blog/app-marketing-for-local-business) covers whether an app is worth building at all.
 
-- [Adjust vs AppsFlyer: Which Mobile Attribution Tool Is Right for Your Business?](/blog/adjust-vs-appsflyer-comparison)
-- [Unlocking Local Website Insights: Google Tag Manager for Local Businesses](/blog/google-tag-manager-for-local-website-analytics)
-- [How to Measure Local SEO Success: The KPIs That Actually Matter](/blog/how-to-measure-local-seo-success-kpis)
-- [The Importance of Analytics and Tracking for Pet Groomers](/blog/pet-groomer-analytics-and-tracking)
-- [Predictive Analytics for Local Business: Reduce Churn](/blog/predictive-analytics-local-business-what-it-means)
+## How Much Does AppsFlyer Cost?
 
-<Callout type="warning">
-The most common mistake small businesses make with AppsFlyer: installing the SDK but not mapping the right conversion events. Installing the app is only one data point. You want to track in-app bookings, purchases, and meaningful actions — not just installs. Work with your developer to define and implement all relevant conversion events before launching campaigns.
+The pricing page lists three plans.
+
+| Plan | Price | Notes |
+| --- | --- | --- |
+| Zero | Free | For owned-media apps; "Not suitable for apps with paid activities" |
+| Growth | $0.07 per conversion | Pay-as-you-go, aimed at startups starting paid campaigns |
+| Enterprise | Custom | Demo required to get a quote |
+
+Zero and Growth include the Welcome Package: 12,000 free conversions within the first 12 months, core marketing analytics, SKAdNetwork support for iOS, and 30 days of free access to select premium add-ons. A conversion is an install or action your campaigns drove and AppsFlyer measured. Organic installs it does not attribute are not counted and are free. The page does not publish Enterprise prices or minimum fees.
+
+## The Math: What Would Growth Cost a Small App?
+
+All inputs below are **assumptions**, and the $0.07 rate is the only AppsFlyer figure.
+
+| Input | Assumption |
+| --- | --- |
+| Attributed installs from paid campaigns, per month | 500 |
+| Attributed conversions in year one | 6,000 |
+| Welcome Package allowance | 12,000 |
+| Billable conversions in year one | 0 |
+| Billable conversions per month after year one | 500 |
+| Monthly AppsFlyer cost after year one | 500 x $0.07 = $35 |
+
+On these assumptions the tool is free in year one and about $35 a month afterwards. The tool costs little compared with the ad spend it measures. If you also count in-app purchases or bookings as conversions, volume and cost rise, so count every event type you plan to measure.
+
+## What Are the Free Alternatives?
+
+Google Analytics for Firebase describes itself as "an unlimited analytics solution available at no charge", with reporting on up to 500 distinct events. It reports campaign performance across organic and paid channels. It is not a dedicated attribution network, so it does not offer the install-source matching that a specialist tool does.
+
+Branch's pricing page lists Basics, Essentials and Enterprise plans with no dollar prices, and offers a free trial on Basics with no stated length. Adjust's pricing page returned a rate-limit error when checked, so it is not covered. For web tracking, see our [Google Analytics 4 guide for small business](/blog/google-analytics-4-for-small-business) and [local business analytics and tracking](/blog/local-business-analytics-and-tracking).
+
+<Callout type="tip" title="Do This Today">
+Write down how many app installs you paid for last month and from how many networks. If the answer is zero or one, skip AppsFlyer and use Firebase.
 </Callout>
 
-## AppsFlyer vs the Alternatives
+## What Does Setup Involve?
 
-AppsFlyer isn't the only mobile attribution solution. Alternatives to consider:
+You add the vendor's SDK to the app, define which events to track, and connect each ad network. That is developer work on both iOS and Android, so budget for it if your app was built by an agency. AppsFlyer's pricing page does not give setup steps or hours, so ask your developer for an estimate.
 
-**Adjust:** Direct competitor, similar capabilities, different pricing. Often cheaper for small volumes. Strong fraud protection. Good choice if AppsFlyer's pricing feels heavy for your install volume.
+If you advertise apps on Apple's network, see our guide to [Apple Search Ads for local business](/blog/apple-search-ads-local-business) and [Google App Campaigns](/blog/google-app-campaigns-local-business).
 
-**Branch:** Strong deep linking capabilities, popular for e-commerce apps. Good alternative if cross-channel deep linking is a priority.
+## FAQ
 
-**Google Analytics 4 for Firebase:** Free, works for basic attribution if you're primarily running Google App Campaigns. Limited cross-platform attribution and no fraud protection. Fine for starting out.
+### Is AppsFlyer free?
+The Zero plan is free but is for owned-media apps, not paid campaigns. Growth includes 12,000 free conversions in the first 12 months, then $0.07 per conversion.
 
-**Singular:** Enterprise-focused, strong for brands running large multi-channel campaigns. Overkill for small businesses.
+### What counts as a conversion?
+A successful install or user action that your campaigns drove and AppsFlyer measured. Organic installs it does not attribute are free.
 
-For most local businesses just starting with app marketing, **Firebase + GA4** is the right free starting point. Once you're scaling past $5,000/month in mobile ad spend and running on multiple platforms, AppsFlyer or Adjust becomes worth the cost.
+### Do I need AppsFlyer if I only run Google Ads?
+Not necessarily. Google Analytics for Firebase reports campaign performance at no charge, so start there.
 
-<CompareBar
-  title="AppsFlyer vs Adjust vs Firebase for Small Business"
-  metrics="Setup simplicity|Cost efficiency|Attribution accuracy|Fraud protection|Integration breadth|Free tier"
-  leftValues="60|55|90|95|90|30"
-  rightValues="65|70|85|88|80|30"
-  leftLabel="AppsFlyer"
-  rightLabel="Adjust"
-/>
+### Can I use it for a website?
+AppsFlyer is a mobile app attribution tool. For a website, use Google Analytics 4.
 
+## Sources
 
+- [AppsFlyer pricing](https://www.appsflyer.com/pricing/) (Zero, Growth, Enterprise; Welcome Package)
+- [AppsFlyer glossary: Mobile attribution](https://www.appsflyer.com/glossary/mobile-attribution/)
+- [Firebase: Google Analytics for Firebase](https://firebase.google.com/docs/analytics)
+- [Branch pricing](https://www.branch.io/pricing/) (plan names; no prices published)
 
-## Frequently Asked Questions
-
-**Q: Can't I just use Google Analytics for everything?**
-You can use Google Analytics for Firebase, which is different from the web version. It handles mobile app events and ads attribution for free. If you're only running Google ads, it's sufficient. It won't handle cross-platform deduplication between Google and Meta, and it won't give you the fraud detection that AppsFlyer offers. But for a business spending under $10k/month, the missing features won't meaningfully impact your decisions.
-
-**Q: What if I'm only running Instagram ads to promote my app?**
-If Instagram is your only channel, you don't need any third-party attribution. Meta's own ads manager will tell you how many installs each campaign drove. You won't get a full-funnel view (you won't see organic installs or search-driven installs), but if you're only running one paid channel, tracking that channel's native data is enough.
-
-**Q: Doesn't Apple's privacy update make AppsFlyer useless anyway?**
-Apple's App Tracking Transparency (ATT) broke the old model of deterministic attribution. However, AppsFlyer adapted by building probabilistic models and using aggregated SKAdNetwork data. It still works, but it's less precise than before ATT. Most small businesses don't need the precision that remains. The post-ATT attribution accuracy drop from ~95% to ~70-80% matters to Uber; it doesn't matter to a hair salon trying to decide between Instagram and Google.
-
-**Q: How do I know if my app is actually generating revenue I'm not measuring?**
-Look at what happens after someone installs your app. If users create accounts, book services, or make repeat visits, but all payments happen offline (in-store, on-site, by invoice), your app is driving revenue that no attribution tool will capture. The fix isn't a better attribution tool — it's connecting your app analytics to your POS system so you can see which app users become paying customers.
-
-**Q: Is AppsFlyer worth it for a coffee shop app that's basically a loyalty card?**
-Probably not. If your app's main function is a digital punch card — buy 10 coffees, get one free — and you're not running paid ads to drive installs, you don't need any attribution tool. If you are running ads, simple Firebase tracking will tell you cost per install. You don't need to know cost per loyal customer because the only in-app event is "scanned loyalty card." The ROI isn't there.
-
-**Q: What's the cheapest way to start tracking app installs today?**
-Add the Google Analytics for Firebase SDK to your app. This is a one-time developer task (2–4 hours, $300–$600 depending on your dev's rate). Then add UTM parameters to all your ad links. That's it. You'll have install data, campaign data, and basic event tracking for zero ongoing cost. If you need more in six months, upgrade then.
-
----
-
-Closing paragraph, no heading:
-
-I once sat in a meeting at GroupM where a senior strategist spent twenty minutes arguing that a local restaurant chain needed AppsFlyer because "everyone in mobile uses it." The client had a $4,000 monthly mobile budget and a simple ordering app. I asked him what decision he'd make with the data that he couldn't make without it. He said, "We'll know which channel is most efficient." I said, "You already do — it's the one your customers mention when you ask them." We didn't get the AppsFlyer sale that month. The client saved $36,000 that year. They're still in business, still using Firebase, and still asking customers at the register. Sometimes the most expensive tool in your stack is the one you don't need. [Book a free consultation](/free-audit) — I'll tell you honestly whether you need it or not, and I'll send you home with a setup that costs zero dollars if you don't.
+Need to track calls, bookings and ad results for your business? See our [analytics service](/services/analytics) or [book a free audit](/free-audit).
