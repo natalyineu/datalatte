@@ -93,6 +93,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/blog/ctv-advertising`,             lastModified: today,      changeFrequency: "monthly", priority: 0.9 },
     { url: `${baseUrl}/blog/dooh-advertising`,            lastModified: today,      changeFrequency: "monthly", priority: 0.9 },
     { url: `${baseUrl}/contact`,                           lastModified: today,      changeFrequency: "monthly", priority: 0.9 },
+    { url: `${baseUrl}/partnerships`,                       lastModified: today,      changeFrequency: "monthly", priority: 0.5 },
     { url: `${baseUrl}/advertise`,                          lastModified: today,      changeFrequency: "monthly", priority: 0.5 },
     { url: `${baseUrl}/about`,                             lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/radar`,                             lastModified: today,      changeFrequency: "daily",   priority: 0.8 },

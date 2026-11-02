@@ -51,6 +51,7 @@ const footerLinks = {
     { label: "Reporting",               href: "/reporting" },
     { label: "Pricing",                 href: "/pricing" },
     { label: "Advertise",               href: "/advertise" },
+    { label: "Partnerships",            href: "/partnerships" },
     { label: "Contact",                 href: "/contact" },
     { label: "Free Audit",              href: "/free-audit" },
   ],

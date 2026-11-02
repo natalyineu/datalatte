@@ -133,6 +133,10 @@ export default function AdvertisePage() {
           <p className="text-coffee-100 text-lg md:text-xl max-w-2xl mx-auto mb-10">
             DataLatte is a library of sourced guides on local marketing: ad platforms, local SEO, streaming TV, outdoor and the tools behind them. Put your product in the guide where readers are already comparing options.
           </p>
+          <p className="text-white text-xl md:text-2xl font-semibold mb-8">
+            Placements from $150 &middot;{" "}
+            <a href="mailto:hi@datalatte.pro" className="underline decoration-coffee-300 underline-offset-4 hover:text-coffee-200">hi@datalatte.pro</a>
+          </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href={MAIL} className="inline-flex items-center justify-center gap-2 bg-white text-coffee-900 font-bold px-8 py-4 rounded-xl hover:bg-coffee-100 transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 text-lg">
               Book a placement <ArrowRight size={20} />
