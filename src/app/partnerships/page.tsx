@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, BadgeCheck } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
+import CopyEmail from "@/components/advertise/CopyEmail";
 import Reveal from "@/components/advertise/Reveal";
 import { GridOverlay, FloatingChip, StatsBar, BeforeAfter, TileGrid, PipelineFlow } from "@/components/advertise/Shared";
 import { breadcrumbSchema } from "@/lib/schema";
@@ -116,7 +117,8 @@ export default function PartnershipsPage() {
             DataLatte works with tools, platforms, agencies, researchers and local organizations that serve small-business owners. We bring sourced guides, careful editing and a readership that is choosing how to market.
           </p>
           <p className="text-lg text-white font-semibold mb-10">
-            Write to us: <a href="mailto:hi@datalatte.pro" className="underline decoration-coffee-400 underline-offset-4 hover:text-coffee-300">hi@datalatte.pro</a>
+            Write to us: <a href="mailto:hi@datalatte.pro" className="underline decoration-coffee-400 underline-offset-4 hover:text-coffee-300">hi@datalatte.pro</a>{" "}
+            <CopyEmail className="ml-1" />
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a href={MAIL} className="inline-flex items-center justify-center gap-2 bg-coffee-500 text-white font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-400 transition-all hover:shadow-xl hover:shadow-coffee-900/30">
@@ -233,6 +235,7 @@ export default function PartnershipsPage() {
           <a href={MAIL} className="inline-flex items-center gap-2 bg-coffee-500 text-white font-bold px-8 py-4 rounded-xl hover:bg-coffee-400 transition-all hover:shadow-xl text-lg">
             Email hi@datalatte.pro <ArrowRight size={20} />
           </a>
+          <div className="mt-4"><CopyEmail /></div>
         </div>
       </section>
     </>

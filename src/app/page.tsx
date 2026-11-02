@@ -25,6 +25,7 @@ import BlogCard from "@/components/BlogCard";
 import TestimonialCard from "@/components/TestimonialCard";
 import ScrollReveal from "@/components/ScrollReveal";
 import Reveal from "@/components/advertise/Reveal";
+import CopyEmail from "@/components/advertise/CopyEmail";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import HeroAnimated from "@/components/HeroAnimated";
 import AnimatedDashboard from "@/components/AnimatedDashboard";
@@ -602,6 +603,7 @@ export default function HomePage() {
               Partnerships →
             </Link>
             <a href="mailto:hi@datalatte.pro" className="text-white/80 underline decoration-coffee-400 underline-offset-4 hover:text-white text-sm sm:ml-3">hi@datalatte.pro</a>
+            <CopyEmail />
           </div>
           <p className="text-center text-xs text-white/45 mt-6">Every paid placement is labelled Sponsored and uses rel=&quot;sponsored&quot; links.</p>
         </div>

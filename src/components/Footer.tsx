@@ -1,4 +1,5 @@
 import Link from "next/link";
+import CopyEmail from "@/components/advertise/CopyEmail";
 import { Mail, MessageCircle, MapPin, Linkedin } from "lucide-react";
 import NewsletterForm from "@/components/NewsletterForm";
 
@@ -75,9 +76,12 @@ export default function Footer() {
               Brew up better results — without the guesswork.
             </p>
             <div className="space-y-3">
-              <a href="mailto:hi@datalatte.pro" className="flex items-center gap-2 text-sm hover:text-white transition-colors">
-                <Mail size={15} /> hi@datalatte.pro
-              </a>
+              <div className="flex items-center gap-2 flex-wrap">
+                <a href="mailto:hi@datalatte.pro" className="flex items-center gap-2 text-sm hover:text-white transition-colors">
+                  <Mail size={15} /> hi@datalatte.pro
+                </a>
+                <CopyEmail />
+              </div>
               <a href="https://wa.me/48503589781" className="flex items-center gap-2 text-sm hover:text-white transition-colors">
                 <MessageCircle size={15} /> +48 503 589 781
               </a>
