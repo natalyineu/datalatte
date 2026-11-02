@@ -1,18 +1,18 @@
 {
-  "fetchedAt": "2026-11-01T12:18:24.297Z",
+  "fetchedAt": "2026-11-02T14:10:56.594Z",
   "period": {
     "startDate": "28daysAgo",
     "endDate": "yesterday"
   },
   "propertyId": "properties/537670353",
   "allTimeEventsReal": {
-    "scroll": 2584,
-    "scroll_50": 69,
-    "form_start": 58,
-    "free_audit_clicked": 28,
-    "chat_widget_opened": 24,
-    "contact_form_submitted": 8,
-    "chat_message_sent": 7
+    "scroll": 2586,
+    "scroll_50": 70,
+    "form_start": 59,
+    "free_audit_clicked": 29,
+    "chat_widget_opened": 25,
+    "contact_form_submitted": 9,
+    "chat_message_sent": 8
   },
   "allTimeChannels": [
     {
@@ -204,6 +204,11 @@
       "d": "20260919",
       "ch": "Direct",
       "s": 132
+    },
+    {
+      "d": "20261101",
+      "ch": "Direct",
+      "s": 131
     },
     {
       "d": "20260915",
@@ -1266,6 +1271,11 @@
       "s": 5
     },
     {
+      "d": "20261101",
+      "ch": "Organic Search",
+      "s": 5
+    },
+    {
       "d": "20260517",
       "ch": "Referral",
       "s": 4
@@ -1497,6 +1507,11 @@
     },
     {
       "d": "20261028",
+      "ch": "Organic Search",
+      "s": 4
+    },
+    {
+      "d": "20261031",
       "ch": "Organic Search",
       "s": 4
     },
@@ -1747,11 +1762,6 @@
     },
     {
       "d": "20261027",
-      "ch": "Organic Search",
-      "s": 3
-    },
-    {
-      "d": "20261031",
       "ch": "Organic Search",
       "s": 3
     },
@@ -2701,19 +2711,19 @@
       "s": 1
     },
     {
-      "d": "20261031",
+      "d": "20261101",
       "ch": "Unassigned",
       "s": 1
     }
   ],
   "allTimeEvents": {
-    "scroll": 15298,
-    "scroll_50": 2450,
-    "chat_widget_opened": 111,
-    "form_start": 72,
-    "free_audit_clicked": 36,
-    "contact_form_submitted": 11,
-    "chat_message_sent": 7
+    "scroll": 15389,
+    "scroll_50": 2478,
+    "chat_widget_opened": 112,
+    "form_start": 73,
+    "free_audit_clicked": 37,
+    "contact_form_submitted": 12,
+    "chat_message_sent": 8
   },
   "events": [
     {
@@ -2727,7 +2737,7 @@
       ],
       "metricValues": [
         {
-          "value": "4438"
+          "value": "3736"
         }
       ]
     },
@@ -2742,7 +2752,7 @@
       ],
       "metricValues": [
         {
-          "value": "2359"
+          "value": "2039"
         }
       ]
     },
@@ -2757,7 +2767,7 @@
       ],
       "metricValues": [
         {
-          "value": "1920"
+          "value": "1487"
         }
       ]
     },
@@ -2772,7 +2782,7 @@
       ],
       "metricValues": [
         {
-          "value": "1660"
+          "value": "1282"
         }
       ]
     },
@@ -2787,7 +2797,7 @@
       ],
       "metricValues": [
         {
-          "value": "1493"
+          "value": "1156"
         }
       ]
     },
@@ -2802,7 +2812,7 @@
       ],
       "metricValues": [
         {
-          "value": "1174"
+          "value": "921"
         }
       ]
     },
@@ -2817,7 +2827,7 @@
       ],
       "metricValues": [
         {
-          "value": "884"
+          "value": "799"
         }
       ]
     },
@@ -2832,7 +2842,7 @@
       ],
       "metricValues": [
         {
-          "value": "517"
+          "value": "472"
         }
       ]
     },
@@ -2847,7 +2857,7 @@
       ],
       "metricValues": [
         {
-          "value": "333"
+          "value": "312"
         }
       ]
     },
@@ -2862,7 +2872,7 @@
       ],
       "metricValues": [
         {
-          "value": "328"
+          "value": "305"
         }
       ]
     },
@@ -2877,7 +2887,7 @@
       ],
       "metricValues": [
         {
-          "value": "322"
+          "value": "303"
         }
       ]
     },
@@ -2892,7 +2902,7 @@
       ],
       "metricValues": [
         {
-          "value": "230"
+          "value": "221"
         }
       ]
     },
@@ -2907,7 +2917,7 @@
       ],
       "metricValues": [
         {
-          "value": "8"
+          "value": "9"
         }
       ]
     },
@@ -2929,10 +2939,40 @@
     {
       "dimensionValues": [
         {
-          "value": "free_audit_clicked"
+          "value": "chat_message_sent"
         },
         {
-          "value": "date_range_1"
+          "value": "date_range_0"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "contact_form_submitted"
+        },
+        {
+          "value": "date_range_0"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "form_start"
+        },
+        {
+          "value": "date_range_0"
         }
       ],
       "metricValues": [
@@ -2948,6 +2988,96 @@
         },
         {
           "value": "date_range_0"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "free_audit_clicked"
+        },
+        {
+          "value": "date_range_1"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "generate_lead"
+        },
+        {
+          "value": "date_range_0"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "chat_message_sent"
+        },
+        {
+          "value": "date_range_1"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "0"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "contact_form_submitted"
+        },
+        {
+          "value": "date_range_1"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "0"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "form_start"
+        },
+        {
+          "value": "date_range_1"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "0"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "generate_lead"
+        },
+        {
+          "value": "date_range_1"
         }
       ],
       "metricValues": [
@@ -3321,6 +3451,21 @@
     {
       "dimensionValues": [
         {
+          "value": "20261101"
+        },
+        {
+          "value": "Direct"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "131"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
           "value": "20261006"
         },
         {
@@ -3330,21 +3475,6 @@
       "metricValues": [
         {
           "value": "121"
-        }
-      ]
-    },
-    {
-      "dimensionValues": [
-        {
-          "value": "20261004"
-        },
-        {
-          "value": "Direct"
-        }
-      ],
-      "metricValues": [
-        {
-          "value": "112"
         }
       ]
     },
@@ -3666,6 +3796,21 @@
     {
       "dimensionValues": [
         {
+          "value": "20261101"
+        },
+        {
+          "value": "Organic Search"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "5"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
           "value": "20261017"
         },
         {
@@ -3741,7 +3886,7 @@
     {
       "dimensionValues": [
         {
-          "value": "20261004"
+          "value": "20261031"
         },
         {
           "value": "Organic Search"
@@ -3749,7 +3894,7 @@
       ],
       "metricValues": [
         {
-          "value": "3"
+          "value": "4"
         }
       ]
     },
@@ -3817,21 +3962,6 @@
       "dimensionValues": [
         {
           "value": "20261027"
-        },
-        {
-          "value": "Organic Search"
-        }
-      ],
-      "metricValues": [
-        {
-          "value": "3"
-        }
-      ]
-    },
-    {
-      "dimensionValues": [
-        {
-          "value": "20261031"
         },
         {
           "value": "Organic Search"
@@ -3915,21 +4045,6 @@
       "metricValues": [
         {
           "value": "2"
-        }
-      ]
-    },
-    {
-      "dimensionValues": [
-        {
-          "value": "20261004"
-        },
-        {
-          "value": "AI Assistant"
-        }
-      ],
-      "metricValues": [
-        {
-          "value": "1"
         }
       ]
     },
@@ -4251,7 +4366,7 @@
     {
       "dimensionValues": [
         {
-          "value": "20261031"
+          "value": "20261101"
         },
         {
           "value": "Unassigned"
@@ -4295,22 +4410,22 @@
       {
         "metricValues": [
           {
-            "value": "16554"
+            "value": "16636"
           },
           {
-            "value": "16463"
+            "value": "16497"
           },
           {
-            "value": "16399"
+            "value": "16417"
           },
           {
-            "value": "0.98465627642865772"
+            "value": "0.98467179610483291"
           },
           {
-            "value": "6.4524715115984055"
+            "value": "6.3671927681534024"
           },
           {
-            "value": "16307"
+            "value": "16333"
           }
         ]
       }
@@ -4346,10 +4461,10 @@
       ],
       "metricValues": [
         {
-          "value": "106"
+          "value": "113"
         },
         {
-          "value": "104"
+          "value": "111"
         }
       ]
     },
@@ -4361,10 +4476,10 @@
       ],
       "metricValues": [
         {
-          "value": "102"
+          "value": "103"
         },
         {
-          "value": "98"
+          "value": "97"
         }
       ]
     },
@@ -4406,10 +4521,10 @@
       ],
       "metricValues": [
         {
-          "value": "25"
+          "value": "24"
         },
         {
-          "value": "24"
+          "value": "23"
         }
       ]
     },
@@ -4421,10 +4536,10 @@
       ],
       "metricValues": [
         {
-          "value": "23"
+          "value": "22"
         },
         {
-          "value": "22"
+          "value": "21"
         }
       ]
     },
@@ -4476,30 +4591,15 @@
     {
       "dimensionValues": [
         {
-          "value": "/blog/stackadapt-review-local-business-programmatic"
-        }
-      ],
-      "metricValues": [
-        {
-          "value": "19"
-        },
-        {
-          "value": "13"
-        }
-      ]
-    },
-    {
-      "dimensionValues": [
-        {
           "value": "/blog/local-marketing-brazil-small-business-whatsapp-meta"
         }
       ],
       "metricValues": [
         {
-          "value": "18"
+          "value": "19"
         },
         {
-          "value": "19"
+          "value": "20"
         }
       ]
     },
@@ -4511,10 +4611,25 @@
       ],
       "metricValues": [
         {
-          "value": "18"
+          "value": "19"
         },
         {
-          "value": "18"
+          "value": "19"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "/blog/stackadapt-review-local-business-programmatic"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "19"
+        },
+        {
+          "value": "13"
         }
       ]
     },
@@ -4566,7 +4681,7 @@
     {
       "dimensionValues": [
         {
-          "value": "/blog/local-marketing-egypt-small-business-2026"
+          "value": "/blog/local-marketing-iran-small-business-2026"
         }
       ],
       "metricValues": [
@@ -4574,22 +4689,7 @@
           "value": "17"
         },
         {
-          "value": "18"
-        }
-      ]
-    },
-    {
-      "dimensionValues": [
-        {
-          "value": "/blog/local-marketing-kazakhstan-small-business-2026"
-        }
-      ],
-      "metricValues": [
-        {
           "value": "17"
-        },
-        {
-          "value": "14"
         }
       ]
     },
@@ -4611,7 +4711,22 @@
     {
       "dimensionValues": [
         {
-          "value": "/blog/local-marketing-iran-small-business-2026"
+          "value": "/free-audit"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "17"
+        },
+        {
+          "value": "15"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "/blog/digital-audio-advertising-2026-spotify-pandora-podcast-ads"
         }
       ],
       "metricValues": [
@@ -4626,7 +4741,37 @@
     {
       "dimensionValues": [
         {
-          "value": "/blog/local-marketing-kyrgyzstan-small-business-2026"
+          "value": "/blog/local-marketing-egypt-small-business-2026"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "16"
+        },
+        {
+          "value": "17"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "/blog/local-marketing-kazakhstan-small-business-2026"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "16"
+        },
+        {
+          "value": "13"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "/blog/local-marketing-south-korea-small-business-2026"
         }
       ],
       "metricValues": [
@@ -4641,7 +4786,22 @@
     {
       "dimensionValues": [
         {
-          "value": "/blog/local-marketing-turkey-small-business-2026"
+          "value": "/blog/local-marketing-uzbekistan-small-business-2026"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "16"
+        },
+        {
+          "value": "16"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "/blog/local-marketing-vietnam-small-business-2026"
         }
       ],
       "metricValues": [
@@ -4680,36 +4840,6 @@
         },
         {
           "value": "13"
-        }
-      ]
-    },
-    {
-      "dimensionValues": [
-        {
-          "value": "/blog/digital-audio-advertising-2026-spotify-pandora-podcast-ads"
-        }
-      ],
-      "metricValues": [
-        {
-          "value": "15"
-        },
-        {
-          "value": "15"
-        }
-      ]
-    },
-    {
-      "dimensionValues": [
-        {
-          "value": "/blog/dooh-advertising-complete-guide-2026"
-        }
-      ],
-      "metricValues": [
-        {
-          "value": "15"
-        },
-        {
-          "value": "15"
         }
       ]
     },
@@ -4757,21 +4887,6 @@
           "value": "15"
         }
       ]
-    },
-    {
-      "dimensionValues": [
-        {
-          "value": "/blog/local-marketing-iraq-small-business-2026"
-        }
-      ],
-      "metricValues": [
-        {
-          "value": "15"
-        },
-        {
-          "value": "15"
-        }
-      ]
     }
   ],
   "trafficSources": [
@@ -4783,10 +4898,10 @@
       ],
       "metricValues": [
         {
-          "value": "16347"
+          "value": "16426"
         },
         {
-          "value": "16326"
+          "value": "16354"
         }
       ]
     },
@@ -4798,7 +4913,7 @@
       ],
       "metricValues": [
         {
-          "value": "159"
+          "value": "162"
         },
         {
           "value": "123"
@@ -4813,10 +4928,10 @@
       ],
       "metricValues": [
         {
-          "value": "20"
+          "value": "19"
         },
         {
-          "value": "15"
+          "value": "14"
         }
       ]
     },
@@ -4846,7 +4961,7 @@
           "value": "11"
         },
         {
-          "value": "10"
+          "value": "11"
         }
       ]
     },
@@ -4867,21 +4982,6 @@
     }
   ],
   "dailyTrend": [
-    {
-      "dimensionValues": [
-        {
-          "value": "20261004"
-        }
-      ],
-      "metricValues": [
-        {
-          "value": "116"
-        },
-        {
-          "value": "116"
-        }
-      ]
-    },
     {
       "dimensionValues": [
         {
@@ -5284,6 +5384,21 @@
         },
         {
           "value": "113"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "20261101"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "136"
+        },
+        {
+          "value": "136"
         }
       ]
     }
