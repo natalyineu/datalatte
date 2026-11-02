@@ -266,7 +266,7 @@ export default function HomePage() {
             <HeroAnimated />
 
             {/* Right — animated dashboard */}
-            <div className="hidden lg:block">
+            <div className="mt-2 lg:mt-0">
               <AnimatedDashboard />
             </div>
           </div>
