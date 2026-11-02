@@ -343,19 +343,19 @@
 .stagger-children > *:nth-child(6) { animation-delay: 0.40s; }
 
 /* ── Advertise / Partnerships page effects ── */
-@keyframes adv-drift { 0%,100% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(30px,-24px,0) scale(1.08); } }
-@keyframes adv-steam { 0% { opacity: 0; transform: translateY(8px) scaleX(1); } 30% { opacity: .85; } 100% { opacity: 0; transform: translateY(-26px) scaleX(1.6); } }
-@keyframes adv-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-@keyframes adv-shine { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
-@keyframes adv-pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(176,125,77,.45); } 50% { box-shadow: 0 0 0 10px rgba(176,125,77,0); } }
-@keyframes adv-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-.adv-orb { position: absolute; border-radius: 9999px; filter: blur(70px); pointer-events: none; animation: adv-drift 14s ease-in-out infinite; }
-.adv-steam { animation: adv-steam 2.8s ease-in-out infinite; transform-origin: bottom; }
-.adv-marquee-track { display: flex; width: max-content; animation: adv-marquee 38s linear infinite; }
-.adv-marquee:hover .adv-marquee-track { animation-play-state: paused; }
-.adv-border { background: linear-gradient(90deg, #b07d4d, #f3d9b8, #b07d4d, #8a5a2b, #b07d4d); background-size: 200% 100%; animation: adv-shine 5s linear infinite; }
-.adv-pulse { animation: adv-pulse 2.4s ease-in-out infinite; }
-.adv-bob { animation: adv-bob 4s ease-in-out infinite; }
+@keyframes fx-drift { 0%,100% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(30px,-24px,0) scale(1.08); } }
+@keyframes fx-steam { 0% { opacity: 0; transform: translateY(8px) scaleX(1); } 30% { opacity: .85; } 100% { opacity: 0; transform: translateY(-26px) scaleX(1.6); } }
+@keyframes fx-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes fx-shine { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+@keyframes fx-pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(176,125,77,.45); } 50% { box-shadow: 0 0 0 10px rgba(176,125,77,0); } }
+@keyframes fx-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+.fx-orb { position: absolute; border-radius: 9999px; filter: blur(70px); pointer-events: none; animation: fx-drift 14s ease-in-out infinite; }
+.fx-steam { animation: fx-steam 2.8s ease-in-out infinite; transform-origin: bottom; }
+.fx-marquee-track { display: flex; width: max-content; animation: fx-marquee 38s linear infinite; }
+.fx-marquee:hover .fx-marquee-track { animation-play-state: paused; }
+.fx-border { background: linear-gradient(90deg, #b07d4d, #f3d9b8, #b07d4d, #8a5a2b, #b07d4d); background-size: 200% 100%; animation: fx-shine 5s linear infinite; }
+.fx-pulse { animation: fx-pulse 2.4s ease-in-out infinite; }
+.fx-bob { animation: fx-bob 4s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) {
-  .adv-orb, .adv-steam, .adv-marquee-track, .adv-border, .adv-pulse, .adv-bob { animation: none !important; }
+  .fx-orb, .fx-steam, .fx-marquee-track, .fx-border, .fx-pulse, .fx-bob { animation: none !important; }
 }

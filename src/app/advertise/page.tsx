@@ -237,7 +237,7 @@ export default function AdvertisePage() {
           <div className="grid md:grid-cols-3 gap-6 items-stretch">
             {FORMATS.map((f, i) => (
               <Reveal key={f.name} delay={i * 0.12} className="h-full">
-                <div className={f.featured ? "adv-border rounded-2xl p-[2px] h-full md:-mt-3 md:mb-3" : "h-full"}>
+                <div className={f.featured ? "fx-border rounded-2xl p-[2px] h-full md:-mt-3 md:mb-3" : "h-full"}>
                   <div className={`card p-8 flex flex-col h-full ${f.featured ? "" : "hover:-translate-y-1 transition-transform duration-300"}`}>
                     {f.featured && <span className="self-start text-xs font-bold uppercase tracking-wide bg-coffee-700 text-white rounded-full px-3 py-1 mb-3">Recommended</span>}
                     <h3 className="text-xl font-bold text-gray-900 dark:text-gray-50">{f.name}</h3>
