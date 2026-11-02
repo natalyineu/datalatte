@@ -50,6 +50,7 @@ const footerLinks = {
     { label: "⚡ Value Radar",          href: "/radar" },
     { label: "Reporting",               href: "/reporting" },
     { label: "Pricing",                 href: "/pricing" },
+    { label: "Advertise",               href: "/advertise" },
     { label: "Contact",                 href: "/contact" },
     { label: "Free Audit",              href: "/free-audit" },
   ],
