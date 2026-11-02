@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, BadgeCheck, FileCheck2 } from "lucide-react";
+import { ArrowRight, BadgeCheck, FileCheck2, Eye } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import Reveal from "@/components/advertise/Reveal";
 import CountUp from "@/components/advertise/CountUp";
@@ -114,6 +114,16 @@ const TILE_GROUPS = [
   },
 ];
 
+// Snapshot from Google Search Console, 90 days to Oct 30, 2026 (pages that are live and indexable).
+const TOP_GUIDES = [
+  { slug: "glovo-vs-wolt-which-is-better", title: "Glovo vs Wolt for Restaurants: Fees Compared (2026)", cat: "Delivery platforms", imp: 1813, pos: 7.4 },
+  { slug: "ctv-advertising-platforms-compared-2026", title: "CTV Advertising Platforms Compared: Roku, Disney, Tubi", cat: "Streaming TV (CTV)", imp: 1301, pos: 13.3 },
+  { slug: "digital-audio-advertising-2026-spotify-pandora-podcast-ads", title: "Digital Audio Advertising 2026: Spotify and Pandora Costs", cat: "Audio ads", imp: 1226, pos: 10.0 },
+  { slug: "new-ctv-ad-formats-2026-pause-ads-qr-codes-shoppable", title: "New CTV Ad Formats 2026: Pause Ads, QR Codes, Shoppable", cat: "Streaming TV (CTV)", imp: 825, pos: 11.4 },
+  { slug: "nextdoor-ads-cost-2026", title: "Nextdoor Ads Cost in 2026: Pricing and Budgets", cat: "Neighborhood marketing", imp: 802, pos: 9.0 },
+  { slug: "bark-vs-thumbtack-local-business", title: "Bark vs Thumbtack for Service Businesses (2026)", cat: "Lead platforms", imp: 624, pos: 7.3 },
+];
+
 const FORMATS = [
   { name: "Sponsored mention", price: "$150", note: "one-time", items: ["50 to 100 words inside one existing article", "Placed where readers already compare options", "One link, rel=\"sponsored\"", "Wording approved by you"], cta: "Book a mention" },
   { name: "Sponsored section", price: "$300", note: "one-time", featured: true, items: ["150 to 300 words plus a row in the comparison table", "Facts checked against your public pages", "Up to two links, rel=\"sponsored\"", "Wording approved by you"], cta: "Book a section" },
@@ -207,6 +217,30 @@ export default function AdvertisePage() {
           <p className="text-gray-500 max-w-xl mx-auto dark:text-gray-400">Pick the guides that match your product. We confirm the fit before anything is published.</p>
         </div>
         <TileGrid groups={TILE_GROUPS} />
+      </SectionWrapper>
+
+      {/* Top guides */}
+      <SectionWrapper>
+        <div className="text-center mb-12">
+          <span className="section-label">Our guides</span>
+          <h2 className="section-title">Some of the guides <span className="gradient-text">where placements could go</span></h2>
+          <p className="text-gray-500 max-w-xl mx-auto dark:text-gray-400">Real articles from our library, with what Google showed for each in the last 90 days.</p>
+        </div>
+        <div className="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {TOP_GUIDES.map((g, i) => (
+            <Reveal key={g.slug} delay={i * 0.07}>
+              <Link href={`/blog/${g.slug}`} className="card p-6 block h-full hover:-translate-y-1 hover:shadow-lg transition-all duration-300 group">
+                <span className="text-xs font-medium px-2 py-0.5 rounded bg-coffee-50 text-coffee-700 dark:bg-coffee-900/40 dark:text-coffee-200">{g.cat}</span>
+                <h3 className="font-bold text-gray-900 dark:text-gray-50 mt-3 mb-4 group-hover:text-coffee-700 dark:group-hover:text-coffee-300 transition-colors">{g.title}</h3>
+                <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+                  <span className="inline-flex items-center gap-1.5"><Eye size={14} aria-hidden /> {g.imp.toLocaleString("en-US")} Google impressions</span>
+                  <span>avg. position {g.pos.toFixed(1)}</span>
+                </div>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+        <p className="text-center text-xs text-gray-500 dark:text-gray-400 mt-6">Google Search Console, 90 days to Oct 30, 2026. Screenshots available on request. Browse all <Link href="/blog" className="underline text-coffee-700 dark:text-coffee-300">guides</Link>.</p>
       </SectionWrapper>
 
       {/* Placement preview (dark) */}
