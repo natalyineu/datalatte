@@ -6,6 +6,8 @@ import Reveal from "@/components/advertise/Reveal";
 import CountUp from "@/components/advertise/CountUp";
 import PlacementTabs from "@/components/advertise/PlacementTabs";
 import FitFinder from "@/components/advertise/FitFinder";
+import FaqSection from "@/components/advertise/FaqSection";
+import { ADVERTISE_FAQ } from "@/components/advertise/faq-data";
 import { GridOverlay, FloatingChip, StatsBar, BeforeAfter, PipelineFlow } from "@/components/advertise/Shared";
 import { breadcrumbSchema } from "@/lib/schema";
 
@@ -23,45 +25,11 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: PAGE_TITLE, description: PAGE_DESC },
 };
 
-const FAQ = [
-  {
-    q: "Is a sponsored placement a paid link?",
-    a: "A placement can include a link to your site. Every paid link is marked rel=\"sponsored\", which is what Google's guidelines ask for, so it works as a clearly labelled advertisement and as a referral path for readers, not as a ranking trick.",
-  },
-  {
-    q: "How is sponsored content disclosed?",
-    a: "Each placement carries a visible “Sponsored” label next to it. In the US, the FTC's Endorsement Guides (16 CFR Part 255) require a clear and conspicuous disclosure of a paid connection, and we apply the same rule to every placement on every device.",
-  },
-  {
-    q: "Can I write the copy myself?",
-    a: "You can send key facts, a draft or approved claims. We rewrite for accuracy and tone, check the facts against your public pages, and send you the final wording before it goes live.",
-  },
-  {
-    q: "What if my claims cannot be verified?",
-    a: "We cut or soften them. A claim we cannot support from a public source does not run, whoever is paying for it.",
-  },
-  {
-    q: "Do you guarantee traffic, rankings or sales?",
-    a: "No, and nobody honest can. We tell you where the placement sits and what the page earns in search so you can judge the fit.",
-  },
-  {
-    q: "How long does a placement stay up?",
-    a: "For as long as the article is published. If it becomes inaccurate we contact you before changing or removing it.",
-  },
-  {
-    q: "How do I pay?",
-    a: "We invoice in US dollars. You can pay by wire or ACH-compatible transfer through Wise or Revolut, by PayPal, or by bank transfer. Payment is one-time per placement.",
-  },
-  {
-    q: "Do you take placements outside the US?",
-    a: "Yes. Our readers are mostly in the US, UK, Canada and Australia, and we can phrase and price placements for any of those markets.",
-  },
-];
 
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: FAQ.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+  mainEntity: ADVERTISE_FAQ.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
 };
 
 const breadcrumb = breadcrumbSchema([
@@ -322,22 +290,12 @@ export default function AdvertisePage() {
 
       {/* FAQ */}
       <SectionWrapper className="bg-gray-50 dark:bg-gray-900/40">
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-10">
-            <span className="section-label">FAQ</span>
-            <h2 className="section-title">Questions advertisers ask</h2>
-          </div>
-          <div className="space-y-3">
-            {FAQ.map((f) => (
-              <details key={f.q} className="card p-5 group">
-                <summary className="font-semibold text-gray-900 dark:text-gray-50 cursor-pointer list-none flex justify-between gap-4">
-                  {f.q}<span className="text-coffee-700 dark:text-coffee-300 group-open:rotate-45 transition-transform" aria-hidden>+</span>
-                </summary>
-                <p className="text-sm text-gray-700 dark:text-gray-200 mt-3">{f.a}</p>
-              </details>
-            ))}
-          </div>
+        <div className="text-center mb-10">
+          <span className="section-label">FAQ</span>
+          <h2 className="section-title">Questions advertisers ask, <span className="gradient-text">answered</span></h2>
+          <p className="text-gray-500 max-w-xl mx-auto dark:text-gray-400">Pricing, disclosure, process and results. Pick a topic or read them all.</p>
         </div>
+        <FaqSection />
       </SectionWrapper>
 
       {/* Final CTA */}

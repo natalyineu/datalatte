@@ -24,6 +24,7 @@ import CTABanner from "@/components/CTABanner";
 import BlogCard from "@/components/BlogCard";
 import TestimonialCard from "@/components/TestimonialCard";
 import ScrollReveal from "@/components/ScrollReveal";
+import Reveal from "@/components/advertise/Reveal";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import HeroAnimated from "@/components/HeroAnimated";
 import AnimatedDashboard from "@/components/AnimatedDashboard";
@@ -557,6 +558,54 @@ export default function HomePage() {
           </Link>
         </div>
       </SectionWrapper>
+
+      {/* Sponsored placements and partnerships */}
+      <section className="bg-gradient-to-br from-gray-950 via-coffee-950 to-coffee-900 py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.6) 1px,transparent 1px)", backgroundSize: "40px 40px" }} aria-hidden />
+        <div className="max-w-6xl mx-auto relative">
+          <Reveal>
+            <div className="text-center mb-12">
+              <span className="inline-block bg-white/10 border border-white/20 text-coffee-300 text-sm font-medium px-4 py-1.5 rounded-full mb-5 backdrop-blur-sm">
+                For brands, tools and agencies
+              </span>
+              <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 text-balance">
+                Want your product in front of{" "}
+                <span className="text-coffee-400">local business owners?</span>
+              </h2>
+              <p className="text-lg text-white/65 max-w-2xl mx-auto">
+                We also work with brands: labelled sponsored placements in our guides, and partnerships on reviews, joint resources and research. Placements start at $150.
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="grid md:grid-cols-3 gap-5 mb-10">
+            {[
+              { name: "Sponsored mention", price: "from $150", text: "50 to 100 words in an existing guide, where readers compare options." },
+              { name: "Sponsored section", price: "from $300", text: "150 to 300 words plus a comparison-table row, facts checked." },
+              { name: "Sponsored article", price: "from $600", text: "A new 1,200+ word article, researched and sourced by us." },
+            ].map((c, i) => (
+              <Reveal key={c.name} delay={i * 0.1}>
+                <div className="h-full rounded-2xl border border-white/15 bg-white/5 backdrop-blur-sm p-6 hover:bg-white/10 hover:-translate-y-1 transition-all duration-300">
+                  <div className="text-coffee-300 text-sm font-semibold mb-1">{c.name}</div>
+                  <div className="text-3xl font-bold text-white mb-3">{c.price}</div>
+                  <p className="text-sm text-white/65">{c.text}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+            <Link href="/advertise" className="inline-flex items-center gap-2 bg-coffee-500 text-white font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-400 transition-all hover:shadow-xl hover:shadow-coffee-900/30">
+              Advertise with us <ArrowRight size={17} />
+            </Link>
+            <Link href="/partnerships" className="inline-flex items-center gap-2 bg-white/10 border border-white/15 text-white/85 font-semibold px-7 py-3.5 rounded-xl hover:bg-white/15 transition-all">
+              Partnerships →
+            </Link>
+            <a href="mailto:hi@datalatte.pro" className="text-white/80 underline decoration-coffee-400 underline-offset-4 hover:text-white text-sm sm:ml-3">hi@datalatte.pro</a>
+          </div>
+          <p className="text-center text-xs text-white/45 mt-6">Every paid placement is labelled Sponsored and uses rel=&quot;sponsored&quot; links.</p>
+        </div>
+      </section>
 
       {/* FAQ */}
       <SectionWrapper>
