@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, BadgeCheck, Clock, FileCheck2, Mail, Search, ShieldCheck, Target, Tv, Megaphone, Store, Wrench } from "lucide-react";
+import { ArrowRight, BadgeCheck, FileCheck2 } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
 import Reveal from "@/components/advertise/Reveal";
 import CountUp from "@/components/advertise/CountUp";
+import PlacementTabs from "@/components/advertise/PlacementTabs";
+import { GridOverlay, FloatingChip, StatsBar, BeforeAfter, TileGrid, PipelineFlow } from "@/components/advertise/Shared";
 import { breadcrumbSchema } from "@/lib/schema";
 
 const PAGE_URL = "https://datalatte.pro/advertise";
@@ -73,59 +75,63 @@ const FLAGS = [
   { f: "🇦🇺", n: "Australia" },
 ];
 
-const MARQUEE = ["Streaming TV (CTV)", "Digital out-of-home", "Google Ads", "Meta Ads", "Local SEO", "Google Business Profile", "Spotify Ads", "Nextdoor", "Email and SMS", "Booking software", "Review tools", "Analytics"];
+const BEFORE_AFTER = [
+  { before: "A banner readers learn to ignore", after: "A mention inside the comparison they are reading" },
+  { before: "Anonymous paid links with no label", after: "Visible Sponsored label and rel=\"sponsored\" on every link" },
+  { before: "Ad copy nobody checks", after: "Facts checked against your own public pages" },
+  { before: "Weeks of back-and-forth", after: "Live within three business days of your approval" },
+  { before: "Unclear price until the invoice", after: "Published starting prices, one time, in US dollars" },
+  { before: "No say in the final wording", after: "You approve the text before it goes live" },
+];
 
-const WHY = [
-  { icon: Target, title: "Readers who are deciding", text: "People land on our guides while comparing ad platforms, checking costs or choosing a tool. A mention sits where that decision happens." },
-  { icon: BadgeCheck, title: "A sourced environment", text: "Every guide names its sources. Your placement sits next to numbers that readers can check, which is the opposite of a banner." },
-  { icon: ShieldCheck, title: "Labelled and compliant", text: "Visible Sponsored label and rel=\"sponsored\" links on every placement, in line with Google's paid-link guidance and the FTC's disclosure rules." },
-  { icon: Clock, title: "Live in three business days", text: "Send the facts, approve the wording, and we publish within three business days of your approval. No long sales cycle." },
+const TILE_GROUPS = [
+  {
+    label: "Advertising and media", dot: "#b07d4d",
+    tiles: [
+      { abbr: "TV", name: "Streaming TV (CTV)", category: "Platforms", desc: "Platform comparisons, minimum budgets and CPM ranges for small advertisers.", tags: ["Platforms", "Budgets", "CPM"] },
+      { abbr: "OO", name: "Out-of-home (DOOH)", category: "Outdoor", desc: "Digital billboards and screens, how local businesses buy them.", tags: ["Networks", "Pricing", "Targeting"] },
+      { abbr: "GA", name: "Google and Meta ads", category: "Paid search and social", desc: "Campaign setup, benchmarks and budgets by niche.", tags: ["CPC", "CPL", "Setup"] },
+      { abbr: "AU", name: "Audio and local ads", category: "Emerging channels", desc: "Spotify, Nextdoor and other channels local businesses test.", tags: ["Spotify", "Nextdoor", "Retail media"] },
+    ],
+  },
+  {
+    label: "Search and local", dot: "#8a5a2b",
+    tiles: [
+      { abbr: "SE", name: "Local SEO", category: "Organic", desc: "Rankings, citations and audits for businesses with a physical location.", tags: ["Audits", "Citations", "Maps"] },
+      { abbr: "GB", name: "Google Business Profile", category: "Local search", desc: "Setup, optimisation and review management.", tags: ["Profile", "Reviews", "Posts"] },
+      { abbr: "RV", name: "Reviews and reputation", category: "Trust", desc: "Tools and rules for asking for and answering reviews.", tags: ["Yelp", "Google", "Policy"] },
+      { abbr: "WB", name: "Websites and landing pages", category: "Conversion", desc: "Builders, speed and booking flows for small sites.", tags: ["Builders", "CRO", "Forms"] },
+    ],
+  },
+  {
+    label: "Tools and software", dot: "#6f4e37",
+    tiles: [
+      { abbr: "BK", name: "Booking and POS", category: "Operations", desc: "Booking apps and checkout tools for salons, studios and cafes.", tags: ["Booking", "Payments", "CRM"] },
+      { abbr: "EM", name: "Email and SMS", category: "Retention", desc: "Newsletters, reminders and review requests.", tags: ["Email", "SMS", "Automation"] },
+      { abbr: "AI", name: "AI and automation", category: "Productivity", desc: "Assistants, no-code workflows and agents for small teams.", tags: ["Agents", "Zapier", "Workflows"] },
+      { abbr: "AN", name: "Analytics and reporting", category: "Measurement", desc: "Dashboards, attribution and tracking setup.", tags: ["GA4", "Dashboards", "Tracking"] },
+    ],
+  },
 ];
 
 const FORMATS = [
-  {
-    name: "Sponsored mention",
-    price: "$150",
-    note: "one-time",
-    items: ["50 to 100 words inside one existing article", "Placed where readers already compare options", "One link, rel=\"sponsored\"", "Wording approved by you"],
-    cta: "Book a mention",
-  },
-  {
-    name: "Sponsored section",
-    price: "$300",
-    note: "one-time",
-    featured: true,
-    items: ["150 to 300 words plus a row in the comparison table", "Facts checked against your public pages", "Up to two links, rel=\"sponsored\"", "Wording approved by you"],
-    cta: "Book a section",
-  },
-  {
-    name: "Sponsored article",
-    price: "$600",
-    note: "one-time",
-    items: ["New 1,200+ word article researched and written by us", "Tutorial, comparison or buyer's guide on an agreed topic", "Sources cited, “Sponsored” label at the top", "Internal links from related guides"],
-    cta: "Book an article",
-  },
+  { name: "Sponsored mention", price: "$150", note: "one-time", items: ["50 to 100 words inside one existing article", "Placed where readers already compare options", "One link, rel=\"sponsored\"", "Wording approved by you"], cta: "Book a mention" },
+  { name: "Sponsored section", price: "$300", note: "one-time", featured: true, items: ["150 to 300 words plus a row in the comparison table", "Facts checked against your public pages", "Up to two links, rel=\"sponsored\"", "Wording approved by you"], cta: "Book a section" },
+  { name: "Sponsored article", price: "$600", note: "one-time", items: ["New 1,200+ word article researched and written by us", "Tutorial, comparison or buyer's guide on an agreed topic", "Sources cited, \"Sponsored\" label at the top", "Internal links from related guides"], cta: "Book an article" },
 ];
 
 const PACKS = [
-  { name: "Partner pack", price: "$400", detail: "Three sponsored mentions across three related articles, instead of $450.", },
-  { name: "Launch pack", price: "$850", detail: "One sponsored article plus two mentions in related guides, instead of $900.", },
+  { name: "Partner pack", price: "$400", detail: "Three sponsored mentions across three related articles, instead of $450." },
+  { name: "Launch pack", price: "$850", detail: "One sponsored article plus two mentions in related guides, instead of $900." },
 ];
 
-const TOPICS = [
-  { icon: Tv, title: "Streaming TV (CTV) and DOOH", text: "Platform comparisons, minimum budgets, CPM ranges.", href: "/blog/ctv-advertising" },
-  { icon: Megaphone, title: "Ad platforms", text: "Google Ads, Meta, Spotify, Nextdoor, Walmart Connect and more.", href: "/blog" },
-  { icon: Search, title: "Local SEO and reviews", text: "Google Business Profile, citations, review tools.", href: "/blog/local-marketing-guides" },
-  { icon: Wrench, title: "Marketing and booking tools", text: "Booking software, CRMs, automation, analytics.", href: "/rates" },
-  { icon: Store, title: "Local business niches", text: "Cafes, salons, groomers, fitness studios, home services.", href: "/for/coffee-shops" },
-];
-
-const STEPS = [
-  { n: "1", title: "Tell us what you offer", text: "Email the product, your target market and the article you have in mind." },
-  { n: "2", title: "We confirm the fit", text: "Within two business days we confirm placement, format, price and timing." },
-  { n: "3", title: "Approve the wording", text: "We write or adapt the text from your facts and send it for approval." },
-  { n: "4", title: "Pay by invoice", text: "A USD invoice, payable by Wise, Revolut, PayPal or bank transfer." },
-  { n: "5", title: "We publish", text: "Live within three business days of approval, and we send you the URL." },
+const STANDARDS = [
+  { t: "Label", d: "A visible \"Sponsored\" label sits next to every paid item, on desktop and mobile." },
+  { t: "Links", d: "Every paid link carries rel=\"sponsored\". We do not sell links that pass ranking credit." },
+  { t: "Facts", d: "Facts and prices are checked against your public pages and the sources named in the article. Claims we cannot verify are softened or removed." },
+  { t: "Approval", d: "You approve the final wording. We edit for accuracy, tone and length." },
+  { t: "Independence", d: "Payment does not change a comparison table, a ranking of options or a conclusion reached earlier." },
+  { t: "Fit", d: "Sensitive categories (gambling, adult, crypto trading, health claims) are reviewed case by case. If a request does not suit our readers, we say so." },
 ];
 
 export default function AdvertisePage() {
@@ -135,42 +141,36 @@ export default function AdvertisePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       {/* Hero */}
-      <section className="hero-gradient relative overflow-hidden py-24 px-4 sm:px-6 lg:px-8">
-        <div className="adv-orb w-96 h-96 bg-coffee-500/30 -top-24 -left-24" aria-hidden />
-        <div className="adv-orb w-80 h-80 bg-coffee-300/20 bottom-0 right-0" style={{ animationDelay: "-6s" }} aria-hidden />
-        <div className="relative max-w-4xl mx-auto text-center">
-          <div className="adv-bob mx-auto mb-6 w-20 h-20" aria-hidden>
-            <svg viewBox="0 0 80 80" className="w-full h-full">
-              <path className="adv-steam" d="M30 26c-4-5 4-8 0-13" stroke="#f3d9b8" strokeWidth="3" strokeLinecap="round" fill="none" />
-              <path className="adv-steam" style={{ animationDelay: "0.9s" }} d="M40 26c-4-5 4-8 0-13" stroke="#f3d9b8" strokeWidth="3" strokeLinecap="round" fill="none" />
-              <path className="adv-steam" style={{ animationDelay: "1.8s" }} d="M50 26c-4-5 4-8 0-13" stroke="#f3d9b8" strokeWidth="3" strokeLinecap="round" fill="none" />
-              <path d="M18 32h44v18a16 16 0 0 1-16 16h-12a16 16 0 0 1-16-16z" fill="#b07d4d" />
-              <path d="M62 36h6a8 8 0 0 1 0 16h-8" stroke="#b07d4d" strokeWidth="5" fill="none" strokeLinecap="round" />
-              <ellipse cx="40" cy="32" rx="22" ry="4" fill="#4a2d18" />
-              <rect x="14" y="68" width="52" height="5" rx="2.5" fill="#8a5a2b" />
-            </svg>
-          </div>
-          <span className="inline-block text-coffee-200 text-sm font-semibold tracking-widest uppercase mb-4">Advertise and partner</span>
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 text-balance">
-            Reach small-business owners <span className="text-coffee-300">at the moment they choose</span>
+      <section className="bg-gradient-to-br from-gray-950 via-coffee-950 to-coffee-900 pt-24 pb-28 px-4 sm:px-6 lg:px-8 overflow-hidden relative">
+        <GridOverlay />
+        <FloatingChip className="left-6 top-20 lg:left-20 lg:top-24 sm:block" dot="green"><span className="text-gray-300">Label</span><span className="text-green-400 font-bold">Sponsored ✓</span></FloatingChip>
+        <FloatingChip className="right-6 top-24 lg:right-24 lg:top-28 sm:block" dot="green" delay="0.8s" reverse><span className="text-gray-300">Links</span><span className="text-green-400 font-bold">rel=sponsored</span></FloatingChip>
+        <FloatingChip className="left-10 bottom-16 lg:left-32 lg:block" dot="amber" delay="1.4s"><span className="text-gray-300">Live in</span><span className="text-amber-400 font-bold">3 days</span></FloatingChip>
+        <FloatingChip className="right-10 bottom-20 lg:right-28 lg:block" dot="blue" delay="0.4s" reverse><span className="text-gray-300">From</span><span className="text-blue-300 font-bold">$150</span></FloatingChip>
+        <FloatingChip className="left-1/4 top-12 lg:block" dot="pink" delay="2.1s"><span className="text-gray-300">🇺🇸 🇬🇧 🇨🇦 🇦🇺</span></FloatingChip>
+        <FloatingChip className="right-1/4 bottom-10 lg:block" dot="purple" delay="1.8s" reverse><span className="text-gray-300">Facts</span><span className="text-purple-300 font-bold">checked</span></FloatingChip>
+
+        <div className="max-w-4xl mx-auto text-center relative">
+          <span className="inline-block bg-white/10 border border-white/20 text-coffee-300 text-sm font-medium px-4 py-1.5 rounded-full mb-6 backdrop-blur-sm">Advertise and partner</span>
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 text-balance leading-tight">
+            Reach small-business owners <span className="text-coffee-400">at the moment they choose</span>
           </h1>
-          <p className="text-coffee-100 text-lg md:text-xl max-w-2xl mx-auto mb-8">
+          <p className="text-xl text-white/65 max-w-2xl mx-auto mb-4 leading-relaxed">
             DataLatte is a library of sourced guides on local marketing: ad platforms, local SEO, streaming TV, outdoor and the tools behind them. Put your product in the guide where readers are already comparing options.
           </p>
-          <p className="text-white text-xl md:text-2xl font-semibold mb-8">
+          <p className="text-lg text-white font-semibold mb-10">
             Placements from $150 &middot;{" "}
-            <a href="mailto:hi@datalatte.pro" className="underline decoration-coffee-300 underline-offset-4 hover:text-coffee-200">hi@datalatte.pro</a>
+            <a href="mailto:hi@datalatte.pro" className="underline decoration-coffee-400 underline-offset-4 hover:text-coffee-300">hi@datalatte.pro</a>
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
-            <a href={MAIL} className="adv-pulse inline-flex items-center justify-center gap-2 bg-white text-coffee-900 font-bold px-8 py-4 rounded-xl hover:bg-coffee-100 transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 text-lg">
-              Book a placement <ArrowRight size={20} />
+          <div className="flex flex-col sm:flex-row gap-3 justify-center mb-10">
+            <a href={MAIL} className="inline-flex items-center justify-center gap-2 bg-coffee-500 text-white font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-400 transition-all hover:shadow-xl hover:shadow-coffee-900/30">
+              Book a placement <ArrowRight size={17} />
             </a>
-            <a href="#formats" className="inline-flex items-center justify-center gap-2 border border-coffee-200 text-white font-semibold px-8 py-4 rounded-xl hover:bg-white/10 transition-all duration-200 text-lg">
-              See formats and prices
+            <a href="#formats" className="inline-flex items-center justify-center gap-2 bg-white/10 border border-white/15 text-white/80 font-semibold px-7 py-3.5 rounded-xl hover:bg-white/15 transition-all">
+              See formats and prices →
             </a>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-3" aria-label="Where our readers are">
-            <span className="text-coffee-200 text-sm mr-1">Our readers:</span>
             {FLAGS.map((x) => (
               <span key={x.n} className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm px-4 py-2 text-white text-sm hover:bg-white/20 transition-colors">
                 <span className="text-xl leading-none" aria-hidden>{x.f}</span>{x.n}
@@ -180,113 +180,56 @@ export default function AdvertisePage() {
         </div>
       </section>
 
-      {/* Topic marquee */}
-      <div className="adv-marquee overflow-hidden bg-coffee-950 border-y border-coffee-800 py-4" aria-label="Topics we cover">
-        <div className="adv-marquee-track">
-          {[...MARQUEE, ...MARQUEE].map((m, i) => (
-            <span key={i} aria-hidden={i >= MARQUEE.length} className="mx-6 inline-flex items-center gap-3 text-coffee-200 whitespace-nowrap text-sm font-medium">
-              <span className="w-1.5 h-1.5 rounded-full bg-coffee-400" aria-hidden />{m}
-            </span>
-          ))}
-        </div>
-      </div>
+      <StatsBar items={[
+        { value: <CountUp to={1000} suffix="+" />, label: "Sourced guides" },
+        { value: <CountUp to={15100} prefix="~" />, label: "Google impressions, 28 days to Oct 31 (Search Console)" },
+        { value: "4 markets", label: "US, UK, Canada, Australia" },
+        { value: "3 days", label: "From approval to live" },
+      ]} />
+      <p className="text-center text-xs text-gray-500 dark:text-gray-400 py-3 px-4 bg-coffee-950">The site is young and growing. Search Console and analytics screenshots are available on request.</p>
 
-      {/* Proof strip */}
-      <section className="bg-white dark:bg-gray-950 border-b border-gray-100 dark:border-gray-800">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-gray-100 dark:divide-gray-800 text-center">
-          <div className="py-8 px-6">
-            <div className="text-4xl font-bold text-coffee-700 dark:text-coffee-300"><CountUp to={1000} suffix="+" /></div>
-            <div className="text-sm text-gray-600 dark:text-gray-300 mt-1">sourced guides, each citing its sources</div>
+      {/* Before / After */}
+      <SectionWrapper>
+        <Reveal>
+          <div className="text-center mb-12">
+            <span className="section-label">The difference</span>
+            <h2 className="section-title">Not a banner. <span className="gradient-text">A useful, labelled mention.</span></h2>
           </div>
-          <div className="py-8 px-6">
-            <div className="text-4xl font-bold text-coffee-700 dark:text-coffee-300"><CountUp to={15100} prefix="~" /></div>
-            <div className="text-sm text-gray-600 dark:text-gray-300 mt-1">Google Search impressions in the 28 days to Oct 31, 2026 (Search Console)</div>
-          </div>
-          <div className="py-8 px-6">
-            <div className="text-4xl leading-none" aria-hidden>🇺🇸 🇬🇧 🇨🇦 🇦🇺</div>
-            <div className="text-sm text-gray-600 dark:text-gray-300 mt-3">where our readers are</div>
-          </div>
+          <BeforeAfter beforeLabel="Typical ad buy" afterLabel="A DataLatte placement" rows={BEFORE_AFTER} />
+        </Reveal>
+      </SectionWrapper>
+
+      {/* Topics grid */}
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-900/40">
+        <div className="text-center mb-12">
+          <span className="section-label">Where you can appear</span>
+          <h2 className="section-title">Twelve topics, <span className="gradient-text">one readership</span></h2>
+          <p className="text-gray-500 max-w-xl mx-auto dark:text-gray-400">Pick the guides that match your product. We confirm the fit before anything is published.</p>
         </div>
-        <p className="text-center text-xs text-gray-500 dark:text-gray-400 pb-4 px-4">
-          The site is young and growing. Search Console and analytics screenshots are available on request.
-        </p>
+        <TileGrid groups={TILE_GROUPS} />
+      </SectionWrapper>
+
+      {/* Placement preview (dark) */}
+      <section className="bg-gray-950 py-20 px-4 sm:px-6 lg:px-8 overflow-hidden relative">
+        <GridOverlay size={32} opacity={0.035} />
+        <div className="max-w-7xl mx-auto relative">
+          <div className="text-center mb-12">
+            <span className="inline-block text-coffee-400 text-sm font-semibold uppercase tracking-widest mb-3">Live placement preview</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">What your placement looks like</h2>
+            <p className="text-gray-400 max-w-xl mx-auto text-sm leading-relaxed">Switch between the three formats to see how each one sits inside a guide.</p>
+          </div>
+          <PlacementTabs />
+        </div>
       </section>
 
-      {/* Placement mockup */}
-      <SectionWrapper className="bg-gray-50 dark:bg-gray-900">
-        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-          <Reveal>
-            <span className="section-label">What it looks like</span>
-            <h2 className="section-title mb-4">Inside the guide, clearly labelled</h2>
-            <p className="text-gray-700 dark:text-gray-200 mb-3">
-              Your mention sits in the section where readers compare options, with a visible Sponsored label and a link marked rel=&quot;sponsored&quot;. It reads as useful information, not as a banner, and it never changes the comparison around it.
-            </p>
-            <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-200">
-              <li className="flex gap-2"><BadgeCheck size={18} className="text-coffee-600 shrink-0 mt-0.5" aria-hidden />Facts checked against your public pages</li>
-              <li className="flex gap-2"><BadgeCheck size={18} className="text-coffee-600 shrink-0 mt-0.5" aria-hidden />You approve the final wording</li>
-              <li className="flex gap-2"><BadgeCheck size={18} className="text-coffee-600 shrink-0 mt-0.5" aria-hidden />Live for as long as the article is published</li>
-            </ul>
-          </Reveal>
-          <Reveal delay={0.15}>
-            <div className="card p-6 shadow-lg rotate-1 hover:rotate-0 transition-transform duration-300" aria-hidden>
-              <div className="h-3 w-24 rounded bg-coffee-200 dark:bg-coffee-800 mb-4" />
-              <div className="h-5 w-3/4 rounded bg-gray-300 dark:bg-gray-600 mb-4" />
-              <div className="space-y-2 mb-5">
-                <div className="h-2.5 rounded bg-gray-200 dark:bg-gray-700" />
-                <div className="h-2.5 w-11/12 rounded bg-gray-200 dark:bg-gray-700" />
-                <div className="h-2.5 w-4/5 rounded bg-gray-200 dark:bg-gray-700" />
-              </div>
-              <div className="adv-pulse rounded-xl border-2 border-coffee-500 bg-coffee-50 dark:bg-coffee-900/30 p-4 mb-5">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-coffee-700 dark:text-coffee-300 bg-coffee-100 dark:bg-coffee-800 rounded px-2 py-0.5">Sponsored</span>
-                  <span className="text-[10px] text-gray-500">Your brand</span>
-                </div>
-                <div className="h-3 w-2/3 rounded bg-coffee-400/70 mb-2" />
-                <div className="space-y-1.5">
-                  <div className="h-2 rounded bg-coffee-200 dark:bg-coffee-800" />
-                  <div className="h-2 w-5/6 rounded bg-coffee-200 dark:bg-coffee-800" />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <div className="h-2.5 rounded bg-gray-200 dark:bg-gray-700" />
-                <div className="h-2.5 w-10/12 rounded bg-gray-200 dark:bg-gray-700" />
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </SectionWrapper>
-
-      {/* Why */}
-      <SectionWrapper>
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <span className="section-label">Why partner</span>
-            <h2 className="section-title">A placement that reads like help, not a banner</h2>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {WHY.map((w, i) => (
-              <Reveal key={w.title} delay={i * 0.1}>
-                <div className="card p-6 h-full hover:-translate-y-1 transition-transform duration-300">
-                  <span className="inline-flex w-12 h-12 items-center justify-center rounded-xl bg-coffee-100 dark:bg-coffee-900/40 mb-4">
-                    <w.icon className="text-coffee-700 dark:text-coffee-300" size={26} aria-hidden />
-                  </span>
-                  <h3 className="font-bold text-gray-900 dark:text-gray-50 mb-2">{w.title}</h3>
-                  <p className="text-sm text-gray-700 dark:text-gray-200">{w.text}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </SectionWrapper>
-
       {/* Formats */}
-      <SectionWrapper id="formats" className="bg-gray-50 dark:bg-gray-900">
+      <SectionWrapper id="formats">
+        <div className="text-center mb-12">
+          <span className="section-label">Formats and prices</span>
+          <h2 className="section-title">Simple pricing, <span className="gradient-text">one time, in US dollars</span></h2>
+          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">Prices are starting points. The final quote depends on the article, the length and the research the item needs.</p>
+        </div>
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <span className="section-label">Formats and prices</span>
-            <h2 className="section-title">Simple pricing, one time, in US dollars</h2>
-            <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">Prices are starting points. The final quote depends on the article, the length and the research the item needs.</p>
-          </div>
           <div className="grid md:grid-cols-3 gap-6 items-stretch">
             {FORMATS.map((f, i) => (
               <Reveal key={f.name} delay={i * 0.12} className="h-full">
@@ -309,98 +252,72 @@ export default function AdvertisePage() {
               </Reveal>
             ))}
           </div>
-
           <div className="mt-10 grid md:grid-cols-2 gap-6">
             {PACKS.map((p, i) => (
               <Reveal key={p.name} delay={i * 0.1}>
-              <div className="card p-6 flex items-center justify-between gap-4 h-full hover:-translate-y-1 transition-transform duration-300">
-                <div>
-                  <h3 className="font-bold text-gray-900 dark:text-gray-50">{p.name}</h3>
-                  <p className="text-sm text-gray-700 dark:text-gray-200">{p.detail}</p>
+                <div className="card p-6 flex items-center justify-between gap-4 h-full hover:-translate-y-1 transition-transform duration-300">
+                  <div>
+                    <h3 className="font-bold text-gray-900 dark:text-gray-50">{p.name}</h3>
+                    <p className="text-sm text-gray-700 dark:text-gray-200">{p.detail}</p>
+                  </div>
+                  <div className="text-2xl font-bold text-coffee-700 dark:text-coffee-300 whitespace-nowrap">{p.price}</div>
                 </div>
-                <div className="text-2xl font-bold text-coffee-700 dark:text-coffee-300 whitespace-nowrap">{p.price}</div>
-              </div>
               </Reveal>
             ))}
           </div>
         </div>
       </SectionWrapper>
 
-      {/* Topics */}
-      <SectionWrapper>
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <span className="section-label">Where you can appear</span>
-            <h2 className="section-title">Topics our readers search for</h2>
+      {/* Pipeline */}
+      <section className="bg-gray-950 py-20 px-4 sm:px-6 lg:px-8 overflow-hidden relative">
+        <GridOverlay size={32} opacity={0.035} />
+        <div className="max-w-6xl mx-auto relative">
+          <div className="text-center mb-14">
+            <span className="inline-block text-coffee-400 text-sm font-semibold uppercase tracking-widest mb-3">How it works</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">From your email to a live page</h2>
+            <p className="text-gray-400 max-w-xl mx-auto text-sm leading-relaxed">You send the facts. We check, write, label and publish, and you approve before anything goes live.</p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {TOPICS.map((t, i) => (
-              <Reveal key={t.title} delay={i * 0.08}>
-                <Link href={t.href} className="card p-6 block h-full hover:-translate-y-1 hover:shadow-lg transition-all duration-300 group">
-                  <span className="inline-flex w-11 h-11 items-center justify-center rounded-xl bg-coffee-100 dark:bg-coffee-900/40 mb-3 group-hover:scale-110 transition-transform">
-                    <t.icon className="text-coffee-700 dark:text-coffee-300" size={24} aria-hidden />
-                  </span>
-                  <h3 className="font-bold text-gray-900 dark:text-gray-50 mb-1">{t.title}</h3>
-                  <p className="text-sm text-gray-700 dark:text-gray-200">{t.text}</p>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
+          <PipelineFlow
+            sub="Check · write · label"
+            left={[
+              { title: "1. You write to us", text: "Product, market and the article you have in mind." },
+              { title: "2. We confirm the fit", text: "Reply within two business days with format, price and timing." },
+              { title: "3. You send the facts", text: "Key claims and the URL for the link." },
+            ]}
+            right={[
+              { title: "4. You approve the wording", text: "We write or adapt it and send the final text." },
+              { title: "5. Invoice and payment", text: "USD invoice via Wise, Revolut, PayPal or bank transfer." },
+              { title: "6. Live in three days", text: "We publish and send you the URL." },
+            ]}
+          />
         </div>
-      </SectionWrapper>
-
-      {/* Steps */}
-      <SectionWrapper className="bg-gray-50 dark:bg-gray-900">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <span className="section-label">How it works</span>
-            <h2 className="section-title">From email to live page in five steps</h2>
-          </div>
-          <ol className="space-y-4">
-            {STEPS.map((s, i) => (
-              <Reveal key={s.n} delay={i * 0.08}>
-              <li className="card p-5 flex gap-4 items-start hover:translate-x-1 transition-transform duration-300">
-                <span className="shrink-0 w-9 h-9 rounded-full bg-coffee-700 text-white font-bold flex items-center justify-center">{s.n}</span>
-                <div>
-                  <h3 className="font-bold text-gray-900 dark:text-gray-50">{s.title}</h3>
-                  <p className="text-sm text-gray-700 dark:text-gray-200">{s.text}</p>
-                </div>
-              </li>
-              </Reveal>
-            ))}
-          </ol>
-        </div>
-      </SectionWrapper>
+      </section>
 
       {/* Standards */}
       <SectionWrapper>
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-10">
             <span className="section-label">Editorial standards</span>
-            <h2 className="section-title">How we keep sponsored content honest</h2>
+            <h2 className="section-title">How we keep sponsored content <span className="gradient-text">honest</span></h2>
           </div>
-          <ul className="space-y-3 text-gray-700 dark:text-gray-200">
-            {[
-              "A visible “Sponsored” label sits next to every paid item, on desktop and mobile.",
-              "Every paid link carries rel=\"sponsored\". We do not sell links that pass ranking credit.",
-              "Facts and prices are checked against your public pages and the sources named in the article. Claims we cannot verify are softened or removed.",
-              "You approve the final wording. We edit for accuracy, tone and length.",
-              "Payment does not change a comparison table, a ranking of options or a conclusion reached earlier.",
-              "Sensitive categories (gambling, adult, crypto trading, health claims) are reviewed case by case. If a request does not suit our readers, we say so.",
-            ].map((r) => (
-              <li key={r} className="flex gap-3"><BadgeCheck size={20} className="text-coffee-600 mt-0.5 shrink-0" aria-hidden />{r}</li>
+          <div className="rounded-2xl border border-gray-800 bg-gray-950 divide-y divide-gray-800 overflow-hidden">
+            {STANDARDS.map((r) => (
+              <div key={r.t} className="flex items-start gap-4 px-5 py-4 hover:bg-gray-900/60 transition-colors">
+                <BadgeCheck size={18} className="text-green-400 mt-0.5 shrink-0" aria-hidden />
+                <div><div className="text-sm font-semibold text-white">{r.t}</div><div className="text-sm text-gray-400">{r.d}</div></div>
+              </div>
             ))}
-          </ul>
-          <p className="text-sm text-gray-600 dark:text-gray-300 mt-8">
+          </div>
+          <p className="text-sm text-gray-600 dark:text-gray-300 mt-6">
             References:{" "}
             <a className="underline text-coffee-700 dark:text-coffee-300" href="https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links" rel="noopener noreferrer">Google: qualify outbound links (rel=&quot;sponsored&quot;)</a>{" · "}
-            <a className="underline text-coffee-700 dark:text-coffee-300" href="https://www.ecfr.gov/current/title-16/chapter-I/subchapter-B/part-255" rel="noopener noreferrer">FTC Endorsement Guides, 16 CFR Part 255</a>. This page describes our own practice and is not legal advice.
+            <a className="underline text-coffee-700 dark:text-coffee-300" href="https://www.ecfr.gov/current/title-16/chapter-I/subchapter-B/part-255" rel="noopener noreferrer">FTC Endorsement Guides, 16 CFR Part 255</a>. This page describes our own practice and is not legal advice. Looking for a collaboration rather than a placement? See <Link href="/partnerships" className="underline text-coffee-700 dark:text-coffee-300">Partnerships</Link>.
           </p>
         </div>
       </SectionWrapper>
 
       {/* FAQ */}
-      <SectionWrapper className="bg-gray-50 dark:bg-gray-900">
+      <SectionWrapper className="bg-gray-50 dark:bg-gray-900/40">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-10">
             <span className="section-label">FAQ</span>
@@ -420,13 +337,13 @@ export default function AdvertisePage() {
       </SectionWrapper>
 
       {/* Final CTA */}
-      <section className="hero-gradient relative overflow-hidden py-20 px-4 sm:px-6 lg:px-8">
-        <div className="adv-orb w-72 h-72 bg-coffee-400/25 -top-20 right-10" aria-hidden />
+      <section className="bg-gradient-to-br from-gray-950 via-coffee-950 to-coffee-900 py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <GridOverlay />
         <div className="relative max-w-3xl mx-auto text-center">
-          <Mail className="adv-bob mx-auto text-coffee-200 mb-4" size={36} aria-hidden />
+          <div className="text-5xl mb-4 animate-float" aria-hidden>☕</div>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 text-balance">Have a product that fits our readers?</h2>
-          <p className="text-coffee-200 text-lg mb-8">Tell us about it and the article you have in mind. We reply within two business days.</p>
-          <a href={MAIL} className="inline-flex items-center gap-2 bg-white text-coffee-900 font-bold px-8 py-4 rounded-xl hover:bg-coffee-100 transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 text-lg">
+          <p className="text-white/65 text-lg mb-8">Tell us about it and the article you have in mind. We reply within two business days.</p>
+          <a href={MAIL} className="inline-flex items-center gap-2 bg-coffee-500 text-white font-bold px-8 py-4 rounded-xl hover:bg-coffee-400 transition-all hover:shadow-xl text-lg">
             Email hi@datalatte.pro <ArrowRight size={20} />
           </a>
         </div>
