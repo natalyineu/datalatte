@@ -182,7 +182,7 @@ export default function AdvertisePage() {
 
       <StatsBar items={[
         { value: <CountUp to={1000} suffix="+" />, label: "Sourced guides" },
-        { value: <CountUp to={15100} prefix="~" />, label: "Google impressions, 28 days to Oct 31 (Search Console)" },
+        { value: <CountUp to={74000} prefix="~" />, label: "Google impressions, last 90 days to Oct 31 (Search Console)" },
         { value: "4 markets", label: "US, UK, Canada, Australia" },
         { value: "3 days", label: "From approval to live" },
       ]} />
