@@ -359,3 +359,5 @@
 @media (prefers-reduced-motion: reduce) {
   .fx-orb, .fx-steam, .fx-marquee-track, .fx-border, .fx-pulse, .fx-bob { animation: none !important; }
 }
+
+@keyframes dash-progress { from { width: 0%; } to { width: 100%; } }
