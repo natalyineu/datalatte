@@ -5,7 +5,8 @@ import SectionWrapper from "@/components/SectionWrapper";
 import Reveal from "@/components/advertise/Reveal";
 import CountUp from "@/components/advertise/CountUp";
 import PlacementTabs from "@/components/advertise/PlacementTabs";
-import { GridOverlay, FloatingChip, StatsBar, BeforeAfter, TileGrid, PipelineFlow } from "@/components/advertise/Shared";
+import FitFinder from "@/components/advertise/FitFinder";
+import { GridOverlay, FloatingChip, StatsBar, BeforeAfter, PipelineFlow } from "@/components/advertise/Shared";
 import { breadcrumbSchema } from "@/lib/schema";
 
 const PAGE_URL = "https://datalatte.pro/advertise";
@@ -84,37 +85,6 @@ const BEFORE_AFTER = [
   { before: "No say in the final wording", after: "You approve the text before it goes live" },
 ];
 
-const TILE_GROUPS = [
-  {
-    label: "Advertising and media", dot: "#b07d4d",
-    tiles: [
-      { abbr: "TV", name: "Streaming TV (CTV)", category: "Platforms", desc: "Platform comparisons, minimum budgets and CPM ranges for small advertisers.", tags: ["Platforms", "Budgets", "CPM"] },
-      { abbr: "OO", name: "Out-of-home (DOOH)", category: "Outdoor", desc: "Digital billboards and screens, how local businesses buy them.", tags: ["Networks", "Pricing", "Targeting"] },
-      { abbr: "GA", name: "Google and Meta ads", category: "Paid search and social", desc: "Campaign setup, benchmarks and budgets by niche.", tags: ["CPC", "CPL", "Setup"] },
-      { abbr: "AU", name: "Audio and local ads", category: "Emerging channels", desc: "Spotify, Nextdoor and other channels local businesses test.", tags: ["Spotify", "Nextdoor", "Retail media"] },
-    ],
-  },
-  {
-    label: "Search and local", dot: "#8a5a2b",
-    tiles: [
-      { abbr: "SE", name: "Local SEO", category: "Organic", desc: "Rankings, citations and audits for businesses with a physical location.", tags: ["Audits", "Citations", "Maps"] },
-      { abbr: "GB", name: "Google Business Profile", category: "Local search", desc: "Setup, optimisation and review management.", tags: ["Profile", "Reviews", "Posts"] },
-      { abbr: "RV", name: "Reviews and reputation", category: "Trust", desc: "Tools and rules for asking for and answering reviews.", tags: ["Yelp", "Google", "Policy"] },
-      { abbr: "WB", name: "Websites and landing pages", category: "Conversion", desc: "Builders, speed and booking flows for small sites.", tags: ["Builders", "CRO", "Forms"] },
-    ],
-  },
-  {
-    label: "Tools and software", dot: "#6f4e37",
-    tiles: [
-      { abbr: "BK", name: "Booking and POS", category: "Operations", desc: "Booking apps and checkout tools for salons, studios and cafes.", tags: ["Booking", "Payments", "CRM"] },
-      { abbr: "EM", name: "Email and SMS", category: "Retention", desc: "Newsletters, reminders and review requests.", tags: ["Email", "SMS", "Automation"] },
-      { abbr: "AI", name: "AI and automation", category: "Productivity", desc: "Assistants, no-code workflows and agents for small teams.", tags: ["Agents", "Zapier", "Workflows"] },
-      { abbr: "AN", name: "Analytics and reporting", category: "Measurement", desc: "Dashboards, attribution and tracking setup.", tags: ["GA4", "Dashboards", "Tracking"] },
-    ],
-  },
-];
-
-// Snapshot from Google Search Console, 90 days to Oct 30, 2026 (pages that are live and indexable).
 const TOP_GUIDES = [
   { slug: "glovo-vs-wolt-which-is-better", title: "Glovo vs Wolt for Restaurants: Fees Compared (2026)", cat: "Delivery platforms", imp: 1813, pos: 7.4 },
   { slug: "ctv-advertising-platforms-compared-2026", title: "CTV Advertising Platforms Compared: Roku, Disney, Tubi", cat: "Streaming TV (CTV)", imp: 1301, pos: 13.3 },
@@ -209,14 +179,14 @@ export default function AdvertisePage() {
         </Reveal>
       </SectionWrapper>
 
-      {/* Topics grid */}
+      {/* Find your fit */}
       <SectionWrapper className="bg-gray-50 dark:bg-gray-900/40">
         <div className="text-center mb-12">
-          <span className="section-label">Where you can appear</span>
-          <h2 className="section-title">Twelve topics, <span className="gradient-text">one readership</span></h2>
-          <p className="text-gray-500 max-w-xl mx-auto dark:text-gray-400">Pick the guides that match your product. We confirm the fit before anything is published.</p>
+          <span className="section-label">Find your fit</span>
+          <h2 className="section-title">Tell us what you sell. <span className="gradient-text">We show where it belongs.</span></h2>
+          <p className="text-gray-500 max-w-xl mx-auto dark:text-gray-400">Pick your category to see the guides it fits and the format we would suggest. We confirm the fit before anything is published.</p>
         </div>
-        <TileGrid groups={TILE_GROUPS} />
+        <FitFinder />
       </SectionWrapper>
 
       {/* Top guides */}
