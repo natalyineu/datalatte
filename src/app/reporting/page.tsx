@@ -4,6 +4,7 @@ import { ArrowRight, TrendingUp, TrendingDown, Minus, Check, X, Bell, Zap } from
 import SectionWrapper from "@/components/SectionWrapper";
 import CTABanner from "@/components/CTABanner";
 import ReportingFlow from "@/components/ReportingFlow";
+import AnimatedDashboard from "@/components/AnimatedDashboard";
 import DashboardTabs from "@/components/DashboardTabs";
 import { breadcrumbSchema } from "@/lib/schema";
 
@@ -404,6 +405,26 @@ export default function ReportingPage() {
             </p>
           </div>
           <DashboardTabs />
+        </div>
+      </section>
+
+      {/* ── Niche dashboards (new) ── */}
+      <section className="bg-gray-950 py-20 px-4 sm:px-6 lg:px-8 overflow-hidden relative">
+        <div className="absolute inset-0 opacity-[0.035]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.6) 1px,transparent 1px)", backgroundSize: "32px 32px" }} />
+        <div className="max-w-6xl mx-auto relative grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <span className="inline-block text-coffee-400 text-sm font-semibold uppercase tracking-widest mb-3">By business type</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">A dashboard built for <span className="text-coffee-400">your kind of business</span></h2>
+            <p className="text-gray-400 mb-6 leading-relaxed">
+              A coffee shop, a salon, a groomer and a studio do not care about the same numbers. Each dashboard shows the sales trend, the three numbers that matter and the channels that brought the customers.
+            </p>
+            <ul className="space-y-3 text-sm text-gray-300">
+              <li className="flex gap-3"><span className="text-coffee-400 font-bold">1</span><span><strong className="text-white">Weekly sales</strong> shows whether marketing is paying off over time, not just last week.</span></li>
+              <li className="flex gap-3"><span className="text-coffee-400 font-bold">2</span><span><strong className="text-white">Impressions, visits, sales</strong> follow a customer from seeing you, to reaching out, to paying.</span></li>
+              <li className="flex gap-3"><span className="text-coffee-400 font-bold">3</span><span><strong className="text-white">Where sales came from</strong> tells you which channel to put the next dollar into.</span></li>
+            </ul>
+          </div>
+          <AnimatedDashboard />
         </div>
       </section>
 

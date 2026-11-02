@@ -151,7 +151,7 @@ export default function AnimatedDashboard() {
               Live
             </span>
           </div>
-          <div className="text-xs text-gray-400 mb-4">Example dashboard · {n.title} · illustrative figures</div>
+          <div className="text-xs text-gray-400 mb-4">{n.title} · last 30 days</div>
 
           <AnimatePresence mode="wait">
             <motion.div
@@ -196,6 +196,8 @@ export default function AnimatedDashboard() {
           </AnimatePresence>
         </div>
       </div>
+
+      <p className="mt-3 text-center text-[11px] text-white/45">Example figures for illustration.</p>
 
       {/* Floating badge */}
       <AnimatePresence mode="wait">
