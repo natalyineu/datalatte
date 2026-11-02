@@ -135,6 +135,7 @@ async function main() {
     .from("leads")
     .select("id, business_name, email, niche")
     .eq("status", "new")
+    .eq("country_code", "us") // English templates, US leads only (Polish leads need their own text and a legal basis)
     .not("email", "is", null)
     .limit(batchLimit);
 

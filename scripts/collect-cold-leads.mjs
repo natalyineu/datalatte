@@ -15,7 +15,7 @@ if (!APIFY_TOKEN || !SUPABASE_URL || !KEY) { console.error("Missing APIFY_TOKEN 
 
 const sb = (p, opt = {}) => fetch(`${SUPABASE_URL}/rest/v1/${p}`, { ...opt, headers: { apikey: KEY, Authorization: `Bearer ${KEY}`, "Content-Type": "application/json", ...(opt.headers || {}) } });
 
-const CHAINS = /starbucks|dunkin|peet'?s|caribou|tim hortons|panera|subway|mcdonald|great clips|supercuts|sport clips|fantastic sams|regis|petco|petsmart|planet fitness|anytime fitness|orangetheory|f45|la fitness|equinox|crunch|snap fitness|ulta|massage envy|european wax|drybar|blue bottle|philz|la colombe|dutch bros|scooter'?s|tully|biggby|7 brew|jazzercise|lifetime|ymca|gold'?s gym|barry'?s|solidcore|pure barre|club pilates|yogasix|cyclebar|burn boot|title boxing|massage heights/i;
+const CHAINS = /costa coffee|green caff|coffeeheaven|tchibo|starbucks|dunkin|peet'?s|caribou|tim hortons|panera|subway|mcdonald|great clips|supercuts|sport clips|fantastic sams|regis|petco|petsmart|planet fitness|anytime fitness|orangetheory|f45|la fitness|equinox|crunch|snap fitness|ulta|massage envy|european wax|drybar|blue bottle|philz|la colombe|dutch bros|scooter'?s|tully|biggby|7 brew|jazzercise|lifetime|ymca|gold'?s gym|barry'?s|solidcore|pure barre|club pilates|yogasix|cyclebar|burn boot|title boxing|massage heights/i;
 const JUNK = /(sentry|wixpress|example|domain|yourname|email@|user@|@2x|\.png|\.jpg|\.gif|\.webp|noreply|no-reply|donotreply|godaddy|squarespace|wix\.com|shopify)/i;
 const FREE = /@(gmail|yahoo|hotmail|outlook|aol|icloud|me|live|msn)\./i;
 
@@ -39,7 +39,7 @@ async function existingEmails() {
 async function scrape(term, city) {
   const run = await fetch(`https://api.apify.com/v2/acts/compass~crawler-google-places/runs?token=${APIFY_TOKEN}`, {
     method: "POST", headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ searchStringsArray: [`${term} in ${city.city}, ${city.stateCode}`], maxCrawledPlacesPerSearch: q.maxPlacesPerSearch, language: "en", countryCode: "us", scrapeContacts: true, maxReviews: 0 }),
+    body: JSON.stringify({ searchStringsArray: [city.stateCode ? `${term} in ${city.city}, ${city.stateCode}` : `${term} ${city.city}`], maxCrawledPlacesPerSearch: q.maxPlacesPerSearch, language: city.language || "en", countryCode: city.country || "us", scrapeContacts: true, maxReviews: 0 }),
   });
   if (!run.ok) { const t = (await run.text()).slice(0, 300); if (run.status === 403 || run.status === 402) { console.error(`Apify refused to start (${run.status}): ${t}`); process.exit(2); } throw new Error(`Apify start ${run.status}: ${t}`); }
   const { data } = await run.json();
@@ -61,7 +61,9 @@ let added = 0, places = 0;
 const byNiche = {};
 
 outer: for (const city of q.cities) {
-  for (const [niche, term] of Object.entries(q.niches)) {
+  for (const [niche, defTerm] of Object.entries(q.niches)) {
+    if (city.onlyNiches && !city.onlyNiches.includes(niche)) continue;
+    const term = (city.terms && city.terms[niche]) || defTerm;
     if (added >= q.target || places >= q.maxPlacesTotal) break outer;
     try {
       console.log(`→ ${term} in ${city.city}`);
@@ -73,7 +75,7 @@ outer: for (const city of q.cities) {
         const email = pickEmail(it.emails);
         if (!email || seen.has(email)) continue;
         seen.add(email);
-        rows.push({ business_name: it.title, niche, city: it.city || city.city, state: it.state || city.stateCode, country_code: "us", address: it.address || null, website: it.website || null, phone: it.phone || null, google_maps_url: it.url || null, rating: it.totalScore || null, reviews_count: it.reviewsCount || null, email, instagram: it.instagrams?.[0] || null, facebook: it.facebooks?.[0] || null, source: "google_maps", status: "new" });
+        rows.push({ business_name: it.title, niche, city: it.city || city.city, state: it.state || city.stateCode || null, country_code: city.country || "us", address: it.address || null, website: it.website || null, phone: it.phone || null, google_maps_url: it.url || null, rating: it.totalScore || null, reviews_count: it.reviewsCount || null, email, instagram: it.instagrams?.[0] || null, facebook: it.facebooks?.[0] || null, source: "google_maps", status: "new" });
       }
       if (rows.length) {
         const r = await sb("leads?on_conflict=email", { method: "POST", headers: { Prefer: "resolution=ignore-duplicates,return=minimal" }, body: JSON.stringify(rows.slice(0, q.target - added)) });
