@@ -53,10 +53,10 @@ const RULES = [
 ];
 
 const REFUSALS = [
-  "Gambling, adult content, payday loans, crypto trading promotions, miracle health claims and anything illegal where the reader lives.",
-  "Products we could not verify exist or work as described.",
-  "Link swaps, private blog networks, mass guest-post packages and anonymous placements.",
-  "Placements inside pages about a competitor's product that read as an attack on it.",
+  "Products in sensitive categories (gambling, adult, crypto trading, health claims) need a closer look, and we decide case by case.",
+  "We need to be able to verify that the product exists and works as described.",
+  "Link swaps and bulk guest-post packages are not a fit; single, clearly labelled placements are.",
+  "If a request does not suit our readers, we say so and, where we can, suggest a better fit.",
 ];
 
 export default function AdvertisePage() {
@@ -111,7 +111,7 @@ export default function AdvertisePage() {
             {RULES.map((r) => <li key={r}>{r}</li>)}
           </ul>
 
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-50 mt-14 mb-4">What we refuse</h2>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-50 mt-14 mb-4">What we review carefully</h2>
           <ul className="space-y-2 text-gray-700 dark:text-gray-200 list-disc pl-5">
             {REFUSALS.map((r) => <li key={r}>{r}</li>)}
           </ul>
