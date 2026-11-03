@@ -1,9 +1,9 @@
 ---
 title: "How to Embed Google Maps on a Business Website"
 date: "2026-05-21"
-lastModified: "2026-10-08"
+lastModified: "2026-11-03"
 seoTitle: "Embed Google Maps on Your Business Website (2026)"
-description: "Google says Maps Embed API use is free and unlimited. Copy the code, add a title and lazy loading, then add a trackable directions link."
+description: "Google says all Maps Embed API requests are free with unlimited usage. Embed in 5 minutes, add 4 attributes and a trackable directions link."
 author: "Nataliia"
 category: "Local SEO"
 tags: ["google maps", "local SEO", "small business", "website optimization"]
@@ -15,17 +15,21 @@ Google's own documentation says it plainly: "All Maps Embed API requests are ava
 
 The real costs are quieter: a map that loads before it is needed, a frame a screen reader cannot name, a map that tells nobody your address in text, and a visitor who has to pinch and zoom to find out how to get to you.
 
+<StatRow values="$0|5|21|200 px" labels="Embed API request cost|Embed API modes|Maximum zoom level|Minimum map size" subs="Google Maps Platform docs|place, view, directions, streetview, search|0 is the whole world|Either dimension" trends="neutral|neutral|neutral|neutral" />
+
+<BigStat value="$0" label="Google states all Maps Embed API requests are available at no charge with unlimited usage" note="The cost of the map is not the issue. Loading, accessibility, privacy and tracking are." source="Google Maps Platform, Maps Embed API, checked 3 November 2026" />
+
 This guide is for owners of local businesses in the US, UK, Australia and Canada who run their own site on WordPress, Squarespace, Wix or similar.
 
 It covers three ways to show your location, the attributes worth adding to the code, a privacy check that matters most in the UK, and a way to measure whether the map earns its space. If you are wondering whether you need the paid developer API, read [our Google Maps API guide](/blog/using-google-maps-api-for-local-businesses) first. This article stays on the simple end.
 
-## First, Be Honest About What a Map Does
+## Does an Embedded Map Help You Rank?
 
 An embedded map is a convenience, not a ranking tool. Google's Business Profile help says: "There's no way to request or pay for a better local ranking on Google," and that local results are "mainly based on relevance, distance, and popularity." Putting a map on your site is not on that list. What it does well is remove one step for a customer who has already decided to visit.
 
 So the order of work is: get your listing right (our [Google Business Profile checklist](/blog/google-business-profile-optimization-checklist) and the [Maps ranking factors guide](/blog/google-maps-ranking-factors-what-moves-needle-2026) cover that), then put a clean map on one page. Not ten pages. One.
 
-## Three Ways to Show Your Location
+## What Are the Three Ways to Show Your Location?
 
 | Method | Setup | Loads Google's map on page load? | Best for |
 | --- | --- | --- | --- |
@@ -33,9 +37,9 @@ So the order of work is: get your listing right (our [Google Business Profile ch
 | Maps Embed API with a key | Needs a Google Cloud project and key | Yes (unless lazy loaded) | Directions or fixed zoom modes |
 | Text address plus a "Get directions" link | Minutes | No | Pages where speed or privacy matter most |
 
-Many small sites need only the first row. The third row is underrated, and we will come back to it.
+Many small sites need only the first row. The third row is underrated and is covered below.
 
-## Method 1: Copy the Code From Google Maps
+## How Do You Copy the Embed Code From Google Maps?
 
 Google's Maps help describes the steps for a computer (the page gives no steps for the phone apps).
 
@@ -45,9 +49,9 @@ Google also lists what you cannot embed: a map that includes your saved location
 
 Then paste the code into a Custom HTML or embed block on your contact page. In WordPress that is the Custom HTML block; Squarespace, Wix and Shopify have equivalent embed or code blocks.
 
-## Method 2: The Maps Embed API (When You Want Control)
+## When Should You Use the Maps Embed API?
 
-The Maps Embed API gives you a URL in the form `https://www.google.com/maps/embed/v1/MAP_MODE?key=YOUR_API_KEY&PARAMETERS`. Google states "An API key is required for using the Embed API." It documents five modes:
+The Maps Embed API gives you a URL in the form `https://www.google.com/maps/embed/v1/MAP_MODE?key=YOUR_API_KEY&PARAMETERS`. Its examples include a `key` parameter, and the setup runs through a Google Cloud project. Google documents five modes:
 
 | Mode | What it shows | Required parameter |
 | --- | --- | --- |
@@ -61,7 +65,7 @@ Useful optional settings from the same page: `zoom` runs from 0 (the whole world
 
 If you use a key, restrict it. We cover how, and why an unrestricted key is a billing risk, in the [Maps API guide](/blog/using-google-maps-api-for-local-businesses). The embed itself is free per Google's documentation, but a key sitting in public page code can be copied by anyone, so restricting it to your site's address is sensible housekeeping.
 
-## Add Four Attributes Before You Publish
+## Which Four Attributes Should the Iframe Have?
 
 Google's own sample iframe includes `loading="lazy"`, `allowfullscreen` and `referrerpolicy="strict-origin-when-cross-origin"`. Check that your pasted code has the first two and add the third if you want to be explicit. Then add a `title`, which Google's sample does not show.
 
@@ -78,19 +82,19 @@ Google's own sample iframe includes `loading="lazy"`, `allowfullscreen` and `ref
 </iframe>
 ```
 
-Here is why each one earns its place.
+Each one has a job.
 
 **title.** The MDN documentation says screen reader users can use the `title` attribute to label an iframe, and that without it they "have to navigate into the iframe to determine what its embedded content is." The W3C's accessibility technique H64 makes the same recommendation. Describe the content concisely, as in the example above.
 
-**loading="lazy".** MDN defines it as deferring "loading of the iframe until it reaches a calculated distance from the visual viewport," which "improves the performance and cost in most typical use cases." Google's web.dev guidance says lazy loading for iframes is supported in the major browsers (it lists Chrome 77, Edge 79, Firefox 121 and Safari 16.4). It also says omitting the attribute behaves like `eager`, so the map loads immediately if you leave it out. MDN adds that deferral only happens when JavaScript is enabled. One practical note from me, not a source: if the map sits at the very top of the screen on a phone, lazy loading gains you nothing, so put it below your address and hours.
+**loading="lazy".** MDN defines it as deferring "loading of the iframe until it reaches a calculated distance from the visual viewport," which "improves the performance and cost in most typical use cases." Google's web.dev guidance says lazy loading for iframes is supported in the major browsers (it lists Chrome 77, Edge 79, Firefox 121 and Safari 16.4). It also says omitting the attribute behaves like `eager`, so the map loads immediately if you leave it out. MDN adds that deferral only happens when JavaScript is enabled. A practical note, not from a source: if the map sits at the very top of the screen on a phone, lazy loading gains you nothing, so put it below your address and hours.
 
 **referrerpolicy.** MDN says the default is `strict-origin-when-cross-origin`, which sends the full address only for same-site requests and just the site name over HTTPS to other sites. Setting it explicitly matches Google's sample and avoids surprises.
 
-**Width and height.** Google's sample uses fixed 600 by 450. For phones, set `width="100%"` (my suggestion) with a height around 300 to 400 pixels so the map does not push your phone number off the first screen. Check on a real phone, not a desktop window.
+**Width and height.** Google's sample uses fixed 600 by 450. For phones, set `width="100%"` (a practical suggestion, not from Google) with a height around 300 to 400 pixels so the map does not push your phone number off the first screen. Check on a real phone, not a desktop window.
 
 MDN also warns that every iframe "requires increased memory and other computing resources," so one map per page is plenty.
 
-## Method 3: Text Plus a Directions Link
+## Why Add a Text Address and a Directions Link?
 
 Google's Maps URLs let you open Google Maps from any link, and the documentation says: "You don't need a Google API key to use Maps URLs." The two forms you need:
 
@@ -99,13 +103,13 @@ Google's Maps URLs let you open Google Maps from any link, and the documentation
 
 Google says `api=1` is required in every request (without it, "all parameters are ignored"), values must be URL-encoded, and `travelmode` accepts driving, walking, bicycling, two-wheeler or transit. The docs make no statement about cost for Maps URLs, so check their page if you expect heavy use.
 
-The big advantage over an iframe is measurement. A click inside an embedded frame is not reported to your analytics, but a normal link is. We use the directions link as the main thing to count.
+The big advantage over an iframe is measurement. A click inside an embedded frame is not reported to your analytics, but a normal link is. Count the directions link as the main action.
 
 Pair it with a tap-to-call link. MDN notes that on cellular devices a `tel:` link autodials the number, while on other devices the behaviour varies (some open a calling app or offer to save the number). Write the number as text as well, so it is readable and copyable.
 
 Accessibility detail: if a link opens in a new tab, say so in the link text, for example "Get directions (opens in new tab)", as MDN recommends. Use descriptive text, never "click here."
 
-## Privacy Check: Does Your Map Need Consent?
+## Does Your Map Need Cookie Consent?
 
 This is where UK owners especially should pause. Under the UK's PECR rules, the ICO's guidance says you must not store information on, or access information stored on, a visitor's device unless an exception applies.
 
@@ -119,17 +123,17 @@ The ICO's exceptions page discusses embedded video and social plugins, and advis
 
 This is general information, not legal advice. US, Canadian and Australian rules differ, so the same check applies to your own jurisdiction.
 
-## A Note on Structured Data
+## Should You Add Structured Data for the Map?
 
 You can tell search engines your location with LocalBusiness markup. Google's documentation lists `address` and `name` as the required properties, and recommends `geo` (latitude and longitude with at least five decimal places), `openingHoursSpecification`, `telephone` and `url`.
 
 It also states that Google "does not guarantee that features that consume structured data will show up in search results." Schema.org defines a `hasMap` property as "A URL to a map of the place" for the Place type, but Google's LocalBusiness page does not list it, so treat it as optional and do not expect a visible change.
 
-## Measure It
+## How Do You Measure Whether the Map Works?
 
-The map earns its space only if people act. Set up three counts: clicks on the directions link, taps on the phone number, and visits to the contact page. Our call tracking guide shows how to count calls, and Google Business Profile's own performance report shows direction requests and calls from your listing. Compare the two over a month.
+The map earns its space only if people act. Set up three counts: clicks on the directions link, taps on the phone number, and visits to the contact page. Count calls with a tracking number, and Google Business Profile's own performance report shows direction requests and calls from your listing. Compare the two over a month.
 
-## The Math
+## Is a Better Map Block Worth an Hour?
 
 Is a better map block worth an hour of your time? These figures are **assumptions** for illustration. Swap in your own analytics numbers.
 
@@ -149,7 +153,7 @@ How to read it: the 4-point lift in the second column is an assumption, not a me
 
 The point of tracking is to replace these guesses with your own numbers. If the lift is zero, you spent an hour and learned your page is fine.
 
-## Do This Today
+## What Should You Do Today?
 
 1. Search your business on Google Maps and check the pin sits on your entrance and the name, address and phone number match your website.
 2. Copy the embed code (Menu, Share or embed map, Embed a map, Copy HTML) and paste it into your contact page below your address and opening hours.
@@ -175,7 +179,7 @@ A: The ICO's PECR guidance requires consent for non-exempt storage or access on 
 A: Give each location its own page with its own map, address, phone number and hours. Clearer for visitors, and far lighter than loading several maps together.
 
 **Q: Can I track clicks on the map itself?**
-A: Not inside the frame. Track clicks on separate links, which is why we recommend a directions link beside the map.
+A: Not inside the frame. Track clicks on separate links, which is why a directions link beside the map is worth adding.
 
 ## Sources
 
