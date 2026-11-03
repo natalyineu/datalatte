@@ -1,0 +1,279 @@
+{
+ "source": "Intuit QuickBooks industry benchmarking (via QuickBooks MCP connector, benchmarking_against_industry)",
+ "fetched": "2026-11-03",
+ "unit": "USD, average yearly figure per business in the QuickBooks dataset for the state",
+ "caveat": "Averages of businesses that keep books in QuickBooks, not of all businesses in the state. Not every niche returned a value for every state (missing = not returned).",
+ "naics": {
+  "coffee": "722515 Snack and Nonalcoholic Beverage Bars",
+  "salon": "812112 Beauty Salons",
+  "fitness": "713940 Fitness and Recreational Sports Centers",
+  "pet": "812910 Pet Care Services"
+ },
+ "states": {
+  "CA": {
+   "coffee": {
+    "revenue": 748168.76,
+    "profit": 24928.47,
+    "margin_pct": 3.3
+   },
+   "fitness": {
+    "revenue": 409657.8,
+    "profit": 24569.08,
+    "margin_pct": 6.0
+   },
+   "pet": {
+    "revenue": 355419.94,
+    "profit": 39916.78,
+    "margin_pct": 11.2
+   },
+   "salon": {
+    "revenue": 204514.15,
+    "profit": 29653.97,
+    "margin_pct": 14.5
+   }
+  },
+  "TX": {
+   "coffee": {
+    "revenue": 678796.47,
+    "profit": 15920.07,
+    "margin_pct": 2.3
+   },
+   "pet": {
+    "revenue": 395706.78,
+    "profit": 32637.92,
+    "margin_pct": 8.2
+   },
+   "fitness": {
+    "revenue": 343992.65,
+    "profit": 17282.82,
+    "margin_pct": 5.0
+   },
+   "salon": {
+    "revenue": 266529.9,
+    "profit": 31647.14,
+    "margin_pct": 11.9
+   }
+  },
+  "NY": {
+   "coffee": {
+    "revenue": 980418.8,
+    "profit": 18842.09,
+    "margin_pct": 1.9
+   },
+   "fitness": {
+    "revenue": 433834.39,
+    "profit": 29292.19,
+    "margin_pct": 6.8
+   },
+   "salon": {
+    "revenue": 337548.46,
+    "profit": 21216.35,
+    "margin_pct": 6.3
+   },
+   "pet": {
+    "revenue": 316564.9,
+    "profit": 28088.73,
+    "margin_pct": 8.9
+   }
+  },
+  "FL": {
+   "coffee": {
+    "revenue": 498294.79,
+    "profit": 3069.86,
+    "margin_pct": 0.6
+   },
+   "salon": {
+    "revenue": 341476.38,
+    "profit": 21770.35,
+    "margin_pct": 6.4
+   },
+   "fitness": {
+    "revenue": 340749.28,
+    "profit": 15348.08,
+    "margin_pct": 4.5
+   },
+   "pet": {
+    "revenue": 276726.29,
+    "profit": 22674.93,
+    "margin_pct": 8.2
+   }
+  },
+  "IL": {
+   "coffee": {
+    "revenue": 639053.63,
+    "profit": 272.36,
+    "margin_pct": 0.0
+   },
+   "pet": {
+    "revenue": 388800.68,
+    "profit": 35491.94,
+    "margin_pct": 9.1
+   },
+   "fitness": {
+    "revenue": 331539.72,
+    "profit": 12505.57,
+    "margin_pct": 3.8
+   },
+   "salon": {
+    "revenue": 258008.72,
+    "profit": 27083.57,
+    "margin_pct": 10.5
+   }
+  },
+  "PA": {
+   "coffee": {
+    "revenue": 556704.92,
+    "profit": 39520.59,
+    "margin_pct": 7.1
+   },
+   "fitness": {
+    "revenue": 310821.33,
+    "profit": 13368.5,
+    "margin_pct": 4.3
+   },
+   "pet": {
+    "revenue": 256483.93,
+    "profit": 32629.6,
+    "margin_pct": 12.7
+   }
+  },
+  "OH": {
+   "coffee": {
+    "revenue": 675111.59,
+    "profit": 26219.25,
+    "margin_pct": 3.9
+   },
+   "fitness": {
+    "revenue": 337499.59,
+    "profit": 22216.53,
+    "margin_pct": 6.6
+   },
+   "pet": {
+    "revenue": 324255.31,
+    "profit": 29462.75,
+    "margin_pct": 9.1
+   },
+   "salon": {
+    "revenue": 280351.83,
+    "profit": 24612.13,
+    "margin_pct": 8.8
+   }
+  },
+  "GA": {
+   "coffee": {
+    "revenue": 758448.36,
+    "profit": 24921.14,
+    "margin_pct": 3.3
+   },
+   "fitness": {
+    "revenue": 337918.82,
+    "profit": 16453.9,
+    "margin_pct": 4.9
+   },
+   "salon": {
+    "revenue": 322702.4,
+    "profit": 34666.32,
+    "margin_pct": 10.7
+   },
+   "pet": {
+    "revenue": 307760.13,
+    "profit": 25578.18,
+    "margin_pct": 8.3
+   }
+  },
+  "NC": {
+   "coffee": {
+    "revenue": 384648.47,
+    "profit": 11780.98,
+    "margin_pct": 3.1
+   },
+   "fitness": {
+    "revenue": 314827.47,
+    "profit": 26324.16,
+    "margin_pct": 8.4
+   },
+   "pet": {
+    "revenue": 311156.4,
+    "profit": 30447.02,
+    "margin_pct": 9.8
+   },
+   "salon": {
+    "revenue": 215071.67,
+    "profit": 33738.81,
+    "margin_pct": 15.7
+   }
+  },
+  "WA": {
+   "coffee": {
+    "revenue": 562620.01,
+    "profit": 20287.71,
+    "margin_pct": 3.6
+   },
+   "fitness": {
+    "revenue": 338032.38,
+    "profit": 26650.07,
+    "margin_pct": 7.9
+   },
+   "pet": {
+    "revenue": 234138.22,
+    "profit": 30387.3,
+    "margin_pct": 13.0
+   },
+   "salon": {
+    "revenue": 172358.58,
+    "profit": 27227.38,
+    "margin_pct": 15.8
+   }
+  },
+  "AZ": {
+   "coffee": {
+    "revenue": 583041.69,
+    "profit": 20320.4,
+    "margin_pct": 3.5
+   },
+   "pet": {
+    "revenue": 332097.28,
+    "profit": 32762.99,
+    "margin_pct": 9.9
+   },
+   "fitness": {
+    "revenue": 317987.51,
+    "profit": 18872.36,
+    "margin_pct": 5.9
+   },
+   "salon": {
+    "revenue": 164048.62,
+    "profit": 24910.09,
+    "margin_pct": 15.2
+   }
+  },
+  "CO": {
+   "coffee": {
+    "revenue": 774179.31,
+    "profit": 18428.65,
+    "margin_pct": 2.4
+   },
+   "fitness": {
+    "revenue": 341957.36,
+    "profit": 14158.17,
+    "margin_pct": 4.1
+   },
+   "salon": {
+    "revenue": 340180.06,
+    "profit": 40495.6,
+    "margin_pct": 11.9
+   },
+   "pet": {
+    "revenue": 280041.92,
+    "profit": 28420.74,
+    "margin_pct": 10.1
+   }
+  }
+ },
+ "expenses_TX": {
+  "coffee": 700913.49,
+  "pet": 379985.61,
+  "fitness": 347954.83,
+  "salon": 246668.34
+ }
+}
