@@ -1126,6 +1126,11 @@ const nextConfig: NextConfig = {
         destination: "/blog/google-responsive-search-ads-best-practices-10-tips-to-improve-your-ad-strength",
         permanent: true,
       },
+      {
+        source: "/blog/microsoft-bing-ads-for-local-business-guide",
+        destination: "/blog/bing-ads-microsoft-advertising-local-business",
+        permanent: true,
+      },
     // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
