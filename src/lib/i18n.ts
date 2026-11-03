@@ -16,6 +16,10 @@ export const EN_TO_PL: Record<string, string> = {
   "/for/fitness-studios": "/pl/dla/studiow-fitness",
   "/free-audit": "/pl/darmowy-audyt",
   "/privacy": "/pl/polityka-prywatnosci",
+  "/blog/glovo-vs-wolt-which-is-better": "/pl/blog/glovo-vs-wolt-dla-restauracji-porownanie-prowizji",
+  "/blog/online-booking-system-for-salons": "/pl/blog/system-rezerwacji-online-dla-salonow-porownanie-cen",
+  "/blog/booksy-vs-vagaro-vs-fresha-best-booking-app-salons-2026": "/pl/blog/booksy-vs-vagaro-vs-fresha-koszty-dla-salonu",
+  "/blog/best-marketing-automation-tools-small-business": "/pl/blog/najlepsze-narzedzia-marketing-automation-dla-malych-firm",
   "/blog/poznan-cafes-google-maps-presence-ranking-2026": "/pl/blog/ranking-kawiarni-poznan-google-maps-2026",
 };
 

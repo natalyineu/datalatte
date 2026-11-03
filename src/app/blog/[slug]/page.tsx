@@ -23,6 +23,7 @@ import { hubForPost, getHubCopy } from "@/lib/hubs";
 import { ArrowRight } from "lucide-react";
 import ReadingProgress from "@/components/ReadingProgress";
 import TableOfContents from "@/components/TableOfContents";
+import { EN_TO_PL } from "@/lib/i18n";
 import { articleSchema, breadcrumbSchema, faqSchema } from "@/lib/schema";
 
 /** Convert heading text to an anchor id (mirrors TableOfContents slugify). */
@@ -337,7 +338,7 @@ export async function generateMetadata({
         "en-AU": url,
         "en-CA": url,
         "x-default": url,
-        ...(slug === "poznan-cafes-google-maps-presence-ranking-2026" ? { pl: "https://datalatte.pro/pl/blog/ranking-kawiarni-poznan-google-maps-2026" } : {}),
+        ...(EN_TO_PL[`/blog/${slug}`] ? { pl: `https://datalatte.pro${EN_TO_PL[`/blog/${slug}`]}` } : {}),
       },
     },
     // ── Open Graph (article type with full metadata) ───────────────────────
