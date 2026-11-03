@@ -2,7 +2,7 @@
 title: "Local Business Schema Markup: What Google Requires"
 seoTitle: "Local Business Schema Markup and Rich Snippets"
 date: "2026-05-20"
-lastModified: "2026-10-08"
+lastModified: "2026-11-03"
 description: "LocalBusiness schema needs just 2 properties per Google: name and address. Fields to add, JSON-LD to copy, how to test, and why rich results vary."
 author: "Nataliia"
 category: "Website & CRO"
@@ -13,11 +13,15 @@ readTime: '9 min read'
 ---
 Google's LocalBusiness structured data documentation lists exactly two required properties: `name` and `address`. It then lists about ten recommended ones, from opening hours to a phone number. That is the whole job for most small businesses, and it takes an hour, not a month. What it does not do is promise anything.
 
-Google's own page says it "does not guarantee that features that consume structured data will show up in search results."
+Google's own page says it does not guarantee that features consuming structured data will show up in search results, even when the markup is valid.
 
-This guide is for owners of local businesses in the US, UK, Australia and Canada who want to add LocalBusiness schema correctly, without chasing rich snippets that Google may never show. It is based on Google Search Central's documentation, quoted where it matters, and it corrects a claim you will still find on older posts: FAQ rich results no longer exist.
+<StatRow values="2|8|5 decimals|7 May 2026" labels="Required properties|Other recommended properties|Minimum coordinate precision|FAQ rich result ended" subs="name and address|geo, hours, phone, url and more|Google LocalBusiness docs|Google Search changelog" trends="neutral|neutral|neutral|neutral" />
 
-## What Schema Is and What to Expect
+<BigStat value="2" label="Google requires only two properties for LocalBusiness markup, name and address, and promises no visual result even when everything validates" note="The recommended list is longer: telephone, url, geo, openingHoursSpecification, priceRange, menu, servesCuisine, department." source="Google Search Central, Local business structured data, read 3 November 2026" />
+
+This guide is for owners of local businesses in the US, UK, Australia and Canada who want to add LocalBusiness schema correctly, without chasing rich snippets that Google may never show. It is based on Google Search Central's documentation and corrects a claim still found on older posts: FAQ rich results no longer exist.
+
+## What Is Schema Markup and What Should You Expect?
 
 Structured data is code on your page, usually JSON-LD, that labels facts such as your name, address and hours so a machine does not have to guess.
 
@@ -25,32 +29,32 @@ Google's [introduction to structured data](https://developers.google.com/search/
 
 Realistic expectations:
 
-- **It labels your facts clearly.** Google lists the LocalBusiness markup as feeding business details in the knowledge panel and business carousels, per its [LocalBusiness documentation](https://developers.google.com/search/docs/appearance/structured-data/local-business).
-- **It does not guarantee any visual result.** Even valid markup that passes the Rich Results Test may not produce an enhanced result. Google's [general structured data guidelines](https://developers.google.com/search/docs/appearance/structured-data/sd-policies) say the same.
+- **It labels your facts clearly.** The [LocalBusiness documentation](https://developers.google.com/search/docs/appearance/structured-data/local-business) defines which business details Google can read from a page.
+- **It does not guarantee any visual result.** Even valid markup that passes the Rich Results Test may not produce an enhanced result.
 - **Your Google Business Profile still carries the local pack.** Treat schema as the tidy-up that makes your website agree with your listing, after the profile, reviews and page content are in good shape.
 
-## What Google Requires and Recommends
+## What Does Google Require for LocalBusiness Schema?
 
 From the LocalBusiness documentation:
 
 | Status | Properties |
 | --- | --- |
 | Required | `name`, `address` (a PostalAddress; Google says to include as many properties as possible) |
-| Recommended | `geo` (latitude and longitude), `openingHoursSpecification`, `priceRange`, `telephone`, `url`, `menu` and `servesCuisine` for food businesses, `department` for departments |
+| Recommended | `geo` (latitude and longitude), `openingHoursSpecification`, `priceRange`, `telephone`, `url`, `menu` and `servesCuisine` for food establishments, `department` for departments |
 | Only for sites that capture reviews about other local businesses | `aggregateRating`, `review` |
 
 Notable rules from the same page:
 
 - **Use the most specific LocalBusiness subtype possible,** such as Restaurant or DaySpa, specified as an array if more than one applies. `additionalType` is not supported.
 - **Multiple locations:** define each location as its own LocalBusiness.
-- **Hours past midnight** use a single specification; 24-hour opening is "00:00" to "23:59"; a closed day sets both `opens` and `closes` to "00:00"; seasonal closures use `validFrom` and `validThrough`.
+- **Hours past midnight** use a single specification, and seasonal closures use `validFrom` and `validThrough`.
 - **Coordinates** need at least 5 decimal places.
 - **Price range** must be under 100 characters or Google will not show it.
-- **URL** must be a working link.
+- **URL** must be a working link to the specific business location.
 
-Subtypes exist for many local trades. At [schema.org](https://schema.org/CafeOrCoffeeShop), CafeOrCoffeeShop sits under FoodEstablishment, [HairSalon](https://schema.org/HairSalon) under HealthAndBeautyBusiness, [PetStore](https://schema.org/PetStore) under Store, and [HealthClub](https://schema.org/HealthClub) under HealthAndBeautyBusiness and SportsActivityLocation. Not every trade has its own type: a "Photographer" type page could not be found at schema.org, so photographers and similar businesses should browse the [LocalBusiness subtype list](https://schema.org/LocalBusiness) and pick the closest, or fall back to plain LocalBusiness.
+Subtypes exist for many local trades. At [schema.org](https://schema.org/CafeOrCoffeeShop), CafeOrCoffeeShop sits under FoodEstablishment, [HairSalon](https://schema.org/HairSalon) under HealthAndBeautyBusiness and [PetStore](https://schema.org/PetStore) under Store. [HealthClub](https://schema.org/HealthClub) also exists for gyms. Not every trade has its own type, so photographers and similar businesses should browse the [LocalBusiness subtype list](https://schema.org/LocalBusiness) and pick the closest, or fall back to plain LocalBusiness.
 
-## Copy This JSON-LD
+## What Does a Copy-Paste JSON-LD Look Like?
 
 This is a template for a hypothetical salon. Replace every value with your real details, delete lines you cannot fill truthfully, and keep it matching what visitors can read on the page.
 
@@ -97,50 +101,48 @@ This is a template for a hypothetical salon. Replace every value with your real 
 }
 ```
 
-Put it in a `<script type="application/ld+json">` tag on the page that describes the business, usually the home or contact page. Google lists JSON-LD as its recommended format, alongside Microdata and RDFa.
+Put it in a `<script type="application/ld+json">` tag on the page that describes the business, usually the home or contact page. Google recommends JSON-LD "if your site's setup allows it".
 
 For UK, Australian or Canadian businesses, change `addressCountry` ("GB", "AU", "CA"), use the local region and postal code style, and write the phone number in international format.
 
-## Where to Put It on Your Platform
+## Where Do You Put It on Your Platform?
 
 - **WordPress:** SEO plugins such as Yoast, Rank Math or a dedicated schema plugin can generate LocalBusiness data from settings. Open the output and compare it to the template above rather than trusting defaults.
 - **Squarespace, Wix, Shopify:** these may add some structured data on their own. For custom JSON-LD, use the code injection or custom code area your plan allows.
 - **Custom or Next.js sites:** render the script from one source of truth for your name, address and hours so they cannot drift.
 - **Google Tag Manager:** possible, but placing JSON-LD directly in the page markup is simpler to audit.
 
-Our fuller guides [schema markup for local business](/blog/schema-markup-for-local-business) and [schema markup for local business websites](/blog/schema-markup-local-business-website) cover platform-by-platform setup.
+The fuller guides [schema markup for local business](/blog/schema-markup-for-local-business) and [schema markup for local business websites](/blog/schema-markup-local-business-website) cover platform-by-platform setup.
 
-## Test It
+## How Do You Test It?
 
-Google's introduction page recommends the Rich Results Test while building and the Search Console rich result status reports after launch, because templating issues can break markup later. A working routine:
+Google's introduction page recommends the Rich Results Test while building and the Search Console rich result status reports after launch, to catch templating or serving problems. A working routine:
 
 1. **Rich Results Test** (search.google.com/test/rich-results): paste your URL or code and check for errors.
 2. **Schema Markup Validator** (validator.schema.org): checks general Schema.org syntax.
 3. **Search Console:** watch the enhancement or rich result reports for new errors after any site change.
-4. **Compare with your listing.** Open your Google Business Profile and confirm the name, phone and hours match the schema character for character. Our [Google Business Profile optimisation checklist](/blog/google-business-profile-optimization-checklist) lists what to keep in sync.
+4. **Compare with your listing.** Open your Google Business Profile and confirm the name, phone and hours match the schema character for character. The [Google Business Profile optimisation checklist](/blog/google-business-profile-optimization-checklist) lists what to keep in sync.
 
 Fix errors first. A missing optional field is not urgent.
 
-## Two Traps: Reviews and FAQs
+## Which Two Schema Traps Should You Avoid?
 
-**Review stars.** Google's [review snippet documentation](https://developers.google.com/search/docs/appearance/structured-data/review-snippet) says that when a reviewed entity controls the reviews about itself, its pages that use LocalBusiness or other Organization structured data are ineligible for the star review feature. That includes reviews placed on your own site through an embedded third-party widget. It also says ratings must be sourced directly from users, and that editors should not create or compile ratings. The LocalBusiness page itself says `aggregateRating` and `review` are for sites that capture reviews about other local businesses. So adding your own five-star average to your own home page schema is not going to earn stars, and made-up ratings risk a manual action. The general guidelines warn that reviews or ratings not by actual users may result in one.
+**Review stars.** Google's [review snippet documentation](https://developers.google.com/search/docs/appearance/structured-data/review-snippet) says that when a reviewed entity controls the reviews about itself, its pages that use LocalBusiness or other Organization structured data are ineligible for the star review feature. That includes reviews placed on your own site through an embedded third-party widget. It also says ratings must be sourced directly from users, and that editors should not create or compile ratings. The LocalBusiness page itself says `aggregateRating` and `review` are for sites that capture reviews about other local businesses. So adding your own five-star average to your own home page schema is not going to earn stars. Google says violations may lead to a manual action, and structured data on a page under manual action is ignored, though the page can still appear in results.
 
-A manual action for structured data, according to Google, means the page loses eligibility for appearance as a rich result; it does not affect ranking in web search.
+**FAQ markup.** Many older articles say FAQ rich results are limited to a few sites. The current position is stricter. Google's [Search Central changelog](https://developers.google.com/search/updates) says the FAQ rich result feature would no longer appear in Google Search starting 7 May 2026, and a later entry says it is no longer shown in results. So do not add FAQPage schema hoping for expandable answers in results. You can still publish a visible FAQ section for customers, which is useful on its own.
 
-**FAQ markup.** Many older articles, including earlier versions of this one, said FAQ rich results were limited to a few sites. The current position is stricter. Google's [Search Central changelog](https://developers.google.com/search/updates) says the FAQ rich result feature would no longer appear in Google Search starting May 7, 2026, and a June 15, 2026 entry says it is no longer shown and the documentation was removed. So do not add FAQPage schema hoping for expandable answers in results. You can still publish a visible FAQ section for customers, which is useful on its own.
+The same changelog shows a pattern: Google has retired several other structured data features since 2025, including practice problems and course info. Write schema to describe your business accurately, not to unlock a particular visual, because that visual can disappear.
 
-The same changelog shows a pattern: Google has retired several other structured data features since 2024. Write schema to describe your business accurately, not to unlock a particular visual, because that visual can disappear.
-
-## Common Mistakes
+## What Are the Most Common Schema Mistakes?
 
 - **Mismatch:** phone, address or hours in schema differ from the page or your listing.
-- **Markup for hidden content.** Google says structured data must be a true representation of the page content.
+- **Markup for content visitors cannot see,** which makes the data disagree with the page.
 - **Two sources of schema:** both a theme and a plugin print LocalBusiness, creating duplicates.
 - **A generic type** where a specific one exists.
 - **Stale hours** after a holiday or seasonal change.
 - **Treating schema as a substitute** for reviews, a complete profile and good pages.
 
-## The Math
+## Is Schema Worth the Cost? A Worked Example
 
 Schema is a small fixed cost with no guaranteed return, so the sensible question is how many extra customers it must bring to pay for itself. Every number below is an **assumption**; no source cited here measures schema's effect on customer numbers.
 
@@ -152,9 +154,11 @@ Schema is a small fixed cost with no guaranteed return, so the sensible question
 | Gross profit per new customer (assumption) | $60 | $60 | $60 |
 | Extra customers needed to break even in year one | 4 | 6 | 12 |
 
-How to read it: 4 extra customers in a year is plausible if cleaner, consistent data stops even one confused enquiry a quarter, but there is no evidence that schema alone delivers that. The cheap path is the rational one. Spend more only if you run multiple locations, a booking site or a custom build where schema is generated from the same data as the page.
+<ColumnChart title="Extra customers needed to break even in year one (assumption)" labels="DIY plugin|Freelancer|Custom developer" values="4|6|12" highlights="DIY plugin" caption="Assumption: $60 gross profit per new customer and the first-year costs in the table. Not a measured effect of schema." />
 
-## Do This Today
+How to read it: the table only shows how many extra customers are needed. No source cited here shows that schema alone delivers them, so the cheap path is the rational one. Spend more only if you run multiple locations, a booking site or a custom build where schema is generated from the same data as the page.
+
+## What Should You Do First?
 
 1. Open your Google Business Profile and copy the exact name, address, phone and hours into a note. These become your single source of truth.
 2. Pick the most specific schema.org subtype for your business from the [LocalBusiness list](https://schema.org/LocalBusiness).
@@ -164,26 +168,30 @@ How to read it: 4 extra customers in a year is plausible if cleaner, consistent 
 
 ## FAQ
 
-**Q: Does schema markup improve my Google rankings?**
-A: Google's introduction to structured data describes benefits in terms of search appearance and does not call it a ranking factor. Treat it as a way to label your facts clearly, not a ranking lever.
+### Does schema markup improve my Google rankings?
 
-**Q: Will I get rich snippets if my markup is valid?**
-A: Not necessarily. Google says it does not guarantee that features consuming structured data will show up in search results, even when a test passes.
+Google's introduction to structured data describes benefits in terms of search appearance and does not call it a ranking factor. Treat it as a way to label your facts clearly, not a ranking lever.
 
-**Q: Can I add star ratings to my own business schema?**
-A: Google says pages about an entity that controls its own reviews, using LocalBusiness or Organization markup, are ineligible for the star review feature. Skip it.
+### Will I get rich snippets if my markup is valid?
 
-**Q: Do I still need FAQ schema?**
-A: Not for search results. Google announced that the FAQ rich result stopped appearing from May 7, 2026. A visible FAQ section for customers is still worthwhile.
+Not necessarily. Google says it does not guarantee that features consuming structured data will show up in search results, even when a test passes.
 
-**Q: Which format should I use?**
-A: Google recommends JSON-LD, and also supports Microdata and RDFa.
+### Can I add star ratings to my own business schema?
+
+Google says pages about an entity that controls its own reviews, using LocalBusiness or Organization markup, are ineligible for the star review feature. Skip it.
+
+### Do I still need FAQ schema?
+
+Not for search results. Google announced that the FAQ rich result stopped appearing from 7 May 2026. A visible FAQ section for customers is still worthwhile.
+
+### Which format should I use?
+
+Google recommends JSON-LD if your site's setup allows it.
 
 ## Sources
 
 - [Google Search Central: Local business structured data](https://developers.google.com/search/docs/appearance/structured-data/local-business)
 - [Google Search Central: Introduction to structured data](https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data)
-- [Google Search Central: General structured data guidelines](https://developers.google.com/search/docs/appearance/structured-data/sd-policies)
 - [Google Search Central: Review snippet structured data](https://developers.google.com/search/docs/appearance/structured-data/review-snippet)
 - [Google Search Central: Search documentation updates (changelog)](https://developers.google.com/search/updates)
 - [Schema.org: LocalBusiness](https://schema.org/LocalBusiness)

@@ -2,8 +2,8 @@
 title: "AI Agent for Google Reviews: Safe Replies"
 seoTitle: "AI Agent for Google Reviews: Replies and Requests"
 date: "2026-05-18"
-lastModified: "2026-10-08"
-description: "How an AI agent can draft Google review replies, flag bad reviews and send review requests: API access, approval rules, Google and FTC limits, and costs."
+lastModified: "2026-11-03"
+description: "89% of consumers expect replies to reviews. How an AI agent drafts Google review replies safely: API access, approval rules, Google and FTC limits, costs."
 author: "Nataliia"
 category: "AI & Automation"
 tags: ["AI", "Google Reviews", "Automation", "Local SEO"]
@@ -17,7 +17,9 @@ An AI agent can close the gap by watching for new reviews, drafting a reply in y
 
 This guide shows how a review agent actually works, what Google requires before you can connect one, which reviews it should never touch alone, and what it costs. It is for coffee shops, salons, groomers and studios in the US, UK, Australia and Canada.
 
-## What the Evidence Says About Reviews and Replies
+<BigStat value="19%" label="One consumer in five now expects a reply to a review on the same day, up from 6% a year earlier" note="BrightLocal 2026: 1,002 US adults. 89% expect owner replies at all; 81% expect one within a week." source="BrightLocal Local Consumer Review Survey, published 11 February 2026" />
+
+## What Do Consumers Expect From Review Replies?
 
 BrightLocal's [2026 survey](https://www.brightlocal.com/research/local-consumer-review-survey/) (1,002 US adults, published February 2026) found:
 
@@ -28,9 +30,11 @@ BrightLocal's [2026 survey](https://www.brightlocal.com/research/local-consumer-
   trends="neutral|neutral|neutral|neutral"
 />
 
+<BarChart title="What consumers say about reviews and replies" labels="Read local reviews|Expect owner replies|Expect reply within a week|Seek reviews under 3 months old|Expect reply same day" values="97|89|81|74|19" unit="%" maxValue="100" caption="BrightLocal Local Consumer Review Survey 2026, 1,002 US adults, published February 2026." />
+
 Google's own [reply help page](https://support.google.com/business/answer/3474050) is more modest: it says helpful and positive replies can show you are responsive, and that the reviewer is notified when you reply. It does not claim replies lift your search ranking, so treat replies as customer service, not an SEO trick.
 
-## How a Review Agent Works
+## How Does a Review Agent Work?
 
 Strip away the marketing and a review agent is four steps in a loop:
 
@@ -41,7 +45,7 @@ Strip away the marketing and a review agent is four steps in a loop:
 
 Posting is the only step with consequences, so keep it behind your approval at first.
 
-## Getting Access: Google Requires Approval
+## What Access Does Google Require?
 
 You cannot just point software at Google reviews. Google's [Business Profile API prerequisites](https://developers.google.com/my-business/content/prereqs) say you need:
 
@@ -51,17 +55,17 @@ You cannot just point software at Google reviews. Google's [Business Profile API
 
 Google says a quota of 0 queries per minute in the Cloud console means the project is not yet approved, and 300 means it is.
 
-The [review data page](https://developers.google.com/my-business/content/review-data) shows the two calls an agent uses: a GET to list reviews, and a PUT to the review's `/reply` endpoint with a JSON body such as `{"comment": "Thank you for visiting our business!"}`. It creates the reply if none exists or updates the existing one.
+The [review data page](https://developers.google.com/my-business/content/review-data) shows the two calls an agent uses: a GET to list reviews, and a PUT to the review's `/reply` endpoint with a JSON body that has a single `comment` field. The same request creates the reply if none exists or updates the existing one.
 
 To reply through the API, a Google Workspace administrator must also enable Search and/or Maps with Business Profile for the account.
 
-If that sounds like a lot, it is the reason most small businesses use a hosted tool that has already been approved. Ask any vendor whether it connects through Google's official API; our [AI review management service](/services/ai-agents/review-management) is built that way.
+If that sounds like a lot, it is the reason most small businesses use a hosted tool that has already been approved. Ask any vendor whether it connects through Google's official API; the [AI review management service](/services/ai-agents/review-management) is built that way.
 
-## Rules the Agent Must Follow
+## Which Rules Must the Agent Follow?
 
 ### Replies
 
-Google checks every reply against its content policies. Its help page says checks usually take about 10 minutes but can occasionally take up to 30 days, and that an unapproved reply will be returned for editing. Do not let the agent post private details, admit legal fault or offer compensation in public. Our guides on negative review scripts and [fake reviews](/blog/how-to-deal-with-fake-google-reviews) cover the wording.
+Google checks every reply against its content policies. Its help page says checks usually take about 10 minutes but can occasionally take up to 30 days, and that an unapproved reply will be returned for editing. Do not let the agent post private details, admit legal fault or offer compensation in public. The guide to [fake reviews](/blog/how-to-deal-with-fake-google-reviews) covers the wording.
 
 ### Requests
 
@@ -75,7 +79,7 @@ The FTC's [final rule on fake reviews](https://www.ftc.gov/news-events/news/pres
 
 It says the rule has no specific ban on asking only customers you think are happy, but that the practice could still violate the FTC Act. Never have an agent write a review as a customer. That includes "customers" who are staff.
 
-## What to Automate and What Not To
+## What Should You Automate and What Not?
 
 | Situation | Handling |
 | --- | --- |
@@ -88,17 +92,17 @@ It says the rule has no specific ban on asking only customers you think are happ
 
 Add a hard stop word list: "refund", "lawyer", "injured", "sick", "police", "discrimination". Any review containing one goes straight to you.
 
-## A Prompt That Works
+## What Prompt Keeps Replies Safe?
 
 Give the model the review text, star rating, your business name and a short voice guide. Something like:
 
 > You write replies for [Business] in [Town]. Tone: warm, brief, no exclamation marks overload. Use the customer's first name and one specific detail they mentioned. Never offer discounts, never admit fault, never mention staff by surname. For 1-3 stars, thank them, apologise that the visit fell short, and invite them to contact [phone/email]. Output the reply only. If the review mentions health, safety, money or legal action, output HOLD.
 
-The word HOLD is your safety valve: the pipeline treats it as "send to the owner". Test with ten of your own old reviews before connecting anything live. Our [auto-reply script walkthrough](/blog/ai-agent-google-reviews-auto-reply-script) shows the code side.
+The word HOLD is your safety valve: the pipeline treats it as "send to the owner". Test with ten of your own old reviews before connecting anything live. The [auto-reply script walkthrough](/blog/ai-agent-google-reviews-auto-reply-script) shows the code side.
 
-## The Math
+## Is a Review Agent Worth It? A Worked Example
 
-Model usage is the cheapest part. Anthropic's [pricing page](https://platform.claude.com/docs/en/about-claude/pricing) lists Claude Sonnet 5.5 at $2 per million input tokens and $10 per million output tokens. Assume each reply uses 1,500 input tokens (the prompt plus the review) and 200 output tokens: that is roughly $0.003 plus $0.002, about half a cent per reply. Everything else in the table is an **assumption**, so replace it with your own figures.
+Model usage is the cheapest part. Anthropic's [pricing page](https://platform.claude.com/docs/en/about-claude/pricing) lists Claude Sonnet 5.5 at $2 per million input tokens and $10 per million output tokens (checked 3 November 2026). Assume each reply uses 1,500 input tokens (the prompt plus the review) and 200 output tokens: that is roughly $0.003 plus $0.002, about half a cent per reply. Everything else in the table is an **assumption**, so replace it with your own figures.
 
 | | Quiet | Typical | Busy |
 | --- | --- | --- | --- |
@@ -113,13 +117,13 @@ Model usage is the cheapest part. Anthropic's [pricing page](https://platform.cl
 
 Read it honestly. If you get 20 reviews a month, an agent saves you very little, and a template list and ten minutes a week may beat any subscription. The agent pays off at volume, or when you have several locations.
 
-Its real value is speed: it can draft within hours, so replies land well inside the one-week window 81% of consumers expect. The review requests are a separate lever, since the more reviews you collect, the more replies you need to write. Our [review request automation guide](/blog/how-to-automate-google-review-requests) and 5-star reviews guide cover that side.
+Its real value is speed: it can draft within hours, so replies land well inside the one-week window 81% of consumers expect. The review requests are a separate lever, since the more reviews you collect, the more replies you need to write. The [review request automation guide](/blog/how-to-automate-google-review-requests) covers that side.
 
 <Callout type="warning" title="The gating trap">
 Many "review funnel" tools ask customers how they felt and only send happy ones to Google. Google's policy against selectively soliciting positive reviews, and the FTC's warning about the same practice, are good reasons to avoid that design. Send one neutral request to everyone.
 </Callout>
 
-## Weekly Routine (15 Minutes)
+## What Is a 15-Minute Weekly Routine?
 
 1. Clear the approval queue and edit any draft that does not sound like you.
 2. Read every 1-3 star review personally and decide on the real-world fix.
@@ -127,7 +131,7 @@ Many "review funnel" tools ask customers how they felt and only send happy ones 
 4. Look for patterns: three mentions of waiting time is an operations problem, not a reply problem.
 5. Check the request log to confirm every customer received the same message.
 
-## Do This Today
+## What Should You Do First?
 
 1. Count your reviews from the last 90 days and how many have no reply. That is your backlog and your volume estimate.
 2. Write a one-paragraph voice guide with three example replies you are proud of and three phrases you never use.
@@ -137,20 +141,25 @@ Many "review funnel" tools ask customers how they felt and only send happy ones 
 
 ## FAQ
 
-**Q: Will AI replies sound fake?**
-A: They can if every reply follows one template. Include a specific detail from each review, vary the openings and edit the first batch until it sounds like you. Keep a person on negative reviews.
+### Will AI replies sound fake?
 
-**Q: Can an AI agent post replies automatically?**
-A: Technically yes, through the Business Profile API once your project is approved. Google reviews replies against its content policies, so start with draft-and-approve rather than auto-posting.
+They can if every reply follows one template. Include a specific detail from each review, vary the openings and edit the first batch until it sounds like you. Keep a person on negative reviews.
 
-**Q: Is it allowed to offer a discount for a review?**
-A: No. Google's policy lists payment, discounts and free goods or services as prohibited incentives, and the FTC says incentives cannot depend on the review being positive.
+### Can an AI agent post replies automatically?
 
-**Q: Can I use AI to write the reviews themselves?**
-A: No. The FTC rule bans fake reviews, including AI-generated ones, that misrepresent who wrote them. Ask real customers.
+Technically yes, through the Business Profile API once your project is approved. Google reviews replies against its content policies, so start with draft-and-approve rather than auto-posting.
 
-**Q: How do I handle a suspected fake review?**
-A: Reply neutrally, report it through your Business Profile and avoid accusing the reviewer. The FTC's Q&A says false accusations about reviewers and unfounded legal threats are not allowed when used to suppress reviews.
+### Is it allowed to offer a discount for a review?
+
+No. Google's policy lists payment, discounts and free goods or services as prohibited incentives, and the FTC says incentives cannot depend on the review being positive.
+
+### Can I use AI to write the reviews themselves?
+
+No. The FTC rule bans fake reviews, including AI-generated ones, that misrepresent who wrote them. Ask real customers.
+
+### How do I handle a suspected fake review?
+
+Reply neutrally, report it through your Business Profile and avoid accusing the reviewer. The FTC's Q&A says false accusations about reviewers and unfounded legal threats are not allowed when used to suppress reviews.
 
 ## Sources
 

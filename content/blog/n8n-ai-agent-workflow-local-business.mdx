@@ -2,338 +2,144 @@
 title: "n8n AI Agent Workflow for Local Business Lead Follow-Up"
 seoTitle: "n8n AI Agent Workflow for Local Business (2026)"
 date: "2026-06-13"
-lastModified: "2026-10-07"
-description: "Build an n8n AI agent workflow for a local business: classify new leads, draft replies and log everything, with importable JSON and self-hosting tips."
+lastModified: "2026-11-03"
+description: "n8n AI lead follow-up workflow for a local business: Gmail trigger, classifier, drafted replies, sheet log. Cloud from $20 a month for 2,500 runs."
 author: "Nataliia"
 category: "AI & Automation"
 tags: ["n8n", "ai agents", "automation", "workflow", "self-hosted", "local business", "open source"]
 slug: "n8n-ai-agent-workflow-local-business"
 image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&q=80&auto=format&fit=crop"
-readTime: "10 min read"
+readTime: "9 min read"
 ---
-An n8n AI agent workflow for a local business can watch your inbox for new inquiries, classify each lead with an LLM, draft a personalized reply, and log everything to a spreadsheet. n8n is an open-source automation tool you can self-host or run in the cloud, which makes it a good fit if you want more control over data and costs than per-operation tools offer.
+An n8n workflow can watch a Gmail inbox for new inquiries, sort each one into a category with an AI model, save a drafted reply for you to approve and log the lead to a Google Sheet. The n8n documentation lists a Gmail Trigger, a Text Classifier, an AI Agent, a Gmail node that can create drafts and a Google Sheets node that can append rows, so every step has a built-in node.
 
-The workflow below is a starting template: test it carefully before letting it email real customers.
+This guide walks through that design, what n8n costs on its pricing page and how to keep a person in the loop. It does not include an importable JSON file: node names and parameters change between n8n versions, and a file that cannot be tested against your version is more risk than help.
 
-This article covers a specific workflow: an AI agent that monitors your email inbox for new leads, classifies them, generates a reply using an LLM, and logs the result. It uses the same logic as our [Make.com workflow](/blog/make-com-ai-agent-workflow-local-business), but runs on infrastructure you control. We recommend having the agent create drafts at first, so you can review replies before anything is sent.
+<StatRow values="$20|2,500|$50|10,000" labels="Starter plan a month|Starter executions|Pro plan a month|Pro executions" subs="Billed annually|Per month, unlimited steps|Billed annually|Per month, unlimited steps" trends="neutral|neutral|neutral|neutral" />
 
----
+<BigStat value="83" label="At one execution per inquiry, the cheapest n8n Cloud plan would cover about 83 inquiries every day of the month" note="2,500 executions divided by 30 days is 83. The one-execution-per-inquiry rule is an assumption; check how n8n counts executions for your trigger." source="n8n pricing page, read 3 November 2026; arithmetic by DataLatte" />
 
-## n8n vs. Make.com: When to Choose Which
+## What Does a Lead Follow-Up Workflow Look Like?
 
-| Factor | n8n | Make.com |
-|---|---|---|
-| Cost | Free community edition if self-hosted (you pay for the server), or paid cloud plans | Free tier (limited), paid plans |
-| Setup complexity | Higher (needs server or cloud setup) | Low (cloud-native) |
-| Data privacy | Full control (self-hosted) | Data goes through Make servers |
-| Execution limits | No per-execution fees when self-hosted | Operation limits depend on plan |
-| AI integration | Native AI Agent nodes | Via HTTP modules |
-| Community | Large library of shared workflow templates | Large, but proprietary |
+The workflow has six steps. Each maps to a node the n8n docs describe.
 
-**Choose n8n if**: You care about data privacy, need unlimited operations, or want to avoid per-operation costs as you scale.
+1. **Gmail Trigger.** Fires on "Message Received". The docs list filters for label, search text, read status (unread only is the default) and sender, plus a poll interval you choose. Use a label or a dedicated inquiries address so only real leads start the workflow.
+2. **Text Classifier.** Sorts the email into categories you define, each with a name and a description. Examples: new booking enquiry, price question, complaint, spam. The node has an option to send items that match no category to an extra "Other" output instead of discarding them.
+3. **Branch.** Complaints, refunds and anything under "Other" go to a person. Only clear enquiries continue.
+4. **Draft the reply.** An AI Agent or a basic LLM step writes a short reply from your prompt and a few facts you supply, such as hours and prices.
+5. **Gmail, Create Draft.** The Gmail node supports creating a draft as well as sending and replying. A draft means nothing leaves your account until you press send.
+6. **Google Sheets, Append Row.** Log date, sender, category and whether a draft was created. This log is your evidence that the workflow works.
 
-**Choose Make.com if**: You want the fastest setup with no server management.
+The Gmail Trigger has a Simplify option, on by default, that returns only IDs, labels and headers such as From and Subject. To give the model the email text, turn Simplify off so the full message comes through.
 
----
+## Should You Use the AI Agent Node or a Classifier?
 
-## Setting Up n8n
+The n8n docs describe the AI Agent node this way: you connect a chat model and one or more tools, and the agent decides which tools to call. At least one tool must be connected, and all AI Agent nodes now work as a Tools Agent.
 
-### Option 1: n8n Cloud (Easiest Start)
+For a lead inbox, the more predictable design is a classifier first, then a fixed draft step. An agent that picks its own tools is flexible but harder to test. Use the agent when leads vary a lot, such as when it must look up your calendar or price list, and keep its tools to the minimum: create a draft, read the sheet.
 
-Sign up at [n8n.io](https://n8n.io). There is typically a free trial and then a paid plan; check current pricing. No server needed.
+## What Does n8n Cost?
 
-### Option 2: Self-Hosted on a VPS (Free)
+The [n8n pricing page](https://n8n.io/pricing/) says pricing is based on monthly workflow executions, regardless of complexity, with unlimited users and workflows on every plan.
 
-Run n8n on a small VPS (entry-level plans from providers like DigitalOcean or Hetzner usually cost a few dollars a month; confirm current prices). This is a minimal example, so follow n8n's current docs for production settings:
+| Option | Price shown | Executions per month | Notes |
+| --- | --- | --- | --- |
+| Cloud Starter | $20 a month, billed annually | 2,500 | Hosted by n8n, 5 concurrent executions, free trial without a credit card |
+| Cloud Pro | $50 a month, billed annually | 10,000 | 3 shared projects, 50 concurrent executions |
+| Business | 667 euros a month, billed annually | 40,000 | Self-hosted only |
+| Community Edition | Free software | Not metered by n8n | Self-hosted from GitHub; you pay for the server and your time |
+
+<ColumnChart title="Executions included per month, by n8n plan" labels="Starter|Pro|Business" values="2500|10000|40000" highlights="Starter" caption="n8n pricing page, read 3 November 2026. Starter $20 and Pro $50 a month billed annually; Business 667 euros, self-hosted only." />
+
+For a single café, salon or studio, Starter is likely enough for this workflow. The pricing page shows a euro price for Business and dollar prices for the other plans, so check the live page for your currency.
+
+## How Do You Self-Host n8n?
+
+Self-hosting avoids the monthly plan but adds server work. The n8n Docker page says you need technical self-hosting skills (server and container setup, resource management, security) and warns that mistakes can cause data loss, security issues or downtime.
+
+The page is marked outdated and points to a Docker Compose guide. Its basic command is:
 
 ```bash
-# Install Docker
-curl -fsSL https://get.docker.com | sh
+docker volume create n8n_data
 
-# Run n8n with Docker Compose
-cat > docker-compose.yml << 'EOF'
-version: '3'
-services:
-  n8n:
-    image: docker.n8nio/n8n
-    restart: unless-stopped
-    ports:
-      - "5678:5678"
-    environment:
-      - N8N_HOST=your-domain.com
-      - N8N_PORT=5678
-      - N8N_PROTOCOL=https
-      - WEBHOOK_URL=https://your-domain.com/
-      - GENERIC_TIMEZONE=America/Chicago
-    volumes:
-      - n8n_data:/home/node/.n8n
-
-volumes:
-  n8n_data:
-EOF
-
-docker compose up -d
+docker run -it --rm \
+  --name n8n \
+  -p 5678:5678 \
+  -e GENERIC_TIMEZONE="<YOUR_TIMEZONE>" \
+  -e TZ="<YOUR_TIMEZONE>" \
+  -v n8n_data:/home/node/.n8n \
+  n8nio/n8n
 ```
 
-Access at `http://your-server-ip:5678`. Set up SSL with Nginx or Caddy for production.
+The `n8n_data` volume holds encryption keys and logs, so keep it. For production use, follow the current Docker Compose install guide in the n8n docs, and put the server behind HTTPS. If that sounds like too much, n8n Cloud removes the work.
 
----
+## How Do You Keep the Agent Safe?
 
-## The Workflow: AI Lead Follow-Up Agent
+- Start in draft mode only. Review every draft for a week before trusting the classifier.
+- Tell the model in the prompt never to promise prices, availability or guarantees you have not approved.
+- Send complaints, refunds, health or legal topics to a person.
+- Store API keys in n8n credentials, not in the workflow text or prompts.
+- Test with your own emails first, including spam and angry messages.
+- Check what your email provider and local rules require before sending automated replies to customers.
 
-This workflow:
-1. Watches your Gmail inbox for new inquiry emails (use a dedicated inquiries address if you can)
-2. Uses an LLM to classify lead quality (GOOD_FIT / MAYBE / NOT_FIT)
-3. Generates a personalized reply for GOOD_FIT leads
-4. Sends the email reply (or, safer at first, saves it as a draft for you to approve)
-5. Logs everything to a Google Sheet
-6. Sends you a Slack/email alert for high-priority leads only
+## Is It Worth Building? A Worked Example
 
-### Workflow JSON (Import Directly into n8n)
+Every input below is an **assumption**. Replace it with your own numbers.
 
-Go to n8n → New Workflow → click the three dots → Import from JSON → paste this. Node names, versions and parameters change between n8n releases, so treat this JSON as a template: after importing, reconnect credentials, replace placeholders like `YOUR_GOOGLE_SHEET_ID` and the Calendly link, and run it with test emails before enabling it.
+| | Assumption |
+| --- | --- |
+| Inquiries per month | 60 |
+| Minutes to read, sort and draft one reply by hand | 5 |
+| Minutes to review one draft | 1 |
+| Value of your time | $30 an hour |
+| n8n Cloud Starter | $20 a month |
+| AI model cost per inquiry | under $0.01 |
 
-```json
-{
-  "name": "AI Lead Follow-Up Agent",
-  "nodes": [
-    {
-      "parameters": {
-        "pollTimes": {
-          "item": [{"mode": "everyMinute"}]
-        },
-        "filters": {
-          "readStatus": "unread",
-          "sender": ""
-        }
-      },
-      "name": "Gmail Trigger",
-      "type": "n8n-nodes-base.gmailTrigger",
-      "typeVersion": 1,
-      "position": [250, 300]
-    },
-    {
-      "parameters": {
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "openAiApi",
-        "resource": "chat",
-        "model": "gpt-4o-mini",
-        "messages": {
-          "values": [
-            {
-              "role": "system",
-              "content": "You are a lead qualifier. Classify the email as GOOD_FIT, MAYBE, or NOT_FIT. Reply only with valid JSON: {\"classification\": \"GOOD_FIT\", \"reason\": \"one sentence\", \"priority\": \"high|medium|low\", \"first_name\": \"extracted name or Unknown\"}"
-            },
-            {
-              "role": "user",
-              "content": "=Classify this lead inquiry:\n\nFrom: {{ $json.from }}\nSubject: {{ $json.subject }}\nBody: {{ $json.text }}\n\nGOOD_FIT: local business, clear service need, budget signals, professional inquiry\nNOT_FIT: requests free work, spam, wrong service entirely, student project\nMAYBE: everything else"
-            }
-          ]
-        },
-        "options": {
-          "maxTokens": 150,
-          "temperature": 0.2
-        }
-      },
-      "name": "Classify Lead",
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
-      "typeVersion": 1,
-      "position": [500, 300]
-    },
-    {
-      "parameters": {
-        "jsCode": "const raw = $input.first().json.choices[0].message.content;\ntry {\n  return [{ json: JSON.parse(raw) }];\n} catch(e) {\n  return [{ json: { classification: 'MAYBE', reason: 'parse error', priority: 'low', first_name: 'there' } }];\n}"
-      },
-      "name": "Parse Classification",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [750, 300]
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "string": [
-            {
-              "value1": "={{ $json.classification }}",
-              "value2": "GOOD_FIT"
-            }
-          ]
-        }
-      },
-      "name": "Is Good Fit?",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 1,
-      "position": [1000, 300]
-    },
-    {
-      "parameters": {
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "openAiApi",
-        "resource": "chat",
-        "model": "gpt-4o-mini",
-        "messages": {
-          "values": [
-            {
-              "role": "system",
-              "content": "You write warm, personalized business emails. Under 180 words. Sound like a real person, not a marketing email. Sign as Nataliia from DataLatte."
-            },
-            {
-              "role": "user",
-              "content": "=Write a reply to this inquiry.\n\nFrom: {{ $('Gmail Trigger').first().json.from }}\nSubject: {{ $('Gmail Trigger').first().json.subject }}\nInquiry: {{ $('Gmail Trigger').first().json.text }}\n\nInclude:\n- Reference something specific from their message\n- Suggest a free 20-min discovery call\n- Calendly link: https://calendly.com/datalatte/discovery\n- Warm and specific, not generic"
-            }
-          ]
-        },
-        "options": {
-          "maxTokens": 350,
-          "temperature": 0.7
-        }
-      },
-      "name": "Generate Reply",
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
-      "typeVersion": 1,
-      "position": [1250, 200]
-    },
-    {
-      "parameters": {
-        "operation": "reply",
-        "messageId": "={{ $('Gmail Trigger').first().json.id }}",
-        "message": "={{ $json.choices[0].message.content }}"
-      },
-      "name": "Send Reply",
-      "type": "n8n-nodes-base.gmail",
-      "typeVersion": 2,
-      "position": [1500, 200]
-    },
-    {
-      "parameters": {
-        "operation": "append",
-        "documentId": "YOUR_GOOGLE_SHEET_ID",
-        "sheetName": "Leads",
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "timestamp": "={{ new Date().toISOString() }}",
-            "from": "={{ $('Gmail Trigger').first().json.from }}",
-            "subject": "={{ $('Gmail Trigger').first().json.subject }}",
-            "classification": "={{ $('Parse Classification').first().json.classification }}",
-            "priority": "={{ $('Parse Classification').first().json.priority }}",
-            "reason": "={{ $('Parse Classification').first().json.reason }}",
-            "replied": "=YES"
-          }
-        }
-      },
-      "name": "Log to Sheets",
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4,
-      "position": [1750, 200]
-    }
-  ],
-  "connections": {
-    "Gmail Trigger": {
-      "main": [[{"node": "Classify Lead", "type": "main", "index": 0}]]
-    },
-    "Classify Lead": {
-      "main": [[{"node": "Parse Classification", "type": "main", "index": 0}]]
-    },
-    "Parse Classification": {
-      "main": [[{"node": "Is Good Fit?", "type": "main", "index": 0}]]
-    },
-    "Is Good Fit?": {
-      "main": [
-        [{"node": "Generate Reply", "type": "main", "index": 0}],
-        [{"node": "Log to Sheets", "type": "main", "index": 0}]
-      ]
-    },
-    "Generate Reply": {
-      "main": [[{"node": "Send Reply", "type": "main", "index": 0}]]
-    },
-    "Send Reply": {
-      "main": [[{"node": "Log to Sheets", "type": "main", "index": 0}]]
-    }
-  }
-}
-```
+By hand: 60 x 5 minutes = 5 hours, worth $150. With drafts: 60 x 1 minute = 1 hour, worth $30. Time saved is 4 hours, worth $120. Subtract the $20 plan and well under $1 of model use, and the net gain is about $100 a month before setup time.
 
----
+On Anthropic's [pricing page](https://platform.claude.com/docs/en/about-claude/pricing), Claude Haiku 5.5 is listed at $0.10 per million input tokens and $0.50 per million output tokens for prompts up to 100,000 tokens. At an assumed 1,200 input and 300 output tokens per inquiry, one inquiry costs about $0.0003.
 
-## Using n8n's Native AI Agent Node
+The caveat is volume. At 10 inquiries a month the same maths saves about $20 of time, which only matches the plan price, so a saved-reply template may beat any automation. The workflow also does nothing about the real bottleneck if leads go cold because nobody follows up after the first reply. See the [Make.com version of this workflow](/blog/make-com-ai-agent-workflow-local-business) for a no-server alternative.
 
-n8n 1.x+ includes a dedicated **AI Agent** node that's more powerful than chaining LLM calls manually. This node:
+## What Should You Do First?
 
-- Maintains conversation context
-- Can call multiple tools in sequence
-- Supports function calling (takes actions based on LLM decisions)
-- Works with many LLM providers, including OpenAI-compatible APIs such as Groq
-
-For a lead follow-up agent using the AI Agent node:
-
-```
-Trigger (Gmail) 
-    → AI Agent node
-        - System prompt: "You are a business development assistant. When given a new email lead, classify it and draft a reply."
-        - Tools: [Gmail Reply, Google Sheets Append, Slack Notify]
-        - LLM: Groq (llama-3.3-70b) or OpenAI gpt-4o-mini
-    → Done
-```
-
-The AI Agent node handles all the classification, drafting, and action-taking in a single node. It's simpler to build and more flexible when leads have unusual context.
-
----
-
-## Connecting to Groq (Low-Cost LLM Option)
-
-n8n works with any OpenAI-compatible API. To use Groq instead of OpenAI (this can reduce LLM costs, depending on usage):
-
-1. In n8n, go to Credentials → New → OpenAI API
-2. Set API key: your Groq API key
-3. Set base URL: `https://api.groq.com/openai/v1`
-4. In any LLM node, set model to: `llama-3.3-70b-versatile`
-
-Groq has offered a free tier with daily request limits; limits and available models change, so check their current terms. For many small local-business workflows, a free or low-cost tier is enough, but plan for what happens if limits are reached.
-
----
-
-## Safety Checklist Before Going Live
-
-* Start with **draft mode** or send replies only to yourself for the first week.
-* Never let the agent promise prices, availability or guarantees you have not approved. Put those rules in the system prompt.
-* Route complaints, refunds and sensitive messages to a human.
-* Keep API keys in n8n credentials, not in the workflow text.
-* Tell customers they may be talking to an automated assistant where the law or good practice requires it.
-
-For the broader strategy, see AI agent for lead generation and our [AI agents service](/services/ai-agents).
+1. Count the inquiries your inbox received in the last 30 days and how long each reply took.
+2. Write three to five category descriptions for the classifier, including a category for messages a person must handle.
+3. Start the n8n Cloud free trial and build only the first three steps: trigger, classifier, sheet log. Run it on your own test emails.
+4. Add the draft step, and review every draft by hand for a week.
+5. Compare the log with your inbox after two weeks and fix mislabelled categories before you widen the scope.
 
 ## FAQ
 
-**Q: Do I need programming knowledge to use n8n?**
-A: Less than you might expect. The visual interface is similar to Make.com — you drag nodes and connect them. The workflow JSON I've provided can be imported and run without editing code. Where you need basic programming is: the Code node (JavaScript) for data transformation, and occasionally debugging webhook payloads. If you're comfortable with Excel formulas, you can handle n8n. If the self-hosted setup is intimidating, start with n8n Cloud, where they handle infrastructure.
+### Do I need programming knowledge to use n8n?
 
-**Q: How does n8n compare to Zapier for this use case?**
-A: Zapier is simpler to set up but can become more expensive at scale, because pricing is based on tasks. n8n self-hosted has no per-execution fee, though you pay for the server and your time. For a low-volume AI lead follow-up workflow, Zapier's cost may be manageable. See our comparison of Make.com and Zapier. For higher volume or complex multi-branch workflows, n8n's economics improve significantly. Zapier also doesn't have native AI Agent nodes — complex AI workflows require chaining multiple Zap steps vs. n8n's single agent node.
+Not for the visual workflow, but some basic comfort helps. You connect nodes in an editor. A Code node uses JavaScript, and you will read error messages when a credential or field is wrong. If server setup worries you, start with n8n Cloud.
 
-**Q: Can I run n8n on a small, cheap server reliably?**
-A: Yes. A small VPS with about 2GB of RAM can usually run n8n for light workflow volumes, such as a local business handling a modest number of executions a day. If you see slowdowns or memory errors, move to a larger instance. Check n8n's current system recommendations.
+### Can n8n send the replies automatically?
 
-**Q: How do I handle webhook security on self-hosted n8n?**
-A: n8n generates unique webhook URLs with random tokens by default. For additional security: 1) Enable basic auth on the n8n interface, 2) Use environment variables for all credentials (never hardcode), 3) Run behind an Nginx reverse proxy with SSL, 4) Restrict the server's incoming connections to known IP ranges if your webhook sources are fixed. For many small automations the default token-based security is a reasonable baseline, but review n8n's current security guidance before exposing the server publicly.
+Yes. The Gmail node can send or reply to a message as well as create a draft. Start with drafts and move to sending only for the safest category, such as a confirmation of receipt.
 
-**Q: Can n8n send SMS messages for appointment reminders?**
-A: Yes. n8n has integrations for SMS providers such as Twilio. Remember to collect consent and follow local texting rules. Build a workflow: Google Sheets (read upcoming appointments) → Code node (filter for 48h window) → an LLM node (generate message) → Twilio (send SMS). This is the n8n version of the Python reminder script elsewhere in this blog. The visual builder makes it easier to modify and debug without touching code.
+### How many executions will I use?
 
----
+That depends on how n8n counts executions for your trigger and how often it polls. The pricing page bills by workflow executions, so test for a week and read your usage before choosing a plan.
 
-## Next Step
+### Is n8n better than Make.com or Zapier for this?
 
-If you would rather have this built and tested for you, explore our [AI agents service](/services/ai-agents) or [contact us](/contact) and we will scope a workflow for your business. You may also like our guide to [automating your local business with AI](/blog/how-to-automate-your-local-business-with-ai-complete-guide).
+Neither is universally better. n8n offers a self-hosted free edition and execution-based plans, which can suit higher volumes. For a small inbox, the cheapest plan on any platform may be enough. The [n8n beginner guide](/blog/n8n-for-local-business-automation-beginners-guide) lists other first automations.
 
-## Related Articles
+### Can the same pattern handle appointment reminders?
 
-- [Make.com AI Agent Workflow for Local Business: Complete Blueprint](/blog/make-com-ai-agent-workflow-local-business)
-- [AI Appointment Reminder Agent: Python Script That Cuts No-Shows](/blog/ai-agent-appointment-reminder-python-script)
-- Make.com vs Zapier for Local Business: Which Platform Is Better?
-- AI Agent for Lead Generation: How to Automate Your Follow-Ups
-- [Custom GPT for Local Business: Real System Prompts That Work](/blog/custom-gpt-local-business-customer-service)
+Yes, with a Schedule Trigger and a message node, but check consent and local texting rules first. The [appointment reminder script](/blog/ai-agent-appointment-reminder-python-script) shows the logic in code.
 
-<Callout type="coffee" title="Want More Local Customers?">
-Nataliia at DataLatte runs data-driven local marketing campaigns for local businesses — coffee shops, salons, pet groomers, and fitness studios. [Book a free 30-minute strategy call](/contact) or explore [Google Ads management](/services/google-ads).
-</Callout>
+## Sources
+
+- [n8n: Plans and pricing](https://n8n.io/pricing/)
+- [n8n docs: AI Agent node](https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.agent/)
+- [n8n docs: Text Classifier node](https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.text-classifier/)
+- [n8n docs: Gmail node](https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.gmail/)
+- [n8n docs: Gmail Trigger node](https://docs.n8n.io/integrations/builtin/trigger-nodes/n8n-nodes-base.gmailtrigger/)
+- [n8n docs: Google Sheets node](https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.googlesheets/)
+- [n8n docs: Install with Docker](https://docs.n8n.io/hosting/installation/docker/) (page marked outdated by n8n)
+- [Anthropic: API pricing](https://platform.claude.com/docs/en/about-claude/pricing)
+
+Want this built and tested for your inbox? See the [AI agents service](/services/ai-agents), the guide to [automating a local business with AI](/blog/how-to-automate-your-local-business-with-ai-complete-guide), or [contact DataLatte](/contact).
