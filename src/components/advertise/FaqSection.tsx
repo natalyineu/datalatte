@@ -1,4 +1,5 @@
 "use client";
+import PhoneWhatsApp from "./PhoneWhatsApp";
 import { useState } from "react";
 import { ADVERTISE_FAQ, FAQ_CATS } from "./faq-data";
 
@@ -39,7 +40,7 @@ export default function FaqSection() {
         })}
       </div>
       <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-8">
-        Still have a question? Write to <a href="mailto:hi@datalatte.pro" className="underline text-coffee-700 dark:text-coffee-300">hi@datalatte.pro</a>.
+        Still have a question? Write to <a href="mailto:hi@datalatte.pro" className="underline text-coffee-700 dark:text-coffee-300">hi@datalatte.pro</a>, or call / WhatsApp <PhoneWhatsApp dark={false} className="ml-1 align-middle" />.
       </p>
     </div>
   );

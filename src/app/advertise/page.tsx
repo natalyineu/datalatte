@@ -7,6 +7,7 @@ import CountUp from "@/components/advertise/CountUp";
 import PlacementTabs from "@/components/advertise/PlacementTabs";
 import FitFinder from "@/components/advertise/FitFinder";
 import CopyEmail from "@/components/advertise/CopyEmail";
+import PhoneWhatsApp from "@/components/advertise/PhoneWhatsApp";
 import FaqSection from "@/components/advertise/FaqSection";
 import { ADVERTISE_FAQ } from "@/components/advertise/faq-data";
 import { GridOverlay, FloatingChip, StatsBar, BeforeAfter, PipelineFlow } from "@/components/advertise/Shared";
@@ -111,6 +112,7 @@ export default function AdvertisePage() {
             Placements from $150 &middot;{" "}
             <a href="mailto:hi@datalatte.pro" className="underline decoration-coffee-400 underline-offset-4 hover:text-coffee-300">hi@datalatte.pro</a>{" "}
             <CopyEmail className="ml-1" />
+            <span className="block mt-3 text-base"><PhoneWhatsApp /></span>
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center mb-10">
             <a href={MAIL} className="inline-flex items-center justify-center gap-2 bg-coffee-500 text-white font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-400 transition-all hover:shadow-xl hover:shadow-coffee-900/30">
@@ -311,6 +313,7 @@ export default function AdvertisePage() {
             Email hi@datalatte.pro <ArrowRight size={20} />
           </a>
           <div className="mt-4"><CopyEmail /></div>
+          <div className="mt-5"><PhoneWhatsApp /></div>
         </div>
       </section>
     </>

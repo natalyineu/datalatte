@@ -61,12 +61,12 @@ export default function NewsletterForm({ source = "blog" }: { source?: string })
           placeholder="your@email.com"
           required
           disabled={status === "loading"}
-          className="flex-1 px-4 py-2.5 rounded-xl border border-gray-200 focus:border-coffee-500 focus:ring-2 focus:ring-coffee-100 outline-none text-sm disabled:opacity-60 dark:border-gray-700"
+          className="flex-1 min-w-0 px-4 py-2.5 rounded-xl border border-gray-200 focus:border-coffee-500 focus:ring-2 focus:ring-coffee-100 outline-none text-sm disabled:opacity-60 dark:border-gray-700"
         />
         <button
           type="submit"
           disabled={status === "loading"}
-          className="bg-coffee-700 hover:bg-coffee-800 text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition-colors disabled:opacity-60 whitespace-nowrap"
+          className="shrink-0 bg-coffee-700 hover:bg-coffee-800 text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition-colors disabled:opacity-60 whitespace-nowrap"
         >
           {status === "loading" ? "..." : "Subscribe"}
         </button>
