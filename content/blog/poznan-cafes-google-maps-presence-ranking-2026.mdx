@@ -1,30 +1,69 @@
 ---
-title: "Poznań Cafés Ranked: 304 Google Maps Profiles"
+title: "Poznań Cafés Ranked: 210 Google Maps Profiles"
 date: "2026-11-03"
 lastModified: "2026-11-03"
-description: "304 Poznań cafés analysed on Google Maps: websites, phones, Instagram, reviews by area and type, plus a top-24 ranking of the best-presented."
+description: "210 Poznań cafés analysed on Google Maps and on their own websites: reviews by area and type, a top-24 ranking and a 90-day plan to catch up."
 author: "Nataliia"
 category: "Local Marketing"
 tags: ["poznan cafes", "google maps", "local marketing poland", "coffee shop marketing", "cafe ranking"]
 slug: "poznan-cafes-google-maps-presence-ranking-2026"
 image: "https://images.unsplash.com/photo-1560472355-536de3962603?w=800&q=80&auto=format&fit=crop"
-readTime: "18 min read"
+readTime: "40 min read"
 ---
 
-Of 304 cafés in Poznań checked on Google Maps in November 2026, 46% list their own website, 83% a phone number and 41% an Instagram page. Only 86 (28%) have all three. The best-presented cafés pair that full set with hundreds of reviews, but the data holds a surprise: the weakest group is not cafés without a website, it is cafés with no online presence at all.
+Of 210 independent cafés, bakeries and roasters in Poznań checked on Google Maps in November 2026, 35% list their own website, 81% a phone number and 44% an Instagram page. Only 58 (28%) have all three.
+
+The best-presented cafés pair that full set with hundreds or thousands of reviews, yet the data holds a surprise: the weakest group is not cafés without a website, it is cafés with no online presence at all.
 
 <StatRow
-  values="304|46%|83%|28%"
-  labels="Poznań cafés in the dataset|List their own website|List a phone number|Own website, phone and Instagram"
-  subs="Google Maps listings, 2-3 Nov 2026|140 of 304|253 of 304|86 of 304"
+  values="210|35%|81%|28%"
+  labels="Poznań cafés in the cleaned dataset|List their own website|List a phone number|Own website, phone and Instagram"
+  subs="Google Maps listings, 2-3 Nov 2026|74 of 210|171 of 210|58 of 210"
   trends="neutral|neutral|neutral|neutral"
 />
 
-This is an analysis of public profiles, not of coffee. It scores what a customer can see before visiting: a rating, a count of reviews, a website, a phone, social pages. The tables below rank the best-presented cafés, break the market down by review volume, postal area and type of place, and end with a self-audit any café can run in fifteen minutes.
+This is an analysis of public profiles, not of coffee. It scores what a customer can see before visiting: a rating, a count of reviews, a website, a phone, social pages. It also opens 67 café websites to see how they are built.
+
+The tables rank the best-presented cafés, split the market by review volume, postal area and type of place, and end with a self-audit, a Google Business Profile playbook and a 90-day plan.
+
+## What are the main findings?
+
+The analysis is long, so the results come first. Each point is explained with its table further down.
+
+- Ratings do not separate Poznań cafés: 85% of rated cafés are at 4.5 or higher and the average is 4.67. Review volume does, from a median of 219 to over 1,000 for the top tenth.
+- The weakest profiles are not those that use a social page as their website. They are the 55 cafés with no website and no social page found, whose median is 65 reviews.
+- Only 35% of cafés list an own website, and 28% have the full set of own website, phone and Instagram.
+- The best-presented cafés are rarely technical leaders: their websites are similar to the rest, and what sets them apart is reviews and a reachable profile.
+- Central postal areas 61-7 and 61-8 show the highest review counts among the larger areas, with medians of 385 and 371.
+- Of 55 working café websites, only 25% carry local-business structured data, 51% a tap-to-call link and 42% a Google Maps link.
+- Google states that incentives for reviews are prohibited and that there is no way to pay for a better local ranking, so reviews and a complete profile are the legitimate path.
+- A café with 60 reviews needs roughly 10 to 20 months to reach the median, at 8 to 15 new reviews a month (assumption).
+
+## How was the dataset built and cleaned?
+
+The starting point was public Google Maps listings returned for searches such as "kawiarnia", "specialty coffee", "palarnia kawy" and "cafe" in Poznań, collected on 2 and 3 November 2026 with a scraping tool. That gave 483 listings. A first pass removed supermarkets, shopping centres, museums, parks and public places.
+
+A second pass removed filling stations, the Wild Bean Cafe chain, restaurants, pizzerias, fast-food outlets, ice-cream parlours, vending machines, canteens, coffee-machine repair and wholesale firms, and a PC repair shop.
+
+What remained is 210 listings of cafés, coffee shops, patisseries, bakeries and roasters, one row per Google listing. A café with two locations counts twice. The table shows how the 483 became 210.
+
+| Step | Listings | What was removed |
+|---|---|---|
+| Collected | 483 | All Google Maps results for the searches in Poznań |
+| First pass | 136 | Supermarkets, shopping centres, museums, parks and other public places |
+| Second pass: fuel and chain | 17 | Filling stations and the Wild Bean Cafe chain |
+| Second pass: restaurants | 32 | Restaurants, fast-food outlets and pizzerias |
+| Second pass: ice cream | 13 | Ice-cream parlours and waffle shops |
+| Second pass: services | 19 | Coffee-machine repair, wholesale, shops and a PC repair firm |
+| Second pass: other | 13 | Vending machines, canteens, delicatessens and similar |
+| Restaurant-led places | 43 | Pizza, sushi, kebab and bistro places kept in the database but excluded from café figures |
+| Analysed | 210 | Independent cafés, bakeries and roasters |
+
+The second pass counts are approximate, because some listings match more than one category. Closed places were skipped at collection.
+
+The cleaning was done by name, which is imperfect. A few restaurant-led places with "cafe" in the name were removed, and a few mislabelled places may remain. Every figure below uses the cleaned 210, except the website audit, which uses the 67 distinct websites of the cafés that list their own domain.
 
 ## How was the ranking built?
-
-The dataset is public Google Maps listings for cafés, coffee shops, patisseries, bakeries and roasters in Poznań, collected on 2 and 3 November 2026 with a scraping tool and then read page by page from each café's own website for contact details. Supermarkets, shopping centres, museums, parks and chains were removed by name, so a few mislabelled places may remain. After cleaning, 304 listings stayed in the analysis.
 
 Each café scores up to 100 points from signals a customer can see:
 
@@ -37,6 +76,10 @@ Each café scores up to 100 points from signals a customer can see:
 - Review volume: 1,000 or more reviews 25 points, 500 or more 18, 200 or more 10, 100 or more 5.
 
 Ties are broken by review count. The score measures how complete and proven a public profile looks. It does not measure taste, service or prices, and a café missing from a table is not a bad café.
+
+Instagram and Facebook count only when linked from the Google listing or the café's own website. E-mail counts only when it appears on the website. Both are therefore lower bounds, not a census of what exists.
+
+In the named tables, a place is listed only when its name or website confirms it is a café, patisserie, bakery or roaster. High-scoring entries whose type could not be confirmed, or whose "website" is a third-party ordering page, are not named, which is why a few scores of 93 do not appear in the top ten.
 
 ## What does Google say decides local ranking?
 
@@ -69,8 +112,8 @@ The next fourteen all have an own website, a phone number and an Instagram page 
 |---|---|---|---|---|---|
 | 11 | ABOUT CAFE, Matcha, Coffee, Desserts (Półwiejska) | Półwiejska 21 | 4.9 | 1,843 | 85 |
 | 12 | Świeżo Palona, roaster and coffee shop | Glinianki 8 | 4.7 | 404 | 85 |
-| 13 | Kawaii Cafe Bake Art Studio | Szkolna 5 | 4.5 | 385 | 85 |
-| 14 | Bagieta Poznań | Macieja Palacza 134/U3 | 4.7 | 385 | 85 |
+| 13 | Bagieta Poznań | Macieja Palacza 134/U3 | 4.7 | 385 | 85 |
+| 14 | Kawaii Cafe Bake Art Studio | Szkolna 5 | 4.5 | 385 | 85 |
 | 15 | TCB Tokyo Cheesecake Bakery, Okrąglak | Okrąglak | 4.5 | 355 | 85 |
 | 16 | Cukiernia Expressowa | Wilczak 3 | 4.5 | 302 | 85 |
 | 17 | Pochleb x Wartka | Stanisława Taczaka 4A | 4.6 | 299 | 85 |
@@ -86,7 +129,7 @@ ABOUT CAFE has no Instagram page linked from its listing or site, and Stacja Caf
 
 ## Which cafés have the highest ratings with 300 or more reviews?
 
-A high rating on a handful of reviews proves little, so this list requires at least 300. Nine cafés reach 4.9 or better.
+A high rating on a handful of reviews proves little, so this list requires at least 300 reviews and a rating of 4.8 or more. Fourteen cafés qualify, nine of them at 4.9 or higher.
 
 | Café | Street | Rating | Reviews |
 |---|---|---|---|
@@ -99,27 +142,99 @@ A high rating on a handful of reviews proves little, so this list requires at le
 | Body Balance specialty coffee & people | Ratajczaka 44 | 4.9 | 402 |
 | Panta Rhei Cafe | Wodna 5 | 4.9 | 385 |
 | Słodko-Mat | Raszyńska 29 | 4.9 | 323 |
+| Kawiarnia U Przyjaciół | Mielżyńskiego 27/29 | 4.8 | 2,409 |
+| Trzecia Kawa | Polna 1 | 4.8 | 1,495 |
+| LAGACCA Cafe, Stary Rynek | Woźna 21 | 4.8 | 1,340 |
+| Pączuś i Kawusia | rynek Łazarski 8 | 4.8 | 1,303 |
+| TCB Tokyo Cheesecake Bakery, Stare Miasto | pl. Kolegiacki 8 | 4.8 | 1,250 |
 
-At the other end of the scale, the ten most-reviewed cafés in the dataset are Weranda Caffe (3,954), Kociak (2,619), U Przyjaciół (2,409), Stragan (1,995), ABOUT CAFE (1,843), Parlé Pâtisserie (1,730), Trzecia Kawa (1,495), KAHAWA (1,352), LAGACCA Cafe (1,340) and TCB Tokyo Cheesecake Bakery, Stare Miasto (1,250).
+## Which cafés have the most reviews?
+
+The twelve most-reviewed listings in the dataset are Weranda Caffe (3,954), Kociak (2,619), U Przyjaciół (2,409), Stragan (1,995), ABOUT CAFE (1,843), Parlé Pâtisserie (1,730), bardzo (1,693), ALEkosmos (1,656), Różove (1,631), Trzecia Kawa (1,495), Warung Sumatra (1,434) and Dżungla Cafe & Breakfast (1,355).
+
+Review counts are the most unequal number in the dataset. The 210 listings hold 84,082 reviews in total. The median café has 219, but the busiest has 3,954, about eighteen times as many.
+
+## How are ratings and review counts spread across Poznań?
+
+Ratings are bunched at the top, which is why they separate cafés so poorly.
+
+| Rating band | Cafés |
+|---|---|
+| 4.9 or higher | 58 |
+| 4.8 to 4.89 | 39 |
+| 4.5 to 4.79 | 76 |
+| 4.0 to 4.49 | 23 |
+| Below 4.0 | 7 |
+| No rating yet | 7 |
+
+The average rating across the 203 rated cafés is 4.67, and 173 (85% of the rated ones) are at 4.5 or higher. Nearly half, 97 of 203, are at 4.8 or higher. A café rated 4.6 is below the middle of the market here.
+
+Reviews spread far more widely.
+
+| Reviews | Cafés |
+|---|---|
+| None listed | 7 |
+| 1 to 49 | 40 |
+| 50 to 199 | 55 |
+| 200 to 499 | 55 |
+| 500 to 999 | 29 |
+| 1,000 or more | 24 |
+
+The quartiles are 70 reviews at the 25th percentile, 219 at the median, 603 at the 75th and 1,072 at the 90th. A café needs about 600 reviews to be in the top quarter and about 1,070 to be in the top tenth.
 
 ## What do the best-presented cafés have in common?
 
-Two things show up clearly. Every top-ten café has at least 607 reviews, against a dataset median of 207, and only 72 of the 304 cafés have 500 or more. And their ratings sit between 4.4 and 4.8, right where the market already is: the average rating across 287 rated cafés is 4.58 and 221 of 304 (73%) are at 4.5 or higher.
+Two things show up clearly. Every top-ten café has at least 607 reviews, against a median of 219, and only 53 of the 210 cafés have 500 or more. And their ratings sit between 4.4 and 4.8, right where most of the market already is.
 
 Rating alone therefore does not separate cafés in Poznań. Almost everyone is rated well, and what differs is how many customers have said so. The review count is the number that moves most between a thin profile and a strong one.
 
+## Would a different scoring method change who ranks first?
+
+Three ways of ranking the same 210 cafés give different answers, and comparing them shows what the combined score really rewards.
+
+Ranking by review count alone puts Weranda Caffe, Kociak, U Przyjaciół, Stragan and ABOUT CAFE first, followed by Parlé Pâtisserie and four other well-reviewed places. Ranking by completeness alone, which adds up website, phone, Instagram, Facebook and e-mail for a maximum of 60 points, cannot separate the 44 cafés that reach the full 60. Reviews and rating then have to break the tie, which is what the combined score does.
+
+Only five cafés appear in both the top ten by reviews and the top ten by combined score: Weranda Caffe, Kociak, U Przyjaciół, Stragan and Parlé Pâtisserie. The other five most-reviewed places miss the combined top ten because their profile lacks at least one of the elements the score counts, such as an own website or a published e-mail address.
+
+The overlap is wider across the top 24: nine cafés are in both lists. And 23 of the 24 best-scoring cafés have at least 55 of the 60 completeness points. A strong review count with a thin profile and a complete profile with few reviews both land lower than a café that has both.
+
+That is the intended behaviour of the method, and it is the argument for working on both at once.
+
+## How does a café's review count compare with the rest?
+
+Review counts are skewed, so the median hides how the market is spread. The table shows the share of cafés that have fewer reviews than a given number, among the 203 cafés that have at least one.
+
+| Reviews | Share of Poznań cafés with fewer |
+|---|---|
+| 25 | 14% |
+| 50 | 20% |
+| 100 | 32% |
+| 150 | 41% |
+| 200 | 47% |
+| 300 | 59% |
+| 400 | 70% |
+| 500 | 74% |
+| 750 | 80% |
+| 1,000 | 88% |
+| 1,500 | 96% |
+| 2,000 | 99% |
+
+A café with 300 reviews has more than 59% of the others behind it, and one with 1,000 is ahead of 88%. The steepest part of the curve sits between 200 and 400 reviews, where each extra 100 reviews moves a café past about ten more percentage points of its rivals.
+
+Below 100 reviews and above 1,000 the curve flattens, so early reviews matter for visibility and the last few hundred matter for status.
+
 ## How does review volume line up with the rest of the profile?
 
-Grouping the 304 cafés by review count shows how completeness rises with volume. The share with no website at all falls from 41% in the smallest group to 8% in the two largest, and the share with an e-mail address on the site more than doubles.
+Grouping the 210 cafés by review count shows how completeness rises with volume. The share with no website at all falls from 55% in the group with fewer than 50 reviews to 8% in the group with 1,000 or more, and the share with an e-mail address on the site climbs from 18% to 75%.
 
 | Reviews | Cafés | Own website | No website | Phone listed | Instagram found | E-mail on site | Avg rating |
 |---|---|---|---|---|---|---|---|
-| None listed | 17 | 29% | 53% | 59% | 12% | 29% | n/a |
-| Fewer than 50 | 69 | 46% | 41% | 70% | 33% | 33% | 4.53 |
-| 50 to 199 | 70 | 37% | 29% | 83% | 47% | 40% | 4.62 |
-| 200 to 499 | 76 | 51% | 14% | 91% | 43% | 49% | 4.57 |
-| 500 to 999 | 36 | 50% | 8% | 94% | 42% | 58% | 4.64 |
-| 1,000 or more | 36 | 56% | 8% | 94% | 50% | 72% | 4.59 |
+| None listed | 7 | 14% | 57% | 43% | 29% | 29% | n/a |
+| Fewer than 50 | 40 | 30% | 55% | 63% | 33% | 18% | 4.71 |
+| 50 to 199 | 55 | 33% | 27% | 84% | 51% | 40% | 4.65 |
+| 200 to 499 | 55 | 40% | 16% | 87% | 49% | 47% | 4.65 |
+| 500 to 999 | 29 | 41% | 10% | 93% | 45% | 55% | 4.66 |
+| 1,000 or more | 24 | 38% | 8% | 92% | 42% | 75% | 4.67 |
 
 The average rating barely moves across the groups, which again says rating does not tell cafés apart. The data cannot show which comes first: well-reviewed cafés may have more time and traffic to complete their profiles, or complete profiles may attract more reviews. Both are plausible, and the table shows an association, not a cause.
 
@@ -129,35 +244,53 @@ Not in this dataset. Grouping cafés by how they present themselves gives a resu
 
 | Group | Cafés | Median reviews | Avg rating |
 |---|---|---|---|
-| Own website, phone and Instagram | 86 | 225 | 4.50 |
-| Own website, partial profile | 54 | 272 | 4.46 |
-| Facebook or Instagram page as the "website" | 90 | 273 | 4.73 |
-| No website and no social page found | 74 | 65 | 4.58 |
+| Own website, phone and Instagram | 58 | 246 | 4.59 |
+| Own website, partial profile | 16 | 359 | 4.65 |
+| Facebook or Instagram page as the "website" | 81 | 295 | 4.73 |
+| No website and no social page found | 55 | 65 | 4.65 |
 
-The cafés that use a social page as their website have as many reviews as those with their own domain, and the highest average rating. The group that stands out is the last one: with no website and no social page linked, the median falls to 65 reviews, about a quarter of the others.
+Cafés that use a social page as their website have as many reviews as those with their own domain, and the highest average rating. The group that stands out is the last one: with no website and no social page linked, the median falls to 65 reviews, about a quarter of the others.
 
-So the practical gap is not between own website and social page. It is between a profile that sends a customer somewhere and a profile that sends them nowhere. An own domain still brings control (menu, booking, analytics), but being reachable online is the first step.
+So the practical gap is not between own website and social page. It is between a profile that sends a customer somewhere and a profile that sends them nowhere. An own domain still brings control over menu, booking and analytics, but being reachable online is the first step.
 
 ## Where in Poznań are the cafés best reviewed?
 
-Addresses in the dataset carry a postal code. Grouping cafés by the first four characters of the code gives ten areas with 15 or more cafés. These are postal-code areas, not official districts.
+Addresses in the dataset carry a postal code. Grouping cafés by the first four characters of the code gives ten areas with 10 or more cafés. These are postal-code areas, not official districts.
 
 | Postal area | Cafés | Avg rating | Median reviews | Own website | Instagram found |
 |---|---|---|---|---|---|
-| 60-1 | 38 | 4.40 | 122 | 66% | 45% |
-| 61-8 | 35 | 4.69 | 357 | 46% | 51% |
-| 61-6 | 30 | 4.51 | 152 | 50% | 43% |
-| 60-6 | 26 | 4.43 | 363 | 62% | 35% |
-| 61-7 | 24 | 4.74 | 402 | 25% | 46% |
-| 60-3 | 21 | 4.53 | 163 | 57% | 52% |
-| 60-4 | 19 | 4.32 | 85 | 32% | 11% |
-| 61-1 | 18 | 4.66 | 202 | 39% | 44% |
-| 60-5 | 16 | 4.61 | 350 | 25% | 38% |
-| 61-5 | 15 | 4.72 | 148 | 40% | 47% |
+| 61-8 | 34 | 4.68 | 371 | 44% | 50% |
+| 61-7 | 21 | 4.74 | 385 | 24% | 48% |
+| 60-1 | 18 | 4.44 | 119 | 61% | 56% |
+| 61-6 | 18 | 4.53 | 186 | 39% | 44% |
+| 61-5 | 15 | 4.72 | 148 | 33% | 47% |
+| 60-5 | 15 | 4.61 | 445 | 27% | 40% |
+| 61-1 | 14 | 4.69 | 202 | 29% | 50% |
+| 60-3 | 13 | 4.75 | 42 | 31% | 54% |
+| 60-7 | 12 | 4.76 | 351 | 17% | 33% |
+| 60-8 | 11 | 4.76 | 580 | 18% | 36% |
 
-In this dataset the 61-7 and 61-8 areas include addresses on Woźna, Mielżyńskiego, Święty Marcin and Półwiejska. They show the most reviews per café, 402 and 357 at the median, even though only 25% and 46% of their cafés list an own website. The 60-4 area has the lowest median (85) and the lowest Instagram share (11%).
+In this dataset the 61-7 and 61-8 areas include addresses on Woźna, Mielżyńskiego, Święty Marcin and Półwiejska. They hold the most cafés (55 of the 210) and show median review counts of 385 and 371. The highest median of all, 580, belongs to the small 60-8 area with 11 cafés.
 
-Higher review counts in busy central areas are likely to reflect footfall and visitor numbers, but the data cannot confirm that. Areas with fewer than 15 cafés are left out because the percentages would swing on a single listing.
+At the other end, the 60-3 area has a median of only 42 reviews even though its average rating is 4.75, which is the pattern of newer or quieter places. The 60-1 area has the lowest average rating, 4.44. Higher review counts in busy central areas are likely to reflect footfall and visitor numbers, but the data cannot confirm that.
+
+Areas with fewer than 10 cafés are left out because the percentages would swing on a single listing.
+
+## Which cafés lead in each postal area?
+
+The ranking above mixes the whole city, but a customer chooses among nearby places. Within each postal area that has at least ten cafés, the best-presented cafés by combined score are listed below, naming only those that are clearly cafés or bakeries.
+
+- **61-8:** Kawiarnia Kociak od 1962 roku (4.6, 2,619 reviews) and TCB Tokyo Cheesecake Bakery, Stare Miasto (4.8, 1,250).
+- **61-7:** Kawiarnia U Przyjaciół (4.8, 2,409) and KAHAWA Kawa i Książka (4.7, 1,352).
+- **60-7:** Parlé Pâtisserie (4.6, 1,730) and Kawiarnia Cukiernia Cappuccina (4.4, 351).
+- **60-8:** Uno, kawa and śniadania in Jeżyce (4.7, 1,194) and Kafej (4.9, 133).
+- **61-1:** Kavoshe kawiarnia (4.8, 626) and VENI ANDRO (4.8, 380).
+- **61-6:** Cukiernia Expressowa (4.5, 302).
+- **60-1:** Lavenda Food & Cake (4.7, 607).
+- **60-3:** The Hive Grunwald (4.7, 268).
+- **60-5:** Schlebiać Jeżyce (4.5, 153).
+
+The pattern is useful for a new café. In an area where the best-presented neighbour has 150 to 300 reviews, such as 60-3 or 60-5, a complete profile and a steady review rhythm can reach the top of the local table in a year. In 61-7 and 61-8 the leaders have thousands of reviews, so the realistic goal is the middle of the table first.
 
 ## Do roasters, patisseries and cafés present differently?
 
@@ -165,24 +298,112 @@ Names were sorted into three types by keywords such as patisserie, bakery, roast
 
 | Type | Cafés | Avg rating | Median reviews | Own website |
 |---|---|---|---|---|
-| Cafés and coffee shops | 251 | 4.60 | 209 | 44% |
-| Patisseries and bakeries | 42 | 4.42 | 212 | 52% |
-| Roasters and specialty coffee | 11 | 4.85 | 40 | 73% |
+| Cafés and coffee shops | 165 | 4.69 | 218 | 29% |
+| Patisseries and bakeries | 35 | 4.50 | 249 | 54% |
+| Roasters and specialty coffee | 10 | 4.84 | 218 | 70% |
 
-Roasters and specialty places have the highest ratings and the most own websites, but only a median of 40 reviews, which fits small and recent businesses. Patisseries and bakeries have the lowest average rating, 4.42, and more often an own site than ordinary cafés. With only 11 roasters, that row should be read as a pointer, not a rule.
+Roasters and specialty places have the highest ratings and the most own websites, which fits businesses that sell beans online as well as cups. Patisseries and bakeries have the lowest average rating, 4.50, and more often an own site than ordinary cafés, which suggests they sell more than they serve. With only 10 roasters, that row should be read as a pointer, not a rule.
+
+## Instagram, Facebook or both?
+
+Social links split the cafés four ways. Among the 210 cafés, 54 (26%) link both an Instagram and a Facebook page, 39 (19%) only Instagram, 50 (24%) only Facebook, and 67 (32%) neither.
+
+| Social pages found | Cafés | Share |
+|---|---|---|
+| Instagram and Facebook | 54 | 26% |
+| Instagram only | 39 | 19% |
+| Facebook only | 50 | 24% |
+| Neither found | 67 | 32% |
+
+So 89 cafés (42%) are present on one of the two platforms only. A customer who looks for them on the other platform finds nothing. The Poland guide on this site, citing DataReportal's Digital 2026 report, puts Facebook ad reach at 18.7 million, down 3.6% on the year, and Instagram at 12.4 million, up 6.9%.
+
+Facebook is still larger, but Instagram is growing, which makes a Facebook-only profile a safe base and an Instagram-only profile a narrower one.
+
+The cheapest improvement is to cross-link: whichever page exists, add the other if it can be maintained, and link both from the Google profile and the website. A page that is rarely updated can hurt more than no page, so only link a page that is current.
+
+## What do café contact details say about the business?
+
+Contact details are the first thing a customer uses, and the dataset shows how cafés choose them.
+
+Of the 171 cafés with a phone number, 150 (88%) list a mobile number, 16 (9%) a Poznań landline starting with 61, and 5 another area code. A mobile number often means the owner or a manager answers directly, which is quick for customers but can mean calls go unanswered during service. The data cannot show how often calls are answered.
+
+E-mail shows a different split. Of the 91 cafés that publish an address on their website, 41 (45%) use a free mailbox such as Gmail, Wirtualna Polska or Onet, and 50 (55%) an address on their own domain. Only 21 (23%) use a generic role address such as kontakt, info or biuro.
+
+An address on the café's own domain looks established and survives a change of owner, while a free mailbox is tied to one person. For a café that wants catering, event or supplier enquiries, a role address on the own domain plus a clear contact page is the simplest fix.
+
+The audit found that 53% of loaded home pages carry an e-mail link and 51% a tap-to-call link, so on about half of sites a phone user cannot call in one tap.
+
+## What do the cafés' own websites look like?
+
+Of the 210 cafés, 74 list an own domain. Those 74 listings point to 67 distinct websites. Each home page was opened once with a plain request, one site at a time, and its HTML was checked. No site was visited more than once and nothing was logged into. Pages that refused automated access were recorded as blocked and not retried.
+
+Of the 67 sites, 55 loaded normally. Seven could not be reached from the test machine (connection or certificate errors), two returned "page not found", two returned a server error and one blocked automated access. That is 12 of 67 sites, or 18%, that a visitor might also fail to open, although some failures may come from the test environment rather than the site.
+
+The signals below are counted over the 55 sites that loaded.
+
+| Signal on the home page | Sites | Share |
+|---|---|---|
+| Opens on HTTPS | 50 | 91% |
+| Mobile viewport tag | 51 | 93% |
+| Page title | 54 | 98% |
+| Meta description | 33 | 60% |
+| Open Graph tags (link previews) | 38 | 69% |
+| Any JSON-LD structured data | 30 | 55% |
+| Local-business-type structured data | 14 | 25% |
+| Google Analytics or Tag Manager snippet | 25 | 45% |
+| Meta (Facebook) pixel | 7 | 13% |
+| Tap-to-call phone link | 28 | 51% |
+| E-mail link | 29 | 53% |
+| Link or embed of Google Maps | 23 | 42% |
+| Link to a menu, offer or price list | 37 | 67% |
+| Link to an ordering platform (Wolt, Glovo, Pyszne and similar) | 12 | 22% |
+| Reservation or booking link | 22 | 40% |
+| English version or English link | 12 | 22% |
+| Cookie notice or consent tool | 37 | 67% |
+| Instagram link | 42 | 76% |
+| Facebook link | 44 | 80% |
+
+Most sites are technically sound at the basic level: nearly all are secure, mobile-ready and have a title. The gaps are in what helps a visitor act and what helps Google read the page.
+
+Only 28 of 55 give a mobile visitor a tap-to-call link, only 23 link to Google Maps, and only 14 describe themselves to Google with local-business structured data. By platform, 20 sites run on WordPress, two on Webflow, two on a Lovable-built page, one on Wix and one on Squarespace. For 29 the builder could not be identified from the page source.
+
+Speed varies. The average home page took 1.7 seconds to download from the test machine, and eight sites took more than 3 seconds, the slowest 5.5 seconds. Counts of analytics tags and pixels reflect code visible in the page source and miss anything loaded in other ways.
+
+## Are the top cafés technically ahead of the rest?
+
+Not clearly. Of the ten top-ranked cafés, eight sites loaded in the check. Seven of the eight use HTTPS and have a mobile tag, four have a meta description, three have structured data and three have an analytics tag.
+
+Across the other 47 loaded sites the shares are similar: 62% have a meta description and 55% an analytics tag, higher than the top eight. With a sample of eight, no conclusion follows, but the pattern matches the earlier tables. What separates the leading cafés is review volume and a reachable profile, not website engineering.
+
+## What does a complete café home page contain?
+
+The audit lists what fifty-five working café home pages actually offer. Read as a checklist, it shows what a visitor can expect and where most sites fall short.
+
+- **Menu link (67% of sites).** The most common action a visitor wants. Cafés without it force customers to ask by phone or open Instagram.
+- **Opening hours.** Not measured on the page, but Google asks for hours on the profile, including holidays, and a site that repeats them removes doubt.
+- **Instagram (76%) and Facebook (80%) links.** Present on most sites, which makes missing links from the Google listing the real gap.
+- **Cookie notice (67%).** Common in Poland and the European Union where sites use analytics or advertising tags. The data does not check whether notices are configured correctly.
+- **E-mail link (53%) and tap-to-call link (51%).** Roughly half of sites let a visitor make contact in one tap.
+- **Google Maps link or embed (42%).** Fewer than half link to directions. A map link on a mobile page saves a customer typing the address.
+- **Reservation or booking link (40%).** Mostly restaurants and larger cafés, but it also shows which places take groups.
+- **Ordering platform link (22%).** Wolt, Glovo, Pyszne and similar. Each is a way for customers to order without calling.
+- **Structured data of a local-business type (25%).** Google's page says this lets a business tell Google about hours and details, and that Google may show a knowledge panel. Only 14 of 55 sites have it.
+- **English version (22%).** Poznań has foreign students and visitors. Twelve sites offer an English page or link.
+- **Analytics (45%).** A snippet for Google Analytics or Tag Manager lets a café see which pages are used. Without it, a café cannot tell whether the site brings customers.
+
+A complete page does not need to be large. In the dataset, most strong sites combine the menu, hours, address with a map link, phone and e-mail, and the two social links in a few screens. The missing parts are small and cheap to add.
 
 ## How not to do it: which gaps are common?
 
 No café is named here, because the data cannot say why a profile looks thin. The aggregate numbers show where customers hit a wall.
 
-- 74 of 304 cafés (24%) list no website at all.
-- 90 (30%) use a Facebook or Instagram page as the website link, so there is no own domain for menu, booking or analytics.
-- 51 (17%) list no phone number.
-- 111 (37%) show no Instagram or Facebook page linked from the listing or the website.
-- 69 (23%) have fewer than 50 reviews.
-- Of the 140 cafés with an own website, 11 (8%) returned an error or could not be reached when the site was checked: eight connection errors and three pages not found. Another 15 (11%) refused automated checks with HTTP 403, which says nothing about real visitors.
-- Only 8 of the 230 cafés that list a website tag the link with UTM parameters, so most cannot tell traffic from Google Maps apart in their analytics.
-- Of the 140 own sites, 79 link to a contact page from the home page.
+- 55 of 210 cafés (26%) list no website at all.
+- 81 (39%) use a Facebook or Instagram page as the website link, so there is no own domain for menu, booking or analytics.
+- 39 (19%) list no phone number.
+- 67 (32%) show no Instagram or Facebook page linked from the listing or the website.
+- 47 (22%) have fewer than 50 reviews, including 7 with none listed.
+- Of the 67 distinct own websites, 12 (18%) did not load normally when checked.
+- Only 7 of the 155 cafés that list a website tag the link with UTM parameters, so most cannot tell traffic from Google Maps apart in their analytics.
 
 Instagram and Facebook are counted only when they are linked from the Google listing or the café's website. A café can have an account that customers cannot find from the listing. That is the gap: a profile customers cannot reach does not help, whether or not it exists.
 
@@ -200,25 +421,174 @@ Open your own Google Maps listing in a private browser window and answer seven q
 | Rating 4.5 or higher | 15 | Read it on the listing |
 | 1,000 reviews: 25, 500: 18, 200: 10, 100: 5 | up to 25 | Read the review count |
 
-A score of 80 or more puts a café near the first two tables. Most of the missing points in the dataset are cheap: a phone number, an own website with hours and a menu, a visible Instagram link. Reviews take longer, and the next section shows how long.
+A score of 80 or more puts a café near the first two tables. Most of the missing points in the dataset are cheap: a phone number, an own website with hours and a menu, a visible Instagram link. Reviews take longer, and the sections below show how long and how to ask for them.
+
+## How can a café benchmark itself against its neighbours in 30 minutes?
+
+The tables above are city averages. A café competes with the five or ten places within walking distance, and a small worksheet makes the comparison concrete.
+
+1. Open Google Maps and search for cafés around the address. Pick the five nearest and the two best reviewed.
+2. For each, record the rating, the number of reviews, whether the website field opens an own domain, whether a phone number is listed, and whether an Instagram or Facebook page is linked.
+3. Add the same row for your own café.
+4. Compare your review count with the percentile table above, and your row with the self-audit score.
+5. Write down the three cheapest gaps and the date they will be fixed.
+
+A blank worksheet looks like this:
+
+| Place | Rating | Reviews | Own website | Phone | Instagram | Facebook | Score |
+|---|---|---|---|---|---|---|---|
+| Your café | | | | | | | |
+| Neighbour 1 | | | | | | | |
+| Neighbour 2 | | | | | | | |
+| Neighbour 3 | | | | | | | |
+| Best reviewed nearby | | | | | | | |
+
+Repeat the exercise every quarter. Reviews move slowly, but links, hours and phone numbers can change in a day, and a changed profile is easy to spot on the next visit.
+
+## What should a café do depending on its review count?
+
+The right next step depends on where the café sits in the distribution. The groups below use the review bands from the tables above.
+
+### Fewer than 50 reviews (47 cafés, 22%)
+
+These are mostly new or quiet cafés, and more than half of this group has no website. The aim is to be found and to look alive. Complete the Google profile, add real photos, link an Instagram or Facebook page, and put a QR code for reviews at the till from the first day.
+
+The median here is far below the market, so even ten new reviews a month change the picture within a year.
+
+### 50 to 499 reviews (110 cafés, 52%)
+
+This is the middle of the market, and the profile gaps matter most here. Check phone, website, hours and links against the self-audit table. Add menu and contact details to the website, and reply to every review in the same week. Moving from 200 to 400 reviews is the steepest climb in the distribution.
+
+### 500 or more reviews (53 cafés, 25%)
+
+These cafés already look established. The risks are staleness and wasted attention: outdated hours, a menu that no longer matches, a Facebook page that is not updated. Keep the profile current, publish an e-mail address on an own domain, add structured data and an English page if tourists matter, and track traffic from the listing with UTM parameters, as only 7 of 155 cafés with a website do.
+
+A café should not copy the top ten blindly. The best-presented places have been open for years, and a smaller, newer café with a clean profile and a good reply habit can be a better neighbour to visit than a crowded one.
 
 ## How many months does it take to catch up on reviews?
 
-The median in the dataset is 207 reviews. Suppose a café has 60 reviews (assumption) and wants to reach that median. It needs 147 more. At 8 new reviews a month (assumption) that is about 18 months. At 15 a month (assumption) it is about 10 months. To reach the 500 reviews that only 72 cafés have, at 15 a month (assumption), another 440 reviews would take about 29 months.
+The median in the dataset is 219 reviews. Suppose a café has 60 reviews (assumption) and wants to reach that median. It needs 159 more. At 8 new reviews a month (assumption) that is about 20 months. At 15 a month (assumption) it is about 11 months. To reach the 603 reviews that mark the top quarter, at 15 a month (assumption), another 543 reviews would take about 36 months.
 
-Google publishes no minimum review count. Its help page says more reviews and positive ratings can help local ranking, so a steady monthly rhythm matters more than a one-off push. See [how to rank a coffee shop on Google Maps](/blog/coffee-shops-dominate-google-maps) for a review routine that stays within Google's rules.
+Google publishes no minimum review count. Its help page says more reviews and positive ratings can help local ranking, so a steady monthly rhythm matters more than a one-off push. A café with 100 transactions a day (assumption) and a 2% review rate (assumption) would collect about 60 reviews a month, which shows why the review prompt at the counter matters more than any later campaign.
+
+## What should a café fix first on its Google Business Profile?
+
+Google's Business Profile help gives a short list of what to complete. The items below come from its pages on editing a profile and getting reviews.
+
+1. **Hours.** Google says to set main hours or mark the business closed, to use special hours for holidays and other temporary periods, and to set more hours if different features have different hours. A café with a terrace or a kitchen that closes earlier than the counter fits this.
+2. **Categories.** Pick the primary category that best matches what the business does; Google allows up to nine more. Its tip is not to use categories solely as keywords or to describe features.
+3. **Attributes.** Google describes attributes as telling customers more, with examples such as Wi-Fi or outdoor seating. For a café these are often the deciding details.
+4. **Photos.** Add photos or videos of the storefront, products and services. Google notes that an exterior photo helps customers recognise the place when they arrive.
+5. **Verification.** Replying to reviews requires a verified business, and Google reviews edits before they go live, so changes do not appear instantly.
+
+The [Google Business Profile checklist](/blog/google-business-profile-optimization-checklist) walks through each field with screenshots of where it lives, and the [coffee shop Google Maps guide](/blog/coffee-shops-dominate-google-maps) covers the review routine.
+
+## How should a café ask for reviews and answer them?
+
+Google's help page on getting more reviews says customers can be reminded to leave reviews by asking them to visit a Google link or scan a QR code. It also says to reply to reviews, that replies should be "conversational, not promotional", and that responses should not be used to offer deals or promotions.
+
+One rule matters more than the rest. Google states that offering incentives, such as free or discounted goods or services, in exchange for reviews is "considered fake and misleading content and is strictly prohibited", and that this covers incentives to change reviews or remove negative ones. A café that gives a free coffee for a five-star review risks having the reviews removed.
+
+Google's review pages also say a business can flag a review it believes violates the content policies, and that a reply is reviewed before it is posted publicly and the reviewer is notified. The sample texts below are templates, not data, and the Polish wording can be adapted to the café's voice.
+
+### What can the counter card say?
+
+A short card with a QR code at the till is the lowest-effort request. A template:
+
+- Polish: "Smakowała Ci kawa? Będzie nam bardzo miło, jeśli zostawisz opinię w Google. Wystarczy zeskanować kod."
+- English: "Did you enjoy your coffee? A review on Google would mean a lot to us. Just scan the code."
+
+### How can a café reply to a positive review?
+
+A short, specific reply works better than a stock phrase. A template:
+
+- Polish: "Dziękujemy za miłe słowa i za wizytę! Cieszymy się, że smakował sernik. Zapraszamy ponownie."
+- English: "Thank you for the kind words and for visiting. We are glad you enjoyed the cheesecake. See you again."
+
+### How can a café reply to a negative review?
+
+Answer calmly, acknowledge the issue, offer a channel for details, and do not argue in public. A template:
+
+- Polish: "Dziękujemy za opinię i przepraszamy za to doświadczenie. Chcielibyśmy to wyjaśnić, napisz proszę do nas na adres kontakt@twojakawiarnia.pl."
+- English: "Thank you for the feedback and we are sorry about the experience. We would like to look into it; please write to us at the address above."
+
+The address is a placeholder. Do not include a discount or an offer in the reply, since Google says replies should avoid promotions.
+
+## What should a café website say in one page?
+
+A single page can carry a café. It needs to answer the questions a visitor has on a phone in front of the door: where, when, what and how to reach. The home pages in the audit most often lack a tap-to-call link, a Google Maps link and structured data, so those are the three cheap additions.
+
+Google's structured-data page for local businesses says the format lets a business tell Google about hours and departments, and that search may show a knowledge panel with business details. It lists only name and address as required properties.
+
+It recommends, among others, the telephone number, the URL of the specific location, geographic coordinates, opening hours, price range and, for food establishments, the URL of the menu. Its examples use JSON-LD, and it advises the most specific business sub-type available.
+
+An example for a café follows. Every value is a placeholder to be replaced, and the result should be checked with Google's Rich Results Test.
+
+```html
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CafeOrCoffeeShop",
+  "name": "Example Café",
+  "url": "https://example.pl/",
+  "telephone": "+48 000 000 000",
+  "menu": "https://example.pl/menu",
+  "priceRange": "PLN 10-40",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "ul. Przykładowa 1",
+    "addressLocality": "Poznań",
+    "postalCode": "60-000",
+    "addressCountry": "PL"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "08:00",
+      "closes": "18:00"
+    }
+  ]
+}
+</script>
+```
+
+Beyond the code, a one-page café site needs only six blocks: name and photo, address with a map link, opening hours, menu, phone and e-mail as tap-to-contact links, and links to Instagram and Facebook. The [local SEO audit guide](/blog/local-seo-audit-tool-review) shows how to check that the site and the Maps listing say the same thing.
+
+## What should the Instagram page do for a café?
+
+The data supports one claim about Instagram: a page that cannot be found from the listing or the website does not count for a customer. Of the 210 cafés, 93 have an Instagram page linked, and 42 of the 55 loaded websites link to one. Cafés with the most reviews have it slightly more often.
+
+Practical steps follow from that. Link the page from the Google profile and from the site. Use the same name everywhere so a customer can recognise it. Put address, hours and a link in the profile text. Keep the menu and the main dishes visible in recent posts, and reply to messages. For ideas on content and routines, see the [coffee shop Instagram marketing strategy](/blog/coffee-shop-instagram-marketing-strategy).
+
+Follower counts, post frequency and engagement were not collected, so the data says nothing about whether a more active page brings more customers.
 
 ## What should a Poznań café do in the next 90 days?
 
 The steps below are ordered by effort. The time estimates are assumptions.
 
-1. **Week 1, about 2 hours (assumption).** Complete the Google profile: address, opening hours including holidays, category and attributes. Google names these items as the information to keep complete. The [Google Business Profile checklist](/blog/google-business-profile-optimization-checklist) walks through each field.
-2. **Week 2, about 3 hours (assumption).** Put a website on your own domain in the website field. A single page with hours, menu, address, phone and an e-mail address is enough. Add UTM parameters to the link so Maps visits show in your analytics.
-3. **Week 2.** Link the Instagram page from the listing and the site so a customer finds it in two taps, and check the phone number works.
-4. **Weeks 3 to 12.** Ask every happy customer for a review in person or with a QR code at the counter, and reply to each review. The routine in the Google Maps guide linked below stays within Google's rules.
-5. **Week 12.** Run a [local SEO audit](/blog/local-seo-audit-tool-review) and compare the result with the score table above.
+| When | What | Time (assumption) |
+|---|---|---|
+| Week 1 | Complete the Google profile: hours with holidays, primary category, attributes, photos | 2 hours |
+| Week 1 | Verify the business if not yet verified, so replies can be posted | 30 minutes |
+| Week 2 | Put a one-page website on an own domain in the website field, with UTM parameters on the link | 3 hours |
+| Week 2 | Add tap-to-call, e-mail and Google Maps links to the site | 30 minutes |
+| Week 2 | Link Instagram and Facebook from the listing and the site | 20 minutes |
+| Weeks 3 to 12 | Place a QR code card at the till and ask happy customers for a review | 5 minutes a day |
+| Weeks 3 to 12 | Reply to every review in the same week | 15 minutes a week |
+| Week 12 | Run a self-audit with the score table and compare with the tables above | 30 minutes |
 
 For the market context, including how many businesses compete online in Poland and what a Google Business Profile should include, see the [guide to local marketing in Poland](/blog/local-business-marketing-poland-guide). For the paid side, see the [local marketing budget guide](/blog/local-marketing-budget-guide).
+
+## How does the Polish market shape these numbers?
+
+The Poland guide on this site, citing StatCounter, reports that Google had 89.56% of search in Poland in September 2026, so a Google Business Profile is the main free listing for a café. It cites Statistics Poland (GUS) for 2,896,481 active enterprises in the second quarter of 2026, of which micro enterprises with up to nine people employed made up 96.0%.
+
+For a café this means most competitors are small, owner-run firms with limited time. That matches the dataset: only 35% list their own website, and 26% have no website at all. Complete information and regular reviews can stand out quickly.
+
+The same guide, citing DataReportal, notes that Instagram and TikTok are growing in Poland while Facebook is large but flat. For cafés, that supports linking the social page that is actually maintained, and keeping the Google profile as the base, since profile, reviews and directions are what a customer sees first when searching nearby.
+
+The dataset is limited to Poznań and cannot say whether other Polish cities look the same. The method can be repeated for any city with public Google Maps listings.
 
 ## What can this data not tell you?
 
@@ -228,8 +598,92 @@ Several limits apply, and they matter for how the tables are used.
 - Café age is unknown, and older cafés have had longer to collect reviews.
 - Instagram follower counts, posts and engagement were not collected, and Instagram or Facebook pages count only when linked from the listing or the website.
 - E-mail counts include only addresses found on the café's own website.
-- Chains and non-cafés were filtered by name, which is imperfect, and the 304 are the listings that matched the searches, not every café in Poznań.
+- Chains and non-cafés were filtered by name, which is imperfect, and the 210 are the listings that matched the searches, not every café in Poznań.
 - Third-party ordering or menu pages are counted as websites, which can overstate own-domain share.
+- The website audit reads one home page per site, from one machine, at one moment. A site that failed may work for visitors, and a feature on an inner page is not seen.
+- Types and postal areas are approximate groupings, and small groups can move with one listing.
+
+## What is the full 25-point checklist for a café profile?
+
+The self-audit above covers the scored items. A fuller list adds the habits that keep a profile accurate. Each item takes minutes, and the order follows the sections of this article.
+
+| # | Item | Where | Why it matters |
+|---|---|---|---|
+| 1 | Business verified | Google Business Profile | Replies to reviews need a verified business |
+| 2 | Primary category chosen | Google profile | Google asks for the best-matching primary category |
+| 3 | Up to nine extra categories reviewed | Google profile | Google allows them, but not as keywords |
+| 4 | Main hours correct | Google profile | Hours are among the information Google asks to keep complete |
+| 5 | Holiday and special hours set | Google profile | Google supports special hours for holidays |
+| 6 | Attributes selected (Wi-Fi, seating) | Google profile | Attributes tell customers more |
+| 7 | Exterior photo added | Google profile | Helps customers recognise the place |
+| 8 | Photos of drinks, food and interior | Google profile | Shows what is sold |
+| 9 | Phone number listed and answered | Google profile | About one café in five lists none |
+| 10 | Website field points to an own domain | Google profile | Gives control over menu and analytics |
+| 11 | UTM parameters on the website link | Google profile | Lets analytics separate Maps traffic |
+| 12 | Instagram or Facebook linked | Profile and site | A reachable social page counts |
+| 13 | Menu on the site | Website | The most-linked page in the audit |
+| 14 | Address and map link on the site | Website | Saves a customer typing the address |
+| 15 | Tap-to-call and e-mail links | Website | About half of sites have them |
+| 16 | E-mail on an own domain | Website | Looks established, survives owner changes |
+| 17 | Mobile viewport and HTTPS | Website | Basic, and most sites already have it |
+| 18 | Local-business structured data | Website | Only a quarter of sites have it |
+| 19 | Analytics snippet installed | Website | Shows whether the site brings customers |
+| 20 | QR code for reviews at the till | Counter | Google's suggestion for review requests |
+| 21 | Replies to every review in the same week | Google profile | Replies are conversational, not promotional |
+| 22 | No rewards for reviews | Policy | Google prohibits incentives in exchange for reviews |
+| 23 | Inappropriate reviews flagged | Google profile | Google lets a business flag policy violations |
+| 24 | English text for visitors | Profile and site | Twelve of 55 sites offer it |
+| 25 | Quarterly self-audit and neighbour comparison | Calendar | Profiles drift, and neighbours improve |
+
+## How do three example cafés score?
+
+Three hypothetical cafés show how the score is applied. All inputs are assumptions.
+
+**Café A (assumption).** A new café with 35 reviews and a 4.8 rating, an Instagram page linked from the listing, a phone number, no website and no e-mail. Score: phone 10, Instagram 15, rating 15, reviews 0, total 40. The cheapest additions are a one-page website (20 points), an e-mail (10) and a Facebook page (5), which would raise the score to 75 without a single new review.
+
+**Café B (assumption).** A café with 320 reviews and a 4.4 rating, an own website, phone, Facebook page and e-mail, but no Instagram page. Score: website 20, phone 10, Facebook 5, e-mail 10, rating 8, reviews 10, total 63. Linking an Instagram page adds 15 points, and moving from 4.4 to 4.5 adds 7 more.
+
+**Café C (assumption).** A café with 1,100 reviews and a 4.6 rating, a complete profile, but a Facebook page used as its website. Score: phone 10, Instagram 15, Facebook 5, e-mail 10, rating 15, reviews 25, total 80. Replacing the Facebook link with an own domain adds 20 points and makes it a top-ten candidate.
+
+The examples show that profile completeness can add as many points as reviews in the first year, and that a weak profile hides a strong café.
+
+## Which numbers should a café track every month?
+
+A one-page tracker keeps the work from drifting. The targets below are assumptions meant as starting points, not benchmarks.
+
+| Metric | How to read it | Starting target (assumption) |
+|---|---|---|
+| New Google reviews | Count on the profile | 8 to 15 a month |
+| Average rating | On the profile | Hold at 4.5 or higher |
+| Replies | Share of reviews answered | 100% within a week |
+| Website clicks from Maps | Analytics, filtered by the UTM tag | Rising month on month |
+| Calls from the profile | Google Business Profile performance view | Rising month on month |
+| Profile completeness | Self-audit score | 80 or more within 90 days |
+| Review rank in the neighbourhood | Worksheet | Move up one place per quarter |
+| Instagram or Facebook reachable | Two-tap test | Always yes |
+
+Review the tracker on the first day of each month and write down one change for the next one. A café that follows eight numbers for a year has more evidence about its own profile than any city average can give.
+
+## How can the same analysis be repeated?
+
+The method needs only public listings and public home pages, so it works for any city and business type.
+
+1. Collect Google Maps listings for the business type and city with a scraping tool, keeping rating, review count, address, phone, website and social links.
+2. Clean the list by name and category: remove chains, shops, services and anything that is not the target business, and mark closed places.
+3. Add the website signals by reading each home page once and recording the fields in the audit table.
+4. Compute the score and the groupings described above, and keep every assumption written down.
+5. Publish aggregates for weaker profiles and name only the cafés that stand out positively.
+
+DataLatte runs this kind of review for cafés, salons, groomers and studios. Write to hi@datalatte.pro with the city and the type of business.
+
+## Key terms in this analysis
+
+- **Listing:** one Google Maps entry, which can be a single location of a larger business.
+- **Prominence:** Google's term for how well-known a business is, based partly on reviews and links from other sites.
+- **Structured data:** code in a page that tells search engines facts such as the business type, address and hours.
+- **UTM parameters:** tags added to a link so analytics can tell where a visit came from.
+- **JSON-LD:** the format Google's examples use for structured data.
+- **Own website:** a site on the café's own domain, as opposed to a Facebook or Instagram page.
 
 ## FAQ
 
@@ -247,23 +701,48 @@ The data shows what a public profile contains, not why. A thin profile can be a 
 
 ### How many reviews does a café need?
 
-No threshold is published. Google says more reviews and positive ratings can help local ranking. In this dataset the median café has about 200 reviews and the top ten all have at least 607.
+No threshold is published. Google says more reviews and positive ratings can help local ranking. In this dataset the median café has 219 reviews and the top ten all have at least 607.
 
 ### Is a Facebook page enough instead of a website?
 
 In this dataset, cafés using a social page as their website have as many reviews as those with their own domain. A social page is still not a replacement for a domain you control, because you cannot run your own analytics or design the menu and booking flow there.
 
+### Can I offer a free coffee for a review?
+
+No. Google's help page says offering incentives in exchange for reviews is considered fake and misleading content and is strictly prohibited.
+
+### How do I ask for reviews without breaking the rules?
+
+Remind customers to leave a review and give them a Google link or a QR code, as Google's help page suggests. Do not reward the review, and reply to reviews in a conversational way without offering deals.
+
+### Do I need structured data on my café website?
+
+Google's page lists only name and address as required for local business structured data, and recommends fields such as telephone, menu and opening hours. It is not required to appear in Google Maps, but it tells Google facts about the business directly.
+
 ### How current is the data and how can a café get corrected?
 
-Listings were collected on 2 and 3 November 2026. A café that is missing, misclassified or shown incorrectly can write to hi@datalatte.pro and the entry will be corrected.
+Listings were collected on 2 and 3 November 2026 and websites were read on the same days. A café that is missing, misclassified or shown incorrectly can write to hi@datalatte.pro and the entry will be corrected.
 
-### Can the same analysis be done for another city?
+### Why does the article use 210 cafés and not more?
+
+The first search returned 483 listings, and the cleaning steps removed everything that was not an independent café, bakery or roaster, such as filling stations, chains, restaurants and repair shops.
+
+### Can the same analysis be done for another city or business type?
 
 Yes. The method works for any city and business type that has public Google Maps listings. Write to hi@datalatte.pro with the city and the type of business.
+
+### What is the single most useful thing a café can do first?
+
+Complete the Google profile and make sure the website field and an Instagram link lead somewhere. In this dataset, the cafés with no online presence at all have a median of 65 reviews, against about 250 to 360 for the other groups.
 
 ## Sources
 
 - [Tips to improve your local ranking on Google, Google Business Profile Help](https://support.google.com/business/answer/7091): relevance, distance and prominence; complete and accurate information; reviews; "no way to request or pay for a better local ranking".
-- DataLatte dataset of 304 Poznań cafés, collected from public Google Maps listings with the Apify Google Maps scraper on 2-3 November 2026 and enriched from each café's own website (contact page, e-mail, social links). Scoring, grouping and area breakdowns as described above. Instagram and Facebook counts include pages linked from the listing or the café's own website. E-mail counts only addresses found on the café's website.
+- [Tips to get more reviews, Google Business Profile Help](https://support.google.com/business/answer/3474122): review link or QR code, replies "conversational, not promotional", incentives prohibited.
+- [Manage customer reviews, Google Business Profile Help](https://support.google.com/business/answer/3474050): verification before replying, replies reviewed before posting, flagging reviews.
+- [Edit your Business Profile, Google Business Profile Help](https://support.google.com/business/answer/3039617): hours and special hours, categories, attributes, photos, edits reviewed.
+- Poland context (secondary, as cited in [DataLatte's Poland guide](/blog/local-business-marketing-poland-guide)): StatCounter for Google's 89.56% share of search in Poland in September 2026; DataReportal Digital 2026 for Facebook, Instagram and TikTok ad reach; Statistics Poland (GUS) for 2,896,481 active enterprises in the second quarter of 2026.
+- [Local business (LocalBusiness) structured data, Google Search Central](https://developers.google.com/search/docs/appearance/structured-data/local-business): required and recommended properties, JSON-LD examples, most specific sub-type.
+- DataLatte dataset of 210 Poznań cafés, bakeries and roasters, collected from public Google Maps listings with the Apify Google Maps scraper on 2-3 November 2026 and enriched from each café's own website (contact page, e-mail, social links), plus a technical read of 67 distinct café home pages on 3 November 2026. Scoring, grouping and area breakdowns as described above.
 
 Want a profile check like this for your own café? Start with the [coffee shop marketing page](/for/coffee-shops) or request a [free marketing audit](/free-audit).

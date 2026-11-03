@@ -97,7 +97,8 @@ function check(slug) {
   const prose = lines.filter((l) => !/^\s*(<|\||#|-|\d+\.)/.test(l)).join("\n");
   const fp = prose.match(/\b(we tested|we ran|our client|my client|our clients|I tested|I ran|I've|I'm|I'd|Picture it|in my experience|we found|I made|I wrote|I used|I chose|I recommend|I think|I believe|I picked)\b/gi);
   if (fp) E.push(`first person / invented-case phrasing: ${[...new Set(fp.map((x) => x.toLowerCase()))].join(", ")}`);
-  const hazard = lines.filter((l) => !fence && !/^\s*(<|[a-z]+=|\/>)/.test(l) && !/^\s*[a-z]+="/.test(l) && (/[{}]/.test(l) || /<(?![A-Za-z/!])/.test(l)));
+  const inFence = []; { let f = false; for (const l of lines) { if (l.startsWith("```")) { f = !f; inFence.push(true); } else inFence.push(f); } }
+  const hazard = lines.filter((l, i) => !inFence[i] && !/^\s*(<|[a-z]+=|\/>)/.test(l) && !/^\s*[a-z]+="/.test(l) && (/[{}]/.test(l) || /<(?![A-Za-z/!])/.test(l)));
   if (hazard.length) E.push(`bare { } or < in MDX on ${hazard.length} line(s): "${hazard[0].trim().slice(0, 50)}"`);
   return { slug, errors: E, warns: W };
 }
