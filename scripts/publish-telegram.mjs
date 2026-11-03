@@ -8,6 +8,7 @@
  *      TELEGRAM_CHANNEL_ID (default @datalattepro)
  * Usage: node scripts/publish-telegram.mjs [--dry]
  */
+import { spawnSync } from "node:child_process";
 const dry = process.argv.includes("--dry");
 const {
   TELEGRAM_BOT_TOKEN,
@@ -43,24 +44,20 @@ console.log(`${rows.length} post(s) due`);
 let failed = 0;
 for (const row of rows) {
   if (dry) { console.log(`[dry] ${row.id}\n${row.content}\n`); continue; }
-  // 30s timeout, up to 3 attempts on timeout / 5xx. Telegram never accepted the message in those cases.
-  let tg, body = {};
+  // curl (as in the other workflows): Node fetch to api.telegram.org timed out on GitHub runners.
+  // Retry up to 3 times when no response was received (Telegram did not accept the message).
+  let body = {};
   for (let attempt = 1; attempt <= 3; attempt++) {
-    try {
-      tg = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chat_id: TELEGRAM_CHANNEL_ID, text: row.content }),
-        signal: AbortSignal.timeout(30000),
-      });
-      body = await tg.json().catch(() => ({}));
-      if (body.ok || tg.status < 500) break;
-    } catch (e) {
-      tg = { status: 0 };
-      body = { description: String(e.message || e) };
-    }
-    console.log(`attempt ${attempt} failed: ${body.description || tg.status}`);
-    if (attempt < 3) await new Promise((r) => setTimeout(r, 5000));
+    const r = spawnSync("curl", [
+      "-sS", "-4", "-m", "30", "-X", "POST",
+      `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+      "--data-urlencode", `chat_id=${TELEGRAM_CHANNEL_ID}`,
+      "--data-urlencode", `text=${row.content}`,
+    ], { encoding: "utf8" });
+    try { body = JSON.parse(r.stdout); } catch { body = { description: (r.stderr || "no response").trim().slice(0, 200) }; }
+    if (body.ok || (body.error_code && body.error_code < 500)) break;
+    console.log(`attempt ${attempt} failed: ${body.description}`);
+    if (attempt < 3) await new Promise((r2) => setTimeout(r2, 5000));
   }
   const patch = body.ok
     ? {
@@ -70,7 +67,7 @@ for (const row of rows) {
         published_at: new Date().toISOString(),
         error_message: null,
       }
-    : { status: "failed", error_message: String(body.description || `HTTP ${tg.status}`).slice(0, 500) };
+    : { status: "failed", error_message: String(body.description || "unknown error").slice(0, 500) };
   const up = await sb(`social_posts?id=eq.${row.id}`, { method: "PATCH", body: JSON.stringify(patch) });
   if (!up.ok) console.error(`DB update failed for ${row.id}: ${up.status} ${await up.text()}`);
   console.log(row.id, patch.status, patch.post_url || patch.error_message);
