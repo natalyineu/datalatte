@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown } from "lucide-react";
 import clsx from "clsx";
+import { EN_TO_PL } from "@/lib/i18n";
 
 const niches = [
   { label: "Coffee Shops",              href: "/for/coffee-shops" },
@@ -99,6 +100,8 @@ export default function Header() {
   const pathname = usePathname();
 
   const isRadar = pathname.startsWith("/radar");
+  // Language switch: PL twin of the current page if one exists, otherwise the Polish home page
+  const plHref = EN_TO_PL[pathname.replace(/\/$/, "") || "/"] ?? "/pl";
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-100 dark:border-gray-800 shadow-sm">
@@ -140,7 +143,8 @@ export default function Header() {
           </nav>
 
           {/* CTA */}
-          <div className="hidden md:flex">
+          <div className="hidden md:flex items-center gap-3">
+            <Link href={plHref} hrefLang="pl" className="rounded-lg border border-gray-300 dark:border-gray-600 px-2.5 py-1.5 text-xs font-bold text-gray-600 dark:text-gray-300 hover:border-coffee-500" aria-label="Przełącz na polski">PL</Link>
             <Link href="/free-audit" className="btn-primary text-sm py-2.5 px-5">
               Free Audit
             </Link>
@@ -230,6 +234,10 @@ export default function Header() {
 
           <Link href="/contact" className="block py-3 text-gray-700 dark:text-gray-200 font-medium" onClick={() => setMobileOpen(false)}>
             Contact
+          </Link>
+
+          <Link href={plHref} hrefLang="pl" className="block py-3 text-gray-700 dark:text-gray-200 font-medium" onClick={() => setMobileOpen(false)}>
+            Polski (PL)
           </Link>
 
           <Link href="/free-audit" className="btn-primary w-full justify-center mt-3" onClick={() => setMobileOpen(false)}>

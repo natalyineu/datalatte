@@ -188,6 +188,7 @@ export default function Footer() {
           <p>© {new Date().getFullYear()} DataLatte. All rights reserved.</p>
           <div className="flex gap-5">
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="/pl" hrefLang="pl" className="hover:text-white transition-colors">Polski</Link>
             <Link href="/terms"   className="hover:text-white transition-colors">Terms</Link>
           </div>
         </div>
