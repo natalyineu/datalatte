@@ -1,0 +1,32 @@
+name: Collect Poznan cafes
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["data/pl-cafes-queue.json", "scripts/collect-pl-cafes.mjs", "scripts/enrich-pl-cafes.mjs"]
+
+concurrency:
+  group: collect-pl-cafes
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Scrape Google Maps (Apify) into pl_cafes
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: node scripts/collect-pl-cafes.mjs
+      - name: Read each cafe's public website for e-mail, phone, Instagram and Facebook
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: node scripts/enrich-pl-cafes.mjs
