@@ -199,7 +199,7 @@ export default function AIChatWidget() {
   const [messages, setMessages] = useState<Message[]>([WELCOME]);
   const [input,   setInput]   = useState("");
   const [loading, setLoading] = useState(false);
-  const [pulse,   setPulse]   = useState(true);
+  const [pulse,   setPulse]   = useState(false); // no attention-grabbing pulse
   const [unread,  setUnread]  = useState(0);
   const bottomRef  = useRef<HTMLDivElement>(null);
   const inputRef   = useRef<HTMLInputElement>(null);
@@ -255,7 +255,7 @@ export default function AIChatWidget() {
   return (
     <>
       {/* ── Floating trigger ── */}
-      <div className="fixed bottom-6 left-6 z-50">
+      <div className="group fixed bottom-20 left-3 md:bottom-5 md:left-5 z-40">
         {/* Pulse ring */}
         <AnimatePresence>
           {!open && pulse && (
@@ -271,8 +271,8 @@ export default function AIChatWidget() {
 
         <motion.button
           onClick={() => setOpen(v => { if (!v) gtag.chatWidgetOpened(); return !v; })}
-          className="relative w-14 h-14 bg-coffee-700 hover:bg-coffee-800 rounded-full shadow-lg hover:shadow-xl transition-all flex items-center justify-center"
-          whileHover={{ scale: 1.08 }}
+          className="relative w-10 h-10 md:w-11 md:h-11 bg-coffee-700/85 hover:bg-coffee-800 rounded-full shadow-md hover:shadow-lg transition-all flex items-center justify-center opacity-80 hover:opacity-100"
+          whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           aria-label="Chat with Latte AI"
         >
@@ -282,7 +282,7 @@ export default function AIChatWidget() {
                 <X size={22} className="text-white" />
               </motion.span>
             ) : (
-              <motion.span key="coffee" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }} className="text-2xl leading-none">
+              <motion.span key="coffee" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }} className="text-lg md:text-xl leading-none">
                 ☕
               </motion.span>
             )}
@@ -296,20 +296,12 @@ export default function AIChatWidget() {
           )}
         </motion.button>
 
-        {/* Tooltip */}
-        <AnimatePresence>
-          {!open && (
-            <motion.div
-              className="absolute bottom-1 left-16 bg-gray-900 text-white text-xs font-medium px-3 py-1.5 rounded-full shadow-lg whitespace-nowrap pointer-events-none"
-              initial={{ opacity: 0, x: -6 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -6 }}
-              transition={{ delay: 1.2, duration: 0.3 }}
-            >
-              Ask Latte — free advice ☕
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {/* Tooltip: only on hover (desktop) */}
+        {!open && (
+          <div className="hidden md:block absolute bottom-1.5 left-14 bg-gray-900 text-white text-xs font-medium px-3 py-1.5 rounded-full shadow-lg whitespace-nowrap pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+            Ask Latte — free advice ☕
+          </div>
+        )}
       </div>
 
       {/* ── Chat panel ── */}

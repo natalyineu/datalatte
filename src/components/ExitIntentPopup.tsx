@@ -30,45 +30,32 @@ export default function ExitIntentPopup() {
   useEffect(() => {
     // Don't show if already dismissed this session
     if (sessionStorage.getItem("exit-popup-dismissed")) return;
+    try {
+      const last = Number(localStorage.getItem("exit-popup-last") || 0);
+      if (last && Date.now() - last < 14 * 24 * 3600 * 1000) return; // at most once per 14 days
+    } catch { /* ignore */ }
+    const mountedAt = Date.now();
 
     // Desktop: exit intent on mouse leaving top of viewport
     const onMouseLeave = (e: MouseEvent) => {
-      if (e.clientY <= 0 && !shown.current) {
+      // desktop only, and only after the visitor has actually spent some time reading
+      if (e.clientY <= 0 && !shown.current && window.innerWidth >= 768 && Date.now() - mountedAt > 20000) {
         shown.current = true;
         setTimeout(() => { setVisible(true); gtag.exitIntentShown("mouse_leave"); }, 100);
       }
     };
 
-    // Mobile: show after 40s of engagement
-    const mobileTimer = setTimeout(() => {
-      if (!shown.current && window.innerWidth < 768) {
-        shown.current = true;
-        setVisible(true);
-        gtag.exitIntentShown("timer_40s");
-      }
-    }, 40000);
-
-    // Also show after scrolling 60% of the page
-    const onScroll = () => {
-      const scrolled = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-      if (scrolled > 0.6 && !shown.current) {
-        shown.current = true;
-        setTimeout(() => { setVisible(true); gtag.exitIntentShown("scroll_60"); }, 500);
-      }
-    };
 
     document.addEventListener("mouseleave", onMouseLeave);
-    window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
       document.removeEventListener("mouseleave", onMouseLeave);
-      window.removeEventListener("scroll", onScroll);
-      clearTimeout(mobileTimer);
     };
   }, []);
 
   function dismiss() {
     setVisible(false);
     sessionStorage.setItem("exit-popup-dismissed", "1");
+    try { localStorage.setItem("exit-popup-last", String(Date.now())); } catch { /* ignore */ }
     gtag.exitIntentDismissed();
   }
 

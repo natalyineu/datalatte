@@ -12,12 +12,14 @@ export default function FloatingCTA() {
   const shownRef = useRef(false);
 
   useEffect(() => {
-    if (sessionStorage.getItem("floating-cta-dismissed")) {
+    let recent = false;
+    try { const t = Number(localStorage.getItem("floating-cta-dismissed-at") || 0); recent = !!t && Date.now() - t < 14 * 24 * 3600 * 1000; } catch { /* ignore */ }
+    if (recent || sessionStorage.getItem("floating-cta-dismissed")) {
       setDismissed(true);
       return;
     }
     const onScroll = () => {
-      const shouldShow = window.scrollY > 400;
+      const shouldShow = window.scrollY > 1500;
       setVisible(shouldShow);
       if (shouldShow && !shownRef.current) {
         shownRef.current = true;
@@ -31,6 +33,7 @@ export default function FloatingCTA() {
   function dismiss() {
     setDismissed(true);
     sessionStorage.setItem("floating-cta-dismissed", "1");
+    try { localStorage.setItem("floating-cta-dismissed-at", String(Date.now())); } catch { /* ignore */ }
     gtag.floatingCtaDismissed();
   }
 
@@ -78,14 +81,6 @@ export default function FloatingCTA() {
             exit={{ opacity: 0, x: 60 }}
             transition={{ type: "spring", damping: 20 }}
           >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3 }}
-              className="bg-white text-xs text-gray-600 px-3 py-1.5 rounded-full shadow-md border border-gray-100 whitespace-nowrap dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700"
-            >
-              Free audit — no strings attached ☕
-            </motion.div>
             <div className="flex items-center gap-2">
               <Link
                 href="/free-audit"
