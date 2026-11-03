@@ -35,8 +35,9 @@ DB enforces: platform and status values (check constraints), `published` needs `
 2. **Pick source.** Indexable blog post (`content/blog/*.mdx`, no `noindex`), service page, or radar signal. Use only facts that are in the source. No invented stats, cases or quotes (same rule as `datalatte-article`).
 3. **Write the post** (rules below). Insert as `draft` with `destination_url` and UTM.
 4. **Owner approves** the text. Nothing is posted without an explicit yes.
-5. **After publishing**: update the row to `published` with `post_url`, `post_id_external`, `published_at`. If it failed: `failed` + `error_message`.
-6. Say in the report: what was inserted, what was published, what is still draft.
+5. **Telegram auto-publish**: set `status='scheduled'` + `scheduled_at` after approval. GitHub Action `social-publish.yml` (hourly, `scripts/publish-telegram.mjs`) posts to `@datalattepro` and fills `published`, `post_url`, `published_at`. X is manual until API keys exist (`scripts/sync-x-posts.mjs` marks X posts via Apify).
+6. **After manual publishing**: update the row to `published` with `post_url`, `post_id_external`, `published_at`. If it failed: `failed` + `error_message`.
+7. Say in the report: what was inserted, what was published, what is still draft.
 
 ## UTM
 `utm_source=telegram|twitter`, `utm_medium=social`, `utm_campaign=<blog-slug or page-slug>`, `utm_content=<post type>` (e.g. `stat`, `howto`, `thread`). Link = `https://www.datalatte.pro/...?utm_...`.
