@@ -2,7 +2,7 @@
 title: "AppLovin Ads for Local Business: Cost and Access"
 seoTitle: "AppLovin Ads for Local Business: Worth It? (2026)"
 date: "2026-05-31"
-lastModified: "2026-10-08"
+lastModified: "2026-11-03"
 description: "AppLovin's guidance implies 15-20 conversions a day. At a $30 lead cost that is $450+ daily, so most local businesses should test elsewhere first."
 author: "Nataliia"
 category: "Programmatic Advertising"
@@ -17,9 +17,13 @@ That single sum explains why AppLovin is, for most local businesses, an interest
 
 This guide is for owners in the US, UK, Australia and Canada. It covers what AppLovin is, whether a local business can now sign up, what the documentation says about targeting and billing, the math on budget, and what to do instead.
 
-Where a number is a guess it is labelled as one, and AppLovin does not publish a minimum budget or a local-business price list in the pages we opened.
+Where a number is a guess it is labelled as one. AppLovin does not publish a minimum budget or a local-business price list on the support pages checked on 3 November 2026.
 
-## What AppLovin Is, in Plain English
+<StatRow values="15-20|$450|3|0" labels="Conversions a day AppLovin advises (apps)|Daily budget at an assumed $30 lead|Geo levels documented (country, state, metro)|City, zip or radius options documented" subs="AppLovin Support, app campaigns|15 x $30 (assumption)|AppLovin web campaign API|AppLovin web campaign API" trends="neutral|up|neutral|neutral" />
+
+<BigStat value="0" label="The AppLovin web campaign API documents no city, zip code or radius targeting, only country and, in the US, state or metro area" note="Region and metro options apply only when the country is US. Check the live interface, which may differ from the API reference." source="AppLovin Support, Axon campaign management API (web), checked 3 November 2026" />
+
+## What is AppLovin?
 
 AppLovin is a mobile advertising company. Its advertising platform, called Axon, serves video and interactive ads inside mobile apps, mostly games. AppLovin's long-time advertisers were app developers buying installs. Since late 2025 it has been pushing into websites and e-commerce.
 
@@ -27,7 +31,7 @@ On the company's Q1 2026 earnings call, per a [third-party transcript from The M
 
 Since the transcript is third-party, treat the wording as close but not guaranteed.
 
-## Can a Local Business Sign Up?
+## Can a local business sign up for AppLovin Ads?
 
 Mostly yes in principle, with big caveats in practice.
 
@@ -37,7 +41,7 @@ Mostly yes in principle, with big caveats in practice.
 
 The situation has moved quickly, so the rule is to check the current sign-up page rather than rely on any article, including this one.
 
-## What the Documentation Says About Targeting
+## Can you target a neighbourhood on AppLovin?
 
 This is where a local business hits a wall. The [web campaign API reference](https://support.applovin.com/en/growth/promoting-your-websites/api/axon-campaign-management-api-web) lists these geographic options:
 
@@ -46,9 +50,9 @@ This is where a local business hits a wall. The [web campaign API reference](htt
 - **Metro**: US metropolitan areas such as DETROIT, again only for the US.
 - **Not listed:** cities, zip codes, or a radius.
 
-If you run a coffee shop in Leeds, a groomer in Brisbane or a barbershop in Calgary, the pages we opened show country-level targeting only. A US business can narrow to a state or a metro area, which for a single suburb is still very wide. That mismatch with a delivery or service radius of a few miles is the main reason AppLovin is hard to justify for neighbourhood businesses.
+If you run a coffee shop in Leeds, a groomer in Brisbane or a barbershop in Calgary, the documentation shows country-level targeting only. A US business can narrow to a state or a metro area, which for a single suburb is still very wide. That mismatch with a delivery or service radius of a few miles is the main reason AppLovin is hard to justify for neighbourhood businesses.
 
-## How It Is Billed and Optimised
+## How is AppLovin billed?
 
 - **Billing model.** The API reference lists a single bidding strategy, auto-bidding with CPM billing, which "aims to fully use your budget while maximizing results at the lowest possible cost per result" and charges on every ad impression. You pay for exposure, not clicks.
 - **Goals.** The launch checklist lists cost per lead, cost per purchase and return on ad spend, with a Day 0 or Day 7 window.
@@ -56,7 +60,7 @@ If you run a coffee shop in Leeds, a groomer in Brisbane or a barbershop in Calg
 - **Pixel and creative.** The [launch checklist](https://support.applovin.com/en/growth/promoting-your-websites/welcome-to-applovin/launch-checklist) says to install the pixel via Shopify or Google Tag Manager and validate it with the Pixel Helper, and to supply at least one video and one interactive or image asset per creative set. It notes video ads are skip-delayed by at least five seconds, so state the offer early, and recommends videos of 30 seconds or longer with subtitles.
 - **Minimum budget.** None of these pages states one.
 
-## The Math
+## What does the budget math look like?
 
 The budget guidance quoted in the hook comes from AppLovin's [app campaign scaling page](https://support.applovin.com/en/growth/promoting-your-apps/track-and-optimize/scale-your-campaign) and is written for app installs. The website checklist only says budgets should be "high enough to generate a meaningful volume of actions." So the 15 to 20 per day figure is the nearest published yardstick, not a rule for local services. Every other input below is an **assumption** you should replace.
 
@@ -73,11 +77,13 @@ The budget guidance quoted in the hook comes from AppLovin's [app campaign scali
 
 How to read it: leads per month is 15 x 30 = 450, and customers equal leads times the close rate. The Base case looks profitable on paper at $120 per customer against $300 of lifetime profit, but it still ties up $13,500 a month before you know if the assumptions hold.
 
-The Tough case loses money on every customer. The Strong case needs leads at $15, which no source we opened supports for local services. A single-location business seldom has $6,750 to $27,000 a month to test with, and may not have the lead volume nearby to absorb it.
+The Tough case loses money on every customer. The Strong case needs leads at $15, which no source checked for this article supports for local services. A single-location business seldom has $6,750 to $27,000 a month to test with, and may not have the lead volume nearby to absorb it.
 
-Now compare with a channel that targets by search intent. A $1,500 monthly Google Ads budget at an assumed $3 click gives 500 clicks. At an assumed 5% enquiry rate that is 25 enquiries. See [Google Ads for gyms](/blog/google-ads-for-gyms) for a worked version of this funnel and the Google Ads budget guide for sizing.
+<ColumnChart title="Monthly budget at 15 conversions a day, by cost per lead (assumption)" labels="$15 per lead|$30 per lead|$60 per lead" values="6750|13500|27000" unit=" USD" highlights="$30 per lead" caption="15 conversions x 30 days x assumed cost per lead. Only the 15 comes from AppLovin's app guidance." />
 
-## When AppLovin Could Make Sense
+Now compare with a channel that targets by search intent. A $1,500 monthly Google Ads budget at an assumed $3 click gives 500 clicks. At an assumed 5% enquiry rate that is 25 enquiries. See [Google Ads for gyms](/blog/google-ads-for-gyms) for a worked version of this funnel.
+
+## When could AppLovin make sense?
 
 It is a reasonable test, not a first move, if all of these are true:
 
@@ -93,22 +99,22 @@ It is a poor fit if your customers come from a few miles around, your conversion
 An ad shown between game levels reaches people who are doing something else. That can still work for a broad offer. For "pet groomer near me," a person searching has already told Google what they want.
 </Callout>
 
-## Better First Tests for Local Businesses
+## What should local businesses test first?
 
 - **Search and your Business Profile** for people already looking. Start with [Google Ads versus Facebook ads](/blog/google-ads-vs-facebook-ads-local-business-which-wins).
 - **Streaming TV** if you want awareness with geographic control. See [CTV advertising platforms compared](/blog/ctv-advertising-platforms-compared-2026) and [how much CTV advertising costs](/blog/how-much-does-ctv-advertising-cost-real-cpm-data).
 - **Other in-app and programmatic options**: our [in-app advertising guide for local business](/blog/in-app-advertising-local-business-guide) and [programmatic advertising for coffee shops](/blog/programmatic-advertising-for-coffee-shops).
-- **Tracking basics first**: Google Ads conversion tracking setup applies to any channel that sends people to your site.
+- **Tracking basics first**: a clean pixel and conversion setup applies to any channel that sends people to your site.
 
-## If You Do Test It: A Cautious Plan
+## How do you test AppLovin cautiously?
 
-1. Ask AppLovin or your agency for current minimums in writing, since none are published in the pages we opened.
+1. Ask AppLovin or your agency for current minimums in writing, since none are published on the pages checked.
 2. Send traffic to one landing page with one offer and a form, with the pixel validated before launch.
 3. Set the goal to cost per lead and a target you can afford, and cap the test length (for example, four weeks).
 4. Add a source question to your booking form and a unique code, because in-app ads rarely produce a trackable click path on their own.
 5. Compare cost per new customer with your best channel; stop if it is more than double.
 
-## Do This Today
+## What should you do today?
 
 1. Write down your cost per lead and cost per customer from your best current channel.
 2. Multiply your cost per lead by 15 to see the AppLovin-style daily budget your business would imply.
@@ -118,20 +124,25 @@ An ad shown between game levels reaches people who are doing something else. Tha
 
 ## FAQ
 
-**Q: Can a local business advertise on AppLovin?**
-A: AppLovin's account page says AppLovin Ads is available to all advertisers with no referral code, but the sign-up goals are website purchases or leads. Whether a small local business gets good results is unproven in anything we opened.
+### Can a local business advertise on AppLovin?
 
-**Q: Can I target a radius around my shop?**
-A: The web campaign API reference lists country, US region and US metro targeting, and no radius, zip code or city option. Check the live interface, which may differ.
+AppLovin's account page says AppLovin Ads is available to all advertisers with no referral code, but the sign-up goals are website purchases or leads. Whether a small local business gets good results is not shown in any source checked for this article.
 
-**Q: What is the minimum budget?**
-A: None of the pages we opened state one. AppLovin's app guidance recommends a daily budget that yields at least 15 to 20 conversions per day, so ask for a written minimum and test with money you can afford to lose.
+### Can I target a radius around my shop?
 
-**Q: Are AppLovin ads cheaper than Meta or Google?**
-A: We found no verified comparison for local services, so we do not quote one. The platform bills by CPM, so compare cost per new customer, not cost per thousand views.
+The web campaign API reference lists country, US region and US metro targeting, and no radius, zip code or city option. Check the live interface, which may differ.
 
-**Q: Is it only for mobile games?**
-A: Ads appear mainly inside mobile apps, and gaming is its largest revenue source per management's Q1 2026 remarks. The sign-up flow now offers website goals as well.
+### What is the minimum budget?
+
+None of the pages checked state one. AppLovin's app guidance recommends a daily budget that yields at least 15 to 20 conversions per day, so ask for a written minimum and test with money you can afford to lose.
+
+### Are AppLovin ads cheaper than Meta or Google?
+
+No verified comparison for local services was found, so none is quoted here. The platform bills by CPM, so compare cost per new customer, not cost per thousand views.
+
+### Is it only for mobile games?
+
+Ads appear mainly inside mobile apps, and gaming is its largest revenue source per management's Q1 2026 remarks. The sign-up flow now offers website goals as well.
 
 ## Sources
 

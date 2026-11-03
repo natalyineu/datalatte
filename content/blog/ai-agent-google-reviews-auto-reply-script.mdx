@@ -2,7 +2,7 @@
 title: "AI Agent for Google Reviews: Python Reply Script"
 seoTitle: "AI Agent Google Reviews Auto-Reply Script (Python)"
 date: "2026-06-13"
-lastModified: "2026-10-10"
+lastModified: "2026-11-03"
 description: "Replying to a Google review takes one API call, but access needs a 60-day-old verified profile. A Python script that drafts replies, dry-run by default."
 author: "Nataliia"
 category: "AI & Automation"
@@ -15,13 +15,17 @@ Posting a reply to a Google review through the API is a single request. Getting 
 
 Reading reviews is also one request, returning up to 50 per page, and a reply can be at most 4,096 bytes. Everything else in this article is a Python script that wraps those two calls, drafts replies with a language model, and refuses to post anything risky.
 
+<StatRow values="60 days|50|4,096|300" labels="Minimum age of the verified profile|Reviews per page, maximum|Bytes in a reply, maximum|Queries per minute once approved" subs="Google prerequisites page|Reviews list reference, v4|ReviewReply reference, v4|Google prerequisites page" trends="neutral|neutral|neutral|neutral" />
+
+<BigStat value="60 days" label="Google only grants Business Profile API access to a verified profile that has been active for 60 or more days and lists a website" note="After that you submit an Application for Basic API Access. A quota of 0 queries per minute means you are not approved yet; 300 means you are." source="Google Business Profile APIs, Prerequisites, checked 3 November 2026" />
+
 <Callout type="warning" title="Untested starting point">
 The script below is a template written from Google's and Groq's published documentation. It has not been run against a live Business Profile. Read it, run it with `DRY_RUN=1` (the default) and test on your own reviews before you let it post anything. Treat it as a starting point, not a finished product.
 </Callout>
 
-This page covers the code. For the strategy side (what Google and the FTC allow, which reviews a human should always handle), read our [AI agent for Google reviews management](/blog/ai-agent-for-google-reviews-management) guide first. For wording that works on bad reviews, see our negative review reply scripts. It is written for owners and developers serving customers in the US, UK, Australia and Canada.
+This page covers the code. For the strategy side (what Google and the FTC allow, which reviews a human should always handle), read our [AI agent for Google reviews management](/blog/ai-agent-for-google-reviews-management) guide first. It is written for owners and developers serving customers in the US, UK, Australia and Canada.
 
-## Get Access First
+## What access does Google require first?
 
 Per Google's [prerequisites page](https://developers.google.com/my-business/content/prereqs), you need:
 
@@ -36,11 +40,11 @@ Google's [usage limits page](https://developers.google.com/my-business/content/l
 
 Its [review data page](https://developers.google.com/my-business/content/review-data) also says that to use the reply functionality, a Google Workspace administrator must enable Search and/or Maps with Business Profile for the account. Google's [basic setup page](https://developers.google.com/my-business/content/basic-setup) says Workspace accounts without Business Profile enabled get a 403 error.
 
-The review endpoints we use live in the older v4 API on `mybusiness.googleapis.com`. Google's REST reference for [listing reviews](https://developers.google.com/my-business/reference/rest/v4/accounts.locations.reviews/list) and [replying](https://developers.google.com/my-business/reference/rest/v4/accounts.locations.reviews/updateReply) shows no deprecation notice for these methods at the time of writing, but the docs link to a general deprecation schedule, so check it before you build anything long-lived.
+The review endpoints used here live in the older v4 API on `mybusiness.googleapis.com`. Google's REST reference for [listing reviews](https://developers.google.com/my-business/reference/rest/v4/accounts.locations.reviews/list) and [replying](https://developers.google.com/my-business/reference/rest/v4/accounts.locations.reviews/updateReply) shows no deprecation notice for these methods at the time of writing, but the docs link to a general deprecation schedule, so check it before you build anything long-lived.
 
 If this sounds like a lot of admin for a coffee shop, it is. Many small businesses use a hosted tool that already has approval. Our [AI review management service](/services/ai-agents/review-management) works that way.
 
-## How the Script Works
+## How does the script work?
 
 ```
 Refresh OAuth access token
@@ -66,7 +70,7 @@ Design choices worth copying even if you rewrite the code:
 - **No generic fallback reply.** If the model fails, the script skips the review rather than posting boilerplate.
 - **A log file prevents double replies.**
 
-## Find Your Account and Location IDs
+## How do you find your account and location IDs?
 
 Google's [basic setup page](https://developers.google.com/my-business/content/basic-setup) shows listing accounts with a GET to the Account Management API. Its [locations list reference](https://developers.google.com/my-business/reference/businessinformation/rest/v1/accounts.locations/list) says the Business Information API needs a `readMask`. Replace `ACCESS_TOKEN` with a token from the OAuth flow (scope `https://www.googleapis.com/auth/business.manage`):
 
@@ -80,9 +84,9 @@ curl -H "Authorization: Bearer ACCESS_TOKEN" \
   "https://mybusinessbusinessinformation.googleapis.com/v1/accounts/ACCOUNT_ID/locations?readMask=name,title"
 ```
 
-The v4 review path combines the two: `accounts/ACCOUNT_ID/locations/LOCATION_ID`. That is the value for `LOCATION_NAME` below. The review resource's own `name` field comes back in the form `accounts/{accountId}/locations/{locationId}/reviews/{reviewId}`, which is what the reply call needs.
+The v4 review path combines the two: `accounts/ACCOUNT_ID/locations/LOCATION_ID`. That is the value for `LOCATION_NAME` below. The review resource's own `name` field comes back as that path followed by `/reviews/REVIEW_ID`, which is what the reply call needs.
 
-## The Script
+## What does the Python script look like?
 
 Environment variables hold secrets. Never commit them. The Groq endpoint and response shape follow Groq's [API reference](https://console.groq.com/docs/api-reference), where `llama-3.3-70b-versatile` is the example model; check Groq's [models page](https://console.groq.com/docs/models) for the current list. Any OpenAI-style chat provider works with small changes.
 
@@ -237,22 +241,22 @@ if __name__ == "__main__":
 
 What to check before you rely on it:
 
-- **Moderation.** Google's [reply help page](https://support.google.com/business/answer/3474050) says each reply is checked against content policies before it posts, usually in about 10 minutes but sometimes up to 30 days, and that a rejected reply must be edited. The review resource includes a `reviewReplyState` of `PENDING`, `APPROVED` or `REJECTED` and a `policyViolation` field when a reply is rejected. The script does not read these yet; adding a check is a sensible next step.
+- **Moderation.** Google's [reply help page](https://support.google.com/business/answer/3474050) says each reply is checked against content policies before it posts, usually in about 10 minutes but sometimes up to 30 days, and that a rejected reply must be edited. The review resource includes a `reviewReplyState` field, and a `policyViolation` field that is filled only when a reply is rejected. The script does not read these yet; adding a check is a sensible next step.
 - **Error handling.** It stops on the first Google error when fetching and does not retry. Add exponential backoff for 429 responses, as Google recommends.
 - **Scheduling.** Run it once a day from cron or a scheduled GitHub Action, not in a tight loop.
 - **Stop words.** The list above is a starting point. Add words that matter in your trade.
 
-## Example Replies (Illustrative)
+## What do the drafted replies look like?
 
-These show the tone the prompt aims for. They are examples we wrote, not real customer reviews.
+These show the tone the prompt aims for. They are invented examples, not real customer reviews.
 
-**5 stars, from Sarah:** "Best balayage I've ever had. Emma understood what I wanted without a million photos."
+**5 stars, from Sarah:** "Best balayage ever. Emma understood what I wanted without a million photos."
 **Draft:** Hi Sarah, Emma will be delighted to read this. Getting the colour right without a reference board is exactly what we aim for. See you at your next appointment. Nataliia
 
 **2 stars, from Mike:** "Waited 20 minutes past my appointment time. Good cut but the wait was frustrating."
-**Draft (owner edits, never auto-posted):** Hi Mike, you're right that 20 minutes is too long and I'm sorry it happened. Please email or call us so we can look at your booking and make your next visit smoother. Nataliia
+**Draft (owner edits, never auto-posted):** Hi Mike, you are right that 20 minutes is too long, and sorry it happened. Please email or call us so we can look at your booking and make your next visit smoother. Nataliia
 
-## The Math
+## What does it cost in time? Worked example
 
 The script is cheap to run; the cost is your time to build and maintain it. Every figure below is an **assumption**, so substitute your own. Check your model provider's current pricing, which this article does not quote.
 
@@ -267,9 +271,11 @@ The script is cheap to run; the cost is your time to build and maintain it. Ever
 | One-off build and approval time: 6 hours (assumption) | $180 | $180 | $180 |
 | Months to pay back | 12 | 3 | 1.2 |
 
+<ColumnChart title="Months to pay back the build time (assumption)" labels="30 reviews a month|60 reviews a month|120 reviews a month" values="12|3|1.2" unit=" months" highlights="60 reviews a month" caption="Worked example from the table above. Every input is an assumption: 3 minutes saved per reply, $30 per hour, 1 hour upkeep a month, 6 hours to build." />
+
 Read it honestly. At 30 reviews a month the payback is a year, and a saved-replies document may beat a script. The case gets stronger at volume or across several locations, and the Google access application can add weeks on top.
 
-## Do This Today
+## What should you do today?
 
 1. Check whether your Business Profile is verified, has a website listed and is at least 60 days old.
 2. Create a Google Cloud project, submit the "Application for Basic API Access", and note the project number you used.
@@ -279,20 +285,25 @@ Read it honestly. At 30 reviews a month the payback is a year, and a saved-repli
 
 ## FAQ
 
-**Q: Is it allowed to post AI-written replies to Google reviews?**
-A: Google's help pages say replies are checked against its content policies and that unapproved replies must be edited. We have not found a Google rule that specifically bans AI-drafted replies, but you are responsible for what posts. Read every draft at first and follow the rules in our [management guide](/blog/ai-agent-for-google-reviews-management).
+### Is it allowed to post AI-written replies to Google reviews?
 
-**Q: How do I find my location ID?**
-A: List accounts with the Account Management API, then list locations with the Business Information API (see the curl commands above). Combine them as `accounts/ACCOUNT_ID/locations/LOCATION_ID`.
+Google's help pages say replies are checked against its content policies and that unapproved replies must be edited. No Google rule specifically banning AI-drafted replies was found on those pages, but you are responsible for what posts. Read every draft at first and follow the rules in our [management guide](/blog/ai-agent-for-google-reviews-management).
 
-**Q: Can I use a different model provider?**
-A: Yes. Replace the URL, auth header and model name in `draft_reply()`. Keep the HOLD rule and the length check.
+### How do I find my location ID?
 
-**Q: Can I delay replies so I can handle some personally?**
-A: Yes. Each review has a `createTime` in RFC 3339 format. Parse it, compare it with the current time, and skip reviews newer than your chosen delay.
+List accounts with the Account Management API, then list locations with the Business Information API (see the curl commands above). Combine them as `accounts/ACCOUNT_ID/locations/LOCATION_ID`.
 
-**Q: Should I also automate asking for reviews?**
-A: Only with one neutral request sent to every customer. Google prohibits selectively soliciting positive reviews. See our [review request automation guide](/blog/how-to-automate-google-review-requests).
+### Can I use a different model provider?
+
+Yes. Replace the URL, auth header and model name in `draft_reply()`. Keep the HOLD rule and the length check.
+
+### Can I delay replies so I can handle some personally?
+
+Yes. Each review has a `createTime` in RFC 3339 format. Parse it, compare it with the current time, and skip reviews newer than your chosen delay.
+
+### Should I also automate asking for reviews?
+
+Only with one neutral request sent to every customer. Google prohibits selectively soliciting positive reviews. See our [review request automation guide](/blog/how-to-automate-google-review-requests).
 
 ## Sources
 
