@@ -1,0 +1,36 @@
+{
+  "_help": "Local business collection (Google Maps via Apify) into the local_businesses table: any country, city and niche. Add a search below and push to run the 'Collect local businesses' workflow. It never sends anything. About 3-6 USD per 1,000 places incl. contact scraping. Set enabled:false to skip a search (already done).",
+  "searches": [
+    {
+      "enabled": false,
+      "note": "done 2026-11-03: 483 places",
+      "country": "pl",
+      "language": "pl",
+      "city": "Poznań",
+      "locationQuery": "Poznań, Polska",
+      "niche": "coffee",
+      "maxPlacesPerSearch": 200,
+      "terms": [
+        "kawiarnia",
+        "specialty coffee",
+        "kawiarnia z wypiekami",
+        "palarnia kawy",
+        "cafe"
+      ]
+    },
+    {
+      "enabled": false,
+      "note": "example: set enabled true to run",
+      "country": "pl",
+      "language": "pl",
+      "city": "Warszawa",
+      "locationQuery": "Warszawa, Polska",
+      "niche": "salon",
+      "maxPlacesPerSearch": 150,
+      "terms": [
+        "salon fryzjerski",
+        "barber shop"
+      ]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Enrich pl_cafes from each cafe's own public website: e-mails (mailto, page text, scripts, JSON-LD),
+ * Enrich local_businesses from each business's own public website: e-mails (mailto, page text, scripts, JSON-LD),
  * phone numbers, Instagram and Facebook pages, and the contact page URL. Reads at most 3 public pages per site,
  * one at a time with a pause. Never logs in, never works around blocks: a site that refuses is marked and skipped.
  * Env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY.
@@ -39,7 +39,7 @@ function extract(html, base) {
   return { emails: [...emails].filter((e) => /^[^@\s]+@[^@\s]+\.[a-z]{2,}$/.test(e) && !JUNK.test(e)), phones: [...phones], instagram: ig ? `https://www.instagram.com/${ig[1]}` : null, facebook: fb ? `https://www.facebook.com/${fb[1]}` : null, contactUrl };
 }
 
-const r = await sb("pl_cafes?select=*&enriched_at=is.null&order=reviews_count.desc.nullslast&limit=500");
+const r = await sb("local_businesses?select=*&enriched_at=is.null&order=reviews_count.desc.nullslast&limit=500");
 if (!r.ok) { console.error("read failed", r.status, await r.text()); process.exit(1); }
 const rows = await r.json();
 console.log(`To enrich: ${rows.length}`);
@@ -73,7 +73,7 @@ for (const c of rows) {
   if (all.length && !c.email) withNewEmail++;
   if (ig && !c.instagram) withIg++;
   Object.assign(patch, { emails_all: all, email: c.email || all[0] || null, instagram: ig || null, facebook: fb || null, phone: phone || null, contact_page: contactPage, enrich_note: note.trim() || null });
-  const u = await sb(`pl_cafes?id=eq.${c.id}`, { method: "PATCH", headers: { Prefer: "return=minimal" }, body: JSON.stringify(patch) });
+  const u = await sb(`local_businesses?id=eq.${c.id}`, { method: "PATCH", headers: { Prefer: "return=minimal" }, body: JSON.stringify(patch) });
   console.log(`${u.ok ? "✓" : "✗"} ${c.business_name} | emails:${all.length} ig:${ig ? "y" : "n"} ${note}`);
   await sleep(500);
 }

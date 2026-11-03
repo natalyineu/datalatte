@@ -1,13 +1,13 @@
-name: Collect Poznan cafes
+name: Collect local businesses
 
 on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ["data/pl-cafes-queue.json", "scripts/collect-pl-cafes.mjs", "scripts/enrich-pl-cafes.mjs"]
+    paths: ["data/local-businesses-queue.json", "scripts/collect-local-businesses.mjs", "scripts/enrich-local-businesses.mjs"]
 
 concurrency:
-  group: collect-pl-cafes
+  group: collect-local-businesses
   cancel-in-progress: false
 
 jobs:
@@ -19,14 +19,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
-      - name: Scrape Google Maps (Apify) into pl_cafes
+      - name: Scrape Google Maps (Apify) into local_businesses
         env:
           APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-        run: node scripts/collect-pl-cafes.mjs
-      - name: Read each cafe's public website for e-mail, phone, Instagram and Facebook
+        run: node scripts/collect-local-businesses.mjs
+      - name: Read each business's public website for e-mail, phone, Instagram and Facebook
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-        run: node scripts/enrich-pl-cafes.mjs
+        run: node scripts/enrich-local-businesses.mjs
