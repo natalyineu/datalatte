@@ -28,6 +28,7 @@ Frontmatter keeps `date`, `author`, `category`, `tags`, `image`, `readTime`; set
 - `## Sources` with markdown links, secondary sources marked.
 - 3-6 internal `/blog/<slug>` links to existing **indexable** posts, plus the service link `/services/...` or `/free-audit` at the end.
 - Valid MDX: no bare `{ }` or `<` in prose.
+- Optional readability blocks: `<BigStat value="26%" label="..." note="..." source="..." />` and the chart components (ColumnChart, StackedBar, Heatmap, AreaChart, RadarChart, BubbleChart, ScoreBreakdown, ProjectionChart, BarChart, DonutChart). Catalog and props: `.claude/skills/datalatte-research-article/components.md`. For long data-driven articles use the `datalatte-research-article` skill.
 - Reference article: `content/blog/google-ads-for-hardware-stores.mdx`.
 
 ## 3. Style
