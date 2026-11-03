@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import ChartRoot from "./ChartRoot";
 
 /* Chart set for articles. Pure SVG/CSS, no dependencies, coffee palette, dark-mode aware.
    Data comes in as pipe-separated strings (matrix rows separated by ";"), like the other mdx components. */
@@ -13,11 +14,11 @@ const fmtNum = (v: number) => (Number.isInteger(v) ? v.toLocaleString("en-US") :
 
 function Frame({ title, caption, children }: { title?: string; caption?: string; children: ReactNode }) {
   return (
-    <figure className="my-8 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden dark:bg-gray-900 dark:border-gray-700">
+    <ChartRoot className="my-8 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden dark:bg-gray-900 dark:border-gray-700">
       {title && <figcaption className="px-5 pt-4 pb-3 border-b border-gray-100 font-semibold text-gray-800 text-sm dark:text-gray-100 dark:border-gray-700">{title}</figcaption>}
       <div className="px-4 sm:px-5 py-4">{children}</div>
       {caption && <p className="px-5 pb-4 -mt-1 text-xs text-gray-500 dark:text-gray-400">{caption}</p>}
-    </figure>
+    </ChartRoot>
   );
 }
 
@@ -235,5 +236,22 @@ export function BubbleChart({ title, labels, x, y, size, xTitle, yTitle, sizeTit
         {yTitle && <text x={12} y={p.t - 6} fontSize="11.5" className="fill-gray-600 dark:fill-gray-300">{yTitle}</text>}
       </svg></div></div>
     </Frame>
+  );
+}
+
+
+/* 9. Big number pull-quote */
+export function BigStat({ value, label, note, source }: { value: string; label: string; note?: string; source?: string }) {
+  return (
+    <ChartRoot className="my-10 rounded-2xl border-l-8 border-coffee-600 bg-gradient-to-r from-coffee-50 to-white px-6 py-6 sm:px-8 sm:py-7 shadow-sm dark:from-coffee-900/30 dark:to-gray-900 dark:border-coffee-500">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-8">
+        <div className="mdx-pop shrink-0 text-6xl sm:text-7xl font-extrabold leading-none tracking-tight text-coffee-700 dark:text-coffee-300 tabular-nums">{value}</div>
+        <div className="min-w-0">
+          <p className="text-xl sm:text-2xl font-semibold leading-snug text-gray-900 dark:text-gray-50 before:content-['\201C'] before:mr-1 before:text-coffee-400 after:content-['\201D'] after:ml-0.5 after:text-coffee-400">{label}</p>
+          {note && <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">{note}</p>}
+          {source && <p className="mt-1 text-xs uppercase tracking-wide text-coffee-700/80 dark:text-coffee-300/80">{source}</p>}
+        </div>
+      </div>
+    </ChartRoot>
   );
 }

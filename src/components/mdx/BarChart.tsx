@@ -1,4 +1,5 @@
 import { Lightbulb } from "lucide-react";
+import ChartRoot from "./ChartRoot";
 
 interface BarChartProps {
   title?: string;
@@ -26,7 +27,7 @@ export default function BarChart({
   const maxVal = maxValue ? parseFloat(maxValue) : Math.max(...valueArr) * 1.1;
 
   return (
-    <div className="my-8 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden dark:bg-gray-900 dark:border-gray-700">
+    <ChartRoot className="my-8 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden dark:bg-gray-900 dark:border-gray-700">
       {title && (
         <div className="px-5 pt-4 pb-3 border-b border-gray-100 flex items-center gap-2 dark:border-gray-700">
           <Lightbulb size={14} className="text-coffee-500 shrink-0" />
@@ -79,6 +80,6 @@ export default function BarChart({
         })}
       </div>
       <p className="px-5 pb-4 text-xs text-gray-500 dark:text-gray-400">{caption ?? "Illustrative estimate. Actual results vary by market and business."}</p>
-    </div>
+    </ChartRoot>
   );
 }
