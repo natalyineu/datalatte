@@ -1101,6 +1101,31 @@ const nextConfig: NextConfig = {
         destination: "/blog/fitness-studio-google-business-profile-optimization",
         permanent: true,
       },
+      {
+        source: "/blog/how-to-advertise-dog-grooming-business-15-ideas-that-actually-get-bookings",
+        destination: "/blog/how-to-advertise-your-dog-grooming-business-15-ideas-that-actually-get-bookings",
+        permanent: true,
+      },
+      {
+        source: "/blog/how-to-advertise-dog-grooming-business",
+        destination: "/blog/how-to-advertise-your-dog-grooming-business-15-ideas-that-actually-get-bookings",
+        permanent: true,
+      },
+      {
+        source: "/blog/how-to-get-dog-grooming-clients-2026-growth-playbook-for-groomers",
+        destination: "/blog/how-to-get-dog-grooming-clients-the-2026-growth-playbook-for-groomers",
+        permanent: true,
+      },
+      {
+        source: "/blog/how-to-get-dog-grooming-clients",
+        destination: "/blog/how-to-get-dog-grooming-clients-the-2026-growth-playbook-for-groomers",
+        permanent: true,
+      },
+      {
+        source: "/blog/google-responsive-search-ads-best-practices",
+        destination: "/blog/google-responsive-search-ads-best-practices-10-tips-to-improve-your-ad-strength",
+        permanent: true,
+      },
     // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
