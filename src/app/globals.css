@@ -381,3 +381,6 @@
 
 /* long inline code (URLs, UTM strings) must wrap instead of widening the page on mobile */
 .prose-datalatte code:not(pre code) { overflow-wrap: anywhere; word-break: break-word; }
+
+/* entrance animations slide in from the side; never let them create horizontal scroll */
+html, body { overflow-x: clip; }

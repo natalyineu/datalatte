@@ -32,41 +32,58 @@ function FadeUp({
   );
 }
 
-export default function HeroAnimated() {
+const PL = {
+  badge: "Marketing lokalny oparty na danych",
+  h1: ["Marketing cyfrowy dla", "lokalnych firm,", "zrobiony dobrze"],
+  p: "Google Ads, Meta Ads, lokalne SEO i automatyzacja marketingu dla kawiarni, salonów fryzjerskich, groomerów i studiów fitness oraz rozwijających się marek w każdej skali.",
+  cta: "Darmowy audyt marketingu", ctaHref: "/pl/darmowy-audyt",
+  how: "Zobacz, jak to działa",
+  built: <>Stworzone dla <strong className="text-white">lokalnych firm</strong> z 4 branż</>,
+};
+const EN = {
+  badge: "Data-Driven Local Marketing",
+  h1: ["Digital Marketing for", "Local Businesses,", "Done Right"],
+  p: "Google Ads, Meta Ads, local SEO and marketing automation for coffee shops, hair salons, pet groomers, fitness studios — and growing brands at any scale.",
+  cta: "Get a Free Marketing Audit", ctaHref: "/free-audit",
+  how: "See how it works",
+  built: <>Built for <strong className="text-white">local businesses</strong> across 4 niches</>,
+};
+
+export default function HeroAnimated({ lang }: { lang?: "pl" } = {}) {
+  const t = lang === "pl" ? PL : EN;
   return (
     <div>
       <FadeUp delay={0} className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-white text-sm font-medium mb-6 backdrop-blur-sm">
         <span className="w-2 h-2 bg-coffee-400 rounded-full animate-pulse" />
-        Data-Driven Local Marketing
+        {t.badge}
       </FadeUp>
 
       <FadeUp delay={0.1} as="h1" className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 text-balance">
-        Digital Marketing for
+        {t.h1[0]}
         <br />
-        <span className="text-coffee-300">Local Businesses,</span>
+        <span className="text-coffee-300">{t.h1[1]}</span>
         <br />
-        Done Right
+        {t.h1[2]}
       </FadeUp>
 
       <FadeUp delay={0.2} as="p" className="text-coffee-200 text-lg md:text-xl mb-8 max-w-lg leading-relaxed">
-        Google Ads, Meta Ads, local SEO and marketing automation for coffee shops,
-        hair salons, pet groomers, fitness studios — and growing brands at any scale.
+        {t.p}
       </FadeUp>
 
       <FadeUp delay={0.3} className="flex flex-col sm:flex-row gap-3">
         <Link
-          href="/free-audit"
+          href={t.ctaHref}
           onClick={() => gtag.freeAuditClicked("hero")}
           className="inline-flex items-center justify-center gap-2 bg-white text-coffee-900 font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-100 transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 dark:bg-gray-900 dark:text-coffee-100 dark:hover:bg-gray-800 dark:hover:text-white"
         >
-          Get a Free Marketing Audit
+          {t.cta}
           <ArrowRight size={18} />
         </Link>
         <Link
           href="#how-it-works"
           className="inline-flex items-center justify-center gap-2 border-2 border-white/40 text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-white/10 transition-all duration-200"
         >
-          See how it works
+          {t.how}
         </Link>
       </FadeUp>
 
@@ -82,7 +99,7 @@ export default function HeroAnimated() {
           ))}
         </div>
         <p className="text-sm text-coffee-200">
-          Built for <strong className="text-white">local businesses</strong> across 4 niches
+          {t.built}
         </p>
       </FadeUp>
     </div>

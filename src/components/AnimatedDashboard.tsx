@@ -51,8 +51,36 @@ const NICHES = [
   },
 ] as const;
 
-function SalesChart({ data, id }: { data: readonly number[]; id: string }) {
-  const W = 340, H = 130, L = 34, R = 10, T = 14, B = 22;
+
+// Polish version: the same example series scaled to thousand zł (x4), with Polish labels.
+const PL_TEXT: Record<string, { label: string; title: string; hints: [string, string, string]; channels: string[]; badge: string }> = {
+  coffee:  { label: "Kawiarnia", title: "Kawiarnia Narożna", hints: ["tyle razy pokazała się Twoja wizytówka i reklamy", "osoby, które weszły na stronę lub poprosiły o trasę", "przychód z zamówień dzięki marketingowi"], channels: ["Mapy Google", "Instagram", "Google Ads", "E-mail"], badge: "☕ +38% nowych klientów w tym miesiącu" },
+  salon:   { label: "Salon fryzjerski", title: "Studio Fryzjerskie", hints: ["tyle razy pokazała się Twoja wizytówka i reklamy", "wizyty w profilu, telefony i wejścia na stronę rezerwacji", "przychód z rezerwacji dzięki marketingowi"], channels: ["Instagram", "Mapy Google", "Meta Ads", "E-mail"], badge: "💇 +24% powracających rezerwacji" },
+  pets:    { label: "Groomer", title: "Salon Groomerski Łapki", hints: ["tyle razy pokazała się Twoja wizytówka i reklamy", "telefony, prośby o trasę i kliknięcia rezerwacji", "przychód z wizyt dzięki marketingowi"], channels: ["Mapy Google", "Google Ads", "Facebook", "E-mail"], badge: "🐾 +19 nowych stałych klientów" },
+  fitness: { label: "Studio fitness", title: "Studio Fitness Szczyt", hints: ["tyle razy pokazała się Twoja wizytówka i reklamy", "wejścia na stronę zajęć i zapisy na próbne", "karnety i pakiety dzięki marketingowi"], channels: ["Instagram", "Google Ads", "Mapy Google", "E-mail"], badge: "🏋️ +42 zapisy na zajęcia próbne" },
+};
+const fmtPl = (v: number, d = 1) => v.toFixed(d).replace(".", ",");
+function plNiche(n: (typeof NICHES)[number]) {
+  const t = PL_TEXT[n.id];
+  const weekly = n.weekly.map((v) => Math.round(v * 4 * 10) / 10);
+  const sales = weekly.slice(-4).reduce((a, b) => a + b, 0);
+  const impr = n.stats[0], vis = n.stats[1], sal = n.stats[2];
+  return {
+    id: n.id, emoji: n.emoji, label: t.label, title: t.title, weekly,
+    stats: [
+      { label: "Wyświetlenia", value: impr.value.replace(".", ",").replace("K", " tys."), change: impr.change, hint: t.hints[0] },
+      { label: "Wizyty", value: vis.value.replace(",", " "), change: vis.change, hint: t.hints[1] },
+      { label: "Sprzedaż", value: `${fmtPl(sales)} tys. zł`, change: sal.change, hint: t.hints[2] },
+    ],
+    channels: n.channels.map(([, pct], k) => [t.channels[k], pct] as [string, number]),
+    badge: t.badge,
+  };
+}
+
+function SalesChart({ data, id, lang }: { data: readonly number[]; id: string; lang?: "pl" }) {
+  const pl = lang === "pl";
+  const money = (v: number) => (pl ? `${fmtPl(v, v % 1 ? 1 : 0)} tys.` : `$${v.toFixed(v % 1 ? 1 : 0)}K`);
+  const W = 340, H = 130, L = pl ? 56 : 34, R = 10, T = 14, B = 22;
   const max = Math.ceil(Math.max(...data) * 1.15 * 2) / 2;
   const x = (i: number) => L + (i * (W - L - R)) / (data.length - 1);
   const y = (v: number) => T + (1 - v / max) * (H - T - B);
@@ -61,7 +89,7 @@ function SalesChart({ data, id }: { data: readonly number[]; id: string }) {
   const ticks = [0, max / 2, max];
   const last = data.length - 1;
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto" role="img" aria-label="Weekly sales over the last 12 weeks, rising">
+    <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto" role="img" aria-label={pl ? "Sprzedaż tygodniowa z ostatnich 12 tygodni, rosnąca" : "Weekly sales over the last 12 weeks, rising"}>
       <defs>
         <linearGradient id={`g-${id}`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#e3b98a" stopOpacity="0.55" />
@@ -71,7 +99,7 @@ function SalesChart({ data, id }: { data: readonly number[]; id: string }) {
       {ticks.map((t) => (
         <g key={t}>
           <line x1={L} x2={W - R} y1={y(t)} y2={y(t)} stroke="rgba(255,255,255,.14)" strokeDasharray="3 4" />
-          <text x={L - 6} y={y(t) + 3} textAnchor="end" fontSize="9" fill="#9ca3af">${t.toFixed(t % 1 ? 1 : 0)}K</text>
+          <text x={L - 6} y={y(t) + 3} textAnchor="end" fontSize="9" fill="#9ca3af">{money(t)}</text>
         </g>
       ))}
       <path d={area} fill={`url(#g-${id})`} />
@@ -79,25 +107,27 @@ function SalesChart({ data, id }: { data: readonly number[]; id: string }) {
         initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.9, ease: "easeOut" }} />
       {data.map((v, i) => (
         <circle key={i} cx={x(i)} cy={y(v)} r={i === last ? 4.5 : 2.2} fill={i === last ? "#fff" : "#f3d9b8"} stroke={i === last ? "#b07d4d" : "none"} strokeWidth="2">
-          <title>{`Week ${i + 1}: $${v.toFixed(1)}K`}</title>
+          <title>{pl ? `Tydzień ${i + 1}: ${fmtPl(v)} tys. zł` : `Week ${i + 1}: $${v.toFixed(1)}K`}</title>
         </circle>
       ))}
-      <text x={x(last) - 4} y={y(data[last]) - 9} textAnchor="end" fontSize="10" fontWeight="700" fill="#fff">${data[last].toFixed(1)}K</text>
-      <text x={L} y={H - 6} fontSize="9" fill="#9ca3af">12 weeks ago</text>
-      <text x={W - R} y={H - 6} textAnchor="end" fontSize="9" fill="#9ca3af">This week</text>
+      <text x={x(last) - 4} y={y(data[last]) - 9} textAnchor="end" fontSize="10" fontWeight="700" fill="#fff">{pl ? `${fmtPl(data[last])} tys.` : `$${data[last].toFixed(1)}K`}</text>
+      <text x={L} y={H - 6} fontSize="9" fill="#9ca3af">{pl ? "12 tyg. temu" : "12 weeks ago"}</text>
+      <text x={W - R} y={H - 6} textAnchor="end" fontSize="9" fill="#9ca3af">{pl ? "Ten tydzień" : "This week"}</text>
     </svg>
   );
 }
 
 const INTERVAL = 8000;
 
-export default function AnimatedDashboard() {
+export default function AnimatedDashboard({ lang }: { lang?: "pl" } = {}) {
+  const pl = lang === "pl";
+  const niches = pl ? NICHES.map(plNiche) : NICHES;
   const reduce = useReducedMotion();
   const [i, setI] = useState(0);
   const [paused, setPaused] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const next = useCallback(() => setI((v) => (v + 1) % NICHES.length), []);
+  const next = useCallback(() => setI((v) => (v + 1) % niches.length), []);
 
   useEffect(() => {
     if (reduce || paused) return;
@@ -105,7 +135,7 @@ export default function AnimatedDashboard() {
     return () => { if (timer.current) clearTimeout(timer.current); };
   }, [i, paused, reduce, next]);
 
-  const n = NICHES[i];
+  const n = niches[i];
 
   return (
     <motion.div
@@ -120,8 +150,8 @@ export default function AnimatedDashboard() {
     >
       <div className="bg-gray-950/90 rounded-2xl border border-coffee-400/40 shadow-2xl shadow-black/50 overflow-hidden">
         {/* Niche tabs */}
-        <div role="tablist" aria-label="Dashboard examples by business type" className="flex border-b border-white/10 bg-black/30">
-          {NICHES.map((x, k) => (
+        <div role="tablist" aria-label={pl ? "Przykłady pulpitu według rodzaju firmy" : "Dashboard examples by business type"} className="flex border-b border-white/10 bg-black/30">
+          {niches.map((x, k) => (
             <button
               key={x.id}
               role="tab"
@@ -145,13 +175,13 @@ export default function AnimatedDashboard() {
 
         <div className="p-4 sm:p-6">
           <div className="flex items-center justify-between mb-1">
-            <span className="text-white font-bold text-base sm:text-lg">Your Marketing Dashboard</span>
+            <span className="text-white font-bold text-base sm:text-lg">{pl ? "Twój pulpit marketingowy" : "Your Marketing Dashboard"}</span>
             <span className="text-green-300 text-xs font-semibold bg-green-400/15 border border-green-400/30 px-2 py-0.5 rounded-full flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
-              Live
+              {pl ? "Na żywo" : "Live"}
             </span>
           </div>
-          <div className="text-xs text-gray-400 mb-4">{n.title} · last 30 days</div>
+          <div className="text-xs text-gray-400 mb-4">{n.title} · {pl ? "ostatnie 30 dni" : "last 30 days"}</div>
 
           <AnimatePresence mode="wait">
             <motion.div
@@ -162,25 +192,25 @@ export default function AnimatedDashboard() {
               transition={{ duration: 0.35, ease: "easeOut" }}
             >
               <div className="mb-1 flex items-baseline justify-between">
-                <span className="text-sm font-semibold text-white">Weekly sales</span>
-                <span className="text-[11px] text-gray-400">12 weeks, $K</span>
+                <span className="text-sm font-semibold text-white">{pl ? "Sprzedaż tygodniowa" : "Weekly sales"}</span>
+                <span className="text-[11px] text-gray-400">{pl ? "12 tygodni, tys. zł" : "12 weeks, $K"}</span>
               </div>
               <div className="mb-4 rounded-xl bg-white/5 border border-white/10 p-2">
-                <SalesChart data={n.weekly} id={n.id} />
+                <SalesChart data={n.weekly} id={n.id} lang={lang} />
               </div>
 
               <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-4">
-                {n.stats.map((s) => (
-                  <div key={s.label} className={`rounded-xl border p-2.5 sm:p-3 ${s.label === "Sales" ? "bg-coffee-500/25 border-coffee-300/50" : "bg-white/10 border-white/20"}`}>
+                {n.stats.map((s, si) => (
+                  <div key={s.label} className={`rounded-xl border p-2.5 sm:p-3 ${si === 2 ? "bg-coffee-500/25 border-coffee-300/50" : "bg-white/10 border-white/20"}`}>
                     <div className="text-gray-300 text-xs font-medium">{s.label}</div>
                     <div className="text-white text-base sm:text-xl font-bold leading-tight">{s.value}</div>
-                    <div className="text-green-300 text-xs font-semibold">▲ {s.change} <span className="hidden sm:inline text-gray-400 font-normal">vs prior 30 days</span></div>
+                    <div className="text-green-300 text-xs font-semibold">▲ {s.change} <span className="hidden sm:inline text-gray-400 font-normal">{pl ? "vs poprzednie 30 dni" : "vs prior 30 days"}</span></div>
                     <div className="hidden sm:block text-[10px] text-gray-400 mt-1 leading-snug">{s.hint}</div>
                   </div>
                 ))}
               </div>
 
-              <div className="text-xs font-semibold text-white mb-2">Where sales came from</div>
+              <div className="text-xs font-semibold text-white mb-2">{pl ? "Skąd pochodziła sprzedaż" : "Where sales came from"}</div>
               <div className="space-y-1.5">
                 {n.channels.map(([name, pct]) => (
                   <div key={name} className="flex items-center gap-2 text-xs">
@@ -197,7 +227,7 @@ export default function AnimatedDashboard() {
         </div>
       </div>
 
-      <p className="mt-3 text-center text-[11px] text-white/45">Example figures for illustration.</p>
+      <p className="mt-3 text-center text-[11px] text-white/45">{pl ? "Przykładowe dane poglądowe." : "Example figures for illustration."}</p>
 
       {/* Floating badge */}
       <AnimatePresence mode="wait">

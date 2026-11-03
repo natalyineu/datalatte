@@ -15,9 +15,10 @@ interface BlogCardProps {
   image: string;
   readTime: string;
   featured?: boolean;
+  basePath?: string;
 }
 
-export default function BlogCard({ title, excerpt, slug, category, date, rawDate, image, readTime, featured }: BlogCardProps) {
+export default function BlogCard({ title, excerpt, slug, category, date, rawDate, image, readTime, featured, basePath = "/blog" }: BlogCardProps) {
   const [imgError, setImgError] = useState(false);
   const group = getGroup(category);
   const { Icon, gradient } = GROUP_CONFIG[group];
@@ -26,7 +27,7 @@ export default function BlogCard({ title, excerpt, slug, category, date, rawDate
 
   if (featured) {
     return (
-      <Link href={`/blog/${slug}`} className="col-span-full card overflow-hidden group flex flex-col sm:flex-row">
+      <Link href={`${basePath}/${slug}`} className="col-span-full card overflow-hidden group flex flex-col sm:flex-row">
         {/* Image panel */}
         <div className="relative sm:w-72 shrink-0 h-52 sm:h-auto overflow-hidden">
           {showImage ? (
@@ -68,7 +69,7 @@ export default function BlogCard({ title, excerpt, slug, category, date, rawDate
   }
 
   return (
-    <Link href={`/blog/${slug}`} className="card overflow-hidden group flex flex-col">
+    <Link href={`${basePath}/${slug}`} className="card overflow-hidden group flex flex-col">
       {/* Image */}
       <div className="relative h-44 overflow-hidden">
         {showImage ? (
