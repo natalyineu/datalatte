@@ -31,7 +31,7 @@ const faqs = [
   ["Czy są umowy na rok?", "Nie. Rozliczamy się miesięcznie i możesz zrezygnować w każdej chwili."],
   ["Ile to kosztuje?", "Cenę ustalam po darmowym audycie, bo zależy od zakresu i miasta. Moje wynagrodzenie jest jawne i osobne od budżetu reklamowego."],
   ["Czy obiecujesz wyniki?", "Nie obiecuję konkretnych pozycji ani liczby klientów. Obiecuję jasny pomiar i uczciwe raporty."],
-  ["Kto prowadzi kampanie?", "Ja, Nataliia. Rozmawiasz bezpośrednio z osobą, która pracuje nad Twoim kontem."],
+  ["Kto prowadzi kampanie?", "Ja, Natalia. Rozmawiasz bezpośrednio z osobą, która pracuje nad Twoim kontem."],
 ];
 
 export default function Page() {

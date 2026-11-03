@@ -6,7 +6,7 @@ import CTABanner from "@/components/CTABanner";
 import { plAlternates } from "@/lib/i18n";
 
 export const metadata: Metadata = {
-  title: "O mnie: Nataliia, założycielka DataLatte",
+  title: "O mnie: Natalia Rumiancewa, założycielka DataLatte",
   description: "Mieszkam w Poznaniu, piję za dużo kawy i od ponad 10 lat zajmuję się marketingiem cyfrowym, między innymi w agencjach OMD, Dentsu, BBDO i GroupM.",
   alternates: plAlternates("/pl/o-mnie"),
 };
@@ -18,10 +18,10 @@ export default function Page() {
     <>
       <section className="hero-gradient py-20 px-4 sm:px-6">
         <div className="max-w-2xl mx-auto flex flex-col sm:flex-row items-center sm:items-start gap-8">
-          <Image src="/images/founder.png" alt="Nataliia, założycielka DataLatte" width={140} height={140} className="rounded-full ring-4 ring-white/20 shadow-2xl shrink-0" style={{ width: 140, height: 140, objectFit: "cover" }} priority />
+          <Image src="/images/founder.png" alt="Natalia Rumiancewa, założycielka DataLatte" width={140} height={140} className="rounded-full ring-4 ring-white/20 shadow-2xl shrink-0" style={{ width: 140, height: 140, objectFit: "cover" }} priority />
           <div className="text-center sm:text-left">
             <p className="text-coffee-300 text-sm font-semibold uppercase tracking-widest mb-2">O mnie</p>
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Cześć, jestem Nataliia ☕</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Cześć, jestem Natalia Rumiancewa ☕</h1>
             <p className="text-coffee-200 text-lg leading-relaxed">Prowadzę DataLatte z Poznania. Pomagam lokalnym firmom rosnąć dzięki marketingowi, który ma sens i który da się zmierzyć.</p>
           </div>
         </div>
