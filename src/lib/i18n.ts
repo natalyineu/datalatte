@@ -20,6 +20,8 @@ export const EN_TO_PL: Record<string, string> = {
   "/blog/online-booking-system-for-salons": "/pl/blog/system-rezerwacji-online-dla-salonow-porownanie-cen",
   "/blog/booksy-vs-vagaro-vs-fresha-best-booking-app-salons-2026": "/pl/blog/booksy-vs-vagaro-vs-fresha-koszty-dla-salonu",
   "/blog/best-marketing-automation-tools-small-business": "/pl/blog/najlepsze-narzedzia-marketing-automation-dla-malych-firm",
+  "/blog/food-delivery-platform-advertising-comparison-europe": "/pl/blog/reklama-w-platformach-dostawy-jedzenia-w-europie-porownanie",
+  "/blog/online-reviews-strategy-europe": "/pl/blog/strategia-opinii-online-dla-lokalnych-firm-w-europie",
   "/blog/poznan-cafes-google-maps-presence-ranking-2026": "/pl/blog/ranking-kawiarni-poznan-google-maps-2026",
 };
 
