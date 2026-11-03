@@ -43,12 +43,25 @@ console.log(`${rows.length} post(s) due`);
 let failed = 0;
 for (const row of rows) {
   if (dry) { console.log(`[dry] ${row.id}\n${row.content}\n`); continue; }
-  const tg = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ chat_id: TELEGRAM_CHANNEL_ID, text: row.content }),
-  });
-  const body = await tg.json().catch(() => ({}));
+  // 30s timeout, up to 3 attempts on timeout / 5xx. Telegram never accepted the message in those cases.
+  let tg, body = {};
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      tg = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chat_id: TELEGRAM_CHANNEL_ID, text: row.content }),
+        signal: AbortSignal.timeout(30000),
+      });
+      body = await tg.json().catch(() => ({}));
+      if (body.ok || tg.status < 500) break;
+    } catch (e) {
+      tg = { status: 0 };
+      body = { description: String(e.message || e) };
+    }
+    console.log(`attempt ${attempt} failed: ${body.description || tg.status}`);
+    if (attempt < 3) await new Promise((r) => setTimeout(r, 5000));
+  }
   const patch = body.ok
     ? {
         status: "published",
