@@ -378,3 +378,6 @@
 @media (prefers-reduced-motion: reduce) {
   .mdx-col-grow, .mdx-bar-grow2, .mdx-draw, .mdx-pop { animation-name: chart-fade; animation-duration: .6s; }
 }
+
+/* long inline code (URLs, UTM strings) must wrap instead of widening the page on mobile */
+.prose-datalatte code:not(pre code) { overflow-wrap: anywhere; word-break: break-word; }
