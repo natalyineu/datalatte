@@ -71,7 +71,7 @@ export default function HeaderPL() {
       </div>
 
       {open && (
-        <div className="md:hidden border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 px-4 pb-6 pt-2 space-y-1">
+        <div className="md:hidden border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 px-4 pb-6 pt-2 space-y-1 max-h-[calc(100dvh-4rem)] overflow-y-auto overscroll-contain">
           <button className="flex items-center justify-between w-full py-3 text-gray-700 dark:text-gray-200 font-medium" onClick={() => setMobServ(!mobServ)}>
             Usługi <ChevronDown size={16} className={clsx("transition-transform", mobServ && "rotate-180")} />
           </button>

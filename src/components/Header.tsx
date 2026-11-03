@@ -119,6 +119,8 @@ export default function Header() {
             <DropdownMenu label="Free Tools"         items={tools} />
             <DropdownMenu label="Learn"              items={learn} />
 
+            <Link href="/contact" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium text-sm">Contact</Link>
+
             {/* Radar — distinct live pill */}
             <Link
               href="/radar"
@@ -157,7 +159,7 @@ export default function Header() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 px-4 pb-6 pt-2 space-y-1">
+        <div className="md:hidden border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 px-4 pb-6 pt-2 space-y-1 max-h-[calc(100dvh-4rem)] overflow-y-auto overscroll-contain">
           {/* Radar first on mobile */}
           <Link
             href="/radar"
@@ -225,6 +227,10 @@ export default function Header() {
               ))}
             </div>
           )}
+
+          <Link href="/contact" className="block py-3 text-gray-700 dark:text-gray-200 font-medium" onClick={() => setMobileOpen(false)}>
+            Contact
+          </Link>
 
           <Link href="/free-audit" className="btn-primary w-full justify-center mt-3" onClick={() => setMobileOpen(false)}>
             Get a Free Audit
