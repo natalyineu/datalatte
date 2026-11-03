@@ -39,6 +39,15 @@ The analysis is long, so the results come first. Each point is explained with it
 - Google states that incentives for reviews are prohibited and that there is no way to pay for a better local ranking, so reviews and a complete profile are the legitimate path.
 - A café with 60 reviews needs roughly 10 to 20 months to reach the median, at 8 to 15 new reviews a month (assumption).
 
+<DonutChart
+  title="How Poznań cafés list a website on Google Maps"
+  labels="Facebook or Instagram page|Own website|No website"
+  values="39|35|26"
+  unit="%"
+  centerLabel="210 cafés"
+  caption="Share of 210 listings, Google Maps, 2-3 November 2026."
+/>
+
 ## How was the dataset built and cleaned?
 
 The starting point was public Google Maps listings returned for searches such as "kawiarnia", "specialty coffee", "palarnia kawy" and "cafe" in Poznań, collected on 2 and 3 November 2026 with a scraping tool. That gave 483 listings. A first pass removed supermarkets, shopping centres, museums, parks and public places.
@@ -104,6 +113,14 @@ All ten have their own website, a phone number and an Instagram page linked. Rat
 | 9 | Beza Cukiernia Bezowa | Za Groblą 5/14 | 4.8 | 909 | 93 |
 | 10 | Lavenda Food & Cake | Grunwaldzka 248 | 4.7 | 607 | 93 |
 
+<ScoreBreakdown
+  title="What the score of each top-ten café is made of"
+  rows="Kawiarnia Kociak|Kawiarnia U Przyjaciół|Parlé Pâtisserie|KAHAWA Kawa i Książka|TCB Tokyo Cheesecake Bakery|Lastryko Cafe|Stragan|Weranda Caffe|Beza Cukiernia Bezowa|Lavenda Food & Cake"
+  parts="Own website|Phone|Instagram|Facebook|E-mail|Rating|Reviews"
+  matrix="20,10,15,5,10,15,25;20,10,15,5,10,15,25;20,10,15,5,10,15,25;20,10,15,5,10,15,25;20,10,15,5,10,15,25;20,10,15,5,10,15,25;20,10,15,0,10,15,25;20,10,15,5,10,8,25;20,10,15,5,10,15,18;20,10,15,5,10,15,18"
+  caption="Points per signal, maximum 100. Weranda Caffe loses points on rating (4.4), Stragan has no Facebook page linked, Beza and Lavenda have fewer than 1,000 reviews."
+/>
+
 ## Which cafés rank 11 to 24?
 
 The next fourteen all have an own website, a phone number and an Instagram page unless noted. They separate mostly on review volume and on whether an e-mail address is published.
@@ -167,6 +184,14 @@ Ratings are bunched at the top, which is why they separate cafés so poorly.
 | Below 4.0 | 7 |
 | No rating yet | 7 |
 
+<ColumnChart
+  title="Google rating bands, 203 rated cafés"
+  labels="4.9 or higher|4.8 to 4.89|4.5 to 4.79|4.0 to 4.49|Below 4.0"
+  values="58|39|76|23|7"
+  highlights="4.5 to 4.79"
+  caption="Ratings cluster at the top: 173 of 203 rated cafés are at 4.5 or higher."
+/>
+
 The average rating across the 203 rated cafés is 4.67, and 173 (85% of the rated ones) are at 4.5 or higher. Nearly half, 97 of 203, are at 4.8 or higher. A café rated 4.6 is below the middle of the market here.
 
 Reviews spread far more widely.
@@ -179,6 +204,14 @@ Reviews spread far more widely.
 | 200 to 499 | 55 |
 | 500 to 999 | 29 |
 | 1,000 or more | 24 |
+
+<ColumnChart
+  title="Number of reviews per café, 210 cafés"
+  labels="None|1 to 49|50 to 199|200 to 499|500 to 999|1,000+"
+  values="7|40|55|55|29|24"
+  highlights="200 to 499"
+  caption="The median café, 219 reviews, sits in the 200 to 499 band."
+/>
 
 The quartiles are 70 reviews at the 25th percentile, 219 at the median, 603 at the 75th and 1,072 at the 90th. A café needs about 600 reviews to be in the top quarter and about 1,070 to be in the top tenth.
 
@@ -219,6 +252,16 @@ Review counts are skewed, so the median hides how the market is spread. The tabl
 | 1,500 | 96% |
 | 2,000 | 99% |
 
+<AreaChart
+  title="Where a café's review count places it among 203 Poznań cafés"
+  labels="25|50|100|150|200|300|400|500|750|1,000|1,500|2,000"
+  values="14|20|32|41|47|59|70|74|80|88|96|99"
+  unit="%"
+  xTitle="Number of reviews"
+  yTitle="Share of cafés with fewer reviews"
+  caption="The curve is steepest between 200 and 400 reviews."
+/>
+
 A café with 300 reviews has more than 59% of the others behind it, and one with 1,000 is ahead of 88%. The steepest part of the curve sits between 200 and 400 reviews, where each extra 100 reviews moves a café past about ten more percentage points of its rivals.
 
 Below 100 reviews and above 1,000 the curve flattens, so early reviews matter for visibility and the last few hundred matter for status.
@@ -236,6 +279,15 @@ Grouping the 210 cafés by review count shows how completeness rises with volume
 | 500 to 999 | 29 | 41% | 10% | 93% | 45% | 55% | 4.66 |
 | 1,000 or more | 24 | 38% | 8% | 92% | 42% | 75% | 4.67 |
 
+<ColumnChart
+  title="Share of cafés with no website, by number of reviews"
+  labels="None listed|Under 50|50 to 199|200 to 499|500 to 999|1,000+"
+  values="57|55|27|16|10|8"
+  unit="%"
+  highlights="None listed|Under 50"
+  caption="The more reviews a café has, the less likely it is to have no website at all."
+/>
+
 The average rating barely moves across the groups, which again says rating does not tell cafés apart. The data cannot show which comes first: well-reviewed cafés may have more time and traffic to complete their profiles, or complete profiles may attract more reviews. Both are plausible, and the table shows an association, not a cause.
 
 ## Does having an own website mean more reviews?
@@ -248,6 +300,20 @@ Not in this dataset. Grouping cafés by how they present themselves gives a resu
 | Own website, partial profile | 16 | 359 | 4.65 |
 | Facebook or Instagram page as the "website" | 81 | 295 | 4.73 |
 | No website and no social page found | 55 | 65 | 4.65 |
+
+<StackedBar
+  title="How the 210 cafés present themselves online"
+  rows="Poznań cafés"
+  segments="Own website, phone and Instagram|Own website, partial profile|Facebook or Instagram page as the website|No website and no social page"
+  matrix="58,16,81,55"
+/>
+
+<BarChart
+  title="Median number of reviews by type of online presence"
+  labels="Own website, partial profile|Facebook or Instagram page as website|Own website, phone and Instagram|No website and no social page"
+  values="359|295|246|65"
+  caption="Cafés with no online presence have a median of 65 reviews, about a quarter of the other groups."
+/>
 
 Cafés that use a social page as their website have as many reviews as those with their own domain, and the highest average rating. The group that stands out is the last one: with no website and no social page linked, the median falls to 65 reviews, about a quarter of the others.
 
@@ -269,6 +335,25 @@ Addresses in the dataset carry a postal code. Grouping cafés by the first four 
 | 60-3 | 13 | 4.75 | 42 | 31% | 54% |
 | 60-7 | 12 | 4.76 | 351 | 17% | 33% |
 | 60-8 | 11 | 4.76 | 580 | 18% | 36% |
+
+<Heatmap
+  title="Postal areas compared: darker means higher in that column"
+  rows="61-8|61-7|60-1|61-6|61-5|60-5|61-1|60-3|60-7|60-8"
+  cols="Cafés|Avg rating|Median reviews|Own website|Instagram"
+  matrix="34,4.68,371,44,50;21,4.74,385,24,48;18,4.44,119,61,56;18,4.53,186,39,44;15,4.72,148,33,47;15,4.61,445,27,40;14,4.69,202,29,50;13,4.75,42,31,54;12,4.76,351,17,33;11,4.76,580,18,36"
+  units="|||%|%"
+/>
+
+<BubbleChart
+  title="Cafés per postal area against their median reviews"
+  labels="61-8|61-7|60-1|61-6|61-5|60-5|61-1|60-3|60-7|60-8"
+  x="34|21|18|18|15|15|14|13|12|11"
+  y="371|385|119|186|148|445|202|42|351|580"
+  size="44|24|61|39|33|27|29|31|17|18"
+  xTitle="Cafés in the area"
+  yTitle="Median reviews"
+  sizeTitle="share with own website"
+/>
 
 In this dataset the 61-7 and 61-8 areas include addresses on Woźna, Mielżyńskiego, Święty Marcin and Półwiejska. They hold the most cafés (55 of the 210) and show median review counts of 385 and 371. The highest median of all, 580, belongs to the small 60-8 area with 11 cafés.
 
@@ -315,6 +400,13 @@ Social links split the cafés four ways. Among the 210 cafés, 54 (26%) link bot
 | Facebook only | 50 | 24% |
 | Neither found | 67 | 32% |
 
+<StackedBar
+  title="Which social pages do Poznań cafés link?"
+  rows="210 cafés"
+  segments="Instagram and Facebook|Instagram only|Facebook only|Neither found"
+  matrix="54,39,50,67"
+/>
+
 So 89 cafés (42%) are present on one of the two platforms only. A customer who looks for them on the other platform finds nothing. The Poland guide on this site, citing DataReportal's Digital 2026 report, puts Facebook ad reach at 18.7 million, down 3.6% on the year, and Instagram at 12.4 million, up 6.9%.
 
 Facebook is still larger, but Instagram is growing, which makes a Facebook-only profile a safe base and an Instagram-only profile a narrower one.
@@ -332,6 +424,20 @@ E-mail shows a different split. Of the 91 cafés that publish an address on thei
 An address on the café's own domain looks established and survives a change of owner, while a free mailbox is tied to one person. For a café that wants catering, event or supplier enquiries, a role address on the own domain plus a clear contact page is the simplest fix.
 
 The audit found that 53% of loaded home pages carry an e-mail link and 51% a tap-to-call link, so on about half of sites a phone user cannot call in one tap.
+
+<StackedBar
+  title="E-mail addresses published on café websites (91 cafés)"
+  rows="Type of address"
+  segments="Own domain|Free mailbox (Gmail, WP, Onet and similar)"
+  matrix="50,41"
+/>
+
+<StackedBar
+  title="Phone numbers listed on Google Maps (171 cafés)"
+  rows="Type of number"
+  segments="Mobile number|Poznań landline (61)|Other area code"
+  matrix="150,16,5"
+/>
 
 ## What do the cafés' own websites look like?
 
@@ -362,6 +468,21 @@ The signals below are counted over the 55 sites that loaded.
 | Cookie notice or consent tool | 37 | 67% |
 | Instagram link | 42 | 76% |
 | Facebook link | 44 | 80% |
+
+<RadarChart
+  title="What the 55 working café websites have: eight key signals"
+  labels="HTTPS|Mobile tag|Meta description|Structured data|Analytics|Tap-to-call|Maps link|Menu link"
+  values="91|93|60|25|45|51|42|67"
+  caption="Share of the 55 home pages that loaded. Basics are common; structured data, maps links and tap-to-call are not."
+/>
+
+<BarChart
+  title="Links and features on café home pages (55 sites)"
+  labels="Facebook link|Instagram link|Menu link|Cookie notice|E-mail link|Tap-to-call link|Maps link|Booking link|Ordering platform|English version"
+  values="80|76|67|67|53|51|42|40|22|22"
+  unit="%"
+  maxValue="100"
+/>
 
 Most sites are technically sound at the basic level: nearly all are secure, mobile-ready and have a title. The gaps are in what helps a visitor act and what helps Google read the page.
 
@@ -470,6 +591,17 @@ A café should not copy the top ten blindly. The best-presented places have been
 The median in the dataset is 219 reviews. Suppose a café has 60 reviews (assumption) and wants to reach that median. It needs 159 more. At 8 new reviews a month (assumption) that is about 20 months. At 15 a month (assumption) it is about 11 months. To reach the 603 reviews that mark the top quarter, at 15 a month (assumption), another 543 reviews would take about 36 months.
 
 Google publishes no minimum review count. Its help page says more reviews and positive ratings can help local ranking, so a steady monthly rhythm matters more than a one-off push. A café with 100 transactions a day (assumption) and a 2% review rate (assumption) would collect about 60 reviews a month, which shows why the review prompt at the counter matters more than any later campaign.
+
+<ProjectionChart
+  title="How long a café with 60 reviews needs to reach the market's median and top quarter (assumption)"
+  months="40"
+  start="60"
+  rates="8|15"
+  rateLabels="8 reviews a month|15 reviews a month"
+  targets="219|603"
+  targetLabels="Median: 219 reviews|Top quarter: 603 reviews"
+  caption="Assumption: constant monthly review growth. The median is reached in month 20 at 8 a month and month 11 at 15 a month."
+/>
 
 ## What should a café fix first on its Google Business Profile?
 

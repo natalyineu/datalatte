@@ -361,3 +361,14 @@
 }
 
 @keyframes dash-progress { from { width: 0%; } to { width: 100%; } }
+
+/* Chart animations (Charts.tsx) */
+@keyframes col-grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes bar-grow2 { from { transform: scaleX(0); opacity: .4; } to { transform: scaleX(1); opacity: 1; } }
+@keyframes chart-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes line-draw { from { stroke-dasharray: 1200; stroke-dashoffset: 1200; } to { stroke-dasharray: 1200; stroke-dashoffset: 0; } }
+.mdx-col-grow { transform-box: fill-box; transform-origin: bottom; animation: col-grow .7s cubic-bezier(.22,1,.36,1) both; }
+.mdx-bar-grow2 { transform-origin: left; animation: bar-grow2 .7s cubic-bezier(.22,1,.36,1) both; }
+.mdx-fade { animation: chart-fade .9s ease-out both; }
+.mdx-draw { animation: line-draw 1.1s ease-out both; }
+@media (prefers-reduced-motion: reduce) { .mdx-col-grow, .mdx-bar-grow2, .mdx-fade, .mdx-draw { animation: none !important; } }

@@ -9,6 +9,7 @@ import remarkGfm from "remark-gfm";
 import Callout from "@/components/mdx/Callout";
 import BarChart from "@/components/mdx/BarChart";
 import StatRow from "@/components/mdx/StatRow";
+import { ColumnChart, AreaChart, StackedBar, Heatmap, RadarChart, ScoreBreakdown, ProjectionChart, BubbleChart } from "@/components/mdx/Charts";
 import Funnel from "@/components/mdx/Funnel";
 import DonutChart from "@/components/mdx/DonutChart";
 import LineChart from "@/components/mdx/LineChart";
@@ -445,6 +446,14 @@ const mdxComponents = {
   DonutChart,
   LineChart,
   CompareBar,
+  ColumnChart,
+  AreaChart,
+  StackedBar,
+  Heatmap,
+  RadarChart,
+  ScoreBreakdown,
+  ProjectionChart,
+  BubbleChart,
   // Aliases for shorthand component names the AI sometimes generates
   Tip: ({ children }: { children: React.ReactNode }) => <Callout type="tip">{children}</Callout>,
   Warning: ({ children }: { children: React.ReactNode }) => <Callout type="warning">{children}</Callout>,
