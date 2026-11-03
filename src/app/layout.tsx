@@ -1,9 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ClientWidgets from "@/components/ClientWidgets";
+import ChromeGate from "@/components/ChromeGate";
+import AnalyticsScripts from "@/components/AnalyticsScripts";
 import { localBusinessSchema, websiteSchema } from "@/lib/schema";
 
 const BASE = "https://datalatte.pro";
@@ -113,31 +114,12 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema()) }}
         />
-        <Header />
+        <ChromeGate><Header /></ChromeGate>
         <main>{children}</main>
-        <Footer />
-        <ClientWidgets />
-        {/* Microsoft Clarity */}
-        <Script id="clarity-init" strategy="lazyOnload">
-          {`(function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "xf9zebr32b");`}
-        </Script>
-        {/* Google Analytics 4 */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-M4L8HJGRCH"
-          strategy="lazyOnload"
-        />
-        <Script id="ga4-init" strategy="lazyOnload">
-          {`// Do not count headless/automated browsers (the bulk of "Direct" traffic)
-if (navigator.webdriver || /HeadlessChrome|PhantomJS|bot|crawl|spider/i.test(navigator.userAgent)) { window['ga-disable-G-M4L8HJGRCH'] = true; }
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-M4L8HJGRCH');`}
-        </Script>
+        <ChromeGate><Footer /></ChromeGate>
+        <ChromeGate><ClientWidgets /></ChromeGate>
+        {/* Clarity + GA4 (Polish pages wait for cookie consent) */}
+        <AnalyticsScripts />
       </body>
     </html>
   );

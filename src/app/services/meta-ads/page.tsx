@@ -10,6 +10,7 @@ export const metadata: Metadata = {
       "en-AU": "https://datalatte.pro/services/meta-ads",
       "en-CA": "https://datalatte.pro/services/meta-ads",
       "x-default": "https://datalatte.pro/services/meta-ads",
+      pl: "https://datalatte.pro/pl/uslugi/meta-ads",
     },
   },
   title: "Meta Ads (Facebook & Instagram) for Local Businesses",

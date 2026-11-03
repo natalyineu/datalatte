@@ -10,6 +10,7 @@ export const metadata: Metadata = {
       "en-AU": "https://datalatte.pro/services/local-seo",
       "en-CA": "https://datalatte.pro/services/local-seo",
       "x-default": "https://datalatte.pro/services/local-seo",
+      pl: "https://datalatte.pro/pl/uslugi/lokalne-seo",
     },
   },
   title: "Local SEO for Small Businesses | Coffee Shops, Salons & More",

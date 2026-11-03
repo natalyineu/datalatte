@@ -20,6 +20,7 @@ export const metadata: Metadata = {
       "en-AU": CONTACT_URL,
       "en-CA": CONTACT_URL,
       "x-default": CONTACT_URL,
+      pl: "https://datalatte.pro/pl/kontakt",
     },
   },
   openGraph: {

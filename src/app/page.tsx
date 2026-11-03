@@ -31,6 +31,7 @@ import HeroAnimated from "@/components/HeroAnimated";
 import AnimatedDashboard from "@/components/AnimatedDashboard";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://datalatte.pro", languages: { "en-US": "https://datalatte.pro", pl: "https://datalatte.pro/pl", "x-default": "https://datalatte.pro" } },
   title: {
     absolute: "DataLatte — Data-Driven Local Marketing for Small Businesses",
   },

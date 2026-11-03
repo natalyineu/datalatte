@@ -10,6 +10,7 @@ export const metadata: Metadata = {
       "en-AU": "https://datalatte.pro/services/google-business-profile",
       "en-CA": "https://datalatte.pro/services/google-business-profile",
       "x-default": "https://datalatte.pro/services/google-business-profile",
+      pl: "https://datalatte.pro/pl/uslugi/profil-firmy-w-google",
     },
   },
   title: "Google Business Profile Optimization | Local Map Pack",

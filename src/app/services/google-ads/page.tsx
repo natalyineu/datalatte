@@ -10,6 +10,7 @@ export const metadata: Metadata = {
       "en-AU": "https://datalatte.pro/services/google-ads",
       "en-CA": "https://datalatte.pro/services/google-ads",
       "x-default": "https://datalatte.pro/services/google-ads",
+      pl: "https://datalatte.pro/pl/uslugi/google-ads",
     },
   },
   title: "Google Ads for Coffee Shops, Salons & Local Businesses",

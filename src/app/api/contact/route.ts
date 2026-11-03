@@ -54,9 +54,12 @@ export async function POST(req: NextRequest) {
       niche?: string;
       message?: string;
       form_type?: string;
+      locale?: string;
+      consent_marketing?: boolean;
     };
 
-    const { email, name, niche, message, form_type = "explore" } = body;
+    const { email, name, niche, message, form_type = "explore", locale, consent_marketing } = body;
+    const pl = locale === "pl";
 
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json({ error: "Invalid email" }, { status: 400 });
@@ -65,14 +68,15 @@ export async function POST(req: NextRequest) {
     const nicheLabel = niche ? (NICHE_LABELS[niche] ?? niche) : null;
 
     // 0. Save to CRM (non-blocking)
-    const saved = await saveLead({ email, name: name ?? null, niche: niche ?? null, message: message ?? null, form_type });
+    const saved = await saveLead({ email, name: name ?? null, niche: niche ?? null, message: pl ? `[PL] ${message ?? ""}`.trim() : (message ?? null), form_type });
 
     // Serverless freezes after the response is sent, so un-awaited fetches get cut off.
     // Collect side-effects and await them (allSettled) before returning.
     const tasks: Promise<unknown>[] = [];
 
     // 1. Add to Resend audience
-    tasks.push(addToResendAudience(email, name).catch(() => {}));
+    // Polish leads join the newsletter audience only with explicit marketing consent
+    if (!pl || consent_marketing === true) tasks.push(addToResendAudience(email, name).catch(() => {}));
 
     // 2. Notify Nataliia via Resend
     const safeEmail     = escapeHtml(email);
@@ -119,11 +123,31 @@ export async function POST(req: NextRequest) {
     }
 
     // 3. Confirmation email to the visitor
-    const confirmSubject = form_type === "ready"
+    const confirmSubject = pl
+      ? "Dziękuję za wiadomość — Nataliia z DataLatte"
+      : form_type === "ready"
       ? "Got it! I'll be in touch soon ☕"
       : "Thanks for reaching out — Nataliia @ DataLatte";
 
-    const confirmHtml = `
+    const confirmHtmlPl = `
+      <div style="font-family:sans-serif;max-width:520px;margin:0 auto;color:#333">
+        <div style="background:linear-gradient(135deg,#7c4a2d,#a0622a);padding:32px;border-radius:16px 16px 0 0;text-align:center">
+          <p style="font-size:28px;margin:0 0 8px">☕</p>
+          <h1 style="color:#fff;font-size:20px;margin:0;font-weight:700">Wiadomość dotarła!</h1>
+        </div>
+        <div style="background:#fff;padding:28px 32px;border:1px solid #eee;border-top:none;border-radius:0 0 16px 16px">
+          <p style="margin:0 0 16px">Cześć${safeName ? ` ${safeName}` : ""}!</p>
+          <p style="margin:0 0 16px;line-height:1.6">Dziękuję za wiadomość. Odpiszę w ciągu <strong>jednego dnia roboczego</strong>, zwykle szybciej.</p>
+          <p style="margin:0 0 24px;line-height:1.6">Tymczasem zajrzyj na bloga: piszę o marketingu lokalnych firm na podstawie danych.</p>
+          <a href="https://datalatte.pro/pl/blog" style="display:inline-block;background:#7c4a2d;color:#fff;font-weight:700;padding:12px 24px;border-radius:10px;text-decoration:none">Czytaj bloga →</a>
+          <hr style="margin:28px 0;border:none;border-top:1px solid #f0ebe6">
+          <p style="margin:0;line-height:1.6">Do usłyszenia,<br><strong>Nataliia</strong><br><span style="color:#999;font-size:13px">DataLatte · <a href="https://datalatte.pro/pl" style="color:#7c4a2d">datalatte.pro</a></span></p>
+        </div>
+        <p style="text-align:center;font-size:11px;color:#bbb;margin-top:16px">Dostajesz tę wiadomość, bo wysłałeś/aś formularz na datalatte.pro. Szczegóły: <a href="https://datalatte.pro/pl/polityka-prywatnosci" style="color:#bbb">polityka prywatności</a>.</p>
+      </div>
+    `;
+
+    const confirmHtmlEn = `
       <div style="font-family:sans-serif;max-width:520px;margin:0 auto;color:#333">
         <div style="background:linear-gradient(135deg,#7c4a2d,#a0622a);padding:32px 32px 24px;border-radius:16px 16px 0 0;text-align:center">
           <p style="font-size:28px;margin:0 0 8px">☕</p>
@@ -153,7 +177,7 @@ export async function POST(req: NextRequest) {
         to: email,
         reply_to: "hi@datalatte.pro",
         subject: confirmSubject,
-        html: confirmHtml,
+        html: pl ? confirmHtmlPl : confirmHtmlEn,
       }),
     }).catch((err) => console.error("Confirmation email failed:", err)));
 

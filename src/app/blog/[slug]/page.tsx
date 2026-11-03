@@ -337,6 +337,7 @@ export async function generateMetadata({
         "en-AU": url,
         "en-CA": url,
         "x-default": url,
+        ...(slug === "poznan-cafes-google-maps-presence-ranking-2026" ? { pl: "https://datalatte.pro/pl/blog/ranking-kawiarni-poznan-google-maps-2026" } : {}),
       },
     },
     // ── Open Graph (article type with full metadata) ───────────────────────

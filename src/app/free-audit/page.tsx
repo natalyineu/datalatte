@@ -6,7 +6,7 @@ import ContactForm from "@/components/ContactForm";
 import CTABanner from "@/components/CTABanner";
 
 export const metadata: Metadata = {
-  alternates: { canonical: "https://datalatte.pro/free-audit" },
+  alternates: { canonical: "https://datalatte.pro/free-audit", languages: { "en-US": "https://datalatte.pro/free-audit", pl: "https://datalatte.pro/pl/darmowy-audyt", "x-default": "https://datalatte.pro/free-audit" } },
   title: "Free Local Marketing Audit — No Strings Attached",
   description:
     "Get a personalised audit of your Google Business Profile, local SEO, and ad campaigns. 100% free, delivered within 48 hours. Find out exactly what's holding your business back.",
