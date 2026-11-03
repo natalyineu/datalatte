@@ -5,13 +5,13 @@ description: Run DataLatte social media (Telegram, X/Twitter) with the Supabase 
 
 # DataLatte social skill
 
-Platforms now: `telegram`, `x`. New platform = add it to `social_posts_platform_check` (migration) and a section below.
+Platforms in use: `telegram`, `twitter` (X). The DB also allows linkedin, google_business, medium, instagram, facebook, pinterest, reddit, nextdoor. New platform = add a section below.
 Supabase project: `datalatte` (`olsxxfwvwsycwzihbmdn`). Table: `public.social_posts` (RLS on, service role only).
 
 ## Table
 | column | meaning |
 |---|---|
-| `platform` | `telegram` or `x` |
+| `platform` | `telegram` or `twitter` (X) |
 | `status` | `draft` → `scheduled` → `published` (or `failed`) |
 | `title` | internal label, not published |
 | `content` | exact post text as published |
@@ -23,7 +23,7 @@ Supabase project: `datalatte` (`olsxxfwvwsycwzihbmdn`). Table: `public.social_po
 | `signal_id` | optional link to `radar_signals.id` if the post came from a radar signal |
 | `error_message` | reason when `failed` |
 
-DB enforces: platform and status values, `published` needs `post_url` + `published_at`, `(platform, post_url)` unique.
+DB enforces: platform and status values (check constraints), `published` needs `post_url` + `published_at`, `(platform, post_url)` unique.
 
 ## Workflow
 1. **Check history first.** Never repost a topic or link without checking:
@@ -39,7 +39,7 @@ DB enforces: platform and status values, `published` needs `post_url` + `publish
 6. Say in the report: what was inserted, what was published, what is still draft.
 
 ## UTM
-`utm_source=telegram|x`, `utm_medium=social`, `utm_campaign=<blog-slug or page-slug>`, `utm_content=<post type>` (e.g. `stat`, `howto`, `thread`). Link = `https://www.datalatte.pro/...?utm_...`.
+`utm_source=telegram|twitter`, `utm_medium=social`, `utm_campaign=<blog-slug or page-slug>`, `utm_content=<post type>` (e.g. `stat`, `howto`, `thread`). Link = `https://www.datalatte.pro/...?utm_...`.
 
 ## Telegram
 - Channel post, up to ~900 characters (hard limit 4096). First line is the hook with the answer or number.
@@ -47,7 +47,7 @@ DB enforces: platform and status values, `published` needs `post_url` + `publish
 - One link at the end. Format: HTML or plain text; check the preview.
 - Types: `stat` (one sourced number + what to do), `howto` (3-5 steps), `checklist`, `digest` (weekly, 3 links).
 
-## X
+## X (platform value `twitter`)
 - Single post ≤280 characters (a link counts as 23). Thread: 3-6 posts, first post stands alone, link in the last one.
 - No hashtags except one if it matches the niche. No engagement bait.
 - Types: `stat`, `tip`, `thread`.
