@@ -35,6 +35,11 @@ export default function FooterPL() {
           <div>
             <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wide">Firma</h3>
             <ul className="space-y-2 text-sm">
+              <li><Link href="/pl/dla/kawiarni" className="hover:text-white">Dla kawiarni</Link></li>
+              <li><Link href="/pl/dla/salonow" className="hover:text-white">Dla salonów</Link></li>
+              <li><Link href="/pl/dla/groomerow" className="hover:text-white">Dla groomerów</Link></li>
+              <li><Link href="/pl/dla/studiow-fitness" className="hover:text-white">Dla studiów fitness</Link></li>
+              <li><Link href="/pl/o-mnie" className="hover:text-white">O mnie</Link></li>
               <li><Link href="/pl/blog" className="hover:text-white">Blog</Link></li>
               <li><Link href="/pl/darmowy-audyt" className="hover:text-white">Darmowy audyt</Link></li>
               <li><Link href="/pl/kontakt" className="hover:text-white">Kontakt</Link></li>

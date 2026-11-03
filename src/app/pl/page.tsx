@@ -13,10 +13,10 @@ export const metadata: Metadata = {
 };
 
 const niches = [
-  ["☕", "Kawiarnie", "Widoczność w Mapach Google i wyszukiwaniach „w pobliżu”."],
-  ["✂️", "Fryzjerzy i kosmetyka", "Rezerwacje z Instagrama i z wyszukiwarki."],
-  ["🐾", "Groomerzy i usługi dla zwierząt", "Lokalni klienci, którzy szukają kogoś zaufanego."],
-  ["🏋️", "Studia fitness i joga", "Zapisy na zajęcia próbne przez cały rok."],
+  ["☕", "Kawiarnie", "Widoczność w Mapach Google i wyszukiwaniach „w pobliżu”.", "/pl/dla/kawiarni"],
+  ["✂️", "Fryzjerzy i kosmetyka", "Rezerwacje z Instagrama i z wyszukiwarki.", "/pl/dla/salonow"],
+  ["🐾", "Groomerzy i usługi dla zwierząt", "Lokalni klienci, którzy szukają kogoś zaufanego.", "/pl/dla/groomerow"],
+  ["🏋️", "Studia fitness i joga", "Zapisy na zajęcia próbne przez cały rok.", "/pl/dla/studiow-fitness"],
 ];
 
 const process = [
@@ -69,8 +69,8 @@ export default function Page() {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-10"><span className="section-label">Dla kogo</span><h2 className="section-title">Lokalne firmy, które żyją z klientów z okolicy</h2></div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {niches.map(([e, t, d]) => (
-              <div key={t} className="card p-5"><div className="text-3xl mb-2">{e}</div><h3 className="font-bold text-gray-900 dark:text-gray-100 mb-1">{t}</h3><p className="text-sm text-gray-600 dark:text-gray-400">{d}</p></div>
+            {niches.map(([e, t, d, h]) => (
+              <Link key={t} href={h} className="card p-5 block"><div className="text-3xl mb-2">{e}</div><h3 className="font-bold text-gray-900 dark:text-gray-100 mb-1">{t}</h3><p className="text-sm text-gray-600 dark:text-gray-400">{d}</p></Link>
             ))}
           </div>
         </div>

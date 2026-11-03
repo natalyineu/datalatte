@@ -11,6 +11,7 @@ export const metadata: Metadata = {
       "en-AU": "https://datalatte.pro/for/fitness-studios",
       "en-CA": "https://datalatte.pro/for/fitness-studios",
       "x-default": "https://datalatte.pro/for/fitness-studios",
+      pl: "https://datalatte.pro/pl/dla/studiow-fitness",
     },
   },
   title: "Fitness Studio & Gym Marketing | More Trial Sign-Ups & Memberships",

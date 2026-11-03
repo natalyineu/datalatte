@@ -11,6 +11,7 @@ export const metadata: Metadata = {
       "en-AU": "https://datalatte.pro/for/coffee-shops",
       "en-CA": "https://datalatte.pro/for/coffee-shops",
       "x-default": "https://datalatte.pro/for/coffee-shops",
+      pl: "https://datalatte.pro/pl/dla/kawiarni",
     },
   },
   title: "Coffee Shop & Restaurant Marketing | Google Ads, Local SEO & More",

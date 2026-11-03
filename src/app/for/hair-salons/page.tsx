@@ -11,6 +11,7 @@ export const metadata: Metadata = {
       "en-AU": "https://datalatte.pro/for/hair-salons",
       "en-CA": "https://datalatte.pro/for/hair-salons",
       "x-default": "https://datalatte.pro/for/hair-salons",
+      pl: "https://datalatte.pro/pl/dla/salonow",
     },
   },
   title: "Hair Salon & Beauty Marketing | Get More Bookings with Local SEO & Ads",

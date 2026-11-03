@@ -6,6 +6,13 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import clsx from "clsx";
 import { PL_TO_EN } from "@/lib/i18n";
 
+const niches = [
+  { label: "Kawiarnie", href: "/pl/dla/kawiarni" },
+  { label: "Fryzjerzy i kosmetyka", href: "/pl/dla/salonow" },
+  { label: "Groomerzy", href: "/pl/dla/groomerow" },
+  { label: "Studia fitness i jogi", href: "/pl/dla/studiow-fitness" },
+];
+
 const services = [
   { label: "Wszystkie usługi", href: "/pl/uslugi" },
   { label: "Google Ads", href: "/pl/uslugi/google-ads" },
@@ -46,6 +53,8 @@ export default function HeaderPL() {
                 </div>
               )}
             </div>
+            <Link href="/pl/dla/kawiarni" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium">Dla kogo</Link>
+            <Link href="/pl/o-mnie" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium">O mnie</Link>
             <Link href="/pl/blog" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium">Blog</Link>
             <Link href="/pl/kontakt" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium">Kontakt</Link>
           </nav>
@@ -71,6 +80,8 @@ export default function HeaderPL() {
               {services.map((s) => (<Link key={s.href} href={s.href} className="block py-2 text-sm text-gray-600 dark:text-gray-300" onClick={() => setOpen(false)}>{s.label}</Link>))}
             </div>
           )}
+          {niches.map((x) => (<Link key={x.href} href={x.href} className="block py-3 text-gray-700 dark:text-gray-200 font-medium" onClick={() => setOpen(false)}>{x.label}</Link>))}
+          <Link href="/pl/o-mnie" className="block py-3 text-gray-700 dark:text-gray-200 font-medium" onClick={() => setOpen(false)}>O mnie</Link>
           <Link href="/pl/blog" className="block py-3 text-gray-700 dark:text-gray-200 font-medium" onClick={() => setOpen(false)}>Blog</Link>
           <Link href="/pl/kontakt" className="block py-3 text-gray-700 dark:text-gray-200 font-medium" onClick={() => setOpen(false)}>Kontakt</Link>
           <Link href={enHref} hrefLang="en" className="block py-3 text-gray-700 dark:text-gray-200 font-medium" onClick={() => setOpen(false)}>English version (EN)</Link>

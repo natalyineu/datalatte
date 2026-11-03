@@ -99,7 +99,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/radar`,                             lastModified: today,      changeFrequency: "daily",   priority: 0.8 },
     { url: `${baseUrl}/radar/feed.xml`,                    lastModified: today,      changeFrequency: "daily",   priority: 0.5 },
     // Polish site
-    ...["/pl", "/pl/uslugi", "/pl/uslugi/google-ads", "/pl/uslugi/meta-ads", "/pl/uslugi/lokalne-seo", "/pl/uslugi/profil-firmy-w-google", "/pl/kontakt", "/pl/darmowy-audyt", "/pl/polityka-prywatnosci", "/pl/blog", "/pl/blog/ranking-kawiarni-poznan-google-maps-2026"].map((p) => ({ url: `${baseUrl}${p}`, lastModified: today, changeFrequency: "monthly" as const, priority: p === "/pl" ? 0.8 : 0.6 })),
+    ...["/pl", "/pl/uslugi", "/pl/uslugi/google-ads", "/pl/uslugi/meta-ads", "/pl/uslugi/lokalne-seo", "/pl/uslugi/profil-firmy-w-google", "/pl/kontakt", "/pl/o-mnie", "/pl/dla/kawiarni", "/pl/dla/salonow", "/pl/dla/groomerow", "/pl/dla/studiow-fitness", "/pl/darmowy-audyt", "/pl/polityka-prywatnosci", "/pl/blog", "/pl/blog/ranking-kawiarni-poznan-google-maps-2026"].map((p) => ({ url: `${baseUrl}${p}`, lastModified: today, changeFrequency: "monthly" as const, priority: p === "/pl" ? 0.8 : 0.6 })),
     // Niche pages
     { url: `${baseUrl}/for/coffee-shops`,                  lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/for/hair-salons`,                   lastModified: today,      changeFrequency: "monthly", priority: 0.8 },

@@ -21,6 +21,7 @@ export const metadata: Metadata = {
       "en-AU": ABOUT_URL,
       "en-CA": ABOUT_URL,
       "x-default": ABOUT_URL,
+      pl: "https://datalatte.pro/pl/o-mnie",
     },
   },
   openGraph: {

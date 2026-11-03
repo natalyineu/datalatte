@@ -11,6 +11,7 @@ export const metadata: Metadata = {
       "en-AU": "https://datalatte.pro/for/pet-groomers",
       "en-CA": "https://datalatte.pro/for/pet-groomers",
       "x-default": "https://datalatte.pro/for/pet-groomers",
+      pl: "https://datalatte.pro/pl/dla/groomerow",
     },
   },
   title: "Pet Groomer Marketing | Local SEO, Google Ads & More for Pet Businesses",
