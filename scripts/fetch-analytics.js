@@ -168,6 +168,20 @@ async function saveGscPageHistory() {
     }));
     console.log(`✓ GSC query x page saved (${Math.min(qp.length, 5000)} of ${qp.length} pairs)`);
   } catch (e) { console.warn("query x page export failed:", e.message); }
+  // Page x country pairs (90d): which pages are shown in which countries (e.g. Poland, Germany, Netherlands).
+  try {
+    const pc = (await sc90.searchanalytics.query({
+      siteUrl,
+      requestBody: { startDate: dateStr(-93), endDate: end, dimensions: ["page", "country"], rowLimit: 25000, dataState: "final" },
+    })).data.rows || [];
+    pc.sort((a, b) => b.impressions - a.impressions);
+    fs.writeFileSync(path.join(OUT_DIR, "gsc-page-country-90d.json"), JSON.stringify({
+      end,
+      cols: ["page", "country", "clicks", "impressions", "position"],
+      rows: pc.map(r => [r.keys[0].replace("https://datalatte.pro", ""), r.keys[1], r.clicks, r.impressions, +r.position.toFixed(1)]),
+    }));
+    console.log(`✓ GSC page x country saved (${pc.length} pairs)`);
+  } catch (e) { console.warn("page x country export failed:", e.message); }
   const last = hist[hist.length - 1];
   if (last && (new Date(end) - new Date(last.end)) / 864e5 < 7) return;
   const sc = google.searchconsole({ version: "v1", auth });
