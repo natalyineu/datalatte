@@ -41,6 +41,15 @@ if (!res.ok) throw new Error(`Supabase read failed: ${res.status} ${await res.te
 const rows = await res.json();
 console.log(`${rows.length} post(s) due`);
 
+
+// Diagnostics: which Telegram calls respond from this runner (no secrets printed)
+for (const [m, q] of [["getMe", []], ["getChat", ["--data-urlencode", `chat_id=${TELEGRAM_CHANNEL_ID}`]], ["getChatMember", ["--data-urlencode", `chat_id=${TELEGRAM_CHANNEL_ID}`, "--data-urlencode", `user_id=${TELEGRAM_BOT_TOKEN.split(":")[0]}`]]]) {
+  const r = spawnSync("curl", ["-sS", "-m", "15", "-X", "POST", `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/${m}`, ...q], { encoding: "utf8" });
+  let out = r.stdout || r.stderr || "";
+  try { const j = JSON.parse(out); out = JSON.stringify(j.ok ? { ok: true, ...(m === "getChatMember" ? { status: j.result.status, can_post: j.result.can_post_messages } : { id: j.result.id, username: j.result.username }) } : j); } catch {}
+  console.log(`[diag] ${m}: ${out.slice(0, 300)}`);
+}
+
 let failed = 0;
 for (const row of rows) {
   if (dry) { console.log(`[dry] ${row.id}\n${row.content}\n`); continue; }
