@@ -33,8 +33,8 @@ export const metadata: Metadata = {
     "pet groomer marketing",
     "fitness studio marketing",
   ],
-  authors: [{ name: "Nataliia Makota", url: `${BASE}/about` }],
-  creator: "Nataliia Makota",
+  authors: [{ name: "Nataliia Rumiantseva", url: `${BASE}/about` }],
+  creator: "Nataliia Rumiantseva",
   // ── Canonical + hreflang ──────────────────────────────────────────────────
   alternates: {
     canonical: BASE,

@@ -233,7 +233,7 @@ export default async function BlogOgImage({
               N
             </div>
             <span style={{ color: "rgba(245,237,228,0.7)", fontSize: 15 }}>
-              Nataliia Makota · DataLatte
+              Nataliia Rumiantseva · DataLatte
             </span>
           </div>
           <span style={{ fontSize: 14, color: "rgba(212,149,106,0.6)", fontWeight: 500 }}>

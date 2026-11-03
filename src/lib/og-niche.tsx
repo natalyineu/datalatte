@@ -111,7 +111,7 @@ export function generateNicheOg(slug: string): ImageResponse {
         <div style={{ position: "absolute", bottom: 60, left: 72, right: 72, display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid rgba(212,149,106,0.2)", paddingTop: 20 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <div style={{ width: 36, height: 36, borderRadius: "50%", background: "rgba(212,149,106,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, color: "#d4956a", fontWeight: 700 }}>N</div>
-            <span style={{ color: "rgba(245,237,228,0.7)", fontSize: 15 }}>Nataliia Makota · DataLatte</span>
+            <span style={{ color: "rgba(245,237,228,0.7)", fontSize: 15 }}>Nataliia Rumiantseva · DataLatte</span>
           </div>
           <span style={{ fontSize: 14, color: "rgba(212,149,106,0.6)", fontWeight: 500 }}>Data-Driven Local Marketing</span>
         </div>
