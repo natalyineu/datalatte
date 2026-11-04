@@ -1,1 +1,1 @@
-- 2026-11-04: Published the Spotify Advertising section (short "Sponsored" tag) in ctv-advertising-platforms-compared-2026 (sponsor-supplied text and figures, labelled; invoice $150 sent via PayPal).
+- 2026-11-04: Spotify Advertising section in ctv-advertising-platforms-compared-2026 is editorial, not sponsored (no payment, no request from Spotify); "Sponsored" tag removed.
