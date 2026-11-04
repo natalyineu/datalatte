@@ -1,0 +1,1 @@
+- 2026-11-04: Published the "Sponsored: Spotify Advertising" section in ctv-advertising-platforms-compared-2026 (sponsor-supplied text and figures, labelled; invoice $150 sent via PayPal).
