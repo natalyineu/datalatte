@@ -1,2 +1,3 @@
 - 2026-11-04: Spotify Advertising section in ctv-advertising-platforms-compared-2026 is editorial, not sponsored (no payment, no request from Spotify); "Sponsored" tag removed.
 - 2026-11-04: Added Flodesk to the segmentation tools list in email-marketing-ideas-for-small-businesses-20-campaigns (Biglinko request).
+- 2026-11-04: Rewrote and reopened (noindex removed) email-marketing-ideas article; Flodesk bullet kept.
