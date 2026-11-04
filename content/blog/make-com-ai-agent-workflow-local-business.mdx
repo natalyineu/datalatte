@@ -1,7 +1,7 @@
 ---
 title: "Make.com AI Agent Workflow for Local Business"
 date: "2026-06-13"
-lastModified: "2026-10-24"
+lastModified: "2026-11-03"
 description: "A Make.com lead workflow with an AI step costs about 7 credits per lead, so the free 1,000 credits cover roughly 140 leads a month. Setup and costs."
 author: "Nataliia"
 category: "AI & Automation"
@@ -15,7 +15,7 @@ To build an AI lead workflow in Make.com, connect a form to a custom webhook, se
 
 On the free plan, Make includes 1,000 credits a month, and each lead in this design uses about 7.
 
-This is an automation with an AI step, not a fully autonomous agent. Make also has a separate AI Agents app where agents use instructions, knowledge and tools. Details below were checked on 24 October 2026 against vendor pages that opened. Anything that did not open is marked.
+This is an automation with an AI step, not a fully autonomous agent. Make also has a separate AI Agents app where agents use instructions, knowledge and tools. Make help pages were rechecked on 3 November 2026; the Make pricing page returned a bot-check (403) that day, so plan prices are not restated. Other details were checked on 24 October 2026 against vendor pages that opened. Anything that did not open is marked.
 
 <StatRow
   values="1,000|about 7|5 MB|3,000"
@@ -54,6 +54,24 @@ Make's pricing page now lists credits as the billing unit. Its help page says on
 | 8 | Google Sheets | Add a row with time, lead details, label, reason and whether a reply was sent. |
 
 Make's docs say each scenario needs its own webhook, and callers can send query string, form data or JSON. You can require an API key sent in the x-make-apikey header and define a data structure so bad requests are rejected with HTTP 400. An accepted request returns HTTP 200 with the body "Accepted."
+
+## How Do You Parse the AI Reply in Make (Parse JSON)?
+
+Ask the model to answer only with JSON, for example label, reason and a score field, then pass the reply text to the Parse JSON module so each field becomes mappable in later steps. Define the data structure for that module from a sample reply. Webhooks work the same way: Make's docs say the Custom webhook accepts query string, form data, multipart and JSON, and rejects data that fails the structure check with HTTP 400.
+
+If you switch on JSON pass-through in the webhook settings, the payload reaches the next modules as one text string instead of separate fields. You would then need Parse JSON on the incoming lead as well. Keep pass-through off unless you need the raw body.
+
+## How Do You Export or Import This as a Make Blueprint?
+
+A blueprint is a copy of a scenario with its modules, settings and mapped values. Per [Make Help](https://help.make.com/blueprints), export it from the three-dot menu in the Scenario Builder (Export blueprint), and import it into a new, empty scenario with Import blueprint. Connections are not included, so you create your own after import, and the file must be under 2 MB.
+
+This guide does not publish blueprint JSON. The internal module identifiers inside the file were not found on an official Make page, so build the scenario once from the table above and export your own, which is the reliable source.
+
+## Can an SEO Agency Use This for Lead Generation?
+
+Yes, with different classification rules. For a local SEO agency the incoming lead is a contact form, an audit request or a reply to outreach. Replace the three labels with your own fit rules, for example the business type you serve, the number of locations and a stated budget range, and keep a human approval before any first-contact email.
+
+The route design stays the same: webhook, AI classify, Parse JSON, router with fallback, draft, approve, send, log. Keep the log sheet as your lead record and add a column for the source page, so you can see which content brings qualified enquiries. All thresholds are yours to set; no benchmark for qualified-lead rates was verified.
 
 ## How Does the Router Behave?
 
@@ -121,6 +139,10 @@ For ready-made scenarios in other areas, see [10 Make.com workflows for local bu
 
 Not at low volume. The free plan includes 1,000 credits a month. If each lead uses about 7 credits, that covers roughly 140 leads. Paid prices could not be confirmed on the official page, so check it.
 
+### Can I download a ready Make blueprint for this?
+
+Not from this page. Build the steps in the table, then use Export blueprint in the scenario menu to save your own file. Connections are not exported.
+
 ### What form tools can trigger the webhook?
 
 Any tool that can send a POST request to the webhook URL, in query string, form data or JSON. Check whether webhooks are on your form plan.
@@ -142,6 +164,7 @@ No. Make AI Agents is a separate app where an agent has instructions, knowledge 
 - [Make: pricing](https://www.make.com/en/pricing) (free plan credits; paid prices were not shown when opened)
 - [Make Help: credits](https://help.make.com/credits)
 - [Make: custom webhook module](https://apps.make.com/gateway)
+- [Make Help: blueprints](https://help.make.com/blueprints)
 - [Make Help: router](https://help.make.com/router)
 - [Make Help: Make AI Agents](https://help.make.com/make-ai-agents)
 - [Groq: deprecations](https://console.groq.com/docs/deprecations)
