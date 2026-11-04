@@ -8,3 +8,4 @@
 - 2026-11-04: Rewrote and reopened ctv-advertising-denver-co-local-business-guide; no Denver-specific rates found, national vendor CPM ranges used and labelled.
 - 2026-11-04: Rewrote and reopened video-marketing-local-businesses-getting-started; Pew figures updated to the 2026 fact sheet, YouTube Shorts limits added.
 - 2026-11-04: Stage B: titles/descriptions fixed for 117 articles
+- 2026-11-04: Added BigStat pull-quote to 20 top-GSC articles (sourced figures only); ethiopia and glovo-vs-wolt skipped (no sourced number).
