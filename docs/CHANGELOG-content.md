@@ -7,3 +7,4 @@
 - 2026-11-04: Rewrote and reopened sms-marketing-for-hair-salons-guide; angle: which texts to send and how to measure; sms-marketing-hair-salons-scripts-timing stays noindex.
 - 2026-11-04: Rewrote and reopened ctv-advertising-denver-co-local-business-guide; no Denver-specific rates found, national vendor CPM ranges used and labelled.
 - 2026-11-04: Rewrote and reopened video-marketing-local-businesses-getting-started; Pew figures updated to the 2026 fact sheet, YouTube Shorts limits added.
+- 2026-11-04: Stage B: titles/descriptions fixed for 117 articles
