@@ -16,7 +16,7 @@ export default function NichePagePL({ n }: { n: PlNiche }) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(n.faq)) }} />
       <section className="hero-gradient py-20 px-4 sm:px-6 lg:px-8 text-center">
         <div className="max-w-3xl mx-auto">
-          <div className="text-5xl mb-4">{n.emoji}</div>
+          <div className="text-5xl mb-4 text-white" aria-hidden>{n.emoji}</div>
           <p className="text-coffee-200 text-sm font-semibold uppercase tracking-wide mb-3">{n.name}</p>
           <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 text-balance">{n.headline}</h1>
           <p className="text-coffee-100 text-lg mb-8">{n.sub}</p>

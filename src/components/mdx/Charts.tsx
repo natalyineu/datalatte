@@ -106,7 +106,7 @@ export function StackedBar({ lang, title, rows, segments, matrix: m, caption }: 
         })}
       </div>
       <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-xs text-gray-600 dark:text-gray-300">
-        {S.map((s, i) => (<li key={s} className="inline-flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded" style={{ background: COFFEE[i % COFFEE.length] }} />{s}{M[0] ? <span className="text-gray-400"> ({fmtNum(M[0][i], lang)})</span> : null}</li>))}
+        {S.map((s, i) => (<li key={s} className="inline-flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded" style={{ background: COFFEE[i % COFFEE.length] }} />{s}{M[0] ? <span className="text-gray-500 dark:text-gray-400"> ({fmtNum(M[0][i], lang)})</span> : null}</li>))}
       </ul>
     </Frame>
   );
@@ -128,7 +128,13 @@ export function Heatmap({ lang, title, rows, cols, matrix: m, units = "", captio
               <div className="flex items-center text-sm font-semibold text-gray-700 dark:text-gray-200">{r}</div>
               {M[i].map((v, j) => {
                 const t = shade(j, v);
-                return (<div key={j} className="rounded-md py-2 text-center text-sm font-bold tabular-nums" style={{ background: `rgba(146,87,46,${0.1 + t * 0.85})`, color: t > 0.5 ? "#fff" : "#3b2412" }}>{fmtNum(v, lang)}{U[j] || ""}</div>);
+                const cream = [245, 233, 221], coffee = [92, 51, 23];
+                const rgb = cream.map((c0, k) => Math.round(c0 + (coffee[k] - c0) * t));
+                const lin = (c0: number) => { const s0 = c0 / 255; return s0 <= 0.03928 ? s0 / 12.92 : Math.pow((s0 + 0.055) / 1.055, 2.4); };
+                const lum = 0.2126 * lin(rgb[0]) + 0.7152 * lin(rgb[1]) + 0.0722 * lin(rgb[2]);
+                // pick whichever of white / near-black gives the higher contrast on this cell
+                const text = (1.05 / (lum + 0.05)) >= ((lum + 0.05) / 0.0615) ? "#ffffff" : "#2b1708";
+                return (<div key={j} className="rounded-md py-2 text-center text-sm font-bold tabular-nums" style={{ background: `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`, color: text }}>{fmtNum(v, lang)}{U[j] || ""}</div>);
               })}
             </div>
           ))}

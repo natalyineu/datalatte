@@ -23,7 +23,7 @@ export default function Page() {
         <div className="space-y-4">
           {posts.map((p: any) => (
             <Link key={p.slug} href={`/pl/blog/${p.slug}`} className="card p-6 block">
-              <p className="text-xs text-coffee-600 mb-1">{p.category} · {p.readTime}</p>
+              <p className="text-xs text-coffee-700 dark:text-coffee-300 mb-1">{p.category} · {p.readTime}</p>
               <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-1.5">{p.title}</h2>
               <p className="text-sm text-gray-600 dark:text-gray-400">{p.description}</p>
             </Link>
