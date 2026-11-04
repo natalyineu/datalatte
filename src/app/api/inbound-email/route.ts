@@ -73,7 +73,9 @@ export async function POST(req: NextRequest) {
     email, name: name || null, message, form_type: "direct_email",
     notes: clip(body.messageId, 200) ? `zoho-message-id: ${clip(body.messageId, 200)}` : null,
   });
-  if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID) {
+  // DMARC reports, bounces and postmaster mail are stored in the CRM (status "system") but never ping Telegram
+  const automated = /dmarc|^mailer-daemon|^postmaster/i.test(email);
+  if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID && !automated) {
     tasks.push(
       fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
         method: "POST",
