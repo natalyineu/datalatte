@@ -1,3 +1,9 @@
 - 2026-11-04: Spotify Advertising section in ctv-advertising-platforms-compared-2026 is editorial, not sponsored (no payment, no request from Spotify); "Sponsored" tag removed.
 - 2026-11-04: Added Flodesk to the segmentation tools list in email-marketing-ideas-for-small-businesses-20-campaigns (Biglinko request).
 - 2026-11-04: Rewrote and reopened (noindex removed) email-marketing-ideas article; Flodesk bullet kept.
+- 2026-11-04: Rewrote and reopened (noindex removed) thumbtack-vs-homeadvisor-local-business; angle: lead types and cost per signed job; sources Angi Inc. 10-K and one 2022 secondary comparison.
+- 2026-11-04: Rewrote and reopened thumbtack-vs-angi-local-business; angle: platform fit and lead model (billing covered in angi-vs-thumbtack-for-local-business, possible 301 candidate).
+- 2026-11-04: Rewrote and reopened klaviyo-vs-mailchimp-comparison; angle: bill growth by list size; official free-plan limits, tracker prices marked secondary.
+- 2026-11-04: Rewrote and reopened sms-marketing-for-hair-salons-guide; angle: which texts to send and how to measure; sms-marketing-hair-salons-scripts-timing stays noindex.
+- 2026-11-04: Rewrote and reopened ctv-advertising-denver-co-local-business-guide; no Denver-specific rates found, national vendor CPM ranges used and labelled.
+- 2026-11-04: Rewrote and reopened video-marketing-local-businesses-getting-started; Pew figures updated to the 2026 fact sheet, YouTube Shorts limits added.
