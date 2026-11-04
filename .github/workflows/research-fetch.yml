@@ -1,0 +1,33 @@
+name: Research fetch (Apify web RAG)
+
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "Max queue items to fetch"
+        default: "10"
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Fetch research pack
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: node scripts/research-fetch.mjs --limit "${{ github.event.inputs.limit }}"
+      - name: Commit results (no deploy)
+        run: |
+          git config user.name  "research-bot"
+          git config user.email "research-bot@datalatte.pro"
+          git add data/research/
+          if git diff --cached --quiet; then echo "nothing new"; else
+            git commit -m "chore: research pack (Apify web RAG)"
+            git pull --rebase --autostash -X theirs origin main
+            git push
+          fi
