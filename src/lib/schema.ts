@@ -99,6 +99,7 @@ export function personSchema() {
       "Brand Strategy", "Media Planning", "Performance Marketing",
     ],
     sameAs: [
+      "https://www.linkedin.com/in/nataliia-r",
       "https://www.linkedin.com/company/datalattepro",
       "https://www.instagram.com/datalatte.pro",
       "https://medium.com/@datalatte.pro",
@@ -200,7 +201,7 @@ export function articleSchema({
       name: "Nataliia Rumiantseva",
       url: `${BASE}/about`,
       sameAs: [
-        "https://www.linkedin.com/in/nataliia-makota",
+        "https://www.linkedin.com/in/nataliia-r",
         "https://x.com/datalattepro",
       ],
     },

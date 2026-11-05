@@ -762,9 +762,14 @@ export default async function BlogPostPage({
               <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5 leading-relaxed">
                 Local marketing strategist with 10+ years at global agencies — OMD, Dentsu, GroupM, and BBDO. Now helping small businesses get the same data-driven edge. Based in Europe, working with clients in the US, UK, Australia, and beyond.
               </p>
-              <Link href="/about" className="inline-flex items-center gap-1 text-xs text-coffee-700 font-semibold mt-2 hover:underline dark:text-coffee-300">
-                About Nataliia <ArrowRight size={12} />
-              </Link>
+              <div className="flex items-center gap-4 mt-2">
+                <Link href="/about" className="inline-flex items-center gap-1 text-xs text-coffee-700 font-semibold hover:underline dark:text-coffee-300">
+                  About Nataliia <ArrowRight size={12} />
+                </Link>
+                <a href="https://www.linkedin.com/in/nataliia-r" target="_blank" rel="noopener me" className="text-xs text-coffee-700 font-semibold hover:underline dark:text-coffee-300">
+                  LinkedIn
+                </a>
+              </div>
             </div>
           </div>
         </div>
