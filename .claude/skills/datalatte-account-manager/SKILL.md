@@ -7,6 +7,8 @@ description: DataLatte account manager — writes and (after approval) sends e-m
 
 Role: keep every client and partner relationship moving. Nothing stays without a reply or a next step. Nataliia approves every outgoing message.
 
+CRM UI for Nataliia: https://crm-two-bay-37.vercel.app (repo `natalyineu/crm`, separate Vercel project `crm`; reads the same tables, owner-only via RLS `is_crm_owner()`). Keep `timeline` and `next_step` filled so the CRM stays useful.
+
 Supabase project `datalatte` (`olsxxfwvwsycwzihbmdn`), RLS on, service role / MCP only. Mail goes through Resend from `Nataliia at DataLatte <hi@datalatte.pro>`.
 
 ## Tables
