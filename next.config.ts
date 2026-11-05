@@ -1182,11 +1182,11 @@ const nextConfig: NextConfig = {
             key: "Content-Security-Policy",
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://va.vercel-scripts.com https://www.clarity.ms https://scripts.clarity.ms",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://va.vercel-scripts.com https://www.clarity.ms https://scripts.clarity.ms https://static.ads-twitter.com",
               "style-src 'self' 'unsafe-inline'",
               "img-src * data: blob:",
               "font-src 'self'",
-              "connect-src 'self' https://vitals.vercel-insights.com https://www.google-analytics.com https://*.clarity.ms",
+              "connect-src 'self' https://vitals.vercel-insights.com https://www.google-analytics.com https://*.clarity.ms https://analytics.twitter.com https://t.co",
               "frame-src https://www.google.com https://maps.google.com https://www.youtube.com https://calendly.com",
             ].join("; "),
           },
