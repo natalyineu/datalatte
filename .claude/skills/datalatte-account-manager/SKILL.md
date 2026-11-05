@@ -75,7 +75,7 @@ Each `partner_deals` row has `placement_check` = text that must be on every page
 - Sponsored-content prices and terms: only from existing `partner_deals` rows or Nataliia.
 - Show all drafts to Nataliia in one list. **Send nothing without an explicit "да / send".**
 - Send with Resend MCP (`send-email`, or `reply-to-inbox-thread-email` to keep the thread): from `Nataliia at DataLatte <hi@datalatte.pro>`, plain text + simple HTML, reply in the same thread (`In-Reply-To`) when answering. Partners: send to every address in `contact_emails`, cc `intermediary` if set.
-- Signature: `Nataliia\nDataLatte — data-driven local marketing\nhttps://datalatte.pro`
+- Signature: always append `signature.html` (this folder) to the HTML body and its plain-text version to the text body. Replace `{campaign}` with `reply` / `followup` / `partner` / `invoice`. Do not change links without Nataliia.
 
 ### Templates (adapt, keep short)
 - **First reply (inquiry):** thanks + one line showing you read their message + answer or question + next step (call link / free audit / quote by date).
