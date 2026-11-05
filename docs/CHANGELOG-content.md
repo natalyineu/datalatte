@@ -10,3 +10,4 @@
 - 2026-11-04: Stage B: titles/descriptions fixed for 117 articles
 - 2026-11-04: Added BigStat pull-quote to 20 top-GSC articles (sourced figures only); ethiopia and glovo-vs-wolt skipped (no sourced number).
 - 2026-11-05: Reviewed 30 shortened titles (none needed changes); fixed audits for 5 articles (StatRow, neutral wording); FAQ H3 structure in ai-sales-agent-for-local-business.
+- 2026-11-05: Added BigStat (sourced figure, before 2nd H2) to 30 GSC articles; added StatRow + BigStat to how-much-does-ctv-advertising-cost-real-cpm-data.
