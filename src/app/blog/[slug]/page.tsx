@@ -18,6 +18,10 @@ import StepPlan from "@/components/mdx/StepPlan";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+
+// All posts are by the founder; frontmatter spells it several ways ("Nataliia", typos). Show the full name as on LinkedIn.
+const AUTHOR_FULL_NAME = "Nataliia Rumiantsewa";
+const authorName = (a?: string) => (!a || /^nat/i.test(a.trim()) ? AUTHOR_FULL_NAME : a);
 import CTABanner from "@/components/CTABanner";
 import { hubForPost, getHubCopy } from "@/lib/hubs";
 import { ArrowRight } from "lucide-react";
@@ -635,7 +639,7 @@ export default async function BlogPostPage({
             <Calendar size={14} /> {displayDate}
           </span>
           <span>·</span>
-          <span>{frontmatter.author}</span>
+          <span>{authorName(frontmatter.author)}</span>
           <span>·</span>
           <span className="flex items-center gap-1.5">
             <Clock size={14} /> {frontmatter.readTime}
@@ -762,14 +766,19 @@ export default async function BlogPostPage({
             </Link>
             <div>
               <Link href="/about" className="font-bold text-gray-900 dark:text-gray-50 hover:text-coffee-700 dark:hover:text-coffee-400 transition-colors">
-                {frontmatter.author}
+                {authorName(frontmatter.author)}
               </Link>
               <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5 leading-relaxed">
                 Local marketing strategist with 10+ years at global agencies — OMD, Dentsu, GroupM, and BBDO. Now helping small businesses get the same data-driven edge. Based in Europe, working with clients in the US, UK, Australia, and beyond.
               </p>
-              <Link href="/about" className="inline-flex items-center gap-1 text-xs text-coffee-700 font-semibold mt-2 hover:underline dark:text-coffee-300">
-                About Nataliia <ArrowRight size={12} />
-              </Link>
+              <div className="flex items-center gap-4 mt-2">
+                <Link href="/about" className="inline-flex items-center gap-1 text-xs text-coffee-700 font-semibold hover:underline dark:text-coffee-300">
+                  About Nataliia <ArrowRight size={12} />
+                </Link>
+                <a href="https://www.linkedin.com/in/nataliia-r" target="_blank" rel="noopener me" className="text-xs text-coffee-700 font-semibold hover:underline dark:text-coffee-300">
+                  LinkedIn
+                </a>
+              </div>
             </div>
           </div>
         </div>

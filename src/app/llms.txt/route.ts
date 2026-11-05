@@ -126,7 +126,7 @@ export async function GET(req: Request) {
   const lines: string[] = [
     `# DataLatte — Data-Driven Local Marketing for Small Businesses`,
     ``,
-    `> DataLatte (datalatte.pro) is a digital marketing consultancy founded by Nataliia Rumiantseva — a senior marketing strategist with 10+ years experience at OMD, Dentsu, BBDO, and GroupM. We help local small businesses in the US, UK, Australia, and Canada grow with performance marketing: Google Ads, Meta Ads, Local SEO, Google Business Profile, AI automation, and analytics.`,
+    `> DataLatte (datalatte.pro) is a digital marketing consultancy founded by Nataliia Rumiantsewa — a senior marketing strategist with 10+ years experience at OMD, Dentsu, BBDO, and GroupM. We help local small businesses in the US, UK, Australia, and Canada grow with performance marketing: Google Ads, Meta Ads, Local SEO, Google Business Profile, AI automation, and analytics.`,
     ``,
     `## Core Pages`,
     ``,

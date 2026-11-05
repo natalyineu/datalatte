@@ -61,7 +61,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
           <Link href="/pl/blog" className="inline-flex items-center gap-1 text-sm text-coffee-700 dark:text-coffee-300 hover:underline mb-4"><ArrowLeft size={14} /> Wszystkie artykuły</Link>
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-50 leading-tight mb-4">{d.title}</h1>
           <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500 dark:text-gray-400 pb-6 border-b border-gray-100 dark:border-gray-800">
-            <span className="flex items-center gap-1.5"><Calendar size={14} /> {date}</span><span>·</span><span>{d.author}</span><span>·</span>
+            <span className="flex items-center gap-1.5"><Calendar size={14} /> {date}</span><span>·</span><span>{!d.author || /^nat/i.test(d.author.trim()) ? "Nataliia Rumiantsewa" : d.author}</span><span>·</span>
             <span className="flex items-center gap-1.5"><Clock size={14} /> {d.readTime}</span>
           </div>
         </div>
