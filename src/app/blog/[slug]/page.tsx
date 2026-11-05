@@ -547,6 +547,11 @@ export default async function BlogPostPage({
     // Format 2: **Q: Question?** \n A: Answer
     const boldRegex = /\*\*Q:\s*(.+?)\*\*\s*\n+([\s\S]+?)(?=\n\*\*Q:|\n##|$)/g;
     while ((m = boldRegex.exec(faqSection)) !== null) add(m[1].trim(), clean(m[2]));
+    // Format 3: **Question?** on its own line, answer on the next line(s)
+    if (!items.length) {
+      const boldQRegex = /^\*\*([^*\n]+\?)\*\*[ \t]*\n+([\s\S]+?)(?=\n\*\*[^*\n]+\?\*\*|\n##|$)/gm;
+      while ((m = boldQRegex.exec(faqSection)) !== null) add(m[1].trim(), clean(m[2]));
+    }
     return items;
   })();
 
