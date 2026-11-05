@@ -88,16 +88,16 @@ Each `partner_deals` row has `placement_check` = text that must be on every page
 - **Placement problem fixed:** what happened, when restored, URL.
 
 ## 4. After sending
-Update the row in the same step:
+Update the row in the same step (fill the <...> values):
 ```sql
 update contact_submissions
-set status='replied', replied_at=now(), reply_subject=$1, reply_text=$2, reply_email_id=$3
-where id=$4;
+set status='replied', replied_at=now(), reply_subject='<subject>', reply_text='<text>', reply_email_id='<resend id>'
+where id='<row id>';
 
 update partner_deals
-set timeline = coalesce(timeline,'[]'::jsonb) || jsonb_build_array(jsonb_build_object('at', now(), 'event', $1)),
-    next_step=$2, updated_at=now()
-where id=$3;
+set timeline = coalesce(timeline,'[]'::jsonb) || jsonb_build_array(jsonb_build_object('at', now(), 'event', '<what happened>')),
+    next_step='<next step + date>', updated_at=now()
+where id='<deal id>';
 ```
 Invoices: record `invoice_number`, `invoice_url`, `invoice_status='sent'`; on payment `invoice_status='paid'`, `paid_at`, `deal_status='paid'`.
 

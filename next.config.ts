@@ -1186,7 +1186,7 @@ const nextConfig: NextConfig = {
               "style-src 'self' 'unsafe-inline'",
               "img-src * data: blob:",
               "font-src 'self'",
-              "connect-src 'self' https://vitals.vercel-insights.com https://www.google-analytics.com https://*.clarity.ms https://analytics.twitter.com https://t.co",
+              "connect-src 'self' https://vitals.vercel-insights.com https://www.google-analytics.com https://*.clarity.ms https://t.co https://analytics.twitter.com",
               "frame-src https://www.google.com https://maps.google.com https://www.youtube.com https://calendly.com",
             ].join("; "),
           },
