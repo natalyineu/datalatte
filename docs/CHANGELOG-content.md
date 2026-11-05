@@ -147,3 +147,4 @@
 | pet-groomer-seo-tips | n | 0 |
 | sms-marketing-for-coffee-shops-how-to-start | n | 0 |
 - 2026-11-05: Added FAQ (3 questions built from article text only) to 49 older indexable articles without one; fixed FAQ heading level or formatting in 17 more (10 broken bold headings, 6 H3-to-H2 with Q/A converted to ### questions, 1 unclosed code fence in fitness-studio-local-seo). Other audit gaps (Sources, StatRow, first person) left as is.
+- 2026-11-05: New research article how-much-can-a-coffee-shop-afford-to-spend-on-ads-quickbooks-data (Intuit QuickBooks benchmarking dataset, fetched 2026-11-03: coffee margins by state, 1/2/3% of revenue as share of profit, labelled-assumption $500 test month).
