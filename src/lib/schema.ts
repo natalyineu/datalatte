@@ -53,7 +53,7 @@ export function localBusinessSchema() {
     ],
     founder: {
       "@type": "Person",
-      name: "Nataliia Rumiantseva",
+      name: "Nataliia Rumiantsewa",
       url: `${BASE}/about`,
     },
   };
@@ -82,7 +82,7 @@ export function personSchema() {
     "@context": "https://schema.org",
     "@type": "Person",
     "@id": `${BASE}/#founder`,
-    name: "Nataliia Rumiantseva",
+    name: "Nataliia Rumiantsewa",
     jobTitle: "Digital Marketing Consultant & Founder",
     url: `${BASE}/about`,
     email: "hi@datalatte.pro",
@@ -198,7 +198,7 @@ export function articleSchema({
     author: {
       "@type": "Person",
       "@id": `${BASE}/#founder`,
-      name: "Nataliia Rumiantseva",
+      name: "Nataliia Rumiantsewa",
       url: `${BASE}/about`,
       sameAs: [
         "https://www.linkedin.com/in/nataliia-r",

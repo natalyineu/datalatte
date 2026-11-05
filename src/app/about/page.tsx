@@ -6,7 +6,7 @@ import CTABanner from "@/components/CTABanner";
 import { personSchema } from "@/lib/schema";
 
 const ABOUT_URL = "https://datalatte.pro/about";
-const ABOUT_TITLE = "Nataliia Rumiantseva — DataLatte Founder";
+const ABOUT_TITLE = "Nataliia Rumiantsewa — DataLatte Founder";
 const ABOUT_DESC =
   "I live in Poznań, I'm obsessed with coffee, I cat-sit for friends, and I escape to Croatia every year. Also: 10+ years in digital marketing at OMD, Dentsu, BBDO and GroupM.";
 
