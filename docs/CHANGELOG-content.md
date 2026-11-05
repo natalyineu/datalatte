@@ -146,3 +146,4 @@
 | nextdoor-ads-setup-guide-local-business | n | 0 |
 | pet-groomer-seo-tips | n | 0 |
 | sms-marketing-for-coffee-shops-how-to-start | n | 0 |
+- 2026-11-05: Added FAQ (3 questions built from article text only) to 49 older indexable articles without one; fixed FAQ heading level or formatting in 17 more (10 broken bold headings, 6 H3-to-H2 with Q/A converted to ### questions, 1 unclosed code fence in fitness-studio-local-seo). Other audit gaps (Sources, StatRow, first person) left as is.
