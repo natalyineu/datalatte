@@ -80,17 +80,18 @@ Local small business owners in the US, UK, Australia, Canada, and other English-
 - `src/components/NichePage.tsx` — Reusable niche page template
 - `src/components/CTABanner.tsx` — Reusable CTA section
 - `src/components/SectionWrapper.tsx` — Consistent section padding
-- `src/app/blog/[slug]/page.tsx` — Blog renderer with renderInline() for bold/italic
+- `src/app/blog/[slug]/page.tsx` — MDX blog renderer (schema, TOC, MDX components)
 - `src/app/sitemap.ts` — Static sitemap (update when adding pages)
+- `src/app/api/inbound-email/route.ts` — Zoho → CRM + Telegram ping (shows new reply text only)
+- `src/components/pl/*`, `src/app/pl/*`, `src/content/pl/*` — Polish site (`/pl`)
+- `src/components/mdx/StatRow.tsx`, `Charts.tsx` (BigStat, Heatmap) — article stat blocks
 - `public/images/founder.png` — Nataliia's photo (AI-enhanced headshot)
 
-## 📝 Live Blog Posts
-1. `/blog/coffee-shops-dominate-google-maps`
-2. `/blog/hair-salon-instagram-bookings`
-3. `/blog/pet-groomer-google-ads-mistakes`
-4. `/blog/fitness-studio-year-round-marketing`
-5. `/blog/google-business-profile-optimization-checklist`
-6. `/blog/local-marketing-budget-guide`
+## 📝 Blog
+- ~2,700 MDX posts in `content/blog` (~1,200 indexable; the rest `noindex: true`), Polish posts in `content/blog-pl`. List: `/blog`, sitemap: `src/app/sitemap.ts`.
+- Quality rules and validation live in the skills `datalatte-article` / `datalatte-research-article` and `scripts/audit/check-article.mjs <slug> --date YYYY-MM-DD` (title ≤55, description 120–155, Sources, FAQ, StatRow, sourced facts only, no first person, no links to noindex posts).
+- Every article should have a sourced `<StatRow>` (4 cards; cards labelled as examples show an "Assumption" badge) and, where a sourced number exists, a `<BigStat>` before the 2nd H2. Never use an assumption as BigStat.
+- Change log: `docs/CHANGELOG-content.md`.
 
 ## 🚀 Growth Strategy
 **Current phase**: Rapidly scaling content to build topical authority.
@@ -108,12 +109,9 @@ Local small business owners in the US, UK, Australia, Canada, and other English-
 - Location × niche × service pages: `/for/coffee-shops/austin-tx`
 - Target: ~50 cities × 4 niches = 200 location pages
 
-### Technical SEO (in progress)
-- Submit sitemap to Google Search Console & Bing Webmaster Tools
-- Add `Person` schema to About page
-- Add `FAQPage` schema to all service pages
-- Add `Article` + `Author` schema to blog posts
-- Internal linking architecture: blog → service page → contact
+### Technical SEO
+- Done: sitemap, robots.ts (AI crawlers allowed), `llms.txt` route + `llms-full.txt`, hreflang EN/PL, schema (Article + Breadcrumb + FAQPage on blog via `src/lib/schema.ts`, Organization/Person/Service/WebSite elsewhere). FAQPage is generated only if the article has an `## FAQ` section (`**Question?**` or `### Question` format); ~55 older posts still have none.
+- Open: internal linking architecture (blog → service → contact); GSC re-check of rewritten articles ~2 weeks after each deploy.
 
 ### Quick wins (planned)
 - Free resource (e.g. "Local Marketing Budget Calculator" or "GBP Checklist PDF") for email capture + backlinks
@@ -122,10 +120,14 @@ Local small business owners in the US, UK, Australia, Canada, and other English-
 - **Always commit & push directly to `main`** — no feature branches. The repo deploys on every push to `main` and Nataliia works solo, so PRs add friction with no review benefit. If a Claude Code session opens on a `claude/*` branch, merge into `main` (fast-forward) and push to `main`.
 - **Vercel deploy trigger**: The Ignored Build Step is inverted — commits **with** `[vercel skip]` in the message **trigger** a build; commits **without** it are skipped. Always include `[vercel skip]` in commit messages that should deploy to production.
 - Always run `npm run build` before deploying to catch TypeScript errors
-- Blog posts are defined as objects inside `src/app/blog/[slug]/page.tsx` — add new posts there AND update `generateStaticParams` AND `src/app/sitemap.ts`
-- The `renderInline()` function handles `**bold**` and `*italic*` in blog content
+- Blog posts are MDX files in `content/blog/<slug>.mdx` (frontmatter + body); `src/app/blog/[slug]/page.tsx` renders them with custom MDX components. Sitemap is generated from the content folder.
 - Next.js `fill` prop doesn't clip with `rounded-full` — always use explicit `width`/`height` for circular images
 - Page titles: use `title: { absolute: "..." }` only for home page; all others just use a plain string (template appends "| DataLatte" automatically)
+
+## 💰 Partnerships & paid placements
+- Deals/invoices are tracked in Supabase table `partner_deals` (project `olsxxfwvwsycwzihbmdn`): contacts, brief link, articles, amount, invoice link/status, timeline, next step. Update it on every offer, reply, invoice and payment.
+- Never send outreach/replies without Nataliia's explicit approval of text and recipients. Never delete data (mark skipped).
+- Deploy rule: push to `main` only when Nataliia says so; if she says "don't push", keep commits local.
 
 ## 💡 Claude's Role on This Project
 You are a proactive developer and growth partner who always thinks several steps ahead. Goals:
