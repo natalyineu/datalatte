@@ -155,6 +155,7 @@ export default function AnimatedDashboard({ lang }: { lang?: "pl" } = {}) {
             <button
               key={x.id}
               role="tab"
+              aria-label={x.label}
               aria-selected={k === i}
               onClick={() => setI(k)}
               className={`relative flex-1 px-2 py-3 text-xs sm:text-sm font-semibold transition-colors ${k === i ? "text-white bg-white/10" : "text-gray-400 hover:text-white hover:bg-white/5"}`}

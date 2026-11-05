@@ -597,7 +597,7 @@ export default function HomePage() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
-            <Link href="/advertise" className="inline-flex items-center gap-2 bg-coffee-500 text-white font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-400 transition-all hover:shadow-xl hover:shadow-coffee-900/30">
+            <Link href="/advertise" className="inline-flex items-center gap-2 bg-coffee-700 text-white font-bold px-7 py-3.5 rounded-xl hover:bg-coffee-600 transition-all hover:shadow-xl hover:shadow-coffee-900/30">
               Advertise with us <ArrowRight size={17} />
             </Link>
             <Link href="/partnerships" className="inline-flex items-center gap-2 bg-white/10 border border-white/15 text-white/85 font-semibold px-7 py-3.5 rounded-xl hover:bg-white/15 transition-all">
