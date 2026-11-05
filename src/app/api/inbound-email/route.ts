@@ -66,7 +66,11 @@ export async function POST(req: NextRequest) {
   const message = [subject && `Subject: ${subject}`, snippet].filter(Boolean).join("\n\n");
 
   // Surface money in the Telegram ping: sentences with an amount or a fee/price/payment word (the most important part of an offer)
-  const money = (snippet.match(/[^.\n]*(\$\s?\d|€\s?\d|£\s?\d|\b(fee|price|paid|payment|invoice|budget)\b)[^.\n]*/gi) || []).map((x) => x.trim().slice(0, 140)).slice(0, 3);
+  // Only the sender's NEW text: cut the quoted earlier thread ("On ... wrote:", "Original Message", "> " lines)
+  const fresh = snippet
+    .split(/\n\s*On\s[^\n]{0,160}wrote:|\n\s*-{2,}\s*Original Message|\n\s*From:\s[^\n]+\n\s*(Sent|Date):|\n>/i)[0]
+    .trim().slice(0, 600);
+  const money = (fresh.match(/[^.\n]*(\$\s?\d|€\s?\d|£\s?\d|\b(fee|price|paid|payment|invoice|budget)\b)[^.\n]*/gi) || []).map((x) => x.trim().slice(0, 140)).slice(0, 3);
 
   const tasks: Promise<unknown>[] = [];
   const saved = await saveLead({
@@ -82,7 +86,7 @@ export async function POST(req: NextRequest) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           chat_id: TELEGRAM_CHAT_ID, parse_mode: "HTML",
-          text: `✉️ <b>New e-mail to hi@</b>${saved ? "" : "\n⚠️ <b>NOT saved to CRM</b>"}\n📨 ${esc(email)}${name ? `\n👤 ${esc(name)}` : ""}${subject ? `\n📌 ${esc(subject)}` : ""}${money.length ? `\n💲 ${esc(money.join(" | "))}` : ""}`,
+          text: `✉️ <b>New e-mail to hi@</b>${saved ? "" : "\n⚠️ <b>NOT saved to CRM</b>"}\n📨 ${esc(email)}${name ? `\n👤 ${esc(name)}` : ""}${subject ? `\n📌 ${esc(subject)}` : ""}${fresh ? `\n\n💬 ${esc(fresh)}` : ""}${money.length ? `\n💲 ${esc(money.join(" | "))}` : ""}`,
         }),
       }).catch((e) => console.error("inbound-email: Telegram failed", e)),
     );
