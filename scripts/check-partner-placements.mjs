@@ -8,14 +8,14 @@
  *   node scripts/check-partner-placements.mjs                 # reads deals from Supabase (env)
  *   node scripts/check-partner-placements.mjs deals.json      # deals exported as JSON array
  *   add --write to store last_checked_at / last_check_result in Supabase (env needed)
- * Env: NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY. Exit 1 if any placement fails.
+ * Env: SUPABASE_URL (or NEXT_PUBLIC_SUPABASE_URL), SUPABASE_SERVICE_ROLE_KEY. Exit 1 if any placement fails.
  */
 import { readFileSync } from "node:fs";
 
 const args = process.argv.slice(2);
 const write = args.includes("--write");
 const file = args.find((a) => !a.startsWith("--"));
-const SB = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const SB = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 const KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const sbHeaders = { apikey: KEY, Authorization: `Bearer ${KEY}`, "Content-Type": "application/json" };
 

@@ -51,7 +51,7 @@ Also check Resend inbox (`mcp__Resend__list-received-emails` / `list-inbox-threa
 
 ## 2a. Placement tracking (partner content on the site)
 Each `partner_deals` row has `placement_check` = text that must be on every page in `article_url` (`;`-separated), several values `a|b`. Canonical domain is `https://datalatte.pro` (no www).
-- Run on every account check and after every push that touches `content/blog/`:
+- Automatic: workflow `Check partner placements` runs daily and after every push to `content/blog/` or `next.config.ts`, writes `last_checked_at` / `last_check_result`, alerts Telegram on FAIL. On each account check read `last_check_result`; run manually if older than 24 h:
   ```bash
   node scripts/check-partner-placements.mjs deals.json   # deals exported via Supabase MCP
   node scripts/check-partner-placements.mjs --write      # with Supabase env: reads and stores result
