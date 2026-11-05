@@ -148,3 +148,18 @@
 | sms-marketing-for-coffee-shops-how-to-start | n | 0 |
 - 2026-11-05: Added FAQ (3 questions built from article text only) to 49 older indexable articles without one; fixed FAQ heading level or formatting in 17 more (10 broken bold headings, 6 H3-to-H2 with Q/A converted to ### questions, 1 unclosed code fence in fitness-studio-local-seo). Other audit gaps (Sources, StatRow, first person) left as is.
 - 2026-11-05: New research article how-much-can-a-coffee-shop-afford-to-spend-on-ads-quickbooks-data (Intuit QuickBooks benchmarking dataset, fetched 2026-11-03: coffee margins by state, 1/2/3% of revenue as share of profit, labelled-assumption $500 test month).
+
+## 2026-11-05: top 10 traffic articles that failed the audit
+
+| Slug | What changed |
+|---|---|
+| crm-for-small-business | Rewritten from vendor pages (HubSpot, Zoho, Freshworks): invented opening scene softened, 4-card sourced StatRow, BigStat, question H2s, Pipedrive price removed (page not readable), 2 noindex links removed, Sources updated |
+| fitness-studio-ai-powered-marketing-tools | Rewritten: HFA 2026 report (81M members, 26.1%), FTC CAN-SPAM, StatRow + BigStat, assumption-labelled follow-up example, invented 9:40 pm scene and first person removed, FAQ as ### headings |
+| ai-powered-social-media-management-tools | Rewritten: all prices and trials read from the 10 vendors' pricing pages and Pew 2025 usage; Content Blossom replaced by SocialBee (no source found); StatRow, BigStat, assumption-labelled time-saving example, Sources added |
+| how-much-should-a-coffee-shop-spend-on-google-ads | Unsourced metro/suburb budget table replaced by arithmetic on LocaliQ 2026 Restaurants & Food benchmarks ($2.05 CPC, $30.57 CPL, 8.05%); Google 30.4x monthly limit; StatRow, BigStat, assumption-labelled $500 example, Sources; headings and structure kept |
+| yoga-studio-class-pass-vs-own-membership-marketing | Added 4-card StatRow from figures already cited |
+| pinterest-vs-instagram-ads-local-business | Added 4-card StatRow (Pew, LocaliQ) |
+| how-much-do-spotify-ads-cost-pricing-for-local-business | Added 4-card StatRow (Spotify specs) |
+| fresha-vs-square-vs-vagaro-salon-booking-software | Added 4-card StatRow (vendor rates) |
+| best-google-ad-keywords-for-dog-groomers-in-2026 | Added 4-card StatRow (Seattle Maps pull, assumed CPC labelled); first-person phrasing made neutral |
+| dooh-advertising-for-restaurants | Added StatRow and BigStat (StackAdapt CPM range); invented "forty office workers" removed |
