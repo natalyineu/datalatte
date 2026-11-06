@@ -1,18 +1,19 @@
 {
-  "fetchedAt": "2026-11-05T13:42:28.293Z",
+  "fetchedAt": "2026-11-06T13:26:59.982Z",
   "period": {
     "startDate": "28daysAgo",
     "endDate": "yesterday"
   },
   "propertyId": "properties/537670353",
   "allTimeEventsReal": {
-    "scroll": 2585,
-    "scroll_50": 79,
+    "scroll": 2587,
+    "scroll_50": 85,
     "form_start": 60,
-    "free_audit_clicked": 29,
+    "free_audit_clicked": 30,
     "chat_widget_opened": 25,
     "contact_form_submitted": 9,
-    "chat_message_sent": 8
+    "chat_message_sent": 8,
+    "contact_cta_clicked": 1
   },
   "allTimeChannels": [
     {
@@ -132,6 +133,11 @@
     },
     {
       "d": "20261008",
+      "ch": "Direct",
+      "s": 183
+    },
+    {
+      "d": "20261105",
       "ch": "Direct",
       "s": 183
     },
@@ -741,6 +747,11 @@
       "s": 9
     },
     {
+      "d": "20261105",
+      "ch": "Paid Social",
+      "s": 9
+    },
+    {
       "d": "20260520",
       "ch": "Direct",
       "s": 8
@@ -1087,6 +1098,11 @@
     },
     {
       "d": "20261103",
+      "ch": "Organic Search",
+      "s": 6
+    },
+    {
+      "d": "20261105",
       "ch": "Organic Search",
       "s": 6
     },
@@ -2771,19 +2787,25 @@
       "s": 1
     },
     {
-      "d": "20261104",
+      "d": "20261105",
+      "ch": "Referral",
+      "s": 1
+    },
+    {
+      "d": "20261105",
       "ch": "Unassigned",
       "s": 1
     }
   ],
   "allTimeEvents": {
-    "scroll": 15743,
-    "scroll_50": 2611,
-    "chat_widget_opened": 112,
+    "scroll": 15864,
+    "scroll_50": 2635,
+    "chat_widget_opened": 115,
     "form_start": 74,
-    "free_audit_clicked": 37,
+    "free_audit_clicked": 38,
     "contact_form_submitted": 12,
-    "chat_message_sent": 8
+    "chat_message_sent": 8,
+    "contact_cta_clicked": 1
   },
   "events": [
     {
@@ -2797,7 +2819,7 @@
       ],
       "metricValues": [
         {
-          "value": "1339"
+          "value": "1257"
         }
       ]
     },
@@ -2812,7 +2834,7 @@
       ],
       "metricValues": [
         {
-          "value": "756"
+          "value": "761"
         }
       ]
     },
@@ -2827,7 +2849,7 @@
       ],
       "metricValues": [
         {
-          "value": "714"
+          "value": "686"
         }
       ]
     },
@@ -2842,7 +2864,7 @@
       ],
       "metricValues": [
         {
-          "value": "415"
+          "value": "400"
         }
       ]
     },
@@ -2857,7 +2879,37 @@
       ],
       "metricValues": [
         {
-          "value": "403"
+          "value": "390"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "scroll_25"
+        },
+        {
+          "value": "date_range_1"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "345"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "scroll_25"
+        },
+        {
+          "value": "date_range_0"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "298"
         }
       ]
     },
@@ -2872,37 +2924,7 @@
       ],
       "metricValues": [
         {
-          "value": "355"
-        }
-      ]
-    },
-    {
-      "dimensionValues": [
-        {
-          "value": "scroll_25"
-        },
-        {
-          "value": "date_range_1"
-        }
-      ],
-      "metricValues": [
-        {
-          "value": "349"
-        }
-      ]
-    },
-    {
-      "dimensionValues": [
-        {
-          "value": "scroll_25"
-        },
-        {
-          "value": "date_range_0"
-        }
-      ],
-      "metricValues": [
-        {
-          "value": "313"
+          "value": "290"
         }
       ]
     },
@@ -2917,7 +2939,22 @@
       ],
       "metricValues": [
         {
-          "value": "294"
+          "value": "273"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "floating_cta_shown"
+        },
+        {
+          "value": "date_range_0"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "261"
         }
       ]
     },
@@ -2932,22 +2969,7 @@
       ],
       "metricValues": [
         {
-          "value": "280"
-        }
-      ]
-    },
-    {
-      "dimensionValues": [
-        {
-          "value": "floating_cta_shown"
-        },
-        {
-          "value": "date_range_0"
-        }
-      ],
-      "metricValues": [
-        {
-          "value": "266"
+          "value": "257"
         }
       ]
     },
@@ -2962,7 +2984,7 @@
       ],
       "metricValues": [
         {
-          "value": "252"
+          "value": "248"
         }
       ]
     },
@@ -2992,7 +3014,7 @@
       ],
       "metricValues": [
         {
-          "value": "5"
+          "value": "8"
         }
       ]
     },
@@ -3029,7 +3051,37 @@
     {
       "dimensionValues": [
         {
+          "value": "free_audit_clicked"
+        },
+        {
+          "value": "date_range_0"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "2"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
           "value": "chat_message_sent"
+        },
+        {
+          "value": "date_range_0"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "contact_cta_clicked"
         },
         {
           "value": "date_range_0"
@@ -3077,21 +3129,6 @@
           "value": "free_audit_clicked"
         },
         {
-          "value": "date_range_0"
-        }
-      ],
-      "metricValues": [
-        {
-          "value": "1"
-        }
-      ]
-    },
-    {
-      "dimensionValues": [
-        {
-          "value": "free_audit_clicked"
-        },
-        {
           "value": "date_range_1"
         }
       ],
@@ -3120,6 +3157,21 @@
       "dimensionValues": [
         {
           "value": "chat_message_sent"
+        },
+        {
+          "value": "date_range_1"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "0"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "contact_cta_clicked"
         },
         {
           "value": "date_range_1"
@@ -3451,7 +3503,7 @@
     {
       "dimensionValues": [
         {
-          "value": "20261008"
+          "value": "20261105"
         },
         {
           "value": "Direct"
@@ -3691,6 +3743,21 @@
     {
       "dimensionValues": [
         {
+          "value": "20261105"
+        },
+        {
+          "value": "Paid Social"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "9"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
           "value": "20261015"
         },
         {
@@ -3797,6 +3864,21 @@
       "dimensionValues": [
         {
           "value": "20261103"
+        },
+        {
+          "value": "Organic Search"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "6"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "20261105"
         },
         {
           "value": "Organic Search"
@@ -4021,21 +4103,6 @@
     {
       "dimensionValues": [
         {
-          "value": "20261008"
-        },
-        {
-          "value": "Organic Search"
-        }
-      ],
-      "metricValues": [
-        {
-          "value": "3"
-        }
-      ]
-    },
-    {
-      "dimensionValues": [
-        {
           "value": "20261013"
         },
         {
@@ -4165,21 +4232,6 @@
       "metricValues": [
         {
           "value": "2"
-        }
-      ]
-    },
-    {
-      "dimensionValues": [
-        {
-          "value": "20261008"
-        },
-        {
-          "value": "AI Assistant"
-        }
-      ],
-      "metricValues": [
-        {
-          "value": "1"
         }
       ]
     },
@@ -4501,7 +4553,22 @@
     {
       "dimensionValues": [
         {
-          "value": "20261104"
+          "value": "20261105"
+        },
+        {
+          "value": "Referral"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "20261105"
         },
         {
           "value": "Unassigned"
@@ -4545,22 +4612,22 @@
       {
         "metricValues": [
           {
-            "value": "16781"
+            "value": "16578"
           },
           {
-            "value": "16617"
+            "value": "16638"
           },
           {
-            "value": "16533"
+            "value": "16538"
           },
           {
-            "value": "0.98498301650676356"
+            "value": "0.984678489564483"
           },
           {
-            "value": "6.7196449380847385"
+            "value": "6.5718747818192789"
           },
           {
-            "value": "16474"
+            "value": "16490"
           }
         ]
       }
@@ -4614,7 +4681,7 @@
           "value": "105"
         },
         {
-          "value": "93"
+          "value": "95"
         }
       ]
     },
@@ -4636,15 +4703,45 @@
     {
       "dimensionValues": [
         {
+          "value": "/blog/college-football-ctv-advertising-local-business"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "28"
+        },
+        {
+          "value": "18"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
           "value": "/blog/new-ctv-ad-formats-2026-pause-ads-qr-codes-shoppable"
         }
       ],
       "metricValues": [
         {
-          "value": "24"
+          "value": "25"
         },
         {
+          "value": "24"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "/blog/local-marketing-trinidad-tobago-small-business-2026"
+        }
+      ],
+      "metricValues": [
+        {
           "value": "23"
+        },
+        {
+          "value": "14"
         }
       ]
     },
@@ -4666,21 +4763,6 @@
     {
       "dimensionValues": [
         {
-          "value": "/blog/local-marketing-russia-small-business-2026"
-        }
-      ],
-      "metricValues": [
-        {
-          "value": "21"
-        },
-        {
-          "value": "20"
-        }
-      ]
-    },
-    {
-      "dimensionValues": [
-        {
           "value": "/blog/small-business-marketing-russia-2026"
         }
       ],
@@ -4690,6 +4772,51 @@
         },
         {
           "value": "21"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "/blog/local-marketing-mongolia-small-business-2026"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "20"
+        },
+        {
+          "value": "20"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "/blog/local-marketing-russia-small-business-2026"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "20"
+        },
+        {
+          "value": "19"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "/free-audit"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "20"
+        },
+        {
+          "value": "16"
         }
       ]
     },
@@ -4711,52 +4838,7 @@
     {
       "dimensionValues": [
         {
-          "value": "/blog/local-marketing-ghana-small-business-2026"
-        }
-      ],
-      "metricValues": [
-        {
-          "value": "19"
-        },
-        {
-          "value": "19"
-        }
-      ]
-    },
-    {
-      "dimensionValues": [
-        {
-          "value": "/blog/local-marketing-mongolia-small-business-2026"
-        }
-      ],
-      "metricValues": [
-        {
-          "value": "19"
-        },
-        {
-          "value": "19"
-        }
-      ]
-    },
-    {
-      "dimensionValues": [
-        {
-          "value": "/blog/local-marketing-trinidad-tobago-small-business-2026"
-        }
-      ],
-      "metricValues": [
-        {
-          "value": "19"
-        },
-        {
-          "value": "12"
-        }
-      ]
-    },
-    {
-      "dimensionValues": [
-        {
-          "value": "/blog/coffee-shop-iphone-photography-tips-for-social-media"
+          "value": "/blog/adjust-vs-appsflyer-comparison"
         }
       ],
       "metricValues": [
@@ -4764,7 +4846,7 @@
           "value": "18"
         },
         {
-          "value": "18"
+          "value": "19"
         }
       ]
     },
@@ -4801,42 +4883,12 @@
     {
       "dimensionValues": [
         {
-          "value": "/blog/local-marketing-vietnam-small-business-2026"
+          "value": "/blog/local-marketing-ghana-small-business-2026"
         }
       ],
       "metricValues": [
         {
           "value": "18"
-        },
-        {
-          "value": "18"
-        }
-      ]
-    },
-    {
-      "dimensionValues": [
-        {
-          "value": "/free-audit"
-        }
-      ],
-      "metricValues": [
-        {
-          "value": "18"
-        },
-        {
-          "value": "16"
-        }
-      ]
-    },
-    {
-      "dimensionValues": [
-        {
-          "value": "/blog/adjust-vs-appsflyer-comparison"
-        }
-      ],
-      "metricValues": [
-        {
-          "value": "17"
         },
         {
           "value": "18"
@@ -4906,7 +4958,7 @@
     {
       "dimensionValues": [
         {
-          "value": "/blog/local-marketing-myanmar-small-business-2026"
+          "value": "/blog/local-marketing-vietnam-small-business-2026"
         }
       ],
       "metricValues": [
@@ -4914,22 +4966,22 @@
           "value": "17"
         },
         {
-          "value": "18"
+          "value": "17"
         }
       ]
     },
     {
       "dimensionValues": [
         {
-          "value": "/blog/local-marketing-venezuela-small-business-2026"
+          "value": "/blog/coffee-shop-iphone-photography-tips-for-social-media"
         }
       ],
       "metricValues": [
         {
-          "value": "17"
+          "value": "16"
         },
         {
-          "value": "15"
+          "value": "16"
         }
       ]
     },
@@ -4966,7 +5018,7 @@
     {
       "dimensionValues": [
         {
-          "value": "/blog/local-marketing-turkey-small-business-2026"
+          "value": "/blog/local-marketing-ethiopia-small-business-2026"
         }
       ],
       "metricValues": [
@@ -4981,7 +5033,22 @@
     {
       "dimensionValues": [
         {
-          "value": "/blog/walmart-connect-ads-small-business"
+          "value": "/blog/local-marketing-myanmar-small-business-2026"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "16"
+        },
+        {
+          "value": "17"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "/blog/local-marketing-venezuela-small-business-2026"
         }
       ],
       "metricValues": [
@@ -4996,7 +5063,7 @@
     {
       "dimensionValues": [
         {
-          "value": "/blog/local-marketing-belarus-small-business-2026"
+          "value": "/blog/best-free-openrouter-models-business-automation"
         }
       ],
       "metricValues": [
@@ -5004,14 +5071,14 @@
           "value": "15"
         },
         {
-          "value": "16"
+          "value": "15"
         }
       ]
     },
     {
       "dimensionValues": [
         {
-          "value": "/blog/local-marketing-egypt-small-business-2026"
+          "value": "/blog/ctv-advertising-australia-small-business-guide"
         }
       ],
       "metricValues": [
@@ -5033,10 +5100,10 @@
       ],
       "metricValues": [
         {
-          "value": "16571"
+          "value": "16392"
         },
         {
-          "value": "16442"
+          "value": "16447"
         }
       ]
     },
@@ -5048,7 +5115,7 @@
       ],
       "metricValues": [
         {
-          "value": "160"
+          "value": "163"
         },
         {
           "value": "118"
@@ -5063,10 +5130,10 @@
       ],
       "metricValues": [
         {
-          "value": "18"
+          "value": "19"
         },
         {
-          "value": "10"
+          "value": "11"
         }
       ]
     },
@@ -5078,10 +5145,10 @@
       ],
       "metricValues": [
         {
-          "value": "16"
+          "value": "15"
         },
         {
-          "value": "12"
+          "value": "11"
         }
       ]
     },
@@ -5103,6 +5170,21 @@
     {
       "dimensionValues": [
         {
+          "value": "Paid Social"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "9"
+        },
+        {
+          "value": "8"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
           "value": "Organic Social"
         }
       ],
@@ -5117,21 +5199,6 @@
     }
   ],
   "dailyTrend": [
-    {
-      "dimensionValues": [
-        {
-          "value": "20261008"
-        }
-      ],
-      "metricValues": [
-        {
-          "value": "187"
-        },
-        {
-          "value": "187"
-        }
-      ]
-    },
     {
       "dimensionValues": [
         {
@@ -5534,6 +5601,21 @@
         },
         {
           "value": "164"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "20261105"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "199"
+        },
+        {
+          "value": "194"
         }
       ]
     }
