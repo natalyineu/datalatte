@@ -79,33 +79,45 @@ function getBlogCategories(): string[] {
     .filter((f) => f.endsWith(".mdx"))
     .forEach((f) => {
       const { data } = matter(fs.readFileSync(path.join(contentDir, f), "utf8"));
+      if (data.noindex === true) return; // never advertise noindex posts
       if (data.category) cats.add(String(data.category));
     });
   return [...cats].sort();
 }
 
-function getAllBlogPosts(): { slug: string; title: string }[] {
-  const files = fs.readdirSync(contentDir).filter((f) => f.endsWith(".mdx"));
-  const posts: { slug: string; title: string; date: string }[] = [];
+type Post = { slug: string; title: string; description: string; updated: string };
 
+/** Indexable posts only (noindex posts are never listed), most recently updated first. */
+function getIndexablePosts(): Post[] {
+  const files = fs.readdirSync(contentDir).filter((f) => f.endsWith(".mdx"));
+  const posts: Post[] = [];
   for (const file of files) {
     const { data } = matter(fs.readFileSync(path.join(contentDir, file), "utf8"));
+    if (data.noindex === true) continue;
     posts.push({
       slug: file.replace(".mdx", ""),
       title: String(data.title ?? ""),
-      date: String(data.date ?? ""),
+      description: String(data.description ?? ""),
+      updated: String(data.lastModified ?? data.date ?? ""),
     });
   }
-
-  return posts
-    .sort((a, b) => b.date.localeCompare(a.date))
-    .map(({ slug, title }) => ({ slug, title }));
+  return posts.sort((a, b) => b.updated.localeCompare(a.updated));
 }
+
+const RESEARCH_SLUGS = [
+  "how-much-can-a-coffee-shop-afford-to-spend-on-ads-quickbooks-data",
+  "marketing-agency-for-a-coffee-shop-can-you-afford-one",
+  "meta-andromeda-update-october-2026-local-ads",
+];
+
+const TOP_N = 150;
 
 export async function GET(req: Request) {
   const ua = req.headers.get("user-agent") ?? "unknown";
   console.log(`[llms.txt] ${new Date().toISOString()} ua="${ua}"`);
-  const topPosts = getAllBlogPosts();
+  const allPosts = getIndexablePosts();
+  const topPosts = allPosts.slice(0, TOP_N);
+  const research = RESEARCH_SLUGS.map((slug) => allPosts.find((p) => p.slug === slug)).filter((p): p is Post => Boolean(p));
   const categories = getBlogCategories();
 
   let radarLines: string[] = [];
@@ -133,7 +145,7 @@ export async function GET(req: Request) {
     `- [Homepage](${BASE}): Overview of services and value proposition for local businesses`,
     `- [About Nataliia](${BASE}/about): Founder background, experience, and approach`,
     `- [Services overview](${BASE}/services): Full list of marketing services offered`,
-    `- [Blog](${BASE}/blog): 1500+ how-to guides and strategies for local business marketing`,
+    `- [Blog](${BASE}/blog): ${allPosts.length}+ how-to guides and strategies for local business marketing`,
     `- [Free marketing checklists](${BASE}/checklists): Step-by-step checklists for Google Ads, SEO, Meta Ads, and more`,
     `- [Marketing Radar](${BASE}/radar): Weekly local marketing insights and trends`,
     `- [Contact / Free Audit](${BASE}/contact): Get a free marketing audit`,
@@ -169,9 +181,14 @@ export async function GET(req: Request) {
     }),
     ``,
     ...radarLines,
-    `## Blog — All Articles`,
+    ...(research.length
+      ? [`## Original Research`, ``, ...research.map(({ slug, title, description }) => `- [${title}](${BASE}/blog/${slug}): ${description}`), ``]
+      : []),
+    `## Blog — Recently Updated Articles`,
     ``,
-    ...topPosts.map(({ slug, title }) => `- [${title}](${BASE}/blog/${slug})`),
+    `The ${TOP_N} most recently updated of ${allPosts.length} indexable articles. Full list: ${BASE}/sitemap.xml`,
+    ``,
+    ...topPosts.map(({ slug, title, description }) => `- [${title}](${BASE}/blog/${slug})${description ? `: ${description.slice(0, 120)}` : ""}`),
     ``,
   ];
 
