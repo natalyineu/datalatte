@@ -52,6 +52,7 @@ export default function FooterPL() {
           <span className="flex gap-4">
             <Link href="/pl/polityka-prywatnosci" className="hover:text-white">Polityka prywatności</Link>
             <CookieSettingsLink />
+            <a href="/llms.txt" className="opacity-50 hover:opacity-100 hover:text-white">llms.txt</a>
           </span>
         </div>
       </div>
