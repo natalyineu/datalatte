@@ -23,11 +23,11 @@ for (const item of queue) {
   const file = path.join(outDir, `${item.id}.json`);
   if (fs.existsSync(file)) continue;
   if (done >= limit) break;
-  const url = `https://api.apify.com/v2/acts/apify~rag-web-browser/run-sync-get-dataset-items?token=${TOKEN}&timeout=120`;
+  const url = `https://api.apify.com/v2/acts/apify~rag-web-browser/run-sync-get-dataset-items?timeout=120`;
   try {
     const res = await fetch(url, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: TOKEN === "proxy-injected" ? { "Content-Type": "application/json" } : { "Content-Type": "application/json", Authorization: `Bearer ${TOKEN}` }, // proxy-injected: the session proxy adds the saved token
       body: JSON.stringify({ query: item.query, maxResults: item.maxResults || 4, outputFormats: ["markdown"] }),
     });
     if (!res.ok) { console.error(`✗ ${item.id}: HTTP ${res.status} ${(await res.text()).slice(0, 200)}`); continue; }

@@ -168,5 +168,30 @@
   "id": "tool-cursor-refresh-docs",
   "query": "Cursor changelog latest release",
   "maxResults": 4
+ },
+ {
+  "id": "tool-grok-build-official",
+  "query": "site:x.ai Grok Build",
+  "maxResults": 4
+ },
+ {
+  "id": "tool-openai-codex-official",
+  "query": "site:developers.openai.com Codex pricing",
+  "maxResults": 4
+ },
+ {
+  "id": "tool-openai-codex-official2",
+  "query": "site:openai.com Codex",
+  "maxResults": 4
+ },
+ {
+  "id": "tool-windsurf-official",
+  "query": "site:windsurf.com pricing",
+  "maxResults": 4
+ },
+ {
+  "id": "tool-bolt-new-official",
+  "query": "site:bolt.new pricing OR site:support.bolt.new tokens plans",
+  "maxResults": 4
  }
 ]
