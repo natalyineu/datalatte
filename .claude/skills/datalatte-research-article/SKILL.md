@@ -3,6 +3,9 @@ name: datalatte-research-article
 description: Write a long, data-driven DataLatte article from our own dataset (city rankings, audits, benchmarks) with charts, BigStat pull-quotes, tables, sourced playbooks and a validation pass. Use when asked to make a research article, ranking, "analysis of N businesses", pillar article, or when a chart, BigStat or big-number block is wanted in a blog post.
 ---
 
+> **Frozen paid placements.** Never edit, reword, move, delete or restyle partner-supplied blocks listed in `data/protected-placements.json` (Spotify section, Vibe blocks, Flodesk bullet). Keep them byte-for-byte in place when rewriting a host article, and do not add the partner's name anywhere else in it. Run `node scripts/check-protected-placements.mjs` before committing.
+
+
 # DataLatte research article skill
 
 For articles built on **our own data** (Google Maps listings, website audits, GSC) rather than rewriting vendor facts. The plain rewrite rules live in `.claude/skills/datalatte-article/SKILL.md` and still apply (sources, no first person, structure, FAQ). This skill adds the data workflow, the readability layer (BigStat, charts) and the quality gates learned on the Poznań cafés article.

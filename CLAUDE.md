@@ -124,6 +124,13 @@ Local small business owners in the US, UK, Australia, Canada, and other English-
 - Next.js `fill` prop doesn't clip with `rounded-full` — always use explicit `width`/`height` for circular images
 - Page titles: use `title: { absolute: "..." }` only for home page; all others just use a plain string (template appends "| DataLatte" automatically)
 
+## 🔒 Frozen paid placements (never modify)
+The text supplied by partners under a paid agreement ("по ТЗ") must stay **byte-for-byte identical** in the article, in the same place, with the same label (or none, as published). Do not edit, reword, shorten, translate, reformat, move, merge, delete, or add links/attributes/figures to these blocks. This holds for every rewrite, title tune, link clean-up, FAQ or StatRow pass, and every agent.
+- The exact protected texts are in `data/protected-placements.json` (Spotify Advertising section, three Vibe blocks, the Flodesk bullet). Check: `node scripts/check-protected-placements.mjs` (exit 1 if any block changed); `scripts/audit/check-article.mjs` also fails with "PROTECTED PLACEMENT altered or missing".
+- The rest of a host article may be improved, but the placement must be kept as is. Do not add the partner's name in new places (cards, BigStat, FAQ, sources) without Nataliia's approval.
+- A new paid placement is added to `data/protected-placements.json` right after it is published, and logged in `partner_deals`.
+- Run the check before every push that touches `content/blog/`.
+
 ## 💰 Partnerships & paid placements
 - Deals/invoices are tracked in Supabase table `partner_deals` (project `olsxxfwvwsycwzihbmdn`): contacts, brief link, articles, amount, invoice link/status, timeline, next step. Update it on every offer, reply, invoice and payment.
 - Never send outreach/replies without Nataliia's explicit approval of text and recipients. Never delete data (mark skipped).

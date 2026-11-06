@@ -3,6 +3,9 @@ name: datalatte-article
 description: Write or rewrite a DataLatte blog article (content/blog/*.mdx) with sourced facts only, then validate it. Use when asked to rewrite, fix, expand or create a blog post, run a rewrite wave, or clean fabricated stats, invented cases or first-person text.
 ---
 
+> **Frozen paid placements.** Never edit, reword, move, delete or restyle partner-supplied blocks listed in `data/protected-placements.json` (Spotify section, Vibe blocks, Flodesk bullet). Keep them byte-for-byte in place when rewriting a host article, and do not add the partner's name anywhere else in it. Run `node scripts/check-protected-placements.mjs` before committing.
+
+
 # DataLatte article skill
 
 One article = one pass through six steps. Do not skip the checker.

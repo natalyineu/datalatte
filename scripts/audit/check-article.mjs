@@ -34,8 +34,16 @@ const noindex = (slug) => /^noindex:\s*true/m.test(fs.readFileSync(path.join(DIR
 function check(slug) {
   const file = path.join(DIR, slug + ".mdx");
   if (!fs.existsSync(file)) return { slug, errors: ["file not found"], warns: [] };
-  const { fm, body } = split(fs.readFileSync(file, "utf8"));
+  const rawFile = fs.readFileSync(file, "utf8");
+  const { fm, body } = split(rawFile);
   const E = [], W = [];
+  // Paid placements are frozen: the supplied text must stay byte-identical (data/protected-placements.json)
+  try {
+    const prot = JSON.parse(fs.readFileSync(path.join(DIR, "..", "..", "data", "protected-placements.json"), "utf8"));
+    for (const p of prot.filter((x) => x.slug === slug)) {
+      if (!rawFile.includes(p.text)) E.push(`PROTECTED PLACEMENT altered or missing (${p.partner}): restore it exactly from data/protected-placements.json`);
+    }
+  } catch { /* no protected file: nothing to check */ }
   const lines = body.split("\n");
 
   if ((fm.title || "").length > 55) E.push(`title ${fm.title.length} chars (max 55)`);
