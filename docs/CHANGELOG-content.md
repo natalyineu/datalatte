@@ -177,3 +177,16 @@
 | salon-rebooking-script-that-gets-clients-back | Rewrite: answer-first script, scripts labelled as templates, first person removed, Zenoti re-verified, Boulevard retention data added, ICO claim dropped (page not readable), StatRow source, FAQ as ### |
 | best-google-ad-keywords-for-cleaning-services-in-2026 | Light fix: 4-card StatRow from figures already in the article, first-person/"we" wording made neutral |
 | google-business-profile-coffee-shop-tips | Light fix: 4-card BrightLocal StatRow from figures already in the article |
+
+- 2026-11-06: Rewrote 8 remaining failing traffic articles with sources (0 audit errors each).
+
+| slug | what changed |
+|---|---|
+| local-marketing-ethiopia-small-business-2026 | Sources added (DataReportal Digital 2026 Ethiopia, Telebirr via StockMarket.et, Telegram ad terms); StatRow and BigStat (21.7% internet penetration); first-person "we" removed; ETB budget example labelled assumption |
+| ctv-advertising-usa-local-business-guide | Unsourced per-platform CPMs, audience claims and compliance section removed; Roku and Disney $500 minimums, Tubi self-serve, AdWave/eMarketer CPMs added with Sources; $500 worked example (assumption) |
+| facebook-ads-for-personal-injury-lawyers | LocaliQ 2026 Facebook benchmarks (legal CPC $0.69) in StatRow and BigStat; Meta personal-attributes policy and California Rules 7.1/7.2 text checked; first-person line removed; cost cap and form-type claims that could not be verified deleted |
+| google-ads-for-dermatologists | LocaliQ 2026 Physicians and Surgeons benchmark ($4.76 CPC, $40.04 CPL) added; Google healthcare and personalized-advertising policy pages cited; worked example now uses benchmark plus labelled assumptions |
+| google-ads-for-personal-trainers | Invented per-keyword CPC table removed; LocaliQ 2026 Health and Fitness benchmark and Google Ads help (negatives, location, call tracking) added; assumption-labelled $600 example |
+| how-much-do-youtube-ads-cost-real-cpv-cpm-data | Vague ranges replaced by AdWave 2026 and Mega Digital benchmarks (flagged as vendor/older data) and Google billing rules per format; CPM-to-CPV formula and $300 test (assumption) |
+| dv360-for-small-business-is-it-worth-it | Google DV360 help pages added (fee is a percentage of media cost set by contract, no public rate stated); 35M Display reach; fee-split example labelled assumption; unsourced platform claims removed |
+| podcast-advertising-australia-local-business-guide | "We found" and other first-person phrases removed; Edison/CRA, Mediaweek, IAB Australia (via PPC Land), Spotify and AANA figures re-checked; unverified A$250 minimum and Spotify pricing claim removed; H2s turned into questions |
