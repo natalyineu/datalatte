@@ -165,3 +165,15 @@
 | dooh-advertising-for-restaurants | Added StatRow and BigStat (StackAdapt CPM range); invented "forty office workers" removed |
 
 - 2026-11-06 — noindex for 64 old posts with invented cases/first-person text and ~0 impressions (rewrite pending); links to them removed from other posts (217 bullets, 181 inline links, 9 empty Related headings). Not touched: best-marketing-for-salons-in-2026-what-actually-works-with-real-examples and coffee-shop-google-business-profile-optimization (they have impressions; rewrite next). Undo: delete the `noindex: true` line.
+
+## 2026-11-06: 7 near-page-1 articles
+
+| Slug | What changed |
+|---|---|
+| best-marketing-for-salons-in-2026-what-actually-works-with-real-examples | Full rewrite: invented salon cases, ROI figures and first person removed; title changed to "What Works" (no "real examples" promise). Now built on Boulevard retention report, Phorest 2025 survey, LocaliQ 2026 Beauty benchmarks, BrightLocal 2026, Google ranking help, FTC influencer disclosure rules. StatRow, BigStat, assumption-labelled second-visit example, Sources, FAQ |
+| coffee-shop-google-business-profile-optimization | Full rewrite as a setup walkthrough from Google Business Profile help pages (guidelines, verification, menu editor, photos, special hours, posts, performance report) and BrightLocal 2026. Invented client stories, Q&A and file-name ranking claims removed; StatRow, BigStat, assumption-labelled example, Sources |
+| podcast-advertising-for-coffee-shops | Rewrite: answer-first intro, Edison Infinite Dial 2026 and IAB/PwC re-verified, Gumball second-hand stats replaced by Magellan AI Q1 2026 (via Radio Ink, marked secondary), first person and unsourced Spotify claim removed, StatRow source, BigStat, FAQ as ### |
+| is-10-a-day-enough-for-google-ads-complete-guide-for-2026 | Full rewrite: invented client results and CTR/CPC table removed; replaced with LocaliQ 2026 benchmark arithmetic, Google daily-budget (2x / 30.4x), Smart Bidding, match type, location help pages; StatRow, BigStat, assumption-labelled example, Sources |
+| salon-rebooking-script-that-gets-clients-back | Rewrite: answer-first script, scripts labelled as templates, first person removed, Zenoti re-verified, Boulevard retention data added, ICO claim dropped (page not readable), StatRow source, FAQ as ### |
+| best-google-ad-keywords-for-cleaning-services-in-2026 | Light fix: 4-card StatRow from figures already in the article, first-person/"we" wording made neutral |
+| google-business-profile-coffee-shop-tips | Light fix: 4-card BrightLocal StatRow from figures already in the article |
