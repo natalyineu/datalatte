@@ -1,0 +1,107 @@
+---
+title: "Meta Andromeda Update (October 2026): Local Ads"
+date: "2026-11-06"
+lastModified: "2026-11-06"
+description: "Meta's Oct 28, 2026 post says Andromeda scores over 1 billion ads per second, 100x the 2024 system. What it says, leaves out, and means for local ads."
+author: "Nataliia"
+category: "Meta Ads"
+tags: ["meta ads", "andromeda", "facebook ads", "local advertising", "ad delivery"]
+slug: "meta-andromeda-update-october-2026-local-ads"
+image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80&auto=format&fit=crop"
+readTime: "8 min read"
+---
+
+Meta published a new engineering post on October 28, 2026 about the next generation of Andromeda, the system that picks which ads are considered for each person. It says the system now scores over one billion ads per second on a single GPU server, 100x the 2024 system, and reports a 2.4% increase in conversions on Facebook since 2025. It gives advertisers no new instructions.
+
+This article separates what Meta wrote from what others are saying about it. Numbers come from the two Meta engineering posts and LocaliQ's 2026 benchmarks. Meta Business Help Center pages did not load, so nothing here is taken from them.
+
+<StatRow
+  values="1 billion+|100x|2.4%|300x"
+  labels="Ads scored per second on a single GPU server|Throughput vs the 2024 Andromeda system|Increase in conversions on Facebook since 2025|Fewer inference-time FLOPs than the 2024 retrieval model"
+  subs="Meta Engineering, Oct 28, 2026|Meta's own comparison|Meta attributes it to Andromeda|Meta's own figure"
+  trends="up|up|up|down"
+  source="Engineering at Meta, Oct 28, 2026 (company-reported figures)"
+/>
+
+<BigStat value="+2.4%" label="Meta reports a 2.4% increase in conversions on Facebook since 2025, attributed to the new Andromeda" note="Company-reported, no method or baseline given in the post. It is an aggregate across Facebook, not a result for any single advertiser." source="Engineering at Meta, Oct 28, 2026" />
+
+## What does Meta say about the new Andromeda?
+
+Andromeda is the retrieval stage of Meta's ad system. According to the 2024 post, retrieval narrows tens of millions of ad candidates to a few thousand, and later ranking models choose the final ads. The 2026 post describes a redesigned version of that first stage.
+
+Figures stated in the October 28, 2026 post:
+
+- Over one billion ads per second on a single GPU server, scoring every eligible ad. Meta calls this a 100x lift over the 2024 system.
+- About 300x fewer inference-time FLOPs than the 2024 retrieval model.
+- A 2.4% increase in conversions on Facebook since 2025.
+- Generative AI creative tools helped advertisers create "hundreds of millions of new ads".
+
+On how it decides, Meta lists signals on the user side: sequential ad engagement events, user-cohort representations, LLM-derived semantic features and cross-surface co-engagement. On the ad side, candidates are encoded together with real-time serving context. The post says advertisers get "better performance automatically from the retrieval system matching ads across a larger candidate pool".
+
+## What does Meta not say?
+
+The post does not use the name "Andromeda 2.0". It says "the next generation of Meta Andromeda" and "the 2026 Meta Andromeda". "2.0" is a label used outside Meta's post.
+
+It also does not tell advertisers to change anything. The words CBO, campaign budget optimization and ad sets do not appear, and it does not describe how a brand-new ad with no spend history is judged. Creative appears only in the context of generative AI tools producing more ads.
+
+Claims such as "performance will drop within days" or "build one ad set per persona" are not in Meta's post. They may be someone's advice or experience, but the post does not support them. The 2024 post is the one that mentions Advantage+, which it says automates budget allocation, audience targeting and bid adjustments.
+
+## What changed between the 2024 and 2026 posts?
+
+The 2024 post reported +6% recall for retrieval, +8% ads quality on selected segments and a 22% ROAS increase for advertisers who had not used Advantage+ creative and turned on its AI-driven targeting. The 2026 post reports +2.4% conversions on Facebook. These measure different things, so they should not be compared as if one were bigger.
+
+The 2024 post said Advantage+ and generative AI tools were expected to increase the number of ad creatives significantly and that increased ad diversity can improve people's experience and advertiser outcomes. The 2026 post's "hundreds of millions of new ads" is consistent with that direction.
+
+## What does this mean for a local business?
+
+Meta's posts describe the system, not a method for advertisers, so everything below is a recommendation, not a measured result. It rests on what the posts say and on LocaliQ's 2026 Meta benchmarks (updated September 23, 2026, produced with WordStream, no sample size published).
+
+- **Keep creative varied.** Meta says more ad diversity can help outcomes (2024 post). Consider two or three distinct images or videos of real products and the shop, rather than small edits of one.
+- **Let the placement and audience tools work if you lack data.** The 2026 post says gains arrive "automatically" from matching across a larger candidate pool. A small account with few conversions has less to tune by hand.
+- **Measure on your own numbers.** LocaliQ lists lead campaigns at 2.70% CTR, $1.80 CPC, 8.54% conversion rate and $27.39 cost per lead across industries. Beauty and Personal Care shows $50.91 per lead and Health and Fitness $27.11. Restaurants and Food appears only in traffic campaigns, at 2.68% CTR and $0.45 CPC.
+- **Do not restructure on a rumor.** Nothing in either post says to rebuild campaigns. Change one thing at a time and compare a few weeks of results.
+
+Meta Business Help pages on the learning phase, Advantage+ and best practices returned page titles only when opened, so this article makes no claim about learning-phase thresholds or budget rules. Check those pages in your Ads Manager before changing budgets.
+
+## What are agencies saying?
+
+Commentary from practitioners and agencies has circulated since October 28. Some say the update will change how ad accounts should be structured, some say results will drop for accounts with few creatives, and some say little will change. This is opinion. None of it comes with public evidence that DataLatte could open, and it is not quoted or attributed here.
+
+Treat advice that begins "you must" with caution unless it points to a Meta page or to data you can check. A fair test of any such advice is whether it would still make sense if Meta's post were the only evidence.
+
+## What does a small local budget look like in practice?
+
+**Assumption:** a café with a $300 monthly Meta budget (assumption, not a recommended amount).
+
+At LocaliQ's all-industry traffic CPC of $0.60, $300 buys about 500 clicks ($300 / $0.60). At the leads cost per lead of $27.39, the same $300 gives about 11 leads ($300 / $27.39 = 10.95). These are benchmarks, not forecasts: a café's cost can differ widely, and Restaurants and Food has no published leads row.
+
+A reasonable plan under that assumption is one campaign, two or three different creatives, and a review after a few weeks against the shop's own cost per result. See the [Meta ads guide for coffee shops](/blog/meta-ads-for-coffee-shops-2026), the [Facebook ads guide for coffee shops](/blog/coffee-shop-facebook-ads-guide) and [Instagram story ads for salons](/blog/instagram-story-ads-for-salons-bookings). For setup help, see the [Meta Ads service page](/services/meta-ads).
+
+## FAQ
+
+### Is there an Andromeda 2.0?
+
+Meta's October 28, 2026 post does not use that name. It refers to "the next generation of Meta Andromeda" and "the 2026 Meta Andromeda".
+
+### Do I need to change my Meta campaigns after the update?
+
+Meta's post gives advertisers no instructions. Changes should be driven by your own results, not by the announcement.
+
+### Does Andromeda change how new ads are judged?
+
+The post does not say how a new ad with no spend history is treated. Any claim about that is not supported by it.
+
+### Does Meta recommend one ad set per persona?
+
+Not in the October 2026 post, which does not mention ad sets. Treat the claim as practitioner opinion.
+
+### Will my conversions go up 2.4%?
+
+No. The 2.4% is Meta's reported aggregate for Facebook since 2025. It is not a forecast for any single advertiser.
+
+## Sources
+
+- [Engineering at Meta, Meta Andromeda: next-generation ads retrieval, GPU co-design](https://engineering.fb.com/2026/10/28/ml-applications/meta-andromeda-next-gen-ads-retrieval-gpu-co-design/), October 28, 2026 (company-reported).
+- [Engineering at Meta, Meta Andromeda: advantage automation and next-generation personalized ads retrieval engine](https://engineering.fb.com/2024/12/02/production-engineering/meta-andromeda-advantage-automation-next-gen-personalized-ads-retrieval-engine/), December 2, 2024 (company-reported).
+- [LocaliQ, Facebook Advertising Benchmarks 2026](https://localiq.com/blog/facebook-advertising-benchmarks/), last updated September 23, 2026 (vendor benchmark, no sample size published).
+- Meta Business Help Center pages (learning phase, best practices, Advantage+): opened, only titles rendered, no claims taken from them.

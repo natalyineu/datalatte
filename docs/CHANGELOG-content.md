@@ -219,3 +219,4 @@
 | instagram-marketing-for-bars | Full rewrite; invented stats removed; Dash Social H1 2026 food and beverage benchmark, Meta alcohol ad standards and Instagram age-gating guidance added. |
 | how-to-automate-your-local-business-with-ai-complete-guide | Light: StatRow from figures already cited, first person removed, FAQ to ###, links to indexable posts. |
 | instagram-marketing-for-photographers | Light: StatRow from figures already cited, first person removed, FAQ to ###. |
+- 2026-11-06: New articles: marketing-agency-for-a-coffee-shop-can-you-afford-one (retainer vs QuickBooks coffee revenue/profit by state; Clutch, WebFX, SEO.com pricing as published; Google Ads and FTC checklist; Meta Help bodies did not render) and meta-andromeda-update-october-2026-local-ads (Engineering at Meta posts of 2024-12-02 and 2026-10-28, LocaliQ 2026 Meta benchmarks; no "2.0" name or advertiser instructions in Meta's post).
