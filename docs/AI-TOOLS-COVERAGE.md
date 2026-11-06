@@ -2,9 +2,14 @@
 
 One article per tool. "Have" = indexable article exists (title/slug match). Tools marked "?" need Nataliia's confirmation of the exact product name.
 
-## Coding agents and AI IDEs
+## Coding agents and AI IDEs (checked 2026-11-06 on the web; vendor pages still to open per article)
 - Have: Cursor (cursor-ai-build-local-business-website-no-code)
-- Missing: Claude Code, OpenAI Codex, GitHub Copilot, Windsurf, Replit (Agent), Lovable, Bolt.new, v0 (Vercel), Devin, Cline, Aider, Gemini CLI, Jules, Amp, "Muse Code" (?)
+- New in 2026 (priority):
+  - Muse Code (Meta): terminal agent, beta from 5 Aug 2026, runs on Muse Spark 1.2, macOS/Linux, pay-as-you-go API or a contributor tier with >90% lower price in exchange for data sharing (press: CNBC, Forbes, The Next Web).
+  - Grok Build (xAI): terminal CLI agent, early beta from mid-May 2026; grok-build-0.1 in the API from 1 Jun 2026; open-sourced July 2026 per xAI blog list. Price reports ($99 intro, $299) come from one secondary source. A separate "Grok bot" product was not found; confirm with Nataliia.
+  - Google Antigravity: announced May 2026, replaces Gemini CLI and individual Gemini Code Assist tiers (search summary, verify).
+- Established, no article yet: Claude Code (Anthropic), Codex and Codex CLI (OpenAI), GitHub Copilot, Devin (Cognition), Windsurf, Replit Agent, Lovable, Bolt.new, v0 (Vercel)
+- Others listed on Wikipedia's AI-assisted development tools page: Amp, Amazon Q Developer, Bob (IBM), Cline, Cody (Sourcegraph), Command Code, Crush (Charm), DeepSeek Harness, goose, Hermes Agent (Nous Research), Kilo Code, Kimi Code (Moonshot), OpenCode, OpenHands, Pi, Warp, ZCode (Z.AI), Zed Agent, Qodo, Tabnine, Aider
 
 ## Chat assistants and models
 - Have: ChatGPT (3 posts), Claude (MCP + Calendar, DeepSeek vs Claude), Gemini (Flash API), Perplexity (API), DeepSeek, Qwen (OpenRouter), Mistral, Llama (2), Bing Copilot
