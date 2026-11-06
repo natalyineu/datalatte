@@ -1,177 +1,118 @@
 ---
 title: "Microsoft Clarity for Small Business: Free Heatmaps"
 date: "2026-06-13"
-lastModified: "2026-06-13"
-description: "Microsoft Clarity is free with no data limits. Install it on your site and use heatmaps, session recordings and rage-click reports to fix conversions."
+lastModified: "2026-11-06"
+description: "Microsoft Clarity is free with no traffic limits, keeps heatmaps 9 months and recordings 30 days. How a small business sets it up and what to check first."
 author: "Nataliia"
 category: "Analytics"
 tags: ["microsoft clarity", "heatmaps", "website analytics", "conversion optimization", "small business"]
 slug: "microsoft-clarity-small-business-free-heatmaps"
 image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&auto=format&fit=crop"
-readTime: "10 min read"
+readTime: "7 min read"
 ---
 
-Most small business owners have Google Analytics installed and look at it approximately never. The data is there — sessions, bounce rates, page views — but it doesn't tell you *why* people are leaving without booking or calling.
+Microsoft Clarity is a free behavior analytics tool that shows how visitors use your website through session recordings, heatmaps and AI-powered insights. Microsoft's documentation calls it a free service forever with no traffic limits. A small business can install one script, wait a few hours for data, and see where visitors click, scroll and get stuck before booking or calling.
 
-Microsoft Clarity does. It records actual user sessions (anonymized), generates heatmaps showing where people click and how far they scroll, and flags specific behaviors like rage clicks (clicking something repeatedly in frustration) and dead clicks (clicking something that isn't actually a link).
+This guide covers setup, what to review first, privacy duties and data retention. Every fact comes from Microsoft's Clarity documentation listed at the end. The worked example uses assumptions that are labelled.
 
-And it's completely free. No data limits, no "upgrade to see more than 1,000 sessions," no premium tier. Free.
+<StatRow
+  values="Free|30 days|9 months|Under 18"
+  labels="Price, no traffic limits|Playback data retention|Heatmap data retention|Audience age Clarity should not target"
+  subs="Microsoft Clarity docs|Microsoft data retention page|Microsoft data retention page|Microsoft Clarity FAQ"
+  trends="neutral|neutral|neutral|neutral"
+  source="Microsoft Learn: Clarity documentation"
+/>
 
----
+## What Does Microsoft Clarity Show You?
 
-## What Microsoft Clarity Shows You
+Clarity's overview lists session recordings, heatmaps (click, scroll and area maps), a dashboard of insights, funnels, filters and segments, and a Copilot feature for AI summaries. In plain terms: recordings show what a visitor did, heatmaps show what many visitors did on one page, and insights flag patterns.
 
-**Heatmaps**: Where people click, tap, and scroll on each page. You'll immediately see if visitors are clicking on your phone number (good), your header image (confusing), or stopping reading before they reach your CTA (problem).
+Microsoft defines two behaviors worth watching. Rage clicks occur when a user repeatedly clicks in a clustered area within a short period. Dead clicks occur when a user clicked somewhere and no response was detected. Both point to something on the page that looks clickable or is broken. These are the fastest things to find on a small site.
 
-**Session recordings**: Actual video playback of real user sessions — anonymized so no personal data is shown. Watch someone navigate to your booking page, get confused, and leave. That 30-second recording is worth more than a month of bounce rate data.
+<BigStat value="30 days" label="how long Clarity keeps playback data for recordings" note="Heatmap data and favorited sessions are kept 9 months, so save useful recordings." source="Microsoft Learn: Clarity data retention" />
 
-**Insights dashboard**: Clarity automatically surfaces unusual patterns — pages with high frustration (rage clicks), pages where users scroll back and forth (confused navigation), sessions where users gave up on forms before submitting.
+## How Do You Install Clarity?
 
-**Dead click detection**: Shows you where people are clicking on things that aren't links or buttons. Often reveals design elements that look clickable but aren't.
+Sign up on the Clarity site, create a project, and install the tracking code. Microsoft's FAQ says you need access to your site's head section to add the code manually, and that each site has its own code. It also says Clarity works with platforms such as WordPress, Shopify, WooCommerce, Google Tag Manager and Wix, with a supported platforms list in the docs.
 
-**Scroll depth**: Shows what percentage of visitors actually see your pricing, your CTA, or your contact form. Many small business owners discover their most important content is below the fold — seen by fewer than 40% of visitors.
-
----
-
-## How to Install Microsoft Clarity
-
-### Option 1: Direct Script Install (Any Website)
-
-1. Go to [clarity.microsoft.com](https://clarity.microsoft.com) and create a free account
-2. Click "New project" → enter your website name and URL
-3. Copy the tracking script:
+The standard snippet looks like this, with your project ID in place of the placeholder:
 
 ```html
 <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "YOUR_PROJECT_ID");
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "YOUR_PROJECT_ID");
 </script>
 ```
 
-4. Paste it in your website's `<head>` section, before the closing `</head>` tag
+Microsoft says it takes a few hours for data to show in the dashboard after install, and that the script is asynchronous, so it does not affect how quickly a page loads.
 
-### Option 2: Next.js / React (Script Component)
+## What Should You Check First?
 
-For Next.js sites, add to your `layout.tsx`:
+Start with the pages that earn you bookings: home, services, contact and booking.
 
-```tsx
-import Script from 'next/script'
+1. **Click heatmap on the contact page.** Are visitors tapping the phone number, the form button, or something that does nothing? Dead clicks show up here.
+2. **Scroll heatmap on the home page.** See how far visitors get before they leave and whether your main call to action sits below that point.
+3. **Recordings filtered by rage clicks.** Watch a handful. Repeated clicks on the same element usually mean a broken link or a button that looks clickable but is not.
+4. **Recordings of visitors who reached the booking page and left.** Look for the step where they stop.
 
-export default function RootLayout({ children }) {
-  return (
-    <html>
-      <head>
-        <Script
-          id="microsoft-clarity"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(c,l,a,r,i,t,y){
-                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-              })(window, document, "clarity", "script", "YOUR_PROJECT_ID");
-            `,
-          }}
-        />
-      </head>
-      <body>{children}</body>
-    </html>
-  )
-}
-```
+Fix one problem at a time and compare the same heatmap afterwards. Our [heatmap tools comparison](/blog/heatmap-tools-for-websites) lists alternatives, and [Google Analytics 4 for small business](/blog/google-analytics-4-for-small-business) covers the numbers side.
 
-### Option 3: WordPress
+## How Long Is Your Data Available?
 
-Install the "Microsoft Clarity" plugin from the WordPress plugin directory. Enter your Project ID in the plugin settings. Done.
+Microsoft's retention page says playback data is retained for 30 days, labeled or favorited sessions for 9 months, and heatmap data for 9 months. Data is deleted after that and cannot be recovered. Use the favorite or label option on recordings that show a clear problem.
 
-### Option 4: Shopify
+## What Does a Worked Example Look Like?
 
-Add the Clarity script via Online Store → Themes → Edit Code → theme.liquid, inside the `<head>` section.
+All inputs are **assumptions** for an imaginary service business, not Clarity results.
 
-Data starts appearing in Clarity within 2–24 hours after installation.
+| Input (assumption) | Value |
+| --- | --- |
+| Sessions per day | 40 |
+| Recordings within the 30-day window | about 1,200 |
+| Recordings reviewed in a weekly 30-minute session | 10 |
+| Contact page visits per month | 300 |
+| Form completion before the fix | 6% (18 enquiries) |
+| Form completion after fixing a dead button | 9% (27 enquiries) |
 
----
+Under these assumptions, one fix adds nine enquiries a month. The point is the method: find one friction point in recordings, change it, and measure the same page for a month. Check whether the gain is real with your own analytics rather than assuming it.
 
-## What to Look for First
+## Do You Need a Privacy Notice or Consent?
 
-Once you have 100+ sessions recorded (typically 2–5 days for most small business sites), start here:
+Yes. Microsoft's FAQ says you must inform users about the cookie Clarity uses, and its disclosure page recommends a site notice and a privacy policy entry saying you use Clarity and what it captures. For visitors in the EEA, UK and Switzerland, Clarity requires explicit consent before placing cookies. Without it, Microsoft says some features, such as session recordings, may be affected.
 
-**1. Scroll depth on your homepage**: If fewer than 50% of visitors scroll past the fold, your most important content (services, contact, booking) needs to move up. A header image + tagline + wall of text means most visitors never see your offer.
+On masking: Clarity masks sensitive content by default, with Balanced mode as the default. Text in input boxes and dropdowns is masked in every mode. Microsoft also says Clarity should not be used on sites that target users under 18. Check this before using it on a family or youth business, and read our [Google Business Profile tool guide](/blog/google-business-profile-optimization-tool) for another low-cost visibility step.
 
-**2. Click heatmap on your contact page**: Are people clicking your phone number? Your contact form submit button? Or are they clicking non-links and rage-clicking out of frustration? This single heatmap often reveals a broken form, a phone number formatted as plain text (not a tel: link on mobile), or a submit button that's too small to tap.
+## FAQ
 
-**3. Session recordings filtered by "rage click"**: Clarity lets you filter recordings by behavior. Start with rage click sessions — these are users actively frustrated. Watch 5–10 of these. Patterns emerge fast: they're all clicking the same thing that doesn't work, or all getting confused at the same page.
+### Is Microsoft Clarity really free?
 
-**4. Dead clicks on your navigation**: If people are clicking your logo expecting to go home but your logo isn't linked, or clicking a service name in your nav that goes to the wrong page — Clarity shows you this.
+Microsoft's documentation says it is a free service forever, with no traffic limits and no obligation to upgrade. Check the Clarity pricing page for the current terms.
 
-**5. Booking page abandonment**: Watch session recordings of users who reached your booking page but didn't complete. Where do they stop? What do they do before leaving? Most booking abandonment happens at the same friction point.
+### Does Clarity slow down my website?
 
----
+Microsoft states the Clarity script is asynchronous and does not affect how quickly a website loads. Measure your own pages before and after if speed matters to you.
 
-## Real Examples: What Small Businesses Discovered
+### Do I need cookie consent for UK and EU visitors?
 
-**Coffee shop**: Heatmap showed 80% of mobile visitors were clicking the phone number — but it wasn't formatted as a clickable tel: link. They were expecting to dial from the website. Fix: add `<a href="tel:+15551234567">` wrapper. Booking calls increased within a week.
+Microsoft says explicit consent is required for users in the EEA, UK and Switzerland before cookies are placed. Using Clarity without consent does not violate its terms, but it reduces functionality, for example by fragmenting sessions.
 
-**Hair salon**: Scroll depth showed only 22% of homepage visitors reached the pricing section. The hero section had a full-screen photo with no CTA. Fix: add a "Book Now" button above the fold. Booking form clicks increased 40%.
+### Can I use Clarity with Google Analytics?
 
-**Fitness studio**: Rage clicks isolated to the membership page. Users were clicking a "Join Now" button that linked to a broken Mindbody page (URL had changed). Fix: update the link. Recovered all those lost conversions immediately.
+Yes. Microsoft documents a Google Analytics integration, and you must finish the Clarity setup first. Clarity creates a custom dimension in your property, which can fail if you reach Google's custom dimension limit.
 
-**Pet groomer**: Session recordings showed mobile users struggling with a multi-step contact form. They'd fill step 1, go to step 2, and abandon. Fix: consolidate to a single-page form. Form completion rate went from 31% to 68%.
+### How long does Clarity keep my recordings?
 
----
+Playback data is retained for 30 days. Favorited or labeled sessions and heatmap data are kept for 9 months.
 
-## Clarity + Google Analytics Together
+## Sources
 
-Microsoft Clarity integrates directly with Google Analytics 4. Connect them in Clarity Settings → Google Analytics to see session recordings linked to specific GA4 events and conversions.
+- [Microsoft Learn: Clarity overview](https://learn.microsoft.com/en-us/clarity/setup-and-installation/about-clarity)
+- [Microsoft Learn: Clarity frequently asked questions](https://learn.microsoft.com/en-us/clarity/faq)
+- [Microsoft Learn: Clarity data retention](https://learn.microsoft.com/en-us/clarity/setup-and-installation/data-retention)
+- [Microsoft Learn: Sample wording for site and privacy policy disclosure](https://learn.microsoft.com/en-us/clarity/setup-and-installation/privacy-disclosure)
+- [Microsoft Learn: Masking content](https://learn.microsoft.com/en-us/clarity/setup-and-installation/clarity-masking)
 
-This means you can: identify your best-converting sessions in GA4 (completed booking, contact form submission), then watch recordings of those sessions in Clarity to understand *what* those converting users did differently. Then replicate that path for more users.
-
-This combination — quantitative data in GA4, qualitative video in Clarity — is what enterprise teams use. It's now completely free for any small business.
-
----
-
-## Frequently Asked Questions
-
-**Q: Is Microsoft Clarity GDPR compliant for UK and EU visitors?**
-
-Microsoft Clarity includes privacy features designed for GDPR and CCPA compliance: it automatically masks text inputs (passwords, form fields), doesn't track personally identifiable information, and lets you configure masking for additional elements. You should disclose Clarity's use in your privacy policy and cookie banner. For EU/UK sites, enable "Do Not Track" respect in Clarity settings and add Clarity cookies to your cookie consent management tool. Microsoft's Clarity privacy documentation covers specific compliance configurations.
-
-**Q: How is Clarity different from Hotjar?**
-
-Both offer heatmaps and session recordings. The key differences: Clarity is completely free with no session limits; Hotjar's free plan limits you to 35 sessions/day. Clarity's AI-powered insights (rage click detection, dead click surfacing) are more automated. Hotjar has better funnel analysis and user survey features. For most small businesses, Clarity's free offering covers 90% of what Hotjar's paid tier costs $39+/month to provide.
-
-**Q: Does Clarity slow down my website?**
-
-The Clarity script loads asynchronously (the `t.async=1` in the install code), which means it doesn't block your page from loading. Google's PageSpeed Insights typically shows minimal impact from Clarity. Using Next.js `strategy="afterInteractive"` ensures it loads after the page is interactive, further reducing any perceived performance impact. In practice, Clarity adds 1–3ms to page load time — unmeasurable by users.
-
-**Q: Can I use Clarity on a WordPress site with thousands of pages?**
-
-Yes. Clarity handles high-traffic, multi-page sites without issue. It samples sessions intelligently at scale — on very high-traffic sites, it records a representative sample rather than every session, which keeps the data manageable. The heatmaps aggregate data across all sessions for a given page URL, so even if not every session is recorded, the click and scroll data reflects the full traffic pattern.
-
-**Q: How many sessions do I need before the data is meaningful?**
-
-Heatmaps become reliable at 100+ sessions per page. Session recordings are useful from session 1 — even watching 5–10 recordings reveals patterns. For rage click and dead click insights, Clarity surfaces these automatically once a pattern reaches statistical significance (usually 50+ occurrences). For a typical small business site getting 20–50 sessions/day, expect reliable insights within 1–2 weeks.
-
----
-
-## Related Articles
-
-- [How to Show Up in Bing Copilot AI Answers for Local Business](/blog/how-to-show-up-in-bing-copilot-local-business)
-- [Google Analytics 4 for Local Business: What to Actually Track](/blog/google-analytics-4-for-small-business)
-- [AI Agents for Analytics and Reporting: What Small Businesses Should Automate](/blog/ai-agents-for-local-business-what-they-are-and-how-they-work)
-- [Local SEO for Small Business: Complete 2026 Guide](/guides/local-seo-guide)
-- Website Conversion Optimization for Local Business
-
-<Callout type="coffee" title="Want More Local Customers?">
-Nataliia at DataLatte runs data-driven local marketing campaigns for local businesses — coffee shops, salons, pet groomers, and fitness studios. [Book a free 30-minute strategy call](/contact) or explore [Google Ads management](/services/google-ads).
-</Callout>
-
-## Related guides
-
-- [Video Marketing for Small Business: Start With a Phone](/blog/video-marketing-for-small-business-beginners-guide)
-- [Google Business Profile Optimization Tools: Prices](/blog/google-business-profile-optimization-tool)
-- [SEO vs PPC for Small Business: Which First?](/blog/seo-vs-ppc-complete-guide)
+Want help turning website data into more bookings? See our [Analytics and reporting service](/services/analytics).

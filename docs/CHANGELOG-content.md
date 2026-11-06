@@ -190,3 +190,18 @@
 | how-much-do-youtube-ads-cost-real-cpv-cpm-data | Vague ranges replaced by AdWave 2026 and Mega Digital benchmarks (flagged as vendor/older data) and Google billing rules per format; CPM-to-CPV formula and $300 test (assumption) |
 | dv360-for-small-business-is-it-worth-it | Google DV360 help pages added (fee is a percentage of media cost set by contract, no public rate stated); 35M Display reach; fee-split example labelled assumption; unsourced platform claims removed |
 | podcast-advertising-australia-local-business-guide | "We found" and other first-person phrases removed; Edison/CRA, Mediaweek, IAB Australia (via PPC Land), Spotify and AANA figures re-checked; unverified A$250 minimum and Spotify pricing claim removed; H2s turned into questions |
+
+- 2026-11-06: Rewrote 5 and fixed 5 near-page-1 articles (lastModified 2026-11-06, slugs/dates/images unchanged; audit 0 errors).
+
+| slug | what changed |
+|---|---|
+| how-to-beat-starbucks-on-google-maps | Full rewrite: invented cases, fake StepPlan stats and first person removed; Google ranking/verification/name/review-policy facts and BrightLocal 2026 stats added; assumption review plan; FAQ; Sources |
+| spotify-ads-for-fitness-studios-target-active-listeners-in-your-city | Full rewrite from Spotify Ads pages only (250 minimum, location levels, specs, re-approval); invented studio case, CPM table and first-person FAQ removed; assumption test; Sources |
+| microsoft-clarity-small-business-free-heatmaps | Full rewrite from Microsoft Learn docs (free, retention 30 days/9 months, consent, masking); invented examples and Hotjar claims removed; StatRow, assumption example, Sources |
+| google-business-profile-optimization-for-pet-groomers | Verified against Google/BrightLocal pages; added StatRow and BigStat, number in description, 2 internal links, first person removed |
+| google-ads-for-coffee-shops-in-chicago-il | First person neutralised; LocaliQ 2026 Restaurants & Food benchmark ($2.05 CPC) added to the math and Sources; unsourced timing claim removed |
+| tiktok-marketing-for-hair-salons | StatRow from existing sourced figures, number in description, first person neutralised |
+| google-analytics-for-hair-salons | StatRow from existing Google sources, first person neutralised |
+| hair-salon-before-after-photos-legal-and-converting | StatRow from existing sourced items, first person neutralised |
+| ai-agents-for-hair-salons | StatRow from Fresha pricing, first person neutralised, link to an indexable rebooking post replacing unlinked mentions of noindex posts |
+| google-ads-for-art-studios | StatRow from existing Google Ads Help figures, first person neutralised |

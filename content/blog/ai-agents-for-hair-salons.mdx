@@ -2,7 +2,7 @@
 title: "AI Agents for Hair Salons: What to Automate and Block"
 seoTitle: "AI Agents for Hair Salons: Bookings and Guardrails"
 date: "2026-06-09"
-lastModified: "2026-10-08"
+lastModified: "2026-11-06"
 description: "A salon AI agent costs about $100 a month and pays back after roughly 1.2 extra bookings at $85. What it can book, what to block, and the math."
 author: "Nataliia Rumiantsewa"
 category: "AI & Automation"
@@ -15,7 +15,15 @@ Fresha lists its AI Concierge add-on at $99.95 per location per month. At an ass
 
 That is the right way to think about an AI agent in a salon: not as magic, but as a monthly cost that must be repaid by chairs it fills. This guide shows where an agent can plausibly do that, where it should be fenced off, and how to test one before you commit.
 
-It is written for salon owners and independent stylists in the US, UK, Australia and Canada. Prices come from vendor pages we opened in October 2026 and change often. Reminders, no-show maths, consent rules and review requests are covered in depth in our guide to [AI automation for hair salons](/blog/ai-automation-for-hair-salons), so this article focuses on the part that is actually new: software that holds a conversation and takes action.
+It is written for salon owners and independent stylists in the US, UK, Australia and Canada. Prices come from vendor pages opened in October 2026 and change often. Reminders, no-show maths, consent rules and review requests are covered in depth in our guide to [AI automation for hair salons](/blog/ai-automation-for-hair-salons), so this article focuses on the part that is actually new: software that holds a conversation and takes action.
+
+<StatRow
+  values="$99.95|200|500|1.18"
+  labels="Fresha AI Concierge add-on, per location a month|Minutes included in the add-on|Messages included in the add-on|Break-even extra bookings at an assumed $85 ticket"
+  subs="Fresha pricing page|Fresha pricing page|Fresha pricing page|$99.95 divided by $85"
+  trends="neutral|neutral|neutral|neutral"
+  source="Fresha pricing page, opened October 2026"
+/>
 
 ## Agent, Chatbot or Plain Automation?
 
@@ -50,7 +58,7 @@ Look at what you already have before you buy a separate agent.
 
 - **Fresha.** The [pricing page](https://www.fresha.com/pricing) lists Independent at $19.95 a month for one bookable team member and Team at $14.95 per member. It lists the **AI Concierge** add-on at $99.95 per location monthly, including 200 minutes and 500 messages, with extra minutes at $0.60 and extra messages at $0.04. Automated texts include 100 free a month, then $0.02. The page says the Concierge answers calls and messages anytime; the pricing page does not detail exactly what it can book, so ask for a demo using your own questions.
 - **Vagaro.** The [pricing page](https://www.vagaro.com/pro/pricing) lists $23.99 a month for one location for the first six months (down from $30), $10 for each additional bookable calendar, and unlimited notifications and appointment reminders on every plan. It says AI-powered business tools and marketing are included, mentions an assistant called Vera, and says client messaging can use your own AI chatbot. No separate AI price is listed. It does not mention an AI receptionist.
-- **General-purpose chatbot tools** (for example ManyChat, which connects to Instagram and Facebook) have their own pricing. We have not verified their current prices, so check the vendor page directly and compare it with the built-in options above.
+- **General-purpose chatbot tools** (for example ManyChat, which connects to Instagram and Facebook) have their own pricing. Their current prices were not verified for this guide, so check the vendor page directly and compare it with the built-in options above.
 
 The takeaway is that the cheap parts of automation are usually already in your plan, and the add-on is a genuine extra. For a side-by-side of the booking platforms, see [Booksy vs Vagaro vs Fresha](/blog/booksy-vs-vagaro-vs-fresha-best-booking-app-salons-2026).
 
@@ -62,7 +70,7 @@ The takeaway is that the cheap parts of automation are usually already in your p
 4. **No medical or allergy advice.** Point to your patch-test policy and a stylist.
 5. **Only facts you gave it.** An agent can state wrong hours or services with total confidence. Give it a short document of truths and re-check what it says every month.
 6. **Reviews, done properly.** Google's [policy on reviews](https://support.google.com/business/answer/7400114) allows encouraging genuine reviews but prohibits offering discounts or free services in exchange, selectively soliciting positive reviews, or pressuring people to write them on the premises. So the agent sends everyone the same link and offers nothing in return.
-7. **Consent for texts.** Keep reminders strictly about the appointment, record consent when you take the phone number, and honour opt-outs. Our [automation guide](/blog/ai-automation-for-hair-salons) lays out the UK and US rules and flags what we could not verify.
+7. **Consent for texts.** Keep reminders strictly about the appointment, record consent when you take the phone number, and honour opt-outs. Our [automation guide](/blog/ai-automation-for-hair-salons) lays out the UK and US rules and flags what could not be verified.
 
 ## Where to Start
 
@@ -72,7 +80,7 @@ Do not buy an agent and a chatbot and rebooking sequences in the same week. Orde
 2. **Draft mode second.** Let an AI tool write replies to DMs and enquiries, but you press send. After two weeks you will see which questions repeat.
 3. **Agent last.** Let it book only the simplest services, only into slots you marked bookable, with a human handoff for everything else.
 
-For the phone-answering side, see our AI receptionist for hair salons and the AI booking assistant guide.
+For the rebooking side, see the [salon rebooking script guide](/blog/salon-rebooking-script-that-gets-clients-back).
 
 ## The Math
 
@@ -97,7 +105,7 @@ Read it with care. It counts revenue, not profit, and it only works if you have 
 The break-even is simple: add-on cost divided by average ticket, so $99.95 / $85 = 1.18 bookings. Run it for a month, count only the bookings that came through the agent, and keep it if the count clears that line.
 
 <Callout type="coffee" title="The One-Question Test">
-Before paying for any agent, ask: which message, last month, did we lose because nobody answered in time? If you cannot name one, fix reminders and your Business Profile first.
+Before paying for any agent, ask: which message, last month, was lost because nobody answered in time? If you cannot name one, fix reminders and your Business Profile first.
 </Callout>
 
 ## Do This Today
