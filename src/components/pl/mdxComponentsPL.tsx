@@ -46,9 +46,15 @@ export const mdxComponents = {
   strong: (props: React.HTMLAttributes<HTMLElement>) => (
     <strong className="font-semibold text-gray-800 dark:text-gray-100" {...props} />
   ),
-  a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
-    <a className="text-coffee-700 dark:text-coffee-400 underline hover:text-coffee-900 dark:hover:text-coffee-200" {...props} />
-  ),
+  a: ({ href, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => {
+    const external = /^https?:\/\//i.test(href || "") && !/^https?:\/\/(www\.)?datalatte\.pro/i.test(href || "");
+    return external ? (
+      // External source links: muted colour and light underline, same behaviour as before
+      <a href={href} className="text-gray-500 dark:text-gray-400 underline decoration-gray-300 dark:decoration-gray-600 hover:text-coffee-700 dark:hover:text-coffee-300" {...props} />
+    ) : (
+      <a href={href} className="text-coffee-700 dark:text-coffee-400 underline hover:text-coffee-900 dark:hover:text-coffee-200" {...props} />
+    );
+  },
   blockquote: (props: React.HTMLAttributes<HTMLQuoteElement>) => (
     <blockquote className="border-l-4 border-coffee-300 dark:border-coffee-700 pl-4 italic text-gray-500 dark:text-gray-400 my-6" {...props} />
   ),
