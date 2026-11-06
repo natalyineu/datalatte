@@ -205,3 +205,17 @@
 | hair-salon-before-after-photos-legal-and-converting | StatRow from existing sourced items, first person neutralised |
 | ai-agents-for-hair-salons | StatRow from Fresha pricing, first person neutralised, link to an indexable rebooking post replacing unlinked mentions of noindex posts |
 | google-ads-for-art-studios | StatRow from existing Google Ads Help figures, first person neutralised |
+
+- 2026-11-06: Rewrote/fixed 9 articles with sources (lastModified 2026-11-06; slug, date, image unchanged).
+
+| slug | what changed |
+|---|---|
+| bland-ai-phone-answering-local-business-2026 | Full rewrite from Bland pricing/billing/Dispatch/Send Call/Clone Voice docs; old $0.09/min, sub-500ms latency and voice-clone process removed (not supported by Bland pages); TCPA note (secondary, FCC page 403). |
+| claude-mcp-google-calendar-booking-automation | Full rewrite from Anthropic MCP connector/tool docs and Google Calendar API docs; invented 30% stat, salon before/after and non-existent npm MCP package removed; code reduced to documented calls. |
+| cursor-ai-build-local-business-website-no-code | Full rewrite; current Cursor plans (Free, Plus $8, Premium $30...) replaced old Pro $20; Vercel Hobby is non-commercial (Pro $20) added; fake-testimonial FTC warning; competitor price table removed. |
+| ollama-local-llm-small-business-free-setup | Full rewrite from Ollama README/FAQ/API/GPU docs and model pages; invented RAM table and speed claims removed; privacy limits (cloud models) and 4,096 default context added. |
+| influencer-marketing-for-local-restaurants-and-cafes | StatRow + BigStat added (SevenRooms/YouGov, MGH via Restaurant Dive; IMH 2026 benchmark); FTC/ASA claims re-verified; question H2s, ### FAQ, links to noindex post removed. |
+| instagram-story-ads-for-salons-bookings | Full rewrite; fabricated 34% bookings, template results, "we/I" case claims removed; LocaliQ 2026 Beauty and Personal Care Meta benchmarks and assumption-labelled test budget added. Meta Stories spec pages did not render, so no Stories-specific limits. |
+| instagram-marketing-for-bars | Full rewrite; invented stats removed; Dash Social H1 2026 food and beverage benchmark, Meta alcohol ad standards and Instagram age-gating guidance added. |
+| how-to-automate-your-local-business-with-ai-complete-guide | Light: StatRow from figures already cited, first person removed, FAQ to ###, links to indexable posts. |
+| instagram-marketing-for-photographers | Light: StatRow from figures already cited, first person removed, FAQ to ###. |

@@ -1,203 +1,121 @@
 ---
 title: "Build a Local Business Website With Cursor AI"
 date: "2026-06-13"
-lastModified: "2026-06-13"
-description: "Build and update a local business website with Cursor AI by describing changes in plain English. Step-by-step setup for non-developers."
+lastModified: "2026-11-06"
+description: "Cursor plans run from free to $200 a month, and Vercel's free tier bars business use. What a non-developer can and cannot do with Cursor on a site."
 author: "Nataliia"
 category: "AI & Automation"
 tags: ["Cursor AI", "website building", "no-code", "local business"]
 slug: "cursor-ai-build-local-business-website-no-code"
 image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80&auto=format&fit=crop"
-readTime: "10 min read"
+readTime: "7 min read"
 ---
+A non-developer can use Cursor, an AI coding editor, to draft and edit a small business website by describing changes in plain English. But Cursor writes code, not a finished business. You still choose the content, check every page, host the site and keep it secure.
 
-A professional website used to require a developer ($3,000-8,000) or weeks of struggling with website builders that produce mediocre results. Cursor AI has changed this equation dramatically.
+This guide explains what Cursor does, what it costs on its current plan list, and a hosting trap: Vercel's free Hobby plan is limited to personal, non-commercial use. Plans and prices below come from Cursor's and Vercel's own pages, opened on 6 November 2026. They change often, so re-check before you pay.
 
-Cursor is a code editor built on top of VS Code, with AI so deeply integrated that even non-developers can build functional, professional websites by describing what they want in plain English. You type "Add a booking section with a contact form" and the AI writes the code. You say "The menu prices are wrong, change the balayage to $180" and it updates the file in seconds.
+<StatRow
+  title="Cursor and hosting prices"
+  values="$0|$8|$30|$20"
+  labels="Cursor Free plan, limited usage|Cursor Plus plan per month|Cursor Premium plan per month, 4x Plus usage|Vercel Pro per month for commercial sites"
+  subs="Cursor models and pricing docs|Cursor models and pricing docs|Cursor models and pricing docs|Vercel pricing page"
+  trends="neutral|neutral|neutral|neutral"
+  source="Cursor docs (models and pricing) and Vercel pricing page, checked 6 November 2026"
+/>
 
-This guide is specifically for local business owners who want a professional website without a developer — and without the limitations of template-based website builders like Wix or Squarespace.
+## What Does Cursor Cost Now?
 
-## Why Cursor Instead of Wix or Squarespace?
+Cursor's pricing documentation lists these individual plans: Free at $0 with limited usage, Plus at $8 a month (base usage), Premium at $30 (4x Plus usage), Super at $100 (15x Plus) and Ultra at $200 (50x Plus). It says usage allowances refresh weekly and that third-party models are billed separately at API list price on some plans.
 
-| Feature | Wix/Squarespace | Custom Dev | Cursor AI |
-|---|---|---|---|
-| Cost | $17-49/month | $3,000-8,000 one-time | $20/month (Cursor Pro) + $15/month hosting |
-| Time to launch | 1-2 days | 4-8 weeks | 2-3 days |
-| Design quality | Template-limited | Custom | Custom |
-| SEO control | Limited | Full | Full |
-| Future updates | DIY or expensive | Hire dev again | Ask Cursor |
-| Ownership | Locked in | Full | Full |
-| Performance | Slow (JS heavy) | Varies | Fast (static) |
+The same page says older plans such as Hobby, Pro and Pro+ "continue for existing customers". Many articles still quote Pro at $20 a month. That is a legacy name, so do not rely on it for a new sign-up.
 
-The key advantage: you own the code, you're not locked into a platform, and making updates is as easy as asking Cursor in plain English.
+A site for one shop is a small project. Start on Free or Plus, and move up only if you hit the usage limit.
 
-## What You'll Build
+<BigStat value="$8" label="per month is the entry paid Cursor plan on its current list, with $0 Free for limited usage" note="Premium is $30 a month with 4x Plus usage. Older Pro and Pro+ plans continue only for existing customers." source="Cursor docs, Models and pricing, checked 6 November 2026" />
 
-By the end of this guide, you'll have:
-- A professional website for your local business (salon, café, fitness studio, pet groomer)
-- Homepage with hero section, services, testimonials, about, and contact form
-- Mobile-responsive design
-- Deployed live on Vercel (free)
-- Connected to your own domain
+## How Do You Start a Project in Cursor?
 
-## Step 1: Install Cursor
+Cursor's quickstart tells you to download the app for your system, log in, pick a folder and start with a small task. It says to open Agent with Cmd I (the guide lists macOS shortcuts, so check the keyboard settings on Windows). Agent can search your files, make the edits you ask for, and run checks such as a local build. Changes appear in a diff view that you review. For bigger jobs, Plan Mode (Shift+Tab) researches the code and asks questions before building.
 
-Download Cursor from cursor.com (free tier available, Pro at $20/month).
+Agent also creates checkpoints before significant changes. Cursor's docs say these are stored locally, separate from Git, and are for undoing Agent changes rather than permanent version history. Put the project in Git or another backup as well.
 
-Install and open it. Cursor looks like VS Code — if you've used VS Code or even Notepad++, you'll feel at home.
+Write your first request as a brief, not a wish. Give the business name, address, phone number, opening hours and services as you want them printed. Tell Cursor not to invent anything:
 
-## Step 2: Start a New Project with Cursor's AI
-
-Open Cursor and press **Ctrl+Shift+P** (or Cmd+Shift+P on Mac) → type "New Folder" → create a folder called `my-salon-website`.
-
-Now open the **Composer** (press Ctrl+I or Cmd+I). This is where you talk to the AI. Type:
-
-```
-I want to build a professional website for a hair salon called "The Loft Hair Studio" 
-in Nashville, TN. Use Next.js with Tailwind CSS. Create a homepage with:
-- A hero section with the headline "Nashville's Premier Hair Studio" and a "Book Now" button
-- Services section showing: Women's Cut ($65-95), Balayage ($150-250), Color ($90-130), Keratin ($200-300)
-- Testimonials section with 3 sample reviews
-- About section mentioning we've been in Nashville for 8 years
-- Contact section with phone (615) 555-0123 and address: 142 Music Row
-
-Create the project structure with package.json, install dependencies, and generate all the files.
+```text
+Create a one-page site for [business name] in [city]. Use only the facts below.
+Do not invent prices, reviews, awards or staff names; leave a clear TODO where
+information is missing. Sections: hero, services, hours and address, contact.
+Facts: [paste your real text here]
 ```
 
-Cursor generates your entire project structure. It writes `package.json`, `tailwind.config.js`, the homepage component, and all the necessary files. This would take a developer 4-6 hours. Cursor does it in 2-3 minutes.
+## Where Should You Host It?
 
-## Step 3: Preview Your Site
+Vercel is one popular option. Its pricing page lists Hobby at $0 for "personal, non-commercial use" and Pro at $20 a month for professional developers, freelancers and businesses. Vercel's Hobby plan page repeats that its fair use guidelines restrict Hobby to non-commercial, personal use only. A business website is commercial. Plan for the $20 Pro price, or choose another host and read its terms first.
 
-In Cursor's terminal (Ctrl+`), run:
+You also need a domain name. Registrars set their own prices, so check one directly. Point the domain at your host following the host's instructions.
 
-```bash
-npm install && npm run dev
-```
+## What Should You Check Before Publishing?
 
-Open your browser to `http://localhost:3000`. You'll see your website.
+AI-written pages can look finished and still be wrong. Read every line against your real details.
 
-Now, if something doesn't look right, just tell Cursor:
+- **Facts:** name, address, phone, hours, prices.
+- **Reviews:** only publish genuine testimonials you have permission to use. The US Federal Trade Commission's final rule bans creating or buying fake reviews and testimonials, including AI-generated ones, when the business knew or should have known they were fake. Never ask Cursor for "sample reviews" and publish them.
+- **Contact form:** send yourself a test message. A form that fails silently loses leads.
+- **Mobile:** open the site on a phone and tap every button.
+- **Secrets:** never paste passwords or API keys into prompts or into the code.
 
-```
-The hero section background is too dark and the text is hard to read. 
-Make the background a warm cream color (#FDF6EC) and the headline text dark brown (#2D1810).
-```
+Our guides on the [local business website checklist](/blog/local-business-website-checklist) and [website copy that converts](/blog/how-to-write-website-copy-local-business-examples) list what a shop site needs. If you also want a map, see [embedding Google Maps on your site](/blog/google-maps-embed-local-business-website).
 
-Cursor finds the right file, makes the change, and you see the update immediately.
+## When Is a Developer the Better Choice?
 
-## Step 4: Customizing with Plain English
+Cursor suits simple brochure sites you can review yourself. Hire help when you need online payments, accounts, bookings with a database, accessibility compliance or a site with many templates. Our comparison of a [DIY website and a professional developer](/blog/diy-website-vs-professional-developer) covers the trade-offs.
 
-Here are real prompts you'd use to customize your site:
+## Worked Example: What Might the Monthly Bill Be?
 
-**Adding a new section:**
-```
-Add a photo gallery section between Services and Testimonials. 
-Use a 3-column grid with placeholder images from unsplash.com (search "hair salon").
-```
+These inputs are **assumptions** built from the list prices above. They exclude your time and the domain.
 
-**Updating content:**
-```
-In the Services section, add a new service: "Bridal Package" at $350, which includes 
-updo, makeup touch-up, and bridal trial. Add a small crown emoji next to the name.
-```
+| Item | Assumption |
+| --- | --- |
+| Cursor Plus | $8 per month |
+| Vercel Pro (one developer seat) | $20 per month |
+| Total tools | $28 per month |
+| Total tools with Cursor Premium | $50 per month |
 
-**Adding a booking link:**
-```
-Make the "Book Now" button link to https://booksy.com/en-us/123456_the-loft-hair-studio.
-Open it in a new tab.
-```
+Over a year that is $336 on Plus or $600 on Premium, plus the domain. Whether it pays back depends on what the site brings in. Track calls, direction requests and form submissions for a month before deciding.
 
-**Fixing mobile:**
-```
-On mobile, the navigation menu items are too small and cramped. 
-Change to a hamburger menu that expands on tap. Keep the logo visible on mobile.
-```
-
-**SEO improvements:**
-```
-Add proper SEO meta tags to the homepage: 
-title "The Loft Hair Studio | Nashville Hair Salon", 
-description "Nashville's premier hair salon offering cuts, balayage, color, and keratin treatments. Book online or call (615) 555-0123."
-Add a favicon.
-```
-
-## Step 5: Creating Inner Pages
-
-Tell Cursor to add new pages:
-
-```
-Create a /services page with detailed descriptions of each service, 
-what to expect, how long it takes, and who it's best for.
-Create a /team page with 4 stylists (make up names and specialties).
-Create a /contact page with a contact form that collects name, email, phone, 
-and message, and a Google Maps embed showing 142 Music Row Nashville.
-Update the navigation to include links to these pages.
-```
-
-## Step 6: Deploy to Vercel (Free)
-
-Once you're happy with the site locally:
-
-1. Create a free GitHub account and push your code:
-```bash
-git init && git add . && git commit -m "Initial website"
-```
-Create a new repo on github.com and follow their push instructions.
-
-2. Go to vercel.com, sign up free, click "Import Project", select your GitHub repo.
-
-3. Vercel detects Next.js automatically and deploys. Your site is live at `yourproject.vercel.app` within 2 minutes.
-
-4. Connect your custom domain in Vercel settings (add your domain, update DNS at your registrar).
-
-## Step 7: Making Future Updates
-
-This is where Cursor shines long-term. Next time you need to update your site:
-
-- New prices? Open Cursor, find the services page, tell it the new prices
-- Adding a staff member? "Add stylist Maya Chen to the team page, specialty: balayage and color correction, 5 years experience"
-- Holiday hours? "Add a banner at the top of the site saying we're closed December 24-26 and January 1"
-- New testimonial? "Add this Google review to the testimonials section: [paste review]"
-
-Each update takes 2-5 minutes, no developer needed, no monthly platform fees for the privilege.
-
-## For Non-Technical Owners: Common Stumbling Blocks
-
-**"The code looks scary"** — You don't need to read it. Just describe what you want in English and tell Cursor to fix it. The code is like the engine of a car — you don't need to understand it to drive.
-
-**"Something broke"** — Tell Cursor exactly what broke: "The homepage is showing an error, here's the error message: [paste the error]". Cursor debugs and fixes it.
-
-**"I accidentally deleted something"** — Cursor integrates with Git. Type `git log` in the terminal to see your commit history, `git restore .` to undo recent changes.
-
-**"I need something I don't know how to describe"** — Screenshot a website you like, describe it to Cursor: "Make the services section look like this [description]. Each service in a card with an icon, price in bold, and a 'Learn More' link."
+<Callout type="tip" title="Do This Today">
+Write one page of real facts about your business: services, hours, address, phone. That page is the input for every prompt you will give Cursor.
+</Callout>
 
 ## FAQ
 
-**Do I need any coding knowledge to use Cursor AI?**
-No — but a tiny bit helps. You'll need to run two terminal commands (`npm install` and `npm run dev`) and one or two Git commands to deploy. These are copy-paste commands that Cursor will provide. If you get stuck, paste the error message back to Cursor and ask it to fix it.
+### Is Cursor free?
 
-**How much does the whole setup cost?**
-Cursor Pro: $20/month. Vercel hosting: free (for one project on the hobby plan). Domain: $10-15/year from Namecheap or Cloudflare. Total: about $20/month with no per-visitor charges, ever — far cheaper than Wix ($17-49/month with limits) or paying a developer for updates.
+Cursor lists a Free plan with limited usage. Paid plans on the current list start at $8 a month (Plus).
 
-**Can Cursor build an e-commerce website?**
-Yes — tell Cursor to add a Stripe checkout for selling gift cards, retail products, or online class bookings. Stripe integration takes about 30 minutes with Cursor guiding you. For complex e-commerce (product catalog, inventory management), Shopify is still easier.
+### Can I use Vercel's free plan for my business website?
 
-**Is my website owned by me, or am I locked into Cursor?**
-You own the code completely. Cursor is just the tool that helped you write it. Cancel Cursor and your website keeps running. Move to a different host anytime. Export your code anytime. No lock-in — this is one of the biggest advantages over Wix, Squarespace, or other website builders.
+Vercel says Hobby is for personal, non-commercial use. A business site should be on a paid plan or another host whose terms allow commercial use.
 
-**What if I need a feature Cursor can't build?**
-Cursor can build almost anything a web developer can. For very complex features (real-time inventory, complex booking systems with staff scheduling), it may be worth using a third-party service (Calendly, Acuity, Fresha) integrated with your Cursor-built site, rather than building from scratch. Cursor handles the integration code perfectly.
+### Do I need to know how to code?
 
-## Related Articles
+You do not need to write code, but you must be able to check results. Review the preview and the diff, test forms and keep a backup. If that feels unmanageable, hire a developer.
 
-- [AI Receptionist for Small Business: Complete Setup Guide 2026](/blog/ai-receptionist-small-business-setup-guide-2026)
-- [LangChain RAG: AI That Answers Customer FAQs from Your Own Data](/blog/langchain-rag-customer-faq-local-business)
-- [Gemini Flash API for Local Business: Fast AI at Near-Zero Cost](/blog/gemini-flash-api-local-business-automation)
-- [OpenRouter Guide: Access 100+ AI Models for Local Business Automation](/blog/openrouter-guide-local-business-automation-2026)
-- [Local SEO Guide for Small Business](/blog/local-marketing-budget-guide)
+### Can Cursor write my reviews or testimonials?
 
-## Related guides
+It can generate text, but publishing fake testimonials is banned by the FTC's rule when the business knew or should have known they were fake. Use real customer reviews only.
 
-- [Website Design for Vets: What a Clinic Site Needs](/blog/website-design-for-vets)
-- [Website Design for Real Estate Agents: Leads First](/blog/website-design-for-real-estate-agents)
-- [Case Study: How a Fitness Studio Filled Every Class With Facebook Ads](/blog/case-study-fitness-studio-filled-every-class-facebook-ads)
+### Will Cursor make my site rank on Google?
+
+No tool guarantees rankings. Cursor can help you build pages and fix technical issues, but rankings depend on content, links and your Google Business Profile.
+
+## Sources
+
+- [Cursor docs: Models and pricing](https://cursor.com/docs/models-and-pricing)
+- [Cursor docs: Quickstart](https://cursor.com/docs/get-started/quickstart)
+- [Cursor docs: Agent overview](https://cursor.com/docs/agent/overview)
+- [Vercel pricing](https://vercel.com/pricing)
+- [Vercel docs: Hobby plan](https://vercel.com/docs/plans/hobby)
+- [FTC: Final rule banning fake reviews and testimonials](https://www.ftc.gov/news-events/news/press-releases/2024/08/federal-trade-commission-announces-final-rule-banning-fake-reviews-testimonials)
+
+Want a site built and reviewed by a person? See our [website service](/services/website) or [book a free audit](/free-audit).
