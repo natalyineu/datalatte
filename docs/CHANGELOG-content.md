@@ -163,3 +163,5 @@
 | fresha-vs-square-vs-vagaro-salon-booking-software | Added 4-card StatRow (vendor rates) |
 | best-google-ad-keywords-for-dog-groomers-in-2026 | Added 4-card StatRow (Seattle Maps pull, assumed CPC labelled); first-person phrasing made neutral |
 | dooh-advertising-for-restaurants | Added StatRow and BigStat (StackAdapt CPM range); invented "forty office workers" removed |
+
+- 2026-11-06 — noindex for 64 old posts with invented cases/first-person text and ~0 impressions (rewrite pending); links to them removed from other posts (217 bullets, 181 inline links, 9 empty Related headings). Not touched: best-marketing-for-salons-in-2026-what-actually-works-with-real-examples and coffee-shop-google-business-profile-optimization (they have impressions; rewrite next). Undo: delete the `noindex: true` line.
