@@ -1,6 +1,6 @@
 import Link from "next/link";
 import CopyEmail from "@/components/advertise/CopyEmail";
-import { Mail, MessageCircle, MapPin, Linkedin } from "lucide-react";
+import { Mail, MessageCircle, MapPin, Linkedin, Instagram } from "lucide-react";
 import NewsletterForm from "@/components/NewsletterForm";
 
 const footerLinks = {
@@ -121,6 +121,15 @@ export default function Footer() {
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="text-gray-300">
                   <path d="M21.8 3.1L2.2 10.7c-1.3.5-1.3 1.3-.2 1.6l5 1.6 1.9 5.8c.3.8.4 1.1 1.1 1.1.6 0 .9-.3 1.2-.6l2.9-2.8 5.9 4.4c1.1.6 1.9.3 2.2-.9l3.9-18.3c.4-1.6-.6-2.3-1.3-1.5z" fill="currentColor"/>
                 </svg>
+              </a>
+              <a
+                href="https://www.instagram.com/datalatte.pro"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="DataLatte on Instagram"
+                className="w-9 h-9 rounded-lg bg-coffee-900 hover:bg-coffee-700 flex items-center justify-center transition-colors"
+              >
+                <Instagram size={16} className="text-gray-300" />
               </a>
               <a
                 href="https://medium.com/@datalatte.pro"
