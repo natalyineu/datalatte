@@ -38,7 +38,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
 twq('config','rihym');`}
       </Script>
       {/* RB2B visitor identification (script from the RB2B dashboard). Polish pages: loads only after cookie consent (this whole component returns null before it) */}
-      <Script id="reb2b" strategy="afterInteractive">
+      <Script id="rb2b-loader" strategy="afterInteractive">
         {`!function(key) {
 if (window.reb2b) return;
 window.reb2b = {loaded: true};
