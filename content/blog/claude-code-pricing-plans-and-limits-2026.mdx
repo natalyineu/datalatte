@@ -1,0 +1,158 @@
+---
+title: "Claude Code Pricing 2026: Plans, Limits, Real Cost"
+date: "2026-11-07"
+lastModified: "2026-11-07"
+description: "Claude Code costs $20 a month on Pro, $100 on Max and $200 on Ultra. Plans, usage limits, data rules and a worked cost example for a small business."
+author: "Nataliia"
+category: "AI Tools"
+tags: ["claude code pricing", "claude code", "ai coding agents", "ai tools for small business", "claude pro vs max"]
+slug: "claude-code-pricing-plans-and-limits-2026"
+image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80&auto=format&fit=crop"
+readTime: "10 min read"
+---
+
+Claude Code is included in Anthropic's paid Claude plans: Pro at $20 a month ($17 a month if billed annually), Max at $100 a month and Ultra at $200 a month. The Free plan does not include it. Usage is capped by a five-hour window and a weekly limit, so the plan you need depends on how much you ask it to do, not on the number of websites you own.
+
+Prices and features checked on 7 November 2026.
+
+This guide is written for owners and marketers of cafés, salons, grooming studios and gyms who have heard about AI coding agents and want to know what Claude Code is, what it costs and whether it earns its fee. Everything below comes from Anthropic's own pages, listed in Sources.
+
+<StatRow
+  title="Claude Code plan prices"
+  values="$20|$100|$200|$20"
+  labels="Pro per month, billed monthly|Max per month, 5x Pro usage|Ultra per month, 10x Pro weekly usage|Team standard seat per month, billed annually"
+  subs="claude.com/pricing|claude.com/pricing|claude.com/pricing|claude.com/pricing"
+  trends="neutral|neutral|neutral|neutral"
+  source="Anthropic pricing page, opened 7 November 2026"
+/>
+
+## How Much Does Claude Code Cost?
+
+Claude Code has no separate price tag. It comes with a Claude subscription, and the subscription price is what you pay. Anthropic's pricing page lists these plans:
+
+| Plan | Price | Claude Code | What the page says is included |
+|---|---|---|---|
+| Free | $0 | Not included | Chat on web, desktop and mobile, web search, file creation, memory, Artifacts. Usage is "limited" |
+| Pro | $20 a month, or $17 a month on annual billing ($200 upfront) | Included | Projects, Research, Opus, Claude in Chrome, Microsoft 365 |
+| Max | $100 a month | Included | 5x Pro usage, $100 a month in API credits, priority access |
+| Ultra | $200 a month | Included | 10x Pro weekly usage, no 5-hour limit for verified accounts, $200 a month in API credits |
+| Team | Standard seat $20 a month annual, $25 monthly. Premium seat $100 annual, $125 monthly | Included | Claude Code and Cowork, central billing, SSO |
+| Enterprise | $20 per seat a month billed annually, 20-seat minimum, plus usage at API rates | Included per the comparison table | Team features plus audit logs and custom data retention |
+
+One detail matters for budgeting. Anthropic's help article says the monthly API credits that come with Max and Ultra cannot be used in Claude Code. They are a separate benefit.
+
+<BigStat value="5 years" label="Consumer accounts that allow model improvement keep Claude Code data for five years. With the setting off, retention is 30 days." note="Free, Pro, Max and Ultra accounts. Team, Enterprise and API accounts have a standard 30-day period." source="Anthropic Claude Code data usage page, checked 7 November 2026" />
+
+## What Is Claude Code and How Does It Work?
+
+Anthropic describes Claude Code as "an agentic coding tool that reads your codebase, edits files, runs commands, and integrates with your development tools." In plain terms, it is an assistant that works inside a folder of files. You describe a change in ordinary language and it plans the work, edits files and runs commands.
+
+It runs on several surfaces: the terminal, VS Code and JetBrains extensions, a desktop app and the web at claude.ai/code. The desktop app needs a paid subscription. On a Mac, the terminal install is one line pasted into the Terminal app, and Anthropic's docs include a guide for people who have never opened a terminal.
+
+Claude Code can also connect to outside tools through MCP, an open standard. If that term is new, read [what MCP is and how it works](/blog/what-is-mcp-model-context-protocol-explained).
+
+## What Are the Usage Limits?
+
+Anthropic's help center says Pro and Max have a five-hour session limit and a weekly limit. Ultra has a weekly limit, and verified Ultra accounts have no five-hour limit. Max and Ultra also have a separate weekly limit for Fable models. Terminal and IDE use count toward the same limits as Claude on the web and apps.
+
+The pricing page adds that "how fast you reach a limit depends on the model you use, how long your chats are, and how large your files are." It gives no fixed message count, so any figure you see elsewhere is an estimate, not a vendor promise.
+
+When a limit is reached, the help article lists the options: upgrade, enable usage credits, switch to a Console account with API credits, or wait for the reset.
+
+## What Happens if an API Key Is Set?
+
+If an `ANTHROPIC_API_KEY` environment variable is present, Anthropic says Claude Code uses that key instead of the subscription, which means API charges instead of plan allowance. A non-developer who copied a setup guide may have this variable without knowing. Run `/status` to see which account is active.
+
+The API route is priced per million tokens. The pricing page lists Sonnet 5.5 at $2 input and $10 output, Opus 5.5 at $4 and $20, and Haiku 5.5 at $0.10 and $0.50. It gives no per-task price, so a monthly bill cannot be predicted from these numbers alone.
+
+## What Can a Small Business Use It For?
+
+These are possibilities, not results. Anthropic's overview says Claude Code can build features, fix bugs, edit multiple files and script repeated work. For a local business that could include:
+
+- Editing the text, hours and prices on a landing page, then previewing the change before it goes live.
+- Writing a small script that turns an exported sales or booking spreadsheet into a weekly summary.
+- Cleaning a customer list: fixing duplicate rows, inconsistent phone formats or missing postcodes.
+- Checking a website for broken links or missing page titles.
+- Connecting a calendar or booking tool, as in [this MCP and Google Calendar automation guide](/blog/claude-mcp-google-calendar-booking-automation).
+
+Each task still needs a person who can read the result and decide whether it is right. For a wider view of where AI fits in a local business, see the [complete guide to automating a local business with AI](/blog/how-to-automate-your-local-business-with-ai-complete-guide).
+
+## What Would It Cost? A Worked Example
+
+This is an assumption, built only from the published prices above. Assume a salon owner wants help for two months while rebuilding a booking landing page and cleaning a client spreadsheet, then plans to stop.
+
+| Line | Assumption | Cost |
+|---|---|---|
+| Plan | Pro, billed monthly | $20 a month |
+| Duration | 2 months (assumed) | $40 |
+| If the owner hits the limit and moves to Max for one month | $100 | $100 |
+| Total, Pro only | | $40 |
+| Total, Pro then one month of Max | | $60 plus $100 = $140 |
+
+Annual billing only helps if the tool is used all year: $200 upfront is $17 a month, but it is paid in full on day one. Compare any figure to what the same task would cost from a freelancer, and to what a coffee shop can afford to spend on marketing overall, as in [this ad budget breakdown](/blog/how-much-can-a-coffee-shop-afford-to-spend-on-ads-quickbooks-data).
+
+## What Are the Risks and Limits?
+
+- **Review is the user's job.** Anthropic's security page says "You're responsible for reviewing proposed code and commands for safety before approval."
+- **Permissions.** In Manual mode Claude Code starts with read-only permissions and asks before editing files or running commands. The same page says Auto mode, a classifier that reviews actions instead of you, is the starting mode for interactive terminal and VS Code sessions.
+- **Data use.** Consumer plans give a choice about training on your data. Anthropic's data page says it will train new models on data from Free, Pro, Max and Ultra accounts when that setting is on, including Claude Code use. Team, Enterprise and API use falls under commercial terms.
+- **Sensitive files.** Anything in the working folder can be sent to the model as context. Keep customer lists with personal data out of the folder unless the privacy settings suit that data.
+- **Feedback.** Running `/feedback` sends a copy of the conversation, including code, to Anthropic.
+- **Limits.** The five-hour and weekly windows can interrupt a long job.
+
+Anthropic also states that "no system is completely immune to all attacks."
+
+## How Do the Six AI Coding Agents Compare?
+
+Only facts confirmed on each vendor's own page on 7 November 2026 are shown. "Not confirmed" means the page did not open or did not state it.
+
+| Tool | Free option | Lowest paid price confirmed | Where it runs | Guide |
+|---|---|---|---|---|
+| Claude Code | Not included on Free plan | Pro $20 a month ($17 on annual billing) | Terminal, VS Code, JetBrains, desktop app, web | [Claude Code guide](/blog/claude-code-pricing-plans-and-limits-2026) |
+| OpenAI Codex | Free plan with quick coding tasks | Go $8 a month, Plus $20 a month | Desktop app, web, CLI, IDE extension, Codex Cloud | [Codex guide](/blog/openai-codex-pricing-and-plans-2026) |
+| Meta Muse Code | None listed on the pages opened | Everyday Usage $5 a month | Terminal and CI, macOS, Windows (Linux per docs) | [Muse Code guide](/blog/meta-muse-code-price-features-review-2026) |
+| Grok Build | Not confirmed | Not confirmed (x.ai pricing page returned an error) | Terminal; web, iOS and Android per xAI post | [Grok Build guide](/blog/grok-build-xai-pricing-and-setup-2026) |
+| Google Antigravity | Individuals plan at $0 | Google AI Pro, $19.99 a month per Google's plan page calculator | Desktop on macOS, Windows, Linux, Googlebook | [Antigravity guide](/blog/google-antigravity-pricing-and-setup-2026) |
+| Cursor | Free, limited usage | Plus $8 a month | See the Cursor guide | [Cursor guide](/blog/cursor-ai-build-local-business-website-no-code) |
+
+
+Claude Code is not on Anthropic's Free plan, while Codex, Antigravity and Cursor list free tiers on their own pages. Each tool has its own guide: [Codex](/blog/openai-codex-pricing-and-plans-2026), [Muse Code](/blog/meta-muse-code-price-features-review-2026), [Grok Build](/blog/grok-build-xai-pricing-and-setup-2026) and [Antigravity](/blog/google-antigravity-pricing-and-setup-2026). For a builder aimed at non-developers, see the [Cursor website guide](/blog/cursor-ai-build-local-business-website-no-code).
+
+A free local option also exists: [running a local model with Ollama](/blog/ollama-local-llm-small-business-free-setup).
+
+## FAQ
+
+### Is Claude Code free?
+
+No. Anthropic's pricing page marks Claude Code as not included on the Free plan. It is included from Pro at $20 a month. The Claude Code overview says most surfaces require a Claude subscription or an Anthropic Console account.
+
+### How much does Claude Code cost per month?
+
+The subscription route is $20 a month on Pro billed monthly, $100 on Max and $200 on Ultra. Team standard seats are $20 a seat a month on annual billing. The API route is billed per token, with no fixed monthly amount.
+
+### Do I need to know how to code to use Claude Code?
+
+The documentation does not set a coding requirement, and it includes a guide for opening a terminal for the first time. It does put the responsibility for reviewing changes on the user, so basic familiarity with websites and files helps.
+
+### Is Claude Code included in Claude Pro?
+
+Yes. Anthropic's help center says Pro, Max and Ultra subscriptions include Claude Code in the terminal and in supported IDEs, and use counts toward the same limits as Claude on the web and apps.
+
+### Does Claude Code use my data for training?
+
+For Free, Pro, Max and Ultra accounts, Anthropic says it trains new models on data when the improvement setting is on, including Claude Code use. Commercial accounts (Team, Enterprise, API) are covered by a policy of not training on Claude Code code or prompts unless the customer opts in.
+
+## Sources
+
+Opened on 7 November 2026:
+
+- [Claude pricing, claude.com/pricing](https://claude.com/pricing)
+- [Claude Code overview, code.claude.com/docs/en/overview](https://code.claude.com/docs/en/overview)
+- [Using Claude Code with your Pro or Max plan, Claude Help Center](https://support.claude.com/en/articles/11145838-using-claude-code-with-your-pro-or-max-plan)
+- [Claude Code data usage](https://code.claude.com/docs/en/data-usage)
+- [Claude Code security](https://code.claude.com/docs/en/security)
+- [Cursor pricing, cursor.com/pricing](https://cursor.com/pricing) (comparison row)
+
+Comparison rows for the other tools come from the vendor pages listed in their own guides. Third-party pricing summaries were used only as leads and are not cited. The cost example is an assumption built from the published prices.
+
+Need help choosing and setting up AI tools for your business? See our [AI agents and automation service](/services/ai-agents).

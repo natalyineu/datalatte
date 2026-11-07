@@ -1,0 +1,151 @@
+---
+title: "Meta Muse Code: Price, Features and Who It Is For"
+date: "2026-11-07"
+lastModified: "2026-11-07"
+description: "Meta Muse Code lists plans at $5, $15, $50 and $200 a month, with a Contributor mode trading your data for more usage. Features, risks, fit."
+author: "Nataliia"
+category: "AI Tools"
+tags: ["meta muse code", "muse code pricing", "meta ai coding agent", "ai coding agents", "ai tools for small business"]
+slug: "meta-muse-code-price-features-review-2026"
+image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80&auto=format&fit=crop"
+readTime: "10 min read"
+---
+
+Meta Muse Code is Meta's coding agent for the terminal. Meta's product page lists four monthly plans: Everyday Usage at $5, High Usage at $15, Power Usage at $50 and Maximum Usage at $200. Subscriptions default to a Contributor mode, where Meta says you get more usage in exchange for letting Meta use your content to train future models. It can be turned off at any time.
+
+Prices and features checked on 7 November 2026.
+
+This guide is for owners and marketers who want to know what Muse Code is and whether the cheap plans are a good deal once the data terms are understood. All facts come from Meta's developer pages, listed in Sources.
+
+<StatRow
+  title="Muse Code plan prices"
+  values="$5|$15|$50|$200"
+  labels="Everyday Usage per month|High Usage per month, 5x Everyday|Power Usage per month, 20x Everyday|Maximum Usage per month, 80x Everyday"
+  subs="dev.meta.ai product page|dev.meta.ai product page|dev.meta.ai product page|dev.meta.ai product page"
+  trends="neutral|neutral|neutral|neutral"
+  source="Meta Muse Code product and subscriptions pages, opened 7 November 2026"
+/>
+
+## How Much Does Muse Code Cost?
+
+Meta's Muse Code product page lists the subscription plans. The separate subscriptions documentation page lists the usage of each plan but no prices, and says benefits are shown during onboarding.
+
+| Plan | Price (product page) | Usage (subscriptions page) |
+|---|---|---|
+| Everyday Usage | $5.00 a month | 10 to 50 prompts every 5 hours, including image and video uploads |
+| High Usage | $15.00 a month | 5x more usage than Everyday |
+| Power Usage | $50.00 a month | 20x more usage than Everyday. The product page says it includes access to the most powerful Muse models, including Muse Wonder Full |
+| Maximum Usage | $200.00 a month | 80x more usage than Everyday |
+
+The pages do not say whether these prices differ between Contributor mode and Standard mode. The documentation describes a flat monthly rate.
+
+<BigStat value="80x" label="The Maximum Usage plan offers 80 times the usage of the Everyday plan, for 40 times the listed price" note="Everyday is $5 a month and Maximum is $200 a month. Arithmetic on the two vendor figures." source="Meta Muse Code subscriptions and product pages, opened 7 November 2026" />
+
+## What Is Contributor Mode?
+
+Meta's subscriptions page says Muse Code subscriptions default to Contributor mode. The page says that in this mode "you get more usage from your plan in exchange for letting Meta use your content to train future Meta models." Your content means the prompts, code, files and context you send and the responses you get back.
+
+You can turn it off at any time, "at which point your future content is not used to train Meta models." The page also says the mode does not appear for pay-as-you-go billing, accounts with Zero Data Retention, or organizations whose managed configuration sets it off. The subscriptions page does not describe a price discount for Contributor mode; the benefit it names is more usage.
+
+## What Are the Per-Token Prices?
+
+For people who use the API route instead of a subscription, the product page lists two versions of each model. The Contributor versions are labelled "Used to improve our products." The Standard versions are labelled "Not used to improve our products." Both have a 1M-token context window.
+
+| Muse Spark 1.3 and 1.2 | Input per million tokens | Output per million tokens |
+|---|---|---|
+| Contributor versions | $0.10 | $0.20 |
+| Standard versions | $1.25 | $4.25 |
+
+On Meta's figures, the Standard input rate is 12.5 times the Contributor rate ($1.25 divided by $0.10), and the Standard output rate is 21.25 times ($4.25 divided by $0.20). That is arithmetic on Meta's numbers. Press coverage of the contributor tier exists, but it is secondary and is not used for any fact here.
+
+## What Is Muse Code and How Does It Work?
+
+Meta's docs describe Muse Code as its coding agent for the terminal and CI, built for Muse Spark. Run it in a project and it plans, edits files and runs commands. The product page adds that it is multi-agent by default, with workers in parallel and reviewers in the background, and that its actions are auditable.
+
+Install is one line. On macOS or Linux: `curl -fsSL https://dev.meta.ai/install.sh | sh`. On Windows, a PowerShell command is given. The docs say to run `muse` inside a project folder, choose whether to trust the workspace and sign in through a browser or an API key. The default model is `muse-spark-1.2`.
+
+Platforms differ slightly between pages. The product page says "Available for MacOS and Windows" and the docs say macOS, Linux and Windows. Neither page labels the product as beta, and neither gives a launch date.
+
+## What Can a Small Business Use It For?
+
+These are possibilities, not results. Because it works on project files, the jobs are file jobs:
+
+- Changing prices, hours or offers on a landing page.
+- A small script that turns exported booking or sales data into a weekly table.
+- Cleaning a spreadsheet of client contacts.
+- Checking a website for broken links or missing descriptions.
+
+The terminal install means it suits someone comfortable pasting commands. A non-technical owner may prefer a tool with a visual app, such as [Cursor](/blog/cursor-ai-build-local-business-website-no-code). For the broader picture of AI in a small business, read the [AI automation guide](/blog/how-to-automate-your-local-business-with-ai-complete-guide), or the [guide to running a free local model with Ollama](/blog/ollama-local-llm-small-business-free-setup) if data privacy is the main worry.
+
+## What Would It Cost? A Worked Example
+
+This is an assumption using only published prices. A groomer wants to try an agent for two months.
+
+| Line | Assumption | Cost |
+|---|---|---|
+| Plan | Everyday Usage, $5 a month | $5 a month |
+| Duration | 2 months (assumed) | $10 |
+| Upgrade for the second month | High Usage, $15 | $5 plus $15 = $20 |
+
+The Everyday plan's allowance is 10 to 50 prompts every 5 hours. Whether that is enough for a page rebuild is not something the pages answer. The trade is that, while Contributor mode is on, the prompts and files used in those sessions can be used for model training.
+
+## What Are the Risks and Limits?
+
+- **Data sharing.** Contributor mode is the default. Do not send customer lists, staff details or anything confidential while it is on. Turn it off in settings first if that matters.
+- **Approvals and sandbox.** Meta's permissions page says two safeguards apply: an approval policy and an OS-level sandbox. Writes are limited to the workspace and a temp directory, and network access defaults to per-destination approval.
+- **Removing guardrails.** The `--yolo` option disables both layers and the docs reserve it for disposable, already-isolated environments.
+- **Usage caps.** The Everyday plan allows 10 to 50 prompts per 5 hours.
+- **Review.** Output still needs a person to check it before it goes live.
+- **Unconfirmed.** Meta's pages opened do not state a free plan, a refund policy or a beta label.
+
+## How Do the Six AI Coding Agents Compare?
+
+Only facts confirmed on each vendor's own page on 7 November 2026 are shown. "Not confirmed" means the page did not open or did not state it.
+
+| Tool | Free option | Lowest paid price confirmed | Where it runs | Guide |
+|---|---|---|---|---|
+| Claude Code | Not included on Free plan | Pro $20 a month ($17 on annual billing) | Terminal, VS Code, JetBrains, desktop app, web | [Claude Code guide](/blog/claude-code-pricing-plans-and-limits-2026) |
+| OpenAI Codex | Free plan with quick coding tasks | Go $8 a month, Plus $20 a month | Desktop app, web, CLI, IDE extension, Codex Cloud | [Codex guide](/blog/openai-codex-pricing-and-plans-2026) |
+| Meta Muse Code | None listed on the pages opened | Everyday Usage $5 a month | Terminal and CI, macOS, Windows (Linux per docs) | [Muse Code guide](/blog/meta-muse-code-price-features-review-2026) |
+| Grok Build | Not confirmed | Not confirmed (x.ai pricing page returned an error) | Terminal; web, iOS and Android per xAI post | [Grok Build guide](/blog/grok-build-xai-pricing-and-setup-2026) |
+| Google Antigravity | Individuals plan at $0 | Google AI Pro, $19.99 a month per Google's plan page calculator | Desktop on macOS, Windows, Linux, Googlebook | [Antigravity guide](/blog/google-antigravity-pricing-and-setup-2026) |
+| Cursor | Free, limited usage | Plus $8 a month | See the Cursor guide | [Cursor guide](/blog/cursor-ai-build-local-business-website-no-code) |
+
+
+Muse Code has the lowest listed entry price of the six, at $5 a month. Compare it with the [Claude Code plans](/blog/claude-code-pricing-plans-and-limits-2026), [Codex plans](/blog/openai-codex-pricing-and-plans-2026), [Grok Build](/blog/grok-build-xai-pricing-and-setup-2026) and [Antigravity](/blog/google-antigravity-pricing-and-setup-2026).
+
+## FAQ
+
+### What is Meta Muse Code?
+
+It is Meta's coding agent for the terminal and CI, built for Muse Spark models. It plans a task, edits files and runs commands, with approvals and an OS sandbox on from the first run.
+
+### How much does Meta Muse Code cost?
+
+The product page lists Everyday Usage at $5 a month, High Usage at $15, Power Usage at $50 and Maximum Usage at $200. The subscriptions page lists usage but no prices.
+
+### What is Muse Code Contributor mode?
+
+It is the default for subscriptions. Meta says you get more usage in exchange for letting Meta use your content to train future models. You can turn it off at any time, after which future content is not used for training.
+
+### Is Meta Muse Code free?
+
+The pages opened do not list a free plan. The cheapest plan listed is Everyday Usage at $5 a month.
+
+### Is Muse Code safe for business data?
+
+Meta's docs describe approvals and a sandbox, but Contributor mode is on by default and allows content to be used for training. Turn it off, or use pay-as-you-go billing where the mode does not appear, before working with business or customer data.
+
+## Sources
+
+Opened on 7 November 2026:
+
+- [Muse Code product page, dev.meta.ai/products/muse-code](https://dev.meta.ai/products/muse-code)
+- [Muse Code subscriptions, dev.meta.ai/docs/muse-code/subscriptions](https://dev.meta.ai/docs/muse-code/subscriptions)
+- [Muse Code documentation, dev.meta.ai/docs/muse-code](https://dev.meta.ai/docs/muse-code)
+- [Muse Code permissions, dev.meta.ai/docs/muse-code/permissions](https://dev.meta.ai/docs/muse-code/permissions)
+- [Cursor pricing, cursor.com/pricing](https://cursor.com/pricing) (comparison row)
+
+Third-party articles about the contributor tier were used only as leads, are secondary and are not cited for facts. The cost example is an assumption.
+
+Need help with AI tools in your business? See our [AI agents and automation service](/services/ai-agents).

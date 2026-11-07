@@ -1,0 +1,151 @@
+---
+title: "Grok Build (xAI): Pricing, Features and Setup"
+date: "2026-11-07"
+lastModified: "2026-11-07"
+description: "Grok Build is xAI's terminal coding agent. API rates start at $1.00 per million input tokens; subscription prices could not be confirmed. Setup and risks."
+author: "Nataliia"
+category: "AI Tools"
+tags: ["grok build", "xai grok build pricing", "grok coding agent", "ai coding agents", "ai tools for small business"]
+slug: "grok-build-xai-pricing-and-setup-2026"
+image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80&auto=format&fit=crop"
+readTime: "9 min read"
+---
+
+Grok Build is xAI's coding agent. It launched on 25 May 2026 as an early beta in the terminal for SuperGrok and X Premium Plus subscribers, and xAI's 19 August 2026 post says it is now available on every plan, on the web and on mobile. xAI's API lists the grok-build-0.1 model at $1.00 per million input tokens and $2.00 per million output tokens. Subscription prices could not be confirmed, because x.ai's pricing page returned an error.
+
+Prices and features checked on 7 November 2026.
+
+This guide is for owners and marketers of local businesses who want to know what Grok Build is and whether it is worth trying. Where xAI's pages could not be opened, the article says so and leaves the number out.
+
+<StatRow
+  title="Grok Build facts from xAI"
+  values="$1.00|$2.00|256k|May 25"
+  labels="Input price per million tokens, grok-build-0.1, prompts under 200k|Output price per million tokens, same model|Context window in tokens|Early beta launch date, 2026"
+  subs="docs.x.ai pricing|docs.x.ai pricing|docs.x.ai pricing|x.ai launch post"
+  trends="neutral|neutral|neutral|neutral"
+  source="xAI API pricing page and x.ai news posts, opened 7 November 2026"
+/>
+
+## What Does Grok Build Cost?
+
+The honest answer is that subscription prices for Grok Build could not be confirmed from xAI for this guide. The x.ai pricing page and the x.ai/build page returned an HTTP 403 error when opened on 7 November 2026, and xAI's docs paths tried returned 404. Plan prices seen in press coverage are therefore left out.
+
+What xAI's pages do confirm:
+
+| Item | What xAI says | Page |
+|---|---|---|
+| Early access, 25 May 2026 | Available to all SuperGrok and X Premium Plus subscribers | x.ai/news/grok-build-cli |
+| Wider access, 19 August 2026 | "Grok Build is now available on every plan, on the web and on mobile" | x.ai/news/grok-build-for-everyone |
+| grok-build-0.1 API, prompts under 200k tokens | $1.00 input, $0.20 cached input, $2.00 output per million tokens | docs.x.ai/developers/pricing |
+| grok-build-0.1 API, 200k tokens or more | $2.00 input, $0.40 cached input, $4.00 output per million tokens | docs.x.ai/developers/pricing |
+| Context window | 256k tokens | docs.x.ai/developers/pricing |
+
+The pricing docs also say Grok 4.7 Fast is billed through your plan in Cursor and Grok Build, is not on the public xAI API and is not included in Grok Build's free tier.
+
+<BigStat value="Every plan" label="xAI's 19 August 2026 post says Grok Build is now available on every plan, on the web and on mobile" note="At launch it was an early beta. Plan prices were not readable on x.ai on 7 November 2026." source="x.ai/news/grok-build-for-everyone, opened 7 November 2026" />
+
+## Is Grok Build Still in Beta?
+
+xAI's launch post (25 May 2026) calls it an early beta. The 19 August post does not call it beta now and says the new features "ship to everyone today". The two xAI posts also disagree on timing: the August post says Grok Build launched "in July" as an early beta limited to SuperGrok Heavy, while the launch post is dated 25 May and lists SuperGrok and X Premium Plus. Press coverage of the beta also differs from these posts, so this guide follows xAI's own pages and notes the conflict rather than picking a date.
+
+## What Is Grok Build and How Does It Work?
+
+xAI describes it as "a new coding agent that runs right from your terminal," built for professional software engineering and complex coding work. Listed features:
+
+- Plan mode, where you approve, comment on or rewrite a plan before execution.
+- Support for existing setups: AGENTS.md, plugins, hooks, skills and MCP servers.
+- Parallel subagents, which can run in their own git worktrees.
+- Headless mode with `-p` for scripts.
+- A `/goal` command (introduced 22 June 2026) for long-running autonomous tasks.
+- A plugin marketplace (announced 11 June 2026), using commands such as `grok plugin install`.
+
+If MCP is unfamiliar, [this explainer](/blog/what-is-mcp-model-context-protocol-explained) covers it.
+
+## How Do You Set Up Grok Build?
+
+xAI's posts give a single install command for the terminal: `curl -fsSL https://x.ai/cli/install.sh | bash`. Then you sign in with your account. The pages do not name supported operating systems. The August post adds building on the web, iOS and Android, so a terminal is not the only route.
+
+For a non-technical owner, the terminal is the hurdle. If that is a barrier, a visual editor such as [Cursor](/blog/cursor-ai-build-local-business-website-no-code) may be easier.
+
+## What Can a Small Business Use It For?
+
+These are possibilities, not results, based on what xAI lists the tool can do:
+
+- Editing a landing page: opening hours, offers, phone numbers.
+- Writing a script that summarizes a sales or booking export.
+- Cleaning up a client spreadsheet.
+- Running a checklist over a website for missing titles or broken links.
+
+All of these need a person to check the output. For where this fits in a wider plan, see the [guide to automating a local business with AI](/blog/how-to-automate-your-local-business-with-ai-complete-guide).
+
+## What Would It Cost? A Worked Example
+
+This is an assumption using only published API rates. Assume a gym owner runs one session with 150,000 input tokens and 30,000 output tokens on grok-build-0.1, with a prompt under 200k tokens and no caching.
+
+| Line | Calculation | Cost |
+|---|---|---|
+| Input | 0.15 million tokens at $1.00 | $0.15 |
+| Output | 0.03 million tokens at $2.00 | $0.06 |
+| Total | | $0.21 |
+
+The token counts are invented for the example, and real sessions vary. A subscription route would follow the plan price, which was not confirmed. Do not budget from this example.
+
+## What Are the Risks and Limits?
+
+- **Beta wording.** xAI called it an early beta at launch and has not repeated that label in the August post.
+- **Unconfirmed terms.** Plan prices, usage limits and data-training terms could not be opened on x.ai for this guide. Read xAI's terms before sending customer data.
+- **Autonomy.** `/goal` is described as long-running autonomous execution. That raises the importance of reviewing changes.
+- **Review.** Plan mode lets you approve a plan before execution; the owner remains responsible for checking results.
+
+## How Do the Six AI Coding Agents Compare?
+
+Only facts confirmed on each vendor's own page on 7 November 2026 are shown. "Not confirmed" means the page did not open or did not state it.
+
+| Tool | Free option | Lowest paid price confirmed | Where it runs | Guide |
+|---|---|---|---|---|
+| Claude Code | Not included on Free plan | Pro $20 a month ($17 on annual billing) | Terminal, VS Code, JetBrains, desktop app, web | [Claude Code guide](/blog/claude-code-pricing-plans-and-limits-2026) |
+| OpenAI Codex | Free plan with quick coding tasks | Go $8 a month, Plus $20 a month | Desktop app, web, CLI, IDE extension, Codex Cloud | [Codex guide](/blog/openai-codex-pricing-and-plans-2026) |
+| Meta Muse Code | None listed on the pages opened | Everyday Usage $5 a month | Terminal and CI, macOS, Windows (Linux per docs) | [Muse Code guide](/blog/meta-muse-code-price-features-review-2026) |
+| Grok Build | Not confirmed | Not confirmed (x.ai pricing page returned an error) | Terminal; web, iOS and Android per xAI post | [Grok Build guide](/blog/grok-build-xai-pricing-and-setup-2026) |
+| Google Antigravity | Individuals plan at $0 | Google AI Pro, $19.99 a month per Google's plan page calculator | Desktop on macOS, Windows, Linux, Googlebook | [Antigravity guide](/blog/google-antigravity-pricing-and-setup-2026) |
+| Cursor | Free, limited usage | Plus $8 a month | See the Cursor guide | [Cursor guide](/blog/cursor-ai-build-local-business-website-no-code) |
+
+
+For the details on each, see [Claude Code](/blog/claude-code-pricing-plans-and-limits-2026), [Codex](/blog/openai-codex-pricing-and-plans-2026), [Muse Code](/blog/meta-muse-code-price-features-review-2026) and [Antigravity](/blog/google-antigravity-pricing-and-setup-2026).
+
+## FAQ
+
+### Is Grok Build free?
+
+Not confirmed. The xAI pricing page returned an error. The API docs say Grok 4.7 Fast is not included in Grok Build's free tier, which implies a free tier exists, but its limits are not stated in the pages opened.
+
+### How much does Grok Build cost?
+
+Subscription prices could not be confirmed from xAI. The API model grok-build-0.1 is $1.00 per million input tokens and $2.00 per million output tokens for prompts under 200k tokens.
+
+### Is Grok Build still in beta?
+
+xAI's 25 May 2026 post calls it an early beta. Its 19 August 2026 post says Grok Build is now available on every plan, on the web and on mobile, and does not use the beta label.
+
+### How do I install Grok Build?
+
+xAI's posts give this terminal command: `curl -fsSL https://x.ai/cli/install.sh | bash`, followed by signing in with your account. The pages do not list supported operating systems.
+
+### Do I need SuperGrok to use Grok Build?
+
+At launch, xAI listed SuperGrok and X Premium Plus subscribers. The August post says it is available on every plan.
+
+## Sources
+
+Opened on 7 November 2026:
+
+- [Introducing Grok Build, x.ai](https://x.ai/news/grok-build-cli)
+- [Grok Build on web and mobile, x.ai](https://x.ai/news/grok-build-for-everyone)
+- [Introducing /goal, x.ai](https://x.ai/news/introducing-goal)
+- [Grok Build Plugin Marketplace, x.ai](https://x.ai/news/grok-plugin-marketplace)
+- [xAI API pricing, docs.x.ai](https://docs.x.ai/developers/pricing)
+- [Cursor pricing, cursor.com/pricing](https://cursor.com/pricing) (comparison row)
+
+Could not be opened (HTTP 403): x.ai/pricing, x.ai/build, x.ai/cli. Not found (404): docs.x.ai paths for Grok Build. Third-party pricing summaries and press coverage were used only as leads and are not cited. The cost example is an assumption.
+
+Want help choosing AI tools for your business? See our [AI agents and automation service](/services/ai-agents).
