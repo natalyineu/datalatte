@@ -37,6 +37,17 @@ export default function AnalyticsScripts() {
 a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
 twq('config','rihym');`}
       </Script>
+      {/* RB2B visitor identification (script from the RB2B dashboard). Polish pages: loads only after cookie consent (this whole component returns null before it) */}
+      <Script id="reb2b" strategy="afterInteractive">
+        {`!function(key) {
+if (window.reb2b) return;
+window.reb2b = {loaded: true};
+var s = document.createElement("script");
+s.async = true;
+s.src = "https://ddwl4m2hdecbv.cloudfront.net/b/" + key + "/" + key + ".js.gz";
+document.getElementsByTagName("script")[0].parentNode.insertBefore(s, document.getElementsByTagName("script")[0]);
+}("R6G5YH5LJP65");`}
+      </Script>
       <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA}`} strategy="lazyOnload" />
       <Script id="ga4-init" strategy="lazyOnload">
         {`// Do not count headless/automated browsers (the bulk of "Direct" traffic)
