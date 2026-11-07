@@ -37,6 +37,10 @@ export default function AnalyticsScripts() {
 a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
 twq('config','rihym');`}
       </Script>
+      {/* Reddit Pixel */}
+      <Script id="reddit-pixel" strategy="afterInteractive">
+        {`!function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};p.callQueue=[];var t=d.createElement("script");t.src="https://www.redditstatic.com/ads/pixel.js?pixel_id=p2_15e9rp9amxefm",t.async=!0;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}}(window,document);rdt('init','p2_15e9rp9amxefm');rdt('track','PageVisit');`}
+      </Script>
       {/* RB2B visitor identification (script from the RB2B dashboard). Polish pages: loads only after cookie consent (this whole component returns null before it) */}
       <Script id="rb2b-loader" strategy="afterInteractive">
         {`!function(key) {
