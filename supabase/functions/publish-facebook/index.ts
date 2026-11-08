@@ -16,6 +16,19 @@ Deno.serve(async (req) => {
     return Response.json(r.ok ? { id: j.id, name: j.name } : { error: j.error?.message });
   }
 
+  if (url.searchParams.get("ids") === "1") {
+    // Diagnostics: Instagram business account + Threads user + granted permissions (no secrets returned).
+    const g = async (u: string) => { const r = await fetch(u); return await r.json(); };
+    const ig = await g(`${GRAPH}/${pageId}?fields=instagram_business_account{id,username},connected_instagram_account{id,username}&access_token=${token}`);
+    const perms = await g(`${GRAPH}/me/permissions?access_token=${token}`);
+    const th = await g(`https://graph.threads.net/v1.0/me?fields=id,username&access_token=${token}`);
+    return Response.json({
+      instagram: ig.error ? { error: ig.error.message } : ig,
+      permissions: perms.error ? { error: perms.error.message } : perms.data,
+      threads: th.error ? { error: th.error.message } : th,
+    });
+  }
+
   const sb = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
   const { data: posts, error } = await sb
     .from("social_posts")
