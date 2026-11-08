@@ -100,6 +100,10 @@ export async function generateMetadata({
       title: BLOG_TITLE,
       description: BLOG_DESC,
       robots: { index: false, follow: false },
+      // Query variants consolidate to the clean blog index. The page stays
+      // crawlable (not blocked in robots.ts) so crawlers can see this
+      // noindex + canonical pair.
+      alternates: { canonical: BLOG_URL },
     };
   }
 

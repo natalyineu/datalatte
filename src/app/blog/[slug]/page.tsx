@@ -332,7 +332,11 @@ export async function generateMetadata({
   return {
     title: seoTitle,
     description: frontmatter.description,
-    ...(frontmatter.noindex && { robots: { index: false, follow: true } }),
+    // Explicit on every post: indexable posts must not rely on layout
+    // inheritance, and noindex posts keep follow so link equity still flows.
+    robots: frontmatter.noindex
+      ? { index: false, follow: true }
+      : { index: true, follow: true },
     // ── Canonical + hreflang per article ──────────────────────────────────
     alternates: {
       canonical: url,

@@ -3,7 +3,8 @@ import SectionWrapper from "@/components/SectionWrapper";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  robots: { index: false },
+  robots: { index: true, follow: true },
+  alternates: { canonical: "https://datalatte.pro/terms" },
 };
 
 export default function TermsPage() {

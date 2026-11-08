@@ -3,7 +3,8 @@ import SectionWrapper from "@/components/SectionWrapper";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  robots: { index: false },
+  robots: { index: true, follow: true },
+  alternates: { canonical: "https://datalatte.pro/privacy" },
 };
 
 export default function PrivacyPage() {

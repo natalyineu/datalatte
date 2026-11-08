@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint src",
     "generate-index": "node scripts/generate-blog-index.mjs",
-    "ping-indexing": "node scripts/ping-indexing.mjs"
+    "ping-indexing": "node scripts/ping-indexing.mjs",
+    "check:crawl": "node scripts/audit/check-crawl-meta.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.106.2",
