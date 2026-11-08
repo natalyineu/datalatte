@@ -1,12 +1,12 @@
 // Publishes due social_posts (platform='facebook', status='scheduled') to the DataLatte Facebook Page.
-// Secrets (Supabase): FB_PAGE_TOKEN (never-expiring Page token), FB_PAGE_ID. Modes: ?dry=1, ?whoami=1
+// Secrets (Supabase): META_PAGE_TOKEN (never-expiring Page token), FB_PAGE_ID. Modes: ?dry=1, ?whoami=1
 import { createClient } from "npm:@supabase/supabase-js@2";
 
 const GRAPH = "https://graph.facebook.com/v21.0";
 
 Deno.serve(async (req) => {
   const url = new URL(req.url);
-  const token = Deno.env.get("FB_PAGE_TOKEN")!;
+  const token = Deno.env.get("META_PAGE_TOKEN")!;
   const pageId = Deno.env.get("FB_PAGE_ID")!;
   const dry = url.searchParams.get("dry") === "1";
 
