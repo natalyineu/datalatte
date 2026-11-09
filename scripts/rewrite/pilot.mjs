@@ -43,7 +43,7 @@ function links(slug, fm) {
   return rows.map((s) => [s, (s.match(/[a-z]{4,}/g) || []).filter((w) => tok.has(w)).length]).sort((a, b) => b[1] - a[1]).slice(0, 12).map((x) => x[0]);
 }
 async function call(model, user) {
-  const r = await fetch("https://openrouter.ai/api/v1/chat/completions", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ model, messages: [{ role: "system", content: SYS }, { role: "user", content: user }], max_tokens: 9000, temperature: 0.4 }) });
+  const r = await fetch("https://openrouter.ai/api/v1/chat/completions", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ model, messages: [{ role: "system", content: SYS }, { role: "user", content: user }], max_tokens: 16000, temperature: 0.4 }), signal: AbortSignal.timeout(420000) });
   const j = await r.json(); if (!j.choices) throw new Error(JSON.stringify(j).slice(0, 300));
   return { text: j.choices[0].message.content, usage: j.usage };
 }
@@ -57,7 +57,7 @@ async function gen() {
     await Promise.all(MODELS.map(async (m) => {
       const dir = path.join(OUT, m.replace("/", "__")); fs.mkdirSync(dir, { recursive: true });
       const f = path.join(dir, s + ".mdx"); if (fs.existsSync(f)) return;
-      try { const { text, usage } = await call(m, user); fs.writeFileSync(f, text.replace(/^```(?:mdx|markdown)?\n/, "").replace(/\n```\s*$/, "")); cost[m] = (cost[m] || 0) + (usage?.cost || 0); console.log("gen", m, s, usage?.cost); }
+      try { let o; for (let a = 0; a < 2 && !o; a++) { try { o = await call(m, user); } catch (e) { console.error('retry', m, s, String(e).slice(0, 120)); } } if (!o) throw new Error('failed'); const { text, usage } = o; fs.writeFileSync(f, text.replace(/^```(?:mdx|markdown)?\n/, "").replace(/\n```\s*$/, "")); cost[m] = (cost[m] || 0) + (usage?.cost || 0); console.log("gen", m, s, usage?.cost); }
       catch (e) { console.error("gen fail", m, s, String(e).slice(0, 200)); }
     }));
   }
