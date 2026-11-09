@@ -85,6 +85,8 @@ Every cold e-mail (first touch and follow-ups to businesses that did not write t
 - Send with Resend MCP (`send-email`, or `reply-to-inbox-thread-email` to keep the thread): from `Nataliia at DataLatte <hi@datalatte.pro>`, plain text + simple HTML, reply in the same thread (`In-Reply-To`) when answering. Partners: send to every address in `contact_emails`, cc `intermediary` if set.
 - Signature: always append `signature.html` (this folder) to the HTML body and its plain-text version to the text body. Replace `{campaign}` with `reply` / `followup` / `partner` / `invoice`. Do not change links without Nataliia.
 
+- Conversation history: every e-mail sent through Resend is copied automatically (full text, signature stripped) into `sent_emails` by workflow "Sync outreach status" (every 3 h; run it manually after sending if Nataliia wants to see it in the CRM right away). Therefore always send through Resend from hi@datalatte.pro, never from a personal mailbox, or the CRM will miss the message. `reply_text` in `contact_submissions` stays a one-line summary.
+
 ### Templates (adapt, keep short)
 - **First reply (inquiry):** thanks + one line showing you read their message + answer or question + next step (call link / free audit / quote by date).
 - **Follow-up day 3:** one line context, one question, easy yes/no.

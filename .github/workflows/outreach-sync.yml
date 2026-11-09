@@ -3,7 +3,7 @@ name: Sync outreach status
 on:
   workflow_dispatch:
   schedule:
-    - cron: "17 7 * * *"   # daily
+    - cron: "17 */3 * * *"   # every 3 hours
 
 jobs:
   sync:
@@ -20,3 +20,9 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: node scripts/sync-outreach-status.mjs
+      - name: Copy sent e-mails (full text) into sent_emails for CRM conversations
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: node scripts/sync-sent-emails.mjs
