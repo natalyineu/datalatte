@@ -70,6 +70,12 @@ Each `partner_deals` row has `placement_check` = text that must be on every page
 - New article in a niche of an open inquiry → suggest sending it to that person (draft).
 - Partner placement goes live → draft the "it's live" e-mail with the URL (template below) and set `published_at`, `live_url`.
 
+## 2c. Cold outreach log
+Every cold e-mail (first touch and follow-ups to businesses that did not write to us first) gets one row in `outreach_emails` right after sending: `sent_at`, `campaign` (`<city>-<niche>-<yyyy-mm>`, e.g. `poznan-cafes-top24-2026-11`), `to_email`, `business_name`, `niche`, `city`, `country_code`, `subject`, `resend_id` (from the send result), `source_table`/`source_id` (`local_businesses` or `leads`). Send with Resend tag `campaign=<campaign>`.
+- Status is synced from Resend daily (`scripts/sync-outreach-status.mjs`, workflow "Sync outreach status"). Replies are matched automatically from `contact_submissions` by e-mail (view `outreach_emails_v.replied_at_eff`).
+- When a reply comes, set `outcome` (`interested` / `not_interested` / `deal` / `unsubscribe`); an unsubscribe means never e-mail that address again.
+- The CRM tab Outreach shows the funnel per campaign.
+
 ## 3. Drafting replies
 - English unless the sender wrote in another language. Plain, warm, short (≤120 words), one clear next step (15-min call, the free audit `/free-audit`, a price, a date).
 - Use the niche and their own words; link one relevant service page or indexable blog post.
