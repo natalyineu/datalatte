@@ -8,7 +8,7 @@ import fs from "fs"; import path from "path"; import { execSync } from "child_pr
 const ROOT = path.join(path.dirname(new URL(import.meta.url).pathname), "../..");
 const OUT = process.env.OUT || path.join(ROOT, "data/triage/pilot-out");
 const MODELS = (process.env.MODELS || "deepseek/deepseek-v4-flash,qwen/qwen3.8-max-0902,google/gemini-3.5-flash,moonshotai/kimi-k3.1-pro,anthropic/claude-sonnet-5.5").split(",");
-const slugs = JSON.parse(fs.readFileSync(path.join(ROOT, "data/triage/pilot-slugs.json"), "utf8"));
+const slugs = process.env.SLUGS ? process.env.SLUGS.split(",") : JSON.parse(fs.readFileSync(path.join(ROOT, "data/triage/pilot-slugs.json"), "utf8"));
 const TODAY = new Date().toISOString().slice(0, 10);
 const art = (s) => path.join(ROOT, "content/blog", s + ".mdx");
 const split = (t) => { const m = t.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/); return [m[1], m[2]]; };
@@ -43,8 +43,8 @@ function links(slug, fm) {
   return rows.map((s) => [s, (s.match(/[a-z]{4,}/g) || []).filter((w) => tok.has(w)).length]).sort((a, b) => b[1] - a[1]).slice(0, 12).map((x) => x[0]);
 }
 async function call(model, user) {
-  const r = await fetch("https://openrouter.ai/api/v1/chat/completions", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ model, messages: [{ role: "system", content: SYS }, { role: "user", content: user }], max_tokens: 16000, temperature: 0.4 }), signal: AbortSignal.timeout(420000) });
-  const j = await r.json(); if (!j.choices) throw new Error(JSON.stringify(j).slice(0, 300));
+  const r = await fetch("https://openrouter.ai/api/v1/chat/completions", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ model, messages: [{ role: "system", content: SYS }, { role: "user", content: user }], max_tokens: 16000, temperature: 0.4, reasoning: { effort: "low" }, usage: { include: true } }), signal: AbortSignal.timeout(420000) });
+  const j = await r.json(); if (j.usage?.cost) console.log("cost", model, j.usage.cost, "tokens", j.usage.total_tokens); if (!j.choices || !j.choices[0].message.content) throw new Error("empty/err " + JSON.stringify(j).slice(0, 200));
   return { text: j.choices[0].message.content, usage: j.usage };
 }
 async function gen() {
