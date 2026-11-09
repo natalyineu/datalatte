@@ -1,0 +1,30 @@
+name: Send outreach wave
+
+on:
+  workflow_dispatch:
+    inputs:
+      wave:
+        description: "Wave file in data/outreach/"
+        default: "poznan-wave2-2026-11.json"
+  schedule:
+    - cron: "0 8 10 11 *"   # 2026-11-10 09:00 Warsaw (08:00 UTC); the script also checks send_after
+
+concurrency:
+  group: outreach-wave
+  cancel-in-progress: false
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Send approved wave
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: node scripts/send-outreach-wave.mjs "data/outreach/${{ github.event.inputs.wave || 'poznan-wave2-2026-11.json' }}"
