@@ -22,7 +22,7 @@ fs.mkdirSync("data/triage/new", { recursive: true }); let total = 0;
 for (const job of jobs) {
   const pk = JSON.parse(fs.readFileSync(`data/research/new-${job.pack}.json`, "utf8"));
   const src = pk.results.map((x, i) => `[S${i + 1}] ${x.url} (${x.title}, opened ${x.fetchedAt})\n${x.markdown}`).join("\n\n---\n\n");
-  const user = `SLUG: ${job.slug}\nWORKING TITLE: ${job.title}\nANGLE: ${job.angle}\nALLOWED LINKS: ${LINKS.map((x) => "/blog/" + x).join(", ")}\n\nSOURCES:\n${src}`;
+  const user = `SLUG: ${job.slug}\nWORKING TITLE: ${job.title}\nANGLE: ${job.angle}\nALLOWED LINKS: ${(job.links || LINKS).map((x) => "/blog/" + x).join(", ")}\n\nSOURCES:\n${src}`;
   let o; for (let a = 0; a < 2 && !o; a++) { try { o = await call(job.model || "anthropic/claude-sonnet-5.5", user); } catch (e) { console.error("retry", job.slug, String(e).slice(0, 100)); } }
   if (!o) { console.log("fail", job.slug); continue; } total += o.cost;
   fs.writeFileSync(`data/triage/new/${job.slug}.mdx`, o.text.replace(/^```(?:mdx|markdown)?\n/, "").replace(/\n```\s*$/, "")); console.log("gen", job.slug, o.cost);
