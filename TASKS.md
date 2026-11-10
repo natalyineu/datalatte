@@ -13,6 +13,8 @@
 
 - 2026-11-10 DEPLOYED (`b474dcd`): 638 internal links for 319 orphan posts (`scripts/audit/link-orphans2.py`), redirect fixes, socials (Instagram `datalattepro`, Facebook id 1406384899231203, Threads `@datalattepro`; Medium dropped). Clutch/Crunchbase in sameAs unverified. Next: GSC re-check ~2026-11-24 (rewrites, images, indexed count); then decide on gea pages, group C, remaining P1 (needs sources).
 
+- 2026-11-10 DEPLOYED (`643538c`): 7 new TV/seasonal articles (BF/CM, Small Business Saturday, Super Bowl LXI [merged], Q4 CTV, midterm CTV prices, measuring CTV, local ad forecast), wave 5 (49 rewrites), 155 weak posts noindexed, 8 Polish translations, seasonal posts reopened (holiday-marketing-strategy, pet gift certificates, holiday email, valentines), process-leak cleanup, IndexNow 338 URLs. Tools: `scripts/rewrite/new-pack.mjs`, `new-article.mjs`, `scripts/audit/verify-facts.py`, `strip-leaks.py`. Rules: never rewrite redirect-source slugs; no partner names (Vibe/Spotify Advertising/Flodesk/AirOps) in new content; verify numbers against sources. GSC re-check ~2026-11-24; ideas next: Netflix/Amazon local, NBA/March Madness 2027, FAST channels.
+
 ## Waiting on others
 - Spotify $150 (PayPal …CZVT8EVJ6TSQDK24), Biglinko $50 (…FASQSTWT4WX527JW), Vibe $600 (…MVVN4PWCFS7XXG4Z): mark paid in `partner_deals` when received.
 - GSC: re-check rewritten/reopened articles ~2 weeks after the next deploy.
