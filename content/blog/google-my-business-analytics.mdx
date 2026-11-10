@@ -1,8 +1,8 @@
 ---
 title: "Google Business Profile Analytics: Metrics Explained"
 date: "2026-05-25"
-lastModified: "2026-10-31"
-description: "Google My Business analytics now live in Business Profile Performance: 6-month Analytics data, calls, directions and searches. What each metric counts."
+lastModified: "2026-11-10"
+description: "Business Profile analytics sit under Performance. Views count each viewer once a day; searches update within 5 days. Here is what each metric counts."
 author: "Nataliia"
 category: "Analytics & Tracking"
 tags: ["google my business analytics", "google business profile performance", "local business", "google my business insights"]
@@ -11,90 +11,102 @@ image: "https://images.unsplash.com/photo-1601758174493-67b91ef5e0c4?w=800&q=80&
 readTime: '8 min read'
 ---
 
-Google My Business analytics are now found in the Performance section of your Google Business Profile. Sign in with the Google Account that manages a verified profile, search for your business, click Performance, pick a date range and click Apply. The page reports views, searches, calls, directions, website clicks and, where they apply, messages and bookings. Google counts unique viewers once a day and filters out repeat taps and spam, so the numbers will not match your phone log exactly.
+Google Business Profile analytics sit in the Performance report. A user signs in with the Google Account linked to a verified profile, opens Performance, chooses a time period and clicks Apply. The report covers views, searches, calls, directions, website clicks and, where they apply, messages and bookings. Google counts a unique viewer at most once a day and filters out multiple taps and spam, so the figures will not match a phone log exactly. Each metric measures a different customer action, and reading them correctly matters more than collecting every number.
 
-This guide explains what each metric counts, where to find the data in other tools and how to keep a simple monthly record.
+This guide explains where to find the data, what each metric counts, why it differs from other records, and how to keep a simple monthly record that supports decisions.
 
 <StatRow
-  values="6 months|5 days|31 Jul 2024|1 per day"
-  labels="Business Profile data window in Google Analytics|Longest delay for the monthly Searches report|Chat and call history removed|Times a unique viewer counts in Views"
-  subs="Google Analytics Help|Business Profile Help|Business Profile Help|Business Profile Help"
-  trends="neutral|neutral|neutral|neutral"
+  values="85%|18x|550%|50%"
+  labels="Cost-per-acquisition reduction reported by Lider after using Google Analytics|Conversion rate improvement reported by Lider|In-app order increase reported by McDonald's Hong Kong with GA4|Reporting time reduction reported by 412 Food Rescue"
+  subs="Google Marketing Platform, customer case|Google Marketing Platform, customer case|Google Marketing Platform, case study headline|Google Marketing Platform, customer quote"
+  trends="down|up|up|down"
 />
 
-## Where Do You Find Your Business Profile Analytics?
+## Where Do You Find Business Profile Analytics?
 
-There are three places:
+There are two ways to open the report, and both show the same underlying data:
 
-- **Search or Maps.** In Google Search, open your Business Profile and click Performance. In the Google Maps app, tap Business, then See more next to Performance. Choose a time period and apply it.
-- **Google Analytics.** You can link your profile in Admin under Product links, then Google Business Profile links. You need Owner or Manager on the profile and Editor or Administrator on the property.
-- **Download.** In Business Profile Manager you can select profiles, choose Actions, then Insights, pick a timeframe and download a report.
+- **Google Search.** Go to your Business Profile and click Performance. Select a time period at the top and click Apply.
+- **Google Maps app.** Open the app, tap Business at the bottom right, then tap See more next to Performance. Select a period and tap Apply.
 
-Performance data is available only for verified profiles. If you have not verified yours, start with our [Google Business Profile checklist](/blog/google-business-profile-optimization-checklist).
+Performance data is available only for verified Business Profiles, and you must be signed in to the Google Account linked to the profile. If the profile is not verified, the [Google Business Profile checklist](/blog/google-business-profile-optimization-checklist) covers the setup steps first. Google also notes that the Insights suggestions may not appear for every profile, so treat them as optional.
 
 ## What Does Each Metric Count?
 
-Google's definitions, simplified:
+Google's definitions, simplified into what to watch for:
 
 | Metric | What it counts | Watch for |
 | --- | --- | --- |
-| Views | People who viewed your profile on Search and Maps | Unique visitors, counted at most once a day, so the figure can be lower than other places |
-| Searches | Search terms people used to find your business | Updated at the start of each month, up to 5 days to appear |
+| Views | People who viewed the profile on Search and Maps | Unique visitors, counted once a day |
+| Searches | Search terms people used to find the business | Updated at the start of each month, up to 5 days to appear |
 | Calls | Clicks on the call button | Needs a phone number on the profile; counts taps, not answered calls |
 | Directions | People who asked for directions | Multiple taps, cancelled requests and spam are filtered out |
-| Website clicks | Clicks on your website link | Pair with your site's own analytics |
-| Messages | Distinct message conversations | Only appears if it applies to you |
+| Website clicks | Clicks on the website link | Compare with the site's own analytics |
+| Messages | Distinct message conversations | Shows only if messaging applies to the business |
 | Bookings | Completed bookings | Needs bookings managed through a booking provider |
 
-Only the metrics that apply to your business appear, and the data covers both organic results and Google Ads. Google's Insights suggestions may not be available for all profiles.
+The report includes activity from both organic results and Google Ads, so it does not isolate one source. Only the metrics that apply to a business appear. The [performance and insights help page](https://support.google.com/business/answer/9918094?hl=en) lists the full set before a report is built around one number.
 
-## What Does the Google Analytics Link Add?
+## Why Don't the Numbers Match the Phone Log?
 
-The link shares interactions, website clicks, calls, directions, messages, bookings and menu clicks with a GA4 property, and a Google Business Profile collection appears in your reports. Three limits apply, per Google Analytics Help:
+Business Profile metrics measure customer actions on Google, not the whole business. A caller who finds the number on a website is not a Performance call. A customer who views the profile twice in one day is counted once for Views. A tap on the call button is counted even if nobody answers.
 
-- Data is available for the last 6 months only, even if you pick a longer range.
-- With several profiles linked, the data is combined, and you cannot filter by one location.
-- The metrics cannot be used in custom explorations or comparisons.
+That gap is normal. Use profile numbers to see trends in how people find and contact the business, and use the phone system, booking tool or point-of-sale records to count revenue. Mixing the two produces false conclusions, such as assuming every call becomes a customer.
 
-So Analytics helps with one location, and with several it is less useful. Download or screenshot monthly numbers if you need history beyond six months. For more on analytics setup, see our [Google Business Profile insights guide](/blog/google-my-business-analytics).
+Views can also look lower than the notifications or emails Google sends. The help page gives the reasons: unique visitors are counted, visits across devices and platforms can be merged, and repeat visits on the same day are not added. This is a measurement rule, not a sign that the profile is failing.
 
-## What Changed Recently?
+## How Does Local Ranking Affect These Numbers?
 
-Google removed Business Profile chat and call history on July 31, 2024. Calls from your profile still come through, and web traffic, directions and other engagement metrics continue to be tracked. The BUSINESS_CONVERSATIONS metric is also no longer available in the Performance API. If an older guide tells you to read chat logs, that feature is gone.
+Views and searches depend partly on how Google ranks a profile. Google states that local results are mainly based on relevance, distance and prominence. Relevance comes from complete, detailed business information. Distance is how far the business is from the searcher. Prominence reflects how well known the business is, including how many websites link to it and how many reviews and ratings it has.
 
-Developers using the Performance API can read daily metrics such as desktop and mobile impressions on Maps and Search, direction requests, call clicks, website clicks, messaging clicks and bookings. Impressions by the same unique user in a day count once.
+Google also states there is no way to request or pay for a better local ranking. Analytics therefore cannot be bought up. The practical response to weak numbers is to improve the profile: accurate categories, correct hours, a service area that matches where the business really works, and timely review replies. The [coffee shop profile tips](/blog/google-business-profile-coffee-shop-tips) show how these edits apply to a single location.
+
+## What Does Google Analytics Add to Profile Data?
+
+Google Analytics is a free tool, and it shows what people do on a website after they click through from a profile. Website clicks in Performance show how many people visited the site, but not what they did next. A GA4 property answers that question. The [Google Analytics 4 guide for small businesses](/blog/google-analytics-4-for-small-business) covers the basic setup and the reports most owners need.
+
+Google's own case studies show what the tool can do for organisations that track their sites closely. Lider reported an 85% decrease in cost per acquisition and an 18x conversion rate improvement after using Analytics to re-engage users, and McDonald's Hong Kong reported a 550% increase in in-app orders with GA4. A customer quoted on the same page, 412 Food Rescue, said it cut reporting time by 50%. These are large, app-focused organisations, so they are not a forecast for a local shop. They show the kind of website behaviour the tool can measure.
 
 ## How Do You Turn the Numbers Into Decisions?
 
-Keep it small. Once a month, copy these into a sheet: views, calls, directions, website clicks and the top five searches. Compare month to month, and note any change you made, such as new photos or a category edit. Our [photos and videos guide](/blog/google-my-business-photos-and-videos) shows one change worth tracking.
+Keep the record small so it stays up to date. Once a month, copy five figures into a spreadsheet: views, calls, directions, website clicks and the top five searches. Add a column for each change made that month, such as new photos, a category edit or updated hours. Compare each month with the one before.
 
-An example, with **assumed** numbers: if calls rise from 20 to 26 after you add services and photos, and you answer 70% of calls and book half of those, the extra 6 calls are worth about 2 more bookings. The assumption is yours to replace with your own answer and booking rates. Compare with actual bookings, since Google counts taps, not customers.
+A worked example for a mobile pet grooming business shows how to connect calls to revenue. Every input below is an assumption, so replace each one with real figures:
+
+| Input or result | Month 1 | Month 2 |
+| --- | --- | --- |
+| Calls from profile (assumption) | 40 | 60 |
+| Calls answered (assumption: 70%) | 28 | 42 |
+| Bookings from answered calls (assumption: 50%) | 14 | 21 |
+| Revenue per booking (assumption: $60) | $840 | $1,260 |
+
+In this example, calls rise by 20, which adds 7 bookings and $420 in revenue for the month. The result depends entirely on the assumed answer and booking rates. Measure real rates for two or three months before relying on the figure. Google counts taps on the call button, so the booking step has to come from the business's own records. The [pet groomer profile guide](/blog/google-business-profile-optimization-for-pet-groomers) shows which profile fields to review when calls drop.
 
 ## FAQ
 
 ### Is Google My Business the same as Google Business Profile?
 
-Google renamed it. Its help pages now use Business Profile, and the performance report is called Performance.
+Google renamed it. Its help pages now use Business Profile, and the report is called Performance.
 
-### Why do my calls differ from my phone records?
+### Why do the calls differ from phone records?
 
-Google counts clicks on the call button, not completed calls. Customers who find your number elsewhere are not counted.
+Google counts clicks on the call button, not completed or answered calls. Calls that start from a website or another directory are not counted in the profile figures.
 
 ### How often does the data update?
 
-Google states only the timing for Searches: they update at the start of each month and can take up to 5 days to appear. It gives no schedule for the other metrics.
+Google states the timing only for Searches, which update at the start of each month and can take up to 5 days to appear. The help pages give no schedule for the other metrics.
 
-### Can I see data older than six months?
+### Do I need a booking system to see booking data?
 
-Not in Google Analytics, which shows the last 6 months. Download reports or record numbers monthly to keep history.
+Yes. Bookings are counted only when they are managed through a booking provider, so profiles without one will not show this metric.
 
 ## Sources
 
-- [Understand your Business Profile performance and insights, Google Business Profile Help](https://support.google.com/business/answer/9918094)
-- [Connect Google Business Profile to Google Analytics, Analytics Help](https://support.google.com/analytics/answer/16930347)
-- [Changes to Google Business Profile chat and call history, Business Profile Help](https://support.google.com/business/answer/14919056)
-- [DailyMetric, Google Business Profile Performance API](https://developers.google.com/my-business/reference/performance/rest/v1/DailyMetric)
+- [Understand your Business Profile performance and insights, Google Business Profile Help](https://support.google.com/business/answer/9918094?hl=en)
+- [Tips to improve your local ranking on Google, Google Business Profile Help](https://support.google.com/business/answer/7091)
+- [Edit your Business Profile, Google Business Profile Help](https://support.google.com/business/answer/3039617)
+- [Analytics Tools and Solutions for Your Business, Google Marketing Platform](https://marketingplatform.google.com/about/analytics/)
 
-All pages checked 31 October 2026.
+All pages checked 10 November 2026.
 
-Want help reading your local data? See our [analytics and reporting service](/services/analytics).
+Want help reading your local data? Use the [free audit](/free-audit) to review your profile metrics and tracking setup.

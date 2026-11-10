@@ -1,8 +1,8 @@
 ---
 title: "Google Ads for European Businesses: Multi-Market"
 date: "2026-05-12"
-lastModified: "2026-10-25"
-description: "Run Google Ads in several European markets: 1 campaign per market and language, EEA consent signals, permanent account currency and a worked example."
+lastModified: "2026-11-10"
+description: "Run Google Ads across European markets with one campaign per country and language, plus a worked two-market example using EUR 400 test budgets."
 author: "Nataliia"
 category: "Google Ads"
 tags: ["google ads", "european business", "multi-market campaign"]
@@ -11,107 +11,95 @@ image: "https://images.unsplash.com/photo-1639762600572-4afd0c09e4b8?w=800&q=80&
 readTime: "8 min read"
 ---
 
-To run Google Ads across several European markets, build one campaign per market, with ads and a landing page in that market's language, a daily budget you set per campaign, and a consent setup that passes EEA visitors' choices to Google. Start with one market, learn your cost per lead there, then copy the structure to the next.
-
-Google publishes no European small business cost benchmarks, so the figures below are labelled by source and region. Examples are **assumptions**. Every claim is backed by a source at the end.
+To run Google Ads across several European markets, build one campaign per country and language pair, with ads and a landing page written in that market's language and a budget set for each campaign. Start with one market, measure your real cost per click and cost per lead there, then copy the structure to the next. Keeping each market's data separate stops one country's results from hiding another's. The figures below come from Google's help content and two secondary reports. The worked example uses assumed inputs that you can replace with your own.
 
 <StatRow
-  values="1 per market|Permanent|2|$5.42"
-  labels="Campaign per market and language (recommended structure)|Account currency once set|New consent mode parameters for EEA traffic|Average Google Ads CPC, all industries, United States"
-  subs="Author recommendation|Google Ads Help|Google Ads Help|WordStream by LocaliQ 2026"
-  trends="neutral|neutral|neutral|neutral"
+  values="1-10|90|130+|2-5%"
+  labels="Quality Score scale, rated per keyword|Days of exact-search history used for Quality Score|Languages supported by Google Translate|Extra ad cost from the digital tax in UK, Austria and Turkey"
+  subs="Google Ads Help, primary|Google Ads Help, primary|Lianlian Global, secondary|Dall, secondary"
+  trends="neutral|neutral|neutral|up"
 />
 
-## How Should You Structure a Multi-Market Campaign?
+## How should you structure campaigns across markets?
 
-Use one campaign per country and language pair, for example "Germany - German" and "France - French". That gives each market its own budget, its own location targeting and its own landing page, so results are never blended. It also stops one market from spending another's budget.
+One campaign per country and language pair is the simplest structure to read. For example, "Germany - German" and "France - French" each get their own budget, location targeting and landing page, so results are never blended. Multi-location PPC is generally described as strategy tailored to each locale rather than one setup for everything ([seoplus+](https://seoplus.com/paid-ads/the-ultimate-guide-to-multi-location-ppc-advertising-on-google-ads/), secondary).
 
-Give campaigns a naming pattern such as market, language, service. Keep ad groups themed by service so your ad text can match search terms closely. Google's Quality Score guidance says that for weak ad relevance you should match ad text more directly to search terms and split ad groups by theme.
+Other splits are possible. Dall lists three common approaches, and the right one depends on the offer and the audience.
 
-For the budget split across countries, see our [European local marketing budget guide](/blog/local-marketing-budget-guide-europe).
+| Structure | Best when | Watch out for |
+|---|---|---|
+| By country | Each country has its own budget, USP such as free shipping or a guarantee, or product range | Needs a budget and reporting set up for each country |
+| By language | Several countries share one language and you want one campaign | Can miss some audiences in each country |
+| By area within a country | You should only reach specific cities, regions or postal codes | More campaigns to manage |
 
-## Do You Need Ads and Landing Pages in Each Language?
+Within each campaign, group ad groups by service so the ad text can match search terms closely. Dall notes that keyword phrasing varies by market, so the same offer may be searched for in different ways.
 
-Yes, as a rule. Google's help says language settings let you show ads in the languages your customers speak. Secondary reporting (Techwyse, August 2026) says Google is removing the manual campaign-level language setting for Search and AI Max for Search from late September 2026, and will rely on the language of your ads and landing pages plus its own signals about the languages a user understands.
+## Do ads and landing pages need to be in each language?
 
-That makes the ad text and landing page the language signal. A French ad that lands on an English page is a mismatch Google's quality guidance warns against: its landing page experience rating looks at how relevant and useful the page is to the person who clicked. Quality Score is a diagnostic. Google states it is not an input in the auction.
+In most cases, yes. Lianlian Global advises that ads written in a buyer's native language convert better than English copy, and it recommends having a native speaker proofread anything produced by machine translation. Google Translate covers more than 130 languages, but it is not always accurate, so treat its output as a first draft ([Lianlian Global](https://www.lianlianglobal.com/post-us/5-tips-for-using-google-ads-to-expand-your-ecommerce-businesses-into-international-markets), secondary).
 
-No published study measures how much a language mismatch raises costs, so test it.
+Google's Quality Score guidance explains why the landing page matters. Its landing page experience component measures how relevant and useful the page is to people who click the ad ([Google Ads Help](https://support.google.com/google-ads/answer/6167118)). A French ad that lands on an English page is a relevance gap. The same help page says Quality Score is a diagnostic tool and not an input in the ad auction, so use it to find problems rather than as a score to chase.
 
-## What Consent Rules Apply to European Visitors?
+## What should be ready on each landing page?
 
-Google's EU user consent policy applies to the European Economic Area. If you use Google tags on EEA traffic and want measurement or ad personalization, you must collect consent and pass the signals to Google. Google's consent mode added two parameters: `ad_user_data` and `ad_personalization`.
+Dall recommends three things before launch: translated pages, prices in the local currency, and a local domain extension, which it says builds user trust ([Dall](https://www.dall-int.com/google-ads-campaigns-on-foreign-markets/), secondary). Keyword research also needs to happen per market, because direct translation of search terms often misses how locals actually search.
 
-Google's help gives these cases:
+Use this checklist before spending in a new market:
 
-- With a banner and consent mode and no personalized ads, no action is needed.
-- With a Google-certified consent platform and personalized ads, the platform should update itself.
-- With your own banner, implement consent mode v2.
-- Without a banner or consent mode, set both up.
+1. Check market fit with Google's free Market Finder tool, which scans a website and suggests markets based on data ([Lianlian Global](https://www.lianlianglobal.com/post-us/5-tips-for-using-google-ads-to-expand-your-ecommerce-businesses-into-international-markets), secondary).
+2. Run Keyword Planner for the target country and write down the local search terms.
+3. Translate and proofread the ads and landing page, with accents and punctuation checked.
+4. Show prices in the local currency on the page.
+5. Confirm that the landing page matches the ad's language and offer.
 
-Blocking Google tags until a visitor clicks the banner can cause data loss. This is not legal advice. Our [GDPR website compliance guide](/blog/local-business-website-gdpr-compliance) covers the website side.
+For a service business that needs help with account basics, the [Google Ads for service businesses](/blog/google-ads-for-service-businesses) guide covers the setup steps.
 
-## How Do You Handle Currency Across Countries?
+## Which bidding and measurement settings suit a new market?
 
-Google says an account's currency is permanently set at creation because it determines how you are billed. To bill in another currency you need a new account. So decide the billing currency before you launch.
+Lianlian Global suggests using Smart Bidding, also called automated bidding, when entering a new market. Google's algorithm sets bids at auction time, which saves management time while the advertiser learns. Once the market is understood, bid control can become more hands-on. The same source advises checking time zones when setting ad schedules, and notes that language and location can be targeted together ([Lianlian Global](https://www.lianlianglobal.com/post-us/5-tips-for-using-google-ads-to-expand-your-ecommerce-businesses-into-international-markets), secondary).
 
-Conversion values are reported in the account's billing currency. Google's help is less clear on conversion tracking when your customers pay in a different currency, so confirm your conversion actions show the right value in a test purchase. For stores, check that your shop plugin passes the order value and currency code.
+Quality Score data can be thin in a new market. Google shows a dash when there are not enough exact searches over the last 90 days. Its guidance is to use Keyword Planner to find higher-volume terms and to broaden match types so keywords enter more auctions ([Google Ads Help](https://support.google.com/google-ads/answer/6167118)). For tracking conversions across markets, the [Google Analytics 4 guide for small business](/blog/google-analytics-4-for-small-business) explains the measurement setup.
 
-If your business bills in euro, pounds and kroner, test one order in each currency before you spend.
+## What does a two-market test cost per lead?
 
-## How Much Should You Test Per Market?
-
-No source sets a standard test budget. LocaliQ's 2026 benchmarks (United States, all industries) show a $5.42 click, a 6.64% click-through rate and $66.69 per lead, which gives a scale, not a European forecast.
-
-Earlier versions of this article advised $300 to $500 per market and a rule of 100 clicks and 5 conversions by day 60. Those numbers had no source and are now only an **assumption** you can adjust.
-
-Our [Netherlands](/blog/local-marketing-netherlands-small-business-2026) and [Germany](/blog/local-marketing-germany-small-business-google-ads) guides cover market-specific points.
-
-## Worked Example: Testing Two Markets
-
-All inputs are **assumptions**.
+All inputs below are **assumptions**. They are not benchmarks for any country.
 
 | Input (assumption) | Market A | Market B |
 |---|---|---|
 | Monthly test budget | EUR 400 | EUR 400 |
 | Cost per click | EUR 1.50 | EUR 3.00 |
-| Clicks | about 267 | about 133 |
+| Clicks (budget / CPC) | about 267 | about 133 |
 | Conversion rate | 4% | 4% |
-| Leads | about 10.7 | about 5.3 |
-| Cost per lead | about EUR 37 | about EUR 75 |
+| Leads (clicks x rate) | about 10.7 | about 5.3 |
+| Cost per lead (budget / leads) | about EUR 37 | about EUR 75 |
 
-With the same budget and conversion rate, the market with the higher click price returns half the leads. If a lead is worth EUR 50 to you, only Market A is profitable at these inputs. Measure your real click price per country in the first month before you add budget. See our guide to [website conversion for European local businesses](/blog/website-conversion-rate-optimization) for improving the conversion rate.
+With the same budget and conversion rate, the market with the higher click price returns half the leads. If a lead is assumed to be worth EUR 50 to the business, only Market A is profitable at these inputs. Market B would need a higher conversion rate or a lower click price to break even.
+
+If a market falls under the digital tax that Dall describes (UK, Austria or Turkey), add 2 to 5% to its click cost as a sensitivity check before setting the budget ([Dall](https://www.dall-int.com/google-ads-campaigns-on-foreign-markets/), secondary). Replace every assumed value with the first month of real data. The [Google Ads management guide](/blog/google-ads-management-small-business-what-to-expect) explains what to review each month, and the [Google Ads vs Facebook Ads comparison](/blog/google-ads-vs-facebook-ads-local-business) helps when weighing paid search against social.
 
 ## FAQ
 
 ### Can I run one campaign for all of Europe?
 
-You can, but you would blend markets, budgets and languages in one report. One campaign per country and language gives clearer results and separate budgets.
+You can, but it blends markets, budgets and languages into one report. One campaign per country and language gives clearer results and separate budgets. Shared-language campaigns across countries are an option, though they can miss some audiences.
 
 ### Do I need to translate landing pages as well as ads?
 
-Google rates how relevant and useful your landing page is to people who click, so a page in the ad's language is the safer choice.
+Yes, where possible. Google rates how relevant and useful a landing page is to the people who click, so a page in the same language as the ad is the safer choice.
 
-### Which currency should I set up?
+### Does Quality Score change what I pay?
 
-Choose it when you create the account. Google says it cannot be changed later.
+Not directly. Google says Quality Score is not an input in the ad auction. It is a diagnostic that shows whether an ad, keyword or landing page needs work.
 
-### Do I need a cookie banner for Google Ads in Europe?
+### Should I use Smart Bidding in a new market?
 
-If you use Google tags on EEA traffic and want measurement or personalization, Google's policy requires you to collect consent and pass the signals. Ask a data protection adviser for your setup.
-
-### Can a service business in one city advertise to European visitors?
-
-You can target people in your service area or who show interest in it, but you cannot serve customers outside it. Check location options in Google's location targeting help before choosing "Presence or interest".
+It can help while the market is being learned, since the algorithm sets bids at auction time. Check results against cost per lead, and move to manual control once the market is understood.
 
 ## Sources
 
-- [Google Ads Help: About Quality Score](https://support.google.com/google-ads/answer/6167118) (components; not an auction input)
-- [Google Ads Help: Language, number format, time zone and currency settings](https://support.google.com/google-ads/answer/9842104) (currency is permanent)
-- [Google Ads Help: Updates to consent mode for traffic in the EEA](https://support.google.com/google-ads/answer/13695607)
-- [Google Ads Help: About language targeting](https://support.google.com/google-ads/answer/1722072)
-- [Google Ads Help: About location targeting](https://support.google.com/google-ads/answer/1722043)
-- [Techwyse: Google removes campaign-level language targeting from Search](https://www.techwyse.com/news/platform-updates/google-ads-removes-language-targeting-search-campaigns-2026) (secondary)
-- [WordStream by LocaliQ: 2026 Google Ads benchmarks](https://localiq.com/blog/search-advertising-benchmarks/) (United States averages)
+- [Google Ads Help: About Quality Score for Search campaigns](https://support.google.com/google-ads/answer/6167118) (primary; scale, components, 90-day window, not an auction input)
+- [Lianlian Global: 5 tips for using Google Ads to expand your eCommerce businesses into international markets](https://www.lianlianglobal.com/post-us/5-tips-for-using-google-ads-to-expand-your-ecommerce-businesses-into-international-markets) (secondary; Market Finder, translation, Smart Bidding, language and location targeting)
+- [Dall: Google Ads Campaigns on Foreign Markets](https://www.dall-int.com/google-ads-campaigns-on-foreign-markets/) (secondary; campaign splits, digital tax, local prices and domains)
+- [seoplus+: The Ultimate Guide to Multi-Location PPC Advertising on Google Ads](https://seoplus.com/paid-ads/the-ultimate-guide-to-multi-location-ppc-advertising-on-google-ads/) (secondary; locale-based strategy)
 
-Want a multi-market account reviewed? See our [Google Ads service](/services/google-ads) or [book a free audit](/free-audit).
+For help setting up a multi-market account, see the [Google Ads service](/services/google-ads) or [book a free audit](/free-audit).
