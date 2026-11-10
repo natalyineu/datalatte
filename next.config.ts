@@ -1775,6 +1775,8 @@ const nextConfig: NextConfig = {
       { source: "/blog/wechat-marketing-local-business-australia-uk", destination: "/blog", permanent: true },
       { source: "/blog/yelp-optimization-guide", destination: "/blog", permanent: true },
       { source: "/blog/youtube-marketing-for-local-business", destination: "/blog", permanent: true },
+    // Merged into one Super Bowl article (2026-11-10)
+      { source: "/blog/super-bowl-advertising-small-business", destination: "/blog/small-business-super-bowl-season-ctv-ads-2026", permanent: true },
     // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",
