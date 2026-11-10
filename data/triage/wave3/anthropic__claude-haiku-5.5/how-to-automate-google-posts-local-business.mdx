@@ -1,0 +1,119 @@
+---
+title: "Automate Google Business Profile Posts: 3 Methods"
+date: "2026-05-18"
+lastModified: "2026-11-10"
+description: "Automate Google Business Profile posts with 3 methods: Google's built-in schedule, a WordPress plugin, or an n8n workflow. Check limits first."
+author: "Nataliia"
+category: "Local SEO"
+tags: ["local SEO", "Google Business Profile", "automation", "small business"]
+slug: "how-to-automate-google-posts-local-business"
+image: "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=800&q=80&auto=format&fit=crop"
+readTime: '7 min read'
+---
+You can automate Google Business Profile posts in three ways: use Google's own scheduling and repeat settings, connect a WordPress plugin that shares posts when you publish, or build a workflow that writes and publishes posts from a spreadsheet. For most single-location small businesses, Google's built-in scheduling is enough. The other two options add a tool and a setup step, and one of them depends on Google approving API quota before it can publish at all.
+
+Google's [posts help page](https://support.google.com/business/answer/7342169?hl=en) confirms that a post can be scheduled for a future time and set to repeat weekly, monthly or on a custom schedule. It also says posts older than six months are archived unless a date range is set.
+
+<StatRow
+  values="$25|6 months|0|240 minutes"
+  labels="Listed price of the n8n GPT-4 workflow template|Age at which a post without a date range is archived|Default Google Business Profile API quota before you request more|Time for 12 weekly posts at 20 minutes each"
+  subs="n8n template listing (secondary)|Google Business Profile Help (primary)|n8n template page, quota default (secondary)|Worked example, inputs are assumption"
+  trends="neutral|neutral|neutral|neutral"
+/>
+
+## Which automation method fits your business?
+
+The three methods differ mainly in how much setup they need and where the posting logic lives. Google's native tools sit inside your profile. A WordPress plugin ties posting to your website's publishing schedule. A workflow tool such as n8n can generate text from a list and post on a timer, but it needs Google Cloud credentials and API access.
+
+| Method | What it does | Sourced constraint | Best for |
+| --- | --- | --- | --- |
+| Google's built-in scheduling | Publishes at a set time, or repeats weekly, monthly or on a custom rhythm | Posts older than six months are archived unless dated | One or a few locations |
+| WordPress auto-post plugin (Bit Social) | Shares a post when you publish it on WordPress, or on a delay, and keeps a log | Requires connecting your Google Business Profile to the plugin | Sites that already publish blog content |
+| n8n workflow with Google Sheets and OpenAI | Reads topics from a sheet, drafts text, posts on a daily schedule | The Business Profile API quota defaults to zero and must be requested from Google | Agencies or teams that want a content queue |
+
+The entries for the plugin and the workflow come from vendor pages, which are secondary sources. Check Google's current help page before relying on any limit that is not listed there.
+
+## What can you post on Google?
+
+Google's help page lists three post types, and each one has its own required fields. An Update is news with an optional photo, video and action button. An Offer requires a title, dates and times, and adds a View Offer button automatically. An Event needs a title and start and end dates. If an event has no start or end time, Google shows it as lasting 24 hours on those dates.
+
+Posts about events, deals or specials can also appear as featured posts on mobile. Google says this feature is currently available in English for single-location food and drink businesses in the US, UK, Canada, Australia and New Zealand. If your business falls outside that group, do not plan around featured posts.
+
+Google also states that a post with a phone number in its description may be rejected if the number cannot be verified as connected to the business. This is a common reason a scheduled post fails to publish, so check the number before you queue the post.
+
+## How do you schedule a post in Google?
+
+Google's steps are short. Open your Business Profile, select Posts, then Add post. Choose Update, Offer or Event, and fill in the fields that type requires. Turn on Schedule this post for a later publish time, then pick the date and time. For a repeating post, use the Repeats dropdown to choose weekly, monthly or a custom schedule.
+
+1. Open your Business Profile and select Posts, then Add post.
+2. Choose the post type: Update, Offer or Event.
+3. Add the required fields, including a photo if you have a real one.
+4. Turn on Schedule this post and set the date and time, or set Repeats.
+5. Select Post. If you manage several profiles, choose which ones to share to first.
+6. Check the status afterwards: Live, Pending or Not approved.
+
+Edit a post at any time from the same Posts page. Google's help page advises editing a post when its details change, so the information stays current.
+
+## How do you automate posts from WordPress or a spreadsheet?
+
+The WordPress plugin route works from publishing rather than from a calendar. Bit Social's guide describes an auto-post setting that shares posts to all active accounts when they are published, with an optional share delay and a log that records each shared post. It also describes a separate schedule feature for queuing WordPress content in advance. These are vendor descriptions, so treat them as a guide to the workflow and confirm the current steps inside the plugin.
+
+The spreadsheet route is more involved. An [n8n template](https://n8n.io/workflows/6165-automate-google-business-profile-posts-with-gpt-4-and-google-sheets/) from a creator on the platform runs on a daily schedule, reads a topic from a Google Sheet with a blank or unpublished status, uses OpenAI to write the text and an image model to create an image, posts to Google Business Profile, and then marks the row as published. The template page states that the Business Profile API quota is set to zero by default, and that you must request quota from Google before the workflow can post.
+
+Whichever route you pick, review every generated post before it goes live. Google's rules on phone numbers and content still apply, and an automated post that breaks them will not be approved.
+
+## What does a 12-week posting calendar cost in time?
+
+A worked example makes the trade-off concrete. The inputs below are assumptions, not measured figures, so replace them with your own numbers.
+
+- Assumption: 12 weeks of posting.
+- Assumption: one Update each week, so 12 Updates.
+- Assumption: one Offer each month, so 3 Offers over 12 weeks.
+- Assumption: 20 minutes per week to write, photograph and schedule the posts.
+
+Total time is 12 weeks multiplied by 20 minutes, which is 240 minutes, or 4 hours. The schedule does the publishing, but a person still sets the content. If the weekly figure is really 60 minutes once photo selection and review are added, the 12-week block is 12 hours. Batch-writing the calendar in one sitting usually saves more time than posting one update at a time, because the profile is opened once for setup. Schedule in advance, then spend a few minutes each week on replies and checks.
+
+## Do posts need checking after they go live?
+
+Yes. Google reviews every published post against its content policy, and each post has a status. Live posts appear on Search and Maps. Pending posts do not show yet, either because they are still processing or because the profile is not verified. Not approved posts do not show, and a question mark next to the status indicates which policy the post breaks.
+
+Keep the six-month archive rule in mind as well. A post without a date range leaves the active view after six months. For a recurring offer, set a date range so the post ends on purpose rather than disappearing unnoticed.
+
+Some profile tasks cannot be automated from outside Google. DMly's guide, a secondary source, notes that questions and answers on a listing are not managed through the profile tabs, and that a Business Profile is not a messaging channel. Answer questions directly on Google and keep a separate channel for conversations. For the profile setup itself, the [coffee shop Google Business Profile optimization guide](/blog/coffee-shop-google-business-profile-optimization) walks through the basics before you add a posting routine.
+
+## Should you pay for a paid channel alongside posts?
+
+Posts are free to publish, but they do not replace paid visibility. If you want to test whether a specific offer brings more people in, compare it with a paid campaign. The [Google Ads vs Facebook Ads guide for local businesses](/blog/google-ads-vs-facebook-ads-local-business) explains which channel suits which goal, and the [Google Local Service Ads guide](/blog/google-local-service-ads-worth-it-local-business) covers the lead-based option for service businesses.
+
+If you run several tools at once, such as a scheduler, a spreadsheet and a CRM, a workflow tool can connect them. The [Zapier vs Make comparison for small businesses](/blog/zapier-vs-make-small-business-local-business) covers which tool suits a simple trigger-and-post setup, and the [marketing automation tools roundup](/blog/best-marketing-automation-tools-small-business) lists options by budget.
+
+## Frequently Asked Questions
+
+### Can scheduling a post get my profile suspended?
+
+Scheduling is a feature Google provides. Policy problems come from the content itself, such as a phone number that cannot be verified or material that breaks Google's content policy. Check each post's status after it publishes.
+
+### How often should I post?
+
+The primary source here does not give a required frequency. Choose a rhythm you can keep up, such as one Update each week, and use Offers for dated promotions.
+
+### Can I post an offer without an end date?
+
+Google requires dates and times for an Offer, so every offer needs a set window. A post without a date range is archived after six months.
+
+### Do I need a developer to automate posts?
+
+No, for Google's built-in scheduling. The workflow route needs Google Cloud setup and an API quota request, which usually means technical help.
+
+### Will my posts appear as featured posts?
+
+Google says featured posts are available for single-location food and drink businesses in five countries, in English. Other businesses should not assume they will appear there.
+
+## Sources
+
+- [Create and manage posts on your Business Profile (Google Business Profile Help), primary](https://support.google.com/business/answer/7342169?hl=en)
+- [Google Business Profile Automation: Complete Guide for 2026 (DMly), secondary](https://dmly.io/google-business-profile-automation-guide/)
+- [Easily Auto-Post to Google My Business Profile from WordPress (Bit Social), secondary](https://bit-social.com/blog/auto-post-to-google-my-business-profile/)
+- [Automate Google Business Profile posts with GPT-4 and Google Sheets (n8n workflow template), secondary](https://n8n.io/workflows/6165-automate-google-business-profile-posts-with-gpt-4-and-google-sheets/)
+
+If you want the profile setup and posting routine checked together, the [local SEO service](/services/local-seo) covers both.
