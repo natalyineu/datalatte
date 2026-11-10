@@ -1,0 +1,116 @@
+---
+title: "Build a Local Business Website With Cursor AI"
+date: "2026-06-13"
+lastModified: "2026-11-10"
+description: "Cursor can draft a local business site from plain-English prompts. You still verify facts, test the form and pick hosting. Start with 1 page of facts."
+author: "Nataliia"
+category: "AI & Automation"
+tags: ["Cursor AI", "website building", "no-code", "local business"]
+slug: "cursor-ai-build-local-business-website-no-code"
+image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80&auto=format&fit=crop"
+readTime: "7 min read"
+---
+A non-developer can use Cursor, an AI code editor, to draft and edit a small business website by describing changes in plain English. Cursor writes the code, but it does not know the business. The owner supplies the facts, checks every page, chooses where the site is hosted and keeps it secure. Treat the output as a first draft that someone reviews line by line before a customer sees it.
+
+<StatRow values="$240|$240|$15|$495" labels="Cursor paid plan, one year|Hosting on a paid plan, one year|Domain name, one year|Total yearly cost" subs="assumption: $20 a month for example|assumption: $20 a month for example|assumption: $15 a year for example|assumption: sum of the three rows above" trends="neutral|neutral|neutral|neutral" />
+
+## What Can a Non-Developer Build With Cursor?
+
+Cursor suits simple brochure sites: a home page, a services list, opening hours, an address and a contact form. The secondary account by Chris Hannah, a developer, describes using Cursor to build a personal timeline site in a few hours by asking for features and small corrections. He calls it well suited to quick prototypes and small changes he did not want to write himself, which is a fair description of what a shop owner needs too ([Chris Hannah, secondary](https://chrishannah.me/mcu-tracker-with-cursor/)).
+
+The same article shows the limits. The AI missed films in its source data, so a person had to notice and correct them. A business site works the same way. If the AI invents a price or a staff name, nothing in the tool stops it from publishing that error.
+
+Cursor is less suitable for online payments, customer accounts, booking systems that use a database, or anything that stores personal data beyond a contact form. Those need a developer who can test security and handle failures.
+
+## Does Cursor Cost Money, and Where Do You Check?
+
+The supplied sources do not state current Cursor prices, so this guide does not quote them. Open Cursor's own pricing page on the day you sign up, because plan names and limits change. Ignore any article, older ones included, that quotes a price without a date.
+
+Start on the free tier to learn the tool with a throwaway folder. Move to a paid plan only after you have a page you want to keep and you hit a real usage limit. Paying before you know what you need is one of the most common ways to waste money on these tools.
+
+Hosting is a separate cost. A domain name and a host both have their own prices and terms, so budget for them apart from the AI tool.
+
+## How Do You Write a Safe First Prompt?
+
+Write the first request as a brief, not a wish. Give the business name, location, phone number, hours and services exactly as you want them printed. Tell Cursor not to invent anything, because a model will fill gaps with plausible text unless it is forbidden to do so.
+
+Use a prompt like this, then replace the brackets with your real facts:
+
+```text
+Create a one-page site for [business name] in [city]. Use only the facts below.
+Do not invent prices, reviews, awards or staff names. Where information is
+missing, leave a visible TODO. Sections: hero, services, hours and address,
+contact form. Facts: [paste your real text here]
+```
+
+After the first draft, ask for one change at a time. Small requests are easier to check than a full rebuild, and they keep each change readable in the diff view.
+
+## Where Should the Site Be Hosted?
+
+Read the host's terms before publishing. Some free hosting plans are limited to personal, non-commercial use, and a shop website is commercial. A paid plan, or a host whose terms allow business use, avoids a surprise later. This is a general check, not a claim about any one provider, so confirm the wording on the host's own pages.
+
+If the form collects names, emails or phone numbers, the site must handle that data properly. The guide on [local business website GDPR compliance](/blog/local-business-website-gdpr-compliance) covers what to check when visitors in Europe or the UK submit a form.
+
+## What Must You Check Before Publishing?
+
+AI-written pages can look finished and still be wrong. Read every line against the real details.
+
+- Facts: name, address, phone, hours and any prices.
+- Reviews: publish only genuine testimonials that customers gave and agreed to share. Never ask the AI for sample reviews.
+- Contact form: send a test message from a phone and a laptop. A form that fails silently loses leads.
+- Mobile: tap every button and link on a phone.
+- Secrets: never paste passwords or API keys into prompts or into the code.
+
+If the page includes a map, follow the steps in [embedding Google Maps on a local business website](/blog/google-maps-embed-local-business-website) so the location matches on both the page and the map.
+
+## Worked Example: What Might the Yearly Cost Be?
+
+The figures below are assumptions for a single shop, not quoted prices. Replace each one with the real price shown on the provider's page on the day you check.
+
+| Item | Assumption | Monthly | Yearly |
+| --- | --- | --- | --- |
+| Cursor paid plan | $20 per month | $20 | $240 |
+| Hosting on a paid plan | $20 per month | $20 | $240 |
+| Domain name | $15 per year | $1.25 | $15 |
+| Total | | $41.25 | $495 |
+
+The total excludes the owner's time, which is often the largest cost. Compare it with what the site must earn. If one new customer a year covers the yearly total, the spend is easy to justify. If not, a simpler page or a developer may be better value. Track calls, direction requests and form submissions for one month before deciding.
+
+## When Should You Hire a Developer Instead?
+
+Hire help when the site must take payments, hold customer accounts, manage bookings, or meet accessibility rules that cannot be tested without expertise. A developer can also set up backups and security updates, which first-time owners often forget.
+
+Cursor is still useful for a quick prototype of a new page before paying someone to build the final version. The overview of [AI tools that can replace a marketing assistant](/blog/ai-tools-replace-marketing-assistant-local-business) shows where AI helps and where a person still needs to decide. For answering common visitor questions automatically, read about an [AI agent for customer service](/blog/ai-agent-for-customer-service-local-business) before adding a chat widget.
+
+<Callout type="tip" title="Do This Today">
+Write one page of real facts about the business: services, hours, address and phone. That page is the input for every prompt you will give Cursor.
+</Callout>
+
+## FAQ
+
+### Is Cursor free to use?
+
+Cursor offers a free tier with limited usage. Check Cursor's pricing page for current plans, because the supplied sources do not confirm any price.
+
+### Can I host a business website on a free plan?
+
+Some free hosting plans are limited to personal, non-commercial use. Read the host's terms before publishing a business site, and move to a plan that allows commercial use if the terms require it.
+
+### Do I need to know how to code?
+
+Coding is not required, but the results must be checked. Review each change, test the contact form and keep a backup of the project. If that feels like too much, hire a developer.
+
+### Can Cursor write customer reviews for my site?
+
+It can generate text, but invented reviews should never be published. Use only genuine testimonials that customers gave and agreed to share.
+
+### Will a Cursor-built site rank on Google?
+
+No tool guarantees rankings. A well-built site helps, but results depend on content quality, accurate business details and the Google Business Profile.
+
+## Sources
+
+- [Chris Hannah, "I Challenged Myself to Build a Website Using Cursor" (secondary)](https://chrishannah.me/mcu-tracker-with-cursor/)
+- [ColorPark, "Build Websites in Minutes: The Ultimate AI Workflow Using ChatGPT, Cursor, and Vercel" (secondary)](https://www.colorpark.io/blog/build-websites-in-minutes-the-ultimate-ai-workflow-using-chatgpt-cursor-and-vercel)
+
+For a site that a reviewer checks with the owner before it goes live, [book a free audit](/free-audit). The audit covers the facts, the forms and the hosting setup.

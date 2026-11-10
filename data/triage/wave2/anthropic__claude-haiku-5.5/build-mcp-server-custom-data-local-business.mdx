@@ -1,0 +1,137 @@
+---
+title: "Build an MCP Server for a Local Business in Python"
+date: "2026-06-13"
+lastModified: "2026-11-10"
+seoTitle: "Build an MCP Server for Your Local Business (Python)"
+description: "Build an MCP server in Python 3.9+ that exposes a local business's menu, hours and loyalty data to an AI agent. Code, testing and security steps."
+author: "Nataliia"
+category: "AI & Automation"
+tags: ["MCP server", "build MCP", "AI agent", "local business"]
+slug: "build-mcp-server-custom-data-local-business"
+image: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800&q=80&auto=format&fit=crop"
+readTime: "13 min read"
+---
+To build an MCP server for a local business in Python, write a small program that exposes your menu, opening hours and loyalty records as tools an AI agent can call, then register it with an MCP client such as Claude Desktop. A tutorial in the sources gives Python 3.9 or newer as the starting requirement for the FastMCP approach ([LinkedIn guide](https://www.linkedin.com/posts/prasanth-ss-a39b0a1a1_intellectai-intellectai-ai-activity-7406171035869491200-0MEg)). A four-tool coffee shop server takes a few hours for someone comfortable with basic Python. Every price in the examples is a placeholder.
+
+<StatRow values="3.9|1|4|1032" labels="Minimum Python version in the FastMCP tutorial|GitHub stars on the Build MCP Server skill listing|Tools in the example coffee shop server|First-year build cost in the worked example (USD)" subs="Source: LinkedIn guide (secondary)|Source: MCPMarket listing snapshot (secondary)|Assumption: design choice for this example|Assumption: illustrative inputs, not a benchmark" trends="neutral|neutral|neutral|neutral" />
+
+## Why would a local business need its own MCP server?
+
+Off-the-shelf connectors can link an AI assistant to calendars, notes and databases, but none of them knows your prices, your appointment rules or your loyalty tiers. A custom server closes that gap. It exposes only the data the owner chooses, and the agent queries it the same way it queries any other tool.
+
+The build is worth it when the agent must answer questions about specific products or policies, when that data changes often, or when the agent needs to look up or update the business's own records. It is probably not worth it when a general connector already covers the job, or when a static FAQ page would do.
+
+The [MCP documentation](https://modelcontextprotocol.io) describes the protocol itself, including the transport options. Read it before choosing how the server will be hosted.
+
+## How does FastMCP keep the code short?
+
+FastMCP lets a developer turn a normal Python function into an AI-callable tool with a decorator. The tutorial describes this as any Python function becoming an AI-usable skill, with examples such as math operations, database queries and API calls ([LinkedIn guide](https://www.linkedin.com/posts/prasanth-ss-a39b0a1a1_intellectai-intellectai-ai-activity-7406171035869491200-0MEg)). The sketch below follows that pattern. Treat it as a starting point and test it before use.
+
+```python
+import json
+from fastmcp import FastMCP
+
+mcp = FastMCP("coffeeshop-local")
+
+@mcp.tool()
+def get_menu(category: str = "all") -> str:
+    """Return the current menu, or one section of it."""
+    with open("menu.json") as f:
+        menu = json.load(f)
+    if category == "all":
+        return json.dumps(menu, indent=2)
+    return json.dumps(menu.get(category, {"error": "category not found"}))
+
+if __name__ == "__main__":
+    mcp.run(transport="sse")
+```
+
+The tutorial starts the server with `mcp.run(transport="sse")` and connects it to Claude Desktop or another MCP-compatible IDE. Other transports exist, so the current documentation should be checked before deployment.
+
+## What should the coffee shop server expose?
+
+The first version should stay small. A practical set is four tools: a menu lookup, a loyalty balance check, an opening-hours lookup and a points addition after purchase. Each tool reads from a plain file the owner controls, such as `menu.json`, `hours.json` or `customers.csv`, so updating the business is a file edit, not a code change.
+
+Use one function per job and give each a description the agent can read. Clear descriptions help the model choose the right tool. Add holiday closures to the hours file as dated entries, so the agent answers correctly on a bank holiday.
+
+Sample placeholder data for a coffee shop might look like this:
+
+```json
+{
+  "hot_drinks": [
+    { "name": "Oat Milk Latte", "price": 6.50 }
+  ],
+  "last_updated": "2026-06-13"
+}
+```
+
+The $6.50 price is an assumption for illustration. The owner should replace it with actual figures.
+
+## How do you test and connect the server?
+
+Each tool should be tested directly before the server is connected to an AI client. Call every function with a valid input, an invalid input and an edge case, such as a phone number that is not in the loyalty file or a holiday date. A server that crashes on bad input can fail silently from the client's side, so errors should be caught inside the tool and returned as a clear message.
+
+To connect the server to Claude Desktop, add an entry under `mcpServers` in the Claude Desktop configuration file. Use the absolute path to `server.py`, restart the app, then ask a question with a known answer, such as the price of one menu item. If the answer matches the file, the wiring works.
+
+## What does the build cost in a worked example?
+
+The figures below are assumptions for a single coffee shop. They are not sourced benchmarks. Replace them with actual rates and quotes.
+
+| Cost item | Input (assumption) | Amount (assumption) |
+|---|---|---|
+| Build time | 4 hours | n/a |
+| Developer rate | $60 per hour | $240 one-off |
+| Hosting on a small VPS | $6 per month × 12 | $72 per year |
+| Maintenance | 1 hour per month × 12 at $60 | $720 per year |
+| First-year total | | $1,032 |
+
+If the owner maintains the files personally, the maintenance line drops out and the first-year total falls to $312. That figure should be weighed against the cost of one wrong price or one wrong holiday hour given to a customer.
+
+## Which security rules apply to write tools?
+
+Any tool that changes data needs stricter rules than a read-only tool. Inputs should be validated on the server, not in the prompt. A points tool should reject negative values and cap a single transaction at a sensible maximum, so a bad request cannot drain or inflate balances.
+
+Credentials should stay out of the server entirely. No tool should return payment keys, Wi-Fi passwords or staff logins. Write tools should be limited to the minimum needed, and every write should be logged with a timestamp, its inputs and its result, creating an audit trail.
+
+If the server is deployed over HTTP rather than run locally, it needs authentication such as a long random token. A server that anyone can reach can be called by anyone.
+
+## When is a visual workflow tool the better choice?
+
+A custom server suits data that is unique to the business. Visual automation tools suit multi-step flows that link many apps with little code. For a sequence such as "new booking, then confirmation email, then calendar entry," a builder may be faster. The comparison in [Zapier vs Make for small business](/blog/zapier-vs-make-small-business-local-business) helps choose between them, and [n8n AI agent workflows for local business](/blog/n8n-ai-agent-workflow-local-business) covers a route with more control and no server code.
+
+For a customer-facing assistant on a website, the [AI agent for customer service](/blog/ai-agent-for-customer-service-local-business) guide covers the wider design. Once an agent is live, [AgentOps for monitoring and debugging](/blog/agentops-monitor-debug-ai-agents-local-business) shows how to track what it does with the business's data.
+
+## What is the launch checklist?
+
+1. Confirm Python 3.9 or newer and install the FastMCP or MCP SDK package.
+2. Store menu, hours and loyalty data in plain files, and date each one.
+3. Test every tool with valid, invalid and edge-case inputs.
+4. Connect the server to one client and check three answers against the source records.
+5. Add logging and rate limits to every write tool before going live.
+6. Review the data files monthly and retire any tool nobody uses.
+
+## FAQ
+
+### Do I need to be a developer to build an MCP server?
+
+Basic Python skills are needed, such as running commands in a terminal and editing a function. Anyone who has never written Python should allow extra time to learn it first. Many small businesses hire a developer for the build and keep the data files in-house.
+
+### Can the server connect to live services?
+
+Yes. A tool can call an external API, for example to read today's specials from the business website. Those calls should be fast, because a slow tool can time out in the AI client.
+
+### Does one server work with several AI clients?
+
+Possibly, but it depends on the transport. Local stdio servers are usually launched by a single client. Network transports can serve more than one client, so the current MCP documentation should be checked before planning for that.
+
+### Is a custom MCP server secure by default?
+
+No. A local stdio server is not reachable over a network, but any server exposed over HTTP needs authentication, input validation and limits on write tools.
+
+## Sources
+
+- [Build MCP Server with Python: Step-by-Step Guide, LinkedIn post by Prasanth SS](https://www.linkedin.com/posts/prasanth-ss-a39b0a1a1_intellectai-intellectai-ai-activity-7406171035869491200-0MEg) (secondary)
+- [Build MCP Server: Claude Code Skill for MCP Development, MCPMarket listing](https://mcpmarket.com/tools/skills/build-mcp-server-3) (secondary)
+- [Model Context Protocol documentation](https://modelcontextprotocol.io) (primary, used for transport reference only)
+
+Ready to put an AI assistant on your own data? [Run a free audit](/free-audit) to see where a custom server would help most.
