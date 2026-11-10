@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { coverOr } from "@/lib/cover";
+import { cardOr } from "@/lib/cover";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
@@ -69,7 +69,7 @@ function getAllPosts(): PostMeta[] {
       category: data.category,
       date: data.date,
       readTime,
-      image: coverOr(slug, imageCache[slug] ?? data.image),
+      image: cardOr(slug, imageCache[slug] ?? data.image),
       tags: data.tags ?? [],
     } as PostMeta;
   });

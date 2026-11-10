@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { coverOr } from "@/lib/cover";
+import { cardOr } from "@/lib/cover";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -222,7 +222,7 @@ function getRelatedPosts(currentSlug: string, category: string, limit = 3, curre
         slug,
         title: data.title || slug,
         description: data.description || "",
-        image: coverOr(slug, imageCache[slug] ?? data.image ?? `/blog/clusters/marketing-strategy.jpg`),
+        image: cardOr(slug, imageCache[slug] ?? data.image ?? `/blog/clusters/marketing-strategy.jpg`),
         category: data.category || "",
         readTime: data.readTime || `${Math.max(1, Math.ceil(content.split(/\s+/).length / 200))} min read`,
         date: data.date || "",

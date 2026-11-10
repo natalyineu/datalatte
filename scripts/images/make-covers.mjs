@@ -16,7 +16,7 @@ for (const s of slugs) {
   const { data, content } = matter(fs.readFileSync(f, "utf8"));
   const sr = content.match(/<StatRow[^>]*values="([^"]*)"[^>]*labels="([^"]*)"(?:[^>]*subs="([^"]*)")?/);
   let cards = [];
-  if (sr) { const V = sr[1].split("|"), L = sr[2].split("|"), S = (sr[3] || "").split("|"); V.forEach((v, k) => { if (/\d/.test(v) && !/assumption|example|illustrat/i.test(S[k] || "")) cards.push({ v: v.slice(0, 11), l: L[k] || "" }); }); cards = cards.slice(0, 3); }
+  if (sr) { const V = sr[1].split("|"), L = sr[2].split("|"), S = (sr[3] || "").split("|"); V.forEach((v, k) => { if (/\d/.test(v) && !/assumption|example|illustrat/i.test(S[k] || "") && !/spotify|vibe|flodesk|airops/i.test(L[k] || "")) cards.push({ v: v.slice(0, 11), l: L[k] || "" }); }); cards = cards.slice(0, 3); }
   const title = String(data.title || s).replace(/\s*\|.*$/, ""); const cat = String(data.category || "Local Marketing");
   const tl = wrap(title, 24, 3), g = GLYPH[glyphFor(s, cat)].replace(/ACC/g, ACC);
   const ty = 180 - (tl.length - 1) * 8;

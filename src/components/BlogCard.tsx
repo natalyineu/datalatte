@@ -37,7 +37,7 @@ export default function BlogCard({ title, excerpt, slug, category, date, rawDate
               alt={title}
               fill
               unoptimized={unoptimized}
-              className="object-cover group-hover:scale-105 transition-transform duration-500"
+              className={`object-cover ${isCover ? "object-left" : ""} group-hover:scale-105 transition-transform duration-500`}
               sizes="(max-width: 640px) 100vw, 288px"
               onError={() => setImgError(true)}
             />
