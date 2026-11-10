@@ -1,8 +1,8 @@
 ---
 title: "How to Track Marketing ROI for a Local Business"
 date: "2026-05-20"
-lastModified: "2026-10-25"
-description: "Track marketing ROI for a local business in 5 steps: UTM tags, GA4 key events, call tracking, promo codes and a worked example using $66.69 per lead."
+lastModified: "2026-11-10"
+description: "Track marketing ROI for a local business in 5 steps: tag links, set conversions, log calls and walk-ins, compare channels, and check a $1,000 example."
 author: "Nataliia"
 category: "Analytics & Tracking"
 tags: ["marketing roi local business", "small business owners", "coffee shops", "salons", "pet groomers", "fitness studios"]
@@ -10,125 +10,116 @@ slug: "how-to-track-marketing-roi-local-business-guide"
 image: "https://images.unsplash.com/photo-1517344884509-a0c97ec11bfb?w=800&q=80&auto=format&fit=crop"
 readTime: "8 min read"
 ---
-To track marketing ROI for a local business, record what each channel cost, count the customers it brought, multiply by what those customers paid, and subtract the cost. ROI is profit from a channel divided by its cost. ROAS, the figure ad platforms show, is revenue divided by ad cost, so it ignores your margin. A 4x ROAS can still lose money.
-
-This guide shows five tracking steps that work for a shop, studio or service firm without a data team. Figures come from the sources at the end; examples are labelled as assumptions.
+To track marketing ROI for a local business, record what each channel cost, count the customers it brought in, measure what those customers spent, and subtract the cost. ROI is the gain from a channel, after its cost, divided by that cost. ROAS is revenue divided by ad spend, so it ignores your costs and margin. A 400% ROAS can still lose money once cost of goods and fixed costs are counted. This guide sets out five steps that work for a shop, studio or service firm without a data team. Examples are labelled as assumptions.
 
 <StatRow
-  values="$5.42|$66.69|8.18%"
-  labels="Average CPC, all industries|Average cost per lead, all industries|Average conversion rate, all industries"
-  subs="WordStream by LocaliQ 2026|WordStream by LocaliQ 2026|WordStream by LocaliQ 2026"
-  trends="neutral|neutral|neutral"
+  values="400%|10|11|15%"
+  labels="ROI in the worked example|KPIs in the LinkedIn list|Tips in the ClicData summary|UK traffic goal used as the example"
+  subs="Ken Lyons LinkedIn post (secondary)|Ken Lyons LinkedIn post (secondary)|ClicData ROI guide (secondary)|ClicData ROI guide (secondary)"
+  trends="neutral|neutral|neutral|neutral"
 />
 
 ## What Is the Difference Between ROI and ROAS?
 
-Google's own help defines target ROAS as conversion value divided by ad spend: its example is $5 in sales for $1 of ads, a 500% ROAS. That is revenue, not profit.
+ROAS and ROI are different measures. The LinkedIn post by Ken Lyons gives ROAS as (Revenue ÷ Ad Spend) x 100, which shows how much revenue each ad dollar brings back. ROI uses (Revenue - Cost) ÷ Cost x 100. In his example, $1,000 of ads that produced $5,000 of revenue gives an ROI of 400% ([Ken Lyons, LinkedIn, secondary](https://www.linkedin.com/posts/bostonseo_the-10-kpis-local-business-owners-need-to-activity-7294752560974856192-8Xw1)).
 
-ROI subtracts costs. If a job earns $150 and costs you $90 to deliver, the profit is $60, and ROI is measured against the money you put into marketing. Use ROAS to compare ad campaigns and ROI to decide whether a channel deserves more money.
+ROAS stops at revenue. ROI subtracts what it cost to earn that revenue. A business with thin margins can post a strong ROAS and still make no money. Use ROAS to compare ads, and use ROI to decide whether a channel deserves more budget.
 
 | Measure | Formula | Answers |
 | --- | --- | --- |
-| Cost per lead | Spend divided by leads | Is the channel cheap to try? |
-| Cost per customer | Spend divided by new customers | Does it bring buyers? |
-| ROAS | Revenue divided by ad spend | Which ads sell most? |
-| ROI | (Profit minus spend) divided by spend | Should I spend more? |
+| Cost per lead | Spend ÷ leads | Is the channel cheap to try? |
+| Cost per acquisition | Spend ÷ paying customers | Does it bring buyers? |
+| ROAS | Revenue ÷ ad spend x 100 | Which ads sell most? |
+| ROI | (Revenue - cost) ÷ cost x 100 | Should spend increase here? |
 
-## How Do You Tag Every Link with UTM Parameters?
+## How Do You Tag Every Link So the Source Is Clear?
 
-Add UTM tags to every link you control: emails, social bios, QR codes, ad URLs. Google Analytics help says to always use utm_source, utm_medium and utm_campaign, with utm_term and utm_content optional.
+Each customer should arrive with a label that shows where they came from. The LinkedIn list recommends segmenting traffic by source, whether organic, paid or social, so you can see which channel earns the visit ([Ken Lyons, LinkedIn, secondary](https://www.linkedin.com/posts/bostonseo_the-10-kpis-local-business-owners-need-to-activity-7294752560974856192-8Xw1)). Apply the same discipline to every link you control: emails, social bios, printed QR codes and ad destinations.
 
-The values are case sensitive, so "google" and "Google" show as two sources. Pick lowercase names and keep a short spreadsheet of them. Our [UTM guide](/blog/utm-parameters-track-every-marketing-campaign) has a ready naming scheme.
+Keep the labels consistent. Use lowercase names, record them in one shared sheet, and never invent a new name for an existing channel. Two spellings of one channel split your data into two channels and make the comparison meaningless.
 
-## How Do You Set Up Conversions in Google Analytics 4?
+If you schedule posts with [Hootsuite or Sprout Social](/blog/hootsuite-vs-sprout-social-small-business-local-business), check whether the tool fee belongs to that channel's cost. Usually it does.
 
-Mark the actions that matter as key events: a booking form sent, a call button tapped, an order placed. Google defines a key event as an event that measures an action particularly important to the success of your business.
+## How Do You Set Up Conversions in Google Analytics?
 
-You can create a Google Ads conversion from a GA4 key event so both tools count the same action. Google notes that Google Ads conversions do not appear in standard Analytics reports, so expect two views that need reading side by side.
+A conversion is an action that matters to the business. The LinkedIn list defines conversion rate as the share of visitors who take an action, such as buying or signing up. It then treats cost per lead and cost per acquisition as the efficiency checks that follow ([Ken Lyons, LinkedIn, secondary](https://www.linkedin.com/posts/bostonseo_the-10-kpis-local-business-owners-need-to-activity-7294752560974856192-8Xw1)). Write down your own version: a booking form sent, a quote requested, a product bought.
 
-GA4 sees web visits only. For walk-ins and phone orders, use the next two steps. See also the [analytics guide for local businesses](/blog/local-business-analytics-and-tracking).
+Set up that one action in Google Analytics first, then check it weekly. The same list names Google Analytics and Google Search Console as tools for monitoring these metrics. Start with one conversion, because adding five at once makes the numbers harder to trust.
 
-## How Do You Track Phone Calls?
+Web analytics only sees people who visit your site. Customers who walk in or phone are invisible to it, which is why the next step matters.
 
-For many local firms the phone is the main conversion. Google Ads help lists five phone conversion types, among them calls from ads, calls to a forwarding number on your website, and imported call conversions from a CRM. You set a minimum call length, and every call at least that long counts.
+## How Do You Track Calls and Walk-Ins?
 
-Forwarding numbers are needed for calls from ads and website calls. Choose a length that reflects a genuine enquiry, not a wrong number. Then mark in your own log which calls became customers.
+For many local firms, the phone and the front door bring the most sales, and web tools miss both. The ClicData guide advises asking customers why they chose your business, which fills that gap ([ClicData, secondary](https://www.clicdata.com/blog/marketing-roi-tracking-guide/)). Add one question at checkout or on the booking form: "How did you hear about us?"
 
-## How Do You Track Walk-Ins and Offline Sales?
+Offer five answers to pick from, such as search, social media, a friend, a flyer or other. Log each answer in your till or a notebook. A promo code for each channel gives a second signal, although no single code captures every customer. Treat the tally as a direction, then compare it with your analytics data.
 
-Ask one question at checkout or on the booking form: "How did you hear about us?" Give five answers to pick from, such as Google, Instagram, a friend, a flyer, other. Log them in your till or a notebook.
-
-A promo code for each channel adds a second signal, but no code system captures everyone. Treat the tally as a direction, then compare it with GA4 and call data. When they disagree, trust the one closest to cash received.
+The LinkedIn list also names attributed store visits, which count in-store visits that follow an online campaign ([Ken Lyons, LinkedIn, secondary](https://www.linkedin.com/posts/bostonseo_the-10-kpis-local-business-owners-need-to-activity-7294752560974856192-8Xw1)). Treat it as a goal, and measure it with your own log.
 
 ## How Do You Compare Channels Fairly?
 
-Use the same period and the same definition of a customer for every channel. Include everything you paid: ad spend, tool fees, printing, and your time at a fair rate.
+Compare channels over the same period and with the same definition of a customer. Count everything you paid for, not only ad spend. Tool fees, printing and discounts belong in the cost. Include the owner's time as well, or the cheapest channel will always look best.
 
 | Channel | Cost to count | What to log |
 | --- | --- | --- |
-| Google Ads | Ad spend, agency fee | Calls, forms, cost per customer |
-| Social ads | Ad spend, design | Link clicks with UTM, replies, bookings |
-| Email and SMS | Tool fee, discounts | Revenue from tagged links or codes |
-| Google Business Profile | Your time | Calls, direction requests, bookings |
-| Referrals | Rewards given | Referred customers |
+| Paid search ads | Ad spend, agency fee | Calls, forms, cost per customer |
+| Social ads | Ad spend, design, boosts | Tagged link clicks, bookings |
+| Email and SMS | Tool fee, discounts given | Revenue from tagged links or codes |
+| Local listings | Owner's time | Calls, direction requests, bookings |
+| Referrals | Rewards given | Referred customers and their spend |
 
-The [metrics guide](/blog/which-marketing-metrics-matter-local-business) explains which of these numbers to watch weekly.
+For service firms, job revenue is the figure that matters, so the software that records jobs should feed your numbers. A [Jobber and ServiceTitan comparison](/blog/jobber-vs-servicetitan-small-business-local-business) shows how field-service tools handle job records. Bookkeeping software records costs, and a [FreshBooks versus QuickBooks comparison](/blog/freshbooks-vs-quickbooks-small-business-local-business) covers that side.
 
-## The Math: A $1,000 Ad Month
+## What Does a $1,000 Ad Month Return?
 
-All inputs are **assumptions** except the cost per lead, which is the LocaliQ all-industry average of $66.69.
+This example applies the ROI formula from the LinkedIn post, with gross profit in place of revenue so that margin is counted. Every input is an assumption. Replace the inputs with your own figures before deciding anything.
 
-| | Value |
+| Line | Value |
 | --- | --- |
-| Ad spend | $1,000 |
-| Leads at $66.69 each | about 15 |
-| Leads who become customers (assumption) | 40% |
-| New customers | 6 |
-| Revenue per customer, first visit (assumption) | $150 |
-| Gross margin (assumption) | 40% |
+| Ad spend (assumption) | $1,000 |
+| Leads (assumption) | 15 |
+| Cost per lead | $66.67 |
+| Share of leads who buy (assumption) | 40%, so 6 customers |
+| Spend per customer, first visit (assumption) | $150 |
 | Revenue | $900 |
-| ROAS | 0.9 |
+| Gross margin (assumption) | 40% |
 | Gross profit | $360 |
-| ROI on first visit | minus 64% |
+| ROAS (revenue ÷ spend x 100) | 90% |
+| ROI on first visit ((profit - spend) ÷ spend x 100) | -64% |
 
-Same spend, but if each customer returns three times in the year (assumption), revenue is $2,700, gross profit $1,080 and ROI is about plus 8%. Repeat business decides the result, so log returns as well as first orders.
+If each customer returns three times in a year (assumption), revenue becomes $2,700 and gross profit $1,080. ROI then becomes +8%. The same campaign moves from a loss to a small gain because of repeat visits, so track returns as carefully as first sales.
 
-<Callout type="tip" title="Do This Today">
-Write down one number: what a new customer is worth to you over 12 months. Without it no ad cost can be judged.
-</Callout>
+## How Often Should You Review the Numbers?
+
+Review the figures on a fixed schedule. The ClicData guide recommends regular team meetings to review campaign metrics and discuss budget changes, and it advises documenting the strategy so the reasoning is not lost ([ClicData, secondary](https://www.clicdata.com/blog/marketing-roi-tracking-guide/)). A one-person shop can manage with a 20-minute weekly review.
+
+Each review should answer three questions: which channel cost the least per customer, which returned the most profit, and which needs a new message rather than more money. Write the answers in the same sheet as the data, so the next review starts from these decisions.
+
+The ClicData guide also separates goals from priorities. A goal is the measurable outcome, such as a 15% rise in UK website traffic in Q4. A priority is the order of work that reaches it ([ClicData, secondary](https://www.clicdata.com/blog/marketing-roi-tracking-guide/)). Set one ROI goal for the quarter and let it set the priorities.
+
+Firms in [Australia](/blog/local-marketing-australia-small-business-2026) can use the same method. Check how local sales tax is treated in your own accounts before calculating profit, since that changes the cost line.
 
 ## FAQ
 
-### I am a one-person shop. Do I need all of this?
+### Does a one-person shop need all of this?
 
-Start with one question: did this channel make more profit than it cost? A tally of how customers found you, plus ad spend, answers it. Add GA4 and call tracking when spend grows.
+Start with one question: did this channel make more profit than it cost? A tally of how customers found you, plus ad spend, answers it. Add analytics and call logging once spend grows.
 
-### What if customers do not use promo codes?
+### Why does the ad platform show a strong return when the bank balance does not?
 
-Codes only capture some customers. Add the checkout question and compare. Expect gaps and use them to spot direction, not exact totals.
+ROAS counts revenue, not profit. A 400% ROAS means $4 of revenue for every $1 of ads. If margin is 25%, that is only $1 of gross profit. Subtract cost of goods and fixed costs before judging the channel.
 
-### Why does the platform say 4x ROAS when my bank balance disagrees?
+### Can web analytics track everything?
 
-ROAS counts revenue, not profit, and platforms may count conversions you would have had anyway. Subtract cost of goods and fixed costs. At a 25% margin, $4,000 of revenue from $1,000 of ads leaves $1,000 gross profit, which only breaks even.
+No. It records activity on your website only. Phone calls and walk-in sales need a separate log, such as a checkout question or a call record.
 
-### Can GA4 track everything?
+### How do you measure a channel that sends no clicks, such as a flyer?
 
-No. It records web activity. Phone calls need call tracking and in-person sales need your till or a checkout question.
+Give the flyer its own promo code or phone number, then count the customers who use it. Compare that count with the checkout question answers. Expect the result to be an estimate.
 
-### How do I track Yelp or directory ads?
-
-Use a separate tracking number or landing page for each source, and ask callers how they found you. Compare with the platform report.
-
-### Should seasonal businesses track differently?
-
-Track the same metrics year round and compare cost per lead and per customer across seasons, not total spend. See also [how to measure website ROI](/blog/website-roi-local-business).
+Need tracking set up once and done right? Start with a [free audit](/free-audit), or see how [Google Ads reporting](/services/google-ads) connects ad spend to customers.
 
 ## Sources
 
-- [WordStream by LocaliQ: 2026 search advertising benchmarks](https://localiq.com/blog/search-advertising-benchmarks/) (all-industry averages, updated June 1, 2026)
-- [Google Ads Help: About target ROAS bidding](https://support.google.com/google-ads/answer/6268637)
-- [Google Analytics Help: Campaign URL parameters](https://support.google.com/analytics/answer/1033863)
-- [Google Analytics Help: About key events](https://support.google.com/analytics/answer/9267568)
-- [Google Ads Help: About phone call conversion tracking](https://support.google.com/google-ads/answer/6100664)
-
-Need tracking set up once and done right? See our [analytics and reporting service](/services/analytics) or [book a free audit](/free-audit). For ad setup, read [how to set up Google Ads](/blog/how-to-set-up-google-ads-for-your-small-business-in-2026-step-by-step-with-screenshots).
+- [Ken Lyons, "The 10 KPIs Local Business Owners Need to Measure Marketing ROI," LinkedIn (secondary)](https://www.linkedin.com/posts/bostonseo_the-10-kpis-local-business-owners-need-to-activity-7294752560974856192-8Xw1)
+- [ClicData, "ROI Tracking: A Comprehensive Guide for Marketers" (secondary)](https://www.clicdata.com/blog/marketing-roi-tracking-guide/)

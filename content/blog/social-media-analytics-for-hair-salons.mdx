@@ -1,7 +1,7 @@
 ---
 title: "Social Media Analytics for Hair Salons: 5 Metrics"
 date: "2026-05-23"
-lastModified: "2026-10-30"
+lastModified: "2026-11-10"
 description: "Track 5 salon metrics: reach, profile visits, website taps, booking-page visits and bookings, with Instagram Insights, GA4 and a source field."
 author: "Nataliia"
 category: "Analytics"
@@ -11,95 +11,97 @@ image: "https://images.unsplash.com/photo-1562322140-8baeececf3df?w=800&q=80&aut
 readTime: "6 min read"
 ---
 
-A hair salon should track five numbers from social media: reach, profile visits, website or booking-link taps, booking-page visits and actual bookings. The first three come from Instagram Insights, which requires a professional account. The last two come from a tagged booking link and your booking software. Likes and follower counts are not on the list, because they do not show whether anyone booked.
-
-This guide shows where each number lives, how to tag links so Google Analytics can see the traffic, and a worked example of the funnel. Industry benchmark rates for salons are not used, since a reliable published source was not found.
+A hair salon should track five numbers from social media: reach, profile visits, website or booking-link taps, booking-page visits and actual bookings. The first three measure attention, and the last two measure intent and revenue. Likes and follower counts are left off the list because they do not show whether anyone booked. Tagging every link and asking new clients how they heard about the salon closes the gap that app dashboards leave open.
 
 <StatRow
-  values="5|3|3|1"
-  labels="Metrics worth tracking monthly|UTM parameters to set on every link|Platform sources to compare|Booking field to add: how did you hear about us"
-  subs="Reach to bookings|utm_source, utm_medium, utm_campaign|Instagram, Google profile, booking tool|At checkout or in the booking form"
-  trends="neutral|neutral|neutral|neutral"
+  values="670,800|7|$17.25|8"
+  labels="Barbers, hairstylists and cosmetologists employed in 2025|Projected employment growth, 2025 to 2035 (%)|Median hourly pay, May 2025 (combined occupations)|Forecast extensions market growth per year to 2031 (%)"
+  subs="BLS, primary|BLS, primary|BLS, primary|Trade press citing a ResearchandMarkets survey, secondary"
+  trends="neutral|up|neutral|up"
 />
 
-## Which Instagram Metrics Matter for a Salon?
+## Why Track Bookings Instead of Followers?
 
-Instagram's help center lists Insights metrics including reach, impressions or views, accounts reached, profile visits, website taps and follower demographics. You need a professional account to see them. For a salon, three of those connect to a booking: reach (how many people saw the content), profile visits (who looked at you) and website taps (who tried to book).
+Competition for clients is growing. The U.S. Bureau of Labor Statistics counted 670,800 barbers, hairstylists and cosmetologists in 2025 and projects employment to grow 7 percent from 2025 to 2035, much faster than the average for all occupations. About 80,300 openings are expected each year, many from workers retiring or moving to other jobs.
 
-Follower count is not a measure of demand. Hootsuite's 2026 trends research says follower count and engagement rate are no longer reliable indicators of impact, and recommends focusing on audience alignment and return on investment instead.
+More stylists and more salons compete for the same feeds. Trade press reporting on a ResearchandMarkets survey says the hair extensions market is forecast to grow about 8% a year through 2031, with companies forming more partnerships with salons and influencers.
 
-## How Do You Tell Which Posts Bring Bookings?
+A bigger audience does not guarantee a fuller chair. Followers are an input, and bookings are the outcome a salon needs to measure.
 
-Instagram shows taps on your link, but not whether the visitor booked. To close that gap, put a tagged link in your bio and in Stories. Google Analytics 4 reads UTM parameters, and Google recommends always using utm_source, utm_medium and utm_campaign. Values are case sensitive, so use lowercase every time, and missing parameters appear as "(not set)" in reports.
+## Which Instagram Numbers Lead to a Booking?
 
-An example link: your booking page followed by a question mark and utm_source=instagram, utm_medium=social and utm_campaign=november-colour. Use a different campaign name for each promotion so the report separates them. If your booking tool does not use your own website, check whether it supports analytics or a Meta Pixel. Fresha lists free Meta Pixel and Google Analytics integrations on its pricing page.
+Think of social media as a funnel with five steps: someone sees a post (reach), looks at the profile (profile visits), taps the link (website taps), reaches the booking page (booking-page visits) and completes a reservation (bookings). Each step loses people, so the drop between steps shows where the process breaks.
 
-## What About Google Business Profile?
+If reach is high but profile visits are low, the content may attract the wrong viewers or the profile may not explain the service. If profile visits are steady but taps are low, the bio or link is the problem. Associated Hair Professionals argues that a following is only useful when it belongs to people who appreciate what the stylist offers, so check whether viewers match target clients before changing the content.
 
-Many people who see your content search your name before booking. Google's help page defines the profile metrics: calls count taps on the call button (only if a phone number is listed), directions count people who requested directions, website clicks count taps on the website link, and bookings count completed reservations through a booking provider. Compare these month to month when you run a promotion. See our [Google Business Profile checklist](/blog/google-business-profile-optimization-checklist).
+App menus for these metrics change, so look for the current location of each number in Instagram settings rather than relying on an old screenshot.
 
-## Should You Ask Clients How They Found You?
+## How Do You Tag Links So Traffic Can Be Traced?
 
-Yes, because no tool sees everything. Add a required "How did you hear about us?" field to the booking form, or have the front desk ask and record it for new clients. Use five fixed choices, such as Instagram, Google, a friend, walking past and other, so the answers can be counted.
+Instagram can show taps on a link, but it cannot show who booked. A tagged link lets an analytics tool record where the visitor came from. Use three standard parameters: utm_source for the platform, utm_medium for the type of traffic and utm_campaign for the promotion.
 
-This is the only way to catch the client who saw a Reel, then searched your name and booked from Google. Keep the question for a full month before judging.
+For example, a link might read yoursalon.example/book?utm_source=instagram&utm_medium=social&utm_campaign=november-colour. Use lowercase throughout and a new campaign name for each promotion, so the report keeps them separate. Use the same spelling every time, or the same source will appear as several rows.
 
-## What Should You Check Each Month?
+If the booking tool sits on another domain, make a test booking through the tagged link and check whether the parameters arrive in the analytics report. If they do not, ask the booking provider how it passes campaign data. A simple way to start is to read the [social media management guide for hair salons](/blog/social-media-management-for-hair-salons) before choosing which channels to tag first.
 
-Use a short routine and one sheet:
+## What Does a Monthly Check Look Like?
 
-1. Export reach, profile visits and website taps from Instagram Insights.
-2. Read the Traffic acquisition report in Google Analytics, filtered to your instagram source.
-3. Count new bookings from your booking software and the "how did you hear" answers.
-4. Note which posts or Stories ran in the best weeks.
-5. Decide one thing to repeat and one to stop.
+Use a short routine and one shared sheet:
 
-Compare weeks, not single posts. Our [Instagram guide for hair salons](/blog/instagram-marketing-for-hair-salons) and [Reels and TikTok guide for salons](/blog/video-marketing-for-salons-reels-tiktok-guide) cover what to post.
+1. Export reach, profile visits and website taps for the month from Instagram.
+2. Open the analytics traffic report and filter to the Instagram source.
+3. Count new bookings from the booking software for the same dates.
+4. Count how many new clients named Instagram in the "how did you hear about the salon" answers.
+5. Note which posts or Stories ran in the best weeks, then decide one thing to repeat and one to stop.
 
-## What Does a Month Look Like? A Worked Example
+Compare weeks rather than single posts. A single post can spike for reasons unrelated to content. Paid promotions need the same routine, so the [Meta ads guide for hair salon marketing](/blog/using-meta-ads-for-hair-salon-marketing) explains how to read paid results alongside organic ones.
 
-All numbers below are **assumptions** to show the arithmetic, not salon benchmarks.
+## What Does a Worked Month Cost Out?
+
+All numbers below are assumptions to show the arithmetic. They are not salon benchmarks.
 
 | Step | Source of the number | Assumed value |
 | --- | --- | --- |
-| Accounts reached | Instagram Insights | 6,000 |
-| Profile visits | Instagram Insights | 300 |
-| Website taps | Instagram Insights | 30 |
-| Booking-page visits from instagram source | Google Analytics | 24 |
-| New bookings that say Instagram | Booking form field | 5 |
-| Average service price | Your price list | $75 |
+| Accounts reached | Instagram | 6,000 (assumption) |
+| Profile visits | Instagram | 300 (assumption) |
+| Website taps | Instagram | 30 (assumption) |
+| Booking-page visits from instagram source | Analytics report | 24 (assumption) |
+| New bookings that name Instagram | Booking form | 5 (assumption) |
+| Average service price | Price list | $75 (assumption) |
 | Revenue from those bookings | Calculated | $375 |
-| Staff time spent on content | Your own log | 8 hours |
+| Staff time on content | Own log | 8 hours (assumption) |
 
-Dividing 5 bookings by 300 profile visits gives about 1.7%. The useful comparison is that rate against your own previous month, not against another salon. If revenue is below the value of the time spent, change the content or add a stronger booking prompt. Our [Google Analytics guide for hair salons](/blog/google-analytics-for-hair-salons) covers the web side in more detail.
+Five bookings from 300 profile visits gives a 1.7% conversion. Revenue of $375 over 8 hours of staff time works out to about $47 per hour. For comparison, BLS reports a combined median hourly wage of $17.25 for barbers, hairstylists and cosmetologists in May 2025, so the content hours in this example return more than the median wage. The useful test is whether this month beats the previous month. If the figure falls, change the content or the booking prompt before adding more posts.
 
-<Callout type="tip" title="Do This Today">
-Switch Instagram to a professional account if it is not one, build a tagged booking link with the campaign name of your next promotion, and add the "How did you hear about us?" field.
-</Callout>
+## Should You Ask Clients How They Found the Salon?
+
+Yes, because no tool sees the whole path. A client may see a Reel, search the salon name a week later and book from a search result. Analytics will record that as a search, not as Instagram. A booking form question catches it.
+
+Add a "How did you hear about us?" field with five fixed options, such as Instagram, Google, a friend, walking past and other. Fixed options make the answers easy to count. Keep the question in place for a full month before judging results, since one or two weeks of answers can mislead. For a broader view of which channels suit a salon budget, see the [guide to salon marketing that works in 2026](/blog/best-marketing-for-salons-in-2026-what-actually-works-with-real-examples).
+
+For search-driven bookings, the [Google Ads guide for hair salons](/blog/google-ads-for-hair-salons-complete-guide) covers how paid search reports differ from social reports.
 
 ## FAQ
 
 ### What social media metrics should a salon track?
-Reach, profile visits, website taps, booking-page visits and bookings. Follower counts and likes show little about demand.
-
-### Where do I see Instagram statistics?
-In Instagram Insights, which needs a professional account. It lists reach, profile visits, website taps and follower demographics.
+Track reach, profile visits, website taps, booking-page visits and bookings. Follower counts and likes say little about whether a post brings clients.
 
 ### How can I tell if Instagram brings bookings?
-Use a tagged booking link, check the source in Google Analytics, and ask new clients how they found you.
+Use a tagged booking link, check the Instagram source in the analytics report, and ask new clients how they found the salon. Using all three gives a fuller picture than any single tool.
 
-### What is a good engagement rate for a salon?
-No reliable published benchmark was found for salons, so compare against your own previous months.
+### Why not use follower count as a success measure?
+Followers do not show whether people want the services or will book. Bookings and booking-page visits connect directly to revenue.
 
 ### How often should I review the numbers?
-Monthly for the full report and weekly for a quick look at bookings during a promotion.
+Review the full report monthly and check bookings weekly during a promotion. Weekly checks catch problems early, while monthly reviews show the trend.
+
+### What if my booking tool does not pass campaign data?
+Test with a real booking through the tagged link. If the source does not arrive, ask the provider how it handles campaign parameters, or treat the "how did you hear" answers as the main source.
 
 ## Sources
 
-- [Instagram Help Center: Insights](https://help.instagram.com/1533933820244654) (only an outline of the metrics was readable)
-- [Google Analytics Help: Custom campaign URLs in GA4](https://support.google.com/analytics/answer/10917952)
-- [Google Business Profile Help: Performance metrics](https://support.google.com/business/answer/10018786)
-- [Hootsuite: Social trends research](https://www.hootsuite.com/research/social-trends) (secondary for the follower-count statement; no benchmark rates were used)
-- [Fresha: Pricing](https://www.fresha.com/pricing) (Meta Pixel and Google Analytics integrations)
+- [U.S. Bureau of Labor Statistics: Barbers, Hairstylists, and Cosmetologists](https://www.bls.gov/ooh/personal-care-and-service/barbers-hairstylists-and-cosmetologists.htm) (primary: employment, growth projection, annual openings and median pay)
+- [American Salon: Social Media Driving Global Demand for Hair Extensions](https://www.americansalon.com/extensions/social-media-driving-global-demand-hair-extensions) (secondary: reports a ResearchandMarkets.com survey on extensions market growth)
+- [Associated Hair Professionals: The Power of Social Media for Your Hairstyling Brand](https://www.associatedhairprofessionals.com/updates/blog-posts/power-social-media-your-hairstyling-brand) (guidance on audience fit; no statistics used)
 
-Want help setting up tracking that shows what brings bookings? See our [Analytics and reporting service](/services/analytics) or [book a free audit](/free-audit).
+Want help setting up tracking that shows which posts bring bookings? [Book a free audit](/free-audit) and receive a review of current links, the booking flow and reporting.
