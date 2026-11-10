@@ -1,8 +1,8 @@
 ---
 title: "Build a Local Business Website With Cursor AI"
 date: "2026-06-13"
-lastModified: "2026-11-06"
-description: "Cursor plans run from free to $200 a month, and Vercel's free tier bars business use. What a non-developer can and cannot do with Cursor on a site."
+lastModified: "2026-11-10"
+description: "Cursor can draft a local business site from plain-English prompts. You still verify facts, test the form and pick hosting. Start with 1 page of facts."
 author: "Nataliia"
 category: "AI & Automation"
 tags: ["Cursor AI", "website building", "no-code", "local business"]
@@ -10,112 +10,107 @@ slug: "cursor-ai-build-local-business-website-no-code"
 image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80&auto=format&fit=crop"
 readTime: "7 min read"
 ---
-A non-developer can use Cursor, an AI coding editor, to draft and edit a small business website by describing changes in plain English. But Cursor writes code, not a finished business. You still choose the content, check every page, host the site and keep it secure.
+A non-developer can use Cursor, an AI code editor, to draft and edit a small business website by describing changes in plain English. Cursor writes the code, but it does not know the business. The owner supplies the facts, checks every page, chooses where the site is hosted and keeps it secure. Treat the output as a first draft that someone reviews line by line before a customer sees it.
 
-This guide explains what Cursor does, what it costs on its current plan list, and a hosting trap: Vercel's free Hobby plan is limited to personal, non-commercial use. Plans and prices below come from Cursor's and Vercel's own pages, opened on 6 November 2026. They change often, so re-check before you pay.
+<StatRow values="$240|$240|$15|$495" labels="Cursor paid plan, one year|Hosting on a paid plan, one year|Domain name, one year|Total yearly cost" subs="assumption: $20 a month for example|assumption: $20 a month for example|assumption: $15 a year for example|assumption: sum of the three rows above" trends="neutral|neutral|neutral|neutral" />
 
-<StatRow
-  title="Cursor and hosting prices"
-  values="$0|$8|$30|$20"
-  labels="Cursor Free plan, limited usage|Cursor Plus plan per month|Cursor Premium plan per month, 4x Plus usage|Vercel Pro per month for commercial sites"
-  subs="Cursor models and pricing docs|Cursor models and pricing docs|Cursor models and pricing docs|Vercel pricing page"
-  trends="neutral|neutral|neutral|neutral"
-  source="Cursor docs (models and pricing) and Vercel pricing page, checked 6 November 2026"
-/>
+## What Can a Non-Developer Build With Cursor?
 
-## What Does Cursor Cost Now?
+Cursor suits simple brochure sites: a home page, a services list, opening hours, an address and a contact form. The secondary account by Chris Hannah, a developer, describes using Cursor to build a personal timeline site in a few hours by asking for features and small corrections. He calls it well suited to quick prototypes and small changes he did not want to write himself, which is a fair description of what a shop owner needs too ([Chris Hannah, secondary](https://chrishannah.me/mcu-tracker-with-cursor/)).
 
-Cursor's pricing documentation lists these individual plans: Free at $0 with limited usage, Plus at $8 a month (base usage), Premium at $30 (4x Plus usage), Super at $100 (15x Plus) and Ultra at $200 (50x Plus). It says usage allowances refresh weekly and that third-party models are billed separately at API list price on some plans.
+The same article shows the limits. The AI missed films in its source data, so a person had to notice and correct them. A business site works the same way. If the AI invents a price or a staff name, nothing in the tool stops it from publishing that error.
 
-The same page says older plans such as Hobby, Pro and Pro+ "continue for existing customers". Many articles still quote Pro at $20 a month. That is a legacy name, so do not rely on it for a new sign-up.
+Cursor is less suitable for online payments, customer accounts, booking systems that use a database, or anything that stores personal data beyond a contact form. Those need a developer who can test security and handle failures.
 
-A site for one shop is a small project. Start on Free or Plus, and move up only if you hit the usage limit.
+## Does Cursor Cost Money, and Where Do You Check?
 
-<BigStat value="$8" label="per month is the entry paid Cursor plan on its current list, with $0 Free for limited usage" note="Premium is $30 a month with 4x Plus usage. Older Pro and Pro+ plans continue only for existing customers." source="Cursor docs, Models and pricing, checked 6 November 2026" />
+The supplied sources do not state current Cursor prices, so this guide does not quote them. Open Cursor's own pricing page on the day you sign up, because plan names and limits change. Ignore any article, older ones included, that quotes a price without a date.
 
-## How Do You Start a Project in Cursor?
+Start on the free tier to learn the tool with a throwaway folder. Move to a paid plan only after you have a page you want to keep and you hit a real usage limit. Paying before you know what you need is one of the most common ways to waste money on these tools.
 
-Cursor's quickstart tells you to download the app for your system, log in, pick a folder and start with a small task. It says to open Agent with Cmd I (the guide lists macOS shortcuts, so check the keyboard settings on Windows). Agent can search your files, make the edits you ask for, and run checks such as a local build. Changes appear in a diff view that you review. For bigger jobs, Plan Mode (Shift+Tab) researches the code and asks questions before building.
+Hosting is a separate cost. A domain name and a host both have their own prices and terms, so budget for them apart from the AI tool.
 
-Agent also creates checkpoints before significant changes. Cursor's docs say these are stored locally, separate from Git, and are for undoing Agent changes rather than permanent version history. Put the project in Git or another backup as well.
+## How Do You Write a Safe First Prompt?
 
-Write your first request as a brief, not a wish. Give the business name, address, phone number, opening hours and services as you want them printed. Tell Cursor not to invent anything:
+Write the first request as a brief, not a wish. Give the business name, location, phone number, hours and services exactly as you want them printed. Tell Cursor not to invent anything, because a model will fill gaps with plausible text unless it is forbidden to do so.
+
+Use a prompt like this, then replace the brackets with your real facts:
 
 ```text
 Create a one-page site for [business name] in [city]. Use only the facts below.
-Do not invent prices, reviews, awards or staff names; leave a clear TODO where
-information is missing. Sections: hero, services, hours and address, contact.
-Facts: [paste your real text here]
+Do not invent prices, reviews, awards or staff names. Where information is
+missing, leave a visible TODO. Sections: hero, services, hours and address,
+contact form. Facts: [paste your real text here]
 ```
 
-## Where Should You Host It?
+After the first draft, ask for one change at a time. Small requests are easier to check than a full rebuild, and they keep each change readable in the diff view.
 
-Vercel is one popular option. Its pricing page lists Hobby at $0 for "personal, non-commercial use" and Pro at $20 a month for professional developers, freelancers and businesses. Vercel's Hobby plan page repeats that its fair use guidelines restrict Hobby to non-commercial, personal use only. A business website is commercial. Plan for the $20 Pro price, or choose another host and read its terms first.
+## Where Should the Site Be Hosted?
 
-You also need a domain name. Registrars set their own prices, so check one directly. Point the domain at your host following the host's instructions.
+Read the host's terms before publishing. Some free hosting plans are limited to personal, non-commercial use, and a shop website is commercial. A paid plan, or a host whose terms allow business use, avoids a surprise later. This is a general check, not a claim about any one provider, so confirm the wording on the host's own pages.
 
-## What Should You Check Before Publishing?
+If the form collects names, emails or phone numbers, the site must handle that data properly. The guide on [local business website GDPR compliance](/blog/local-business-website-gdpr-compliance) covers what to check when visitors in Europe or the UK submit a form.
 
-AI-written pages can look finished and still be wrong. Read every line against your real details.
+## What Must You Check Before Publishing?
 
-- **Facts:** name, address, phone, hours, prices.
-- **Reviews:** only publish genuine testimonials you have permission to use. The US Federal Trade Commission's final rule bans creating or buying fake reviews and testimonials, including AI-generated ones, when the business knew or should have known they were fake. Never ask Cursor for "sample reviews" and publish them.
-- **Contact form:** send yourself a test message. A form that fails silently loses leads.
-- **Mobile:** open the site on a phone and tap every button.
-- **Secrets:** never paste passwords or API keys into prompts or into the code.
+AI-written pages can look finished and still be wrong. Read every line against the real details.
 
-Our guides on the [local business website checklist](/blog/local-business-website-checklist) and [website copy that converts](/blog/how-to-write-website-copy-local-business-examples) list what a shop site needs. If you also want a map, see [embedding Google Maps on your site](/blog/google-maps-embed-local-business-website).
+- Facts: name, address, phone, hours and any prices.
+- Reviews: publish only genuine testimonials that customers gave and agreed to share. Never ask the AI for sample reviews.
+- Contact form: send a test message from a phone and a laptop. A form that fails silently loses leads.
+- Mobile: tap every button and link on a phone.
+- Secrets: never paste passwords or API keys into prompts or into the code.
 
-## When Is a Developer the Better Choice?
+If the page includes a map, follow the steps in [embedding Google Maps on a local business website](/blog/google-maps-embed-local-business-website) so the location matches on both the page and the map.
 
-Cursor suits simple brochure sites you can review yourself. Hire help when you need online payments, accounts, bookings with a database, accessibility compliance or a site with many templates. Our comparison of a [DIY website and a professional developer](/blog/diy-website-vs-professional-developer) covers the trade-offs.
+## Worked Example: What Might the Yearly Cost Be?
 
-## Worked Example: What Might the Monthly Bill Be?
+The figures below are assumptions for a single shop, not quoted prices. Replace each one with the real price shown on the provider's page on the day you check.
 
-These inputs are **assumptions** built from the list prices above. They exclude your time and the domain.
+| Item | Assumption | Monthly | Yearly |
+| --- | --- | --- | --- |
+| Cursor paid plan | $20 per month | $20 | $240 |
+| Hosting on a paid plan | $20 per month | $20 | $240 |
+| Domain name | $15 per year | $1.25 | $15 |
+| Total | | $41.25 | $495 |
 
-| Item | Assumption |
-| --- | --- |
-| Cursor Plus | $8 per month |
-| Vercel Pro (one developer seat) | $20 per month |
-| Total tools | $28 per month |
-| Total tools with Cursor Premium | $50 per month |
+The total excludes the owner's time, which is often the largest cost. Compare it with what the site must earn. If one new customer a year covers the yearly total, the spend is easy to justify. If not, a simpler page or a developer may be better value. Track calls, direction requests and form submissions for one month before deciding.
 
-Over a year that is $336 on Plus or $600 on Premium, plus the domain. Whether it pays back depends on what the site brings in. Track calls, direction requests and form submissions for a month before deciding.
+## When Should You Hire a Developer Instead?
+
+Hire help when the site must take payments, hold customer accounts, manage bookings, or meet accessibility rules that cannot be tested without expertise. A developer can also set up backups and security updates, which first-time owners often forget.
+
+Cursor is still useful for a quick prototype of a new page before paying someone to build the final version. The overview of [AI tools that can replace a marketing assistant](/blog/ai-tools-replace-marketing-assistant-local-business) shows where AI helps and where a person still needs to decide. For answering common visitor questions automatically, read about an [AI agent for customer service](/blog/ai-agent-for-customer-service-local-business) before adding a chat widget.
 
 <Callout type="tip" title="Do This Today">
-Write one page of real facts about your business: services, hours, address, phone. That page is the input for every prompt you will give Cursor.
+Write one page of real facts about the business: services, hours, address and phone. That page is the input for every prompt you will give Cursor.
 </Callout>
 
 ## FAQ
 
-### Is Cursor free?
+### Is Cursor free to use?
 
-Cursor lists a Free plan with limited usage. Paid plans on the current list start at $8 a month (Plus).
+Cursor offers a free tier with limited usage. Check Cursor's pricing page for current plans, because the supplied sources do not confirm any price.
 
-### Can I use Vercel's free plan for my business website?
+### Can I host a business website on a free plan?
 
-Vercel says Hobby is for personal, non-commercial use. A business site should be on a paid plan or another host whose terms allow commercial use.
+Some free hosting plans are limited to personal, non-commercial use. Read the host's terms before publishing a business site, and move to a plan that allows commercial use if the terms require it.
 
 ### Do I need to know how to code?
 
-You do not need to write code, but you must be able to check results. Review the preview and the diff, test forms and keep a backup. If that feels unmanageable, hire a developer.
+Coding is not required, but the results must be checked. Review each change, test the contact form and keep a backup of the project. If that feels like too much, hire a developer.
 
-### Can Cursor write my reviews or testimonials?
+### Can Cursor write customer reviews for my site?
 
-It can generate text, but publishing fake testimonials is banned by the FTC's rule when the business knew or should have known they were fake. Use real customer reviews only.
+It can generate text, but invented reviews should never be published. Use only genuine testimonials that customers gave and agreed to share.
 
-### Will Cursor make my site rank on Google?
+### Will a Cursor-built site rank on Google?
 
-No tool guarantees rankings. Cursor can help you build pages and fix technical issues, but rankings depend on content, links and your Google Business Profile.
+No tool guarantees rankings. A well-built site helps, but results depend on content quality, accurate business details and the Google Business Profile.
 
 ## Sources
 
-- [Cursor docs: Models and pricing](https://cursor.com/docs/models-and-pricing)
-- [Cursor docs: Quickstart](https://cursor.com/docs/get-started/quickstart)
-- [Cursor docs: Agent overview](https://cursor.com/docs/agent/overview)
-- [Vercel pricing](https://vercel.com/pricing)
-- [Vercel docs: Hobby plan](https://vercel.com/docs/plans/hobby)
-- [FTC: Final rule banning fake reviews and testimonials](https://www.ftc.gov/news-events/news/press-releases/2024/08/federal-trade-commission-announces-final-rule-banning-fake-reviews-testimonials)
+- [Chris Hannah, "I Challenged Myself to Build a Website Using Cursor" (secondary)](https://chrishannah.me/mcu-tracker-with-cursor/)
+- [ColorPark, "Build Websites in Minutes: The Ultimate AI Workflow Using ChatGPT, Cursor, and Vercel" (secondary)](https://www.colorpark.io/blog/build-websites-in-minutes-the-ultimate-ai-workflow-using-chatgpt-cursor-and-vercel)
 
-Want a site built and reviewed by a person? See our [website service](/services/website) or [book a free audit](/free-audit).
+For a site that a reviewer checks with the owner before it goes live, [book a free audit](/free-audit). The audit covers the facts, the forms and the hosting setup.

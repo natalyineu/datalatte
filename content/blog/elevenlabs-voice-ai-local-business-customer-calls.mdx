@@ -2,8 +2,8 @@
 title: "ElevenLabs Voice AI for Local Business Calls"
 seoTitle: "ElevenLabs Voice AI for Local Business Calls"
 date: "2026-06-13"
-lastModified: "2026-11-03"
-description: "ElevenLabs Agents bills calls at $0.08 per extra minute, from $6 a month. How it handles local business calls, and the math to check first."
+lastModified: "2026-11-10"
+description: "ElevenLabs Agents cites 10,000+ voices and 90+ languages. Here is how it handles local business calls and the monthly math to check."
 author: "Nataliia"
 category: "AI & Automation"
 tags: ["ElevenLabs", "voice AI", "conversational AI", "local business"]
@@ -11,73 +11,55 @@ slug: "elevenlabs-voice-ai-local-business-customer-calls"
 image: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=800&q=80&auto=format&fit=crop"
 readTime: "8 min read"
 ---
-Yes, ElevenLabs can answer customer calls for a local business. Its agents platform runs inbound and outbound phone calls, uses tools to trigger actions such as bookings, and bills by call minute: plans run from $0 (15 minutes) to $990 a month, and extra minutes cost $0.08 each. The language-model usage is billed on top.
+Yes, ElevenLabs Agents can answer inbound calls and place outbound calls for a local business. The vendor describes agents that handle customer questions, book appointments mid-call through calendar and CRM integrations, and run after-hours coverage. Its published pages cite 10,000+ voices, 90+ languages and sub-second response times. Pricing is not stated in the pages reviewed for this update, so confirm plan costs on the ElevenLabs pricing page before you build. Whether it fits depends on whether the calls you miss are worth more than the monthly cost.
 
-It suits businesses where voice quality matters and someone can set up the integrations. Prices change, so confirm them on the [ElevenLabs agents pricing page](https://elevenlabs.io/pricing/agents) before you build.
+<StatRow values="10,000+|90+|66%|5,000,000" labels="Expressive voices to choose from|Languages supported|Lower cost per call (vendor claim)|Hours of conversations per month (vendor claim)" subs="ElevenLabs small business page, 9 Nov 2026|ElevenLabs small business page, 9 Nov 2026|ElevenLabs AI call agents page, vendor claim|ElevenLabs small business page, vendor claim" trends="neutral|neutral|down|neutral" />
 
-<StatRow values="$0.08|$6|75|31" labels="Per extra call minute|Starter plan, per month|Minutes in Starter|Voice languages" subs="ElevenLabs pricing, 3 Nov 2026|After a $1 first month|Call minutes included|Per the agents docs" trends="neutral|neutral|neutral|neutral" />
+## What can ElevenLabs Agents do on a phone call?
 
-<BigStat value="$0.08" label="Extra call minutes on every ElevenLabs plan cost eight cents each, and the language model you pick is billed separately on top" note="Burst pricing, when calls exceed your concurrency limit, is $0.16 per minute. ElevenLabs adds no telephony fee; an outside provider such as Twilio bills you directly." source="ElevenLabs agents pricing page, 3 November 2026" />
+The call-agent page describes inbound and outbound calls with low-latency voice. It says agents can authenticate a customer, update a CRM, log the interaction and schedule an appointment through API and telephony integrations ([ElevenLabs AI call agents](https://elevenlabs.io/agents/ai-call-agent)).
+
+The platform page adds a knowledge base built from uploaded documents, FAQs or a connected data source. It also describes workflows, actions and escalation paths, plus a dashboard for tracking conversations and spotting gaps ([ElevenLabs conversational AI](https://elevenlabs.io/conversational-ai)). For a salon or clinic, that could mean hours, service questions and booking requests handled without a person picking up.
+
+These are the vendor's product claims. Test each one on your own calls before relying on it.
+
+## Is the vendor's cost claim reliable?
+
+The call-agent page states that its agents can reduce cost per call by up to 66% ([ElevenLabs AI call agents](https://elevenlabs.io/agents/ai-call-agent)). The page does not publish a method or name the human-staffed baseline it compares against, so treat the figure as a direction, not a forecast. The same page cites 60% more efficient collections for firms, which is a different workflow and does not transfer to salon bookings.
+
+A better test is your own arithmetic, shown in the next section.
 
 ## Is a voice agent worth it for a small business?
 
-A voice agent pays off only if the calls it catches are worth more than it costs. Do the arithmetic before you pick a voice.
+A voice agent pays off only when the calls it catches are worth more than its all-in cost. All-in means the plan, language-model usage, any telephony provider and your setup time. The sources do not give plan prices or language-model costs, so those lines need figures from the pricing pages and your own bills.
 
-**Worked example (all inputs are assumptions, swap in your own).** A grooming shop or salon with a $55 average ticket.
+**Worked example.** Every input below is an assumption for a salon with a $55 average ticket. Replace them with your own counts.
 
 | Line | Assumption | Arithmetic | Result |
 |---|---|---|---|
-| Missed calls caught | 25 missed calls a month, 40% would book, the agent converts 60% of those | 25 x 0.4 x 0.6 = 6 bookings | 6 x $55 = **$330** |
-| No-shows saved | 120 appointments a month, 10% no-show, reminder calls prevent 1 in 4 | 120 x 0.10 = 12 no-shows; 12 x 0.25 = 3 saved | 3 x $55 = **$165** |
-| **Monthly value** | | $330 + $165 | **$495** |
+| Missed calls caught | 25 missed calls a month (assumption), 40% would book (assumption), agent converts 60% of those (assumption) | 25 x 0.4 x 0.6 = 6 bookings | 6 x $55 = $330 |
+| No-shows saved | 120 appointments a month (assumption), 10% no-show (assumption), reminder calls prevent 1 in 4 (assumption) | 120 x 0.10 = 12; 12 x 0.25 = 3 saved | 3 x $55 = $165 |
+| Monthly value | | $330 + $165 | $495 |
 
-In this example the agent has to cost clearly less than $495 a month, all-in. All-in means the plan, the language-model usage, any outside telephony and your setup time. ElevenLabs publishes plan prices and the $0.08 minute rate, but not a flat per-call language-model cost, so that line stays an estimate until you run test calls.
+On these assumptions, the agent must cost clearly less than $495 a month, all-in, to justify itself. If the real missed-call count is 5 instead of 25, the value falls to a fraction of that, and a missed-call text-back may be the better buy. Count missed calls and no-shows for two weeks before committing to any platform.
 
-If your real missed-call count is 5 instead of 25, the answer flips. Count your missed calls for two weeks first.
+## Which calls should the agent take first?
 
-## What does an ElevenLabs plan include?
+Start with one narrow job. The three most common in the vendor materials are reminders, inbound answering and booking. Launching all three at once makes failures hard to trace.
 
-ElevenLabs started as a text-to-speech company and now also sells a platform for real-time voice agents. According to its [agents documentation](https://elevenlabs.io/docs/agents-platform/overview) (checked 3 Nov 2026), the platform includes:
+For appointment-based businesses, a reminder call can confirm a slot, offer to reschedule or capture a cancellation so the time can be resold. It matters most where an empty slot costs real money. A plain text reminder is the cheaper experiment to run first.
 
-- A voice library with 10,000+ voices across 31 languages. Check that your market's language and accent are covered.
-- Tools that call APIs, so the agent can trigger actions such as booking or sending data to a CRM.
-- A knowledge base, so it can answer questions about hours, prices and policies.
-- Telephony options: a native Twilio integration, SIP trunk connectivity and batch outbound calling.
-
-Plans are billed by call minutes ([pricing page](https://elevenlabs.io/pricing/agents), 3 Nov 2026):
-
-| Plan | Price per month | Call minutes included | Concurrent calls |
-|---|---|---|---|
-| Free | $0 | 15 | 4 |
-| Starter | $6 ($1 first month) | 75 | 6 |
-| Creator | $22 ($11 first month) | 275 | 10 |
-| Pro | $99 | 1,238 | 20 |
-| Scale | $299 | 3,738 | 30 |
-| Business | $990 | 12,375 | 40 |
-
-<ColumnChart title="Call minutes included per month, by plan" labels="Free|Starter|Creator|Pro|Scale|Business" values="15|75|275|1238|3738|12375" unit=" min" highlights="Creator" caption="ElevenLabs agents pricing page, 3 Nov 2026. Language-model usage is billed separately on every plan." />
-
-A small shop with a few hundred call minutes a month sits in the Starter or Creator range. Enterprise pricing is custom and not published.
-
-## What jobs can an AI voice agent do for a local business?
-
-### Appointment reminders and confirmations
-
-A reminder call can confirm, offer to reschedule or capture a cancellation so you can fill the slot. It matters most where a missed slot costs money: salons, groomers, clinics, studios. Test a plain SMS reminder first, since it is the cheaper experiment.
-
-### Inbound receptionist
-
-The agent answers when you are busy or closed: hours, services, parking, rough pricing, booking requests. For anything it cannot handle, it takes a message or transfers to a person. See the [AI receptionist setup guide for 2026](/blog/ai-receptionist-small-business-setup-guide-2026).
+For after-hours inbound calls, the agent answers questions about hours, services and parking, then books or takes a message. Counter businesses can apply the same logic to orders and questions, as covered in [AI-driven customer service for local coffee shops](/blog/ai-driven-customer-service-for-local-coffee-shops).
 
 ## How do you set one up?
 
 1. Define one job: reminders, FAQs or booking.
-2. Write the system prompt: role, tone, what it knows, what it must never do.
-3. Choose a voice from the library, or clone your own voice (see the warning below).
-4. Connect your tools: booking system, calendar or CRM through the platform's tool or webhook options.
-5. Connect a phone number. Purchased Twilio numbers can take inbound and outbound calls, while a verified caller ID supports outbound calls only ([ElevenLabs docs](https://elevenlabs.io/docs/agents-platform/phone-numbers/twilio-integration/native-integration)). Check support for your country first.
-6. Test with real calls, including interruptions, accents and odd questions.
-7. Review transcripts weekly and refine the prompt.
+2. Write the system prompt: role, tone, what the agent knows and what it must never do.
+3. Load the knowledge base with current hours, services and policies. For larger FAQ sets, a retrieval approach like the one in [LangChain RAG for customer FAQs](/blog/langchain-rag-customer-faq-local-business) keeps answers grounded.
+4. Connect your booking tool or CRM. Developer help is usually needed. A no-code route such as [Zapier vs Make for small business](/blog/zapier-vs-make-small-business-local-business) can pass appointment data across.
+5. Connect a phone number through the platform's telephony options, and check that your country and number type are supported.
+6. Test with real calls, including interruptions, accents and unusual questions.
+7. Review transcripts weekly and log failed calls. For that habit, see [monitoring and debugging AI agents](/blog/agentops-monitor-debug-ai-agents-local-business).
 
 A simple prompt structure for a fitness studio (adapt it to your business):
 
@@ -95,65 +77,44 @@ If you do not know an answer, say "Let me have our team call you back"
 and take a message. Never make up prices or policies.
 ```
 
-Automated outbound reminders need a developer or a no-code tool such as Zapier or Make to pass appointment data to the agent. Use ElevenLabs' current API documentation for endpoints and fields.
+## What rules apply to AI voice calls?
 
-<Callout type="warning">ElevenLabs says you can only create a Professional Voice Clone of your own voice, and it verifies this ([ElevenLabs help](https://elevenlabs.io/docs/help-center/product/voices/voice-cloning/can-i-create-a-professional-voice-clone-of-someone-elses-voice)). In the US, the FCC ruled in February 2024 that calls made with AI-generated voices count as "artificial" voices under the TCPA, so its robocall rules apply to them ([FCC](https://docs.fcc.gov/public/attachments/DOC-400393A1.pdf)). Disclose to callers that they may be speaking with an AI, and check call-recording and automated-calling rules in your country or state before launching outbound campaigns.</Callout>
+Rules on AI-generated calls vary by country and state. They cover consent, disclosure and call recording. The sources reviewed for this update do not set those rules out, so treat this section as a checklist to bring to a local professional, not as legal advice.
+
+Tell callers they are speaking with an AI assistant and give them a route to a person. Keep a call-back path. Set prompt boundaries: no medical, legal or pricing promises beyond what is listed. Get consent before outbound calls, and check recording rules before launch.
+
+For broader agent safeguards, see [AI agents for customer service in local businesses](/blog/ai-agent-for-customer-service-local-business).
 
 ## When does ElevenLabs fit, and when does it not?
 
-ElevenLabs fits when:
+ElevenLabs fits when voice quality and brand feel matter, when callers speak several languages, or when polished reminders and a human-sounding receptionist are the goal. The 90+ language claim and the expressive voice library are the reasons to shortlist it.
 
-- Voice quality and brand feel matter (premium salons, spas, boutique studios).
-- You serve customers in several languages.
-- You mainly want outbound reminders or a polished receptionist.
+It does not fit when the budget is tight and a missed-call text-back or voicemail solves the problem. It also suits a business poorly if it needs no-code setup in under an hour, because booking integration usually takes developer time. Complex multi-step tool logic may call for a developer-focused platform.
 
-It does not fit when:
-
-- You need complex multi-step tool logic. A developer-focused platform may be more flexible.
-- Your budget is tight and a missed-call text-back or simple voicemail solves the problem.
-- You want a no-code setup in under an hour.
-
-Vapi, Bland AI and Retell AI sell similar phone agents. Compare them on the same test-call script, your booking integration and total monthly cost. See the [Bland AI guide](/blog/bland-ai-phone-answering-local-business-2026), the [Vapi setup guide](/blog/vapi-ai-phone-agent-local-business-setup) and [Retell AI vs Vapi](/blog/retell-ai-vs-vapi-local-business-comparison).
-
-## What should you do before you build?
-
-1. For 14 days, tally every missed call and every voicemail. Note which ones were new customers.
-2. Pull your no-show count for the last 30 days.
-3. Fill in the math table with those two numbers and your average ticket.
-4. Add up the all-in monthly cost from the current pricing pages.
-5. If the value is not at least double the cost, use a missed-call text-back instead.
-6. If it is, start with after-hours calls only, because the alternative is voicemail.
-
-Rollout rules that apply to any voice platform: tell callers it is an AI assistant and give them a way to reach a person, set boundaries in the prompt (no medical, legal or pricing promises beyond what you list), keep a call-back path, and read transcripts weekly for the first month. SMS and email reminders, a card on file for high-value appointments and an easy reschedule link can cut no-shows at lower cost. See the [WhatsApp automation guide](/blog/whatsapp-business-api-local-marketing-automation) and our [Email and SMS service](/services/email-sms).
+Compare any vendors on the same test-call script, your booking integration and total monthly cost.
 
 ## FAQ
 
-### Is ElevenLabs Agents different from its text-to-speech?
+### Is ElevenLabs Agents different from its text-to-speech product?
 
-Yes. Text-to-speech converts text into audio. The agents platform runs live, two-way calls with reasoning and tool use. You can also use ElevenLabs voices inside other voice-agent platforms.
+Yes. The agents platform runs live two-way calls with a knowledge base, tools and workflows. Text-to-speech only converts text into audio. The agents pages describe voice agents that connect to CRMs and schedulers, which goes beyond voice generation ([ElevenLabs conversational AI](https://elevenlabs.io/conversational-ai)).
 
-### How much does an ElevenLabs phone agent cost?
+### How many languages does ElevenLabs support for calls?
 
-Plans run from $0 (15 call minutes) to $990 a month, extra minutes cost $0.08, and language-model usage is billed separately. A third-party number provider such as Twilio bills you directly. Source: the pricing page, 3 Nov 2026.
+The vendor states support for 90+ languages with consistent tone ([ElevenLabs AI call agents](https://elevenlabs.io/agents/ai-call-agent)). Test the specific language and accent your callers use before relying on it.
 
-### Can I make outbound calls without coding?
+### Can an AI voice agent replace my receptionist?
 
-ElevenLabs documents batch outbound calling through its telephony integrations. Pulling live appointment data into those calls generally needs the API or a no-code tool such as Zapier or Make, so plan for some setup.
+It can take a large share of routine calls, such as hours, bookings and reminders. Complex, sensitive or emotional calls should still go to a person, with the agent taking a message or transferring the call.
 
-### Is it legal to use AI voice calls to my customers?
+### How do I know if the monthly cost is worth it?
 
-Rules vary by country and state. In the US, the FCC treats AI-generated voices as artificial voices under the TCPA, which affects outbound calls. Get consent, disclose AI use where required, and ask a local professional about recording rules.
+Run the worked example with your own missed-call and no-show counts. If the monthly value is not clearly higher than the all-in cost, start with a cheaper fix such as SMS reminders or a missed-call text-back.
 
-### Will an AI voice agent replace my receptionist?
-
-For simple, repetitive calls it can take a lot of load. Complex or sensitive calls should go to a person.
+Want help deciding whether a voice agent or a cheaper fix suits your business? Start with a [free audit](/free-audit).
 
 ## Sources
 
-- [ElevenLabs: Agents pricing](https://elevenlabs.io/pricing/agents)
-- [ElevenLabs docs: Agents platform overview](https://elevenlabs.io/docs/agents-platform/overview)
-- [ElevenLabs docs: Twilio native integration](https://elevenlabs.io/docs/agents-platform/phone-numbers/twilio-integration/native-integration)
-- [ElevenLabs help: Professional Voice Clone of someone else's voice](https://elevenlabs.io/docs/help-center/product/voices/voice-cloning/can-i-create-a-professional-voice-clone-of-someone-elses-voice)
-- [FCC: AI-generated voices in robocalls are illegal under the TCPA (Feb 2024)](https://docs.fcc.gov/public/attachments/DOC-400393A1.pdf)
-
-Want an AI phone agent set up with booking integration and sensible guardrails? [Contact us](/contact) or see our [AI agents service](/services/ai-agents).
+- [ElevenLabs: AI for small business answering services](https://elevenlabs.io/agents/small-business-answering-service) (primary, vendor page, opened 9 Nov 2026)
+- [ElevenLabs: AI call agents for sales and support](https://elevenlabs.io/agents/ai-call-agent) (primary, vendor page, opened 9 Nov 2026)
+- [ElevenLabs: Conversational AI platform](https://elevenlabs.io/conversational-ai) (primary, vendor page, opened 9 Nov 2026)
