@@ -53,7 +53,7 @@ Anthropic warns that custom connectors are not verified by Anthropic. Connect on
 
 **Slack.** The server can search messages, files and channels, read threads, and send or draft messages. It works only through directory-published or internal apps, and a workspace admin has to approve the app. That makes it a poor first choice for a solo owner.
 
-**Supabase.** Setup is a browser sign-in, with no access token needed. Supabase says production projects can hold sensitive data, so scope the server with `project_ref`, turn on `read_only=true`, and keep manual approval of tool calls on. It also says not to give the server to customers. Our [Supabase connector guide](/blog/mcp-supabase-connector-ai-agent-database) covers the database side.
+**Supabase.** Setup is a browser sign-in, with no access token needed. Supabase says production projects can hold sensitive data, so scope the server with `project_ref`, turn on `read_only=true`, and keep manual approval of tool calls on. It also says not to give the server to customers. Our Supabase connector guide covers the database side.
 
 **Google Calendar, Drive and Gmail.** Google documents one remote server per product, at `calendarmcp.googleapis.com`, `drivemcp.googleapis.com` and `gmailmcp.googleapis.com`. They are a Developer Preview, you need to join the program, and you must enable the APIs in a Google Cloud project and create an OAuth client. Treat this as a project for someone technical, not a five-minute install. For booking, see [Claude and Google Calendar](/blog/claude-mcp-google-calendar-booking-automation).
 
