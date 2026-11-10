@@ -1,9 +1,9 @@
 ---
 title: "Build an MCP Server for a Local Business in Python"
 date: "2026-06-13"
-lastModified: "2026-10-07"
+lastModified: "2026-11-10"
 seoTitle: "Build an MCP Server for Your Local Business (Python)"
-description: "Build an MCP server in Python that exposes a local business's menu, hours and loyalty data to an AI agent. Full code and security tips."
+description: "Build an MCP server in Python 3.9+ that exposes a local business's menu, hours and loyalty data to an AI agent. Code, testing and security steps."
 author: "Nataliia"
 category: "AI & Automation"
 tags: ["MCP server", "build MCP", "AI agent", "local business"]
@@ -11,524 +11,127 @@ slug: "build-mcp-server-custom-data-local-business"
 image: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800&q=80&auto=format&fit=crop"
 readTime: "13 min read"
 ---
-To build an MCP server for a local business, you write a small Python program using the official `mcp` SDK that exposes your own data (menu, hours, policies, loyalty points) as tools an AI agent can call, then register it with an MCP-compatible client such as Claude Desktop.
+To build an MCP server for a local business in Python, write a small program that exposes your menu, opening hours and loyalty records as tools an AI agent can call, then register it with an MCP client such as Claude Desktop. A tutorial in the sources gives Python 3.9 or newer as the starting requirement for the FastMCP approach ([LinkedIn guide](https://www.linkedin.com/posts/prasanth-ss-a39b0a1a1_intellectai-intellectai-ai-activity-7406171035869491200-0MEg)). A four-tool coffee shop server takes a few hours for someone comfortable with basic Python. Every price in the examples is a placeholder.
 
-It takes a few hours for someone comfortable with basic Python, and the example below builds a complete coffee shop server you can adapt.
+<StatRow values="3.9|1|4|1032" labels="Minimum Python version in the FastMCP tutorial|GitHub stars on the Build MCP Server skill listing|Tools in the example coffee shop server|First-year build cost in the worked example (USD)" subs="Source: LinkedIn guide (secondary)|Source: MCPMarket listing snapshot (secondary)|Assumption: design choice for this example|Assumption: illustrative inputs, not a benchmark" trends="neutral|neutral|neutral|neutral" />
 
-Off-the-shelf MCP servers can connect your AI to Google Calendar, Notion, Supabase, and a dozen other tools. They're useful — but they don't know anything about *your* business.
+## Why would a local business need its own MCP server?
 
-They don't know that your oat milk latte is $6.50, that your Saturday appointments fill up by Tuesday, that the blue rinse treatment requires a patch test 48 hours in advance, or that your 10% senior discount applies only to services (not retail products).
+Off-the-shelf connectors can link an AI assistant to calendars, notes and databases, but none of them knows your prices, your appointment rules or your loyalty tiers. A custom server closes that gap. It exposes only the data the owner chooses, and the agent queries it the same way it queries any other tool.
 
-That's the gap a custom MCP server fills. You build a small server that exposes your unique business data — your menu, your pricing, your policies, your loyalty program — and your AI agent queries it the same way it queries any other tool. Suddenly the AI doesn't just know general things about coffee shops: it knows *your* coffee shop.
+The build is worth it when the agent must answer questions about specific products or policies, when that data changes often, or when the agent needs to look up or update the business's own records. It is probably not worth it when a general connector already covers the job, or when a static FAQ page would do.
 
-This guide walks through building a complete MCP server for a coffee shop from scratch. The same pattern applies to salons, pet groomers, gyms, or any local business with unique data that an AI needs to access accurately.
+The [MCP documentation](https://modelcontextprotocol.io) describes the protocol itself, including the transport options. Read it before choosing how the server will be hosted.
 
-## Why Build a Custom MCP Server?
+## How does FastMCP keep the code short?
 
-Before getting into code, let's be clear about when this is worth doing.
+FastMCP lets a developer turn a normal Python function into an AI-callable tool with a decorator. The tutorial describes this as any Python function becoming an AI-usable skill, with examples such as math operations, database queries and API calls ([LinkedIn guide](https://www.linkedin.com/posts/prasanth-ss-a39b0a1a1_intellectai-intellectai-ai-activity-7406171035869491200-0MEg)). The sketch below follows that pattern. Treat it as a starting point and test it before use.
 
-**You should build a custom MCP server when:**
-- Your AI agent needs to answer questions about your specific products, prices, or policies
-- You have data that changes regularly (menu, staff schedules, promotions) and the AI needs the current version
-- You want the AI to look up or update records in a custom data store (loyalty points, inventory)
-- You need logic specific to your business (discount rules, booking constraints)
+```python
+import json
+from fastmcp import FastMCP
 
-**You probably don't need a custom server when:**
-- A general-purpose MCP server already handles your use case (Supabase, Google Sheets, Notion)
-- You only need one-way information flow from a static document
+mcp = FastMCP("coffeeshop-local")
 
-The investment is a few hours of setup. The payoff is an AI that answers from your real, current data instead of guessing. For a wider view of what agents can do, read our overview of [AI agents for local business](/blog/ai-agents-for-local-business-what-they-are-and-how-they-work).
+@mcp.tool()
+def get_menu(category: str = "all") -> str:
+    """Return the current menu, or one section of it."""
+    with open("menu.json") as f:
+        menu = json.load(f)
+    if category == "all":
+        return json.dumps(menu, indent=2)
+    return json.dumps(menu.get(category, {"error": "category not found"}))
 
-## MCP Server Architecture: Three Core Concepts
-
-Before writing code, understand the three primitives the MCP protocol gives you:
-
-**Tools** — Actions the AI can take. Tools accept parameters and return results. Examples: `get_menu()`, `check_loyalty_points(phone)`, `add_appointment(date, time, client)`. Tools can read data, write data, call APIs, or run any logic you write.
-
-**Resources** — Data the AI can read, like documents or structured records. Resources are identified by URIs (e.g., `business://hours`, `business://faq`). Unlike tools, resources don't accept parameters — they just expose a snapshot of data.
-
-**Prompts** — Reusable prompt templates that users or AI clients can invoke. For example, a `customer_greeting` prompt that always starts with your business name and tone.
-
-For a local business AI agent, you'll primarily use **tools** (they're the most powerful and flexible).
-
-## Prerequisites
-
-- Python 3.11 or higher
-- `pip install mcp` (the official MCP Python SDK)
-- Basic Python comfort (you don't need to be an expert)
-
-Check your Python version:
-
-```bash
-python3 --version  # should show 3.11 or higher
-pip install mcp
+if __name__ == "__main__":
+    mcp.run(transport="sse")
 ```
 
-The `mcp` library provides the server framework, decorators for registering tools, and handles all the protocol communication with Claude Desktop.
+The tutorial starts the server with `mcp.run(transport="sse")` and connects it to Claude Desktop or another MCP-compatible IDE. Other transports exist, so the current documentation should be checked before deployment.
 
-## Step-by-Step: Building a Coffee Shop MCP Server
+## What should the coffee shop server expose?
 
-We'll build a server with 4 tools:
-1. `get_menu()` — current menu with prices from a JSON file
-2. `check_loyalty_points(customer_phone)` — loyalty balance from a CSV
-3. `get_business_hours()` — hours including holiday schedule
-4. `add_loyalty_points(customer_phone, points)` — adds points after purchase
+The first version should stay small. A practical set is four tools: a menu lookup, a loyalty balance check, an opening-hours lookup and a points addition after purchase. Each tool reads from a plain file the owner controls, such as `menu.json`, `hours.json` or `customers.csv`, so updating the business is a file edit, not a code change.
 
-First, create your project structure:
+Use one function per job and give each a description the agent can read. Clear descriptions help the model choose the right tool. Add holiday closures to the hours file as dated entries, so the agent answers correctly on a bank holiday.
 
-```bash
-mkdir coffeeshop-mcp
-cd coffeeshop-mcp
-touch server.py menu.json customers.csv hours.json
-```
-
-### Data Files
-
-**`menu.json`** — your current menu:
+Sample placeholder data for a coffee shop might look like this:
 
 ```json
 {
   "hot_drinks": [
-    { "name": "Espresso", "price": 3.50, "sizes": ["single", "double"] },
-    { "name": "Oat Milk Latte", "price": 6.50, "sizes": ["small", "medium", "large"] },
-    { "name": "Cappuccino", "price": 5.00, "sizes": ["regular", "large"] },
-    { "name": "Pour Over", "price": 5.50, "origin": "Ethiopia Yirgacheffe" }
-  ],
-  "cold_drinks": [
-    { "name": "Cold Brew", "price": 5.00, "sizes": ["12oz", "16oz"] },
-    { "name": "Iced Latte", "price": 6.00, "milk_options": ["whole", "oat", "almond", "soy"] }
-  ],
-  "food": [
-    { "name": "Avocado Toast", "price": 9.00, "dietary": ["vegan"] },
-    { "name": "Blueberry Muffin", "price": 4.00, "dietary": ["vegetarian"] },
-    { "name": "Croissant", "price": 3.50 }
+    { "name": "Oat Milk Latte", "price": 6.50 }
   ],
   "last_updated": "2026-06-13"
 }
 ```
 
-**`hours.json`** — your business hours:
-
-```json
-{
-  "regular": {
-    "monday": "7:00 AM - 6:00 PM",
-    "tuesday": "7:00 AM - 6:00 PM",
-    "wednesday": "7:00 AM - 6:00 PM",
-    "thursday": "7:00 AM - 7:00 PM",
-    "friday": "7:00 AM - 7:00 PM",
-    "saturday": "8:00 AM - 5:00 PM",
-    "sunday": "9:00 AM - 4:00 PM"
-  },
-  "holidays": {
-    "2026-07-04": "Closed",
-    "2026-11-26": "10:00 AM - 2:00 PM",
-    "2026-12-25": "Closed",
-    "2026-01-01": "Closed"
-  },
-  "timezone": "America/New_York"
-}
-```
-
-**`customers.csv`** — your loyalty program (one row per customer):
-
-```
-phone,name,points,tier,joined
-+15550123,Sample Customer A,340,Gold,2024-03-15
-+15550456,Sample Customer B,85,Bronze,2025-11-02
-+15550789,Sample Customer C,1240,Platinum,2023-07-20
-```
-
-### The MCP Server Code
-
-Now the main file — `server.py`. Read through the comments; they explain every decision:
-
-```python
-import json
-import csv
-import asyncio
-from datetime import date
-from pathlib import Path
-from mcp.server import Server
-from mcp.server.models import InitializationOptions
-from mcp.types import Tool, TextContent
-import mcp.server.stdio
-
-# Initialize the MCP server with a name your AI client will display
-server = Server("coffeeshop-local")
-
-# File paths — adjust to match your project structure
-BASE_DIR = Path(__file__).parent
-MENU_FILE = BASE_DIR / "menu.json"
-HOURS_FILE = BASE_DIR / "hours.json"
-CUSTOMERS_FILE = BASE_DIR / "customers.csv"
-
-
-# ─── TOOL 1: Get Menu ──────────────────────────────────────────────────────────
-
-@server.list_tools()
-async def list_tools() -> list[Tool]:
-    """Register all tools with the MCP protocol."""
-    return [
-        Tool(
-            name="get_menu",
-            description="Get the current coffee shop menu with all items and prices. Use this when a customer asks about menu items, prices, ingredients, or dietary options.",
-            inputSchema={
-                "type": "object",
-                "properties": {
-                    "category": {
-                        "type": "string",
-                        "enum": ["hot_drinks", "cold_drinks", "food", "all"],
-                        "description": "Which menu section to return. Use 'all' for the complete menu."
-                    }
-                },
-                "required": []
-            }
-        ),
-        Tool(
-            name="check_loyalty_points",
-            description="Look up a customer's loyalty points balance by their phone number.",
-            inputSchema={
-                "type": "object",
-                "properties": {
-                    "phone": {
-                        "type": "string",
-                        "description": "Customer phone number in format +15551234567"
-                    }
-                },
-                "required": ["phone"]
-            }
-        ),
-        Tool(
-            name="get_business_hours",
-            description="Get business hours for a specific day or the full week schedule, including holiday closures.",
-            inputSchema={
-                "type": "object",
-                "properties": {
-                    "day": {
-                        "type": "string",
-                        "description": "Day name (e.g., 'monday') or specific date (e.g., '2026-07-04'). Leave empty for full week."
-                    }
-                },
-                "required": []
-            }
-        ),
-        Tool(
-            name="add_loyalty_points",
-            description="Add loyalty points to a customer's account after a purchase. Always confirm the transaction amount with the customer first.",
-            inputSchema={
-                "type": "object",
-                "properties": {
-                    "phone": {
-                        "type": "string",
-                        "description": "Customer phone number"
-                    },
-                    "points": {
-                        "type": "integer",
-                        "description": "Number of points to add (1 point per $1 spent, rounded down)"
-                    }
-                },
-                "required": ["phone", "points"]
-            }
-        )
-    ]
-
-
-@server.call_tool()
-async def call_tool(name: str, arguments: dict) -> list[TextContent]:
-    """Route tool calls to the correct handler."""
-
-    if name == "get_menu":
-        return await handle_get_menu(arguments)
-    elif name == "check_loyalty_points":
-        return await handle_check_loyalty(arguments)
-    elif name == "get_business_hours":
-        return await handle_get_hours(arguments)
-    elif name == "add_loyalty_points":
-        return await handle_add_points(arguments)
-    else:
-        return [TextContent(type="text", text=f"Unknown tool: {name}")]
-
-
-# ─── TOOL HANDLERS ─────────────────────────────────────────────────────────────
-
-async def handle_get_menu(args: dict) -> list[TextContent]:
-    with open(MENU_FILE) as f:
-        menu = json.load(f)
-
-    category = args.get("category", "all")
-
-    if category == "all":
-        result = menu
-    elif category in menu:
-        result = {category: menu[category]}
-    else:
-        return [TextContent(type="text", text=f"Category '{category}' not found.")]
-
-    return [TextContent(type="text", text=json.dumps(result, indent=2))]
-
-
-async def handle_check_loyalty(args: dict) -> list[TextContent]:
-    phone = args.get("phone", "").strip()
-
-    # Input validation — never trust user-provided data
-    if not phone.startswith("+") or not phone[1:].isdigit():
-        return [TextContent(type="text", text="Invalid phone format. Use +15551234567")]
-
-    with open(CUSTOMERS_FILE, newline="") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            if row["phone"] == phone:
-                return [TextContent(type="text", text=json.dumps({
-                    "found": True,
-                    "name": row["name"],
-                    "points": int(row["points"]),
-                    "tier": row["tier"],
-                    "member_since": row["joined"]
-                }, indent=2))]
-
-    return [TextContent(type="text", text=json.dumps({
-        "found": False,
-        "message": "No loyalty account found for this phone number."
-    }))]
-
-
-async def handle_get_hours(args: dict) -> list[TextContent]:
-    with open(HOURS_FILE) as f:
-        hours = json.load(f)
-
-    day = args.get("day", "").lower().strip()
-
-    if not day:
-        # Return full week
-        return [TextContent(type="text", text=json.dumps(hours["regular"], indent=2))]
-
-    # Check if it's a specific date (holiday lookup)
-    if len(day) == 10 and day[4] == "-":  # format: YYYY-MM-DD
-        if day in hours["holidays"]:
-            return [TextContent(type="text", text=f"Holiday hours for {day}: {hours['holidays'][day]}")]
-        # Check if it's a known day of week for that date
-        try:
-            d = date.fromisoformat(day)
-            day_name = d.strftime("%A").lower()
-            regular = hours["regular"].get(day_name, "Closed")
-            return [TextContent(type="text", text=f"{day} ({d.strftime('%A')}): {regular}")]
-        except ValueError:
-            return [TextContent(type="text", text="Invalid date format")]
-
-    # Regular day name lookup
-    if day in hours["regular"]:
-        return [TextContent(type="text", text=f"{day.capitalize()}: {hours['regular'][day]}")]
-
-    return [TextContent(type="text", text=f"Day '{day}' not recognized.")]
-
-
-async def handle_add_points(args: dict) -> list[TextContent]:
-    phone = args.get("phone", "").strip()
-    points_to_add = int(args.get("points", 0))
-
-    # Input validation
-    if points_to_add <= 0 or points_to_add > 500:
-        return [TextContent(type="text", text="Points must be between 1 and 500 per transaction.")]
-
-    if not phone.startswith("+") or not phone[1:].isdigit():
-        return [TextContent(type="text", text="Invalid phone format.")]
-
-    # Read all customers, update the matching one
-    rows = []
-    found = False
-
-    with open(CUSTOMERS_FILE, newline="") as f:
-        reader = csv.DictReader(f)
-        fieldnames = reader.fieldnames
-        for row in reader:
-            if row["phone"] == phone:
-                row["points"] = str(int(row["points"]) + points_to_add)
-                found = True
-            rows.append(row)
-
-    if not found:
-        return [TextContent(type="text", text="Customer not found. They may need to sign up for the loyalty program first.")]
-
-    # Write back to CSV
-    with open(CUSTOMERS_FILE, "w", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(rows)
-
-    updated_customer = next(r for r in rows if r["phone"] == phone)
-    return [TextContent(type="text", text=json.dumps({
-        "success": True,
-        "name": updated_customer["name"],
-        "points_added": points_to_add,
-        "new_balance": int(updated_customer["points"]),
-        "tier": updated_customer["tier"]
-    }, indent=2))]
-
-
-# ─── SERVER ENTRY POINT ────────────────────────────────────────────────────────
-
-async def main():
-    async with mcp.server.stdio.stdio_server() as (read_stream, write_stream):
-        await server.run(
-            read_stream,
-            write_stream,
-            InitializationOptions(
-                server_name="coffeeshop-local",
-                server_version="1.0.0",
-                capabilities=server.get_capabilities(
-                    notification_options=None,
-                    experimental_capabilities={}
-                )
-            )
-        )
-
-if __name__ == "__main__":
-    asyncio.run(main())
-```
-
-## Register Your Server in Claude Desktop
-
-Add the following to your Claude Desktop config (`~/Library/Application Support/Claude/claude_desktop_config.json` on macOS):
-
-```json
-{
-  "mcpServers": {
-    "coffeeshop": {
-      "command": "python3",
-      "args": ["/absolute/path/to/coffeeshop-mcp/server.py"]
-    }
-  }
-}
-```
-
-Use the absolute path to `server.py`. Restart Claude Desktop. In a new conversation, you'll see the coffeeshop tools listed. Ask Claude: "What's the price of an oat milk latte?" — it will call `get_menu`, read the JSON, and answer from your actual data.
-
-## Testing Your Server Locally
-
-Before connecting to Claude Desktop, test your server directly using the MCP inspector:
-
-```bash
-pip install mcp[cli]
-mcp dev server.py
-```
-
-This opens an interactive terminal where you can call each tool manually and see the raw JSON response. Test every tool with valid inputs, invalid inputs, and edge cases (phone not found, requesting a holiday date, adding 0 points).
-
-Sample test session:
-
-```bash
-# In the mcp dev interface:
-> call get_menu {"category": "hot_drinks"}
-# Should return hot drinks list from menu.json
-
-> call check_loyalty_points {"phone": "+15550123"}
-# Should return Sample Customer A's 340 points
-
-> call check_loyalty_points {"phone": "invalid"}
-# Should return validation error, not a crash
-
-> call add_loyalty_points {"phone": "+15550456", "points": 15}
-# Should add 15 points to Sample Customer B's account
-```
-
-Fix any errors before connecting to Claude Desktop. A crashing MCP server will silently fail from Claude's perspective.
-
-## Deploying Your MCP Server
-
-Local setup works for Claude Desktop on your personal computer. But if you want the server available 24/7 (for a customer-facing AI on your website), you need to deploy it.
-
-**Option 1: Always-on process on a VPS**
-
-Get a small VPS (entry-level plans from providers such as DigitalOcean or Linode are typically a few dollars a month; check current pricing). SSH in and run:
-
-```bash
-# Install dependencies
-pip install mcp
-
-# Run as a background service using systemd
-sudo nano /etc/systemd/system/coffeeshop-mcp.service
-```
-
-```ini
-[Unit]
-Description=CoffeeShop MCP Server
-After=network.target
-
-[Service]
-User=ubuntu
-WorkingDirectory=/home/ubuntu/coffeeshop-mcp
-ExecStart=/usr/bin/python3 /home/ubuntu/coffeeshop-mcp/server.py
-Restart=always
-RestartSec=5
-
-[Install]
-WantedBy=multi-user.target
-```
-
-```bash
-sudo systemctl enable coffeeshop-mcp
-sudo systemctl start coffeeshop-mcp
-```
-
-**Option 2: Serverless via Cloudflare Workers**
-
-For serverless deployment, you'd port the server to use the MCP HTTP transport instead of stdio. This is more advanced — see the [MCP documentation on HTTP transport](https://modelcontextprotocol.io) for details. Serverless platforms often have free or low-cost tiers that can suit small customer-facing deployments; check current limits and pricing.
-
-## Security: What Not to Expose
-
-Custom MCP servers are powerful, which means you need to think carefully about what you expose.
-
-**Rules to follow:**
-
-1. **Never expose credentials through MCP tools.** Don't create a tool that returns your Stripe secret key, WiFi password, or staff passwords — even if only you use the MCP server. AI context windows can be logged.
-
-2. **Validate all inputs.** See how the loyalty point handler checks `points_to_add > 0 and points_to_add <= 500`? That prevents someone from passing -1000 to drain points or 999999 to overflow the field. Never trust inputs.
-
-3. **Limit write operations.** If the AI only needs to read your menu, don't build a `update_menu_price()` tool unless you specifically need it. Fewer write tools = smaller attack surface.
-
-4. **Use rate limiting for write tools.** For any tool that modifies data, add a simple in-memory rate limiter. For example, limit `add_loyalty_points` to 10 calls per minute — a bot can't silently inflate every customer's balance.
-
-5. **Log every write operation.** Append to a simple log file every time `add_loyalty_points` or any write tool is called: timestamp, inputs, result. This gives you an audit trail.
-
-## Comparison: Custom MCP Server vs Alternatives
-
-| Approach | Setup Time | Flexibility | Cost | Maintenance | Best For |
-|---|---|---|---|---|---|
-| Custom MCP server | A few hours | Maximum — your logic | Free locally; small hosting fee if deployed | Low (update JSON/CSV files) | Unique business data |
-| n8n workflow | Hours | High — visual builder | Paid cloud plans or self-host | Low | Complex multi-step flows |
-| Zapier | Under an hour | Moderate — preset connectors | Free tier, then paid plans | Very low | Simple trigger-action automations |
-| Direct API integration | Hours | High — any API | Varies | Medium (API changes) | Well-documented external services |
-| General MCP server (Supabase, Sheets) | Hours | Moderate — generic DB ops | Free tiers, then paid | Very low | Standard data storage |
-
-The custom MCP server wins when your data or logic is unique — which it always is for a local business. n8n is a good middle ground if you want more flexibility than Zapier but don't want to write Python.
+The $6.50 price is an assumption for illustration. The owner should replace it with actual figures.
+
+## How do you test and connect the server?
+
+Each tool should be tested directly before the server is connected to an AI client. Call every function with a valid input, an invalid input and an edge case, such as a phone number that is not in the loyalty file or a holiday date. A server that crashes on bad input can fail silently from the client's side, so errors should be caught inside the tool and returned as a clear message.
+
+To connect the server to Claude Desktop, add an entry under `mcpServers` in the Claude Desktop configuration file. Use the absolute path to `server.py`, restart the app, then ask a question with a known answer, such as the price of one menu item. If the answer matches the file, the wiring works.
+
+## What does the build cost in a worked example?
+
+The figures below are assumptions for a single coffee shop. They are not sourced benchmarks. Replace them with actual rates and quotes.
+
+| Cost item | Input (assumption) | Amount (assumption) |
+|---|---|---|
+| Build time | 4 hours | n/a |
+| Developer rate | $60 per hour | $240 one-off |
+| Hosting on a small VPS | $6 per month × 12 | $72 per year |
+| Maintenance | 1 hour per month × 12 at $60 | $720 per year |
+| First-year total | | $1,032 |
+
+If the owner maintains the files personally, the maintenance line drops out and the first-year total falls to $312. That figure should be weighed against the cost of one wrong price or one wrong holiday hour given to a customer.
+
+## Which security rules apply to write tools?
+
+Any tool that changes data needs stricter rules than a read-only tool. Inputs should be validated on the server, not in the prompt. A points tool should reject negative values and cap a single transaction at a sensible maximum, so a bad request cannot drain or inflate balances.
+
+Credentials should stay out of the server entirely. No tool should return payment keys, Wi-Fi passwords or staff logins. Write tools should be limited to the minimum needed, and every write should be logged with a timestamp, its inputs and its result, creating an audit trail.
+
+If the server is deployed over HTTP rather than run locally, it needs authentication such as a long random token. A server that anyone can reach can be called by anyone.
+
+## When is a visual workflow tool the better choice?
+
+A custom server suits data that is unique to the business. Visual automation tools suit multi-step flows that link many apps with little code. For a sequence such as "new booking, then confirmation email, then calendar entry," a builder may be faster. The comparison in [Zapier vs Make for small business](/blog/zapier-vs-make-small-business-local-business) helps choose between them, and [n8n AI agent workflows for local business](/blog/n8n-ai-agent-workflow-local-business) covers a route with more control and no server code.
+
+For a customer-facing assistant on a website, the [AI agent for customer service](/blog/ai-agent-for-customer-service-local-business) guide covers the wider design. Once an agent is live, [AgentOps for monitoring and debugging](/blog/agentops-monitor-debug-ai-agents-local-business) shows how to track what it does with the business's data.
+
+## What is the launch checklist?
+
+1. Confirm Python 3.9 or newer and install the FastMCP or MCP SDK package.
+2. Store menu, hours and loyalty data in plain files, and date each one.
+3. Test every tool with valid, invalid and edge-case inputs.
+4. Connect the server to one client and check three answers against the source records.
+5. Add logging and rate limits to every write tool before going live.
+6. Review the data files monthly and retire any tool nobody uses.
 
 ## FAQ
 
-**Q: Do I need to be a developer to build an MCP server?**
-A: You need basic Python skills: reading and modifying code, running commands in a terminal and understanding what a function does. If you have never written Python, plan extra time to learn the basics first. The example here is deliberately straightforward.
+### Do I need to be a developer to build an MCP server?
 
-**Q: Can my MCP server connect to the internet?**
-A: Yes. Tool handlers can call external APIs, for example to fetch today's specials from your website or check the weather. Keep calls fast, because tool calls can time out.
+Basic Python skills are needed, such as running commands in a terminal and editing a function. Anyone who has never written Python should allow extra time to learn it first. Many small businesses hire a developer for the build and keep the data files in-house.
 
-**Q: How do I update the data my MCP server exposes?**
-A: Edit the data files. Because the example reads `menu.json`, `hours.json` and `customers.csv` on every tool call, changes show up without code changes. For frequently changing data like inventory, replace the files with a database query.
+### Can the server connect to live services?
 
-**Q: Can multiple AI clients use my MCP server?**
-A: Yes, if you run it with an HTTP-based transport rather than stdio. In stdio mode one client launches the server directly. Check the current MCP documentation for transport options, since the SDK evolves.
+Yes. A tool can call an external API, for example to read today's specials from the business website. Those calls should be fast, because a slow tool can time out in the AI client.
 
-**Q: Is my MCP server secure?**
-A: In stdio mode the server is not network accessible. If you deploy it over HTTP you must add authentication, for example a long random bearer token, and never expose credentials or unrestricted write tools. Review the Security section above.
+### Does one server work with several AI clients?
 
-## Next Step
+Possibly, but it depends on the transport. Local stdio servers are usually launched by a single client. Network transports can serve more than one client, so the current MCP documentation should be checked before planning for that.
 
-If you would rather have this built and maintained for you, see our [AI agents and automation service](/services/ai-agents) or [contact us](/contact) to talk through your use case.
+### Is a custom MCP server secure by default?
 
-## Related Articles
+No. A local stdio server is not reachable over a network, but any server exposed over HTTP needs authentication, input validation and limits on write tools.
 
-- [What Is MCP? The Model Context Protocol Explained for Local Business Owners](/blog/what-is-mcp-model-context-protocol-explained)
-- [Best MCP Servers for Local Business: The Complete Setup Guide](/blog/best-mcp-servers-local-business-setup-guide)
-- [MCP + Supabase: Give Your AI Agent a Persistent Database](/blog/mcp-supabase-connector-ai-agent-database)
-- [MCP + Notion: Build a Client CRM for Your Local Business](/blog/mcp-notion-connector-client-crm-local-business)
-- AI Agents for Coffee Shops
-- [Claude + MCP + Google Calendar: Automate Your Booking Confirmations](/blog/claude-mcp-google-calendar-booking-automation)
+## Sources
+
+- [Build MCP Server with Python: Step-by-Step Guide, LinkedIn post by Prasanth SS](https://www.linkedin.com/posts/prasanth-ss-a39b0a1a1_intellectai-intellectai-ai-activity-7406171035869491200-0MEg) (secondary)
+- [Build MCP Server: Claude Code Skill for MCP Development, MCPMarket listing](https://mcpmarket.com/tools/skills/build-mcp-server-3) (secondary)
+- [Model Context Protocol documentation](https://modelcontextprotocol.io) (primary, used for transport reference only)
+
+Ready to put an AI assistant on your own data? [Run a free audit](/free-audit) to see where a custom server would help most.
