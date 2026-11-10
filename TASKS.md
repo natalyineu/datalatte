@@ -11,6 +11,8 @@
 
 - 2026-11-10 DEPLOYED also: SVG covers + image sitemap (`7a22de6`). Wave 4 (166 rewrites, `data/triage/wave4/`, applied to `content/blog` on branch, build OK, 13 likely duplicates kept `noindex`) waiting for Nataliia's deploy word. NOTE: never rewrite slugs that are redirect sources in `next.config.ts` (18 wasted); keep `noindex` on redirect-source files.
 
+- 2026-11-10 DEPLOYED (`b474dcd`): 638 internal links for 319 orphan posts (`scripts/audit/link-orphans2.py`), redirect fixes, socials (Instagram `datalattepro`, Facebook id 1406384899231203, Threads `@datalattepro`; Medium dropped). Clutch/Crunchbase in sameAs unverified. Next: GSC re-check ~2026-11-24 (rewrites, images, indexed count); then decide on gea pages, group C, remaining P1 (needs sources).
+
 ## Waiting on others
 - Spotify $150 (PayPal …CZVT8EVJ6TSQDK24), Biglinko $50 (…FASQSTWT4WX527JW), Vibe $600 (…MVVN4PWCFS7XXG4Z): mark paid in `partner_deals` when received.
 - GSC: re-check rewritten/reopened articles ~2 weeks after the next deploy.
