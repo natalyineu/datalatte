@@ -32,6 +32,7 @@ function getBlogRoutes(): MetadataRoute.Sitemap {
         lastModified: !isNaN(parsed.getTime()) ? parsed : new Date(),
         changeFrequency: "monthly" as const,
         priority: isCountryGuide ? 0.8 : (impressions > 100 ? 0.9 : impressions >= 10 ? 0.8 : 0.7),
+        ...(fs.existsSync(path.join(process.cwd(), "public/images/blog", `${slug}.svg`)) ? { images: [`${baseUrl}/images/blog/${slug}.svg`] } : {}),
       }];
     })
     .sort((a, b) => b.lastModified.getTime() - a.lastModified.getTime());
