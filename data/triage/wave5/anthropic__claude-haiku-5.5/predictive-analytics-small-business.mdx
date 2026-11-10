@@ -1,0 +1,106 @@
+---
+title: "Predictive Analytics for Small Business: Where to Start"
+date: "2026-05-21"
+lastModified: "2026-11-10"
+description: "Predictive analytics for small business: Google lists 14 recommended events; a days-since-last-visit rule works below data thresholds."
+author: "Nataliia"
+category: "AI & Automation"
+tags: ["predictive analytics small business", "AI for business", "machine learning for business"]
+slug: "predictive-analytics-small-business"
+image: "https://images.unsplash.com/photo-1524995406-1db1bba49cc4?w=800&q=80&auto=format&fit=crop"
+readTime: '8 min read'
+---
+
+Predictive analytics for a small business means using past customer records to estimate who will return, who is drifting away and what they may spend next. Most local shops cannot test those estimates at scale yet. The practical route is a simple rule built on your own visit or order dates, plus tracking that reliably records the actions that matter. Google's recommended events list names 14 events for all properties, but those events are not sent automatically, so someone has to set them up. This guide covers what to track, a days-since-last-visit rule and a worked win-back calculation with every input labelled.
+
+<StatRow
+  values="14|14|400|60"
+  labels="Recommended events for all properties|Recommended events for online sales|Example customer list size|Example customers flagged each month"
+  subs="Google Analytics Help|Google Analytics Help|Assumption for worked example|Assumption for worked example"
+  trends="neutral|neutral|neutral|neutral"
+/>
+
+## What Does Predictive Analytics Actually Predict?
+
+It estimates the likelihood of a future action from patterns in past behaviour. For a café, that might mean the chance a regular stops visiting this month, or the chance a first-time buyer comes back within a season. The estimate is only as good as the records behind it.
+
+Thin or messy data makes predictions weaker, and so does a change in how customers behave, such as a new competitor opening nearby. Any score should be treated as a prompt to check, not a verdict. For a wider view of how data supports marketing decisions, see [data analytics for small business](/blog/data-analytics-for-small-business).
+
+## Can You Track the Actions a Prediction Needs?
+
+Yes, and this is where most small businesses should begin. Google's recommended events page lists events for three situations: all properties, online sales and lead generation. It says these events need additional context to be meaningful, so they are not sent automatically. The site owner sends them with the prescribed parameters.
+
+For online sales, the list includes events such as add_to_cart, begin_checkout and purchase. For lead generation, generate_lead fires when a user submits a form or a request for information, and the page notes that offline conversions can be included as well. According to Google, sending events with their prescribed parameters gives the most detail in reports.
+
+The sources reviewed for this article do not state the minimum data volumes that Google's built-in prediction features need. Check the current vendor documentation before assuming a business qualifies. The safer habit is to get the events right first, whatever tool is used later. More on setup is in [Google Analytics 4 for small business](/blog/google-analytics-4-for-small-business).
+
+## Which Tracking Steps Matter for a Local Business?
+
+A café, salon or repair shop does not need all 14 events. It needs a short, reliable record of who came back and when. Work through these steps in order:
+
+1. Choose the one action that pays the business, such as a booking, a purchase or a form enquiry.
+2. Match it to the closest recommended event name, for example purchase for a completed sale or generate_lead for a form or call request.
+3. Send the event with its prescribed parameters, following Google's developer guide for the website.
+4. Check reports after a week to confirm each event arrives once per action, not zero or twice.
+5. Export a matching customer list from the booking, POS or loyalty system so offline visits are not lost.
+
+Steps 4 and 5 matter most for shops that take walk-in trade, because website events miss in-person visits entirely.
+
+## What Should You Do Below the Data Threshold?
+
+Use a rule built on your own records. Export the customer list and add one column: days since last visit. Then add a second column for each customer's usual gap between visits, using their average across past visits. When the current gap is about double the usual one, flag the customer as at risk.
+
+The "double the usual gap" cut-off is an assumption to start from, not a sourced benchmark. Adjust it after a few months by checking which flagged customers actually returned. This is not machine learning, and it does not need to be. It answers the question that matters most to a local shop: who is drifting away?
+
+Once a flagged list exists, the message itself can be simple. Tools for sending it are compared in [best marketing automation tools for small business](/blog/best-marketing-automation-tools-small-business).
+
+## How Do You Test a Win-Back Rule Before Paying for Tools?
+
+Running the numbers comes before buying anything. All inputs below are **assumptions** for an illustrative café, not benchmarks. Replace them with the shop's own figures before relying on the result.
+
+| Input | Value (assumption) |
+| --- | --- |
+| Active customers on the list | 400 |
+| Usual gap between visits | 14 days |
+| Flag when gap exceeds | 28 days |
+| Customers flagged this month | 60 |
+| Share who return after a check-in message | 15% |
+| Customers won back | 9 |
+| Average ticket | $12 |
+| First-visit revenue recovered | $108 |
+
+Nine returning customers at $12 each is $108 from the first visit. Later visits add more, but that depends on the shop's repeat pattern. The cost is roughly an hour of exporting the list and sending one message. If the return rate were 5% instead of 15%, the same 60 flagged customers would return 3 times, bringing in $36. That gap is why the test is worth running before committing to a paid system.
+
+<Callout type="tip" title="Start With One Question">
+Pick one prediction: who has not been back in twice their usual gap. Run it monthly for three months, record how many flagged customers returned, then decide whether a paid tool is worth it.
+</Callout>
+
+## Which Tools Are Worth Comparing Later?
+
+Once the rule shows results, platforms that automate the flag-and-message step can be compared. Some marketing suites include segmentation and automated sends, and some AI-focused products claim to score customers directly. Each vendor's current requirements should be read carefully, because the data they need varies.
+
+For a broader look at options, see [AI marketing tools for small business](/blog/ai-marketing-tools-for-small-business). For agents that act on a customer list automatically, [best AI agents for small business in 2026](/blog/best-ai-agents-for-small-business-2026) covers what to check before granting access to records.
+
+## How Often Should the List Be Reviewed?
+
+Monthly is enough for most shops with a visit cycle of a few weeks. Shops with very short cycles, such as daily coffee, may justify a weekly check. Whatever the schedule, the previous month's flagged list should be compared with actual returns, and the gap threshold adjusted if too many or too few customers are being caught.
+
+## FAQ
+
+### Do I need a data scientist for predictive analytics?
+No. A spreadsheet with a days-since-last-visit column gives a useful signal for most local shops. The harder part is acting on the flagged list consistently.
+
+### Does Google Analytics predict individual customers?
+Google Analytics works with events sent from a website or app. A shop that sells mostly in person needs its POS or booking data kept in a separate list.
+
+### How accurate are predictions?
+The sources reviewed here do not publish accuracy figures for local businesses. Any rule or tool should be tested by checking flagged customers against who actually came back.
+
+### How often should the list be updated?
+Monthly suits most shops. Shops with very short visit cycles may need a weekly review.
+
+## Sources
+
+- [Google Analytics Help: Recommended events (GA4)](https://support.google.com/analytics/answer/9267735)
+
+Want help deciding which customer events to track first? Book a [free audit](/free-audit) to have the current tracking setup reviewed.
