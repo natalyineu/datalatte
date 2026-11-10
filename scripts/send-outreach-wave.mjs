@@ -22,12 +22,15 @@ const sigHtml = sigRaw.slice(sigRaw.indexOf("<table"), sigRaw.indexOf("</table>"
 const sigText = sigRaw.slice(sigRaw.indexOf("Plain-text version:") + 19, sigRaw.lastIndexOf("-->")).trim().replaceAll("{campaign}", wave.campaign);
 
 function render(r) {
-  const url = `${wave.article}?utm_source=email&utm_medium=outreach&utm_campaign=${wave.campaign}&utm_content=${r.slug}`;
-  const fill = (s) => s.replaceAll("{name}", r.name);
+  const url = wave.article ? `${wave.article}?utm_source=email&utm_medium=outreach&utm_campaign=${wave.campaign}&utm_content=${r.slug}` : "";
+  // {field} placeholders are filled from the recipient (name, article_title, ...)
+  const fill = (s) => s.replace(/\{(\w+)\}/g, (m, k) => (k === "article_link" || k === "article_title_link" ? m : r[k] ?? m));
   const subject = fill(wave.subject);
-  const textParas = wave.paragraphs.map((p) => fill(p).replace("{article_link}", url));
+  const textParas = wave.paragraphs.map((p) => fill(p).replace("{article_link}", url).replace("{article_title_link}", `${r.article_title || ""} (${r.article_url || ""})`));
   const htmlParas = wave.paragraphs.map((p) => {
-    const t = esc(fill(p)).replace("{article_link}", `<a href="${url}" style="color:#8b5e3c">artykuł</a>`);
+    const t = esc(fill(p))
+      .replace("{article_link}", `<a href="${url}" style="color:#8b5e3c">artykuł</a>`)
+      .replace("{article_title_link}", `<a href="${r.article_url || ""}" style="color:#8b5e3c">${esc(r.article_title || "")}</a>`);
     return `<p style="margin:0 0 12px">${t.replace(/\n/g, "<br>")}</p>`;
   });
   return {
@@ -68,9 +71,9 @@ for (const r of wave.recipients) {
   const now = new Date().toISOString();
   await fetch(`${SB}/rest/v1/outreach_emails`, { method: "POST", headers: sbH, body: JSON.stringify({
     sent_at: now, campaign: wave.campaign, to_email: r.email, business_name: r.name, niche: wave.niche, city: wave.city,
-    country_code: wave.country_code, subject: m.subject, resend_id: body.id, status: "sent", source_table: "local_businesses", source_id: r.id,
+    country_code: wave.country_code, subject: m.subject, resend_id: body.id, status: "sent", source_table: wave.source_table || "local_businesses", source_id: r.id || null,
   }) });
-  await fetch(`${SB}/rest/v1/local_businesses?id=eq.${r.id}`, { method: "PATCH", headers: sbH, body: JSON.stringify({ status: "contacted", last_contacted_at: now }) });
+  if (r.id && (wave.source_table || "local_businesses") === "local_businesses") await fetch(`${SB}/rest/v1/local_businesses?id=eq.${r.id}`, { method: "PATCH", headers: sbH, body: JSON.stringify({ status: "contacted", last_contacted_at: now }) });
   console.log(`sent ${r.email}`);
   await wait(1500);
 }
