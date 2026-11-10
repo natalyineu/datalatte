@@ -2,7 +2,7 @@
 
 ## In progress (2026-11-10 rewrite campaign, branch claude/laughing-lovelace-vaflrp)
 - DEPLOYED: 68 Haiku-rewritten articles (`03b1b76`), crawl-waste fix: tags no longer link to `/blog?q=`, `/blog/category/*` noindex, niche hubs link to service/city pages (`0b94f3f`), 3 duplicates re-noindexed pending 301 (bing-ads, 7-best, make-com). IndexNow sent (68 URLs).
-- Wave 3 (78 articles, Haiku 5.5) in `data/triage/wave3/` — not applied to `content/blog`; needs Nataliia to review 3 articles, then apply + build + deploy.
+- DEPLOYED 2026-11-10 (`8bf0d4f`): wave 3 (78 rewrites) + 246 thin template posts removed with 301 (`data/triage/remove-301.csv`). Geo pages (570) left as is until GSC re-check ~2026-11-24.
 - Lists for Nataliia to review: `data/triage/remove-301.csv` (246 noindex template posts, 0 impressions, 0 refdomains; `redirect_to` is a suggestion), `data/triage/geo-pages.csv` (570 geo posts; 212 have 10+ impressions, so do NOT merge blindly).
 - Pipeline: `scripts/rewrite/pilot.mjs` (gen/check, validator + repair), `scripts/rewrite/add-primary.mjs`, `data/research/*.json` packs (214 ready). Apify cap used ($4.77/$5).
 - GSC re-check of the 68 rewrites + hubs ~2026-11-24. Nataliia: request indexing in GSC for top-10 URLs (see chat).
