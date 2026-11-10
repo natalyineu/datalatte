@@ -22,7 +22,7 @@ export default function BlogCard({ title, excerpt, slug, category, date, rawDate
   const [imgError, setImgError] = useState(false);
   const group = getGroup(category);
   const { Icon, gradient } = GROUP_CONFIG[group];
-  const unoptimized = image?.startsWith("http");
+  const unoptimized = image?.startsWith("http") || image?.endsWith(".svg");
   const showImage = image && !imgError;
 
   if (featured) {
