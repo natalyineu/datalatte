@@ -4,7 +4,7 @@ import path from "path";
 import matter from "gray-matter";
 import Link from "next/link";
 import Image from "next/image";
-import { coverOr } from "@/lib/cover";
+import { cardOr } from "@/lib/cover";
 import {
   ArrowRight,
   TrendingUp,
@@ -206,7 +206,7 @@ function getLatestPosts(count = 3) {
       const raw = fs.readFileSync(path.join(dir, file), "utf8");
       const { data } = matter(raw);
       const slug = file.replace(".mdx","");
-      const image = coverOr(slug, imageCache[slug] ?? String(data.image ?? ""));
+      const image = cardOr(slug, imageCache[slug] ?? String(data.image ?? ""));
       return { slug, title: String(data.title ?? ""), description: String(data.description ?? ""), category: String(data.category ?? ""), date: String(data.date ?? ""), readTime: String(data.readTime ?? "5 min read"), image };
     })
     .sort((a,b) => new Date(b.date).getTime() - new Date(a.date).getTime());
