@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { coverOr } from "@/lib/cover";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
@@ -55,7 +56,7 @@ function getAllPosts(): PostMeta[] {
         category: data.category ?? "",
         date: data.date,
         readTime: data.readTime || calcReadTime(content.split(/\s+/).length),
-        image: imageCache[slug] ?? data.image,
+        image: coverOr(slug, imageCache[slug] ?? data.image),
         tags: data.tags ?? [],
       } as PostMeta;
     })

@@ -1,8 +1,8 @@
 ---
 title: "WhatsApp AI Bot for Local Business: Setup Guide"
 date: "2026-05-18"
-lastModified: "2026-10-30"
-description: "WhatsApp AI bot for local business: Meta's Business Agent costs $2.00 per million tokens, about 4-5 cents a message. Setup steps, rules and a cost example."
+lastModified: "2026-11-10"
+description: "WhatsApp AI bot for local business: Meta lists $2.00 per million tokens. Set up in six steps, keep a human route, and budget 400 replies a month."
 author: "Nataliia"
 category: "Social Media"
 tags: ["WhatsApp marketing", "AI bot", "local business", "customer conversations"]
@@ -11,91 +11,107 @@ image: "https://images.unsplash.com/photo-1584515933487-779824d29309?w=800&q=80&
 readTime: "7 min read"
 ---
 
-A local business has three ways to run an AI bot on WhatsApp: Meta's own Business Agent, a third-party AI provider connected to the WhatsApp Business Platform, or the free app's greeting and away messages with no AI. Meta's pricing page puts Business Agent at $2.00 per million tokens, about 4 to 5 cents per message. The same page estimates a third-party AI solution at about 9 cents per message in a Brazil example.
-
-These figures are Meta's own estimates, not a quote for your country. The cost example below is labelled as an assumption.
+A WhatsApp AI bot for a local business can answer routine questions about hours, prices and bookings, then pass everything else to a person. There are three routes: the free WhatsApp Business app with greeting and away messages and no AI, Meta's Business Agent, or a third-party AI provider connected through the WhatsApp Business Platform. Meta's pricing page lists Business Agent at $2.00 per million tokens. The cost example below is a labelled assumption, not a quote.
 
 <StatRow
-  values="$2.00|4-5 cents|About 9 cents|Jan 15, 2026"
-  labels="Business Agent rate per million tokens|Typical Business Agent cost per message|Third-party AI cost per message, Meta's Brazil example|General-purpose chatbot ban in force, per press reports"
-  subs="Meta for Developers|Meta for Developers (estimate)|Meta for Developers (estimate)|Secondary: respond.io and others"
+  values="$2.00|20,000-25,000|1,000|400"
+  labels="Business Agent price per million tokens|Tokens in a typical Business Agent message|Free service messages per number per month|Bot questions answered per month in the example"
+  subs="[Meta for Developers pricing](https://developers.facebook.com/docs/whatsapp/pricing/)|[Meta for Developers pricing](https://developers.facebook.com/docs/whatsapp/pricing/)|[Meta pricing updates](https://developers.facebook.com/docs/whatsapp/pricing/updates-to-pricing/), from October 1, 2026|Assumption: pet groomer example"
   trends="neutral|neutral|neutral|neutral"
 />
 
-## Which WhatsApp AI Bot Options Does a Small Business Have?
+## Which WhatsApp AI Bot Option Fits a Small Business?
 
-| Option | What it does | Cost, as published |
+The three routes differ in cost, control and effort. The free app costs nothing beyond your phone plan, but it cannot answer open questions. Meta's Business Agent and third-party providers can, and they bill per message or through a platform fee. Choose by the questions customers actually send, not by the feature list.
+
+| Option | Best for | What to check before starting |
 | --- | --- | --- |
-| WhatsApp Business app, no AI | Greets people when they start a chat and replies when you are away | The page prints no price |
-| Meta Business Agent | Meta says it can answer questions, capture leads and recommend products | $2.00 per million tokens, about 4-5 cents a message |
-| Third-party AI provider on the Business Platform | Your own bot, built by a vendor | Provider fees plus Meta fees; Meta estimates about 9 cents in its Brazil example |
+| WhatsApp Business app, greeting and away messages | Businesses with few messages and set hours | Whether the greeting covers hours, booking and how to reach a person |
+| Meta Business Agent | Owners who want Meta's built-in assistant | Whether it is offered on your account and how it is billed |
+| Third-party AI provider on the Business Platform | Businesses needing custom pricing, bookings or a CRM link | Provider fees, Meta message fees and who keeps answers current |
 
-TechCrunch reported on June 3, 2026 that Business Agent also books appointments and qualifies leads, and hands off to a person when needed. The same report says Meta plans to include it in some tiers of its WhatsApp Business Premium subscription. Meta's page prices it by tokens, so check which route applies to your account before relying on either report.
+Start with the free option if the repeat questions are not yet known. A paid bot built on guesses will answer the wrong things quickly.
 
-## How Much Does a WhatsApp AI Bot Cost?
+## What Should a WhatsApp Bot Be Allowed to Answer?
 
-Meta's pricing page says a Business Agent message is metered per message, with one per-token charge that covers AI processing and message delivery. A typical message uses roughly 20,000 to 25,000 tokens. Volume tiers and free messages do not apply, and Business Agent messages are still charged inside the free entry point window.
+Limit the bot to facts that can be kept current. Hours, the price list, service area, parking and the booking link are good candidates. Anything that changes weekly, such as stock, special offers or staff availability, should go to a person or be checked by hand before the bot repeats it.
 
-Messages from a third-party AI solution fall into the service category. From October 1, 2026 each business phone number gets 1,000 free service messages a month, but Meta states the service message update does not apply to AI Providers, which follow a separate policy whose details are not on that page. Our [WhatsApp Business API guide](/blog/whatsapp-business-api-local-marketing-automation) covers the rest of the pricing.
-
-## Which Bots Does WhatsApp Not Allow?
-
-The business messaging policy page, last updated September 23, 2026, lets you automate replies inside the 24-hour customer service window, but automated responders must offer a prompt, clear, direct escalation path to a human. Examples it lists include an in-chat agent transfer, a phone number, email, web support or an in-store visit. Outside the window you can send only approved templates, and you need the customer's opt-in.
-
-Press reports say the platform terms also bar general-purpose chatbots, meaning open-ended assistants such as ChatGPT, from January 15, 2026, while support and sales bots remain allowed. We did not find that wording on Meta's policy page, so treat it as secondary and read Meta's current terms before choosing a vendor.
+Write the ten questions customers ask most often, and mark each one as safe for the bot, needs a human, or needs a payment link. Keep that list in the same document as the price list, so one update changes both the website and the bot.
 
 ## How Do You Set Up a WhatsApp Bot Step by Step?
 
-1. Write down the ten questions customers ask most: hours, prices, parking, booking, cancellation.
-2. Start with the free app's greeting and away message, then see which questions still reach you.
-3. Decide whether Business Agent is offered on your account, or whether you need a provider.
-4. Give the bot only facts you can keep current: price list, hours, service area.
-5. Add a human route to every flow: a phone number or a "talk to a person" reply.
-6. Read the first 50 real conversations and fix wrong answers.
+1. Write down the ten questions customers ask most, such as hours, prices, parking, booking and cancellation.
+2. Set up the free app's greeting and away message first, then count how many questions still reach you.
+3. Check whether Business Agent is available on your account, or whether a third-party provider is needed.
+4. Load the bot only with facts that can be updated each week: price list, opening hours and service area.
+5. Add a route to a person in every flow, such as a phone number or a "talk to a person" reply.
+6. Read the first 50 real conversations, fix wrong answers, then repeat the check each month.
 
-Do not collect card numbers in chat; send a payment link from your booking or payment system instead. Our WhatsApp customer service guide shows the free-app version, and the WhatsApp marketing guide separates free from paid features.
+Step 5 matters most. A bot that leaves a customer with no way out loses the sale and the goodwill. Set the bot to hand over quickly when a message concerns a complaint, a refund or an urgent change.
+
+## How Much Does a WhatsApp AI Bot Cost Per Reply?
+
+Meta's pricing page gives Business Agent at $2.00 per million tokens, and estimates a typical message at 20,000 to 25,000 tokens. Using the midpoint of 22,500 tokens gives about 4.5 cents a reply. Meta's own page puts the typical figure at about 4 to 5 cents, which matches. Check the current page before budgeting, because rates change.
+
+Third-party AI providers charge their own fees on top of Meta's message fees. Meta's pricing updates say that from October 1, 2026, each business phone number gets 1,000 free service messages a month, but this does not apply to AI providers. Ask the vendor how its fees are structured before signing.
 
 ## What Does a Month of Bot Replies Cost? A Worked Example
 
-All inputs are **assumptions**. A pet groomer's bot answers 400 customer questions in a month, and each answer is one message at Meta's estimated rates.
+All inputs below are assumptions, except the per-message token cost taken from Meta's pricing. A pet groomer's bot answers 400 customer questions in a month.
 
-| Route | Calculation | Result |
+| Line | Calculation (assumption inputs marked) | Result |
 | --- | --- | --- |
-| Meta Business Agent | 400 x $0.04 to $0.05 | $16 to $20 |
-| Third-party AI, Meta's Brazil estimate | 400 x about $0.09 | about $36 |
-| Platform subscription or setup fees | Not published here | Check the vendor |
+| Token cost per reply | 22,500 tokens x $2.00 per million (Meta rate) | About $0.045 |
+| Message and AI cost, 400 replies | 400 x $0.045 | About $18 |
+| Staff time saved | Assumption: 2 minutes per routine question = 800 minutes, about 13.3 hours, at an assumed $25 an hour | About $333 |
+| Bookings recovered | Assumption: 2 extra bookings a month at an assumed $60 each | $120 |
+| Total monthly benefit | $333 + $120 (assumed) | About $453 |
+| Monthly bot cost | About $18 in messages plus platform or setup fees (enter the vendor's quote) | About $18 plus fees |
 
-The message cost is small next to one no-show. The bigger cost is the time spent keeping the answers correct. Compare this with a missed booking worth your average ticket before choosing paid automation. For wider automation ideas see our guide to [AI content tools for local businesses](/blog/ai-content-creation-tools-local-business-2026).
+The message cost is small next to the time saved. The time figure only counts if staff stop answering the same questions by hand. Recovered bookings are the least certain line, so track them for a month before relying on them.
+
+## How Do You Keep a Human in the Loop?
+
+Customers should always know how to reach a person. The bot can state this at the start of a chat and offer the route again whenever a customer types words such as "complaint", "refund" or "speak to someone". WhatsApp's business messaging policy requires automated responders to offer a prompt, clear and direct escalation path to a human, such as a phone number, email or an in-chat transfer.
+
+Review the bot every month. Look for questions it answered wrongly, questions it could not answer, and conversations where a customer gave up. Each pattern points to one change in the answer list or the handover rule.
+
+## What Should the Bot Never Collect?
+
+Do not ask for card numbers in chat. Send a payment link from the booking or payment system instead, so card details never pass through the conversation. The same applies to passwords, ID numbers and health details. A bot that collects only names, preferred times and a phone number keeps the risk low.
+
+The business messaging policy also limits outreach outside the 24-hour customer service window to approved templates, and it requires the customer's opt-in. Build the bot's follow-up messages around those limits. For the wider case for automated support, see [AI agents for customer service at local businesses](/blog/ai-agent-for-customer-service-local-business). For prompts that help draft the answer list, see [ChatGPT prompts for local business marketing](/blog/chatgpt-prompts-for-local-business-marketing).
 
 ## FAQ
 
 ### Is there a free WhatsApp AI bot?
 
-Meta's Business Agent is paid per message, and the Business app page lists no AI price. The free app can send a greeting and away messages without AI.
+The free WhatsApp Business app can send greeting and away messages without AI. An AI answer engine on your number usually carries a provider or platform charge, so check the current price before assuming it is free.
 
 ### Can I use ChatGPT on my WhatsApp Business number?
 
-Press reports say general-purpose chatbots have been barred from the Business Platform since January 15, 2026. A bot built for your own support and sales is a different category. Confirm with Meta's terms.
+Check Meta's current business messaging terms before connecting a general-purpose assistant. A bot built for your own support and sales questions is a different case from an open-ended chat tool, and the rules can change.
 
 ### Do I have to tell customers it is a bot?
 
-The policy page we read does not state a disclosure rule, but it does require a clear route to a human. Saying plainly that a bot is answering is safer.
+Saying plainly that a bot is answering is the safer choice. It also sets expectations, so customers know when to ask for a person.
 
 ### Can the bot take payments?
 
-Do not ask for card numbers in chat. Send a link to your payment page.
+Do not take card details in chat. Send a payment link from the booking or payment system and let the customer pay there.
 
 ### How long does setup take?
 
-No published figure. The steps above are the work: collecting answers, testing and reading real chats.
+The sources checked for this article give no setup time. It depends on how many questions there are and how quickly accurate answers can be supplied. Plan for the testing stage, when real conversations are read and errors fixed.
 
 ## Sources
 
-- [WhatsApp Business Messaging Policy](https://whatsappbusiness.com/policy/) (last updated September 23, 2026)
-- [Meta for Developers: WhatsApp Business Platform pricing](https://developers.facebook.com/docs/whatsapp/pricing/)
-- [Meta for Developers: Pricing updates](https://developers.facebook.com/docs/whatsapp/pricing/updates-to-pricing/)
-- [WhatsApp Business app page](https://whatsappbusiness.com/products/business-app/)
-- [TechCrunch: Meta's AI agent for WhatsApp Business is now available globally](https://www.techcrunch.com/2026/06/03/metas-ai-agent-for-whatsapp-business-is-now-available-globally/) (secondary, news report)
-- [respond.io: WhatsApp general-purpose chatbots ban](https://respond.io/blog/whatsapp-general-purpose-chatbots-ban) (secondary, vendor blog; appeared in search results, not opened)
+- [WhatsApp Business Platform pricing, Meta for Developers](https://developers.facebook.com/docs/whatsapp/pricing/) (primary; source of the $2.00 per million tokens rate and the 20,000 to 25,000 token estimate)
+- [Meta for Developers: Pricing updates](https://developers.facebook.com/docs/whatsapp/pricing/updates-to-pricing/) (primary; source of the 1,000 free service messages from October 1, 2026)
+- [WhatsApp Business Messaging Policy](https://whatsappbusiness.com/policy/) (primary; escalation-path and template rules, last updated September 23, 2026)
+- [U.S. Small Business Administration, marketing your business](https://www.sba.gov/business-guide/grow-your-business/marketing-your-business) (opened; returned a page-not-found result, no usable content)
+- [SBA Office of Advocacy, Frequently Asked Questions About Small Business, 2023](https://advocacy.sba.gov/2023/03/07/frequently-asked-questions-about-small-business-2023/) (opened; site navigation only, no WhatsApp content)
 
-Want a WhatsApp assistant connected to your bookings? See our [AI agents service](/services/ai-agents) or [book a free audit](/free-audit).
+Before publishing, recheck the Meta pricing and policy pages, since rates and terms change, and replace the assumption figures with current vendor quotes.
+
+Want a WhatsApp assistant connected to your bookings? A [free audit](/free-audit) reviews your current answers and handover routes.

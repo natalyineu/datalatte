@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { coverOr } from "@/lib/cover";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -221,7 +222,7 @@ function getRelatedPosts(currentSlug: string, category: string, limit = 3, curre
         slug,
         title: data.title || slug,
         description: data.description || "",
-        image: imageCache[slug] ?? data.image ?? `/blog/clusters/marketing-strategy.jpg`,
+        image: coverOr(slug, imageCache[slug] ?? data.image ?? `/blog/clusters/marketing-strategy.jpg`),
         category: data.category || "",
         readTime: data.readTime || `${Math.max(1, Math.ceil(content.split(/\s+/).length / 200))} min read`,
         date: data.date || "",
@@ -816,7 +817,7 @@ export default async function BlogPostPage({
                       src={rp.image}
                       alt={rp.title}
                       fill
-                      unoptimized={rp.image?.startsWith("http")}
+                      unoptimized={rp.image?.startsWith("http") || rp.image?.endsWith(".svg")}
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
