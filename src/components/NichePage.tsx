@@ -7,6 +7,8 @@ import TestimonialCard from "@/components/TestimonialCard";
 import ScrollReveal from "@/components/ScrollReveal";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { HUBS, getHubCopy } from "@/lib/hubs";
+import { CITIES, NICHES, SERVICE_SEGMENTS, type NicheSlug } from "@/lib/locationData";
+import { getCityStats } from "@/lib/cityStats";
 
 const HUB_NICHE: Record<string, string> = { "coffee-shops": "coffee", "hair-salons": "salon", "pet-groomers": "pet", "fitness-studios": "fitness" };
 import type { CityServiceGroup } from "@/lib/cityGuides";
@@ -312,6 +314,38 @@ export default function NichePage({
           </div>
         </div>
       </SectionWrapper>
+
+      {/* ── Service + city pages (internal links so these pages are not orphans) ── */}
+      {(NICHES as readonly string[]).includes(slug) && (
+        <SectionWrapper className="bg-white dark:bg-gray-900">
+          <div className="max-w-5xl mx-auto space-y-8">
+            <div>
+              <h2 className="section-title mb-3">Services for {niche.toLowerCase()}</h2>
+              <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+                {Object.values(SERVICE_SEGMENTS).map((s) => (
+                  <li key={s.slug}>
+                    <Link href={`/for/${slug}/${s.slug}`} className="block text-sm text-coffee-700 hover:text-coffee-900 hover:underline py-1 px-2 rounded hover:bg-coffee-50 transition-colors dark:text-coffee-300 dark:hover:bg-coffee-900/60">
+                      {s.label} for {niche.toLowerCase()}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h2 className="section-title mb-3">{niche} marketing by city</h2>
+              <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+                {CITIES.filter((c) => getCityStats(slug as NicheSlug, c.slug)).map((c) => (
+                  <li key={c.slug}>
+                    <Link href={`/for/${slug}/${c.slug}`} className="block text-sm text-coffee-700 hover:text-coffee-900 hover:underline py-1 px-2 rounded hover:bg-coffee-50 transition-colors dark:text-coffee-300 dark:hover:bg-coffee-900/60">
+                      {c.city}, {c.stateCode}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </SectionWrapper>
+      )}
 
       {/* ── City Guides ── */}
       {cityServiceGroups && cityServiceGroups.length > 0 && (
