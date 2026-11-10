@@ -42,6 +42,8 @@ const FIELD_MAP = [
   [/twitter|x\.com/i, "twitter"],
   [/linkedin/i, "linkedin"],
   [/founder|owner|contact.*name|your.*name|first.*name/i, "founder"],
+  [/street|address/i, "address"],
+  [/zip|postal|post.?code/i, "postal_code"],
   [/city/i, "city"],
   [/country/i, "country"],
   [/year|founded/i, "year_founded"],
