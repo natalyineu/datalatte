@@ -52,7 +52,16 @@ async function call(model, user) {
   const j = await r.json(); if (j.usage?.cost) console.log("cost", model, j.usage.cost, "tokens", j.usage.total_tokens); if (!j.choices || !j.choices[0].message.content) throw new Error("empty/err " + JSON.stringify(j).slice(0, 200));
   return { text: j.choices[0].message.content, usage: j.usage };
 }
+function validate(t) {
+  const iss = [], body = t.replace(/\]\([^)]*\)/g, "]").replace(/^---[\s\S]*?---/, "");
+  if (/\b(we|our|ours|us|we'll|we're|I|I'm|my)\b/.test(body.replace(/^#+.*$/gm, ""))) iss.push("first person (we/our/I) remains: rewrite those sentences in neutral third person");
+  if (!/^\|.+\|\s*$/m.test(t) && !/^- \[ \]/m.test(t)) iss.push("no table or checklist: add one concrete comparison table or step checklist");
+  const sr = (t.match(/<StatRow[^>]*values="([^"]*)"/) || [])[1];
+  if (sr && sr.split("|").some((v) => !/\d{2,}|\d+\s?%|\$\d/.test(v))) iss.push("StatRow has a card without a real statistic (counts like 1 or 5 are not stats): use sourced percentages, dollar amounts or large counts");
+  return iss;
+}
 function autofix(t) {
+  t = t.replace(/\bour (guide|guides|article|articles|post|posts|checklist|[A-Z][a-z]+)\b/g, "the $1");
   return t.replace(/^description:\s*"(.*)"$/m, (m, d) => { if (d.length <= 155) return m; let c = d.slice(0, 155); c = c.slice(0, Math.max(c.lastIndexOf(". ") + 1, c.lastIndexOf(" "))).replace(/[,;:\s]+$/, ""); if (!/[.!?]$/.test(c)) c += "."; return 'description: "' + c + '"'; });
 }
 async function gen() {
@@ -65,7 +74,7 @@ async function gen() {
     await Promise.all(MODELS.map(async (m) => {
       const dir = path.join(OUT, m.replace("/", "__")); fs.mkdirSync(dir, { recursive: true });
       const f = path.join(dir, s + ".mdx"); if (fs.existsSync(f)) return;
-      try { let o; for (let a = 0; a < 2 && !o; a++) { try { o = await call(m, user); } catch (e) { console.error('retry', m, s, String(e).slice(0, 120)); } } if (!o) throw new Error('failed'); const { text, usage } = o; fs.writeFileSync(f, autofix(text.replace(/^```(?:mdx|markdown)?\n/, "").replace(/\n```\s*$/, ""))); cost[m] = (cost[m] || 0) + (usage?.cost || 0); console.log("gen", m, s, usage?.cost); }
+      try { let o; for (let a = 0; a < 2 && !o; a++) { try { o = await call(m, user); } catch (e) { console.error('retry', m, s, String(e).slice(0, 120)); } } if (!o) throw new Error('failed'); let { text, usage } = o; const iss = validate(autofix(text)); if (iss.length) { console.log('repair', s, iss.join('; ')); try { const o2 = await call(m, user + '\n\nYOUR PREVIOUS DRAFT:\n' + text + '\n\nFIX THESE PROBLEMS AND OUTPUT THE FULL FILE AGAIN: ' + iss.join('; ')); text = o2.text; usage = { cost: (usage?.cost || 0) + (o2.usage?.cost || 0) }; } catch (e) { console.error('repair fail', s); } } fs.writeFileSync(f, autofix(text.replace(/^```(?:mdx|markdown)?\n/, "").replace(/\n```\s*$/, ""))); cost[m] = (cost[m] || 0) + (usage?.cost || 0); console.log("gen", m, s, usage?.cost); }
       catch (e) { console.error("gen fail", m, s, String(e).slice(0, 200)); }
     }));
   }
