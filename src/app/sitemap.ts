@@ -9,25 +9,6 @@ import { fetchPublishedSignals } from "@/lib/radar-signals";
 const baseUrl = "https://datalatte.pro";
 const contentDir = path.join(process.cwd(), "content/blog");
 
-function getCategoryRoutes(): MetadataRoute.Sitemap {
-  const cats = new Set<string>();
-  fs.readdirSync(contentDir)
-    .filter((f) => f.endsWith(".mdx"))
-    .forEach((f) => {
-      const { data } = matter(fs.readFileSync(path.join(contentDir, f), "utf8"));
-      if (data.category) cats.add(data.category as string);
-    });
-  return [...cats].map((cat) => {
-    const slug = cat.toLowerCase().replace(/\s*&\s*/g, "-").replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
-    return {
-      url: `${baseUrl}/blog/category/${slug}`,
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
-      priority: 0.6,
-    };
-  });
-}
-
 function getBlogRoutes(): MetadataRoute.Sitemap {
   let popularity: Record<string, number> = {};
   const popPath = path.join(contentDir, "popularity.json");
@@ -186,7 +167,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/terms`,                              lastModified: today,      changeFrequency: "yearly",  priority: 0.3 },
   ];
 
-  const categoryRoutes = getCategoryRoutes();
   const radarRoutes = await getRadarRoutes();
 
   const locationRoutes: MetadataRoute.Sitemap = [];
@@ -215,5 +195,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  return [...staticRoutes, ...getGuideRoutes(), ...radarRoutes, ...locationRoutes, ...nicheServiceRoutes, ...categoryRoutes, ...blogRoutes];
+  return [...staticRoutes, ...getGuideRoutes(), ...radarRoutes, ...locationRoutes, ...nicheServiceRoutes, ...blogRoutes];
 }

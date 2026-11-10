@@ -258,7 +258,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/blog/marketing-strategy-for-coffee-shops",
-        destination: "/blog/how-to-market-a-coffee-shop-the-complete-2026-strategy-guide",
+        destination: "/blog/coffee-shop-marketing-ideas-30-strategies-to-fill-every-seat-in-2026",
         permanent: true,
       },
       {

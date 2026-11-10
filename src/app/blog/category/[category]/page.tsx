@@ -90,6 +90,7 @@ export async function generateMetadata({
   return {
     title: `${category} Articles`,
     description: `Browse all DataLatte articles about ${category}. Practical tips for local business owners on ${category.toLowerCase()}.`,
+    robots: { index: false, follow: true },
     alternates: {
       canonical: url,
       languages: {

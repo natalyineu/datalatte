@@ -703,13 +703,12 @@ export default async function BlogPostPage({
         {frontmatter.tags && frontmatter.tags.length > 0 && (
           <div className="mt-8 flex flex-wrap gap-2">
             {frontmatter.tags.map((tag) => (
-              <Link
+              <span
                 key={tag}
-                href={`/blog?q=${encodeURIComponent(tag)}`}
-                className="text-xs bg-coffee-50 dark:bg-coffee-900/30 text-coffee-700 dark:text-coffee-300 px-3 py-1 rounded-full font-medium hover:bg-coffee-100 dark:hover:bg-coffee-900/50 hover:text-coffee-900 dark:hover:text-coffee-100 transition-colors"
+                className="text-xs bg-coffee-50 dark:bg-coffee-900/30 text-coffee-700 dark:text-coffee-300 px-3 py-1 rounded-full font-medium"
               >
                 {tag}
-              </Link>
+              </span>
             ))}
           </div>
         )}
