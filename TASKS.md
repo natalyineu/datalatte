@@ -7,6 +7,8 @@
 - Pipeline: `scripts/rewrite/pilot.mjs` (gen/check, validator + repair), `scripts/rewrite/add-primary.mjs`, `data/research/*.json` packs (214 ready). Apify cap used ($4.77/$5).
 - GSC re-check of the 68 rewrites + hubs ~2026-11-24. Nataliia: request indexing in GSC for top-10 URLs (see chat).
 
+- DEPLOYED 2026-11-10 (`bba4b48`) Stage 1 cleanup: 243 zero-impression indexable posts set `noindex` (`data/triage/stage1-noindexed.txt`, 301 them after GSC check ~2026-11-24), 483 zero-impression noindex posts removed with 301 (`data/triage/stage1-removed.csv`). Next: Stage 2 rewrite groups A+B (341, need Apify sources), then C (200).
+
 ## Waiting on others
 - Spotify $150 (PayPal …CZVT8EVJ6TSQDK24), Biglinko $50 (…FASQSTWT4WX527JW), Vibe $600 (…MVVN4PWCFS7XXG4Z): mark paid in `partner_deals` when received.
 - GSC: re-check rewritten/reopened articles ~2 weeks after the next deploy.
