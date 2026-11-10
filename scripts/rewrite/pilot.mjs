@@ -36,6 +36,11 @@ HARD RULES
 - Exactly one <StatRow values="a|b|c|d" labels="..." subs="..." trends="neutral|up|down|neutral" /> with 4 items and equal counts, built only from sourced figures (put "assumption" in subs for example figures).
 - A worked example with inputs labelled assumption. One "## FAQ" section with "### Question" entries (3-5). One "## Sources" section with markdown links (mark secondary sources "secondary").
 - 3-6 internal links /blog/<slug> chosen ONLY from the ALLOWED LINKS list, plus a closing link to /services/google-ads, /services/local-seo or /free-audit as fits.
+- Audience: small businesses in the US, UK, Australia, Canada. Drop facts about other regions (UAE, India, etc.) unless the topic is that region.
+- Prefer primary sources (vendor, government, platform help pages). Retellings are "secondary"; do not build the 4 StatRow cards only from secondary figures if a primary one exists.
+- UNIQUE ELEMENT (required): add one original, useful block that is not in the sources: a comparison table, a step checklist, or a worked budget/ROI calculation with assumption-labelled inputs. It must be concrete for the niche.
+- Internal links go inline in the body text (3-6, from ALLOWED LINKS), not only in one closing line.
+- description MUST be 120-155 characters; count them.
 - Valid MDX: no bare { } or < in prose. 1200-2000 words.`;
 function links(slug, fm) {
   const rows = fs.readFileSync(path.join(ROOT, "data/triage/triage.csv"), "utf8").split("\n").slice(1).map((l) => l.match(/^([^,]+),(KEEP-OK)/)).filter(Boolean).map((m) => m[1]);
@@ -47,6 +52,9 @@ async function call(model, user) {
   const j = await r.json(); if (j.usage?.cost) console.log("cost", model, j.usage.cost, "tokens", j.usage.total_tokens); if (!j.choices || !j.choices[0].message.content) throw new Error("empty/err " + JSON.stringify(j).slice(0, 200));
   return { text: j.choices[0].message.content, usage: j.usage };
 }
+function autofix(t) {
+  return t.replace(/^description:\s*"(.*)"$/m, (m, d) => { if (d.length <= 155) return m; let c = d.slice(0, 155); c = c.slice(0, Math.max(c.lastIndexOf(". ") + 1, c.lastIndexOf(" "))).replace(/[,;:\s]+$/, ""); if (!/[.!?]$/.test(c)) c += "."; return 'description: "' + c + '"'; });
+}
 async function gen() {
   const cost = {};
   for (const s of slugs) {
@@ -57,7 +65,7 @@ async function gen() {
     await Promise.all(MODELS.map(async (m) => {
       const dir = path.join(OUT, m.replace("/", "__")); fs.mkdirSync(dir, { recursive: true });
       const f = path.join(dir, s + ".mdx"); if (fs.existsSync(f)) return;
-      try { let o; for (let a = 0; a < 2 && !o; a++) { try { o = await call(m, user); } catch (e) { console.error('retry', m, s, String(e).slice(0, 120)); } } if (!o) throw new Error('failed'); const { text, usage } = o; fs.writeFileSync(f, text.replace(/^```(?:mdx|markdown)?\n/, "").replace(/\n```\s*$/, "")); cost[m] = (cost[m] || 0) + (usage?.cost || 0); console.log("gen", m, s, usage?.cost); }
+      try { let o; for (let a = 0; a < 2 && !o; a++) { try { o = await call(m, user); } catch (e) { console.error('retry', m, s, String(e).slice(0, 120)); } } if (!o) throw new Error('failed'); const { text, usage } = o; fs.writeFileSync(f, autofix(text.replace(/^```(?:mdx|markdown)?\n/, "").replace(/\n```\s*$/, ""))); cost[m] = (cost[m] || 0) + (usage?.cost || 0); console.log("gen", m, s, usage?.cost); }
       catch (e) { console.error("gen fail", m, s, String(e).slice(0, 200)); }
     }));
   }
