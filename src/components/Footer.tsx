@@ -1,6 +1,6 @@
 import Link from "next/link";
 import CopyEmail from "@/components/advertise/CopyEmail";
-import { Mail, MessageCircle, MapPin, Linkedin, Instagram } from "lucide-react";
+import { Mail, MessageCircle, MapPin, Linkedin, Instagram, Facebook } from "lucide-react";
 import NewsletterForm from "@/components/NewsletterForm";
 
 const footerLinks = {
@@ -123,7 +123,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="https://www.instagram.com/datalatte.pro"
+                href="https://www.instagram.com/datalattepro"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="DataLatte on Instagram"
@@ -132,14 +132,23 @@ export default function Footer() {
                 <Instagram size={16} className="text-gray-300" />
               </a>
               <a
-                href="https://medium.com/@datalatte.pro"
+                href="https://www.facebook.com/profile.php?id=1406384899231203"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="DataLatte on Medium"
+                aria-label="DataLatte on Facebook"
                 className="w-9 h-9 rounded-lg bg-coffee-900 hover:bg-coffee-700 flex items-center justify-center transition-colors"
               >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="text-gray-300">
-                  <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
+                <Facebook size={16} className="text-gray-300" />
+              </a>
+              <a
+                href="https://www.threads.com/@datalattepro"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="DataLatte on Threads"
+                className="w-9 h-9 rounded-lg bg-coffee-900 hover:bg-coffee-700 flex items-center justify-center transition-colors"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="text-gray-300">
+                  <path d="M17.5 9.5C16.6 6.6 14.6 5 12 5c-3.3 0-5.5 2.5-5.5 7s2.2 7 5.5 7c2.6 0 4.5-1.4 4.5-3.5 0-2.3-2.2-3.1-4.2-3.1-1.6 0-2.8.7-2.8 1.8 0 1 .9 1.6 2 1.6 1.9 0 3-1.5 3-4.3" />
                 </svg>
               </a>
               <a
