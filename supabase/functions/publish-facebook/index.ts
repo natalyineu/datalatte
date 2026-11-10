@@ -16,6 +16,18 @@ Deno.serve(async (req) => {
     return Response.json(r.ok ? { id: j.id, name: j.name } : { error: j.error?.message });
   }
 
+  const chk = url.searchParams.get("check");
+  if (chk) {
+    // Diagnostics: does a post/video exist? (ids comma-separated)
+    const res: Record<string, unknown> = {};
+    for (const id of chk.split(",")) {
+      const r = await fetch(`${GRAPH}/${id}?fields=id,created_time,permalink_url,status&access_token=${token}`);
+      const j = await r.json();
+      res[id] = r.ok ? { exists: true, created: j.created_time, status: j.status?.video_status ?? null } : { exists: false, error: j.error?.message };
+    }
+    return Response.json(res);
+  }
+
   if (url.searchParams.get("ids") === "1") {
     // Diagnostics: Instagram business account + Threads user + granted permissions (no secrets returned).
     const g = async (u: string) => { const r = await fetch(u); return await r.json(); };
