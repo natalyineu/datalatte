@@ -1794,7 +1794,7 @@ const nextConfig: NextConfig = {
       // Truncated slug names → full names
       {
         source: "/blog/google-business-profile-optimization-in-2026-the-complete-guide-25-point-checki",
-        destination: "/blog/google-business-profile-optimization-in-2026-the-complete-guide-25-point-checklist",
+        destination: "/blog/google-business-profile-optimization-checklist",
         permanent: true,
       },
       {
