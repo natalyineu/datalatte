@@ -1,8 +1,8 @@
 ---
 title: "Local SEO Reports in Google Data Studio: Setup Guide"
 date: "2026-05-20"
-lastModified: "2026-10-31"
-description: "Build a free local SEO report with Search Console, GA4 and Business Profile data. Which Google connectors exist, which do not, and a 4-section layout."
+lastModified: "2026-11-10"
+description: "Build a local SEO report in Google Data Studio from Search Console, Analytics and Business Profile data in 4 sections, reviewed monthly."
 author: "Nataliia"
 category: "Local SEO"
 tags: ["local seo reports", "google data studio", "looker studio", "reporting"]
@@ -11,88 +11,102 @@ image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&aut
 readTime: "7 min read"
 ---
 
-You can build a free local SEO report in Google's dashboard tool by connecting Search Console and Google Analytics, and by adding Business Profile numbers through a sheet or a partner connector. Google's connector catalog (checked 31 October 2026) lists Search Console, Google Analytics, Google Ads and Google Sheets. It does not list a Google Business Profile connector.
-
-Google's documentation now calls the tool Data Studio again, after the Looker Studio name. It describes it as a no-cost tool, and the older names refer to the same product. This guide shows what to put in the report and where each number comes from.
+A local SEO report in Google Data Studio answers three questions: is the site found, do people act on the listing, and did anything change that explains it. Build it from Search Console, Google Analytics and Business Profile numbers, with each source in its own section. Keep it to four sections on one page, with a fixed monthly date range. Google's connector catalog lists Search Console, Analytics, Ads and Sheets, but not a Business Profile connector, so profile numbers usually come through a monthly sheet export. Example figures in this guide are assumptions.
 
 <StatRow
-  values="0|4|8"
-  labels="Google-owned Business Profile connectors in the catalog|Connectors used here: Search Console, Analytics, Ads, Sheets|Core Profile metrics: interactions, searches, views, directions, calls, website clicks, messages, bookings"
-  subs="Data Studio available-connectors page, 31 Oct 2026|Data Studio available-connectors page, 31 Oct 2026|Business Profile Help, performance report"
-  trends="neutral|neutral|neutral"
+  values="5 days|A few hours|Several months|8"
+  labels="Lag before Profile search terms appear|Earliest a site change can show|Latest a site change can take to show|Metric types in the Profile performance report"
+  subs="Business Profile Help, performance report|Google SEO Starter Guide|Google SEO Starter Guide|Business Profile Help, performance report"
+  trends="neutral|neutral|neutral|neutral"
 />
 
-## Which Data Can You Pull Into a Local SEO Report?
+## What Should a Local SEO Report Include?
 
-Google-owned sources cover web search and site traffic. Search Console gives queries, clicks and impressions for your site. Google Analytics gives sessions and conversions. Google Ads adds paid results if you run them. Google Sheets lets you add anything else, such as monthly Business Profile numbers you copy in.
+A local report draws on two kinds of data. The first is site data: how pages appear in Google Search and what visitors do after arriving. Google's [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide) describes SEO as helping search engines understand content and helping users decide whether to visit a site from a search result. That purpose maps to the visibility and website sections.
 
-| Source | Connector status in Google's catalog | What it adds |
-|---|---|---|
-| Search Console | Listed | Search queries, clicks, impressions |
-| Google Analytics | Listed | Sessions, conversions |
-| Google Ads | Listed | Paid clicks and spend |
-| Google Sheets | Listed | Any manual or exported data |
-| Google Business Profile | Not listed | Needs a sheet or a partner connector |
+The second is profile data: how people interact with the Business Profile on Google. Google's [guidelines for representing your business](https://support.google.com/business/answer/3038177) ask that the profile reflect the real-world business, with an accurate address or service area and the fewest categories needed to describe the core business. If the profile is wrong, the numbers attached to it will mislead, so check the profile before building the report.
 
-Partner connectors exist for Business Profile, but they are third-party products with their own terms and limits. Treat their feature lists as vendor claims and check the current listing before paying.
+The report should stay short. A shop owner should be able to read it in two minutes. Anything that does not connect to a visit, a call, a booking or a clear next step can go in an appendix or be dropped.
 
-## What Does Business Profile Report?
+## Why Should a Business Have One Profile?
 
-Business Profile Help describes a performance report with these items, shown only where they apply: interactions, searches, views on Search and Maps, directions, calls, website clicks, messages, bookings, and product, menu and offer views.
+Google's guidelines say there should be only one Business Profile per business, because duplicate profiles can cause problems with how information displays on Google Maps and Search. For reporting, this matters more than it first seems. With two profiles, calls, directions and views split between them, and any month-on-month comparison becomes unreliable.
 
-Some counting rules matter in a report. Views count unique visitors, so they can be lower than notification numbers. Search terms update at the start of each month and can take up to five days to appear. Call tracking needs a phone number on the profile. Bookings need a booking provider.
+Search for the business name and address before building the report, and confirm that one profile appears. If a duplicate exists, resolve it before tracking starts. A report that begins with a broken baseline can mislead for many months.
 
-## How Do You Lay Out the Report?
+Name consistency matters for the same reason. Google asks that the business name reflect the real-world name used on the storefront, website and stationery. Matching names let the data sources refer to the same entity, so a change in the numbers can be read as real rather than as a listing artefact.
 
-Keep it to four sections that a shop owner can read in two minutes:
+Google's guidelines also state that no links of any type are allowed in the business description. Tracking URLs belong in the website field of the profile, measured in Analytics, not in the description text.
 
-1. **Visibility:** Search Console clicks and impressions by month, plus Profile views.
-2. **Actions:** Profile calls, direction requests and website clicks.
-3. **Website:** Analytics sessions from organic search and form or booking conversions.
-4. **Notes:** Two lines on what changed and what you do next.
+## How Do You Lay Out the Four Sections?
 
-Start with a single page and monthly date ranges. Add a comparison to the previous period so changes are visible. For which metrics to choose, see [how to measure local SEO success](/blog/how-to-measure-local-seo-success-kpis) and [marketing reporting for small business](/blog/marketing-reporting-for-small-business).
+The report has four sections. Build them in the order below, with the source and the question each one answers.
 
-## Where Does AI Fit In?
+| Step | Section | Data source | Question it answers |
+|---|---|---|---|
+| 1 | Visibility | Search Console clicks and impressions, Profile views | Are people seeing the business? |
+| 2 | Actions | Profile calls, direction requests, website clicks | Are people doing something? |
+| 3 | Website | Analytics sessions from organic search, form or booking events | Do visitors convert on the site? |
+| 4 | Notes | Two lines written by the analyst | What changed, and what happens next? |
 
-AI is useful for the writing step, not for the numbers. Export the table, paste it into an AI assistant, and ask for a plain summary of what rose, what fell and which numbers are too small to trust. Then check each claim against the table.
+Start with one page and a monthly date range. Add a comparison to the previous period so changes are visible without extra work. Connect Search Console and Analytics first, and give each its own date filter so the periods line up.
 
-Do not paste customer names or private data. Do not let a tool state causes it cannot see, such as "rankings rose because of your new photos". Search Console shows what happened, not why.
+Profile numbers need a manual step. Export them each month into a sheet, connect that sheet to the report, and write the export date in the sheet. Paid figures from Google Ads should sit in their own block so they are not mixed with organic results. For paid setup, see [how to set up Google Ads for your small business](/blog/how-to-set-up-google-ads-for-your-small-business-in-2026-step-by-step-with-screenshots), and for retail-specific paid reporting, see [Google Ads for local retail](/blog/google-ads-for-local-retail).
 
-Worked example, all inputs are assumptions: a salon sees Search Console clicks go from 120 in September to 150 in October, and Profile calls from 18 to 22. The report shows +25% clicks and +4 calls. With counts this small, one busy week can explain it, so the note says "watch for two more months" instead of claiming a win.
+Each section should have one headline number and one trend line. A report with twelve charts is harder to read than one with four well-chosen figures.
 
-## How Often Should You Send It?
+## How Long Before a Change Shows Up?
 
-Monthly is enough for most local businesses, because Profile search terms update monthly. Weekly dashboards can stay open for you, but send the client or owner one short monthly page. Set the date range to the last full month so the numbers do not shift after sending.
+Google's SEO Starter Guide says changes take time to appear in results. Some take effect within a few hours, while others could take several months. It suggests waiting a few weeks before judging whether work had a beneficial effect, and notes that not every change will produce a noticeable impact.
 
-If you want a deeper setup for tracking, start with our [Google Analytics 4 guide](/blog/google-analytics-4-for-small-business), the [Search Console guide](/blog/google-search-console-guide) and the [Business Profile checklist](/blog/google-business-profile-optimization-checklist).
+The report should therefore avoid announcing wins from one month to the next. For a monthly report, treat a change as a result only after it has held for at least two or three periods, and say so in the notes. Where absolute numbers are small, write that the data is too thin to judge yet.
+
+Check indexing before reading a drop as a ranking problem. The site: search operator shows whether pages appear in Google's index, and the URL Inspection Tool in Search Console shows how Google sees a specific page. A page that is not indexed will show no clicks, however good the content is.
+
+Google's guidance also says its crawler generally uses a US location to view pages. If the site shows different information by location, the crawler's view may differ from what local customers see. Confirm which version the report is measuring.
+
+## Does AI Belong in the Reporting Step?
+
+AI tools suit the writing step, but they should not handle the numbers. Export the table, paste it into an AI assistant, and ask for a plain summary of what rose, what fell, and which figures are too small to trust. Check each claim against the original table before the summary goes to the client or owner.
+
+Do not paste customer names, contact details or other personal data into the tool. Do not let the summary state causes the data cannot show. Search Console shows what happened, not why, so a line such as "rankings rose because of the new photos" is an inference, not a finding. For background on how search results are changing, see [Google AI Mode and local SEO](/blog/google-ai-mode-local-seo-2026).
+
+**Worked example (all inputs are assumptions):** a hair salon records 120 Search Console clicks in September and 150 in October. Profile calls go from 18 to 22. Clicks rose by (150 − 120) ÷ 120 = 25%, and calls rose by 4. With counts this small, one busy week can explain the change. The note should say "watch for two more months" rather than credit a new page with the rise.
+
+## How Often Should the Report Go Out?
+
+Monthly is enough for most local businesses. Profile search terms update at the start of each month and can take up to five days to appear, so a monthly rhythm matches the data. A weekly dashboard can stay open for internal use, but the owner or client should receive one short monthly page.
+
+Set the date range to the last full calendar month. A rolling 30-day window shifts after the report is sent, and the owner then sees figures that differ from those discussed. A fixed period avoids that confusion.
+
+Seasonal businesses need a longer window to separate a normal peak from a real change. The sources here give no minimum period, so choose one long enough for the business, and state it in the notes. Our [local SEO service](/services/local-seo) covers the reporting layout, and a [free audit](/free-audit) can check the profile, site and data connections before the first build.
 
 ## FAQ
 
-### Is Google Data Studio free?
+### Should I check indexing before I report a drop in clicks?
 
-Google's documentation describes the base tool as no-cost. A paid Pro version exists for team and administration features. The pricing page was not readable when checked, so no Pro price is quoted here.
+Yes. The SEO Starter Guide suggests the site: operator to confirm pages are indexed, and the URL Inspection Tool in Search Console to see how Google views a specific page. A page that is not indexed will show no clicks.
 
-### Is it called Looker Studio or Data Studio now?
+### How long should I wait before calling a change a result?
 
-Google's current documentation page says the tool is called Data Studio, after the Looker Studio name. Older guides use Google Data Studio or Looker Studio for the same product.
+Google suggests waiting a few weeks, because changes can take anywhere from hours to several months to appear. For a monthly report, treat a change as a result only after it has held for at least two or three periods.
 
-### Is there a Google Business Profile connector?
+### Can a business have more than one Business Profile?
 
-Not in Google's own connector catalog as checked on 31 October 2026. Use a Sheets export or a partner connector, and read the partner's current terms.
+Google's guidelines say there should be only one profile per business. Duplicates split the data and can cause display problems on Google Maps and Search, so resolve them before tracking starts.
 
-### Can AI write the report for me?
+### Can AI write the report?
 
-It can summarize a table you give it. You still need to check the numbers and avoid claims about causes.
+AI can summarize a table you provide, but each number must be checked against the source, and the summary should avoid claims about causes. Do not paste personal or customer data into the tool.
 
 ### How many months of data do I need?
 
-The sources here give no minimum. Use at least three months to spot a pattern, and more if your business is seasonal.
+Google's guidance sets no minimum. Use a window long enough to show a pattern, label small counts as too thin to judge, and expect seasonal businesses to need longer.
 
 ## Sources
 
-- [Google Cloud docs: Data Studio](https://docs.cloud.google.com/looker/docs/studio) (renamed; no-cost tool)
-- [Google Cloud docs: Available connectors](https://docs.cloud.google.com/looker/docs/studio/available-connectors) (Search Console, Analytics, Ads, Sheets listed; no Business Profile connector)
-- [Google Business Profile Help: Understand your Business Profile performance](https://support.google.com/business/answer/9918094)
-
-Want a monthly report set up for your business? See our [local SEO service](/services/local-seo) or [book a free audit](/free-audit).
+- [Google Search Central: SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide) (primary)
+- [Google Business Profile Help: Guidelines for representing your business on Google](https://support.google.com/business/answer/3038177) (primary)
+- [Google Business Profile Help: Understand your Business Profile performance](https://support.google.com/business/answer/9918094) (primary)
+- [Google Cloud docs: Looker Studio available connectors](https://docs.cloud.google.com/looker/docs/studio/available-connectors) (primary)
+- [Google Search Central: LocalBusiness structured data](https://developers.google.com/search/docs/appearance/structured-data/local-business) (primary, reference for profile markup)

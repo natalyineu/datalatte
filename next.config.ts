@@ -1434,7 +1434,7 @@ const nextConfig: NextConfig = {
       { source: "/blog/best-google-ad-keywords-for-cat-groomers-in-2026", destination: "/blog/best-google-ad-keywords-for-pet-groomers-in-2026", permanent: true },
       { source: "/blog/best-google-ads-keywords-nail-salons", destination: "/blog/best-google-ad-keywords-for-nail-salons-in-2026", permanent: true },
       { source: "/blog/best-marketing-for-salons-2026-what-actually-works-with-real-examples", destination: "/blog/best-marketing-for-salons-in-2026-what-actually-works-with-real-examples", permanent: true },
-      { source: "/blog/black-friday-marketing-local-businesses-2026", destination: "/blog", permanent: true },
+      { source: "/blog/black-friday-marketing-local-businesses-2026", destination: "/blog/black-friday-cyber-monday-small-business-2026", permanent: true },
       { source: "/blog/bolt-food-ads-restaurants-europe", destination: "/blog/instagram-ads-restaurant-food-delivery-europe", permanent: true },
       { source: "/blog/booking-form-optimization", destination: "/blog", permanent: true },
       { source: "/blog/boosting-coffee-shop-website-conversions-with-cro", destination: "/blog/coffee-shop-website-cro-tips", permanent: true },
@@ -1775,6 +1775,10 @@ const nextConfig: NextConfig = {
       { source: "/blog/wechat-marketing-local-business-australia-uk", destination: "/blog", permanent: true },
       { source: "/blog/yelp-optimization-guide", destination: "/blog", permanent: true },
       { source: "/blog/youtube-marketing-for-local-business", destination: "/blog", permanent: true },
+    // Merged into one Super Bowl article (2026-11-10)
+      { source: "/blog/super-bowl-advertising-small-business", destination: "/blog/small-business-super-bowl-season-ctv-ads-2026", permanent: true },
+    // Old Black Friday draft merged into the sourced 2026 article
+      { source: "/blog/black-friday-marketing-strategy", destination: "/blog/black-friday-cyber-monday-small-business-2026", permanent: true },
     // Renamed posts — old slugs redirect to new canonical URLs
       {
         source: "/blog/how-to-ask-grooming-clients-for-google-reviews",

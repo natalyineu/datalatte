@@ -1,8 +1,8 @@
 ---
-title: "n8n for Local Business: 5 Automations to Start With"
+title: "n8n Cost for Local Business: Plans and 5 Automations"
 date: "2026-05-18"
-lastModified: "2026-10-31"
-description: "n8n Cloud starts at €20 a month for 2,500 executions. Five automations a coffee shop, salon or groomer can build, plus the costs and limits to know."
+lastModified: "2026-11-10"
+description: "n8n Cloud starts at €20 a month for 2,500 executions. Five automations for a coffee shop, salon or groomer, plus costs, limits and a worked plan check."
 author: "Nataliia"
 category: "AI & Automation"
 tags: ["n8n", "local business", "automation", "productivity"]
@@ -11,50 +11,59 @@ image: "https://images.unsplash.com/photo-1569025753-b69dd7958f1f?w=800&q=80&aut
 readTime: "7 min read"
 ---
 
-n8n is a workflow automation tool that connects apps such as Gmail, Google Sheets and Google Calendar with a visual editor. A local business can start with n8n Cloud, which its pricing page lists at €20 a month billed annually for 2,500 workflow executions, or self-host the free Community edition. n8n publishes no figure for hours saved, so this guide gives no such promise.
-
-The five automations below use nodes documented by n8n. Examples marked as assumptions are illustrations, not results from any business.
+n8n is a workflow automation tool that connects apps such as Gmail, Google Sheets and Google Calendar through a visual editor. A local business can start with n8n Cloud, which the [n8n pricing page](https://n8n.io/pricing/) lists at €20 a month billed annually for 2,500 workflow executions, or self-host the free Community edition. n8n publishes no figure for hours saved, so this guide makes no such promise. The five automations below use nodes documented by n8n, and any example numbers are labelled as assumptions.
 
 <StatRow
-  values="€20|2.5K|€50|10K"
-  labels="Starter plan per month, billed annually|Starter executions per month|Pro plan per month, billed annually|Pro executions per month"
-  subs="n8n pricing page|n8n pricing page|n8n pricing page|n8n pricing page"
+  values="€20|2,500|31.35%|0.15%"
+  labels="n8n Starter per month, billed annually|n8n Starter executions per month|Avg email open rate, Business + Finance|Avg unsubscribe rate, Business + Finance"
+  subs="n8n pricing page|n8n pricing page|Mailchimp benchmarks, Dec 2023 data|Mailchimp benchmarks, Dec 2023 data"
   trends="neutral|neutral|neutral|neutral"
 />
 
 ## What Does n8n Cost for a Small Business?
 
-The n8n pricing page lists Starter at €20 a month billed annually with 2,500 executions, Pro at €50 with 10,000, and Business at €667 with 40,000 on self-hosted only. Enterprise is custom. A monthly billing toggle exists, but the monthly prices did not appear when we read the page.
+The [n8n pricing page](https://n8n.io/pricing/) lists Starter at €20 a month billed annually with 2,500 executions and Pro at €50 with 10,000. Business is listed at €667 with 40,000 executions, on self-hosted only. Enterprise pricing is custom. A monthly billing toggle exists, but the monthly prices did not appear when the page was read, so the annual figures are the ones to budget with.
 
-An execution is a single run of your entire workflow, however many steps it has. A workflow that runs once a day uses about 30 executions a month. A self-hosted Community edition is available on GitHub with no listed price.
+An execution is a single run of your entire workflow, however many steps it has. A workflow that runs once a day uses about 30 executions a month. The Community edition is available on GitHub with no listed price.
 
 ## Is n8n Free to Self-Host?
 
-The software is free to run, but you carry the server, updates and backups. n8n's hosting docs describe Docker Compose for production and a one-line setup script, and say npm installation is deprecated from n8n 3.0. Without a license key, a self-hosted instance runs as the free Community edition.
+The software is free to run, but you carry the server, updates and backups. The [n8n hosting docs](https://docs.n8n.io/hosting/) describe Docker Compose for production and a one-line setup script, and say npm installation is deprecated from n8n 3.0. Without a license key, a self-hosted instance runs as the free Community edition.
 
-The Sustainable Use License allows use for your own internal business purposes or non-commercial use. Sharing it is allowed only free of charge and non-commercially. If you plan to resell n8n as a service, read the license text on GitHub first.
+The [Sustainable Use License](https://github.com/n8n-io/n8n/blob/master/LICENSE.md) allows use for your own internal business purposes or non-commercial use. Sharing it is allowed only free of charge and non-commercially. If you plan to resell n8n as a service, read the license text first.
+
+The table below compares the two routes for a single shop. The server fee is an assumption, not a quoted price.
+
+| Option | Monthly cost | What you maintain |
+| --- | --- | --- |
+| n8n Cloud Starter | €20 billed annually (listed) | Workflows only |
+| Self-hosted Community | Server fee of about €5 (assumption) | Server, updates, backups |
+
+For a business that cannot run a server, the listed Cloud price is usually the simpler budget line.
 
 ## Which Automations Are Worth Building First?
 
-Pick tasks that are repetitive, rule-based and low risk. All five use n8n nodes whose operations are documented:
+Pick tasks that are repetitive, rule-based and low risk. Each of these five uses n8n nodes whose operations are documented:
 
-- **Daily booking digest:** the Schedule Trigger runs at a fixed time, reads rows from Google Sheets and emails the day's list through Gmail.
-- **Lead capture:** a Webhook node receives a form submission and appends a row in Google Sheets.
-- **Appointment check:** Google Calendar's Get Many events and Availability operations read your calendar.
-- **Email draft for enquiries:** Gmail can create a draft for you to review before sending.
-- **Review request list:** a sheet of recent customers feeds a reminder for staff to ask for reviews.
+- Daily booking digest: the Schedule Trigger runs at a fixed time, reads rows from Google Sheets and emails the day's list through Gmail.
+- Lead capture: a Webhook node receives a form submission and appends a row in Google Sheets.
+- Appointment check: Google Calendar's Get Many events and Availability operations read your calendar. For a broader comparison of booking and scheduling software, see [Jobber vs ServiceTitan for small business](/blog/jobber-vs-servicetitan-small-business-local-business).
+- Email draft for enquiries: Gmail can create a draft for you to review before sending.
+- Review request list: a sheet of recent customers feeds a reminder for staff to ask for reviews.
 
-Our [AI agents overview](/blog/ai-agents-for-local-business-what-they-are-and-how-they-work) explains where agents fit beyond fixed rules.
+Email is the channel most of these workflows touch. Mailchimp's benchmark data puts the all-user average open rate at 35.63% and the Business + Finance average at 31.35%, with an unsubscribe rate of 0.15% for that group. The data was last updated in December 2023, and Mailchimp notes that Apple's Mail Privacy Protection can affect open rates, so treat them as a rough baseline. Each automation works best when a person reviews the output before it goes out. For a wider look at AI models in these workflows, see [Gemini Flash API for local business automation](/blog/gemini-flash-api-local-business-automation).
 
 ## What Do the Key Nodes Actually Do?
 
-The Schedule Trigger runs at intervals from seconds to months or on a cron expression. The workflow must be published for it to run, and it uses the workflow or instance timezone: self-hosted defaults to America/New York and Cloud to GMT. Set the timezone first.
+The Schedule Trigger runs at intervals from seconds to months, or on a cron expression. The workflow must be published for it to run. It uses the workflow or instance timezone: self-hosted defaults to America/New York and Cloud to GMT. Set the timezone before you trust any time-based output.
 
-The Webhook node creates a URL that receives data and supports GET, POST and other methods, with a 16 MB payload limit. It has separate test and production URLs. Gmail supports sending, replying and creating drafts, and Google Sheets supports append, update and get rows.
+The Webhook node creates a URL that receives data and supports GET, POST and other methods, with a 16 MB payload limit. It has separate test and production URLs, and the production URL is the one a form should call. Gmail supports sending, replying and creating drafts. Google Sheets supports append, update and get rows.
 
-## The Math: Will Your Plan Cover Your Workflows?
+If you want an AI assistant to read or trigger these tools directly, the setup is covered in [best MCP servers for local business setup](/blog/best-mcp-servers-local-business-setup-guide).
 
-All inputs are **assumptions**. A salon builds a daily digest, a form capture workflow and a review-request list.
+## Will Your Plan Cover Your Workflows?
+
+All inputs below are assumptions. The example salon builds a daily digest, a form capture workflow and a daily review-request check.
 
 | Workflow | Assumed runs per month | Executions |
 | --- | --- | --- |
@@ -63,7 +72,7 @@ All inputs are **assumptions**. A salon builds a daily digest, a form capture wo
 | Review-request check, daily | 30 days | 30 |
 | Total | | 140 |
 
-140 executions is far under Starter's 2,500. The limit matters if a workflow runs per customer message, because each run counts. If you send an automated reply to 100 messages a day, that is about 3,000 executions a month and exceeds Starter. Estimate runs before choosing a plan.
+140 executions is far under Starter's 2,500. The limit matters when a workflow runs per customer message, because each run counts. Suppose the salon also auto-replies to 100 messages a day (assumption). That is about 3,000 executions a month, which exceeds Starter. Count the runs before you pick a plan, not after.
 
 <Callout type="tip" title="Do This Today">
 Write down one task you repeat every day, how many times it happens, and whether a mistake would harm a customer. Automate only the tasks where an error is cheap.
@@ -73,23 +82,25 @@ Write down one task you repeat every day, how many times it happens, and whether
 
 ### Is n8n free?
 
-A self-hosted Community edition is available on GitHub. n8n Cloud is paid, starting at €20 a month billed annually for 2,500 executions.
+A self-hosted Community edition is available on GitHub. n8n Cloud is paid, starting at €20 a month billed annually for 2,500 executions, according to the [pricing page](https://n8n.io/pricing/).
 
 ### Do I need to code to use n8n?
 
-The editor is visual. n8n's hosting docs do not state a skill level, but self-hosting involves Docker or similar, so many small businesses choose Cloud.
+The editor is visual. The hosting docs do not state a required skill level, but self-hosting involves Docker or a similar setup, so many small businesses choose Cloud.
 
 ### What counts as an execution?
 
-n8n says an execution is a single run of your entire workflow. Step count and data volume do not change that.
+n8n defines an execution as a single run of your entire workflow. Step count and data volume do not change that.
 
 ### Can n8n send emails and read my calendar?
 
-Yes. Documented operations include Gmail send, reply and draft, and Google Calendar get, create and availability.
+Yes. Documented operations include Gmail send, reply and draft, and Google Calendar get, create and availability checks.
 
 ### How many hours will n8n save me?
 
-n8n publishes no figure. Time them yourself: count the minutes the task takes now, then compare after a month.
+n8n publishes no figure. Time the task yourself: count the minutes it takes now, then compare after a month of running the workflow.
+
+Ready to map which tasks in your business are worth automating? [Book a free audit](/free-audit).
 
 ## Sources
 
@@ -101,9 +112,4 @@ n8n publishes no figure. Time them yourself: count the minutes the task takes no
 - [n8n Docs: Gmail node](https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.gmail/)
 - [n8n Docs: Google Sheets node](https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.googlesheets/)
 - [n8n Docs: Google Calendar node](https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.googlecalendar/)
-
-Related: AI agents vs chatbots, [AI automation for hair salons](/blog/ai-automation-for-hair-salons) and [Claude with Google Calendar booking](/blog/claude-mcp-google-calendar-booking-automation). See our [AI agents service](/services/ai-agents) or [book a free audit](/free-audit).
-
-## Related guides
-
-- [Instagram DM Automation for Local Business: Rules](/blog/instagram-dm-automation-local-business)
+- [Mailchimp: Email Marketing Benchmarks and Industry Statistics](https://mailchimp.com/resources/email-marketing-benchmarks/)
