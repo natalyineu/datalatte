@@ -41,6 +41,7 @@ HARD RULES
 - UNIQUE ELEMENT (required): add one original, useful block that is not in the sources: a comparison table, a step checklist, or a worked budget/ROI calculation with assumption-labelled inputs. It must be concrete for the niche.
 - Internal links go inline in the body text (3-6, from ALLOWED LINKS), not only in one closing line.
 - description MUST be 120-155 characters; count them.
+- Never mention the research process in the article: no "source pack", "supplied sources", "returned a 404/error when checked", "pages could not be opened". If a fact is missing, just omit it or say to check the platform's live help page. Do not list sources that failed in ## Sources.
 - Valid MDX: no bare { } or < in prose. 1200-2000 words.`;
 function links(slug, fm) {
   const rows = fs.readFileSync(path.join(ROOT, "data/triage/triage.csv"), "utf8").split("\n").slice(1).map((l) => l.match(/^([^,]+),(KEEP-OK)/)).filter(Boolean).map((m) => m[1]);
