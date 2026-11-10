@@ -24,6 +24,7 @@ export default function BlogCard({ title, excerpt, slug, category, date, rawDate
   const { Icon, gradient } = GROUP_CONFIG[group];
   const unoptimized = image?.startsWith("http") || image?.endsWith(".svg");
   const showImage = image && !imgError;
+  const isCover = !!image?.endsWith(".svg"); // generated cover already shows category and title, so no chip on top of it
 
   if (featured) {
     return (
@@ -43,10 +44,12 @@ export default function BlogCard({ title, excerpt, slug, category, date, rawDate
           ) : (
             <div className={`bg-gradient-to-br ${gradient} w-full h-full`} />
           )}
+          {!isCover && (
           <div className={`absolute top-3 left-3 bg-gradient-to-br ${gradient} flex items-center gap-1.5 px-3 py-1.5 rounded-full`}>
             <Icon size={13} strokeWidth={2} className="text-white" />
             <span className="text-white text-xs font-semibold tracking-wide">{group}</span>
           </div>
+          )}
         </div>
         {/* Content */}
         <div className="p-7 flex flex-col justify-center">
@@ -85,10 +88,12 @@ export default function BlogCard({ title, excerpt, slug, category, date, rawDate
         ) : (
           <div className={`bg-gradient-to-br ${gradient} w-full h-full`} />
         )}
+        {!isCover && (
         <div className={`absolute top-3 left-3 bg-gradient-to-br ${gradient} flex items-center gap-1.5 px-2.5 py-1 rounded-full`}>
           <Icon size={11} strokeWidth={2} className="text-white" />
           <span className="text-white text-xs font-semibold tracking-wide">{group}</span>
         </div>
+        )}
       </div>
 
       {/* Body */}

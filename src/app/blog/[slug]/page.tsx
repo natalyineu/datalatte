@@ -609,7 +609,36 @@ export default async function BlogPostPage({
         </div>
       </nav>
 
+      {hasCover && (
+        <>
+          <div className="bg-coffee-900 px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+            <div className="max-w-4xl mx-auto">
+              <Link
+                href={`/blog/category/${frontmatter.category.toLowerCase().replace(/\s*&\s*/g, "-").replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}`}
+                className="inline-block bg-coffee-700 text-white text-xs font-semibold px-3 py-1 rounded-full mb-3 hover:bg-coffee-600 transition-colors"
+              >
+                {frontmatter.category}
+              </Link>
+              <h1 className="text-2xl md:text-4xl font-bold text-white leading-tight">{frontmatter.title}</h1>
+            </div>
+          </div>
+          <figure className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+            <Image
+              src={`/images/blog/${slug}.svg`}
+              alt={`Infographic: ${frontmatter.title}`}
+              width={1200}
+              height={630}
+              priority
+              unoptimized
+              className="w-full h-auto rounded-xl shadow-md"
+              sizes="(max-width: 896px) 100vw, 896px"
+            />
+          </figure>
+        </>
+      )}
+
       {/* Hero image */}
+      {!hasCover && (
       <div className="relative h-64 md:h-96 w-full">
         <Image
           src={hasCover ? `/images/blog/${slug}.svg` : (imageCache[slug] ?? frontmatter.image)}
@@ -633,6 +662,7 @@ export default async function BlogPostPage({
           </h1>
         </div>
       </div>
+      )}
 
       {/* Wide wrapper for content + sidebar */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
