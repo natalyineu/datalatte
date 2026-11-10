@@ -1,0 +1,106 @@
+---
+title: "Ollama for Small Business: Run AI Locally for Free"
+date: "2026-06-13"
+lastModified: "2026-11-10"
+description: "Ollama is free and runs AI on your own computer. Paid chatbots cost about $20 a month. Hardware needs, setup and privacy limits for small shops."
+author: "Nataliia"
+category: "AI & Automation"
+tags: ["Ollama", "local AI", "privacy", "free AI tools"]
+slug: "ollama-local-llm-small-business-free-setup"
+image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80&auto=format&fit=crop"
+readTime: "8 min read"
+---
+
+Ollama is a free program that runs open-weight AI language models on your own computer, so prompts do not have to leave the machine. A small business can use it for drafts such as review replies, captions and rewritten FAQ text. The trade-off is hardware and quality. Small models need a capable computer, and the largest models are out of reach for most shops. This guide covers costs, hardware, setup, privacy and a worked time check. The main reference is a secondary news report on local AI tools, so confirm details against the official documentation before you install anything.
+
+<StatRow
+  values="$20|20GB|2.4 trillion|24 of 31"
+  labels="Typical monthly paid chatbot subscription|Largest reported Gemma 4 download|Total parameters in Alibaba's Qwen 3.8-Max|Tests won by closed models in Alibaba's comparison"
+  subs="AgentLocker report, secondary|AgentLocker report, secondary|AgentLocker report, secondary|AgentLocker report, secondary"
+  trends="neutral|neutral|neutral|down"
+/>
+
+## What Does Ollama Cost a Small Business?
+
+The software itself costs nothing. The [AgentLocker report](https://agentlocker.ai/news/how-to-run-ai-models-locally-with-ollama-and-lm-studio) describes Ollama and LM Studio as two free programs, while paid chatbot subscriptions cost about $20 a month. Your real costs are the computer, its electricity and the time spent setting it up.
+
+Models carry their own licences, and these differ. The report says DeepSeek's R1 series uses the MIT License, while Google's Gemma 4 and OpenAI's gpt-oss use Apache 2.0. Both licences allow changes and commercial use. Check the licence of each model you plan to use for client work, because a free program does not make every model free to use commercially.
+
+## What Computer Does a Small Business Need?
+
+A model must fit in a graphics card's video memory (VRAM) or, on a Mac, in unified memory. The report says small models need about 8GB of VRAM. Heavier users may want a card with 24GB or more, or a machine with unified memory such as the Mac Mini.
+
+Quantization shrinks a model by storing each weight with fewer bits. This reduces memory use but costs some accuracy. LM Studio recommends 16GB or more of RAM on Apple Silicon Macs running macOS 14 or newer. On Windows, it recommends 16GB of RAM with 4GB of dedicated VRAM. Intel-based Macs are not supported.
+
+Download sizes matter as well. The report says Gemma 4 downloads run from about 4.6GB to 20GB, and OpenAI says gpt-oss-20b needs 16GB of memory. Check free disk space before pulling several models, because each one stays on your drive until you delete it.
+
+## How Do You Get Started?
+
+Ollama is aimed at developers who prefer a command line. According to the report, typing "ollama pull gemma4:e2b" downloads a model, and "ollama run gemma4:e2b" opens a chat. If a command line feels unfamiliar, LM Studio offers a graphical interface where you download the app, search for a model, download it and start a chat.
+
+A practical first setup follows these steps:
+
+1. Confirm that your computer meets the memory figures above for the model size you want.
+2. Install Ollama or LM Studio from its official website.
+3. Pull one small model and run a short test chat.
+4. Paste three real customer reviews into the prompt and time how long each draft takes.
+5. Decide whether the drafts need light or heavy editing before going further.
+
+Models whose names end in ":cloud" run on Ollama's servers rather than your machine. The report says privacy-focused users should skip them. It also notes that Google's Multi-Token Prediction drafters for Gemma 4 can speed up responses by up to 3x, which helps if your machine feels slow.
+
+## Does Running Locally Keep Customer Data Private?
+
+A cloud chatbot sends every prompt to a company's servers. The report notes that a court ordered OpenAI to preserve ChatGPT logs, including deleted ones. A local model keeps conversations on your own computer. The report also says documents attached to a chat can be used offline, citing LM Studio's documentation.
+
+Local does not automatically mean compliant. Cloud models and any web interface you add to a local setup send data elsewhere. If you handle health, payment or other sensitive customer records, take advice on the rules that apply to you before entering that data into any AI tool. For a wider comparison of tools that handle customer-facing work, see [AI marketing tools for small business](/blog/ai-marketing-tools-for-small-business) and [AI tools for small business marketing in 2026](/blog/ai-tools-for-small-business-marketing-2026).
+
+## What Are the Limits of Local Models?
+
+Local models are smaller than the best cloud models. The report says open-weight models trail the best closed models by about four months on average, based on Epoch AI's analysis covering the period since January 2026. That gap changes over time, so test current models rather than relying on older results.
+
+Performance drops when a model spills out of VRAM into system RAM, and larger context windows need more memory. The biggest open models are far beyond home hardware. The report cites Alibaba's Qwen 3.8-Max, which has 2.4 trillion total parameters, and notes that closed models won 24 of 31 tests in Alibaba's own comparison.
+
+Small models can also state wrong facts with confidence. Put the facts in the prompt, and check every output before it reaches a customer. Tools that connect local models to your other systems need more care. [The best MCP servers for a local business setup](/blog/best-mcp-servers-local-business-setup-guide) explains how those connections work.
+
+## Worked Example: Is the Time Saving Worth the Setup?
+
+Every input below is an **assumption**. Replace them with your own counts.
+
+| Input or result | Assumption or calculation |
+| --- | --- |
+| Reviews to answer per month | 40 (assumption) |
+| Minutes to write a reply by hand | 3 (assumption) |
+| Minutes to read and edit an AI draft | 1.5 (assumption) |
+| Hand-written time | 40 × 3 = 120 minutes |
+| Draft-and-edit time | 40 × 1.5 = 60 minutes |
+| Time saved per month | 60 minutes |
+| Setup time, one-off | 2 hours (assumption) |
+| Break-even | 2 hours ÷ 1 hour saved a month = about 2 months |
+
+On these assumptions, setup pays back in about two months, but only if the drafts stay good and you already own a capable machine. If you would need to buy hardware, a paid tool with built-in review steps may be the cheaper route. [Marketing automation tools compared for small business](/blog/best-marketing-automation-tools-small-business-compared) can help you price that option.
+
+For work that runs through a managed workflow rather than your own machine, [how AI tools can replace a marketing assistant for a local business](/blog/ai-tools-replace-marketing-assistant-local-business) shows where the cost trade-offs change.
+
+Want help deciding whether local drafting fits your review and content workload? [Book a free audit](/free-audit) and the process can be reviewed against your current volume.
+
+## FAQ
+
+### Is Ollama really free to use?
+
+The programs are free, according to the report. Models have their own licences, and you pay for your hardware and electricity. Check each model's licence before commercial use.
+
+### Does Ollama send my prompts to the internet?
+
+Models run on your own computer keep prompts local. Models ending in ":cloud" run on Ollama's servers, so they are not local.
+
+### How much memory do I need?
+
+The report says small models need about 8GB of VRAM, and LM Studio recommends 16GB of RAM on Apple Silicon Macs. Start with a small model and test it on your own machine.
+
+### Can I use a local model for customer-facing replies?
+
+You can draft replies with one, but a person should read and edit each draft before it is sent. Small models can state wrong facts confidently, so give them the facts in the prompt and check the output.
+
+## Sources
+
+- [How to Run AI Models Locally With Ollama and LM Studio, AgentLocker (secondary)](https://agentlocker.ai/news/how-to-run-ai-models-locally-with-ollama-and-lm-studio)

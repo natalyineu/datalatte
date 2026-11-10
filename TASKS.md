@@ -9,6 +9,8 @@
 
 - DEPLOYED 2026-11-10 (`bba4b48`) Stage 1 cleanup: 243 zero-impression indexable posts set `noindex` (`data/triage/stage1-noindexed.txt`, 301 them after GSC check ~2026-11-24), 483 zero-impression noindex posts removed with 301 (`data/triage/stage1-removed.csv`). Next: Stage 2 rewrite groups A+B (341, need Apify sources), then C (200).
 
+- 2026-11-10 DEPLOYED also: SVG covers + image sitemap (`7a22de6`). Wave 4 (166 rewrites, `data/triage/wave4/`, applied to `content/blog` on branch, build OK, 13 likely duplicates kept `noindex`) waiting for Nataliia's deploy word. NOTE: never rewrite slugs that are redirect sources in `next.config.ts` (18 wasted); keep `noindex` on redirect-source files.
+
 ## Waiting on others
 - Spotify $150 (PayPal …CZVT8EVJ6TSQDK24), Biglinko $50 (…FASQSTWT4WX527JW), Vibe $600 (…MVVN4PWCFS7XXG4Z): mark paid in `partner_deals` when received.
 - GSC: re-check rewritten/reopened articles ~2 weeks after the next deploy.
