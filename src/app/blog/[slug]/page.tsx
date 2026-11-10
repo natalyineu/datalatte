@@ -516,6 +516,7 @@ export default async function BlogPostPage({
   if (!post) notFound();
 
   const { frontmatter, content } = post;
+  const hasCover = fs.existsSync(path.join(process.cwd(), "public/images/blog", `${slug}.svg`));
   const relatedPosts = getRelatedPosts(slug, frontmatter.category, 4, frontmatter.tags ?? []);
   const { prev: prevPost, next: nextPost } = getAdjacentPosts(slug);
 
@@ -610,12 +611,12 @@ export default async function BlogPostPage({
       {/* Hero image */}
       <div className="relative h-64 md:h-96 w-full">
         <Image
-          src={imageCache[slug] ?? frontmatter.image}
-          alt={frontmatter.title}
+          src={hasCover ? `/images/blog/${slug}.svg` : (imageCache[slug] ?? frontmatter.image)}
+          alt={hasCover ? `Infographic: ${frontmatter.title}` : frontmatter.title}
           fill
           className="object-cover"
           priority
-          unoptimized={(imageCache[slug] ?? frontmatter.image)?.startsWith("http")}
+          unoptimized={hasCover || (imageCache[slug] ?? frontmatter.image)?.startsWith("http")}
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />

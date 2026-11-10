@@ -46,10 +46,7 @@ export function localBusinessSchema() {
     knowsLanguage: ["en-US", "en-GB"],
     sameAs: [
       "https://www.linkedin.com/company/datalattepro",
-      "https://www.instagram.com/datalattepro",
-      "https://www.facebook.com/profile.php?id=61596111221507",
-      "https://www.threads.com/@datalattepro",
-      "https://www.pinterest.com/datalattepro/",
+      "https://www.instagram.com/datalatte.pro",
       "https://x.com/datalattepro",
       "https://t.me/datalattepro",
       "https://medium.com/@datalatte.pro",
@@ -106,7 +103,7 @@ export function personSchema() {
     sameAs: [
       "https://www.linkedin.com/in/nataliia-r",
       "https://www.linkedin.com/company/datalattepro",
-      "https://www.instagram.com/datalattepro",
+      "https://www.instagram.com/datalatte.pro",
       "https://medium.com/@datalatte.pro",
       "https://clutch.co/profile/datalatte",
       "https://www.crunchbase.com/organization/datalatte-pro",
