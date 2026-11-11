@@ -1,0 +1,88 @@
+{
+ "url": "https://docs.lovable.dev/features/insights",
+ "title": "Insights - Lovable Documentation",
+ "hash": "1c44e6fedf928a636b39744fdc89ada8f64d4297",
+ "fetchedAt": "2026-11-06",
+ "facts": [
+  {
+   "fact": "Insights is available only on Business and Enterprise plans.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Business and Enterprise plans",
+   "topic": "rules"
+  },
+  {
+   "fact": "Access to Insights is limited to workspace admins and owners.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Access:** Workspace admins and owners",
+   "topic": "rules"
+  },
+  {
+   "fact": "According to Lovable's documentation, Insights does not consume credits, whether a user views it or exports its data.",
+   "value": "0",
+   "unit": "credits",
+   "as_of": "",
+   "quote": "Insights does not consume credits, whether you view it or export its data.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Lovable's Insights metric cards cover the last 30 days and show the percentage change from the 30 days before.",
+   "value": "30",
+   "unit": "days",
+   "as_of": "",
+   "quote": "Each number covers the last 30 days. Next to it, Lovable shows the percentage change from the 30 days before",
+   "topic": "definition"
+  },
+  {
+   "fact": "Per Lovable's documentation, an App visit is one person opening a published app, and a return visit, reload, or new tab each counts as another visit, so visits are not unique people.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "A **visit** is one person opening a published app. The same person returning later counts as another visit, and so does a reload or a new tab, so visits do not count unique people.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Per Lovable's documentation, only published apps can have visits.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Only published apps can have visits.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Per Lovable's documentation, Active builders counts only workspace members who built something in the last 30 days, while the builders list shows every member.",
+   "value": "30",
+   "unit": "days",
+   "as_of": "",
+   "quote": "**Active builders** counts only the members who built something in the last 30 days.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Per Lovable's documentation, Active apps (30d) counts apps with any activity in the last 30 days, whether published or not.",
+   "value": "30",
+   "unit": "days",
+   "as_of": "",
+   "quote": "Apps with any activity in the last 30 days, published or not",
+   "topic": "definition"
+  },
+  {
+   "fact": "Per Lovable's documentation, Insights counts app and chat connections, including custom connectors, but does not count chat connectors (MCP servers) or app user connections.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "It does not count [chat connectors](https://docs.lovable.dev/integrations/custom-mcp) (MCP servers) or [app user connections]",
+   "topic": "definition"
+  },
+  {
+   "fact": "Per Lovable's documentation, the example given is that one person visiting on two days counts as two visits in App visits (30d).",
+   "value": "2",
+   "unit": "visits",
+   "as_of": "",
+   "quote": "One person visiting on two days counts as two visits. This is not a count of unique people.",
+   "topic": "definition"
+  }
+ ]
+}

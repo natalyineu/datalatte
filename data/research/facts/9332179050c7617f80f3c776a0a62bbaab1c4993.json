@@ -1,0 +1,64 @@
+{
+ "url": "https://developers.google.com/google-ads/api/docs/campaigns/local-service-campaigns",
+ "title": "Local Services campaigns  |  Google Ads API  |  Google for Developers",
+ "hash": "c59e8ae52f2fb4d66031a409f753120037187647",
+ "fetchedAt": "2026-11-09",
+ "facts": [
+  {
+   "fact": "Starting in API version v24, existing Local Services Performance Max campaigns created in the UI by allowlisted accounts can be retrieved and updated through the Google Ads API.",
+   "value": "v24",
+   "unit": "API version",
+   "as_of": "v24",
+   "quote": "Starting in **`v24`**, you can retrieve and update existing Local Services Performance Max campaigns",
+   "topic": "rules"
+  },
+  {
+   "fact": "Starting in API version v26, new Local Services Performance Max campaigns can be created through the Google Ads API.",
+   "value": "v26",
+   "unit": "API version",
+   "as_of": "v26",
+   "quote": "Starting in **`v26`**, you can also [create new Local Services Performance Max campaigns]",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Google Ads API does not support creating or removing Local Services campaigns, or operations on their ad groups, ads, or criteria.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Creating and removing Local Services campaigns, as well as operations on sub-entities like ad groups, ads, or criteria within these campaigns, are not supported by the Google Ads API.",
+   "topic": "rules"
+  },
+  {
+   "fact": "For Local Services campaigns, the API allows updating the campaign's status and the associated campaign budget's amount_micros field.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "and the associated campaign budget's [`amount_micros`]",
+   "topic": "rules"
+  },
+  {
+   "fact": "ManualCpa and MaximizeConversions are the bidding strategies the API lets you set as the standard bidding strategy of Local Services campaigns.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "You can set the following bidding strategies as the standard bidding strategy of Local Services campaigns:",
+   "topic": "rules"
+  },
+  {
+   "fact": "Local Services campaigns are retrieved by querying Campaign resources where advertising_channel_type is 'LOCAL_SERVICES'.",
+   "value": "LOCAL_SERVICES",
+   "unit": "enum value",
+   "as_of": "",
+   "quote": "where `advertising_channel_type = 'LOCAL_SERVICES'`",
+   "topic": "definition"
+  },
+  {
+   "fact": "Lead feedback and ratings for Local Services leads can be submitted using the ProvideLeadFeedback() method.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "You can submit feedback and rating for leads using the `ProvideLeadFeedback()` method",
+   "topic": "other"
+  }
+ ]
+}

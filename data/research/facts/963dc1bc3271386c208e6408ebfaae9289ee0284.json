@@ -1,0 +1,112 @@
+{
+ "url": "https://www.remio.ai/post/xai-grok-build-cli-uploads-entire-repos-and-git-history",
+ "title": "xAI Grok Build CLI Uploads Entire Repos and Git History",
+ "hash": "7b3b25fc5c32f65f78fe6d391773c910015a4476",
+ "fetchedAt": "2026-11-06",
+ "facts": [
+  {
+   "fact": "In the vendor's own test, a 12 GB repository moved 5.10 GiB through storage endpoints.",
+   "value": "5.10",
+   "unit": "GiB",
+   "as_of": "",
+   "quote": "One test with a 12 GB repository moved 5.10 GiB through storage endpoints.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In the same 12 GB test, conversation channels carried only 192 KB.",
+   "value": "192",
+   "unit": "KB",
+   "as_of": "",
+   "quote": "Conversation channels carried only 192 KB.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page reports the storage-path volume as roughly 27,800 times the conversation-path volume in the 12 GB test.",
+   "value": "27800",
+   "unit": "times",
+   "as_of": "",
+   "quote": "The ratio reached roughly 27,800 times more volume on the storage path.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The post says session data reaches both xAI endpoints and a Google Cloud Storage bucket named grok-code-session-traces.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Session data reaches both xAI endpoints and a Google Cloud Storage bucket named grok-code-session-traces.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The post says the trace upload flag persists across restarts and that no UI switch currently disables the flow.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "The flag persists across restarts. No UI switch currently disables the flow.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The post says the separation between uploads and agent read operations appears hard-coded in version 0.2.93.",
+   "value": "0.2.93",
+   "unit": "version",
+   "as_of": "",
+   "quote": "This separation appears hard-coded in version 0.2.93.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The post says both the /v1/responses and /v1/storage routes returned HTTP 200 responses confirming acceptance.",
+   "value": "200",
+   "unit": "HTTP status code",
+   "as_of": "",
+   "quote": "Both routes return HTTP 200 responses confirming acceptance.",
+   "topic": "other"
+  },
+  {
+   "fact": "The post states that no public documentation lists the storage bucket or its retention policy.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "No public documentation lists the storage bucket or its retention policy.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The post states its analysis did not confirm training use of the data, but verified transmission, receipt, and storage.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "The analysis did not confirm training use of the data but verified transmission, receipt, and storage.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The post says the network traffic analysis revealed three data streams.",
+   "value": "3",
+   "unit": "count",
+   "as_of": "",
+   "quote": "Analysis of network traffic revealed three data streams.",
+   "topic": "other"
+  },
+  {
+   "fact": "The post is dated July 13 and was updated July 20; the year is not stated.",
+   "value": "",
+   "unit": "",
+   "as_of": "Jul 13 (updated Jul 20)",
+   "quote": "Updated: Jul 20",
+   "topic": "other"
+  },
+  {
+   "fact": "remio, the page's publisher, states it currently supports Windows 10+ (x64) and Macs with Apple silicon.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "remio currently supports Windows 10+ (x64) and Macs with Apple silicon.",
+   "topic": "other"
+  },
+  {
+   "fact": "remio advertises a Black Friday sale of 30% off its annual plans.",
+   "value": "30",
+   "unit": "%",
+   "as_of": "Black Friday (year not stated)",
+   "quote": "Black Friday Sale: 30% Off Annual Plans",
+   "topic": "pricing"
+  }
+ ]
+}

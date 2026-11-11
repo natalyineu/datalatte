@@ -1,0 +1,96 @@
+{
+ "url": "https://continuumcode.ai/guides/codex-cli-update/",
+ "title": "Codex CLI update: codex update, pin, and roll back",
+ "hash": "fd152ac5c30fbea0e838755696f055d97b0c80f8",
+ "fetchedAt": "2026-11-06",
+ "facts": [
+  {
+   "fact": "As of August 2026, the page says Codex stable releases land every few days and pre-releases most days.",
+   "value": "",
+   "unit": "",
+   "as_of": "August 2026",
+   "quote": "As of August 2026, stable releases land every few days and pre-releases most days.",
+   "topic": "other"
+  },
+  {
+   "fact": "The page states that Codex release 0.146.1 was published on 5 August 2026.",
+   "value": "0.146.1",
+   "unit": "",
+   "as_of": "2026-08-05",
+   "quote": "0.146.1 published on 5 August 2026, 0.147.0 on 7 August 2026, with alpha builds in between.",
+   "topic": "other"
+  },
+  {
+   "fact": "The page states that Codex release 0.147.0 was published on 7 August 2026.",
+   "value": "0.147.0",
+   "unit": "",
+   "as_of": "2026-08-07",
+   "quote": "0.146.1 published on 5 August 2026, 0.147.0 on 7 August 2026, with alpha builds in between.",
+   "topic": "other"
+  },
+  {
+   "fact": "The page says the npm route should be updated with `npm install -g @openai/codex` rather than `npm update`, because a plain install pulls the current release.",
+   "value": "",
+   "unit": "",
+   "as_of": "August 2026",
+   "quote": "Not `npm update`; a plain install pulls the current release",
+   "topic": "other"
+  },
+  {
+   "fact": "The page says the Homebrew route updates with `brew upgrade --cask codex` because Codex is distributed as a cask, not a formula.",
+   "value": "",
+   "unit": "",
+   "as_of": "August 2026",
+   "quote": "Codex is a cask, not a formula",
+   "topic": "other"
+  },
+  {
+   "fact": "The page says the environment variable CODEX_NON_INTERACTIVE=1 should be set only for scripted installs and updates, where prompts take their default answer.",
+   "value": "1",
+   "unit": "",
+   "as_of": "August 2026",
+   "quote": "Set `CODEX_NON_INTERACTIVE=1` for scripted installs and updates only. Prompts take their default answer",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page states that updating Codex does not delete ~/.codex/config.toml, ~/.codex/auth.json, or ~/.codex/sessions/, while the binary is replaced.",
+   "value": "",
+   "unit": "",
+   "as_of": "August 2026",
+   "quote": "Updating replaces a binary. It does not replace your configuration",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page says `brew uninstall --zap codex` removes ~/.codex, including config, credential, and every session transcript, while a plain `brew uninstall` leaves them alone.",
+   "value": "",
+   "unit": "",
+   "as_of": "August 2026",
+   "quote": "The cask zap removes `~/.codex`, which is your config, your credential and every session transcript. A plain `brew uninstall` leaves them alone.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page's recommended policy is to pin Codex to an exact version in CI and container images, and to track the current release on a laptop.",
+   "value": "",
+   "unit": "",
+   "as_of": "August 2026",
+   "quote": "Pin exactly in CI and images. Bump the pin as its own reviewable commit.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page says the GitHub Release carries a DotSlash file named codex that can pin one exact executable for all contributors on every platform.",
+   "value": "",
+   "unit": "",
+   "as_of": "August 2026",
+   "quote": "The GitHub Release also carries a DotSlash file named `codex`.",
+   "topic": "other"
+  },
+  {
+   "fact": "The page says the Codex guide was checked against OpenAI sources in August 2026.",
+   "value": "",
+   "unit": "",
+   "as_of": "August 2026",
+   "quote": "Checked against OpenAI sources in August 2026.",
+   "topic": "other"
+  }
+ ]
+}

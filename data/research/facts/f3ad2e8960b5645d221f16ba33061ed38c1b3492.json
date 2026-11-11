@@ -1,0 +1,96 @@
+{
+ "url": "https://www.layer3labs.io/guides/how-to-use-muse-code",
+ "title": "How to Use Muse Code: Install, Auth, First Task (2026)",
+ "hash": "992980c1657669dedac447af8e5da1b8975c56eb",
+ "fetchedAt": "2026-11-06",
+ "facts": [
+  {
+   "fact": "Meta's Muse Code is a CLI coding agent, and the page gives its release date as 2026-08-05.",
+   "value": "2026-08-05",
+   "unit": "date",
+   "as_of": "",
+   "quote": "Muse Code is Meta's CLI coding agent released 2026-08-05.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Meta's primary install path for Muse Code is a single curl command piped to bash from dev.meta.ai.",
+   "value": "curl -fsSL https://dev.meta.ai/install.sh | bash",
+   "unit": "command",
+   "as_of": "",
+   "quote": "Install with a single line: curl -fsSL https://dev.meta.ai/install.sh | bash.",
+   "topic": "other"
+  },
+  {
+   "fact": "After installing, the muse binary is verified by running muse --version.",
+   "value": "muse --version",
+   "unit": "command",
+   "as_of": "",
+   "quote": "Verify with muse --version.",
+   "topic": "other"
+  },
+  {
+   "fact": "The first run of muse triggers a browser authentication flow against a Meta developer account.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "First run of muse triggers a browser auth flow against your Meta developer account.",
+   "topic": "rules"
+  },
+  {
+   "fact": "As of the page, a documented headless authentication flow for CI or headless environments is not available at launch.",
+   "value": "not available",
+   "unit": "",
+   "as_of": "at launch",
+   "quote": "For CI or headless environments, a documented headless auth flow is not available at launch.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Muse Code credentials are cached locally after the first browser authentication, so later runs skip the browser step.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Once authenticated, credentials cache locally. Subsequent runs skip the browser step.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Muse Code records a full event log for every session, covering file edits, tool calls, and decisions.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Every session records a full event log — file edits, tool calls, and decisions.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The muse replay command walks through a recorded session's event log step by step.",
+   "value": "muse replay",
+   "unit": "command",
+   "as_of": "",
+   "quote": "Run muse replay to walk it step by step.",
+   "topic": "other"
+  },
+  {
+   "fact": "Full session traces from Muse Code can be exported for handoff to a teammate or for a compliance review.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Export the full trace when you need to share a session with a teammate or attach it to a compliance review.",
+   "topic": "other"
+  },
+  {
+   "fact": "The page states that a typical first Muse Code task, from start to a complete worker-reviewer-test round trip, usually takes a couple of minutes.",
+   "value": "a couple of minutes",
+   "unit": "minutes",
+   "as_of": "",
+   "quote": "The whole round trip usually takes a couple of minutes.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The guide was reviewed by Jonathan West and last updated on October 27, 2026.",
+   "value": "2026-10-27",
+   "unit": "date",
+   "as_of": "2026-10-27",
+   "quote": "Reviewed by [Jonathan West](https://www.layer3labs.io/about) · Updated Oct 27, 2026",
+   "topic": "other"
+  }
+ ]
+}

@@ -1,0 +1,168 @@
+{
+ "url": "https://www.subscriptionplaybook.com/pricing-teardowns/vercel/",
+ "title": "Vercel Pricing 2026: Plans, Costs and What Changed",
+ "hash": "67f1ff3977902df2248fc1cc8ab0a5cd95b4e4db",
+ "fetchedAt": "2026-11-06",
+ "facts": [
+  {
+   "fact": "Vercel's own pricing page lists the v0 Plus plan at $30 per user per month, shown struck through from $90, with $30 monthly credits and $2 daily login credits.",
+   "value": "30",
+   "unit": "USD per user per month",
+   "as_of": "27 October 2026",
+   "quote": "| **Plus** | $30 (shown struck from $90) | per user per month | $30 monthly credits + $2 daily login credits |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Vercel's v0 Business plan is listed at $100 per user per month, with $30 monthly credits, $2 daily credits, and team features.",
+   "value": "100",
+   "unit": "USD per user per month",
+   "as_of": "27 October 2026",
+   "quote": "| **Business** | $100 | per user per month | $30 monthly credits + $2 daily credits; team features |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Vercel's Pro platform plan is listed at $20 per deploying seat per month, including a $20 usage credit and free viewer seats.",
+   "value": "20",
+   "unit": "USD per deploying seat per month",
+   "as_of": "27 October 2026",
+   "quote": "$20 included usage credit; free viewer seats; Flat Rate CDN default for new teams",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Vercel's Flat Rate CDN tiers are listed at $20 per month for 10M requests/50 TB, $100 per month for 50M requests, and $300 per month for 150M requests.",
+   "value": "20, 100, 300",
+   "unit": "USD per month",
+   "as_of": "27 October 2026",
+   "quote": "$20 (10M requests/50 TB) / $100 (50M) / $300 (150M)",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Vercel's Active CPU usage is listed starting at $0.128 per hour.",
+   "value": "0.128",
+   "unit": "USD per hour",
+   "as_of": "27 October 2026",
+   "quote": "Active CPU from $0.128/hour",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Vercel lists function invocations at $0.60 per 1 million invocations.",
+   "value": "0.60",
+   "unit": "USD per 1M invocations",
+   "as_of": "27 October 2026",
+   "quote": "function invocations $0.60 per 1M",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Vercel lists AI Gateway usage at $3 per 1,000 token requests.",
+   "value": "3",
+   "unit": "USD per 1,000 token requests",
+   "as_of": "27 October 2026",
+   "quote": "AI Gateway $3 per 1,000 token requests",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Vercel lists triggers at $0.95 per 1,000.",
+   "value": "0.95",
+   "unit": "USD per 1,000",
+   "as_of": "27 October 2026",
+   "quote": "triggers $0.95 per 1,000",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Vercel lists on-demand CDN usage from $0.15 per GB and $2 per 1 million requests.",
+   "value": "0.15, 2",
+   "unit": "USD per GB; USD per 1M requests",
+   "as_of": "27 October 2026",
+   "quote": "On-demand CDN from $0.15/GB and $2 per 1M requests.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Vercel's v0 Mini model is listed at $0.20 per 1M input tokens and $1.20 per 1M output tokens.",
+   "value": "0.20 in / 1.20 out",
+   "unit": "USD per 1M tokens",
+   "as_of": "27 October 2026",
+   "quote": "v0 Mini $0.20 in / $1.20 out",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Vercel's v0 Pro model is listed at $2 per 1M input tokens and $10 per 1M output tokens.",
+   "value": "2 in / 10 out",
+   "unit": "USD per 1M tokens",
+   "as_of": "27 October 2026",
+   "quote": "v0 Pro $2 / $10",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Vercel's v0 Max model is listed at $5 per 1M input tokens and $25 per 1M output tokens.",
+   "value": "5 in / 25 out",
+   "unit": "USD per 1M tokens",
+   "as_of": "27 October 2026",
+   "quote": "v0 Max $5 / $25",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Vercel's v0 Max Fast model is listed at $10 per 1M input tokens and $50 per 1M output tokens.",
+   "value": "10 in / 50 out",
+   "unit": "USD per 1M tokens",
+   "as_of": "27 October 2026",
+   "quote": "v0 Max Fast $10 / $50",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Vercel's v0 free tier includes a one-time $5 credit for new users and 7 messages per day.",
+   "value": "5",
+   "unit": "USD one-time credits",
+   "as_of": "27 October 2026",
+   "quote": "Free: $5 one-time credits for new users, 7 messages/day.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Vercel's Hobby free tier (non-commercial use) includes 100 GB transfer, 1M edge requests, 4 hours of Active CPU, and 500 AI Gateway requests.",
+   "value": "100",
+   "unit": "GB transfer",
+   "as_of": "27 October 2026",
+   "quote": "Hobby: free (non-commercial), 100 GB transfer, 1M edge requests, 4 hours Active CPU, 500 AI Gateway requests.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Vercel's Flat Rate CDN became generally available on 8 September 2026 and is the default for new Pro teams.",
+   "value": "8 September 2026",
+   "unit": "date",
+   "as_of": "8 Sep 2026",
+   "quote": "8 Sep 2026: Flat Rate CDN generally available, default for new Pro teams, after customers asked for predictable bills.",
+   "topic": "other"
+  },
+  {
+   "fact": "In September 2025, Vercel restructured Pro to a $20 platform fee with one deploying seat and a $20 usage credit, with free viewer seats.",
+   "value": "20",
+   "unit": "USD platform fee",
+   "as_of": "Sep 2025",
+   "quote": "Sep 2025: Pro restructured to a $20 platform fee with one deploying seat and $20 usage credit; free viewer seats.",
+   "topic": "other"
+  },
+  {
+   "fact": "Vercel's v0 pricing lets additional credits be purchased and shared across a team.",
+   "value": "",
+   "unit": "",
+   "as_of": "27 October 2026",
+   "quote": "Additional credits can be purchased and shared across a team.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Per the page's summary of Vercel's pricing, the Pro plan's $20 usage credit applies across resources, and usage is pay-as-you-go and uncapped beyond it.",
+   "value": "20",
+   "unit": "USD monthly credit",
+   "as_of": "27 October 2026",
+   "quote": "$20 monthly credit applies across resources; pay as you go uncapped beyond it.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page states that Vercel's v0 Plus price was displayed at $30 against a struck-through $90 at the time of checking, and that Vercel moved to token-based credits by model in 2025.",
+   "value": "90",
+   "unit": "USD struck-through reference price",
+   "as_of": "2025",
+   "quote": "2025: moved to token-based credits by model. Plus displayed at $30 against a struck-through $90 at time of checking.",
+   "topic": "pricing"
+  }
+ ]
+}

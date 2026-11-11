@@ -1,0 +1,88 @@
+{
+ "url": "https://docs.replit.com/features/agent/general-agent",
+ "title": "General Agent - Replit",
+ "hash": "d40e793536b75896408fdfff511f6daaf29b4087",
+ "fetchedAt": "2026-11-06",
+ "facts": [
+  {
+   "fact": "General Agent is described by Replit as the most flexible way to work with Replit Agent, and users do not need to pre-select an artifact type before chatting.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "General Agent is the most flexible way to work with Replit Agent. You don’t need to pre-select an artifact type or commit to building something specific.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Users can access General Agent by selecting \"General\" before writing a prompt on the Replit home page.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Select “General” before writing a prompt on the Replit home page",
+   "topic": "other"
+  },
+  {
+   "fact": "Projects imported from GitHub automatically get General Agent, according to Replit's documentation.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Projects imported from GitHub automatically get General Agent",
+   "topic": "other"
+  },
+  {
+   "fact": "Replit's documentation lists BigQuery, Linear, Slack, Notion, Amplitude, Segment, and Hex as currently supported General Agent connectors, plus \"and more.\"",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Currently supported: BigQuery, Linear, Slack, Notion, Amplitude, Segment, Hex, and more.",
+   "topic": "other"
+  },
+  {
+   "fact": "According to Replit's documentation, connectors are optional and General Agent can be used for knowledge work, file generation, and app building without external connections.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Connectors are optional. You can use General Agent for knowledge work, file generation, and building apps without any external connections.",
+   "topic": "rules"
+  },
+  {
+   "fact": "According to Replit's documentation, each General Agent chat is contained within a single project, and projects cannot communicate with each other.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Each chat is contained within a single project. You can’t have Project A and Project B talk to each other.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Replit's documentation states that agent-based work requires connecting services through Connectors, because Agent does not have access to external tools by default.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "You need to connect your services first through Connectors. Once connected, Agent can read and write to them, but it doesn’t have access by default.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Replit's documentation warns that some technologies may not be fully supported in the Nix environment used by General Agent.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Some technologies may not be fully supported in the Nix environment",
+   "topic": "rules"
+  },
+  {
+   "fact": "According to Replit's documentation, General Agent sets up its own environment and runs commands based on the request, unlike standard Agent with pre-configured environments.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Unlike standard Agent with pre-configured environments, General Agent sets up its own environment and run commands based on your request.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Replit's documentation says users may need to ask General Agent to configure publishing when they are ready to deploy.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "You may need to ask it to configure publishing when you’re ready to deploy.",
+   "topic": "other"
+  }
+ ]
+}

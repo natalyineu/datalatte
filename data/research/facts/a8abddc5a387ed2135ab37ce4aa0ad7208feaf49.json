@@ -1,0 +1,80 @@
+{
+ "url": "https://www.robinchampsaur.com/writing/claude-code-101/",
+ "title": "Claude Code 101: The workflow that changed how I build features | Robin Champsaur",
+ "hash": "2e3742c687016f1d172e07db76991a2fa3ade43f",
+ "fetchedAt": "2026-11-06",
+ "facts": [
+  {
+   "fact": "The page says Plan Mode in Claude Code is toggled by pressing Shift + Tab twice.",
+   "value": "Shift + Tab twice",
+   "unit": "",
+   "as_of": "",
+   "quote": "Toggle it by pressing `Shift + Tab` twice.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The page says the author's guide was published on June 11, 2026.",
+   "value": "June 11, 2026",
+   "unit": "date",
+   "as_of": "2026-06-11",
+   "quote": "June 11, 2026",
+   "topic": "other"
+  },
+  {
+   "fact": "The page says subagents can be created at project level, stored in .claude/agents/, or at user level, stored in ~/.claude/agents/.",
+   "value": ".claude/agents/ (project); ~/.claude/agents/ (user)",
+   "unit": "",
+   "as_of": "",
+   "quote": "create new agents at project level (stored in `.claude/agents/`) or user level (stored in `~/.claude/agents/`).",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page says running /agents in Claude Code opens the subagent management interface.",
+   "value": "/agents",
+   "unit": "",
+   "as_of": "",
+   "quote": "Run `/agents` in Claude Code to open the management interface.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The page says each subagent is a Markdown file with YAML frontmatter.",
+   "value": "Markdown file with YAML frontmatter",
+   "unit": "",
+   "as_of": "",
+   "quote": "Each subagent is a Markdown file with YAML frontmatter:",
+   "topic": "definition"
+  },
+  {
+   "fact": "The page says each subagent operates in its own context window, which keeps the main conversation clean and focused.",
+   "value": "own context window",
+   "unit": "",
+   "as_of": "",
+   "quote": "Each subagent operates in its own context window, keeping your main conversation clean and focused.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The page's example subagent configuration sets the model to sonnet and lists the tools Read, Edit, Bash, Grep, and Glob.",
+   "value": "model: sonnet; tools: Read, Edit, Bash, Grep, Glob",
+   "unit": "",
+   "as_of": "",
+   "quote": "tools: Read, Edit, Bash, Grep, Glob\nmodel: sonnet",
+   "topic": "other"
+  },
+  {
+   "fact": "The page says a claude.md file should be set up in the project root as a persistent guide that Claude references on almost every prompt.",
+   "value": "project root",
+   "unit": "",
+   "as_of": "",
+   "quote": "First thing: set up a `claude.md` file in your project root.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page says that including the phrase \"Use proactively\" in a subagent's description field lets Claude invoke it automatically when relevant.",
+   "value": "\"Use proactively\"",
+   "unit": "",
+   "as_of": "",
+   "quote": "Include phrases like \"Use proactively\" if you want Claude to invoke it automatically when relevant.",
+   "topic": "rules"
+  }
+ ]
+}

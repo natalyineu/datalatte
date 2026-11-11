@@ -1,0 +1,144 @@
+{
+ "url": "https://cosyra.com/guides/grok-cli-vs-grok-build.html",
+ "title": "Grok CLI vs Grok Build: Two Agents, One `grok`",
+ "hash": "6926197af9bec042662b26d2d2f3672de5d4106f",
+ "fetchedAt": "2026-11-06",
+ "facts": [
+  {
+   "fact": "The community Grok CLI project (superagent-ai/grok-cli) was created on 2025-07-14, according to the page.",
+   "value": "2025-07-14",
+   "unit": "date",
+   "as_of": "2025-07-14",
+   "quote": "The community project was created on 2025-07-14. xAI created theirs on 2026-07-14, exactly one year later",
+   "topic": "definition"
+  },
+  {
+   "fact": "xAI's Grok Build (xai-org/grok-build) was created on 2026-07-14, according to the page.",
+   "value": "2026-07-14",
+   "unit": "date",
+   "as_of": "2026-07-14",
+   "quote": "xAI created theirs on 2026-07-14, exactly one year later",
+   "topic": "definition"
+  },
+  {
+   "fact": "On 2026-07-20, the Grok CLI repository had 3,314 GitHub stars, according to the page's own reading of the GitHub API.",
+   "value": "3314",
+   "unit": "stars",
+   "as_of": "2026-07-20",
+   "quote": "Stars (2026-07-20) | 3,314 | 20,734",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "On 2026-07-20, the Grok Build repository had 20,734 GitHub stars, according to the page's own reading of the GitHub API.",
+   "value": "20734",
+   "unit": "stars",
+   "as_of": "2026-07-20",
+   "quote": "Stars (2026-07-20) | 3,314 | 20,734",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The Grok CLI harness is licensed under MIT.",
+   "value": "MIT",
+   "unit": "",
+   "as_of": "2026-07-20",
+   "quote": "| Harness license | MIT | Apache-2.0 |",
+   "topic": "other"
+  },
+  {
+   "fact": "The Grok Build harness is licensed under Apache-2.0.",
+   "value": "Apache-2.0",
+   "unit": "",
+   "as_of": "2026-07-20",
+   "quote": "| Harness license | MIT | Apache-2.0 |",
+   "topic": "other"
+  },
+  {
+   "fact": "Grok CLI is published as the npm package grok-dev, while Grok Build has no npm package.",
+   "value": "grok-dev",
+   "unit": "",
+   "as_of": "2026-07-20",
+   "quote": "| npm package | `grok-dev` | None |",
+   "topic": "other"
+  },
+  {
+   "fact": "The Grok CLI linux-arm64 release asset (grok-linux-arm64) returned HTTP 404 and is not published, per the page's probe on 2026-07-20.",
+   "value": "404",
+   "unit": "HTTP status",
+   "as_of": "2026-07-20",
+   "quote": "| `grok-linux-arm64` | Grok CLI | **404, not published** |",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Grok Build linux-aarch64 release asset (grok-0.2.106-linux-aarch64) returned HTTP 200, per the page's probe on 2026-07-20.",
+   "value": "200",
+   "unit": "HTTP status",
+   "as_of": "2026-07-20",
+   "quote": "| `grok-0.2.106-linux-aarch64` | Grok Build | **200, first-class target** |",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Grok CLI linux-x64 release asset returned HTTP 200 on the page's 2026-07-20 probe.",
+   "value": "200",
+   "unit": "HTTP status",
+   "as_of": "2026-07-20",
+   "quote": "| `grok-linux-x64` | Grok CLI | 200 |",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Grok CLI darwin-arm64 release asset returned HTTP 200 on the page's 2026-07-20 probe.",
+   "value": "200",
+   "unit": "HTTP status",
+   "as_of": "2026-07-20",
+   "quote": "| `grok-darwin-arm64` | Grok CLI | 200 |",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Grok Build version observed by the page on 2026-07-20 was 0.2.106, with commit hash ab5ebf69ac.",
+   "value": "0.2.106",
+   "unit": "version",
+   "as_of": "2026-07-20",
+   "quote": "grok 0.2.106 (ab5ebf69ac)",
+   "topic": "other"
+  },
+  {
+   "fact": "The Grok CLI community project reports npm version 1.1.7 from grok --version.",
+   "value": "1.1.7",
+   "unit": "version",
+   "as_of": "2026-07-20",
+   "quote": "The community CLI reports its npm version, `1.1.7`.",
+   "topic": "other"
+  },
+  {
+   "fact": "The grok-dev npm package declares engines node >=18 with no CPU restriction.",
+   "value": ">=18",
+   "unit": "Node.js version",
+   "as_of": "2026-07-20",
+   "quote": "`grok-dev` declares `engines: node >=18` with no CPU restriction.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Grok CLI's installer accepts Darwin, Linux, and Windows and exits with status 1 on any other platform.",
+   "value": "1",
+   "unit": "exit code",
+   "as_of": "2026-07-20",
+   "quote": "Grok CLI's installer accepts Darwin, Linux, and Windows and exits 1 on anything else",
+   "topic": "rules"
+  },
+  {
+   "fact": "Both Grok CLI and Grok Build install a binary named grok into $HOME/.grok/bin, so they overwrite each other.",
+   "value": "$HOME/.grok/bin",
+   "unit": "",
+   "as_of": "2026-07-20",
+   "quote": "Both install a binary named `grok` into `$HOME/.grok/bin`, so they overwrite each other.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page states that all numbers were read first-hand on 2026-07-20 using gh api, the npm registry, and HTTP probes.",
+   "value": "2026-07-20",
+   "unit": "date",
+   "as_of": "2026-07-20",
+   "quote": "Every number below was read first-hand on **2026-07-20** with `gh api`, the npm registry, and HTTP probes",
+   "topic": "other"
+  }
+ ]
+}

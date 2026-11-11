@@ -1,0 +1,128 @@
+{
+ "url": "https://howtoai.com/how-to-use-claude-code/",
+ "title": "How to Use Claude Code: 2026 Beginner Guide + 18 Commands",
+ "hash": "ca336694e288b52fce63d7e283371d87cbf939fb",
+ "fetchedAt": "2026-11-06",
+ "facts": [
+  {
+   "fact": "Anthropic's pricing page lists the Pro plan at $20 a month, or $17 a month billed annually ($200 a year), with Claude Code included.",
+   "value": "20",
+   "unit": "USD per month",
+   "as_of": "October 8, 2026",
+   "quote": "$20 a month, or $17 a month billed annually ($200 a year)",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The Max plan starts at $100 a month and offers 5x or 20x the usage of Pro, with Claude Code included.",
+   "value": "100",
+   "unit": "USD per month",
+   "as_of": "October 8, 2026",
+   "quote": "From $100 a month, for 5x or 20x the usage of Pro",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The Team plan's standard seat costs $25 a month ($20 billed annually), and its premium seat costs $125 ($100 billed annually) with 5x the usage of a standard seat.",
+   "value": "25",
+   "unit": "USD per seat per month",
+   "as_of": "October 8, 2026",
+   "quote": "Standard seat $25 a month ($20 billed annually); premium seat $125 ($100 billed annually)",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The Enterprise plan is listed at $20 per seat a month billed annually, plus usage at API rates.",
+   "value": "20",
+   "unit": "USD per seat per month",
+   "as_of": "October 8, 2026",
+   "quote": "$20 per seat a month billed annually, plus usage at API rates",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Claude Code is not included in the Free Claude plan.",
+   "value": "",
+   "unit": "",
+   "as_of": "October 8, 2026",
+   "quote": "The Free plan does not include it",
+   "topic": "pricing"
+  },
+  {
+   "fact": "On older Enterprise plans, Claude Code is available only with the Chat + Claude Code or Premium seats.",
+   "value": "",
+   "unit": "",
+   "as_of": "October 8, 2026",
+   "quote": "On older Enterprise plans, Claude Code comes only with Chat + Claude Code or Premium seats.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "On Pro and Max, Claude and Claude Code share the same usage limits, consisting of a five-hour session limit and a weekly limit.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "On Pro and Max, Claude and Claude Code draw on the same usage limits: a five-hour session limit and a weekly limit.",
+   "topic": "rules"
+  },
+  {
+   "fact": "A Claude Console account lets users pay per use with prepaid API credits billed at API rates.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "A Claude Console account with prepaid API credits, billed at API rates",
+   "topic": "pricing"
+  },
+  {
+   "fact": "If an ANTHROPIC_API_KEY environment variable is set and the user approves it, a Claude Code session bills that key at API rates instead of using the subscription.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "the session bills that key at API rates instead of using your subscription",
+   "topic": "rules"
+  },
+  {
+   "fact": "Auto mode is the starting permission mode for terminal and VS Code sessions on Claude Code v2.1.283 or later.",
+   "value": "2.1.283",
+   "unit": "version",
+   "as_of": "",
+   "quote": "Auto mode for terminal and VS Code sessions on v2.1.283 or later.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Claude Code VS Code extension requires VS Code 1.94.0 or later.",
+   "value": "1.94.0",
+   "unit": "version",
+   "as_of": "",
+   "quote": "It needs VS Code 1.94.0 or later.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Claude desktop app's Code tab runs on macOS and Windows, with Linux support in beta.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "for macOS and Windows, with Linux in beta",
+   "topic": "definition"
+  },
+  {
+   "fact": "The guide states that the pricing figures were checked against the claude.com pricing page on October 8, 2026.",
+   "value": "",
+   "unit": "",
+   "as_of": "October 8, 2026",
+   "quote": "Prices from claude.com/pricing on October 8, 2026.",
+   "topic": "other"
+  },
+  {
+   "fact": "The page gives the macOS, Linux and WSL install command as a curl one-liner from claude.ai/install.sh.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "curl -fsSL https://claude.ai/install.sh \\| bash",
+   "topic": "definition"
+  },
+  {
+   "fact": "Users can undo changes in a Claude Code session by pressing Esc twice or running /rewind to restore code and conversation to an earlier point.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Press Esc twice or run `/rewind` to restore code and conversation to an earlier point",
+   "topic": "definition"
+  }
+ ]
+}

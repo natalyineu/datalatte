@@ -1,0 +1,80 @@
+{
+ "url": "https://support.google.com/google-ads/answer/6167118",
+ "title": "About Quality Score for Search campaigns",
+ "hash": "8bca795009d64a61be5cbae2c362490cf4823d82",
+ "fetchedAt": "2026-11-10",
+ "facts": [
+  {
+   "fact": "Quality Score is measured on a scale from 1 to 10 and is available at the keyword level.",
+   "value": "1-10",
+   "unit": "scale",
+   "as_of": "",
+   "quote": "This score is measured on a scale from 1-10 and available at the keyword level.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Quality Score is calculated from three components: expected clickthrough rate, ad relevance, and landing page experience.",
+   "value": "3",
+   "unit": "components",
+   "as_of": "",
+   "quote": "Quality Score is calculated based on the combined performance of 3 components:",
+   "topic": "definition"
+  },
+  {
+   "fact": "Each Quality Score component is evaluated as 'Above average', 'Average', or 'Below average', compared with other advertisers whose ads showed for the exact same search over the last 90 days.",
+   "value": "90",
+   "unit": "days",
+   "as_of": "",
+   "quote": "This evaluation is based on a comparison with other advertisers whose ads showed for the exact same search over the last 90 days.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Quality Score is based on historical impressions for exact searches of a keyword, so changing keyword match types does not impact Quality Score.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Quality Score is based on **historical impressions for exact searches**of your keyword, therefore changing keyword match types will not impact Quality Score.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Quality Score is not a key performance indicator and should not be optimized or aggregated with the rest of your data, according to Google.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Quality Score is not a key performance indicator and should not be optimized or aggregated with the rest of your data.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Quality Score is not an input in the ad auction, according to Google.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Quality Score is not an input in the ad auction. It’s a diagnostic tool to identify how ads that show for certain keywords affect the user experience.",
+   "topic": "rules"
+  },
+  {
+   "fact": "A Quality Score of '—' in the column means there are not enough searches that exactly match the keyword to determine its score.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "If you notice a “—” in the Quality Score column, it means there aren't enough searches that exactly match your keywords to determine a keyword’s Quality Score.",
+   "topic": "rules"
+  },
+  {
+   "fact": "A broad match keyword may have a Quality Score with no impressions if a corresponding exact match keyword in the same ad group has impressions in the last 90 days.",
+   "value": "90",
+   "unit": "days",
+   "as_of": "",
+   "quote": "A broad match keyword may have a Quality Score even though it has no impressions as long as there is a corresponding exact match keyword with impressions in the last 90 days.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Quality Score factors not captured include devices used in search, location of user, time of day, and assets.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "There are factors related to your ad quality that might not be captured by Quality Score. These factors include, but are not limited to: Devices used in search, Location of user, Time of day, Assets",
+   "topic": "rules"
+  }
+ ]
+}

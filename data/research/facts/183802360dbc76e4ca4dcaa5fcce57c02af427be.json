@@ -1,0 +1,144 @@
+{
+ "url": "https://dev.meta.ai/docs/muse-code/subscriptions",
+ "title": "Subscriptions - Meta Model API",
+ "hash": "30e0368e96b8c36f70cb6c4242caca908b254999",
+ "fetchedAt": "2026-11-06",
+ "facts": [
+  {
+   "fact": "Muse Code offers 4 subscription plans: Everyday Usage, High Usage, Power Usage, and Maximum Usage.",
+   "value": "4",
+   "unit": "plans",
+   "as_of": "",
+   "quote": "There are 4 subscription plans available for Muse Code:",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The Everyday Usage plan lets subscribers send 10-50 prompts every 5 hours, including image and video uploads.",
+   "value": "10-50 prompts every 5 hours",
+   "unit": "prompts per 5 hours",
+   "as_of": "",
+   "quote": "Send 10-50 prompts every 5 hours, including image and video uploads",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The High Usage plan provides 5x more usage than the Everyday Usage plan.",
+   "value": "5",
+   "unit": "x Everyday Usage plan",
+   "as_of": "",
+   "quote": "5x more usage than the Everyday Usage plan",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The Power Usage plan provides 20x more usage than the Everyday Usage plan.",
+   "value": "20",
+   "unit": "x Everyday Usage plan",
+   "as_of": "",
+   "quote": "20x more usage than the Everyday Usage plan",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The Maximum Usage plan provides 80x more usage than the Everyday Usage plan.",
+   "value": "80",
+   "unit": "x Everyday Usage plan",
+   "as_of": "",
+   "quote": "80x more usage than the Everyday Usage plan",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Muse Code subscribers must be 18 or the age of majority in their country to subscribe.",
+   "value": "18",
+   "unit": "years",
+   "as_of": "",
+   "quote": "You must be 18 or the age of majority in your country to subscribe.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Pay-as-you-go billing on Muse Code is charged per token consumed with a Meta Model API key.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "billed per token consumed with your Meta Model API key",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Any additional API keys a user creates under their Meta Model API account are billed pay-as-you-go rather than under the subscription.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Any additional API keys you create under your Meta Model API account will be billed through pay-as-you-go.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The subscription works only through the Muse Code CLI while signed in with a Meta Model API account.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "It works only through the Muse Code CLI while signed in with your Meta Model API account.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Subscription benefits and availability may vary by region.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Subscription benefits and availability may vary by region.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Muse Code subscriptions default to Contributor mode, which gives more plan usage in exchange for letting Meta use the user's content to train future Meta models.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Muse Code subscriptions default to Contributor mode.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Contributor mode can be turned off at any time in Muse Code settings, after which future content is not used to train Meta models.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "you can turn it off at any time, at which point your future content is not used to train Meta models",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Power Usage plan includes access to Muse Wonder Full, the higher-capability variant of Muse Wonder.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Access to Muse Wonder Full, the higher-capability variant of Muse Wonder",
+   "topic": "definition"
+  },
+  {
+   "fact": "A headless run on a computer with no settings file has Contributor mode off.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "a headless run has Contributor mode off",
+   "topic": "rules"
+  },
+  {
+   "fact": "The MUSE_CONTRIBUTOR_MODE environment variable sets Contributor mode for a run, using 1 for on and 0 for off, and a flag given at the same time takes precedence.",
+   "value": "1 (on) or 0 (off)",
+   "unit": "",
+   "as_of": "",
+   "quote": "You can also set the environment variable `MUSE_CONTRIBUTOR_MODE` to `1` (on) or `0` (off) for a run. If you set both, the flag wins.",
+   "topic": "rules"
+  },
+  {
+   "fact": "A subscriber on the Maximum Usage plan who reaches the usage limit must wait for the limit to refresh, because no upgrade is available.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "If you are on the Maximum Usage plan, you must wait for your limit to refresh.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Subscribers who reach their plan's usage limit can upgrade to the next plan or wait for the limit to refresh.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "If you reach your plan's usage limit, you can upgrade to the next plan, or wait until your limit refreshes.",
+   "topic": "rules"
+  }
+ ]
+}

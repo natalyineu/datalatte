@@ -1,0 +1,80 @@
+{
+ "url": "https://n8n.io/workflows/6165-automate-google-business-profile-posts-with-gpt-4-and-google-sheets/",
+ "title": "Automate Google Business Profile posts with GPT-4 & Google Sheets | n8n workflow template",
+ "hash": "04a8d0f07dab784fec6e50da5cae1f1cae33a7bc",
+ "fetchedAt": "2026-11-09",
+ "facts": [
+  {
+   "fact": "The workflow template is listed on n8n for a purchase price of $25.",
+   "value": "25",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "Buy for $25",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The workflow's Schedule Trigger runs daily at 9AM by default, and the page says this is configurable.",
+   "value": "9AM",
+   "unit": "time of day",
+   "as_of": "",
+   "quote": "Runs daily at 9AM (configurable)",
+   "topic": "other"
+  },
+  {
+   "fact": "The template's last update was 8 months before the page was captured.",
+   "value": "8",
+   "unit": "months ago",
+   "as_of": "",
+   "quote": "Last update 8 months ago",
+   "topic": "other"
+  },
+  {
+   "fact": "The workflow's Google Sheet is expected to mark rows for publishing with a Status that is blank or set to \"Unpublished\".",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Should be blank or \"Unpublished\" to trigger the flow",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google Business Profile API quota is set to zero by default and must be requested through a Google support form before use.",
+   "value": "0",
+   "unit": "quota",
+   "as_of": "",
+   "quote": "You need to request for GMB (Google Business Profile) API Quota from here, beacuse by deafult it sets to zero",
+   "topic": "rules"
+  },
+  {
+   "fact": "The template's example OpenAI prompt asks for a short, engaging Google Business Post suitable for a local audience with a subtle call to action.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Write a short, engaging Google Business Post about: \"{{ $json.topic }}\". Make it suitable for a local audience and include a subtle call to action.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The Google Sheet format for the template uses the columns Topic, Status, Date (optional), and Notes (optional), with Notes not used in automation.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Notes | (Optional) Internal info — not used in the automation",
+   "topic": "rules"
+  },
+  {
+   "fact": "The template's Generate Post Text node uses OpenAI GPT-4 to write a local-business-optimized post.",
+   "value": "GPT-4",
+   "unit": "",
+   "as_of": "",
+   "quote": "Uses OpenAI (GPT-4) to write a compelling, local-business optimized post",
+   "topic": "definition"
+  },
+  {
+   "fact": "The template's workflow categories on n8n are Social Media and Multimodal AI.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Social Media",
+   "topic": "other"
+  }
+ ]
+}

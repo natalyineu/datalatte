@@ -1,0 +1,168 @@
+{
+ "url": "https://www.aiwerse.blog/ai-tools/muse-code-meta-s-new-terminal-coding-agent-explained",
+ "title": "Muse Code: Meta's New Terminal Coding Agent, Explained",
+ "hash": "9205eb2ceacba050baf8ce0d50bfde81c77dc02f",
+ "fetchedAt": "2026-11-06",
+ "facts": [
+  {
+   "fact": "Meta released Muse Code in beta on August 5, 2026, as a terminal-based coding agent.",
+   "value": "2026-08-05",
+   "unit": "date",
+   "as_of": "2026-08-05",
+   "quote": "released in beta on _August 5, 2026_",
+   "topic": "definition"
+  },
+  {
+   "fact": "Muse Code installs with a single command on macOS or Linux.",
+   "value": "macOS or Linux",
+   "unit": "",
+   "as_of": "",
+   "quote": "It installs with a single command on macOS or Linux",
+   "topic": "definition"
+  },
+  {
+   "fact": "Muse Code's Standard tier is listed at $1.25 per 1M input tokens.",
+   "value": "1.25",
+   "unit": "USD per 1M tokens",
+   "as_of": "",
+   "quote": "Standard Tier ($1.25/$4.25 per M tokens): Keeps your data private.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Muse Code's Standard tier is listed at $4.25 per 1M output tokens.",
+   "value": "4.25",
+   "unit": "USD per 1M tokens",
+   "as_of": "",
+   "quote": "Standard Tier ($1.25/$4.25 per M tokens): Keeps your data private.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Muse Code's Standard tier is listed at $0.15 per 1M cached input tokens.",
+   "value": "0.15",
+   "unit": "USD per 1M tokens",
+   "as_of": "",
+   "quote": "| **Standard** | $1.25 | $0.15 | $4.25 | Meta does **not** train on your prompts or completions |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Meta states that the Standard tier does not train on users' prompts or completions.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Meta does **not** train on your prompts or completions",
+   "topic": "rules"
+  },
+  {
+   "fact": "Muse Code's Contributor tier is listed at $0.10 per 1M input tokens.",
+   "value": "0.10",
+   "unit": "USD per 1M tokens",
+   "as_of": "",
+   "quote": "Contributor Tier ($0.10/$0.20 per M tokens): Up to 21x cheaper, but Meta trains future models on your prompts and code.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Muse Code's Contributor tier is listed at $0.20 per 1M output tokens.",
+   "value": "0.20",
+   "unit": "USD per 1M tokens",
+   "as_of": "",
+   "quote": "Contributor Tier ($0.10/$0.20 per M tokens): Up to 21x cheaper, but Meta trains future models on your prompts and code.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Muse Code's Contributor tier is listed at $0.002 per 1M cached input tokens.",
+   "value": "0.002",
+   "unit": "USD per 1M tokens",
+   "as_of": "",
+   "quote": "| **Contributor** | $0.10 | $0.002 | $0.20 |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Under the Contributor tier, Meta trains its models on users' prompts and completions.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Meta **trains its models** on your prompts and completions; capped at 60 requests per minute",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Muse Code Contributor tier is capped at 60 requests per minute.",
+   "value": "60",
+   "unit": "requests per minute",
+   "as_of": "",
+   "quote": "capped at 60 requests per minute",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page states that the Contributor tier is roughly 12.5x cheaper than Standard on input tokens.",
+   "value": "12.5",
+   "unit": "x (cheaper on input)",
+   "as_of": "",
+   "quote": "The Contributor tier is roughly 12.5x cheaper on input and 21x cheaper on output than Standard",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Meta reports that Muse Spark 1.2 scores 82.9% on Terminal-Bench 2.1 on its own evaluation harness.",
+   "value": "82.9",
+   "unit": "%",
+   "as_of": "",
+   "quote": "scoring **82.9% on Terminal-Bench 2.1**",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Meta reports that Muse Spark 1.2 scores 59.3% on DeepSWE 1.1 on its own evaluation harness.",
+   "value": "59.3",
+   "unit": "%",
+   "as_of": "",
+   "quote": "**59.3% on DeepSWE 1.1**",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Meta reported a Terminal-Bench 2.1 score of 80.0 for its predecessor Muse Spark 1.1.",
+   "value": "80.0",
+   "unit": "score",
+   "as_of": "",
+   "quote": "On the **predecessor model, Muse Spark 1.1**, Meta reported a Terminal-Bench 2.1 score of 80.0.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Vals AI's independent testing measured Muse Spark 1.1 at 69.29 on Terminal-Bench 2.1 (third-party result).",
+   "value": "69.29",
+   "unit": "score",
+   "as_of": "",
+   "quote": "Vals AI's independent testing measured 69.29",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The Terminal-Bench team's official verified leaderboard lists Muse Spark 1.1 at 76.2% (third-party result).",
+   "value": "76.2",
+   "unit": "%",
+   "as_of": "",
+   "quote": "the Terminal-Bench team's own official verified leaderboard entry for Muse Spark 1.1 came in at 76.2%",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Artificial Analysis independently evaluated Muse Spark 1.2 at around 80% on Terminal-Bench 2.1, versus Meta's claimed 82.9% (third-party estimate).",
+   "value": "80",
+   "unit": "%",
+   "as_of": "",
+   "quote": "independent evaluation from Artificial Analysis puts it around 80% against Meta's claimed 82.9%",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Vals AI's common-harness leaderboard ranks Muse Spark 1.2 14th (third-party ranking).",
+   "value": "14",
+   "unit": "rank",
+   "as_of": "",
+   "quote": "Vals AI's common-harness leaderboard, by contrast, ranks it **14th**.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The highest independently verified Terminal-Bench 2.1 score reported on the page is 83.8%, posted by Claude Fable 5 running in Claude Code (third-party).",
+   "value": "83.8",
+   "unit": "%",
+   "as_of": "",
+   "quote": "the highest independently verified Terminal-Bench 2.1 score posted by any model so far belongs to Claude Fable 5 running in Claude Code, at 83.8%",
+   "topic": "benchmark"
+  }
+ ]
+}

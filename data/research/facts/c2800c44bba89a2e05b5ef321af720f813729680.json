@@ -1,0 +1,88 @@
+{
+ "url": "https://docs.windsurf.com/fr/plugins/cascade/cascade-overview",
+ "title": "Windsurf - Cascade",
+ "hash": "fedad74687f7ccfa5c6583256d0e86e0078eacd6",
+ "fetchedAt": "2026-11-06",
+ "facts": [
+  {
+   "fact": "Cascade can perform up to 25 tool calls per prompt.",
+   "value": "25",
+   "unit": "tool calls per prompt",
+   "as_of": "",
+   "quote": "Cascade peut effectuer jusqu’à 25 appels d’outils par invite.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Each 'continue' typed to resume an interrupted Cascade run counts as a new prompt.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Chaque `continue` comptera comme une nouvelle invite.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Cascade's auto-execution has three levels in JetBrains: Off, Auto, and Turbo.",
+   "value": "3",
+   "unit": "levels",
+   "as_of": "",
+   "quote": "Cascade prend en charge trois niveaux d’exécution automatique des commandes dans JetBrains : **Off**, **Auto** et **Turbo**.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Auto execution level is available only with premium models.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Disponible uniquement avec les modèles premium.",
+   "topic": "rules"
+  },
+  {
+   "fact": "For Teams and Enterprise users, administrators can set a maximum auto-execution level, which users cannot exceed.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Pour les utilisateurs Teams et Enterprise, les administrateurs peuvent définir un niveau maximal d’exécution automatique autorisé.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Cascade's cancellation of changes is currently irreversible, according to the page.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Les annulations sont actuellement irréversibles, soyez prudent !",
+   "topic": "rules"
+  },
+  {
+   "fact": "Cascade has two modes, Write and Chat; Write lets Cascade create and modify the codebase, while Chat answers questions about the codebase or general programming principles.",
+   "value": "2",
+   "unit": "modes",
+   "as_of": "",
+   "quote": "Cascade est disponible en deux modes : **Write** et **Chat**.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Voice input in its current version can transcribe the user's voice into text.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Dans sa version actuelle, elle peut transcrire votre voix en texte.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Cascade can be opened in JetBrains with the Cmd/Ctrl+L shortcut.",
+   "value": "Cmd/Ctrl+L",
+   "unit": "keyboard shortcut",
+   "as_of": "",
+   "quote": "Pour ouvrir Cascade, appuyez sur `Cmd/Ctrl+L` ou cliquez sur l’icône Cascade.",
+   "topic": "other"
+  },
+  {
+   "fact": "Files listed in .codeiumignore at the workspace root are hidden from Cascade, which cannot view, modify, or create files in those paths.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Cela empêchera Cascade d’afficher, de modifier ou de créer des fichiers dans les chemins indiqués.",
+   "topic": "rules"
+  }
+ ]
+}

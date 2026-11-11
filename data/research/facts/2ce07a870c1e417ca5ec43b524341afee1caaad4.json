@@ -1,0 +1,80 @@
+{
+ "url": "https://support.google.com/gemininotebook/answer/17670842?hl=en&co=GENIE.Platform%3DDesktop",
+ "title": "Manage your Gemini Notebook usage limits - Computer - Gemini Notebook Help",
+ "hash": "d938e5f6974798251b218409825ccae3a93aed4c",
+ "fetchedAt": "2026-11-07",
+ "facts": [
+  {
+   "fact": "Gemini Notebook uses compute-based usage limits that factor in prompt complexity, models and features used, chat length, and specific features.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Gemini Notebook has compute-based usage limits that determine how much you can interact with features. The limits factor the complexity of your prompt, the models and features you use, the length of your chat and specific features.",
+   "topic": "rules"
+  },
+  {
+   "fact": "If a Gemini Notebook user hits usage limits, the quota refreshes every 5 hours until they reach their weekly limit.",
+   "value": "5",
+   "unit": "hours",
+   "as_of": "",
+   "quote": "you can come back later as the quota refreshes every 5 hours until you reach your weekly limit",
+   "topic": "rules"
+  },
+  {
+   "fact": "Users without a plan receive standard Gemini Notebook usage limits.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Without a plan | Standard limits",
+   "topic": "rules"
+  },
+  {
+   "fact": "The AI Plus plan provides Gemini Notebook usage limits that are two times higher than standard limits.",
+   "value": "2",
+   "unit": "x standard limits",
+   "as_of": "",
+   "quote": "AI Plus | Two times higher than standard limits",
+   "topic": "rules"
+  },
+  {
+   "fact": "The AI Pro plan provides Gemini Notebook usage limits that are four times higher than standard limits.",
+   "value": "4",
+   "unit": "x standard limits",
+   "as_of": "",
+   "quote": "AI Pro | Four times higher than standard limits",
+   "topic": "rules"
+  },
+  {
+   "fact": "The AI Ultra plan provides Gemini Notebook usage limits that are 5x or 20x higher than AI Pro, depending on subscription.",
+   "value": "5 or 20",
+   "unit": "x AI Pro limits",
+   "as_of": "",
+   "quote": "AI Ultra | 5x or 20x higher than AI Pro depending on your subscription",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Gemini Notebook may cap the number of prompts and conversations, or how much features can be used, within a specific timeframe to keep experience optimal.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "we may at times have to cap the number of prompts and conversations you can have, or how much you can use some features, within a specific timeframe.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Gemini Notebook chat displays a message at the bottom showing remaining usage and when the limit refreshes, such as a reset time of 3:00 PM.",
+   "value": "3:00 PM",
+   "unit": "time of day",
+   "as_of": "",
+   "quote": "Limit resets at 3:00 PM.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Generate later feature, available only on the web, can delay generations when a user is out of AI limits, and may take a couple hours.",
+   "value": "a couple",
+   "unit": "hours",
+   "as_of": "",
+   "quote": "Generating later may take a couple hours but you will be notified if you have notifications enabled.",
+   "topic": "rules"
+  }
+ ]
+}

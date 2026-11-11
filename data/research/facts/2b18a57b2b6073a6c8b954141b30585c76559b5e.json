@@ -1,0 +1,80 @@
+{
+ "url": "https://cursor.com/changelog/05-13-26",
+ "title": "Development environments for cloud agents · Cursor",
+ "hash": "6a25ebff55a55e894c1682bb3d5c27d69e2667c4",
+ "fetchedAt": "2026-11-06",
+ "facts": [
+  {
+   "fact": "Cursor's changelog entry for release 3.4, which introduces development environments for cloud agents, is dated May 13, 2026.",
+   "value": "May 13, 2026",
+   "unit": "date",
+   "as_of": "2026-05-13",
+   "quote": "3.4 May 13, 2026",
+   "topic": "other"
+  },
+  {
+   "fact": "Cursor states that builds that hit its upgraded layer cache run 70% faster.",
+   "value": "70",
+   "unit": "%",
+   "as_of": "2026-05-13",
+   "quote": "Builds that hit the cache run 70% faster.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Cursor states that build secrets used in Dockerfile-based environment configuration are scoped to the build step and are not passed to the running agent's environment.",
+   "value": "",
+   "unit": "",
+   "as_of": "2026-05-13",
+   "quote": "Build secrets are scoped to the build step and aren't passed to the running agent's environment.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Cursor states that each development environment has its own version history that users can review and roll back.",
+   "value": "",
+   "unit": "",
+   "as_of": "2026-05-13",
+   "quote": "Every development environment now has its own version history that users can review and roll back.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Cursor states that admins can restrict rollback permissions on development environments to admins only.",
+   "value": "",
+   "unit": "",
+   "as_of": "2026-05-13",
+   "quote": "Admins can also restrict rollback permissions to admins only.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Cursor states that an audit log captures every action team members take on development environments.",
+   "value": "",
+   "unit": "",
+   "as_of": "2026-05-13",
+   "quote": "An audit log captures every action team members take on environments",
+   "topic": "rules"
+  },
+  {
+   "fact": "Cursor states that egress and secrets can be scoped at the development environment level, and secrets configured for one environment are not accessible from any other.",
+   "value": "",
+   "unit": "",
+   "as_of": "2026-05-13",
+   "quote": "Secrets configured for one environment aren't accessible from any other.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Cursor states that if an environment configuration fails, the environment defaults to a base image with clear warning signs so cloud agents keep running instead of immediately failing.",
+   "value": "",
+   "unit": "",
+   "as_of": "2026-05-13",
+   "quote": "If your environment configuration fails, it will default to a base image with clear warning signs so that your cloud agents can keep running instead of immediately failing.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Cursor states that cloud agents and automations support multi-repo environments, where a single environment can be configured with all repositories an agent needs, with re-use across sessions.",
+   "value": "",
+   "unit": "",
+   "as_of": "2026-05-13",
+   "quote": "You can configure a single environment with all the repositories an agent needs for its work, with re-use across sessions.",
+   "topic": "definition"
+  }
+ ]
+}

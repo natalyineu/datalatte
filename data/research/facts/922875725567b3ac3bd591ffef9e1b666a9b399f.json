@@ -1,0 +1,104 @@
+{
+ "url": "https://burnratehq.dev/tools/grok-build/",
+ "title": "Grok Build pricing, limits and changes · BurnRate",
+ "hash": "136afb644b1eb51e98a050fc521149fea9dd969e",
+ "fetchedAt": "2026-11-06",
+ "facts": [
+  {
+   "fact": "The Free plan costs $0 per month and offers limited Grok Build access, per the BurnRate table, which cites cursor.com/pricing.",
+   "value": "0",
+   "unit": "USD per month",
+   "as_of": "2026-10-20",
+   "quote": "| Free | $0  | Limited Grok Build access | [source](https://cursor.com/pricing) 2026-10-20 |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The Plus plan costs $8 per month, or $6.67 per month on annual billing, and its limits are a shared weekly pool with Grok and Cursor (base).",
+   "value": "8",
+   "unit": "USD per month",
+   "as_of": "2026-10-20",
+   "quote": "| Plus | $8 ($6.67 annual) | Shared weekly pool with Grok and Cursor (base) |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The Plus plan costs $6.67 per month on annual billing.",
+   "value": "6.67",
+   "unit": "USD per month (annual billing)",
+   "as_of": "2026-10-20",
+   "quote": "| Plus | $8 ($6.67 annual) | Shared weekly pool with Grok and Cursor (base) |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The Premium plan costs $30 per month, or $25 per month on annual billing, and provides 4x Plus limits.",
+   "value": "30",
+   "unit": "USD per month",
+   "as_of": "2026-10-20",
+   "quote": "| Premium | $30 ($25 annual) | 4x Plus | [source](https://docs.x.ai/x-subscription/pricing) 2026-10-20 |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The Super plan costs $100 per month, or $84 per month on annual billing, and provides 15x Plus limits.",
+   "value": "100",
+   "unit": "USD per month",
+   "as_of": "2026-10-20",
+   "quote": "| Super | $100 ($84 annual) | 15x Plus |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The Ultra plan costs $200 per month, or $167 per month on annual billing, and provides 50x Plus limits.",
+   "value": "200",
+   "unit": "USD per month",
+   "as_of": "2026-10-20",
+   "quote": "| Ultra | $200 ($167 annual) | 50x Plus |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The grok-build-0.1 API model is priced at $1 per million input tokens.",
+   "value": "1",
+   "unit": "USD per million input tokens",
+   "as_of": "2026-10-20",
+   "quote": "| API key | unknown | grok-build-0.1: $1/M input, $0.20/M cached, $2/M output |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The grok-build-0.1 API model is priced at $0.20 per million cached tokens.",
+   "value": "0.20",
+   "unit": "USD per million cached tokens",
+   "as_of": "2026-10-20",
+   "quote": "| API key | unknown | grok-build-0.1: $1/M input, $0.20/M cached, $2/M output |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The grok-build-0.1 API model is priced at $2 per million output tokens.",
+   "value": "2",
+   "unit": "USD per million output tokens",
+   "as_of": "2026-10-20",
+   "quote": "| API key | unknown | grok-build-0.1: $1/M input, $0.20/M cached, $2/M output |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Per a third-party benchmark source (AA Coding Agent Index v1.5, via aicharts.io, retrieved 2026-10-05), the cost per benchmark task for Grok 4.7 (xhigh) is $8.82.",
+   "value": "8.82",
+   "unit": "USD per benchmark task",
+   "as_of": "2026-10-05",
+   "quote": "Cost per benchmark task: **$8.82** (Grok 4.7 (xhigh), AA Coding Agent Index v1.5, [source](https://aicharts.io/coding), retrieved 2026-10-05).",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "On 2026-10-12, Grok Build was bundled into The X Subscription, with a weekly usage pool shared with Grok and Cursor, per the BurnRate changelog citing x.ai.",
+   "value": "2026-10-12",
+   "unit": "date",
+   "as_of": "2026-10-12",
+   "quote": "Grok Build bundled into The X Subscription (Plus $8 / Premium $30 / Super $100 / Ultra $200) with a weekly usage pool shared with Grok and Cursor.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "BurnRate notes that the Grok Build launch date is not verified, and that the X Subscription date of Oct 12 is taken from standardcompute, a third-party source.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Grok Build launch date not verified. X Subscription date (Oct 12) taken from standardcompute.",
+   "topic": "other"
+  }
+ ]
+}
