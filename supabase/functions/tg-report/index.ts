@@ -1,12 +1,12 @@
 // Telegram reports into a forum group with topics.
 // Secrets: TELEGRAM_BOT_TOKEN. Group id + topic thread ids are stored in social_settings (tg_group_id, tg_topics).
-// Modes: ?purge=<fromId>&to=<toId> (delete bot messages in range), ?discover=1 (list chats the bot sees), ?setup=1&chat=<id> (create topics), POST {topic,text} (send), ?send=<topic>&text=...
+// Modes: ?rename=<key>&name=<new name>, ?purge=<fromId>&to=<toId> (delete bot messages in range), ?discover=1 (list chats the bot sees), ?setup=1&chat=<id> (create topics), POST {topic,text} (send), ?send=<topic>&text=...
 import { createClient } from "npm:@supabase/supabase-js@2";
 
 const sb = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
 const T = Deno.env.get("TELEGRAM_BOT_TOKEN")!;
 const api = async (m: string, body?: unknown) => (await fetch(`https://api.telegram.org/bot${T}/${m}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body ?? {}) })).json();
-const TOPICS: Record<string, string> = { publish: "📤 Публикации", alerts: "🚨 Алерты", metrics: "📊 Метрики", traffic: "🌐 Сессии с сайта", leads: "💼 Лиды и письма", partners: "💰 Партнёры", outreach: "✉️ Outreach" };
+const TOPICS: Record<string, string> = { publish: "📤 Публикации", alerts: "🚨 Алерты", metrics: "📊 Метрики", traffic: "🌐 Сессии с сайта", leads: "💼 Лиды и письма", partners: "💰 Партнёры", outreach: "✉️ Outreach", seo: "🔎 SEO", recs: "🎯 Рекомендации", codes: "🔑 Коды и уведомления", weekly: "🗓 Неделя" };
 const get = async (k: string) => (await sb.from("social_settings").select("value").eq("key", k).maybeSingle()).data?.value as string | undefined;
 const set = (k: string, v: string) => sb.from("social_settings").upsert({ key: k, value: v }, { onConflict: "key" });
 
@@ -18,6 +18,11 @@ Deno.serve(async (req) => {
     const chats = new Map<number, unknown>();
     for (const x of r.result) { const c = x.message?.chat ?? x.my_chat_member?.chat ?? x.channel_post?.chat; if (c) chats.set(c.id, { id: c.id, title: c.title ?? c.username ?? c.first_name, type: c.type, is_forum: c.is_forum ?? false }); }
     return Response.json({ chats: [...chats.values()] });
+  }
+  if (u.searchParams.get("rename")) {
+    const chat = await get("tg_group_id"); const topics = JSON.parse((await get("tg_topics")) ?? "{}"); const key = u.searchParams.get("rename")!;
+    const r = await api("editForumTopic", { chat_id: chat, message_thread_id: topics[key], name: u.searchParams.get("name") });
+    return Response.json(r.ok ? { ok: true } : { error: r.description });
   }
   if (u.searchParams.get("purge")) {
     const chat = await get("tg_group_id"); const from = +u.searchParams.get("purge")!; const to = +(u.searchParams.get("to") ?? from);
