@@ -1,5 +1,5 @@
 // Reports to the Telegram forum group (topics via tg-report settings).
-// Modes: ?mode=publish (recent published/failed posts) | health (token checks, alerts only if broken) | metrics (weekly) | traffic (weekly UTM sessions)
+// Modes: ?mode=leads | outreach | partners | publish (recent published/failed posts) | health (token checks, alerts only if broken) | metrics (weekly) | traffic (weekly UTM sessions)
 import { createClient } from "npm:@supabase/supabase-js@2";
 
 const sb = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
@@ -20,6 +20,54 @@ async function send(topic: string, text: string) {
 Deno.serve(async (req) => {
   const mode = new URL(req.url).searchParams.get("mode");
   const now = Date.now();
+
+  if (mode === "leads") {
+    const since = new Date(now - 24 * 3600e3).toISOString();
+    const { data: fresh } = await sb.from("contact_submissions").select("name,email,niche,form_type,message,status,created_at").gte("created_at", since).not("status", "in", "(spam,system,test)").order("created_at");
+    const { count: waiting } = await sb.from("contact_submissions").select("id", { count: "exact", head: true }).eq("status", "new").lt("created_at", since);
+    if (!fresh?.length && !waiting) return Response.json({ skipped: "no new leads" });
+    let t = "<b>💼 Заявки с сайта</b>\n━━━━━━━━━━━━━━━━━━\n";
+    for (const c of fresh ?? []) t += `👤 <b>${esc(String(c.name ?? "—"))}</b> · ${esc(String(c.niche ?? "—"))} · <i>${esc(String(c.form_type ?? ""))}</i>\n<blockquote>${esc(String(c.message ?? "").slice(0, 220))}</blockquote>\n`;
+    if (!fresh?.length) t += "Новых за сутки нет.\n";
+    if (waiting) t += `\n⏳ Ждут ответа дольше суток: <b>${waiting}</b>`;
+    return Response.json(await send("leads", t));
+  }
+
+  if (mode === "outreach") {
+    const since1 = new Date(now - 24 * 3600e3).toISOString(), since7 = new Date(now - 7 * 864e5).toISOString();
+    const { data: all } = await sb.from("outreach_emails_v").select("campaign,status,sent_at,replied_at_eff,outcome,business_name,subject").order("sent_at", { ascending: false }).limit(5000);
+    const rows = all ?? [];
+    const cnt = (a: any[]) => ({ sent: a.length, delivered: a.filter((x) => ["delivered", "opened", "clicked"].includes(x.status)).length, opened: a.filter((x) => ["opened", "clicked"].includes(x.status)).length, clicked: a.filter((x) => x.status === "clicked").length, bounced: a.filter((x) => x.status === "bounced").length, replied: a.filter((x) => x.replied_at_eff).length });
+    const day = rows.filter((x) => x.sent_at && x.sent_at >= since1), week = rows.filter((x) => x.sent_at && x.sent_at >= since7);
+    const tot = cnt(rows), d = cnt(day), w = cnt(week);
+    const unknown = rows.filter((x) => x.status === "unknown").length;
+    let t = "<b>✉️ Outreach</b>\n━━━━━━━━━━━━━━━━━━\n";
+    t += `<b>За 24 часа:</b> отправлено <b>${d.sent}</b>, доставлено ${d.delivered}, открыто ${d.opened}, ответов ${d.replied}\n`;
+    t += `<b>За 7 дней:</b> отправлено <b>${w.sent}</b>, доставлено ${w.delivered}, открыто ${w.opened}, кликов ${w.clicked}, отказов ${w.bounced}, ответов <b>${w.replied}</b>\n`;
+    t += `<b>Всего:</b> ${tot.sent} писем, ответов ${tot.replied}, открытий ${tot.opened}, кликов ${tot.clicked}, отказов ${tot.bounced}\n`;
+    const byC = new Map<string, any[]>(); for (const x of week) { const k = x.campaign ?? "—"; byC.set(k, [...(byC.get(k) ?? []), x]); }
+    if (byC.size) { t += "\n<b>Кампании за неделю</b>\n"; for (const [k, a] of byC) { const c = cnt(a); t += `<code>${esc(String(k).slice(0, 26))}</code> — ${c.sent} шт, открыто ${c.opened}, ответов ${c.replied}\n`; } }
+    const rep = rows.filter((x) => x.replied_at_eff && x.replied_at_eff >= since1);
+    if (rep.length) { t += "\n<b>💬 Новые ответы</b>\n"; for (const x of rep.slice(0, 8)) t += `• ${esc(String(x.business_name ?? "—"))}: ${esc(String(x.subject ?? "").slice(0, 60))}\n`; }
+    if (unknown) t += `\n<i>Статус не синхронизирован у ${unknown} писем (обновляется скриптом Resend раз в сутки).</i>`;
+    return Response.json(await send("outreach", t));
+  }
+
+  if (mode === "partners") {
+    const { data: d } = await sb.from("partner_deals").select("partner,deal_status,amount,currency,invoice_status,paid_at,next_step,last_check_result,last_checked_at");
+    const deals = d ?? [];
+    const paid = deals.filter((x) => x.paid_at), open = deals.filter((x) => !x.paid_at && x.amount);
+    const sum = (a: any[]) => a.reduce((s, x) => s + Number(x.amount || 0), 0);
+    let t = "<b>💰 Партнёры и счета</b>\n━━━━━━━━━━━━━━━━━━\n";
+    t += `<b>🟢 Оплачено: $${sum(paid)}</b>\n` + paid.sort((a, b) => String(b.paid_at).localeCompare(String(a.paid_at))).map((x) => `<code>${esc(String(x.partner).slice(0, 24)).padEnd(24)} $${x.amount}  ${String(x.paid_at).slice(5)}</code>`).join("\n");
+    t += `\n\n<b>🟡 Ждём оплату: $${sum(open)}</b>` + (open.length ? "\n" + open.map((x) => `• ${esc(String(x.partner))} $${x.amount} (${esc(String(x.invoice_status ?? "—"))})`).join("\n") : "");
+    const steps = deals.filter((x) => x.next_step && !x.paid_at);
+    if (steps.length) t += "\n\n<b>➡️ Следующие шаги</b>\n" + steps.map((x) => `• ${esc(String(x.partner))}: ${esc(String(x.next_step).slice(0, 90))}`).join("\n");
+    const chk = deals.filter((x) => x.last_check_result);
+    const bad = chk.filter((x) => String(x.last_check_result).startsWith("FAIL"));
+    t += `\n\n<b>✅ Проверка размещений</b>\n` + (bad.length ? `⚠️ Проблемы: ${bad.map((x) => esc(String(x.partner))).join(", ")}` : `Все ${chk.length} размещений на месте.`);
+    return Response.json(await send("partners", t));
+  }
 
   if (mode === "publish") {
     const since = new Date(now - 7 * 3600e3).toISOString();
