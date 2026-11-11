@@ -194,6 +194,41 @@ async function saveGscPageHistory() {
   console.log(`✓ GSC page history saved (${rows.length} pages, week ending ${end})`);
 }
 
+
+// ── UTM sessions (social/paid) → Supabase social_utm_daily ───────────────────
+async function syncUtmToSupabase() {
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!key) { console.log("⚠ SUPABASE_SERVICE_ROLE_KEY not set — skipping UTM sync"); return; }
+  const url = process.env.SUPABASE_URL || "https://olsxxfwvwsycwzihbmdn.supabase.co";
+  const auth = getAuth();
+  const analytics = google.analyticsdata({ version: "v1beta", auth });
+  const res = await analytics.properties.runReport({
+    property: process.env.GA4_PROPERTY_ID,
+    requestBody: {
+      dateRanges: [{ startDate: "14daysAgo", endDate: "yesterday" }],
+      dimensions: [{ name: "date" }, { name: "sessionSource" }, { name: "sessionMedium" }, { name: "sessionCampaignName" }, { name: "sessionManualAdContent" }],
+      metrics: [{ name: "sessions" }, { name: "activeUsers" }, { name: "engagedSessions" }, { name: "keyEvents" }],
+      dimensionFilter: { filter: { fieldName: "sessionMedium", inListFilter: { values: ["social", "paid", "paid_social"] } } },
+      limit: 10000,
+    },
+  });
+  const rows = (res.data.rows || []).map((r) => {
+    const d = r.dimensionValues.map((x) => x.value || "");
+    const m = r.metricValues.map((x) => +x.value || 0);
+    const clean = (v) => (v === "(not set)" ? "" : v);
+    return { day: `${d[0].slice(0, 4)}-${d[0].slice(4, 6)}-${d[0].slice(6, 8)}`, source: d[1], medium: d[2], campaign: clean(d[3]), content: clean(d[4]),
+      sessions: m[0], users: m[1], engaged_sessions: m[2], key_events: m[3], updated_at: new Date().toISOString() };
+  });
+  if (!rows.length) { console.log("✓ UTM: no social/paid sessions in the last 14 days"); return; }
+  const r = await fetch(`${url}/rest/v1/social_utm_daily?on_conflict=day,source,medium,campaign,content`, {
+    method: "POST",
+    headers: { apikey: key, Authorization: `Bearer ${key}`, "Content-Type": "application/json", Prefer: "resolution=merge-duplicates" },
+    body: JSON.stringify(rows),
+  });
+  if (!r.ok) throw new Error(`Supabase upsert failed: ${r.status} ${await r.text()}`);
+  console.log(`✓ UTM sessions synced: ${rows.length} rows`);
+}
+
 async function fetchGA4() {
   const auth = getAuth();
   const propertyId = process.env.GA4_PROPERTY_ID;
@@ -357,6 +392,9 @@ async function main() {
     console.error("✗ GA4 error:", err.message);
     errors.push("GA4: " + err.message);
   }
+
+  // UTM sessions for the CRM Social metrics page (non-fatal)
+  try { await syncUtmToSupabase(); } catch (err) { console.error("✗ UTM sync error:", err.message); }
 
   if (errors.length) {
     console.error("\nErrors:", errors.join("; "));
