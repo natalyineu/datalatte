@@ -1,0 +1,164 @@
+---
+title: "AI Appointment Reminder Agent: Python Script Guide"
+date: "2026-06-13"
+lastModified: "2026-11-11"
+description: "Build an AI appointment reminder agent in Python that sends SMS via Twilio and email via Resend 48 hours before visits, with a copy-paste script."
+author: "Nataliia"
+category: "AI & Automation"
+tags: ["ai agents", "python", "appointment reminders", "automation", "no-shows", "twilio", "resend"]
+slug: "ai-agent-appointment-reminder-python-script"
+image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&q=80&auto=format&fit=crop"
+readTime: "14 min read"
+---
+
+An AI appointment reminder agent is a small Python program that reads upcoming bookings, drafts a personalised reminder for each client, and sends it by SMS or email at the right time. This guide covers a working setup using Twilio for SMS, Resend for email, and Groq for message drafting. Timing matters as much as wording. Most published guidance points to a reminder 24 to 48 hours ahead, and this script also sends a second reminder about two hours before the visit.
+
+## How much do no-shows cost a small business?
+
+Lost revenue depends on your own numbers, so the example below uses placeholder inputs. Replace them with your booking data before you rely on the result.
+
+Worked example (all inputs are assumptions):
+
+- Appointments per week: 80 (assumption)
+- No-show rate: 15% (assumption)
+- Average ticket: $80 (assumption)
+
+Lost appointments: 80 × 15% = 12 per week. Lost revenue: 12 × $80 = $960 per week.
+
+Suppose the reminder cuts no-shows by 35%. That figure comes from SchedulingKit as cited on BookingBee (secondary), and applying it here is an assumption. You would recover 12 × 35% = 4.2 appointments, or about $336 per week. Over 52 weeks that is roughly $17,500 a year. The same SchedulingKit source puts the no-show rate at 20% for salons without automated reminders, so your 15% assumption already sits below that baseline. Treat the 35% result as an upper bound. For more on the operational side, see [how to reduce no-shows in an appointment business](/blog/reduce-no-shows-appointment-business).
+
+## What reminder timing do the sources support?
+
+Most guidance clusters around 24 to 48 hours. Lockhart-Meyer recommends a text between 24 and 48 hours before the appointment and says 48 hours works best, arguing that texting the day before is too late (secondary). SalonIQ recommends an SMS two days ahead, and Salonist suggests at least a single reminder a couple of days out (secondary). BuilderGrowthEngine describes automated SMS and email typically sent 24 to 48 hours ahead, with an option to confirm or reschedule (secondary).
+
+<StatRow values="14%|20%|35%|24-48h" labels="Attendance improvement from text reminders|No-show rate without automated reminders|No-show cut with automated SMS reminders|Typical reminder lead time" subs="Permanente Journal, cited by Lutily (secondary)|SchedulingKit, cited by BookingBee, as of 2026 (secondary)|SchedulingKit, cited by BookingBee (secondary)|BuilderGrowthEngine FAQ (secondary)" trends="up|neutral|down|neutral" />
+
+Mariana Tek, which covers group fitness, recommends an SMS a few hours before class to reduce no-shows (secondary). The right lead time depends on how far ahead your clients book. The script's two windows, 48 hours and about 2 hours, give clients time to reschedule and catch plans that changed late. Medical practices face the same timing question, covered in [SMS appointment reminders for medical practices](/blog/sms-appointment-reminders-medical).
+
+## How does the script decide when to send a reminder?
+
+Each hourly run loads the appointment list, works out how many hours remain until each visit, and checks whether that number falls inside a reminder window. The core logic is short:
+
+```python
+def reminder_window(hours_until: float) -> str | None:
+    if 46 <= hours_until <= 50:
+        return "48h"
+    if 1 <= hours_until <= 3:
+        return "2h"
+    return None
+
+def already_sent(sent_log: dict, client_id: str, window: str) -> bool:
+    return f"{client_id}_{window}" in sent_log
+```
+
+Inside main(), a matched window triggers the message generator. The script then calls send_sms() if the client has a phone number and send_email() if they have an address. A log entry is written only when at least one channel succeeds. A failed send therefore gets retried on the next hourly run, as long as the window is still open. The log is what stops double-sending across runs.
+
+## What should the AI-written message say?
+
+The generator sends the client's first name, service, appointment time, stylist, and business name to Groq and asks for a message under 160 characters. The prompt asks for no hashtags, no emojis, and a simple request to reply YES to confirm or call to reschedule. If the API call fails, a plain template takes over, so the client still gets a reminder.
+
+Meevo gives an example of a system that texts a client 24 hours before the appointment so they can confirm or reschedule. That is an illustration, not a measured result (secondary). Whatever the wording, the reschedule path matters most, because its purpose is to surface a change early enough to refill the slot. Read several generated messages before going live, since model output can drift from the tone you want.
+
+## What do you need before running the script?
+
+You need Python 3.10 or later, a Twilio account with an SMS-capable number, a Resend account for email, a Groq API key, and an appointment list in CSV form. Store every key as an environment variable and never hard-code it.
+
+This guide does not quote per-message or per-email rates. Check each provider's live pricing page before you commit. If your booking platform already has automations, check those first. SMMcalc's review of a class booking system notes that GoHighLevel workflows can send SMS 24 hours and 2 hours before a class starts. That describes platform capability, not a measured result (secondary).
+
+A sample CSV looks like this:
+
+```
+client_name,phone,email,service,appointment_datetime,stylist
+Sarah Johnson,+15551234567,sarah@email.com,Balayage,2026-06-15 14:00,Emma
+Mike Torres,+15559876543,mike@email.com,Haircut & Beard,2026-06-15 15:30,James
+Lisa Chen,,lisa.chen@gmail.com,Highlights,2026-06-16 11:00,Emma
+```
+
+Clients without a phone number receive email only, and clients without an email receive SMS only.
+
+## How do you run the reminder agent on a schedule?
+
+GitHub Actions can run the script every hour, which catches both windows. Store the CSV contents and API keys as repository secrets, then create a workflow file at `.github/workflows/appointment-reminders.yml`:
+
+```yaml
+name: Appointment Reminders
+on:
+  schedule:
+    - cron: '0 * * * *'
+jobs:
+  reminders:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Write appointments CSV
+        run: echo '${{ secrets.APPOINTMENTS_CSV }}' > appointments.csv
+      - name: Run reminders
+        env:
+          TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+          TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
+          TWILIO_FROM_PHONE: ${{ secrets.TWILIO_FROM_PHONE }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        run: python3 reminder_agent.py
+```
+
+## What is the go-live checklist?
+
+Work through these steps in order before clients receive live messages.
+
+1. Replace the placeholder CSV with a test file that uses your own phone number and email.
+2. Comment out send_sms() and send_email(), then replace them with print() calls and run the script. Check that each message reads correctly.
+3. Confirm that the window logic fires for an appointment set 48 hours out and one set 2 hours out.
+4. Run the script twice in a row and confirm that the sent log prevents a second message.
+5. Re-enable sending with one channel only, such as email, and check delivery in the provider dashboard.
+6. Enable SMS, then turn on the hourly schedule.
+7. Record your no-show rate for four weeks before launch so you can compare it after.
+
+## Which reminder impact claims should you trust?
+
+Treat vendor figures with care. BonusQR claims automated SMS reminders can reduce costly no-shows by up to 40%, but the claim is unsourced (secondary). GoConverso states that email and SMS reminders reduce no-shows by 60 to 70%, without naming a source for the figure (secondary). The 14% attendance figure traces back to research in The Permanente Journal, as cited by Lutily (secondary), and the 35% reduction traces to SchedulingKit (secondary). Of these, the 14% and 35% figures have a named origin, which makes them more useful for planning than the unsourced claims.
+
+Your own baseline matters more than any published number. The worked example above only shows what would happen if the assumed rates held. The no-show rate you measure before and after launch is the number that counts. For what to do when a client does not show, see [the abandoned appointment email win-back guide](/blog/abandoned-appointment-email-win-back-no-shows).
+
+## What happens when a client replies?
+
+The script sends reminders but does not process replies. Inbound texts go to your Twilio number. You can configure a Twilio webhook to forward replies to email or a chat channel, then handle reschedules manually. A second script can parse replies and update the booking, which is more involved and worth building only once the basic reminders are working.
+
+Log output from each run is also useful for debugging, since it shows which appointments matched a window and which sends failed. Tracking agent behaviour in this way is covered in [how to monitor and debug AI agents for local business](/blog/agentops-monitor-debug-ai-agents-local-business). If you want the reminder flow connected to booking and intake, see [AI agents for appointment booking in local business](/blog/ai-agent-for-appointment-booking-local-business). Once a visit is complete, the same contact list can support review requests, which is covered in [AI agents for Google reviews management](/blog/ai-agent-for-google-reviews-management).
+
+## Frequently Asked Questions
+
+### Does the reminder script cost anything to run?
+
+The script itself is free to copy and run. Twilio and Resend bill for usage, and this guide does not quote their rates. Multiply your expected message count by the live rate on each provider's pricing page. For example, 80 appointments per week with an SMS at each of two windows is 160 messages per week (assumption).
+
+### Should reminders go out 24 hours or 48 hours ahead?
+
+The sources point to a range of 24 to 48 hours, and Lockhart-Meyer favours 48 hours (secondary). The script uses 46 to 50 hours and about 2 hours. If most of your clients book within a day, change the first window to match your typical booking lead time.
+
+### What if a client has no phone number or email address?
+
+The script sends to whichever channel is available. A client with neither receives nothing, so collect at least one contact method when the booking is made.
+
+### Will an AI-written message fix no-shows by itself?
+
+No source measures that. The timing of the message and the option to reschedule are the parts most consistently recommended. Compare your no-show rate before and after launch to see whether the wording is contributing anything.
+
+To see where reminders fit in your wider marketing spend, [request a free audit from DataLatte](/free-audit).
+
+## Sources
+
+- [10 Actionable Hair Salon Marketing Ideas to Keep Your Chairs Full, BonusQR](https://bonusqr.com/article/10-actionable-hair-salon-marketing-ideas-to-keep-your-chairs-full) (secondary)
+- [How Salon Automation Adds Value to Your Beauty Business, Meevo](https://www.meevo.com/blog/salon-automation/) (secondary)
+- [How to Improve Your Salon Rebooking Rate: 8 Ways That Work, Salonist](https://salonist.io/blog/improve-salon-rebooking-rate) (secondary)
+- [Grow your Salon with SMS, SalonIQ](https://www.saloniq.com/article/grow-your-salon-with-sms/) (secondary)
+- [A salon marketing checklist for savvy text messaging, Lockhart-Meyer](https://www.lockhart-meyer.co.uk/a-salon-marketing-checklist-for-savvy-text-messaging/) (secondary)
+- [How to Increase Salon Rebooking Rate (From 33% to 58%), Lutily](https://lutily.com/blog/rebook-before-they-leave) (secondary)
+- [Best Client Communication Tools for Pet Grooming Businesses, BuilderGrowthEngine](https://buildergrowthengine.com/top-client-communication-tools-for-pet-grooming-businesses/) (secondary)
+- [Group Fitness Studio Marketing Strategies That Fill Classes (2026), Mariana Tek](https://www.marianatek.com/blog/group-fitness-studio-marketing-strategies/) (secondary)
+- [Best Online Scheduling System in 2025, GoConverso Docs](https://docs.goconverso.com/en/guides/best-online-scheduling-system) (secondary)
+- [Best Class Booking System Review, SMMcalc.com](https://smmcalc.com/blog/best-class-booking-system/) (secondary)
+- [Front Desk Automation for Salons: Ultimate Guide, BookingBee](https://bookingbee.ai/ultimate-guide-to-front-desk-automation-for-salons/) (secondary)
