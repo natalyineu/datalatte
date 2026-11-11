@@ -12,6 +12,7 @@ function links(slug, tags) { const q = tk(slug + " " + tags); return live.filter
 async function call(user) { const r = await fetch("https://openrouter.ai/api/v1/chat/completions", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ model: "anthropic/claude-haiku-5.5", max_tokens: 16000, temperature: 0.3, usage: { include: true }, messages: [{ role: "system", content: SYS }, { role: "user", content: user }] }), signal: AbortSignal.timeout(420000) }); const j = await r.json(); if (!j.choices?.[0]?.message?.content) throw new Error("empty"); return { text: j.choices[0].message.content, cost: j.usage?.cost || 0 }; }
 let total = 0; const close = [], done = [];
 async function one(s) {
+  if (fs.existsSync(path.join(OUT, s + ".mdx"))) return;
   const old = fs.readFileSync(`content/blog/${s}.mdx`, "utf8"); const title = (old.match(/^title:\s*"(.*)"/m) || [])[1] || s; const tags = (old.match(/^tags:\s*\[(.*)\]/m) || [])[1] || "";
   const r = searchFacts(s.replace(/-/g, " ") + " " + title + " " + tags);
   if (r.facts.length < 12 || r.sources < 3) { close.push({ slug: s, facts: r.facts.length, sources: r.sources }); return; }

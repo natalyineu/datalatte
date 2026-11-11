@@ -1,0 +1,114 @@
+---
+title: "Marketing Dashboard for Small Business: Free Setup"
+date: "2026-05-20"
+lastModified: "2026-11-11"
+description: "Build a free marketing dashboard from Google Analytics, Search Console and Google Ads. Track 5 to 8 numbers you will act on, reviewed monthly."
+author: "Nataliia"
+category: "Analytics & Tracking"
+tags: ["marketing dashboard", "looker studio", "google analytics 4", "search console", "small business marketing"]
+slug: "how-to-create-marketing-dashboard-small-business"
+image: "https://images.unsplash.com/photo-1599351431613-d3496169e4e7?w=800&q=80&auto=format&fit=crop"
+readTime: "7 min read"
+---
+
+A small business can build a marketing dashboard for free by pulling its key numbers into one report. The three sources most owners need are Google Analytics for site activity, Search Console for search visibility and Google Ads for paid results. Google's Analytics page offers a free account to start with, so the cost of the data itself is zero. Limit the dashboard to 5 to 8 numbers, and keep only the ones that would change what you do next week.
+
+Looker Studio is the free reporting tool that connects these sources. The steps below cover what each source answers, how to set the report up, and a worked example with clearly marked assumptions. Connector limits change over time, so check Google's Looker Studio connector help pages for current rules before you build.
+
+<StatRow
+  values="5|9|0|1"
+  labels="Google Analytics integrations named on Google's Analytics page|Integrations listed on Google's wider Analytics tools page|Cost to open a Google Analytics account|Recommended checks per month for site and search data"
+  subs="Google Analytics page, primary|Google tools page, primary|Google Analytics page: create a free account, primary|Indelible Think guide, secondary"
+  trends="neutral|neutral|neutral|neutral"
+/>
+
+## What Should a Small Business Dashboard Show?
+
+Start from the questions a business owner asks each month, not from the charts a tool offers. Are people finding the business in search? Are they visiting the site and taking action? What did paid ads cost? Are calls and bookings moving? Each question needs one primary number, and a source for that number.
+
+Numbers that look impressive but do not change a decision belong off the page. A dashboard that shows 30 metrics usually gets ignored after the first week. The goal is a page that someone can read in two minutes and act on within the same afternoon.
+
+## Which Google Source Answers Which Question?
+
+Each source measures something different, so it helps to match the source to the question before building anything. Search Console reports search behaviour, while Google Analytics reports what happens on the site. Google Ads reports paid activity only.
+
+| Question | Source | Number to show | What it means |
+| --- | --- | --- | --- |
+| Are people finding us in search? | Search Console | Impressions and clicks | An impression means the site appeared in a result; a click means someone selected it ([Wildheart Media, secondary](https://wildheartmedia.com/keyword-research-yoga-retreats/)) |
+| Is the site being used? | Google Analytics | Sessions and key actions | Activity after the visit, set up by you as conversions |
+| What did ads cost and return? | Google Ads | Cost, clicks, conversions | Paid results only; it does not include organic search |
+| Which words are people using? | Business Profile | Search terms | Google's sample dashboard lists terms such as "cafe" ([Google Business Profile](https://business.google.com/ca-en/business-profile/)) |
+| Are calls and bookings rising? | Your own sheet | Calls, bookings | No connector provides this; count it by hand |
+
+Google Analytics also integrates with Google Ads, which means the two datasets can be compared without copying figures ([Google Analytics](https://marketingplatform.google.com/about/analytics/)). Google describes Google Ads as using connected data such as Google Analytics to learn from signals, so linked accounts are worth setting up early ([Google Ads](https://business.google.com/en-all/google-ads/)).
+
+## How Do You Set Up the Dashboard?
+
+Work through the steps in order, because later steps depend on the data being present. Confirm the site is collecting data before opening Looker Studio, or the tiles will stay empty.
+
+1. Install Google Analytics 4 on the website and confirm visits appear in the reports. The [GA4 guide](/blog/google-analytics-4-for-small-business) covers the basic setup.
+2. Verify the website in Search Console, and sign in to all tools with the same Google account.
+3. Create a new report in Looker Studio and add each data source.
+4. Place four number tiles across the top, one per question in the table above, each with a comparison to the previous month.
+5. Add one trend chart per source with a date selector, so the period can be changed.
+6. Add a manual Google Sheet for calls and bookings, and connect it as a source.
+7. Share the report link with the person who will review it each month.
+
+A manual column is more useful than an empty tile. If bookings come from a phone line or a booking page, count them weekly in the sheet, even if the number is rough.
+
+## What Does a Worked Example Look Like?
+
+The figures below are **assumptions** for a single-location hair salon, used only to show layout. They are not benchmarks and should be replaced with real numbers from your own accounts.
+
+| Tile | This month (assumption) | Last month (assumption) | Change |
+| --- | --- | --- | --- |
+| Search clicks | 220 | 190 | +16% |
+| Sessions | 640 | 600 | +7% |
+| Ad spend | $300 | $300 | 0% |
+| Bookings (sheet) | 42 | 38 | +11% |
+
+Cost per booking would be $300 divided by 42, or about $7.14 in this example. Show it only if you can tie each booking to a specific ad click, because otherwise the division mixes unrelated activity. In this layout, bookings and spend sit side by side, which is the honest comparison.
+
+Writing one decision under the tiles keeps the dashboard useful. For example, the salon might note "move the online booking link higher on the Google Business Profile" and check the result next month. The [Google Business Profile optimization guide for fitness studios](/blog/fitness-studio-google-business-profile-optimization) shows how profile changes like this are typically handled.
+
+## How Often Should You Review It?
+
+A monthly review is enough for most small businesses. An SEO guide from a UK agency recommends checking Google Analytics, Search Console and Business Profile insights once a month, so patterns become visible over time ([Indelible Think, secondary](https://indeliblethink.co.uk/how-liverpool-businesses-can-improve-seo/)). Weekly checks make sense only during a campaign, because the numbers move too much day to day to judge a result.
+
+Keep the review short. Read the four tiles, check the trend charts for one unusual change, and write one decision. If the same tile is flat for three months, change the action behind it rather than adding more charts.
+
+If you run paid campaigns and need help reading the numbers, the [guide to what Google Ads management involves](/blog/google-ads-management-small-business-what-to-expect) explains the reporting you can expect from an agency. The broader [data analytics guide for small businesses](/blog/data-analytics-for-small-business) covers how to read these numbers without a data team.
+
+## FAQ
+
+### Is Looker Studio free to use?
+
+Looker Studio is listed as a free tool for building custom dashboards, according to a 2026 comparison guide ([Ryze, secondary](https://www.get-ryze.ai/blog/google-local-services-ads-reporting-tool)). Check Google's current pricing page before you build, since terms can change.
+
+### Do I need Google Ads to start a dashboard?
+
+No. A dashboard built from Google Analytics and Search Console is useful on its own. Add Google Ads once you run paid campaigns and need to compare spend with site results.
+
+### Why do my Search Console numbers look incomplete?
+
+Search Console data is a sample of search activity and may group some queries together. Check Google's Search Console help page for the current explanation before drawing conclusions from small changes.
+
+### Can I add calls and bookings without a connector?
+
+Yes. Keep a Google Sheet with a row per week, count calls and bookings by hand, and connect the sheet as a data source. It is less automated, but it is accurate enough for monthly decisions.
+
+### How many numbers should the dashboard show?
+
+Five to eight is a practical range for a small business. The four tiles in the worked example plus one or two trend charts keep the report readable in a few minutes.
+
+## Sources
+
+- [Analytics Tools & Solutions for Your Business, Google Analytics](https://marketingplatform.google.com/about/analytics/)
+- [Google Analytics tools and integrations, Google](https://business.google.com/en-all/google-analytics/)
+- [Reach Customers Across YouTube & Search, Google Ads](https://business.google.com/en-all/google-ads/)
+- [Get Listed on Google, Google Business Profile (CA)](https://business.google.com/ca-en/business-profile/)
+- [Keyword Research For Yoga Retreats: Free Guide, Wildheart Media (secondary)](https://wildheartmedia.com/keyword-research-yoga-retreats/)
+- [How Liverpool businesses can improve SEO, Indelible Think (secondary)](https://indeliblethink.co.uk/how-liverpool-businesses-can-improve-seo/)
+- [Google Local Services Ads Reporting Tool (2026 Guide), Ryze (secondary)](https://www.get-ryze.ai/blog/google-local-services-ads-reporting-tool)
+
+Want a dashboard built around your own numbers? [Book a free audit](/free-audit) and we will review which sources you already have.

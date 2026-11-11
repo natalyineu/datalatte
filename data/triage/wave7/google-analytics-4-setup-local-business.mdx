@@ -1,0 +1,111 @@
+---
+title: "Google Analytics 4 Setup for a Local Business"
+date: "2026-05-21"
+lastModified: "2026-11-11"
+description: "Google Analytics 4 setup for a local business in 5 steps: account, property, data stream, tag, then key events and excluding your own visits."
+author: "Nataliia"
+category: "Analytics"
+tags: ["analytics", "google-analytics-4", "local-business", "tracking"]
+slug: "google-analytics-4-setup-local-business"
+image: "https://images.unsplash.com/photo-1525193612562-4cd76a7dfa6c?w=800&q=80&auto=format&fit=crop"
+readTime: "8 min read"
+---
+
+To set up Google Analytics 4 for a local business, create an account and a property, add a web data stream for your website, install the Google tag on every page, and check the Realtime report on your phone. Then mark your booking, call and form actions as key events, and exclude your own visits so the numbers reflect customers. Google Analytics is free to use, and a vendor guide says data should take 24 to 48 hours to appear after correct setup.
+
+This guide is for owners of cafes, salons, studios and clinics with a website. Google changes menu names in its interface, so if a label differs from what you see, check the live help page. Worked numbers are labelled as assumptions.
+
+<StatRow
+  values="20|24-48 hours|3|Free"
+  labels="Conversion goals allowed per account|Hours for data to appear after correct setup|Core metrics to track in reports|Cost of Google Analytics"
+  subs="LivePlan ROI guide (secondary)|Salesforce CA small business guide (secondary)|CTR, conversion rate and ROAS, BoostFloral (secondary)|Slamdot marketing guide (secondary)"
+  trends="neutral|neutral|neutral|neutral"
+/>
+
+## How Do You Create the Account and Property?
+
+Sign in with the Google account that will own your analytics data, then create an account and give it a name. Set the data-sharing options when prompted. Use a business login rather than a personal one, so access does not depend on a single employee.
+
+Next, create a property inside the account. Enter a name, then choose the reporting time zone and currency of your business. Reports use these settings, so set them correctly the first time. Most small businesses with one website need only one property.
+
+Google Analytics is described as a free tool to monitor, track and analyze website traffic in a [Slamdot marketing guide](https://www.slamdot.com/blog/catering-marketing-101-four-google-marketing-tools-you-need-to-master/) (secondary). A [LivePlan ROI guide](https://www.liveplan.com/blog/starting/track-marketing-return-on-investment) (secondary) also calls it a free analytics tool.
+
+## How Do You Add the Web Data Stream and Install the Tag?
+
+In the property settings, open Data streams and choose Web. Enter your website address and a stream name, then create the stream. Copy the Measurement ID shown on the screen. It begins with "G-", and it identifies this stream only.
+
+Install the tag in one of three ways:
+
+- Website builder: paste the Measurement ID into the Google Analytics field that most builders provide.
+- Manual install: paste the tag code into the head section of every page.
+- Tag manager: add the Google Analytics configuration tag if you already use a tag manager.
+
+Do not forget the booking page. If a third-party scheduler hosts it, check whether the vendor lets you add the tag there. Schedulers differ, so ask the vendor before assuming bookings are tracked.
+
+## How Do You Confirm Data Is Arriving?
+
+Open the Realtime report, then visit your own site on your phone. Click through to the booking page and submit a test form if you have one. Seeing your own visit in Realtime confirms the tag is firing.
+
+Data in the full reports takes longer. A [Salesforce CA small business guide](https://www.salesforce.com/ca/small-business/marketing/smb-marketing-guide/?bc=OTH) (secondary) says that after tracking is set up correctly, data should take 24 to 48 hours to appear. If nothing shows after that window, check that the Measurement ID matches this stream and that the tag is on every page.
+
+## Which Actions Should Be Key Events?
+
+Key events are the actions that matter most to your business. For a local business these are usually a booking confirmation, a contact form submission, a tap on the phone number and a click on directions. Create the event first, then mark it as a key event.
+
+Keep the list short. A [LivePlan ROI guide](https://www.liveplan.com/blog/starting/track-marketing-return-on-investment) (secondary) says Google limits conversion goals to 20 per account, and that goals only record conversions from the point they are set up. Decide your three or four key actions before you start any campaign, so you do not lose early data. The [GA4 guide for small business](/blog/google-analytics-4-for-small-business) covers the reports where these actions appear.
+
+## How Do You Keep Your Own Visits Out of the Numbers?
+
+On a small site, staff checking the booking page can inflate results. Define internal traffic by IP address in the web stream's tag settings, then create an exclude data filter that uses that rule.
+
+Start the filter in testing mode and check the data before activating it. An active filter changes incoming data permanently, so a wrong IP range can remove real customers. Home and mobile connections change IP addresses, so this rule works best for a fixed shop, studio or clinic network.
+
+## How Should You Read Ad and Profile Traffic?
+
+If you run ads, link Google Ads from the property's admin settings. You need the right access on both accounts, and the platform's help page lists the exact roles. Compare the two channels side by side in [Google Ads vs Facebook Ads for local business](/blog/google-ads-vs-facebook-ads-local-business) before you decide where budget goes.
+
+Attribution can mislead you. A [LivePlan ROI guide](https://www.liveplan.com/blog/starting/track-marketing-return-on-investment) (secondary) notes that Google Analytics gives a sign-up's credit to the last campaign that brought the user to the website. It also classifies CPM and CPC visitors as paid traffic under the UTM medium. For ad reports, a [BoostFloral florist guide](https://www.boostfloral.com/blogs/using-google-ads-to-market-your-flower-shop-website) (secondary) recommends watching click-through rate, conversion rate and return on ad spend. If you run local campaigns for physical stores, a [vendor guide on local campaigns](https://bofu.ca/en/blogs/the-top-of-the-funnel/campagnes-locales-google-ads-visites-en-magasin) (secondary) recommends Store Visit Reports to track visits.
+
+Remarketing adds another layer. See [Google Ads remarketing for local businesses](/blog/google-ads-remarketing-setup-local-businesses) once your key events are firing.
+
+## What Does the Setup Show? A Worked Example
+
+All inputs below are **assumptions** for a salon with a website that gets 1,200 visits a month.
+
+| Channel | Visits (assumption) | Bookings (assumption) | Booking rate |
+| --- | --- | --- | --- |
+| Google Business Profile | 400 | 20 | 5% |
+| Instagram | 300 | 6 | 2% |
+| Other sources | 500 | 10 | 2% |
+| Total | 1,200 | 36 | 3% |
+
+Booking rate is bookings divided by visits. Google Business Profile produces 20 of 36 bookings, which is 56%, from 33% of visits. That gap is why the setup matters. A channel with equal visits but fewer bookings deserves less of your time.
+
+Treat the result as a lead, not a verdict. Last-click credit may give the profile too much credit if a customer saw an Instagram post first. For a wider view of what to measure, read the [local business analytics and tracking guide](/blog/local-business-analytics-and-tracking).
+
+## FAQ
+
+### Is Google Analytics 4 free?
+A [Slamdot marketing guide](https://www.slamdot.com/blog/catering-marketing-101-four-google-marketing-tools-you-need-to-master/) (secondary) describes Google Analytics as a free tool. Confirm current pricing on Google's live help page before you rely on it.
+
+### How long until data shows up?
+A [Salesforce CA guide](https://www.salesforce.com/ca/small-business/marketing/smb-marketing-guide/?bc=OTH) (secondary) says data should take 24 to 48 hours to appear after correct setup. Use Realtime to confirm the tag is firing sooner.
+
+### What is a key event?
+It is an action that matters to your business, such as a booking or a call tap. Check Google's live help page for the exact definition, then mark your three or four most important actions.
+
+### Can I exclude my own visits?
+Yes. Define internal traffic by IP address, then create an exclude data filter. Test it first, because an active filter permanently changes incoming data.
+
+### Why does a sign-up show under the wrong channel?
+Google Analytics credits a sign-up to the last campaign that brought the user to the site, according to a [LivePlan ROI guide](https://www.liveplan.com/blog/starting/track-marketing-return-on-investment) (secondary). Read channel totals alongside your booking-page data, not in isolation.
+
+## Sources
+
+- [Slamdot: Catering Marketing 101, four Google marketing tools](https://www.slamdot.com/blog/catering-marketing-101-four-google-marketing-tools-you-need-to-master/) (secondary)
+- [LivePlan: A Complete Guide to Marketing ROI Tracking](https://www.liveplan.com/blog/starting/track-marketing-return-on-investment) (secondary)
+- [Salesforce CA: Small Business Marketing, The Ultimate Guide](https://www.salesforce.com/ca/small-business/marketing/smb-marketing-guide/?bc=OTH) (secondary)
+- [BoostFloral: Google Ads Tips for Florists](https://www.boostfloral.com/blogs/using-google-ads-to-market-your-flower-shop-website) (secondary)
+- [bofu.ca: Google Ads Local Campaigns, Generate More Physical Store Visits](https://bofu.ca/en/blogs/the-top-of-the-funnel/campagnes-locales-google-ads-visites-en-magasin) (secondary)
+
+Want help confirming your tracking shows which channel brings bookings? Start with a [free audit](/free-audit).

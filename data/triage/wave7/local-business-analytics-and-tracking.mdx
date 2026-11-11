@@ -1,0 +1,125 @@
+---
+title: "Local Business Analytics: What to Track and Measure"
+date: "2026-05-23"
+lastModified: "2026-11-11"
+description: "Track 4 local metrics: calls, direction requests, form leads and campaign sources. Use GA4 key events and UTM links to tie them together."
+author: "Nataliia"
+category: "Analytics & Tracking"
+tags: ["local business analytics", "tracking", "small business growth"]
+slug: "local-business-analytics-and-tracking"
+image: "https://images.unsplash.com/photo-1599058917765-a780eda07a3e?w=800&q=80&auto=format&fit=crop"
+readTime: "8 min read"
+---
+
+A local business needs to track four things: calls, direction requests, form or booking leads, and the campaign that sent each one. Business Profile insights show how people find and contact your listing, GA4 records form submits and other actions as key events, and UTM tags on outside links show which email, post or ad sent the visitor. Google Analytics is free to use, according to two guides cited below, so the main cost is setup time.
+
+This guide is for owners of shops, clinics, salons and studios that have a website and a Google Business Profile. Worked numbers are labelled as assumptions.
+
+<StatRow
+  values="20|24 to 48|3|3"
+  labels="Conversion goals per Google Analytics account, per the older goals feature|Hours before new Google Analytics data appears after setup|Metrics the Google Ads guide recommends: CTR, conversion rate and ROAS|Measures the membership guide says to track: conversion, engagement and acquisition cost"
+  subs="LivePlan (secondary)|Salesforce (secondary)|BoostFloral (secondary)|Raklet (secondary)"
+  trends="neutral|neutral|neutral|neutral"
+/>
+
+## What Should a Local Business Track?
+
+Track actions that lead to revenue, not page views. For most local businesses that means phone calls from the listing and the website, direction requests, booking, quote or contact form submissions, and the source of each: search, maps, ads, email or social. Start with these four before adding any other report.
+
+The membership guide from Raklet recommends watching conversion rates, engagement and the cost of getting each new member (secondary). A salon can apply the same logic to new clients: divide the month's ad spend by the new clients that came through each source. Encompass describes marketing automation as a way to bring email, social, website analytics and ad tracking together (secondary).
+
+For a broader reporting habit, read the [data analytics guide for small business](/blog/data-analytics-for-small-business) once these basics are running.
+
+## What Does Google Business Profile Report?
+
+Business Profile insights show how people find the listing and what they do next. The usual measures include views, searches, calls, direction requests and website clicks. Messages, bookings and menus appear only when they apply to your business type.
+
+The exact labels and definitions change over time, so check the platform's live help page for the current list before you build a report on it. Export the monthly figures to a sheet so you can compare months later.
+
+A call-button click is not the same as an answered call. If your phone system logs missed calls, record them separately so the two numbers are not mixed up.
+
+## How Do You Set Up Key Events in GA4?
+
+Key events are the actions you choose to mark as important. For a local website that usually means a form submit, a click on the phone number, a click on a booking button and a view of the thank-you page. Keep the list short so each event means something when you read the report.
+
+The older goals feature works differently. The LivePlan guide says Google caps goals at 20 per account and that goals only record conversions from the moment they are set up, not historical data (secondary). Set up your events before a campaign starts, not during it.
+
+After correct setup, Salesforce's guide says data can take 24 to 48 hours to appear (secondary). Do not judge a new setup on its first day. For click-by-click steps, follow the [GA4 guide for small business](/blog/google-analytics-4-for-small-business).
+
+## How Do UTM Links Show Which Campaign Worked?
+
+Add campaign parameters to links you control: emails, social bios, ads and any link you send out. Use one naming scheme, written in a shared sheet. For example, source newsletter, medium email and campaign november-offer. Keep everything lower case, because "Google" and "google" can be counted as two separate sources.
+
+Tag only links that come from outside your website. Tags on links inside your own site overwrite the original source of the visit, so the report then shows your own pages as the traffic source.
+
+Write the scheme down before the first campaign. Changing names halfway through splits one campaign across two rows and makes the month harder to read.
+
+## How Does Google Analytics Credit a Lead to a Campaign?
+
+Google Analytics credits a sign-up to the last campaign that brought the user to the website, according to the LivePlan guide (secondary). A customer who clicked an ad, then later called from the Business Profile, may be credited to the ad, to a direct visit or to another source, depending on the path they took.
+
+Visits from CPM and CPC ads are classed automatically as paid traffic, so ad visits appear in paid reports without extra work (secondary, LivePlan). Check that a few known test visits land in the right channel before trusting the totals.
+
+BoostFloral recommends reviewing click-through rate, conversion rate and return on ad spend in both Google Analytics and Google Ads reports (secondary). Use these ratios alongside your lead counts, not instead of them.
+
+## How Do You Calculate Cost per Lead? A Worked Example
+
+Every number below is an **assumption** for a salon running one local ad campaign for a month. Replace them with your own figures.
+
+| Input | Value |
+| --- | --- |
+| Monthly ad spend (assumption) | $400 |
+| Calls from Business Profile and site (assumption) | 18 |
+| Form leads (assumption) | 12 |
+| Total leads | 30 |
+| Cost per lead | about $13.33 |
+| Share of leads who book (assumption) | 50% |
+| Bookings | 15 |
+| Cost per booking | about $26.67 |
+| Gross profit per booking (assumption) | $60 |
+| Gross profit left after ad cost per booking | about $33.33 |
+
+Gross profit left per booking is calculated before overheads. Compare the 18 calls against the same month last year, or against a month with no ads, to see whether the campaign added new customers or only claimed people who would have called anyway. The [local SEO pricing guide](/blog/how-much-does-local-seo-cost-for-a-small-business-honest-pricing-guide) helps you compare ad spend with the cost of organic work.
+
+## What Should You Check Each Month?
+
+1. Confirm the key events still fire on the form, the phone link and the booking button.
+2. Export Business Profile calls, direction requests and website clicks for the month.
+3. Filter GA4 by source and check that each campaign uses the agreed UTM names.
+4. Record the number of leads, bookings and cost per lead for each source.
+5. Compare this month with the same month last year and note any change over 20 percent.
+
+Step five is a suggested review threshold, not a rule from any source. Adjust it to your business size.
+
+<Callout type="tip" title="Do This Today">
+Mark your form submission and phone-click events as key events in GA4, then write down this month's Business Profile calls and direction requests as your baseline for comparison.
+</Callout>
+
+## FAQ
+
+### What is the most important metric for a local business?
+
+Leads that become paying customers. Count calls, direction requests and form submissions, then track how many turn into customers. A lead count alone does not show whether marketing is paying off.
+
+### Is Google Analytics free?
+
+Yes. The Slamdot and LivePlan guides both describe it as free (secondary). Your costs come from setup time and any paid tools you add, such as call-tracking software.
+
+### How long before new tracking shows data?
+
+Salesforce's guide says data can take 24 to 48 hours to appear after correct setup (secondary). Check your reports after that window, not on the day you make the change.
+
+### What happens if I forget UTM tags?
+
+Untagged visits are grouped under a general source, so you cannot tell which email, post or ad sent them. Add tags to every outside link before each campaign goes live.
+
+## Sources
+
+- [Slamdot: Catering Marketing 101, Four Google Marketing Tools](https://www.slamdot.com/blog/catering-marketing-101-four-google-marketing-tools-you-need-to-master/) (secondary)
+- [LivePlan: A Complete Guide to Marketing ROI Tracking](https://www.liveplan.com/blog/starting/track-marketing-return-on-investment) (secondary)
+- [Salesforce: Small Business Marketing, The Ultimate Guide](https://www.salesforce.com/ca/small-business/marketing/smb-marketing-guide/) (secondary)
+- [BoostFloral: Google Ads Tips for Florists](https://www.boostfloral.com/blogs/using-google-ads-to-market-your-flower-shop-website) (secondary)
+- [Raklet: Membership Marketing, Strategies to Grow and Retain](https://www.raklet.com/blog/membership-marketing-strategies-for-success/) (secondary)
+- [Encompass: Automated Marketing Tools for Small Business](https://360encompass.com/automated-marketing-tools/) (secondary)
+
+Want tracking set up properly? [Book a free audit](/free-audit) and check which of the four measures is missing from your current setup.
