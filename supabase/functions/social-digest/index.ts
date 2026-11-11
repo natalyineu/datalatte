@@ -111,8 +111,10 @@ Deno.serve(async (req) => {
     const have = new Set((sched ?? []).map((x) => x.platform));
     const miss = ["facebook", "instagram", "threads"].filter((p) => !have.has(p));
     if (miss.length) recs.push({ key: `gap:${todayS}`, pr: 3, text: `Next 36 hours have no posts in ${miss.join(", ")}. Add and approve them in CRM → Social.` });
-    const { count: waiting } = await sb.from("contact_submissions").select("id", { count: "exact", head: true }).eq("status", "new").lt("created_at", new Date(now - 24 * 3600e3).toISOString());
-    if (waiting) recs.push({ key: `wait:${todayS}`, pr: 3, text: `${waiting} lead(s) have waited over a day for a reply. Answer them in CRM → Inbox.` });
+    const { data: newRows } = await sb.from("contact_submissions").select("email,form_type,message").eq("status", "new").neq("form_type", "newsletter").lt("created_at", new Date(now - 24 * 3600e3).toISOString());
+    const AUTO_D = /(facebookmail|mail\.instagram|mail\.threads|instagram\.com|threads\.net|meta\.com|linkedin\.com|rb2b|retention\.com|ahrefs|zendesk|freshworks|freshdesk|google\.com|vercel|supabase|github|apify|stripe|namecheap|zoho|mailchimp|calendly|resend|dodolaunch|vibe-contributors)/i, AUTO_L = /^(no-?reply|notification|notifications|security|support|billing|news|newsletter|marketing|mailer-daemon|postmaster)/i;
+    const real = (newRows ?? []).filter((x) => !(x.form_type === "direct_email" && (AUTO_D.test(String(x.email).split("@")[1] ?? "") || AUTO_L.test(String(x.email).split("@")[0] ?? ""))));
+    if (real.length) recs.push({ key: `wait:${todayS}`, pr: 3, text: `${real.length} real message(s) have waited over a day for a reply (${real.slice(0, 3).map((x) => String(x.email).split("@")[1]).join(", ")}). Answer in CRM → Inbox.` });
     const { data: deals } = await sb.from("partner_deals").select("partner,next_step");
     for (const d of deals ?? []) { const dt = String(d.next_step ?? "").match(/(\d{4}-\d{2}-\d{2})/)?.[1]; if (dt && dt <= todayS) recs.push({ key: `nudge:${d.partner}:${dt}`, pr: 3, text: `Time to nudge ${d.partner} (${String(d.next_step).slice(0, 80)}).` }); }
     const in7 = new Date(now + 7 * 864e5).toISOString().slice(0, 10);
