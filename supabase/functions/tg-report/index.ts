@@ -10,6 +10,9 @@ const TOPICS: Record<string, string> = { publish: "📤 Публикации", a
 const get = async (k: string) => (await sb.from("social_settings").select("value").eq("key", k).maybeSingle()).data?.value as string | undefined;
 const set = (k: string, v: string) => sb.from("social_settings").upsert({ key: k, value: v }, { onConflict: "key" });
 
+// Sending and purging require the service role key (the anon key is public): used by the GitHub Action report and server jobs.
+const isService = (req: Request) => { try { const t = (req.headers.get("authorization") ?? "").replace(/^Bearer /i, "").split(".")[1]; return JSON.parse(atob(t.replace(/-/g, "+").replace(/_/g, "/"))).role === "service_role"; } catch { return false; } };
+
 Deno.serve(async (req) => {
   const u = new URL(req.url);
   if (u.searchParams.get("discover") === "1") {
@@ -25,6 +28,7 @@ Deno.serve(async (req) => {
     return Response.json(r.ok ? { ok: true } : { error: r.description });
   }
   if (u.searchParams.get("purge")) {
+    if (!isService(req)) return Response.json({ error: "service role required" }, { status: 403 });
     const chat = await get("tg_group_id"); const from = +u.searchParams.get("purge")!; const to = +(u.searchParams.get("to") ?? from);
     const ids: number[] = []; for (let i = from; i <= to; i++) ids.push(i);
     let deleted = 0;
@@ -49,7 +53,8 @@ Deno.serve(async (req) => {
     for (const key of fresh) { const tid = existing[key]; await api("sendMessage", { chat_id: chat, message_thread_id: tid, text: `Тема «${TOPICS[key]}» подключена ✅` }); }
     return Response.json({ ok: true, topics: existing, created: fresh });
   }
-  // send
+  // send (service role only)
+  if (!isService(req)) return Response.json({ error: "service role required" }, { status: 403 });
   let topic = u.searchParams.get("send"); let text = u.searchParams.get("text");
   if (req.method === "POST") { try { const b = await req.json(); topic = b.topic ?? topic; text = b.text ?? text; } catch { /* ignore */ } }
   if (!topic || !text) return Response.json({ error: "need topic and text" }, { status: 400 });

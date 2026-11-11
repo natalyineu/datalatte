@@ -505,7 +505,7 @@ const fmtDay = (d) => `${+d.slice(8, 10)} ${MON[+d.slice(5, 7) - 1]}`;
 const shortPath = (u) => { const p = u.replace(/^https?:\/\/[^/]+/, "") || "/"; return p.length > 46 ? p.slice(0, 45) + "…" : p; };
 const TARGET = new Set(["usa", "gbr", "can", "aus", "nzl", "irl"]);
 
-function buildReport(gsc, ga4, leads, bing) {
+function buildReport(gsc, ga4, leads, bing, utm) {
   // ---- GSC: last 7 full days vs previous 7 ----
   const gd = gsc.dailyTrend;
   const g1 = gd.slice(-7), g0 = gd.slice(-14, -7);
@@ -651,104 +651,149 @@ function buildReport(gsc, ga4, leads, bing) {
   const launch = gAll.length ? fmtDay(gAll[0].d) : "launch";
   const A = leads ? leads.all : null;
 
-  const L = [];
-  L.push(`<b>📊 DATALATTE DAILY REPORT</b>`, `<i>${esc(date)}</i>`, "");
+  const hdr = (t) => [`<b>${t}</b>`, `<i>${esc(date)}</i>`, ""];
+  const rows7 = [
+    `${lab("")}${pad("this wk", 8)}${pad("last wk", 9)}${pad("change", 7)}`,
+  ];
+  const org1 = hasChan ? chSum(wk1, "Organic Search") : 0, org0 = hasChan ? chSum(wk0, "Organic Search") : 0;
 
-  // ================= 1. ALL TIME =================
-  L.push(`<b>━━ 1. ALL TIME (since ${esc(launch)}) ━━</b>`, "");
+  // ================= SUMMARY (topic: weekly) =================
+  const S = hdr("🗓 DATALATTE · DAILY SUMMARY");
+  S.push(`<b>━━ 1. ALL TIME (since ${esc(launch)}) ━━</b>`, "");
   const stages = [["Seen in search", searchImp], ["Clicked to the site", searchClk], ["Real visitors", realAll], ["Clicked a button", ctaAll], ["Started the form", formStarts], ["Became a lead", A ? A.leads : 0]];
   const top = Math.max(...stages.map(x => x[1]), 1);
   const shown = stages.filter(x => x[1] > 0 || x[0] === "Became a lead");
   const bar = (v) => "█".repeat(v ? Math.max(1, Math.round(Math.log10(v + 1) / Math.log10(top + 1) * 14)) : 0);
-  L.push(`<b>FUNNEL</b>`, pre(shown.map(([n, v]) => `${lab(n, 20)}${pad(num(v), 8)}  ${bar(v)}`)));
-  if (A) L.push(`Visitor → lead conversion: <b>${fp(pctOf(A.leads, realAll))}</b>   ·   Click rate in search: <b>${fp(pctOf(searchClk, searchImp), 2)}</b>`, "");
-
-  L.push(`<b>GOOGLE SEARCH CONSOLE</b>`, pre([
-    `${lab("Shown in results", 20)}${pad(num(gImpAll), 9)}`,
-    `${lab("Clicks", 20)}${pad(num(gClkAll), 9)}   (${fp(pctOf(gClkAll, gImpAll), 2)})`,
-    `${lab("Average position", 20)}${pad(gPosAll.toFixed(1), 9)}   (lower is better)`,
-  ]));
-  if (bAll) L.push(`<b>BING</b>`, pre([
-    `${lab("Shown in results", 20)}${pad(num(bAll.imp), 9)}`,
-    `${lab("Clicks", 20)}${pad(num(bAll.clk), 9)}   (${fp(pctOf(bAll.clk, bAll.imp), 2)})`,
-  ]));
-  L.push(`<b>GOOGLE ANALYTICS</b>`, pre([
-    `${lab("All sessions", 20)}${pad(num(sessAll), 9)}`,
-    `${lab("  real visitors", 20)}${pad(num(realAll), 9)}   (${chTxt})`,
-    `${lab("  bots (ignored)", 20)}${pad(num(botsAll), 9)}`,
-    `${lab("  one-day spam (ignored)", 20)}${pad(num(spamAll), 9)}`,
-  ]));
-  if (A) L.push(`<b>LEADS</b>`, pre([
+  S.push(`<b>FUNNEL</b>`, pre(shown.map(([n, v]) => `${lab(n, 20)}${pad(num(v), 8)}  ${bar(v)}`)));
+  if (A) S.push(`Visitor → lead conversion: <b>${fp(pctOf(A.leads, realAll))}</b>   ·   Click rate in search: <b>${fp(pctOf(searchClk, searchImp), 2)}</b>`, "");
+  if (A) S.push(`<b>LEADS</b>`, pre([
     `${lab("Leads", 20)}${pad(A.leads, 9)}   (${A.ready} ready to start)`,
     `${lab("  answered", 20)}${pad(A.replied, 9)}   (${fp(pctOf(A.replied, A.leads), 0)})`,
     `${lab("  waiting for reply", 20)}${pad(A.waiting, 9)}${A.waiting ? `   oldest ${leads.oldestWaitingDays}d ⚠️` : ""}`,
     `${lab("Partnership requests", 20)}${pad(A.partner, 9)}`,
     `${lab("Newsletter subscribers", 20)}${pad(A.subs, 9)}`,
   ]));
-
-  // ================= 2. LAST 7 DAYS =================
-  L.push(`<b>━━ 2. LAST 7 DAYS (${esc(periodTxt)}) ━━</b>`, "");
-  const org1 = hasChan ? chSum(wk1, "Organic Search") : 0, org0 = hasChan ? chSum(wk0, "Organic Search") : 0;
-  const rows7 = [
-    `${lab("")}${pad("this wk", 8)}${pad("last wk", 9)}${pad("change", 7)}`,
+  S.push(`<b>━━ 2. LAST 7 DAYS (${esc(periodTxt)}) ━━</b>`, "");
+  S.push(pre([
+    rows7[0],
     wrow("Google: shown", c1.imp, c0.imp),
     wrow("Google: clicks", c1.clk, c0.clk),
-    ...(bing && bing.length >= 14 ? [wrow("Bing: shown", sum(bing.slice(-7), d => d.impressions), sum(bing.slice(-14, -7), d => d.impressions)), wrow("Bing: clicks", sum(bing.slice(-7), d => d.clicks), sum(bing.slice(-14, -7), d => d.clicks))] : []),
     wrow("Real visitors", real1, real0),
-    ...(hasChan ? [wrow("  from search", org1, org0)] : []),
     ...(leads ? [wrow("New leads", leads.w1.leads, leads.w0.leads)] : []),
-  ];
-  L.push(pre(rows7));
-  L.push(`<i>Google average position this week: ${c1.pos.toFixed(1)} (last week ${c0.pos.toFixed(1)}, lower is better)</i>`, "");
-
-  // ================= 3. CONCLUSION =================
+  ]));
   const concl = [];
   const dImp = c0.imp ? (c1.imp / c0.imp - 1) * 100 : 0, dClk = c0.clk ? (c1.clk / c0.clk - 1) * 100 : 0;
   concl.push(`Google showed the site ${Math.abs(dImp) < 5 ? "about as often" : dImp > 0 ? "more often" : "less often"} (${chg(c1.imp, c0.imp)}) but clicks ${dClk < -5 ? "fell" : dClk > 5 ? "grew" : "stayed flat"} (${chg(c1.clk, c0.clk)}).${c1.pos - c0.pos > 3 ? ` The site now appears lower in results (average position ${c0.pos.toFixed(0)} → ${c1.pos.toFixed(0)}).` : ""}`);
+  concl.push(`${num(real1)} real visitors this week (${chg(real1, real0)}); ${leads ? (leads.w1.leads ? `${leads.w1.leads} new lead(s).` : "no new leads.") : ""} ${hasChan && direct1 > real1 * 5 ? `Bot traffic is ${num(direct1)} sessions, ignored in all numbers.` : ""}`);
+  if (leads && A.waiting) concl.push(`⚠️ ${A.waiting} lead(s) are waiting for your reply, the oldest for ${leads.oldestWaitingDays} days.`);
+  S.push(`<b>━━ 3. CONCLUSION ━━</b>`, ...concl.map(t => `• ${esc(t.trim())}`));
+
+  // ================= SEO (topic: seo) =================
+  const E = hdr("🔎 SEO · GOOGLE + BING");
+  E.push(`<b>━━ 1. ALL TIME (since ${esc(launch)}) ━━</b>`, "");
+  E.push(`<b>GOOGLE SEARCH CONSOLE</b>`, pre([
+    `${lab("Shown in results", 20)}${pad(num(gImpAll), 9)}`,
+    `${lab("Clicks", 20)}${pad(num(gClkAll), 9)}   (${fp(pctOf(gClkAll, gImpAll), 2)})`,
+    `${lab("Average position", 20)}${pad(gPosAll.toFixed(1), 9)}   (lower is better)`,
+  ]));
+  if (bAll) E.push(`<b>BING</b>`, pre([
+    `${lab("Shown in results", 20)}${pad(num(bAll.imp), 9)}`,
+    `${lab("Clicks", 20)}${pad(num(bAll.clk), 9)}   (${fp(pctOf(bAll.clk, bAll.imp), 2)})`,
+  ]));
+  E.push(`<b>━━ 2. LAST 7 DAYS (${esc(periodTxt)}) ━━</b>`, "");
+  E.push(pre([
+    rows7[0],
+    wrow("Google: shown", c1.imp, c0.imp),
+    wrow("Google: clicks", c1.clk, c0.clk),
+    ...(bing && bing.length >= 14 ? [wrow("Bing: shown", sum(bing.slice(-7), d => d.impressions), sum(bing.slice(-14, -7), d => d.impressions)), wrow("Bing: clicks", sum(bing.slice(-7), d => d.clicks), sum(bing.slice(-14, -7), d => d.clicks))] : []),
+  ]));
+  E.push(`<i>Google average position this week: ${c1.pos.toFixed(1)} (last week ${c0.pos.toFixed(1)}, lower is better)</i>`, "");
+  const whySearch = why.filter(w => /^(Impressions|Position|Clicks)/.test(w));
+  if (whySearch.length) E.push(`<b>━━ 3. WHY IT MOVED ━━</b>`, ...whySearch.map(t => `• ${esc(t)}`), "");
+  for (const blk of [movers, pageOpps, queryOpps]) if (blk) E.push(pre(blk.split("\n").filter(Boolean)));
   if (bing && bing.length >= 14) {
     const bc1 = sum(bing.slice(-7), d => d.clicks), bc0 = sum(bing.slice(-14, -7), d => d.clicks);
     const bCtr = bAll ? pctOf(bAll.clk, bAll.imp) : 0, gCtr = pctOf(gClkAll, gImpAll);
-    concl.push(`Bing sent ${bc1} clicks (${chg(bc1, bc0)}). People click there ${bCtr > gCtr * 1.3 ? `${(bCtr / gCtr).toFixed(1)}× more often than on Google` : "about as often as on Google"}.`);
+    E.push(`• Bing sent ${bc1} clicks (${chg(bc1, bc0)}). People click there ${bCtr > gCtr * 1.3 ? `${(bCtr / gCtr).toFixed(1)}× more often than on Google` : "about as often as on Google"}.`);
   }
-  concl.push(`${num(real1)} real visitors this week (${chg(real1, real0)}); ${leads ? (leads.w1.leads ? `${leads.w1.leads} new lead(s).` : "no new leads.") : ""} ${hasChan && direct1 > real1 * 5 ? `Bot traffic is ${num(direct1)} sessions, ignored in all numbers above.` : ""}`);
-  if (leads && A.waiting) concl.push(`⚠️ ${A.waiting} lead(s) are waiting for your reply, the oldest for ${leads.oldestWaitingDays} days.`);
-  L.push(`<b>━━ 3. CONCLUSION ━━</b>`, ...concl.map(t => `• ${esc(t.trim())}`), "");
 
-  // ================= 4. RECOMMENDATIONS =================
-  if (recs.length) L.push(`<b>━━ 4. WHAT TO DO ━━</b>`, ...recs.slice(0, 4).map((t, i) => `${i + 1}. ${esc(t)}`));
-  return L.join("\n");
+  // ================= TRAFFIC (topic: traffic) =================
+  const T = hdr("🌐 TRAFFIC · GA4 (REAL VS BOTS)");
+  T.push(`<b>━━ 1. ALL TIME (since ${esc(launch)}) ━━</b>`, "");
+  T.push(`<b>GOOGLE ANALYTICS</b>`, pre([
+    `${lab("All sessions", 20)}${pad(num(sessAll), 9)}`,
+    `${lab("  real visitors", 20)}${pad(num(realAll), 9)}   (${chTxt})`,
+    `${lab("  bots (ignored)", 20)}${pad(num(botsAll), 9)}`,
+    `${lab("  one-day spam (ignored)", 20)}${pad(num(spamAll), 9)}`,
+  ]));
+  T.push(pre([
+    `${lab("Buttons clicked", 20)}${pad(num(ctaAll), 9)}`,
+    `${lab("Form started", 20)}${pad(num(formStarts), 9)}`,
+  ]));
+  T.push(`<b>━━ 2. LAST 7 DAYS (${esc(periodTxt)}) ━━</b>`, "");
+  const chNow = hasChan ? [...new Set(chan.filter(r => wk1.has(r.date) && r.ch !== "Direct").map(r => r.ch))].sort((a, b) => chSum(wk1, b) - chSum(wk1, a)).slice(0, 5) : [];
+  T.push(pre([
+    rows7[0],
+    wrow("Real visitors", real1, real0),
+    ...(hasChan ? [wrow("  from search", org1, org0)] : []),
+    ...chNow.filter(c => c !== "Organic Search").map(c => wrow(`  ${c.toLowerCase()}`, chSum(wk1, c), chSum(wk0, c))),
+    wrow("All sessions (incl. bots)", s1, s0),
+  ]));
+  T.push(`<i>Bounce rate ${bounce}% · average visit ${avgSec}s (all sessions, 28 days)</i>`, "");
+  if (utm) {
+    const keys = [...new Set([...Object.keys(utm.w1), ...Object.keys(utm.w0)])].sort((a, b) => (utm.w1[b] || 0) - (utm.w1[a] || 0));
+    if (keys.length) T.push(`<b>FROM OUR SOCIAL POSTS (UTM)</b>`, pre([rows7[0], ...keys.map(k => wrow(k, utm.w1[k] || 0, utm.w0[k] || 0))]), "");
+  }
+  const whyTraffic = why.filter(w => /^Sessions/.test(w));
+  if (whyTraffic.length) T.push(`<b>━━ 3. WHY IT MOVED ━━</b>`, ...whyTraffic.map(t => `• ${esc(t)}`));
+
+  // ================= RECOMMENDATIONS (topic: recs) =================
+  const R = [`<b>🎯 WHAT TO DO · SITE & SEO</b>`, `<i>${esc(date)}</i>`, "", ...recs.slice(0, 5).map((t, i) => `${i + 1}. ${esc(t)}`)];
+  return { weekly: S.join("\n"), seo: E.join("\n"), traffic: T.join("\n"), recs: recs.length ? R.join("\n") : null };
 }
 
 async function sendTelegramReport() {
-  const tgToken = process.env.TELEGRAM_BOT_TOKEN;
-  const tgChat  = process.env.TELEGRAM_CHAT_ID;
-  if (!tgToken || !tgChat) {
-    console.log("No TELEGRAM_BOT_TOKEN/TELEGRAM_CHAT_ID — skipping Telegram report");
-    return;
-  }
-
+  const sbUrl = process.env.SUPABASE_URL || "https://olsxxfwvwsycwzihbmdn.supabase.co";
+  const sbKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   const gsc = JSON.parse(fs.readFileSync(path.join(OUT_DIR, "gsc-latest.json"), "utf8"));
   const ga4 = JSON.parse(fs.readFileSync(path.join(OUT_DIR, "ga4-latest.json"), "utf8"));
   let bing = null;
   try { bing = JSON.parse(fs.readFileSync(path.join(OUT_DIR, "bing-latest.json"), "utf8")).rows; } catch { /* optional */ }
-  const msg = buildReport(gsc, ga4, await fetchLeads(), bing);
 
-  const body = JSON.stringify({ chat_id: tgChat, text: msg.slice(0, 4000), parse_mode: "HTML", disable_web_page_preview: true });
-  await new Promise((resolve, reject) => {
-    const https = require("https");
-    const url = `https://api.telegram.org/bot${tgToken}/sendMessage`;
-    const req = https.request(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Content-Length": Buffer.byteLength(body) },
-    }, res => {
-      res.resume();
-      if (res.statusCode === 200) { console.log("✓ Telegram report sent"); resolve(); }
-      else { console.error(`✗ Telegram error: ${res.statusCode}`); resolve(); }
-    });
-    req.on("error", e => { console.error("✗ Telegram network error:", e.message); resolve(); });
-    req.write(body);
-    req.end();
-  });
+  // UTM sessions from our social posts: last 7 days vs previous 7 (Supabase social_utm_daily)
+  let utm = null;
+  if (sbKey) {
+    try {
+      const since = new Date(Date.now() - 15 * 864e5).toISOString().slice(0, 10);
+      const r = await fetch(`${sbUrl}/rest/v1/social_utm_daily?select=day,source,sessions&day=gte.${since}`, { headers: { apikey: sbKey, Authorization: `Bearer ${sbKey}` } });
+      if (r.ok) {
+        const rows = await r.json(); const cut = new Date(Date.now() - 8 * 864e5).toISOString().slice(0, 10);
+        utm = { w1: {}, w0: {} };
+        for (const x of rows) { const w = x.day >= cut ? utm.w1 : utm.w0; w[x.source] = (w[x.source] || 0) + x.sessions; }
+      }
+    } catch { /* optional */ }
+  }
+  const rep = buildReport(gsc, ga4, await fetchLeads(), bing, utm);
+
+  // Preferred: forum topics through the tg-report edge function (service role only)
+  const sections = [["weekly", rep.weekly], ["seo", rep.seo], ["traffic", rep.traffic], ["recs", rep.recs]].filter(x => x[1]);
+  let sent = 0;
+  if (sbKey) {
+    for (const [topic, text] of sections) {
+      try {
+        const r = await fetch(`${sbUrl}/functions/v1/tg-report`, { method: "POST", headers: { Authorization: `Bearer ${sbKey}`, "Content-Type": "application/json" }, body: JSON.stringify({ topic, text: text.slice(0, 3900) }) });
+        const j = await r.json().catch(() => ({}));
+        if (r.ok && j.ok) sent++; else console.error(`✗ topic ${topic}:`, j.error || r.status);
+      } catch (e) { console.error(`✗ topic ${topic}:`, e.message); }
+    }
+    if (sent) { console.log(`✓ Telegram topic reports sent: ${sent}/${sections.length}`); return; }
+  }
+
+  // Fallback: single message to the old chat
+  const tgToken = process.env.TELEGRAM_BOT_TOKEN, tgChat = process.env.TELEGRAM_CHAT_ID;
+  if (!tgToken || !tgChat) { console.log("No Telegram target configured — skipping report"); return; }
+  const res = await fetch(`https://api.telegram.org/bot${tgToken}/sendMessage`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ chat_id: tgChat, text: [rep.weekly, rep.seo, rep.traffic].join("\n\n").slice(0, 4000), parse_mode: "HTML", disable_web_page_preview: true }) });
+  console.log(res.ok ? "✓ Telegram report sent (fallback chat)" : `✗ Telegram error: ${res.status}`);
 }
 
 if (require.main === module) main();
