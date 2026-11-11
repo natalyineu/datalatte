@@ -17,7 +17,8 @@ const pre = (lines: string[]) => `<pre>${esc(lines.join("\n"))}</pre>`;
 const chg = (cur: number, prev: number) => { if (!prev) return cur ? "new" : "–"; const d = (cur / prev - 1) * 100; return `${d >= 0 ? "+" : "−"}${Math.abs(d).toFixed(0)}%`; };
 const flag = (cur: number, prev: number) => { if (!prev) return cur ? "🟢" : "⚪"; const d = (cur / prev - 1) * 100; return d > 5 ? "🟢" : d < -5 ? "🔴" : "⚪"; };
 const wrow = (name: string, cur: number, prev: number, f = num) => `${lab(name)}${pad(f(cur), 8)}${pad(f(prev), 9)}${pad(chg(cur, prev), 7)} ${flag(cur, prev)}`;
-const WH = `${lab("")}${pad("this wk", 8)}${pad("last wk", 9)}${pad("change", 7)}`;
+const mr = (name: string, cur: number, prev: number, f = num) => `${flag(cur, prev)} ${esc(name)}: <b>${f(cur)}</b> · was ${f(prev)} (${chg(cur, prev)})`;
+const sec = (t: string, sub = "") => `<b>━━ ${t} ━━</b>${sub ? ` <i>${esc(sub)}</i>` : ""}`;
 const today = () => new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
 const D7 = 7 * 864e5;
 
@@ -42,20 +43,17 @@ Deno.serve(async (req) => {
     const w1 = rows.filter((x) => x.t >= now - D7), w0 = rows.filter((x) => x.t >= now - 2 * D7 && x.t < now - D7);
     const first = rows.length ? new Date(Math.min(...rows.map((x) => x.t))).toLocaleDateString("en-GB", { day: "numeric", month: "short" }) : "launch";
     const plats = Object.keys(PL).filter((k) => rows.some((x) => x.platform === k));
-    let t = `<b>📊 SOCIAL · ALL PLATFORMS</b>\n<i>${esc(today())}</i>\n\n<b>━━ 1. ALL TIME (since ${esc(first)}) ━━</b>\n\n`;
-    t += pre([`${lab("", 12)}${pad("posts", 6)}${pad("views", 9)}${pad("likes", 7)}`, ...plats.map((k) => { const a = rows.filter((x) => x.platform === k); return `${lab(PL[k], 12)}${pad(a.length, 6)}${pad(k === "linkedin" ? "–" : num(sum(a, "views")), 9)}${pad(num(sum(a, "likes")), 7)}`; }), `${lab("Total", 12)}${pad(rows.length, 6)}${pad(num(sum(rows, "views")), 9)}${pad(num(sum(rows, "likes")), 7)}`]);
+    const L: string[] = [`<b>📊 SOCIAL</b>`, `<i>${esc(today())}</i>`, "", sec("ALL TIME", `since ${first}`)];
+    for (const k of plats) { const a = rows.filter((x) => x.platform === k); L.push(`${PL[k]}: <b>${a.length}</b> posts` + (k === "linkedin" ? `, ♥ ${num(sum(a, "likes"))}` : `, 👁 ${num(sum(a, "views"))}, ♥ ${num(sum(a, "likes"))}`)); }
+    L.push(`<b>Total: ${rows.length} posts, 👁 ${num(sum(rows, "views"))}, ♥ ${num(sum(rows, "likes"))}</b>`);
     const best = [...rows].sort((a, b) => (b.m.views ?? 0) - (a.m.views ?? 0))[0];
-    if (best && best.m.views) t += `\n🏆 Best post: ${PL[best.platform]} · <a href="${best.post_url}">${esc(String(best.title).slice(0, 50))}</a> (${num(best.m.views)} views)\n`;
-    t += `\n<b>━━ 2. LAST 7 DAYS ━━</b>\n\n`;
-    const lines = [WH, wrow("Posts published", w1.length, w0.length), wrow("Views", sum(w1, "views"), sum(w0, "views")), wrow("Likes", sum(w1, "likes"), sum(w0, "likes")), wrow("Comments", sum(w1, "comments"), sum(w0, "comments"))];
-    for (const k of plats) { const a1 = w1.filter((x) => x.platform === k), a0 = w0.filter((x) => x.platform === k); if (a1.length || a0.length) lines.push(wrow(`  ${PL[k]} posts`, a1.length, a0.length)); }
-    t += pre(lines);
-    t += `<i>Views of newer posts are still growing, so the latest week is naturally lower.</i>\n\n<b>━━ 3. CONCLUSION ━━</b>\n`;
+    if (best && best.m.views) L.push(`🏆 Best: ${PL[best.platform]} · <a href="${best.post_url}">${esc(String(best.title).slice(0, 45))}</a> (${num(best.m.views)} views)`);
+    L.push("", sec("LAST 7 DAYS", "posts published in the window"), mr("Posts", w1.length, w0.length), mr("Views", sum(w1, "views"), sum(w0, "views")), mr("Likes", sum(w1, "likes"), sum(w0, "likes")), mr("Comments", sum(w1, "comments"), sum(w0, "comments")));
     const byPlat = plats.map((k) => ({ k, v: sum(w1.filter((x) => x.platform === k), "views") })).sort((a, b) => b.v - a.v);
-    t += `• ${w1.length} posts this week (${chg(w1.length, w0.length)}), ${num(sum(w1, "views"))} views.\n`;
-    if (byPlat[0]?.v) t += `• Most views this week: ${PL[byPlat[0].k]} (${num(byPlat[0].v)}).\n`;
-    t += `• LinkedIn views are not available without the official API; likes and comments come from the public page.`;
-    return Response.json(await send("metrics", t));
+    L.push("", sec("CONCLUSION"), `• ${w1.length} posts this week (${chg(w1.length, w0.length)}), ${num(sum(w1, "views"))} views.`);
+    if (byPlat[0]?.v) L.push(`• Most views this week: ${PL[byPlat[0].k]} (${num(byPlat[0].v)}).`);
+    L.push(`<i>Newer posts are still collecting views. LinkedIn shows likes only (no official API).</i>`);
+    return Response.json(await send("metrics", L.join("\n")));
   }
 
   // ───────── OUTREACH ─────────
@@ -71,17 +69,16 @@ Deno.serve(async (req) => {
     const repAll = rows.filter((x) => x.tr).length, unknown = rows.filter((x) => x.status === "unknown").length;
     const first = rows.length ? new Date(Math.min(...rows.map((x) => x.ts))).toLocaleDateString("en-GB", { day: "numeric", month: "short" }) : "launch";
     const pc = (a: number, b: number) => (b ? `${(a / b * 100).toFixed(1)}%` : "–");
-    let t = `<b>✉️ OUTREACH · COLD E-MAILS</b>\n<i>${esc(today())}</i>\n\n<b>━━ 1. ALL TIME (since ${esc(first)}) ━━</b>\n\n`;
-    t += pre([`${lab("E-mails sent", 20)}${pad(num(rows.length), 8)}`, `${lab("  delivered", 20)}${pad(num(dlv(rows)), 8)}   (${pc(dlv(rows), rows.length)})`, `${lab("  opened", 20)}${pad(num(opn(rows)), 8)}   (${pc(opn(rows), dlv(rows))} of delivered)`, `${lab("  clicked", 20)}${pad(num(clk(rows)), 8)}`, `${lab("  bounced", 20)}${pad(num(bnc(rows)), 8)}   (${pc(bnc(rows), rows.length)})`, `${lab("Replies", 20)}${pad(num(repAll), 8)}   (${pc(repAll, rows.length)})`]);
-    t += `\n<b>━━ 2. LAST 7 DAYS ━━</b>\n\n`;
-    t += pre([WH, wrow("Sent", w1.length, w0.length), wrow("Delivered", dlv(w1), dlv(w0)), wrow("Opened", opn(w1), opn(w0)), wrow("Clicked", clk(w1), clk(w0)), wrow("Bounced", bnc(w1), bnc(w0)), wrow("Replies", rep1, rep0)]);
+    const L: string[] = [`<b>✉️ OUTREACH · COLD E-MAILS</b>`, `<i>${esc(today())}</i>`, "", sec("ALL TIME", `since ${first}`),
+      `Sent: <b>${num(rows.length)}</b>`, `Delivered: <b>${num(dlv(rows))}</b> (${pc(dlv(rows), rows.length)})`, `Opened: <b>${num(opn(rows))}</b> (${pc(opn(rows), dlv(rows))} of delivered)`, `Clicked: <b>${num(clk(rows))}</b> · Bounced: <b>${num(bnc(rows))}</b> (${pc(bnc(rows), rows.length)})`, `💬 Replies: <b>${num(repAll)}</b> (${pc(repAll, rows.length)})`,
+      "", sec("LAST 7 DAYS"), mr("Sent", w1.length, w0.length), mr("Opened", opn(w1), opn(w0)), mr("Clicked", clk(w1), clk(w0)), mr("Bounced", bnc(w1), bnc(w0)), mr("Replies", rep1, rep0)];
     const byC = new Map<string, any[]>(); for (const x of w1) byC.set(x.campaign ?? "–", [...(byC.get(x.campaign ?? "–") ?? []), x]);
-    if (byC.size) t += pre([`${lab("Campaign (this week)", 26)}${pad("sent", 6)}${pad("open", 6)}`, ...[...byC.entries()].map(([k, a]) => `${lab(String(k).slice(0, 25), 26)}${pad(a.length, 6)}${pad(opn(a), 6)}`)]);
-    t += `\n<b>━━ 3. CONCLUSION ━━</b>\n• ${w1.length} e-mails this week (${chg(w1.length, w0.length)}); ${rep1} replies (all time ${repAll}).\n`;
-    if (unknown) t += `• ${unknown} older e-mails have no delivery status yet, so open and click rates are understated.\n`;
+    if (byC.size) L.push("", `<b>Campaigns this week</b>`, ...[...byC.entries()].map(([k, a]) => `• ${esc(String(k).slice(0, 30))}: ${a.length} sent, ${opn(a)} opened`));
+    L.push("", sec("CONCLUSION"), `• ${w1.length} e-mails this week (${chg(w1.length, w0.length)}), ${rep1} replies.`);
+    if (unknown) L.push(`• ${unknown} older e-mails have no delivery status yet, so open/click rates are understated.`);
     const recent = rows.filter((x) => x.tr >= now - D7).slice(0, 5);
-    if (recent.length) t += `\n💬 New replies: ` + recent.map((x) => esc(String(x.business_name ?? "–"))).join(", ");
-    return Response.json(await send("outreach", t));
+    if (recent.length) L.push(`💬 New replies: ` + recent.map((x) => esc(String(x.business_name ?? "–"))).join(", "));
+    return Response.json(await send("outreach", L.join("\n")));
   }
 
   // ───────── PARTNERS ─────────
@@ -94,16 +91,15 @@ Deno.serve(async (req) => {
     const sumA = (a: any[]) => a.reduce((s, x) => s + x.a, 0);
     const p1 = paid.filter((x) => x.t >= now - D7), p0 = paid.filter((x) => x.t >= now - 2 * D7 && x.t < now - D7);
     const first = paid.length ? paid.map((x) => x.paid_at).sort()[0] : "launch";
-    let t = `<b>💰 PARTNERS · PAID PLACEMENTS</b>\n<i>${esc(today())}</i>\n\n<b>━━ 1. ALL TIME (since ${esc(first)}) ━━</b>\n\n`;
-    t += pre([`${lab("Paid", 22)}${pad("$" + num(sumA(paid)), 8)}   (${paid.length} deals)`, ...paid.sort((a, b) => b.t - a.t).map((x) => `${lab("  " + String(x.partner).slice(0, 20), 22)}${pad("$" + x.a, 8)}   ${String(x.paid_at).slice(5)}`), `${lab("Waiting for payment", 22)}${pad("$" + num(open.reduce((s, x) => s + Number(x.amount), 0)), 8)}   (${open.length})`, `${lab("Upsell offers sent", 22)}${pad(offers.length, 8)}`]);
-    t += `\n<b>━━ 2. LAST 7 DAYS ━━</b>\n\n`;
-    t += pre([WH, wrow("Payments received $", sumA(p1), sumA(p0)), wrow("Deals paid", p1.length, p0.length)]);
-    t += `\n<b>━━ 3. CONCLUSION ━━</b>\n• $${num(sumA(p1))} received this week (${chg(sumA(p1), sumA(p0))}).\n`;
+    const L: string[] = [`<b>💰 PARTNERS · PAID PLACEMENTS</b>`, `<i>${esc(today())}</i>`, "", sec("ALL TIME", `since ${first}`), `Paid: <b>$${num(sumA(paid))}</b> (${paid.length} deals)`,
+      ...paid.sort((a, b) => b.t - a.t).map((x) => `   • ${esc(String(x.partner))}: $${x.a} · ${String(x.paid_at).slice(5)}`),
+      `Waiting for payment: <b>$${num(open.reduce((s, x) => s + Number(x.amount), 0))}</b> (${open.length})`, `Upsell offers sent: <b>${offers.length}</b>`,
+      "", sec("LAST 7 DAYS"), mr("Payments received $", sumA(p1), sumA(p0)), mr("Deals paid", p1.length, p0.length)];
     const chk = deals.filter((x) => x.last_check_result), bad = chk.filter((x) => String(x.last_check_result).startsWith("FAIL"));
-    t += bad.length ? `• ⚠️ Placement problem: ${bad.map((x) => esc(String(x.partner))).join(", ")}\n` : `• All ${chk.length} placements are live (links checked).\n`;
+    L.push("", sec("CONCLUSION"), `• $${num(sumA(p1))} received this week (${chg(sumA(p1), sumA(p0))}).`, bad.length ? `• ⚠️ Placement problem: ${bad.map((x) => esc(String(x.partner))).join(", ")}` : `• All ${chk.length} placements are live (links checked).`);
     const steps = deals.filter((x) => x.next_step && !x.paid_at);
-    if (steps.length) t += "\n<b>Next steps</b>\n" + steps.map((x) => `• ${esc(String(x.partner))}: ${esc(String(x.next_step).slice(0, 90))}`).join("\n");
-    return Response.json(await send("partners", t));
+    if (steps.length) L.push("", `<b>Next steps</b>`, ...steps.map((x) => `• ${esc(String(x.partner))}: ${esc(String(x.next_step).slice(0, 90))}`));
+    return Response.json(await send("partners", L.join("\n")));
   }
 
   // ───────── RECOMMENDATIONS: social & sales ─────────
