@@ -1,6 +1,7 @@
 // Writes NEW articles from explicit research packs (data/research/new-<id>.json) with Sonnet 5.5. Output: data/triage/new/<slug>.mdx
 // Usage: NODE_USE_ENV_PROXY=1 node new-article.mjs <jobs.json>
 import fs from "fs"; import path from "path";
+import { factsBlock } from "../research/facts-lib.mjs";
 const jobs = JSON.parse(fs.readFileSync(process.argv[2], "utf8")), TODAY = new Date().toISOString().slice(0, 10);
 const LINKS = ["how-much-does-ctv-advertising-cost-real-cpm-data","ctv-advertising-platforms-compared-2026","ctv-ads-for-restaurants","ctv-ads-for-fitness-studios","is-ctv-advertising-worth-it-small-budget-2026","nfl-ctv-advertising-local-business","march-madness-ctv-advertising-local-business","new-ctv-ad-formats-2026-pause-ads-qr-codes-shoppable","ctv-advertising-creative-specs-guide-2026","connected-tv-ads-vs-traditional-tv-ads-why-ctv-wins-for-local-business","amazon-prime-video-ads-small-business","ott-advertising-local-business","live-sports-advertising-local-business","google-analytics-4-for-small-business","ctv-vs-ott-advertising-explained","roku-ads-local-business"];
 const SYS = `You write one blog article for DataLatte (local marketing for small businesses: coffee shops, hair and beauty salons, pet groomers, fitness studios; US audience). Output ONLY the full MDX file (frontmatter + body).
@@ -23,7 +24,8 @@ for (const job of jobs) {
   if (fs.existsSync(`data/triage/new/${job.slug}.mdx`) && !process.env.FORCE) { console.log('exists', job.slug); continue; }
   const pk = JSON.parse(fs.readFileSync(`data/research/new-${job.pack}.json`, "utf8"));
   const src = pk.results.map((x, i) => `[S${i + 1}] ${x.url} (${x.title}, opened ${x.fetchedAt})\n${x.markdown}`).join("\n\n---\n\n");
-  const user = `SLUG: ${job.slug}\nWORKING TITLE: ${job.title}\nANGLE: ${job.angle}\nALLOWED LINKS: ${(job.links || LINKS).map((x) => "/blog/" + x).join(", ")}\n\nSOURCES:\n${src}`;
+  const fb = process.env.USE_FACTS ? factsBlock(job.pack) : null; if (fb) console.log("facts mode", job.slug, fb.sources, "sources", fb.facts, "facts", fb.missing.length, "pages without facts");
+  const user = `SLUG: ${job.slug}\nWORKING TITLE: ${job.title}\nANGLE: ${job.angle}\nALLOWED LINKS: ${(job.links || LINKS).map((x) => "/blog/" + x).join(", ")}\n\n${fb ? "FACTS (each extracted from the cited page with a verbatim quote; cite the page link; use only these)" : "SOURCES"}:\n${fb ? fb.text : src}`;
   let o; for (let a = 0; a < 3 && !o; a++) { try { o = await call(job.model || "anthropic/claude-sonnet-5.5", user + (a ? `\n\n(Attempt ${a + 1}: write the complete article through the Sources section.)` : "")); if (!/^## Sources/m.test(o.text)) { console.error("incomplete, retry", job.slug); total += o.cost; o = null; } } catch (e) { console.error("retry", job.slug, String(e).slice(0, 100)); } }
   if (!o) { console.log("fail", job.slug); continue; } total += o.cost;
   fs.writeFileSync(`data/triage/new/${job.slug}.mdx`, o.text.replace(/^```(?:mdx|markdown)?\n/, "").replace(/\n```\s*$/, "")); console.log("gen", job.slug, o.cost);
