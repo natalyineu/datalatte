@@ -16,14 +16,15 @@ HARD RULES
 - Valid MDX: no bare { } or < in prose.`;
 async function call(model, user) {
   const r = await fetch("https://openrouter.ai/api/v1/chat/completions", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ model, messages: [{ role: "system", content: SYS }, { role: "user", content: user }], max_tokens: 16000, temperature: 0.4, usage: { include: true } }), signal: AbortSignal.timeout(480000) });
-  const j = await r.json(); if (!j.choices?.[0]?.message?.content) throw new Error("empty " + JSON.stringify(j).slice(0, 160)); return { text: j.choices[0].message.content, cost: j.usage?.cost || 0 };
+  const j = await r.json(); if (!j.choices?.[0]?.message?.content) throw new Error("empty " + JSON.stringify(j).slice(0, 160)); if (j.choices[0].finish_reason !== "stop") console.error("finish", j.choices[0].finish_reason, j.usage?.completion_tokens); return { text: j.choices[0].message.content, cost: j.usage?.cost || 0, fin: j.choices[0].finish_reason };
 }
 fs.mkdirSync("data/triage/new", { recursive: true }); let total = 0;
 for (const job of jobs) {
+  if (fs.existsSync(`data/triage/new/${job.slug}.mdx`) && !process.env.FORCE) { console.log('exists', job.slug); continue; }
   const pk = JSON.parse(fs.readFileSync(`data/research/new-${job.pack}.json`, "utf8"));
   const src = pk.results.map((x, i) => `[S${i + 1}] ${x.url} (${x.title}, opened ${x.fetchedAt})\n${x.markdown}`).join("\n\n---\n\n");
   const user = `SLUG: ${job.slug}\nWORKING TITLE: ${job.title}\nANGLE: ${job.angle}\nALLOWED LINKS: ${(job.links || LINKS).map((x) => "/blog/" + x).join(", ")}\n\nSOURCES:\n${src}`;
-  let o; for (let a = 0; a < 2 && !o; a++) { try { o = await call(job.model || "anthropic/claude-sonnet-5.5", user); } catch (e) { console.error("retry", job.slug, String(e).slice(0, 100)); } }
+  let o; for (let a = 0; a < 3 && !o; a++) { try { o = await call(job.model || "anthropic/claude-sonnet-5.5", user + (a ? `\n\n(Attempt ${a + 1}: write the complete article through the Sources section.)` : "")); if (!/^## Sources/m.test(o.text)) { console.error("incomplete, retry", job.slug); total += o.cost; o = null; } } catch (e) { console.error("retry", job.slug, String(e).slice(0, 100)); } }
   if (!o) { console.log("fail", job.slug); continue; } total += o.cost;
   fs.writeFileSync(`data/triage/new/${job.slug}.mdx`, o.text.replace(/^```(?:mdx|markdown)?\n/, "").replace(/\n```\s*$/, "")); console.log("gen", job.slug, o.cost);
 }
