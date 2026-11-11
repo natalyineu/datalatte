@@ -15,6 +15,13 @@
 
 - 2026-11-10 DEPLOYED (`643538c`): 7 new TV/seasonal articles (BF/CM, Small Business Saturday, Super Bowl LXI [merged], Q4 CTV, midterm CTV prices, measuring CTV, local ad forecast), wave 5 (49 rewrites), 155 weak posts noindexed, 8 Polish translations, seasonal posts reopened (holiday-marketing-strategy, pet gift certificates, holiday email, valentines), process-leak cleanup, IndexNow 338 URLs. Tools: `scripts/rewrite/new-pack.mjs`, `new-article.mjs`, `scripts/audit/verify-facts.py`, `strip-leaks.py`. Rules: never rewrite redirect-source slugs; no partner names (Vibe/Spotify Advertising/Flodesk/AirOps) in new content; verify numbers against sources. GSC re-check ~2026-11-24; ideas next: Netflix/Amazon local, NBA/March Madness 2027, FAST channels.
 
+## HANDOFF 2026-11-11 (session limit) — continue from here
+- DEPLOYED on main (`4057a56` build fix, `ed9ef1b` wave 6): everything up to wave 6 is live. Vercel build was failing because `supabase/functions` (Deno) was type-checked by Next; fixed by excluding it in `tsconfig.json`.
+- In branch `claude/laughing-lovelace-vaflrp`, NOT deployed: (a) 164 closed posts reopened (had impressions or were new); (b) wave 7 = ~190 articles rewritten from the facts library in `data/triage/wave7/*.mdx` (NOT yet validated/applied; ~570 more candidates lacked facts and need sources).
+- To finish wave 7: re-run `NODE_USE_ENV_PROXY=1 node scripts/rewrite/rewrite-from-facts.mjs /tmp/slugs7.json data/triage/wave7` only if /tmp is gone (rebuild list = CNI/closed pages, see session summary); then copy wave7/*.mdx to content/blog (apply `strip-leaks.py --apply`, partner-name grep `vibe|spotify|flodesk|airops` must be 0 — revert files that mention them), run `node scripts/audit/check-article.mjs`, `node scripts/check-protected-placements.mjs`, number check vs facts, covers/cards (`scripts/images/make-covers.mjs`, `make-cards.mjs`), `link-orphans2.py --apply`, `npm run build`, then restore `content/blog public/images/blog` onto `main` with `[vercel skip]`.
+- Rules: never delete/close posts that have impressions or are new; focus on pages Google does not index (GSC "Crawled - not indexed"). Never rewrite redirect-source slugs. No partner names (Vibe, Spotify Advertising, Flodesk, AirOps) in new content. Supabase: two TEMP anon policies `tmp_anon_research_sources/facts` still exist — drop them when Nataliia confirms (`drop policy ...`).
+- OpenRouter balance ~ $11 at the time. GSC re-check 2026-11-24 (Nataliia exports Pages report).
+
 ## Waiting on others
 - Spotify $150 (PayPal …CZVT8EVJ6TSQDK24), Biglinko $50 (…FASQSTWT4WX527JW), Vibe $600 (…MVVN4PWCFS7XXG4Z): mark paid in `partner_deals` when received.
 - GSC: re-check rewritten/reopened articles ~2 weeks after the next deploy.
