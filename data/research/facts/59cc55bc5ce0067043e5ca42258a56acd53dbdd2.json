@@ -1,11 +1,14 @@
 {
  "url": "https://adwave.com/resources/political-ad-rates-2026",
  "title": "Political Ad Rates 2026: TV & CTV Costs by Market Size",
- "hash": "6f723e716e4f73c2ef29163f0761c41a95b946da",
+ "hash": "45c26994242118972f81ed6a496c3ce16a659828",
  "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 23165,
+ "chunks": 3,
  "facts": [
   {
-   "fact": "AdImpact projects record political ad spending of $10.8 billion for the 2026 cycle, as cited by AdWave.",
+   "fact": "AdImpact projects record political ad spending of $10.8 billion for the 2026 cycle (third-party projection cited by the vendor).",
    "value": "10.8",
    "unit": "billion USD",
    "as_of": "2026",
@@ -13,132 +16,524 @@
    "topic": "forecast"
   },
   {
-   "fact": "AdWave's example states that reaching 100,000 viewers at a $25 CPM costs $2,500.",
+   "fact": "The page's worked CPM example gives a cost of $2,500 for reaching 100,000 viewers at a $25 CPM.",
    "value": "2500",
    "unit": "USD",
-   "as_of": "2026",
-   "quote": "To reach 100,000 viewers at $25 CPM: Cost = (100,000 / 1,000) × $25 = $2,500",
+   "as_of": "",
+   "quote": "Example: To reach 100,000 viewers at $25 CPM: Cost = (100,000 / 1,000) × $25 = $2,500",
    "topic": "definition"
   },
   {
-   "fact": "AdWave lists typical broadcast TV minimum commitments of $5,000-50,000+.",
+   "fact": "The page's worked CPP example gives a cost of $100,000 for 200 GRPs at a $500 cost per point.",
+   "value": "100000",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "Example: To achieve 200 GRPs at $500 CPP: Cost = 200 × $500 = $100,000",
+   "topic": "definition"
+  },
+  {
+   "fact": "The vendor lists broadcast TV minimum commitments at roughly $5,000 to $50,000+.",
    "value": "5000-50000+",
    "unit": "USD minimum",
-   "as_of": "2026",
+   "as_of": "",
    "quote": "Broadcast TV: Often $5,000-50,000+ minimum",
    "topic": "pricing"
   },
   {
-   "fact": "AdWave lists typical cable TV minimum commitments of $2,000-15,000+.",
+   "fact": "The vendor lists cable TV minimum commitments at roughly $2,000 to $15,000+.",
    "value": "2000-15000+",
    "unit": "USD minimum",
-   "as_of": "2026",
+   "as_of": "",
    "quote": "Cable TV: $2,000-15,000+ minimum",
    "topic": "pricing"
   },
   {
-   "fact": "AdWave lists typical premium CTV minimum commitments of $10,000-50,000.",
+   "fact": "The vendor lists premium CTV minimum commitments at $10,000 to $50,000.",
    "value": "10000-50000",
    "unit": "USD minimum",
-   "as_of": "2026",
+   "as_of": "",
    "quote": "Premium CTV: $10,000-50,000 minimum",
    "topic": "pricing"
   },
   {
-   "fact": "AdWave states self-serve CTV minimums can be as low as $50-100.",
+   "fact": "The vendor states self-serve CTV can have minimums as low as $50 to $100.",
    "value": "50-100",
    "unit": "USD minimum",
-   "as_of": "2026",
+   "as_of": "",
    "quote": "Self-serve CTV: As low as $50-100",
    "topic": "pricing"
   },
   {
-   "fact": "AdWave lists a major-market (Top 10 DMA) prime time 30-second broadcast spot at $15,000-75,000.",
+   "fact": "In the top 10 DMAs, the vendor lists a 30-second prime time (8-11 PM) spot at $15,000 to $75,000.",
    "value": "15000-75000",
-   "unit": "USD per spot",
-   "as_of": "2026",
+   "unit": "USD per 30-second spot",
+   "as_of": "",
    "quote": "30-second spot: $15,000-75,000",
    "topic": "pricing"
   },
   {
-   "fact": "AdWave lists a mid-size market (DMAs 11-50) prime time 30-second spot at $2,000-10,000.",
+   "fact": "In mid-size markets (DMAs 11-50), the vendor lists a 30-second prime time spot at $2,000 to $10,000.",
    "value": "2000-10000",
-   "unit": "USD per spot",
-   "as_of": "2026",
-   "quote": "**Prime time:** *   30-second spot: $2,000-10,000",
+   "unit": "USD per 30-second spot",
+   "as_of": "",
+   "quote": "### Mid-size market rates (DMAs 11-50)",
    "topic": "pricing"
   },
   {
-   "fact": "AdWave lists a small market (DMAs 51+) prime time 30-second spot at $200-2,000.",
+   "fact": "In small markets (DMAs 51+), the vendor lists a 30-second prime time spot at $200 to $2,000.",
    "value": "200-2000",
-   "unit": "USD per spot",
-   "as_of": "2026",
-   "quote": "**Prime time:** *   30-second spot: $200-2,000",
+   "unit": "USD per 30-second spot",
+   "as_of": "",
+   "quote": "30-second spot: $200-2,000",
    "topic": "pricing"
   },
   {
-   "fact": "AdWave lists a small-market daytime 30-second spot at $25-150.",
-   "value": "25-150",
-   "unit": "USD per spot",
-   "as_of": "2026",
-   "quote": "**Daytime:** *   30-second spot: $25-150",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Per AdWave's summary of 47 U.S.C. 315, the lowest unit rate applies in the 45 days before a primary and the 60 days before a general or special election.",
-   "value": "45 and 60",
-   "unit": "days",
-   "as_of": "2026",
-   "quote": "In the 45 days before a primary and the 60 days before a general or special election, a broadcast station or cable system can charge a legally qualified candidate no more than its lowest unit charge",
+   "fact": "Under Section 315(b) lowest unit rate rules, the window runs 45 days before a primary election.",
+   "value": "45",
+   "unit": "days before primary",
+   "as_of": "",
+   "quote": "In the 45 days before a primary and the 60 days before a general or special election",
    "topic": "rules"
   },
   {
-   "fact": "AdWave states federal candidates must certify that any ad mentioning an opponent carries a disclosure shown together for at least 4 seconds at the end on TV.",
+   "fact": "The vendor states federal candidate ads must show the candidate's clear image plus a printed statement together for at least 4 seconds at the end of the ad.",
    "value": "4",
    "unit": "seconds",
-   "as_of": "2026",
+   "as_of": "",
    "quote": "shown together for at least 4 seconds at the end, saying the candidate approved the ad and their committee paid for it.",
    "topic": "rules"
   },
   {
-   "fact": "AdWave lists national news cable networks (CNN, Fox News, MSNBC) at a CPM of $20-40.",
-   "value": "20-40",
-   "unit": "USD CPM",
-   "as_of": "2026",
-   "quote": "**News networks (CNN, Fox News, MSNBC):** *   CPM: $20-40",
-   "topic": "pricing"
-  },
-  {
-   "fact": "AdWave lists national sports cable networks at a CPM of $25-50.",
-   "value": "25-50",
-   "unit": "USD CPM",
-   "as_of": "2026",
-   "quote": "**Sports networks (ESPN, regional sports):** *   CPM: $25-50",
-   "topic": "pricing"
-  },
-  {
-   "fact": "AdWave lists national entertainment cable networks at a CPM of $10-25.",
+   "fact": "The vendor states zone buying adds 10-25% to base cable rates.",
    "value": "10-25",
-   "unit": "USD CPM",
-   "as_of": "2026",
-   "quote": "**Entertainment networks (USA, TNT, HGTV, Discovery):** *   CPM: $10-25",
-   "topic": "pricing"
-  },
-  {
-   "fact": "AdWave states zone targeting on local cable adds 10-25% to base rates.",
-   "value": "10-25",
-   "unit": "%",
-   "as_of": "2026",
+   "unit": "% premium over base rates",
+   "as_of": "",
    "quote": "Zone buying adds 10-25% to base rates but reduces waste for district-specific races.",
    "topic": "pricing"
   },
   {
-   "fact": "AdWave lists Paramount+ at a CPM of $25-40.",
+   "fact": "The vendor lists national news cable networks (CNN, Fox News, MSNBC) at a CPM of $20 to $40.",
+   "value": "20-40",
+   "unit": "USD CPM",
+   "as_of": "",
+   "quote": "**News networks (CNN, Fox News, MSNBC):** CPM: $20-40",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The vendor lists sports cable networks at a CPM of $25 to $50.",
+   "value": "25-50",
+   "unit": "USD CPM",
+   "as_of": "",
+   "quote": "**Sports networks (ESPN, regional sports):** CPM: $25-50",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The vendor lists entertainment cable networks at a CPM of $10 to $25.",
+   "value": "10-25",
+   "unit": "USD CPM",
+   "as_of": "",
+   "quote": "**Entertainment networks (USA, TNT, HGTV, Discovery):** CPM: $10-25",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The vendor lists full-system local cable buys at a CPM of $5 to $15.",
+   "value": "5-15",
+   "unit": "USD CPM",
+   "as_of": "",
+   "quote": "**Full system buy:** CPM: $5-15",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The vendor lists Hulu at a CPM of $30 to $45 with a direct minimum commitment of $20,000 to $50,000.",
+   "value": "30-45",
+   "unit": "USD CPM",
+   "as_of": "",
+   "quote": "**Hulu:** CPM: $30-45",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The vendor lists Peacock at a CPM of $25 to $40 with a minimum commitment of $15,000 to $40,000.",
    "value": "25-40",
    "unit": "USD CPM",
-   "as_of": "2026",
-   "quote": "**Paramount+:** *   CPM: $25-40",
+   "as_of": "",
+   "quote": "**Peacock:** CPM: $25-40",
    "topic": "pricing"
+  },
+  {
+   "fact": "The vendor lists Paramount+ at a CPM of $25 to $40 with a minimum commitment of $15,000 to $35,000.",
+   "value": "25-40",
+   "unit": "USD CPM",
+   "as_of": "",
+   "quote": "**Paramount+:** CPM: $25-40",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The vendor lists Disney+ (ad-supported) at a CPM of $35 to $50 with a minimum commitment of $25,000 or more.",
+   "value": "35-50",
+   "unit": "USD CPM",
+   "as_of": "",
+   "quote": "**Disney+ (ad-supported):** CPM: $35-50",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The vendor lists Max (HBO) at a CPM of $30 to $50.",
+   "value": "30-50",
+   "unit": "USD CPM",
+   "as_of": "",
+   "quote": "**Max (HBO):** CPM: $30-50",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The vendor lists Tubi at a CPM of $12 to $22.",
+   "value": "12-22",
+   "unit": "USD CPM",
+   "as_of": "",
+   "quote": "**Tubi:** CPM: $12-22",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The vendor lists Roku Channel at a CPM of $15 to $25.",
+   "value": "15-25",
+   "unit": "USD CPM",
+   "as_of": "",
+   "quote": "**Roku Channel:** CPM: $15-25",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Adwave's page lists self-serve CTV political advertising CPMs at $20-35.",
+   "value": "$20-35",
+   "unit": "CPM (USD)",
+   "as_of": "2026",
+   "quote": "**Self-serve CTV rates:** * CPM: $20-35 * Media budgets from $30/day * No agency fees or markups",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Adwave's page states that self-serve CTV media budgets start from $30 per day.",
+   "value": "$30",
+   "unit": "USD per day",
+   "as_of": "2026",
+   "quote": "Media budgets from $30/day",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Adwave's page gives an example that a $1,000 CTV campaign at a $25 CPM delivers 40,000 impressions.",
+   "value": "40,000",
+   "unit": "impressions",
+   "as_of": "",
+   "quote": "At $25 CPM, a $1,000 CTV campaign delivers 40,000 impressions to targeted voters.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Amazon Freevee CTV CPMs are listed at $18-28.",
+   "value": "$18-28",
+   "unit": "CPM (USD)",
+   "as_of": "",
+   "quote": "**Amazon Freevee:** * CPM: $18-28",
+   "topic": "pricing"
+  },
+  {
+   "fact": "YouTube skippable video political ads are listed at $10-25 CPM.",
+   "value": "$10-25",
+   "unit": "CPM (USD)",
+   "as_of": "",
+   "quote": "Skippable video: $10-25 CPM",
+   "topic": "pricing"
+  },
+  {
+   "fact": "YouTube non-skippable 15-second political video ads are listed at $15-35 CPM.",
+   "value": "$15-35",
+   "unit": "CPM (USD)",
+   "as_of": "",
+   "quote": "Non-skippable (15 sec): $15-35 CPM",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Facebook/Instagram image ads are listed at $5-15 CPM and click costs at $0.50-3.00 CPC.",
+   "value": "$5-15",
+   "unit": "CPM (USD)",
+   "as_of": "",
+   "quote": "Image ads: $5-15 CPM * Carousel: $6-18 CPM * Click cost: $0.50-3.00 CPC",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Google Ads candidate name search terms are listed at $2-10 CPC.",
+   "value": "$2-10",
+   "unit": "CPC (USD)",
+   "as_of": "",
+   "quote": "Candidate name terms: $2-10 CPC",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Standard programmatic display political CPMs are listed at $2-8.",
+   "value": "$2-8",
+   "unit": "CPM (USD)",
+   "as_of": "",
+   "quote": "**Standard display:** * CPM: $2-8",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Major market radio 30-second drive time spots are listed at $200-800.",
+   "value": "$200-800",
+   "unit": "USD per 30-second spot",
+   "as_of": "",
+   "quote": "**Drive time (6-10 AM, 3-7 PM):** * 30-second spot: $200-800",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Small market radio 30-second drive time spots are listed at $25-150.",
+   "value": "$25-150",
+   "unit": "USD per 30-second spot",
+   "as_of": "",
+   "quote": "**Drive time:** * 30-second spot: $25-150",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Political ad rates in October are listed as 100-200% above the January-June baseline.",
+   "value": "100-200%",
+   "unit": "% above baseline",
+   "as_of": "",
+   "quote": "**October:** 100-200% above baseline",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Final two weeks before Election Day are listed at 150-300% above baseline political ad rates.",
+   "value": "150-300%",
+   "unit": "% above baseline",
+   "as_of": "",
+   "quote": "**Final 2 weeks:** 150-300% above baseline",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page states a $10,000 January buy might cost $25,000-30,000 in October for comparable reach.",
+   "value": "$25,000-30,000",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "A $10,000 January buy might cost $25,000-30,000 in October.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Battleground states are listed as having 30-60% higher political ad rates than non-competitive markets during peak season.",
+   "value": "30-60%",
+   "unit": "% higher rates",
+   "as_of": "2026",
+   "quote": "Expect 30-60% higher rates in these states compared to non-competitive markets during peak election season.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Fixed-position TV ad slots are listed at a 20-50% premium.",
+   "value": "20-50%",
+   "unit": "% premium",
+   "as_of": "",
+   "quote": "**Fixed position (guaranteed):** 20-50% premium",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Preemptible TV inventory is listed at a 10-30% discount.",
+   "value": "10-30%",
+   "unit": "% discount",
+   "as_of": "",
+   "quote": "**Preemptible:** 10-30% discount",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page lists a competitive Senate statewide race total media budget at $10-50 million.",
+   "value": "$10-50 million",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "**Competitive Senate race (statewide):** * Total media budget: $10-50 million",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page lists a competitive House race total media budget at $1-5 million.",
+   "value": "$1-5 million",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "**Competitive House race:** * Total media budget: $1-5 million",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page lists a state legislature total media budget at $50,000-500,000.",
+   "value": "$50,000-500,000",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "**State legislature:** * Total media budget: $50,000-500,000",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page lists a city/municipal race total media budget at $5,000-75,000.",
+   "value": "$5,000-75,000",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "**City/municipal races:** * Total media budget: $5,000-75,000",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Larger broadcast TV commitments are listed as earning discounts of 10-25%.",
+   "value": "10-25%",
+   "unit": "% discount",
+   "as_of": "",
+   "quote": "**Commit to volume:** Larger buys earn discounts of 10-25% for major commitments.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Monthly or quarterly CTV commitments are listed as often earning 5-15% lower CPMs.",
+   "value": "5-15%",
+   "unit": "% lower CPM",
+   "as_of": "",
+   "quote": "Monthly or quarterly commitments often earn 5-15% lower CPMs.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Traditional agencies are listed as charging 10-15% of media spend in fees.",
+   "value": "10-15%",
+   "unit": "% of media spend",
+   "as_of": "",
+   "quote": "**Typical agency fees:** * 10-15% of media spend",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Traditional agencies are listed as having $5,000-15,000 monthly minimums.",
+   "value": "$5,000-15,000",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "* $5,000-15,000 monthly minimums",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page suggests starting CTV or digital tests at $500-2,000 before larger commitments.",
+   "value": "$500-2,000",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "**Test first:** Start with small tests ($500-2,000) to validate performance before major commitments.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Per the vendor, prime-time TV in major markets such as New York and LA costs about $15,000-75,000.",
+   "value": "15000-75000",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "In major markets (New York, LA), expect $15,000-75,000 for prime time.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Per the vendor, mid-size markets run $2,000-10,000 for TV advertising.",
+   "value": "2000-10000",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "Mid-size markets run $2,000-10,000.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Per the vendor, small markets can cost as little as $200-2,000 for TV advertising.",
+   "value": "200-2000",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "Small markets can be as low as $200-2,000.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Per the vendor, CTV/streaming offers a consistent $20-35 CPM regardless of market.",
+   "value": "20-35",
+   "unit": "USD CPM",
+   "as_of": "",
+   "quote": "CTV/streaming offers a consistent $20-35 CPM regardless of market",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Per the vendor, broadcast TV effectively runs $30-100+ CPM when accounting for reach wasted outside the district.",
+   "value": "30-100+",
+   "unit": "USD CPM",
+   "as_of": "",
+   "quote": "broadcast TV effectively runs $30-100+ CPM when accounting for wasted reach outside your district",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Per the vendor, CTV campaigns can start from $30 per day, versus $5,000+ minimums for broadcast.",
+   "value": "30",
+   "unit": "USD per day",
+   "as_of": "",
+   "quote": "CTV campaigns can start from $30/day versus $5,000+ minimums for broadcast.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Per the vendor, political TV rates can rise 100-300% in the final weeks before Election Day compared with earlier in the year.",
+   "value": "100-300",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Rates can increase 100-300% in the final weeks before Election Day compared to earlier in the year.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Per the vendor's example, a $10,000 January broadcast buy might cost $25,000-30,000 in October for equivalent reach and frequency.",
+   "value": "25000-30000",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "a $10,000 January buy might cost $25,000-30,000 in October for equivalent reach and frequency.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The lowest unit rate applies during the 45 days before a primary and the 60 days before a general election.",
+   "value": "45 days before primary; 60 days before general",
+   "unit": "days",
+   "as_of": "",
+   "quote": "during the 45 days before a primary and the 60 days before a general election",
+   "topic": "rules"
+  },
+  {
+   "fact": "PACs, Super PACs and issue groups do not get the lowest unit rate and pay regular rates.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "PACs, Super PACs and issue groups don't get it and pay regular rates.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Per the vendor, local campaigns (city, county, school board) typically allocate $5,000-50,000 for TV/CTV advertising.",
+   "value": "5000-50000",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "Local campaigns (city, county, school board) typically allocate $5,000-50,000 for TV/CTV advertising.",
+   "topic": "audience"
+  },
+  {
+   "fact": "Per the vendor, a $5,000 CTV campaign at $25 CPM delivers 200,000 impressions.",
+   "value": "200000",
+   "unit": "impressions",
+   "as_of": "",
+   "quote": "At $25 CPM on CTV, a $5,000 campaign delivers 200,000 impressions",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Per the vendor, CTV delivers 2-3x more in-district impressions per dollar than broadcast for targeted local campaigns.",
+   "value": "2-3",
+   "unit": "x",
+   "as_of": "",
+   "quote": "For targeted local campaigns, CTV delivers 2-3x more in-district impressions per dollar.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Per the vendor, self-serve platforms eliminate agency fees, which it says save 10-20%.",
+   "value": "10-20",
+   "unit": "%",
+   "as_of": "",
+   "quote": "self-serve platforms eliminate agency fees (10-20% savings)",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Per the vendor, broadcast TV bought during lowest unit rate windows saves 30-50% versus standard rates for federal campaigns.",
+   "value": "30-50",
+   "unit": "%",
+   "as_of": "",
+   "quote": "**Broadcast TV during LUR windows** - 30-50% savings vs. standard rates",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Under 47 CFR 73.1212, every political ad on broadcast TV needs a sponsor identification stating who paid for it.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Every political ad on broadcast TV needs a sponsor identification that says who paid for it",
+   "topic": "rules"
   }
  ]
 }

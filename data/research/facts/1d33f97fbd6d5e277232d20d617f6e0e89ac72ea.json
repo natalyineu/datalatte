@@ -1,91 +1,94 @@
 {
  "url": "https://howtoai.com/how-to-use-claude-code/",
  "title": "How to Use Claude Code: 2026 Beginner Guide + 18 Commands",
- "hash": "ca336694e288b52fce63d7e283371d87cbf939fb",
- "fetchedAt": "2026-11-06",
+ "hash": "e4b496edbbf1a75285071ddb9359cfd4c3bf0973",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 30752,
+ "chunks": 4,
  "facts": [
   {
-   "fact": "Anthropic's pricing page lists the Pro plan at $20 a month, or $17 a month billed annually ($200 a year), with Claude Code included.",
+   "fact": "Anthropic's Claude Pro plan costs $20 a month, or $17 a month billed annually ($200 a year), before tax, and includes Claude Code.",
    "value": "20",
    "unit": "USD per month",
-   "as_of": "October 8, 2026",
-   "quote": "$20 a month, or $17 a month billed annually ($200 a year)",
+   "as_of": "2026-10-08",
+   "quote": "Pro | $20 a month, or $17 a month billed annually ($200 a year) | Included",
    "topic": "pricing"
   },
   {
-   "fact": "The Max plan starts at $100 a month and offers 5x or 20x the usage of Pro, with Claude Code included.",
+   "fact": "Anthropic's Claude Max plan starts at $100 a month and includes Claude Code, with 5x or 20x the usage of Pro.",
    "value": "100",
    "unit": "USD per month",
-   "as_of": "October 8, 2026",
-   "quote": "From $100 a month, for 5x or 20x the usage of Pro",
+   "as_of": "2026-10-08",
+   "quote": "Max | From $100 a month, for 5x or 20x the usage of Pro | Included",
    "topic": "pricing"
   },
   {
-   "fact": "The Team plan's standard seat costs $25 a month ($20 billed annually), and its premium seat costs $125 ($100 billed annually) with 5x the usage of a standard seat.",
+   "fact": "Anthropic's Claude Team standard seat costs $25 a month ($20 billed annually), and the premium seat costs $125 ($100 billed annually) with 5x the usage of a standard seat.",
    "value": "25",
    "unit": "USD per seat per month",
-   "as_of": "October 8, 2026",
-   "quote": "Standard seat $25 a month ($20 billed annually); premium seat $125 ($100 billed annually)",
+   "as_of": "2026-10-08",
+   "quote": "Standard seat $25 a month ($20 billed annually); premium seat $125 ($100 billed annually) with 5x the usage of a standard seat",
    "topic": "pricing"
   },
   {
-   "fact": "The Enterprise plan is listed at $20 per seat a month billed annually, plus usage at API rates.",
+   "fact": "Anthropic's Claude Enterprise plan is listed at $20 per seat a month billed annually, plus usage at API rates.",
    "value": "20",
    "unit": "USD per seat per month",
-   "as_of": "October 8, 2026",
-   "quote": "$20 per seat a month billed annually, plus usage at API rates",
+   "as_of": "2026-10-08",
+   "quote": "Enterprise | $20 per seat a month billed annually, plus usage at API rates",
    "topic": "pricing"
   },
   {
-   "fact": "Claude Code is not included in the Free Claude plan.",
+   "fact": "Claude Code is not included in the Claude Free plan.",
    "value": "",
    "unit": "",
-   "as_of": "October 8, 2026",
-   "quote": "The Free plan does not include it",
-   "topic": "pricing"
+   "as_of": "2026-10-08",
+   "quote": "Pro, Max, Team and Enterprise. The Free plan does not include it",
+   "topic": "rules"
   },
   {
-   "fact": "On older Enterprise plans, Claude Code is available only with the Chat + Claude Code or Premium seats.",
+   "fact": "On older Enterprise plans, Claude Code is available only with Chat + Claude Code or Premium seats, according to the page.",
    "value": "",
    "unit": "",
-   "as_of": "October 8, 2026",
+   "as_of": "2026-10-08",
    "quote": "On older Enterprise plans, Claude Code comes only with Chat + Claude Code or Premium seats.",
-   "topic": "pricing"
-  },
-  {
-   "fact": "On Pro and Max, Claude and Claude Code share the same usage limits, consisting of a five-hour session limit and a weekly limit.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "On Pro and Max, Claude and Claude Code draw on the same usage limits: a five-hour session limit and a weekly limit.",
    "topic": "rules"
   },
   {
-   "fact": "A Claude Console account lets users pay per use with prepaid API credits billed at API rates.",
-   "value": "",
-   "unit": "",
+   "fact": "On Pro and Max plans, Claude and Claude Code share the same usage limits, which include a five-hour session limit and a weekly limit.",
+   "value": "5",
+   "unit": "hour session limit",
    "as_of": "",
-   "quote": "A Claude Console account with prepaid API credits, billed at API rates",
-   "topic": "pricing"
-  },
-  {
-   "fact": "If an ANTHROPIC_API_KEY environment variable is set and the user approves it, a Claude Code session bills that key at API rates instead of using the subscription.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "the session bills that key at API rates instead of using your subscription",
+   "quote": "a five-hour session limit and a weekly limit",
    "topic": "rules"
   },
   {
-   "fact": "Auto mode is the starting permission mode for terminal and VS Code sessions on Claude Code v2.1.283 or later.",
+   "fact": "Anthropic's native Claude Code installer for macOS, Linux and WSL is run with the curl command shown on the page.",
+   "value": "curl -fsSL https://claude.ai/install.sh | bash",
+   "unit": "command",
+   "as_of": "",
+   "quote": "Install on macOS, Linux, WSL | `curl -fsSL https://claude.ai/install.sh | bash`",
+   "topic": "definition"
+  },
+  {
+   "fact": "The Windows PowerShell install command for Claude Code is irm https://claude.ai/install.ps1 | iex.",
+   "value": "irm https://claude.ai/install.ps1 | iex",
+   "unit": "command",
+   "as_of": "",
+   "quote": "Install on Windows (PowerShell) | `irm https://claude.ai/install.ps1 | iex`",
+   "topic": "definition"
+  },
+  {
+   "fact": "Auto permission mode is the starting mode for terminal and VS Code sessions on Claude Code v2.1.283 or later.",
    "value": "2.1.283",
    "unit": "version",
    "as_of": "",
-   "quote": "Auto mode for terminal and VS Code sessions on v2.1.283 or later.",
+   "quote": "Auto mode for terminal and VS Code sessions on v2.1.283 or later. Press Shift+Tab to switch",
    "topic": "rules"
   },
   {
-   "fact": "The Claude Code VS Code extension requires VS Code 1.94.0 or later.",
+   "fact": "The VS Code extension for Claude Code needs VS Code 1.94.0 or later.",
    "value": "1.94.0",
    "unit": "version",
    "as_of": "",
@@ -93,36 +96,356 @@
    "topic": "rules"
   },
   {
-   "fact": "The Claude desktop app's Code tab runs on macOS and Windows, with Linux support in beta.",
-   "value": "",
-   "unit": "",
+   "fact": "Claude Code runs on macOS 13.0 or later.",
+   "value": "13.0",
+   "unit": "macOS version",
    "as_of": "",
-   "quote": "for macOS and Windows, with Linux in beta",
-   "topic": "definition"
+   "quote": "Claude Code runs on macOS 13.0 or later, Windows 10 1809 or later",
+   "topic": "rules"
   },
   {
-   "fact": "The guide states that the pricing figures were checked against the claude.com pricing page on October 8, 2026.",
-   "value": "",
-   "unit": "",
-   "as_of": "October 8, 2026",
-   "quote": "Prices from claude.com/pricing on October 8, 2026.",
-   "topic": "other"
-  },
-  {
-   "fact": "The page gives the macOS, Linux and WSL install command as a curl one-liner from claude.ai/install.sh.",
-   "value": "",
-   "unit": "",
+   "fact": "Claude Code runs on Windows 10 version 1809 or later, or Windows Server 2019 and later.",
+   "value": "1809",
+   "unit": "Windows build",
    "as_of": "",
-   "quote": "curl -fsSL https://claude.ai/install.sh \\| bash",
-   "topic": "definition"
+   "quote": "Windows 10 1809 or later (or Windows Server 2019 and later), Ubuntu 20.04+, Debian 10+ and Alpine Linux 3.19+",
+   "topic": "rules"
   },
   {
-   "fact": "Users can undo changes in a Claude Code session by pressing Esc twice or running /rewind to restore code and conversation to an earlier point.",
-   "value": "",
-   "unit": "",
+   "fact": "Claude Code supports Ubuntu 20.04 or later, Debian 10 or later, and Alpine Linux 3.19 or later.",
+   "value": "20.04",
+   "unit": "Ubuntu version",
+   "as_of": "",
+   "quote": "Ubuntu 20.04+, Debian 10+ and Alpine Linux 3.19+",
+   "topic": "rules"
+  },
+  {
+   "fact": "Claude Code requires at least 4 GB of RAM and an x64 or ARM64 processor.",
+   "value": "4",
+   "unit": "GB RAM",
+   "as_of": "",
+   "quote": "You need at least 4 GB of RAM, an x64 or ARM64 processor, an internet connection",
+   "topic": "rules"
+  },
+  {
+   "fact": "Press Esc twice or run /rewind in Claude Code to restore code and conversation to an earlier point.",
+   "value": "2",
+   "unit": "Esc presses",
    "as_of": "",
    "quote": "Press Esc twice or run `/rewind` to restore code and conversation to an earlier point",
    "topic": "definition"
+  },
+  {
+   "fact": "The Claude Code desktop app's Code tab is available for macOS and Windows, with Linux in beta.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "the Code tab in the Claude app for macOS and Windows, with Linux in beta",
+   "topic": "rules"
+  },
+  {
+   "fact": "A Claude Console account lets users pay per use with prepaid API credits billed at standard API rates, with Claude Code available pay as you go.",
+   "value": "",
+   "unit": "",
+   "as_of": "2026-10-08",
+   "quote": "Claude Console (API) | Prepaid API credits, billed at standard API rates | Pay as you go",
+   "topic": "pricing"
+  },
+  {
+   "fact": "If an ANTHROPIC_API_KEY environment variable is set and approved, the session bills that key at API rates instead of the subscription.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "the session bills that key at API rates instead of using your subscription",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page states it checked Claude Code details against Anthropic's documentation, pricing page and Help Center on October 8, 2026.",
+   "value": "",
+   "unit": "",
+   "as_of": "2026-10-08",
+   "quote": "Checked against Anthropic’s Claude Code documentation, the claude.com pricing page and the Claude Help Center on October 8, 2026.",
+   "topic": "other"
+  },
+  {
+   "fact": "Anthropic recommends installing Git for Windows on native Windows so Claude Code can use its Bash tool; without it, Claude Code uses PowerShell instead.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "On native Windows, Anthropic recommends installing [Git for Windows](https://git-scm.com/downloads/win) so Claude Code can use its Bash tool. Without it, Claude Code uses PowerShell instead.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The npm installation of Claude Code requires Node.js 22 or later.",
+   "value": "22",
+   "unit": "Node.js version (or later)",
+   "as_of": "",
+   "quote": "# npm (needs Node.js 22 or later)",
+   "topic": "rules"
+  },
+  {
+   "fact": "Anthropic warns never to use sudo with npm install -g for Claude Code, because it causes permission and security problems.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Anthropic warns never to use `sudo npm install -g`, which causes permission and security problems.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Homebrew and WinGet installs of Claude Code do not update themselves and must be upgraded manually.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Homebrew and WinGet installs don’t update themselves, so run `brew upgrade claude-code` or `winget upgrade Anthropic.ClaudeCode` now and then.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Anthropic recommends keeping each CLAUDE.md file under 200 lines.",
+   "value": "200",
+   "unit": "lines per file",
+   "as_of": "",
+   "quote": "**Keep it short.** Aim for under 200 lines per file. Longer files use more context, and Claude follows them less reliably.",
+   "topic": "rules"
+  },
+  {
+   "fact": "On current versions (v2.1.283 or later), new terminal and VS Code sessions of Claude Code start in auto permission mode.",
+   "value": "2.1.283",
+   "unit": "version (or later)",
+   "as_of": "",
+   "quote": "On current versions (v2.1.283 or later), new terminal and VS Code sessions start in auto mode.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Anthropic states that auto mode in Claude Code reduces permission prompts but does not guarantee safety.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Anthropic is clear that auto mode reduces permission prompts but does not guarantee safety.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Anthropic recommends using Bypass permissions mode only in isolated environments such as containers or virtual machines.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Anthropic says to use it only in isolated environments such as containers or virtual machines, where Claude Code can’t cause damage.",
+   "topic": "rules"
+  },
+  {
+   "fact": "In Claude Code's plan mode, Claude can read files and explore but cannot edit source code until the user approves a plan.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "It reads files, runs commands to explore and writes a plan, but it can’t edit your source until you approve.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Anthropic reports an average of about $13 per developer per active day across enterprise Claude Code deployments.",
+   "value": "13",
+   "unit": "USD per developer per active day",
+   "as_of": "",
+   "quote": "Anthropic reports an average of about $13 per developer per active day across enterprise deployments, or $150 to $250 per developer per month",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Anthropic reports that across enterprise Claude Code deployments, 150 to 250 USD per developer per month is typical.",
+   "value": "150 to 250",
+   "unit": "USD per developer per month",
+   "as_of": "",
+   "quote": "or $150 to $250 per developer per month, with 90% of users under $30 per active day",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Anthropic reports that 90% of Claude Code enterprise users spend under 30 USD per active day.",
+   "value": "90",
+   "unit": "% of users under $30 per active day",
+   "as_of": "",
+   "quote": "with 90% of users under $30 per active day",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The article states that the --max-budget-usd flag caps how much a single scripted claude -p run can spend.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "the `--max-budget-usd` flag caps what a single run can spend",
+   "topic": "pricing"
+  },
+  {
+   "fact": "On Free, Pro and Max plans, Anthropic trains on Claude Code session data only when the user's model-improvement setting is on.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "On Free, Pro and Max, Anthropic trains on your data, including Claude Code sessions, only when your model-improvement setting is on",
+   "topic": "rules"
+  },
+  {
+   "fact": "On Team, Enterprise and API plans, Anthropic does not train on code or prompts sent to Claude Code unless the organization opts in.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "On Team, Enterprise and the API, Anthropic doesn’t train on code or prompts sent to Claude Code unless your organization opts in.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Claude Code's deny rules take precedence over allow rules in permission settings.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Deny rules win over allow rules.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Rewind restores Claude's file edits but does not track changes made by shell commands such as rm, mv or cp.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Rewind restores Claude’s file edits, but it doesn’t track changes made by shell commands such as rm, mv or cp",
+   "topic": "rules"
+  },
+  {
+   "fact": "The /usage command shows plan limits on Pro, Max, Team and Enterprise plans.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "On Pro, Max, Team and Enterprise it shows your plan limits and what is using them",
+   "topic": "rules"
+  },
+  {
+   "fact": "Anthropic's docs say Sonnet handles most coding tasks well and costs less than Opus.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Anthropic’s docs say Sonnet handles most coding tasks well and costs less than Opus.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Claude Code permission rules are enforced by Claude Code itself rather than by the model.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Permission rules are enforced by Claude Code itself, not by the model, so they hold even if Claude misreads an instruction.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Anthropic's best-practices guide calls verification the biggest lever for getting good results from Claude Code.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Anthropic’s best-practices guide calls verification the biggest lever",
+   "topic": "other"
+  },
+  {
+   "fact": "Claude Code is not included in the free Claude plan; a paid Pro, Max, Team or Enterprise plan is needed, or a Claude Console account billed per use at API rates.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "No, Claude Code isn't included in the free Claude plan. You need a Pro, Max, Team or Enterprise plan (Pro is $20 a month)",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The Claude Pro plan costs $20 a month, or $17 a month when billed annually, per the page.",
+   "value": "20",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "Pro is the cheapest way in at $20 a month, or $17 a month billed annually.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The Claude Max plan starts at $100 a month, offering 5x or 20x the Pro usage.",
+   "value": "100",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "Max starts at $100 a month for 5x or 20x the Pro usage",
+   "topic": "pricing"
+  },
+  {
+   "fact": "On Pro and Max plans, Claude and Claude Code share the same five-hour session limit and weekly limit.",
+   "value": "5",
+   "unit": "hours",
+   "as_of": "",
+   "quote": "On Pro and Max, Claude and Claude Code share the same five-hour session limit and weekly limit.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Claude Code VS Code extension requires VS Code 1.94.0 or later.",
+   "value": "1.94.0",
+   "unit": "version",
+   "as_of": "",
+   "quote": "it needs VS Code 1.94.0 or later and also works in Cursor",
+   "topic": "rules"
+  },
+  {
+   "fact": "Anthropic suggests clearing the session and writing a better first prompt after two failed corrections in Claude Code.",
+   "value": "2",
+   "unit": "failed corrections",
+   "as_of": "",
+   "quote": "After two failed corrections, Anthropic suggests clearing and writing a better first prompt.",
+   "topic": "rules"
+  },
+  {
+   "fact": "CLAUDE.md files should be kept under about 200 lines, according to the page's guidance.",
+   "value": "200",
+   "unit": "lines",
+   "as_of": "",
+   "quote": "Run /init to generate one, keep it under about 200 lines, and edit it with /memory.",
+   "topic": "rules"
+  },
+  {
+   "fact": "In the published outline for Claude Certified Architect: Foundations (CCAR-F), Claude Code Configuration & Workflows is 20% of the exam.",
+   "value": "20",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Claude Code Configuration & Workflows is 20% of the exam, and two of the six scenarios",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Claude Certified Developer: Foundations (CCDV-F) lists Claude Code as one of its eight domains.",
+   "value": "8",
+   "unit": "domains",
+   "as_of": "",
+   "quote": "Claude Certified Developer: Foundations (CCDV-F) lists Claude Code as one of its eight domains",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The CCAR-F exam draws from six scenarios, two of which are Code Generation with Claude Code and Claude Code for CI.",
+   "value": "6",
+   "unit": "scenarios",
+   "as_of": "",
+   "quote": "two of the six scenarios the exam draws from are Code Generation with Claude Code and Claude Code for CI",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Certification exams for Claude are open only to people at Claude Partner Network organizations, per the page.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "These exams are open only to people at Claude Partner Network organizations",
+   "topic": "rules"
+  },
+  {
+   "fact": "Press Esc twice on an empty prompt, or run /rewind, to restore code, conversation or both; rewind does not undo changes made by shell commands such as rm or mv.",
+   "value": "2",
+   "unit": "presses of Esc",
+   "as_of": "",
+   "quote": "Press Esc twice on an empty prompt, or run /rewind",
+   "topic": "definition"
+  },
+  {
+   "fact": "Anthropic's Claude Code courses on Claude Academy are free.",
+   "value": "0",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "Anthropic's Claude Code courses on Claude Academy are free.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Running claude doctor or /doctor provides a setup checkup for Claude Code.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Run `/doctor` in a session, or `claude doctor` in your terminal, for a setup checkup.",
+   "topic": "other"
   }
  ]
 }

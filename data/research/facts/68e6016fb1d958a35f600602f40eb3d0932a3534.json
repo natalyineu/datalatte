@@ -1,19 +1,14 @@
 {
  "url": "https://salonist.io/blog/improve-salon-rebooking-rate",
  "title": "How to Improve Your Salon Rebooking Rate: 8 Ways That Work",
- "hash": "dbf09bc240a068785fb46ff2a26d75d4141a9f97",
- "fetchedAt": "2026-11-09",
+ "hash": "edaf9b12da3f2945b8f368f00c9ba56473cead6d",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 12562,
+ "chunks": 2,
  "facts": [
   {
-   "fact": "The page's salon rebooking rate formula is: clients who rebooked before leaving divided by total clients served, multiplied by 100.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Rebooking rate = (number of clients who rebooked before leaving ÷ total clients served) × 100",
-   "topic": "definition"
-  },
-  {
-   "fact": "The page gives an example in which 180 of 400 clients rebooked, yielding a rebooking rate of 45%.",
+   "fact": "The chunk gives an illustrative calculation in which 180 of 400 clients rebooked, producing a rebooking rate of 45%.",
    "value": "45",
    "unit": "%",
    "as_of": "",
@@ -21,31 +16,31 @@
    "topic": "definition"
   },
   {
-   "fact": "The page says some salons also count bookings made a day or two after the visit, and that salons should stick to one counting rule.",
-   "value": "1",
-   "unit": "day",
+   "fact": "The rebooking rate formula is the number of clients who rebooked before leaving divided by total clients served, multiplied by 100.",
+   "value": "100",
+   "unit": "multiplier",
    "as_of": "",
-   "quote": "Some salons also count bookings made a day or two later. That's fine, just stick to one rule.",
-   "topic": "rules"
+   "quote": "Rebooking rate = (number of clients who rebooked before leaving ÷ total clients served) × 100",
+   "topic": "definition"
   },
   {
-   "fact": "The page states that unnamed published industry benchmarks put the average salon rebooking rate between 40% and 55%.",
+   "fact": "Published industry benchmarks put the average salon rebooking rate between 40% and 55%; the page does not name the source.",
    "value": "40-55",
    "unit": "%",
    "as_of": "",
-   "quote": "Published industry benchmarks put the average somewhere between 40% and 55%, plenty of owners work towards 60%, and the strongest salons pass 70%.",
+   "quote": "Published industry benchmarks put the average somewhere between 40% and 55%",
    "topic": "benchmark"
   },
   {
-   "fact": "The page says many owners work towards a 60% rebooking rate and the strongest salons pass 70%, citing unnamed industry benchmarks.",
-   "value": "60-70",
+   "fact": "Many owners work towards a 60% rebooking rate, and the strongest salons pass 70%, according to the page.",
+   "value": "60; 70",
    "unit": "%",
    "as_of": "",
    "quote": "plenty of owners work towards 60%, and the strongest salons pass 70%.",
    "topic": "benchmark"
   },
   {
-   "fact": "The page recommends gel or acrylic nail clients return every 2 to 3 weeks.",
+   "fact": "Recommended appointment interval for gel or acrylic nails is every 2 to 3 weeks.",
    "value": "2-3",
    "unit": "weeks",
    "as_of": "",
@@ -53,7 +48,7 @@
    "topic": "benchmark"
   },
   {
-   "fact": "The page recommends fades and short men's cuts be rebooked every 3 to 4 weeks.",
+   "fact": "Recommended appointment interval for fades and short men's cuts is every 3 to 4 weeks.",
    "value": "3-4",
    "unit": "weeks",
    "as_of": "",
@@ -61,7 +56,7 @@
    "topic": "benchmark"
   },
   {
-   "fact": "The page recommends root colour be rebooked every 4 to 6 weeks.",
+   "fact": "Recommended appointment interval for root colour is every 4 to 6 weeks.",
    "value": "4-6",
    "unit": "weeks",
    "as_of": "",
@@ -69,36 +64,140 @@
    "topic": "benchmark"
   },
   {
-   "fact": "The page recommends facial clients return about once a month.",
+   "fact": "Recommended appointment interval for facials is about once a month.",
    "value": "1",
-   "unit": "month",
+   "unit": "per month",
    "as_of": "",
    "quote": "Facials: about once a month",
    "topic": "benchmark"
   },
   {
-   "fact": "The page recommends sending at least one appointment reminder a couple of days before the appointment.",
+   "fact": "The page recommends sending a single appointment reminder a couple of days before the appointment.",
    "value": "2",
-   "unit": "days",
+   "unit": "days before",
    "as_of": "",
    "quote": "at least a single one a couple of days before",
    "topic": "rules"
   },
   {
-   "fact": "The page recommends contacting clients who have not rebooked a few days before their appointment slot.",
+   "fact": "The page recommends contacting a client who has not rebooked a few days before their appointment slot.",
    "value": "a few",
-   "unit": "days",
+   "unit": "days before",
    "as_of": "",
    "quote": "contact them a few days before their appointment slot",
    "topic": "rules"
   },
   {
-   "fact": "Salonist's pricing banner states the plan now offers unlimited staff with no staff limits.",
+   "fact": "For inactive clients, the page recommends a friendly check-in once someone is overdue, then one more message a couple of weeks later.",
+   "value": "2",
+   "unit": "weeks later",
+   "as_of": "",
+   "quote": "Send a friendly check-in once someone is overdue, then one more message a couple of weeks later",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends checking the rebooking rate monthly alongside the 90-day return rate.",
+   "value": "90",
+   "unit": "days",
+   "as_of": "",
+   "quote": "Check your rebooking rate monthly alongside your 90-day return rate.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page says that counting bookings made a day or two after the visit is acceptable, provided the salon uses one consistent rule.",
+   "value": "1-2",
+   "unit": "days later",
+   "as_of": "",
+   "quote": "Some salons also count bookings made a day or two later. That’s fine, just stick to one rule.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page states that most salons have a rebooking rate between 40% and 55%.",
+   "value": "40% to 55%",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Most salons land between 40% and 55%. Many owners aim for 60%.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page says many salon owners aim for a rebooking rate of 60%.",
+   "value": "60%",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Many owners aim for 60%. The strongest salons pass 70%.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page says the strongest salons pass a rebooking rate of 70%.",
+   "value": "70%",
+   "unit": "%",
+   "as_of": "",
+   "quote": "The strongest salons pass 70%.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page gives an example calculation: if 180 of 400 clients rebooked, the salon rebooking rate is 45%.",
+   "value": "45%",
+   "unit": "%",
+   "as_of": "",
+   "quote": "If 180 out of 400 clients rebooked your rate is 45%.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The page defines salon rebooking rate as clients who rebooked before leaving divided by total clients served, multiplied by 100.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Unlimited staff. No staff limits. Get more features for less.",
-   "topic": "pricing"
+   "quote": "Divide the clients who rebooked before leaving by the total clients served. Then multiply by 100.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The page says gel or acrylic nail clients need a visit every 2 to 3 weeks.",
+   "value": "2 to 3 weeks",
+   "unit": "weeks",
+   "as_of": "",
+   "quote": "Gel or acrylic nails need a visit every 2 to 3 weeks.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page says fades and short men's cuts need a visit every 3 to 4 weeks.",
+   "value": "3 to 4 weeks",
+   "unit": "weeks",
+   "as_of": "",
+   "quote": "Fades and short men’s cuts need one every 3 to 4 weeks.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page says root colour needs a visit every 4 to 6 weeks.",
+   "value": "4 to 6 weeks",
+   "unit": "weeks",
+   "as_of": "",
+   "quote": "Root colour needs a visit every 4 to 6 weeks.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page says facials work best about once a month.",
+   "value": "about once a month",
+   "unit": "per month",
+   "as_of": "",
+   "quote": "Facials work best about once a month.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page states that a few percentage points per quarter is a sensible rebooking rate improvement goal.",
+   "value": "a few points",
+   "unit": "percentage points per quarter",
+   "as_of": "",
+   "quote": "A few points a quarter is a sensible goal.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page advises changing one thing at a time and giving each change a full month.",
+   "value": "1 month",
+   "unit": "month",
+   "as_of": "",
+   "quote": "Try to make just one change, perhaps the reminder time, and give it a full month.",
+   "topic": "rules"
   }
  ]
 }

@@ -1,127 +1,290 @@
 {
  "url": "https://www.superblocks.com/blog/claude-code-pricing",
  "title": "Claude Code Pricing 2026: Plans, Limits, and Hidden Costs | Superblocks",
- "hash": "155f49b512ecc97f4b2eb12828d562ed0485634a",
- "fetchedAt": "2026-11-06",
+ "hash": "8325689592ae20db7bb1cb95680f3cf0fcb3f605",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 15534,
+ "chunks": 2,
  "facts": [
   {
-   "fact": "Claude Code pricing plans range from $0 to $200/month for individuals and from $20 to $125 per seat for teams, according to the page's introduction.",
-   "value": "$0 to $200/month (individual); $20 to $125/seat (team)",
-   "unit": "USD",
-   "as_of": "2026",
-   "quote": "Plans range from $0 to $200/month for individuals and $20 to $125/seat for teams, with weekly usage limits",
+   "fact": "Anthropic's Pro plan costs $20/month on a monthly plan or $17/month on an annual plan, billed as $200 upfront, per the Superblocks page (pricing stated as correct as of June 2026).",
+   "value": "20",
+   "unit": "USD per month",
+   "as_of": "June 2026",
+   "quote": "At $20/month on a monthly plan or $17/month on an annual plan ($200 upfront), it covers a single user across all three Claude products.",
    "topic": "pricing"
   },
   {
-   "fact": "The Free Claude plan costs $0 and does not include Claude Code.",
+   "fact": "The Free Claude plan does not include Claude Code.",
    "value": "0",
    "unit": "USD per month",
    "as_of": "June 2026",
-   "quote": "Casual Claude use (Claude Code not included)",
-   "topic": "pricing"
+   "quote": "The Free plan gives you access to Claude on web, iOS, Android, and desktop, but **does not include Claude Code**.",
+   "topic": "rules"
   },
   {
-   "fact": "The Pro plan costs $20 per month on a monthly billing plan or $17 per month on an annual plan, which the page says is $200 paid upfront.",
-   "value": "20 (monthly) / 17 (annual)",
-   "unit": "USD per month",
-   "as_of": "June 2026",
-   "quote": "At $20/month on a monthly plan or $17/month on an annual plan ($200 upfront)",
-   "topic": "pricing"
-  },
-  {
-   "fact": "The Pro plan covers a single user across Claude Code, Claude on web/desktop/mobile, and Claude Cowork under one price.",
-   "value": "",
-   "unit": "",
-   "as_of": "June 2026",
-   "quote": "it covers a single user across all three Claude products.",
-   "topic": "pricing"
-  },
-  {
-   "fact": "The Max 5x plan costs $100 per month and provides 5x Pro capacity per five-hour session.",
+   "fact": "Anthropic's Max 5x plan costs $100/month and provides 5x Pro capacity per five-hour session.",
    "value": "100",
    "unit": "USD per month",
    "as_of": "June 2026",
-   "quote": "5x Pro capacity per five-hour session.",
+   "quote": "**Max 5x ($100/month):** 5x Pro capacity per five-hour session.",
    "topic": "pricing"
   },
   {
-   "fact": "The Max 20x plan costs $200 per month and provides 20x Pro capacity per five-hour session.",
+   "fact": "Anthropic's Max 20x plan costs $200/month and provides 20x Pro capacity per five-hour session.",
    "value": "200",
    "unit": "USD per month",
    "as_of": "June 2026",
-   "quote": "20x Pro capacity per five-hour session.",
+   "quote": "**Max 20x ($200/month):** 20x Pro capacity per five-hour session.",
    "topic": "pricing"
   },
   {
-   "fact": "Team Standard costs $25 per seat per month, or $20 per seat per month on an annual basis, and is listed for teams of 5 to 150.",
-   "value": "25 (monthly) / 20 (annual)",
+   "fact": "Anthropic's Team Standard seat costs $25/seat/month on a monthly plan or $20/seat/month on an annual plan.",
+   "value": "25",
    "unit": "USD per seat per month",
    "as_of": "June 2026",
-   "quote": "$25/seat/mo or $20 annual",
+   "quote": "$25/seat/month on a monthly plan or $20/seat/month on an annual plan.",
    "topic": "pricing"
   },
   {
-   "fact": "Team Premium costs $125 per seat per month, or $100 per seat per month on an annual basis.",
-   "value": "125 (monthly) / 100 (annual)",
+   "fact": "Anthropic's Team Premium seat costs $125/seat/month on a monthly plan or $100/seat/month on an annual plan.",
+   "value": "125",
    "unit": "USD per seat per month",
    "as_of": "June 2026",
-   "quote": "$125/seat/mo or $100 annual",
+   "quote": "$125/seat/month on a monthly plan or $100/seat/month on an annual plan.",
    "topic": "pricing"
   },
   {
-   "fact": "Enterprise pricing is listed as $20 per seat plus usage.",
+   "fact": "Claude Code is not included on Team Standard seats; only Team Premium seats bundle Claude Code.",
+   "value": "",
+   "unit": "",
+   "as_of": "June 2026",
+   "quote": "**Claude Code is not included on Standard seats** (Premium only).",
+   "topic": "rules"
+  },
+  {
+   "fact": "Anthropic's Team plan requires a minimum of 5 members and allows a maximum of 150 seats.",
+   "value": "5",
+   "unit": "members minimum",
+   "as_of": "June 2026",
+   "quote": "It requires a minimum of 5 members and tops out at 150 seats.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Organizations with more than 150 seats must upgrade to Anthropic's Enterprise plan, according to the Superblocks page.",
+   "value": "150",
+   "unit": "seats",
+   "as_of": "June 2026",
+   "quote": "Organizations with more than 150 seats need to upgrade to Enterprise.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Anthropic's Enterprise plan pricing starts at $20/seat, with usage billed separately at API rates.",
    "value": "20",
    "unit": "USD per seat",
    "as_of": "June 2026",
-   "quote": "$20/seat + usage",
+   "quote": "Pricing starts at $20/seat with usage billed at API rates.",
    "topic": "pricing"
   },
   {
-   "fact": "Team Standard is listed as best for teams of 5 to 150 people.",
-   "value": "5 to 150",
-   "unit": "seats",
-   "as_of": "June 2026",
-   "quote": "Teams of 5 to 150",
-   "topic": "audience"
-  },
-  {
-   "fact": "Claude Code usage counts against the same limits as Claude chat usage under a subscription.",
+   "fact": "Claude Code usage counts against the same five-hour session and weekly limits as Claude chat usage on a subscription.",
    "value": "",
    "unit": "",
    "as_of": "June 2026",
-   "quote": "your Claude Code usage counts against the same limits as your Claude chat usage",
+   "quote": "your Claude Code usage **counts against the same limits as your Claude chat usage**.",
    "topic": "rules"
   },
   {
-   "fact": "Subscription usage limits reset weekly and across five-hour sessions, and the exact token count varies by model selection.",
-   "value": "",
-   "unit": "",
+   "fact": "Usage limits on Anthropic's Pro plan reset weekly and across five-hour sessions.",
+   "value": "5",
+   "unit": "hours per session",
    "as_of": "June 2026",
-   "quote": "Usage limits reset weekly and across five-hour sessions",
+   "quote": "Usage limits reset weekly and across **five-hour sessions**, with the exact token count Anthropic permits varying by model selection.",
    "topic": "rules"
   },
   {
-   "fact": "Anthropic's Fable 5 access ships in promotional mode on consumer plans prior to June 12, 2026.",
-   "value": "2026-06-12",
-   "unit": "date",
-   "as_of": "June 2026",
-   "quote": "on consumer plans (prior to June 12, 2026)",
-   "topic": "rules"
-  },
-  {
-   "fact": "The page states that $200/month equals roughly $6.67 per day.",
+   "fact": "The Superblocks page states that $200/month equals roughly $6.67/day.",
    "value": "6.67",
    "unit": "USD per day",
    "as_of": "June 2026",
-   "quote": "The math: $200/month is roughly **$6.67/day**",
+   "quote": "The math: $200/month is roughly **$6.67/day**, which beats the API rate for sustained Opus usage.",
    "topic": "pricing"
   },
   {
-   "fact": "The page claims weekly usage limits can automatically switch a subscription to pay-per-token mode without warning.",
+   "fact": "Team plans allow purchasing usage credits so members can keep working after reaching their seat's included limits.",
    "value": "",
    "unit": "",
    "as_of": "June 2026",
-   "quote": "weekly usage limits that can automatically switch a subscription to pay-per-token mode",
+   "quote": "Team plans also support purchasing usage credits that let members continue working after hitting their seat's included limits.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Premium Team seats provide 5x more usage per session than Standard Team seats.",
+   "value": "5",
+   "unit": "x usage per session",
+   "as_of": "June 2026",
+   "quote": "5x more usage per session than Standard seats.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Fable 5 access on consumer plans is in promotional mode prior to June 12, 2026, per the Superblocks page.",
+   "value": "2026-06-12",
+   "unit": "date",
+   "as_of": "June 2026",
+   "quote": "Fable 5 access ships in [promotional mode](https://support.claude.com/en/articles/15424964-claude-fable-models-on-your-plan) on consumer plans (prior to June 12, 2026).",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Superblocks article was published on 2026-06-19.",
+   "value": "2026-06-19",
+   "unit": "date",
+   "as_of": "2026-06-19",
+   "quote": "Published Time: 2026-06-19",
+   "topic": "other"
+  },
+  {
+   "fact": "Anthropic's Enterprise plan includes HIPAA-ready offerings for healthcare deployments.",
+   "value": "",
+   "unit": "",
+   "as_of": "June 2026",
+   "quote": "[**HIPAA-ready offering**](https://support.claude.com/en/articles/13296973-hipaa-ready-enterprise-plans)**:**available for healthcare deployments.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Anthropic's listed API price for Fable 5 is $10 per million input tokens (MTok).",
+   "value": "10",
+   "unit": "USD per MTok (input)",
+   "as_of": "",
+   "quote": "| Fable 5 | $10/MTok | $50/MTok | $12.50/MTok | $1/MTok |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Anthropic's listed API price for Opus 4.8 is $5 per million input tokens (MTok).",
+   "value": "5",
+   "unit": "USD per MTok (input)",
+   "as_of": "",
+   "quote": "| Opus 4.8 | $5/MTok | $25/MTok | $6.25/MTok | $0.50/MTok |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Anthropic's listed API price for Sonnet 4.6 is $3 per million input tokens (MTok).",
+   "value": "3",
+   "unit": "USD per MTok (input)",
+   "as_of": "",
+   "quote": "| Sonnet 4.6 | $3/MTok | $15/MTok | $3.75/MTok | $0.30/MTok |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Anthropic's listed API price for Haiku 4.5 is $1 per million input tokens (MTok).",
+   "value": "1",
+   "unit": "USD per MTok (input)",
+   "as_of": "",
+   "quote": "| Haiku 4.5 | $1/MTok | $5/MTok | $1.25/MTok | $0.10/MTok |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "As of June 12, 2026, Anthropic removed access to Fable 5 and Mythos 5 for all users in response to a US export control directive.",
+   "value": "2026-06-12",
+   "unit": "date",
+   "as_of": "2026-06-12",
+   "quote": "As of June 12, 2026, Anthropic removed access to Fable 5 and Mythos 5 for all users in response to a",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page lists the Claude Pro plan for Claude Code at $17-$20 per month.",
+   "value": "17-20",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "**Choose Pro ($17-$20/month) if you:**",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page lists the Claude Max 5x plan at $100 per month.",
+   "value": "100",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "**Choose Max 5x ($100/month) if you:**",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page lists the Claude Max 20x plan at $200 per month.",
+   "value": "200",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "**Choose Max 20x ($200/month) if you:**",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page states Team Premium seats, which are required for Claude Code on Team, cost $100-$125 per seat per month.",
+   "value": "100-125",
+   "unit": "USD per seat per month",
+   "as_of": "",
+   "quote": "requires Team Premium seats at $100-$125/seat/month**, since Standard seats don't include Claude Code",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page lists the Team plan at $20-$125 per seat per month.",
+   "value": "20-125",
+   "unit": "USD per seat per month",
+   "as_of": "",
+   "quote": "**Choose Team ($20-$125/seat/month) if you:**",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page lists the Enterprise plan at $20 per seat plus usage.",
+   "value": "20",
+   "unit": "USD per seat per month (plus usage)",
+   "as_of": "",
+   "quote": "**Choose Enterprise ($20/seat + usage) if you:**",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page suggests Enterprise is a fit for organizations with more than 150 seats or that need RBAC, SCIM, and audit logs.",
+   "value": "150",
+   "unit": "seats",
+   "as_of": "",
+   "quote": "Have **more than 150 seats** or need **RBAC, SCIM, and audit logs**.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page suggests the Team plan is for groups of 5 or more developers who need Claude Code access.",
+   "value": "5",
+   "unit": "developers",
+   "as_of": "",
+   "quote": "Have **5 or more developers** who need Claude Code access",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page states Claude Code costs $20 per month on the Pro monthly plan, or $17 per month on the annual plan.",
+   "value": "20",
+   "unit": "USD per month (monthly); 17 USD per month (annual)",
+   "as_of": "",
+   "quote": "**Claude Code costs **$20/month on Pro monthly** (or $17/month annual)",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page states Claude Code shares usage limits with Claude chat across paid plans, under a five-hour session cap and a weekly usage cap.",
+   "value": "5",
+   "unit": "hours (session cap)",
+   "as_of": "",
+   "quote": "every coding session counts against the same **five-hour session and weekly usage caps**",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page states Claude Code can be billed through API credits at standard API rates of $3 to $5 per million input tokens, depending on the model.",
+   "value": "3-5",
+   "unit": "USD per million input tokens",
+   "as_of": "",
+   "quote": "charging **standard API rates per token** ($3 to $5 per million input tokens depending on the model).",
+   "topic": "pricing"
+  },
+  {
+   "fact": "If an ANTHROPIC_API_KEY environment variable is set, Claude Code authenticates with the API key and charges the API account at pay-per-token rates.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "If you have an ANTHROPIC_API_KEY environment variable set, Claude Code authenticates with the API key, charging your API account at pay-per-token rates.",
    "topic": "rules"
   }
  ]

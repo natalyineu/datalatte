@@ -1,35 +1,46 @@
 {
  "url": "https://origami.chat/blog/find-businesses-without-websites",
  "title": "Find Businesses Without Websites: Honest 2026 Guide",
- "hash": "5d24da369c18a0c40b069dfbc3e2719a3ffb33d4",
- "fetchedAt": "2026-11-09",
+ "hash": "00d5e1d19a9565abe8dc38ef23efc558d8c14369",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 21839,
+ "chunks": 3,
  "facts": [
   {
-   "fact": "Origami's current Starter plan costs $99 per month and includes over 1,000 researched and verified leads a month with no per-seat fees, as stated by Origami on its own blog.",
+   "fact": "Origami's current Starter plan costs $99 per month, according to the page's product information checked November 8, 2026.",
    "value": "99",
    "unit": "USD per month",
-   "as_of": "November 8, 2026",
-   "quote": "current Starter plan](https://origami.chat/#pricing) is **$99 per month**, includes **over 1,000 researched and verified leads a month**, and has **no per-seat fees**.",
+   "as_of": "2026-11-08",
+   "quote": "[Origami’s current Starter plan](https://origami.chat/#pricing) is **$99 per month**, includes **over 1,000 researched and verified leads a month**",
    "topic": "pricing"
   },
   {
-   "fact": "Origami's current site offers a free trial, but the page does not state the trial allowance or duration and says these terms should be confirmed at signup.",
-   "value": "",
-   "unit": "",
-   "as_of": "November 8, 2026",
-   "quote": "The current site offers a free trial; confirm the trial allowance, duration and other terms at signup.",
+   "fact": "Origami's current Starter plan includes over 1,000 researched and verified leads a month, per the page's product information checked November 8, 2026.",
+   "value": "1000",
+   "unit": "leads per month",
+   "as_of": "2026-11-08",
+   "quote": "includes **over 1,000 researched and verified leads a month**, and has **no per-seat fees**",
    "topic": "pricing"
   },
   {
-   "fact": "Email and social sequencing is included on Origami's paid plans, according to the vendor.",
-   "value": "",
-   "unit": "",
-   "as_of": "November 8, 2026",
-   "quote": "Email and social sequencing is included on paid plans; connect a sender before sending.",
+   "fact": "Origami's current Starter plan has no per-seat fees, according to the page.",
+   "value": "0",
+   "unit": "USD per seat",
+   "as_of": "2026-11-08",
+   "quote": "and has **no per-seat fees**",
    "topic": "pricing"
   },
   {
-   "fact": "The article states that 60% of specialty contractors with under 50 employees have no website, though it cites no source.",
+   "fact": "The page states that older Origami pricing, including a plan starting at $29 per month with 1,000 free credits, is historical and superseded by the current pricing.",
+   "value": "29",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "Starts free with 1,000 credits, no credit card required — paid plans from $29/month",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page says that 60% of specialty contractors under 50 employees have no website.",
    "value": "60",
    "unit": "%",
    "as_of": "",
@@ -37,7 +48,7 @@
    "topic": "benchmark"
   },
   {
-   "fact": "The article states that 45% of HVAC, plumbing, and electrical companies operate phone-only, though it cites no source.",
+   "fact": "The page says that 45% of HVAC, plumbing, and electrical companies operate phone-only.",
    "value": "45",
    "unit": "%",
    "as_of": "",
@@ -45,44 +56,100 @@
    "topic": "benchmark"
   },
   {
-   "fact": "The article states that many businesses without websites generate $1M-$20M annually, with no source given.",
+   "fact": "The page says many businesses without websites generate $1M-$20M annually.",
    "value": "1M-20M",
    "unit": "USD per year",
    "as_of": "",
    "quote": "Many generate $1M-$20M annually but invest in equipment and staff instead of websites and SEO.",
-   "topic": "benchmark"
+   "topic": "audience"
   },
   {
-   "fact": "The article's illustrative Phoenix example says there are 400+ licensed HVAC contractors in that market.",
-   "value": "400",
-   "unit": "licensed contractors (count, 400+)",
-   "as_of": "",
-   "quote": "Meanwhile, there are 400+ licensed contractors in that market",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "In the article's illustrative example, an Apollo search for \"HVAC Phoenix\" returned 47 results.",
-   "value": "47",
-   "unit": "results",
-   "as_of": "",
-   "quote": "search \"HVAC Phoenix,\" and get 47 results",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "The article's expectations table lists 70% or more verified work emails as uncommon for no-website rows.",
+   "fact": "The page's expectation table lists 70%+ verified work emails as uncommon for no-website rows.",
    "value": "70",
-   "unit": "% verified work emails (or more)",
+   "unit": "%",
    "as_of": "",
    "quote": "| 70%+ verified work emails | ❌ Uncommon for no-website rows |",
    "topic": "benchmark"
   },
   {
-   "fact": "The article was first published April 24, 2026 and last updated November 8, 2026.",
+   "fact": "The page states that Phoenix has 400+ licensed contractors in the HVAC market used in its example.",
+   "value": "400",
+   "unit": "licensed contractors",
+   "as_of": "",
+   "quote": "there are 400+ licensed contractors in that market",
+   "topic": "audience"
+  },
+  {
+   "fact": "The page states that government business databases are updated in real time, while commercial databases update quarterly, according to the article's claim.",
+   "value": "quarterly",
+   "unit": "",
+   "as_of": "",
+   "quote": "**Government databases are updated in real-time as businesses register and renew licenses.** This data is often fresher than commercial databases that update quarterly.",
+   "topic": "other"
+  },
+  {
+   "fact": "The page says Origami's paid plans include email and social sequencing, and a sender must be connected before sending.",
    "value": "",
    "unit": "",
    "as_of": "2026-11-08",
-   "quote": "•April 24, 2026•Updated Nov 8, 2026•17 min read",
+   "quote": "Email and social sequencing is included on paid plans; connect a sender before sending.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page states that the Google Maps API does not include email addresses or decision-maker names.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "**Limitation:** Requires technical setup and doesn't include email addresses or decision-maker names.",
    "topic": "other"
+  },
+  {
+   "fact": "The article was published on April 24, 2026.",
+   "value": "2026-04-24",
+   "unit": "date",
+   "as_of": "2026-04-24",
+   "quote": "Published Time: 2026-04-24",
+   "topic": "other"
+  },
+  {
+   "fact": "Hunter.io, a third-party email-finding tool, offers a free tier with 50 credits per month, according to the page.",
+   "value": "50",
+   "unit": "credits per month",
+   "as_of": "",
+   "quote": "Starting at free with 50 credits per month, paid plans from $34/month.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page's author claims that cold-call success rates to offline businesses are often 3-5x higher than with digitally-native companies; this is an unsourced vendor claim, not third-party data.",
+   "value": "3-5",
+   "unit": "x (multiple of success rate)",
+   "as_of": "",
+   "quote": "Your success rate on cold calls to offline businesses is often 3-5x higher than with digitally-native companies.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Origami's free plan includes 1,000 credits and does not require a credit card.",
+   "value": "1,000",
+   "unit": "credits",
+   "as_of": "",
+   "quote": "The free plan includes 1,000 credits with no credit card required, perfect for testing this approach",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The article states that Google's Place Details documentation distinguishes the fields websiteUri, businessStatus, and movedPlaceId.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "distinguishes the fields `websiteUri`, `businessStatus`, and `movedPlaceId`.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The article states that search results from a map-based query are a discovery sample rather than a census of every business in a city.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Search results are a discovery sample, not a census of every business in a city.",
+   "topic": "rules"
   }
  ]
 }

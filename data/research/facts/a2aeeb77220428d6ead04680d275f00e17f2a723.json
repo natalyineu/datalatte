@@ -1,31 +1,82 @@
 {
  "url": "https://support.google.com/business/answer/3039617",
  "title": "Edit your Business Profile - Google Business Profile Help",
- "hash": "5af84eea3f46212993d38c2a1eea8c1eb43f9fe9",
- "fetchedAt": "2026-11-10",
+ "hash": "44cdfee12e3abc6b4bc5c26a94afdc39385fad3a",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 13924,
+ "chunks": 2,
  "facts": [
   {
-   "fact": "Beyond the primary category, a business can select up to 9 more categories on its Business Profile.",
+   "fact": "Businesses can select up to 9 more categories in addition to the primary category.",
    "value": "9",
-   "unit": "additional categories",
+   "unit": "categories",
    "as_of": "",
    "quote": "You can select up to 9 more categories.",
    "topic": "rules"
   },
   {
-   "fact": "Beyond the primary business phone number, a Business Profile can list up to 2 more phone numbers, which can be mobile or landline but not fax.",
+   "fact": "Businesses can enter up to 2 more phone numbers in addition to the primary business phone number, and they cannot be fax numbers.",
    "value": "2",
-   "unit": "additional phone numbers",
+   "unit": "phone numbers",
    "as_of": "",
-   "quote": "you can enter up to 2 more phone numbers. They can be mobile numbers or landline, but not fax.",
+   "quote": "In addition to your primary business phone number, you can enter up to 2 more phone numbers. They can be mobile numbers or landline, but not fax.",
    "topic": "rules"
   },
   {
-   "fact": "Google may occasionally contact the verified phone number on a Business Profile using automated calls, texts, or WhatsApp to confirm business info, a feature that is currently available only in select regions, languages, and business categories.",
+   "fact": "Businesses can add one social media link per platform, for Facebook, Instagram, LinkedIn, Pinterest, TikTok, X, and YouTube.",
+   "value": "1",
+   "unit": "link per platform",
+   "as_of": "",
+   "quote": "You can add one social media link per platform to your Business Profile for:",
+   "topic": "rules"
+  },
+  {
+   "fact": "Social media links are available only in select regions and may not be available for all users.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "This feature is currently available for select regions, languages, and business categories and may not be available for all users.",
+   "quote": "Social media links are currently available for select regions and may not be available for all users.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Chat options with text message or WhatsApp are available only in select regions, and only businesses with a claimed and verified Business Profile can add a WhatsApp or text messaging option.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Businesses with a claimed and verified Business Profile can add a WhatsApp or text messaging option.",
+   "topic": "rules"
+  },
+  {
+   "fact": "A website URL entered on a Business Profile must be the full URL and include http:// or https://.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Enter the full URL, which includes “http://” or “https://.”",
+   "topic": "rules"
+  },
+  {
+   "fact": "Businesses can hide their Business Profile phone number by turning on 'Don't show' under Advanced settings in Business Profile settings.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Under \"Phone number,” turn on **Don't show.**",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google may occasionally contact the verified phone number on a profile using automated calls, texts, or WhatsApp messages to confirm business info, and this feature is available only for select regions, languages, and business categories.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Google may occasionally reach out using automated messages via call, text, or WhatsApp to the verified phone number on your profile.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Changing the business name after the profile is verified may require the business to verify again.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "If you change your business name after it’s verified, you might need to verify your business again.",
    "topic": "rules"
   },
   {
@@ -37,19 +88,83 @@
    "topic": "rules"
   },
   {
-   "fact": "If a business changes its name after the Business Profile is verified, it might need to verify the business again.",
+   "fact": "To edit business info, the user must sign in to the Google Account linked to the Business Profile.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "If you change your business name after it’s verified, you might need to verify your business again.",
+   "quote": "To edit your business info, you need to sign in to the Google Account that's linked to your Business Profile.",
    "topic": "rules"
   },
   {
-   "fact": "If a business moves to a new address after its Business Profile is verified, it must verify the business again.",
+   "fact": "The Google Business Profile description field must not exceed 750 characters.",
+   "value": "750",
+   "unit": "characters",
+   "as_of": "",
+   "quote": "Do not exceed 750 characters in the description field.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Business descriptions on Google Business Profile must not include URLs or HTML code.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "If you move your business to a new address after it’s verified, you must verify your business again.",
+   "quote": "Do not include URLs or HTML code.",
+   "topic": "rules"
+  },
+  {
+   "fact": "For the opening date on a Google Business Profile, only the month and year need to be written.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "You only need to write the month and year of your opening date.",
+   "topic": "rules"
+  },
+  {
+   "fact": "A Google Business Profile opening date can be entered up to one year in the future, but it will not show on Google until 90 days before that date.",
+   "value": "90",
+   "unit": "days",
+   "as_of": "",
+   "quote": "You can enter a date up to one year in the future, but it won't show up on Google until 90 days before the date.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The in-store products showcase on Google Business Profile is available to retail businesses in the US, CA, UK, and IE.",
+   "value": "US, CA, UK, IE",
+   "unit": "countries",
+   "as_of": "",
+   "quote": "If you have a retail business in an eligible country (US, CA, UK, and IE)",
+   "topic": "rules"
+  },
+  {
+   "fact": "To showcase in-store products on a Business Profile, a retailer must connect its Point of Sale system to the Local Inventory app.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "you need to connect your store's Point of Sale system to the Local Inventory app.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Hotels can add check-in and check-out times to their Business Profile, and this feature is only available on a computer.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "This feature is only available on a computer.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Responses to Business Profile attribute questions cannot be edited or deleted on mobile devices.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Responses to these attribute questions cannot be edited or deleted on mobile devices.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google's car dealership inventory feature is a pilot available only for select business categories and regions.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "This feature is available only for select business categories and regions.",
    "topic": "rules"
   }
  ]

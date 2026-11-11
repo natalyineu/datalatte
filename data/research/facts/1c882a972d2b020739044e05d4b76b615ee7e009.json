@@ -1,87 +1,114 @@
 {
  "url": "https://www.tracknlist.com/blog/promoted-listings-and-seller-tools-which-ones-actually-move-product/",
  "title": "Promoted Listings and Seller Tools: Which Ones Actually Move Product",
- "hash": "eb7cd90fc6cfe9082ee9ded748f9d7d8a1f484b9",
- "fetchedAt": "2026-11-09",
+ "hash": "6b5005ced5af356169a8590a7436090f0aa14e7b",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 9784,
+ "chunks": 2,
  "facts": [
   {
-   "fact": "The article was published on 17 August 2026 and carries a 6-minute read time.",
-   "value": "17 Aug 2026",
-   "unit": "date",
-   "as_of": "2026-08-17",
-   "quote": "17 Aug 2026 — 6 min read",
-   "topic": "other"
-  },
-  {
-   "fact": "The author suggests starting ad rates at roughly half of the platform's suggested rate on a batch of listings.",
+   "fact": "The guide advises starting ad rates at roughly half the platform's suggested rate on a batch of listings and watching for two weeks before stepping up.",
    "value": "50",
-   "unit": "% of suggested ad rate",
+   "unit": "% of suggested rate",
    "as_of": "",
-   "quote": "start at roughly half the suggested rate on a batch of listings and watch for two weeks",
+   "quote": "A practical approach is to start at roughly half the suggested rate on a batch of listings and watch for two weeks.",
    "topic": "pricing"
   },
   {
-   "fact": "The author suggests watching a reduced ad rate for about two weeks before changing it.",
-   "value": "2",
-   "unit": "weeks",
-   "as_of": "",
-   "quote": "start at roughly half the suggested rate on a batch of listings and watch for two weeks",
-   "topic": "rules"
-  },
-  {
-   "fact": "In the author's illustration, ad fees of four percent and thirteen percent stack on top of other seller fees.",
-   "value": "4% and 13%",
-   "unit": "% of sale",
-   "as_of": "",
-   "quote": "Four percent here and thirteen percent there feels small individually",
-   "topic": "pricing"
-  },
-  {
-   "fact": "The author recommends sending watcher offers with a modest discount of five to ten percent and a short expiry.",
+   "fact": "The guide recommends sending watcher offers with a modest discount of five to ten percent and a short expiry.",
    "value": "5-10",
-   "unit": "% discount",
+   "unit": "%",
    "as_of": "",
-   "quote": "send a modest discount, five to ten percent, with a short expiry",
+   "quote": "send a modest discount, five to ten percent, with a short expiry.",
    "topic": "pricing"
   },
   {
-   "fact": "The author says acceptance of watcher offers often jumps at a discount somewhere around eight to twelve percent.",
+   "fact": "The guide says many sellers find an acceptance-rate cliff for watcher offers somewhere around an 8 to 12 percent discount, where acceptance jumps.",
    "value": "8-12",
    "unit": "% discount",
    "as_of": "",
-   "quote": "often somewhere around eight to twelve percent, where acceptance jumps",
+   "quote": "Most sellers find a cliff, often somewhere around eight to twelve percent, where acceptance jumps.",
    "topic": "benchmark"
   },
   {
-   "fact": "The author advises waiting one week after a listing goes live before sending it offers.",
-   "value": "1",
-   "unit": "week",
+   "fact": "The guide advises not sending offers on a listing until it has had about a week at full price.",
+   "value": "7",
+   "unit": "days",
    "as_of": "",
    "quote": "Give a listing a week to find its audience at full price.",
    "topic": "rules"
   },
   {
-   "fact": "The author recommends focusing sharing on the top thirty items by likes plus the newest inventory.",
-   "value": "30",
-   "unit": "items",
+   "fact": "The guide's example policy runs new listings unpromoted for the first seven to ten days to observe organic performance.",
+   "value": "7-10",
+   "unit": "days",
    "as_of": "",
-   "quote": "Focus on your top thirty items by likes and your newest inventory.",
+   "quote": "New listings run unpromoted for the first seven to ten days so you can see organic performance.",
    "topic": "rules"
   },
   {
-   "fact": "The author recommends batching sharing into two short daily blocks.",
-   "value": "2",
-   "unit": "blocks per day",
+   "fact": "In the guide's example policy, listings with fewer than twenty views by day ten get promoted at the seller's tested base rate.",
+   "value": "20",
+   "unit": "views by day 10",
    "as_of": "",
-   "quote": "Sharing is worth batching into two short daily blocks rather than spreading across the day.",
+   "quote": "Anything with fewer than twenty views by day ten gets promoted at your tested base rate.",
    "topic": "rules"
   },
   {
-   "fact": "The author says a listing up for ninety days with steady views and no sales needs a lower price or better photos rather than a relist.",
+   "fact": "In the guide's example policy, listings older than sixty days receive one round of aggressive treatment combining promotion, a price cut, and an offer sweep.",
+   "value": "60",
+   "unit": "days",
+   "as_of": "",
+   "quote": "Anything past sixty days gets one round of aggressive treatment",
+   "topic": "rules"
+  },
+  {
+   "fact": "The guide cites a listing up for ninety days with steady views and no sales as needing a lower price or better photos rather than a relist.",
    "value": "90",
    "unit": "days",
    "as_of": "",
    "quote": "A listing that has been up for ninety days with steady views and no sales does not need a fresh start",
+   "topic": "rules"
+  },
+  {
+   "fact": "The guide illustrates how ad fees compound by citing a four percent ad rate and a thirteen percent final value fee stacking on the same sale.",
+   "value": "4 and 13",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Four percent here and thirteen percent there feels small individually and collectively can turn a twenty percent margin into single digits.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The guide recommends a promotion holdout test run for one month, comparing a promoted group against an unpromoted group of comparable inventory.",
+   "value": "1",
+   "unit": "month",
+   "as_of": "",
+   "quote": "Promote one group, leave the other alone, and run it for a month.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The guide recommends running the promotion holdout test once a quarter rather than continuously.",
+   "value": "1",
+   "unit": "per quarter",
+   "as_of": "",
+   "quote": "Run this test once a quarter rather than continuously.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The guide's worked example assumes promotion moves sell-through from 20 percent to 25 percent on a group of 100 items, yielding five extra sales.",
+   "value": "20 to 25",
+   "unit": "% sell-through",
+   "as_of": "",
+   "quote": "If promotion moved your sell through from twenty percent to twenty five percent on a group of a hundred items, that is five extra sales.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The guide suggests batching sharing into two short daily blocks focused on the top thirty items by likes and the newest inventory.",
+   "value": "2 blocks; 30 items",
+   "unit": "daily blocks; items",
+   "as_of": "",
+   "quote": "Sharing is worth batching into two short daily blocks rather than spreading across the day.",
    "topic": "rules"
   }
  ]

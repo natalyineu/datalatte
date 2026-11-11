@@ -1,11 +1,14 @@
 {
  "url": "https://cursor.com/fr/pricing",
  "title": "Cursor · Tarifs",
- "hash": "6a0647b10f4059c4e59b0557d3125d553ae89c12",
- "fetchedAt": "2026-11-06",
+ "hash": "c72e7351ddbc6325584126115f402398a729974f",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 7483,
+ "chunks": 1,
  "facts": [
   {
-   "fact": "Cursor's Free plan is listed at $0 per month.",
+   "fact": "The Gratuit (Free) plan on the Cursor pricing page is listed at $0 per month.",
    "value": "0",
    "unit": "USD per month",
    "as_of": "",
@@ -13,35 +16,35 @@
    "topic": "pricing"
   },
   {
-   "fact": "Cursor's Plus plan is listed at $8 per month.",
+   "fact": "The Plus plan is listed at $8 per month and is described as the 'forfait de découverte' (discovery plan).",
    "value": "8",
    "unit": "USD per month",
    "as_of": "",
-   "quote": "### Plus\n\n$8/mois",
+   "quote": "### Plus\n\n$8/mois\n\nNotre forfait de découverte:",
    "topic": "pricing"
   },
   {
-   "fact": "Cursor's Premium plan is listed at $30 per month and is described as offering 4x the usage of Plus.",
+   "fact": "The Premium plan is listed at $30 per month and is marked as the most popular plan.",
    "value": "30",
    "unit": "USD per month",
    "as_of": "",
-   "quote": "$30/mois",
+   "quote": "### Premium\n\nLe plus populaire\n\n$30/mois",
    "topic": "pricing"
   },
   {
-   "fact": "Cursor's Super plan is listed at $100 per month and is described as offering 15x the usage of Plus.",
+   "fact": "The Super plan is listed at $100 per month.",
    "value": "100",
    "unit": "USD per month",
    "as_of": "",
-   "quote": "$100/mois",
+   "quote": "### Super\n\n$100/mois",
    "topic": "pricing"
   },
   {
-   "fact": "Cursor's Ultra plan is listed at $200 per month and is described as offering 50x the usage of Plus.",
+   "fact": "The Ultra plan is listed at $200 per month.",
    "value": "200",
    "unit": "USD per month",
    "as_of": "",
-   "quote": "$200/mois",
+   "quote": "### Ultra\n\n$200/mois",
    "topic": "pricing"
   },
   {
@@ -49,43 +52,43 @@
    "value": "30",
    "unit": "USD per user per month",
    "as_of": "",
-   "quote": "$30+/utilisateur/mois",
+   "quote": "Teams$30+/utilisateur/mois",
    "topic": "pricing"
   },
   {
-   "fact": "The Enterprise plan is priced on a custom basis rather than a published figure.",
+   "fact": "The Enterprise plan is listed with custom ('sur mesure') pricing rather than a published price.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "EnterpriseSur mesure",
+   "quote": "Enterprise Sur mesure [Contacter l’équipe commerciale]",
    "topic": "pricing"
   },
   {
-   "fact": "Premium offers 4x the usage of the Plus plan, according to the page.",
+   "fact": "According to the page, the Premium plan provides 4x the usage of the Plus plan.",
    "value": "4",
    "unit": "x Plus usage",
    "as_of": "",
    "quote": "4x\n\nplus d’utilisation qu’avec Plus",
-   "topic": "benchmark"
+   "topic": "pricing"
   },
   {
-   "fact": "Super offers 15x the usage of the Plus plan, according to the page.",
+   "fact": "According to the page, the Super plan provides 15x the usage of the Plus plan.",
    "value": "15",
    "unit": "x Plus usage",
    "as_of": "",
    "quote": "15x\n\nplus d’utilisation qu’avec Plus",
-   "topic": "benchmark"
+   "topic": "pricing"
   },
   {
-   "fact": "Ultra offers 50x the usage of the Plus plan, according to the page.",
+   "fact": "According to the page, the Ultra plan provides 50x the usage of the Plus plan.",
    "value": "50",
    "unit": "x Plus usage",
    "as_of": "",
    "quote": "50x\n\nplus d’utilisation qu’avec Plus",
-   "topic": "benchmark"
+   "topic": "pricing"
   },
   {
-   "fact": "The page states that displayed prices do not include applicable taxes or fees, such as VAT.",
+   "fact": "The page states that the displayed prices do not include applicable taxes or fees such as VAT.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -93,19 +96,27 @@
    "topic": "rules"
   },
   {
-   "fact": "The page states that third-party model usage in Cursor is not included in the displayed monthly prices and must be purchased separately.",
+   "fact": "The page states that subscribers can cancel at any time, at least 24 hours before renewal to avoid additional charges.",
+   "value": "24",
+   "unit": "hours before renewal",
+   "as_of": "",
+   "quote": "Vous pouvez [résilier à tout moment](https://x.ai/legal/bundled-subscription-terms#cancel), au moins 24 heures avant le renouvellement",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page states that use of third-party models in Cursor is not included in the displayed monthly prices and must be purchased separately, billed by usage.",
    "value": "",
    "unit": "",
    "as_of": "",
    "quote": "L’utilisation des modèles tiers dans Cursor n’est pas incluse dans les prix mensuels affichés et doit être achetée séparément.",
-   "topic": "pricing"
+   "topic": "rules"
   },
   {
-   "fact": "The page states that subscriptions can be cancelled at least 24 hours before renewal to avoid additional charges.",
-   "value": "24",
-   "unit": "hours before renewal",
+   "fact": "The page states that the Plus plan includes only Grok models.",
+   "value": "",
+   "unit": "",
    "as_of": "",
-   "quote": "au moins 24 heures avant le renouvellement pour éviter des frais supplémentaires",
+   "quote": "*Seuls les modèles Grok sont disponibles avec ce forfait",
    "topic": "rules"
   },
   {
@@ -117,36 +128,44 @@
    "topic": "rules"
   },
   {
-   "fact": "The page lists the Premium and higher tiers as including Cloud Agents and automations; the Free and Plus tiers do not.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Agents Cloud et automatisations",
-   "topic": "definition"
-  },
-  {
-   "fact": "The page lists a team marketplace for internal rules, skills and plugins as available only on the Teams and Enterprise plans.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Marketplace d’équipe pour les règles, skills et plugins internes",
-   "topic": "definition"
-  },
-  {
-   "fact": "The page lists X Money's effective annual yield as 6.00% with direct deposit (a vendor-listed figure for X Money, not a Cursor feature).",
+   "fact": "The page lists the effective annual yield on X Money as 6.00% with direct deposit for the Free and Plus plans, and 6.00% for the higher tiers.",
    "value": "6.00",
    "unit": "% annual yield",
    "as_of": "",
-   "quote": "Rendement annuel effectif de 𝕏 Money\n\n6.00% avec dépôt direct",
+   "quote": "Rendement annuel effectif de 𝕏 Money | 6.00% avec dépôt direct | 6.00% avec dépôt direct | 6.00% | 6.00% | 6.00%",
    "topic": "other"
   },
   {
-   "fact": "The page lists X Money cashback as 3% with direct deposit (a vendor-listed figure for X Money, not a Cursor feature).",
+   "fact": "The page lists X Money cashback at 3% with direct deposit on the Free plan and 3% on the Plus plan.",
    "value": "3",
    "unit": "% cashback",
    "as_of": "",
-   "quote": "Cashback 𝕏 Money\n\n3% avec dépôt direct",
+   "quote": "Cashback 𝕏 Money | 3% avec dépôt direct | 3% | 3% | 3% | 3%",
    "topic": "other"
+  },
+  {
+   "fact": "On the Free plan, usage of the Agent and Chat features is described as limited, with a limited number of agent requests and chat requests.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Nombre limité de requêtes d’agent\n*   Nombre limité de requêtes de Chat",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Teams plan usage is listed as 4-50x Plus.",
+   "value": "4-50",
+   "unit": "x Plus usage",
+   "as_of": "",
+   "quote": "| Utilisation | Limité | Basique | 4x Plus | 15x Plus | 50x Plus | 4-50x Plus | Mutualisée |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page states that the Cursor Premium plan includes access to Cloud Agents and automations.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Agents Cloud et automatisations | — | — | ✓ | ✓ | ✓ | ✓ | ✓",
+   "topic": "definition"
   }
  ]
 }

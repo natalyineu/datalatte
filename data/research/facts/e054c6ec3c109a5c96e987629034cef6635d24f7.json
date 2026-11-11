@@ -1,91 +1,46 @@
 {
  "url": "https://support.google.com/adspolicy/answer/9872280?hl=en&co=GENIE.CountryCode%3DBN",
  "title": "Document requirements for advertiser verification - Brunei - Advertising Policies Help",
- "hash": "6549141add924768651ab3449915946a582dd060",
- "fetchedAt": "2026-11-09",
+ "hash": "b3843be3c5d2c2ee676b1d16a805f190c9dde310",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 9162,
+ "chunks": 2,
  "facts": [
   {
-   "fact": "Organizations in Brunei may be required to provide two types of documentation for advertiser verification: organization registration documents and a government-issued photo ID from an authorized representative.",
+   "fact": "Google may require advertisers to submit documents for advertiser verification, and the required documents depend on whether the account type is Organization or Individual.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "The documents required are based on your account type “Organization” or “Individual”.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Organizations may be required to provide organization registration documents and a government-issued photo ID from an authorized representative for advertiser verification.",
    "value": "2",
    "unit": "document types",
    "as_of": "",
-   "quote": "Organizations may be required to provide 2 different types of documentation for advertiser verification: organization registration documents and a government-issued photo ID from an authorized representative.",
+   "quote": "**Organizations** may be required to provide 2 different types of documentation for advertiser verification: organization registration documents and a government-issued photo ID from an authorized representative.",
    "topic": "rules"
   },
   {
-   "fact": "Individuals in Brunei must submit a Bruneian government-issued photo ID issued as part of the verification program.",
+   "fact": "Individuals must submit a Bruneian government-issued photo ID issued as part of the verification program for advertiser verification.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Individuals must submit a Bruneian government-issued photo ID issued as part of the verification program.",
+   "quote": "**Individuals** must submit a Bruneian government-issued photo ID issued as part of the verification program.",
    "topic": "rules"
   },
   {
-   "fact": "Individuals may also be required to submit a second proof-of-address document that matches the full name and address already submitted.",
+   "fact": "For individual advertiser verification, the second proof-of-address document may be required in certain cases, and the address will not show in ad disclosure.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "In certain cases, individuals may also be required to submit a second proof-of-address document matching the full name and address already submitted.",
+   "quote": "In certain cases, individuals may also be required to submit a second proof-of-address document matching the full name and address already submitted. The address won’t show in ad disclosure.",
    "topic": "rules"
   },
   {
-   "fact": "A utility or phone or internet bill used as proof of address must be dated within the last 60 days.",
-   "value": "60",
-   "unit": "days",
-   "as_of": "",
-   "quote": "A utility (for example, electricity, gas, water bill) or phone or internet bill (with a date in the last 60 days)",
-   "topic": "rules"
-  },
-  {
-   "fact": "A bank statement used as proof of address must be dated within the last 60 days.",
-   "value": "60",
-   "unit": "days",
-   "as_of": "",
-   "quote": "A bank statement (with a date in the last 60 days)",
-   "topic": "rules"
-  },
-  {
-   "fact": "Acceptable proof-of-address documents include a lease or mortgage agreement, in addition to utility, phone, internet, and bank statements.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "A lease or mortgage agreement",
-   "topic": "rules"
-  },
-  {
-   "fact": "Accepted registration documents for organizations include a certificate of incorporation or registration, extract from commercial register, business license, and tax certificate.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Certificate of incorporation or registration",
-   "topic": "rules"
-  },
-  {
-   "fact": "Only government departments and agencies may submit an official letter including full name, address and date as a registration document.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Only for government departments and agencies: an official letter including full name, address and date",
-   "topic": "rules"
-  },
-  {
-   "fact": "An authorized representative is an admin of the Google Ads account and/or the payments profile paying for the ads.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "An authorized representative is an admin of the Google Ads account and/or the payments profile paying for the ads.",
-   "topic": "definition"
-  },
-  {
-   "fact": "The government-issued photo ID of an authorized representative can be issued in any country.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "The government-issued photo ID can be issued in any country.",
-   "topic": "rules"
-  },
-  {
-   "fact": "Submitted government-issued photo IDs must be valid and not expired.",
+   "fact": "Government-issued photo IDs submitted for verification must be valid and not expired.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -93,7 +48,15 @@
    "topic": "rules"
   },
   {
-   "fact": "When requested, the front and back of a photo ID must be submitted separately to avoid verification failure.",
+   "fact": "Photocopies, screenshots, or photos taken through third-party apps may not be accepted for government-issued photo ID submission during advertiser verification.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Photocopies, screenshots, or photos taken through third-party apps may not be accepted; we recommend using your device’s native camera app.",
+   "topic": "rules"
+  },
+  {
+   "fact": "For advertiser verification, the front and back of the ID should be submitted separately when requested to prevent failing verification.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -101,15 +64,7 @@
    "topic": "rules"
   },
   {
-   "fact": "Submitted document details must exactly match the payments profile info, including the organization name if applicable.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Make sure that the details in the submitted documents exactly match your payments profile info, including the organization name, if applicable.",
-   "topic": "rules"
-  },
-  {
-   "fact": "Documents must be submitted only through the Ads UI and not by email.",
+   "fact": "Advertiser verification documents must be submitted only through the Ads UI and not by email.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -117,19 +72,67 @@
    "topic": "rules"
   },
   {
-   "fact": "Google states that personal data and documents submitted for verification will not be shared with any third party.",
+   "fact": "Common reasons for failed advertiser verification include the document being unverifiable, a name mismatch, or using an unsupported document type.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Personal data and documents won't be shared with any third party",
+   "quote": "common reasons include the document being unverifiable, a name mismatch, or using an unsupported document type.",
    "topic": "rules"
   },
   {
-   "fact": "The address from proof-of-address documents does not appear in ad disclosures.",
+   "fact": "Personal data and documents submitted for advertiser verification are not shared with any third party, per Google's stated policy.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "The address won’t show in ad disclosure.",
+   "quote": "Personal data and documents won't be shared with any third party, as per the Google data protection policy.",
+   "topic": "rules"
+  },
+  {
+   "fact": "An authorized representative for advertiser verification is an admin of the Google Ads account and/or the payments profile paying for the ads, and the government-issued photo ID can be issued in any country.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "An authorized representative is an admin of the Google Ads account and/or the payments profile paying for the ads. The government-issued photo ID can be issued in any country.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Only government departments and agencies may use an official letter including full name, address and date as a registration document for advertiser verification.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Only for government departments and agencies: an official letter including full name, address and date",
+   "topic": "rules"
+  },
+  {
+   "fact": "For Brunei advertiser verification, a utility (electricity, gas, or water bill) or phone or internet bill is an accepted address document only if it is dated within the last 60 days.",
+   "value": "60",
+   "unit": "days",
+   "as_of": "",
+   "quote": "A utility (for example, electricity, gas, water bill) or phone or internet bill (with a date in the last 60 days)",
+   "topic": "rules"
+  },
+  {
+   "fact": "For Brunei advertiser verification, a bank statement is an accepted address document only if it is dated within the last 60 days.",
+   "value": "60",
+   "unit": "days",
+   "as_of": "",
+   "quote": "A bank statement (with a date in the last 60 days)",
+   "topic": "rules"
+  },
+  {
+   "fact": "For Brunei advertiser verification, a second government-issued photo ID must be uploaded showing the side that displays the address.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "A second government issued document of photo ID (make sure to upload the side showing the address)",
+   "topic": "rules"
+  },
+  {
+   "fact": "For Brunei advertiser verification, a lease or mortgage agreement is listed as an accepted supporting document.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "A lease or mortgage agreement",
    "topic": "rules"
   }
  ]

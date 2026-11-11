@@ -1,11 +1,14 @@
 {
  "url": "https://scrap.io/how-to-create-an-email-list-in-gmail",
  "title": "How to Create an Email List in Gmail (2026 Guide) | Scrap.io",
- "hash": "0b0c3010bcc67faf81957caed991620b62a69292",
- "fetchedAt": "2026-11-09",
+ "hash": "2bcafa28957fd51e62db56ba971067933fd3c8c5",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 24231,
+ "chunks": 3,
  "facts": [
   {
-   "fact": "Scrap.io's page states that there are 25,780,971 businesses on Google Maps in the US, a vendor-supplied figure not attributed to a third-party source.",
+   "fact": "According to the vendor (Scrap.io), there are 25,780,971 businesses on Google Maps in the US.",
    "value": "25780971",
    "unit": "businesses",
    "as_of": "",
@@ -13,7 +16,7 @@
    "topic": "benchmark"
   },
   {
-   "fact": "Scrap.io's page states that 8,851,466 of the US businesses on Google Maps have a public email address that can be reached, a vendor-supplied figure.",
+   "fact": "According to the vendor (Scrap.io), 8,851,466 of the US businesses on Google Maps have a public email address that can be reached.",
    "value": "8851466",
    "unit": "businesses",
    "as_of": "",
@@ -21,43 +24,267 @@
    "topic": "benchmark"
   },
   {
-   "fact": "The page says creating a Google Contacts label-based email list (Method 1) takes four minutes and is free.",
+   "fact": "The vendor states that creating a contact-label email list in Google Contacts takes about four minutes.",
    "value": "4",
    "unit": "minutes",
    "as_of": "",
    "quote": "It takes four minutes and it's free.",
-   "topic": "pricing"
+   "topic": "other"
   },
   {
-   "fact": "The page's comparison table gives a setup time of about 4 minutes for a Gmail contact label, about 15 minutes for a Google Group, and an afternoon for a dedicated tool.",
-   "value": "~4 minutes (contact label); ~15 minutes (Google Group)",
+   "fact": "The vendor's comparison table gives a setup time of about 15 minutes for a Google Group.",
+   "value": "15",
    "unit": "minutes",
    "as_of": "",
-   "quote": "| Setup time | ~4 minutes | ~15 minutes | An afternoon |",
-   "topic": "benchmark"
+   "quote": "Setup time | ~4 minutes | ~15 minutes | An afternoon",
+   "topic": "other"
   },
   {
-   "fact": "The page's comparison table states that unsubscribe handling is manual for a Gmail contact label, self-service for a Google Group, and automatic for a dedicated tool.",
+   "fact": "The vendor states that Google Groups is built for Google Workspace and that some of its nicer admin controls assume a paid plan.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "| Unsubscribe handling | Manual | Self-service | Automatic |",
+   "quote": "Google Groups is really built for Google Workspace, and some of the nicer admin controls assume you're on a paid plan.",
    "topic": "rules"
   },
   {
-   "fact": "The page states that Gmail has no feature called an email list.",
+   "fact": "The vendor states that deleting a contact label removes the grouping (the list) but not the contacts themselves.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Gmail doesn't have a feature called \"email list.\" It never has.",
-   "topic": "definition"
+   "quote": "Deleting the label deletes the list, not the contacts.",
+   "topic": "rules"
   },
   {
-   "fact": "The page states that when a contact label is placed in the To field, every recipient can see every other recipient's address, while placing it in Bcc hides recipients from each other but limits replies to the sender.",
+   "fact": "The vendor states that when a label is placed in the Bcc field with your own address in To, replies come back only to the sender.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Put the label in the **To** field and every recipient sees every other address.",
+   "quote": "The catch? Replies come back only to you.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The vendor states that Google Contacts can import a CSV file, so spreadsheet data can be brought in without retyping.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Google Contacts imports a CSV.",
+   "topic": "other"
+  },
+  {
+   "fact": "A free Gmail account can reach 500 recipients in a rolling 24-hour window.",
+   "value": "500",
+   "unit": "recipients per 24 hours",
+   "as_of": "2026",
+   "quote": "500. That's how many recipients a free Gmail account can reach in 24 hours",
+   "topic": "rules"
+  },
+  {
+   "fact": "Gmail's free-account sending limit counts recipients rather than messages, and the count is cumulative across To, Cc, and Bcc.",
+   "value": "",
+   "unit": "",
+   "as_of": "2026",
+   "quote": "the count is cumulative across To, Cc, and Bcc — every field adds up",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Gmail sending quota is a rolling 24-hour window rather than a midnight reset.",
+   "value": "24",
+   "unit": "hours",
+   "as_of": "2026",
+   "quote": "It's a rolling 24-hour window, so if you send at 3pm today you can't send again to a fresh batch until 3pm tomorrow.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google Workspace accounts can send 2,000 messages per day.",
+   "value": "2,000",
+   "unit": "messages per day",
+   "as_of": "2026",
+   "quote": "| Google Workspace | 2,000 | Up to 10,000 |",
+   "topic": "rules"
+  },
+  {
+   "fact": "A list of 400 contacts in Bcc would consume 80% of a free Gmail account's daily recipient quota in a single send.",
+   "value": "80",
+   "unit": "% of daily free-Gmail quota",
+   "as_of": "2026",
+   "quote": "A list of 400 contacts sitting in Bcc? That's 80% of your daily free-Gmail quota gone in a single click.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Since 2024, Gmail, Yahoo and Microsoft have tightened sender requirements and now expect proper authentication before trusting mail.",
+   "value": "2024",
+   "unit": "year",
+   "as_of": "2024",
+   "quote": "Since 2024, Gmail, Yahoo and Microsoft have tightened the rules on who's even allowed into the inbox",
+   "topic": "rules"
+  },
+  {
+   "fact": "As of August 8, 2026, Scrap.io (vendor data) counts 25,780,971 businesses referenced across the United States.",
+   "value": "25,780,971",
+   "unit": "businesses",
+   "as_of": "2026-08-08",
+   "quote": "As of August 8, 2026, Scrap.io counts 25,780,971 businesses referenced across the United States",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Per Scrap.io data as of August 8, 2026, 8,851,466 US businesses have a public email address, which is 34.3% of those referenced.",
+   "value": "8,851,466",
+   "unit": "businesses",
+   "as_of": "2026-08-08",
+   "quote": "of which 8,851,466 have a public email address",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Scrap.io's catalog covers 225,676,406 establishments across 195 countries.",
+   "value": "225,676,406",
+   "unit": "establishments",
+   "as_of": "2026-08-08",
+   "quote": "the catalog runs to 225,676,406 establishments across 195 countries",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Per Omnisend (2026), email marketing returns $36 to $42 for every $1 spent, compared with roughly $2 for paid search.",
+   "value": "36 to 42",
+   "unit": "USD return per USD 1 spent",
+   "as_of": "2026",
+   "quote": "Email marketing still returns $36 to $42 for every $1 spent — against roughly $2 for paid search",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Per Marketful (2026), about 18% of businesses push past 7,000% ROI from email marketing.",
+   "value": "18",
+   "unit": "% of businesses",
+   "as_of": "2026",
+   "quote": "About 18% of businesses push past 7,000% ROI, which is more than $70 back on the dollar (Marketful, 2026)",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Per Instantly (2026), a B2B contact list loses about 2.1% of its accuracy every month, roughly 22.5% per year.",
+   "value": "2.1",
+   "unit": "% accuracy loss per month",
+   "as_of": "2026",
+   "quote": "A B2B contact list loses about 2.1% of its accuracy every single month. Compound that and it's roughly 22.5% a year",
+   "topic": "forecast"
+  },
+  {
+   "fact": "Per Cleanlist (2026), somewhere between 15 and 20% of professionals change jobs every year.",
+   "value": "15 to 20",
+   "unit": "% of professionals per year",
+   "as_of": "2026",
+   "quote": "Somewhere between 15 and 20% of professionals change jobs every year",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Scrap.io offers a free 7-day trial that includes 100 export credits with no commitment.",
+   "value": "7 days, 100 export credits",
+   "unit": "days, credits",
+   "as_of": "",
+   "quote": "Try it free for 7 days — 100 export credits, no commitment",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Scrap.io's filters apply before extraction, so users are not charged credits for listings without a contactable email.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "The filtering happens **before** extraction — so you can tell it \"only businesses that already have an email,\"",
+   "topic": "other"
+  },
+  {
+   "fact": "Scrap.io states that 22.5% of an email list dies every year.",
+   "value": "22.5",
+   "unit": "%",
+   "as_of": "",
+   "quote": "22.5% of your list dies every year.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Scrap.io states that more than 50,000 professionals re-extract data instead of recycling old files.",
+   "value": "50,000+",
+   "unit": "professionals",
+   "as_of": "",
+   "quote": "That's why 50,000+ professionals re-extract instead of recycling old files",
+   "topic": "audience"
+  },
+  {
+   "fact": "Scrap.io offers a free starting tier of 100 leads.",
+   "value": "100",
+   "unit": "leads",
+   "as_of": "",
+   "quote": "Start free with 100 leads",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Scrap.io offers a free trial lasting 7 days.",
+   "value": "7",
+   "unit": "days",
+   "as_of": "",
+   "quote": "Start your free 7-day Scrap.io trial",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Scrap.io says its database covers 25.7 million US businesses from Google Maps.",
+   "value": "25.7",
+   "unit": "million US businesses",
+   "as_of": "",
+   "quote": "25.7M US businesses from Google Maps",
+   "topic": "other"
+  },
+  {
+   "fact": "Under CAN-SPAM, opt-out requests must be honored within 10 business days, according to the guide as summarized on the page.",
+   "value": "10",
+   "unit": "business days",
+   "as_of": "",
+   "quote": "honor any opt-out within 10 business days",
+   "topic": "rules"
+  },
+  {
+   "fact": "A Gmail contact label has no built-in unsubscribe mechanism, so opt-outs must be handled manually.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "a Gmail contact label has no built-in unsubscribe mechanism",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page states that Gmail is sufficient for sending to fewer than 50 recipients without personalization.",
+   "value": "50",
+   "unit": "recipients",
+   "as_of": "",
+   "quote": "Under 50 recipients and no personalization, Gmail is fine.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page lists a Gmail contact label volume limit of up to 500 emails per day.",
+   "value": "500",
+   "unit": "per day",
+   "as_of": "",
+   "quote": "Up to 500/day",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page lists a Gmail mail merge volume limit of up to 1,500 emails per day.",
+   "value": "1,500",
+   "unit": "per day",
+   "as_of": "",
+   "quote": "Up to 1,500/day",
+   "topic": "rules"
+  },
+  {
+   "fact": "A free Gmail account can send to 500 recipients per rolling 24 hours.",
+   "value": "500",
+   "unit": "recipients per rolling 24 hours",
+   "as_of": "",
+   "quote": "a free Gmail account can reach 500 recipients per rolling 24 hours",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google Workspace accounts can send up to 2,000 messages and 10,000 recipients per day.",
+   "value": "2,000 messages; 10,000 recipients",
+   "unit": "per day",
+   "as_of": "",
+   "quote": "Google Workspace accounts up to 2,000 messages and 10,000 recipients per day",
    "topic": "rules"
   }
  ]

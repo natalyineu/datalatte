@@ -1,119 +1,114 @@
 {
  "url": "https://replit.com/blog/effort-based-pricing-recap",
  "title": "Effort-Based Pricing Recap | Replit",
- "hash": "7cae2c93008f83510e831fc8d5ae24499752e125",
- "fetchedAt": "2026-11-06",
+ "hash": "695c56fbb428f35a386b100011290c068e7c6e9a",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 11288,
+ "chunks": 2,
  "facts": [
   {
-   "fact": "Replit began rolling Effort-Based Pricing out to remaining users on July 2nd.",
+   "fact": "Replit began rolling out Effort-Based Pricing to remaining users on July 2nd.",
    "value": "July 2",
    "unit": "date",
-   "as_of": "",
+   "as_of": "2025",
    "quote": "we began rolling this feature out to the remaining users last week on July 2nd.",
    "topic": "pricing"
   },
   {
-   "fact": "Replit offered $10 in free Replit credits to all members who used the new pricing model, applied automatically to active accounts.",
+   "fact": "Replit offered $10 in free credits to all members who used the new Effort-Based Pricing model.",
    "value": "10",
    "unit": "USD",
-   "as_of": "",
+   "as_of": "2025",
    "quote": "we would like to offer $10 in free Replit credits to all Replit members who used the new pricing model",
    "topic": "pricing"
   },
   {
-   "fact": "Replit states that a July 11th incident involving incorrectly computed checkpoint charges lasted from 11:26AM PDT to 5:43PM PDT.",
-   "value": "11:26AM PDT - 5:43PM PDT",
-   "unit": "time window",
-   "as_of": "July 11",
-   "quote": "happened on July 11th between the hours of 11:26AM PDT - 5:43PM PDT.",
-   "topic": "other"
-  },
-  {
-   "fact": "Replit states the July 11th incident affected approximately 6% of paying users.",
+   "fact": "A cost calculation error on July 11th incorrectly computed Replit checkpoint charges, impacting approximately 6% of paying users, according to Replit.",
    "value": "6",
    "unit": "% of paying users",
-   "as_of": "July 11",
+   "as_of": "2025-07-11",
    "quote": "This impacted approximately 6% of paying users.",
-   "topic": "other"
+   "topic": "benchmark"
   },
   {
-   "fact": "Replit's first version of Agent (v1), which came out of beta in December 2024, billed a flat rate of $0.25 per checkpoint.",
+   "fact": "Under the previous pricing model, Agent v1 billed a flat rate of $0.25 per checkpoint.",
    "value": "0.25",
    "unit": "USD per checkpoint",
-   "as_of": "Dec 2024",
+   "as_of": "2024-12",
    "quote": "bill the user a flat rate of $0.25, which at the time was enough to cover the cost of AI and running the service.",
    "topic": "pricing"
   },
   {
-   "fact": "Replit states that the v2 Agent can run autonomously for up to 20 minutes.",
-   "value": "20",
-   "unit": "minutes",
-   "as_of": "",
-   "quote": "With v2, however, Replit can run autonomously for up to 20 minutes.",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "Replit states that 20 minutes of Agent work could cost it upwards of $10.",
-   "value": "10",
-   "unit": "USD",
-   "as_of": "",
-   "quote": "20 minutes of work could cost us upwards of $10.",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Before Effort-Based Pricing, Replit generated a checkpoint every ninth time the Agent ran a command behind the scenes.",
-   "value": "9",
-   "unit": "command runs per checkpoint",
-   "as_of": "",
-   "quote": "we patched the Agent to generate a checkpoint every ninth time that the Agent ran a command behind the scenes.",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Under the previous pricing model, each checkpoint cost the user $0.25.",
-   "value": "0.25",
-   "unit": "USD per checkpoint",
-   "as_of": "",
-   "quote": "Each checkpoint would cost the user $0.25.",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Under Effort-Based Pricing, Agent creates at most one checkpoint per request.",
-   "value": "1",
-   "unit": "checkpoint per request (maximum)",
-   "as_of": "",
-   "quote": "Agent will create at most one checkpoint per request instead of many.",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Under Effort-Based Pricing, simpler requests may cost as little as $0.06 per checkpoint.",
+   "fact": "With Effort-Based Pricing, simpler requests may cost as little as $0.06 per checkpoint.",
    "value": "0.06",
    "unit": "USD per checkpoint",
-   "as_of": "",
+   "as_of": "2025",
    "quote": "Simpler requests may cost as little as $0.06 and more involved requests will usually cost more than $0.25",
    "topic": "pricing"
   },
   {
-   "fact": "Under Effort-Based Pricing, more involved requests will usually cost more than $0.25 per checkpoint, sometimes resulting in charges of multiple dollars.",
-   "value": "0.25",
-   "unit": "USD per checkpoint (typical minimum for involved requests)",
-   "as_of": "",
-   "quote": "more involved requests will usually cost more than $0.25, sometimes resulting in charges of multiple dollars depending on the size of the work.",
-   "topic": "pricing"
+   "fact": "Under the earlier approach, Agent generated a checkpoint every ninth time it ran a command behind the scenes.",
+   "value": "9",
+   "unit": "th command run",
+   "as_of": "2025",
+   "quote": "we patched the Agent to generate a checkpoint every ninth time that the Agent ran a command behind the scenes.",
+   "topic": "rules"
   },
   {
-   "fact": "Replit reports that some users have seen individual checkpoints costing over $1 under Effort-Based Pricing.",
+   "fact": "Under Effort-Based Pricing, Agent creates at most one checkpoint per request.",
    "value": "1",
-   "unit": "USD per checkpoint (over)",
+   "unit": "checkpoint per request",
+   "as_of": "2025",
+   "quote": "Agent will create at most one checkpoint per request instead of many.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Replit rolled out an AI model usage efficiency change to all users by the end of July 7th.",
+   "value": "July 7",
+   "unit": "date",
    "as_of": "",
-   "quote": "Users have seen checkpoints costing over $1, and they would have been charged the same amount under the old pricing model.",
+   "quote": "We quickly rolled these changes out to all users by the end of July 7th.",
+   "topic": "other"
+  },
+  {
+   "fact": "Shortly after launching its new pricing, Replit identified a double-digit percent efficiency win in its AI model usage (vendor's own claim).",
+   "value": "double-digit percent",
+   "unit": "%",
+   "as_of": "",
+   "quote": "we identified a major double-digit percent efficiency win in our AI model usage",
+   "topic": "other"
+  },
+  {
+   "fact": "Replit states that users had been accustomed to seeing $0.25 charges per checkpoint.",
+   "value": "0.25",
+   "unit": "USD per checkpoint",
+   "as_of": "",
+   "quote": "When users are accustomed to seeing $0.25 charges per checkpoint, it’s harder to interpret a $0.75 checkpoint",
    "topic": "pricing"
   },
   {
-   "fact": "Replit reports that the cost per checkpoint under Effort-Based Pricing is determined by the amount of computing resources consumed.",
+   "fact": "Replit cites a $0.75 checkpoint as an example of a newer checkpoint that can include the work of three $0.25 checkpoints.",
+   "value": "0.75",
+   "unit": "USD per checkpoint",
+   "as_of": "",
+   "quote": "even if that $0.75 checkpoint includes the work of three $0.25 checkpoints.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Under Replit's Effort-Based Pricing, chat cost with the Agent is summed into the next checkpoint's charges.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "The cost per checkpoint is now determined based on the amount of computing resources consumed.",
+   "quote": "Even more surprising is that the chat cost is summed in the next checkpoint's charges.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Replit states that Effort-Based Pricing ties user-facing charges to its operational costs.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Because Effort-Based Pricing ties user-facing charges to Replit operational costs, users began to see cost savings immediately.",
    "topic": "definition"
   }
  ]

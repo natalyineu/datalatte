@@ -1,19 +1,30 @@
 {
  "url": "https://crewai.com/",
  "title": "CrewAI",
- "hash": "c882e3ea6af0e1b1d2605908a8184f2674e1ac1a",
- "fetchedAt": "2026-11-09",
+ "hash": "047ae7d9539c56132c0a97d7836111c4884d4e90",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 4475,
+ "chunks": 1,
  "facts": [
   {
-   "fact": "CrewAI's homepage states that its platform is used by 65% of the Fortune 500 (vendor's own claim, undated).",
-   "value": "65",
+   "fact": "CrewAI states that it is used by 65% of the Fortune 500.",
+   "value": "65%",
    "unit": "%",
    "as_of": "",
    "quote": "Used by 65% of the Fortune 500.",
    "topic": "benchmark"
   },
   {
-   "fact": "CrewAI's Build product says its multi-agent builder is guided by 700k agent workflow patterns (vendor's own claim).",
+   "fact": "CrewAI Discovery matches patterns observed over billions of agent runs against a user's tickets, chats, apps, and workflows to produce automation opportunities ranked by effort, value, and readiness.",
+   "value": "billions",
+   "unit": "agent runs",
+   "as_of": "",
+   "quote": "CrewAI Discovery matches patterns observed over billions of agent runs against your tickets, chats, apps, and workflows.",
+   "topic": "definition"
+  },
+  {
+   "fact": "CrewAI's Build product is guided by 700k agent workflow patterns.",
    "value": "700k",
    "unit": "agent workflow patterns",
    "as_of": "",
@@ -21,19 +32,43 @@
    "topic": "benchmark"
   },
   {
-   "fact": "CrewAI says its Discovery feature matches patterns observed over billions of agent runs (vendor's own claim; no exact count given).",
-   "value": "billions",
-   "unit": "agent runs",
-   "as_of": "",
-   "quote": "CrewAI Discovery matches patterns observed over billions of agent runs against your tickets, chats, apps, and workflows.",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "CrewAI's Discovery feature ranks automation opportunities by effort, value, and readiness.",
+   "fact": "CrewAI's Build offers a no-code visual editor that is exportable to Python.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "You get a list of automation opportunities ranked by effort, value, and readiness.",
+   "quote": "No-code visual editor, exportable to Python",
+   "topic": "definition"
+  },
+  {
+   "fact": "CrewAI's Control Plane provides real-time tracing of every LLM call, tool call, and memory read with full cost accounting.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Real-time tracing of every LLM call, tool call, and memory read is observable with full cost accounting",
+   "topic": "definition"
+  },
+  {
+   "fact": "CrewAI's Control Plane includes human-in-the-loop approval gates and intervention during execution.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Human-in-the-loop approval gates and intervention during execution",
+   "topic": "rules"
+  },
+  {
+   "fact": "CrewAI's runtime hooks inject PII redaction and policy checks at every LLM and tool call.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Runtime hooks inject PII redaction and policy checks at every LLM and tool call",
+   "topic": "rules"
+  },
+  {
+   "fact": "CrewAI's evaluation capability is powered by Arize, Galileo, DataDog, and Patronus.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Evaluation for native tracking with expanded sophistication powered by Arize, Galileo, DataDog, and Patronus",
    "topic": "definition"
   }
  ]

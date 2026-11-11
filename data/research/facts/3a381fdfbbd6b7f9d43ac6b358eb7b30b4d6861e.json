@@ -1,40 +1,51 @@
 {
  "url": "https://crewai.com/open-source",
  "title": "CrewAI",
- "hash": "f527c180c1bf4bc83c2a50cc2eb90cb6a044e26b",
- "fetchedAt": "2026-11-09",
+ "hash": "a38016fc4b8c31e5f3d703160c38d894ac10398d",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 6399,
+ "chunks": 1,
  "facts": [
   {
-   "fact": "CrewAI's own page claims its agent harness powering agentic systems is used by 63% of the Fortune 500.",
-   "value": "63",
+   "fact": "CrewAI's page states its agent harness is used by 63% of the Fortune 500.",
+   "value": "63%",
    "unit": "%",
    "as_of": "",
    "quote": "The agent harness powering agentic systems used by 63% of the Fortune 500",
    "topic": "audience"
   },
   {
-   "fact": "CrewAI's own page also claims the platform is used by 65% of the Fortune 500, which conflicts with the 63% figure in its hero headline.",
-   "value": "65",
+   "fact": "CrewAI's page states its platform is used by 65% of the Fortune 500.",
+   "value": "65%",
    "unit": "%",
    "as_of": "",
    "quote": "Loved by AI builders. Trusted by AI leaders. Used by 65% of the Fortune 500.",
    "topic": "audience"
   },
   {
-   "fact": "CrewAI's own page states it is backed by more than 100,000 developers.",
-   "value": "100000",
+   "fact": "CrewAI's page states it is backed by more than 100,000 developers.",
+   "value": "100,000",
    "unit": "developers",
    "as_of": "",
    "quote": "Backed by more than 100,000 developers, CrewAI sets the standard for transparent, reliable, and enterprise-capable AI.",
    "topic": "audience"
   },
   {
-   "fact": "CrewAI's own page says it provides agents with 100s of open-source tools out of the box.",
+   "fact": "CrewAI's page states it provides hundreds of open-source tools out of the box.",
    "value": "100s",
-   "unit": "open-source tools",
+   "unit": "tools",
    "as_of": "",
-   "quote": "100s of open-source tools out of the box",
+   "quote": "CrewAI provides AI agents with hundreds of open-source tools out of the box",
    "topic": "other"
+  },
+  {
+   "fact": "CrewAI's page states its Checkpointing feature captures runtime state at every step and lets users replay from specific steps and fork workflows.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Checkpointing is a core pillar for deploying agentic systems to production. It lets users replay from specific steps, fork workflows",
+   "topic": "definition"
   }
  ]
 }

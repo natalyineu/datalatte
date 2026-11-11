@@ -1,79 +1,122 @@
 {
  "url": "https://www.robinchampsaur.com/writing/claude-code-101/",
  "title": "Claude Code 101: The workflow that changed how I build features | Robin Champsaur",
- "hash": "2e3742c687016f1d172e07db76991a2fa3ade43f",
- "fetchedAt": "2026-11-06",
+ "hash": "5b0787344333d35f51ddced3b518f51364dc1382",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 12053,
+ "chunks": 2,
  "facts": [
   {
-   "fact": "The page says Plan Mode in Claude Code is toggled by pressing Shift + Tab twice.",
+   "fact": "In Claude Code, Plan Mode is toggled by pressing Shift + Tab twice.",
    "value": "Shift + Tab twice",
    "unit": "",
    "as_of": "",
-   "quote": "Toggle it by pressing `Shift + Tab` twice.",
-   "topic": "definition"
-  },
-  {
-   "fact": "The page says the author's guide was published on June 11, 2026.",
-   "value": "June 11, 2026",
-   "unit": "date",
-   "as_of": "2026-06-11",
-   "quote": "June 11, 2026",
-   "topic": "other"
-  },
-  {
-   "fact": "The page says subagents can be created at project level, stored in .claude/agents/, or at user level, stored in ~/.claude/agents/.",
-   "value": ".claude/agents/ (project); ~/.claude/agents/ (user)",
-   "unit": "",
-   "as_of": "",
-   "quote": "create new agents at project level (stored in `.claude/agents/`) or user level (stored in `~/.claude/agents/`).",
+   "quote": "Toggle it by pressing `Shift + Tab` twice. Describe the feature you want in detail.",
    "topic": "rules"
   },
   {
-   "fact": "The page says running /agents in Claude Code opens the subagent management interface.",
+   "fact": "The author says running /agents in Claude Code opens the interface for managing subagents.",
    "value": "/agents",
    "unit": "",
    "as_of": "",
    "quote": "Run `/agents` in Claude Code to open the management interface.",
-   "topic": "definition"
+   "topic": "rules"
   },
   {
-   "fact": "The page says each subagent is a Markdown file with YAML frontmatter.",
-   "value": "Markdown file with YAML frontmatter",
+   "fact": "The author says project-level subagents are stored in .claude/agents/ and user-level subagents in ~/.claude/agents/.",
+   "value": ".claude/agents/ (project); ~/.claude/agents/ (user)",
    "unit": "",
    "as_of": "",
-   "quote": "Each subagent is a Markdown file with YAML frontmatter:",
-   "topic": "definition"
+   "quote": "create new agents at project level (stored in `.claude/agents/`) or user level (stored in `~/.claude/agents/`)",
+   "topic": "rules"
   },
   {
-   "fact": "The page says each subagent operates in its own context window, which keeps the main conversation clean and focused.",
-   "value": "own context window",
+   "fact": "The author's example frontend subagent is configured with the tools Read, Edit, Bash, Grep, and Glob and the model sonnet.",
+   "value": "Read, Edit, Bash, Grep, Glob; model sonnet",
+   "unit": "",
+   "as_of": "",
+   "quote": "tools: Read, Edit, Bash, Grep, Glob",
+   "topic": "rules"
+  },
+  {
+   "fact": "The author states that each subagent operates in its own context window, which keeps the main conversation clean and focused.",
+   "value": "",
    "unit": "",
    "as_of": "",
    "quote": "Each subagent operates in its own context window, keeping your main conversation clean and focused.",
    "topic": "definition"
   },
   {
-   "fact": "The page's example subagent configuration sets the model to sonnet and lists the tools Read, Edit, Bash, Grep, and Glob.",
-   "value": "model: sonnet; tools: Read, Edit, Bash, Grep, Glob",
+   "fact": "The author recommends creating the claude.md file in the project root as a persistent guide that Claude references on almost every prompt.",
+   "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "tools: Read, Edit, Bash, Grep, Glob\nmodel: sonnet",
-   "topic": "other"
-  },
-  {
-   "fact": "The page says a claude.md file should be set up in the project root as a persistent guide that Claude references on almost every prompt.",
-   "value": "project root",
-   "unit": "",
-   "as_of": "",
-   "quote": "First thing: set up a `claude.md` file in your project root.",
+   "quote": "set up a `claude.md` file in your project root.",
    "topic": "rules"
   },
   {
-   "fact": "The page says that including the phrase \"Use proactively\" in a subagent's description field lets Claude invoke it automatically when relevant.",
+   "fact": "The author lists three core elements for success with Claude Code: the claude.md file, Plan Mode, and specialized subagents.",
+   "value": "3",
+   "unit": "count",
+   "as_of": "",
+   "quote": "Three elements make the difference between frustration and flow:",
+   "topic": "definition"
+  },
+  {
+   "fact": "The author says that to have Claude invoke a subagent automatically when relevant, the subagent's description should include phrases like \"Use proactively\".",
    "value": "\"Use proactively\"",
    "unit": "",
    "as_of": "",
    "quote": "Include phrases like \"Use proactively\" if you want Claude to invoke it automatically when relevant.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The article is dated June 11, 2026.",
+   "value": "2026-06-11",
+   "unit": "date",
+   "as_of": "2026-06-11",
+   "quote": "Published Time: 2026-06-11",
+   "topic": "other"
+  },
+  {
+   "fact": "The author's feature development pattern in Claude Code has six steps, starting with toggling Plan Mode using Shift + Tab.",
+   "value": "6",
+   "unit": "steps",
+   "as_of": "",
+   "quote": "Toggle Plan Mode (`Shift + Tab`)",
+   "topic": "rules"
+  },
+  {
+   "fact": "The author recommends reviewing the claude.md project file weekly as the project evolves.",
+   "value": "weekly",
+   "unit": "per week",
+   "as_of": "",
+   "quote": "Your claude.md should too. Review it weekly.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The author advises resetting context between features because long conversations cause Claude to lose earlier context.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Long conversations cause Claude to lose earlier context. Clean slate, clean code.",
+   "topic": "rules"
+  },
+  {
+   "fact": "With the Linear MCP integration configured, Claude can read ticket descriptions, update statuses, and create subtasks.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "With Linear, Claude can read ticket descriptions, update statuses, and create subtasks.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The author lists four common mistakes to avoid when using Claude Code, including skipping the planning phase and accepting the first output.",
+   "value": "4",
+   "unit": "mistakes",
+   "as_of": "",
+   "quote": "Accepting the first output",
    "topic": "rules"
   }
  ]

@@ -1,7 +1,115 @@
 {
  "url": "https://developers.openai.com/api/docs/models/gpt-5.3-codex",
  "title": "GPT-5.3-Codex Model | OpenAI API",
- "hash": "82ec85a909d2307c17a63dddd23e417a74a364b1",
- "fetchedAt": "2026-11-06",
- "facts": []
+ "hash": "f5e27c0b37d6efbb5ed5163895e7f0247bee5105",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 24478,
+ "chunks": 3,
+ "facts": [
+  {
+   "fact": "OpenAI's GPT-5.3-Codex model is listed with an input price of $1.75 per 1M text tokens.",
+   "value": "1.75",
+   "unit": "USD per 1M tokens",
+   "as_of": "",
+   "quote": "Input\n\n$1.75",
+   "topic": "pricing"
+  },
+  {
+   "fact": "OpenAI's GPT-5.3-Codex model is listed with a cached input price of $0.175 per 1M text tokens.",
+   "value": "0.175",
+   "unit": "USD per 1M tokens",
+   "as_of": "",
+   "quote": "Cached input\n\n$0.175",
+   "topic": "pricing"
+  },
+  {
+   "fact": "OpenAI's GPT-5.3-Codex model is listed with an output price of $14.00 per 1M text tokens.",
+   "value": "14.00",
+   "unit": "USD per 1M tokens",
+   "as_of": "",
+   "quote": "Output\n\n$14.00",
+   "topic": "pricing"
+  },
+  {
+   "fact": "OpenAI lists GPT-5.3-Codex with a 400,000-token context window.",
+   "value": "400000",
+   "unit": "tokens",
+   "as_of": "",
+   "quote": "400,000 context window",
+   "topic": "definition"
+  },
+  {
+   "fact": "OpenAI lists GPT-5.3-Codex with a maximum output of 128,000 tokens.",
+   "value": "128000",
+   "unit": "tokens",
+   "as_of": "",
+   "quote": "128,000 max output tokens",
+   "topic": "definition"
+  },
+  {
+   "fact": "OpenAI lists the knowledge cutoff for GPT-5.3-Codex as August 31, 2025.",
+   "value": "2025-08-31",
+   "unit": "date",
+   "as_of": "2025-08-31",
+   "quote": "Aug 31, 2025 knowledge cutoff",
+   "topic": "definition"
+  },
+  {
+   "fact": "OpenAI's page labels GPT-5.3-Codex as deprecated.",
+   "value": "Deprecated",
+   "unit": "",
+   "as_of": "",
+   "quote": "Deprecated\n\n`gpt-5.3-codex`",
+   "topic": "other"
+  },
+  {
+   "fact": "GPT-5.3-Codex supports reasoning effort settings low, medium, high, and xhigh.",
+   "value": "low, medium, high, xhigh",
+   "unit": "",
+   "as_of": "",
+   "quote": "GPT-5.3-Codex supports `low`, `medium`, `high`, and `xhigh` reasoning effort settings.",
+   "topic": "definition"
+  },
+  {
+   "fact": "GPT-5.3-Codex accepts text and image input and produces text output; audio and video are not supported.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Audio\n\nNot supported\n\nVideo\n\nNot supported",
+   "topic": "definition"
+  },
+  {
+   "fact": "GPT-5.3-Codex's rate limit for the Build usage tier is 5,000 RPM and 1,000,000 TPM, with a batch queue limit of 3,000,000.",
+   "value": "5000",
+   "unit": "requests per minute",
+   "as_of": "",
+   "quote": "| Build | 5,000 | 1,000,000 | 3,000,000 |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "GPT-5.3-Codex's rate limit for the Launch usage tier is 10,000 RPM and 4,000,000 TPM, with a batch queue limit of 200,000,000.",
+   "value": "10000",
+   "unit": "requests per minute",
+   "as_of": "",
+   "quote": "| Launch | 10,000 | 4,000,000 | 200,000,000 |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "GPT-5.3-Codex's rate limit for the Grow usage tier is 15,000 RPM and 40,000,000 TPM, with a batch queue limit of 15,000,000,000.",
+   "value": "15000",
+   "unit": "requests per minute",
+   "as_of": "",
+   "quote": "| Grow | 15,000 | 40,000,000 | 15,000,000,000 |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "OpenAI's page states that the Free usage tier does not support GPT-5.3-Codex.",
+   "value": "Not supported",
+   "unit": "",
+   "as_of": "",
+   "quote": "| Free | Not supported |",
+   "topic": "rules"
+  }
+ ]
 }

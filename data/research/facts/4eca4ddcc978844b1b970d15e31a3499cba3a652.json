@@ -1,19 +1,14 @@
 {
  "url": "https://support.google.com/gemininotebook/answer/16337734?hl=en",
  "title": "Use Gemini Notebook with a work or school Google account - Gemini Notebook Help",
- "hash": "5a6b1cdb160fa21cbbd3ad345c2ce4561c854fec",
- "fetchedAt": "2026-11-07",
+ "hash": "43ad6904376b739982624b47d39ad2d0341b8280",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 7767,
+ "chunks": 1,
  "facts": [
   {
-   "fact": "Most users with a work or school Google Account have access to Gemini Notebook, though feature availability and data handling depend on their license.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Most users with a work or school Google Account have access to Gemini Notebook. Feature availability and how your data is handled depends on your license.",
-   "topic": "rules"
-  },
-  {
-   "fact": "For Workspace and Workspace for Education users, Gemini Notebook is a core service, like Gmail, Google Calendar, and Docs.",
+   "fact": "Gemini Notebook is now a core service for Workspace and Workspace for Education users, alongside Gmail, Google Calendar, and Docs.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -21,19 +16,11 @@
    "topic": "definition"
   },
   {
-   "fact": "To get higher limits and additional features with a work or school account, the organization must upgrade to a Google Workspace plan that includes higher limits; users are told to contact their Workspace administrator.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "your organization needs to upgrade to a Google Workspace plan that includes higher limits. Contact your Google Workspace administrator to request an upgraded license.",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Under Standard Access, each user can have up to 100 notebooks.",
+   "fact": "Under Standard Access, each user can create up to 100 notebooks.",
    "value": "100",
    "unit": "notebooks per user",
    "as_of": "",
-   "quote": "**Notebooks** | 100/user | 200/user | 500/user | 500/user | 500/user",
+   "quote": "**Notebooks**100/user 200/user 500/user 500/user 500/user",
    "topic": "rules"
   },
   {
@@ -41,7 +28,7 @@
    "value": "50",
    "unit": "sources per notebook",
    "as_of": "",
-   "quote": "**Sources** | 50/notebook | 100/notebook | 300/notebook | 400/Notebook | 600/notebook",
+   "quote": "**Sources**50/notebook 100/notebook 300/notebook 400/Notebook 600/notebook",
    "topic": "rules"
   },
   {
@@ -49,75 +36,51 @@
    "value": "50",
    "unit": "chats per day",
    "as_of": "",
-   "quote": "**Chats** | 50/day | 200/day | 500/day | 1k/day | 5K/day",
+   "quote": "**Chats**50/day 200/day 500/day 1k/day 5K/day",
    "topic": "rules"
   },
   {
    "fact": "Under Standard Access, users get 3 Audio Overviews per day.",
    "value": "3",
-   "unit": "audio overviews per day",
+   "unit": "per day",
    "as_of": "",
-   "quote": "**Audio Overviews** | 3/day | 6/day | 20/day | 40/day | 200/day",
+   "quote": "**Audio Overviews**3/day 6/day 20/day 40/day 200/day",
    "topic": "rules"
   },
   {
-   "fact": "Under Standard Access, users get 3 Video Overviews per day.",
-   "value": "3",
-   "unit": "video overviews per day",
-   "as_of": "",
-   "quote": "**Video Overviews** | 3/day | 6/day | 20 /day",
-   "topic": "rules"
-  },
-  {
-   "fact": "Under Highest Level Access, users get 20 Cinematic Video Overviews per day.",
-   "value": "20",
-   "unit": "cinematic video overviews per day",
-   "as_of": "",
-   "quote": "Cinematic Video Overviews:<br><br>20/day",
-   "topic": "rules"
-  },
-  {
-   "fact": "Under Standard Access, users get 10 Reports per day.",
-   "value": "10",
-   "unit": "reports per day",
-   "as_of": "",
-   "quote": "**Reports** | 10/day | 20/day | 100/day | 200/day | 1K/day",
-   "topic": "rules"
-  },
-  {
-   "fact": "Under Standard Access, users get 10 Flashcards, 10 Quizzes, and 10 Mind Maps per day.",
+   "fact": "Under Standard Access, users get 10 Reports per day, and the same 10 per day limit applies to Flashcards, Quizzes, and Mind Maps.",
    "value": "10",
    "unit": "per day",
    "as_of": "",
-   "quote": "**Flashcards** | 10/day | 20/day | 100/day | 200/day | 1K/day",
+   "quote": "**Reports**10/day 20/day 100/day 200/day 1K/day",
    "topic": "rules"
   },
   {
-   "fact": "Under Standard Access, users get 10 Deep Research uses per month.",
+   "fact": "Under Standard Access, Deep Research is limited to 10 uses per month, while the More Access tier allows 3 per day.",
    "value": "10",
-   "unit": "deep research per month",
+   "unit": "per month",
    "as_of": "",
-   "quote": "**Deep Research** | 10/month | 3/day | 20/day | 30/day | 200/day",
+   "quote": "**Deep Research**10/month 3/day 20/day 30/day 200/day",
    "topic": "rules"
   },
   {
-   "fact": "Under Highest Level Access, users get 200 Deep Research uses per day.",
-   "value": "200",
-   "unit": "deep research per day",
-   "as_of": "",
-   "quote": "**Deep Research** | 10/month | 3/day | 20/day | 30/day | 200/day",
-   "topic": "rules"
-  },
-  {
-   "fact": "Standard Access data protection: user data is not used to train Gemini Notebook unless the user provides feedback, and feedback may let Google review the full context of that interaction.",
+   "fact": "Visible watermarks are applied automatically to generated images and videos for users residing in India, South Korea, or Vietnam.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Your data is protected, and is not used to train Gemini Notebook unless you provide feedback.",
+   "quote": "A visible watermark will be applied automatically if you reside in India, South Korea, or Vietnam.",
    "topic": "rules"
   },
   {
-   "fact": "Enterprise-grade security and privacy tiers state that uploaded files, chats and model outputs will not be reviewed by human reviewers or used to improve generative AI models.",
+   "fact": "All outputs generated in Gemini Notebook using Veo, Omni, or Nano Banana include invisible SynthID watermarks.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "All outputs generated in Gemini Notebook using Veo, Omni, or Nano Banana include invisible SynthID watermarks.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Under enterprise-grade security and privacy, uploaded files, chats, and model outputs are not reviewed by human reviewers or used to improve generative AI models.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -125,12 +88,12 @@
    "topic": "rules"
   },
   {
-   "fact": "The page states that usage limits are subject to change.",
+   "fact": "Higher limits and additional features require a Workspace plan with higher limits, and the organization must upgrade its license through the Google Workspace administrator.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Usage Limits (Subject to Change)",
-   "topic": "rules"
+   "quote": "your organization needs to upgrade to a Google Workspace plan that includes higher limits.",
+   "topic": "pricing"
   }
  ]
 }

@@ -1,11 +1,14 @@
 {
  "url": "https://support.claude.com/en/articles/11049741-what-is-the-max-plan",
  "title": "What is the Max plan? | Claude Help Center",
- "hash": "c4da4f038dabbb1b99aa77f48a02759e7befe5d0",
- "fetchedAt": "2026-11-06",
+ "hash": "c3248d45d995af1cde9835123e21f97a84103f66",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 3805,
+ "chunks": 1,
  "facts": [
   {
-   "fact": "Anthropic's help center states the Max plan is available for $100 per month for web subscriptions.",
+   "fact": "The Max plan for individual consumers is available for $100 per month, according to Anthropic's help center.",
    "value": "100",
    "unit": "USD per month",
    "as_of": "",
@@ -13,31 +16,7 @@
    "topic": "pricing"
   },
   {
-   "fact": "Anthropic states the $100 Max price applies to web subscriptions only, and mobile pricing may vary by app platform.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "This price is for web subscriptions only. Mobile pricing may vary depending on your app platform.",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Anthropic states Max plan usage is five times the Pro plan's usage every five hours and every week.",
-   "value": "5",
-   "unit": "x Pro plan usage",
-   "as_of": "",
-   "quote": "Get five times the Pro plan's usage every five hours and every week.",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "Anthropic states the Max plan is currently offered only as a monthly subscription.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "The Max plan is currently available as a monthly subscription only.",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Anthropic states Max plan prices and plans are subject to change at its discretion.",
+   "fact": "Anthropic states that price and plans for the Max plan are subject to change at Anthropic's discretion.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -45,52 +24,60 @@
    "topic": "pricing"
   },
   {
-   "fact": "Anthropic states that when upgrading from Max to Ultra, the account is charged on a prorated basis for the remainder of the billing cycle.",
+   "fact": "Anthropic says it does not offer standard discounted pricing for individual plans (Pro, Max, and Ultra).",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "When upgrading from Max to Ultra, your account will be charged on a prorated basis for the remainder of your billing cycle.",
+   "quote": "We don't offer standard discounted pricing for individual plans (Pro, Max, and Ultra), but anyone in a supported location can access the free version of Claude",
    "topic": "pricing"
   },
   {
-   "fact": "Anthropic states that when moving from an annual Pro plan to Max, a credit for the remaining Pro balance is issued if that balance exceeds the Max price, provided the billing address is unchanged.",
+   "fact": "Anthropic states its Support team cannot issue one-off discounts or coupons for Claude plans.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "if the remaining balance on your annual Pro plan is greater than your Max plan price, you will receive a credit to your account for the remaining balance.",
+   "quote": "Our Support team cannot issue one-off discounts or coupons.",
    "topic": "pricing"
   },
   {
-   "fact": "Anthropic states that for subscriptions purchased through Google Play, the full price of the new plan is charged on upgrade and unused value becomes extra days, so renewal lands a few days later than a full month.",
+   "fact": "Anthropic states that discounted pricing on Team and Enterprise plans is available to eligible nonprofit organizations.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "If you subscribed through Google Play, you're charged the full price of your new plan when you upgrade.",
+   "quote": "Eligible nonprofit organizations can get discounted pricing on Team and Enterprise plans.",
    "topic": "pricing"
   },
   {
-   "fact": "Anthropic states it does not offer standard discounted pricing for individual plans (Pro, Max, and Ultra).",
-   "value": "",
-   "unit": "",
+   "fact": "According to Anthropic, the Max plan includes five times the Pro plan's usage every five hours and every week.",
+   "value": "5",
+   "unit": "times Pro plan usage",
    "as_of": "",
-   "quote": "We don't offer standard discounted pricing for individual plans (Pro, Max, and Ultra)",
-   "topic": "pricing"
+   "quote": "The Max plan includes five times the Pro plan's usage every five hours and every week.",
+   "topic": "rules"
   },
   {
-   "fact": "Anthropic states Max plan subscribers receive monthly API credits, which are included with Max, Ultra, and Team plans.",
+   "fact": "Max plans have a five-hour usage limit, a weekly usage limit across all models, and a separate weekly limit for Fable.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Claude Max, Ultra, and Team plans include monthly credits for the Claude API.",
-   "topic": "pricing"
+   "quote": "Max plans have a five-hour limit, a weekly usage limit that applies across all models, and a separate weekly limit for Fable.",
+   "topic": "rules"
   },
   {
-   "fact": "Anthropic describes the Max plan as a paid plan for individual consumers, with organizations directed to Team and Enterprise plans instead.",
+   "fact": "The weekly usage limit for Max plans resets at a fixed time each week assigned to the user's account, and users receive their full weekly allowance each cycle.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "This article is about paid Max plans for individual consumers.",
-   "topic": "definition"
+   "quote": "The weekly limit resets at a fixed time each week that is assigned to your account.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Anthropic states that Max plans may face additional usage limits such as weekly and monthly caps, and that it does not guarantee uninterrupted service.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Additional usage limits may apply to manage capacity and ensure fair access to all users.",
+   "topic": "rules"
   }
  ]
 }

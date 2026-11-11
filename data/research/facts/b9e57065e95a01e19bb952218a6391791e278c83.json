@@ -1,107 +1,54 @@
 {
  "url": "https://www.myarchitectai.com/blog/midjourney-pricing",
  "title": "Midjourney Pricing in 2026: Is It Worth the Cost?",
- "hash": "8cfe0d0d6508bab67e5a5f1ed3c15cf097cfec46",
- "fetchedAt": "2026-11-07",
+ "hash": "55ee83f0f449a1b515fc5a340591eee53e7801e0",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 14477,
+ "chunks": 2,
  "facts": [
   {
-   "fact": "Midjourney offers four monthly subscription tiers: Basic, Standard, Pro, and Mega.",
-   "value": "4",
-   "unit": "tiers",
-   "as_of": "2026",
-   "quote": "so you find four monthly options",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Midjourney's Basic plan costs $10 per month when billed monthly.",
+   "fact": "Midjourney's Basic plan costs $10 per month on monthly billing.",
    "value": "10",
    "unit": "USD per month",
    "as_of": "2026",
-   "quote": "Basic | $10 | $8",
+   "quote": "| Basic | $10 | $8 | 3.3 hrs (~200 images) | No | No | 3 |",
    "topic": "pricing"
   },
   {
-   "fact": "Midjourney's Basic plan costs $8 per month when billed annually.",
-   "value": "8",
-   "unit": "USD per month",
-   "as_of": "2026",
-   "quote": "Basic | $10 | $8",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Midjourney's Standard plan costs $30 per month when billed monthly.",
+   "fact": "Midjourney's Standard plan costs $30 per month on monthly billing.",
    "value": "30",
    "unit": "USD per month",
    "as_of": "2026",
-   "quote": "Standard ($30/month)",
+   "quote": "| Standard | $30 | $24 | 15 hrs (~900 images) | Unlimited | No | 3 |",
    "topic": "pricing"
   },
   {
-   "fact": "Midjourney's Standard plan costs $24 per month when billed annually.",
-   "value": "24",
-   "unit": "USD per month",
-   "as_of": "2026",
-   "quote": "Standard | $30 | $24",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Midjourney's Pro plan costs $60 per month when billed monthly.",
+   "fact": "Midjourney's Pro plan costs $60 per month on monthly billing.",
    "value": "60",
    "unit": "USD per month",
    "as_of": "2026",
-   "quote": "Pro ($60/month)",
+   "quote": "| Pro | $60 | $48 | 30 hrs (~1,800 images) | Unlimited | Yes | 12 |",
    "topic": "pricing"
   },
   {
-   "fact": "Midjourney's Pro plan costs $48 per month when billed annually.",
-   "value": "48",
-   "unit": "USD per month",
-   "as_of": "2026",
-   "quote": "Pro | $60 | $48 | 30 hrs (~1,800 images)",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Midjourney's Mega plan costs $120 per month when billed monthly.",
+   "fact": "Midjourney's Mega plan costs $120 per month on monthly billing.",
    "value": "120",
    "unit": "USD per month",
    "as_of": "2026",
-   "quote": "Mega ($120/month)",
+   "quote": "| Mega | $120 | $96 | 60 hrs (~3,600 images) | Unlimited | Yes | 12 |",
    "topic": "pricing"
   },
   {
-   "fact": "Midjourney's Mega plan costs $96 per month when billed annually.",
-   "value": "96",
-   "unit": "USD per month",
-   "as_of": "2026",
-   "quote": "Mega | $120 | $96 | 60 hrs (~3,600 images)",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Annual billing reduces the price of all Midjourney plans by 20%.",
-   "value": "20",
-   "unit": "%",
-   "as_of": "2026",
-   "quote": "Annual billing knocks 20% off all plans",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Extra fast GPU time can be purchased on any Midjourney tier at $4 per hour.",
-   "value": "4",
-   "unit": "USD per hour",
-   "as_of": "2026",
-   "quote": "extra fast GPU time is also available on any tier at $4 per hour",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Midjourney's Basic plan includes 3.3 fast GPU hours per month, which the page says is about 200 images.",
+   "fact": "Midjourney's Basic plan includes 3.3 fast GPU hours per month, roughly 200 images.",
    "value": "3.3",
    "unit": "hours per month",
    "as_of": "2026",
-   "quote": "Basic | $10 | $8  | 3.3 hrs (~200 images)",
+   "quote": "Basic | $10 | $8 | 3.3 hrs (~200 images)",
    "topic": "pricing"
   },
   {
-   "fact": "Midjourney's Standard plan includes 15 fast GPU hours per month, which the page says is about 900 images.",
+   "fact": "Midjourney's Standard plan includes 15 fast GPU hours per month, roughly 900 images.",
    "value": "15",
    "unit": "hours per month",
    "as_of": "2026",
@@ -109,7 +56,7 @@
    "topic": "pricing"
   },
   {
-   "fact": "Midjourney's Pro plan includes 30 fast GPU hours per month, which the page says is about 1,800 images.",
+   "fact": "Midjourney's Pro plan includes 30 fast GPU hours per month, roughly 1,800 images.",
    "value": "30",
    "unit": "hours per month",
    "as_of": "2026",
@@ -117,7 +64,7 @@
    "topic": "pricing"
   },
   {
-   "fact": "Midjourney's Mega plan includes 60 fast GPU hours per month, which the page says is about 3,600 images.",
+   "fact": "Midjourney's Mega plan includes 60 fast GPU hours per month, roughly 3,600 images.",
    "value": "60",
    "unit": "hours per month",
    "as_of": "2026",
@@ -125,68 +72,180 @@
    "topic": "pricing"
   },
   {
-   "fact": "According to the page, a standard image generated in fast mode uses roughly 1 minute of GPU time.",
-   "value": "1",
-   "unit": "minute of GPU time per image",
+   "fact": "Midjourney's annual billing reduces plan prices by 20%, with Basic at $8, Standard at $24, Pro at $48, and Mega at $96 per month.",
+   "value": "20",
+   "unit": "%",
    "as_of": "2026",
-   "quote": "a standard image generation in fast mode costs roughly 1 minute of GPU time",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "Midjourney's concurrent job limit is 3 on the Basic and Standard plans and 12 on the Pro and Mega plans.",
-   "value": "3 / 12",
-   "unit": "concurrent jobs",
-   "as_of": "2026",
-   "quote": "The second is 12 concurrent jobs, up from 3",
+   "quote": "Annual billing knocks 20% off all plans",
    "topic": "pricing"
   },
   {
-   "fact": "Stealth Mode is not included on the Basic or Standard plans and is included on the Pro and Mega plans.",
-   "value": "",
-   "unit": "",
+   "fact": "Extra fast GPU time on Midjourney is available on any tier at $4 per hour.",
+   "value": "4",
+   "unit": "USD per hour",
    "as_of": "2026",
-   "quote": "The first is Stealth Mode, which keeps your generated images off the public gallery.",
-   "topic": "rules"
+   "quote": "extra fast GPU time is also available on any tier at $4 per hour",
+   "topic": "pricing"
   },
   {
-   "fact": "Unused fast GPU hours do not roll over to the next billing cycle.",
-   "value": "",
-   "unit": "",
-   "as_of": "2026",
-   "quote": "But once your fast hours are gone, they're gone, no rollover to the next billing cycle.",
-   "topic": "rules"
-  },
-  {
-   "fact": "Fast mode generates images in 10 to 30 seconds, according to the page.",
-   "value": "10-30",
-   "unit": "seconds",
-   "as_of": "2026",
-   "quote": "It generates images in 10 to 30 seconds and draws directly from your monthly GPU hour allocation.",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "Upscaling and running variations each take 2 to 4 minutes in fast mode, according to the page.",
-   "value": "2-4",
+   "fact": "Midjourney's Relax mode generation takes 0 to 30 minutes according to Midjourney's own documentation.",
+   "value": "0 to 30",
    "unit": "minutes",
-   "as_of": "2026",
-   "quote": "Upscaling and running variations can each take 2 to 4 minutes",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "Per Midjourney's own documentation, Relax mode generation takes anywhere from 0 to 30 minutes.",
-   "value": "0-30",
-   "unit": "minutes",
-   "as_of": "2026",
+   "as_of": "",
    "quote": "Generation takes anywhere from 0 to 30 minutes ([per Midjourney's own docs]",
    "topic": "benchmark"
   },
   {
-   "fact": "The page was last updated on August 20, 2026.",
+   "fact": "Midjourney's Relax mode is unavailable on the Basic plan and unlimited on Standard, Pro, and Mega plans.",
    "value": "",
    "unit": "",
-   "as_of": "2026-08-20",
-   "quote": "August 20, 2026",
-   "topic": "other"
+   "as_of": "2026",
+   "quote": "on Standard, Pro, and Mega plans, it's unlimited.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Midjourney's Basic and Standard plans each allow 3 concurrent jobs, while Pro and Mega allow 12.",
+   "value": "3 and 12",
+   "unit": "concurrent jobs",
+   "as_of": "2026",
+   "quote": "The second is 12 concurrent jobs, up from 3",
+   "topic": "rules"
+  },
+  {
+   "fact": "Midjourney's outputs are capped at 2048px.",
+   "value": "2048",
+   "unit": "px",
+   "as_of": "",
+   "quote": "Midjourney's outputs are capped at 2048px",
+   "topic": "rules"
+  },
+  {
+   "fact": "Midjourney videos start at 5 seconds and can extend to 21 seconds.",
+   "value": "5 to 21",
+   "unit": "seconds",
+   "as_of": "",
+   "quote": "Videos start at 5 seconds and can extend to 21 seconds.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Companies with annual gross revenue over $1 million must be on Pro or Mega plans for any commercial work, according to Midjourney's terms as stated by the author.",
+   "value": "1000000",
+   "unit": "USD annual gross revenue",
+   "as_of": "",
+   "quote": "companies with annual gross revenue over $1 million must be on Pro or Mega for any commercial work.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Fast mode generates images in 10 to 30 seconds, and a standard image costs roughly one minute of fast GPU time.",
+   "value": "10 to 30",
+   "unit": "seconds",
+   "as_of": "",
+   "quote": "It generates images in 10 to 30 seconds and draws directly from your monthly GPU hour allocation.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Upscaling and running variations in Midjourney fast mode can each take 2 to 4 minutes.",
+   "value": "2 to 4",
+   "unit": "minutes",
+   "as_of": "",
+   "quote": "Upscaling and running variations can each take 2 to 4 minutes",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Midjourney's starting price is $10 per month, with no free tier.",
+   "value": "10",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "| Midjourney | $10/mo | No | Artistic quality, photorealism |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "DALL-E 3 / GPT Image is bundled into the ChatGPT Plus plan, which the page lists at $20 per month.",
+   "value": "20",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "| DALL-E 3 / GPT Image (ChatGPT Plus) | $20/mo | Limited | Prompt accuracy, text in images |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Adobe Firefly standalone plans start at $9.99 per month.",
+   "value": "9.99",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "with standalone plans starting at $9.99/month",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Leonardo AI's paid plan starts at $12 per month.",
+   "value": "12",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "| Leonardo AI | $12/mo paid | Free tier available | Game assets, character design |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Leonardo AI's free tier gives 150 tokens per day.",
+   "value": "150",
+   "unit": "tokens per day",
+   "as_of": "",
+   "quote": "The free tier gives you 150 tokens per day, enough for casual testing or occasional concept work.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Leonardo AI's Apprentice plan costs $12 per month.",
+   "value": "12",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "Paid plans start at $12/month (Apprentice) and scale up through $30 (Artisan) and $60 (Maestro).",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Leonardo AI's Artisan plan costs $30 per month.",
+   "value": "30",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "scale up through $30 (Artisan) and $60 (Maestro).",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Stable Diffusion and Flux are free when self-hosted, though this requires hardware and ongoing maintenance.",
+   "value": "0",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "| Stable Diffusion / Flux | Free (self-hosted) | Yes | Full control, no subscription |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Midjourney shut down its free trial in March 2023 and has not brought it back.",
+   "value": "March 2023",
+   "unit": "date",
+   "as_of": "2023-03",
+   "quote": "Midjourney shut down its free trial back in March 2023 and never brought it back.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Midjourney's Stealth Mode is locked behind a $60 per month plan.",
+   "value": "60",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "Stealth Mode, which is table stakes for client work, is locked behind a $60/month plan.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page states that using Midjourney's Stealth Mode doubles the user's spend.",
+   "value": "2",
+   "unit": "x spend",
+   "as_of": "",
+   "quote": "The value starts to erode if you need Stealth Mode (doubling your spend)",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Midjourney does not offer an official API at the time of the page.",
+   "value": "0",
+   "unit": "",
+   "as_of": "",
+   "quote": "No, Midjourney doesn't offer an API at the moment.",
+   "topic": "rules"
   }
  ]
 }

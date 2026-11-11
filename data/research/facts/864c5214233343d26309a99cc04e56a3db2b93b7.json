@@ -1,11 +1,14 @@
 {
  "url": "https://textdrip.com/blog/10dlc-registration-best-practices",
  "title": "10DLC Registration Best Practices: Making Compliance Easy",
- "hash": "e7d129da8ecb602143da6f6b3a55358d9027e857",
- "fetchedAt": "2026-11-09",
+ "hash": "47ebd3ef2230b14c77228aacebd32c3f6e5f8065",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 19845,
+ "chunks": 3,
  "facts": [
   {
-   "fact": "The page defines 10DLC as a 10-digit phone number approved by TCR (The Campaign Registry) on behalf of mobile network operators (MNOs) for A2P messaging.",
+   "fact": "10DLC stands for a 10-digit phone number approved by The Campaign Registry (TCR) on behalf of mobile network operators (MNOs) for A2P messaging.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -13,15 +16,15 @@
    "topic": "definition"
   },
   {
-   "fact": "The page states that 10DLC registration involves three steps: brand registration, campaign registration, and number assignment.",
-   "value": "3",
-   "unit": "steps",
+   "fact": "Traditional long codes are designed for P2P communication, whereas 10DLC numbers are designed for business messaging.",
+   "value": "",
+   "unit": "",
    "as_of": "",
-   "quote": "10DLC registration involves the following steps.",
-   "topic": "rules"
+   "quote": "Traditional long codes are specifically designed for P2P communication, whereas 10DLC numbers are designed for business messaging.",
+   "topic": "definition"
   },
   {
-   "fact": "Brand registration with TCR requires business information including legal entity name, contact details, and tax identification number.",
+   "fact": "The page states that brand registration with TCR requires accurate business information including the legal entity name, contact details, and tax identification number.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -29,7 +32,7 @@
    "topic": "rules"
   },
   {
-   "fact": "Campaign registration requires the business to define each campaign's purpose, target audience, and message type.",
+   "fact": "The page states that campaign registration requires defining each campaign's purpose, target audience, and message type to be sent.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -37,12 +40,92 @@
    "topic": "rules"
   },
   {
-   "fact": "The page advises that an eCommerce business sending order updates should select the \"Customer Care\" use case rather than \"Promotional.\"",
-   "value": "Customer Care",
-   "unit": "use case",
+   "fact": "The page states that carriers want to know only two things during A2P 10DLC registration: who the business is and what messages it is trying to send.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "While A2P 10DLC registration, carriers want to know only two things – who you are and what messages you are trying to send.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page was published on 2026-06-22.",
+   "value": "2026-06-22",
+   "unit": "date",
+   "as_of": "2026-06-22",
+   "quote": "Published Time: 2026-06-22T07:43:59.359Z",
+   "topic": "other"
+  },
+  {
+   "fact": "In the page's illustrative example, an insurance company found that 25% of its messages were not delivered, which it attributed to many links triggering carrier filters.",
+   "value": "25",
+   "unit": "%",
+   "as_of": "",
+   "quote": "An insurance company finds that 25% of their messages are not delivered.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In the page's illustrative example, a large retail store could register for a high-volume campaign at 15 messages per second (MPS).",
+   "value": "15",
+   "unit": "MPS",
+   "as_of": "",
+   "quote": "A large retail store can register for the high-volume campaign, such as 15 MPS.",
+   "topic": "rules"
+  },
+  {
+   "fact": "In the page's illustrative example, a small local bakery with low traffic could register for 1 message per second (MPS) to avoid unnecessary fees.",
+   "value": "1",
+   "unit": "MPS",
+   "as_of": "",
+   "quote": "A small local bakery with low traffic can register for 1 MPS to avoid unnecessary fees.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page advises that an eCommerce business sending order updates should choose the \"Customer Care\" 10DLC use case rather than \"Promotional\", because choosing Promotional by mistake can cause carriers to block transactional messages.",
+   "value": "",
+   "unit": "",
    "as_of": "",
    "quote": "you need to select the “Customer Care” use case instead of “Promotional.”",
    "topic": "rules"
+  },
+  {
+   "fact": "The page states that a business must obtain the recipient's explicit consent before sending messages, and that sending without consent violates compliance rules and can lead to penalties.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "You must obtain the recipient’s explicit consent before sending them messages.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page lists mismatched Tax ID numbers and incomplete or incorrect business information among common causes of 10DLC brand registration failure.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "There are a few common issues when brand registration fails, such as incorrect or incomplete business information, mismatched Tax ID numbers, inconsistent business information, etc.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page lists using the same number for multiple campaigns as a common cause of 10DLC campaign registration failure.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "a few scenarios in which campaign registration fails are non-compliant content; you have used the same number for multiple campaigns, incomplete or incorrect campaign details, opt-in and opt-out issues",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page states that registration problems can cause registration delays, campaign disapprovals, and message delivery problems.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "These issues can cause registration delays, campaign disapprovals, message delivery problems, etc.",
+   "topic": "rules"
+  },
+  {
+   "fact": "As an illustrative example, the page says a travel agency sends a reminder SMS 48 hours before departure.",
+   "value": "48",
+   "unit": "hours",
+   "as_of": "",
+   "quote": "A travel agency sends a reminder SMS 48 hours before departure instead of last-minute spam messages like alerts.",
+   "topic": "benchmark"
   }
  ]
 }

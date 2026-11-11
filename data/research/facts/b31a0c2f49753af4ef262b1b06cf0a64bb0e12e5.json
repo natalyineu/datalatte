@@ -1,11 +1,14 @@
 {
  "url": "https://winbackengine.com/blog/customer-reactivation-guide/",
  "title": "The Complete Guide to Customer Reactivation for Service Businesses | Winback Engine Blog",
- "hash": "a710f2255001f4d493423365d3f189003bce7484",
- "fetchedAt": "2026-11-09",
+ "hash": "35b327beab4173705e20ad7e49629f7edfde865e",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 36585,
+ "chunks": 5,
  "facts": [
   {
-   "fact": "Vendor's blog states that industry data shows 60–70% of a typical service business's customer base is lapsed at any given time.",
+   "fact": "Industry data shows that 60–70% of a typical service business's customer base is lapsed at any given time.",
    "value": "60–70",
    "unit": "%",
    "as_of": "",
@@ -13,92 +16,732 @@
    "topic": "benchmark"
   },
   {
-   "fact": "Vendor's blog states that reactivation campaigns typically cost 5–10x less per converted customer than new customer acquisition.",
-   "value": "5–10",
-   "unit": "x less cost per converted customer",
+   "fact": "Reactivation campaigns typically cost 5–10x less per converted customer than new acquisition, according to the vendor's guide.",
+   "value": "5–10x less",
+   "unit": "multiple",
    "as_of": "",
    "quote": "reactivation campaigns typically cost 5–10x less per converted customer than new acquisition.",
    "topic": "benchmark"
   },
   {
-   "fact": "Vendor's blog says a 'lapsed' service-business customer is typically someone who hasn't booked in 90–180 days, with the exact threshold depending on service cadence.",
-   "value": "90–180",
-   "unit": "days without booking",
-   "as_of": "",
-   "quote": "a “lapsed” customer is typically someone who hasn’t booked in 90–180 days (the exact threshold depends on your service cadence).",
-   "topic": "definition"
-  },
-  {
-   "fact": "Vendor's comparison table lists cost per contact of $50–$200 for new customer acquisition versus $5–$20 for customer reactivation.",
-   "value": "$50–$200 vs $5–$20",
-   "unit": "USD per contact",
+   "fact": "Cost per contact for new customer acquisition is $50–$200, while cost per contact for customer reactivation is $5–$20, per the vendor's comparison table.",
+   "value": "$50–$200 (acquisition); $5–$20 (reactivation)",
+   "unit": "USD",
    "as_of": "",
    "quote": "| Cost per contact | $50–$200 | $5–$20 |",
    "topic": "benchmark"
   },
   {
-   "fact": "Vendor's comparison table lists conversion rate of 1–3% for new customer acquisition versus 15–40% for customer reactivation.",
-   "value": "1–3 vs 15–40",
+   "fact": "Conversion rate for new customer acquisition is 1–3%, versus 15–40% for customer reactivation, per the vendor's comparison table.",
+   "value": "1–3% (acquisition); 15–40% (reactivation)",
    "unit": "%",
    "as_of": "",
    "quote": "| Conversion rate | 1–3% | 15–40% |",
    "topic": "benchmark"
   },
   {
-   "fact": "Vendor's comparison table lists time to first booking of 2–8 weeks for new customer acquisition versus 3–14 days for customer reactivation.",
-   "value": "2–8 weeks vs 3–14 days",
-   "unit": "time to first booking",
+   "fact": "Time to first booking is 2–8 weeks for new customer acquisition versus 3–14 days for customer reactivation, per the vendor's table.",
+   "value": "2–8 weeks (acquisition); 3–14 days (reactivation)",
+   "unit": "weeks/days",
    "as_of": "",
    "quote": "| Time to first booking | 2–8 weeks | 3–14 days |",
    "topic": "benchmark"
   },
   {
-   "fact": "Vendor's blog states a lapsed customer who rebooks has a 60–70% probability of becoming active again long-term, compared with a 20–30% retention rate for newly acquired customers.",
-   "value": "60–70 vs 20–30",
+   "fact": "A lapsed customer who rebooks has a 60–70% probability of becoming active again long-term, compared with a 20–30% retention rate for newly acquired customers, per the vendor.",
+   "value": "60–70 (reactivated); 20–30 (new)",
    "unit": "%",
    "as_of": "",
    "quote": "A lapsed customer who rebooks has a 60–70% probability of becoming active again long-term, compared to a 20–30% retention rate for newly acquired customers.",
    "topic": "benchmark"
   },
   {
-   "fact": "Vendor's guidance recommends setting the lapsed threshold at roughly 1.5–2x a service's typical repeat-visit interval.",
-   "value": "1.5–2",
-   "unit": "x typical repeat-visit interval",
+   "fact": "In service businesses, a lapsed customer is typically someone who hasn't booked in 90–180 days, depending on service cadence.",
+   "value": "90–180",
+   "unit": "days",
+   "as_of": "",
+   "quote": "a “lapsed” customer is typically someone who hasn’t booked in 90–180 days (the exact threshold depends on your service cadence).",
+   "topic": "definition"
+  },
+  {
+   "fact": "The guide suggests setting the lapsed threshold at roughly 1.5–2x the typical repeat-visit interval for each service.",
+   "value": "1.5–2x",
+   "unit": "multiple of visit interval",
    "as_of": "",
    "quote": "set the lapsed threshold at roughly 1.5–2x that interval.",
    "topic": "rules"
   },
   {
-   "fact": "Vendor's table lists a lapsed threshold of 30–60 days inactive for gym/fitness studios with 2–4 visits per week.",
+   "fact": "Gym/fitness studios with 2–4 visits per week are treated as lapsed after 30–60 days of inactivity, per the vendor's table.",
    "value": "30–60",
    "unit": "days inactive",
    "as_of": "",
    "quote": "| Gym/fitness studio | 2–4x per week | 30–60 days inactive |",
-   "topic": "rules"
+   "topic": "definition"
   },
   {
-   "fact": "Vendor's table lists a lapsed threshold of 90+ days inactive for med spas visiting every 4–8 weeks.",
+   "fact": "Dental practices with about 2 visits per year are treated as lapsed after 7+ months since last visit, per the vendor's table.",
+   "value": "7+",
+   "unit": "months",
+   "as_of": "",
+   "quote": "| Dental practice | 2x per year | 7+ months since last visit |",
+   "topic": "definition"
+  },
+  {
+   "fact": "Med spas with visits every 4–8 weeks are treated as lapsed after 90+ days inactive, per the vendor's table.",
    "value": "90+",
    "unit": "days inactive",
    "as_of": "",
    "quote": "| Med spa | Every 4–8 weeks | 90+ days inactive |",
-   "topic": "rules"
+   "topic": "definition"
   },
   {
-   "fact": "Vendor's table lists a lapsed threshold of 120+ days inactive for pet grooming customers visiting every 6–8 weeks.",
+   "fact": "Hair salons with visits every 4–6 weeks are treated as lapsed after 90+ days inactive, per the vendor's table.",
+   "value": "90+",
+   "unit": "days inactive",
+   "as_of": "",
+   "quote": "| Hair salon | Every 4–6 weeks | 90+ days inactive |",
+   "topic": "definition"
+  },
+  {
+   "fact": "Pet grooming with visits every 6–8 weeks is treated as lapsed after 120+ days inactive, per the vendor's table.",
    "value": "120+",
    "unit": "days inactive",
    "as_of": "",
    "quote": "| Pet grooming | Every 6–8 weeks | 120+ days inactive |",
+   "topic": "definition"
+  },
+  {
+   "fact": "Calling every lapsed customer yields a 15–20% reactivation rate at $45–70 per reactivated customer, per the vendor's table.",
+   "value": "15–20% rate; $45–70 cost",
+   "unit": "% / USD",
+   "as_of": "",
+   "quote": "| Call every lapsed customer | 15–20% | $45–70 |",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Calling a scored, segmented list yields a 30–40% reactivation rate at $18–30 per reactivated customer, per the vendor's table.",
+   "value": "30–40% rate; $18–30 cost",
+   "unit": "% / USD",
+   "as_of": "",
+   "quote": "| Call a scored, segmented list | 30–40% | $18–30 |",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Emailing every lapsed customer yields a 2–4% reactivation rate at $8–15 per reactivated customer, per the vendor's table.",
+   "value": "2–4% rate; $8–15 cost",
+   "unit": "% / USD",
+   "as_of": "",
+   "quote": "| Email every lapsed customer | 2–4% | $8–15 |",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In the vendor's 5-factor reactivation score, Recency carries a 30% weight, Frequency 25%, Value 20%, Tenure 15%, and Engagement 10%.",
+   "value": "30/25/20/15/10",
+   "unit": "%",
+   "as_of": "",
+   "quote": "| **Recency** | 30% | How recently they lapsed | Last visit date |",
    "topic": "rules"
   },
   {
-   "fact": "Vendor's table lists a lapsed threshold of 7+ months since last visit for dental practices that see patients about 2x per year.",
-   "value": "7+",
-   "unit": "months since last visit",
+   "fact": "Under the vendor's recency scoring band, customers lapsed 12+ months receive 3 of 30 recency points.",
+   "value": "3",
+   "unit": "points (of 30)",
    "as_of": "",
-   "quote": "| Dental practice | 2x per year | 7+ months since last visit |",
+   "quote": "12+ months = 3.",
    "topic": "rules"
+  },
+  {
+   "fact": "Under the page's lead-scoring model, a customer with 2+ years of tenure earns 15 points, the maximum for the tenure category.",
+   "value": "15",
+   "unit": "points",
+   "as_of": "",
+   "quote": "**Tenure (15 max):** customer 2+ years = 15; 1–2 years = 12; 6–12 months = 8; under 6 months = 4.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Under the page's engagement scoring, opening an email in the last 30 days earns 5 points, the maximum engagement points for that action.",
+   "value": "5",
+   "unit": "points",
+   "as_of": "",
+   "quote": "**Engagement (10 max):** opened an email in last 30 days = 5; visited the website in last 30 days = 3; follows on social = 2.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Tier A (Hot, score 70–100) calls for a phone call within 48 hours, with an expected reactivation rate of 35–50%.",
+   "value": "35–50",
+   "unit": "%",
+   "as_of": "",
+   "quote": "| **A — Hot** | 70–100 | Phone call first, within 48 hours | 35–50% |",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Tier B (Warm, score 45–69) has an expected reactivation rate of 20–35%.",
+   "value": "20–35",
+   "unit": "%",
+   "as_of": "",
+   "quote": "| **B — Warm** | 45–69 | Phone call, second batch | 20–35% |",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Tier C (Cool, score 25–44) has an expected reactivation rate of 10–20%.",
+   "value": "10–20",
+   "unit": "%",
+   "as_of": "",
+   "quote": "| **C — Cool** | 25–44 | Email + SMS sequence; phone if budget allows | 10–20% |",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Tier D (Cold, score 0–24) has an expected reactivation rate of 3–8%.",
+   "value": "3–8",
+   "unit": "%",
+   "as_of": "",
+   "quote": "| **D — Cold** | 0–24 | Email only, or exclude | 3–8% |",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page states that Tier A and B customers convert at 3–5 times the rate of lower tiers.",
+   "value": "3–5",
+   "unit": "x",
+   "as_of": "",
+   "quote": "These customers convert at 3–5x the rate of the lower tiers and generate more revenue when they return.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page describes the 'golden window' as customers lapsed 1–3 times their normal visit cycle.",
+   "value": "1–3",
+   "unit": "x normal visit cycle",
+   "as_of": "",
+   "quote": "The **golden window** is customers lapsed 1–3x their normal visit cycle",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends excluding customers lapsed more than 18 months, stating conversion drops below 5% and the data is stale.",
+   "value": "18",
+   "unit": "months",
+   "as_of": "",
+   "quote": "Customers lapsed more than 18 months — conversion drops below 5% and the data is stale",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends excluding anyone who received a win-back campaign in the last 90 days to avoid fatigue.",
+   "value": "90",
+   "unit": "days",
+   "as_of": "",
+   "quote": "Anyone who received a win-back campaign in the last 90 days (avoid fatigue)",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends excluding customers with fewer than 2 total visits, since they never really became customers.",
+   "value": "2",
+   "unit": "total visits (minimum)",
+   "as_of": "",
+   "quote": "Customers with fewer than 2 total visits — they never really became customers",
+   "topic": "rules"
+  },
+  {
+   "fact": "In the page's 80/20 shortcut, the call list filters for a last visit within 6 months.",
+   "value": "6",
+   "unit": "months",
+   "as_of": "",
+   "quote": "**Last visit within 6 months** — recency alone predicts 50%+ of reactivation likelihood",
+   "topic": "rules"
+  },
+  {
+   "fact": "In the page's 80/20 shortcut, the call list filters for 3 or more total visits.",
+   "value": "3",
+   "unit": "total visits (minimum)",
+   "as_of": "",
+   "quote": "**3+ total visits** — they were real customers, not one-time visitors",
+   "topic": "rules"
+  },
+  {
+   "fact": "Per the page's cited lapsed-customer research, 68% of lapsed customers simply got busy and forgot to rebook.",
+   "value": "68",
+   "unit": "%",
+   "as_of": "",
+   "quote": "*   **68%** simply got busy and forgot to rebook",
+   "topic": "audience"
+  },
+  {
+   "fact": "Per the page's cited lapsed-customer research, 14% of lapsed customers had a life change such as moving, schedule change, or new baby.",
+   "value": "14",
+   "unit": "%",
+   "as_of": "",
+   "quote": "*   **14%** had a life change (moved, schedule change, new baby)",
+   "topic": "audience"
+  },
+  {
+   "fact": "Per the page's cited lapsed-customer research, 9% of lapsed customers had a pricing concern.",
+   "value": "9",
+   "unit": "%",
+   "as_of": "",
+   "quote": "*   **9%** had a pricing concern",
+   "topic": "audience"
+  },
+  {
+   "fact": "Per the page's cited lapsed-customer research, 6% of lapsed customers had a service issue.",
+   "value": "6",
+   "unit": "%",
+   "as_of": "",
+   "quote": "*   **6%** had a service issue",
+   "topic": "audience"
+  },
+  {
+   "fact": "Per the page's cited lapsed-customer research, 3% of lapsed customers actively chose a competitor.",
+   "value": "3",
+   "unit": "%",
+   "as_of": "",
+   "quote": "*   **3%** actively chose a competitor",
+   "topic": "audience"
+  },
+  {
+   "fact": "A third-party statistic cited on the page says 32% of consumers stop doing business with a brand after one bad experience.",
+   "value": "32",
+   "unit": "%",
+   "as_of": "",
+   "quote": "[Research shows](https://winbackengine.com/customer-churn-statistics/) that 32% of consumers stop doing business with a brand after one bad experience",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page states the window between 'I should go back' and 'I've moved on' is about 3–6 weeks for most service businesses.",
+   "value": "3–6",
+   "unit": "weeks",
+   "as_of": "",
+   "quote": "about 3–6 weeks for most service businesses",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page reports automated reactivation emails have open rates of 10–15%, click-through rates of 2–3%, and rebooking rates of 1–3%.",
+   "value": "10–15 open; 2–3 click; 1–3 rebook",
+   "unit": "%",
+   "as_of": "",
+   "quote": "reactivation email open rates run 10–15%, click-throughs 2–3%, and actual rebooking rates 1–3%.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page states the rebooking rate from phone calls is 25–40%.",
+   "value": "25–40",
+   "unit": "%",
+   "as_of": "",
+   "quote": "The rebooking rate from phone calls: 25–40%. That’s 10–15x the rate of email.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page states direct phone calls to lapsed customers convert at 25–40%, versus 2–5% for email and 5–15% for SMS.",
+   "value": "25–40",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Direct phone calls to lapsed customers convert at 25–40%, compared to 2–5% for email and 5–15% for SMS.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page lists phone outreach cost per contact at $3–$8.",
+   "value": "3–8",
+   "unit": "USD per contact",
+   "as_of": "",
+   "quote": "*   **Cost per contact:** $3–$8",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page lists SMS reactivation at 5–10% with cost per contact of $0.05–$0.15 and a 98% text open rate.",
+   "value": "0.05–0.15",
+   "unit": "USD per contact",
+   "as_of": "",
+   "quote": "Text messages have 98% open rates and work well for time-sensitive nudges.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page lists email reactivation at 2–5% with cost per contact of $0.01–$0.05.",
+   "value": "0.01–0.05",
+   "unit": "USD per contact",
+   "as_of": "",
+   "quote": "*   **Cost per contact:** $0.01–$0.05",
+   "topic": "pricing"
+  },
+  {
+   "fact": "According to the Winback Engine guide, automated email and SMS campaigns typically recover 2–5% of lapsed customers.",
+   "value": "2–5",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Automated email and SMS campaigns typically recover 2–5% of lapsed customers",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "According to the Winback Engine guide, the 15–35% of lapsed customers who need a conversation represent the larger opportunity compared with automated outreach.",
+   "value": "15–35",
+   "unit": "%",
+   "as_of": "",
+   "quote": "The real opportunity is in the 15–35% who need a conversation.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The guide's recommended call sequence runs over 20+ days and ends with an automated nurture sequence of a 3-email series starting on Day 20+.",
+   "value": "3",
+   "unit": "emails",
+   "as_of": "",
+   "quote": "Day 20+ | Automated nurture sequence | Email (3-email series)",
+   "topic": "rules"
+  },
+  {
+   "fact": "In the guide's offer escalation ladder, a discount of 10–20% is the level 4 offer and is recommended only as a last resort.",
+   "value": "10–20",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Discount (10–20% max) | Last resort only",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The guide states that an agent can handle 50–80 quality calls per day.",
+   "value": "50–80",
+   "unit": "calls per agent per day",
+   "as_of": "",
+   "quote": "Call capacity: 50–80 quality calls per agent per day",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The guide recommends the best call times as Tuesday–Thursday, 10–11:30 AM and 1:30–3 PM.",
+   "value": "Tuesday–Thursday, 10–11:30 AM and 1:30–3 PM",
+   "unit": "",
+   "as_of": "",
+   "quote": "Best call times: Tuesday–Thursday, 10–11:30 AM and 1:30–3 PM",
+   "topic": "rules"
+  },
+  {
+   "fact": "The guide recommends reviewing 10–15% of call recordings weekly as part of quality assurance.",
+   "value": "10–15",
+   "unit": "% of call recordings per week",
+   "as_of": "",
+   "quote": "review 10–15% of call recordings weekly",
+   "topic": "rules"
+  },
+  {
+   "fact": "The guide recommends surveying reactivated customers 30 days after they return.",
+   "value": "30",
+   "unit": "days after return",
+   "as_of": "",
+   "quote": "survey reactivated customers 30 days after their return",
+   "topic": "rules"
+  },
+  {
+   "fact": "The guide claims that seven objections account for roughly 90% of call resistance across thousands of reactivation calls in fitness, dental, med spa, and home services.",
+   "value": "7 objections, ~90%",
+   "unit": "%",
+   "as_of": "",
+   "quote": "seven objections account for roughly 90% of call resistance",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The guide reports an average reactivation rate of 8–12% for calls with no objection handling (script only).",
+   "value": "8–12",
+   "unit": "%",
+   "as_of": "",
+   "quote": "No objection handling (script only) | 8–12%",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The guide reports an average reactivation rate of 18–24% for basic objection handling (1–2 responses).",
+   "value": "18–24",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Basic (1–2 responses) | 18–24%",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The guide reports an average reactivation rate of 28–35% for trained objection handling covering all 7 objections.",
+   "value": "28–35",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Trained (all 7 covered) | 28–35%",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The guide states the gap between untrained and trained objection handling is often a 3x difference in revenue recovered.",
+   "value": "3",
+   "unit": "x revenue recovered",
+   "as_of": "",
+   "quote": "the gap between untrained and trained handling is often a 3x difference in revenue recovered",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The guide says that using its objection-handling approach instead of pushing a promotion raises conversation continuation rates from 15% to 55%.",
+   "value": "15 to 55",
+   "unit": "%",
+   "as_of": "",
+   "quote": "conversation continuation rates jump from 15% to 55%",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The guide estimates that in about 60% of cases the 'I can't afford it right now' objection is a proxy for doubting the service is worth the money.",
+   "value": "60",
+   "unit": "%",
+   "as_of": "",
+   "quote": "in about 60% of cases it’s a proxy for “I’m not sure it’s worth the money anymore.”",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The guide states that permission-based follow-ups for customers who switched to a competitor convert at 15–20% within 90 days.",
+   "value": "15–20",
+   "unit": "% within 90 days",
+   "as_of": "",
+   "quote": "permission-based follow-ups convert at 15–20% within 90 days",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The guide's ongoing cadence recommends first-lapse nudges 30–90 days after last visit, with deeper re-engagement at 6 and 12 months.",
+   "value": "30–90 days; 6 and 12 months",
+   "unit": "days / months",
+   "as_of": "",
+   "quote": "first-lapse nudges at 30–90 days after last visit, deeper re-engagement at 6 and 12 months",
+   "topic": "rules"
+  },
+  {
+   "fact": "The guide's staggered execution plan has Week 1 covering 100% of Tier A contacts and Week 2 and Week 3 each covering 50% of Tier B.",
+   "value": "100% Tier A; 50% Tier B per week",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Week 1 | Tier A (hot) — all contacts | 100% of Tier A",
+   "topic": "rules"
+  },
+  {
+   "fact": "The guide's data preparation phase is scheduled for Days 1–3 of the campaign, followed by campaign design on Days 3–5 and execution on Days 5–30.",
+   "value": "Days 1–3, 3–5, 5–30",
+   "unit": "days",
+   "as_of": "",
+   "quote": "Phase 1: Data Preparation (Days 1–3)",
+   "topic": "rules"
+  },
+  {
+   "fact": "The guide gives 'Start with a single well-defined segment' as an example pilot segment: '180+ days lapsed in 10 pilot locations'.",
+   "value": "180+ days lapsed, 10 pilot locations",
+   "unit": "days / locations",
+   "as_of": "",
+   "quote": "“180+ days lapsed in 10 pilot locations”",
+   "topic": "audience"
+  },
+  {
+   "fact": "Per the Winback Engine guide, a lapsed client who receives no acknowledgment of a bad experience re-engages at 2–5%.",
+   "value": "2–5%",
+   "unit": "%",
+   "as_of": "",
+   "quote": "| Ignored / no acknowledgment | 2–5% |",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Per the Winback Engine guide, a generic apology yields a 8–12% re-engagement rate.",
+   "value": "8–12%",
+   "unit": "%",
+   "as_of": "",
+   "quote": "| Generic apology | 8–12% |",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Per the Winback Engine guide, a specific acknowledgment plus a recovery offer yields a 25–35% re-engagement rate.",
+   "value": "25–35%",
+   "unit": "%",
+   "as_of": "",
+   "quote": "| Specific acknowledgment + recovery offer | 25–35% |",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Per the Winback Engine guide, adding a manager follow-up call to a specific acknowledgment and recovery offer yields a 35–45% re-engagement rate.",
+   "value": "35–45%",
+   "unit": "%",
+   "as_of": "",
+   "quote": "| Above + manager follow-up call | 35–45% |",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Per the Winback Engine guide, when a warm transfer to a new location is offered proactively, 40–60% of clients who moved reactivate there.",
+   "value": "40–60%",
+   "unit": "%",
+   "as_of": "",
+   "quote": "When a warm transfer is offered proactively, 40–60% of “moved” clients reactivate at the new location.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Per the Winback Engine guide, an 'I'll think about it' response converts to action less than 5% of the time without a follow-up mechanism.",
+   "value": "<5%",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Without a follow-up mechanism, “I’ll think about it” converts to action less than 5% of the time.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Per the Winback Engine guide, an 'I'll think about it' response converts at 20–30% when a scheduled follow-up date is set.",
+   "value": "20–30%",
+   "unit": "%",
+   "as_of": "",
+   "quote": "With a scheduled follow-up date, it converts at 20–30%",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Winback Engine's guide lists a target contact rate of 40–50% for the share of the lapsed list reached by phone.",
+   "value": "40–50%",
+   "unit": "%",
+   "as_of": "",
+   "quote": "| Contact rate | % of list reached by phone | 40–50% |",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Winback Engine's guide lists a target reactivation rate of 25–35% for contacts who rebook.",
+   "value": "25–35%",
+   "unit": "%",
+   "as_of": "",
+   "quote": "| Reactivation rate | % of contacts who rebook | 25–35% |",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Winback Engine's guide lists a target cost per reactivation of under $30.",
+   "value": "< $30",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "| Cost per reactivation | Total campaign cost ÷ reactivated customers | < $30 |",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Winback Engine's guide lists a target campaign ROI of 3x or more.",
+   "value": "3x+",
+   "unit": "multiple",
+   "as_of": "",
+   "quote": "| Campaign ROI | Revenue recovered ÷ campaign cost | 3x+ |",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Winback Engine's guide lists a target 90-day retention of 65% or more for reactivated customers.",
+   "value": "65%+",
+   "unit": "%",
+   "as_of": "",
+   "quote": "| 90-day retention | % of reactivated customers still active at 90 days | 65%+ |",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Per Winback Engine's industry benchmarks, fitness/gym phone reactivation is 28–35% and email is 3–5%, with $600–$1,200/yr revenue per reactivated customer.",
+   "value": "28–35% phone; 3–5% email; $600–$1,200/yr",
+   "unit": "%",
+   "as_of": "",
+   "quote": "| Fitness/Gym | 28–35% | 3–5% | $600–$1,200/yr |",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Per Winback Engine's industry benchmarks, med spa phone reactivation is 25–35% and email is 2–4%, with $1,500–$4,000/yr revenue per reactivated customer.",
+   "value": "25–35% phone; 2–4% email; $1,500–$4,000/yr",
+   "unit": "%",
+   "as_of": "",
+   "quote": "| Med Spa | 25–35% | 2–4% | $1,500–$4,000/yr |",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Winback Engine's benchmarks reflect campaigns targeting customers lapsed 90 days to 12 months; results degrade significantly past 12 months of inactivity.",
+   "value": "90 days to 12 months",
+   "unit": "",
+   "as_of": "",
+   "quote": "These benchmarks reflect campaigns targeting customers lapsed 90 days to 12 months.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In Winback Engine's illustrative fitness brand example, a 30% phone campaign on 2,500 reactivatable lapsed customers recovers 750 customers and $675,000 at $900 average annual value, against a $50,000–$75,000 campaign cost.",
+   "value": "750 customers; $675,000; $50,000–$75,000 cost",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "Campaign cost:** $50,000–$75,000",
+   "topic": "forecast"
+  },
+  {
+   "fact": "Per Winback Engine, loyalty programs can increase retention by 5–30%.",
+   "value": "5–30%",
+   "unit": "%",
+   "as_of": "",
+   "quote": "loyalty programs can increase retention by 5–30%",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page states that 60–70% of a service business's customer base is lapsed.",
+   "value": "60–70%",
+   "unit": "%",
+   "as_of": "",
+   "quote": "60–70% of your customer base is lapsed",
+   "topic": "audience"
+  },
+  {
+   "fact": "The page states that 68% of lapsed customers drifted away because they got busy and forgot to rebook.",
+   "value": "68%",
+   "unit": "%",
+   "as_of": "",
+   "quote": "68% just got busy and forgot to rebook",
+   "topic": "audience"
+  },
+  {
+   "fact": "The page claims phone-based reactivation converts at 25–40%.",
+   "value": "25–40%",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Phone-based reactivation converts at 25–40%, far outperforming email (2–5%) and SMS (5–10%)",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page claims email reactivation converts at 2–5%.",
+   "value": "2–5%",
+   "unit": "%",
+   "as_of": "",
+   "quote": "far outperforming email (2–5%) and SMS (5–10%)",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page states that seven objections account for about 90% of call resistance.",
+   "value": "~90%",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Seven objections account for ~90% of call resistance",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page claims trained objection handling roughly triples reactivation rates versus script-only calling.",
+   "value": "3x",
+   "unit": "multiple",
+   "as_of": "",
+   "quote": "trained handling roughly triples reactivation rates versus script-only calling",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page states that the ROI on well-run reactivation campaigns typically exceeds 3x, often 9–13x.",
+   "value": "9–13x",
+   "unit": "multiple",
+   "as_of": "",
+   "quote": "The ROI on well-run reactivation campaigns typically exceeds 3x, often 9–13x",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Winback Engine guarantees 5x ROI in 30 days, or it returns a $1,000 commitment to the client.",
+   "value": "5x ROI in 30 days; $1,000",
+   "unit": "multiple / USD",
+   "as_of": "",
+   "quote": "guaranteed 5x ROI in 30 days, or your $1,000 commitment back",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Winback Engine says first results arrive within 7 days.",
+   "value": "7",
+   "unit": "days",
+   "as_of": "",
+   "quote": "with first results within 7 days",
+   "topic": "other"
+  },
+  {
+   "fact": "The page refers to a 1–3x visit-cycle golden window for focusing reactivation calls on lapsed customers.",
+   "value": "1–3x",
+   "unit": "multiple of visit cycle",
+   "as_of": "",
+   "quote": "inside the 1–3x visit-cycle golden window",
+   "topic": "rules"
+  },
+  {
+   "fact": "Winback Engine says it integrates directly with Zenoti, Mindbody, and Vagaro CRMs.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "We integrate directly with your CRM (Zenoti, Mindbody, Vagaro, and more)",
+   "topic": "other"
   }
  ]
 }

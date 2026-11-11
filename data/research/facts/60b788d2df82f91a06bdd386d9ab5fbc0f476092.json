@@ -1,31 +1,170 @@
 {
  "url": "https://business.google.com/us/accelerate/resources/articles/retailer-best-practices-for-ai-powered-performance-max-campaigns/",
  "title": "Retailer best practices for AI-powered Performance Max campaigns - Google Ads Help - Accelerate with Google US",
- "hash": "1a64615d69753d8e26b9fcf844b0a0ba12907dff",
- "fetchedAt": "2026-11-09",
+ "hash": "4f16d2b9131449553ea09dad1ceefeccce632471",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 22421,
+ "chunks": 3,
  "facts": [
   {
-   "fact": "Google states that during the 2022 holiday season, 55% of shoppers used five or more channels, ranging from video to social media, to shop over a two-day period.",
-   "value": "55",
-   "unit": "% of shoppers",
+   "fact": "During the 2022 holiday season, 55% of shoppers used five or more channels to shop over a two-day period, according to Google's cited source.",
+   "value": "55%",
+   "unit": "%",
    "as_of": "2022 holiday season",
    "quote": "During the 2022 holiday season, 55% of shoppers used five or more channels, ranging from video to social media, to shop over a two-day period.",
    "topic": "audience"
   },
   {
-   "fact": "Google states that advertisers who shifted from Standard Shopping campaigns to Performance Max drove a 25% increase in conversion value on average at a similar ROAS.",
-   "value": "25",
+   "fact": "Advertisers that shifted from Standard Shopping campaigns to Performance Max drove a 25% increase in conversion value on average at a similar ROAS, per Google's claim.",
+   "value": "25%",
    "unit": "% increase in conversion value",
    "as_of": "",
    "quote": "Advertisers that have shifted from Standard Shopping campaigns to Performance Max drove a 25% increase in conversion value, on average, at a similar ROAS.",
    "topic": "benchmark"
   },
   {
-   "fact": "Google says Performance Max, powered by Google AI, runs across Search, YouTube, Display, Discover, and Google Maps inventory.",
+   "fact": "Performance Planner's forecasts are adjusted for seasonal events so advertisers can explore conversion opportunities during key moments like holiday.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Powered by Google AI, Performance Max helps retailers increase sales and optimize ROI across all Google Ads channels and inventory—including Search, YouTube, Display, Discover, and Google Maps.",
+   "quote": "Performance Planner’s forecasts are also adjusted for seasonal events so you can explore conversion opportunities during key moments like holiday.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google recommends providing transaction-specific conversion values for each conversion for retailers whose customers purchase items at different prices and who want to maximize total revenue.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "For retailers, we strongly recommend providing transaction-specific values for each conversion if your customers are purchasing items with different prices and you want to maximize total revenue.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The guide's best practices are aimed at retail marketers running Performance Max campaigns with a Google Merchant Center feed.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "We’ve created these best practices for retail marketers who are running Performance Max campaigns with a Google Merchant Center feed.",
+   "topic": "audience"
+  },
+  {
+   "fact": "Performance Max campaigns can be configured to optimize towards online sales, store sales, or omnichannel sales.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Performance Max campaigns are goal-based and can be configured to optimize towards online sales, store sales, or omnichannel sales.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Google's one-click experiments automatically create a new Performance Max campaign from an existing Standard Shopping campaign for A/B testing.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "With new one-click experiments, it’s now easier than ever to set up an A/B test that will automatically create a new Performance Max campaign from an existing Standard Shopping campaign.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google recommends using seasonality adjustments for short, infrequent events where a conversion rate change of more than 30% is expected within a window of less than 7 days.",
+   "value": "30",
+   "unit": "% change in conversion rate over <7 days",
+   "as_of": "",
+   "quote": "Seasonality adjustments are a great tool for short, infrequent events, where you expect a significant change (e.g. >30%) in conversion rates over a narrow time window (<7 days).",
+   "topic": "rules"
+  },
+  {
+   "fact": "Seasonality adjustments require conversion history, so they should only be used on existing campaigns.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Because conversion history is required, seasonal adjustments should only be used on existing campaigns.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google recommends manually adjusting ROAS or CPA targets instead of seasonality adjustments for longer promotions or smaller expected conversion rate changes.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "If you are running a longer promotion or expect a smaller conversion rate change, we recommend manually adjusting ROAS or CPA targets to help Smart Bidding accommodate the seasonality.",
+   "topic": "rules"
+  },
+  {
+   "fact": "New holiday-specific assets and asset groups should be uploaded at least 2 weeks before they are needed so they can be approved.",
+   "value": "2",
+   "unit": "weeks in advance",
+   "as_of": "",
+   "quote": "New holiday assets and asset groups should be uploaded at least 2 weeks in advance to make sure they’re approved.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Final URL expansion is not available to Performance Max campaigns that only optimize to store goals.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Note: Final URL expansion is not available to campaigns that only optimize to store goals.",
+   "topic": "rules"
+  },
+  {
+   "fact": "For store goals, Google requires the full range of creative assets, including text headlines, descriptions, images, logos, video, calls-to-action, business name and a final URL.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "If you’re optimizing to store goals, you must include the full range of creative assets: text headlines, descriptions, images, logos, video, calls-to-action, business name and a final URL.",
+   "topic": "rules"
+  },
+  {
+   "fact": "If an advertiser does not provide its own video creative, Performance Max may auto-generate one or more videos drawing from existing text assets, images, and the product feed.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "If you do not provide your own video creative, then one or more videos may be auto-generated to help you drive more conversions from this inventory.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google/Ipsos Holiday Shopping Study (Oct 13 2022 to Jan 4 2023) was an online survey of US Americans aged 18+ who did holiday shopping in the past two days, with a sample of n=8,467.",
+   "value": "8,467",
+   "unit": "respondents",
+   "as_of": "2022-10-13 to 2023-01-04",
+   "quote": "Source: Google/Ipsos, Holiday Shopping Study, Oct 13 2022 – Jan 4 2023, Online survey, US, n=8,467, Americans 18+ who conducted holiday shopping activities in past two days.",
+   "topic": "audience"
+  },
+  {
+   "fact": "The Google/Kantar Budget Agility and Channel Desiloing Research (March to June 2022, across US, CA, AU, BR, DE, IN, JP, UK) had 416 advertisers classed as Agile.",
+   "value": "416",
+   "unit": "advertisers",
+   "as_of": "2022-03 to 2022-06",
+   "quote": "Google/Kantar Budget Agility and Channel Desiloing Research, US, CA, AU, BR, DE, IN, JP, UK, March 2022 - June 2022. Advertiser: Agile n=416, Not Agile n=1677.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Google Data for Global Ads covers October 2022 to March 2023, as cited in footnote 2 of the page.",
+   "value": "October 2022 - March 2023",
+   "unit": "date range",
+   "as_of": "2022-10 to 2023-03",
+   "quote": "Google Data, Global, Ads, October 2022 - March 2023.",
+   "topic": "other"
+  },
+  {
+   "fact": "Google Data for Global Ads covers February to April 2023, as cited in footnote 5 of the page.",
+   "value": "February - April 2023",
+   "unit": "date range",
+   "as_of": "2023-02 to 2023-04",
+   "quote": "5. Google Data, Global Ads, February - April 2023.",
+   "topic": "other"
+  },
+  {
+   "fact": "A Google global data source cited on the page is dated November 2022.",
+   "value": "November 2022",
+   "unit": "date",
+   "as_of": "2022-11",
+   "quote": "4. Google data, Global, November 2022.",
+   "topic": "other"
+  },
+  {
+   "fact": "Google Ads Ad Strength rates asset quality as “low,” “good,” or “best,” and advertisers can swap lower-quality assets once they reach the maximum number of assets.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "see if your asset quality is “low,” “good,” or “best,” and whether you need to add new assets for Google AI to use in your creative.",
    "topic": "definition"
   }
  ]

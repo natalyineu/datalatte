@@ -1,192 +1,379 @@
 {
  "url": "https://coworker.ai/blog/cursor-pricing",
  "title": "Cursor Pricing in 2026: Every Plan | Coworker AI",
- "hash": "5acf47f40b0c6f1e9862a263191bc289de35893d",
- "fetchedAt": "2026-11-06",
+ "hash": "8159bf7047cd9dd5e0305feb0332654f31b925a8",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 33257,
+ "chunks": 4,
  "facts": [
   {
-   "fact": "Since October 12, 2026, new Cursor customers buy plans through The X Subscription, with Plus priced at $8 a month.",
-   "value": "8",
-   "unit": "USD per month",
-   "as_of": "2026-10-12",
-   "quote": "Since October 12, 2026, new Cursor customers buy it through The X Subscription: Free, Plus at $8 a month, Premium at $30",
-   "topic": "pricing"
-  },
-  {
-   "fact": "The Premium plan on The X Subscription is priced at $30 a month.",
+   "fact": "Cursor's Premium team seat costs $30 per user per month and carries the same weekly usage as the individual Premium plan.",
    "value": "30",
-   "unit": "USD per month",
-   "as_of": "2026-10-12",
-   "quote": "Free, Plus at $8 a month, Premium at $30, Super at $100 and Ultra at $200",
-   "topic": "pricing"
-  },
-  {
-   "fact": "The Super plan on The X Subscription is priced at $100 a month.",
-   "value": "100",
-   "unit": "USD per month",
-   "as_of": "2026-10-12",
-   "quote": "Free, Plus at $8 a month, Premium at $30, Super at $100 and Ultra at $200",
-   "topic": "pricing"
-  },
-  {
-   "fact": "The Ultra plan on The X Subscription is priced at $200 a month.",
-   "value": "200",
-   "unit": "USD per month",
-   "as_of": "2026-10-12",
-   "quote": "Free, Plus at $8 a month, Premium at $30, Super at $100 and Ultra at $200",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Cursor Teams seats on The X Subscription are priced at $30, $100 or $200 per user per month, and Enterprise is available on request.",
-   "value": "30, 100, 200",
    "unit": "USD per user per month",
-   "as_of": "2026-10-12",
-   "quote": "with Teams seats at $30, $100 or $200 per user per month and Enterprise on request",
+   "as_of": "",
+   "quote": "**Premium seat**: $30/user/month, with the same weekly usage as the individual Premium plan.",
    "topic": "pricing"
   },
   {
-   "fact": "Under legacy plans, Cursor's Pro plan was priced at $20 a month, Pro+ at $60 a month, and Teams at $40 or $120 per seat.",
-   "value": "20, 60, 40, 120",
+   "fact": "Cursor's Super team seat costs $100 per user per month and includes 3.75x Premium's weekly usage.",
+   "value": "100",
+   "unit": "USD per user per month",
+   "as_of": "",
+   "quote": "**Super seat**: $100/user/month, with 3.75x Premium's weekly usage.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Cursor's Ultra team seat costs $200 per user per month and includes 12.5x Premium's weekly usage.",
+   "value": "200",
+   "unit": "USD per user per month",
+   "as_of": "",
+   "quote": "**Ultra seat**: $200/user/month, with 12.5x Premium's weekly usage.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Cursor's Free team seat costs $0 and has no team usage allowance, so that member's usage draws from their personal plan.",
+   "value": "0",
    "unit": "USD",
-   "as_of": "2026-10-19",
-   "quote": "Pro $20, Pro+ $60, Ultra $200, and Teams at $40 or $120 per seat.",
+   "as_of": "",
+   "quote": "A **Free seat** ($0) is also available; it has no team usage allowance, so that member's usage draws from their own personal plan.",
    "topic": "pricing"
   },
   {
-   "fact": "Annual billing for Cursor's Plus plan costs $80 a year.",
-   "value": "80",
-   "unit": "USD per year",
-   "as_of": "2026-10-19",
-   "quote": "Annual billing costs $80 a year for Plus, $300 for Premium, $1,000 for Super and $2,000 for Ultra",
+   "fact": "Teams created before October 12 keep legacy Standard seats at $40 and Premium seats at $120 unless they switch.",
+   "value": "40 and 120",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "Teams created before October 12 keep legacy Standard ($40) and Premium ($120) seats with monthly pools and on-demand usage unless they switch.",
    "topic": "pricing"
   },
   {
-   "fact": "Annual billing for Cursor's Premium plan costs $300 a year.",
-   "value": "300",
-   "unit": "USD per year",
-   "as_of": "2026-10-19",
-   "quote": "Annual billing costs $80 a year for Plus, $300 for Premium, $1,000 for Super and $2,000 for Ultra",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Annual billing for Cursor's Super plan costs $1,000 a year.",
-   "value": "1000",
-   "unit": "USD per year",
-   "as_of": "2026-10-19",
-   "quote": "Annual billing costs $80 a year for Plus, $300 for Premium, $1,000 for Super and $2,000 for Ultra",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Annual billing for Cursor's Ultra plan costs $2,000 a year.",
-   "value": "2000",
-   "unit": "USD per year",
-   "as_of": "2026-10-19",
-   "quote": "Annual billing costs $80 a year for Plus, $300 for Premium, $1,000 for Super and $2,000 for Ultra",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Cursor's listed plan prices exclude tax.",
+   "fact": "Cursor bills teams per active paid seat, with upgrades applied immediately at a pro-rated charge and downgrades applied at the end of the billing period.",
    "value": "",
    "unit": "",
-   "as_of": "2026-10-19",
-   "quote": "Prices exclude tax ([Cursor help]",
-   "topic": "pricing"
+   "as_of": "",
+   "quote": "billing is per active paid seat rather than a fixed headcount: upgrades apply right away at a pro-rated charge, and downgrades apply at the end of the billing period.",
+   "topic": "rules"
   },
   {
-   "fact": "Cursor states that Premium provides 4x Plus usage, Super 15x Plus usage, and Ultra 50x Plus usage.",
-   "value": "4, 15, 50",
-   "unit": "multiple of Plus usage",
-   "as_of": "2026-10-12",
-   "quote": "4x Plus usage; adds Cloud Agents, Automations, Bugbot, Origin, and third-party models at API list price from prepaid credit",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Cursor's legacy Start plan (India only) is priced at ₹649 a month, tax inclusive.",
+   "fact": "On The X Subscription, Cursor's displayed plan prices exclude tax, with the legacy India-only Start plan at ₹649 tax inclusive as the exception.",
    "value": "649",
-   "unit": "INR per month",
-   "as_of": "2026-10-19",
-   "quote": "Start (India only) | ₹649/month, tax inclusive | Plus ($8)",
+   "unit": "INR tax inclusive (Start plan exception)",
+   "as_of": "",
+   "quote": "Every plan on The X Subscription displays its price before tax (the legacy India-only Start plan, at ₹649 tax inclusive, is the exception)",
    "topic": "pricing"
   },
   {
-   "fact": "Third-party models such as Claude, GPT and Gemini are no longer included in any new Cursor plan.",
-   "value": "",
-   "unit": "",
-   "as_of": "2026-10-12",
-   "quote": "Third-party models such as Claude, GPT and Gemini are no longer included in any new plan",
+   "fact": "Cursor's Teams restructuring changed seat plans on October 12, when The X Subscription replaced the June Standard and Premium seats with three tiers priced like the individual plans.",
+   "value": "October 12",
+   "unit": "date",
+   "as_of": "",
+   "quote": "On October 12, The X Subscription replaced those seats with three tiers priced like the individual plans.",
    "topic": "rules"
   },
   {
-   "fact": "On Premium and above, third-party models bill at API list price from prepaid credit.",
-   "value": "",
-   "unit": "",
-   "as_of": "2026-10-12",
-   "quote": "on Premium and above they bill at API list price from prepaid credit",
-   "topic": "rules"
-  },
-  {
-   "fact": "SpaceXAI states each new plan includes at least twice the coding usage with Cursor's own models as the plan it replaces (vendor claim, not verified by this page).",
-   "value": "2",
-   "unit": "multiple of prior plan usage",
+   "fact": "Cursor's Teams table lists a $0.25 per million tokens charge on Teams and Enterprise for its meter, in addition to third-party models at API list price from prepaid credit.",
+   "value": "0.25",
+   "unit": "USD per million tokens",
    "as_of": "2026-10-19",
-   "quote": "each new plan includes at least twice the coding usage with Cursor's own models as the plan it replaces",
+   "quote": "plus $0.25 per million tokens on Teams and Enterprise",
+   "topic": "pricing"
+  },
+  {
+   "fact": "GitHub Copilot Pro costs $10 per month and includes 1,500 AI credits according to the comparison table.",
+   "value": "10",
+   "unit": "USD per month",
+   "as_of": "2026-10-19",
+   "quote": "Pro $10/month, 1,500 AI credits",
+   "topic": "pricing"
+  },
+  {
+   "fact": "GitHub's plan documentation sets Copilot Pro at $10 per month with 1,000 base plus 500 flex credits.",
+   "value": "10",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "sets Pro at $10/month with 1,000 base plus 500 flex credits",
+   "topic": "pricing"
+  },
+  {
+   "fact": "GitHub Copilot Pro+ costs $39 per month with 7,000 credits, and Max costs $100 per month with 20,000 credits, per GitHub's plan documentation.",
+   "value": "39 and 100",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "Pro+ at $39 with 7,000, Max at $100 with 20,000",
+   "topic": "pricing"
+  },
+  {
+   "fact": "GitHub Copilot Business costs $19 per granted seat with 1,900 credits per user, and Enterprise costs $39 per seat with 3,900 credits.",
+   "value": "19 and 39",
+   "unit": "USD per seat",
+   "as_of": "",
+   "quote": "Business at $19 per granted seat with 1,900 credits per user, and Enterprise at $39 per seat with 3,900.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "GitHub Copilot overage is billed at a flat $0.01 per AI credit, and completions are excluded from metering.",
+   "value": "0.01",
+   "unit": "USD per AI credit",
+   "as_of": "",
+   "quote": "Overage is a flat $0.01 per AI credit, credits pool across an enterprise, and completions are excluded from metering entirely.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Anthropic's Claude Code cost documentation states the average across enterprise deployments is around $13 per developer per active day.",
+   "value": "13",
+   "unit": "USD per developer per active day",
+   "as_of": "",
+   "quote": "across enterprise deployments the average is around $13 per developer per active day",
    "topic": "benchmark"
   },
   {
-   "fact": "The weekly usage pool for Cursor's own models on The X Subscription refreshes every week rather than every billing cycle.",
+   "fact": "Anthropic's Claude Code cost documentation states the typical monthly cost is $150 to $250 per developer, with 90% of users below $30 per active day.",
+   "value": "150 to 250",
+   "unit": "USD per developer per month",
+   "as_of": "",
+   "quote": "$150 to $250 per developer per month, with 90% of users staying below $30 per active day",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Claude Pro costs $17 per month on annual billing or $20 monthly, Max starts at $100 per month, and Team seats cost $20 or $100 per seat on annual billing, per Claude's pricing page.",
+   "value": "17",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "Pro at $17/month on annual billing or $20 monthly, Max from $100/month, and Team seats at $20 or $100 per seat on annual billing",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Devin's pricing, shown at windsurf.com/pricing as of October 19, 2026, lists Pro at $20 per month, Max at $200 per month, and Teams at $80 per month plus $40 per month per full dev seat.",
+   "value": "20",
+   "unit": "USD per month",
+   "as_of": "2026-10-19",
+   "quote": "Pro at $20/month, Max at $200/month, Teams at $80/month for the team plan plus $40/month per full dev seat",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Superblocks, a third-party source, argues Cursor's $20 Pro plan pays for itself if it saves even one hour of billable time a month.",
+   "value": "20",
+   "unit": "USD per month",
+   "as_of": "2026-07",
+   "quote": "Pro's $20 pays for itself if it saves even an hour of billable time a month",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Coworker AI reports that Cursor's Plus plan costs $8 and covers Agent with Cursor models at fixed settings, but not Auto, Cloud Agents or third-party models.",
+   "value": "8",
+   "unit": "$",
+   "as_of": "2026",
+   "quote": "Plus at $8 covers Agent with Cursor models at fixed settings, but not Auto, Cloud Agents or third-party models.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Coworker AI reports that Cursor's Premium seat costs $30 per month, or $300 per year (equivalent to $25/month).",
+   "value": "30",
+   "unit": "$ per month",
+   "as_of": "2026",
+   "quote": "Premium at $30 ($300 a year, or $25/month equivalent) is the first tier with those.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Coworker AI reports that Cursor recommends its Super plan at $100 for daily Agent users.",
+   "value": "100",
+   "unit": "$",
+   "as_of": "2026",
+   "quote": "Cursor recommends Super at $100 for daily Agent users, and that covers the Cursor-model side.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Coworker AI reports that Cursor's Ultra plan costs $200.",
+   "value": "200",
+   "unit": "$",
+   "as_of": "2026",
+   "quote": "Ultra at $200 only makes sense once a few weeks of data show the Super pool running out",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Coworker AI reports that Cursor charges a Cursor Token Rate of $0.25 per million tokens on third-party model traffic.",
+   "value": "0.25",
+   "unit": "$ per million tokens",
+   "as_of": "2026",
+   "quote": "plus the Cursor Token Rate of $0.25 per million tokens, so 100 million tokens of third-party traffic in a month adds $25",
+   "topic": "pricing"
+  },
+  {
+   "fact": "In Coworker AI's illustrative 10-person team scenario (seven Premium seats and three Super seats), seat cost totals $510 per month.",
+   "value": "510",
+   "unit": "$ per month",
+   "as_of": "2026",
+   "quote": "Seven seats at $30 plus three at $100 is $210 plus $300, or $510/month in seats.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In Coworker AI's illustrative 40-developer scenario (30 Premium and 10 Super seats), list seat cost is $1,900 per month or $22,800 per year before third-party usage.",
+   "value": "1900",
+   "unit": "$ per month",
+   "as_of": "2026",
+   "quote": "That is 30 times $30 plus 10 times $100, or $1,900/month, $22,800/year, before any third-party usage.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Coworker AI states that Cursor's annual Premium price is $300 versus $360 when billed monthly, which it describes as two months free.",
+   "value": "300",
+   "unit": "$ per year",
+   "as_of": "2026",
+   "quote": "Premium is $300 a year instead of $360",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Coworker AI cites Anthropic's published rates showing Claude Sonnet 5 input at $2 per million tokens versus $0.20 per million for cache reads.",
+   "value": "2",
+   "unit": "$ per million tokens",
+   "as_of": "2026",
+   "quote": "$2 versus $0.20 per million on Claude Sonnet 5 at published rates",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Coworker AI gives an illustrative example that a legacy Pro user who mostly runs Claude would pay $30 for Premium plus third-party credit, against $20 today.",
+   "value": "30",
+   "unit": "$",
+   "as_of": "2026",
+   "quote": "Someone on legacy Pro who mostly runs Claude would pay $30 for Premium plus third-party credit, against $20 today.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Coworker AI reports that GitHub Copilot Business costs $19 with a fixed credit allowance.",
+   "value": "19",
+   "unit": "$",
+   "as_of": "2026",
+   "quote": "Copilot Business at $19 with a fixed credit allowance is the more honest fit.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Coworker AI reports that GitHub Copilot Pro costs $10 per month and covers unlimited code completions, about a third of Cursor Premium's price.",
+   "value": "10",
+   "unit": "$ per month",
+   "as_of": "2026",
+   "quote": "Copilot Pro at $10/month covers unlimited code completions, a third of Cursor Premium's price.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Coworker AI says the cheapest and most expensive published model rates differ by roughly 20 times.",
+   "value": "20",
+   "unit": "x",
+   "as_of": "2026",
+   "quote": "Given the roughly 20x spread between the cheapest and most expensive published rates",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "On The X Subscription, which new customers have bought since October 12, 2026, Plus costs $8/month.",
+   "value": "8",
+   "unit": "USD per month",
+   "as_of": "October 12, 2026",
+   "quote": "On The X Subscription, which new customers have bought since October 12, 2026: Free, Plus $8/month, Premium $30/month, Super $100/month and Ultra $200/month.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Cursor Teams seats cost $30, $100 or $200 per user per month on The X Subscription, and Enterprise is priced on request.",
+   "value": "30, 100, 200",
+   "unit": "USD per user per month",
+   "as_of": "",
+   "quote": "Teams seats cost $30, $100 or $200 per user per month, and Enterprise is priced on request.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Legacy Cursor plans (Pro $20, Pro+ $60, Ultra $200, Teams $40 or $120 per seat) continue for existing subscribers.",
+   "value": "20, 60, 200, 40, 120",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "Legacy plans (Pro $20, Pro+ $60, Ultra $200, Teams $40 or $120 per seat) continue for existing subscribers.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "On The X Subscription, annual billing is $80/year for Plus, $300 for Premium, $1,000 for Super and $2,000 for Ultra, which the page says works out to two months free; prices exclude tax.",
+   "value": "80, 300, 1000, 2000",
+   "unit": "USD per year",
+   "as_of": "",
+   "quote": "On The X Subscription, annual billing is $80/year for Plus, $300 for Premium, $1,000 for Super and $2,000 for Ultra, which works out to two months free.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The Cursor Token Rate is $0.25 per million tokens and applies on Teams and Enterprise plans to third-party model requests, on top of that model's API price.",
+   "value": "0.25",
+   "unit": "USD per million tokens",
+   "as_of": "",
+   "quote": "It is a $0.25 per million token charge that applies on Teams and Enterprise plans to third-party model requests, on top of that model's API price.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "On The X Subscription, 10 Premium seats cost $300/month, and moving three heaviest users to Super seats raises that to $510/month before any third-party usage.",
+   "value": "300, 510",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "On The X Subscription, 10 Premium seats cost $300/month. Moving the three heaviest users to Super seats raises that to $510/month before any third-party usage",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Per the page, GitHub Copilot Pro costs $10/month, compared with Cursor Premium at $30/month.",
+   "value": "10",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "Copilot Pro is $10/month against Cursor Premium's $30 (Cursor Plus is $8 but covers only Cursor's own models)",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Per the page, GitHub Copilot Business costs $19 per seat, compared with Cursor Teams at $30 per seat.",
+   "value": "19",
+   "unit": "USD per seat",
+   "as_of": "",
+   "quote": "and Copilot Business is $19 per seat against Cursor Teams at $30.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Per the page, GitHub Copilot charges a flat $0.01 per AI credit on overage.",
+   "value": "0.01",
+   "unit": "USD per AI credit",
+   "as_of": "",
+   "quote": "Copilot also excludes code completions from metering entirely and charges a flat $0.01 per AI credit on overage.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Cursor's privacy mode is described on its pricing page as a guarantee that code data is not used for training by Cursor or its model providers, and it is not an on-premise deployment.",
    "value": "",
    "unit": "",
-   "as_of": "2026-10-19",
-   "quote": "it refreshes every week rather than every billing cycle",
+   "as_of": "",
+   "quote": "Cursor's answer to data concerns is privacy mode, which its pricing page describes as a guarantee that code data is not used for training by Cursor or its model providers.",
    "topic": "rules"
   },
   {
-   "fact": "Cursor's legacy plans are closed to new customers, and switching from a legacy plan to a new plan is permanent.",
+   "fact": "On Cursor, group-level spend limits are available only on Enterprise, while Teams admins can set a default limit per member on The X Subscription.",
    "value": "",
    "unit": "",
-   "as_of": "2026-10-19",
-   "quote": "They are closed to new customers, but existing subscribers keep their plan, price and features unless they switch, and switching is permanent.",
+   "as_of": "",
+   "quote": "Teams admins can also set a default limit per member with per-member overrides. Group-level spend limits are Enterprise-only.",
    "topic": "rules"
   },
   {
-   "fact": "Cursor's Composer 2.5 model is listed at $0.50 per 1M input tokens and $2.50 per 1M output tokens.",
-   "value": "0.50, 2.50",
-   "unit": "USD per 1M tokens",
-   "as_of": "2026-10-19",
-   "quote": "| Composer 2.5 | $0.50 | $2.50 |",
-   "topic": "pricing"
+   "fact": "Cursor's own pricing and model-cost features: third-party models bill at API list price from prepaid credit on The X Subscription, and are never in the included pool.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "On The X Subscription those are never in the included pool: they bill at API list price from prepaid credit.",
+   "topic": "rules"
   },
   {
-   "fact": "Grok 4.6 is listed at $2 per 1M input tokens and $6 per 1M output tokens.",
-   "value": "2, 6",
-   "unit": "USD per 1M tokens",
-   "as_of": "2026-10-19",
-   "quote": "| Grok 4.6 | $2  | $6  |",
-   "topic": "pricing"
+   "fact": "In an Ahrefs SERP check on October 19, 2026, cursor.com held the top organic result with five sitelinks.",
+   "value": "5",
+   "unit": "sitelinks",
+   "as_of": "October 19, 2026",
+   "quote": "In an Ahrefs SERP check on October 19, 2026, cursor.com held the top organic result with five sitelinks",
+   "topic": "benchmark"
   },
   {
-   "fact": "Claude Sonnet 5 is listed at $2 per 1M input tokens and $10 per 1M output tokens.",
-   "value": "2, 10",
-   "unit": "USD per 1M tokens",
-   "as_of": "2026-10-19",
-   "quote": "| Claude Sonnet 5 | $2  | $10 |",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Gemini 3.1 Pro is listed at $2 per 1M input tokens and $12 per 1M output tokens.",
-   "value": "2, 12",
-   "unit": "USD per 1M tokens",
-   "as_of": "2026-10-19",
-   "quote": "| Gemini 3.1 Pro | $2  | $12 |",
-   "topic": "pricing"
-  },
-  {
-   "fact": "GPT-5.6 Terra is listed at $2 per 1M input tokens and $12 per 1M output tokens.",
-   "value": "2, 12",
-   "unit": "USD per 1M tokens",
-   "as_of": "2026-10-19",
-   "quote": "| GPT-5.6 Terra | $2  | $12 |",
-   "topic": "pricing"
+   "fact": "Coworker MCP, per the vendor, connects AI tooling to 50+ apps through one governed connection.",
+   "value": "50",
+   "unit": "apps",
+   "as_of": "",
+   "quote": "through one governed connection to 50+ apps rather than a pile of individually-installed servers.",
+   "topic": "definition"
   }
  ]
 }

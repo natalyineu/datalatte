@@ -1,8 +1,11 @@
 {
  "url": "https://adwave.com/resources/tv-advertising-trends-2026-smbs",
  "title": "TV Advertising Trends for Small Businesses (2026)",
- "hash": "4eb63127f8cefcdf37922a25ceea4d02e025fd00",
- "fetchedAt": "2026-11-10",
+ "hash": "dc8079836ae9a6992fb53a1b795873571d921047",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 12662,
+ "chunks": 2,
  "facts": [
   {
    "fact": "Statista projects U.S. CTV ad spending to reach $33.35 billion in 2026, up from $28.75 billion in 2025.",
@@ -10,6 +13,14 @@
    "unit": "billion USD",
    "as_of": "2026",
    "quote": "U.S. CTV ad spending is projected to reach $33.35 billion in 2026, up from $28.75 billion in 2025 (Statista, 2025).",
+   "topic": "forecast"
+  },
+  {
+   "fact": "Statista's projection implies a 16% year-over-year jump in U.S. CTV ad spending, as stated on the page.",
+   "value": "16",
+   "unit": "%",
+   "as_of": "2026",
+   "quote": "That's a 16% jump year over year.",
    "topic": "forecast"
   },
   {
@@ -21,7 +32,7 @@
    "topic": "audience"
   },
   {
-   "fact": "Adwave states that its platform lets advertisers launch a TV campaign with as little as $50.",
+   "fact": "Adwave lets users launch a TV campaign with as little as $50.",
    "value": "50",
    "unit": "USD",
    "as_of": "",
@@ -29,7 +40,7 @@
    "topic": "pricing"
   },
   {
-   "fact": "The page states that creating a broadcast-quality commercial used to cost $5,000 to $50,000 or more; no source is given.",
+   "fact": "The page states that creating a broadcast-quality commercial used to cost $5,000 to $50,000 or more before AI-generated creative tools.",
    "value": "5000-50000",
    "unit": "USD",
    "as_of": "",
@@ -37,7 +48,7 @@
    "topic": "pricing"
   },
   {
-   "fact": "Adwave states that its AI tools can generate a polished 30-second TV spot in about two minutes.",
+   "fact": "Adwave claims it can generate a polished 30-second TV spot in about two minutes.",
    "value": "2",
    "unit": "minutes",
    "as_of": "",
@@ -53,25 +64,33 @@
    "topic": "other"
   },
   {
-   "fact": "According to eMarketer (2025), programmatic CTV, which includes self-serve platforms, accounts for more than 75% of all CTV ad transactions in the U.S.",
+   "fact": "According to eMarketer (2025), programmatic CTV, which includes self-serve platforms, accounts for more than 75% of all U.S. CTV ad transactions.",
    "value": "75",
-   "unit": "% (more than)",
+   "unit": "% of CTV ad transactions (more than)",
    "as_of": "2025",
    "quote": "programmatic CTV (which includes self-serve platforms) now accounts for more than 75% of all CTV ad transactions in the U.S. (eMarketer, 2025).",
    "topic": "benchmark"
   },
   {
-   "fact": "According to Nielsen's 2025 State of Play report, 68% of CTV ad impressions are delivered with some form of advanced audience targeting beyond basic age and gender.",
-   "value": "68",
-   "unit": "%",
-   "as_of": "2025",
-   "quote": "68% of CTV ad impressions are now delivered with some form of advanced audience targeting beyond basic age and gender.",
-   "topic": "audience"
+   "fact": "eMarketer says programmatic CTV's share of U.S. CTV ad transactions was roughly 60% two years before 2025.",
+   "value": "60",
+   "unit": "% of CTV ad transactions (approx.)",
+   "as_of": "2023",
+   "quote": "That's up from roughly 60% just two years ago.",
+   "topic": "benchmark"
   },
   {
-   "fact": "According to the IAB's 2025 Measurement & Attribution Report, 72% of CTV advertisers use multi-touch attribution models, up from 48% in 2023.",
+   "fact": "According to Nielsen's 2025 State of Play report, 68% of CTV ad impressions are delivered with some form of advanced audience targeting beyond basic age and gender.",
+   "value": "68",
+   "unit": "% of CTV impressions",
+   "as_of": "2025",
+   "quote": "68% of CTV ad impressions are now delivered with some form of advanced audience targeting beyond basic age and gender.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "According to the IAB's 2025 Measurement & Attribution Report, 72% of CTV advertisers use multi-touch attribution models.",
    "value": "72",
-   "unit": "%",
+   "unit": "% of CTV advertisers",
    "as_of": "2025",
    "quote": "72% of CTV advertisers now use multi-touch attribution models, up from 48% in 2023.",
    "topic": "benchmark"
@@ -85,17 +104,25 @@
    "topic": "audience"
   },
   {
-   "fact": "According to Parks Associates, 62% of U.S. broadband households used at least one FAST service in 2025, up from 50% the prior year.",
+   "fact": "The page states the average CPM across streaming platforms ranges from $15 to $35.",
+   "value": "15-35",
+   "unit": "USD per CPM",
+   "as_of": "",
+   "quote": "The average [CPM across streaming platforms](https://adwave.com/resources/tv-advertising-cpm-by-platform) ranges from $15 to $35",
+   "topic": "pricing"
+  },
+  {
+   "fact": "According to Parks Associates, 62% of U.S. broadband households used at least one FAST service in 2025.",
    "value": "62",
-   "unit": "%",
+   "unit": "% of U.S. broadband households",
    "as_of": "2025",
    "quote": "62% of U.S. broadband households used at least one FAST service in 2025, up from 50% the prior year.",
    "topic": "audience"
   },
   {
-   "fact": "According to a 2025 LG Ad Solutions study, QR code scan rates on CTV ads increased 42% year over year.",
+   "fact": "A 2025 LG Ad Solutions study found QR code scan rates on CTV ads increased 42% year over year.",
    "value": "42",
-   "unit": "% year over year",
+   "unit": "% YoY increase in scan rate",
    "as_of": "2025",
    "quote": "QR code scan rates on CTV ads increased 42% year over year, with the highest engagement coming from local service and retail advertisers.",
    "topic": "benchmark"
@@ -107,6 +134,54 @@
    "as_of": "2024",
    "quote": "The 2024 election cycle dumped an estimated $12.3 billion into political advertising, with CTV absorbing a record share (AdImpact, 2025).",
    "topic": "benchmark"
+  },
+  {
+   "fact": "The page states that AI creative tools let advertisers launch a TV campaign in under 10 minutes.",
+   "value": "10",
+   "unit": "minutes",
+   "as_of": "2026",
+   "quote": "AI creative tools mean you can launch a campaign in under 10 minutes and start learning immediately.",
+   "topic": "other"
+  },
+  {
+   "fact": "The page cites a 2025 Video Advertising Bureau (VAB) study finding that advertisers who added CTV to their digital mix saw a 22% lift in overall campaign performance (third-party claim).",
+   "value": "22",
+   "unit": "%",
+   "as_of": "2025",
+   "quote": "According to a 2025 VAB (Video Advertising Bureau) study, advertisers who added CTV to their digital mix saw a 22% lift in overall campaign performance.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page says platforms like Adwave have lowered the minimum TV ad spend for small businesses to $50.",
+   "value": "50",
+   "unit": "USD",
+   "as_of": "2026",
+   "quote": "Platforms like Adwave have brought the minimum spend down to $50, and FAST channels have created a large pool of affordable inventory.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page gives a CPM range of $15 to $35 for small business TV campaigns, with no named source.",
+   "value": "15-35",
+   "unit": "USD per CPM",
+   "as_of": "2026",
+   "quote": "With CPMs ranging from $15 to $35, a small business can run a meaningful local TV campaign for a few hundred dollars a month.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page claims a small business can run a meaningful local TV campaign for a few hundred dollars a month.",
+   "value": "a few hundred",
+   "unit": "USD per month",
+   "as_of": "2026",
+   "quote": "a small business can run a meaningful local TV campaign for a few hundred dollars a month.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page states that FAST platforms Tubi, Pluto TV, and the Roku Channel collectively reach over 100 million monthly viewers.",
+   "value": "100",
+   "unit": "million monthly viewers",
+   "as_of": "2026",
+   "quote": "FAST platforms like Tubi, Pluto TV, and the Roku Channel collectively reach over 100 million monthly viewers.",
+   "topic": "audience"
   }
  ]
 }

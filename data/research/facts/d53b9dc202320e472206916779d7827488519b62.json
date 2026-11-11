@@ -1,11 +1,14 @@
 {
  "url": "https://cursor.com/start",
  "title": "Cursor · Cursor Start",
- "hash": "4ab47c03882cad66142420160ae2b36f5ca2725a",
- "fetchedAt": "2026-11-06",
+ "hash": "119d334475462383e374db8068cccb09aba4e283",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 8396,
+ "chunks": 1,
  "facts": [
   {
-   "fact": "Cursor's vendor page lists the Start plan at ₹649 per month.",
+   "fact": "The Cursor Start plan costs ₹649 per month.",
    "value": "649",
    "unit": "INR per month",
    "as_of": "",
@@ -13,23 +16,15 @@
    "topic": "pricing"
   },
   {
-   "fact": "Cursor's vendor page lists the Hobby plan as free.",
-   "value": "0",
-   "unit": "INR",
-   "as_of": "",
-   "quote": "### Hobby\n\nFree",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Cursor's vendor page lists the Individual plan at ₹1,800 per month.",
+   "fact": "The Cursor Individual plan costs ₹1,800 per month.",
    "value": "1800",
    "unit": "INR per month",
    "as_of": "",
-   "quote": "₹1,800/month",
+   "quote": "### Individual\n\n₹1,800/month",
    "topic": "pricing"
   },
   {
-   "fact": "Cursor's vendor page states the Individual plan costs ₹2,273 if billed monthly, rather than the ₹1,800 figure shown for the base price.",
+   "fact": "The Cursor Individual plan costs ₹2,273 per month if billed monthly rather than annually.",
    "value": "2273",
    "unit": "INR per month",
    "as_of": "",
@@ -37,39 +32,47 @@
    "topic": "pricing"
   },
   {
-   "fact": "Cursor's vendor page says the Start plan is available with monthly billing only, and annual billing is not available for it.",
+   "fact": "The Cursor Hobby plan is free.",
+   "value": "0",
+   "unit": "INR",
+   "as_of": "",
+   "quote": "### Hobby\n\nFree",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The Cursor Start plan is available with monthly billing only, and annual billing is not available for it.",
    "value": "",
    "unit": "",
    "as_of": "",
    "quote": "The Start plan is available with monthly billing only.",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Cursor's vendor page says Start is billed monthly in INR.",
-   "value": "INR",
-   "unit": "currency",
-   "as_of": "",
-   "quote": "Start is billed monthly in INR.",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Cursor's vendor page says Start can be paid with UPI, credit card, or debit card.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "You can pay with UPI, credit card, or debit card.",
    "topic": "rules"
   },
   {
-   "fact": "Cursor's vendor page says UPI payments for Start require approving a monthly autopay mandate in the UPI app at checkout, and renewals happen automatically.",
+   "fact": "Cursor Start is billed monthly in INR and accepts UPI, credit card, or debit card payment.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "you'll approve a monthly autopay mandate in your UPI app at checkout, and renewals happen automatically.",
+   "quote": "Start is billed monthly in INR. You can pay with UPI, credit card, or debit card.",
    "topic": "rules"
   },
   {
-   "fact": "Cursor's vendor page says Individual and Teams plan pricing shown is estimated at current exchange rates.",
+   "fact": "For UPI payments, Cursor Start renews automatically after the user approves a monthly autopay mandate in their UPI app at checkout.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "For UPI, you'll approve a monthly autopay mandate in your UPI app at checkout, and renewals happen automatically.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Cursor Start is available to users in India, and availability may expand to select regions over time.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Cursor Start is available to our users in India. Availability may expand to select regions over time.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Individual and Teams plan pricing on the page is estimated at current exchange rates.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -77,20 +80,28 @@
    "topic": "pricing"
   },
   {
-   "fact": "Cursor's vendor page says the Start plan is available to users in India, and availability may expand to select regions over time.",
-   "value": "India",
-   "unit": "",
-   "as_of": "",
-   "quote": "Cursor Start is available to our users in India.",
-   "topic": "rules"
-  },
-  {
-   "fact": "Cursor's vendor page describes Cursor Start as an accessible monthly plan made for builders in India.",
+   "fact": "The Cursor Start plan includes access to cloud agents, Cursor for iOS with remote control, and plugins, MCP servers, hooks, and skills.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Cursor Start is an accessible monthly plan made for builders in India.",
+   "quote": "Start adds more access to Grok and Composer models in addition to access to cloud agents, Cursor for iOS with remote control",
    "topic": "definition"
+  },
+  {
+   "fact": "The Cursor Individual plan includes unlimited Tab completions, while the Hobby plan includes only limited Tab completions.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "✓ Unlimited Tab completions",
+   "topic": "definition"
+  },
+  {
+   "fact": "Cursor's parent company Anysphere, Inc. states it holds SOC 2, ISO 27001, ISO 42001, and AIUC-1 certifications.",
+   "value": "",
+   "unit": "",
+   "as_of": "2026",
+   "quote": "SOC 2 | ISO27001 | ISO42001 | AIUC-1 Certified",
+   "topic": "other"
   }
  ]
 }

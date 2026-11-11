@@ -1,11 +1,14 @@
 {
  "url": "https://www.airbridge.io/en/blog/appsflyer-pricing-small-apps",
  "title": "How Much Does AppsFlyer Cost for a Small Subscription App? — Airbridge",
- "hash": "b79734472e48e771e87bb689ce50821acf901250",
- "fetchedAt": "2026-11-09",
+ "hash": "d637ca474d117d616588082dd406fb44e5e3afbc",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 7463,
+ "chunks": 1,
  "facts": [
   {
-   "fact": "AppsFlyer's Growth plan charges $0.07 per attributed conversion after the Welcome Package, according to the Airbridge blog's reading of AppsFlyer's pricing page.",
+   "fact": "AppsFlyer's Growth plan charges $0.07 per attributed conversion after the Welcome Package is used up (AppsFlyer's published rate, as reported by Airbridge).",
    "value": "0.07",
    "unit": "USD per attributed conversion",
    "as_of": "",
@@ -13,7 +16,7 @@
    "topic": "pricing"
   },
   {
-   "fact": "AppsFlyer's Zero plan includes a Welcome Package of 12,000 free conversions to use within the first 12 months.",
+   "fact": "AppsFlyer's Welcome Package includes 12,000 free conversions to use within the first 12 months.",
    "value": "12000",
    "unit": "conversions",
    "as_of": "",
@@ -21,31 +24,39 @@
    "topic": "pricing"
   },
   {
-   "fact": "AppsFlyer describes its Zero plan as for apps using owned media and as not suitable for apps with paid activities.",
-   "value": "",
-   "unit": "",
+   "fact": "Under AppsFlyer's Growth plan, a subscription app with 10,000 attributed conversions a month would pay about $700 a month after the Welcome Package, before add-ons.",
+   "value": "700",
+   "unit": "USD per month",
    "as_of": "",
-   "quote": "\"not suitable for apps with paid activities\"",
-   "topic": "rules"
+   "quote": "A subscription app with 10,000 attributed conversions a month would pay about $700 a month once the Welcome Package is used up",
+   "topic": "pricing"
   },
   {
-   "fact": "According to the page, AppsFlyer does not count organic installs as conversions and they are free.",
+   "fact": "Airbridge's table lists AppsFlyer Growth cost at 5,000 monthly attributed conversions as $350/mo, a figure derived from AppsFlyer's $0.07 rate.",
+   "value": "350",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "| 5,000 | $350/mo | Typical for early growth |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Under AppsFlyer's Growth plan, organic installs are not counted and are free.",
    "value": "0",
-   "unit": "USD for organic installs",
+   "unit": "USD",
    "as_of": "",
    "quote": "Organic installs are not counted and are free",
    "topic": "pricing"
   },
   {
-   "fact": "AppsFlyer counts attributed installs, re-engagements, and re-attributions as billable conversions.",
+   "fact": "AppsFlyer's Growth plan sells Protect360, Data Locker, Audiences, API access, and ROI360 separately as premium products.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Attributed installs, re-engagements, and re-attributions.",
-   "topic": "rules"
+   "quote": "Premium products such as Protect360, Data Locker, Audiences, API access, and ROI360 are sold separately",
+   "topic": "pricing"
   },
   {
-   "fact": "The AppsFlyer Welcome Package includes a 30-day trial of select premium add-ons.",
+   "fact": "AppsFlyer's Welcome Package includes a 30-day trial of select premium add-ons.",
    "value": "30",
    "unit": "days",
    "as_of": "",
@@ -53,47 +64,39 @@
    "topic": "pricing"
   },
   {
-   "fact": "AppsFlyer's Enterprise plan uses custom pricing negotiated through its sales team.",
+   "fact": "AppsFlyer describes its free Zero plan as not suitable for apps with paid activities.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Custom pricing through AppsFlyer's sales team",
-   "topic": "pricing"
+   "quote": "\"not suitable for apps with paid activities\"",
+   "topic": "rules"
   },
   {
-   "fact": "AppsFlyer does not publish prices for its add-ons, so a quote must be requested from sales.",
+   "fact": "In AppsFlyer's billing, a conversion is an attributed install, re-engagement, or re-attribution.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "AppsFlyer does not publish add-on pricing. You need to contact sales for a quote",
-   "topic": "pricing"
+   "quote": "A conversion is an attributed install, [re-engagement](https://www.airbridge.io/en/glossary/re-engagement \"Re-engagement\"), or re-attribution",
+   "topic": "definition"
   },
   {
-   "fact": "The Airbridge blog's table estimates AppsFlyer Growth cost at $700 per month for 10,000 monthly attributed conversions, before add-ons.",
-   "value": "700",
-   "unit": "USD per month",
-   "as_of": "",
-   "quote": "| 10,000 | $700/mo | Before add-ons |",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "The Airbridge blog's table estimates AppsFlyer Growth cost at $3,500 per month for 50,000 monthly attributed conversions.",
-   "value": "3500",
-   "unit": "USD per month",
-   "as_of": "",
-   "quote": "| 50,000 | $3,500/mo | Teams at this volume often negotiate Enterprise pricing |",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "Airbridge's own Core Plan starts at $40 or more per month and includes 500K data points per month, per Airbridge's page.",
+   "fact": "Airbridge's Core Plan is $40+ per month after a 30-day free trial (Airbridge's own pricing claim).",
    "value": "40",
    "unit": "USD per month",
    "as_of": "",
-   "quote": "Airbridge's Core Plan bills by data points at $40+/mo with 500K included",
+   "quote": "Airbridge's Core Plan is $40+/mo after a 30-day free trial",
    "topic": "pricing"
   },
   {
-   "fact": "Airbridge's own Core Plan charges $0.0001 per data point beyond the included usage.",
+   "fact": "Airbridge's Core Plan includes 500K data points per month.",
+   "value": "500000",
+   "unit": "data points per month",
+   "as_of": "",
+   "quote": "500K data points per month",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Airbridge's Core Plan charges $0.0001 per data point beyond the included usage (Airbridge's own pricing).",
    "value": "0.0001",
    "unit": "USD per data point",
    "as_of": "",
@@ -101,31 +104,15 @@
    "topic": "pricing"
   },
   {
-   "fact": "Airbridge's own page states that a month with 1M data points on the Core Plan costs $90.",
+   "fact": "Airbridge states that a month with 1M data points on its Core Plan costs $90.",
    "value": "90",
    "unit": "USD per month",
    "as_of": "",
    "quote": "a month with 1M data points costs $40 + (500K × $0.0001) = $90",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "Airbridge's own Core Plan offers a 30-day free trial with no data point limits and no annual contract.",
-   "value": "30",
-   "unit": "days",
-   "as_of": "",
-   "quote": "30-day free trial, no data point limits",
    "topic": "pricing"
   },
   {
-   "fact": "Airbridge's own page states that its Core Plan has no annual contract and can be cancelled at any time.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "No annual contract, cancel anytime",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Airbridge's own page states that tracking-link clicks and ad impressions are not counted as data points.",
+   "fact": "Airbridge defines a data point as one event collected for an app, such as installs, app opens, trial starts, or purchases; tracking-link clicks and ad impressions do not count.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -133,19 +120,35 @@
    "topic": "definition"
   },
   {
-   "fact": "Airbridge's own page claims its Core Plan includes Predictive LTV with a 180-day window without an add-on.",
+   "fact": "Airbridge's Core Plan has no annual contract and can be cancelled anytime (Airbridge's own claim).",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "No annual contract, cancel anytime",
+   "topic": "rules"
+  },
+  {
+   "fact": "Airbridge's Core Plan includes a 30-day free trial with no data point limits.",
+   "value": "30",
+   "unit": "days",
+   "as_of": "",
+   "quote": "30-day free trial, no data point limits",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Airbridge's Core Plan includes Predictive LTV covering 180 days without an add-on.",
    "value": "180",
    "unit": "days",
    "as_of": "",
-   "quote": "Predictive LTV (180 days), and audience sync to ad networks without an add-on.",
+   "quote": "Predictive LTV (180 days)",
    "topic": "other"
   },
   {
-   "fact": "The Airbridge blog post was published on October 14, 2026 and last updated the same day.",
+   "fact": "Airbridge's blog states that several MMPs, including Singular, Kochava, and Adjust, offer free tiers (a third-party-style claim made by Airbridge).",
    "value": "",
    "unit": "",
-   "as_of": "2026-10-14",
-   "quote": "October 14, 2026·Updated October 14, 2026·6 min read",
+   "as_of": "",
+   "quote": "Several MMPs offer free tiers, including Singular, Kochava, and Adjust.",
    "topic": "other"
   }
  ]

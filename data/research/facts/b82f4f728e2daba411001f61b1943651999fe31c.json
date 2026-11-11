@@ -1,91 +1,110 @@
 {
  "url": "https://www.codeart.co.ke/p/running-muse-code-models-inside-claude",
  "title": "Running Muse Code Models Inside Claude Code: A Setup Guide",
- "hash": "c284e4d337c18596af9e988fc90aeb0ab6a01075",
- "fetchedAt": "2026-11-06",
+ "hash": "0a3af685b5af27e404bb114231efc13b2757201d",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 9032,
+ "chunks": 2,
  "facts": [
   {
-   "fact": "The Muse Spark model family is at version 1.3 and is offered in two pricing tiers, Standard and Contributor, which the page says use the same underlying model.",
+   "fact": "Meta shipped its Muse Code terminal coding agent in beta on August 5, 2026.",
+   "value": "2026-08-05",
+   "unit": "date",
+   "as_of": "2026-08-05",
+   "quote": "Meta shipped its own terminal coding agent, _**[Muse Code](https://dev.meta.ai/)**_, in beta on August 5, 2026",
+   "topic": "other"
+  },
+  {
+   "fact": "The Muse Spark model family is currently on version 1.3.",
    "value": "1.3",
    "unit": "version",
    "as_of": "",
-   "quote": "currently on version 1.3, and it ships in two pricing tiers that are otherwise the same underlying model",
+   "quote": "The model family is **Muse Spark**, currently on version 1.3, and it ships in two pricing tiers",
    "topic": "definition"
   },
   {
-   "fact": "Muse Spark's Contributor tier is priced roughly 12x lower than Standard on input tokens, according to the author's reading of the pricing table.",
-   "value": "12",
-   "unit": "x discount (input)",
+   "fact": "The blog author reports that the Muse Spark Contributor tier is roughly 12x cheaper than Standard on input tokens and roughly 21x cheaper on output tokens.",
+   "value": "12x input, 21x output",
+   "unit": "discount multiple",
    "as_of": "",
    "quote": "That’s roughly a **12x** discount on input and a **21x** discount on output.",
    "topic": "pricing"
   },
   {
-   "fact": "Muse Spark's Contributor tier is priced roughly 21x lower than Standard on output tokens, according to the author's reading of the pricing table.",
-   "value": "21",
-   "unit": "x discount (output)",
+   "fact": "The blog author states Contributor is a roughly 20x cost cut relative to Standard pricing.",
+   "value": "~20x",
+   "unit": "discount multiple",
    "as_of": "",
-   "quote": "That’s roughly a **12x** discount on input and a **21x** discount on output.",
+   "quote": "a ~20x cost cut is hard to argue with",
    "topic": "pricing"
   },
   {
-   "fact": "Muse Code pricing is a pass-through of token costs with no separate license fee.",
-   "value": "0",
-   "unit": "USD license fee",
+   "fact": "Pricing for Muse Spark is a straight pass-through of token costs with no separate license fee.",
+   "value": "",
+   "unit": "",
    "as_of": "",
    "quote": "Pricing is a straight pass-through of token costs, no separate license fee:",
    "topic": "pricing"
   },
   {
-   "fact": "The Standard Muse Spark tier is selected by the model ID muse-spark-1.3.",
-   "value": "muse-spark-1.3",
-   "unit": "model ID",
+   "fact": "Muse Spark 1.3 Contributor has a native context window of about 1,048,576 tokens (1M), according to the blog.",
+   "value": "1048576",
+   "unit": "tokens",
    "as_of": "",
-   "quote": "You select the tier by model ID (_**muse-spark-1.3**_ vs _**muse-spark-1.3-contributor**_)",
+   "quote": "Muse Spark 1.3 Contributor actually has a native ~1,048,576-token (1M) context window, larger than Claude’s default 200K assumption.",
    "topic": "definition"
   },
   {
-   "fact": "The Contributor Muse Spark tier is selected by the model ID muse-spark-1.3-contributor.",
-   "value": "muse-spark-1.3-contributor",
-   "unit": "model ID",
+   "fact": "Claude Code's default context assumption is 200K tokens.",
+   "value": "200000",
+   "unit": "tokens",
    "as_of": "",
-   "quote": "You select the tier by model ID (_**muse-spark-1.3**_ vs _**muse-spark-1.3-contributor**_)",
+   "quote": "larger than Claude’s default 200K assumption",
    "topic": "definition"
   },
   {
-   "fact": "Under the Contributor tier, Meta uses the customer's prompts and completions to improve its products; under Standard, the author says Meta does not use them for training.",
+   "fact": "When Claude Code receives an unrecognized model ID, it silently defaults the auto-compact window to 1 token.",
+   "value": "1",
+   "unit": "tokens",
+   "as_of": "",
+   "quote": "it silently defaults the **auto-compact window to 1 token**",
+   "topic": "other"
+  },
+  {
+   "fact": "The Standard tier does not use prompts or completions for training, according to Meta's claim as reported by the blog.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "letting Meta use your prompts and completions to improve its products.",
+   "quote": "Meta does not use your prompts or completions for training, so they claim.",
    "topic": "rules"
   },
   {
-   "fact": "The Standard tier provides full data privacy, with Meta stating it does not use prompts or completions for training.",
+   "fact": "The Contributor tier lets Meta use prompts and completions to improve its products in exchange for a steep discount.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "full data privacy; Meta does not use your prompts or completions for training, so they claim.",
+   "quote": "a steep discount in exchange for letting Meta use your prompts and completions to improve its products.",
    "topic": "rules"
   },
   {
-   "fact": "The Contributor tier is rate-limited well below the Standard tier, so heavy concurrent agent use may be throttled sooner on Contributor.",
+   "fact": "The two Muse Spark tiers are selected by model ID: muse-spark-1.3 for Standard and muse-spark-1.3-contributor for Contributor.",
+   "value": "muse-spark-1.3 / muse-spark-1.3-contributor",
+   "unit": "",
+   "as_of": "",
+   "quote": "(_**muse-spark-1.3**_ vs _**muse-spark-1.3-contributor**_)",
+   "topic": "definition"
+  },
+  {
+   "fact": "Contributor tier is rate-limited well below Standard, so heavy concurrent sessions may be throttled on Contributor sooner.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Contributor is rate-limited well below Standard, so a team running heavy concurrent agent sessions may hit throttling on Contributor before they hit it on Standard",
+   "quote": "Contributor is rate-limited well below Standard, so a team running heavy concurrent agent sessions may hit throttling on Contributor",
    "topic": "rules"
   },
   {
-   "fact": "Muse Spark has been reported by third parties to use more tokens per task than Claude Code on equivalent work, which reduces the headline discount.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Muse Spark has been reported to burn more tokens per task than Claude Code on equivalent work, which eats into the headline discount.",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "Most third-party comparisons rank Muse Code below Claude Code on raw benchmark quality but ahead of Codex CLI.",
+   "fact": "Most third-party comparisons, per the blog, place Muse Code below Claude Code but ahead of Codex CLI on raw benchmark quality.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -93,36 +112,28 @@
    "topic": "benchmark"
   },
   {
-   "fact": "To route Claude Code to Muse Spark, the setup sets ANTHROPIC_BASE_URL to https://api.meta.ai.",
-   "value": "https://api.meta.ai",
-   "unit": "URL",
+   "fact": "The MODEL_API_KEY used for the Claude Code endpoint comes from a Meta Model API account, separate from the muse CLI OAuth login.",
+   "value": "",
+   "unit": "",
    "as_of": "",
-   "quote": "export ANTHROPIC_BASE_URL=\"https://api.meta.ai\"",
-   "topic": "other"
+   "quote": "Get `MODEL_API_KEY` from your Meta Model API account, not from the `muse` CLI’s own OAuth login",
+   "topic": "rules"
   },
   {
-   "fact": "Claude Code's Opus, Sonnet, Haiku, and subagent model variables are set to muse-spark-1.3-contributor in the setup guide.",
-   "value": "muse-spark-1.3-contributor",
-   "unit": "model ID",
+   "fact": "Using the [1m] suffix on a custom model ID is described as an unsupported workaround documented only for known Anthropic model names.",
+   "value": "",
+   "unit": "",
    "as_of": "",
-   "quote": "export CLAUDE_CODE_SUBAGENT_MODEL=\"muse-spark-1.3-contributor\"",
-   "topic": "other"
+   "quote": "Officially, this suffix is documented only for known Anthropic model names, using it against a custom model ID is a workaround, not a supported path",
+   "topic": "rules"
   },
   {
-   "fact": "With an unrecognized model ID such as muse-spark-1.3-contributor, Claude Code silently defaults the auto-compact window to 1 token.",
-   "value": "1",
-   "unit": "token",
+   "fact": "The page advises removing \"-contributor\" from every model ID listed above when working with anything the user would not want Meta to train on.",
+   "value": "",
+   "unit": "",
    "as_of": "",
-   "quote": "silently defaults the **auto-compact window to 1 token**.",
-   "topic": "other"
-  },
-  {
-   "fact": "The article is dated September 14, 2026.",
-   "value": "September 14, 2026",
-   "unit": "date",
-   "as_of": "September 14, 2026",
-   "quote": "Sep 14, 2026",
-   "topic": "other"
+   "quote": "Swap_`-contributor`_out of every model ID above if you’re working with anything you wouldn’t want Meta training on; the pricing difference is real, but so is what you’re trading for it.",
+   "topic": "rules"
   }
  ]
 }

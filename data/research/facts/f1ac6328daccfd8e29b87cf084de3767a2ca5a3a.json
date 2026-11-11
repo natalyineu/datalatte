@@ -1,159 +1,250 @@
 {
  "url": "https://vercel.com/pricing",
  "title": "Vercel Pricing: Hobby, Pro, and Enterprise plans",
- "hash": "26fcbe84173f15d05374cb982879cc56c23335d4",
- "fetchedAt": "2026-11-06",
+ "hash": "28b42b5e68e8e12ae1037848ee7fe7023a46abb7",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 5484,
+ "chunks": 1,
  "facts": [
   {
-   "fact": "Vercel's Hobby plan costs $0 per month.",
-   "value": "0",
-   "unit": "USD per month",
+   "fact": "Vercel's Pro/Enterprise pricing page lists 1M ISR Reads included per month.",
+   "value": "1M",
+   "unit": "per month",
    "as_of": "",
-   "quote": "Hobby\n\n$0/mo.\n\nThe perfect starting place for your web app or personal project.",
+   "quote": "ISR Reads\n\n1M / month included",
    "topic": "pricing"
   },
   {
-   "fact": "Vercel's Pro plan is listed at $20 per month.",
-   "value": "20",
-   "unit": "USD per month",
+   "fact": "Vercel's pricing page lists 200k ISR Writes included per month.",
+   "value": "200k",
+   "unit": "per month",
    "as_of": "",
-   "quote": "Pro\n\nPopular\n\n$20/mo.\n\nEverything you need to build and scale your app.",
+   "quote": "ISR Writes\n\n200k / month included",
    "topic": "pricing"
   },
   {
-   "fact": "Vercel's Pro plan includes $20 of usage credit.",
-   "value": "20",
-   "unit": "USD",
+   "fact": "Vercel's pricing page lists 1 GB of Blob Storage Size included per month.",
+   "value": "1",
+   "unit": "GB per month",
    "as_of": "",
-   "quote": "$20 of included usage credit",
+   "quote": "Blob Storage Size\n\n1 GB / month included",
    "topic": "pricing"
   },
   {
-   "fact": "Vercel's Enterprise plan is priced on a custom basis rather than a listed rate.",
-   "value": "Custom",
-   "unit": "",
+   "fact": "Vercel's pricing page lists 10K Blob Simple Operations included per month.",
+   "value": "10K",
+   "unit": "per month",
    "as_of": "",
-   "quote": "Enterprise\n\nCustom\n\nCritical security, performance, observability, platform SLAs, and support.",
+   "quote": "Blob Simple Operations\n\n10K / month included",
    "topic": "pricing"
   },
   {
-   "fact": "Vercel's Enterprise plan includes a 99.99% SLA.",
-   "value": "99.99",
-   "unit": "% SLA",
+   "fact": "Vercel's pricing page lists 2K Blob Advanced Operations included per month.",
+   "value": "2K",
+   "unit": "per month",
    "as_of": "",
-   "quote": "99.99% SLA",
+   "quote": "Blob Advanced Operations\n\n2K / month included",
    "topic": "pricing"
   },
   {
-   "fact": "Vercel's Pro plan includes free viewer seats for team collaboration.",
-   "value": "",
-   "unit": "",
+   "fact": "Vercel's pricing page lists 10 GB of Blob Data Transfer included per month.",
+   "value": "10",
+   "unit": "GB per month",
    "as_of": "",
-   "quote": "Team collaboration & free viewer seats",
+   "quote": "Blob Data Transfer\n\n10 GB / month included",
    "topic": "pricing"
   },
   {
-   "fact": "Vercel's Pro plan includes 2 microfrontends projects, and each additional project costs $250.",
-   "value": "250",
-   "unit": "USD per additional project",
+   "fact": "Vercel's pricing page lists 5K Image Optimization Transformations included per month.",
+   "value": "5K",
+   "unit": "per month",
    "as_of": "",
-   "quote": "2 included projects\n\n2 included projects\n\nthen $250 per additional project",
+   "quote": "Image Optimization Transformation\n\n5K / month included",
    "topic": "pricing"
   },
   {
-   "fact": "Vercel states that all listed prices are in USD and exclude VAT, GST, and other applicable taxes, which are added to the invoice where required by law.",
-   "value": "",
-   "unit": "",
+   "fact": "Vercel's pricing page lists 300K Image Optimization Cache Reads included per month.",
+   "value": "300K",
+   "unit": "per month",
    "as_of": "",
-   "quote": "All prices shown are in USD and exclude value-added tax (VAT), goods and services tax (GST), and other applicable taxes.",
+   "quote": "Image Optimization Cache Reads\n\n300K / month included",
    "topic": "pricing"
   },
   {
-   "fact": "Vercel's Firewall Rate Limit starts at $0.50 per 1M allowed requests after 1M included requests per month.",
-   "value": "0.50",
-   "unit": "USD per 1M allowed requests",
+   "fact": "Vercel's pricing page lists 100K Global Config Reads included per month.",
+   "value": "100K",
+   "unit": "per month",
    "as_of": "",
-   "quote": "1M allowed requests / month included\n\nStarting at $0.50 per 1M allowed requests",
+   "quote": "Global Config Reads\n\n100K / month included",
    "topic": "pricing"
   },
   {
-   "fact": "Vercel's Blob Storage Size is priced at $0.023 per GB after 1 GB per month is included.",
-   "value": "0.023",
-   "unit": "USD per GB",
+   "fact": "Vercel's pricing page lists 100 Global Config Writes included per month.",
+   "value": "100",
+   "unit": "writes per month",
    "as_of": "",
-   "quote": "Blob Storage Size\n\n1 GB / month included\n\n$0.023 per GB",
+   "quote": "Global Config Writes\n\n100 writes / month included",
    "topic": "pricing"
   },
   {
-   "fact": "Vercel's ISR Reads start at $0.40 per 1M after 1M reads per month are included.",
-   "value": "0.40",
-   "unit": "USD per 1M",
+   "fact": "Vercel's pricing page lists 2 included projects for Microfrontends.",
+   "value": "2",
+   "unit": "projects",
    "as_of": "",
-   "quote": "ISR Reads\n\n1M / month included\n\nStarting at $0.40 per 1M",
+   "quote": "Microfrontends\n\n2 included projects",
    "topic": "pricing"
   },
   {
-   "fact": "Vercel's Bulk Redirects cost $50 per month per 25K redirects, with 1K included per project.",
-   "value": "50",
-   "unit": "USD per month per 25K redirects",
+   "fact": "Vercel's pricing page lists 50K routed requests per month included for Microfrontends Routing.",
+   "value": "50K",
+   "unit": "routed requests per month",
    "as_of": "",
-   "quote": "Bulk Redirects\n\n1K included per project\n\n$50 / month per 25K redirects",
+   "quote": "Microfrontends Routing\n\n50K routed requests / month included",
    "topic": "pricing"
   },
   {
-   "fact": "Vercel Functions Fluid Active CPU includes 4 hours per month and starts at $0.128 per hour beyond that.",
-   "value": "0.128",
-   "unit": "USD per hour",
+   "fact": "Vercel's pricing page lists 4 hours per month of Fluid Active CPU included for Vercel Functions.",
+   "value": "4",
+   "unit": "hours per month",
    "as_of": "",
-   "quote": "Fluid Active CPU\n\n4 hours / month included\n\nStarting at $0.128 per hour",
+   "quote": "Fluid Active CPU\n\n4 hours / month included",
    "topic": "pricing"
   },
   {
-   "fact": "Vercel Functions Fluid Provisioned Memory includes 360 GB-hrs per month and starts at $0.0106 per GB-hr.",
-   "value": "0.0106",
-   "unit": "USD per GB-hr",
+   "fact": "Vercel's pricing page lists 360 GB-hrs per month of Fluid Provisioned Memory included.",
+   "value": "360",
+   "unit": "GB-hrs per month",
    "as_of": "",
-   "quote": "Fluid Provisioned Memory\n\n360 GB-hrs / month included\n\nStarting at $0.0106 per GB-hr",
+   "quote": "Fluid Provisioned Memory\n\n360 GB-hrs / month included",
    "topic": "pricing"
   },
   {
-   "fact": "Vercel Function Invocations include 1M per month and start at $0.60 per 1M beyond that.",
-   "value": "0.60",
-   "unit": "USD per 1M",
+   "fact": "Vercel's pricing page lists 1M function invocations included per month.",
+   "value": "1M",
+   "unit": "per month",
    "as_of": "",
-   "quote": "Function Invocations\n\n1M / month included\n\nStarting at $0.60 per 1M",
+   "quote": "Function Invocations\n\n1M / month included",
    "topic": "pricing"
   },
   {
-   "fact": "Vercel Image Optimization Transformations include 5K per month and start at $0.05 per 1K beyond that.",
-   "value": "0.05",
-   "unit": "USD per 1K",
+   "fact": "Vercel's pricing page lists 5 hours per month of Sandbox Active CPU included.",
+   "value": "5",
+   "unit": "hours per month",
    "as_of": "",
-   "quote": "Image Optimization Transformation\n\n5K / month included\n\nStarting at $0.05 per 1K",
+   "quote": "Sandbox Active CPU\n\n5 hours / month included",
    "topic": "pricing"
   },
   {
-   "fact": "Vercel Fast Origin Transfer includes 10 GB per month and starts at $0.06 per GB beyond that.",
-   "value": "0.06",
-   "unit": "USD per GB",
+   "fact": "Vercel's pricing page lists a limit of 10 concurrent Vercel Sandboxes.",
+   "value": "10",
+   "unit": "concurrent sandboxes",
    "as_of": "",
-   "quote": "10 GB / month included\n\nStarting at $0.06 per GB",
+   "quote": "Concurrent Sandboxes\n\n10",
+   "topic": "rules"
+  },
+  {
+   "fact": "Vercel's pricing page lists 15 GB of Vercel Drives storage included on a lifetime basis.",
+   "value": "15",
+   "unit": "GB (lifetime)",
+   "as_of": "",
+   "quote": "Drive Storage\n\n15 GB (lifetime) included",
    "topic": "pricing"
   },
   {
-   "fact": "Vercel's Spend Management lets users set a limit and receive alerts, with usage stopped before the budget is exceeded.",
-   "value": "",
-   "unit": "",
+   "fact": "Vercel's pricing page lists 50K Workflow events included per month.",
+   "value": "50K",
+   "unit": "events per month",
    "as_of": "",
-   "quote": "Set a limit, get alerts, and we'll stop usage before you go over budget.",
+   "quote": "Workflow Events\n\n50K events / month included",
    "topic": "pricing"
   },
   {
-   "fact": "Vercel's Fluid Compute is billed only for actual execution time rather than idle resources.",
-   "value": "",
-   "unit": "",
+   "fact": "Vercel's pricing page lists 1M Queues API operations included per month.",
+   "value": "1M",
+   "unit": "per month",
    "as_of": "",
-   "quote": "Only pay for actual execution time, not idle resources.",
+   "quote": "API Operations\n\n1M / month included",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Vercel's pricing page lists 500 AI Gateway token requests included per month.",
+   "value": "500",
+   "unit": "requests per month",
+   "as_of": "",
+   "quote": "Token Requests\n\n500 requests / month included",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Vercel's pricing page lists 200 CPU minutes per month included for Vercel CI.",
+   "value": "200",
+   "unit": "CPU minutes per month",
+   "as_of": "",
+   "quote": "Vercel CI\n\nBeta\n\n200 CPU minutes / month included",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Vercel's pricing page lists 10 GB of deployment storage included.",
+   "value": "10",
+   "unit": "GB",
+   "as_of": "",
+   "quote": "Deployment Storage\n\n10 GB included",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Vercel's pricing page lists 150 Flags Explorer overrides included per month.",
+   "value": "150",
+   "unit": "overrides per month",
+   "as_of": "",
+   "quote": "Flags Explorer - Unlimited Overrides\n\n150 overrides / month included",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Vercel's pricing page lists 10K Flag Requests included per month.",
+   "value": "10K",
+   "unit": "requests per month",
+   "as_of": "",
+   "quote": "Flag Requests\n\n10K requests / month included",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Vercel's pricing page lists 10K free Observability events per team per rolling 30 days.",
+   "value": "10K",
+   "unit": "events per team per rolling 30 days",
+   "as_of": "",
+   "quote": "Free\n\n10K events / team / rolling 30 days",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Vercel's pricing page lists 1M allowed requests per month included for Firewall Rate Limit.",
+   "value": "1M",
+   "unit": "allowed requests per month",
+   "as_of": "",
+   "quote": "Firewall Rate Limit Requests\n\n1M allowed requests / month included",
+   "topic": "rules"
+  },
+  {
+   "fact": "Vercel's pricing page lists up to 3 custom firewall rules.",
+   "value": "3",
+   "unit": "rules",
+   "as_of": "",
+   "quote": "Custom Firewall Rules\n\nUp to 3",
+   "topic": "rules"
+  },
+  {
+   "fact": "Vercel's pricing page lists up to 10 IP blocking rules.",
+   "value": "10",
+   "unit": "rules",
+   "as_of": "",
+   "quote": "IP Blocking\n\nUp to 10",
+   "topic": "rules"
+  },
+  {
+   "fact": "Vercel's pricing page lists 1 included developer seat.",
+   "value": "1",
+   "unit": "seat",
+   "as_of": "",
+   "quote": "Developer seat\n\n1",
    "topic": "pricing"
   }
  ]

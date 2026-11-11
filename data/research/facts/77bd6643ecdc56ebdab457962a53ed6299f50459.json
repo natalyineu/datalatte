@@ -1,35 +1,14 @@
 {
  "url": "https://dmly.io/google-business-profile-automation-guide/",
  "title": "Google Business Profile Automation: Complete Guide for 2026",
- "hash": "33c66984afb3744134387b06a909ecd5ac6cebc1",
- "fetchedAt": "2026-11-09",
+ "hash": "8dd6af24eb83793b2d887016fff9fdb2f3766011",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 30148,
+ "chunks": 4,
  "facts": [
   {
-   "fact": "The vendor states it will set up the customer's Google Business Profile automation at no extra cost.",
-   "value": "0",
-   "unit": "USD",
-   "as_of": "",
-   "quote": "We’ll set it up for you at no extra cost.",
-   "topic": "pricing"
-  },
-  {
-   "fact": "The guide is dated August 13, 2026 and is written by Dammy.",
-   "value": "August 13, 2026",
-   "unit": "date",
-   "as_of": "2026-08-13",
-   "quote": "Aug 13, 2026 · 21 min read",
-   "topic": "other"
-  },
-  {
-   "fact": "The page states the guide takes 21 minutes to read.",
-   "value": "21",
-   "unit": "minutes",
-   "as_of": "2026-08-13",
-   "quote": "Aug 13, 2026 · 21 min read",
-   "topic": "other"
-  },
-  {
-   "fact": "A connected Google Business Profile exposes five tabs: Performance, Reviews, Request reviews, Posts and Business info.",
+   "fact": "The guide states that a connected Google Business Profile gives five tabs: Performance, Reviews, Request reviews, Posts and Business info.",
    "value": "5",
    "unit": "tabs",
    "as_of": "",
@@ -37,23 +16,15 @@
    "topic": "definition"
   },
   {
-   "fact": "Every Reputation tab shows sample data (made-up reviews, names and numbers) before a Google Business Profile is connected.",
+   "fact": "According to the guide, every Reputation tab shows sample data (made-up reviews, names and numbers) until a Google Business Profile is connected.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Every Reputation tab works before a profile is attached, and what it shows is sample data: made-up reviews, made-up names, made-up numbers",
+   "quote": "Every Reputation tab works before a profile is attached, and what it shows is **sample data**: made-up reviews, made-up names, made-up numbers, with a badge and a prompt saying so.",
    "topic": "rules"
   },
   {
-   "fact": "Questions and answers on a Google listing are not managed through the Google Business Profile tabs and cannot be automated from outside.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Questions and answers on your listing are not managed here.",
-   "topic": "rules"
-  },
-  {
-   "fact": "A Google Business Profile offers no messaging channel; a review is the only conversation Google provides, and the customer cannot reply to the business's reply.",
+   "fact": "The guide states that customers cannot reply to a business's reply to their Google review, so a review is the only conversation Google provides in this context.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -61,28 +32,212 @@
    "topic": "rules"
   },
   {
-   "fact": "Photos can only reach a Google listing by attaching them to a post (an update, an offer or an event), not through a photo manager.",
+   "fact": "The guide states that Google Business Profile questions and answers are not one of the five Reputation tabs and cannot be managed through the profile management tool.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "You can attach one to an update, an offer or an event.",
+   "quote": "The Q&A section that appears under a Google listing is not one of the five tabs, so answering a question a customer has posted is something you do on Google.",
    "topic": "rules"
   },
   {
-   "fact": "The vendor's Nigeria site shows prices in naira.",
-   "value": "naira",
-   "unit": "currency",
-   "as_of": "",
-   "quote": "See prices in naira on DMly Nigeria.",
-   "topic": "pricing"
+   "fact": "The guide was published on 13 August 2026.",
+   "value": "2026-08-13",
+   "unit": "date",
+   "as_of": "2026-08-13",
+   "quote": "Published Time: 2026-08-13T10:58:01+00:00",
+   "topic": "other"
   },
   {
-   "fact": "The vendor's South Africa site shows prices in rand.",
-   "value": "rand",
-   "unit": "currency",
+   "fact": "Review gating, meaning privately asking customers whether they are happy and sending only happy customers to Google, goes against Google's policies.",
+   "value": "",
+   "unit": "",
    "as_of": "",
-   "quote": "See DMly South Africa, with prices shown in rand.",
-   "topic": "pricing"
+   "quote": "Don’t create a system that asks customers privately if they’re happy and sends only the happy ones to Google. This practice is commonly called review gating, and it goes against Google’s policies.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Offering money, discounts, free services or other incentives in return for a Google review is advised against by the guide.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "You also shouldn’t offer money, discounts, free services, or other incentives in return for a Google review.",
+   "topic": "rules"
+  },
+  {
+   "fact": "In the guide's example workflow, a review request is sent 2 hours after an appointment is completed.",
+   "value": "2",
+   "unit": "hours",
+   "as_of": "",
+   "quote": "Appointment completed → wait 2 hours → send review request",
+   "topic": "other"
+  },
+  {
+   "fact": "In the guide's second example workflow, a review request is sent the following morning after a service is completed.",
+   "value": "following morning",
+   "unit": "",
+   "as_of": "",
+   "quote": "Service completed → wait until the following morning → send review request",
+   "topic": "other"
+  },
+  {
+   "fact": "Review requests can be sent by hand from the Request reviews tab or automatically from a flow after an appointment or payment, via WhatsApp, SMS or email as a tracked link.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Review requests go out as a tracked link on WhatsApp, SMS or email, by hand from the Request reviews tab or automatically from a flow after an appointment or a payment.",
+   "topic": "other"
+  },
+  {
+   "fact": "Four fields (phone, website, description and opening hours) can be edited outside Google and pushed to the Google Business Profile listing.",
+   "value": "4",
+   "unit": "fields",
+   "as_of": "",
+   "quote": "Four fields can be edited outside Google and pushed to your listing",
+   "topic": "rules"
+  },
+  {
+   "fact": "Business name, category and address are read-only outside Google and must be changed on Google itself.",
+   "value": "3",
+   "unit": "fields",
+   "as_of": "",
+   "quote": "your business name, your category and your address are read-only",
+   "topic": "rules"
+  },
+  {
+   "fact": "According to the vendor (DMly), special hours change eight or ten times a year, around bank holidays and similar events.",
+   "value": "8-10",
+   "unit": "times per year",
+   "as_of": "",
+   "quote": "Special hours change eight or ten times, around bank holidays",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "According to the vendor, Google has no scheduled posting feature of its own, so scheduled posts are held outside Google until published.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Google has no scheduled posting of its own",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google Business Profile posts cannot be edited once published; changing a post requires deleting it and publishing again.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "There is no edit.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Deleting a live Google Business Profile post removes it from the listing permanently.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "takes it off your listing for good",
+   "topic": "rules"
+  },
+  {
+   "fact": "An Offer post on Google Business Profile requires a title and a start and end date, and Google will not publish it without them.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "an Offer and an Event both need a title and a start and end date, and Google will not take them without",
+   "topic": "rules"
+  },
+  {
+   "fact": "A photo is recommended for both Offer and Event posts on Google Business Profile.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "A photo is recommended for both.",
+   "topic": "rules"
+  },
+  {
+   "fact": "An Update post on Google Business Profile needs only a message.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "An Update needs a message and nothing else.",
+   "topic": "rules"
+  },
+  {
+   "fact": "A Switch location control appears in Google Business Profile once more than one location is connected.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Each location connects as its own profile, and once more than one is connected",
+   "topic": "rules"
+  },
+  {
+   "fact": "The location selected with the Switch location control lasts for the user's session and resets when they sign out.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "That choice is yours alone and it lasts for your session.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Incentives such as discounts or freebies offered for reviews can breach Google's policies.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Discounts, freebies and other incentives for reviews can breach Google",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google allows businesses to ask customers for genuine reviews and provides a direct review link that businesses can share with customers.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Google allows businesses to ask customers for genuine reviews and provides a direct review link that you can share with them.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page states that businesses should not offer discounts, free products, or other incentives in exchange for reviews.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "businesses shouldn’t offer discounts, free products, or other incentives in exchange for reviews.",
+   "topic": "rules"
+  },
+  {
+   "fact": "DMly can send a customer a Google review request through WhatsApp or SMS after their appointment, and a delay can be added so the message arrives at a more appropriate time.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "DMly can send a customer a Google review request through WhatsApp or SMS after their appointment. You can also add a delay so the message arrives at a more appropriate time.",
+   "topic": "other"
+  },
+  {
+   "fact": "Google provides official APIs that approved platforms can use to manage supported Google Business Profile functions.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Google provides official APIs that approved platforms can use to manage supported Business Profile functions.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google supports the management of multiple business locations, and third-party management platforms can provide a central place to oversee them.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Google supports the management of multiple business locations, and third-party management platforms can provide a central place to oversee them.",
+   "topic": "rules"
+  },
+  {
+   "fact": "DMly does not draft Google review replies itself, and the page advises that a person should read every reply before it is sent, particularly for complaints and sensitive feedback.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "DMly doesn’t draft review replies itself, and a person should read every reply before it goes out, particularly for complaints and sensitive feedback.",
+   "topic": "other"
+  },
+  {
+   "fact": "The page advises avoiding tools that promise questionable shortcuts, fake reviews, or ways to manipulate ratings.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Avoid tools that promise questionable shortcuts, fake reviews or ways to manipulate ratings.",
+   "topic": "rules"
   }
  ]
 }

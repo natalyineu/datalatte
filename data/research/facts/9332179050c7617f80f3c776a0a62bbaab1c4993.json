@@ -1,43 +1,38 @@
 {
  "url": "https://developers.google.com/google-ads/api/docs/campaigns/local-service-campaigns",
  "title": "Local Services campaigns  |  Google Ads API  |  Google for Developers",
- "hash": "c59e8ae52f2fb4d66031a409f753120037187647",
- "fetchedAt": "2026-11-09",
+ "hash": "831c98e3192529edb53f9b836f9e08c18df11188",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 25531,
+ "chunks": 3,
  "facts": [
   {
-   "fact": "Starting in API version v24, existing Local Services Performance Max campaigns created in the UI by allowlisted accounts can be retrieved and updated through the Google Ads API.",
-   "value": "v24",
-   "unit": "API version",
-   "as_of": "v24",
-   "quote": "Starting in **`v24`**, you can retrieve and update existing Local Services Performance Max campaigns",
+   "fact": "The Google Ads API blocks creating and removing standalone Local Services campaigns (advertising_channel_type = 'LOCAL_SERVICES').",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "The Google Ads API blocks the creation and removal of standalone Local Services campaigns (`advertising_channel_type = 'LOCAL_SERVICES'`).",
    "topic": "rules"
   },
   {
-   "fact": "Starting in API version v26, new Local Services Performance Max campaigns can be created through the Google Ads API.",
+   "fact": "Starting in v26, Local Services Performance Max campaigns can be created through the Google Ads API by setting pmax_campaign_settings.local_services_enabled to true.",
    "value": "v26",
-   "unit": "API version",
+   "unit": "",
    "as_of": "v26",
-   "quote": "Starting in **`v26`**, you can also [create new Local Services Performance Max campaigns]",
+   "quote": "Starting in **`v26`**, you can create new Local Services Performance Max campaigns",
    "topic": "rules"
   },
   {
-   "fact": "The Google Ads API does not support creating or removing Local Services campaigns, or operations on their ad groups, ads, or criteria.",
+   "fact": "For standalone Local Services campaigns, the Google Ads API does not support creating, modifying, removing, or retrieving ad groups, ads, or criteria other than the listed campaign criteria.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Creating and removing Local Services campaigns, as well as operations on sub-entities like ad groups, ads, or criteria within these campaigns, are not supported by the Google Ads API.",
+   "quote": "the Google Ads API does not support the creation, modification, removal, or retrieval of ad groups, ads, or criteria other than the campaign criteria",
    "topic": "rules"
   },
   {
-   "fact": "For Local Services campaigns, the API allows updating the campaign's status and the associated campaign budget's amount_micros field.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "and the associated campaign budget's [`amount_micros`]",
-   "topic": "rules"
-  },
-  {
-   "fact": "ManualCpa and MaximizeConversions are the bidding strategies the API lets you set as the standard bidding strategy of Local Services campaigns.",
+   "fact": "ManualCpa and MaximizeConversions are the bidding strategies that can be set as the standard bidding strategy of Local Services campaigns through the Google Ads API.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -45,20 +40,228 @@
    "topic": "rules"
   },
   {
-   "fact": "Local Services campaigns are retrieved by querying Campaign resources where advertising_channel_type is 'LOCAL_SERVICES'.",
-   "value": "LOCAL_SERVICES",
-   "unit": "enum value",
+   "fact": "For Local Services campaigns, the status of the campaign and the amount_micros of its associated campaign budget can be updated through the Google Ads API.",
+   "value": "",
+   "unit": "",
    "as_of": "",
-   "quote": "where `advertising_channel_type = 'LOCAL_SERVICES'`",
-   "topic": "definition"
+   "quote": "You can update the campaign's",
+   "topic": "rules"
   },
   {
-   "fact": "Lead feedback and ratings for Local Services leads can be submitted using the ProvideLeadFeedback() method.",
+   "fact": "Lead feedback and ratings can be submitted for Local Services leads using the ProvideLeadFeedback method.",
    "value": "",
    "unit": "",
    "as_of": "",
    "quote": "You can submit feedback and rating for leads using the `ProvideLeadFeedback()` method",
    "topic": "other"
+  },
+  {
+   "fact": "Local Services Ads data is exposed in the Google Ads API through four read-only report resources: local_services_lead, local_services_lead_conversation, local_services_verification_artifact, and local_services_employee.",
+   "value": "4",
+   "unit": "resources",
+   "as_of": "",
+   "quote": "through the following **read-only** report resources:",
+   "topic": "definition"
+  },
+  {
+   "fact": "Service-type targeting for Local Services campaigns uses a LocalServiceIdInfo set on a CampaignCriterion, and the service ID should match the campaign's targeting location and category.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "You should use a service ID that matches your campaign's targeting",
+   "topic": "rules"
+  },
+  {
+   "fact": "Local Services campaigns can be retrieved by querying Campaign resources where advertising_channel_type is 'LOCAL_SERVICES' using GoogleAdsService Search or SearchStream.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "where `advertising_channel_type = 'LOCAL_SERVICES'`",
+   "topic": "other"
+  },
+  {
+   "fact": "Starting in API version v26, COUPON is supported as a lead type across Local Services and Local Services Performance Max campaigns.",
+   "value": "v26",
+   "unit": "API version",
+   "as_of": "v26",
+   "quote": "Starting in **`v26`**, `COUPON` is supported to enable coupon lead types across Local Services and Local Services Performance Max campaigns.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Starting in API version v25, ContactDetails.email was removed, and ContactDetails.phone_number_extension became available on the ContactDetails message.",
+   "value": "v25",
+   "unit": "API version",
+   "as_of": "v25",
+   "quote": "Starting in **`v25`**, `ContactDetails.email` is removed and",
+   "topic": "rules"
+  },
+  {
+   "fact": "The contact_details field of a Local Services lead is null when lead_status equals WIPED_OUT.",
+   "value": "WIPED_OUT",
+   "unit": "",
+   "as_of": "",
+   "quote": "The `contact_details` field is null if `lead_status` equals `WIPED_OUT`.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Lead data from leads whose category_id is part of a healthcare category is not available through this API.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Data from leads where the `category_id` is part of a healthcare category are not available.",
+   "topic": "rules"
+  },
+  {
+   "fact": "To access the call recording URL for a lead conversation, the signed-in email must have at least read-only access to the Google Ads client account that owns the associated campaign.",
+   "value": "read-only",
+   "unit": "access level",
+   "as_of": "",
+   "quote": "To access the call recording URL, you must sign in with an email address that has at least read-only access to the Google Ads client account that owns the campaign that the lead is associated with.",
+   "topic": "rules"
+  },
+  {
+   "fact": "A Local Services campaign or Local Services Performance Max campaign must exist in the client account making the request for these resources to return data.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "there must be a Local Services campaign or Local Services Performance Max campaign in the client account making the request.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Pay-per-lead Performance Max campaigns are linked to leads when advertising_channel_type is PERFORMANCE_MAX and pmax_campaign_settings.local_services_enabled is true.",
+   "value": "true",
+   "unit": "",
+   "as_of": "",
+   "quote": "`campaign.advertising_channel_type = 'PERFORMANCE_MAX'` and `campaign.pmax_campaign_settings.local_services_enabled = true`",
+   "topic": "definition"
+  },
+  {
+   "fact": "A Local Services lead is one generated when a consumer calls, messages, books a service, or uses a coupon from the advertiser.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "exposes the details of a lead that are generated when a consumer calls, messages, books a service, or uses a coupon from the advertiser.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Each Local Services lead can have many conversations, so the lead-to-conversation relationship is one-to-many.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "There is a one-to-many relationship with `LocalServicesLead`, where one lead can have many conversations.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Requesting all lead conversations at once can be time-consuming, so the documentation recommends filtering conversations by lead.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Requesting all conversations at once can be a time-consuming request, so you should filter conversations by lead",
+   "topic": "rules"
+  },
+  {
+   "fact": "Verification artifacts are recorded at the business level and do not include verifications for employees.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "these verifications are at the business level and don't include verifications for employees.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Each verification artifact represents a single verification request, and a new artifact is created each time a verification request is submitted to Local Services Ads.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "a new verification artifact instance is created for it in the Google Ads API, and each verification artifact represents a single verification request.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The verification artifact data covers four verification types: license, insurance, background check, and business registration.",
+   "value": "4",
+   "unit": "verification types",
+   "as_of": "",
+   "quote": "License verifications",
+   "topic": "definition"
+  },
+  {
+   "fact": "The LocalServicesLeadService.AppendLeadConversation method can append LocalServicesLeadConversation resources to a LocalServicesLead.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "You can use the [`LocalServicesLeadService.AppendLeadConversation`](https://developers.google.com/google-ads/api/reference/rpc/v26/LocalServicesLeadService/AppendLeadConversation) method to append",
+   "topic": "other"
+  },
+  {
+   "fact": "Performance Max campaigns support Local Services-related settings starting in API version v24.",
+   "value": "v24",
+   "unit": "API version",
+   "as_of": "v24",
+   "quote": "support Local Services-related settings starting in `v24`.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Starting in v26, the Google Ads API supports both creating and updating Local Services Performance Max campaigns.",
+   "value": "v26",
+   "unit": "API version",
+   "as_of": "v26",
+   "quote": "Starting in **`v26`**, the Google Ads API supports both creating and updating Local Services Performance Max campaigns.",
+   "topic": "rules"
+  },
+  {
+   "fact": "In API versions v24 and v25, the Google Ads API supports updates only for existing Local Services Performance Max campaigns created in the UI by accounts on the allowlist.",
+   "value": "updates only",
+   "unit": "",
+   "as_of": "v24 and v25",
+   "quote": "In `v24` and `v25`, the API supports **updates only** for existing Local Services Performance Max campaigns created in the UI by accounts on the allowlist.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The local_services_enabled field on pmax_campaign_settings is an immutable CREATE ONLY boolean set to true at campaign creation.",
+   "value": "true",
+   "unit": "boolean",
+   "as_of": "",
+   "quote": "This field is an immutable (`CREATE ONLY`) boolean set to `true` at campaign creation.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Starting in v26, country_code is required and immutable for Local Services Performance Max campaigns, and only US is currently supported.",
+   "value": "US",
+   "unit": "country code",
+   "as_of": "v26",
+   "quote": "(currently, only `US` is supported for Local Services Performance Max campaigns)",
+   "topic": "rules"
+  },
+  {
+   "fact": "Starting in v26, listing_id is required and immutable during Local Services Performance Max campaign creation, and the listing must be linked to the account as an enabled LOCATION asset.",
+   "value": "required and immutable",
+   "unit": "",
+   "as_of": "v26",
+   "quote": "The listing ID must be linked to the account as an enabled `LOCATION` asset; otherwise, the API returns a",
+   "topic": "rules"
+  },
+  {
+   "fact": "If phone_numbers is omitted for a Local Services campaign, the call number defaults to the phone number on the linked Google Business Profile listing, and phone_numbers is required if that listing has no phone number.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "If omitted, the call number defaults to the phone number on the linked Google Business Profile listing, and is required if the Business Profile listing does not have a phone number.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The DESTINATION_PHONE_NUMBER_FOR_ADS phone number type is the destination number for calls from a Local Services ad unit and is the default for call leads.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "`DESTINATION_PHONE_NUMBER_FOR_ADS`: Destination number to use for calls from a Local Services ad unit (for call leads, default).",
+   "topic": "definition"
+  },
+  {
+   "fact": "The DESTINATION_PHONE_NUMBER_FOR_SMS_ONLY phone number type is an optional destination number that supports SMS, used for message lead SMS notifications.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "`DESTINATION_PHONE_NUMBER_FOR_SMS_ONLY`: Destination number that supports SMS (optional, for message lead SMS notifications).",
+   "topic": "definition"
   }
  ]
 }

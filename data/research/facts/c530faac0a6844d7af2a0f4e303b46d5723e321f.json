@@ -1,59 +1,46 @@
 {
  "url": "https://www.seaflux.tech/blogs/bolt-new-ai-full-stack-apps/",
  "title": "Bolt.new Review 2026: Features, Pricing, Limits & Alternatives",
- "hash": "b0abde322f791ab15c9406021d672604b9da91ae",
- "fetchedAt": "2026-11-06",
+ "hash": "de05849b58fc0dc270ab947772d2a60246cd1579",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 9567,
+ "chunks": 2,
  "facts": [
   {
-   "fact": "The page states that Bolt.new is free to start, with paid plans starting at $25 per month.",
-   "value": "25",
-   "unit": "$ per month",
+   "fact": "Bolt.new's Free plan costs $0 and includes 1M tokens per month with a 300K tokens-per-day limit, according to the vendor pricing table as listed at the time of writing.",
+   "value": "$0; 1M tokens per month; 300K tokens per day",
+   "unit": "USD; tokens per month; tokens per day",
    "as_of": "2026",
-   "quote": "free to start, with paid plans from $25 per month",
+   "quote": "| Free | $0 | 1M per month, 300K per day | Bolt branding, 10 MB uploads, limited hosting |",
    "topic": "pricing"
   },
   {
-   "fact": "According to the page's pricing table, Bolt.new's Free plan costs $0.",
-   "value": "0",
-   "unit": "$",
+   "fact": "Bolt.new's Pro plan starts at $25 per month and includes 10M tokens per month with no daily cap, according to the pricing table listed at the time of writing.",
+   "value": "25; 10M tokens per month",
+   "unit": "USD per month; tokens per month",
    "as_of": "2026",
-   "quote": "| Free | $0  | 1M per month, 300K per day |",
+   "quote": "| Pro | From $25 per month | From 10M per month, no daily cap | Custom domains, no Bolt branding, larger uploads, token rollover |",
    "topic": "pricing"
   },
   {
-   "fact": "According to the page's pricing table, the Pro plan starts at $25 per month.",
-   "value": "25",
-   "unit": "$ per month",
-   "as_of": "2026",
-   "quote": "Pro | From $25 per month | From 10M per month, no daily cap",
-   "topic": "pricing"
-  },
-  {
-   "fact": "According to the page's pricing table, the Teams plan costs $30 per member per month, with tokens counted per member rather than pooled.",
+   "fact": "Bolt.new's Teams plan costs $30 per member per month, and tokens are allocated per member rather than pooled.",
    "value": "30",
-   "unit": "$ per member per month",
+   "unit": "USD per member per month",
    "as_of": "2026",
-   "quote": "Teams | $30 per member per month | Per member, not pooled",
+   "quote": "| Teams | $30 per member per month | Per member, not pooled | Centralized billing and admin controls |",
    "topic": "pricing"
   },
   {
-   "fact": "According to the page, the Free plan includes 1M tokens per month and 300K tokens per day.",
-   "value": "1M per month, 300K per day",
-   "unit": "tokens",
+   "fact": "Bolt.new's Enterprise plan is priced on a custom basis, with custom token allowances and a contact-sales process.",
+   "value": "Custom",
+   "unit": "",
    "as_of": "2026",
-   "quote": "1M per month, 300K per day",
+   "quote": "| Enterprise | Custom | Custom | Contact Bolt |",
    "topic": "pricing"
   },
   {
-   "fact": "According to the page, the Pro plan includes from 10M tokens per month with no daily cap.",
-   "value": "10M",
-   "unit": "tokens per month",
-   "as_of": "2026",
-   "quote": "From 10M per month, no daily cap",
-   "topic": "pricing"
-  },
-  {
-   "fact": "According to the page, the Free plan allows uploads of up to 10 MB and includes Bolt branding.",
+   "fact": "Bolt.new's Free plan limits uploads to 10 MB.",
    "value": "10",
    "unit": "MB",
    "as_of": "2026",
@@ -61,23 +48,15 @@
    "topic": "rules"
   },
   {
-   "fact": "According to the page, the Pro plan includes custom domains, removes Bolt branding, allows larger uploads, and offers token rollover.",
+   "fact": "Bolt.new does not publish how many tokens a typical prompt uses, so costs are hard to forecast for large apps or long sessions.",
    "value": "",
    "unit": "",
-   "as_of": "2026",
-   "quote": "Custom domains, no Bolt branding, larger uploads, token rollover",
-   "topic": "rules"
-  },
-  {
-   "fact": "According to the page, the Enterprise plan is priced and tokenized on a custom basis, with the vendor contact required.",
-   "value": "Custom",
-   "unit": "",
-   "as_of": "2026",
-   "quote": "Enterprise | Custom | Custom | Contact Bolt",
+   "as_of": "",
+   "quote": "Because Bolt does not publish how many tokens a typical prompt uses, costs are hard to forecast for large apps or long sessions.",
    "topic": "pricing"
   },
   {
-   "fact": "The page states that Bolt.new charges by tokens consumed as the AI reads and writes code, not by seats or prompts.",
+   "fact": "Bolt.new charges by tokens consumed as the AI reads and writes code, not by seats or prompts.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -85,52 +64,36 @@
    "topic": "pricing"
   },
   {
-   "fact": "The page states that Bolt does not publish how many tokens a typical prompt uses.",
+   "fact": "Bolt.new is a chat-driven, browser-native development tool from StackBlitz powered by WebContainers that generates full-stack web apps from natural-language prompts.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Bolt does not publish how many tokens a typical prompt uses",
-   "topic": "pricing"
+   "quote": "Bolt.new AI (also known as Bolt AI) is a chat-driven, browser-native development tool powered by StackBlitz’s WebContainers.",
+   "topic": "definition"
   },
   {
-   "fact": "The page states that higher Pro tiers with larger token allowances also exist, without giving their prices.",
+   "fact": "Bolt.new can target iOS and Android mobile apps through Expo (React Native) from one codebase, with previews in Expo Go.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Bolt uses Expo (React Native) to target iOS and Android from one codebase. You preview with Expo Go",
+   "topic": "definition"
+  },
+  {
+   "fact": "The article says a first working Bolt.new prototype typically takes minutes to produce, though refining it takes longer.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "a first working prototype typically takes minutes, though refining it takes longer.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Higher Pro tiers with larger token allowances exist beyond the listed Pro plan.",
    "value": "",
    "unit": "",
    "as_of": "2026",
    "quote": "Higher Pro tiers with larger token allowances also exist.",
    "topic": "pricing"
-  },
-  {
-   "fact": "According to the page, Bolt.new is built on StackBlitz's WebContainers and runs in the browser with no local setup.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Bolt.new is an AI-powered, browser-based app builder from StackBlitz.",
-   "topic": "definition"
-  },
-  {
-   "fact": "The page states that Bolt.new can target iOS and Android mobile apps through Expo (React Native).",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Bolt uses Expo (React Native) to target iOS and Android from one codebase.",
-   "topic": "definition"
-  },
-  {
-   "fact": "The page states that a first working prototype typically takes minutes in Bolt.new, though refining it takes longer.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "a first working prototype typically takes minutes, though refining it takes longer",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "The page lists React, Vue, Next.js, Astro, Svelte, and Remix among the frameworks Bolt.new works with.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Works with popular frameworks such as React, Vue, Next.js, Astro, Svelte, and Remix",
-   "topic": "definition"
   }
  ]
 }

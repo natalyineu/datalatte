@@ -1,103 +1,58 @@
 {
  "url": "https://www.aiwerse.blog/ai-tools/muse-code-meta-s-new-terminal-coding-agent-explained",
  "title": "Muse Code: Meta's New Terminal Coding Agent, Explained",
- "hash": "9205eb2ceacba050baf8ce0d50bfde81c77dc02f",
- "fetchedAt": "2026-11-06",
+ "hash": "02dc014c07a6370cca56b36c0a86842ecd0f1a80",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 11990,
+ "chunks": 2,
  "facts": [
   {
-   "fact": "Meta released Muse Code in beta on August 5, 2026, as a terminal-based coding agent.",
+   "fact": "Meta released Muse Code, its first terminal-based coding agent, in beta on August 5, 2026, for macOS or Linux.",
    "value": "2026-08-05",
    "unit": "date",
    "as_of": "2026-08-05",
-   "quote": "released in beta on _August 5, 2026_",
+   "quote": "Muse Code is Meta's first terminal-based coding agent, released in beta on _August 5, 2026_.",
    "topic": "definition"
   },
   {
-   "fact": "Muse Code installs with a single command on macOS or Linux.",
-   "value": "macOS or Linux",
+   "fact": "Muse Code is powered by Muse Spark 1.2, a coding-focused update to Meta's Muse Spark model family.",
+   "value": "Muse Spark 1.2",
    "unit": "",
    "as_of": "",
-   "quote": "It installs with a single command on macOS or Linux",
+   "quote": "It's powered by **Muse Spark 1.2**, a coding-focused update to Meta's Muse Spark model family",
    "topic": "definition"
   },
   {
-   "fact": "Muse Code's Standard tier is listed at $1.25 per 1M input tokens.",
+   "fact": "Meta's Standard tier for Muse Code charges $1.25 per 1M input tokens, and Meta states it does not train on users' prompts or completions under this tier.",
    "value": "1.25",
-   "unit": "USD per 1M tokens",
-   "as_of": "",
-   "quote": "Standard Tier ($1.25/$4.25 per M tokens): Keeps your data private.",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Muse Code's Standard tier is listed at $4.25 per 1M output tokens.",
-   "value": "4.25",
-   "unit": "USD per 1M tokens",
-   "as_of": "",
-   "quote": "Standard Tier ($1.25/$4.25 per M tokens): Keeps your data private.",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Muse Code's Standard tier is listed at $0.15 per 1M cached input tokens.",
-   "value": "0.15",
-   "unit": "USD per 1M tokens",
+   "unit": "USD per 1M input tokens",
    "as_of": "",
    "quote": "| **Standard** | $1.25 | $0.15 | $4.25 | Meta does **not** train on your prompts or completions |",
    "topic": "pricing"
   },
   {
-   "fact": "Meta states that the Standard tier does not train on users' prompts or completions.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Meta does **not** train on your prompts or completions",
-   "topic": "rules"
-  },
-  {
-   "fact": "Muse Code's Contributor tier is listed at $0.10 per 1M input tokens.",
+   "fact": "Meta's Contributor tier for Muse Code charges $0.10 per 1M input tokens, and Meta trains its models on prompts and completions under this tier.",
    "value": "0.10",
-   "unit": "USD per 1M tokens",
+   "unit": "USD per 1M input tokens",
    "as_of": "",
-   "quote": "Contributor Tier ($0.10/$0.20 per M tokens): Up to 21x cheaper, but Meta trains future models on your prompts and code.",
+   "quote": "| **Contributor** | $0.10 | $0.002 | $0.20 | Meta **trains its models** on your prompts and completions; capped at 60 requests per minute |",
    "topic": "pricing"
-  },
-  {
-   "fact": "Muse Code's Contributor tier is listed at $0.20 per 1M output tokens.",
-   "value": "0.20",
-   "unit": "USD per 1M tokens",
-   "as_of": "",
-   "quote": "Contributor Tier ($0.10/$0.20 per M tokens): Up to 21x cheaper, but Meta trains future models on your prompts and code.",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Muse Code's Contributor tier is listed at $0.002 per 1M cached input tokens.",
-   "value": "0.002",
-   "unit": "USD per 1M tokens",
-   "as_of": "",
-   "quote": "| **Contributor** | $0.10 | $0.002 | $0.20 |",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Under the Contributor tier, Meta trains its models on users' prompts and completions.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Meta **trains its models** on your prompts and completions; capped at 60 requests per minute",
-   "topic": "rules"
   },
   {
    "fact": "The Muse Code Contributor tier is capped at 60 requests per minute.",
    "value": "60",
    "unit": "requests per minute",
    "as_of": "",
-   "quote": "capped at 60 requests per minute",
+   "quote": "Meta **trains its models** on your prompts and completions; capped at 60 requests per minute",
    "topic": "rules"
   },
   {
-   "fact": "The page states that the Contributor tier is roughly 12.5x cheaper than Standard on input tokens.",
-   "value": "12.5",
-   "unit": "x (cheaper on input)",
+   "fact": "The article states the Contributor tier is roughly 12.5x cheaper than Standard on input and 21x cheaper on output for the same model.",
+   "value": "12.5x input; 21x output",
+   "unit": "multiplier",
    "as_of": "",
-   "quote": "The Contributor tier is roughly 12.5x cheaper on input and 21x cheaper on output than Standard",
+   "quote": "The Contributor tier is roughly 12.5x cheaper on input and 21x cheaper on output than Standard — for the identical model.",
    "topic": "pricing"
   },
   {
@@ -105,15 +60,7 @@
    "value": "82.9",
    "unit": "%",
    "as_of": "",
-   "quote": "scoring **82.9% on Terminal-Bench 2.1**",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "Meta reports that Muse Spark 1.2 scores 59.3% on DeepSWE 1.1 on its own evaluation harness.",
-   "value": "59.3",
-   "unit": "%",
-   "as_of": "",
-   "quote": "**59.3% on DeepSWE 1.1**",
+   "quote": "Meta reports Muse Spark 1.2 scoring **82.9% on Terminal-Bench 2.1** and **59.3% on DeepSWE 1.1**",
    "topic": "benchmark"
   },
   {
@@ -125,15 +72,15 @@
    "topic": "benchmark"
   },
   {
-   "fact": "Vals AI's independent testing measured Muse Spark 1.1 at 69.29 on Terminal-Bench 2.1 (third-party result).",
+   "fact": "Vals AI's independent testing measured Muse Spark 1.1 at 69.29 on Terminal-Bench 2.1 (third-party).",
    "value": "69.29",
    "unit": "score",
    "as_of": "",
-   "quote": "Vals AI's independent testing measured 69.29",
+   "quote": "Vals AI's independent testing measured 69.29 — a gap of more than 10 points.",
    "topic": "benchmark"
   },
   {
-   "fact": "The Terminal-Bench team's official verified leaderboard lists Muse Spark 1.1 at 76.2% (third-party result).",
+   "fact": "The Terminal-Bench team's official verified leaderboard lists Muse Spark 1.1 at 76.2% (third-party).",
    "value": "76.2",
    "unit": "%",
    "as_of": "",
@@ -141,7 +88,7 @@
    "topic": "benchmark"
   },
   {
-   "fact": "Artificial Analysis independently evaluated Muse Spark 1.2 at around 80% on Terminal-Bench 2.1, versus Meta's claimed 82.9% (third-party estimate).",
+   "fact": "Artificial Analysis independently puts Muse Spark 1.2 at around 80% on Terminal-Bench 2.1 (third-party), versus Meta's claimed 82.9%.",
    "value": "80",
    "unit": "%",
    "as_of": "",
@@ -149,7 +96,7 @@
    "topic": "benchmark"
   },
   {
-   "fact": "Vals AI's common-harness leaderboard ranks Muse Spark 1.2 14th (third-party ranking).",
+   "fact": "Vals AI's common-harness leaderboard ranks Muse Spark 1.2 14th (third-party), while Meta's chart places it 2nd.",
    "value": "14",
    "unit": "rank",
    "as_of": "",
@@ -157,11 +104,107 @@
    "topic": "benchmark"
   },
   {
-   "fact": "The highest independently verified Terminal-Bench 2.1 score reported on the page is 83.8%, posted by Claude Fable 5 running in Claude Code (third-party).",
+   "fact": "The highest independently verified Terminal-Bench 2.1 score reported is 83.8% for Claude Fable 5 running in Claude Code (third-party).",
    "value": "83.8",
    "unit": "%",
    "as_of": "",
    "quote": "the highest independently verified Terminal-Bench 2.1 score posted by any model so far belongs to Claude Fable 5 running in Claude Code, at 83.8%",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Muse Code supports macOS and Linux only at launch, with no confirmed Windows timeline.",
+   "value": "macOS and Linux only",
+   "unit": "",
+   "as_of": "",
+   "quote": "Muse Code supports macOS and Linux only at launch, with no confirmed Windows timeline",
+   "topic": "rules"
+  },
+  {
+   "fact": "Muse Code is not open source: its model weights are not released, and access runs through Meta's hosted API and Muse Code itself.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Not open source — weights aren't released, and access runs entirely through Meta's hosted API and Muse Code itself",
+   "topic": "definition"
+  },
+  {
+   "fact": "Muse Code has two paid tiers, Standard and Contributor.",
+   "value": "2",
+   "unit": "tiers",
+   "as_of": "",
+   "quote": "It has two paid tiers: Standard at $1.25/$4.25 per million input/output tokens with no data training, and Contributor at $0.10/$0.20 per million tokens",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The Muse Code Standard tier costs $1.25 per million input tokens and $4.25 per million output tokens, with no training on user data.",
+   "value": "1.25/4.25",
+   "unit": "USD per million tokens (input/output)",
+   "as_of": "",
+   "quote": "Standard at $1.25/$4.25 per million input/output tokens with no data training",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The Muse Code Contributor tier costs $0.10 per million input tokens and $0.20 per million output tokens, and Meta trains on users' prompts and completions in exchange.",
+   "value": "0.10/0.20",
+   "unit": "USD per million tokens (input/output)",
+   "as_of": "",
+   "quote": "Contributor at $0.10/$0.20 per million tokens where Meta trains on your prompts and completions.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page states the Contributor tier is roughly 12.5x cheaper than Standard on input and 21x cheaper on output.",
+   "value": "12.5 input / 21 output",
+   "unit": "x cheaper",
+   "as_of": "",
+   "quote": "roughly 12.5x cheaper on input and 21x cheaper on output than Standard",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The Muse Code Contributor tier is capped at 60 requests per minute.",
+   "value": "60",
+   "unit": "requests per minute",
+   "as_of": "",
+   "quote": "It's capped at 60 requests per minute.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Meta says the Muse Code Standard tier does not train on user data.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Use the Standard tier, which Meta says does not train on your data.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends reserving the Muse Code Contributor tier for open-source, personal, or explicitly non-sensitive work, not client code, NDAs, or regulated data.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "The Contributor tier should be reserved for open-source, personal, or explicitly non-sensitive work only",
+   "topic": "rules"
+  },
+  {
+   "fact": "Muse Code does not run on Windows at launch; it supports only macOS and Linux, installed via a single terminal command.",
+   "value": "macOS, Linux",
+   "unit": "supported operating systems",
+   "as_of": "",
+   "quote": "Not at launch. It currently supports macOS and Linux only, installed via a single terminal command.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Meta's own benchmarks place Muse Spark 1.2 close behind Claude Opus 5 (vendor claim).",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Meta's own benchmarks place Muse Spark 1.2 close behind Claude Opus 5",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Per the page, independent verification, including Vals AI's common-harness leaderboard, ranks Muse Spark 1.2 lower than Meta's launch materials suggest (third-party claim).",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "independent verification (including Vals AI's common-harness leaderboard) ranks it lower than Meta's launch materials suggest",
    "topic": "benchmark"
   }
  ]

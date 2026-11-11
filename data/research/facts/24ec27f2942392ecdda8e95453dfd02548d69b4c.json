@@ -1,67 +1,38 @@
 {
  "url": "https://pecollective.com/tools/windsurf-pricing/",
  "title": "Windsurf Pricing: Current Plans and Legacy Credits | PE Collective",
- "hash": "6ddb6c174f9b3016e45eed2ad719a67a28901bab",
- "fetchedAt": "2026-11-06",
+ "hash": "b019fd28b9bd4d03324a09312e20490a452dc17d",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 18911,
+ "chunks": 3,
  "facts": [
   {
-   "fact": "The Windsurf pricing URL now redirects to Devin's pricing page.",
-   "value": "",
-   "unit": "",
-   "as_of": "October 28, 2026",
-   "quote": "Windsurf's pricing URL now redirects to Devin's pricing page.",
-   "topic": "other"
-  },
-  {
-   "fact": "As checked by the page, the Free plan is listed at $0 per month.",
+   "fact": "As checked October 28, 2026, the Free plan is listed at $0 on Devin's pricing page, which Windsurf's pricing URL now redirects to.",
    "value": "0",
-   "unit": "$ per month",
+   "unit": "USD",
    "as_of": "October 28, 2026",
-   "quote": "As checked October 28, 2026, it lists Free at $0, Pro at $20 per month and Max at $200 per month.",
+   "quote": "Windsurf's pricing URL now redirects to Devin's pricing page. As checked October 28, 2026, it lists Free at $0, Pro at $20 per month and Max at $200 per month.",
    "topic": "pricing"
   },
   {
-   "fact": "As checked by the page, the Pro plan is listed at $20 per month.",
+   "fact": "As checked October 28, 2026, the Pro plan is listed at $20 per month.",
    "value": "20",
-   "unit": "$ per month",
+   "unit": "USD per month",
    "as_of": "October 28, 2026",
-   "quote": "As checked October 28, 2026, it lists Free at $0, Pro at $20 per month and Max at $200 per month.",
+   "quote": "it lists Free at $0, Pro at $20 per month and Max at $200 per month.",
    "topic": "pricing"
   },
   {
-   "fact": "As checked by the page, the Max plan is listed at $200 per month.",
-   "value": "200",
-   "unit": "$ per month",
-   "as_of": "October 28, 2026",
-   "quote": "As checked October 28, 2026, it lists Free at $0, Pro at $20 per month and Max at $200 per month.",
-   "topic": "pricing"
-  },
-  {
-   "fact": "The page states that Teams has an $80 monthly minimum with $40 per full seat, as explained in the billing documentation.",
+   "fact": "The Teams plan has an $80 monthly minimum, with a $40 price per full seat, according to the billing documentation.",
    "value": "80",
-   "unit": "$ per month minimum",
+   "unit": "USD per month",
    "as_of": "October 28, 2026",
    "quote": "Teams has an $80 monthly minimum with $40 full seats, explained in the billing documentation.",
    "topic": "pricing"
   },
   {
-   "fact": "The page states that Teams full seats cost $40 each.",
-   "value": "40",
-   "unit": "$ per full seat per month",
-   "as_of": "October 28, 2026",
-   "quote": "Teams has an $80 monthly minimum with $40 full seats, explained in the billing documentation.",
-   "topic": "pricing"
-  },
-  {
-   "fact": "The page states that the detailed billing table describes the Teams $80 minimum as satisfied by seats and credits, which differs from the marketing page headline.",
-   "value": "80",
-   "unit": "$ minimum",
-   "as_of": "October 28, 2026",
-   "quote": "The detailed billing table instead describes an $80 minimum satisfied by seats and credits.",
-   "topic": "pricing"
-  },
-  {
-   "fact": "The page states that Enterprise pricing requires a quote rather than a published price.",
+   "fact": "Enterprise pricing is custom and requires a quote.",
    "value": "",
    "unit": "",
    "as_of": "October 28, 2026",
@@ -69,39 +40,55 @@
    "topic": "pricing"
   },
   {
-   "fact": "The page says an older $15 per month Pro price should not be used for a new purchase.",
+   "fact": "The page says a $15 Pro price and a universal 500-credit allowance from older references should not be used for a new purchase.",
    "value": "15",
-   "unit": "$ per month",
-   "as_of": "October 28, 2026",
+   "unit": "USD per month",
+   "as_of": "",
    "quote": "Older references to $15 Pro and a universal 500-credit allowance should not be used for a new purchase.",
    "topic": "pricing"
   },
   {
-   "fact": "The page says the Free plan includes limited agent use and model availability, plus unlimited inline edits and Tab completions according to the pricing page.",
-   "value": "",
-   "unit": "",
-   "as_of": "October 28, 2026",
-   "quote": "The current Free plan includes limited agent use and model availability, plus unlimited inline edits and Tab completions according to the pricing page.",
-   "topic": "rules"
-  },
-  {
-   "fact": "The billing documentation describes daily and weekly allowances for Pro and full team seats.",
-   "value": "",
-   "unit": "",
+   "fact": "The listed monthly price difference between Max and Pro is $180.",
+   "value": "180",
+   "unit": "USD per month",
    "as_of": "",
-   "quote": "describes daily and weekly allowances for Pro and full team seats",
-   "topic": "rules"
+   "quote": "The listed monthly subscription difference is $180: $200 − $20.",
+   "topic": "pricing"
   },
   {
-   "fact": "The page states that Max has a larger weekly allowance than other plans and no daily cap.",
-   "value": "",
-   "unit": "",
+   "fact": "At unchanged monthly rates, the page gives twelve-month Pro cost as $240, excluding taxes and extra usage.",
+   "value": "240",
+   "unit": "USD per year",
    "as_of": "",
-   "quote": "Max has a larger weekly allowance without a daily cap.",
-   "topic": "rules"
+   "quote": "For annualized budgeting at unchanged monthly rates, Pro is 12 × $20 = $240 and Max is 12 × $200 = $2,400.",
+   "topic": "pricing"
   },
   {
-   "fact": "The page states that Flex seats draw from shared team credits and do not include Desktop access.",
+   "fact": "Under the documented Teams structure, with fewer than two full seats the remainder of the $80 minimum becomes prepaid shared usage credit.",
+   "value": "2",
+   "unit": "full seats",
+   "as_of": "",
+   "quote": "Below two full seats, the remainder of that minimum becomes prepaid shared usage credit.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page's Teams table lists a minimum monthly total of $80 for zero and for one full seat, and $80 for two full seats.",
+   "value": "80",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "| 1 | 1 × $40 | $80 | $40 |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "For a five-full-seat Teams example, the page calculates a recurring seat budget of $200 per month before extra usage.",
+   "value": "200",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "the recurring seat budget is therefore $200 per month before extra usage.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Flex seats draw from shared team credits and do not include Desktop access, according to the billing documentation.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -109,11 +96,123 @@
    "topic": "rules"
   },
   {
-   "fact": "The page states that purchased on-demand credits can fund additional usage and roll forward.",
+   "fact": "The billing documentation describes daily and weekly allowances for Pro and full team seats, while Max has a larger weekly allowance without a daily cap.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Max has a larger weekly allowance without a daily cap.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Purchased on-demand credits can fund additional usage and roll forward, according to the billing documentation.",
    "value": "",
    "unit": "",
    "as_of": "",
    "quote": "Purchased on-demand credits can fund additional usage and roll forward.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page's annualized cost calculations exclude taxes and extra usage.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "They exclude taxes and extra usage.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The usage overview page dates the introduction of new self-serve usage plans to March 2026.",
+   "value": "March 2026",
+   "unit": "date",
+   "as_of": "2026-03",
+   "quote": "dates the introduction of new self-serve usage plans to March 2026.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page states that the advertised team minimum is $80, and that the detailed billing table describes it as satisfied by full seats and credits.",
+   "value": "80",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "The detailed billing table describes the $80 minimum as satisfied by full seats and credits",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page states that, for five full seats, the seat-table reading of the team minimum gives $200 before extra usage, while the alternative headline reading gives $280.",
+   "value": "200",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "For five full seats, those interpretations would be $200 and $280 respectively before extra usage.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page describes Max at its listed monthly price as $200.",
+   "value": "200",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "compare it with 12 × $200 = $2,400 for a year of Max at the listed monthly price.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "In the page's illustrative example, the Pro plan is priced at $20 and Max starts at $200 before any further charges.",
+   "value": "20",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "Consider an illustrative individual who buys Pro at $20 and then spends $45 on additional usage during a busy month.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The current self-serve documentation states that purchased on-demand credits roll over, while older guidance that unused credits disappear at month end is not treated as current.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "The current self-serve documentation says purchased on-demand credits roll over.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page's heading refers to an older Windsurf Pro price of $15, which it says should be kept as a dated historical fact rather than a current public offer.",
+   "value": "15",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "What happened to 500 credits and the old $15 Pro price?",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The guide recommends comparing a current self-serve plan, a legacy account, or an enterprise quote before evaluating Windsurf pricing.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Confirm whether you are comparing a current self-serve plan, a legacy account or an enterprise quote.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The guide advises calculating subscription cost plus likely extra usage, with taxes included separately and no discount assumed.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Calculate subscription cost plus likely extra usage. Include taxes separately and avoid assuming a discount.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The guide warns that a lower advertised subscription price may still bill some model usage separately.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "A lower advertised subscription may bill some model usage separately.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The guide names Windsurf's individual and team plan tiers as Free, Pro, Teams, and Max, with Max suggested after measuring sustained individual demand.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "The practical starting point is Free for a bounded evaluation, Pro for an individual whose observed work fits its allowance, and Teams when multiple people need an administered subscription.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The guide directs readers to the official plan screen for the final quote, rather than relying on the guide's figures.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Use the official plan screen for the final quote, and recheck this guide when billing units or plan names change.",
    "topic": "rules"
   }
  ]

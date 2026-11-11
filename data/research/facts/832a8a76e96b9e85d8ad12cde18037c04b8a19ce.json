@@ -1,48 +1,131 @@
 {
  "url": "https://vercel.com/blog/how-to-prompt-v0",
  "title": "How to prompt v0 - Vercel",
- "hash": "60560b4bbf550c4eccf0911ee188a91371a18604",
- "fetchedAt": "2026-11-06",
+ "hash": "d8101d99d755920c9005c6628fdf63748c992678",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 16103,
+ "chunks": 2,
  "facts": [
   {
-   "fact": "Vercel's own testing claims that prompts following its framework produce generation 30-40% faster, with less unnecessary code and fewer credits spent.",
+   "fact": "Vercel's own testing found that good prompts for v0 generate 30-40% faster, with less unnecessary code and fewer credits spent.",
    "value": "30-40",
-   "unit": "% faster generation time",
+   "unit": "%",
    "as_of": "",
    "quote": "From our testing, good prompts consistently deliver: Faster generation time (30-40% faster with less unnecessary code, fewer credits spent)",
    "topic": "benchmark"
   },
   {
-   "fact": "Vercel says its team built hundreds of applications while developing the v0 prompting guidance.",
+   "fact": "In Vercel's Test 1, the e-commerce product page prompt with context of use took 26 seconds longer to generate than the version without context.",
+   "value": "26",
+   "unit": "seconds",
+   "as_of": "",
+   "quote": "The version with context took 26 seconds longer but delivered a completely functional product.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Vercel estimates that the prompt without context of use would have needed 1-2 more prompts to add missing functionality, totaling about 5 minutes and about 1.5 credits.",
+   "value": "1-2 prompts, ~5 minutes, ~1.5 credits",
+   "unit": "prompts, minutes, credits",
+   "as_of": "",
+   "quote": "Without context would have required 1-2 more prompts to add the missing functionality, totaling ~5 minutes and ~1.5 credits.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Vercel says it built hundreds of applications itself before developing its three-input prompting framework for v0.",
    "value": "hundreds",
-   "unit": "applications built by Vercel",
+   "unit": "applications",
    "as_of": "",
-   "quote": "After building hundreds of applications ourselves and learning from v0's power users",
+   "quote": "After building hundreds of applications ourselves and learning from v0's power users, we’ve noticed that the best prompts always include three core inputs:",
    "topic": "other"
   },
   {
-   "fact": "The v0 prompting guide was published on 15 December 2025 by Esteban Suárez, DevRel at v0.",
-   "value": "2025-12-15",
-   "unit": "date",
-   "as_of": "2025-12-15",
-   "quote": "15 Dec 2025",
-   "topic": "other"
+   "fact": "Vercel's prompting framework for v0 uses three core inputs: product surface, context of use, and constraints & taste.",
+   "value": "3",
+   "unit": "inputs",
+   "as_of": "",
+   "quote": "1. Product surface 2. Context of use 3. Constraints & taste",
+   "topic": "definition"
   },
   {
-   "fact": "The article is listed as a 4-minute read.",
-   "value": "4",
-   "unit": "min read",
-   "as_of": "2025-12-15",
-   "quote": "4 min read",
-   "topic": "other"
-  },
-  {
-   "fact": "In Vercel's test example, the context-of-use prompt targets a fashion e-commerce audience of millennials aged 25-35 who browse on mobile during commutes.",
+   "fact": "In Vercel's Test 1 example prompt, the target audience for the fashion e-commerce site is millennials aged 25-35 who browse on mobile during commutes.",
    "value": "25-35",
-   "unit": "years old (age range of example target audience)",
+   "unit": "years old",
    "as_of": "",
-   "quote": "Fashion e-commerce site targeting millennials (25-35)",
+   "quote": "Fashion e-commerce site targeting millennials (25-35) who browse on mobile during commutes.",
    "topic": "audience"
+  },
+  {
+   "fact": "In Vercel's own test, the vague prompt took 1m 38s to generate an app, versus 1m 19s for the specific prompt.",
+   "value": "1m 38s (vague) vs 1m 19s (specific)",
+   "unit": "time",
+   "as_of": "",
+   "quote": "Vague: **1m 38s**, 595 lines, 0.173 credits",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In Vercel's own test, the vague prompt generated 595 lines of code, versus 443 lines for the specific prompt.",
+   "value": "595 (vague) vs 443 (specific)",
+   "unit": "lines",
+   "as_of": "",
+   "quote": "Specific: **1m 19s**, 443 lines, 0.160 credits",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In Vercel's own constraints test, the basic prompt took 1m 42s and produced 679 lines at 0.133 credits.",
+   "value": "1m 42s, 679 lines, 0.133 credits",
+   "unit": "time, lines, credits",
+   "as_of": "",
+   "quote": "Basic: **1m 42s**, 679 lines, 0.133 credits",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In Vercel's own constraints test, the detailed prompt took 1m 52s and produced 569 lines at 0.130 credits.",
+   "value": "1m 52s, 569 lines, 0.130 credits",
+   "unit": "time, lines, credits",
+   "as_of": "",
+   "quote": "Detailed: **1m 52s**, 569 lines, 0.130 credits",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Vercel's example detailed dashboard prompt specifies a maximum of 3 columns for the layout.",
+   "value": "3",
+   "unit": "columns",
+   "as_of": "",
+   "quote": "Maximum3-column layout.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Vercel's example detailed dashboard prompt specifies red for urgent tickets older than 24 hours.",
+   "value": "24",
+   "unit": "hours",
+   "as_of": "",
+   "quote": "Color code: red for urgent (>24h), yellow for medium, green for on-time.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Vercel's prompt template example describes support team leads managing 5–10 agents.",
+   "value": "5–10",
+   "unit": "agents",
+   "as_of": "",
+   "quote": "Used by support team leads (managing 5–10 agents),",
+   "topic": "audience"
+  },
+  {
+   "fact": "Vercel's prompt template example specifies a maximum of 2 columns on mobile.",
+   "value": "2",
+   "unit": "columns",
+   "as_of": "",
+   "quote": "Maximum 2 columns on mobile.",
+   "topic": "rules"
+  },
+  {
+   "fact": "In v0, Design Mode lets users select any element visually and adjust properties directly, and Vercel says it is faster for quick visual changes like colors, spacing, or typography.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "**Design Mode:** Click Design Mode, select any element visually, and adjust properties directly. Faster for quick visual changes like colors, spacing, or typography.",
+   "topic": "definition"
   }
  ]
 }

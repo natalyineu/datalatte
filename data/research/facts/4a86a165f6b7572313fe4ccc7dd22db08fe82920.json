@@ -1,91 +1,102 @@
 {
  "url": "https://cursor.com/pricing",
  "title": "Cursor · Pricing",
- "hash": "cb622f36e1076441d50a8e1090ccbcea68aa74c3",
- "fetchedAt": "2026-11-06",
+ "hash": "f4cf01bb30d7a27738ce8b88df44534890d0e49b",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 6131,
+ "chunks": 1,
  "facts": [
   {
-   "fact": "The vendor lists the Free plan at $0 per month.",
+   "fact": "Cursor's Free plan is listed at $0/month on the pricing page.",
    "value": "0",
    "unit": "USD per month",
    "as_of": "",
-   "quote": "Free$0/month",
+   "quote": "### Free\n\n$0/month",
    "topic": "pricing"
   },
   {
-   "fact": "The vendor lists the Plus plan at $8 per month and describes it as an introductory plan.",
+   "fact": "The Plus plan is listed at $8/month and is described as the introductory plan.",
    "value": "8",
    "unit": "USD per month",
    "as_of": "",
-   "quote": "Plus$8/month",
+   "quote": "### Plus\n\n$8/month\n\nOur introductory plan:",
    "topic": "pricing"
   },
   {
-   "fact": "The vendor lists the Premium plan at $30 per month.",
+   "fact": "The Premium plan is listed at $30/month and is marked as the most popular plan.",
    "value": "30",
    "unit": "USD per month",
    "as_of": "",
-   "quote": "Premium$30/month",
+   "quote": "### Premium\n\nMost popular\n\n$30/month",
    "topic": "pricing"
   },
   {
-   "fact": "The vendor lists the Super plan at $100 per month.",
+   "fact": "The Super plan is listed at $100/month.",
    "value": "100",
    "unit": "USD per month",
    "as_of": "",
-   "quote": "Super$100/month",
+   "quote": "### Super\n\n$100/month",
    "topic": "pricing"
   },
   {
-   "fact": "The vendor lists the Ultra plan at $200 per month.",
+   "fact": "The Ultra plan is listed at $200/month.",
    "value": "200",
    "unit": "USD per month",
    "as_of": "",
-   "quote": "Ultra$200/month",
+   "quote": "### Ultra\n\n$200/month",
    "topic": "pricing"
   },
   {
-   "fact": "The vendor lists the Teams plan at $30 or more per user per month.",
+   "fact": "The vendor states the Premium plan provides 4x more usage compared to Plus.",
+   "value": "4",
+   "unit": "x Plus usage",
+   "as_of": "",
+   "quote": "4x\n\nmore usage compared to Plus",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The vendor states the Super plan provides 15x more usage compared to Plus.",
+   "value": "15",
+   "unit": "x Plus usage",
+   "as_of": "",
+   "quote": "15x\n\nmore usage compared to Plus",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The vendor states the Ultra plan provides 50x more usage compared to Plus.",
+   "value": "50",
+   "unit": "x Plus usage",
+   "as_of": "",
+   "quote": "50x\n\nmore usage compared to Plus",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The Teams plan is listed at $30 or more per user per month.",
    "value": "30",
-   "unit": "USD per user per month",
+   "unit": "USD per user per month (minimum)",
    "as_of": "",
    "quote": "Teams$30+/user/month",
    "topic": "pricing"
   },
   {
-   "fact": "The vendor lists Enterprise pricing as custom, handled through sales contact.",
-   "value": "",
-   "unit": "",
+   "fact": "The Teams plan's usage is listed as 4-50x Plus.",
+   "value": "4-50",
+   "unit": "x Plus usage",
    "as_of": "",
-   "quote": "EnterpriseCustom",
+   "quote": "| Usage | Limited | Basic | 4x Plus | 15x Plus | 50x Plus | 4-50x Plus | Pooled |",
    "topic": "pricing"
   },
   {
-   "fact": "The vendor states Premium includes 4x more usage compared to Plus.",
-   "value": "4",
-   "unit": "x Plus usage",
+   "fact": "The Enterprise plan has custom pricing and is sold through sales contact.",
+   "value": "Custom",
+   "unit": "",
    "as_of": "",
-   "quote": "more usage compared to Plus",
-   "topic": "rules"
+   "quote": "Enterprise Custom [Contact Sales]",
+   "topic": "pricing"
   },
   {
-   "fact": "The vendor states Super includes 15x more usage compared to Plus.",
-   "value": "15",
-   "unit": "x Plus usage",
-   "as_of": "",
-   "quote": "15x more usage compared to Plus",
-   "topic": "rules"
-  },
-  {
-   "fact": "The vendor states Ultra includes 50x more usage compared to Plus.",
-   "value": "50",
-   "unit": "x Plus usage",
-   "as_of": "",
-   "quote": "50x more usage compared to Plus",
-   "topic": "rules"
-  },
-  {
-   "fact": "The vendor states that displayed prices do not include applicable taxes or fees such as VAT.",
+   "fact": "The vendor states that prices shown do not include applicable taxes or fees such as VAT.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -101,68 +112,76 @@
    "topic": "pricing"
   },
   {
-   "fact": "The vendor asks subscribers to cancel at least 24 hours before renewal to avoid additional charges.",
+   "fact": "The vendor states subscribers must cancel at least 24 hours prior to renewal to avoid additional charges.",
    "value": "24",
    "unit": "hours before renewal",
    "as_of": "",
-   "quote": "at least 24 hours prior to renewal to avoid additional charges",
+   "quote": "[Cancel anytime](https://x.ai/legal/bundled-subscription-terms#cancel), at least 24 hours prior to renewal to avoid additional charges.",
    "topic": "rules"
   },
   {
-   "fact": "The vendor states the usage allowance refreshes weekly.",
-   "value": "weekly",
-   "unit": "refresh period",
+   "fact": "The vendor states prices are subject to change.",
+   "value": "",
+   "unit": "",
    "as_of": "",
-   "quote": "Your allowance refreshes weekly, so one heavy day never wipes out your whole month.",
+   "quote": "Prices subject to change.",
    "topic": "rules"
   },
   {
-   "fact": "The vendor states every tier includes a pool of AI usage shared across Cursor and Grok.",
-   "value": "",
-   "unit": "",
+   "fact": "The vendor lists X Money APY of 6.00% with Direct Deposit on the Free and Plus plans.",
+   "value": "6.00",
+   "unit": "% APY",
    "as_of": "",
-   "quote": "Every tier includes a pool of AI usage shared across Cursor and Grok.",
-   "topic": "definition"
-  },
-  {
-   "fact": "The vendor states the Plus plan allows only Grok models.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Only Grok models are available on this plan",
-   "topic": "rules"
-  },
-  {
-   "fact": "The vendor states Premium and higher plans include third-party models at API list price.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Third-party models at API list price",
+   "quote": "| 𝕏 Money APY | 6.00% with Direct Deposit | 6.00% with Direct Deposit | 6.00% | 6.00% | 6.00% | By seat tier | By seat tier |",
    "topic": "pricing"
   },
   {
-   "fact": "The vendor states self-serve plans support all major credit and debit cards.",
-   "value": "",
-   "unit": "",
+   "fact": "The vendor lists X Money cashback of 3% with Direct Deposit on the Free plan and 3% on the Plus plan.",
+   "value": "3",
+   "unit": "% cashback",
    "as_of": "",
-   "quote": "Self-serve plans support all major credit and debit cards.",
-   "topic": "rules"
+   "quote": "| 𝕏 Money cashback | 3% with Direct Deposit | 3% | 3% | 3% | 3% | By seat tier | By seat tier |",
+   "topic": "pricing"
   },
   {
-   "fact": "The vendor recommends Premium for new AI users, Super for daily agent users, and Ultra for power users.",
+   "fact": "The vendor states Plus uses a shared AI usage pool.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "We recommend Premium for new AI users, Super for daily agent users, and Ultra for power users.",
+   "quote": "Shared\n\nAI usage pool",
    "topic": "other"
   },
   {
-   "fact": "The vendor lists the Free plan with limited agent requests and limited Chat requests.",
+   "fact": "The vendor states the Plus plan's Grok models are the only models available on that plan.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Limited agent requests",
-   "topic": "rules"
+   "quote": "*Only Grok models are available on this plan",
+   "topic": "other"
+  },
+  {
+   "fact": "The vendor states the Team marketplace for internal rules, skills, and plugins is available on Teams and Enterprise plans.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "| Team marketplace for internal rules, skills, and plugins | — | — | — | — | — | ✓ | ✓ |",
+   "topic": "other"
+  },
+  {
+   "fact": "The vendor states Priority support is available only on the Enterprise plan.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "| Priority support | — | — | — | — | — | — | ✓ |",
+   "topic": "other"
+  },
+  {
+   "fact": "The vendor states Invoice/PO billing is available only on the Enterprise plan.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "| Invoice/PO billing | — | — | — | — | — | — | ✓ |",
+   "topic": "other"
   }
  ]
 }

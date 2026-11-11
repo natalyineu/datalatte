@@ -1,136 +1,91 @@
 {
  "url": "https://wiki.licenseware.io/wiki/github-copilot-licensing/",
  "title": "GitHub Copilot License: Plans, Seat Prices and AI Credits",
- "hash": "ef140a6b630bd04f52fa8d10c3c321e648959f9a",
- "fetchedAt": "2026-11-06",
+ "hash": "38813be3c4af23af2c72fca97b9b4e33c84d2099",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 24964,
+ "chunks": 4,
  "facts": [
   {
-   "fact": "GitHub lists the Copilot Pro plan at $10 USD per month for individuals, per the wiki's price list as of 2026-10-07.",
+   "fact": "GitHub's published price for Copilot Pro (individual plan) is $10 USD per month, with 1,500 AI credits per month (1,000 base + 500 flex), according to the LICENSEWARE wiki's table.",
    "value": "10",
    "unit": "USD per month",
    "as_of": "2026-10-07",
-   "quote": "Copilot Pro | Individual | $10 USD per month",
+   "quote": "Copilot Pro | Individual | $10 USD per month | 1,500 (1,000 base + 500 flex)",
    "topic": "pricing"
   },
   {
-   "fact": "GitHub lists the Copilot Pro+ plan at $39 USD per month for individuals, per the wiki's price list as of 2026-10-07.",
+   "fact": "GitHub's published price for Copilot Pro+ (individual plan) is $39 USD per month, with 7,000 AI credits per month (3,900 base + 3,100 flex).",
    "value": "39",
    "unit": "USD per month",
    "as_of": "2026-10-07",
-   "quote": "Copilot Pro+ | Individual | $39 USD per month",
+   "quote": "Copilot Pro+ | Individual | $39 USD per month | 7,000 (3,900 base + 3,100 flex)",
    "topic": "pricing"
   },
   {
-   "fact": "GitHub lists the Copilot Max plan at $100 USD per month for individuals, per the wiki's price list as of 2026-10-07.",
+   "fact": "GitHub's published price for Copilot Max (individual plan) is $100 USD per month, with 20,000 AI credits per month (10,000 base + 10,000 flex).",
    "value": "100",
    "unit": "USD per month",
    "as_of": "2026-10-07",
-   "quote": "Copilot Max | Individual | $100 USD per month",
+   "quote": "Copilot Max | Individual | $100 USD per month | 20,000 (10,000 base + 10,000 flex)",
    "topic": "pricing"
   },
   {
-   "fact": "GitHub lists the Copilot Business plan at $19 USD per granted seat per month for organizations and enterprises.",
+   "fact": "GitHub's published price for Copilot Business is $19 USD per granted seat per month, with 1,900 AI credits per user pooled.",
    "value": "19",
    "unit": "USD per granted seat per month",
    "as_of": "2026-10-07",
-   "quote": "Copilot Business | Organizations and enterprises | $19 USD per granted seat per month",
+   "quote": "Copilot Business | Organizations and enterprises | $19 USD per granted seat per month | 1,900 per user, pooled",
    "topic": "pricing"
   },
   {
-   "fact": "GitHub lists the Copilot Enterprise plan at $39 USD per granted seat per month for enterprises on GitHub Enterprise Cloud.",
+   "fact": "GitHub's published price for Copilot Enterprise (Enterprise Cloud) is $39 USD per granted seat per month, with 3,900 AI credits per user pooled.",
    "value": "39",
    "unit": "USD per granted seat per month",
    "as_of": "2026-10-07",
-   "quote": "Copilot Enterprise | Enterprises on GitHub Enterprise Cloud | $39 USD per granted seat per month",
+   "quote": "Copilot Enterprise | Enterprises on GitHub Enterprise Cloud | $39 USD per granted seat per month | 3,900 per user, pooled",
    "topic": "pricing"
   },
   {
-   "fact": "The page states that Copilot Free and Copilot Student are listed at a price of free, with their AI credit allowance amount not stated.",
-   "value": "0",
-   "unit": "USD per month",
-   "as_of": "2026-10-07",
-   "quote": "Copilot Student | Verified students | Free | An allowance (amount not stated)",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Per GitHub documentation cited on the page, 1 AI credit equals $0.01 USD.",
+   "fact": "GitHub states that 1 AI credit equals $0.01 USD.",
    "value": "0.01",
-   "unit": "USD",
+   "unit": "USD per AI credit",
    "as_of": "",
-   "quote": "1 AI credit equals $0.01 USD",
+   "quote": "1 AI credit equals $0.01 USD.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "GitHub lists seven Copilot plans: Free, Student, Pro, Pro+, Max, Business and Enterprise.",
+   "value": "7",
+   "unit": "plans",
+   "as_of": "",
+   "quote": "GitHub lists seven Copilot plans. Copilot is not currently available for GitHub Enterprise Server.",
    "topic": "definition"
   },
   {
-   "fact": "The Copilot Pro plan includes 1,500 AI credits per month, made up of 1,000 base and 500 flex credits.",
-   "value": "1500",
-   "unit": "AI credits per month",
-   "as_of": "2026-10-07",
-   "quote": "Copilot Pro | Individual | $10 USD per month | 1,500 (1,000 base + 500 flex)",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "The Copilot Pro+ plan includes 7,000 AI credits per month, made up of 3,900 base and 3,100 flex credits.",
-   "value": "7000",
-   "unit": "AI credits per month",
-   "as_of": "2026-10-07",
-   "quote": "Copilot Pro+ | Individual | $39 USD per month | 7,000 (3,900 base + 3,100 flex)",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "The Copilot Max plan includes 20,000 AI credits per month, made up of 10,000 base and 10,000 flex credits.",
-   "value": "20000",
-   "unit": "AI credits per month",
-   "as_of": "2026-10-07",
-   "quote": "Copilot Max | Individual | $100 USD per month | 20,000 (10,000 base + 10,000 flex)",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "The Copilot Business plan includes 1,900 AI credits per user per month, pooled.",
-   "value": "1900",
-   "unit": "AI credits per user per month",
-   "as_of": "2026-10-07",
-   "quote": "Copilot Business | Organizations and enterprises | $19 USD per granted seat per month | 1,900 per user, pooled",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "The Copilot Enterprise plan includes 3,900 AI credits per user per month, pooled.",
-   "value": "3900",
-   "unit": "AI credits per user per month",
-   "as_of": "2026-10-07",
-   "quote": "Copilot Enterprise | Enterprises on GitHub Enterprise Cloud | $39 USD per granted seat per month | 3,900 per user, pooled",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "GitHub lists seven Copilot plans.",
-   "value": "7",
-   "unit": "plans",
-   "as_of": "2026-10-07",
-   "quote": "GitHub lists seven Copilot plans.",
-   "topic": "other"
-  },
-  {
-   "fact": "The wiki records no published seat minimum for Copilot, and Enterprise requires GitHub Enterprise Cloud.",
-   "value": "",
-   "unit": "",
-   "as_of": "2026-10-07",
-   "quote": "No published seat minimum; Enterprise requires GitHub Enterprise Cloud",
-   "topic": "rules"
-  },
-  {
-   "fact": "Copilot is not currently available for GitHub Enterprise Server.",
+   "fact": "Copilot Free and Copilot Student include an AI credit allowance, but the amount is not stated in GitHub's plan documentation.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Copilot is not currently available for GitHub Enterprise Server.",
-   "topic": "rules"
+   "quote": "Copilot Free | Individual | Free | An allowance (amount not stated)",
+   "topic": "pricing"
   },
   {
-   "fact": "Copilot Pro is free for verified teachers and maintainers of popular open source projects, according to GitHub's billing documentation cited on the page.",
-   "value": "0",
-   "unit": "USD per month",
+   "fact": "Copilot Pro is free for verified teachers and maintainers of popular open source projects.",
+   "value": "",
+   "unit": "",
    "as_of": "",
    "quote": "Copilot Pro is free for verified teachers and maintainers of popular open source projects",
    "topic": "pricing"
+  },
+  {
+   "fact": "GitHub defines a Copilot seat as a license to use Copilot, assigned to a unique user account through a Copilot Business or Copilot Enterprise plan.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "GitHub defines a seat as a license to use Copilot, assigned to a unique user account through a Copilot Business or Copilot Enterprise plan.",
+   "topic": "definition"
   },
   {
    "fact": "Organizations and enterprises are billed for the number of assigned Copilot seats at the end of each monthly billing cycle.",
@@ -141,15 +96,7 @@
    "topic": "rules"
   },
   {
-   "fact": "A user holding seats in several organizations of the same enterprise is billed once per billing cycle.",
-   "value": "1",
-   "unit": "billing per cycle",
-   "as_of": "",
-   "quote": "A user who holds seats in several organizations of the same enterprise is billed once per cycle.",
-   "topic": "rules"
-  },
-  {
-   "fact": "If a user holds both a Business and an Enterprise seat, only the Enterprise seat is billed, at the Enterprise rate from the time it was assigned.",
+   "fact": "A user who holds both a Copilot Business seat and a Copilot Enterprise seat is billed only for the Enterprise seat, at the Enterprise rate from the time it was assigned.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -157,7 +104,7 @@
    "topic": "rules"
   },
   {
-   "fact": "Seats added mid-cycle are billed for the rest of the cycle, prorated by the date added.",
+   "fact": "Seats added mid-cycle are billed for the rest of the cycle, prorated by the date added, and GitHub issues no refunds for unused time.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -165,7 +112,23 @@
    "topic": "rules"
   },
   {
-   "fact": "Removing every assigned seat in an organization cancels the organization's Copilot plan.",
+   "fact": "Removed Copilot seats stop billing at the end of the cycle, and an unassigned user keeps access until the cycle ends while a revoked seat loses access immediately.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Removed seats stop billing at the end of the cycle, the lower count applies from the next cycle, and GitHub issues no refunds for unused time.",
+   "topic": "rules"
+  },
+  {
+   "fact": "When a Pro, Pro+ or Max subscriber is assigned a Business or Enterprise seat, the personal plan is canceled automatically with a prorated refund.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "When a Pro, Pro+ or Max subscriber is assigned a Business or Enterprise seat, the personal plan is canceled automatically with a prorated refund.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Removing every assigned seat from an organization cancels the organization's Copilot plan.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -173,28 +136,172 @@
    "topic": "rules"
   },
   {
-   "fact": "The Copilot model token metric is priced per 1 million tokens by model, covering input, cached input, cache write where applicable, and output, and drives AI credit conversion.",
-   "value": "1000000",
-   "unit": "tokens",
+   "fact": "For Business and Enterprise, each assigned license adds its included AI credits to a pool at billing entity level; 100 Copilot Business users give a shared pool of 190,000 credits.",
+   "value": "190000",
+   "unit": "AI credits",
    "as_of": "",
-   "quote": "per-model prices per 1 million tokens (input, cached input, cache write where applicable, output)",
-   "topic": "definition"
-  },
-  {
-   "fact": "The GitHub pricing page still names a legacy 'Premium request paid usage' policy, but the retrieved plan and billing pages show no premium request allowance.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "The pricing page still names a legacy “Premium request paid usage” policy",
+   "quote": "100 Copilot Business users give a shared pool of 190,000 credits.",
    "topic": "rules"
   },
   {
-   "fact": "Copilot is licensed per user: individuals subscribe to a personal plan billed per calendar month, while organizations and enterprises pay for each granted seat.",
+   "fact": "Unused AI credits are forfeited, and the allowance resets at 00:00:00 UTC on the first day of each calendar month, regardless of the subscription billing date.",
+   "value": "00:00:00 UTC",
+   "unit": "time of monthly reset",
+   "as_of": "",
+   "quote": "In both cases unused credits are forfeited, and the allowance resets at 00:00:00 UTC on the first day of each calendar month, whatever the subscription billing date.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Paid personal Copilot plans consume base AI credits first, then a variable flex allotment that GitHub says is designed to adapt as the economics of AI evolve.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Individuals subscribe to a personal plan billed per calendar month, while organizations and enterprises buy Copilot Business or Copilot Enterprise and pay for each granted seat.",
+   "quote": "Paid personal plans consume base credits first, then a variable flex allotment that GitHub says is designed to adapt as the economics of AI evolve.",
+   "topic": "rules"
+  },
+  {
+   "fact": "GitHub's current documentation meters Copilot usage in AI credits, and the retrieved plan and billing pages show no premium request allowance, although the pricing page still names a legacy 'Premium request paid usage' policy.",
+   "value": "",
+   "unit": "",
+   "as_of": "2026-10-07",
+   "quote": "The pricing page still names a legacy “Premium request paid usage” policy, but no premium request allowance appears in the retrieved plan or billing pages",
+   "topic": "rules"
+  },
+  {
+   "fact": "With GitHub Enterprise Cloud, an enterprise owner chooses Business or Enterprise for each organization, so both plans can coexist in one enterprise.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "an enterprise owner chooses Business or Enterprise for each organization, so both plans can coexist in one enterprise.",
+   "topic": "rules"
+  },
+  {
+   "fact": "GitHub Copilot Free includes 2000 code completions per month.",
+   "value": "2000",
+   "unit": "code completions per month",
+   "as_of": "",
+   "quote": "Copilot Free includes 2000 code completions per month.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Code completions and next edit suggestions are not billed in AI credits and stay unlimited on paid plans.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Code completions and next edit suggestions are not billed in AI credits and stay unlimited on paid plans.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Copilot Business and Copilot Enterprise are both billed monthly per granted seat.",
+   "value": "",
+   "unit": "per month per seat",
+   "as_of": "",
+   "quote": "Copilot Business** and **Copilot Enterprise**: both billed monthly per granted seat.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Copilot Enterprise is designed for enterprises using GitHub Enterprise Cloud.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Copilot Enterprise is designed for enterprises using GitHub Enterprise Cloud.",
    "topic": "definition"
+  },
+  {
+   "fact": "Individual Copilot plans are tied to a single account and cannot carry additional seats, so licensing several users requires an organization plan.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Individual plans are tied to a single account and cannot carry additional seats; licensing several users needs an organization plan.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Purchasing additional AI credits is not available for Copilot plans bought through GitHub Mobile on iOS or Android.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Purchasing additional AI credits is not available for plans bought through GitHub Mobile on iOS or Android.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Copilot Business and Enterprise bought directly from GitHub fall under the GitHub Generative AI Services Terms, purchases through Microsoft fall under Microsoft's Product Terms, and all other users fall under Section J of the GitHub Terms of Service.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Business and Enterprise bought directly from GitHub fall under the GitHub Generative AI Services Terms; purchases through Microsoft fall under Microsoft’s Product Terms; all other users fall under Section J of the GitHub Terms of Service.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The GitHub Generative AI Services Terms state that GitHub will not use Inputs or Outputs to train generative AI models unless the customer has given documented instructions.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "The Generative AI Services Terms state that GitHub will not use Inputs or Outputs to train generative AI models unless the customer has given documented instructions.",
+   "topic": "rules"
+  },
+  {
+   "fact": "For individual licenses, Section J.3 of the GitHub Terms of Service grants GitHub a license to use Inputs and Outputs to develop and train AI models unless the user opts out in account settings or is covered by a customer or volume licensing agreement.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "For individual licenses, Section J.3 grants GitHub a license to use Inputs and Outputs to develop and train AI models unless the user opts out in account settings or is covered by a customer or volume licensing agreement.",
+   "topic": "rules"
+  },
+  {
+   "fact": "For individual Copilot plans, upgrades take effect immediately with proration, downgrades apply from the next cycle, and cancelling a monthly plan keeps access until the cycle ends.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "upgrades take effect immediately with proration; downgrades apply from the next cycle; cancelling a monthly plan keeps access until the cycle ends.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Once the Copilot AI credit pool is exhausted, additional usage continues at per-token model rates converted to AI credits (pay-as-you-go).",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "once the pool is exhausted, usage continues at per-token model rates converted to AI credits.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Copilot additional usage budgets can be set per user, cost center, organization and enterprise.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Budgets can be set per user, cost center, organization and enterprise;",
+   "topic": "rules"
+  },
+  {
+   "fact": "A user who exhausts a user-level Copilot budget is blocked even if the pool still has capacity.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "a user who exhausts a user-level budget is blocked even if the pool still has capacity.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The GitHub Terms of Service Section J (AI Features, Training, and Your Data) is effective from 2026-04-27, per the cited reference.",
+   "value": "2026-04-27",
+   "unit": "date",
+   "as_of": "2026-04-27",
+   "quote": "Effective 2026-04-27. Retrieved 2026-10-07.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The GitHub Generative AI Services Terms cited on this page are Version: March 2026.",
+   "value": "March 2026",
+   "unit": "date",
+   "as_of": "March 2026",
+   "quote": "GitHub Generative AI Services Terms (Version: March 2026)",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page's reference list states that GitHub Copilot is not available for GitHub Enterprise Server, citing GitHub's plans documentation.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Plan descriptions, prices, AI credit allowances; GitHub Enterprise Server exclusion.",
+   "topic": "rules"
   }
  ]
 }

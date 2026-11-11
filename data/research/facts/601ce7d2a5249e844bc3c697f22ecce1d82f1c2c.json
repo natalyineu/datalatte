@@ -1,72 +1,139 @@
 {
  "url": "https://support.bolt.new/prompting/maximizing-token-efficiency",
  "title": "Maximize token efficiency - Bolt",
- "hash": "123ffcb769f3b82748bf1335aa77f336fae35ebf",
- "fetchedAt": "2026-11-06",
+ "hash": "f4c9af10e4234ed62b2eb4f2f1c5b759fd4821cd",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 63500,
+ "chunks": 3,
  "facts": [
   {
-   "fact": "According to Bolt's documentation, short, common words are typically one token each, while longer or less common words can be several tokens.",
-   "value": "1",
-   "unit": "tokens per common short word",
+   "fact": "Tokens are small pieces of text that AI uses to read and generate content, and short, common words are typically one token each while longer or less common words can be several.",
+   "value": "",
+   "unit": "",
    "as_of": "",
    "quote": "Short, common words are typically one token each, but longer or less common words can be several.",
    "topic": "definition"
   },
   {
-   "fact": "Bolt's documentation states that every prompt submitted in Build mode updates the code and uses tokens, while Plan mode uses fewer tokens because it makes no changes to the project.",
+   "fact": "Bolt consumes tokens when it reads prompts and project files, thinks, responds to prompts, and builds in the project.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "In Build mode, every prompt you submit updates your code and uses tokens, but Plan mode uses fewer tokens because it doesn’t make any changes to your project.",
-   "topic": "pricing"
+   "quote": "Bolt consumes tokens when it reads your prompts and project files, thinks, responds to your prompts, and builds in your project.",
+   "topic": "definition"
   },
   {
-   "fact": "Bolt's documentation states that clicking an on-screen button or built-in action does not use tokens, whereas prompting Bolt does.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Clicking an on-screen button or action doesn’t use tokens, but prompting Bolt does.",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Bolt's documentation says the Standard agent gives accurate results for tasks of average complexity without the additional token cost of deeper reasoning.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "For tasks of average complexity, the Standard agent gives you accurate results without the additional token cost of deeper reasoning.",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Bolt's documentation says the Max agent uses more tokens to work through the full scope of complex tasks, and that using it for straightforward tasks may use more tokens than necessary.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "For more complex tasks, the Max agent uses more tokens to work through the full scope of your task.",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Bolt's documentation states that adding information to Bolt's context from connectors increases token consumption, and recommends turning on connectors for a project only when needed.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "adding information to Bolt’s context increases token consumption. We recommend turning on connectors for a project only when you need them.",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Bolt's documentation notes that each automatic error fix attempt uses tokens, so repeatedly clicking Attempt fix consumes more tokens.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "remember that each attempt uses tokens.",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Bolt's documentation states that Bolt processes fewer tokens when it has less context to process, so keeping context low improves both performance and token efficiency.",
+   "fact": "Bolt processes fewer tokens when it has less context to process, so keeping context low improves both performance and token efficiency.",
    "value": "",
    "unit": "",
    "as_of": "",
    "quote": "Bolt processes fewer tokens when it has less context to process, so keeping your context low improves both performance and token efficiency.",
-   "topic": "pricing"
+   "topic": "rules"
+  },
+  {
+   "fact": "In Build mode, every prompt submitted updates the code and uses tokens, while Plan mode uses fewer tokens because it doesn't write code.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "In Build mode, every prompt you submit updates your code and uses tokens. Plan mode uses fewer tokens because it doesn’t write code.",
+   "topic": "rules"
+  },
+  {
+   "fact": "According to Bolt, the Standard agent gives accurate results for tasks of average complexity without the additional token cost of deeper reasoning, while the Max agent uses more tokens to work through the full scope of complex tasks.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "For tasks of average complexity, the Standard agent gives you accurate results without the additional token cost of deeper reasoning. For more complex tasks, the Max agent uses more tokens",
+   "topic": "rules"
+  },
+  {
+   "fact": "Bolt states that using the Max agent for straightforward tasks may use more tokens than necessary, and using the Standard agent for complex tasks may require more prompts to achieve a goal.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Using the Max agent for straightforward tasks may use more tokens than necessary, and using the Standard agent for complex tasks may require more prompts to achieve your goal.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Clicking an on-screen button or built-in action does not use tokens, but prompting Bolt to do the same task does.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Clicking an on-screen button or action doesn’t use tokens, but prompting Bolt does.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Adding connectors increases token consumption because it adds information to Bolt's context, so Bolt recommends turning on connectors for a project only when needed.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "adding information to Bolt’s context increases token consumption. We recommend turning on connectors for a project only when you need them.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Each click of the automatic error fix ('Attempt fix') uses tokens, so repeated attempts should be avoided.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "remember that each attempt uses tokens. Avoid clicking Attempt fix over and over",
+   "topic": "rules"
+  },
+  {
+   "fact": "Bolt's Version history feature lets users restore a project to a previous state without consuming tokens.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "you can switch back to a previous version of your project without using tokens.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Clearing Bolt's context resets its understanding of the project so that requests use fewer tokens.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Clearing Bolt’s context resets its understanding of your project so your requests use fewer tokens.",
+   "topic": "rules"
+  },
+  {
+   "fact": "According to Bolt's documentation, a smaller project uses fewer tokens because Bolt has less code to read and process.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "A smaller project uses fewer tokens, because Bolt has less code to read and process.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Plan mode uses fewer tokens than Build mode because it doesn't write code.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Plan mode uses fewer tokens because it doesn’t write code.",
+   "topic": "rules"
+  },
+  {
+   "fact": "For more complex tasks, the Max agent uses more tokens to work through the full scope of the task.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "For more complex tasks, the Max agent uses more tokens to work through the full scope of your task.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Each automated error fix attempt in Bolt uses tokens.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "each attempt uses tokens",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Maximize token efficiency help page was last modified on 2026-11-09.",
+   "value": "2026-11-09",
+   "unit": "date",
+   "as_of": "2026-11-09",
+   "quote": "\"lastModified\":\"2026-11-09T21:44:19.573Z\"",
+   "topic": "other"
   }
  ]
 }

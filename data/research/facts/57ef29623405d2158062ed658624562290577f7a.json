@@ -1,19 +1,22 @@
 {
  "url": "https://www.layer3labs.io/guides/notebooklm-pricing",
  "title": "NotebookLM Pricing 2026: Free vs Plus vs Workspace Plans",
- "hash": "67a9b79f1db82c6241f269af8b3ea7bf25c0be46",
- "fetchedAt": "2026-11-07",
+ "hash": "1a832dbfb787a617f97c2dab3915316a9a0111f2",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 9889,
+ "chunks": 2,
  "facts": [
   {
-   "fact": "The page states that NotebookLM has a free tier that requires no credit card.",
-   "value": "",
+   "fact": "NotebookLM has a free tier that requires no credit card.",
+   "value": "no credit card required",
    "unit": "",
    "as_of": "",
    "quote": "Yes, NotebookLM has a free tier with no credit card required.",
    "topic": "pricing"
   },
   {
-   "fact": "The page states that NotebookLM Plus is not sold on its own and is only available as a benefit inside a Google AI subscription or a qualifying Google Workspace plan.",
+   "fact": "NotebookLM Plus is not sold standalone; it is only included in a Google AI subscription or a qualifying Google Workspace plan.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -21,7 +24,7 @@
    "topic": "pricing"
   },
   {
-   "fact": "Third-party trackers, as cited by the page, report Plus-level NotebookLM access starting at about $4.99 to $19.99 per month depending on the Google AI tier.",
+   "fact": "Third-party trackers (not Google) report Plus-level NotebookLM access starting at roughly $4.99 to $19.99 per month, depending on the Google AI tier.",
    "value": "4.99 to 19.99",
    "unit": "USD per month",
    "as_of": "",
@@ -29,31 +32,31 @@
    "topic": "pricing"
   },
   {
-   "fact": "The page says the free NotebookLM tier commonly caps notebooks at around 100 and sources per notebook at around 50.",
-   "value": "100 notebooks; 50 sources per notebook",
-   "unit": "count",
+   "fact": "The page states that Google has restructured consumer AI plan names and prices more than once in the last year, so any specific dollar figure should be treated as directional.",
+   "value": "",
+   "unit": "",
    "as_of": "",
-   "quote": "The free tier commonly caps out around 100 notebooks, 50 sources per notebook",
-   "topic": "rules"
-  },
-  {
-   "fact": "The page says every source on any NotebookLM tier has historically been capped near 500,000 words or roughly 200MB per file.",
-   "value": "500000 words or 200 MB per file",
-   "unit": "words or MB",
-   "as_of": "",
-   "quote": "Every source, on any tier, has historically been capped near 500,000 words or roughly 200MB per file",
-   "topic": "rules"
-  },
-  {
-   "fact": "The page states that Google Workspace Business Standard has historically listed around $14 per user per month for its base plan.",
-   "value": "14",
-   "unit": "USD per user per month",
-   "as_of": "",
-   "quote": "Google Workspace Business Standard has historically listed around $14 per user per month for the base plan",
+   "quote": "Google has restructured these consumer AI plan names and prices more than once in the last year, treat any specific dollar figure as directional.",
    "topic": "pricing"
   },
   {
-   "fact": "The page states that NotebookLM Plus is included in Google Workspace Business Standard and higher tiers at no additional line item beyond the existing per-seat Workspace price.",
+   "fact": "The free tier commonly caps out around 100 notebooks and 50 sources per notebook, according to the page's description.",
+   "value": "100 notebooks; 50 sources per notebook",
+   "unit": "notebooks; sources per notebook",
+   "as_of": "",
+   "quote": "The free tier commonly caps out around 100 notebooks, 50 sources per notebook, and a capped number of chat queries",
+   "topic": "rules"
+  },
+  {
+   "fact": "Every source on any NotebookLM tier has historically been capped near 500,000 words or roughly 200MB per file, per the page.",
+   "value": "500000 words or 200",
+   "unit": "words; MB per file",
+   "as_of": "",
+   "quote": "Every source, on any tier, has historically been capped near 500,000 words or roughly 200MB per file, regardless of your plan.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google made NotebookLM Plus a core service inside Google Workspace Business Standard and above, with no additional line item beyond the existing per-seat Workspace price.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -61,7 +64,15 @@
    "topic": "pricing"
   },
   {
-   "fact": "The page states that a Google Workspace Business Starter team does not automatically receive Plus-level NotebookLM access.",
+   "fact": "Google Workspace Business Standard has historically listed around $14 per user per month for its base plan.",
+   "value": "14",
+   "unit": "USD per user per month",
+   "as_of": "",
+   "quote": "Google Workspace Business Standard has historically listed around $14 per user per month for the base plan",
+   "topic": "pricing"
+  },
+  {
+   "fact": "A team on Google Workspace Business Starter does not automatically get Plus-level NotebookLM access.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -69,20 +80,28 @@
    "topic": "rules"
   },
   {
-   "fact": "The page cites a Google Workspace Updates post titled 'NotebookLM and NotebookLM Plus now a Workspace core service' as its source for the Workspace bundling change.",
+   "fact": "NotebookLM Enterprise is licensed through Google Cloud with its own licensing minimum, and the page states no published list price is available.",
    "value": "",
    "unit": "",
-   "as_of": "2025-02",
-   "quote": "NotebookLM and NotebookLM Plus now a Workspace core service",
-   "topic": "other"
+   "as_of": "",
+   "quote": "sold with its own licensing minimum rather than a simple per-user Workspace add-on",
+   "topic": "pricing"
   },
   {
-   "fact": "The page states it was reviewed by Jonathan West and last updated on September 17, 2026.",
+   "fact": "Google gates the free tier by notebook count, sources per notebook, and daily chat queries rather than by feature; core features are available for free.",
    "value": "",
    "unit": "",
-   "as_of": "2026-09-17",
-   "quote": "Reviewed by [Jonathan West](https://www.layer3labs.io/about) · Updated Sep 17, 2026",
-   "topic": "other"
+   "as_of": "",
+   "quote": "Google gates the free tier by notebook count, sources per notebook, and daily chat queries rather than by feature.",
+   "topic": "definition"
+  },
+  {
+   "fact": "NotebookLM's pricing is bundled into a broader subscription, which the page describes as unusual compared with most competing AI research and chat tools that sell a standalone monthly seat.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "NotebookLM's bundled pricing model is unusual - most competing AI research and chat tools sell a standalone monthly seat instead of folding the product into a broader subscription.",
+   "topic": "pricing"
   }
  ]
 }

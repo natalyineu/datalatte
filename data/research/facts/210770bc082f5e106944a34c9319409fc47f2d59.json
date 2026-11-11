@@ -1,72 +1,91 @@
 {
  "url": "https://support.google.com/analytics/answer/9267735",
  "title": "[GA4] Recommended events - Analytics Help",
- "hash": "4e24058cee551857071e45c788a5234b41aa62cf",
- "fetchedAt": "2026-11-10",
+ "hash": "883c5657d41d449893c394e31ec70c4799e796b6",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 11852,
+ "chunks": 2,
  "facts": [
   {
-   "fact": "Recommended events are not sent automatically by Google Analytics and must be added to a website or mobile app.",
+   "fact": "Google's help page states that recommended events require additional context to be meaningful and are therefore not sent automatically.",
    "value": "",
    "unit": "",
    "as_of": "",
    "quote": "Because these events require additional context to be meaningful, they're not sent automatically.",
-   "topic": "rules"
+   "topic": "definition"
   },
   {
-   "fact": "Google recommends sending recommended events with their prescribed parameters to get the most detail in reports.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "You should send recommended events with their prescribed parameters to get the most details in your reports",
-   "topic": "rules"
-  },
-  {
-   "fact": "Google recommends the 'For all properties' events to all customers in all business verticals.",
-   "value": "",
-   "unit": "",
+   "fact": "The 'For all properties' recommended events list includes 14 events recommended to all customers in all business verticals, including purchase, login, sign_up, and search.",
+   "value": "14",
+   "unit": "events",
    "as_of": "",
    "quote": "We recommend these events to all customers in all business verticals.",
-   "topic": "audience"
-  },
-  {
-   "fact": "The 'For all properties' list includes the ad_impression event, which fires when a user sees an advertisement and applies to apps only.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "sees an advertisement, for apps only",
    "topic": "definition"
   },
   {
-   "fact": "The online sales event set is listed by Google as useful for retail, ecommerce, education, real estate, and travel.",
+   "fact": "Google recommends the lead generation events (generate_lead, qualify_lead, disqualify_lead, working_lead, close_convert_lead, close_unconvert_lead) for business-to-business, automotive, insurance sales, or offline conversions, populating the Lead acquisition report.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "They're useful for **retail**, **ecommerce**, **education**, **real estate**, and **travel**.",
+   "quote": "They're useful for business-to-business sales, automotive sales, insurance sales, or generally for when conversions occur offline. Sending these events populates the Lead acquisition report.",
    "topic": "audience"
   },
   {
-   "fact": "According to Google, sending the online sales events populates the Ecommerce purchases report.",
+   "fact": "By default, the Events report shows three event recommendations at the top of the Events table.",
+   "value": "3",
+   "unit": "recommendations",
+   "as_of": "",
+   "quote": "Three recommendations appear at the top of the Events table by default.",
+   "topic": "other"
+  },
+  {
+   "fact": "The Events report bases event recommendations on data already collected or on the app category in the Google Play Store or iOS App Store (e.g., ecommerce, travel).",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Sending the events populates",
+   "quote": "The **Events** report provides recommendations on events to collect based on the data you already collect or the app category in the Google Play Store or iOS App Store (e.g., ecommerce, travel).",
    "topic": "definition"
   },
   {
-   "fact": "Google lists the lead generation event set as useful for business-to-business sales, automotive sales, insurance sales, or offline conversions.",
+   "fact": "The recommended event tutorial_begin is triggered when a user begins a tutorial during an on-boarding process.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "They're useful for business-to-business sales, automotive sales, insurance sales, or generally for when conversions occur offline.",
-   "topic": "audience"
+   "quote": "| [tutorial_begin](https://developers.google.com/analytics/devguides/collection/ga4/reference/events#tutorial_begin) | begins a tutorial during an on-boarding process |",
+   "topic": "definition"
   },
   {
-   "fact": "According to Google, sending the lead generation events populates the Lead acquisition report.",
+   "fact": "The recommended event earn_virtual_currency is triggered when a user earns virtual currency such as coins, gems, or tokens.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Sending these events populates the",
+   "quote": "| [earn_virtual_currency](https://developers.google.com/analytics/devguides/collection/ga4/reference/events#earn_virtual_currency) | earns virtual currency (coins, gems, tokens, etc.) |",
    "topic": "definition"
+  },
+  {
+   "fact": "Upgrading to Android SDK 17.2.5 or later and/or iOS SDK 16.20.0 or later removes item data from standard event parameters, so item data is only accessible within the repeated items array.",
+   "value": "17.2.5",
+   "unit": "SDK version (Android)",
+   "as_of": "",
+   "quote": "you will only be able to access item data within the repeated items array; item data will no longer be available in standard event parameters",
+   "topic": "rules"
+  },
+  {
+   "fact": "The minimum iOS SDK version that moves item data into the repeated items array (removing it from standard event parameters) is 16.20.0.",
+   "value": "16.20.0",
+   "unit": "SDK version (iOS)",
+   "as_of": "",
+   "quote": "planning to upgrade to Android 17.2.5 (or later) and/or iOS 16.20.0 (or later)",
+   "topic": "rules"
+  },
+  {
+   "fact": "The upgrade to the newer SDK versions changes the BigQuery schema so item/product data appears in a repeated field.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "There is a BigQuery schema format change during this upgrade. Item/product data will begin to appear in a repeated field",
+   "topic": "rules"
   }
  ]
 }

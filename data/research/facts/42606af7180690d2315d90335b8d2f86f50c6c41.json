@@ -1,67 +1,86 @@
 {
  "url": "https://www.brandrocket.net/resources/gym-google-ads-settings-location",
  "title": "Gym Google Ads Settings: Reach Locals, Not Day-Pass Visitors",
- "hash": "c25d8a8c6aee0c209cfa1959a13ba9f4d61df94c",
- "fetchedAt": "2026-11-09",
+ "hash": "46b5c8eea1f02c7aa5229c6f46801201b95c88a0",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 12422,
+ "chunks": 2,
  "facts": [
   {
-   "fact": "Vendor's Keyword Planner data for the Austin example shows about 6,600 searches a month nationwide for 'gyms in austin tx'.",
-   "value": "6600",
+   "fact": "Keyword Planner shows about 6,600 searches a month nationwide for 'gyms in austin tx' in the page's example market.",
+   "value": "6,600",
    "unit": "searches per month",
    "as_of": "",
-   "quote": "Keyword Planner shows about 6,600 searches a month nationwide for \"gyms in austin tx.\"",
+   "quote": "In our example market, Austin, Keyword Planner shows about 6,600 searches a month nationwide for \"gyms in austin tx.\"",
    "topic": "benchmark"
   },
   {
-   "fact": "Per the vendor's Keyword Planner example, only about 2,900 of the 'gyms in austin tx' searches come from inside the Austin market itself.",
-   "value": "2900",
+   "fact": "Of the roughly 6,600 monthly nationwide searches for 'gyms in austin tx,' only about 2,900 come from inside the Austin market itself.",
+   "value": "2,900",
    "unit": "searches per month",
    "as_of": "",
    "quote": "Only about 2,900 of those come from inside the Austin market itself.",
    "topic": "benchmark"
   },
   {
-   "fact": "Per the vendor's Keyword Planner example, 'planet fitness austin' gets about 1,900 searches a month nationally and about 1,000 locally.",
-   "value": "1900",
+   "fact": "The search 'planet fitness austin' gets about 1,900 searches a month nationally and about 1,000 locally, per the page's Keyword Planner figures.",
+   "value": "1,900",
    "unit": "searches per month",
    "as_of": "",
    "quote": "\"planet fitness austin\" gets about 1,900 a month nationally and about 1,000 locally.",
    "topic": "benchmark"
   },
   {
-   "fact": "The vendor states that Keyword Planner rounds its search volumes into ranges, so its figures should be read as a shape rather than an exact share.",
-   "value": "",
-   "unit": "",
+   "fact": "The search 'gym day pass' gets about 8,100 searches a month across the US.",
+   "value": "8,100",
+   "unit": "searches per month",
    "as_of": "",
-   "quote": "Keyword Planner rounds its numbers into ranges, so treat these as a shape rather than an exact share",
-   "topic": "definition"
-  },
-  {
-   "fact": "The vendor's article headline claims that more than half of searches for a city's gyms come from out of town.",
-   "value": "more than half",
-   "unit": "share of searches",
-   "as_of": "",
-   "quote": "More Than Half the Searches for a City's Gyms Come From Out of Town.",
+   "quote": "\"Gym day pass\" alone gets about 8,100 searches a month across the US.",
    "topic": "benchmark"
   },
   {
-   "fact": "The vendor's section heading states that members drive about four miles, and that the radius should fit the kind of gym being run.",
+   "fact": "In 2017, location-data firm Dstillery measured gym member travel distance, and the average member who actually went traveled about 4 miles.",
    "value": "4",
    "unit": "miles",
-   "as_of": "",
-   "quote": "Members Drive About Four Miles. The Radius Should Fit the Kind of Gym You Run.",
+   "as_of": "2017",
+   "quote": "The average member who actually went traveled about 4 miles.",
    "topic": "benchmark"
   },
   {
-   "fact": "The vendor states that Google Ads search partners and AI Max arrive switched on by default and should be turned off before the first click.",
-   "value": "",
-   "unit": "",
+   "fact": "In the Dstillery measurement, Blink Fitness members averaged 2.8 miles of travel, Planet Fitness 3.2 miles, SoulCycle 5.5 miles, Equinox 5.7 miles, and The Barre Code 6 miles.",
+   "value": "2.8, 3.2, 5.5, 5.7, 6",
+   "unit": "miles",
+   "as_of": "2017",
+   "quote": "2.8 miles for Blink Fitness, a low-price chain; 3.2 for Planet Fitness; 5.5 for SoulCycle; 5.7 for Equinox; and 6 for The Barre Code",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In the Dstillery measurement, members who went five or more times a month lived closer (3.7 miles) than those who went about once a month (5.1 miles).",
+   "value": "3.7, 5.1",
+   "unit": "miles",
+   "as_of": "2017",
+   "quote": "People who went five or more times a month lived closer (3.7 miles) than people who went about once a month (5.1).",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Google will not draw a location radius smaller than 1 kilometer.",
+   "value": "1",
+   "unit": "kilometer",
    "as_of": "",
-   "quote": "Search Partners and AI Max Arrive Switched On. Turn Both Off Before the First Click.",
+   "quote": "it won't draw one smaller than 1 kilometer",
    "topic": "rules"
   },
   {
-   "fact": "The vendor's Google Ads default location setting, labeled 'Presence or interest', reaches both people in or regularly in the target area and people who have shown interest in it from elsewhere.",
+   "fact": "The page recommends a 3 to 5 mile radius for a budget gym and a 5 to 8 mile radius for a boutique studio as starting points, adjusted for local driving patterns.",
+   "value": "3-5 (budget gym); 5-8 (boutique studio)",
+   "unit": "miles",
+   "as_of": "",
+   "quote": "A budget gym might start at 3 to 5 miles, and a boutique studio at 5 to 8, adjusted for how people actually drive in your area.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Google Ads' 'Presence or interest' location default reaches people in the target area and people who have shown interest in that area from elsewhere.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -69,12 +88,68 @@
    "topic": "rules"
   },
   {
-   "fact": "The vendor's article was dated September 29, 2026.",
-   "value": "September 29, 2026",
+   "fact": "Google's help center says new Search campaigns have AI Max turned on by default.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Google's help center says new Search campaigns have it turned on by default.",
+   "topic": "rules"
+  },
+  {
+   "fact": "New Search campaigns include search partners by default in Google Ads.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "New Search campaigns include search partners by default",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page is dated 2026-09-29.",
+   "value": "2026-09-29",
    "unit": "date",
-   "as_of": "September 29, 2026",
-   "quote": "September 29, 2026",
+   "as_of": "2026-09-29",
+   "quote": "Published Time: 2026-09-29",
    "topic": "other"
+  },
+  {
+   "fact": "Google's default ad schedule setting is \"All day,\" and the page recommends leaving it on \"All day\" at launch.",
+   "value": "All day",
+   "unit": "",
+   "as_of": "",
+   "quote": "Leave the ad schedule on \"All day\" at launch, which is Google's default.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Turning off AI Max also turns off final URL expansion.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Turning off AI Max takes them with it.",
+   "topic": "rules"
+  },
+  {
+   "fact": "According to Google, final URL expansion depends on text customization, so switching off text customization also switches off URL expansion.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "If you ever turn it back on, Google notes that final URL expansion depends on text customization, so switching off text customization also switches off URL expansion.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google's call reporting setting logs calls from ads along with their length.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Call reporting: it logs calls from your ads with their length",
+   "topic": "definition"
+  },
+  {
+   "fact": "Google's auto-tagging stamps each ad visit with an identifier so that conversions can be traced to the keyword that paid for them.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Google stamps each ad visit with an identifier, so a trial booked on the website, or a join entered at the front desk and uploaded later, can be traced to the keyword that paid for it.",
+   "topic": "definition"
   }
  ]
 }

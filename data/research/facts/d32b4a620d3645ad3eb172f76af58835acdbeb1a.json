@@ -1,11 +1,14 @@
 {
  "url": "https://authors.loop.fans/blog/how-much-does-a-loyalty-program-cost",
  "title": "How Much Does a Loyalty Program Cost? (2026)",
- "hash": "e5b05d06e92caa8cef12a219288983b733e257c2",
+ "hash": "d2c982917e77cc6e6ad1378b9561efc4c6bb9d91",
  "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 11019,
+ "chunks": 2,
  "facts": [
   {
-   "fact": "Loop's own page states that its full destination platform starts from $5,000 per year, with the pricing details on its pricing page.",
+   "fact": "Loop's pricing page lists its full destination platform starting at $5,000 per year, according to the vendor's own page.",
    "value": "5000",
    "unit": "USD per year",
    "as_of": "2026",
@@ -13,7 +16,7 @@
    "topic": "pricing"
   },
   {
-   "fact": "Loop's standalone AI Trip Planner has separate pricing and is included in the full destination platform, according to the page.",
+   "fact": "The page states that Loop's standalone AI Trip Planner has separate pricing and is included in the full destination platform.",
    "value": "",
    "unit": "",
    "as_of": "2026",
@@ -21,52 +24,92 @@
    "topic": "pricing"
   },
   {
-   "fact": "The page's illustrative single-café model assumes 300 active members, 30 free-drink redemptions a month at a $2 marginal cost each, and two hours of staff administration a month at $25 an hour.",
+   "fact": "In the page's illustrative single-café model, the owner estimates 300 active members; the page says this is a model, not a typical result or a Loop price quote.",
    "value": "300",
    "unit": "active members",
-   "as_of": "",
+   "as_of": "2026",
    "quote": "Suppose a café estimates 300 active members.",
    "topic": "benchmark"
   },
   {
-   "fact": "In the page's illustrative café example, the estimated monthly program cost is $150, made up of $60 for rewards, $50 for staff time and $40 for tools.",
-   "value": "150",
-   "unit": "USD per month",
-   "as_of": "",
-   "quote": "The estimated monthly cost is $150: $60 for rewards, $50 for staff time and $40 for tools.",
+   "fact": "In the page's illustrative café example, the owner expects 30 reward redemptions a month, each with a $2 marginal cost.",
+   "value": "30",
+   "unit": "redemptions per month",
+   "as_of": "2026",
+   "quote": "Assume, purely for illustration, that the owner expects 30 redemptions a month at a $2 marginal cost each",
    "topic": "benchmark"
   },
   {
-   "fact": "In the page's illustrative café example, each reward costs $2 in marginal fulfilment cost, based on an assumed 30 redemptions per month.",
-   "value": "2",
-   "unit": "USD per redemption",
-   "as_of": "",
-   "quote": "30 redemptions a month at a $2 marginal cost each",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "In the page's illustrative café example, the owner's staff administration is priced at $25 an hour for two hours of work.",
+   "fact": "In the page's illustrative café example, staff administration is assumed at two hours a month at $25 per hour.",
    "value": "25",
    "unit": "USD per hour",
-   "as_of": "",
+   "as_of": "2026",
    "quote": "two hours of staff administration at $25 an hour",
    "topic": "benchmark"
   },
   {
-   "fact": "In the page's illustrative café example, 20 additional visits at an assumed $6 gross margin each contribute $120, which the page says leaves the program below break-even against the $150 monthly cost.",
-   "value": "120",
+   "fact": "In the page's illustrative café example, software and messaging are assumed to cost $40 a month.",
+   "value": "40",
    "unit": "USD per month",
-   "as_of": "",
-   "quote": "If each additional visit contributes $6 of gross margin, 20 visits contribute $120, leaving the program below break-even on that narrow measure.",
+   "as_of": "2026",
+   "quote": "and $40 of software and messaging",
    "topic": "benchmark"
   },
   {
-   "fact": "The page defines total monthly program cost as software plus reward cost plus communications plus integrations/equipment plus staff time plus other fees.",
+   "fact": "The page's illustrative café example calculates an estimated monthly program cost of $150, made up of $60 rewards, $50 staff time and $40 tools.",
+   "value": "150",
+   "unit": "USD per month",
+   "as_of": "2026",
+   "quote": "The estimated monthly cost is $150: $60 for rewards, $50 for staff time and $40 for tools.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In the page's illustrative café example, each additional visit is assumed to contribute $6 of gross margin.",
+   "value": "6",
+   "unit": "USD per visit",
+   "as_of": "2026",
+   "quote": "If each additional visit contributes $6 of gross margin, 20 visits contribute $120",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page advises that a low software fee can be expensive if setup and manual administration are high.",
    "value": "",
    "unit": "",
    "as_of": "2026",
-   "quote": "**Total monthly cost** = software + reward cost + communications + integrations/equipment + staff time + other fees.",
-   "topic": "definition"
+   "quote": "A low software fee can be expensive if setup and manual administration are high",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page lists the metrics to track for a loyalty program: eligible audience, joining rate, first action, active members, redemptions, and the chosen business outcome.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Track the eligible audience, joining rate, first action, active members, redemptions and the chosen business outcome.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends a monthly budget check that compares the forecast with actual software fees, issued points, redeemed rewards, and staff time needed to run the program.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Compare the forecast with actual software fees, issued points, redeemed rewards and the staff time required to run the program.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page advises separating rewards that have been earned from rewards already redeemed, because a large outstanding points balance may represent a future cost.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Separate rewards that have been earned from rewards already redeemed: a large outstanding points balance may represent a future cost.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page advises that if a reward costs more than the contribution it creates, the rule should be revised or the benefit made experiential rather than increasing the software budget.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "If a reward costs more than the contribution it creates, revise the rule or make the benefit experiential rather than increasing the software budget.",
+   "topic": "rules"
   }
  ]
 }

@@ -1,11 +1,14 @@
 {
  "url": "https://support.google.com/adspolicy/answer/9872280?hl=en-IE&co=GENIE.CountryCode%3DBN",
  "title": "Document requirements for advertiser verification - Brunei - Advertising Policies Help",
- "hash": "42a106acc42d45b8ad9ccd874b7e0cb91c81c9cf",
- "fetchedAt": "2026-11-09",
+ "hash": "d737e2b5bd0109d588f009242765e7eb75804e76",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 8660,
+ "chunks": 1,
  "facts": [
   {
-   "fact": "For Brunei, the documents required for advertiser verification depend on whether the Google Ads account type is 'Organisation' or 'Individual'.",
+   "fact": "Required verification documents depend on whether the Google Ads account type is 'Organisation' or 'Individual', which can be checked in the payments profile under the Billing Settings page.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -13,15 +16,23 @@
    "topic": "rules"
   },
   {
-   "fact": "In Brunei, organisations may be required to provide two types of documentation: organisation registration documents and a government-issued photo ID from an authorised representative.",
+   "fact": "Organisations may need to provide two types of documentation for advertiser verification: organisation registration documents and a government-issued photo ID from an authorised representative.",
    "value": "2",
    "unit": "document types",
    "as_of": "",
-   "quote": "Organisations** may be required to provide two different types of documentation for advertiser verification",
+   "quote": "Organisations** may be required to provide two different types of documentation for advertiser verification: organisation registration documents and a government-issued photo ID from an authorised representative.",
    "topic": "rules"
   },
   {
-   "fact": "In Brunei, only government departments and agencies may submit an official letter including full name, address and date as a registration document.",
+   "fact": "Accepted organisation registration documents include a certificate of incorporation or registration, an extract from the commercial register, a business licence, and a tax certificate.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Certificate of incorporation or registration\n> *   Extract from commercial register\n> *   Business licence\n> *   Tax certificate",
+   "topic": "rules"
+  },
+  {
+   "fact": "An official letter with full name, address and date is accepted as a registration document only for government departments and agencies.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -29,15 +40,23 @@
    "topic": "rules"
   },
   {
-   "fact": "An authorised representative for verification is an admin of the Google Ads account and/or the payments profile paying for the ads, and their government-issued photo ID can be issued in any country.",
+   "fact": "Accepted authorised representative photo IDs are a passport, identification card, driving licence, or permanent residence card.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Passport\n> *   Identification card\n> *   Driving licence\n> *   Permanent residence card",
+   "topic": "rules"
+  },
+  {
+   "fact": "An authorised representative is an admin of the Google Ads account and/or the payments profile paying for the ads, and their government-issued photo ID can be issued in any country.",
    "value": "",
    "unit": "",
    "as_of": "",
    "quote": "An authorised representative is an admin of the Google Ads account and/or the payments profile paying for the ads. The government-issued photo ID can be issued in any country.",
-   "topic": "definition"
+   "topic": "rules"
   },
   {
-   "fact": "Individuals in Brunei must submit a Bruneian government-issued photo ID issued as part of the verification programme, with accepted types being passport, national ID card, driving licence or residence permit.",
+   "fact": "Individuals must submit a Bruneian government-issued photo ID issued as part of the verification programme.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -45,7 +64,23 @@
    "topic": "rules"
   },
   {
-   "fact": "In certain cases, individuals in Brunei may need a second proof-of-address document, such as a utility, phone or internet bill or bank statement dated within the last 60 days.",
+   "fact": "Accepted individual photo IDs for Brunei are a passport, national ID card, driving licence, or residence permit.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Passport\n> *   National ID card\n> *   Driving licence\n> *   Residence permit",
+   "topic": "rules"
+  },
+  {
+   "fact": "In certain cases, individuals may be required to submit a second proof-of-address document matching the full name and address already submitted.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "In certain cases, individuals may also be required to submit a second proof-of-address document matching the full name and address already submitted.",
+   "topic": "rules"
+  },
+  {
+   "fact": "A utility, phone, or Internet bill is an acceptable proof-of-address only if it is dated within the last 60 days.",
    "value": "60",
    "unit": "days",
    "as_of": "",
@@ -53,7 +88,7 @@
    "topic": "rules"
   },
   {
-   "fact": "A bank statement used as proof of address for Brunei verification must be dated within the last 60 days.",
+   "fact": "A bank statement is an acceptable proof-of-address only if it is dated within the last 60 days.",
    "value": "60",
    "unit": "days",
    "as_of": "",
@@ -61,19 +96,43 @@
    "topic": "rules"
   },
   {
-   "fact": "Submitted personal data and documents for advertiser verification are not shared with any third party, according to Google's stated policy.",
+   "fact": "The submitted government-issued photo ID must be valid and not expired.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Personal data and documents won't be shared with any third party, as per the Google data protection policy",
+   "quote": "The ID is valid (not expired)",
    "topic": "rules"
   },
   {
-   "fact": "The details in submitted verification documents must exactly match the payments profile info, including the organisation name where applicable.",
+   "fact": "The submitted photo ID image must be in colour, clear and well lit, and must not be a photocopy or screenshot.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "The image is in colour, not black and white",
+   "topic": "rules"
+  },
+  {
+   "fact": "Submitted document details must exactly match the payments profile info, including the organisation name if applicable.",
    "value": "",
    "unit": "",
    "as_of": "",
    "quote": "Make sure that the details in the submitted documents exactly match your payments profile info, including the organisation name, if applicable.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The address on proof-of-address documents will not show in ad disclosures.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "The address won't show in ad disclosure.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Personal data and documents submitted for verification will not be shared with any third party, per Google's data protection policy.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Personal data and documents won't be shared with any third party, as per the [Google data protection policy]",
    "topic": "rules"
   }
  ]

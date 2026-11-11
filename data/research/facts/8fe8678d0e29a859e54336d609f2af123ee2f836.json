@@ -1,11 +1,14 @@
 {
  "url": "https://www.fcc.gov/consumers/guides/stop-unwanted-robocalls-and-texts",
  "title": "Stop Unwanted Robocalls and Texts",
- "hash": "4eee4a7f09fda90e53513f4468786957d94ee415",
+ "hash": "06d7b793d3ad475ebbc020ec7794f72a5d86a6ff",
  "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 8741,
+ "chunks": 1,
  "facts": [
   {
-   "fact": "Under FCC rules, telemarketing calls to a home are prohibited before 8 a.m. and after 9 p.m.",
+   "fact": "Telemarketing calls to a home are prohibited before 8 a.m. and after 9 p.m. under FCC rules.",
    "value": "8 a.m. and 9 p.m.",
    "unit": "time of day",
    "as_of": "",
@@ -13,16 +16,16 @@
    "topic": "rules"
   },
   {
-   "fact": "Most mobile carriers let consumers block spam text messages by forwarding the message to 7726 (SPAM), according to the FCC page.",
-   "value": "7726",
-   "unit": "short code",
+   "fact": "The National Do Not Call Registry can be registered for free at donotcall.gov or by calling 1-888-382-1222 (TTY: 1-866-290-4236).",
+   "value": "1-888-382-1222",
+   "unit": "phone number",
    "as_of": "",
-   "quote": "Most mobile carriers let you block spam by forwarding the message to 7726 (SPAM)—check with your provider.",
+   "quote": "You can register your numbers for free at [donotcall.gov,](http://www.donotcall.gov/ \"Do Not Call Registry Home Page\") or by calling 1-888-382-1222 (TTY: 1-866-290-4236).",
    "topic": "rules"
   },
   {
-   "fact": "FCC rules require a caller to obtain prior written consent, on paper or through electronic means, before making a prerecorded telemarketing call to a home or wireless phone number.",
-   "value": "prior written consent",
+   "fact": "FCC rules require a caller to obtain prior written consent, including through electronic means or a telephone keypress, before making a prerecorded telemarketing call to a home or wireless number.",
+   "value": "",
    "unit": "",
    "as_of": "",
    "quote": "FCC rules require a caller to obtain your prior written consent – on paper or through electronic means, including website forms or a telephone keypress – before they make a prerecorded telemarketing call",
@@ -30,26 +33,42 @@
   },
   {
    "fact": "Prerecorded telemarketing calls must provide an opt-out option at the start of the message.",
-   "value": "at the start of the message",
+   "value": "",
    "unit": "",
    "as_of": "",
    "quote": "Prerecorded telemarketing calls must provide an opt-out option at the start of the message.",
    "topic": "rules"
   },
   {
-   "fact": "Consumers may opt out of any robocall or robotext at any time and in any reasonable manner, even if they previously gave consent.",
-   "value": "any time",
-   "unit": "",
-   "as_of": "",
-   "quote": "You may opt out of any robocall or robotext at any time and in any reasonable manner, even if you previously gave consent for such calls.",
-   "topic": "rules"
-  },
-  {
-   "fact": "All prerecorded voice message calls must include the caller's name, number, and business name at the beginning of the message.",
+   "fact": "FCC rules ban text messages sent to a mobile phone using an autodialer unless the recipient previously consented or the message is for emergency purposes.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "All prerecorded voice message calls must include the caller's name, number, and business name at the beginning of the message.",
+   "quote": "FCC rules ban text messages sent to a mobile phone using an autodialer unless the phone owner previously gave consent to receive the message or the message is sent for emergency purposes.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Commercial texts require written consent, while informational texts may be consented to orally.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Commercial texts require written consent; for informational texts, your consent may be oral.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Most mobile carriers let consumers block spam by forwarding the message to 7726 (SPAM).",
+   "value": "7726",
+   "unit": "short code",
+   "as_of": "",
+   "quote": "Most mobile carriers let you block spam by forwarding the message to 7726 (SPAM)—check with your provider.",
+   "topic": "other"
+  },
+  {
+   "fact": "Landline political robocalls are allowed without prior consent under the Telephone Consumer Protection Act.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Landlines: Political robocalls (autodialed or prerecorded) are allowed without prior consent.",
    "topic": "rules"
   },
   {
@@ -61,47 +80,7 @@
    "topic": "rules"
   },
   {
-   "fact": "FCC rules ban text messages sent to a mobile phone using an autodialer unless the phone owner previously gave consent or the message is for emergency purposes.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "FCC rules ban text messages sent to a mobile phone using an autodialer unless the phone owner previously gave consent to receive the message or the message is sent for emergency purposes.",
-   "topic": "rules"
-  },
-  {
-   "fact": "Commercial texts require written consent, while informational texts may be sent with oral consent.",
-   "value": "written consent for commercial texts; oral consent for informational texts",
-   "unit": "",
-   "as_of": "",
-   "quote": "Commercial texts require written consent; for informational texts, your consent may be oral.",
-   "topic": "rules"
-  },
-  {
-   "fact": "FCC robotext rules apply even if a consumer has not placed their mobile number on the National Do Not Call Registry.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "FCC rules apply even if you have not placed your mobile phone number on the National Do Not Call Registry.",
-   "topic": "rules"
-  },
-  {
-   "fact": "Political robocalls to landlines (autodialed or prerecorded) are allowed without prior consent.",
-   "value": "no prior consent required",
-   "unit": "",
-   "as_of": "",
-   "quote": "Landlines: Political robocalls (autodialed or prerecorded) are allowed without prior consent.",
-   "topic": "rules"
-  },
-  {
-   "fact": "Political calls, texts, or prerecorded messages to cell phones require the recipient's prior permission unless sent manually.",
-   "value": "prior permission required",
-   "unit": "",
-   "as_of": "",
-   "quote": "Cell phones: Political calls, texts, or prerecorded messages require the recipient’s prior permission—unless sent manually.",
-   "topic": "rules"
-  },
-  {
-   "fact": "Robocalls to landlines for market research or polling and for tax-exempt non-profit groups are permitted under FCC rules.",
+   "fact": "FCC rules allow market research or polling calls and calls on behalf of tax-exempt non-profit groups to landline numbers.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -109,76 +88,12 @@
    "topic": "rules"
   },
   {
-   "fact": "Emergency calls about danger to life, safety, or property are exempt from these robocall rules.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "These rules do not apply to emergency calls about danger to life, safety, or property.",
-   "topic": "rules"
-  },
-  {
-   "fact": "According to the FCC, the agency has issued hundreds of millions of dollars in enforcement actions against illegal robocallers.",
-   "value": "hundreds of millions of dollars",
+   "fact": "The FCC has issued hundreds of millions of dollars in enforcement actions against illegal robocallers.",
+   "value": "hundreds of millions",
    "unit": "USD",
    "as_of": "",
    "quote": "Issued hundreds of millions of dollars in enforcement actions against illegal robocallers.",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "The FCC has mandated blocking of illegal international robocall traffic.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Mandated blocking of illegal international robocall traffic.",
-   "topic": "rules"
-  },
-  {
-   "fact": "The FCC allowed phone companies to block numbers not on a customer's contact list (whitelist) when the customer opts in.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Allowed phone companies to block numbers not on a customer's contact list or \"whitelist\" when the customer opts in.",
-   "topic": "rules"
-  },
-  {
-   "fact": "The FCC states that it does not resolve individual robocall complaints but uses them to guide policy and possible enforcement.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "The FCC doesn’t resolve individual complaints but uses them to guide policy and possible enforcement under the Telephone Consumer Protection Act or the Truth in Caller ID Act.",
    "topic": "other"
-  },
-  {
-   "fact": "Under the Telephone Consumer Protection Act and FCC rules, a robocall is a call made using an autodialer or a prerecorded or artificial voice message.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Robocalls are phone calls made using an autodialer or a prerecorded or artificial voice message.",
-   "topic": "definition"
-  },
-  {
-   "fact": "Telephone solicitations are permissible with prior express permission or from tax-exempt non-profits.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Phone solicitations are permissible with prior express permission or from tax-exempt non-profits.",
-   "topic": "rules"
-  },
-  {
-   "fact": "Telemarketing calls based on an established business relationship are not permitted to a landline without the consumer's advanced permission.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Telemarketing calls based on an established business relationship are not permitted to your landline phone without your advanced permission.",
-   "topic": "rules"
-  },
-  {
-   "fact": "Telemarketers calling a home must provide their name along with the name, telephone number, and address where their employer or contractor can be contacted.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "telemarketers calling your home must provide their name along with the name, telephone number, and address where their employer or contractor can be contacted.",
-   "topic": "rules"
   }
  ]
 }

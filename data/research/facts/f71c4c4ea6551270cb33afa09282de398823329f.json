@@ -1,11 +1,30 @@
 {
  "url": "https://www.emarketer.com/content/faq-on-fast--how-free-streaming-tv-reshaping-ad-market-2026",
  "title": "FAQ on FAST: How free streaming TV is reshaping the ad market in 2026",
- "hash": "5eaaa20a210a8d755adcec1a96ab806b65e47a96",
+ "hash": "8df66fe14abfe22edeec602f501fb8923ee34b0d",
  "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 12562,
+ "chunks": 2,
  "facts": [
   {
-   "fact": "EMARKETER forecasts US FAST users will increase 5.8% from 2025 to 2026.",
+   "fact": "As of mid-2025, nearly 1,870 FAST channels operated globally across 21 countries, offering roughly 34,000 unique titles, according to Nielsen company Gracenote.",
+   "value": "1,870",
+   "unit": "channels",
+   "as_of": "mid-2025",
+   "quote": "operated globally across 21 countries, offering roughly 34,000 unique titles, according to Nielsen company Gracenote.",
+   "topic": "definition"
+  },
+  {
+   "fact": "EMARKETER forecasts US FAST users will reach 131.4 million in 2026, representing 54% of all CTV users.",
+   "value": "131.4",
+   "unit": "million",
+   "as_of": "2026",
+   "quote": "representing 54% of all CTV users, EMARKETER forecasts.",
+   "topic": "audience"
+  },
+  {
+   "fact": "EMARKETER forecasts US FAST users will grow 5.8% from 2025 to 2026.",
    "value": "5.8",
    "unit": "%",
    "as_of": "2026",
@@ -37,28 +56,36 @@
    "topic": "benchmark"
   },
   {
-   "fact": "EMARKETER forecasts Roku Channel, the largest FAST platform, will have 97.3 million US viewers in 2026.",
+   "fact": "EMARKETER forecasts Roku Channel, the largest US FAST platform in 2026, will have 97.3 million US viewers.",
    "value": "97.3",
    "unit": "million US viewers",
    "as_of": "2026",
    "quote": "The largest FAST platform with 97.3 million US viewers.",
-   "topic": "forecast"
+   "topic": "audience"
   },
   {
-   "fact": "EMARKETER forecasts Tubi, the second-largest FAST platform, will have 92.5 million US viewers in 2026.",
+   "fact": "EMARKETER forecasts Tubi, the second-largest US FAST platform in 2026, will have 92.5 million US viewers.",
    "value": "92.5",
    "unit": "million US viewers",
    "as_of": "2026",
    "quote": "The second-largest platform with 92.5 million US viewers.",
-   "topic": "forecast"
+   "topic": "audience"
   },
   {
    "fact": "EMARKETER forecasts Paramount-owned Pluto TV will reach 68.6 million US viewers in 2026.",
    "value": "68.6",
    "unit": "million viewers",
    "as_of": "2026",
-   "quote": "Paramount-owned Pluto TV reaches 68.6 million viewers.",
-   "topic": "forecast"
+   "quote": "Pluto TV reaches 68.6 million viewers.",
+   "topic": "audience"
+  },
+  {
+   "fact": "According to Gracenote, Pluto TV, Tubi, and Roku Channel combined accounted for 5.7% of all US TV viewing in May 2025.",
+   "value": "5.7",
+   "unit": "% of all US TV viewing",
+   "as_of": "May 2025",
+   "quote": "in May 2025, according to Gracenote.",
+   "topic": "benchmark"
   },
   {
    "fact": "Per Simon-Kucher data cited by EMARKETER, 42% of paying streamers worldwide think they spend too much on subscriptions.",
@@ -69,7 +96,7 @@
    "topic": "audience"
   },
   {
-   "fact": "Per Simon-Kucher data cited by EMARKETER, 35% of global subscribers plan to cancel at least one service this year.",
+   "fact": "Per Simon-Kucher data cited by EMARKETER, 35% of global subscribers plan to cancel at least one service that year.",
    "value": "35",
    "unit": "%",
    "as_of": "",
@@ -77,9 +104,17 @@
    "topic": "audience"
   },
   {
+   "fact": "Per Parks Associates, 89% of US internet households already pay for at least one streaming service.",
+   "value": "89",
+   "unit": "% of US internet households",
+   "as_of": "",
+   "quote": "already pay for at least one streaming service, per Parks Associates.",
+   "topic": "audience"
+  },
+  {
    "fact": "Per Parks Associates, 59% of accounts across the eight leading subscription AVOD providers are on basic ad-supported tiers.",
    "value": "59",
-   "unit": "%",
+   "unit": "% of accounts",
    "as_of": "",
    "quote": "59% of accounts across the eight leading subscription AVOD providers are on basic ad-supported tiers",
    "topic": "audience"
@@ -87,33 +122,57 @@
   {
    "fact": "Per Nielsen data cited by EMARKETER, adults 18 to 49 spend 63.8% of their TV viewing time with ad-supported content.",
    "value": "63.8",
-   "unit": "%",
+   "unit": "% of TV viewing time",
    "as_of": "",
    "quote": "Adults 18 to 49 spend 63.8% of their TV viewing time with ad-supported content",
-   "topic": "audience"
+   "topic": "benchmark"
   },
   {
-   "fact": "Per the same Nielsen data, streaming accounts for 66.7% of the time adults 18 to 49 spend with ad-supported content.",
+   "fact": "Per Nielsen data cited by EMARKETER, streaming accounts for 66.7% of adults 18 to 49's ad-supported TV viewing time.",
    "value": "66.7",
+   "unit": "% of ad-supported TV viewing time",
+   "as_of": "",
+   "quote": "within that, streaming accounts for 66.7% of time spent",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "According to Nielsen, 28% of Gen Xers report frequently purchasing products they encounter through streaming TV ads.",
+   "value": "28",
    "unit": "%",
    "as_of": "",
-   "quote": "streaming accounts for 66.7% of time spent",
+   "quote": "report frequently purchasing products they encounter through streaming TV ads, according to Nielsen.",
    "topic": "audience"
   },
   {
-   "fact": "Per Gracenote cited by EMARKETER, only 9.2% of CTV advertisers prioritize contextual targeting at the program level.",
+   "fact": "Gracenote counts nearly 1,870 FAST channels globally, per the EMARKETER page.",
+   "value": "1,870",
+   "unit": "channels",
+   "as_of": "",
+   "quote": "With nearly 1,870 FAST channels globally, the landscape is fragmented.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Per Gracenote as cited by EMARKETER, only 9.2% of CTV advertisers prioritize contextual targeting at the program level.",
    "value": "9.2",
    "unit": "%",
    "as_of": "",
    "quote": "Only 9.2% of CTV advertisers prioritize contextual targeting at the program level",
-   "topic": "benchmark"
+   "topic": "audience"
   },
   {
-   "fact": "Per Gracenote cited by EMARKETER, 54% of CTV advertisers say better content metadata would drive more spending.",
+   "fact": "Per Gracenote as cited by EMARKETER, 54% of CTV advertisers say better content metadata would drive more spending.",
    "value": "54",
    "unit": "%",
    "as_of": "",
    "quote": "54% say better content metadata would drive more spending",
+   "topic": "audience"
+  },
+  {
+   "fact": "Per Gracenote data cited by EMARKETER, FAST platforms grew sports shows 30% year-over-year in the first quarter of 2026.",
+   "value": "30",
+   "unit": "% year-over-year",
+   "as_of": "Q1 2026",
+   "quote": "FAST platforms grew 30% in sports shows year-over-year in the first quarter of 2026",
    "topic": "benchmark"
   }
  ]

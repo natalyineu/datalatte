@@ -1,11 +1,22 @@
 {
  "url": "https://dev.meta.ai/docs/muse-code/subscriptions",
  "title": "Subscriptions - Meta Model API",
- "hash": "30e0368e96b8c36f70cb6c4242caca908b254999",
- "fetchedAt": "2026-11-06",
+ "hash": "05c833d6058f25f0ca1dc5bb512fc7fcd58c5d06",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 9609,
+ "chunks": 2,
  "facts": [
   {
-   "fact": "Muse Code offers 4 subscription plans: Everyday Usage, High Usage, Power Usage, and Maximum Usage.",
+   "fact": "A Muse Code subscription is a flat monthly rate for usage of Muse Code, instead of paying per token.",
+   "value": "",
+   "unit": "per month",
+   "as_of": "",
+   "quote": "With a Muse Code subscription, you pay a flat monthly rate for usage of Muse Code, instead of paying per token.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Muse Code has 4 subscription plans: Everyday Usage, High Usage, Power Usage, and Maximum Usage.",
    "value": "4",
    "unit": "plans",
    "as_of": "",
@@ -14,8 +25,8 @@
   },
   {
    "fact": "The Everyday Usage plan lets subscribers send 10-50 prompts every 5 hours, including image and video uploads.",
-   "value": "10-50 prompts every 5 hours",
-   "unit": "prompts per 5 hours",
+   "value": "10-50",
+   "unit": "prompts every 5 hours",
    "as_of": "",
    "quote": "Send 10-50 prompts every 5 hours, including image and video uploads",
    "topic": "pricing"
@@ -23,15 +34,15 @@
   {
    "fact": "The High Usage plan provides 5x more usage than the Everyday Usage plan.",
    "value": "5",
-   "unit": "x Everyday Usage plan",
+   "unit": "x Everyday Usage",
    "as_of": "",
    "quote": "5x more usage than the Everyday Usage plan",
    "topic": "pricing"
   },
   {
-   "fact": "The Power Usage plan provides 20x more usage than the Everyday Usage plan.",
+   "fact": "The Power Usage plan provides 20x more usage than the Everyday Usage plan and includes access to Muse Wonder Full.",
    "value": "20",
-   "unit": "x Everyday Usage plan",
+   "unit": "x Everyday Usage",
    "as_of": "",
    "quote": "20x more usage than the Everyday Usage plan",
    "topic": "pricing"
@@ -39,53 +50,21 @@
   {
    "fact": "The Maximum Usage plan provides 80x more usage than the Everyday Usage plan.",
    "value": "80",
-   "unit": "x Everyday Usage plan",
+   "unit": "x Everyday Usage",
    "as_of": "",
    "quote": "80x more usage than the Everyday Usage plan",
    "topic": "pricing"
   },
   {
-   "fact": "Muse Code subscribers must be 18 or the age of majority in their country to subscribe.",
+   "fact": "Subscribers must be 18 or the age of majority in their country to subscribe to Muse Code.",
    "value": "18",
-   "unit": "years",
+   "unit": "years of age",
    "as_of": "",
    "quote": "You must be 18 or the age of majority in your country to subscribe.",
-   "topic": "rules"
+   "topic": "audience"
   },
   {
-   "fact": "Pay-as-you-go billing on Muse Code is charged per token consumed with a Meta Model API key.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "billed per token consumed with your Meta Model API key",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Any additional API keys a user creates under their Meta Model API account are billed pay-as-you-go rather than under the subscription.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Any additional API keys you create under your Meta Model API account will be billed through pay-as-you-go.",
-   "topic": "pricing"
-  },
-  {
-   "fact": "The subscription works only through the Muse Code CLI while signed in with a Meta Model API account.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "It works only through the Muse Code CLI while signed in with your Meta Model API account.",
-   "topic": "rules"
-  },
-  {
-   "fact": "Subscription benefits and availability may vary by region.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Subscription benefits and availability may vary by region.",
-   "topic": "rules"
-  },
-  {
-   "fact": "Muse Code subscriptions default to Contributor mode, which gives more plan usage in exchange for letting Meta use the user's content to train future Meta models.",
+   "fact": "Muse Code subscriptions default to Contributor mode, which gives more plan usage in exchange for letting Meta use content to train future Meta models.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -93,51 +72,99 @@
    "topic": "rules"
   },
   {
-   "fact": "Contributor mode can be turned off at any time in Muse Code settings, after which future content is not used to train Meta models.",
+   "fact": "The subscription applies only to the Muse Code API key automatically connected during CLI onboarding; additional API keys are billed pay-as-you-go.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "you can turn it off at any time, at which point your future content is not used to train Meta models",
+   "quote": "Any additional API keys you create under your Meta Model API account will be billed through pay-as-you-go.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "A plan upgrade takes effect immediately, and the subscriber is charged a prorated amount for the rest of the current billing cycle.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "A plan upgrade takes effect immediately. You will be charged a prorated amount for the rest of the current billing cycle.",
    "topic": "rules"
   },
   {
-   "fact": "The Power Usage plan includes access to Muse Wonder Full, the higher-capability variant of Muse Wonder.",
+   "fact": "A plan downgrade takes effect at the start of the next billing cycle, and the current plan's usage limit remains until then.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Access to Muse Wonder Full, the higher-capability variant of Muse Wonder",
-   "topic": "definition"
-  },
-  {
-   "fact": "A headless run on a computer with no settings file has Contributor mode off.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "a headless run has Contributor mode off",
+   "quote": "A plan downgrade takes effect at the start of your next billing cycle.",
    "topic": "rules"
   },
   {
-   "fact": "The MUSE_CONTRIBUTOR_MODE environment variable sets Contributor mode for a run, using 1 for on and 0 for off, and a flag given at the same time takes precedence.",
-   "value": "1 (on) or 0 (off)",
-   "unit": "",
-   "as_of": "",
-   "quote": "You can also set the environment variable `MUSE_CONTRIBUTOR_MODE` to `1` (on) or `0` (off) for a run. If you set both, the flag wins.",
-   "topic": "rules"
-  },
-  {
-   "fact": "A subscriber on the Maximum Usage plan who reaches the usage limit must wait for the limit to refresh, because no upgrade is available.",
+   "fact": "A canceled subscription stays active until the end of the current billing cycle.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "If you are on the Maximum Usage plan, you must wait for your limit to refresh.",
+   "quote": "Your subscription stays active until the end of the current billing cycle, then you lose access to all benefits.",
    "topic": "rules"
   },
   {
-   "fact": "Subscribers who reach their plan's usage limit can upgrade to the next plan or wait for the limit to refresh.",
+   "fact": "To avoid future charges, a subscription must be canceled at least 24 hours before the next billing date.",
+   "value": "24",
+   "unit": "hours before next billing date",
+   "as_of": "",
+   "quote": "Cancel at least 24 hours before your next billing date to avoid future charges.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Deactivating an account keeps the subscription active for 30 days before Meta revokes it if not reactivated.",
+   "value": "30",
+   "unit": "days",
+   "as_of": "",
+   "quote": "Deactivating your account keeps the subscription active for 30 days.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Deleting an account cancels the subscription immediately.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "If you reach your plan's usage limit, you can upgrade to the next plan, or wait until your limit refreshes.",
+   "quote": "deleting your account cancels the subscription immediately.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Meta may revoke a subscription after a payment failure when the payment method fails and no backup payment method is on file.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "your payment method fails and you have no backup payment method on file.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Contributor mode can be turned on or off per run with the --contributor-mode flag or the MUSE_CONTRIBUTOR_MODE environment variable (1 for on, 0 for off), and the flag takes precedence if both are set.",
+   "value": "1 (on), 0 (off)",
+   "unit": "",
+   "as_of": "",
+   "quote": "You can also set the environment variable MUSE_CONTRIBUTOR_MODE to 1 (on) or 0 (off) for a run. If you set both, the flag wins.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The subscription renews automatically each month on the date the user first subscribed.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Your subscription renews automatically each month on the date you first subscribed.",
+   "topic": "rules"
+  },
+  {
+   "fact": "If the subscription's original renewal date does not exist in a given month, the user is charged on the last day of that month instead.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "If that date doesn't exist in a given month (for example, the 31st in a 30-day month), you're charged on the last day of that month instead.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Canceling a subscription does not earn a credit or refund unless required by law.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "if you cancel your subscription, you won't receive a credit or refund unless required by law.",
    "topic": "rules"
   }
  ]

@@ -1,86 +1,73 @@
 {
  "url": "https://www.tenthousandfootview.com/how-to-implement-googles-responsive-search-ads/",
  "title": "How To Implement Google's Responsive Search Ads - Ten Thousand Foot View",
- "hash": "b8dba4b2bf0a5142f1a3aced3fa448a92cc0a603",
- "fetchedAt": "2026-11-09",
+ "hash": "d9aedd0f7635f49391f48acef878c6a388893833",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 6216,
+ "chunks": 1,
  "facts": [
   {
-   "fact": "Responsive Search Ads (RSAs) offer up to 3 headlines and 2 description texts, compared with 2 headlines and 1 description text for Expanded Text Ads (ETAs), according to the vendor.",
-   "value": "3 headlines and 2 descriptions",
-   "unit": "headlines and descriptions per ad",
-   "as_of": "2019-01-16",
-   "quote": "this new ad format offers up to 3 headlines and 2 description texts compared with Expanded Text Ads’ (ETAs) 2 headlines and 1 description text",
+   "fact": "Responsive Search Ads offer up to 3 headlines and 2 description texts, compared with Expanded Text Ads' 2 headlines and 1 description text.",
+   "value": "3 headlines, 2 descriptions",
+   "unit": "count",
+   "as_of": "2018",
+   "quote": "this new ad format offers up to 3 headlines and 2 description texts compared with Expanded Text Ads’ (ETAs) 2 headlines and 1 description text.",
    "topic": "definition"
   },
   {
-   "fact": "The vendor states that RSAs provide 90% more text in search ads than ETAs.",
+   "fact": "Responsive Search Ads offer 90% more text than Expanded Text Ads, according to the author.",
    "value": "90",
-   "unit": "% more text",
-   "as_of": "2019-01-16",
+   "unit": "%",
+   "as_of": "2018",
    "quote": "That’s 90% more text available in your search ads!",
-   "topic": "benchmark"
+   "topic": "definition"
   },
   {
    "fact": "An RSA can contain up to 15 different headlines.",
    "value": "15",
-   "unit": "headlines per RSA",
-   "as_of": "2019-01-16",
+   "unit": "headlines",
+   "as_of": "2018",
    "quote": "you can create up to 15 different headlines and 4 different descriptions.",
    "topic": "rules"
   },
   {
-   "fact": "An RSA can contain up to 4 different descriptions.",
-   "value": "4",
-   "unit": "descriptions per RSA",
-   "as_of": "2019-01-16",
-   "quote": "you can create up to 15 different headlines and 4 different descriptions.",
-   "topic": "rules"
-  },
-  {
-   "fact": "Google claims that ad groups with RSAs generate 5-15% more clicks on average (a Google claim, not verified by the vendor).",
+   "fact": "Google claims that ad groups with Responsive Search Ads generate between 5-15% more clicks on average.",
    "value": "5-15",
-   "unit": "% more clicks on average",
-   "as_of": "2019-01-16",
+   "unit": "% more clicks",
+   "as_of": "2018",
    "quote": "Google claims that ad groups with RSAs generate between 5-15% more clicks on average.",
    "topic": "benchmark"
   },
   {
-   "fact": "The RSA editor presents 5 headlines and 2 description texts by default, instead of the 2 headlines and 1 description used in ETAs.",
-   "value": "5 headlines and 2 descriptions",
-   "unit": "fields per new RSA",
-   "as_of": "2019-01-16",
-   "quote": "Instead of 2 headlines and 1 description text you’ll be presented with 5 headlines and 2 description texts.",
-   "topic": "definition"
-  },
-  {
-   "fact": "Google recommends creating at least 5 headlines for an RSA.",
-   "value": "5",
-   "unit": "headlines minimum",
-   "as_of": "2019-01-16",
-   "quote": "Google recommends creating at least 5 headlines, which makes sense",
-   "topic": "rules"
-  },
-  {
-   "fact": "The vendor advises against creating more than 1 RSA per ad group.",
-   "value": "1",
-   "unit": "RSA per ad group maximum (advice)",
-   "as_of": "2019-01-16",
-   "quote": "Don’t create more than 1 RSA per ad group!",
-   "topic": "rules"
-  },
-  {
-   "fact": "Google recommends against using RSAs in branded ad groups.",
+   "fact": "Google recommends against using Responsive Search Ads in branded ad groups.",
    "value": "",
    "unit": "",
-   "as_of": "2019-01-16",
+   "as_of": "2018",
    "quote": "Google recommends against using RSAs in branded ad groups.",
    "topic": "rules"
   },
   {
-   "fact": "Google rolled out the ability to view impressions by asset (ad copy snippet) and by combination (complete ad units) in the week before the article was published.",
+   "fact": "The author recommends creating at least 5 headlines for an RSA, as Google recommends, because 3 headlines would mean running the same headlines repeatedly.",
+   "value": "5",
+   "unit": "headlines",
+   "as_of": "2018",
+   "quote": "Google recommends creating at least 5 headlines, which makes sense, since having only 3 means running the same headlines over and over",
+   "topic": "rules"
+  },
+  {
+   "fact": "Creating a new RSA in the Google Ads editor initially presents 5 headlines and 2 description texts.",
+   "value": "5 headlines, 2 descriptions",
+   "unit": "count",
+   "as_of": "2018",
+   "quote": "Instead of 2 headlines and 1 description text you’ll be presented with 5 headlines and 2 description texts.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google rolled out the ability to view impressions by asset (ad copy snippet) and by combination for RSAs shortly before the article was published.",
    "value": "",
    "unit": "",
-   "as_of": "2019-01-16",
+   "as_of": "2018",
    "quote": "Just this past week, Google did roll out the ability to view impressions by asset (ad copy snippet) as well as impressions by combination (complete ad units).",
    "topic": "other"
   }

@@ -1,11 +1,14 @@
 {
  "url": "https://docs.windsurf.com/fr/plugins/cascade/cascade-overview",
  "title": "Windsurf - Cascade",
- "hash": "fedad74687f7ccfa5c6583256d0e86e0078eacd6",
- "fetchedAt": "2026-11-06",
+ "hash": "10d2217fbab2cef4b1f5f41a4ab33cd3e45de0dd",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 55338,
+ "chunks": 3,
  "facts": [
   {
-   "fact": "Cascade can perform up to 25 tool calls per prompt.",
+   "fact": "Cascade can perform up to 25 tool calls per prompt according to Windsurf's documentation.",
    "value": "25",
    "unit": "tool calls per prompt",
    "as_of": "",
@@ -21,7 +24,7 @@
    "topic": "rules"
   },
   {
-   "fact": "Cascade's auto-execution has three levels in JetBrains: Off, Auto, and Turbo.",
+   "fact": "Cascade's automatic execution has three levels in JetBrains: Off, Auto, and Turbo.",
    "value": "3",
    "unit": "levels",
    "as_of": "",
@@ -29,7 +32,7 @@
    "topic": "rules"
   },
   {
-   "fact": "The Auto execution level is available only with premium models.",
+   "fact": "The Auto execution level is available only with premium models, per Windsurf's documentation.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -37,31 +40,95 @@
    "topic": "rules"
   },
   {
-   "fact": "For Teams and Enterprise users, administrators can set a maximum auto-execution level, which users cannot exceed.",
+   "fact": "For Teams and Enterprise users, administrators can set a maximum automatic execution level, and users cannot exceed it.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Pour les utilisateurs Teams et Enterprise, les administrateurs peuvent définir un niveau maximal d’exécution automatique autorisé.",
+   "quote": "les administrateurs peuvent définir un niveau maximal d’exécution automatique autorisé. Les utilisateurs peuvent sélectionner n’importe quel niveau jusqu’à ce maximum, mais ne peuvent pas le dépasser.",
    "topic": "rules"
   },
   {
-   "fact": "Cascade's cancellation of changes is currently irreversible, according to the page.",
+   "fact": "Cascade reverts are currently irreversible, according to Windsurf's documentation.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Les annulations sont actuellement irréversibles, soyez prudent !",
+   "quote": "Les annulations sont actuellement irréversibles, soyez prudent!",
    "topic": "rules"
   },
   {
-   "fact": "Cascade has two modes, Write and Chat; Write lets Cascade create and modify the codebase, while Chat answers questions about the codebase or general programming principles.",
-   "value": "2",
-   "unit": "modes",
+   "fact": "In JetBrains, Cascade can be opened by pressing Cmd/Ctrl+L or clicking the Cascade icon.",
+   "value": "Cmd/Ctrl+L",
+   "unit": "shortcut",
    "as_of": "",
-   "quote": "Cascade est disponible en deux modes : **Write** et **Chat**.",
+   "quote": "Pour ouvrir Cascade, appuyez sur `Cmd/Ctrl+L` ou cliquez sur l’icône Cascade.",
+   "topic": "other"
+  },
+  {
+   "fact": "Cascade's Write mode lets it create and modify the codebase, while Chat mode is optimized for questions about the codebase or general programming principles.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Le mode Write permet à Cascade de créer et de modifier votre codebase, tandis que le mode Chat est optimisé pour répondre à des questions",
    "topic": "definition"
   },
   {
-   "fact": "Voice input in its current version can transcribe the user's voice into text.",
+   "fact": "Windsurf's Cascade can be told to ignore specific files by listing them in a .codeiumignore file at the root of the workspace, which prevents Cascade from viewing, editing, or creating files at those paths.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Si vous souhaitez que Cascade ignore certains fichiers, vous pouvez les ajouter à `.codeiumignore` à la racine de votre workspace.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Windsurf's .codeiumignore file accepts file paths written in a format similar to .gitignore.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Vous pouvez déclarer les chemins de fichiers dans un format similaire à `.gitignore`.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The global .codeiumignore file for Windsurf is additive: its rules are combined with any repository-specific .codeiumignore file.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "et s’ajoutera à tout fichier `.codeiumignore` propre à un dépôt.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Each time a user types 'continue' to resume an interrupted Cascade run, that counts as a new prompt.",
+   "value": "1",
+   "unit": "new prompt per continue",
+   "as_of": "",
+   "quote": "comptera comme une nouvelle invite.",
+   "topic": "rules"
+  },
+  {
+   "fact": "At the Off level, Cascade never automatically runs terminal commands except those on the user's allowlist.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "N’exécute jamais automatiquement les commandes du terminal, sauf celles figurant dans votre liste d’autorisation.",
+   "topic": "rules"
+  },
+  {
+   "fact": "At the Turbo level, Cascade always automatically runs terminal commands and browser actions, except those on the user's denylist.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Exécute toujours automatiquement les commandes du terminal et les actions du navigateur",
+   "topic": "rules"
+  },
+  {
+   "fact": "Windsurf's documentation states that Cascade reverts are currently irreversible.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Les annulations sont actuellement irréversibles",
+   "topic": "rules"
+  },
+  {
+   "fact": "Cascade's voice input can currently transcribe the user's voice into text.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -69,19 +136,35 @@
    "topic": "definition"
   },
   {
-   "fact": "Cascade can be opened in JetBrains with the Cmd/Ctrl+L shortcut.",
+   "fact": "Cascade in JetBrains is opened with the Cmd/Ctrl+L shortcut or by clicking the Cascade icon.",
    "value": "Cmd/Ctrl+L",
    "unit": "keyboard shortcut",
    "as_of": "",
-   "quote": "Pour ouvrir Cascade, appuyez sur `Cmd/Ctrl+L` ou cliquez sur l’icône Cascade.",
+   "quote": "Pour ouvrir Cascade, appuyez sur",
    "topic": "other"
   },
   {
-   "fact": "Files listed in .codeiumignore at the workspace root are hidden from Cascade, which cannot view, modify, or create files in those paths.",
+   "fact": "Cascade's Write mode lets it create and modify the codebase, while Chat mode is for answering questions about the codebase or general programming principles.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Cela empêchera Cascade d’afficher, de modifier ou de créer des fichiers dans les chemins indiqués.",
+   "quote": "le mode Chat est optimisé pour répondre à des questions concernant votre codebase",
+   "topic": "definition"
+  },
+  {
+   "fact": "In Cascade, pressing Enter again in an empty text box sends a queued message immediately.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Appuyez de nouveau sur Entrée dans une zone de texte vide pour l’envoyer tout de suite.",
+   "topic": "other"
+  },
+  {
+   "fact": "For Enterprise clients managing multiple repositories, a global .codeiumignore file in the ~/.codeium/ folder applies exclusion rules to all Windsurf workspaces on the system.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Pour les clients Enterprise gérant plusieurs dépôts",
    "topic": "rules"
   }
  ]

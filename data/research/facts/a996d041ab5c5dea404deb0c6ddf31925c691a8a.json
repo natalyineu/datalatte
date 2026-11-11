@@ -1,88 +1,187 @@
 {
  "url": "https://www.cheers.tech/geo-academy/is-google-business-profile-enough-for-ai-visibility",
  "title": "Is Google Business Profile enough for AI visibility?",
- "hash": "fe5552e9f4dcab0c1d2f959bc518dc70ca7ee887",
- "fetchedAt": "2026-11-09",
+ "hash": "1c06bbfbcb00cd5ee5a815b830408087beda15a0",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 21260,
+ "chunks": 3,
  "facts": [
   {
-   "fact": "Cheers' Market Baseline reports that business websites supplied 68.1% of pooled citations in local AI results.",
+   "fact": "Cheers' Market Baseline reports that business websites supplied 68.1% of pooled AI citations in the 28 days ending September 2, 2026.",
    "value": "68.1",
-   "unit": "%",
-   "as_of": "28 days ending September 2, 2026",
-   "quote": "Business websites supplied **68.1% of pooled citations**, while Google surfaces supplied **3.3%**",
+   "unit": "% of pooled citations",
+   "as_of": "2026-09-02",
+   "quote": "Business websites 68.1% Pooled share of citations",
    "topic": "benchmark"
   },
   {
-   "fact": "Cheers' Market Baseline reports that Google surfaces supplied 3.3% of pooled citations in local AI results.",
+   "fact": "Cheers' Market Baseline reports that Google surfaces supplied 3.3% of pooled AI citations in the 28 days ending September 2, 2026.",
    "value": "3.3",
-   "unit": "%",
-   "as_of": "28 days ending September 2, 2026",
-   "quote": "Google surfaces supplied **3.3%**",
+   "unit": "% of pooled citations",
+   "as_of": "2026-09-02",
+   "quote": "Google surfaces 3.3% Pooled share of citations",
    "topic": "benchmark"
   },
   {
-   "fact": "The Cheers Market Baseline citation figures come from 49,677 local-intent runs.",
-   "value": "49677",
-   "unit": "runs",
-   "as_of": "28 days ending September 2, 2026",
-   "quote": "100 metros, four engines, 49,677 runs, 356,019 citations, aggregate only",
+   "fact": "The Cheers Market Baseline citation figures cover 49,677 local-intent runs and 356,019 citations across 100 metros and four engines over 28 days ending September 2, 2026.",
+   "value": "49677 runs; 356019 citations",
+   "unit": "runs; citations",
+   "as_of": "2026-09-02",
+   "quote": "Cheers Market Baseline, 28 days ending September 2, 2026; 100 metros, four engines, 49,677 runs, 356,019 citations, aggregate only",
    "topic": "benchmark"
   },
   {
-   "fact": "The Cheers Market Baseline citation figures include 356,019 citations.",
-   "value": "356019",
-   "unit": "citations",
-   "as_of": "28 days ending September 2, 2026",
-   "quote": "100 metros, four engines, 49,677 runs, 356,019 citations, aggregate only",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "The Cheers Market Baseline covers 100 metros and four AI engines.",
-   "value": "100",
-   "unit": "metros",
-   "as_of": "28 days ending September 2, 2026",
-   "quote": "100 metros, four engines, 49,677 runs, 356,019 citations, aggregate only",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "The Cheers Market Baseline citation statistics were corrected on September 23, 2026.",
-   "value": "",
-   "unit": "",
-   "as_of": "September 23, 2026",
+   "fact": "Cheers states the Market Baseline citation figures were corrected on September 23, 2026.",
+   "value": "2026-09-23",
+   "unit": "date",
+   "as_of": "2026-09-23",
    "quote": "aggregate only (corrected September 23, 2026)",
    "topic": "other"
   },
   {
-   "fact": "Google Search Central's guidance on local businesses and AI search was updated July 10, 2026.",
-   "value": "",
-   "unit": "",
-   "as_of": "July 10, 2026",
+   "fact": "Google Search Central guidance telling local businesses to keep Business Profile information current for AI search was updated July 10, 2026, per the page.",
+   "value": "2026-07-10",
+   "unit": "date",
+   "as_of": "2026-07-10",
    "quote": "That guidance was updated July 10, 2026.",
    "topic": "rules"
   },
   {
-   "fact": "Google's documentation states that businesses should not just recycle what others have said or what a generative AI model could easily produce.",
+   "fact": "Google states that local results are mainly based on relevance, distance, and prominence, and that review count and rating can factor into local ranking.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Don't just recycle what others on the internet have already said, or could easily be produced by a generative AI model.",
+   "quote": "Google says local results are mainly based on relevance, distance, and prominence. ",
    "topic": "rules"
   },
   {
-   "fact": "Google says AI Overviews and AI Mode rely on the same Search fundamentals, including indexed pages, crawlable content, internal links, visible text, page experience, and structured data that matches the page.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Google also says AI Overviews and AI Mode rely on the same Search fundamentals: indexed pages, crawlable content, internal links, visible text, page experience, and structured data that matches the page.",
-   "topic": "rules"
-  },
-  {
-   "fact": "The article was published May 30, 2026 and updated September 2, 2026.",
-   "value": "",
-   "unit": "",
-   "as_of": "September 2, 2026",
-   "quote": "Published May 30, 2026Updated September 2, 2026",
+   "fact": "The article was published May 30, 2026, updated September 2, 2026, and last verified September 2, 2026.",
+   "value": "2026-05-30; 2026-09-02",
+   "unit": "date",
+   "as_of": "2026-09-02",
+   "quote": "Published May 30, 2026 Updated September 2, 2026",
    "topic": "other"
+  },
+  {
+   "fact": "Google's service-area guidance says service areas should be set by city, postal code, or another area type, not by a radius.",
+   "value": "city, postal code, or other area type (not radius)",
+   "unit": "",
+   "as_of": "",
+   "quote": "with service areas set by city, postal code, or another area type, not by a radius.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google's guidelines for chains say locations that provide the same service should generally maintain consistent names and categories.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Google's guidelines for chains say locations that provide the same service should generally maintain consistent names and categories.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google's profile guidelines prohibit low-quality or irrelevant content in Business Profile descriptions.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "they prohibit low-quality or irrelevant content.",
+   "topic": "rules"
+  },
+  {
+   "fact": "According to OpenAI's ChatGPT search documentation as cited in the article, ChatGPT can search the web and provide answers with links to relevant web sources.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "ChatGPT can search the web and provide answers with links to relevant web sources.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Google explains that Business Profile information can come from business owners, publicly available web content, licensed third-party data, user contributions, reviews, and photos.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Google also explains that Business Profile information can come from business owners, publicly available web content, licensed third-party data, user contributions, reviews, photos",
+   "topic": "definition"
+  },
+  {
+   "fact": "The article recommends reading a profile's review sample from the last 60 to 90 days when auditing a Google Business Profile.",
+   "value": "60 to 90",
+   "unit": "days",
+   "as_of": "",
+   "quote": "read a review sample from the last 60 to 90 days",
+   "topic": "other"
+  },
+  {
+   "fact": "The article states that Google AI Mode can use query fan-out to inspect several pieces of evidence behind one local question.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Google AI Mode can use query fan-out to inspect several pieces of evidence behind one local question.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The Google Search Central guide 'AI features and your website' is dated July 2026 on the page.",
+   "value": "July 2026",
+   "unit": "date",
+   "as_of": "July 2026",
+   "quote": "[AI features and your website](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide), Google Search Central, July 2026.",
+   "topic": "other"
+  },
+  {
+   "fact": "The Cheers Research 'AI Visibility Statistics' page is dated September 2026.",
+   "value": "September 2026",
+   "unit": "date",
+   "as_of": "September 2026",
+   "quote": "[AI Visibility Statistics](https://cheers.tech/research/ai-visibility-statistics), Cheers Research, September 2026.",
+   "topic": "other"
+  },
+  {
+   "fact": "The Cheers Research 'Research methodology' page is dated September 2026.",
+   "value": "September 2026",
+   "unit": "date",
+   "as_of": "September 2026",
+   "quote": "[Research methodology](https://cheers.tech/research/methodology), Cheers Research, September 2026.",
+   "topic": "other"
+  },
+  {
+   "fact": "The page's listed sources were checked on September 2, 2026.",
+   "value": "September 2, 2026",
+   "unit": "date",
+   "as_of": "2026-09-02",
+   "quote": "Checked September 2, 2026.",
+   "topic": "other"
+  },
+  {
+   "fact": "A local-visibility branch is marked supported only when the Google Business Profile, page, reviews, citations, schema, and third-party mentions all agree.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "If GBP, page, reviews, citations, schema, and third-party mentions agree, mark the branch as supported.",
+   "topic": "rules"
+  },
+  {
+   "fact": "If the answer depends only on Google Business Profile, the branch is considered under-supported.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "If the answer depends only on Google Business Profile, the branch is under-supported.",
+   "topic": "rules"
+  },
+  {
+   "fact": "When one artifact disagrees with the others, the page recommends assigning that artifact to an owner before publishing more content.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "If one artifact disagrees, assign that artifact to an owner before publishing more content.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google Business Profile anchors category, address or service area, hours, phone, services, photos, and reviews for Google surfaces, but is not sufficient alone.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "GBP anchors category, address or service area, hours, phone, services, photos, and reviews for Google surfaces. It is not enough alone.",
+   "topic": "definition"
   }
  ]
 }

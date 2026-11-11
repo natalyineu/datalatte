@@ -1,7 +1,227 @@
 {
  "url": "https://developers.google.com/search/docs/appearance/structured-data/local-business",
  "title": "Local Business (LocalBusiness) Structured Data | Google Search Central  |  Documentation  |  Google for Developers",
- "hash": "8e150934ba1ad7eadec9952c02456b7b3a59f3fb",
- "fetchedAt": "2026-11-10",
- "facts": []
+ "hash": "0d4749f58a5343db0083328d19b3993dcb4ac50a",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 34161,
+ "chunks": 4,
+ "facts": [
+  {
+   "fact": "Google's Restaurant carousel for Local Business structured data is limited to a small set of restaurant providers, and providers must register interest through a form to participate.",
+   "value": "limited access",
+   "unit": "",
+   "as_of": "",
+   "quote": "The Restaurant carousel is limited to a small set of restaurant providers. If you would like to participate, register your interest in our form.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google's guidance says non-critical issues flagged by the Rich Results Test are not required for rich results eligibility, though fixing them can improve structured data quality.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Consider also fixing any non-critical issues that may be flagged in the tool, as they can help improve the quality of your structured data (however, this isn't necessary to be eligible for rich results).",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google requires that pages with structured data be accessible to Google and not blocked by robots.txt, the noindex tag, or login requirements, as checked with the URL Inspection tool.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Be sure that your page is accessible to Google and not blocked by a robots.txt file, the noindex tag, or login requirements.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Excluding the validFrom and validThrough properties in openingHoursSpecification signifies that the business hours are valid year-round.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Excluding the `validFrom` and `validThrough` properties signify that the hours are valid year-round.",
+   "topic": "rules"
+  },
+  {
+   "fact": "To show a business as open 24 hours a day, set the opens property to \"00:00\" and the closes property to \"23:59\".",
+   "value": "00:00 to 23:59",
+   "unit": "time (24-hour clock)",
+   "as_of": "",
+   "quote": "set the `open` property to \"00:00\" and the `closes` property to \"23:59\".",
+   "topic": "rules"
+  },
+  {
+   "fact": "To show a business as closed all day, set both the opens and closes properties to \"00:00\".",
+   "value": "00:00",
+   "unit": "time (24-hour clock)",
+   "as_of": "",
+   "quote": "To show a business is closed all day, set both `opens` and `closes` properties to \"00:00\".",
+   "topic": "rules"
+  },
+  {
+   "fact": "Seasonal business hours are defined by using both the validFrom and validThrough properties.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Use both the `validFrom` and `validThrough` properties to define seasonal hours.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The seasonal hours example in the Google documentation uses a validFrom date of 2015-12-23 and a validThrough date of 2016-01-05 for a winter holiday closure.",
+   "value": "2015-12-23 to 2016-01-05",
+   "unit": "date range",
+   "as_of": "",
+   "quote": "\"validFrom\": \"2015-12-23\"",
+   "topic": "rules"
+  },
+  {
+   "fact": "For hours past midnight, opening and closing hours are defined using a single OpeningHoursSpecification property, as shown in the example of Saturday 18:00 until Sunday 03:00.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "For hours past midnight, define opening and closing hours using a single `OpeningHoursSpecification` property.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Restaurant carousel is currently limited to a small set of restaurant providers.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "The Restaurant carousel is currently limited to a small set of restaurant providers.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Local Business required properties listed by Google are address and name.",
+   "value": "address, name",
+   "unit": "",
+   "as_of": "",
+   "quote": "You must include the required properties for your content to be eligible for display as a rich result.",
+   "topic": "rules"
+  },
+  {
+   "fact": "If a business has multiple types, they must be specified as an array, and additionalType is not supported.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "If you have multiple types, specify them as an array (`additionalType` isn't supported).",
+   "topic": "rules"
+  },
+  {
+   "fact": "For the address property, Google recommends including as many PostalAddress properties as possible, since more properties produce a higher-quality result.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Include as many properties as possible. The more properties you provide, the higher quality the result is to users.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google's guidelines state that businesses must follow the listed guidelines to be eligible to appear in Local Business rich results.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "You must follow these guidelines to be eligible to appear in Local Business rich results.",
+   "topic": "rules"
+  },
+  {
+   "fact": "For businesses with departments that have distinct properties such as hours or telephone numbers, each department can be marked up with its own element under the department property.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "you can mark up the `department` property with an element for each department.",
+   "topic": "rules"
+  },
+  {
+   "fact": "For LocalBusiness structured data, the geo.latitude and geo.longitude values must have a precision of at least 5 decimal places.",
+   "value": "5",
+   "unit": "decimal places",
+   "as_of": "",
+   "quote": "The precision must be at least 5 decimal places.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google will not show a price range for a business if the priceRange text is 100 characters or longer; the field must be shorter than 100 characters.",
+   "value": "100",
+   "unit": "characters",
+   "as_of": "",
+   "quote": "This field must be shorter than 100 characters. If it's 100 characters or longer, Google won't show a price range for the business.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The openingHoursSpecification.closes time must be in hh:mm:ss format.",
+   "value": "hh:mm:ss",
+   "unit": "",
+   "as_of": "",
+   "quote": "The time the business location closes, in hh:mm:ss format.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The openingHoursSpecification.opens time must be in hh:mm:ss format.",
+   "value": "hh:mm:ss",
+   "unit": "",
+   "as_of": "",
+   "quote": "The time the business location opens, in hh:mm:ss format.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Seasonal closure dates for openingHoursSpecification.validFrom and validThrough must be in YYYY-MM-DD format.",
+   "value": "YYYY-MM-DD",
+   "unit": "",
+   "as_of": "",
+   "quote": "The start date of a seasonal business closure, in YYYY-MM-DD format.",
+   "topic": "rules"
+  },
+  {
+   "fact": "For restaurant carousel eligibility, Google recommends multiple high-resolution images with a minimum of 50K pixels when multiplying width and height.",
+   "value": "50000",
+   "unit": "pixels (width x height)",
+   "as_of": "",
+   "quote": "multiple high-resolution images (minimum of 50K pixels when multiplying width and height)",
+   "topic": "rules"
+  },
+  {
+   "fact": "For restaurant carousel images, Google recommends providing images with aspect ratios of 16x9, 4x3, and 1x1.",
+   "value": "16x9, 4x3, 1x1",
+   "unit": "aspect ratios",
+   "as_of": "",
+   "quote": "we recommend providing multiple high-resolution images (minimum of 50K pixels when multiplying width and height) with the following aspect ratios: 16x9, 4x3, and 1x1.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The telephone property should include the country code and area code in the phone number.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Be sure to include the country code and area code in the phone number.",
+   "topic": "rules"
+  },
+  {
+   "fact": "For a department nested under a store, the department name should be formatted as '{store name} {department name}', unless the department name is explicitly branded.",
+   "value": "{store name} {department name}",
+   "unit": "",
+   "as_of": "",
+   "quote": "Include the store name with the department name in the following format: `{store name} {department name}`.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The aggregateRating and review properties are only recommended for sites that capture reviews about other local businesses.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "This property is only recommended for sites that capture reviews about other local businesses",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google notes it may take several days after publishing a page for Google to find and crawl it.",
+   "value": "several days",
+   "unit": "days",
+   "as_of": "",
+   "quote": "it may take several days after publishing a page for Google to find and crawl it.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google does not guarantee that features consuming structured data will show up in search results.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Google does not guarantee that features that consume structured data will show up in search results.",
+   "topic": "rules"
+  }
+ ]
 }

@@ -1,27 +1,46 @@
 {
  "url": "https://support.google.com/google-ads/answer/2404190?hl=en",
  "title": "About Display ads and the Google Display Network - Google Ads Help",
- "hash": "d66f6198a8fb8d4befa9e3d5d638c699ea0db9d1",
- "fetchedAt": "2026-11-09",
+ "hash": "628a13d5deaf0ae54443b8b204e912633c44f19f",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 11855,
+ "chunks": 2,
  "facts": [
   {
    "fact": "Google's own page says Display campaigns can reach people worldwide across 35 million websites and apps, plus Google-owned properties such as YouTube and Gmail.",
    "value": "35 million",
-   "unit": "websites and apps",
+   "unit": "million websites and apps",
    "as_of": "",
    "quote": "Display campaigns can reach people worldwide across 35 million websites and apps, and on Google-owned properties (YouTube and Gmail).",
    "topic": "audience"
   },
   {
-   "fact": "Google's own page says the Display Network helps advertisers reach people as they browse millions of websites, apps, and Google-owned properties.",
-   "value": "millions",
-   "unit": "websites, apps, and Google-owned properties",
+   "fact": "Optimized targeting is the default targeting method for Google Display campaigns, and advertisers can select a different targeting method instead.",
+   "value": "",
+   "unit": "",
    "as_of": "",
-   "quote": "The Display Network helps you reach people as they browse millions of websites, apps, and Google-owned properties (such as YouTube and Gmail).",
-   "topic": "definition"
+   "quote": "Optimized targeting is set as the default targeting method for your Display campaigns. If you prefer not to use optimized targeting, you can select a different form of targeting.",
+   "topic": "rules"
   },
   {
-   "fact": "Google states that existing Smart Display campaigns migrated into the unified Display campaign structure without any action required from the advertiser.",
+   "fact": "Advertisers can choose to pay for conversions instead of clicks on Display campaigns that use Target CPA bidding, by selecting Conversions under the 'Pay for' header in the Bidding section.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "You can pay for conversions, instead of clicks on Display campaigns that use Target CPA bidding.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google says advertisers can use its library of images for Responsive display ads at no cost.",
+   "value": "0",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "You can also use our library of images at no cost.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Google states that Smart Display campaigns were integrated into the standard Display campaign offering, and existing Smart Display campaigns migrated automatically without any action required from advertisers.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -29,7 +48,7 @@
    "topic": "rules"
   },
   {
-   "fact": "Google states that the migration of Smart Display campaigns into the unified Display campaign structure shouldn't cause any fluctuations in campaign performance.",
+   "fact": "Google states that migrating Smart Display campaigns to the unified Display campaign structure should not cause fluctuations in campaign performance.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -37,12 +56,52 @@
    "topic": "rules"
   },
   {
-   "fact": "Google defines Smart bidding as AI-driven bidding that optimizes for conversions or conversion value in each and every auction.",
+   "fact": "Google defines Smart bidding as bidding that uses AI to optimize for conversions or conversion value in each auction.",
    "value": "",
    "unit": "",
    "as_of": "",
    "quote": "Bidding that uses AI to optimize for conversions or conversion value in each and every auction.",
    "topic": "definition"
+  },
+  {
+   "fact": "Google states that uploaded Display ads can be created as images in different sizes or as HTML5.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "You can upload ads as images in different sizes or HTML5.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Changes to bids, budget, or targeting in the Google Display Network can take 12–24 hours to apply and may not show right away.",
+   "value": "12–24 hours",
+   "unit": "hours",
+   "as_of": "",
+   "quote": "Changes in the Display Network, such as adjustments to bids, budget, or targeting, can take 12–24 hours to apply and may not show right away.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Major structural changes such as creating a new campaign or bid strategy may display a temporary \"Learning\" status for up to 7 days.",
+   "value": "7",
+   "unit": "days",
+   "as_of": "",
+   "quote": "Major structural changes, like creating a new campaign or bid strategy, may display a temporary \"Learning\" status for up to 7 days.",
+   "topic": "rules"
+  },
+  {
+   "fact": "When there are multiple changes made within a 24 hour period, they may be applied outside of the chronological order of change history.",
+   "value": "24",
+   "unit": "hours",
+   "as_of": "",
+   "quote": "When there are multiple changes made within a 24 hour period, they may be applied outside of the chronological order of change history.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Reactivating a Display campaign that has been paused for an extended period restarts the learning phase.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "If your campaign has been paused for an extended period, reactivating it will also restart the learning phase.",
+   "topic": "rules"
   }
  ]
 }

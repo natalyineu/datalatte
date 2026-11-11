@@ -1,64 +1,355 @@
 {
  "url": "https://www.bls.gov/ooh/personal-care-and-service/animal-care-and-service-workers.htm",
  "title": "Animal Care and Service Workers",
- "hash": "36994d53a093cfc0dc15b7aeffdfa5b38b5eac15",
- "fetchedAt": "2026-11-10",
+ "hash": "8a1856e6ceefd9fc2307504d0e4df04276a952b6",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 25119,
+ "chunks": 3,
  "facts": [
   {
-   "fact": "The BLS reports a 2025 median pay of $35,530 per year for animal care and service workers.",
-   "value": "35530",
-   "unit": "USD per year",
-   "as_of": "2025",
-   "quote": "$35,530 per year",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "The BLS reports a 2025 median pay of $17.08 per hour for animal care and service workers.",
-   "value": "17.08",
-   "unit": "USD per hour",
-   "as_of": "2025",
-   "quote": "$17.08 per hour",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "The median annual wage for animal caretakers was $35,360 in May 2025, according to BLS.",
-   "value": "35360",
-   "unit": "USD per year",
-   "as_of": "May 2025",
-   "quote": "The median annual wage for animal caretakers was $35,360 in May 2025.",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "The median annual wage for animal trainers was $39,990 in May 2025, according to BLS.",
-   "value": "39990",
-   "unit": "USD per year",
-   "as_of": "May 2025",
-   "quote": "The median annual wage for animal trainers was $39,990 in May 2025.",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "BLS projects employment of animal care and service workers to grow 11% from 2025 to 2035, which it describes as much faster than the average for all occupations.",
+   "fact": "The BLS projects employment of animal care and service workers to grow 11 percent from 2025 to 2035, much faster than the average for all occupations.",
    "value": "11",
    "unit": "%",
-   "as_of": "2025-2035",
+   "as_of": "2025–2035",
    "quote": "Overall employment of animal care and service workers is projected to grow 11 percent from 2025 to 2035, much faster than the average for all occupations.",
    "topic": "forecast"
   },
   {
-   "fact": "BLS projects about 69,400 openings for animal care and service workers each year, on average, over the decade.",
-   "value": "69400",
+   "fact": "The BLS projects about 69,400 openings for animal care and service workers each year, on average, over the decade.",
+   "value": "69,400",
    "unit": "openings per year",
-   "as_of": "2025-2035",
+   "as_of": "2025–2035",
    "quote": "About 69,400 openings for animal care and service workers are projected each year, on average, over the decade.",
    "topic": "forecast"
   },
   {
-   "fact": "Animal care and service workers typically have a high school diploma or equivalent and learn the occupation on the job, and many employers prefer candidates with experience working with animals.",
+   "fact": "The BLS reports the median annual wage for animal caretakers was $35,360 in May 2025.",
+   "value": "$35,360",
+   "unit": "USD per year",
+   "as_of": "May 2025",
+   "quote": "The median annual wage for animal caretakers was $35,360 in May 2025.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The BLS reports the median annual wage for animal trainers was $39,990 in May 2025.",
+   "value": "$39,990",
+   "unit": "USD per year",
+   "as_of": "May 2025",
+   "quote": "The median annual wage for animal trainers was $39,990 in May 2025.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The BLS states that many employers prefer to hire animal care and service worker candidates who have experience working with animals.",
    "value": "",
    "unit": "",
    "as_of": "",
    "quote": "Many employers prefer to hire candidates who have experience working with animals.",
    "topic": "rules"
+  },
+  {
+   "fact": "The BLS states that animal care and service workers are employed in settings including kennels, zoos, stables, animal shelters, pet stores, veterinary clinics, and aquariums.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Animal care and service workers are employed in a variety of settings, including kennels, zoos, stables, animal shelters, pet stores, veterinary clinics, and aquariums.",
+   "topic": "audience"
+  },
+  {
+   "fact": "Animal caretakers held about 365,300 jobs in 2025.",
+   "value": "365300",
+   "unit": "jobs",
+   "as_of": "2025",
+   "quote": "Animal caretakers held about 365,300 jobs in 2025.",
+   "topic": "audience"
+  },
+  {
+   "fact": "Animal trainers held about 47,800 jobs in 2025.",
+   "value": "47800",
+   "unit": "jobs",
+   "as_of": "2025",
+   "quote": "Animal trainers held about 47,800 jobs in 2025.",
+   "topic": "audience"
+  },
+  {
+   "fact": "Other personal services accounted for 40% of animal caretaker employment, the largest employer group for that occupation.",
+   "value": "40",
+   "unit": "%",
+   "as_of": "2025",
+   "quote": "Other personal services 40%",
+   "topic": "audience"
+  },
+  {
+   "fact": "Self-employed workers accounted for 25% of animal caretaker employment.",
+   "value": "25",
+   "unit": "%",
+   "as_of": "2025",
+   "quote": "Self-employed workers 25",
+   "topic": "audience"
+  },
+  {
+   "fact": "Self-employed workers accounted for 39% of animal trainer employment, the largest employer group for that occupation.",
+   "value": "39",
+   "unit": "%",
+   "as_of": "2025",
+   "quote": "Self-employed workers 39%",
+   "topic": "audience"
+  },
+  {
+   "fact": "Support activities for agriculture and forestry accounted for 17% of animal trainer employment.",
+   "value": "17",
+   "unit": "%",
+   "as_of": "2025",
+   "quote": "Support activities for agriculture and forestry 17",
+   "topic": "audience"
+  },
+  {
+   "fact": "The median annual wage for all occupations was $50,980 in May 2025.",
+   "value": "50980",
+   "unit": "USD per year",
+   "as_of": "May 2025",
+   "quote": "Total, all occupations \n\n$50,980",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The median annual wage for personal care and service occupations was $36,410 in May 2025.",
+   "value": "36410",
+   "unit": "USD per year",
+   "as_of": "May 2025",
+   "quote": "Personal care and service occupations \n\n$36,410",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The median annual wage for animal care and service workers was $35,530 in May 2025.",
+   "value": "35530",
+   "unit": "USD per year",
+   "as_of": "May 2025",
+   "quote": "Animal care and service workers \n\n$35,530",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The lowest 10 percent of animal caretakers earned less than $27,250 in May 2025.",
+   "value": "27250",
+   "unit": "USD per year",
+   "as_of": "May 2025",
+   "quote": "The lowest 10 percent earned less than $27,250, and the highest 10 percent earned more than $50,060.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The highest 10 percent of animal caretakers earned more than $50,060 in May 2025.",
+   "value": "50060",
+   "unit": "USD per year",
+   "as_of": "May 2025",
+   "quote": "the highest 10 percent earned more than $50,060.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The lowest 10 percent of animal trainers earned less than $29,600 in May 2025.",
+   "value": "29600",
+   "unit": "USD per year",
+   "as_of": "May 2025",
+   "quote": "The lowest 10 percent earned less than $29,600, and the highest 10 percent earned more than $75,490.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The highest 10 percent of animal trainers earned more than $75,490 in May 2025.",
+   "value": "75490",
+   "unit": "USD per year",
+   "as_of": "May 2025",
+   "quote": "the highest 10 percent earned more than $75,490.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The median annual wage for animal caretakers in arts, entertainment, and recreation was $37,460 in May 2025.",
+   "value": "37460",
+   "unit": "USD per year",
+   "as_of": "May 2025",
+   "quote": "Arts, entertainment, and recreation$37,460",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The median annual wage for animal caretakers in retail trade was $35,290 in May 2025.",
+   "value": "35290",
+   "unit": "USD per year",
+   "as_of": "May 2025",
+   "quote": "Retail trade 35,290",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The median annual wage for animal caretakers in professional, scientific, and technical services was $33,350 in May 2025.",
+   "value": "33350",
+   "unit": "USD per year",
+   "as_of": "May 2025",
+   "quote": "Professional, scientific, and technical services 33,350",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The median annual wage for animal trainers in retail trade was $36,240 in May 2025.",
+   "value": "36240",
+   "unit": "USD per year",
+   "as_of": "May 2025",
+   "quote": "Retail trade 36,240",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Employment of animal caretakers is projected to grow 12% from 2025 to 2035.",
+   "value": "12",
+   "unit": "%",
+   "as_of": "2025–35",
+   "quote": "Animal caretakers \n\n12%",
+   "topic": "forecast"
+  },
+  {
+   "fact": "Employment of animal care and service workers is projected to grow 11% from 2025 to 2035.",
+   "value": "11",
+   "unit": "%",
+   "as_of": "2025–35",
+   "quote": "Animal care and service workers \n\n11%",
+   "topic": "forecast"
+  },
+  {
+   "fact": "Employment of animal trainers is projected to grow 4% from 2025 to 2035.",
+   "value": "4",
+   "unit": "%",
+   "as_of": "2025–35",
+   "quote": "Animal trainers \n\n4%",
+   "topic": "forecast"
+  },
+  {
+   "fact": "Employment in personal care and service occupations is projected to grow 4% from 2025 to 2035.",
+   "value": "4",
+   "unit": "%",
+   "as_of": "2025–35",
+   "quote": "Personal care and service occupations \n\n4%",
+   "topic": "forecast"
+  },
+  {
+   "fact": "Total employment across all occupations is projected to grow 3% from 2025 to 2035.",
+   "value": "3",
+   "unit": "%",
+   "as_of": "2025–35",
+   "quote": "Total, all occupations \n\n3%",
+   "topic": "forecast"
+  },
+  {
+   "fact": "Most zoos require zookeepers to have a bachelor's degree in biology, animal science, or a related field.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Most zoos require zookeepers to have a bachelor’s degree in biology, animal science, or a related field.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Animal care and service workers typically need at least a high school diploma or equivalent.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Animal care and service workers typically need at least a high school diploma or equivalent.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Many states require self-employed animal care and service workers to have a business license.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Many states require self-employed animal care and service workers to have a business license.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Marine mammal trainers usually need a bachelor's degree in marine biology, animal science, biology, or a related field.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "marine mammal trainers usually need a bachelor’s degree in marine biology, animal science, [biology]",
+   "topic": "rules"
+  },
+  {
+   "fact": "Most animal care and service workers learn their occupation through on-the-job training.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Most animal care and service workers learn through on-the-job training.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Animal care and service workers (SOC 39-2000) had an estimated employment of 413,000 in 2025 and are projected to reach 459,100 in 2035, a change of 11 percent.",
+   "value": "413,000",
+   "unit": "workers",
+   "as_of": "2025",
+   "quote": "**Animal care and service workers** | 39-2000 | 413,000 | 459,100 | 11 | 46,100",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Animal trainers (SOC 39-2011) had an estimated employment of 47,800 in 2025 and are projected to reach 49,700 in 2035, a change of 4 percent.",
+   "value": "47,800",
+   "unit": "workers",
+   "as_of": "2025",
+   "quote": "**Animal trainers** | 39-2011 | 47,800 | 49,700 | 4 | 2,000",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Animal caretakers (SOC 39-2021) had an estimated employment of 365,300 in 2025 and are projected to reach 409,400 in 2035, a change of 12 percent.",
+   "value": "365,300",
+   "unit": "workers",
+   "as_of": "2025",
+   "quote": "**Animal caretakers** | 39-2021 | 365,300 | 409,400 | 12 | 44,100",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The Occupational Employment and Wage Statistics program produces employment and wage estimates annually for over 800 occupations.",
+   "value": "800",
+   "unit": "occupations",
+   "as_of": "",
+   "quote": "produces employment and wage estimates annually for over 800 occupations",
+   "topic": "definition"
+  },
+  {
+   "fact": "The 2025 median pay for agricultural workers, as listed in the similar occupations table, is $35,890.",
+   "value": "35890",
+   "unit": "USD",
+   "as_of": "2025",
+   "quote": "| $35,890 |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The 2025 median pay for farmers, ranchers, and other agricultural managers is $89,900, with a high school diploma or equivalent as entry-level education.",
+   "value": "89900",
+   "unit": "USD",
+   "as_of": "2025",
+   "quote": "High school diploma or equivalent | $89,900 |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The 2025 median pay for veterinarians is $130,100, with a doctoral or professional degree as entry-level education.",
+   "value": "130100",
+   "unit": "USD",
+   "as_of": "2025",
+   "quote": "Doctoral or professional degree | $130,100 |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The 2025 median pay for veterinary assistants and laboratory animal caretakers is $38,150, with a high school diploma or equivalent as entry-level education.",
+   "value": "38150",
+   "unit": "USD",
+   "as_of": "2025",
+   "quote": "High school diploma or equivalent | $38,150 |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The 2025 median pay for veterinary technologists and technicians is $47,380, with an associate's degree as entry-level education.",
+   "value": "47380",
+   "unit": "USD",
+   "as_of": "2025",
+   "quote": "Associate's degree | $47,380 |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The 2025 median pay for zoologists and wildlife biologists is $76,780, with a bachelor's degree as entry-level education.",
+   "value": "76780",
+   "unit": "USD",
+   "as_of": "2025",
+   "quote": "Bachelor's degree | $76,780 |",
+   "topic": "pricing"
   }
  ]
 }

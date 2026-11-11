@@ -1,88 +1,179 @@
 {
  "url": "https://kingy.ai/news/openai-codex-command-guide/",
  "title": "OpenAI Codex Commands: CLI, App & IDE Cheat Sheet",
- "hash": "3ce48ceb71548c164d2b3d2dd79fec1cba04a2bd",
- "fetchedAt": "2026-11-06",
+ "hash": "33d66fac8c67a8dd12960f025e51b52de16c572d",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 16085,
+ "chunks": 2,
  "facts": [
   {
-   "fact": "Kingy states that OpenAI deprecated `codex mcp-server` on August 24.",
-   "value": "August 24",
-   "unit": "date",
+   "fact": "OpenAI's CLI docs say Codex runs on macOS, Windows, and Linux, and that first launch prompts the user to sign in.",
+   "value": "macOS, Windows, Linux",
+   "unit": "",
    "as_of": "",
-   "quote": "OpenAI deprecated `codex mcp-server` on August 24.",
-   "topic": "other"
+   "quote": "OpenAI’s CLI docs say [Codex](https://kingy.ai/news/the-complete-guide-to-openai-codex/) runs on macOS, Windows, and Linux, and that first launch prompts you to sign in.",
+   "topic": "rules"
   },
   {
-   "fact": "The Kingy article was first published on May 12, 2026 and refreshed on September 4, 2026.",
-   "value": "May 12, 2026; September 4, 2026",
+   "fact": "The desktop slash-command table follows the public desktop-app reference captured on August 29, 2026.",
+   "value": "2026-08-29",
    "unit": "date",
-   "as_of": "September 4, 2026",
-   "quote": "Kingy verdict — refreshed September 4, 2026",
-   "topic": "other"
-  },
-  {
-   "fact": "The desktop slash-command table follows a public desktop-app reference that Kingy says was captured on August 29, 2026.",
-   "value": "August 29, 2026",
-   "unit": "date",
-   "as_of": "August 29, 2026",
+   "as_of": "2026-08-29",
    "quote": "This table follows the public desktop-app reference captured on August 29, 2026.",
    "topic": "other"
   },
   {
-   "fact": "Per OpenAI's CLI docs as cited by Kingy, Codex runs on macOS, Windows, and Linux, and first launch prompts the user to sign in.",
-   "value": "macOS, Windows, Linux",
-   "unit": "",
-   "as_of": "",
-   "quote": "runs on macOS, Windows, and Linux, and that first launch prompts you to sign in.",
-   "topic": "definition"
-  },
-  {
-   "fact": "The command `npm i -g @openai/codex` installs the Codex CLI globally.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Installs Codex CLI globally.",
-   "topic": "definition"
-  },
-  {
-   "fact": "OpenAI's docs list three /personality modes: friendly, pragmatic, and none.",
-   "value": "3",
-   "unit": "count",
-   "as_of": "",
-   "quote": "OpenAI’s docs list those three personality modes.",
-   "topic": "definition"
-  },
-  {
-   "fact": "Per Kingy, the /side command is not available inside nested side or review modes.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "It is not available inside nested side or review modes.",
+   "fact": "The August 24 Codex changelog deprecates `codex mcp-server` and directs integrations to the Codex app server.",
+   "value": "2026-08-24",
+   "unit": "date",
+   "as_of": "2026-08-24",
+   "quote": "The August 24 changelog deprecates `codex mcp-server` and directs integrations to the [Codex app server]",
    "topic": "rules"
   },
   {
-   "fact": "Kingy's AI Price Sheet is described as covering 25 AI plans and models on one page, in a November 2026 edition built from official pricing pages.",
-   "value": "25",
-   "unit": "AI plans and models",
-   "as_of": "November 2026",
-   "quote": "The AI Price Sheet: 25 AI plans and models on one page",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Kingy states it did not run a new hands-on test for this refresh and that the guide is source-audited analysis.",
+   "fact": "The `/side` command is described by OpenAI as an ephemeral fork of the conversation and is not available inside nested side or review modes.",
    "value": "",
    "unit": "",
-   "as_of": "September 4, 2026",
-   "quote": "Kingy did not run a new hands-on test for this refresh.",
-   "topic": "other"
+   "as_of": "",
+   "quote": "OpenAI describes `/side` as an ephemeral fork of the conversation. It is not available inside nested side or review modes.",
+   "topic": "rules"
   },
   {
-   "fact": "Kingy's own YouTube channel is listed with 2.2M subscribers on the page.",
-   "value": "2.2",
-   "unit": "million subscribers",
+   "fact": "The `/personality` command in OpenAI's docs lists three modes: friendly, pragmatic, and none.",
+   "value": "3",
+   "unit": "modes",
    "as_of": "",
-   "quote": "Subscribe, 2.2M subscribers",
-   "topic": "audience"
+   "quote": "OpenAI’s docs list those three personality modes.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The `/approve` slash command approves one retry of a recent automatic-review denial, when automatic review is active.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Approve one retry of a recent automatic-review denial, when automatic review is active.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The `--ask-for-approval` flag accepts the values untrusted, on-request, and never.",
+   "value": "untrusted, on-request, never",
+   "unit": "",
+   "as_of": "",
+   "quote": "| `--ask-for-approval`, `-a` | `untrusted`, `on-request`, `never` | Sets approval policy. |",
+   "topic": "rules"
+  },
+  {
+   "fact": "The `--sandbox` flag accepts the values read-only, workspace-write, and danger-full-access.",
+   "value": "read-only, workspace-write, danger-full-access",
+   "unit": "",
+   "as_of": "",
+   "quote": "| `--sandbox`, `-s` | `read-only`, `workspace-write`, `danger-full-access` | Sets sandbox policy. |",
+   "topic": "rules"
+  },
+  {
+   "fact": "In the Codex CLI, pressing Esc twice with an empty composer edits the previous user message.",
+   "value": "2",
+   "unit": "presses",
+   "as_of": "",
+   "quote": "`Esc` twice with an empty composer | Edit the previous user message; continuing to press `Esc` walks backward.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The `codex cloud` `--attempts` option sets between 1 and 4 attempts.",
+   "value": "1–4",
+   "unit": "attempts",
+   "as_of": "",
+   "quote": "Sets 1–4 attempts.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The `--full-auto` flag is deprecated in Codex CLI exec.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Deprecated full-auto behavior.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The `--dangerously-bypass-approvals-and-sandbox` (alias `--yolo`) option disables approvals and sandboxing.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Disable approvals and sandboxing.",
+   "topic": "rules"
+  },
+  {
+   "fact": "In the VS Code extension, the `chatgpt.newChat` command has a default shortcut of Cmd+N on macOS and Ctrl+N on Windows/Linux.",
+   "value": "Cmd+N (macOS); Ctrl+N (Windows/Linux)",
+   "unit": "keyboard shortcut",
+   "as_of": "",
+   "quote": "New chat; default shortcut `Cmd+N` on macOS and `Ctrl+N` on Windows/Linux.",
+   "topic": "definition"
+  },
+  {
+   "fact": "OpenAI's app documentation lists the Codex app keyboard shortcuts for macOS.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "OpenAI’s app docs list these shortcuts for macOS.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The `codex://new` deeplink supports query parameters such as `prompt`, `originUrl`, and `path`.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "`codex://new` supports query parameters such as `prompt`, `originUrl`, and `path`.",
+   "topic": "definition"
+  },
+  {
+   "fact": "OpenAI says custom prompts are deprecated in favor of skills, but existing custom prompts can still expose slash commands in the CLI and IDE.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "OpenAI says custom prompts are deprecated in favor of **skills**, but existing custom prompts can still expose slash commands in the CLI and IDE.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Custom prompt files support positional placeholders `$1` through `$9`, `$ARGUMENTS`, named `KEY=value` placeholders, and `$$` for a literal dollar sign.",
+   "value": "$1–$9",
+   "unit": "placeholders",
+   "as_of": "",
+   "quote": "positional placeholders like `$1` through `$9`, `$ARGUMENTS`",
+   "topic": "definition"
+  },
+  {
+   "fact": "The guide recommends `--sandbox workspace-write` for normal repository work.",
+   "value": "--sandbox workspace-write",
+   "unit": "",
+   "as_of": "",
+   "quote": "Normal repo work | `--sandbox workspace-write`",
+   "topic": "rules"
+  },
+  {
+   "fact": "The guide recommends `--sandbox read-only` for read-only investigation.",
+   "value": "--sandbox read-only",
+   "unit": "",
+   "as_of": "",
+   "quote": "Read-only investigation | `--sandbox read-only`",
+   "topic": "rules"
+  },
+  {
+   "fact": "The guide advises avoiding `--dangerously-bypass-approvals-and-sandbox` / `--yolo` unless inside a disposable or isolated environment.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Avoid `--dangerously-bypass-approvals-and-sandbox` / `--yolo` unless inside a disposable or isolated environment.",
+   "topic": "rules"
+  },
+  {
+   "fact": "OpenAI's sandbox reference warns that bypassing sandboxing should be used carefully.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "OpenAI’s reference documents platform-specific sandbox helper options and warns that bypassing sandboxing should be used carefully.",
+   "topic": "rules"
   }
  ]
 }

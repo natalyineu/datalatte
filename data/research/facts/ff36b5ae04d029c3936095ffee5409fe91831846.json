@@ -1,168 +1,91 @@
 {
  "url": "https://support.google.com/gemininotebook/answer/16213268?hl=en",
  "title": "Learn about Gemini Notebook’s plans - Gemini Notebook Help",
- "hash": "5ab1e9fa9070d8bbd2d7fd36a4bb8df65081d193",
- "fetchedAt": "2026-11-07",
+ "hash": "112bfc5e694b9955c6a6f1743fe45723440f4ea2",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 9247,
+ "chunks": 2,
  "facts": [
   {
-   "fact": "Gemini Notebook Standard allows 100 notebooks per user.",
+   "fact": "Gemini Notebook's usage limit for notebooks per user is 100 without an AI plan, according to Google's help page.",
    "value": "100",
    "unit": "notebooks per user",
    "as_of": "",
-   "quote": "| **Notebooks** | 100/user | 200/user | 500/user | 500/user | 500/user |",
+   "quote": "Notebooks**100/user 200/user 500/user 500/user 500/user",
    "topic": "rules"
   },
   {
-   "fact": "Gemini Notebook in Plus allows 200 notebooks per user.",
-   "value": "200",
-   "unit": "notebooks per user",
-   "as_of": "",
-   "quote": "| **Notebooks** | 100/user | 200/user | 500/user | 500/user | 500/user |",
-   "topic": "rules"
-  },
-  {
-   "fact": "Gemini Notebook in Pro, Ultra (20 TB Plan) and Ultra (30 TB Plan) each allow 500 notebooks per user.",
-   "value": "500",
-   "unit": "notebooks per user",
-   "as_of": "",
-   "quote": "| **Notebooks** | 100/user | 200/user | 500/user | 500/user | 500/user |",
-   "topic": "rules"
-  },
-  {
-   "fact": "Gemini Notebook Standard allows 50 sources per notebook.",
+   "fact": "Gemini Notebook's limit for all sources except notes is 50 per notebook without an AI plan, according to Google's help page.",
    "value": "50",
    "unit": "sources per notebook",
    "as_of": "",
-   "quote": "| **Sources** | 50/notebook | 100/notebook | 300/notebook | 500/notebook | 600/notebook |",
+   "quote": "All sources except notes**50/notebook 100/notebook 300/notebook 500/notebook 600/notebook",
    "topic": "rules"
   },
   {
-   "fact": "Gemini Notebook in Plus allows 100 sources per notebook.",
-   "value": "100",
-   "unit": "sources per notebook",
+   "fact": "Gemini Notebook's limit for notes sources is 500 per notebook on the free, Plus and Pro plans, and 600 per notebook on the Ultra 20 TB and Ultra 30 TB plans, according to Google's help page.",
+   "value": "500 (free, Plus, Pro); 600 (Ultra)",
+   "unit": "note sources per notebook",
    "as_of": "",
-   "quote": "| **Sources** | 50/notebook | 100/notebook | 300/notebook | 500/notebook | 600/notebook |",
+   "quote": "Notes sources**500/notebook 500/notebook 500/notebook 600/notebook 600/notebook",
    "topic": "rules"
   },
   {
-   "fact": "Gemini Notebook in Pro allows 300 sources per notebook.",
-   "value": "300",
-   "unit": "sources per notebook",
-   "as_of": "",
-   "quote": "| **Sources** | 50/notebook | 100/notebook | 300/notebook | 500/notebook | 600/notebook |",
-   "topic": "rules"
-  },
-  {
-   "fact": "Gemini Notebook in Ultra (20 TB Plan) allows 500 sources per notebook.",
-   "value": "500",
-   "unit": "sources per notebook",
-   "as_of": "",
-   "quote": "| **Sources** | 50/notebook | 100/notebook | 300/notebook | 500/notebook | 600/notebook |",
-   "topic": "rules"
-  },
-  {
-   "fact": "Gemini Notebook in Ultra (30 TB Plan) allows 600 sources per notebook.",
-   "value": "600",
-   "unit": "sources per notebook",
-   "as_of": "",
-   "quote": "| **Sources** | 50/notebook | 100/notebook | 300/notebook | 500/notebook | 600/notebook |",
-   "topic": "rules"
-  },
-  {
-   "fact": "The page states that the usage limits are subject to change.",
+   "fact": "According to Google's help page, Gemini Notebook watermark removal is not available without an AI plan or on Plus, and is available on Pro and Ultra plans.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "**Usage Limits (Subject to Change)**",
+   "quote": "Watermark Removal**No No Yes*Yes*Yes*",
    "topic": "rules"
   },
   {
-   "fact": "Sharing a notebook does not change the source limit for any collaborator.",
+   "fact": "A visible watermark is applied automatically to Gemini Notebook outputs for users residing in India, South Korea, or Vietnam, regardless of plan.",
    "value": "",
    "unit": "",
-   "as_of": "",
-   "quote": "_Sharing a notebook does not change the source limit for any collaborator._",
-   "topic": "rules"
-  },
-  {
-   "fact": "Daily quotas on a plan reset after 24 hours, and monthly quotas reset after 30 days.",
-   "value": "24 hours; 30 days",
-   "unit": "hours; days",
-   "as_of": "",
-   "quote": "If your plan is on daily quotas, these reset after 24 hours. Monthly quotas reset after 30 days.",
-   "topic": "rules"
-  },
-  {
-   "fact": "Watermark removal is not available on Gemini Notebook Standard or Plus, and is available on Pro and both Ultra plans.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "| **Watermark Removal** | No  | No  | Yes\\* | Yes\\* | Yes\\* |",
-   "topic": "rules"
-  },
-  {
-   "fact": "A visible watermark is applied automatically to Gemini Notebook for users who reside in India, South Korea, or Vietnam.",
-   "value": "India, South Korea, Vietnam",
-   "unit": "countries",
    "as_of": "",
    "quote": "A visible watermark will be applied automatically if you reside in India, South Korea, or Vietnam.",
    "topic": "rules"
   },
   {
-   "fact": "Advanced sharing is available to paid users, while custom chat and analytics are available to everyone.",
+   "fact": "Gemini Notebook's Earlier Access to Key Features is Standard without an AI plan, Early on Plus, and Priority on Pro and both Ultra plans, according to Google's help page.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Advanced sharing available to paid users. Custom chat and analytics are available to everyone.",
+   "quote": "Earlier Access to Key Features**Standard Early Priority Priority Priority",
    "topic": "rules"
   },
   {
-   "fact": "Gemini Notebook Standard can be used free of charge by signing up with a Gmail account.",
-   "value": "0",
-   "unit": "USD",
+   "fact": "For daily quotas, Gemini Notebook limits reset after 24 hours, and monthly quotas reset after 30 days, according to Google's help page.",
+   "value": "24 hours (daily); 30 days (monthly)",
+   "unit": "hours / days",
    "as_of": "",
-   "quote": "Sign up free of charge by using your gmail account.",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Early access to key features is Standard for the Standard plan, Early for Plus, and Priority for Pro and both Ultra plans.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "| **Earlier Access to Key Features** | Standard | Early | Priority | Priority | Priority |",
+   "quote": "If your plan is on daily quotas, these reset after 24 hours. Monthly quotas reset after 30 days.",
    "topic": "rules"
   },
   {
-   "fact": "Gemini Notebook model access is described as basic access on Standard and Plus, higher access on Pro, and highest access on both Ultra plans.",
+   "fact": "Google states that generated artifacts such as reports, flashcards, or audio overviews created automatically when sources are added do not count toward limits.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "| **Gemini Model** | **Access** to Gemini models | **Access** to Gemini models | **Higher** access to Gemini models | **Highest** access to Gemini models | **Highest** access to Gemini models |",
+   "quote": "These are generated once and do not contribute to limits.",
    "topic": "rules"
   },
   {
-   "fact": "Gemini Notebook data is not used to train Gemini Notebook unless the user provides feedback.",
-   "value": "",
-   "unit": "",
+   "fact": "Google states that Gemini Notebook for enterprise through Google Cloud offers 5X or more notebook artifacts than the consumer plans, according to Google's help page.",
+   "value": "5X or more",
+   "unit": "multiplier of notebook artifacts",
    "as_of": "",
-   "quote": "Your data is protected, and is not used to train Gemini Notebook unless you provide feedback.",
+   "quote": "5X or more notebook artifacts, including Audio Overviews, Video Overviews, Reports, and more.",
    "topic": "rules"
   },
   {
-   "fact": "For Google Workspace or Workspace for Education users, uploads, queries and model responses are not reviewed by human reviewers even when thumbs up or down feedback is given, and are not used to train AI models.",
+   "fact": "Google states that Gemini Notebook usage limits are subject to change.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Your uploads, queries and the model's responses in Gemini Notebook will not be reviewed by human reviewers even when you provide thumbs up or down feedback, and will not be used to train AI models.",
+   "quote": "Usage Limits (Subject to Change)",
    "topic": "rules"
-  },
-  {
-   "fact": "Some users may see a report, flashcards, infographic, slide deck, audio overview, or a video overview feature, depending on their plan or access.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Some users may see a report, flashcards, infographic, slide deck, audio overview, or a video overvie",
-   "topic": "other"
   }
  ]
 }

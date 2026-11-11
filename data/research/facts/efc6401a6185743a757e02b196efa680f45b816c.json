@@ -1,104 +1,451 @@
 {
  "url": "https://one.google.com/intl/en_ca/about/google-ai-plans/",
  "title": "Google AI plans with cloud storage – Google One",
- "hash": "15f4c9df2c4488cc401719b96bfecf796e9c3568",
- "fetchedAt": "2026-11-06",
+ "hash": "35af28701f30aa6592b983960a0994d354265c5d",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 35746,
+ "chunks": 5,
  "facts": [
   {
-   "fact": "Google AI Plus includes 400 GB of cloud storage across Gmail, Drive and Photos, according to Google's plan page.",
+   "fact": "Google AI Plus includes 400 GB of cloud storage across Gmail, Drive and Photos.",
    "value": "400",
    "unit": "GB",
-   "as_of": "",
-   "quote": "400 GB storage Unlock essential tools to boost productivity with double the access to Gemini",
-   "topic": "definition"
+   "as_of": "2026-11-10",
+   "quote": "400 GB of cloud storage across Gmail, Drive and Photos.",
+   "topic": "pricing"
   },
   {
-   "fact": "Google AI Pro includes 5 TB of storage, according to Google's plan page.",
+   "fact": "Google AI Pro includes 5 TB of cloud storage across Gmail, Drive and Photos.",
    "value": "5",
    "unit": "TB",
-   "as_of": "",
-   "quote": "5 TB storage Create faster and get more done with four times more access to Gemini",
-   "topic": "definition"
+   "as_of": "2026-11-10",
+   "quote": "5 TB of cloud storage across Gmail, Drive and Photos.",
+   "topic": "pricing"
   },
   {
-   "fact": "Google AI Ultra starts at 20 TB of storage, according to Google's plan page.",
+   "fact": "Google AI Ultra starts at 20 TB of storage.",
    "value": "20",
    "unit": "TB",
-   "as_of": "",
-   "quote": "Starting at 20 TB of storage Accelerate your workflows with five times higher usage limits in Gemini than with the AI Pro plan",
-   "topic": "definition"
+   "as_of": "2026-11-10",
+   "quote": "Starting at 20 TB of storage",
+   "topic": "pricing"
   },
   {
-   "fact": "Google says Google AI Ultra offers five times higher usage limits in Gemini than the AI Pro plan.",
+   "fact": "Google AI Plus, AI Pro and AI Ultra plans each include family sharing with up to five others.",
    "value": "5",
-   "unit": "times higher usage limits",
-   "as_of": "",
-   "quote": "Accelerate your workflows with five times higher usage limits in Gemini than with the AI Pro plan",
-   "topic": "definition"
+   "unit": "others",
+   "as_of": "2026-11-10",
+   "quote": "Family sharing with up to five others.",
+   "topic": "pricing"
   },
   {
-   "fact": "Google says Google AI Plus gives double the access to Gemini.",
+   "fact": "Google's AI Plus plan is described by Google as providing double the access to Gemini.",
    "value": "2",
-   "unit": "times access to Gemini",
-   "as_of": "",
+   "unit": "times access",
+   "as_of": "2026-11-10",
    "quote": "Unlock essential tools to boost productivity with double the access to Gemini",
    "topic": "definition"
   },
   {
-   "fact": "Google says Google AI Pro gives four times more access to Gemini.",
+   "fact": "Google's AI Pro plan is described by Google as providing four times more access to Gemini.",
    "value": "4",
-   "unit": "times access to Gemini",
-   "as_of": "",
+   "unit": "times access",
+   "as_of": "2026-11-10",
    "quote": "Create faster and get more done with four times more access to Gemini",
    "topic": "definition"
   },
   {
-   "fact": "Google AI Plus and Google AI Pro both include family sharing with up to five others.",
+   "fact": "Google's AI Ultra plan is described by Google as providing five times higher usage limits in Gemini than the AI Pro plan.",
    "value": "5",
-   "unit": "other people",
-   "as_of": "",
-   "quote": "Family sharing with up to five others.",
+   "unit": "times usage limits",
+   "as_of": "2026-11-10",
+   "quote": "Accelerate your workflows with five times higher usage limits in Gemini than with the AI Pro plan",
    "topic": "definition"
+  },
+  {
+   "fact": "Google AI Pro includes Google Colab with 200 compute units per month.",
+   "value": "200",
+   "unit": "compute units per month",
+   "as_of": "2026-11-10",
+   "quote": "Get expanded access to powerful accelerators and longer runtimes in Google Colab with 200 compute units per month.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Google AI Ultra includes Google Colab with 2,000 compute units per month.",
+   "value": "2000",
+   "unit": "compute units per month",
+   "as_of": "2026-11-10",
+   "quote": "Get higher access to powerful accelerators and longer runtimes in Google Colab with 2,000 compute units per month.",
+   "topic": "pricing"
   },
   {
    "fact": "Google AI Pro includes US$10 in monthly Google Cloud credits from the Google Developer Programme.",
    "value": "10",
    "unit": "USD per month",
-   "as_of": "",
+   "as_of": "2026-11-10",
    "quote": "US$10 in monthly Google Cloud credits from Google Developer Programme.",
-   "topic": "definition"
+   "topic": "pricing"
   },
   {
-   "fact": "Google AI Pro includes 200 compute units per month in Google Colab.",
-   "value": "200",
-   "unit": "compute units per month",
-   "as_of": "",
-   "quote": "Get expanded access to powerful accelerators and longer runtimes in Google Colab with 200 compute units per month.",
-   "topic": "definition"
+   "fact": "Google AI Ultra includes US$40 in monthly Google Cloud credits from the Google Developer Programme.",
+   "value": "40",
+   "unit": "USD per month",
+   "as_of": "2026-11-10",
+   "quote": "US$40 in monthly Google Cloud credits from Google Developer Programme.",
+   "topic": "pricing"
   },
   {
-   "fact": "Google states that the Google Home Premium Standard plan is included at no cost with Google AI Pro, with a stated value of US$10 per month and 30 days of event history.",
+   "fact": "Google AI Pro includes the Google Home Premium Standard plan at no cost, which Google values at US$10 per month.",
    "value": "10",
-   "unit": "USD per month (stated value)",
-   "as_of": "",
+   "unit": "USD per month",
+   "as_of": "2026-11-10",
    "quote": "Get the Google Home Premium Standard plan at no cost (US$10/month value), with 30 days of event history and Gemini features.",
    "topic": "pricing"
   },
   {
-   "fact": "Google offers students Google AI Plus at no charge for one year, according to the plan page.",
-   "value": "1",
-   "unit": "year free",
-   "as_of": "",
-   "quote": "Students get Google AI Plus at no charge of charge for one year",
+   "fact": "Google AI Ultra includes the Google Home Premium Advanced plan at no cost, which Google values at US$20 per month.",
+   "value": "20",
+   "unit": "USD per month",
+   "as_of": "2026-11-10",
+   "quote": "Get the Google Home Premium Advanced plan at no cost (US$20/mo value), with 24/7 event history, Gemini features and event descriptions.",
    "topic": "pricing"
   },
   {
-   "fact": "The Google AI plans page lists Gemini 4 Argon as included in the Google AI Plus and Google AI Pro plans.",
+   "fact": "Google AI Ultra includes the YouTube Premium individual plan, ad-free, with availability varying by country.",
+   "value": "",
+   "unit": "",
+   "as_of": "2026-11-10",
+   "quote": "Enjoy YouTube ad-free with the YouTube Premium individual plan",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Google AI Pro includes the YouTube Premium Lite plan, with fewer ads, offline and background playback, and availability varying by country.",
+   "value": "",
+   "unit": "",
+   "as_of": "2026-11-10",
+   "quote": "Enjoy YouTube with fewer ads, offline and in the background with the YouTube Premium Lite plan",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Google AI Ultra's price is shown as 'From' with a per-month amount, but the page text does not state the numeric monthly price.",
+   "value": "",
+   "unit": "per month",
+   "as_of": "2026-11-10",
+   "quote": "From /mo",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Google AI Plus is offered to students at no charge for one year, according to the page.",
+   "value": "one year",
+   "unit": "year",
+   "as_of": "",
+   "quote": "Get ahead this school year with Google AI Plus at no charge for one year.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Students who upgrade to Google AI Pro and YouTube Premium can save up to 70%, according to the page.",
+   "value": "70",
+   "unit": "%",
+   "as_of": "",
+   "quote": "upgrade to get AI Pro and YouTube Premium with ad-free videos and music for savings of up to 70%.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "AI Inbox in Gmail is available to Google AI Plus, Pro and Ultra users in the US.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Includes Gemini 4 Argon",
+   "quote": "Available to Google AI Plus, Pro and Ultra users in the US.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Deep Search in AI Mode is available to Google AI Pro and Ultra users in the US.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Available to Google AI Pro and Ultra users in the US.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Chrome auto browse is available to Google AI Pro and Ultra users in the US and India.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Available to Google AI Pro and Ultra users in the US and India.",
+   "topic": "rules"
+  },
+  {
+   "fact": "A Google AI Ultra subscription includes a YouTube Premium individual plan for no additional cost, providing ad-free YouTube and YouTube Music.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "When you get a Google AI Ultra subscription, you'll also get a YouTube Premium individual plan for no additional cost – enjoy ad-free YouTube and YouTube Music, offline and in the background.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "A Google AI Pro subscription includes YouTube Premium Lite at no extra cost, which shows fewer ads on most videos.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "A Google AI Pro subscription comes with YouTube Premium Lite – see fewer ads on most videos, at no extra cost.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Google AI Ultra subscribers get the Advanced plan of Google Home Premium for no extra cost.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Google AI Ultra subscribers get the Advanced plan of Google Home Premium for no extra cost.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "A Google AI Pro subscription includes Google Home Premium at no additional cost, and it can be upgraded to Advanced at any time for an additional fee that is not stated in the chunk.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "A Google AI Pro subscription includes Google Home Premium for no additional cost, and can be upgraded to Advanced for/month at any time.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "A Google AI Ultra or AI Pro subscription includes Google Health Premium for no extra cost.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "A Google AI Ultra or AI Pro subscription includes Google Health Premium for no extra cost.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Google Health Premium requires the Google Health app and a Pixel Watch or Fitbit device, which are sold separately.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Requires the Google Health app and a Pixel Watch or Fitbit device (sold separately).",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google Home Premium and Google Health Premium are only available with Google AI Pro or AI Ultra plans in countries where those services are offered.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Only available with Google AI Pro or Google AI Ultra plans in countries where Google Home Premium is available.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Availability of the YouTube Premium benefits varies by country.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Availability varies by country – see the full list of countries for YouTube Premium Lite and YouTube Premium individual.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google's Gemini Deep Research uses 3 Pro to turn hours of research work into minutes, according to Google.",
+   "value": "3",
+   "unit": "model version",
+   "as_of": "",
+   "quote": "Your research assistant uses 3 Pro to help you turn hours of work into minutes.",
    "topic": "definition"
+  },
+  {
+   "fact": "Google AI Plus includes storage for Gmail, Google Drive and Google Photos of 400 GB or 2 TB (per the vendor's plan table).",
+   "value": "400 GB or 2 TB",
+   "unit": "GB or TB",
+   "as_of": "",
+   "quote": "Storage for Gmail, Google Drive and Google Photos | 400 GB or 2 TB | 5 TB | 20 TB | 30 TB",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Google's vendor table lists Google Flow credits of 200 per month for Google AI Plus.",
+   "value": "200",
+   "unit": "credits per month",
+   "as_of": "",
+   "quote": "Google Flow credits | 200/mo | 1,000/mo | 10,000/mo | 25,000/mo",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Google's vendor table lists Google Flow Music credits of 3,000 per month for Google AI Plus.",
+   "value": "3000",
+   "unit": "credits per month",
+   "as_of": "",
+   "quote": "Google Flow Music credits | 3,000/mo | 10,000/mo | 30,000/mo | 30,000/mo",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Google's vendor table lists Google Colab compute units of 50 per month for Google AI Plus, 200 for Pro, 1,000 for Ultra 5x and 2,000 for Ultra 20x.",
+   "value": "50, 200, 1000, 2000",
+   "unit": "compute units per month",
+   "as_of": "",
+   "quote": "Compute units | 50/mo | 200/mo | 1,000/mo | 2,000/mo",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Google's vendor table lists Google Cloud monthly credits of US$10 for Google AI Pro, US$40 for Ultra 5x and US$100 for Ultra 20x; none are included in Plus.",
+   "value": "10, 40, 100",
+   "unit": "USD monthly credits",
+   "as_of": "",
+   "quote": "Google Cloud credits |  | US$10 monthly credits | US$40 monthly credits | US$100 monthly credits",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Google's vendor table states that Google AI Pro and both Ultra tiers include an expanded token context window of one million tokens.",
+   "value": "1000000",
+   "unit": "tokens",
+   "as_of": "",
+   "quote": "Expanded token context window |  | One million | One million | One million",
+   "topic": "other"
+  },
+  {
+   "fact": "Google's vendor table states higher usage limits of two times non-AI plans for Google AI Plus and four times non-AI plans for Google AI Pro.",
+   "value": "2 and 4",
+   "unit": "times non-AI plan usage limits",
+   "as_of": "",
+   "quote": "Higher usage limits | Two times (non-AI plans) | Four times (non-AI plans) | 5x (Pro plan) | 20x (Pro plan)",
+   "topic": "other"
+  },
+  {
+   "fact": "Google's vendor table says premium video calling features in Google Meet are available only with the 2 TB plan.",
+   "value": "2",
+   "unit": "TB plan",
+   "as_of": "",
+   "quote": "Premium video calling features in Google Meet | Only with 2 TB plan",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google's FAQ states that Google AI Plus includes 400 GB of storage for Google Photos, Drive and Gmail.",
+   "value": "400",
+   "unit": "GB",
+   "as_of": "",
+   "quote": "400 GB of storage for Google Photos, Drive and Gmail",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Google's FAQ states that Google AI Pro includes 5 TB of storage for Google Photos, Drive and Gmail.",
+   "value": "5",
+   "unit": "TB",
+   "as_of": "",
+   "quote": "5 TB of storage for Google Photos, Drive and Gmail",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Google's FAQ describes Google Colab access with 200 compute units per month for Google AI Pro and 2,000 compute units per month for Google AI Ultra.",
+   "value": "200 and 2000",
+   "unit": "compute units per month",
+   "as_of": "",
+   "quote": "Google Colab: Get higher access to powerful accelerators and longer runtimes with 2,000 compute units per month",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Google's vendor table says Google Home Premium Standard is included with Google AI Pro, and Advanced is included with both Ultra tiers.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Google Home Premium |  | Standard | Advanced | Advanced",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google's FAQ states that Google AI Plus, Google AI Pro and Google AI Ultra are the three Google AI plans.",
+   "value": "3",
+   "unit": "plans",
+   "as_of": "",
+   "quote": "There are three Google AI plans that users can subscribe to: Google AI Plus, Google AI Pro and Google AI Ultra.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Google AI Ultra is available in more than 150 countries.",
+   "value": "150",
+   "unit": "countries",
+   "as_of": "",
+   "quote": "Google AI Ultra is available in more than 150 countries – see the [full list of countries]",
+   "topic": "audience"
+  },
+  {
+   "fact": "Google AI Plus is available in over 160 countries.",
+   "value": "160",
+   "unit": "countries",
+   "as_of": "",
+   "quote": "Google AI Plus is available in over 160 countries.",
+   "topic": "audience"
+  },
+  {
+   "fact": "Google AI Pro is available in over 150 countries.",
+   "value": "150",
+   "unit": "countries",
+   "as_of": "",
+   "quote": "Google AI Pro is available in over 150 countries.",
+   "topic": "audience"
+  },
+  {
+   "fact": "Google AI plans include cloud storage starting at 20 TB for Google Photos, Drive and Gmail.",
+   "value": "20",
+   "unit": "TB",
+   "as_of": "",
+   "quote": "Cloud storage starting at 20 TB for Google Photos, Drive and Gmail",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Google AI Plus includes 400 GB of storage.",
+   "value": "400",
+   "unit": "GB",
+   "as_of": "",
+   "quote": "It includes the same benefits, like the Gemini app, Gemini Notebook, 400 GB of storage and more.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Google AI plans are only available to personal Google Accounts; Workspace customers can sign up for a Gemini add-on to their existing subscription instead.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Only personal Google Accounts can sign up for Google AI plans. Workspace customers can sign up for a Gemini add-on",
+   "topic": "rules"
+  },
+  {
+   "fact": "Certain Google AI benefits are only available to users aged 18 and over.",
+   "value": "18",
+   "unit": "years of age",
+   "as_of": "",
+   "quote": "Certain AI benefits are only available to users aged 18+.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Gemini app and Gemini in Gmail, Docs and more in Google AI plans are only available for those aged 18+.",
+   "value": "18",
+   "unit": "years of age",
+   "as_of": "",
+   "quote": "Gemini app and Gemini in Gmail, Docs and more in Google AI plans are only available for those aged 18+.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Family plan members on a Google AI Pro plan can use AI benefits and features at no extra cost.",
+   "value": "0",
+   "unit": "USD extra",
+   "as_of": "",
+   "quote": "Family plan members on a Google AI Pro plan can enjoy AI benefits and features at no extra cost.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Google Health Premium replaces the former Fitbit Premium subscription.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Google Health Premium replaces the former Fitbit Premium subscription with a singular place to manage and control your health data.",
+   "topic": "other"
+  },
+  {
+   "fact": "The Google AI Premium plan has been renamed Google AI Plus, with the same benefits including 400 GB of storage.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "The Google AI Premium plan has a new name: Google AI Plus.",
+   "topic": "other"
+  },
+  {
+   "fact": "The YouTube Premium Lite plan does not include offline or background playback for music videos, concerts and songs, which may still have ads.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Music videos, concerts and songs may still have ads and won't be available offline or in the background.",
+   "topic": "rules"
   }
  ]
 }

@@ -1,7 +1,131 @@
 {
  "url": "https://developers.openai.com/api/docs/models/codex-mini-latest",
  "title": "codex-mini-latest Model | OpenAI API",
- "hash": "2d560c759e6b0961a4bca7f366a4fd1885a8df34",
- "fetchedAt": "2026-11-06",
- "facts": []
+ "hash": "fbad4756ed16f93d498f7093b08b499b8d4897e4",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 24304,
+ "chunks": 3,
+ "facts": [
+  {
+   "fact": "codex-mini-latest is priced at $1.50 per 1M input tokens.",
+   "value": "1.50",
+   "unit": "USD per 1M tokens",
+   "as_of": "",
+   "quote": "Text tokens\n\nPer 1M tokens\n\nInput\n\n$1.50",
+   "topic": "pricing"
+  },
+  {
+   "fact": "codex-mini-latest cached input is priced at $0.375 per 1M tokens.",
+   "value": "0.375",
+   "unit": "USD per 1M tokens",
+   "as_of": "",
+   "quote": "Cached input\n\n$0.375",
+   "topic": "pricing"
+  },
+  {
+   "fact": "codex-mini-latest output is priced at $6.00 per 1M tokens.",
+   "value": "6.00",
+   "unit": "USD per 1M tokens",
+   "as_of": "",
+   "quote": "Output\n\n$6.00",
+   "topic": "pricing"
+  },
+  {
+   "fact": "GPT-4.1 input is priced at $2.00 per 1M tokens in the page's quick comparison.",
+   "value": "2.00",
+   "unit": "USD per 1M tokens",
+   "as_of": "",
+   "quote": "GPT-4.1\n\n$2.00",
+   "topic": "pricing"
+  },
+  {
+   "fact": "o4-mini input is priced at $1.10 per 1M tokens in the page's quick comparison.",
+   "value": "1.10",
+   "unit": "USD per 1M tokens",
+   "as_of": "",
+   "quote": "o4-mini\n\n$1.10",
+   "topic": "pricing"
+  },
+  {
+   "fact": "codex-mini-latest has a 200,000-token context window.",
+   "value": "200,000",
+   "unit": "tokens",
+   "as_of": "",
+   "quote": "200,000 context window",
+   "topic": "definition"
+  },
+  {
+   "fact": "codex-mini-latest has a maximum output of 100,000 tokens.",
+   "value": "100,000",
+   "unit": "tokens",
+   "as_of": "",
+   "quote": "100,000 max output tokens",
+   "topic": "definition"
+  },
+  {
+   "fact": "codex-mini-latest has a knowledge cutoff of June 1, 2024.",
+   "value": "Jun 01, 2024",
+   "unit": "date",
+   "as_of": "2024-06-01",
+   "quote": "Jun 01, 2024 knowledge cutoff",
+   "topic": "definition"
+  },
+  {
+   "fact": "codex-mini-latest is shut down according to the page status label.",
+   "value": "Shut down",
+   "unit": "",
+   "as_of": "",
+   "quote": "Shut down\n\n`codex-mini-latest`",
+   "topic": "other"
+  },
+  {
+   "fact": "codex-mini-latest is a fine-tuned version of o4-mini for use in Codex CLI, and OpenAI recommends gpt-4.1 for direct API use.",
+   "value": "gpt-4.1",
+   "unit": "",
+   "as_of": "",
+   "quote": "codex-mini-latest is a fine-tuned version of o4-mini specifically for use in Codex CLI. For direct use in the API, we recommend starting with gpt-4.1.",
+   "topic": "definition"
+  },
+  {
+   "fact": "codex-mini-latest supports text and image input and text output, with audio and video not supported.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Audio\n\nNot supported\n\nVideo\n\nNot supported",
+   "topic": "definition"
+  },
+  {
+   "fact": "codex-mini-latest does not support fine-tuning or predicted outputs, but supports streaming, function calling, and structured outputs.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Fine-tuning\n\nNot supported\n\nPredicted outputs\n\nNot supported",
+   "topic": "definition"
+  },
+  {
+   "fact": "The Build usage tier for rate limits allows 2,000 requests per minute and 200,000 tokens per minute, with a batch queue limit of 2,000,000.",
+   "value": "2,000",
+   "unit": "RPM",
+   "as_of": "",
+   "quote": "| Build | 2,000 | 200,000 | 2,000,000 |",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Launch usage tier for rate limits allows 10,000 requests per minute and 10,000,000 tokens per minute, with a batch queue limit of 1,000,000,000.",
+   "value": "10,000",
+   "unit": "RPM",
+   "as_of": "",
+   "quote": "| Launch | 10,000 | 10,000,000 | 1,000,000,000 |",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Grow usage tier for rate limits allows 30,000 requests per minute and 150,000,000 tokens per minute, with a batch queue limit of 15,000,000,000.",
+   "value": "30,000",
+   "unit": "RPM",
+   "as_of": "",
+   "quote": "| Grow | 30,000 | 150,000,000 | 15,000,000,000 |",
+   "topic": "rules"
+  }
+ ]
 }

@@ -1,11 +1,14 @@
 {
  "url": "https://support.google.com/google-ads/answer/2404182?hl=en",
  "title": "About location assets - Google Ads Help",
- "hash": "e22cce804b73277dbd7b9ff823809ba65528e4d6",
- "fetchedAt": "2026-11-09",
+ "hash": "f757604be34606d6ed9628dc80d9c47f2b023063",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 21688,
+ "chunks": 3,
  "facts": [
   {
-   "fact": "Google's location assets help now covers 2 use cases, which the page lists as the former Location Extensions and Affiliate Location Extensions.",
+   "fact": "Location assets now cover 2 use cases: formerly Location Extensions (for stores the advertiser owns directly) and formerly Affiliate Location Extensions (for products or services sold in stores the advertiser does not own, including manufacturing and aggregating).",
    "value": "2",
    "unit": "use cases",
    "as_of": "",
@@ -13,68 +16,156 @@
    "topic": "definition"
   },
   {
-   "fact": "The former Location Extensions use case applies if the advertiser owns its store locations directly.",
-   "value": "",
-   "unit": "",
+   "fact": "An advertiser can choose only one type of location asset in an account.",
+   "value": "1",
+   "unit": "location asset type per account",
    "as_of": "",
-   "quote": "Used if you own your store locations directly.",
-   "topic": "definition"
-  },
-  {
-   "fact": "The former Affiliate Location Extensions use case applies if the advertiser sells products or services in stores it does not own directly, including manufacturing and aggregating.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Used if you sell products or services in stores that you don’t own directly (this includes manufacturing and aggregating).",
-   "topic": "definition"
-  },
-  {
-   "fact": "Store visit conversions are automatically enabled by Google when an account meets specific eligibility criteria, which the page does not enumerate.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Store visit conversions are automatically enabled by Google when an account meets specific eligibility criteria.",
+   "quote": "You can choose only one type of location asset in an account.",
    "topic": "rules"
   },
   {
-   "fact": "Location assets can enable store visit conversions, which track when ads lead to a visit to a physical store.",
+   "fact": "Location asset data used in Google Ads is sourced directly from Google Maps and Google Business Profile, and successful corrections made there flow into linked Google Ads accounts.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Location assets can also enable features like store visit conversions, which help you track when your ads lead to a visit to your physical store.",
-   "topic": "definition"
-  },
-  {
-   "fact": "Location assets can also work with Performance Max campaigns.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Location assets can also work with Performance Max campaigns.",
+   "quote": "Data for location assets used in Google Ads is sourced directly from Google Maps and Google Business Profile.",
    "topic": "rules"
   },
   {
-   "fact": "On Search, a location asset is eligible to show when people nearby search on mobile for the advertiser's keywords, and can display the distance to the location and its city.",
+   "fact": "If a business or location is marked as temporarily or permanently closed in Business Profile, its Google Ads location assets will not show to customers in the final ad.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "when people nearby search on mobile for one of her keywords",
+   "quote": "If you mark your business or any of your locations as temporarily or permanently closed in Business Profile, your Google Ads location assets for those locations won’t show to customers in your final ad.",
    "topic": "rules"
   },
   {
-   "fact": "For YouTube location assets, the store shown in the final ad is selected based on the user's location or a location they have shown interest in.",
+   "fact": "Location assets on Display Network inventory are only available through Local Campaigns or Performance Max campaigns with store goals.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "The store shown in the final ad is selected based on the user’s location or a location they’ve shown interest in.",
+   "quote": "Location assets on Display inventory are only available through Local Campaigns or Performance Max with store goals.",
    "topic": "rules"
   },
   {
-   "fact": "Location assets can display the approximate travel distance to a store to help people find the advertiser's stores.",
+   "fact": "Location assets will begin showing on YouTube video ads, so video ads display business location information unless the advertiser explicitly opts out.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "the approximate travel distance to help people find your stores.",
-   "topic": "definition"
+   "quote": "Your locations will start showing on video ads, meaning your video ads will show information about your business locations unless you explicitly opt out.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Phone numbers used with location assets are verified to confirm they represent the business being promoted.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Phone numbers with location assets are verified to confirm they represent the business being promoted.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Locations added as location assets are eligible to show with any Search, Display, or Video ad in the account, assuming they are approved through the integrity verification process.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "the locations you add are eligible to show with any Search, Display, or Video ad in your account, assuming they're approved through the integrity verification process.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Linking a Business Profile to Google Ads lets Google Ads use Business Profile data to format ads, including street address, phone number, hours, and merchant photos and videos.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Data includes, but isn’t limited to the following: street address, phone number, hours, and merchant photos and videos.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Updates to locations made in the Business Profile manager may take up to a day to appear in the linked Google Ads account.",
+   "value": "1",
+   "unit": "day",
+   "as_of": "",
+   "quote": "updates to locations in the Business Profile manager may take up to a day to reflect in your Google Ads account.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Chain locations update automatically in Google Ads as stores open, move, or close.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Chain locations update automatically as stores open, move, or close",
+   "topic": "rules"
+  },
+  {
+   "fact": "If the location type is not declared correctly when creating location assets, the assets may show a 'Disapproved' status.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Failure to declare the location type correctly may result in your location assets in “Disapproved” state.",
+   "topic": "rules"
+  },
+  {
+   "fact": "When a request to link a Business Profile by email address is approved, locations from that account become eligible to show as location assets with ads.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "When the request is approved, locations from this account will be eligible to show as location assets with your ads.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Connecting Google Ads and Google Business Profile in Business Manager automatically enables store locations to appear as location assets in campaigns.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Connecting these apps in Business Manager automatically enables your store locations to appear as location assets in your campaigns.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google advises businesses to check whether they already have a Business Profile before creating a new one, because Business Profile verification takes time.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Since Business Profile verification takes time, don’t set up a new Business Profile if your business already has one.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Advertisers can select up to 10 locations from Google Maps to link with their Google Ads account when Google Business Profile and chain store options do not work.",
+   "value": "10",
+   "unit": "locations",
+   "as_of": "",
+   "quote": "you can select up to 10 locations from Google Maps to link with your Ads account. These Google Maps locations must be yours, or they may be disapproved.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google Maps locations linked to a Google Ads account must belong to the advertiser, or they may be disapproved.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "These Google Maps locations must be yours, or they may be disapproved.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Advertisers can add up to 10 locations by repeating the process in Location manager when adding 'Our locations'.",
+   "value": "10",
+   "unit": "locations",
+   "as_of": "",
+   "quote": "You may repeat the process to add up to 10 locations.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Campaign-level location asset settings override account-level location asset settings.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Make note that campaign-level settings will override account-level settings.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Removing location assets from the entire account prevents use of business locations for targeting or bidding and prevents tracking of store visit conversions.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "you won't be able to use business locations for targeting or bidding, and you won't be able to track store visit conversions, so it's not recommended.",
+   "topic": "rules"
   }
  ]
 }

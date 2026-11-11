@@ -1,11 +1,14 @@
 {
  "url": "https://www.attnagency.com/blog/ctv-attribution-incrementality",
  "title": "Connected TV Attribution & Incrementality: Complete Measurement Guide for DTC Brands",
- "hash": "048bbba847e7416cffd37efc06579621908ec0c8",
- "fetchedAt": "2026-11-10",
+ "hash": "c6aa45d98d74720cefde1d2be7f7ac5569c7c3e2",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 20264,
+ "chunks": 3,
  "facts": [
   {
-   "fact": "The page says DTC brands investing $50K+ monthly in CTV need to prove incrementality and understand true attribution.",
+   "fact": "The guide says DTC brands investing $50K or more monthly in CTV need to prove incrementality and true attribution to scale profitably.",
    "value": "50000",
    "unit": "USD per month",
    "as_of": "",
@@ -13,7 +16,7 @@
    "topic": "audience"
   },
   {
-   "fact": "The vendor states its guide is based on $75M+ in annual CTV spend across 200+ DTC campaigns.",
+   "fact": "The author states the guide is based on $75M or more in annual CTV spend across 200 or more DTC campaigns (vendor's own experience, not third-party data).",
    "value": "75000000",
    "unit": "USD per year",
    "as_of": "",
@@ -21,31 +24,23 @@
    "topic": "benchmark"
   },
   {
-   "fact": "The page claims platform reporting often shows 40-70% lower conversions than reality, without citing a source.",
-   "value": "40-70",
+   "fact": "The guide claims platform reporting often shows 40-70% lower CTV conversions than reality (unsourced claim).",
+   "value": "40-70%",
    "unit": "%",
    "as_of": "",
    "quote": "Platform reporting often shows 40-70% lower conversions than reality",
    "topic": "benchmark"
   },
   {
-   "fact": "The page says traditional 1-day attribution windows miss most conversions and recommends extended attribution periods of 14-30+ days for CTV.",
-   "value": "14-30",
+   "fact": "The guide recommends extended CTV attribution windows of 14 to 30+ days because traditional 1-day windows miss most conversions.",
+   "value": "14-30+",
    "unit": "days",
    "as_of": "",
    "quote": "Need for extended attribution periods (14-30+ days)",
    "topic": "rules"
   },
   {
-   "fact": "The page recommends configuring The Trade Desk's extended attribution windows at 14-30 days.",
-   "value": "14-30",
-   "unit": "days",
-   "as_of": "",
-   "quote": "Configure extended attribution windows (14-30 days)",
-   "topic": "rules"
-  },
-  {
-   "fact": "The page's example attribution configuration sets the CTV view-through window at 14-30 days.",
+   "fact": "The guide recommends CTV view-through attribution of 14-30 days in its example attribution window configuration.",
    "value": "14-30",
    "unit": "days",
    "as_of": "",
@@ -53,15 +48,15 @@
    "topic": "rules"
   },
   {
-   "fact": "The page's example attribution configuration sets the email click window at 3 days.",
-   "value": "3",
+   "fact": "The guide's example configuration sets search attribution to a 30-day click window.",
+   "value": "30",
    "unit": "days",
    "as_of": "",
-   "quote": "Email: 3 days click",
+   "quote": "Search: 30 days click",
    "topic": "rules"
   },
   {
-   "fact": "The page says marketing mix modeling requires daily sales data covering at least 2 years.",
+   "fact": "The Marketing Mix Modeling section says the model needs at least 2 years of daily sales data.",
    "value": "2",
    "unit": "years",
    "as_of": "",
@@ -69,7 +64,7 @@
    "topic": "rules"
   },
   {
-   "fact": "The page's geo-holdout design calls for 20+ matched market pairs.",
+   "fact": "The geo-holdout test design calls for choosing at least 20 matched market pairs.",
    "value": "20",
    "unit": "market pairs",
    "as_of": "",
@@ -77,7 +72,7 @@
    "topic": "rules"
   },
   {
-   "fact": "The page says geo-holdout tests typically need $100K+ monthly spend to ensure sufficient statistical power.",
+   "fact": "The guide says a geo-holdout test typically needs at least $100K in monthly spend to have sufficient statistical power.",
    "value": "100000",
    "unit": "USD per month",
    "as_of": "",
@@ -85,7 +80,7 @@
    "topic": "pricing"
   },
   {
-   "fact": "The page's geo-holdout design reduces CTV in the control group by 50-80%.",
+   "fact": "The geo-holdout control group has CTV advertising paused or reduced by 50-80%.",
    "value": "50-80",
    "unit": "%",
    "as_of": "",
@@ -93,7 +88,7 @@
    "topic": "rules"
   },
   {
-   "fact": "The page says geo-holdout tests should run a minimum of 6-12 weeks for statistical significance.",
+   "fact": "The geo-holdout test should run at least 6 to 12 weeks for statistical significance.",
    "value": "6-12",
    "unit": "weeks",
    "as_of": "",
@@ -101,7 +96,7 @@
    "topic": "rules"
   },
   {
-   "fact": "The page sets a p-value threshold of below 0.05 for determining statistical significance in incrementality tests.",
+   "fact": "The guide sets a p-value threshold below 0.05 for determining statistical significance in geo tests.",
    "value": "0.05",
    "unit": "p-value",
    "as_of": "",
@@ -109,7 +104,31 @@
    "topic": "rules"
   },
   {
-   "fact": "For beauty/skincare, the page lists a 14-day primary attribution window.",
+   "fact": "In the audience segment test, heavy exposure is defined as 8 or more CTV impressions per person per week.",
+   "value": "8+",
+   "unit": "impressions per person per week",
+   "as_of": "",
+   "quote": "**Heavy Exposure:** 8+ impressions per person per week",
+   "topic": "definition"
+  },
+  {
+   "fact": "In the audience segment test, medium exposure is defined as 4-7 CTV impressions per person per week.",
+   "value": "4-7",
+   "unit": "impressions per person per week",
+   "as_of": "",
+   "quote": "**Medium Exposure:** 4-7 impressions per person per week",
+   "topic": "definition"
+  },
+  {
+   "fact": "In the audience segment test, light exposure is defined as 1-3 CTV impressions per person per week.",
+   "value": "1-3",
+   "unit": "impressions per person per week",
+   "as_of": "",
+   "quote": "**Light Exposure:** 1-3 impressions per person per week",
+   "topic": "definition"
+  },
+  {
+   "fact": "The guide lists a 14-day primary attribution window as an industry benchmark for beauty and skincare.",
    "value": "14",
    "unit": "days",
    "as_of": "",
@@ -117,15 +136,15 @@
    "topic": "benchmark"
   },
   {
-   "fact": "For beauty/skincare, the page says a 28-day extended window captures 85%+ of conversions.",
-   "value": "85",
-   "unit": "%",
+   "fact": "The guide states a 28-day extended window for beauty and skincare captures 85% or more of conversions.",
+   "value": "28",
+   "unit": "days",
    "as_of": "",
    "quote": "Extended window: 28 days (captures 85%+ of conversions)",
    "topic": "benchmark"
   },
   {
-   "fact": "For apparel, the page lists a 21-day primary attribution window and a 45-day extended window.",
+   "fact": "The guide lists a 21-day primary attribution window as an industry benchmark for apparel.",
    "value": "21",
    "unit": "days",
    "as_of": "",
@@ -133,7 +152,7 @@
    "topic": "benchmark"
   },
   {
-   "fact": "For home/garden, the page lists a 30-day primary attribution window and a 60-day extended window.",
+   "fact": "The guide lists a 30-day primary attribution window as an industry benchmark for home and garden.",
    "value": "30",
    "unit": "days",
    "as_of": "",
@@ -141,15 +160,7 @@
    "topic": "benchmark"
   },
   {
-   "fact": "The page's audience segment design defines heavy CTV exposure as 8+ impressions per person per week.",
-   "value": "8",
-   "unit": "impressions per person per week",
-   "as_of": "",
-   "quote": "**Heavy Exposure:** 8+ impressions per person per week",
-   "topic": "definition"
-  },
-  {
-   "fact": "The page's linear time-decay example gives 100% attribution value on day 1 and 0% on day 14.",
+   "fact": "The guide's linear time-decay example gives full attribution value on day 1, 50% on day 7, and 0% on day 14.",
    "value": "0",
    "unit": "% attribution value on day 14",
    "as_of": "",
@@ -157,12 +168,220 @@
    "topic": "definition"
   },
   {
-   "fact": "The page lists ghost ad serving as supported by The Trade Desk and Samsung.",
-   "value": "",
-   "unit": "",
+   "fact": "In the daypart test example, late-night CTV spend (11 PM-1 AM) is reduced by 50%.",
+   "value": "50",
+   "unit": "%",
    "as_of": "",
-   "quote": "Use platforms that support ghost ad serving (The Trade Desk, Samsung)",
-   "topic": "other"
+   "quote": "Late Night (11 PM-1 AM): 50% spend reduction",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page gives a time-decay attribution schedule in which a CTV conversion on day 1 gets 100% attribution value, falling to 12.5% by day 14.",
+   "value": "100% on day 1; 50% on day 3; 25% on day 7; 12.5% on day 14",
+   "unit": "% attribution value",
+   "as_of": "",
+   "quote": "Day 1: 100% attribution value Day 3: 50% attribution value Day 7: 25% attribution value Day 14: 12.5% attribution value",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page states that deterministic cross-device matching typically achieves a 40-60% match rate.",
+   "value": "40-60%",
+   "unit": "% match rate",
+   "as_of": "",
+   "quote": "Deterministic matching: 40-60% match rate typical",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page states that probabilistic cross-device matching typically achieves a 60-80% match rate.",
+   "value": "60-80%",
+   "unit": "% match rate",
+   "as_of": "",
+   "quote": "Probabilistic matching: 60-80% match rate typical",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page states that a combined deterministic and probabilistic approach can achieve a 70-85% match rate.",
+   "value": "70-85%",
+   "unit": "% match rate",
+   "as_of": "",
+   "quote": "Combined approach: 70-85% match rate achievable",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In its beauty brand case study, the brand's monthly CTV spend was $300K.",
+   "value": "300000",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "Case Study 1: Beauty Brand ($300K Monthly CTV Spend)",
+   "topic": "audience"
+  },
+  {
+   "fact": "In the beauty brand case study, traditional attribution showed 1.2x ROAS for CTV.",
+   "value": "1.2",
+   "unit": "x ROAS",
+   "as_of": "",
+   "quote": "Traditional attribution showed 1.2x ROAS",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In the beauty brand case study, the brand ran a 12-week geo-holdout test across 40 matched markets.",
+   "value": "12 weeks, 40 markets",
+   "unit": "weeks, markets",
+   "as_of": "",
+   "quote": "12-week geo-holdout test across 40 matched markets",
+   "topic": "rules"
+  },
+  {
+   "fact": "In the beauty brand case study, the agency reported true incremental ROAS of 2.8x, which it said was 133% higher than platform reporting.",
+   "value": "2.8",
+   "unit": "x ROAS",
+   "as_of": "",
+   "quote": "True incremental ROAS: 2.8x (133% higher than platform reporting)",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In the home goods case study, the brand's monthly CTV spend was $150K.",
+   "value": "150000",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "Case Study 2: Home Goods Brand ($150K Monthly CTV Spend)",
+   "topic": "audience"
+  },
+  {
+   "fact": "In the home goods case study, the agency found that 60% of CTV-driven sales occurred after day 14.",
+   "value": "60",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Discovered 60% of CTV-driven sales occurred after day 14",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In the home goods case study, true ROAS increased from 1.8x to 3.1x with proper attribution.",
+   "value": "1.8 to 3.1",
+   "unit": "x ROAS",
+   "as_of": "",
+   "quote": "True ROAS increased from 1.8x to 3.1x with proper attribution",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In the home goods case study, the agency identified an optimal frequency of 4-6 exposures per month.",
+   "value": "4-6",
+   "unit": "exposures per month",
+   "as_of": "",
+   "quote": "Identified optimal frequency: 4-6 exposures per month",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In the supplement brand case study, the brand's monthly CTV spend was $500K.",
+   "value": "500000",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "Case Study 3: Supplement Brand ($500K Monthly CTV Spend)",
+   "topic": "audience"
+  },
+  {
+   "fact": "In the supplement brand case study, CTV-acquired customers had 40% higher LTV.",
+   "value": "40",
+   "unit": "%",
+   "as_of": "",
+   "quote": "CTV-acquired customers had 40% higher LTV",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In the supplement brand case study, the optimal attribution window was 28 days.",
+   "value": "28",
+   "unit": "days",
+   "as_of": "",
+   "quote": "Optimal attribution window: 28 days",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends a minimum of $50K+ monthly CTV spend for basic attribution.",
+   "value": "50000",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "**Basic Attribution:** $50K+ monthly CTV spend",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page recommends a minimum of $100K+ monthly spend for incrementality testing.",
+   "value": "100000",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "**Incrementality Testing:** $100K+ monthly for statistical power",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page recommends a minimum of $200K+ monthly spend across all channels for marketing mix modeling.",
+   "value": "200000",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "**Marketing Mix Modeling:** $200K+ monthly across all channels",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page recommends a minimum of $300K+ monthly spend for advanced geo-testing.",
+   "value": "300000",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "**Advanced Geo-Testing:** $300K+ monthly for robust results",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page suggests that 5-10% of CTV spend should go to measurement tools.",
+   "value": "5-10",
+   "unit": "% of CTV spend",
+   "as_of": "",
+   "quote": "**5-10%** of CTV spend should go to measurement tools",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page gives a professional MMM cost range of $50-150K annually.",
+   "value": "50000-150000",
+   "unit": "USD per year",
+   "as_of": "",
+   "quote": "**Professional MMM:** $50-150K annually",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page gives an attribution platform cost of $2-5K monthly.",
+   "value": "2000-5000",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "**Attribution Platform:** $2-5K monthly",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page gives a testing tools cost of $3-8K monthly.",
+   "value": "3000-8000",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "**Testing Tools:** $3-8K monthly",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page claims that in Year 1 measurement investment yields a 20-40% improvement in ROAS understanding.",
+   "value": "20-40",
+   "unit": "%",
+   "as_of": "",
+   "quote": "20-40% improvement in ROAS understanding",
+   "topic": "forecast"
+  },
+  {
+   "fact": "The page claims that in Year 1 measurement investment gives confidence to scale CTV by 50-100%.",
+   "value": "50-100",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Confidence to scale CTV by 50-100%",
+   "topic": "forecast"
+  },
+  {
+   "fact": "ATTN Agency states that properly attributed CTV campaigns typically show 2-4x higher ROAS than platform reporting suggests.",
+   "value": "2-4x",
+   "unit": "x ROAS",
+   "as_of": "",
+   "quote": "properly attributed CTV campaigns typically show 2-4x higher ROAS than platform reporting suggests, leading to significant budget reallocation opportunities",
+   "topic": "benchmark"
   }
  ]
 }

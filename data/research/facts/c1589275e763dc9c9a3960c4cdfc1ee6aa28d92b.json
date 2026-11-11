@@ -1,32 +1,211 @@
 {
  "url": "https://developers.google.com/search/docs/fundamentals/seo-starter-guide",
  "title": "SEO Starter Guide: The Basics | Google Search Central  |  Documentation  |  Google for Developers",
- "hash": "e6527824fdb3b96ee2294189dee8231f6fe7c121",
- "fetchedAt": "2026-11-10",
+ "hash": "c3391e509b4c02fa3ab608784cf708d166f3cd96",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 28164,
+ "chunks": 4,
  "facts": [
   {
-   "fact": "According to Google's guide, changes to a website can take effect in Google's results within a few hours, while others could take several months.",
+   "fact": "Changes made to a website can take anywhere from a few hours to several months to be reflected on Google's end.",
    "value": "a few hours to several months",
    "unit": "time",
    "as_of": "",
    "quote": "Some changes might take effect in a few hours, others could take several months.",
-   "topic": "other"
+   "topic": "rules"
   },
   {
-   "fact": "Google's guide recommends waiting a few weeks after making changes before assessing whether the work had beneficial effects in Google Search results.",
+   "fact": "Google's guide says you should generally wait a few weeks to assess whether your work had beneficial effects in Google Search results.",
    "value": "a few weeks",
    "unit": "time",
    "as_of": "",
    "quote": "In general, you likely want to wait a few weeks to assess whether your work had beneficial effects in Google Search results.",
-   "topic": "other"
+   "topic": "rules"
   },
   {
-   "fact": "According to Google's guide, the location of Google's crawler, which determines what information Google sees on location-dependent pages, is generally the US.",
+   "fact": "Google's crawler, when checking location-dependent page content, generally operates from the US, so that is the location whose view of the information matters.",
    "value": "US",
    "unit": "",
    "as_of": "",
-   "quote": "crawler's location, which is generally the US.",
+   "quote": "make sure you're satisfied with the information that Google sees from its crawler's location, which is generally the US.",
    "topic": "rules"
+  },
+  {
+   "fact": "Google says using directories to group similar pages can affect how it crawls and indexes a site once the site has more than a few thousand URLs.",
+   "value": "a few thousand",
+   "unit": "URLs",
+   "as_of": "",
+   "quote": "If you have more than a few thousand URLs on your site, how you organize your content may have effects on how Google crawls and indexes your site.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google states that sites following the Search Essentials are more likely to show up in Google's search results, though no site is guaranteed inclusion in the index.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "sites that follow the Search Essentials are more likely to show up in Google's search results",
+   "topic": "rules"
+  },
+  {
+   "fact": "Having duplicate content on a site is not a violation of Google's spam policies, but it can be a bad user experience and search engines might waste crawling resources.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Having duplicate content on your site is not a violation of our spam policies, but it can be a bad user experience and search engines might waste crawling resources",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google says the vast majority of new pages it finds every day are discovered through links.",
+   "value": "vast majority",
+   "unit": "",
+   "as_of": "",
+   "quote": "the vast majority of the new pages Google finds every day are through links",
+   "topic": "other"
+  },
+  {
+   "fact": "Google states that a site's content can influence its search presence more than any other suggestion in the guide.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Creating content that people find compelling and useful will likely influence your website's presence in search results more than any of the other suggestions in this guide",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google recommends that user-generated links on a site, such as forum posts or comments, have a nofollow or similar annotation automatically added by the CMS.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "make sure every link that's posted by users has a `nofollow` or similar annotation automatically added by your CMS",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google says a good meta description is short, unique to one particular page, and includes the most relevant points of the page, typically one or two sentences.",
+   "value": "one or two sentences",
+   "unit": "sentences",
+   "as_of": "",
+   "quote": "which is typically a succinct, one- or two-sentence summary of the page",
+   "topic": "definition"
+  },
+  {
+   "fact": "Google says search engines' language matching systems can understand how a page relates to many queries even without exact terms in them.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Google's language matching systems are sophisticated and can understand how your page relates to many queries, even if you don't explicitly use the exact terms in them",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google Search doesn't use the keywords meta tag.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "doesn't use the keywords meta tag",
+   "topic": "rules"
+  },
+  {
+   "fact": "Keyword stuffing, meaning excessively repeating the same words even in variations, is against Google's spam policies.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "keyword stuffing is against Google's spam policies",
+   "topic": "rules"
+  },
+  {
+   "fact": "Keywords in the domain name or URL path have hardly any ranking effect beyond appearing in breadcrumbs, according to Google.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "the keywords in the name of the domain (or URL path) alone have hardly any effect beyond appearing in",
+   "topic": "rules"
+  },
+  {
+   "fact": "According to Google, a domain's TLD only matters if you are targeting a specific country's users, and even then it is usually a low impact signal.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "only matters if you're targeting a specific country's users, and even then it's usually a low impact signal",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google states there is no magical word count target for content, minimum or maximum, for ranking purposes.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "there's no magical word count target, minimum or maximum",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google states that content under multiple URLs is fine and does not cause a manual action, though it is inefficient.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "It's inefficient, but it's not something that will cause a manual action.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google states that PageRank, which uses links, is only one of many ranking signals in Google Search.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "We have many ranking signals, and PageRank is just one of those.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google states that the order of headings does not matter from a Google Search perspective, and there is no ideal number of headings for a page.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "it doesn't matter if you're using them out of order",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google states that E-E-A-T is not a ranking factor.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "No, it's not.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google describes alt text as added to HTML with the alt attribute of the img element, or through a CMS description field when uploading an image.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "You can add this to your HTML with the `alt` attribute of the `img` element",
+   "topic": "definition"
+  },
+  {
+   "fact": "Google recommends using images that are sharp and clear and placing them near text relevant to the image.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Use images that are sharp and clear, and place them near text that's relevant to the image.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google describes word of mouth, where people familiar with a site tell friends about it, as one of the most effective and lasting ways to promote a site, though it can take time.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "is word of mouth: that is, people familiar with your site tell their friends about it",
+   "topic": "other"
+  },
+  {
+   "fact": "Google warns that overpromoting a site can harm it, because people may get fatigued and search engines may perceive some practices as manipulation of search results.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "you can overdo promoting your site and actually harm it",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Google Search Central YouTube channel contains hundreds of videos created for website owners, according to Google.",
+   "value": "hundreds",
+   "unit": "videos",
+   "as_of": "",
+   "quote": "Watch hundreds of helpful videos created for website owners.",
+   "topic": "other"
   }
  ]
 }

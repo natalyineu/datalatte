@@ -1,11 +1,14 @@
 {
  "url": "https://agentlocker.ai/news/how-to-run-ai-models-locally-with-ollama-and-lm-studio",
  "title": "How to Run AI Models Locally With Ollama and LM Studio - Agentic Times | AgentLocker",
- "hash": "bd3bd5248d1c319d700c9400a8dc9572bb31a7cb",
- "fetchedAt": "2026-11-09",
+ "hash": "3480e455d56c4e86f1c74273721ab7cd403c9c64",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 3209,
+ "chunks": 1,
  "facts": [
   {
-   "fact": "Open-weight AI models trail the best closed models by about four months on average, according to Epoch AI's May 29 analysis covering the period since January 2026 (third-party figure cited by the article).",
+   "fact": "Open-weight AI models trail the best closed models by about four months on average, according to Epoch AI's May 29 analysis.",
    "value": "4",
    "unit": "months",
    "as_of": "since January 2026",
@@ -13,68 +16,20 @@
    "topic": "benchmark"
   },
   {
-   "fact": "Paid chatbot subscriptions cost about $20 a month, while Ollama and LM Studio cost nothing.",
+   "fact": "Paid chatbot subscriptions cost about $20 a month, while the free local tools Ollama and LM Studio cost nothing.",
    "value": "20",
-   "unit": "$ per month",
+   "unit": "USD per month",
    "as_of": "",
    "quote": "Paid chatbot subscriptions cost about $20 a month, while these tools cost nothing.",
    "topic": "pricing"
   },
   {
-   "fact": "Ollama and LM Studio are free programs.",
-   "value": "0",
-   "unit": "$",
-   "as_of": "",
-   "quote": "Two free programs, Ollama and LM Studio, handle the setup.",
-   "topic": "pricing"
-  },
-  {
-   "fact": "LM Studio's documentation says the app can operate entirely offline, provided the user first gets model files.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "can operate entirely offline, just make sure to get some model files first.",
-   "topic": "rules"
-  },
-  {
-   "fact": "DeepSeek's R1 series uses the MIT License.",
-   "value": "MIT License",
-   "unit": "",
-   "as_of": "",
-   "quote": "DeepSeek’s R1 series uses the MIT License",
-   "topic": "rules"
-  },
-  {
-   "fact": "Google's Gemma 4 and OpenAI's gpt-oss use the Apache 2.0 license, which allows changes and commercial use.",
-   "value": "Apache 2.0",
-   "unit": "",
-   "as_of": "",
-   "quote": "Google’s Gemma 4 and OpenAI’s gpt-oss use Apache 2.0.",
-   "topic": "rules"
-  },
-  {
-   "fact": "Small local AI models need about 8GB of VRAM.",
-   "value": "8",
-   "unit": "GB VRAM",
-   "as_of": "",
-   "quote": "Small models need about 8GB of VRAM.",
-   "topic": "other"
-  },
-  {
-   "fact": "Heavier local AI users may want a graphics card with 24GB or more of VRAM, or unified-memory machines such as the Mac Mini or Nvidia DGX Spark.",
-   "value": "24",
-   "unit": "GB VRAM",
-   "as_of": "",
-   "quote": "Heavier users may want a graphics card with 24GB or more, or machines with unified memory such as the Mac Mini or the Nvidia DGX Spark.",
-   "topic": "other"
-  },
-  {
-   "fact": "LM Studio recommends 16GB or more of RAM on Apple Silicon Macs running macOS 14 or newer.",
+   "fact": "LM Studio recommends at least 16GB of RAM on Apple Silicon Macs running macOS 14 or newer.",
    "value": "16",
    "unit": "GB RAM",
    "as_of": "",
    "quote": "LM Studio recommends 16GB or more of RAM on Apple Silicon Macs running macOS 14 or newer.",
-   "topic": "other"
+   "topic": "rules"
   },
   {
    "fact": "On Windows, LM Studio recommends 16GB of RAM and 4GB of dedicated VRAM.",
@@ -82,7 +37,7 @@
    "unit": "GB RAM",
    "as_of": "",
    "quote": "On Windows, it recommends 16GB of RAM and 4GB of dedicated VRAM.",
-   "topic": "other"
+   "topic": "rules"
   },
   {
    "fact": "LM Studio does not support Intel-based Macs.",
@@ -93,59 +48,43 @@
    "topic": "rules"
   },
   {
-   "fact": "Ollama lists Gemma 4 model downloads at about 4.6GB to 20GB.",
+   "fact": "Small local AI models need about 8GB of VRAM.",
+   "value": "8",
+   "unit": "GB VRAM",
+   "as_of": "",
+   "quote": "Small models need about 8GB of VRAM.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Heavier local AI users may want a graphics card with 24GB or more of VRAM.",
+   "value": "24",
+   "unit": "GB VRAM",
+   "as_of": "",
+   "quote": "Heavier users may want a graphics card with 24GB or more",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Ollama lists Gemma 4 downloads ranging from about 4.6GB to 20GB.",
    "value": "4.6 to 20",
-   "unit": "GB",
+   "unit": "GB download",
    "as_of": "",
    "quote": "Ollama lists Gemma 4 downloads from about 4.6GB to 20GB.",
-   "topic": "other"
+   "topic": "benchmark"
   },
   {
    "fact": "OpenAI says the gpt-oss-20b model needs 16GB of memory.",
    "value": "16",
    "unit": "GB memory",
    "as_of": "",
-   "quote": "OpenAI says gpt-oss-20b needs 16GB of memory",
-   "topic": "other"
-  },
-  {
-   "fact": "OpenAI says the gpt-oss-120b model runs within 80GB.",
-   "value": "80",
-   "unit": "GB",
-   "as_of": "",
-   "quote": "gpt-oss-120b runs within 80GB.",
-   "topic": "other"
-  },
-  {
-   "fact": "Google claims its Multi-Token Prediction drafters for Gemma 4 can speed up responses by up to 3x.",
-   "value": "3",
-   "unit": "x speedup (up to)",
-   "as_of": "",
-   "quote": "Google’s Multi-Token Prediction drafters for Gemma 4 can speed up responses by up to 3x.",
+   "quote": "OpenAI says gpt-oss-20b needs 16GB of memory, and gpt-oss-120b runs within 80GB.",
    "topic": "benchmark"
   },
   {
-   "fact": "Alibaba's Qwen 3.8-Max has 2.4 trillion total parameters.",
-   "value": "2.4",
-   "unit": "trillion parameters",
-   "as_of": "",
-   "quote": "Alibaba’s Qwen 3.8-Max has 2.4 trillion total parameters",
-   "topic": "other"
-  },
-  {
-   "fact": "In Alibaba's own comparison, closed models won 24 of 31 tests against Qwen 3.8-Max (vendor-reported result).",
-   "value": "24 of 31",
-   "unit": "tests won by closed models",
-   "as_of": "",
-   "quote": "in Alibaba’s own comparison, closed models won 24 of 31 tests.",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "Models ending in ':cloud' run on Ollama's servers instead of the user's machine.",
+   "fact": "LM Studio's documentation says the app can operate entirely offline if the user first gets model files.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Models ending in “:cloud” run on Ollama’s servers instead of the user’s machine.",
+   "quote": "can operate entirely offline, just make sure to get some model files first.",
    "topic": "rules"
   }
  ]

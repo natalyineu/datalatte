@@ -1,87 +1,498 @@
 {
  "url": "https://www.usagepricing.com/blueprint/windsurf",
  "title": "Windsurf Pricing | UsagePricing",
- "hash": "98bd90eb6cefaaf26c6135c80b6c18051e4d0742",
- "fetchedAt": "2026-11-06",
+ "hash": "14df43952b1e49d3f88d9281f981856dd0e63221",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 29408,
+ "chunks": 4,
  "facts": [
   {
-   "fact": "Windsurf is an agentic AI coding IDE, formerly Codeium, that is now owned by Cognition and rebranded as Devin Desktop; windsurf.com/pricing 308-redirects to devin.ai/pricing.",
-   "value": "",
-   "unit": "",
-   "as_of": "2026-10-15",
-   "quote": "Windsurf is an agentic AI coding IDE, formerly Codeium, now owned by Cognition and rebranded Devin Desktop, with windsurf.com/pricing 308-redirecting to devin.ai/pricing.",
-   "topic": "definition"
+   "fact": "Windsurf (now Devin Desktop) has a free tier priced at $0 per month for individuals trying the agent.",
+   "value": "0",
+   "unit": "USD per month",
+   "as_of": "2026",
+   "quote": "Free | $0 | Light quota to code with agents; limited model availability",
+   "topic": "pricing"
   },
   {
-   "fact": "Windsurf's Pro plan is priced at $20 per month (page's 2026 pricing).",
+   "fact": "Windsurf's Pro individual plan is priced at $20 per month.",
    "value": "20",
    "unit": "USD per month",
    "as_of": "2026",
-   "quote": "Pro at $20 per month, Max at $200 per month",
+   "quote": "Pro | $20 / mo | Everything in Free, plus increased quotas",
    "topic": "pricing"
   },
   {
-   "fact": "Windsurf's Max plan is priced at $200 per month (page's 2026 pricing).",
+   "fact": "Windsurf's Max individual plan is priced at $200 per month and is labelled NEW on the page.",
    "value": "200",
    "unit": "USD per month",
    "as_of": "2026",
-   "quote": "Max at $200 per month, a Teams plan at $80 per month plus $40 per full dev seat",
+   "quote": "Max | $200 / mo | Everything in Pro, plus significantly higher quotas",
    "topic": "pricing"
   },
   {
-   "fact": "Windsurf's Teams plan is priced at $80 per month plus $40 per full dev seat (page's 2026 pricing).",
-   "value": "80 base + 40 per full dev seat",
-   "unit": "USD per month plus USD per seat",
+   "fact": "Windsurf's Teams plan costs $80 per month as a team base plus $40 per month for each full developer seat.",
+   "value": "80 base + 40 per seat",
+   "unit": "USD per month",
    "as_of": "2026",
-   "quote": "a Teams plan at $80 per month plus $40 per full dev seat",
+   "quote": "Teams | $80 / mo + $40 /seat/mo",
    "topic": "pricing"
   },
   {
-   "fact": "Windsurf offers a free tier priced at $0 (page's 2026 pricing).",
-   "value": "0",
-   "unit": "USD",
+   "fact": "Windsurf's Teams plan supports up to 200 users.",
+   "value": "200",
+   "unit": "users",
    "as_of": "2026",
-   "quote": "runs a free $0 tier",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Windsurf's Enterprise tier is custom-quoted rather than listed at a fixed price.",
-   "value": "",
-   "unit": "",
-   "as_of": "2026",
-   "quote": "and a custom-quoted Enterprise tier",
-   "topic": "pricing"
-  },
-  {
-   "fact": "Each paid Windsurf plan includes a usage quota that refreshes on a daily and weekly basis.",
-   "value": "",
-   "unit": "",
-   "as_of": "2026",
-   "quote": "Each paid plan includes a usage quota that refreshes on a daily and weekly basis",
+   "quote": "capped at up to 200 users, where each full user carries its own quota and Devin Desktop access",
    "topic": "rules"
   },
   {
-   "fact": "Usage beyond Windsurf's included quota is purchased at underlying model API pricing rather than a flat per-message fee.",
+   "fact": "Windsurf's Enterprise tier is custom-quoted through sales rather than listed at a fixed price.",
    "value": "",
    "unit": "",
    "as_of": "2026",
-   "quote": "Usage beyond the included quota is purchased at underlying model API pricing rather than a flat per-message fee.",
+   "quote": "Enterprise | Let’s talk (custom)",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Windsurf's included usage allowance on paid plans refreshes automatically on a daily and weekly basis.",
+   "value": "",
+   "unit": "",
+   "as_of": "2026",
+   "quote": "the included allowance refreshes automatically on a daily and weekly basis",
    "topic": "rules"
   },
   {
-   "fact": "Per the page, in 2026 Windsurf replaced its Cascade prompt-credit system with daily and weekly quotas and raised Pro from $15 to $20, which drew public user backlash.",
+   "fact": "Once the included usage on a paid Windsurf plan is exhausted, extra usage is purchasable and billed at underlying model API rates rather than a flat per-message fee.",
+   "value": "",
+   "unit": "",
+   "as_of": "2026",
+   "quote": "extra usage is purchasable and consumed at underlying model API rates (a pass-through token cost), not a flat per-message fee",
+   "topic": "rules"
+  },
+  {
+   "fact": "Windsurf's Pro and Max plans cap concurrent sessions at up to 10, while Teams and Enterprise have unlimited concurrent sessions.",
+   "value": "10",
+   "unit": "concurrent sessions",
+   "as_of": "2026",
+   "quote": "Pro and Max cap at up to 10 concurrent sessions, while Team and Enterprise are unlimited.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Free, Pro and Max Windsurf plans are single-member plans with one member each.",
+   "value": "1",
+   "unit": "members",
+   "as_of": "2026",
+   "quote": "Free, Pro and Max are single-member (1 member each)",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Windsurf Free tier includes unlimited inline edits and Tab completions.",
+   "value": "",
+   "unit": "",
+   "as_of": "2026",
+   "quote": "unlimited inline edits and Tab completions",
+   "topic": "rules"
+  },
+  {
+   "fact": "Windsurf raised its Pro plan price from $15 to $20 in 2026 when it replaced its Cascade prompt-credit system with daily and weekly quotas, according to the page.",
    "value": "15 to 20",
    "unit": "USD per month",
    "as_of": "2026",
-   "quote": "In 2026 Windsurf replaced its long-running Cascade prompt-credit system with daily and weekly quotas and raised Pro from $15 to $20",
+   "quote": "raised Pro from $15 to $20, drawing public user backlash",
    "topic": "pricing"
   },
   {
-   "fact": "Per the page, Windsurf's ownership split in July 2025 after OpenAI's $3 billion acquisition collapsed: Google paid $2.4 billion to hire the founders and Cognition bought the remaining company.",
-   "value": "3 billion (OpenAI deal); 2.4 billion (Google payment)",
-   "unit": "USD",
+   "fact": "Windsurf reported roughly $82M in ARR and more than 350 enterprise customers by mid-2025, according to the company's own reporting as cited on the page.",
+   "value": "82",
+   "unit": "million USD ARR",
+   "as_of": "mid-2025",
+   "quote": "it reported roughly $82M in ARR and 350+ enterprise customers",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Codeium was originally launched by Exafunction in 2022 before the product became Windsurf.",
+   "value": "2022",
+   "unit": "year",
+   "as_of": "2022",
+   "quote": "by Exafunction in 2022",
+   "topic": "definition"
+  },
+  {
+   "fact": "The company rebranded from Codeium to Windsurf in April 2025.",
+   "value": "2025-04",
+   "unit": "date",
+   "as_of": "2025-04",
+   "quote": "The company rebranded from Codeium to Windsurf in April 2025.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Google reportedly paid roughly $2.4 billion in a reverse-acquihire to hire Windsurf founders into Google DeepMind on the same day OpenAI's deal collapsed in July 2025.",
+   "value": "2.4",
+   "unit": "billion USD",
    "as_of": "2025-07",
-   "quote": "Windsurf's ownership split in July 2025 when OpenAI's $3 billion acquisition collapsed, Google paid $2.4 billion to hire the founders, and Cognition bought the remaining company.",
+   "quote": "The same day, Google paid roughly **$2.4 billion** in a reverse-acquihire",
+   "topic": "other"
+  },
+  {
+   "fact": "OpenAI's reported $3 billion acquisition of Windsurf collapsed in July 2025.",
+   "value": "3",
+   "unit": "billion USD",
+   "as_of": "2025-07",
+   "quote": "OpenAI’s reported $3 billion acquisition of Windsurf collapsed",
+   "topic": "other"
+  },
+  {
+   "fact": "Cognition acquired the remaining Windsurf company, including its product, brand, IP and a team of about 250 people, on 2025-07-14.",
+   "value": "250",
+   "unit": "people",
+   "as_of": "2025-07-14",
+   "quote": "acquired the remaining Windsurf company, including its product, brand, IP and ~250-person team",
+   "topic": "other"
+  },
+  {
+   "fact": "The windsurf.com/pricing page now 308-redirects to devin.ai/pricing under Cognition.",
+   "value": "",
+   "unit": "",
+   "as_of": "2026",
+   "quote": "windsurf.com/pricing** now 308-redirects to **devin.ai/pricing",
+   "topic": "definition"
+  },
+  {
+   "fact": "The page's illustrative estimate for a solo Pro user with heavy overage is a total of $45–$80 per month, made up of a $20 Pro seat plus $25–$60 in overage.",
+   "value": "45–80",
+   "unit": "USD per month",
+   "as_of": "2026",
+   "quote": "**Estimated total** | **$45–$80**",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page's illustrative estimate for a 10-seat Teams deployment with overage is a total of $580–$780 per month, made up of an $80 team base, $400 for 10 seats, and $100–$300 in overage.",
+   "value": "580–780",
+   "unit": "USD per month",
+   "as_of": "2026",
+   "quote": "**Estimated total** | **$580–$780**",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Windsurf's Teams plan was introduced in 2024-09 at $15 per seat per month, as its first paid self-serve tier.",
+   "value": "15",
+   "unit": "USD per seat per month",
+   "as_of": "2024-09",
+   "quote": "**2024-09** — First paid self-serve tier: **Teams $15/seat/mo** (admin dashboard, GPT-4/Claude 3.5 Sonnet).",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Windsurf's Cascade dual-credit system went live on 2024-12-06 with a Free tier at $0, Pro at $15, and Pro Ultimate at $60.",
+   "value": "15",
+   "unit": "USD per month",
+   "as_of": "2024-12-06",
+   "quote": "Pro $15 (500 prompt + 1,500 flow-action), Pro Ultimate $60",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Windsurf's Cascade dual-credit Pro plan included 500 prompt credits and 1,500 flow-action credits per month.",
+   "value": "500 prompt + 1,500 flow-action",
+   "unit": "credits per month",
+   "as_of": "2024-12-06",
+   "quote": "Pro $15 (500 prompt + 1,500 flow-action)",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Under the Cascade dual-credit system, the Free tier included 5 prompt and 5 flow-action credits.",
+   "value": "5+5",
+   "unit": "credits",
+   "as_of": "2024-12-06",
+   "quote": "Free $0 (5+5 credits)",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Windsurf's Pricing v2, dated 2025-04-21, eliminated Flow Action credits so that only prompt credits remained.",
+   "value": "",
+   "unit": "",
+   "as_of": "2025-04-21",
+   "quote": "Flow Action credits eliminated; prompt-credits only; add-ons $10/250 with rollover",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Windsurf's Pricing v2 add-ons were priced at $10 for 250 credits, with rollover.",
+   "value": "10",
+   "unit": "USD per 250 credits",
+   "as_of": "2025-04-21",
+   "quote": "add-ons $10/250 with rollover",
+   "topic": "pricing"
+  },
+  {
+   "fact": "In 2025 Q2, Windsurf added Teams at $35 and Teams Ultimate at $90.",
+   "value": "35 / 90",
+   "unit": "USD",
+   "as_of": "2025 Q2",
+   "quote": "Teams $35 / Teams Ultimate $90 added",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Windsurf's Pro plan rose from $15 to $20 in the 2026 Q1–Q2 period, and a new Max tier at $200 was added.",
+   "value": "20",
+   "unit": "USD per month",
+   "as_of": "2026 Q1–Q2",
+   "quote": "**Pro $15→$20**, new **Max $200** tier",
+   "topic": "pricing"
+  },
+  {
+   "fact": "By 2026-04-01 Windsurf's Pro plan was shown at $20 with a quota allowance that refreshes daily and weekly, and overage billed at API price.",
+   "value": "20",
+   "unit": "USD per month",
+   "as_of": "2026-04-01",
+   "quote": "the new quota model live by **2026-04-01** (Pro $20, allowance “refreshes daily & weekly”, overage “at API price”",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Windsurf's Pricing page still showed the credit model with Pro at $15 and 500 credits per month on 2026-03-08, according to the page's screenshot evidence.",
+   "value": "15",
+   "unit": "USD per month",
+   "as_of": "2026-03-08",
+   "quote": "still running the credit model on **2026-03-08** (Pro $15, 500 credits/mo)",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Windsurf's Enterprise tier was added in 2023-04 with Contact for Pricing, while the Individual tier remained free.",
+   "value": "",
+   "unit": "",
+   "as_of": "2023-04",
+   "quote": "Codeium adds an Enterprise tier (Contact for Pricing, VPC/on-prem, local fine-tuning); Individual remains free forever.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "According to the page, Windsurf's Teams plan carries an $80 base fee plus $40 per seat.",
+   "value": "80 base + 40/seat",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "Teams $80 base + $40/seat means a high platform floor before any usage",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Windsurf's quota allowance refreshes on daily and weekly cycles rather than monthly, and unused allowance does not roll over.",
+   "value": "",
+   "unit": "",
+   "as_of": "2026",
+   "quote": "the new quotas do **not** roll over",
+   "topic": "rules"
+  },
+  {
+   "fact": "Windsurf bills overage after a paid plan's quota is exhausted at the underlying model provider's API token rate rather than a marked-up credit price.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "additional usage is consumed “at API pricing” — the underlying model provider’s wholesale token rate",
+   "topic": "rules"
+  },
+  {
+   "fact": "Cognition acquired Windsurf on 2025-07-14, and the page reports ~$82M ARR, 350+ enterprise customers, and a ~250-person team.",
+   "value": "82",
+   "unit": "million USD ARR",
+   "as_of": "2025-07-14",
+   "quote": "**Cognition acquires Windsurf** (~$82M ARR, 350+ enterprise customers, ~250-person team)",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Per press reporting cited on the page, OpenAI's reported acquisition of Windsurf was about $3 billion, and Google paid about $2.4 billion to hire founders into DeepMind.",
+   "value": "3 / 2.4",
+   "unit": "billion USD",
+   "as_of": "2025-07-11",
+   "quote": "OpenAI’s reported $3B acquisition collapses; Google pays ~$2.4B to hire founders Mohan & Chen into DeepMind",
+   "topic": "other"
+  },
+  {
+   "fact": "A Reddit discussion reported by the page called the 2026 quota change a '33% price hike' and documented effective-usage drops of roughly 4x; these are user claims, not vendor figures.",
+   "value": "33 / 4",
+   "unit": "% price increase / x usage drop",
+   "as_of": "2026",
+   "quote": "Reddit users called it a “33% price hike” and documented effective-usage drops of roughly 4x",
+   "topic": "other"
+  },
+  {
+   "fact": "Windsurf Editor launched on 2024-11-13 as an agentic IDE with the Cascade agent.",
+   "value": "",
+   "unit": "",
+   "as_of": "2024-11-13",
+   "quote": "**2024-11-13** — **Windsurf Editor** launches as an agentic IDE with the Cascade agent.",
+   "topic": "other"
+  },
+  {
+   "fact": "The page's tracked range for Windsurf pricing snapshots runs from 2023-01 to 2026-06.",
+   "value": "2023-01 to 2026-06",
+   "unit": "",
+   "as_of": "2026-06",
+   "quote": "Tracked range: 2023-01–2026-06 (Wayback codeium.com + windsurf.com snapshots).",
+   "topic": "other"
+  },
+  {
+   "fact": "The page counts Windsurf's pricing model as having changed four times in about 16 months.",
+   "value": "4",
+   "unit": "changes in ~16 months",
+   "as_of": "",
+   "quote": "Pricing model has changed four times in ~16 months",
+   "topic": "other"
+  },
+  {
+   "fact": "Hacker News discussion of The Verge's report on the Windsurf ownership split drew 1,055 points and 685 comments on 2025-07-11.",
+   "value": "1055",
+   "unit": "points",
+   "as_of": "2025-07-11",
+   "quote": "The Verge’s report drew a **1,055-point, 685-comment** Hacker News discussion (2025-07-11)",
+   "topic": "other"
+  },
+  {
+   "fact": "The Compare Plans matrix on devin.ai/pricing lists a concurrent sessions limit of up to 10 for Pro and Max, and unlimited for Team and Enterprise.",
+   "value": "10",
+   "unit": "concurrent sessions",
+   "as_of": "",
+   "quote": "publishes a “Concurrent sessions limit” of up to 10 for Pro and Max, and Unlimited for Team and Enterprise",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Pro tier is priced at a $20 step, per the page's description of the Pro upgrade from Free.",
+   "value": "20",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "gives the $20 step a value story beyond “more of the same,”",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Windsurf's older plan was priced at $15 and included 500 credits, according to the page's comparison of the old credit model.",
+   "value": "15",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "than the old $15/500-credit plan",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Historically, referring a friend to a paid plan earned bonus flex/add-on credits in the range of 250 to 500 credits.",
+   "value": "250–500",
+   "unit": "credits",
+   "as_of": "",
+   "quote": "e.g. 250–500 flex/add-on credits",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Windsurf discontinued its dual-credit system in April 2025.",
+   "value": "April 2025",
+   "unit": "date",
+   "as_of": "2025-04",
+   "quote": "killed the dual-credit system outright in April 2025",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Cognition acquired Windsurf in July 2025, and Windsurf was then folded into Devin Desktop.",
+   "value": "July 2025",
+   "unit": "date",
+   "as_of": "2025-07",
+   "quote": "Windsurf was acquired by Cognition in July 2025",
+   "topic": "other"
+  },
+  {
+   "fact": "Per the page, Codeium was reported to be worth $3B to OpenAI and about $2.4B to Google; these are third-party reported figures.",
+   "value": "3 / 2.4",
+   "unit": "USD billion",
+   "as_of": "",
+   "quote": "reported $3B to OpenAI and ~$2.4B to Google",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Windsurf's pricing, docs and billing help pages were checked on Nov 9, 2026.",
+   "value": "Nov 9, 2026",
+   "unit": "date",
+   "as_of": "2026-11-09",
+   "quote": "Checked Nov 9, 2026 against Windsurf's own pricing, docs and billing help pages.",
+   "topic": "other"
+  },
+  {
+   "fact": "Cognition's shared Ashby job board, used for the revenue-org signals, lists 9 open roles.",
+   "value": "9",
+   "unit": "open roles",
+   "as_of": "2026-11",
+   "quote": "9 open roles",
+   "topic": "other"
+  },
+  {
+   "fact": "Cognition's shared job board lists 11 retention-coded 'Deployed Engineer' roles worldwide.",
+   "value": "11",
+   "unit": "open roles",
+   "as_of": "2026-11",
+   "quote": "11 retention-coded \"Deployed Engineer\" roles worldwide",
+   "topic": "other"
+  },
+  {
+   "fact": "Windsurf has had four owners and three names (Codeium, Windsurf, Devin Desktop) within 18 months.",
+   "value": "4 owners / 3 names / 18 months",
+   "unit": "count",
+   "as_of": "",
+   "quote": "Four owners and three names (Codeium → Windsurf → Devin Desktop) in 18 months",
+   "topic": "other"
+  },
+  {
+   "fact": "Windsurf changed its core usage meter four times in about 16 months, according to UsagePricing's analysis.",
+   "value": "4",
+   "unit": "changes",
+   "as_of": "2026",
+   "quote": "Windsurf changed its core meter four times in ~16 months, and the change that altered the _shape_ of the bucket",
+   "topic": "pricing"
+  },
+  {
+   "fact": "UsagePricing describes the Windsurf price increase from $15 to $20 as a 33% increase.",
+   "value": "33",
+   "unit": "%",
+   "as_of": "",
+   "quote": "A 33% price increase is survivable; removing rollover is not.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "According to UsagePricing, Windsurf's flow-action meter was retired because agents' own tool calls outnumbered user prompts about 4:1 with reasoning models.",
+   "value": "4:1",
+   "unit": "ratio of tool calls to user prompts",
+   "as_of": "",
+   "quote": "reasoning models made the agent’s own tool calls outnumber user prompts ~4:1",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Windsurf's Pro plan is priced at $20 against a daily/weekly quota with raw-API overage, per the page's 2026 description.",
+   "value": "20",
+   "unit": "USD",
+   "as_of": "2026",
+   "quote": "now sits inside Devin Desktop charging $20 Pro against a daily/weekly quota with raw-API overage",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Windsurf previously advertised a concrete allowance of 500 credits before replacing it with the label 'Standard'.",
+   "value": "500",
+   "unit": "credits",
+   "as_of": "",
+   "quote": "Replacing concrete “500 credits” with “Standard” let users assume the largest possible cut.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Windsurf's overage is billed at raw API rates, according to the page.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Billing overage at raw API rates made Windsurf’s most-scrutinized number defensible",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Windsurf's pricing history was verified via Internet Archive snapshots of codeium.com/pricing covering 2023-01 to 2025-04 and windsurf.com/pricing covering 2025-04 to 2026-04.",
+   "value": "",
+   "unit": "",
+   "as_of": "2026-06-08",
+   "quote": "Historical pricing verified via Internet Archive snapshots of codeium.com/pricing (2023-01 to 2025-04) and windsurf.com/pricing (2025-04 to 2026-04)",
+   "topic": "other"
+  },
+  {
+   "fact": "The UsagePricing Windsurf page was last updated on November 9, 2026.",
+   "value": "2026-11-09",
+   "unit": "date",
+   "as_of": "2026-11-09",
+   "quote": "UsagePricing, \"Windsurf pricing\", updated Nov 9, 2026.",
    "topic": "other"
   }
  ]

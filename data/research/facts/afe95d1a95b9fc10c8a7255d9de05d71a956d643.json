@@ -1,7 +1,163 @@
 {
  "url": "https://www.datadoghq.com/pricing/",
  "title": "Pricing | Datadog",
- "hash": "81b35d9a46326be647c64ab86679686dc62be99d",
- "fetchedAt": "2026-11-06",
- "facts": []
+ "hash": "e1e31feaf67950c36937c267118d911297e064f4",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 10718,
+ "chunks": 2,
+ "facts": [
+  {
+   "fact": "Datadog Infrastructure Pro is listed at a starting price of $15 per host per month, billed annually.",
+   "value": "15",
+   "unit": "USD per host per month",
+   "as_of": "",
+   "quote": "$ 15",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Datadog Infrastructure Pro is priced at $18 per host per month on-demand (non-annual billing).",
+   "value": "18",
+   "unit": "USD per host per month",
+   "as_of": "",
+   "quote": "*Billed annually or $18 on-demand",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Datadog Infrastructure Enterprise is listed at a starting price of $23 per host per month, billed annually.",
+   "value": "23",
+   "unit": "USD per host per month",
+   "as_of": "",
+   "quote": "$ 23",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Datadog Infrastructure Enterprise is priced at $27 per host per month on-demand (non-annual billing).",
+   "value": "27",
+   "unit": "USD per host per month",
+   "as_of": "",
+   "quote": "*Billed annually or $27 on-demand",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Datadog offers multi-year and volume discounts for Infrastructure plans at 500+ hosts per month.",
+   "value": "500",
+   "unit": "hosts per month",
+   "as_of": "",
+   "quote": "Multi-Year/Volume discounts available (500+ hosts/mo)",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Datadog's Basic infrastructure tier includes 15-month metric retention.",
+   "value": "15",
+   "unit": "months",
+   "as_of": "",
+   "quote": "15-month metric retention",
+   "topic": "rules"
+  },
+  {
+   "fact": "Datadog's Infrastructure Pro and Enterprise plans include 5 and 10 containers allotted per host respectively for container monitoring, with 5 allotted for Pro and 10 for Enterprise.",
+   "value": "5 (Pro) / 10 (Enterprise)",
+   "unit": "containers per host",
+   "as_of": "",
+   "quote": "Depending on your plan, you can monitor 5 or 10 containers free for each host license.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Datadog bills additional containers beyond the included allotment at $0.002 per container per hour.",
+   "value": "0.002",
+   "unit": "USD per container per hour",
+   "as_of": "",
+   "quote": "Additional containers will be billed at $0.002 per container per hour.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Datadog sells prepaid containers at $1 per container per month, or $1.50 per container per month for DevSecOps Containers.",
+   "value": "1",
+   "unit": "USD per container per month",
+   "as_of": "",
+   "quote": "at $1 per container per month or $1.50 per container per month for DevSecOps Containers",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Datadog includes 100 custom metrics per host for Infrastructure Pro and 200 per host for Infrastructure Enterprise.",
+   "value": "100 (Pro) / 200 (Enterprise)",
+   "unit": "custom metrics per host",
+   "as_of": "",
+   "quote": "Datadog offers 100 custom metrics for every host monitored with Infrastructure Pro, or 200 custom metrics for every host monitored with Infrastructure Enterprise.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Datadog counts custom metrics hourly and averages them monthly across the entire account, not per host.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Custom metrics are counted hourly and averaged monthly across your entire account, not on a per-host basis.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Datadog includes 500 custom events per host for Infrastructure Pro and 1,000 per host for Enterprise.",
+   "value": "500 (Pro) / 1000 (Enterprise)",
+   "unit": "custom events per host",
+   "as_of": "",
+   "quote": "Datadog offers 500 custom events for every host monitored with infrastructure monitoring for pro plan, or 1000 for enterprise plan.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Beyond the included allotment, Datadog charges $2 per 100,000 custom events when billed annually, or $3 on-demand.",
+   "value": "2",
+   "unit": "USD per 100,000 custom events",
+   "as_of": "",
+   "quote": "Datadog charges $2 for 100 000 custom events (billed annually or $3 on-demand)",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Datadog's Free tier includes up to five Basic hosts with 1-day metric retention at no cost.",
+   "value": "5",
+   "unit": "hosts",
+   "as_of": "",
+   "quote": "you get up to five Basic hosts with 1-day metric retention, at no cost.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Datadog's DevSecOps Pro and Enterprise plans support conformance tracking against over 15 industry benchmarks, including CIS, PCI DSS, and SOC 2.",
+   "value": "15",
+   "unit": "industry benchmarks (over)",
+   "as_of": "",
+   "quote": "track conformance to requirements of over 15 industry benchmarks including CIS, PCI DSS, SOC 2, and more.",
+   "topic": "other"
+  },
+  {
+   "fact": "Datadog Infrastructure Pro includes 5 cross-org connections, and Enterprise includes 100.",
+   "value": "5 (Pro) / 100 (Enterprise)",
+   "unit": "connections",
+   "as_of": "",
+   "quote": "5 connections",
+   "topic": "rules"
+  },
+  {
+   "fact": "Datadog allows Basic hosts to be mixed with Pro or Enterprise hosts in the same account, but only one infrastructure coverage level can be chosen per account.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Basic hosts can be mixed with either Pro or Enterprise hosts in the same account.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Datadog defines a host as any physical or virtual OS instance monitored with Datadog, such as a server, VM, or Kubernetes node.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "A host is any physical or virtual OS instance that you monitor with Datadog.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Datadog's DevSecOps bundles cover the entire environment and cannot be combined with standalone infrastructure, container, or cloud security products.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "The DevSecOps bundles cover your entire environment, and can’t be combined with standalone infrastructure, container, or cloud security products.",
+   "topic": "rules"
+  }
+ ]
 }

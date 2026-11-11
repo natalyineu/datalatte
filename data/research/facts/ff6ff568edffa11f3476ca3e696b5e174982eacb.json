@@ -1,48 +1,371 @@
 {
  "url": "https://www.cleverly.co/blog/customer-reactivation-campaign-strategies",
  "title": "Customer Reactivation Campaign Strategies That Gets Lost Customers Back",
- "hash": "931cf2615eb1943ca768b0edbc9400aff666391d",
- "fetchedAt": "2026-11-09",
+ "hash": "2e5ba9659db84600624d332091c8af23587bb6bb",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 27709,
+ "chunks": 4,
  "facts": [
   {
-   "fact": "The page states that reactivating a lapsed customer costs 5–7 times less than acquiring an equivalent new customer, with no source cited.",
+   "fact": "Reactivating a lapsed customer costs 5–7x less than acquiring an equivalent new customer, per the vendor's blog.",
    "value": "5–7x less",
-   "unit": "multiple (cost ratio)",
+   "unit": "times cheaper",
    "as_of": "",
    "quote": "Reactivating a lapsed customer costs 5–7x less than acquiring an equivalent new customer",
    "topic": "benchmark"
   },
   {
-   "fact": "The page cites a third-party source (opensend.com) for the claim that existing customers contribute 65% of total revenue for most businesses.",
-   "value": "65",
-   "unit": "% of total revenue",
+   "fact": "The page states that the benchmark reactivation rate for B2B reactivation campaigns is 5–15%.",
+   "value": "5–15",
+   "unit": "%",
    "as_of": "",
-   "quote": "existing customers contribute 65% of total revenue",
+   "quote": "Reactivation rate: benchmark for B2B reactivation campaigns is 5–15%",
    "topic": "benchmark"
   },
   {
-   "fact": "The page's key takeaways state that a 4–5 touch multi-channel sequence (email, LinkedIn, and SDR) consistently outperforms single-channel reactivation attempts, a claim the page does not back with a cited figure.",
-   "value": "4–5 touches",
-   "unit": "touches per sequence",
+   "fact": "For SaaS businesses, the page suggests an inactivity threshold of 30 days without login.",
+   "value": "30",
+   "unit": "days without login",
    "as_of": "",
-   "quote": "A 4–5 touch multi-channel sequence (email + LinkedIn + SDR) consistently outperforms single-channel reactivation attempts.",
-   "topic": "benchmark"
+   "quote": "SaaS: 30 days without login",
+   "topic": "rules"
   },
   {
-   "fact": "The page defines the real success metric for reactivation as whether a customer is still active 90 days after reactivation, rather than whether they clicked.",
+   "fact": "For B2B services, the page suggests an inactivity threshold of 90 days without a touchpoint or purchase.",
    "value": "90",
-   "unit": "days after reactivation",
+   "unit": "days without touchpoint or purchase",
    "as_of": "",
-   "quote": "whether they're still active 90 days after reactivation",
-   "topic": "definition"
+   "quote": "B2B services: 90 days without a touchpoint or purchase",
+   "topic": "rules"
   },
   {
-   "fact": "The page is dated May 26, 2026 and was last modified on the same date.",
-   "value": "2026-05-26",
-   "unit": "date",
-   "as_of": "2026-05-26",
-   "quote": "Modified On :",
+   "fact": "For ecommerce, the page suggests an inactivity threshold of 60–90 days without an order.",
+   "value": "60–90",
+   "unit": "days without an order",
+   "as_of": "",
+   "quote": "Ecommerce: 60–90 days without an order",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends a 4–5 touch multi-channel reactivation sequence rather than a one-time blast.",
+   "value": "4–5",
+   "unit": "touches",
+   "as_of": "",
+   "quote": "Build a 4–5 touch sequence, not a one-time blast",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends spacing reactivation touches 5–7 days apart.",
+   "value": "5–7",
+   "unit": "days between touches",
+   "as_of": "",
+   "quote": "Space touches 5–7 days apart.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends starting the reactivation sequence at the 30–60 day dormancy mark.",
+   "value": "30–60",
+   "unit": "days of dormancy",
+   "as_of": "",
+   "quote": "Starting the sequence at the 30–60 day dormancy mark gives you the best shot at reactivation",
+   "topic": "rules"
+  },
+  {
+   "fact": "In the page's sample five-touch sequence, Touch 1 is a soft check-in on Day 1, with no pitch.",
+   "value": "Day 1",
+   "unit": "day",
+   "as_of": "",
+   "quote": "Touch 1 | Day 1 | Soft check-in — what's changed, no pitch",
+   "topic": "rules"
+  },
+  {
+   "fact": "In the page's sample five-touch sequence, the incentive offer is Touch 4 on Day 21.",
+   "value": "Day 21",
+   "unit": "day",
+   "as_of": "",
+   "quote": "Touch 4 | Day 21 | Incentive offer — time-limited, segment-appropriate",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends tracking 90-day retention rate after reactivation as the real north star metric.",
+   "value": "90",
+   "unit": "days",
+   "as_of": "",
+   "quote": "90-day retention rate post-reactivation (this is your real north star)",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page suggests reviewing NPS trends in the 60 days before disengagement when diagnosing churn.",
+   "value": "60",
+   "unit": "days before disengagement",
+   "as_of": "",
+   "quote": "Look at exit notes, NPS trends in the 60 days before disengagement",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page's tiering model assigns Tier 3 (low LTV, dormant 12+ months) to light-touch email only or suppression.",
+   "value": "12+",
+   "unit": "months dormant",
+   "as_of": "",
+   "quote": "Tier 3 | Low LTV, dormant 12+ months | Light-touch email only or suppression",
+   "topic": "rules"
+  },
+  {
+   "fact": "Global email open rate benchmark for reactivation campaigns reached an average of 21.4% in 2025, according to a third-party source (growthwayadvertising.com), up from 17% in 2023.",
+   "value": "21.4",
+   "unit": "%",
+   "as_of": "2025",
+   "quote": "Global email open rate benchmarks for [reactivation campaigns climbed to an average of 21.4%](https://growthwayadvertising.com/the-best-re-engagement-email-templates-backed-by-open-rate-data/) in 2025, up from 17% in 2023",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The 2023 baseline for the average global email open rate for reactivation campaigns was 17%, per the same third-party source cited by the page.",
+   "value": "17",
+   "unit": "%",
+   "as_of": "2023",
+   "quote": "up from 17% in 2023",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page states that roughly 45% of customers who receive a reactivation email open subsequent emails; no source is given for this vendor-stated benchmark.",
+   "value": "45",
+   "unit": "%",
+   "as_of": "",
+   "quote": "**Reactivation email benchmark:** Roughly 45% of customers who receive a reactivation email open subsequent emails",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page recommends A/B testing subject lines with at least 200 contacts per variant before scaling a reactivation email.",
+   "value": "200",
+   "unit": "contacts per variant",
+   "as_of": "",
+   "quote": "A/B test subject lines with at least 200 contacts per variant before scaling",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends that the offer appear only in touches 3–4 of an email reactivation sequence.",
+   "value": "3–4",
+   "unit": "touch number",
+   "as_of": "",
+   "quote": "**Offer (touches 3–4 only):** Specific, time-bound, and segment-appropriate",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends keeping SMS or push notification messages under 160 characters for reactivation.",
+   "value": "160",
+   "unit": "characters",
+   "as_of": "",
+   "quote": "Keep messages under 160 characters and lead with value",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends that an SDR's reactivation call to a former customer be kept under three minutes.",
+   "value": "3",
+   "unit": "minutes",
+   "as_of": "",
+   "quote": "Keep it under three minutes. Don't pitch. Qualify.",
+   "topic": "rules"
+  },
+  {
+   "fact": "In the B2B 'We Miss You' sequence example, the 20% discount or free onboarding offer is sent on Day 14, after case-study and value-reframe touches.",
+   "value": "20",
+   "unit": "% discount",
+   "as_of": "",
+   "quote": "| Day 14 | 20% discount or free onboarding + specific deadline |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "In the B2B 'We Miss You' sequence example, touches are scheduled on Days 1, 7, 14, and 21.",
+   "value": "1, 7, 14, 21",
+   "unit": "day",
+   "as_of": "",
+   "quote": "| Day 1 | \"It's been [X months] — wanted to check in\" (no offer) |",
+   "topic": "rules"
+  },
+  {
+   "fact": "In the LinkedIn plus email coordinated example for Tier 1 accounts, the sequence runs over 14 days with touches on Days 1, 3, 7, and 14.",
+   "value": "14",
+   "unit": "days",
+   "as_of": "",
+   "quote": "| Day 14 | Email with offer + retargeting ad running in background |",
+   "topic": "rules"
+  },
+  {
+   "fact": "Brex used AI-powered signals to identify lapsed customers, and the page reports this produced a 40% increase in booked demos from formerly dormant accounts.",
+   "value": "40",
+   "unit": "%",
+   "as_of": "",
+   "quote": "The result was a 40% increase in booked demos from formerly dormant accounts.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Database reactivation campaigns recover 5–15% of dormant leads on average, per a third-party source cited by the page.",
+   "value": "5–15",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Database reactivation campaigns recover 5–15% of dormant leads on average — this is your benchmark range for B2B",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page gives a healthy email open rate benchmark for reactivation campaigns of 12–15%, and says below 8% signals a subject line or list quality problem.",
+   "value": "12–15",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Open rate: 12–15% is healthy for reactivation; below 8% signals a subject line or list quality problem",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page gives a click-through rate benchmark of 2–5% for reactivation emails.",
+   "value": "2–5",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Click-through rate: 2–5% benchmark",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page states an unsubscribe rate above 0.5% means the message-to-list match is off.",
+   "value": "0.5",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Unsubscribe rate: above 0.5% means your message-to-list match is off",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "For high LTV accounts the page recommends a 25–30% discount or VIP offer plus concierge onboarding as incentive.",
+   "value": "25–30",
+   "unit": "%",
+   "as_of": "",
+   "quote": "High LTV accounts | 25–30% discount or VIP offer + concierge onboarding",
+   "topic": "rules"
+  },
+  {
+   "fact": "For mid LTV accounts the page recommends a 10–15% discount or extended trial as incentive.",
+   "value": "10–15",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Mid LTV accounts | 10–15% discount or extended trial",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends escalating to an incentive only on touches 3–4, after leading with value on touches 1–2.",
+   "value": "3–4",
+   "unit": "touch",
+   "as_of": "",
+   "quote": "Start with value and \"what's new\" on touches 1–2. Escalate to an incentive only on touches 3–4.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page says if reactivated customers churn again within 60 days, the campaign did not fix the underlying problem.",
+   "value": "60",
+   "unit": "days",
+   "as_of": "",
+   "quote": "if reactivated customers are churning again within 60 days, the campaign didn't fix the underlying problem.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends running cohort analysis comparing LTV of reactivated customers against continuously active customers over 6–12 months.",
+   "value": "6–12",
+   "unit": "months",
+   "as_of": "",
+   "quote": "Compare the LTV of reactivated customers against continuously active customers tracked over 6–12 months.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page lists declining email open rates over 4+ consecutive weeks as an early warning signal of at-risk accounts.",
+   "value": "4",
+   "unit": "weeks",
+   "as_of": "",
+   "quote": "Declining email open rates over 4+ consecutive weeks.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Cleverly states it has generated over $312M in pipeline for clients through outbound programs.",
+   "value": "312",
+   "unit": "million USD",
+   "as_of": "",
+   "quote": "We've generated over $312M in pipeline for clients through outbound programs",
    "topic": "other"
+  },
+  {
+   "fact": "Cleverly states it is trusted by 10,000+ clients.",
+   "value": "10000",
+   "unit": "clients",
+   "as_of": "",
+   "quote": "trusted by 10,000+ clients",
+   "topic": "other"
+  },
+  {
+   "fact": "Cleverly's LinkedIn services start at $397 per month, according to the page.",
+   "value": "397",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "[LinkedIn services](https://www.cleverly.co/linkedin-lead-generation) start at $397/month",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Cleverly states its cold email model means clients only pay for meeting-ready leads delivered.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "our [cold email model](https://www.cleverly.co/cold-email-outreach-agency) means you only pay for meeting-ready leads we deliver.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page recommends running a 4–5 touch reactivation sequence across email and LinkedIn for dormant accounts.",
+   "value": "4–5 touches",
+   "unit": "touches",
+   "as_of": "",
+   "quote": "run a 4–5 touch sequence across email and LinkedIn, leading with what's changed or improved since they left",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page states a benchmark reactivation rate of 5–15% for B2B campaigns.",
+   "value": "5–15%",
+   "unit": "%",
+   "as_of": "",
+   "quote": "reactivation rate (benchmark: 5–15% for B2B)",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page states that 90-day retention rate post-reactivation is the most important metric for reactivation campaigns.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "The 90-day retention rate is the most important — if reactivated customers are churning again within two months",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page recommends reserving incentives for later touches in a reactivation sequence rather than leading with them.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Reserve incentives for later touches, and bring in SDR outreach for high-value accounts.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page identifies email as the primary channel for most reactivation programs.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Email is the primary channel for most reactivation programs due to its scalability and personalizability.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page describes LinkedIn Sales Navigator outreach and sponsored InMail as the highest-leverage second channel for B2B reactivation.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "LinkedIn is the highest-leverage second channel for B2B, particularly through Sales Navigator outreach and sponsored InMail.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends tracking four core reactivation metrics: reactivation rate, revenue per reactivated customer, campaign ROI, and 90-day retention rate.",
+   "value": "4",
+   "unit": "metrics",
+   "as_of": "",
+   "quote": "Track four core metrics: reactivation rate (benchmark: 5–15% for B2B), revenue per reactivated customer, campaign ROI, and 90-day retention rate post-reactivation.",
+   "topic": "rules"
   }
  ]
 }

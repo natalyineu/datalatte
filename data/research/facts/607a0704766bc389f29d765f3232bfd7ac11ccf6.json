@@ -1,59 +1,38 @@
 {
  "url": "https://claude.com/solutions/enterprise",
  "title": "Claude Enterprise plan | Claude by Anthropic",
- "hash": "1c5d0455edd629d000ce64c1ba083d2550ad15fb",
- "fetchedAt": "2026-11-06",
+ "hash": "0c6a60e482fb9b5ea1b4b4a79a511ce2f0ac30cd",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 26758,
+ "chunks": 4,
  "facts": [
   {
-   "fact": "Anthropic's testimonial from a large software company reports that 12 hours of prototyping work collapsed into about 20 minutes, a 97% reduction in prototyping time, using Claude Managed Agents.",
-   "value": "97",
-   "unit": "% reduction in prototyping time",
+   "fact": "Claude Enterprise is priced at $20 per seat per month, billed annually, with usage billed as you go at API rates.",
+   "value": "20",
+   "unit": "USD per seat per month",
    "as_of": "",
-   "quote": "We saw 12 hours of prototyping work collapse into about 20 minutes. Then your whole team can jump in and refine it together.",
-   "topic": "benchmark"
+   "quote": "$20\n\nPer seat / month, billed annually.  \nUsage is billed as you go at API rates, based on what your team uses.",
+   "topic": "pricing"
   },
   {
-   "fact": "A life sciences customer testimonial on the page reports that clinical study documentation went down from 10 weeks to 10 minutes using Claude Code.",
-   "value": "1000",
-   "unit": "x faster clinical study documentation (10 weeks to 10 minutes)",
+   "fact": "Claude Enterprise requires an annual commitment and a minimum of 20 seats.",
+   "value": "20",
+   "unit": "seats",
    "as_of": "",
-   "quote": "clinical study documentation down from 10 weeks to 10 minutes",
-   "topic": "benchmark"
+   "quote": "Annual commitment required. Minimum 20 seats.",
+   "topic": "pricing"
   },
   {
-   "fact": "A Slack customer testimonial on the page reports an average saving of 97 minutes per week per user through summarization and recap features.",
-   "value": "97",
-   "unit": "minutes per week saved per average user",
+   "fact": "Prices shown on the Claude Enterprise page do not include applicable tax, and prices and plans are subject to change at Anthropic's discretion.",
+   "value": "",
+   "unit": "",
    "as_of": "",
-   "quote": "97minutes per week saved by the average user through summarization and recap features",
-   "topic": "benchmark"
+   "quote": "Prices shown don’t include applicable tax. Price and plans are subject to change at Anthropic's discretion.",
+   "topic": "pricing"
   },
   {
-   "fact": "Allianz's testimonial on the page reports 90% week-over-week growth in company-wide deployment with rapid global adoption.",
-   "value": "90",
-   "unit": "% week-over-week growth",
-   "as_of": "",
-   "quote": "90%week-over-week growth company-wide deployment, with rapid global adoption",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "A transportation customer testimonial on the page reports an 87% reduction in customer support time after using Claude.",
-   "value": "87",
-   "unit": "% reduction in customer support time",
-   "as_of": "",
-   "quote": "87%reduction in customer support time",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "A transportation customer testimonial on the page reports 30% more accurate teams making sharper calls.",
-   "value": "30",
-   "unit": "% more accurate teams",
-   "as_of": "",
-   "quote": "30%more accurate teams making sharper calls",
-   "topic": "benchmark"
-  },
-  {
-   "fact": "Anthropic states that customer prompts, data, and results are not used to train its models by default.",
+   "fact": "Anthropic states that prompts, data, and results are not used to train its models by default.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -61,12 +40,268 @@
    "topic": "rules"
   },
   {
-   "fact": "The page states that Claude is a leader on reasoning, coding, and analysis benchmarks, a vendor claim without a specified figure.",
+   "fact": "Data retention controls and OTEL monitoring are currently available on Claude Enterprise only.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Claude is a leader on reasoning, coding, and analysis benchmarks",
+   "quote": "Data retention controls and OTEL monitoring are currently available on Claude Enterprise only.",
+   "topic": "rules"
+  },
+  {
+   "fact": "According to a customer testimonial, a software company saw 12 hours of prototyping work collapse into about 20 minutes, a vendor-reported 97% reduction in prototyping time.",
+   "value": "97",
+   "unit": "%",
+   "as_of": "",
+   "quote": "97%reduction in prototyping time",
    "topic": "benchmark"
+  },
+  {
+   "fact": "A life sciences customer reports clinical study documentation reduced from 10 weeks to 10 minutes using Claude Code (vendor-cited 1000x).",
+   "value": "1000",
+   "unit": "x",
+   "as_of": "",
+   "quote": "1000x clinical study documentation down from 10 weeks to 10 minutes",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Slack reports a 97 minutes per week saving per average user through summarization and recap features, as cited on the Anthropic page.",
+   "value": "97",
+   "unit": "minutes per week",
+   "as_of": "",
+   "quote": "97 minutes per week saved by the average user through summarization and recap features",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Allianz is cited as seeing 90% week-over-week growth in company-wide deployment.",
+   "value": "90",
+   "unit": "%",
+   "as_of": "",
+   "quote": "90%week-over-week growth company-wide deployment, with rapid global adoption",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "A transportation customer reports an 87% reduction in customer support time using Claude.",
+   "value": "87",
+   "unit": "%",
+   "as_of": "",
+   "quote": "87%reduction in customer support time",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "A transportation customer reports a 30% increase in more accurate teams making sharper calls.",
+   "value": "30",
+   "unit": "%",
+   "as_of": "",
+   "quote": "30%more accurate teams making sharper calls",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Moody's cites credit memo prep time cut from 40 hours to 2 minutes with Claude-built agents (vendor-cited 1,200x faster).",
+   "value": "1,200",
+   "unit": "x faster",
+   "as_of": "",
+   "quote": "1,200× faster credit memo prep time cut from 40 hours to 2 minutes with Claude-built agents",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "A software customer reports 30+ concurrent agent tasks from a single task board using Claude Managed Agents.",
+   "value": "30",
+   "unit": "concurrent agent tasks",
+   "as_of": "",
+   "quote": "30+concurrent agent tasks from a single task board",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Anthropic's Claude Code results page reports that Spotify saw a 90% reduction in time spent on complex code migrations.",
+   "value": "90%",
+   "unit": "%",
+   "as_of": "",
+   "quote": "less time spent on complex code migrations",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Anthropic states that customer inputs and outputs are not used to train its models by default.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Your inputs and outputs are not used to train our models by default.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Claude Enterprise data controls include custom data retention, customer-managed encryption keys, and US-only inference.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "custom data retention, customer-managed encryption keys, and US-only inference.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Claude Enterprise includes IP allowlisting and network-level access control, which prevents access to personal or non-corporate Claude instances from enterprise networks.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "IP allowlisting and network-level access control, which prevents access to personal or non-corporate Claude instances from enterprise networks.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Anthropic's Claude Enterprise page lists SOC 2, ISO 27001, GDPR, and CCPA compliance among its security features.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "SOC 2, ISO 27001, GDPR, and CCPA compliance",
+   "topic": "rules"
+  },
+  {
+   "fact": "Anthropic lists a HIPAA-ready offering as a Claude Enterprise feature.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "HIPAA-ready offering",
+   "topic": "rules"
+  },
+  {
+   "fact": "Claude Enterprise connector governance lets admins approve which connectors are available org-wide and set per-tool permissions, and connectors respect the permissions users already have in underlying systems.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Connectors respect the permissions users already have in the underlying systems.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Claude Platform's self-serve API access uses pay-as-you-go pricing with usage-based tiers and automatically increasing rate limits.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Pay-as-you-go pricing",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Claude Platform's self-serve tier includes access to all Claude models.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Access to all Claude models",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Anthropic's sales-assisted Claude Platform support offers custom rate limits, Anthropic-supported onboarding, and billing via monthly invoices.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Billing via monthly invoices",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Claude Enterprise's Compliance API provides programmatic access to activity logs, chats, files, and projects.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "a Compliance API for programmatic access to activity logs, chats, files, and projects",
+   "topic": "definition"
+  },
+  {
+   "fact": "Admins of Claude Enterprise can define groups, roles, and capabilities to govern which people can use which products and connectors, using role-based access control.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Admins define groups, roles, and capabilities to govern exactly which people can use which products and connectors.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Claude Enterprise is positioned to give every employee secure access to Chat, Claude Cowork, Claude Code, and company connectors.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Give every employee secure access to Chat, Claude Cowork, Claude Code, and your company's connectors.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Claude Enterprise includes a HIPAA-ready configuration available with a BAA from Anthropic, after which the organization can process PHI through Claude in accordance with HIPAA.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "HIPAA-ready configuration is available with a BAA from Anthropic. Once enabled, your organization can process Protected Health Information (PHI) through Claude in accordance with HIPAA.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Healthcare customers on the Claude Platform can sign a BAA with no Zero Data Retention requirement.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Healthcare customers can sign a BAA with no Zero Data Retention requirement.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Claude Enterprise is available directly from Anthropic and through AWS Marketplace, where it can draw down from an existing AWS commit.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Claude Enterprise is available directly from Anthropic and through AWS Marketplace, where it can draw down from your existing AWS commit.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Sales-assisted Claude Enterprise plans include invoice billing, while self-serve Enterprise plans accept credit card or ACH bank transfer.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Sales-assisted Claude Enterprise plans include invoice billing. Self-serve Enterprise plans accept credit card or ACH bank transfer.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Self-serve Claude Platform accounts are prepaid, requiring a payment method and purchased credits, with optional auto-reload; Enterprise customers can use monthly invoicing instead.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Self-serve accounts are prepaid: add a payment method, purchase credits, and optionally enable auto-reload.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Credits on the Claude Platform cover API usage, the Workbench, and Claude Code when authenticated with an API key.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Credits cover API usage, the Workbench, and Claude Code (when authenticated with an API key).",
+   "topic": "pricing"
+  },
+  {
+   "fact": "All three of Chat, Claude Code, and Claude Cowork are included in every Enterprise plan.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "All three are included in every Enterprise plan and entitlements are managed with role-based access controls from organization settings.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Claude Enterprise's one seat gives every employee access to Chat, Claude Code, Claude Cowork, Claude Design, and Claude in tools such as Microsoft 365, Chrome, and Slack.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "One seat gives every employee the full suite: Chat for everyday thinking work, Claude Code for engineering, Claude Cowork for delegating multi-step knowledge work, Claude Design",
+   "topic": "definition"
+  },
+  {
+   "fact": "Claude for Work was the earlier name for Anthropic's business plans, now Team and Enterprise; the name has been retired.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Claude for Work was the earlier name for our business plans — what are now the Team and Enterprise plans. The name has been retired",
+   "topic": "definition"
+  },
+  {
+   "fact": "Claude Enterprise security and administration features include SSO, SCIM and JIT provisioning, role-based access control, audit logs, Compliance API, Analytics API, custom data retention, customer-managed encryption keys, IP allowlisting, and network-level access control.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Single sign-on (SSO), domain capture, SCIM and JIT provisioning",
+   "topic": "definition"
+  },
+  {
+   "fact": "Claude Platform supports Amazon Bedrock, Gemini Enterprise Agent Platform, and Microsoft Foundry as availability channels for the API.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Claude Platform (the API) is also available on Amazon Bedrock, Gemini Enterprise Agent Platform, and Microsoft Foundry.",
+   "topic": "other"
   }
  ]
 }

@@ -1,75 +1,86 @@
 {
  "url": "https://www.adstellar.ai/blog/meta-advertising-for-ecommerce-brands",
  "title": "Meta Advertising For Ecommerce Brands: Complete Guide",
- "hash": "640f65032630a10c1a279f6aacf1103abf33367c",
- "fetchedAt": "2026-11-09",
+ "hash": "8e91ef197049b2a125a4ff2631961e60bee6dfc1",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 24590,
+ "chunks": 3,
  "facts": [
   {
    "fact": "The vendor states that Facebook and Instagram have a combined reach of over 3 billion monthly active users.",
-   "value": "3",
-   "unit": "billion monthly active users",
+   "value": "3 billion",
+   "unit": "monthly active users",
    "as_of": "",
-   "quote": "With Facebook and Instagram's combined reach of over 3 billion monthly active users, you have access to shoppers at every stage",
+   "quote": "With Facebook and Instagram's combined reach of over 3 billion monthly active users, you have access to shoppers",
    "topic": "audience"
   },
   {
-   "fact": "The vendor claims that browser-based tracking without the Conversions API can miss up to 30-40% of actual conversions.",
-   "value": "30-40",
+   "fact": "The page says browser-based tracking can miss up to 30-40% of actual conversions, which is the reason it recommends setting up the Conversions API for server-side tracking. This figure is the page's own claim and cites no source.",
+   "value": "30-40%",
    "unit": "% of conversions",
    "as_of": "",
    "quote": "bypassing browser restrictions that can miss up to 30-40% of your actual conversions.",
    "topic": "benchmark"
   },
   {
-   "fact": "The vendor says Meta business identity verification can take a few days, so it should not be left until the last minute.",
-   "value": "a few",
+   "fact": "The page states that business identity verification in Meta Business Suite can take a few days.",
+   "value": "a few days",
    "unit": "days",
    "as_of": "",
    "quote": "You'll need to verify your business identity, which can take a few days, so don't leave this until the last minute.",
    "topic": "rules"
   },
   {
-   "fact": "The vendor recommends creating website custom audiences for people who viewed products in the last 30 days, among other behavior-based segments.",
-   "value": "30",
-   "unit": "days",
-   "as_of": "",
-   "quote": "Create separate audiences for people who viewed products in the last 30 days",
-   "topic": "audience"
-  },
-  {
-   "fact": "The vendor suggests a 7-day retargeting window for impulse-buy products and a 30 to 60-day window for higher-consideration items.",
-   "value": "7 for impulse-buy; 30 to 60 for higher-consideration",
-   "unit": "days",
-   "as_of": "",
-   "quote": "For impulse-buy products, a 7-day window might work best. For higher-consideration items, extend it to 30 or even 60 days.",
-   "topic": "audience"
-  },
-  {
-   "fact": "The vendor advises starting lookalike audiences with a 1% lookalike of your purchasers because it gives the closest match.",
-   "value": "1",
-   "unit": "% lookalike",
-   "as_of": "",
-   "quote": "Start with a 1% lookalike of your purchasers",
-   "topic": "audience"
-  },
-  {
-   "fact": "The vendor states that verifying the domain in Meta Business Suite is required for iOS 14.5+ attribution.",
+   "fact": "The page states that verifying the domain in Meta Business Suite is required for iOS 14.5+ attribution and for configuring aggregated event measurement.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Finally, verify your domain in Meta Business Suite. This step is required for iOS 14.5+ attribution",
+   "quote": "verify your domain in Meta Business Suite. This step is required for iOS 14.5+ attribution",
    "topic": "rules"
   },
   {
-   "fact": "The vendor lists four standard ecommerce pixel events: ViewContent, AddToCart, InitiateCheckout, and Purchase.",
-   "value": "4",
-   "unit": "standard events",
+   "fact": "The page lists the standard ecommerce Pixel events as ViewContent, AddToCart, InitiateCheckout, and Purchase.",
+   "value": "",
+   "unit": "",
    "as_of": "",
-   "quote": "Configure the standard events that matter for ecommerce: ViewContent (when someone views a product), AddToCart (when they add an item),",
+   "quote": "Configure the standard events that matter for ecommerce: ViewContent (when someone views a product), AddToCart",
    "topic": "definition"
   },
   {
-   "fact": "The vendor says Purchase should always be the top-priority conversion event for ecommerce brands when tracking is limited.",
+   "fact": "The page says a 1% lookalike audience in the United States represents about 2.3 million people who most closely match the customer base.",
+   "value": "2.3",
+   "unit": "million people",
+   "as_of": "",
+   "quote": "a 1% lookalike in the United States represents about 2.3 million people who most closely match your customer base.",
+   "topic": "audience"
+  },
+  {
+   "fact": "The page says a 5% lookalike audience in the United States expands to about 11.5 million people, with less precise matching.",
+   "value": "11.5",
+   "unit": "million people",
+   "as_of": "",
+   "quote": "A 5% lookalike expands to about 11.5 million people but with less precise matching.",
+   "topic": "audience"
+  },
+  {
+   "fact": "The page recommends starting with a 1% lookalike of purchasers, then creating 3% and 5% lookalikes for broader reach as the brand scales.",
+   "value": "1%, 3%, 5%",
+   "unit": "% lookalike",
+   "as_of": "",
+   "quote": "Start with a 1% lookalike of your purchasers—this gives you the closest match. Then create 3% and 5% lookalikes",
+   "topic": "audience"
+  },
+  {
+   "fact": "The page suggests a 7-day retargeting window may suit impulse-buy products, while higher-consideration items may use 30 or 60 days.",
+   "value": "7, 30, 60",
+   "unit": "days",
+   "as_of": "",
+   "quote": "For impulse-buy products, a 7-day window might work best. For higher-consideration items, extend it to 30 or even 60 days.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page recommends that ecommerce brands prioritize the Purchase event as their top conversion event when tracking is limited.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -77,11 +88,187 @@
    "topic": "rules"
   },
   {
-   "fact": "The article is authored by Grant Cooper, Founder at AdStellar, and is dated February 1, 2026, with an 18-minute read time.",
-   "value": "February 1, 2026",
-   "unit": "date",
-   "as_of": "2026-02-01",
-   "quote": "February 1, 2026•18 min read",
+   "fact": "The guide suggests allocating 60-70% of Meta ad budget to prospecting, 20-30% to retargeting, and 10% to retention.",
+   "value": "60-70% prospecting; 20-30% retargeting; 10% retention",
+   "unit": "%",
+   "as_of": "",
+   "quote": "60-70% to prospecting (finding new customers), 20-30% to retargeting (converting warm traffic), and 10% to retention (repeat purchases).",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The guide recommends starting with $20-50 per day per ad set during the learning phase.",
+   "value": "20-50",
+   "unit": "USD per day per ad set",
+   "as_of": "",
+   "quote": "Start with $20-50 per day per ad set during the learning phase.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The guide states Meta needs approximately 50 conversion events per week per ad set to exit the learning phase.",
+   "value": "50",
+   "unit": "conversion events per week per ad set",
+   "as_of": "",
+   "quote": "Meta needs approximately 50 conversion events per week per ad set to exit learning and deliver optimized results.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The guide says changing creative, targeting, or modifying budget by more than 30% resets the learning process.",
+   "value": "30",
+   "unit": "% budget change",
+   "as_of": "",
+   "quote": "Every significant edit—changing creative, adjusting targeting, or modifying your budget by more than 30%—resets the learning process.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The guide recommends a 3-7 day waiting period before making optimization decisions.",
+   "value": "3-7",
+   "unit": "days",
+   "as_of": "",
+   "quote": "commit to a 3-7 day waiting period before making optimization decisions.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The guide says a 3:1 ROAS means $3 in revenue for every $1 spent.",
+   "value": "3",
+   "unit": "ratio ROAS",
+   "as_of": "",
+   "quote": "a 3:1 ROAS means you're generating $3 in revenue for every $1 spent.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The guide states frequency above 3-4 in retargeting and above 2 in prospecting signals audience fatigue.",
+   "value": "3-4 retargeting; 2 prospecting",
+   "unit": "frequency",
+   "as_of": "",
+   "quote": "High frequency (above 3-4 in retargeting, above 2 in prospecting) signals audience fatigue.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The guide recommends a rule pausing any ad set that spends 3× target cost per purchase without a conversion.",
+   "value": "3",
+   "unit": "x target cost per purchase",
+   "as_of": "",
+   "quote": "pauses any ad set that spends 3× your target cost per purchase without generating a conversion.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The guide recommends pausing an ad set that has exited learning and spent 2-3× target cost per purchase without conversions.",
+   "value": "2-3",
+   "unit": "x target cost per purchase",
+   "as_of": "",
+   "quote": "spent 2-3× your target cost per purchase without generating conversions, pause it.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The guide suggests aiming for 1%+ click-through rates on ecommerce creative.",
+   "value": "1",
+   "unit": "% CTR",
+   "as_of": "",
+   "quote": "aim for 1%+ click-through rates and watch your engagement signals.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The guide recommends creating 3-5 ad variations per ad set for creative testing.",
+   "value": "3-5",
+   "unit": "ad variations per ad set",
+   "as_of": "",
+   "quote": "Create 3-5 different ad variations per ad set, testing different angles, formats, and messaging.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The guide recommends keeping product demonstration videos under 15 seconds for feed placements.",
+   "value": "15",
+   "unit": "seconds",
+   "as_of": "",
+   "quote": "Keep them under 15 seconds for feed placements—attention spans are brutal on social media.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The guide says the first 3 seconds of a video are critical to hook viewers.",
+   "value": "3",
+   "unit": "seconds",
+   "as_of": "",
+   "quote": "The first 3 seconds are critical; if you don't hook viewers immediately, they're gone.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The guide gives an example naming convention 'PROS_LLA1_AOV50+_Q1' for a prospecting campaign using a 1% lookalike targeting $50+ AOV customers launched in Q1.",
+   "value": "50",
+   "unit": "USD average order value",
+   "as_of": "",
+   "quote": "\"PROS_LLA1_AOV50+_Q1\" tells you at a glance this is a prospecting campaign using a 1% lookalike audience targeting customers with $50+ average order value",
+   "topic": "other"
+  },
+  {
+   "fact": "The article advises keeping at least two ads running per ad set for continuous testing.",
+   "value": "2",
+   "unit": "ads per ad set (minimum)",
+   "as_of": "",
+   "quote": "Keep at least two ads running per ad set for continuous testing",
+   "topic": "rules"
+  },
+  {
+   "fact": "The article recommends increasing the budget of a winning ad set with strong ROAS by 20-30% every 3-4 days.",
+   "value": "20-30",
+   "unit": "% budget increase every 3-4 days",
+   "as_of": "",
+   "quote": "increase the budget by 20-30% every 3-4 days",
+   "topic": "rules"
+  },
+  {
+   "fact": "The article states that most ecommerce ads experience creative fatigue after 2-4 weeks of consistent delivery, especially in retargeting campaigns.",
+   "value": "2-4",
+   "unit": "weeks of consistent delivery",
+   "as_of": "",
+   "quote": "Most ecommerce ads experience fatigue after 2-4 weeks of consistent delivery, especially in retargeting campaigns.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The article says audience saturation is indicated when frequency climbs above 2, at which point creating a 2% or 3% lookalike is suggested.",
+   "value": "2",
+   "unit": "frequency threshold",
+   "as_of": "",
+   "quote": "reaching audience saturation (frequency climbing above 2), create a 2% or 3% lookalike to expand reach",
+   "topic": "rules"
+  },
+  {
+   "fact": "The article gives an example of horizontal scaling by duplicating a winning prospecting ad set with a broader lookalike, moving from a 1% to a 3% lookalike audience.",
+   "value": "1% to 3%",
+   "unit": "lookalike audience size",
+   "as_of": "",
+   "quote": "moving from 1% to 3%, for example",
+   "topic": "rules"
+  },
+  {
+   "fact": "The article recommends dedicating 10-15% of total budget to testing new creative concepts while the bulk goes to proven winners.",
+   "value": "10-15",
+   "unit": "% of budget for creative testing",
+   "as_of": "",
+   "quote": "Dedicate 10-15% of your budget to testing new creative concepts while the bulk of your spend goes to proven winners.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The article advises resisting changes until an ad set has 50+ conversion events, as stated in its guidance on the learning phase.",
+   "value": "50",
+   "unit": "conversion events per ad set (minimum before changes)",
+   "as_of": "",
+   "quote": "resist the urge to make changes until you have 50+ conversion events per ad set",
+   "topic": "rules"
+  },
+  {
+   "fact": "The article says events should be prioritized for iOS 14.5+ attribution alongside Meta Pixel and Conversions API setup.",
+   "value": "14.5",
+   "unit": "iOS version",
+   "as_of": "",
+   "quote": "events prioritized for iOS 14.5+ attribution",
+   "topic": "other"
+  },
+  {
+   "fact": "The vendor AdStellar AI claims it can help launch and scale ad campaigns 10× faster; this is the vendor's own marketing claim, not independently verified.",
+   "value": "10",
+   "unit": "x faster (vendor claim)",
+   "as_of": "",
+   "quote": "scale your ad campaigns 10× faster with our intelligent platform",
    "topic": "other"
   }
  ]

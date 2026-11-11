@@ -1,20 +1,23 @@
 {
  "url": "https://note.com/masa_wunder/n/n9063dd01540d?hl=en",
  "title": "[New Release] A Thorough Guide to Grok Build! xAI's New CLI That Runs Claude Code Assets with Zero Configuration｜まさお@未経験からプロまでAI活用",
- "hash": "76e758c6d573bc8f1f03636af8301c87368d4fd4",
- "fetchedAt": "2026-11-06",
+ "hash": "73fb932921b69d5e7fa9531e1cec21ac2d300ab1",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 12273,
+ "chunks": 2,
  "facts": [
   {
    "fact": "xAI released Grok Build to all X Premium+ and SuperGrok users on May 25, 2026.",
-   "value": "May 25, 2026",
+   "value": "2026-05-25",
    "unit": "date",
    "as_of": "2026-05-25",
    "quote": "On May 25, 2026, xAI released Grok Build to all X Premium+ and SuperGrok users.",
-   "topic": "rules"
+   "topic": "other"
   },
   {
-   "fact": "Grok Build was limited to SuperGrok Heavy on May 14 before its target audience was expanded on May 25.",
-   "value": "May 14",
+   "fact": "Grok Build was initially limited to SuperGrok Heavy subscribers on May 14 before the target was expanded on May 25.",
+   "value": "2026-05-14",
    "unit": "date",
    "as_of": "2026-05-14",
    "quote": "Since it was limited to SuperGrok Heavy on May 14 and the target was expanded on May 25",
@@ -24,65 +27,161 @@
    "fact": "Only X Premium+ or SuperGrok subscribers can use Grok Build; standard X Premium is not eligible.",
    "value": "",
    "unit": "",
-   "as_of": "",
+   "as_of": "2026-05",
    "quote": "You can only use Grok Build if you are a subscriber to X Premium+ or SuperGrok; standard X Premium is not eligible.",
    "topic": "rules"
   },
   {
-   "fact": "As of May 2026 and based on US standards, the author reports X Premium+ costs $40 per month.",
+   "fact": "Based on US standards as of May 2026, X Premium+ costs $40 per month.",
    "value": "40",
    "unit": "USD per month",
    "as_of": "2026-05",
-   "quote": "As of May 2026, based on US standards, X Premium+ is $40, SuperGrok is $30, and SuperGrok Heavy is $300",
+   "quote": "As of May 2026, based on US standards, X Premium+ is $40",
    "topic": "pricing"
   },
   {
-   "fact": "As of May 2026 and based on US standards, the author reports SuperGrok costs $30 per month.",
+   "fact": "Based on US standards as of May 2026, SuperGrok costs $30 per month.",
    "value": "30",
    "unit": "USD per month",
    "as_of": "2026-05",
-   "quote": "As of May 2026, based on US standards, X Premium+ is $40, SuperGrok is $30, and SuperGrok Heavy is $300",
+   "quote": "SuperGrok is $30, and SuperGrok Heavy is $300",
    "topic": "pricing"
   },
   {
-   "fact": "As of May 2026 and based on US standards, the author reports SuperGrok Heavy costs $300 per month.",
+   "fact": "Based on US standards as of May 2026, SuperGrok Heavy costs $300 per month.",
    "value": "300",
    "unit": "USD per month",
    "as_of": "2026-05",
-   "quote": "As of May 2026, based on US standards, X Premium+ is $40, SuperGrok is $30, and SuperGrok Heavy is $300",
+   "quote": "SuperGrok Heavy is $300, with reports that X Premium+ in Japan is approximately 6,080 yen/month",
    "topic": "pricing"
   },
   {
-   "fact": "Reports cited by the author put X Premium+ in Japan at approximately 6,080 yen per month, and the author notes prices vary by region and time.",
+   "fact": "The page reports that X Premium+ in Japan costs approximately 6,080 yen per month, and notes that prices vary by region and time.",
    "value": "6080",
    "unit": "yen per month",
    "as_of": "2026-05",
-   "quote": "with reports that X Premium+ in Japan is approximately 6,080 yen/month. However, this varies by region and time.",
+   "quote": "reports that X Premium+ in Japan is approximately 6,080 yen/month. However, this varies by region and time.",
    "topic": "pricing"
   },
   {
-   "fact": "The author says a '$99 unlimited SuperGrok' claim confuses standard SuperGrok with a 6-month limited promo for SuperGrok Heavy.",
-   "value": "6",
-   "unit": "months",
-   "as_of": "",
-   "quote": "This is a confusion with the 6-month limited promo for SuperGrok Heavy, not the standard SuperGrok",
+   "fact": "The '$99 unlimited SuperGrok' claim is a confusion with a 6-month limited promo for SuperGrok Heavy, not the standard SuperGrok price.",
+   "value": "99",
+   "unit": "USD",
+   "as_of": "2026-05",
+   "quote": "The pitfall is the view that 'SuperGrok is unlimited for $99.'",
    "topic": "pricing"
   },
   {
-   "fact": "The beta usage quota was reset on May 26 after feedback that limits were being hit too quickly.",
-   "value": "May 26",
+   "fact": "On May 26, the Grok Build beta quota was reset after feedback that limits were being hit too quickly.",
+   "value": "2026-05-26",
    "unit": "date",
    "as_of": "2026-05-26",
    "quote": "On May 26, the beta quota was reset following feedback that the limits were being hit too quickly.",
    "topic": "rules"
   },
   {
-   "fact": "The daily usage allowance for consumer plans is not officially disclosed by xAI.",
+   "fact": "The usage allowance for consumer plans is not officially disclosed.",
    "value": "",
    "unit": "",
    "as_of": "",
    "quote": "The usage allowance for consumer plans—that is, how many times you can use it per day—is not officially disclosed",
    "topic": "rules"
+  },
+  {
+   "fact": "Grok Build's default model is grok-build (API name grok-build-0.1), specialized for coding.",
+   "value": "grok-build-0.1",
+   "unit": "",
+   "as_of": "",
+   "quote": "The default model is grok-build, or grok-build-0.1 by API name.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Grok Build's context window is 256K tokens.",
+   "value": "256",
+   "unit": "K tokens",
+   "as_of": "",
+   "quote": "it has been confirmed that the context window is 256K tokens",
+   "topic": "definition"
+  },
+  {
+   "fact": "Grok Build's API pricing is $1.00 per 1 million input tokens and $2.00 per 1 million output tokens.",
+   "value": "1.00 input / 2.00 output",
+   "unit": "USD per million tokens",
+   "as_of": "",
+   "quote": "API unit prices of $1.00 for input and $2.00 for output per 1 million tokens.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "A reported SWE-bench Verified score of 70.8% for Grok Build has appeared, but the page says the official source could not be verified.",
+   "value": "70.8",
+   "unit": "%",
+   "as_of": "",
+   "quote": "While the figure 'SWE-bench Verified 70.8%' has appeared, it is safer to treat this as a reported value",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Grok Build is a native binary that does not require Node.js and installs in one line on macOS and Linux.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "It is a native binary, so Node.js is not required, and it installs in one line on macOS and Linux",
+   "topic": "other"
+  },
+  {
+   "fact": "The Grok Build CLI version the author verified on their machine was grok 0.2.3.",
+   "value": "0.2.3",
+   "unit": "version",
+   "as_of": "",
+   "quote": "The CLI I verified on my machine was `grok 0.2.3`",
+   "topic": "other"
+  },
+  {
+   "fact": "The author states that the Grok Build context window for the grok-build model is 256K.",
+   "value": "256K",
+   "unit": "tokens",
+   "as_of": "",
+   "quote": "the 256K grok-build, and `--best-of-n`",
+   "topic": "definition"
+  },
+  {
+   "fact": "In headless environments, Grok Build runs with an XAI_API_KEY, and processing is governed by API-side limits rather than the subscription allowance.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "pass `XAI_API_KEY` to run it. The input is the API key and prompt",
+   "topic": "rules"
+  },
+  {
+   "fact": "To exit a Grok Build session, the user presses Ctrl+C twice, and resumes with `grok resume`.",
+   "value": "2",
+   "unit": "presses of Ctrl+C",
+   "as_of": "",
+   "quote": "To exit a session, press `Ctrl+C` twice, and to resume, run `grok resume`.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The author describes Grok Build as an early beta with undisclosed usage limits for consumer plans.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "since it's an early beta with undisclosed usage limits for consumer plans",
+   "topic": "rules"
+  },
+  {
+   "fact": "The author says Grok Build is worth trying for users who already have X Premium+ or SuperGrok subscriptions, while advising waiting before subscribing just for Grok Build.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "if you already have X Premium+ or SuperGrok, it's worth a try, but if you're considering a new subscription just for Grok Build, it's safer to wait and see",
+   "topic": "audience"
+  },
+  {
+   "fact": "The author recommends checking existing `.claude/` assets with `grok inspect` before using Grok Build for heavier work, including API pay-as-you-go costs.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "check your existing `.claude/` assets with `grok inspect`, try small fixes in the TUI",
+   "topic": "other"
   }
  ]
 }

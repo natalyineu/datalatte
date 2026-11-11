@@ -1,27 +1,30 @@
 {
  "url": "https://docs.lovable.dev/features/insights",
  "title": "Insights - Lovable Documentation",
- "hash": "1c44e6fedf928a636b39744fdc89ada8f64d4297",
- "fetchedAt": "2026-11-06",
+ "hash": "f9e518bff4a2c91a9ac0e601bd1eaa122f231b10",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 14223,
+ "chunks": 2,
  "facts": [
   {
-   "fact": "Insights is available only on Business and Enterprise plans.",
-   "value": "",
+   "fact": "Insights is available on Business and Enterprise plans.",
+   "value": "Business and Enterprise",
    "unit": "",
    "as_of": "",
-   "quote": "Business and Enterprise plans",
+   "quote": "Available on:** Business and Enterprise plans",
    "topic": "rules"
   },
   {
-   "fact": "Access to Insights is limited to workspace admins and owners.",
-   "value": "",
+   "fact": "Insights is accessible to workspace admins and owners.",
+   "value": "workspace admins and owners",
    "unit": "",
    "as_of": "",
    "quote": "Access:** Workspace admins and owners",
    "topic": "rules"
   },
   {
-   "fact": "According to Lovable's documentation, Insights does not consume credits, whether a user views it or exports its data.",
+   "fact": "Viewing or exporting Insights data does not consume credits.",
    "value": "0",
    "unit": "credits",
    "as_of": "",
@@ -29,31 +32,63 @@
    "topic": "pricing"
   },
   {
-   "fact": "Lovable's Insights metric cards cover the last 30 days and show the percentage change from the 30 days before.",
-   "value": "30",
-   "unit": "days",
+   "fact": "Lovable changed how it counts app visits on October 26, 2026, so most apps show more visits from that day onward.",
+   "value": "2026-10-26",
+   "unit": "date",
+   "as_of": "2026-10-26",
+   "quote": "On October 26, 2026, Lovable changed how it counts visits, so most apps show more visits from that day.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Lovable begins aggregating Insights numbers once a day, around 09:30 UTC, and each update includes activity through the previous day.",
+   "value": "09:30",
+   "unit": "UTC",
    "as_of": "",
-   "quote": "Each number covers the last 30 days. Next to it, Lovable shows the percentage change from the 30 days before",
+   "quote": "Lovable starts aggregating these numbers once a day, around 09:30 UTC, then publishes them to Insights after processing finishes.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Data for a newly active Business or Enterprise workspace typically appears within a day of its first activity.",
+   "value": "1",
+   "unit": "day",
+   "as_of": "",
+   "quote": "Data typically appears within a day of the workspace’s first activity on a Business or Enterprise plan.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Weekly chart view shows one value per week for the last 12 weeks, with weeks starting on Monday.",
+   "value": "12",
+   "unit": "weeks",
+   "as_of": "",
+   "quote": "Weeks start on Monday.",
    "topic": "definition"
   },
   {
-   "fact": "Per Lovable's documentation, an App visit is one person opening a published app, and a return visit, reload, or new tab each counts as another visit, so visits are not unique people.",
+   "fact": "The Monthly chart view shows one value per month for the last 12 months, and the Daily view shows the last 30 days.",
+   "value": "12",
+   "unit": "months",
+   "as_of": "",
+   "quote": "Monthly** shows one value per month for the last 12 months.",
+   "topic": "definition"
+  },
+  {
+   "fact": "An app's edit total on the Top apps card counts edits since January 1, 2025 and is not limited to the last 30 days.",
+   "value": "2025-01-01",
+   "unit": "date",
+   "as_of": "2025-01-01",
+   "quote": "the app’s total edits since January 1, 2025.",
+   "topic": "definition"
+  },
+  {
+   "fact": "A visit is counted each time one person opens a published app, so returning visitors and reloads count as additional visits.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "A **visit** is one person opening a published app. The same person returning later counts as another visit, and so does a reload or a new tab, so visits do not count unique people.",
+   "quote": "A **visit** is one person opening a published app.",
    "topic": "definition"
   },
   {
-   "fact": "Per Lovable's documentation, only published apps can have visits.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Only published apps can have visits.",
-   "topic": "definition"
-  },
-  {
-   "fact": "Per Lovable's documentation, Active builders counts only workspace members who built something in the last 30 days, while the builders list shows every member.",
+   "fact": "Active builders counts only workspace members who built something in the last 30 days, while the builders list shows all members.",
    "value": "30",
    "unit": "days",
    "as_of": "",
@@ -61,28 +96,156 @@
    "topic": "definition"
   },
   {
-   "fact": "Per Lovable's documentation, Active apps (30d) counts apps with any activity in the last 30 days, whether published or not.",
-   "value": "30",
-   "unit": "days",
-   "as_of": "",
-   "quote": "Apps with any activity in the last 30 days, published or not",
-   "topic": "definition"
-  },
-  {
-   "fact": "Per Lovable's documentation, Insights counts app and chat connections, including custom connectors, but does not count chat connectors (MCP servers) or app user connections.",
+   "fact": "An unpublished app counts as an active app when edited but shows no visits.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "It does not count [chat connectors](https://docs.lovable.dev/integrations/custom-mcp) (MCP servers) or [app user connections]",
+   "quote": "An unpublished app still counts as an active app when someone edits it, but it shows no visits.",
    "topic": "definition"
   },
   {
-   "fact": "Per Lovable's documentation, the example given is that one person visiting on two days counts as two visits in App visits (30d).",
+   "fact": "One connection used by two apps is counted twice in the Connections added metric.",
    "value": "2",
-   "unit": "visits",
+   "unit": "apps",
    "as_of": "",
-   "quote": "One person visiting on two days counts as two visits. This is not a count of unique people.",
+   "quote": "One connection used by two apps counts twice.",
    "topic": "definition"
+  },
+  {
+   "fact": "The full app list and full builder list can be exported to a CSV file.",
+   "value": "CSV",
+   "unit": "",
+   "as_of": "",
+   "quote": "Export the full app list or the full builder list to a CSV file for reporting and leadership reviews.",
+   "topic": "other"
+  },
+  {
+   "fact": "Insights counts an app's edits from January 1, 2025 onward, and this total matches the figure on the Top apps card.",
+   "value": "January 1, 2025",
+   "unit": "date",
+   "as_of": "",
+   "quote": "the app’s total edits since January 1, 2025, the same figure as on the Top apps card.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The All apps list shows 25 rows per page by default and can be set to show 25, 50, or 100 rows per page.",
+   "value": "25",
+   "unit": "rows per page",
+   "as_of": "",
+   "quote": "Show 25, 50, or 100 rows per page. The page shows 25 rows by default.",
+   "topic": "other"
+  },
+  {
+   "fact": "The All apps list sorts by visits by default.",
+   "value": "visits",
+   "unit": "",
+   "as_of": "",
+   "quote": "The list sorts by visits by default.",
+   "topic": "other"
+  },
+  {
+   "fact": "The All builders list sorts by edits by default.",
+   "value": "edits",
+   "unit": "",
+   "as_of": "",
+   "quote": "The list sorts by edits by default.",
+   "topic": "other"
+  },
+  {
+   "fact": "The Builders table's Edit activity column shows a week-by-week view of a member's building activity over the last 12 weeks.",
+   "value": "12",
+   "unit": "weeks",
+   "as_of": "",
+   "quote": "a week-by-week view of the member’s building activity over the last 12 weeks.",
+   "topic": "definition"
+  },
+  {
+   "fact": "An app's App visits count only includes visits to apps the member owns, so a member who edits an app owned by someone else adds to Edits but not App visits.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "A member who edits an app someone else owns adds to their own **Edits** but not to their **App visits**.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The Credits (30d) column appears in the All builders table only when credit data is available for the workspace.",
+   "value": "30",
+   "unit": "days",
+   "as_of": "",
+   "quote": "This column appears only when credit data is available for the workspace.",
+   "topic": "rules"
+  },
+  {
+   "fact": "A member counts as building in Adoption by department when they edited an app in the last 30 days.",
+   "value": "30",
+   "unit": "days",
+   "as_of": "",
+   "quote": "A member counts as building when they edited an app in the last 30 days.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The Adoption by department card shows only the three largest departments; workspaces with more departments can open the full list.",
+   "value": "3",
+   "unit": "departments",
+   "as_of": "",
+   "quote": "The card shows the three largest departments.",
+   "topic": "other"
+  },
+  {
+   "fact": "Members without an identity provider department are grouped under Unassigned at the end of the adoption list.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "members whose identity provider record has no department appear in an **Unassigned** group at the end.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Insights numbers are updated once a day and include activity through the previous day.",
+   "value": "once a day",
+   "unit": "",
+   "as_of": "",
+   "quote": "The numbers are updated once a day and include activity through the previous day.",
+   "topic": "rules"
+  },
+  {
+   "fact": "CSV exports of All apps and All builders always cover every app or member in the workspace, ignoring search, filters, and sort order.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "The export always covers every app or every member in the workspace.",
+   "topic": "rules"
+  },
+  {
+   "fact": "An app moved to another workspace disappears from that workspace's app and builder lists immediately, while overview cards and charts keep its history until the next daily update.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "An app that someone moves to another workspace disappears from this workspace’s app and builder lists immediately.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Without access to a project, App analytics is unavailable and shows the message 'You don't have access to this project.'",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "When you do not have access to a project, **App analytics** is unavailable for it and shows **You don’t have access to this project.**",
+   "topic": "rules"
+  },
+  {
+   "fact": "Insights has no destructive actions; nothing done on the page deletes an app, changes a member, or spends credits.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Insights has no destructive actions. Nothing you do on the page deletes an app, changes a member, or spends credits.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Insights covers one workspace, so companies with several workspaces must review each one separately.",
+   "value": "1",
+   "unit": "workspace",
+   "as_of": "",
+   "quote": "Insights covers one workspace.",
+   "topic": "rules"
   }
  ]
 }

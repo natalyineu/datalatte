@@ -1,27 +1,126 @@
 {
  "url": "https://docs.replit.com/features/agent/overview",
  "title": "Replit Agent - Replit",
- "hash": "64c5906fe957459bc41922869bf559bd12e58e05",
- "fetchedAt": "2026-11-06",
+ "hash": "f780bc57513d7533a133e574ea195b90dcd0c277",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 134975,
+ "chunks": 3,
  "facts": [
   {
-   "fact": "Replit states that the Free Mode allowances for the Core and Pro plans reset every five hours.",
-   "value": "5",
+   "fact": "Replit's vendor documentation says Replit Agent turns plain-language ideas into apps, designs, slides, and more, and that no coding is required.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Replit Agent turns your ideas into apps, designs, slides, and more, all from plain language. No coding required.",
+   "topic": "definition"
+  },
+  {
+   "fact": "According to Replit's vendor documentation, Replit Agent can pull data from connected services such as BigQuery, Slack, or Notion.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "like BigQuery, Slack, or Notion.",
+   "topic": "definition"
+  },
+  {
+   "fact": "According to Replit's vendor documentation, a single Replit project can contain multiple artifact types, so a web app, mobile app, slides, or video can be added later in the same project.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Start with a web app and add a mobile app, slides, or a video later — all in the same project.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Replit's vendor documentation lists Free, Power, and Max as the Agent modes that control how Agent builds a project.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "The Agent modes popover with Free, Power, and Max modes.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Replit Agent's Free Mode provides no-cost everyday Agent work within the plan's allowance, and the Core and Pro allowances reset every five hours and have weekly limits.",
+   "value": "five hours",
    "unit": "hours",
    "as_of": "",
    "quote": "The Core and Pro allowances reset every five hours and have weekly limits.",
    "topic": "rules"
   },
   {
-   "fact": "Replit states that the Core and Pro Free Mode allowances also have weekly limits, in addition to the five-hour reset.",
+   "fact": "Replit Agent's Starter tier keeps its existing limits under the Free Mode description.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "The Core and Pro allowances reset every five hours and have weekly limits.",
+   "quote": "The Starter tier keeps its existing limits.",
    "topic": "rules"
   },
   {
-   "fact": "Replit states that Auto mode selects models automatically for paid work in Power or Max on the Core and Pro plans.",
+   "fact": "Replit describes Power mode as a paid, mid-tier Agent mode with powerful models at an affordable price.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "**Power**: A paid, mid-tier mode with powerful models at an affordable price.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Replit describes Max mode as a paid, top-tier Agent mode with the best frontier models for the most demanding work.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "**Max**: A paid, top-tier mode with the best frontier models for the most demanding work.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Replit Agent may offer a paid 'Allow once' option when a request needs more capability than Free Mode, and Replit asks for confirmation before a paid action starts.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Replit asks for confirmation before a paid action starts, and Agent returns to Free Mode afterward.",
+   "topic": "rules"
+  },
+  {
+   "fact": "On Replit Agent's availability table, Core and Pro plans have 1 and 10 active background tasks respectively.",
+   "value": "1 (Core), 10 (Pro)",
+   "unit": "count",
+   "as_of": "",
+   "quote": "| Active background tasks | 1 | 10 |",
+   "topic": "rules"
+  },
+  {
+   "fact": "Enterprise workspaces on Replit use one Auto mode instead of Free Mode, and account admins can manage model access with Enterprise model controls.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Enterprise workspaces use one Auto mode instead of Free Mode.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Replit Agent's Auto mode provides automatic model selection for paid work in Power or Max on Core and Pro plans.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "**Auto**: Automatic model selection for paid work in Power or Max on Core and Pro.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Replit's availability table lists 1 active background task for the Core plan.",
+   "value": "1",
+   "unit": "active background tasks",
+   "as_of": "",
+   "quote": "Active background tasks",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Replit's Agent modes UI describes Turbo as offering the fastest models, with Replit stating up to 2.5x speed and 6x cost.",
+   "value": "2.5x speed and 6x cost",
+   "unit": "multiplier",
+   "as_of": "",
+   "quote": "Fastest models, up to 2.5x speed and 6x cost",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Replit defines Auto as automatic model selection for paid work in Power or Max modes on the Core and Pro plans.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -29,28 +128,20 @@
    "topic": "definition"
   },
   {
-   "fact": "Replit describes Power mode as a paid, mid-tier Agent mode.",
+   "fact": "Replit's availability table shows Power mode and Max mode as available on both the Core and Pro plans.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "A paid, mid-tier mode with powerful models at an affordable price.",
-   "topic": "definition"
-  },
-  {
-   "fact": "Replit describes Max mode as a paid, top-tier Agent mode that uses the best frontier models.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "A paid, top-tier mode with the best frontier models for the most demanding work.",
-   "topic": "definition"
-  },
-  {
-   "fact": "Replit states that for requests needing more capability than Free Mode, Agent may offer a paid 'Allow once' option, and Replit asks for confirmation before any paid action starts.",
-   "value": "",
-   "unit": "",
-   "as_of": "",
-   "quote": "Replit asks for confirmation before a paid action starts, and Agent returns to Free Mode afterward.",
+   "quote": "Power mode",
    "topic": "rules"
+  },
+  {
+   "fact": "Replit's Agent overview page is titled 'Introducing Replit Agent 4' in its embedded video.",
+   "value": "Replit Agent 4",
+   "unit": "",
+   "as_of": "",
+   "quote": "Introducing Replit Agent 4",
+   "topic": "other"
   }
  ]
 }

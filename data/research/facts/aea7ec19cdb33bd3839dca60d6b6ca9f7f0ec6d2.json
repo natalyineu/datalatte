@@ -1,32 +1,187 @@
 {
  "url": "https://devin.ai/",
  "title": "Devin: the autonomous software engineer",
- "hash": "15a77994e5caf5480342bf8a4945beb302c44cdf",
- "fetchedAt": "2026-11-06",
+ "hash": "1c33d5f7f672f723309ec0400744a7205d5017b9",
+ "fetchedAt": "2026-11-11",
+ "full": true,
+ "chars": 51527,
+ "chunks": 6,
  "facts": [
   {
-   "fact": "Devin's homepage states that Devin runs in the cloud or on the user's machine and tests in its own browser.",
+   "fact": "Devin's site advertises giving enterprises $100M+ in credits to fix critical vulnerabilities with Claude Mythos, subject to terms.",
+   "value": "100000000",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "We're giving enterprises $100M+ in credits to fix critical vulnerabilities with Claude Mythos. Terms apply.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Devin's site advertises $100M+ in Devin Security credits, subject to terms and conditions.",
+   "value": "100000000",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "$100M+ in Devin Security credits. Terms and conditions apply.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The homepage displays logos of companies including OpenRouter, Modal, Gamma, Citi, Reducto, Mercor, Mercedes, AngelList, Fox, NVIDIA, RV Tech, AT&T, Profound, Rohlik Group, Cloudflare, Lowe's, Exa, Wayfair, and Elevance Health under a customer-logo section.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Devin runs in the cloud or on your machine, tests in its own browser, and won't stop until the PR is ready to merge",
-   "topic": "definition"
+   "quote": "![Image 55: Citi](https://devin.ai/images/customer-logos/citi.svg?dpl=dpl_FsaHkddKX1Jg66qWHHXnap1jQWa8)",
+   "topic": "other"
   },
   {
-   "fact": "In an illustrative example session shown on the homepage, Devin reports that its sign-in and account-linking tests passed (5 tests passed); this is a mockup example, not a measured result.",
+   "fact": "In a sample session shown on the homepage, Devin reports that 5 browser tests passed for the SSO sign-in and account-linking work.",
    "value": "5",
    "unit": "tests passed",
    "as_of": "",
-   "quote": "Tested sign-in and account linking in the browser5 tests passed",
+   "quote": "Tested sign-in and account linking in the browser 5 tests passed",
    "topic": "benchmark"
   },
   {
-   "fact": "In an illustrative example pull request shown on the homepage, the change is listed as touching 12 files, with +8 and -14 line changes; this is a mockup example, not a measured result.",
-   "value": "12",
-   "unit": "files changed",
+   "fact": "Devin's homepage displays customer logos for companies including Rohlik Group, Cloudflare, Lowe's, Exa, Wayfair, Elevance Health, OpenRouter, Modal, Gamma, Citi, Reducto, Mercor, Mercedes, AngelList, Fox, NVIDIA, RV Tech, AT&T, and Profound.",
+   "value": "",
+   "unit": "",
    "as_of": "",
-   "quote": "12 files changed+8\\-14",
+   "quote": "![Image 105: Lowe's](https://devin.ai/images/customer-logos/lowes.svg",
+   "topic": "audience"
+  },
+  {
+   "fact": "Devin's page claims it can deliver frontier-model performance for up to 60% less cost by mixing and matching models.",
+   "value": "60%",
+   "unit": "% less cost",
+   "as_of": "",
+   "quote": "Access frontier performance for up to 60% less. Devin mixes and matches models to get the most from each",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Devin's page says it spins up its own Windows, Mac, and Linux virtual machines as needed to build, test in a browser, and record itself clicking through what it built.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Devin spins up its own Windows, Mac, and Linux virtual machines as needed to build, test in its browser, and record itself clicking through what it built",
+   "topic": "definition"
+  },
+  {
+   "fact": "Devin's page says a large task can be delegated and Devin will split it across parallel cloud agents, manage them, and report back, even when the user's laptop is closed.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Delegate a big task, then Devin splits it across parallel cloud agents, manages them, and reports back",
+   "topic": "definition"
+  },
+  {
+   "fact": "In Devin's homepage example, a PagerDuty high-severity alert reported an elevated error rate in api-server that exceeded 8% following the latest deployment (illustrative demo content, not a measured statistic).",
+   "value": "8",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Error rate exceeded 8% following the latest deployment.",
+   "topic": "other"
+  },
+  {
+   "fact": "In Devin's homepage demo, the automated bug-fix run was shown as having worked for 1 minute before producing a PR (illustrative demo content).",
+   "value": "1",
+   "unit": "minute",
+   "as_of": "",
+   "quote": "Worked for 1 min",
    "topic": "benchmark"
+  },
+  {
+   "fact": "In Devin's homepage demo, the bulk-actions feature run was shown with 18 tests passing (illustrative demo content).",
+   "value": "18",
+   "unit": "tests passed",
+   "as_of": "",
+   "quote": "Worked for 1 min·18 tests passed",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In Devin's homepage demo of a Devin Review, the example pull request was shown changing 12 files (illustrative demo content).",
+   "value": "12",
+   "unit": "files",
+   "as_of": "",
+   "quote": "12 files",
+   "topic": "other"
+  },
+  {
+   "fact": "In Devin's homepage demo, the example pull request was shown as one of 3 stacked PRs (illustrative demo content).",
+   "value": "3",
+   "unit": "stacked PRs",
+   "as_of": "",
+   "quote": "3 stacked",
+   "topic": "other"
+  },
+  {
+   "fact": "Devin's site states that zero data retention is enforced with model providers.",
+   "value": "zero data retention",
+   "unit": "",
+   "as_of": "",
+   "quote": "Zero data retention enforced with model providers",
+   "topic": "rules"
+  },
+  {
+   "fact": "Devin's site states that inputs and outputs are always the customer's IP.",
+   "value": "always the customer's IP",
+   "unit": "",
+   "as_of": "",
+   "quote": "Inputs and outputs are always your IP",
+   "topic": "rules"
+  },
+  {
+   "fact": "Devin's site states that every session runs in its own VM.",
+   "value": "own VM per session",
+   "unit": "",
+   "as_of": "",
+   "quote": "Every session runs in its own VM",
+   "topic": "definition"
+  },
+  {
+   "fact": "Devin's site lists RBAC, SSO, SCIM, and OIDC among its enterprise security controls.",
+   "value": "RBAC / SSO / SCIM / OIDC",
+   "unit": "",
+   "as_of": "",
+   "quote": "RBAC / SSO / SCIM / OIDC",
+   "topic": "rules"
+  },
+  {
+   "fact": "Devin's site lists comprehensive audit logs among its enterprise security features.",
+   "value": "comprehensive audit logs",
+   "unit": "",
+   "as_of": "",
+   "quote": "Comprehensive audit logs",
+   "topic": "rules"
+  },
+  {
+   "fact": "Devin's site states that private networking is available.",
+   "value": "available",
+   "unit": "",
+   "as_of": "",
+   "quote": "Private networking available",
+   "topic": "rules"
+  },
+  {
+   "fact": "Devin's site displays SOC 2, ISO 27001, and FedRAMP badges in its enterprise security section.",
+   "value": "SOC 2, ISO 27001, FedRAMP",
+   "unit": "",
+   "as_of": "",
+   "quote": "SOC 2",
+   "topic": "rules"
+  },
+  {
+   "fact": "Devin's site gives an example of a scheduled automation that runs every day at 9:00am to review stale Linear tickets.",
+   "value": "9:00am",
+   "unit": "time of day",
+   "as_of": "",
+   "quote": "Every day at 9:00am",
+   "topic": "other"
+  },
+  {
+   "fact": "Devin's site lists a blog post dated 11.02 titled 'Hierarchical budgets: manage AI spend the way your company is organized' under recently shipped items.",
+   "value": "11.02",
+   "unit": "date (MM.DD, year not shown)",
+   "as_of": "",
+   "quote": "11.02 Hierarchical budgets: manage AI spend the way your company is organized",
+   "topic": "pricing"
   }
  ]
 }
