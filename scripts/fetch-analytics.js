@@ -651,101 +651,58 @@ function buildReport(gsc, ga4, leads, bing, utm) {
   const launch = gAll.length ? fmtDay(gAll[0].d) : "launch";
   const A = leads ? leads.all : null;
 
+  // Mobile-friendly layout: no <pre> tables (they wrap on a phone), one metric per line, each number appears once.
   const hdr = (t) => [`<b>${t}</b>`, `<i>${esc(date)}</i>`, ""];
-  const rows7 = [
-    `${lab("")}${pad("this wk", 8)}${pad("last wk", 9)}${pad("change", 7)}`,
-  ];
+  const sec = (t, sub = "") => `<b>━━ ${t} ━━</b>${sub ? ` <i>${esc(sub)}</i>` : ""}`;
+  const mr = (name, cur, prev, f = num) => `${flag(cur, prev)} ${esc(name)}: <b>${f(cur)}</b> · was ${f(prev)} (${chg(cur, prev)})`;
   const org1 = hasChan ? chSum(wk1, "Organic Search") : 0, org0 = hasChan ? chSum(wk0, "Organic Search") : 0;
+  const shortLine = (t) => esc(String(t).trim());
 
-  // ================= SUMMARY (topic: weekly) =================
-  const S = hdr("🗓 DATALATTE · DAILY SUMMARY");
-  S.push(`<b>━━ 1. ALL TIME (since ${esc(launch)}) ━━</b>`, "");
-  const stages = [["Seen in search", searchImp], ["Clicked to the site", searchClk], ["Real visitors", realAll], ["Clicked a button", ctaAll], ["Started the form", formStarts], ["Became a lead", A ? A.leads : 0]];
-  const top = Math.max(...stages.map(x => x[1]), 1);
-  const shown = stages.filter(x => x[1] > 0 || x[0] === "Became a lead");
-  const bar = (v) => "█".repeat(v ? Math.max(1, Math.round(Math.log10(v + 1) / Math.log10(top + 1) * 14)) : 0);
-  S.push(`<b>FUNNEL</b>`, pre(shown.map(([n, v]) => `${lab(n, 20)}${pad(num(v), 8)}  ${bar(v)}`)));
-  if (A) S.push(`Visitor → lead conversion: <b>${fp(pctOf(A.leads, realAll))}</b>   ·   Click rate in search: <b>${fp(pctOf(searchClk, searchImp), 2)}</b>`, "");
-  if (A) S.push(`<b>LEADS</b>`, pre([
-    `${lab("Leads", 20)}${pad(A.leads, 9)}   (${A.ready} ready to start)`,
-    `${lab("  answered", 20)}${pad(A.replied, 9)}   (${fp(pctOf(A.replied, A.leads), 0)})`,
-    `${lab("  waiting for reply", 20)}${pad(A.waiting, 9)}${A.waiting ? `   oldest ${leads.oldestWaitingDays}d ⚠️` : ""}`,
-    `${lab("Partnership requests", 20)}${pad(A.partner, 9)}`,
-    `${lab("Newsletter subscribers", 20)}${pad(A.subs, 9)}`,
-  ]));
-  S.push(`<b>━━ 2. LAST 7 DAYS (${esc(periodTxt)}) ━━</b>`, "");
-  S.push(pre([
-    rows7[0],
-    wrow("Google: shown", c1.imp, c0.imp),
-    wrow("Google: clicks", c1.clk, c0.clk),
-    wrow("Real visitors", real1, real0),
-    ...(leads ? [wrow("New leads", leads.w1.leads, leads.w0.leads)] : []),
-  ]));
+  // ================= SUMMARY (topic: weekly): funnel + leads + 3 headline numbers =================
+  const S = hdr("🗓 DAILY SUMMARY");
+  S.push(sec("ALL TIME", `since ${launch}`));
+  const funnel = [["👁 Seen in search", searchImp], ["🖱 Clicked to the site", searchClk], ["🧑 Real visitors", realAll], ["🔘 Clicked a button", ctaAll], ["📝 Started the form", formStarts], ["✅ Became a lead", A ? A.leads : 0]];
+  S.push(...funnel.filter(x => x[1] > 0 || x[0].includes("lead")).map(([n, v]) => `${n}: <b>${num(v)}</b>`));
+  if (A) S.push(`<i>Visitor → lead ${fp(pctOf(A.leads, realAll))} · click rate in search ${fp(pctOf(searchClk, searchImp), 2)}</i>`, "");
+  if (A) S.push(`<b>Leads</b>: answered <b>${A.replied}</b> (${fp(pctOf(A.replied, A.leads), 0)}) · waiting <b>${A.waiting}</b>${A.waiting ? ` (oldest ${leads.oldestWaitingDays}d ⚠️)` : ""} · partnership requests ${A.partner} · newsletter ${A.subs}`, "");
+  S.push(sec("LAST 7 DAYS", periodTxt), mr("Real visitors", real1, real0), mr("Google clicks", c1.clk, c0.clk), ...(leads ? [mr("New leads", leads.w1.leads, leads.w0.leads)] : []), "");
   const concl = [];
   const dImp = c0.imp ? (c1.imp / c0.imp - 1) * 100 : 0, dClk = c0.clk ? (c1.clk / c0.clk - 1) * 100 : 0;
-  concl.push(`Google showed the site ${Math.abs(dImp) < 5 ? "about as often" : dImp > 0 ? "more often" : "less often"} (${chg(c1.imp, c0.imp)}) but clicks ${dClk < -5 ? "fell" : dClk > 5 ? "grew" : "stayed flat"} (${chg(c1.clk, c0.clk)}).${c1.pos - c0.pos > 3 ? ` The site now appears lower in results (average position ${c0.pos.toFixed(0)} → ${c1.pos.toFixed(0)}).` : ""}`);
-  concl.push(`${num(real1)} real visitors this week (${chg(real1, real0)}); ${leads ? (leads.w1.leads ? `${leads.w1.leads} new lead(s).` : "no new leads.") : ""} ${hasChan && direct1 > real1 * 5 ? `Bot traffic is ${num(direct1)} sessions, ignored in all numbers.` : ""}`);
-  if (leads && A.waiting) concl.push(`⚠️ ${A.waiting} lead(s) are waiting for your reply, the oldest for ${leads.oldestWaitingDays} days.`);
-  S.push(`<b>━━ 3. CONCLUSION ━━</b>`, ...concl.map(t => `• ${esc(t.trim())}`));
+  concl.push(`Google showed the site ${Math.abs(dImp) < 5 ? "about as often" : dImp > 0 ? "more often" : "less often"} (${chg(c1.imp, c0.imp)}); clicks ${dClk < -5 ? "fell" : dClk > 5 ? "grew" : "stayed flat"} (${chg(c1.clk, c0.clk)}).`);
+  concl.push(`${num(real1)} real visitors (${chg(real1, real0)}); ${leads ? (leads.w1.leads ? `${leads.w1.leads} new lead(s).` : "no new leads.") : ""}`);
+  if (leads && A.waiting) concl.push(`⚠️ ${A.waiting} lead(s) wait for your reply, the oldest ${leads.oldestWaitingDays} days.`);
+  S.push(sec("CONCLUSION"), ...concl.map(t => `• ${shortLine(t)}`), "", `<i>Details: SEO · Traffic topics. Bots (${num(direct1)} sessions) are excluded everywhere.</i>`);
 
-  // ================= SEO (topic: seo) =================
+  // ================= SEO (topic: seo): Google + Bing only =================
   const E = hdr("🔎 SEO · GOOGLE + BING");
-  E.push(`<b>━━ 1. ALL TIME (since ${esc(launch)}) ━━</b>`, "");
-  E.push(`<b>GOOGLE SEARCH CONSOLE</b>`, pre([
-    `${lab("Shown in results", 20)}${pad(num(gImpAll), 9)}`,
-    `${lab("Clicks", 20)}${pad(num(gClkAll), 9)}   (${fp(pctOf(gClkAll, gImpAll), 2)})`,
-    `${lab("Average position", 20)}${pad(gPosAll.toFixed(1), 9)}   (lower is better)`,
-  ]));
-  if (bAll) E.push(`<b>BING</b>`, pre([
-    `${lab("Shown in results", 20)}${pad(num(bAll.imp), 9)}`,
-    `${lab("Clicks", 20)}${pad(num(bAll.clk), 9)}   (${fp(pctOf(bAll.clk, bAll.imp), 2)})`,
-  ]));
-  E.push(`<b>━━ 2. LAST 7 DAYS (${esc(periodTxt)}) ━━</b>`, "");
-  E.push(pre([
-    rows7[0],
-    wrow("Google: shown", c1.imp, c0.imp),
-    wrow("Google: clicks", c1.clk, c0.clk),
-    ...(bing && bing.length >= 14 ? [wrow("Bing: shown", sum(bing.slice(-7), d => d.impressions), sum(bing.slice(-14, -7), d => d.impressions)), wrow("Bing: clicks", sum(bing.slice(-7), d => d.clicks), sum(bing.slice(-14, -7), d => d.clicks))] : []),
-  ]));
-  E.push(`<i>Google average position this week: ${c1.pos.toFixed(1)} (last week ${c0.pos.toFixed(1)}, lower is better)</i>`, "");
+  E.push(sec("ALL TIME", `since ${launch}`));
+  E.push(`Google shown: <b>${num(gImpAll)}</b>`, `Google clicks: <b>${num(gClkAll)}</b> (${fp(pctOf(gClkAll, gImpAll), 2)})`, `Average position: <b>${gPosAll.toFixed(1)}</b> <i>(lower is better)</i>`);
+  if (bAll) E.push(`Bing shown: <b>${num(bAll.imp)}</b>`, `Bing clicks: <b>${num(bAll.clk)}</b> (${fp(pctOf(bAll.clk, bAll.imp), 2)})`);
+  E.push("", sec("LAST 7 DAYS", periodTxt), mr("Google shown", c1.imp, c0.imp), mr("Google clicks", c1.clk, c0.clk));
+  if (bing && bing.length >= 14) E.push(mr("Bing shown", sum(bing.slice(-7), d => d.impressions), sum(bing.slice(-14, -7), d => d.impressions)), mr("Bing clicks", sum(bing.slice(-7), d => d.clicks), sum(bing.slice(-14, -7), d => d.clicks)));
+  E.push(`Position: <b>${c1.pos.toFixed(1)}</b> · was ${c0.pos.toFixed(1)}`, "");
   const whySearch = why.filter(w => /^(Impressions|Position|Clicks)/.test(w));
-  if (whySearch.length) E.push(`<b>━━ 3. WHY IT MOVED ━━</b>`, ...whySearch.map(t => `• ${esc(t)}`), "");
-  for (const blk of [movers, pageOpps, queryOpps]) if (blk) E.push(pre(blk.split("\n").filter(Boolean)));
+  if (whySearch.length) E.push(sec("WHY IT MOVED"), ...whySearch.map(t => `• ${shortLine(t)}`), "");
+  for (const blk of [movers, pageOpps, queryOpps]) if (blk) E.push(...blk.split("\n").filter(Boolean).map(l => shortLine(l.replace(/^\s+/, l.trim().startsWith("•") ? "" : ""))), "");
   if (bing && bing.length >= 14) {
     const bc1 = sum(bing.slice(-7), d => d.clicks), bc0 = sum(bing.slice(-14, -7), d => d.clicks);
     const bCtr = bAll ? pctOf(bAll.clk, bAll.imp) : 0, gCtr = pctOf(gClkAll, gImpAll);
-    E.push(`• Bing sent ${bc1} clicks (${chg(bc1, bc0)}). People click there ${bCtr > gCtr * 1.3 ? `${(bCtr / gCtr).toFixed(1)}× more often than on Google` : "about as often as on Google"}.`);
+    E.push(`• Bing: ${bc1} clicks (${chg(bc1, bc0)}); people click there ${bCtr > gCtr * 1.3 ? `${(bCtr / gCtr).toFixed(1)}× more often than on Google` : "about as often as on Google"}.`);
   }
 
-  // ================= TRAFFIC (topic: traffic) =================
-  const T = hdr("🌐 TRAFFIC · GA4 (REAL VS BOTS)");
-  T.push(`<b>━━ 1. ALL TIME (since ${esc(launch)}) ━━</b>`, "");
-  T.push(`<b>GOOGLE ANALYTICS</b>`, pre([
-    `${lab("All sessions", 20)}${pad(num(sessAll), 9)}`,
-    `${lab("  real visitors", 20)}${pad(num(realAll), 9)}   (${chTxt})`,
-    `${lab("  bots (ignored)", 20)}${pad(num(botsAll), 9)}`,
-    `${lab("  one-day spam (ignored)", 20)}${pad(num(spamAll), 9)}`,
-  ]));
-  T.push(pre([
-    `${lab("Buttons clicked", 20)}${pad(num(ctaAll), 9)}`,
-    `${lab("Form started", 20)}${pad(num(formStarts), 9)}`,
-  ]));
-  T.push(`<b>━━ 2. LAST 7 DAYS (${esc(periodTxt)}) ━━</b>`, "");
+  // ================= TRAFFIC (topic: traffic): GA4 only =================
+  const T = hdr("🌐 TRAFFIC · GA4");
+  T.push(sec("ALL TIME", `since ${launch}`));
+  T.push(`All sessions: <b>${num(sessAll)}</b>`, `🧑 Real visitors: <b>${num(realAll)}</b> <i>(${esc(chTxt)})</i>`, `🤖 Bots and one-day spam (ignored): <b>${num(botsAll + spamAll)}</b>`, `🔘 Buttons clicked: <b>${num(ctaAll)}</b> · 📝 form started: <b>${num(formStarts)}</b>`, "");
   const chNow = hasChan ? [...new Set(chan.filter(r => wk1.has(r.date) && r.ch !== "Direct").map(r => r.ch))].sort((a, b) => chSum(wk1, b) - chSum(wk1, a)).slice(0, 5) : [];
-  T.push(pre([
-    rows7[0],
-    wrow("Real visitors", real1, real0),
-    ...(hasChan ? [wrow("  from search", org1, org0)] : []),
-    ...chNow.filter(c => c !== "Organic Search").map(c => wrow(`  ${c.toLowerCase()}`, chSum(wk1, c), chSum(wk0, c))),
-    wrow("All sessions (incl. bots)", s1, s0),
-  ]));
-  T.push(`<i>Bounce rate ${bounce}% · average visit ${avgSec}s (all sessions, 28 days)</i>`, "");
+  T.push(sec("LAST 7 DAYS", periodTxt), mr("Real visitors", real1, real0));
+  for (const c of chNow) T.push(`   ${mr(c, chSum(wk1, c), chSum(wk0, c))}`);
   if (utm) {
     const keys = [...new Set([...Object.keys(utm.w1), ...Object.keys(utm.w0)])].sort((a, b) => (utm.w1[b] || 0) - (utm.w1[a] || 0));
-    if (keys.length) T.push(`<b>FROM OUR SOCIAL POSTS (UTM)</b>`, pre([rows7[0], ...keys.map(k => wrow(k, utm.w1[k] || 0, utm.w0[k] || 0))]), "");
+    if (keys.length) T.push("", `🔗 <b>From our posts (UTM)</b>: ` + keys.map(k => `${esc(k)} <b>${utm.w1[k] || 0}</b> (was ${utm.w0[k] || 0})`).join(" · "));
   }
   const whyTraffic = why.filter(w => /^Sessions/.test(w));
-  if (whyTraffic.length) T.push(`<b>━━ 3. WHY IT MOVED ━━</b>`, ...whyTraffic.map(t => `• ${esc(t)}`));
+  if (whyTraffic.length) T.push("", sec("WHY IT MOVED"), ...whyTraffic.map(t => `• ${shortLine(t)}`));
 
   // ================= RECOMMENDATIONS (topic: recs) =================
   const R = [`<b>🎯 WHAT TO DO · SITE & SEO</b>`, `<i>${esc(date)}</i>`, "", ...recs.slice(0, 5).map((t, i) => `${i + 1}. ${esc(t)}`)];
