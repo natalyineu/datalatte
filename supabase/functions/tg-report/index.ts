@@ -28,9 +28,13 @@ Deno.serve(async (req) => {
     return Response.json(r.ok ? { ok: true } : { error: r.description });
   }
   if (u.searchParams.get("purge")) {
-    if (!isService(req)) return Response.json({ error: "service role required" }, { status: 403 });
+    // service role, or a one-time token stored in social_settings (purge_token); the token is deleted after use
+    const tok = u.searchParams.get("token"); const stored = await get("purge_token");
+    if (!isService(req) && !(tok && stored && tok === stored)) return Response.json({ error: "service role or valid one-time token required" }, { status: 403 });
+    if (tok && stored && tok === stored) await sb.from("social_settings").delete().eq("key", "purge_token");
     const chat = await get("tg_group_id"); const from = +u.searchParams.get("purge")!; const to = +(u.searchParams.get("to") ?? from);
-    const ids: number[] = []; for (let i = from; i <= to; i++) ids.push(i);
+    const skip = new Set((u.searchParams.get("skip") ?? "").split(",").filter(Boolean).map(Number));
+    const ids: number[] = []; for (let i = from; i <= to; i++) if (!skip.has(i)) ids.push(i);
     let deleted = 0;
     for (let i = 0; i < ids.length; i += 100) { const r = await api("deleteMessages", { chat_id: chat, message_ids: ids.slice(i, i + 100) }); if (r.ok) deleted += ids.slice(i, i + 100).length; else return Response.json({ error: r.description, deleted }); }
     return Response.json({ ok: true, requested: ids.length });
