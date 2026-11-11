@@ -116,8 +116,11 @@ Deno.serve(async (req) => {
     const { data: deals } = await sb.from("partner_deals").select("partner,next_step");
     for (const d of deals ?? []) { const dt = String(d.next_step ?? "").match(/(\d{4}-\d{2}-\d{2})/)?.[1]; if (dt && dt <= todayS) recs.push({ key: `nudge:${d.partner}:${dt}`, pr: 3, text: `Time to nudge ${d.partner} (${String(d.next_step).slice(0, 80)}).` }); }
     const in7 = new Date(now + 7 * 864e5).toISOString().slice(0, 10);
-    const { data: ideas } = await sb.from("social_ideas").select("title,source_path,season_tag").eq("status", "new").gte("season_from", todayS).lte("season_from", in7).limit(3);
-    for (const i of ideas ?? []) recs.push({ key: `idea:${i.title}`, pr: 2, text: `Season "${i.season_tag}" starts within a week: use "${String(i.title).slice(0, 80)}" (${i.source_path}).` });
+    const { data: ideas } = await sb.from("social_ideas").select("title,source_path,season_tag").eq("status", "new").gte("season_from", todayS).lte("season_from", in7).limit(20);
+    // one recommendation per season (tags like "Black Friday / email" and "Black Friday / holidays" are the same season)
+    const bySeason = new Map<string, any[]>();
+    for (const i of ideas ?? []) { const k = String(i.season_tag).split("/")[0].trim(); bySeason.set(k, [...(bySeason.get(k) ?? []), i]); }
+    for (const [season, list] of bySeason) recs.push({ key: `season:${season}`, pr: 2, text: `${season} starts within a week. ${list.length} ready ideas from your articles: ` + list.slice(0, 3).map((i) => `${String(i.title).slice(0, 60)} (${i.source_path})`).join("; ") + "." });
     const { data: m } = await sb.from("social_metrics").select("platform,views,social_posts(content_type)").gte("collected_date", new Date(now - 14 * 864e5).toISOString().slice(0, 10)).not("views", "is", null);
     const byType = new Map<string, number[]>(); for (const x of m ?? []) { const k = `${PL[x.platform] ?? x.platform} ${(x as any).social_posts?.content_type ?? ""}`.trim(); byType.set(k, [...(byType.get(k) ?? []), x.views ?? 0]); }
     const ranked = [...byType.entries()].filter(([, v]) => v.length >= 3).map(([k, v]) => ({ k, a: v.reduce((s, x) => s + x, 0) / v.length, n: v.length })).sort((a, b) => b.a - a.a);
