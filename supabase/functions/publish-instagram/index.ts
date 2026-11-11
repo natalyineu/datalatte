@@ -1,4 +1,4 @@
-// Publishes due social_posts (platform='instagram') as Reels (video) or photos via the Instagram Graph API.
+// Publishes due social_posts (platform='instagram') as Reels (video), photos or carousels (media_urls) via the Instagram Graph API.
 // Secrets: META_PAGE_TOKEN, FB_PAGE_ID. Modes: ?dry=1
 import { createClient } from "npm:@supabase/supabase-js@2";
 
@@ -26,12 +26,24 @@ Deno.serve(async (req) => {
     await sb.from("social_posts").update({ status: "failed", error_message: "in flight" }).eq("id", p.id);
     try {
       if (!p.media_url) throw new Error("Instagram needs media_url");
-      const body = new URLSearchParams({ access_token: token, caption: p.content.slice(0, 2200) });
-      if (p.media_type === "video") { body.set("media_type", "REELS"); body.set("video_url", p.media_url); body.set("share_to_feed", "true"); }
-      else body.set("image_url", p.media_url);
-      const c = await fetch(`${G}/${ig}/media`, { method: "POST", body });
-      const co = await j(c);
-      if (!c.ok) throw new Error(co.error?.message ?? `HTTP ${c.status}`);
+      const caption = p.content.slice(0, 2200);
+      let co: any;
+      if (Array.isArray(p.media_urls) && p.media_urls.length > 1) {
+        // Carousel: one child container per image, then a CAROUSEL container
+        const kids: string[] = [];
+        for (const u of p.media_urls.slice(0, 10)) {
+          const rr = await fetch(`${G}/${ig}/media`, { method: "POST", body: new URLSearchParams({ access_token: token, image_url: u, is_carousel_item: "true" }) });
+          const oo = await j(rr); if (!rr.ok) throw new Error(oo.error?.message ?? `child HTTP ${rr.status}`); kids.push(oo.id);
+        }
+        const c = await fetch(`${G}/${ig}/media`, { method: "POST", body: new URLSearchParams({ access_token: token, media_type: "CAROUSEL", children: kids.join(","), caption }) });
+        co = await j(c); if (!c.ok) throw new Error(co.error?.message ?? `HTTP ${c.status}`);
+      } else {
+        const body = new URLSearchParams({ access_token: token, caption });
+        if (p.media_type === "video") { body.set("media_type", "REELS"); body.set("video_url", p.media_url); body.set("share_to_feed", "true"); }
+        else body.set("image_url", p.media_url);
+        const c = await fetch(`${G}/${ig}/media`, { method: "POST", body });
+        co = await j(c); if (!c.ok) throw new Error(co.error?.message ?? `HTTP ${c.status}`);
+      }
 
       for (let i = 0; i < 25; i++) {
         const s = await j(await fetch(`${G}/${co.id}?fields=status_code,status&access_token=${token}`));
