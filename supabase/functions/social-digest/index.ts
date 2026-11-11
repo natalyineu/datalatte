@@ -1,14 +1,25 @@
 // Reports to the Telegram forum group (topics via tg-report settings).
-// Modes: ?mode=leads | outreach | partners | publish (recent published/failed posts) | health (token checks, alerts only if broken) | metrics (weekly) | traffic (weekly UTM sessions)
+// Report format everywhere: ALL TIME first, then LAST 7 DAYS (this week vs last week, change, flag), then a short conclusion.
+// Modes: social | outreach | partners | recs (social & sales recommendations) | publish (event: recent posts) | health (alerts only if broken)
+// Site/SEO/traffic reports are sent by the GitHub Action (scripts/fetch-analytics.js) in the same format.
 import { createClient } from "npm:@supabase/supabase-js@2";
 
 const sb = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
 const TG = Deno.env.get("TELEGRAM_BOT_TOKEN")!;
 const G = "https://graph.facebook.com/v21.0";
 const get = async (k: string) => (await sb.from("social_settings").select("value").eq("key", k).maybeSingle()).data?.value as string | undefined;
-const PL: Record<string, string> = { telegram: "TG", twitter: "X", facebook: "FB", instagram: "IG", threads: "Threads", linkedin: "LI" };
-const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-const n = (v: number | null | undefined) => (v == null ? "—" : v.toLocaleString("en-US"));
+const PL: Record<string, string> = { telegram: "Telegram", twitter: "X", facebook: "Facebook", instagram: "Instagram", threads: "Threads", linkedin: "LinkedIn" };
+const esc = (s: string) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const num = (n: number) => Math.round(n).toLocaleString("en-US");
+const pad = (v: string | number, n: number) => String(v).padStart(n);
+const lab = (t: string, n = 22) => String(t).padEnd(n);
+const pre = (lines: string[]) => `<pre>${esc(lines.join("\n"))}</pre>`;
+const chg = (cur: number, prev: number) => { if (!prev) return cur ? "new" : "–"; const d = (cur / prev - 1) * 100; return `${d >= 0 ? "+" : "−"}${Math.abs(d).toFixed(0)}%`; };
+const flag = (cur: number, prev: number) => { if (!prev) return cur ? "🟢" : "⚪"; const d = (cur / prev - 1) * 100; return d > 5 ? "🟢" : d < -5 ? "🔴" : "⚪"; };
+const wrow = (name: string, cur: number, prev: number, f = num) => `${lab(name)}${pad(f(cur), 8)}${pad(f(prev), 9)}${pad(chg(cur, prev), 7)} ${flag(cur, prev)}`;
+const WH = `${lab("")}${pad("this wk", 8)}${pad("last wk", 9)}${pad("change", 7)}`;
+const today = () => new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+const D7 = 7 * 864e5;
 
 async function send(topic: string, text: string) {
   const chat = await get("tg_group_id"); const topics = JSON.parse((await get("tg_topics")) ?? "{}");
@@ -21,99 +32,132 @@ Deno.serve(async (req) => {
   const mode = new URL(req.url).searchParams.get("mode");
   const now = Date.now();
 
-  if (mode === "leads") {
-    const since = new Date(now - 24 * 3600e3).toISOString();
-    const { data: fresh } = await sb.from("contact_submissions").select("name,email,niche,form_type,message,status,created_at").gte("created_at", since).not("status", "in", "(spam,system,test)").order("created_at");
-    const { count: waiting } = await sb.from("contact_submissions").select("id", { count: "exact", head: true }).eq("status", "new").lt("created_at", since);
-    if (!fresh?.length && !waiting) return Response.json({ skipped: "no new leads" });
-    let t = "<b>💼 Заявки с сайта</b>\n━━━━━━━━━━━━━━━━━━\n";
-    for (const c of fresh ?? []) t += `👤 <b>${esc(String(c.name ?? "—"))}</b> · ${esc(String(c.niche ?? "—"))} · <i>${esc(String(c.form_type ?? ""))}</i>\n<blockquote>${esc(String(c.message ?? "").slice(0, 220))}</blockquote>\n`;
-    if (!fresh?.length) t += "Новых за сутки нет.\n";
-    if (waiting) t += `\n⏳ Ждут ответа дольше суток: <b>${waiting}</b>`;
-    return Response.json(await send("leads", t));
+  // ───────── SOCIAL ─────────
+  if (mode === "social" || mode === "metrics") {
+    const { data: posts } = await sb.from("social_posts").select("id,platform,title,post_url,published_at,content_type").eq("status", "published").not("published_at", "is", null);
+    const { data: met } = await sb.from("social_metrics").select("post_id,views,likes,comments,collected_date").order("collected_date", { ascending: false }).limit(8000);
+    const latest = new Map<string, any>(); for (const m of met ?? []) if (!latest.has(m.post_id)) latest.set(m.post_id, m);
+    const rows = (posts ?? []).map((p) => ({ ...p, t: Date.parse(p.published_at), m: latest.get(p.id) ?? {} }));
+    const sum = (a: any[], k: "views" | "likes" | "comments") => a.reduce((s, x) => s + (x.m[k] ?? 0), 0);
+    const w1 = rows.filter((x) => x.t >= now - D7), w0 = rows.filter((x) => x.t >= now - 2 * D7 && x.t < now - D7);
+    const first = rows.length ? new Date(Math.min(...rows.map((x) => x.t))).toLocaleDateString("en-GB", { day: "numeric", month: "short" }) : "launch";
+    const plats = Object.keys(PL).filter((k) => rows.some((x) => x.platform === k));
+    let t = `<b>📊 SOCIAL · ALL PLATFORMS</b>\n<i>${esc(today())}</i>\n\n<b>━━ 1. ALL TIME (since ${esc(first)}) ━━</b>\n\n`;
+    t += pre([`${lab("", 12)}${pad("posts", 6)}${pad("views", 9)}${pad("likes", 7)}`, ...plats.map((k) => { const a = rows.filter((x) => x.platform === k); return `${lab(PL[k], 12)}${pad(a.length, 6)}${pad(k === "linkedin" ? "–" : num(sum(a, "views")), 9)}${pad(num(sum(a, "likes")), 7)}`; }), `${lab("Total", 12)}${pad(rows.length, 6)}${pad(num(sum(rows, "views")), 9)}${pad(num(sum(rows, "likes")), 7)}`]);
+    const best = [...rows].sort((a, b) => (b.m.views ?? 0) - (a.m.views ?? 0))[0];
+    if (best && best.m.views) t += `\n🏆 Best post: ${PL[best.platform]} · <a href="${best.post_url}">${esc(String(best.title).slice(0, 50))}</a> (${num(best.m.views)} views)\n`;
+    t += `\n<b>━━ 2. LAST 7 DAYS ━━</b>\n\n`;
+    const lines = [WH, wrow("Posts published", w1.length, w0.length), wrow("Views", sum(w1, "views"), sum(w0, "views")), wrow("Likes", sum(w1, "likes"), sum(w0, "likes")), wrow("Comments", sum(w1, "comments"), sum(w0, "comments"))];
+    for (const k of plats) { const a1 = w1.filter((x) => x.platform === k), a0 = w0.filter((x) => x.platform === k); if (a1.length || a0.length) lines.push(wrow(`  ${PL[k]} posts`, a1.length, a0.length)); }
+    t += pre(lines);
+    t += `<i>Views of newer posts are still growing, so the latest week is naturally lower.</i>\n\n<b>━━ 3. CONCLUSION ━━</b>\n`;
+    const byPlat = plats.map((k) => ({ k, v: sum(w1.filter((x) => x.platform === k), "views") })).sort((a, b) => b.v - a.v);
+    t += `• ${w1.length} posts this week (${chg(w1.length, w0.length)}), ${num(sum(w1, "views"))} views.\n`;
+    if (byPlat[0]?.v) t += `• Most views this week: ${PL[byPlat[0].k]} (${num(byPlat[0].v)}).\n`;
+    t += `• LinkedIn views are not available without the official API; likes and comments come from the public page.`;
+    return Response.json(await send("metrics", t));
   }
 
+  // ───────── OUTREACH ─────────
   if (mode === "outreach") {
-    const since1 = new Date(now - 24 * 3600e3).toISOString(), since7 = new Date(now - 7 * 864e5).toISOString();
-    const { data: all } = await sb.from("outreach_emails_v").select("campaign,status,sent_at,replied_at_eff,outcome,business_name,subject").order("sent_at", { ascending: false }).limit(5000);
-    const rows = all ?? [];
-    const cnt = (a: any[]) => ({ sent: a.length, delivered: a.filter((x) => ["delivered", "opened", "clicked"].includes(x.status)).length, opened: a.filter((x) => ["opened", "clicked"].includes(x.status)).length, clicked: a.filter((x) => x.status === "clicked").length, bounced: a.filter((x) => x.status === "bounced").length, replied: a.filter((x) => x.replied_at_eff).length });
-    const day = rows.filter((x) => x.sent_at && x.sent_at >= since1), week = rows.filter((x) => x.sent_at && x.sent_at >= since7);
-    const tot = cnt(rows), d = cnt(day), w = cnt(week);
-    const unknown = rows.filter((x) => x.status === "unknown").length;
-    let t = "<b>✉️ Outreach</b>\n━━━━━━━━━━━━━━━━━━\n";
-    t += `<b>За 24 часа:</b> отправлено <b>${d.sent}</b>, доставлено ${d.delivered}, открыто ${d.opened}, ответов ${d.replied}\n`;
-    t += `<b>За 7 дней:</b> отправлено <b>${w.sent}</b>, доставлено ${w.delivered}, открыто ${w.opened}, кликов ${w.clicked}, отказов ${w.bounced}, ответов <b>${w.replied}</b>\n`;
-    t += `<b>Всего:</b> ${tot.sent} писем, ответов ${tot.replied}, открытий ${tot.opened}, кликов ${tot.clicked}, отказов ${tot.bounced}\n`;
-    const byC = new Map<string, any[]>(); for (const x of week) { const k = x.campaign ?? "—"; byC.set(k, [...(byC.get(k) ?? []), x]); }
-    if (byC.size) { t += "\n<b>Кампании за неделю</b>\n"; for (const [k, a] of byC) { const c = cnt(a); t += `<code>${esc(String(k).slice(0, 26))}</code> — ${c.sent} шт, открыто ${c.opened}, ответов ${c.replied}\n`; } }
-    const rep = rows.filter((x) => x.replied_at_eff && x.replied_at_eff >= since1);
-    if (rep.length) { t += "\n<b>💬 Новые ответы</b>\n"; for (const x of rep.slice(0, 8)) t += `• ${esc(String(x.business_name ?? "—"))}: ${esc(String(x.subject ?? "").slice(0, 60))}\n`; }
-    if (unknown) t += `\n<i>Статус не синхронизирован у ${unknown} писем (обновляется скриптом Resend раз в сутки).</i>`;
+    const { data: all } = await sb.from("outreach_emails_v").select("campaign,status,sent_at,replied_at_eff,business_name,subject").order("sent_at", { ascending: false }).limit(5000);
+    const rows = (all ?? []).filter((x) => x.sent_at).map((x) => ({ ...x, ts: Date.parse(x.sent_at), tr: x.replied_at_eff ? Date.parse(x.replied_at_eff) : 0 }));
+    const dlv = (a: any[]) => a.filter((x) => ["delivered", "opened", "clicked"].includes(x.status)).length;
+    const opn = (a: any[]) => a.filter((x) => ["opened", "clicked"].includes(x.status)).length;
+    const clk = (a: any[]) => a.filter((x) => x.status === "clicked").length;
+    const bnc = (a: any[]) => a.filter((x) => x.status === "bounced").length;
+    const w1 = rows.filter((x) => x.ts >= now - D7), w0 = rows.filter((x) => x.ts >= now - 2 * D7 && x.ts < now - D7);
+    const rep1 = rows.filter((x) => x.tr >= now - D7).length, rep0 = rows.filter((x) => x.tr >= now - 2 * D7 && x.tr < now - D7).length;
+    const repAll = rows.filter((x) => x.tr).length, unknown = rows.filter((x) => x.status === "unknown").length;
+    const first = rows.length ? new Date(Math.min(...rows.map((x) => x.ts))).toLocaleDateString("en-GB", { day: "numeric", month: "short" }) : "launch";
+    const pc = (a: number, b: number) => (b ? `${(a / b * 100).toFixed(1)}%` : "–");
+    let t = `<b>✉️ OUTREACH · COLD E-MAILS</b>\n<i>${esc(today())}</i>\n\n<b>━━ 1. ALL TIME (since ${esc(first)}) ━━</b>\n\n`;
+    t += pre([`${lab("E-mails sent", 20)}${pad(num(rows.length), 8)}`, `${lab("  delivered", 20)}${pad(num(dlv(rows)), 8)}   (${pc(dlv(rows), rows.length)})`, `${lab("  opened", 20)}${pad(num(opn(rows)), 8)}   (${pc(opn(rows), dlv(rows))} of delivered)`, `${lab("  clicked", 20)}${pad(num(clk(rows)), 8)}`, `${lab("  bounced", 20)}${pad(num(bnc(rows)), 8)}   (${pc(bnc(rows), rows.length)})`, `${lab("Replies", 20)}${pad(num(repAll), 8)}   (${pc(repAll, rows.length)})`]);
+    t += `\n<b>━━ 2. LAST 7 DAYS ━━</b>\n\n`;
+    t += pre([WH, wrow("Sent", w1.length, w0.length), wrow("Delivered", dlv(w1), dlv(w0)), wrow("Opened", opn(w1), opn(w0)), wrow("Clicked", clk(w1), clk(w0)), wrow("Bounced", bnc(w1), bnc(w0)), wrow("Replies", rep1, rep0)]);
+    const byC = new Map<string, any[]>(); for (const x of w1) byC.set(x.campaign ?? "–", [...(byC.get(x.campaign ?? "–") ?? []), x]);
+    if (byC.size) t += pre([`${lab("Campaign (this week)", 26)}${pad("sent", 6)}${pad("open", 6)}`, ...[...byC.entries()].map(([k, a]) => `${lab(String(k).slice(0, 25), 26)}${pad(a.length, 6)}${pad(opn(a), 6)}`)]);
+    t += `\n<b>━━ 3. CONCLUSION ━━</b>\n• ${w1.length} e-mails this week (${chg(w1.length, w0.length)}); ${rep1} replies (all time ${repAll}).\n`;
+    if (unknown) t += `• ${unknown} older e-mails have no delivery status yet, so open and click rates are understated.\n`;
+    const recent = rows.filter((x) => x.tr >= now - D7).slice(0, 5);
+    if (recent.length) t += `\n💬 New replies: ` + recent.map((x) => esc(String(x.business_name ?? "–"))).join(", ");
     return Response.json(await send("outreach", t));
   }
 
+  // ───────── PARTNERS ─────────
   if (mode === "partners") {
-    const { data: d } = await sb.from("partner_deals").select("partner,deal_status,amount,currency,invoice_status,paid_at,next_step,last_check_result,last_checked_at");
+    const { data: d } = await sb.from("partner_deals").select("partner,deal_status,amount,currency,invoice_status,paid_at,next_step,last_check_result");
     const deals = d ?? [];
-    const paid = deals.filter((x) => x.paid_at), open = deals.filter((x) => !x.paid_at && x.amount);
-    const sum = (a: any[]) => a.reduce((s, x) => s + Number(x.amount || 0), 0);
-    let t = "<b>💰 Партнёры и счета</b>\n━━━━━━━━━━━━━━━━━━\n";
-    t += `<b>🟢 Оплачено: $${sum(paid)}</b>\n` + paid.sort((a, b) => String(b.paid_at).localeCompare(String(a.paid_at))).map((x) => `<code>${esc(String(x.partner).slice(0, 24)).padEnd(24)} $${x.amount}  ${String(x.paid_at).slice(5)}</code>`).join("\n");
-    t += `\n\n<b>🟡 Ждём оплату: $${sum(open)}</b>` + (open.length ? "\n" + open.map((x) => `• ${esc(String(x.partner))} $${x.amount} (${esc(String(x.invoice_status ?? "—"))})`).join("\n") : "");
+    const paid = deals.filter((x) => x.paid_at).map((x) => ({ ...x, t: Date.parse(x.paid_at + "T12:00:00Z"), a: Number(x.amount || 0) }));
+    const open = deals.filter((x) => !x.paid_at && Number(x.amount) > 0);
+    const offers = deals.filter((x) => !x.paid_at && !Number(x.amount));
+    const sumA = (a: any[]) => a.reduce((s, x) => s + x.a, 0);
+    const p1 = paid.filter((x) => x.t >= now - D7), p0 = paid.filter((x) => x.t >= now - 2 * D7 && x.t < now - D7);
+    const first = paid.length ? paid.map((x) => x.paid_at).sort()[0] : "launch";
+    let t = `<b>💰 PARTNERS · PAID PLACEMENTS</b>\n<i>${esc(today())}</i>\n\n<b>━━ 1. ALL TIME (since ${esc(first)}) ━━</b>\n\n`;
+    t += pre([`${lab("Paid", 22)}${pad("$" + num(sumA(paid)), 8)}   (${paid.length} deals)`, ...paid.sort((a, b) => b.t - a.t).map((x) => `${lab("  " + String(x.partner).slice(0, 20), 22)}${pad("$" + x.a, 8)}   ${String(x.paid_at).slice(5)}`), `${lab("Waiting for payment", 22)}${pad("$" + num(open.reduce((s, x) => s + Number(x.amount), 0)), 8)}   (${open.length})`, `${lab("Upsell offers sent", 22)}${pad(offers.length, 8)}`]);
+    t += `\n<b>━━ 2. LAST 7 DAYS ━━</b>\n\n`;
+    t += pre([WH, wrow("Payments received $", sumA(p1), sumA(p0)), wrow("Deals paid", p1.length, p0.length)]);
+    t += `\n<b>━━ 3. CONCLUSION ━━</b>\n• $${num(sumA(p1))} received this week (${chg(sumA(p1), sumA(p0))}).\n`;
+    const chk = deals.filter((x) => x.last_check_result), bad = chk.filter((x) => String(x.last_check_result).startsWith("FAIL"));
+    t += bad.length ? `• ⚠️ Placement problem: ${bad.map((x) => esc(String(x.partner))).join(", ")}\n` : `• All ${chk.length} placements are live (links checked).\n`;
     const steps = deals.filter((x) => x.next_step && !x.paid_at);
-    if (steps.length) t += "\n\n<b>➡️ Следующие шаги</b>\n" + steps.map((x) => `• ${esc(String(x.partner))}: ${esc(String(x.next_step).slice(0, 90))}`).join("\n");
-    const chk = deals.filter((x) => x.last_check_result);
-    const bad = chk.filter((x) => String(x.last_check_result).startsWith("FAIL"));
-    t += `\n\n<b>✅ Проверка размещений</b>\n` + (bad.length ? `⚠️ Проблемы: ${bad.map((x) => esc(String(x.partner))).join(", ")}` : `Все ${chk.length} размещений на месте.`);
+    if (steps.length) t += "\n<b>Next steps</b>\n" + steps.map((x) => `• ${esc(String(x.partner))}: ${esc(String(x.next_step).slice(0, 90))}`).join("\n");
     return Response.json(await send("partners", t));
   }
 
+  // ───────── RECOMMENDATIONS: social & sales ─────────
+  if (mode === "recs") {
+    const recs: { key: string; pr: number; text: string }[] = [];
+    const todayS = new Date().toISOString().slice(0, 10);
+    const tom = new Date(now + 36 * 3600e3).toISOString();
+    const { data: sched } = await sb.from("social_posts").select("platform").in("status", ["scheduled", "draft"]).gte("scheduled_at", new Date().toISOString()).lte("scheduled_at", tom);
+    const have = new Set((sched ?? []).map((x) => x.platform));
+    const miss = ["facebook", "instagram", "threads"].filter((p) => !have.has(p));
+    if (miss.length) recs.push({ key: `gap:${todayS}`, pr: 3, text: `Next 36 hours have no posts in ${miss.join(", ")}. Add and approve them in CRM → Social.` });
+    const { count: waiting } = await sb.from("contact_submissions").select("id", { count: "exact", head: true }).eq("status", "new").lt("created_at", new Date(now - 24 * 3600e3).toISOString());
+    if (waiting) recs.push({ key: `wait:${todayS}`, pr: 3, text: `${waiting} lead(s) have waited over a day for a reply. Answer them in CRM → Inbox.` });
+    const { data: deals } = await sb.from("partner_deals").select("partner,next_step");
+    for (const d of deals ?? []) { const dt = String(d.next_step ?? "").match(/(\d{4}-\d{2}-\d{2})/)?.[1]; if (dt && dt <= todayS) recs.push({ key: `nudge:${d.partner}:${dt}`, pr: 3, text: `Time to nudge ${d.partner} (${String(d.next_step).slice(0, 80)}).` }); }
+    const in7 = new Date(now + 7 * 864e5).toISOString().slice(0, 10);
+    const { data: ideas } = await sb.from("social_ideas").select("title,source_path,season_tag").eq("status", "new").gte("season_from", todayS).lte("season_from", in7).limit(3);
+    for (const i of ideas ?? []) recs.push({ key: `idea:${i.title}`, pr: 2, text: `Season "${i.season_tag}" starts within a week: use "${String(i.title).slice(0, 80)}" (${i.source_path}).` });
+    const { data: m } = await sb.from("social_metrics").select("platform,views,social_posts(content_type)").gte("collected_date", new Date(now - 14 * 864e5).toISOString().slice(0, 10)).not("views", "is", null);
+    const byType = new Map<string, number[]>(); for (const x of m ?? []) { const k = `${PL[x.platform] ?? x.platform} ${(x as any).social_posts?.content_type ?? ""}`.trim(); byType.set(k, [...(byType.get(k) ?? []), x.views ?? 0]); }
+    const ranked = [...byType.entries()].filter(([, v]) => v.length >= 3).map(([k, v]) => ({ k, a: v.reduce((s, x) => s + x, 0) / v.length, n: v.length })).sort((a, b) => b.a - a.a);
+    if (ranked.length) recs.push({ key: `best:${ranked[0].k}`, pr: 1, text: `Best format over 14 days: ${ranked[0].k}, average ${ranked[0].a.toFixed(0)} views (${ranked[0].n} posts). Make more of it.` });
+    const sent = JSON.parse((await get("recs_sent")) ?? "{}") as Record<string, string>;
+    const fresh = recs.filter((r) => !sent[r.key] || now - Date.parse(sent[r.key]) > 4 * 864e5).sort((a, b) => b.pr - a.pr).slice(0, 6);
+    if (!fresh.length) return Response.json({ skipped: "nothing new" });
+    for (const r of fresh) sent[r.key] = todayS;
+    await sb.from("social_settings").upsert({ key: "recs_sent", value: JSON.stringify(sent) }, { onConflict: "key" });
+    return Response.json(await send("recs", `<b>🎯 WHAT TO DO · SOCIAL & SALES</b>\n<i>${esc(today())}</i>\n\n` + fresh.map((r, i) => `${i + 1}. ${esc(r.text)}`).join("\n")));
+  }
+
+  // ───────── PUBLICATIONS (event digest) ─────────
   if (mode === "publish") {
     const since = new Date(now - 7 * 3600e3).toISOString();
     const { data: ok } = await sb.from("social_posts").select("platform,title,post_url,published_at").eq("status", "published").gte("published_at", since).order("published_at");
     const { data: bad } = await sb.from("social_posts").select("platform,title,error_message").eq("status", "failed").gte("updated_at", since);
     if (!ok?.length && !bad?.length) return Response.json({ skipped: "nothing to report" });
-    let t = "<b>📤 Публикации</b>\n";
+    let t = "<b>📤 Published just now</b>\n";
     for (const p of ok ?? []) t += `✅ ${PL[p.platform] ?? p.platform}: <a href="${p.post_url}">${esc(String(p.title).slice(0, 70))}</a>\n`;
-    if (bad?.length) { t += "\n<b>❌ Ошибки</b>\n"; for (const p of bad) t += `${PL[p.platform] ?? p.platform}: ${esc(String(p.title).slice(0, 60))}: ${esc(String(p.error_message ?? "").slice(0, 120))}\n`; await send("alerts", "🚨 Есть неудачные публикации:\n" + bad.map((p) => `${PL[p.platform] ?? p.platform}: ${esc(String(p.title).slice(0, 60))}`).join("\n")); }
+    if (bad?.length) { t += "\n<b>❌ Errors</b>\n"; for (const p of bad) t += `${PL[p.platform] ?? p.platform}: ${esc(String(p.title).slice(0, 60))}: ${esc(String(p.error_message ?? "").slice(0, 120))}\n`; await send("alerts", "🚨 Failed posts:\n" + bad.map((p) => `${PL[p.platform] ?? p.platform}: ${esc(String(p.title).slice(0, 60))}`).join("\n")); }
     return Response.json(await send("publish", t));
   }
 
+  // ───────── HEALTH (alerts only) ─────────
   if (mode === "health") {
     const problems: string[] = [];
     const mt = Deno.env.get("META_PAGE_TOKEN"), pid = Deno.env.get("FB_PAGE_ID");
     const f = await (await fetch(`${G}/${pid}?fields=id,name,instagram_business_account{username}&access_token=${mt}`)).json();
     if (f.error) problems.push(`Facebook/Instagram: ${f.error.message.replace(/\s+/g, " ").slice(0, 160)}`);
-    else if (!f.instagram_business_account) problems.push("Instagram: страница не видит привязанный аккаунт");
+    else if (!f.instagram_business_account) problems.push("Instagram: the page no longer sees the linked account");
     const tt = (await get("threads_token")) ?? Deno.env.get("THREADS_TOKEN");
     const th = await (await fetch(`https://graph.threads.net/v1.0/me?fields=id,username&access_token=${tt}`)).json();
     if (th.error) problems.push(`Threads: ${String(th.error.message).slice(0, 160)}`);
     if (!problems.length) return Response.json({ ok: true, problems: 0 });
-    return Response.json(await send("alerts", "🚨 <b>Проблема с доступом к соцсетям</b>\n" + problems.map(esc).join("\n") + "\n\nПосты на ближайшее время могут не выйти. Проверьте токены в Meta for Developers."));
+    return Response.json(await send("alerts", "🚨 <b>Social access problem</b>\n" + problems.map(esc).join("\n") + "\n\nPosts may not go out. Check the tokens in Meta for Developers."));
   }
-
-  if (mode === "metrics") {
-    const { data: m } = await sb.from("social_metrics").select("post_id,platform,views,reach,likes,comments,collected_date,social_posts(title,post_url,published_at)").gte("collected_date", new Date(now - 8 * 864e5).toISOString().slice(0, 10)).order("collected_date", { ascending: false }).limit(2000);
-    const latest = new Map<string, any>(); for (const x of m ?? []) if (!latest.has(x.post_id)) latest.set(x.post_id, x);
-    const week = [...latest.values()].filter((x) => x.social_posts?.published_at && Date.parse(x.social_posts.published_at) > now - 7 * 864e5);
-    if (!week.length) return Response.json({ skipped: "no posts this week" });
-    const by: Record<string, { posts: number; views: number; likes: number }> = {};
-    for (const x of week) { const b = (by[x.platform] ??= { posts: 0, views: 0, likes: 0 }); b.posts++; b.views += x.views ?? 0; b.likes += x.likes ?? 0; }
-    let t = "<b>📊 Метрики за неделю</b>\n";
-    for (const [k, v] of Object.entries(by)) t += `${PL[k] ?? k}: ${v.posts} постов, ${n(v.views)} просмотров, ${n(v.likes)} лайков\n`;
-    t += "\n<b>Лучшие посты</b>\n";
-    for (const x of week.sort((a, b) => (b.views ?? 0) - (a.views ?? 0)).slice(0, 5)) t += `${PL[x.platform] ?? x.platform} ${n(x.views)} 👁 ${n(x.likes)} ♥ <a href="${x.social_posts.post_url}">${esc(String(x.social_posts.title).slice(0, 55))}</a>\n`;
-    return Response.json(await send("metrics", t));
-  }
-
-  if (mode === "traffic") {
-    const { data: u } = await sb.from("social_utm_daily").select("source,medium,campaign,sessions,users,engaged_sessions,key_events").gte("day", new Date(now - 7 * 864e5).toISOString().slice(0, 10));
-    if (!u?.length) return Response.json(await send("traffic", "🌐 <b>Сессии с сайта из соцсетей за 7 дней</b>\nПока нет сессий с UTM (utm_medium=social). Данные приходят из GA4 раз в сутки."));
-    const agg = new Map<string, any>(); for (const x of u) { const k = `${x.source}|${x.campaign}`; const a = agg.get(k) ?? { source: x.source, campaign: x.campaign, s: 0, e: 0, k: 0 }; a.s += x.sessions; a.e += x.engaged_sessions; a.k += x.key_events; agg.set(k, a); }
-    let t = "<b>🌐 Сессии с сайта из соцсетей за 7 дней</b>\n";
-    for (const a of [...agg.values()].sort((x, y) => y.s - x.s).slice(0, 12)) t += `${esc(a.source)} / ${esc(a.campaign || "—")}: ${a.s} сессий, ${a.e} вовлечённых, ${a.k} целей\n`;
-    return Response.json(await send("traffic", t));
-  }
-  return Response.json({ error: "mode=publish|health|metrics|traffic" }, { status: 400 });
+  return Response.json({ error: "mode=social|outreach|partners|recs|publish|health" }, { status: 400 });
 });
