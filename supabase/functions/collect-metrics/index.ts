@@ -1,6 +1,6 @@
 // Collects per-post metrics for published social_posts (last 30 days) into social_metrics (one row per post per day).
 // Facebook/Instagram: Graph API with META_PAGE_TOKEN. Threads: THREADS token (needs threads_manage_insights).
-// X: X_BEARER_TOKEN (public_metrics). LinkedIn is filled by sync-linkedin (Apify). Telegram has no view counts via Bot API.
+// X: X_BEARER_TOKEN (public_metrics). LinkedIn is filled by sync-linkedin (Apify). Telegram views come from the public preview https://t.me/s/<channel> (Bot API has no view counts).
 // Modes: ?dry=1 (show what would be collected)
 import { createClient } from "npm:@supabase/supabase-js@2";
 
@@ -75,16 +75,38 @@ async function xBatch(ids: string[]): Promise<Record<string, M>> {
   return out;
 }
 
+function kNum(s: string): number { const t = s.trim().toUpperCase(); if (t.endsWith("K")) return Math.round(parseFloat(t) * 1000); if (t.endsWith("M")) return Math.round(parseFloat(t) * 1e6); return parseInt(t.replace(/\D/g, "")) || 0; }
+async function tgViews(minId: number): Promise<Record<string, number>> {
+  const out: Record<string, number> = {};
+  let before = "";
+  for (let page = 0; page < 6; page++) {
+    const html = await (await fetch(`https://t.me/s/datalattepro${before}`)).text();
+    const ids: number[] = [];
+    for (const blk of html.split("tgme_widget_message_wrap").slice(1)) {
+      const id = blk.match(/data-post="[^/]+\/(\d+)"/)?.[1];
+      const v = blk.match(/tgme_widget_message_views">([^<]+)</)?.[1];
+      if (id) { ids.push(+id); if (v) out[id] = kNum(v); }
+    }
+    if (!ids.length) break;
+    const lo = Math.min(...ids);
+    if (lo <= minId) break;
+    before = `?before=${lo}`;
+  }
+  return out;
+}
+
 Deno.serve(async (req) => {
   const dry = new URL(req.url).searchParams.get("dry") === "1";
   const { data: posts, error } = await sb.from("social_posts").select("id,platform,post_id_external")
     .eq("status", "published").not("post_id_external", "is", null).gte("published_at", new Date(Date.now() - 30 * 864e5).toISOString());
   if (error) return Response.json({ error: error.message }, { status: 500 });
-  const list = (posts ?? []).filter((p) => ["facebook", "instagram", "threads", "twitter"].includes(p.platform));
+  const list = (posts ?? []).filter((p) => ["facebook", "instagram", "threads", "twitter", "telegram"].includes(p.platform));
   if (dry) return Response.json({ would_collect: list.length });
 
   const tt = await threadsToken();
   const x = await xBatch(list.filter((p) => p.platform === "twitter").map((p) => p.post_id_external!));
+  const tgIds = list.filter((p) => p.platform === "telegram").map((p) => +p.post_id_external!);
+  const tgv = tgIds.length ? await tgViews(Math.min(...tgIds)) : {};
   let ok = 0, noted = 0;
   for (const p of list) {
     let m: M = {};
@@ -92,6 +114,7 @@ Deno.serve(async (req) => {
       if (p.platform === "facebook") m = await fb(p.post_id_external!);
       else if (p.platform === "instagram") m = await ig(p.post_id_external!);
       else if (p.platform === "threads") m = await threads(p.post_id_external!, tt);
+      else if (p.platform === "telegram") m = tgv[p.post_id_external!] != null ? { views: tgv[p.post_id_external!] } : { note: "not found in public preview" };
       else m = x[p.post_id_external!] ?? { note: "not returned by X" };
     } catch (e) { m = { note: String(e).slice(0, 200) }; }
     const { note, raw, ...cols } = m;
