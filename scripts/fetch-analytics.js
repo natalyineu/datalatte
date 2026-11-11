@@ -446,8 +446,12 @@ async function fetchBing() {
 // Real lead = enquiry that is not system (DMARC etc.) / test / spam / bounced / archived / partnership / newsletter signup.
 const IGNORE = new Set(["system", "test", "spam", "bounced", "archived"]);
 const DONE = new Set(["replied", "call", "won", "lost"]);
+// Automated senders (security codes, SaaS onboarding, newsletters): stored in contact_submissions via hi@ but never a lead.
+const AUTO_DOMAIN = /(facebookmail|mail\.instagram|mail\.threads|instagram\.com|threads\.net|meta\.com|linkedin\.com|rb2b|retention\.com|ahrefs|zendesk|freshworks|freshdesk|google\.com|vercel|supabase|github|apify|stripe|namecheap|zoho|mailchimp|calendly|resend|dodolaunch|vibe-contributors)/i;
+const AUTO_LOCAL = /^(no-?reply|notification|notifications|security|support|billing|news|newsletter|marketing|mailer-daemon|postmaster)/i;
 function classify(r) {
   if (IGNORE.has(r.status)) return "ignore";
+  if (r.form_type === "direct_email" && r.email && (AUTO_DOMAIN.test(r.email.split("@")[1] || "") || AUTO_LOCAL.test(r.email.split("@")[0] || ""))) return "ignore";
   if (r.status === "partnership") return "partner";
   if (r.form_type === "newsletter") return "sub";
   return "lead";
@@ -457,7 +461,7 @@ async function fetchLeads() {
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!key) return null;
   try {
-    const res = await fetch(`${url}/rest/v1/contact_submissions?select=created_at,form_type,status,replied_at&order=created_at.asc&limit=5000`,
+    const res = await fetch(`${url}/rest/v1/contact_submissions?select=created_at,form_type,status,replied_at,email&order=created_at.asc&limit=5000`,
       { headers: { apikey: key, Authorization: `Bearer ${key}` } });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const rows = (await res.json()).map(r => ({ ...r, t: new Date(r.created_at).getTime(), cls: classify(r) }));
