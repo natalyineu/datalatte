@@ -61,7 +61,18 @@ Deno.serve(async (req) => {
 
     const body = new URLSearchParams({ access_token: token });
     let endpoint = "feed";
-    if (p.media_url && p.media_type === "video") {
+    if (Array.isArray(p.media_urls) && p.media_urls.length > 1) {
+      // Multi-photo post: upload each photo unpublished, then attach them to one feed post
+      const ids: string[] = [];
+      try {
+        for (const u of p.media_urls.slice(0, 10)) {
+          const rr = await fetch(`${GRAPH}/${pageId}/photos`, { method: "POST", body: new URLSearchParams({ access_token: token, url: u, published: "false" }) });
+          const oo = await rr.json(); if (!rr.ok) throw new Error(oo.error?.message ?? `photo HTTP ${rr.status}`); ids.push(oo.id);
+        }
+      } catch (e) { await sb.from("social_posts").update({ status: "failed", error_message: String(e).slice(0, 500) }).eq("id", p.id); out.push({ id: p.id, ok: false, error: String(e) }); continue; }
+      body.set("message", p.content);
+      ids.forEach((id, i) => body.set(`attached_media[${i}]`, JSON.stringify({ media_fbid: id })));
+    } else if (p.media_url && p.media_type === "video") {
       endpoint = "videos"; body.set("file_url", p.media_url); body.set("description", p.content);
     } else if (p.media_url) {
       endpoint = "photos"; body.set("url", p.media_url); body.set("caption", p.content);

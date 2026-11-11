@@ -52,13 +52,25 @@ Deno.serve(async (req) => {
     if (q("dry")) { out.push({ id: p.id, title: p.title, dry: true }); continue; }
     await sb.from("social_posts").update({ status: "failed", error_message: "in flight" }).eq("id", p.id);
     try {
-      const body = new URLSearchParams({ access_token: token, text: p.content.slice(0, 500) });
-      if (p.media_url && p.media_type === "video") { body.set("media_type", "VIDEO"); body.set("video_url", p.media_url); }
-      else if (p.media_url) { body.set("media_type", "IMAGE"); body.set("image_url", p.media_url); }
-      else body.set("media_type", "TEXT");
-      const c = await fetch(`${API}/v1.0/${me.id}/threads`, { method: "POST", body });
-      const co = await j(c);
-      if (!c.ok) throw new Error(co.error?.message ?? `HTTP ${c.status}`);
+      let co: any;
+      if (Array.isArray(p.media_urls) && p.media_urls.length > 1) {
+        // Carousel: item containers, then a CAROUSEL container
+        const kids: string[] = [];
+        for (const u of p.media_urls.slice(0, 20)) {
+          const rr = await fetch(`${API}/v1.0/${me.id}/threads`, { method: "POST", body: new URLSearchParams({ access_token: token, media_type: "IMAGE", image_url: u, is_carousel_item: "true" }) });
+          const oo = await j(rr); if (!rr.ok) throw new Error(oo.error?.message ?? `item HTTP ${rr.status}`); kids.push(oo.id);
+        }
+        await new Promise((r) => setTimeout(r, 4000));
+        const c = await fetch(`${API}/v1.0/${me.id}/threads`, { method: "POST", body: new URLSearchParams({ access_token: token, media_type: "CAROUSEL", children: kids.join(","), text: p.content.slice(0, 500) }) });
+        co = await j(c); if (!c.ok) throw new Error(co.error?.message ?? `HTTP ${c.status}`);
+      } else {
+        const body = new URLSearchParams({ access_token: token, text: p.content.slice(0, 500) });
+        if (p.media_url && p.media_type === "video") { body.set("media_type", "VIDEO"); body.set("video_url", p.media_url); }
+        else if (p.media_url) { body.set("media_type", "IMAGE"); body.set("image_url", p.media_url); }
+        else body.set("media_type", "TEXT");
+        const c = await fetch(`${API}/v1.0/${me.id}/threads`, { method: "POST", body });
+        co = await j(c); if (!c.ok) throw new Error(co.error?.message ?? `HTTP ${c.status}`);
+      }
 
       // Wait for container to be ready (videos take longer).
       for (let i = 0; i < 20; i++) {
