@@ -1,0 +1,136 @@
+{
+ "url": "https://docs.slack.dev/ai/slack-mcp-server/",
+ "title": "Overview | Slack Developer Docs",
+ "hash": "c7b5b6cd5c31cbb96ea069a5365df50e74e6292f",
+ "fetchedAt": "2026-11-12",
+ "facts": [
+  {
+   "fact": "The Slack MCP server enforces rate limits per tool or action type, and the same limits apply whether an action runs through an MCP tool or directly through Slack Web API methods.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Whether an action is performed via an MCP tool or directly through Slack Web API methods, the same rate limits apply.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Per the Slack MCP server rate-limit table, the Read files tool is limited to Tier 4, which the page lists as 100+ per minute.",
+   "value": "100+",
+   "unit": "per minute",
+   "as_of": "",
+   "quote": "Read files | [Tier 4: 100+ per minute]",
+   "topic": "rules"
+  },
+  {
+   "fact": "Per the Slack MCP server rate-limit table, the Search emoji tool is limited to Tier 2, which the page lists as 20+ per minute.",
+   "value": "20+",
+   "unit": "per minute",
+   "as_of": "",
+   "quote": "Search emoji | [Tier 2: 20+ per minute]",
+   "topic": "rules"
+  },
+  {
+   "fact": "Per the Slack MCP server rate-limit table, the Search users tool is limited to Tier 2, which the page lists as 20+ per minute.",
+   "value": "20+",
+   "unit": "per minute",
+   "as_of": "",
+   "quote": "Search users | [Tier 2: 20+ per minute]",
+   "topic": "rules"
+  },
+  {
+   "fact": "Per the Slack MCP server rate-limit table, the Search channels tool is limited to Tier 2, which the page lists as 20+ per minute.",
+   "value": "20+",
+   "unit": "per minute",
+   "as_of": "",
+   "quote": "Search channels | [Tier 2: 20+ per minute]",
+   "topic": "rules"
+  },
+  {
+   "fact": "Per the Slack MCP server rate-limit table, the Schedule message tool is limited to Tier 3, which the page lists as 50+ per minute.",
+   "value": "50+",
+   "unit": "per minute",
+   "as_of": "",
+   "quote": "Schedule message | [Tier 3: 50+ per minute]",
+   "topic": "rules"
+  },
+  {
+   "fact": "Per the Slack MCP server rate-limit table, the Read a channel tool is limited to Tier 3, which the page lists as 50+ per minute.",
+   "value": "50+",
+   "unit": "per minute",
+   "as_of": "",
+   "quote": "Read a channel | [Tier 3: 50+ per minute]",
+   "topic": "rules"
+  },
+  {
+   "fact": "Per the Slack MCP server rate-limit table, the Read a thread tool is limited to Tier 3, which the page lists as 50+ per minute.",
+   "value": "50+",
+   "unit": "per minute",
+   "as_of": "",
+   "quote": "Read a thread | [Tier 3: 50+ per minute]",
+   "topic": "rules"
+  },
+  {
+   "fact": "Per the Slack MCP server rate-limit table, the Create conversation/channel tool is limited to Tier 2, which the page lists as 20+ per minute.",
+   "value": "20+",
+   "unit": "per minute",
+   "as_of": "",
+   "quote": "Create conversation/channel | [Tier 2: 20+ per minute]",
+   "topic": "rules"
+  },
+  {
+   "fact": "Per the Slack MCP server rate-limit table, the Add reactions tool is limited to Tier 3, which the page lists as 50+ per minute.",
+   "value": "50+",
+   "unit": "per minute",
+   "as_of": "",
+   "quote": "Add reactions | [Tier 3: 50+ per minute]",
+   "topic": "rules"
+  },
+  {
+   "fact": "Per the Slack MCP server rate-limit table, the Get reactions tool is limited to Tier 3, which the page lists as 50+ per minute.",
+   "value": "50+",
+   "unit": "per minute",
+   "as_of": "",
+   "quote": "Get reactions | [Tier 3: 50+ per minute]",
+   "topic": "rules"
+  },
+  {
+   "fact": "Per the Slack MCP server rate-limit table, the Create a canvas tool is limited to Tier 2, which the page lists as 20+ per minute.",
+   "value": "20+",
+   "unit": "per minute",
+   "as_of": "",
+   "quote": "Create a canvas | [Tier 2: 20+ per minute]",
+   "topic": "rules"
+  },
+  {
+   "fact": "Per the Slack MCP server rate-limit table, the Update a canvas tool is limited to Tier 3, which the page lists as 50+ per minute.",
+   "value": "50+",
+   "unit": "per minute",
+   "as_of": "",
+   "quote": "Update a canvas | [Tier 3: 50+ per minute]",
+   "topic": "rules"
+  },
+  {
+   "fact": "For the Slack MCP server's Search messages & files tool, the page states that special rate limits apply and refers readers to the method page rather than giving a fixed number.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Search messages & files | Special rate limits apply; consult [method page documentation]",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Slack MCP server's file upload is a two-step process, and the uploaded file is not visible until the second step completes.",
+   "value": "2",
+   "unit": "steps",
+   "as_of": "",
+   "quote": "Upload files — upload files to Slack via a two-step process. The file isn't visible until the second step completes.",
+   "topic": "definition"
+  },
+  {
+   "fact": "According to the Slack MCP server overview, archived channels are included by default when listing user channels.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Archived channels are included by default.",
+   "topic": "rules"
+  }
+ ]
+}

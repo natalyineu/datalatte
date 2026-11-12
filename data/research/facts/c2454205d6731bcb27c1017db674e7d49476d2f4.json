@@ -1,0 +1,104 @@
+{
+ "url": "https://supabase.com/docs/guides/auth/oauth-server/mcp-authentication",
+ "title": "Model Context Protocol (MCP) Authentication | Supabase Docs",
+ "hash": "ae5741d8b6033a7bb9ace505df3dfbbbe1c4b950",
+ "fetchedAt": "2026-11-12",
+ "facts": [
+  {
+   "fact": "The MCP authentication page was last updated on Oct 23, 2026.",
+   "value": "Oct 23, 2026",
+   "unit": "date",
+   "as_of": "Oct 23, 2026",
+   "quote": "Updated Oct 23, 2026",
+   "topic": "other"
+  },
+  {
+   "fact": "The Model Context Protocol (MCP) is described as an open standard for connecting AI agents and LLM tools to data sources and services.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "The Model Context Protocol (MCP) is an open standard for connecting AI agents and LLM tools to data sources and services.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Supabase states that its Auth server provides standards-compliant OAuth 2.1 with PKCE, which MCP clients expect.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Standards-compliant OAuth 2.1 - Full implementation with PKCE that MCP clients expect",
+   "topic": "definition"
+  },
+  {
+   "fact": "Supabase states that existing Row Level Security policies automatically apply to MCP clients.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Row Level Security - Your existing RLS policies automatically apply to MCP clients",
+   "topic": "rules"
+  },
+  {
+   "fact": "Supabase states that refresh token rotation and token expiration are handled automatically by Supabase.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Automatic refresh token rotation and expiration handled by Supabase",
+   "topic": "rules"
+  },
+  {
+   "fact": "The MCP server is configured to use the Supabase Auth server at https://<project-ref>.supabase.co/auth/v1, where <project-ref> is the project reference ID from the dashboard.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "https://<project-ref>.supabase.co/auth/v1",
+   "topic": "definition"
+  },
+  {
+   "fact": "MCP clients discover the OAuth configuration from the endpoint https://<project-ref>.supabase.co/.well-known/oauth-authorization-server/auth/v1.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "https://<project-ref>.supabase.co/.well-known/oauth-authorization-server/auth/v1",
+   "topic": "definition"
+  },
+  {
+   "fact": "Dynamic client registration is optional and is enabled in the Authentication > OAuth Server section of the Supabase dashboard.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Enable this in **Authentication** > **OAuth Server** in your Supabase dashboard",
+   "topic": "rules"
+  },
+  {
+   "fact": "Setting up MCP authentication requires enabling the OAuth 2.1 server in the Supabase project and building an authorization UI.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Before setting up MCP authentication:",
+   "topic": "rules"
+  },
+  {
+   "fact": "The @supabase/server package's withSupabase({ auth: 'user' }) verifies the token and gives MCP tools a client scoped to the signed-in user.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "`withSupabase({ auth: 'user' })` verifies the token and gives your tools a client scoped to that user",
+   "topic": "definition"
+  },
+  {
+   "fact": "Supabase states that the @supabase/server package handles the OAuth plumbing on Supabase Edge Functions or any runtime with a fetch-style handler.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "does the OAuth plumbing for you",
+   "topic": "definition"
+  },
+  {
+   "fact": "Supabase's guidance requires explicit user approval for MCP clients, including showing the client name, requested scopes, a deny option, and later revocation.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Always require explicit user approval for MCP clients:",
+   "topic": "rules"
+  }
+ ]
+}

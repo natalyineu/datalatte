@@ -1,0 +1,136 @@
+{
+ "url": "https://developers.google.com/workspace/sheets/api/guides/configure-mcp-server",
+ "title": "Configure the Sheets MCP server  |  Google Sheets  |  Google for Developers",
+ "hash": "415ab8516a549f6ca6caef67d46538fb588a25c5",
+ "fetchedAt": "2026-11-12",
+ "facts": [
+  {
+   "fact": "The Google Sheets MCP server is labeled as a Developer Preview feature, available through the Google Workspace Developer Preview Program, which grants early access to certain features.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "which grants early access to certain features",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google Sheets offers a remote Model Context Protocol (MCP) server that lets AI agents interact with Google Sheets data, and the page names Google Antigravity and Claude as example AI applications that can use it.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Google Sheets offers a remote [Model Context Protocol (MCP)] server that allows AI agents to securely interact with Google Sheets data.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The Google Sheets MCP server uses OAuth 2.0 for authentication and authorization.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "The Google Sheets MCP server uses OAuth 2.0 for authentication and authorization.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Per the page, the Google Sheets MCP server lets AI agents read cell values, sheet names, grid properties, and other spreadsheet metadata.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Retrieve cell values, sheet names, grid properties, and other spreadsheet metadata.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Per the page, the Google Sheets MCP server lets AI agents update cell values, set formulas, insert rows/columns, and execute spreadsheet structural batch updates.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Update cell values, set formulas, insert rows/columns, and execute spreadsheet structural batch updates.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The page states that the Google Sheets MCP server inherits the same permissions and data governance controls as the user.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Inherit the same permissions and data governance controls as the user.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Google Sheets API (sheets.googleapis.com) must be enabled in the Google Cloud project before using the Sheets MCP server.",
+   "value": "sheets.googleapis.com",
+   "unit": "",
+   "as_of": "",
+   "quote": "you must enable the following API in your Google Cloud project: Google Sheets API",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Google Sheets MCP API (sheetsmcp.googleapis.com) must be enabled in the Google Cloud project to enable the MCP components for Google Sheets.",
+   "value": "sheetsmcp.googleapis.com",
+   "unit": "",
+   "as_of": "",
+   "quote": "you must enable the following service in your Google Cloud project: Google Sheets MCP API",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page instructs that the OAuth consent screen app name be set to 'Sheets MCP Server'.",
+   "value": "Sheets MCP Server",
+   "unit": "",
+   "as_of": "",
+   "quote": "type `Sheets MCP Server`.",
+   "topic": "rules"
+  },
+  {
+   "fact": "When configuring the OAuth consent screen, the page says to select the user type 'Internal' and to select 'External' only if Internal cannot be selected.",
+   "value": "Internal",
+   "unit": "",
+   "as_of": "",
+   "quote": "Under **Audience**, select **Internal**. If you can't select **Internal**, select **External**.",
+   "topic": "rules"
+  },
+  {
+   "fact": "If the OAuth consent screen user type is External, the page requires adding test users in the Audience settings.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "If you selected **External** for user type, add test users",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page lists four OAuth scopes to add for the Google Sheets MCP server: drive.readonly, drive.file, spreadsheets.readonly, and spreadsheets.",
+   "value": "4",
+   "unit": "scopes",
+   "as_of": "",
+   "quote": "paste the scopes for the Google Sheets MCP server",
+   "topic": "rules"
+  },
+  {
+   "fact": "The scope https://www.googleapis.com/auth/spreadsheets.readonly is one of the four scopes listed for the Google Sheets MCP server.",
+   "value": "https://www.googleapis.com/auth/spreadsheets.readonly",
+   "unit": "",
+   "as_of": "",
+   "quote": "`https://www.googleapis.com/auth/spreadsheets.readonly`",
+   "topic": "rules"
+  },
+  {
+   "fact": "The scope https://www.googleapis.com/auth/spreadsheets is one of the four scopes listed for the Google Sheets MCP server.",
+   "value": "https://www.googleapis.com/auth/spreadsheets",
+   "unit": "",
+   "as_of": "",
+   "quote": "`https://www.googleapis.com/auth/spreadsheets`",
+   "topic": "rules"
+  },
+  {
+   "fact": "User-delegated OAuth 2.0 client IDs that call the Sheets MCP server must have 'Use this client for an AI-powered agent' selected in Google Auth Platform > Clients.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "must have **Use this client for an AI-powered agent** selected in **Google Auth Platform** \\> **Clients**",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page requires a Google Cloud project to be used for the setup.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "A Google Cloud project. To create a project, see [Create a project]",
+   "topic": "rules"
+  }
+ ]
+}

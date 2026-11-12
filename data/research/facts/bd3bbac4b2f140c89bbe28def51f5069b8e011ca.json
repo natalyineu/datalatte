@@ -1,0 +1,72 @@
+{
+ "url": "https://procedure.tech/blogs/notion-mcp-guide-connect-notion-to-ai-agents/",
+ "title": "The Complete Guide to Notion MCP: Connect Your Notion Workspace to AI Agents | Procedure Blog",
+ "hash": "dc5b6b4ae4a1225d6d549c39704b99eee377270f",
+ "fetchedAt": "2026-11-12",
+ "facts": [
+  {
+   "fact": "The Notion MCP guide was published on January 23, 2026, and the page lists a reading time of 9 minutes.",
+   "value": "2026-01-23",
+   "unit": "date",
+   "as_of": "2026-01-23",
+   "quote": "January 23, 20269 min read",
+   "topic": "other"
+  },
+  {
+   "fact": "The page lists Node.js version 20 as a prerequisite for the Notion MCP server, with the latest LTS release recommended.",
+   "value": "20",
+   "unit": "Node.js major version",
+   "as_of": "",
+   "quote": "Node.js^20 (latest LTS recommended)",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page's example .env configuration sets the Notion-Version header to 2022-06-28.",
+   "value": "2022-06-28",
+   "unit": "API version string",
+   "as_of": "",
+   "quote": "\\\"Notion-Version\\\": \\\"2022-06-28\\\"",
+   "topic": "rules"
+  },
+  {
+   "fact": "In the page's example, the Notion MCP server started with HTTP transport on port 8000 is reachable at http://localhost:8000/mcp.",
+   "value": "8000",
+   "unit": "port number",
+   "as_of": "",
+   "quote": "This starts the Notion MCP server at:",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page lists seven example tool operations that the open-source Notion MCP server exposes.",
+   "value": "7",
+   "unit": "example tools",
+   "as_of": "",
+   "quote": "The server comes feature-rich out of the box and supports the most common operations you’d need for general-purpose work.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The page states that the open-source Notion MCP server used in the guide is maintained by Notion.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "For this example, we’ll use the [**open-source Notion MCP server**]",
+   "topic": "definition"
+  },
+  {
+   "fact": "The tool API-post-search is described on the page as searching for a page by title.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "`API-post-search` → Search for a page by title.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The page states that many MCP servers run over stdio transport by default, and the guide's setup uses HTTP transport instead.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "By default, many MCP servers run on **stdio** transport for tools like Cursor or Claude.",
+   "topic": "definition"
+  }
+ ]
+}

@@ -1,3 +1,4 @@
+import PaymentBadges from "../PaymentBadges";
 import Link from "next/link";
 import { Mail, MapPin, MessageCircle } from "lucide-react";
 import CopyEmail from "@/components/advertise/CopyEmail";
@@ -47,7 +48,8 @@ export default function FooterPL() {
             </ul>
           </div>
         </div>
-        <div className="mt-12 pt-6 border-t border-coffee-900 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+        <div className="mt-12"><PaymentBadges label="Bezpieczne płatności" /></div>
+        <div className="pt-6 border-t border-coffee-900 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
           <span>© {new Date().getFullYear()} DataLatte. Wszelkie prawa zastrzeżone.</span>
           <span className="flex gap-4">
             <Link href="/pl/polityka-prywatnosci" className="hover:text-white">Polityka prywatności</Link>

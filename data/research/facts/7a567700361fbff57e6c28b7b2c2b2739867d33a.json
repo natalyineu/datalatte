@@ -1,0 +1,80 @@
+{
+ "url": "https://developers.notion.com/guides/mcp/get-started-with-mcp",
+ "title": "Connect Notion to your AI assistant with MCP",
+ "hash": "e4f8dcea9e4d23a3cb5f82a62e446285a5d345a4",
+ "fetchedAt": "2026-11-12",
+ "facts": [
+  {
+   "fact": "The remote Notion MCP server URL is https://mcp.notion.com/mcp.",
+   "value": "https://mcp.notion.com/mcp",
+   "unit": "",
+   "as_of": "",
+   "quote": "The remote server URL is `https://mcp.notion.com/mcp`.",
+   "topic": "definition"
+  },
+  {
+   "fact": "In Claude Code, the default scope for the Notion MCP server (--scope local) makes it available only to the user in the current project.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "`--scope local` (default): Available only to you in the current project",
+   "topic": "rules"
+  },
+  {
+   "fact": "In Claude Code, the --scope project option shares the Notion MCP server with a team via a .mcp.json file.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "`--scope project`: Shared with your team via `.mcp.json` file",
+   "topic": "rules"
+  },
+  {
+   "fact": "Codex stores the Notion MCP server configuration in ~/.codex/config.toml.",
+   "value": "~/.codex/config.toml",
+   "unit": "",
+   "as_of": "",
+   "quote": "Add the Notion server to your Codex configuration at `~/.codex/config.toml`:",
+   "topic": "rules"
+  },
+  {
+   "fact": "For a shared team setup, Codex can use a project-level .codex/config.toml file in the project root with the same Notion server configuration.",
+   "value": ".codex/config.toml",
+   "unit": "",
+   "as_of": "",
+   "quote": "create a `.codex/config.toml` file in your project root with the same server configuration.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Cursor reads a project-level Notion MCP configuration from .cursor/mcp.json in the project root.",
+   "value": ".cursor/mcp.json",
+   "unit": "",
+   "as_of": "",
+   "quote": "Create a `.cursor/mcp.json` file in your project root:",
+   "topic": "rules"
+  },
+  {
+   "fact": "Cursor's global Notion MCP configuration is stored in ~/.cursor/mcp.json.",
+   "value": "~/.cursor/mcp.json",
+   "unit": "",
+   "as_of": "",
+   "quote": "add the same server configuration to `~/.cursor/mcp.json`:",
+   "topic": "rules"
+  },
+  {
+   "fact": "The fx CLI coding agent stores its Notion MCP configuration in ~/.fx/mcp.json.",
+   "value": "~/.fx/mcp.json",
+   "unit": "",
+   "as_of": "",
+   "quote": "Add Notion MCP to `~/.fx/mcp.json`:",
+   "topic": "rules"
+  },
+  {
+   "fact": "Notion's own MCP connection directory is reached in Notion under Settings → Notion MCP.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "You can also browse available connections in Notion under **Settings** → **Notion MCP**.",
+   "topic": "other"
+  }
+ ]
+}

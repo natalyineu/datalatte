@@ -1,0 +1,96 @@
+{
+ "url": "https://supabase.com/docs/guides/ai-tools/mcp",
+ "title": "Supabase MCP Server | Supabase Docs",
+ "hash": "c829d703b9e01089aea431dbbed811f6eebab0ad",
+ "fetchedAt": "2026-11-12",
+ "facts": [
+  {
+   "fact": "The Supabase MCP server documentation page was last updated on November 11, 2026.",
+   "value": "Nov 11, 2026",
+   "unit": "date",
+   "as_of": "Nov 11, 2026",
+   "quote": "Updated Nov 11, 2026",
+   "topic": "other"
+  },
+  {
+   "fact": "Tool feature groups that the connection supports are enabled by default, except the Storage group.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Groups that your connection supports are enabled by default, except Storage.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Storage feature group of the Supabase MCP server is disabled by default.",
+   "value": "disabled",
+   "unit": "",
+   "as_of": "",
+   "quote": "Storage (disabled by default)",
+   "topic": "rules"
+  },
+  {
+   "fact": "The run_notebook tool can run up to 50 query cells in a notebook, or only selected cells.",
+   "value": "50",
+   "unit": "query cells",
+   "as_of": "",
+   "quote": "Run up to 50 query cells in a notebook, or only selected cells",
+   "topic": "rules"
+  },
+  {
+   "fact": "If no project is selected when scoping the Supabase MCP server, all projects are accessible through it.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "If no project is selected, all projects will be accessible.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Feedback tools are disabled when the MCP server runs in read-only mode (the read_only parameter).",
+   "value": "disabled",
+   "unit": "",
+   "as_of": "",
+   "quote": "Disabled in read-only mode (`read_only` parameter).",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Branching tool group of the Supabase MCP server is labeled experimental.",
+   "value": "experimental",
+   "unit": "",
+   "as_of": "",
+   "quote": "Branching (experimental)",
+   "topic": "rules"
+  },
+  {
+   "fact": "The default MCP server URL enables the feature groups docs, account, database, debugging, development, functions, branching, feedback, and notebooks.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "https://mcp.supabase.com/mcp?features=docs%2Caccount%2Cdatabase%2Cdebugging%2Cdevelopment%2Cfunctions%2Cbranching%2Cfeedback%2Cnotebooks",
+   "topic": "definition"
+  },
+  {
+   "fact": "Account cost tools get_cost and confirm_cost apply to tools that use the legacy cost confirmation workflow.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Cost information for tools that use the [legacy cost confirmation workflow]",
+   "topic": "definition"
+  },
+  {
+   "fact": "The submit_feedback tool returns a token, which is then used with delete_feedback to delete that feedback.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Delete feedback using the token returned by `submit_feedback`",
+   "topic": "definition"
+  },
+  {
+   "fact": "During sign-in for the MCP client, the user should choose the organization that contains the project they want to work with.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Be sure to choose the organization that contains the project you wish to work with.",
+   "topic": "rules"
+  }
+ ]
+}

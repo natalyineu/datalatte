@@ -1,0 +1,128 @@
+{
+ "url": "https://openrouter.ai/docs/api_reference/overview",
+ "title": "OpenRouter API Reference - Complete Documentation",
+ "hash": "496d7762e4155928d5e9dbfb28184d0bb73369d1",
+ "fetchedAt": "2026-11-12",
+ "facts": [
+  {
+   "fact": "OpenRouter's Chat Completions request endpoint is POST /api/v1/chat/completions.",
+   "value": "POST /api/v1/chat/completions",
+   "unit": "",
+   "as_of": "",
+   "quote": "the Chat Completions API (`POST /api/v1/chat/completions`)",
+   "topic": "definition"
+  },
+  {
+   "fact": "The OpenRouter API's temperature parameter accepts values in the range [0, 2].",
+   "value": "[0, 2]",
+   "unit": "range",
+   "as_of": "",
+   "quote": "temperature?: number; // Range: [0, 2]",
+   "topic": "rules"
+  },
+  {
+   "fact": "The OpenRouter API's top_p parameter accepts values in the range (0, 1].",
+   "value": "(0, 1]",
+   "unit": "range",
+   "as_of": "",
+   "quote": "top_p?: number; // Range: (0, 1]",
+   "topic": "rules"
+  },
+  {
+   "fact": "The OpenRouter API's frequency_penalty parameter accepts values in the range [-2, 2].",
+   "value": "[-2, 2]",
+   "unit": "range",
+   "as_of": "",
+   "quote": "frequency_penalty?: number; // Range: [-2, 2]",
+   "topic": "rules"
+  },
+  {
+   "fact": "The OpenRouter API's presence_penalty parameter accepts values in the range [-2, 2].",
+   "value": "[-2, 2]",
+   "unit": "range",
+   "as_of": "",
+   "quote": "presence_penalty?: number; // Range: [-2, 2]",
+   "topic": "rules"
+  },
+  {
+   "fact": "The OpenRouter API's repetition_penalty parameter accepts values in the range (0, 2].",
+   "value": "(0, 2]",
+   "unit": "range",
+   "as_of": "",
+   "quote": "repetition_penalty?: number; // Range: (0, 2]",
+   "topic": "rules"
+  },
+  {
+   "fact": "The OpenRouter API's min_p parameter accepts values in the range [0, 1].",
+   "value": "[0, 1]",
+   "unit": "range",
+   "as_of": "",
+   "quote": "min_p?: number; // Range: [0, 1]",
+   "topic": "rules"
+  },
+  {
+   "fact": "The OpenRouter API's top_k parameter accepts values in the range [1, Infinity) and is not available for OpenAI models.",
+   "value": "[1, Infinity)",
+   "unit": "range",
+   "as_of": "",
+   "quote": "top_k?: number; // Range: [1, Infinity) Not available for OpenAI models",
+   "topic": "rules"
+  },
+  {
+   "fact": "The OpenRouter API's max_tokens parameter has a range of [1, context_length).",
+   "value": "[1, context_length)",
+   "unit": "range",
+   "as_of": "",
+   "quote": "max_tokens?: number; // Range: [1, context_length)",
+   "topic": "rules"
+  },
+  {
+   "fact": "The OpenRouter API's top_logprobs parameter accepts integers only.",
+   "value": "integer only",
+   "unit": "",
+   "as_of": "",
+   "quote": "top_logprobs: number; // Integer only",
+   "topic": "rules"
+  },
+  {
+   "fact": "The image_url content part's detail field defaults to \"auto\" when omitted.",
+   "value": "auto",
+   "unit": "",
+   "as_of": "",
+   "quote": "detail?: string; // Optional, defaults to \"auto\"",
+   "topic": "rules"
+  },
+  {
+   "fact": "If the model field is unspecified in an OpenRouter request, the user's default model is used.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "If \"model\" is unspecified, uses the user's default",
+   "topic": "rules"
+  },
+  {
+   "fact": "A Chat Completions request must include either messages or prompt.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Either \"messages\" or \"prompt\" is required",
+   "topic": "rules"
+  },
+  {
+   "fact": "The debug echo_upstream_body option is available for streaming requests only.",
+   "value": "streaming only",
+   "unit": "",
+   "as_of": "",
+   "quote": "// Debug options (streaming only)",
+   "topic": "rules"
+  },
+  {
+   "fact": "OpenRouter's OpenAPI specification is available in YAML at https://openrouter.ai/openapi.yaml.",
+   "value": "https://openrouter.ai/openapi.yaml",
+   "unit": "",
+   "as_of": "",
+   "quote": "**YAML**: [https://openrouter.ai/openapi.yaml](https://openrouter.ai/openapi.yaml)",
+   "topic": "definition"
+  }
+ ]
+}

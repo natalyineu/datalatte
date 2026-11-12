@@ -1,0 +1,104 @@
+{
+ "url": "https://ottermind.ai/mcp/supabase",
+ "title": "Supabase MCP: connect Supabase to an AI agent | ottermind",
+ "hash": "5a20b30457799e9b4cd1d4ed157d3e9d3dc3f125",
+ "fetchedAt": "2026-11-12",
+ "facts": [
+  {
+   "fact": "Supabase MCP is described on the page as Supabase's official Model Context Protocol server for its Postgres-backed platform.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Supabase MCP is Supabase's official Model Context Protocol server for its Postgres-backed platform.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Ottermind states it treats Supabase MCP as a managed connector, with no local process and no config file to maintain.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Ottermind treats it as a managed connector — no local process, no config file to maintain.",
+   "topic": "other"
+  },
+  {
+   "fact": "To connect Supabase, the user finds Supabase in Ottermind's connectors and authorizes it, and Ottermind hosts the connection.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Find Supabase and authorize it. Ottermind hosts the connection.",
+   "topic": "other"
+  },
+  {
+   "fact": "Ottermind's Supabase connector access starts read-only where the provider supports it.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Access starts read-only where the provider supports it, write operations ask for confirmation before running, and you can revoke the connection at any time.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Ottermind states that write operations through the Supabase connection ask for confirmation before running.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Access starts read-only where the provider supports it, write operations ask for confirmation before running, and you can revoke the connection at any time.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Ottermind states that the user can revoke the Supabase connection at any time.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Access starts read-only where the provider supports it, write operations ask for confirmation before running, and you can revoke the connection at any time.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Ottermind says a local Supabase MCP server is only needed if the agent must reach something on the user's own machine, a case the desktop app supports.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "A local server is only needed if you want the agent to reach something on your own machine, which the desktop app supports.",
+   "topic": "other"
+  },
+  {
+   "fact": "Ottermind states it runs on Claude models and speaks MCP.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Ottermind runs on Claude models and speaks MCP",
+   "topic": "other"
+  },
+  {
+   "fact": "With Supabase MCP, the agent can list tables, columns, types and foreign keys before writing a query.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "List tables, columns, types and foreign keys, so a generated query references real objects.",
+   "topic": "definition"
+  },
+  {
+   "fact": "With Supabase MCP, the agent can run SQL against the project and return results as data that can be turned into a table or chart.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Run SQL against the project and get results back as data you can turn into a table or a chart.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Supabase MCP lets the agent draft schema changes and regenerate typed clients from the current schema.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Draft schema changes and regenerate typed clients from the current schema.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Supabase MCP gives the agent access to project logs and project configuration.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Reach logs and project configuration, which is what makes debugging possible in the same conversation.",
+   "topic": "definition"
+  }
+ ]
+}

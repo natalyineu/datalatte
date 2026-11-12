@@ -1,0 +1,128 @@
+{
+ "url": "https://developers.google.com/workspace/sheets/api/reference/mcp",
+ "title": "MCP Reference: sheetsmcp.googleapis.com  |  Google Sheets  |  Google for Developers",
+ "hash": "a1f4f20a259d569ff604c664998b60439b82db19",
+ "fetchedAt": "2026-11-12",
+ "facts": [
+  {
+   "fact": "The Sheets MCP server (sheetsmcp.googleapis.com) is in Developer Preview as part of the Google Workspace Developer Preview Program, which grants early access to certain features.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Available as part of the [Google Workspace Developer Preview Program](https://developers.google.com/workspace/preview), which grants early access to certain features.",
+   "topic": "other"
+  },
+  {
+   "fact": "The page defines an MCP server as a proxy between an external service that provides context, data, or capabilities and a Large Language Model or AI application.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "acts as a proxy between an external service that provides context, data, or capabilities to a Large Language Model (LLM) or AI application.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The get_values tool returns a range of values from a spreadsheet and corresponds to spreadsheets.values.get in the REST API.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Returns a range of values from a spreadsheet.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The get_values tool's range parameter is required and accepts A1 or R1C1 notation, for example \"Sheet1!A1:B10\".",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "The A1 notation or R1C1 notation of the range to retrieve values from",
+   "topic": "rules"
+  },
+  {
+   "fact": "The get_spreadsheet tool's include_grid_data parameter defaults to false.",
+   "value": "false",
+   "unit": "boolean",
+   "as_of": "",
+   "quote": "True if grid data should be returned. Defaults to false.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The get_spreadsheet tool's comments_included parameter defaults to false.",
+   "value": "false",
+   "unit": "boolean",
+   "as_of": "",
+   "quote": "If true, comments will be included in the response. Defaults to false.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The get_spreadsheet tool returns titles, sheet names, grid properties, and other metadata for a given spreadsheet ID, and full grid data if requested.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Returns titles, sheet names, grid properties, and other metadata for the given spreadsheet ID.",
+   "topic": "definition"
+  },
+  {
+   "fact": "If no ranges are specified in get_spreadsheet, the entire spreadsheet is returned.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "If not specified, the entire spreadsheet is returned.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The update_spreadsheet tool applies one or more updates to a spreadsheet and corresponds to spreadsheets.batchUpdate in the REST API.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Applies one or more updates to the spreadsheet.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The update_spreadsheet tool supports an updateSpreadsheetProperties operation for updating the spreadsheet's title, locale, and time zone.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Spreadsheet properties to update",
+   "topic": "definition"
+  },
+  {
+   "fact": "The update_spreadsheet tool's updateDimensionProperties operation updates dimension properties such as row height or column width.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Updates dimensions' properties (e.g. row height or column width).",
+   "topic": "definition"
+  },
+  {
+   "fact": "The update_spreadsheet tool's repeatCell operation repeats a single cell across a range.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Repeats a single cell across a range.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The update_spreadsheet tool's addNamedRange operation adds a named range, and namedRangeId is optional for it.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Adds a named range.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The update_spreadsheet tool's deleteNamedRange operation deletes a named range by its ID.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Deletes a named range by its ID.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The update_spreadsheet tool's addSheet operation adds a sheet to the spreadsheet.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Adds a sheet.",
+   "topic": "definition"
+  }
+ ]
+}

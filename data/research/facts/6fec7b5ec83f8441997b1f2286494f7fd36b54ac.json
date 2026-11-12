@@ -1,0 +1,80 @@
+{
+ "url": "https://mcpservers.org/servers/freema/mcp-gsheets",
+ "title": "Google Sheets MCP Server | Awesome MCP Servers",
+ "hash": "b019b3bd2262c560ea062f4bb5cb9bbd883b1514",
+ "fetchedAt": "2026-11-12",
+ "facts": [
+  {
+   "fact": "The server's GitHub link on the directory page displays the number 105.",
+   "value": "105",
+   "unit": "count",
+   "as_of": "",
+   "quote": "[GitHub\n\n105\n\n](https://github.com/freema/mcp-gsheets)",
+   "topic": "other"
+  },
+  {
+   "fact": "The MCP Google Sheets server requires Node.js version 22 or higher.",
+   "value": "22",
+   "unit": "version (or higher)",
+   "as_of": "",
+   "quote": "[Node.js](https://nodejs.org/) v22 or higher",
+   "topic": "rules"
+  },
+  {
+   "fact": "Setup requires a Google Cloud Project with the Sheets API enabled.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "[Google Cloud Project](https://console.cloud.google.com/) with Sheets API enabled",
+   "topic": "rules"
+  },
+  {
+   "fact": "Setup requires a Google Cloud service account with a JSON key file.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Service Account with JSON key file",
+   "topic": "rules"
+  },
+  {
+   "fact": "Each target spreadsheet must be shared with the service account email, granting it \"Editor\" permissions.",
+   "value": "Editor",
+   "unit": "permission level",
+   "as_of": "",
+   "quote": "Grant \"Editor\" permissions",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends using the mcp-gsheets@latest npm tag so the MCP client always runs the latest server version.",
+   "value": "latest",
+   "unit": "npm tag",
+   "as_of": "",
+   "quote": "Using `mcp-gsheets@latest` ensures that your MCP client will always use the latest version of the MCP Google Sheets server.",
+   "topic": "rules"
+  },
+  {
+   "fact": "When credentials are passed as the GOOGLE_SERVICE_ACCOUNT_KEY JSON string, the entire JSON must be on a single line.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "The entire JSON must be on a single line",
+   "topic": "rules"
+  },
+  {
+   "fact": "If the service account JSON includes a project_id, the GOOGLE_PROJECT_ID variable can be omitted.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "If the JSON includes a `project_id`, you can omit `GOOGLE_PROJECT_ID`",
+   "topic": "rules"
+  },
+  {
+   "fact": "The server is designed to be run from MCP clients such as Claude Code, Claude Desktop, and Cursor.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "directly from your MCP client (e.g., Claude Code, Claude Desktop, Cursor, etc.)",
+   "topic": "definition"
+  }
+ ]
+}
