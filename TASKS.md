@@ -4,6 +4,8 @@
 - Spotify $150 (PayPal …CZVT8EVJ6TSQDK24), Biglinko $50 (…FASQSTWT4WX527JW), Vibe $600 (…MVVN4PWCFS7XXG4Z): mark paid in `partner_deals` when received.
 - GSC: re-check rewritten/reopened articles ~2 weeks after the next deploy.
 - Cafés in Poznań: replies to cold emails (mark `skip` on "nie").
+- Link purchase #1: Collaborator deal 2858455, ranktracker.com, status "New task" (2026-11-12). When published: send the URL, check dofollow + both anchors, then log it in `docs/LINK-PURCHASES.md`. Details and plan there.
+- Link purchase #2 (not ordered yet): Home Business Magazine Mention on PRNEWS.io, $98 (+fee) → ctv-advertising-platforms-compared-2026.
 
 ## Next (one stage at a time)
 - FAQ for ~55 older posts without an FAQ section (sourced from the article text).
