@@ -1,8 +1,8 @@
 ---
 title: "GA4 for Small Business: 6 Settings to Fix First (2026)"
 date: "2026-05-12"
-lastModified: "2026-10-11"
-description: "GA4 for small business: six settings to fix first, from key events to the 14-month retention switch, plus a cost-per-booking worked example."
+lastModified: "2026-11-11"
+description: "GA4 for small business: set your booking conversion first, expect data in 24 to 48 hours, and compare cost per booking with a worked example."
 author: "Nataliia"
 category: "Website & CRO"
 tags: ["google analytics 4", "small business", "local business", "tracking", "insights"]
@@ -10,124 +10,105 @@ slug: "google-analytics-4-for-small-business"
 image: "https://images.unsplash.com/photo-1539803442075-480050e8c1c5?w=800&q=80&auto=format&fit=crop"
 readTime: '8 min read'
 ---
-What should a small business do first in Google Analytics 4 (GA4)? Fix six settings: mark your booking or call action as a key event, switch event data retention to 14 months, exclude your own visits, tag your campaign links, link Google Search Console and read engagement rate instead of old bounce rate.
+What should a small business set up first in GA4? Start by marking the action that earns money, such as a booking, a call tap or a form submission, as a conversion. Google Analytics limits conversion goals to 20 per account, so keep the list short. Allow 24 to 48 hours for data to appear after correct setup, then compare cost per booking by channel rather than traffic alone. Tag every campaign link, check engagement by landing page, and review the figures monthly.
 
-None of this needs a developer. Each setting below is taken from Google's own help pages, and the cost figures in the worked example are labelled assumptions.
-
-This is a checklist for a site that already has GA4 installed. For installation, start with our GA4 setup guide for local business.
+Google Analytics is free, so the real cost is setup time and the habit of checking results ([Slamdot](https://www.slamdot.com/blog/catering-marketing-101-four-google-marketing-tools-you-need-to-master/)).
 
 <StatRow
-  values="14 mo|10 sec|7 days|24-36 hrs"
-  labels="Longest event data retention for standard properties|Session length after which a visit counts as engaged|Window for data-driven attribution to reattribute a conversion|Time a new data filter can take to apply"
-  subs="Choices are 2 or 14 months|Or a key event, or 2 page views|Per Google's attribution help page|Per Google's internal traffic help page"
-  trends="up|neutral|neutral|neutral"
+  values="3|20|24-48 hrs|30 days"
+  labels="Metrics to compare in GA and Google Ads reports|Conversion goals allowed per account|Hours before data appears after correct setup|Days to compare GBP Insights against Yelp"
+  subs="CTR, conversion rate and ROAS, per BoostFloral|Per LivePlan, a limit not a target|Per Salesforce's small business guide|Same period for both, per Keepers Digital"
+  trends="neutral|neutral|neutral|neutral"
 />
 
-## Why Are You Using GA4 and Not Universal Analytics?
+## What Should You Set Up First in GA4?
 
-Universal Analytics no longer exists. Google's help center says standard Universal Analytics properties stopped processing new data on July 1, 2023, and that access to the interface and API ended on July 1, 2024 ([Google Analytics Help: Google Analytics 4 has replaced Universal Analytics](https://support.google.com/analytics/answer/9973999)). If you still open an old dashboard, you are reading history, not current performance.
+Six settings matter most for a local site. Work through them in order, and check each one against your own property, because menu labels change and the platform's live help page is the reference.
 
-GA4 counts activity as events, not sessions and pageviews alone. That is why the first job is telling GA4 which event is the one that pays: a booking, a call tap, a form submission.
+1. Confirm the tag is reporting. Data can take 24 to 48 hours to appear after correct setup ([Salesforce](https://www.salesforce.com/ca/small-business/marketing/smb-marketing-guide/?bc=OTH)).
+2. Choose one primary conversion: the booking, the call tap or the form. Add others only when you will act on them.
+3. Stay within the limit of 20 conversion goals per account ([LivePlan](https://www.liveplan.com/blog/starting/track-marketing-return-on-investment?srsltid=AYCX9vJq8fma11GMaPD4YN3YLfAa8k1pwzVHyWBYHsxn5Tqiu_np7zmZ)).
+4. Tag paid campaign links. Under the UTM medium parameter, Google Analytics automatically classifies CPM and CPC visitors as paid traffic ([LivePlan](https://www.liveplan.com/blog/starting/track-marketing-return-on-investment?srsltid=AYCX9vJq8fma11GMaPD4YN3YLfAa8k1pwzVHyWBYHsxn5Tqiu_np7zmZ)).
+5. Set aside staff and test visits using the internal traffic option described on the live help page before you rely on the numbers.
+6. Connect your ad and search accounts so landing-page data from both sits in one report. Check the roles and permissions required on the live help page first.
 
-## What Is a Key Event and Which One Should You Pick?
+Treat this list as an order of work, not a finished audit. The first two items need the most care, because everything after depends on a conversion that records correctly.
 
-Google defines a key event as "an event that measures an action that's particularly important to the success of your business", and says any collected event can become one ([Google Analytics Help: Key events](https://support.google.com/analytics/answer/9267568)). You can also create a Google Ads conversion from a key event, which Google says reduces discrepancies between Google Ads and Analytics.
+## Why Do Conversions Need to Exist Before You Spend?
 
-Pick the action closest to revenue:
+Goals in Google Analytics do not let you look at historical data. They only start recording conversions once you set them up ([LivePlan](https://www.liveplan.com/blog/starting/track-marketing-return-on-investment?srsltid=AYCX9vJq8fma11GMaPD4YN3YLfAa8k1pwzVHyWBYHsxn5Tqiu_np7zmZ)). A campaign launched with no conversion defined leaves a gap you cannot fill later, so the conversion comes first, then the budget.
 
-| Business | Best key event | Why |
-| --- | --- | --- |
-| Salon or groomer | Booking completed | A booking is revenue |
-| Coffee shop | Tap on directions or phone | Footfall is the goal |
-| Fitness studio | Trial or class booked | The first visit is the sale |
-| Any service business | Quote form submitted | Starts a sales conversation |
+Setup also needs time before results appear. Salesforce's small business guide says data should take 24 to 48 hours to appear after tracking is set up correctly ([Salesforce](https://www.salesforce.com/ca/small-business/marketing/smb-marketing-guide/?bc=OTH)). Check the reports after two days, not two hours, before deciding that tracking is broken.
 
-Mark one primary key event first. Add more only when you will act on them. Our hair salon GA4 guide shows four events in detail, and the Tag Manager guide covers building tap events without code.
+For a wider view of how tracking fits with other data, read the [local business analytics and tracking guide](/blog/local-business-analytics-and-tracking).
 
-## Should You Change Data Retention?
+## How Does Google Analytics Credit a Booking?
 
-Yes, if your property is still on the shorter setting. Standard properties can keep event data for 2 months or 14 months. Google says the setting only affects explorations and funnel reports, not standard aggregated reports ([Google Analytics Help: Data retention](https://support.google.com/analytics/answer/7667196)).
+Google Analytics assigns a sign-up to the last campaign that brought the user to the website, according to LivePlan ([LivePlan](https://www.liveplan.com/blog/starting/track-marketing-return-on-investment?srsltid=AYCX9vJq8fma11GMaPD4YN3YLfAa8k1pwzVHyWBYHsxn5Tqiu_np7zmZ)). That rule favours the final click. A customer who found you through a local listing, then saw an ad, then booked may show the ad alone.
 
-Why this matters to a small business: an exploration showing how visitors reached a booking page becomes useless if it can only look back 2 months. Seasonal businesses such as coffee shops and gyms need to compare this January with last January. Find the setting in Admin, under your property's data settings. The page does not state which setting is the default, so check your property rather than assuming.
+For a small budget, do not switch off a channel because it looks weak on last-click credit alone. Compare channels over the same period, and check whether bookings fall when a channel is paused. For a head-to-head view of two paid channels, see [Google Ads vs Facebook Ads for local business](/blog/google-ads-vs-facebook-ads-local-business-which-wins).
 
-## How Do You Stop Counting Your Own Visits?
+## Which Figures Should You Compare Each Month?
 
-Your staff, you and your agency can inflate traffic. Google's method is two steps: define internal traffic by IP address under the web data stream's tag settings, then create a data filter that excludes events with that traffic type ([Google Analytics Help: Internal traffic](https://support.google.com/analytics/answer/10104470)).
+BoostFloral recommends tracking click-through rate, conversion rate and return on ad spend in both Google Analytics and Google Ads reports ([BoostFloral](https://www.boostfloral.com/blogs/using-google-ads-to-market-your-flower-shop-website)). Those three show whether people click, whether clicks become bookings, and whether spend pays back.
 
-Know these limits before you start:
+Indelible Think advises checking Google Analytics, Google Search Console and Google Business Insights once a month so you notice patterns ([Indelible Think](https://indeliblethink.co.uk/how-liverpool-businesses-can-improve-seo/)). For a business that relies on listings, Keepers Digital suggests pulling GBP Insights and Yelp analytics for the same 30-day period before comparing them ([Keepers Digital](https://keepersdigital.com/en-ca/resources/local-search/yelp-vs-google-business-profile/)).
 
-- Start the filter in **Testing** state. It tags matching data so you can check it in Explore without deleting anything.
-- Switching to **Active** is permanent. Google says excluded data is never processed.
-- A filter can take 24 to 36 hours to take effect.
-- It works for website traffic only, and you need the Editor role.
-- A property can have up to 10 data filters.
+Outside data can help with local targeting. Geotargetly names Google Analytics with location-based goals, Meta Local Insights, Foursquare and GroundTruth as sources of local behavior data ([Geotargetly](https://geotargetly.com/blog/what-is-hyperlocal-marketing)).
 
-A shop on a shared or changing IP address may find this unreliable. In that case, ask staff to use a separate browser profile for checks.
+## Worked Example: Which Channel Gets the Next Budget?
 
-## Which Attribution Model Should You Use?
+All inputs below are assumptions for a hypothetical coffee shop. None of them is a platform or survey figure.
 
-Google lists three models for Analytics properties: data-driven attribution, paid and organic last click, and Google paid channels last click. Data-driven uses your account's data to estimate each click's contribution, and conversions can be reattributed for up to 7 days after they occur. Paid and organic last click ignores direct traffic and gives 100% of the credit to the last channel clicked ([Google Analytics Help: Attribution models](https://support.google.com/analytics/answer/10596866)).
-
-For a small site with few conversions, the practical advice is simple. Do not cancel a channel because it shows few last-click bookings. Check how that channel appears earlier in the path before deciding. Google's page does not say which model is the default for key events, so look at your attribution settings.
-
-## What Do Engagement Rate and Bounce Rate Mean Now?
-
-GA4 redefined both. Engagement rate is the percentage of engaged sessions. Bounce rate is the percentage of sessions that were not engaged. A session counts as engaged if it lasts longer than 10 seconds, has a key event or has 2 or more page views ([Google Analytics Help: Engagement rate and bounce rate](https://support.google.com/analytics/answer/12195621)).
-
-That gives you a clean test for a local site. A visitor who opens your menu page, reads for 15 seconds and leaves counts as engaged. A visitor who lands and leaves in 5 seconds does not. Compare engagement rate by landing page: a low rate on your booking page, with healthy traffic, is a page problem, not a traffic problem.
-
-## Worked Example: Which Channel Deserves the Next 100 Dollars?
-
-All numbers are **assumptions** for illustration.
-
-| | Instagram ads | Google Ads | Newsletter |
+| Assumption or result | Instagram ads | Google Ads | Newsletter |
 | --- | --- | --- | --- |
-| Monthly spend | $300 | $300 | $20 |
-| Sessions | 900 | 400 | 120 |
-| Primary key events (bookings) | 6 | 12 | 5 |
-| Cost per booking | $50 | $25 | $4 |
-| Key event rate | 0.7% | 3.0% | 4.2% |
+| Monthly spend (assumption) | $300 | $300 | $20 |
+| Sessions (assumption) | 900 | 400 | 120 |
+| Bookings (assumption) | 6 | 12 | 5 |
+| Cost per booking (calculated) | $50 | $25 | $4 |
+| Booking rate (calculated) | 0.7% | 3.0% | 4.2% |
 
-How to read it: Instagram brings the most visitors and the fewest bookings per dollar. The newsletter is cheapest per booking but small, so it cannot absorb the next 100 dollars. Google Ads would be the first place to test more budget, then watch whether cost per booking holds.
+Cost per booking is spend divided by bookings. Booking rate is bookings divided by sessions.
 
-This only works if links are tagged. See our guide to [UTM parameters](/blog/utm-parameters-track-every-marketing-campaign). Untagged social links often land in direct traffic, which hides the true source.
+Instagram brings the most visitors but costs $50 per booking in this example. The newsletter is cheapest per booking, but five bookings cannot absorb a larger budget on their own. Google Ads is the most sensible place to test more spend. If cost per booking held at $25 (assumption), an extra $100 would produce about four more bookings. Check whether that holds as spend rises, because costs often change at higher budgets.
 
-## What Should You Link and Check Weekly?
+The table only works when links are tagged and conversions are recorded. Untagged links can make a channel look smaller than it is.
 
-Link Google Search Console. Google says it adds two reports: Google Organic Search Queries and Google Organic Search Traffic, showing landing pages with Search Console and Analytics metrics. You need the Editor role on the property and verified ownership of the Search Console property ([Google Analytics Help: Link Search Console](https://support.google.com/analytics/answer/10737381)).
+## Where Does GA4 Fit Among Your Other Tools?
 
-A 15-minute weekly routine:
+Encompass defines marketing automation as a strategic solution that integrates the tools needed to drive marketing performance, including website analytics and ad campaign tracking ([Encompass](https://360encompass.com/automated-marketing-tools/)). GA4 is one of those pieces, not the whole system.
 
-1. Open the acquisition report and compare key events by channel.
-2. Check engagement rate for your top three landing pages.
-3. Look at organic search landing pages from Search Console.
-4. Write down one action, such as a changed button or a paused ad.
+Your booking system remains the record of what was sold. GA4 shows the path that led to each booking. Read more in [data analytics for small business](/blog/data-analytics-for-small-business).
+
+## Who Should Own the Setup?
+
+If you hire help, decide who holds admin access before any work starts. The [Google Ads management guide for small businesses](/blog/google-ads-management-small-business-what-to-expect) explains what a manager should handle, and the [guide to finding a Google Ads manager](/blog/best-google-ads-manager-local-business-how-to-find) covers selection.
+
+To have your current tracking checked, [book a free audit](/free-audit).
 
 ## FAQ
 
-**Q: Is GA4 enough, or do I need my booking software too?**
-A: Use both. GA4 shows where visitors came from. Your booking system shows what was actually booked. Compare them monthly.
+### Is Google Analytics free?
 
-**Q: Why do my GA4 numbers differ from my sales?**
-A: GA4 measures website behaviour. Offline sales, app bookings, ad blockers and cookie choices can all reduce what it sees. Treat it as a sample, not a ledger.
+Yes. Slamdot describes Google Analytics as a free tool for monitoring, tracking and analyzing website traffic ([Slamdot](https://www.slamdot.com/blog/catering-marketing-101-four-google-marketing-tools-you-need-to-master/)).
 
-**Q: Should I delete the Universal Analytics property?**
-A: Google says access to Universal Analytics data ended on July 1, 2024. Check whether you still need anything exported before removing the property.
+### Why are my Analytics numbers lower than my bookings?
 
-**Q: How long does setup take?**
-A: The six settings above take a few hours the first time, including testing. That is an estimate, not a Google figure.
+Goals only record conversions after they are set up, so earlier bookings will not appear in the report ([LivePlan](https://www.liveplan.com/blog/starting/track-marketing-return-on-investment?srsltid=AYCX9vJq8fma11GMaPD4YN3YLfAa8k1pwzVHyWBYHsxn5Tqiu_np7zmZ)). Keep your booking system as the record of sales and use GA4 to see the path that led to them.
 
-**Q: Do I need a cookie banner?**
-A: It depends on where your visitors are and how you use data. Ask a local adviser, especially for UK and EU visitors.
+### How long before data appears?
+
+Salesforce says data should take 24 to 48 hours to appear after tracking is set up correctly ([Salesforce](https://www.salesforce.com/ca/small-business/marketing/smb-marketing-guide/?bc=OTH)). Check the reports after that window.
+
+### How many conversions should I track?
+
+Google Analytics allows 20 conversion goals per account ([LivePlan](https://www.liveplan.com/blog/starting/track-marketing-return-on-investment?srsltid=AYCX9vJq8fma11GMaPD4YN3YLfAa8k1pwzVHyWBYHsxn5Tqiu_np7zmZ)). Track the few you will act on, starting with the booking or the call.
 
 ## Sources
 
-- [Google Analytics Help: Google Analytics 4 has replaced Universal Analytics](https://support.google.com/analytics/answer/9973999)
-- [Google Analytics Help: Key events](https://support.google.com/analytics/answer/9267568)
-- [Google Analytics Help: Data retention](https://support.google.com/analytics/answer/7667196)
-- [Google Analytics Help: Internal traffic](https://support.google.com/analytics/answer/10104470)
-- [Google Analytics Help: Attribution models](https://support.google.com/analytics/answer/10596866)
-- [Google Analytics Help: Engagement rate and bounce rate](https://support.google.com/analytics/answer/12195621)
-- [Google Analytics Help: Link Search Console](https://support.google.com/analytics/answer/10737381)
-
-Need your tracking checked? See our [analytics and reporting service](/services/analytics) or [book a free audit](/free-audit).
+- [Salesforce: Small Business Marketing: The Ultimate Guide (Canada)](https://www.salesforce.com/ca/small-business/marketing/smb-marketing-guide/?bc=OTH)
+- [LivePlan: A Complete Guide to Marketing ROI Tracking (secondary)](https://www.liveplan.com/blog/starting/track-marketing-return-on-investment?srsltid=AYCX9vJq8fma11GMaPD4YN3YLfAa8k1pwzVHyWBYHsxn5Tqiu_np7zmZ)
+- [Slamdot: Catering Marketing 101: Four Google Marketing Tools (secondary)](https://www.slamdot.com/blog/catering-marketing-101-four-google-marketing-tools-you-need-to-master/)
+- [BoostFloral: Google Ads Tips for Florists (secondary)](https://www.boostfloral.com/blogs/using-google-ads-to-market-your-flower-shop-website)
+- [Keepers Digital: Yelp vs Google Business Profile (secondary)](https://keepersdigital.com/en-ca/resources/local-search/yelp-vs-google-business-profile/)
+- [Indelible Think: How Liverpool businesses can improve SEO (secondary)](https://indeliblethink.co.uk/how-liver

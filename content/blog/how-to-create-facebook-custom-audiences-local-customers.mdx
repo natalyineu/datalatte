@@ -1,118 +1,138 @@
 ---
 title: "Facebook Custom Audiences From a Customer List"
 date: "2026-05-19"
-lastModified: "2026-11-01"
-description: "Build a Facebook Custom Audience from your customer list: SHA256 hashing, field formatting, 10,000-user batches and consent rules from Meta's docs."
+lastModified: "2026-11-11"
+description: "Build a Facebook Custom Audience from your customer list in Ads Manager. Learn the 100-user lookalike minimum, 1,000-5,000 ideal size and 180-day rules."
 author: "Nataliia"
 category: "Meta Ads"
 tags: ["facebook custom audiences", "customer list", "meta ads", "retargeting", "local business"]
 slug: "how-to-create-facebook-custom-audiences-local-customers"
-noindex: true
 image: "https://images.unsplash.com/photo-1601232628399-c97f0f4a9742?w=800&q=80&auto=format&fit=crop"
 readTime: "8 min read"
 ---
 
-To build a Facebook Custom Audience from past customers, export a clean list with emails or phone numbers, upload it in Ads Manager, and target ads at the people Meta can match. Meta requires identifiers to be hashed with SHA256 before matching; Ads Manager does this for a file upload, while API uploads must hash first. Meta publishes no match rate, so treat any figure you see elsewhere as an estimate.
-
-Meta's Business Help Center pages for Ads Manager would not load, so the rules below come from Meta's developer documentation. Check click paths in Ads Manager on screen.
+To build a Facebook Custom Audience from past customers, create the audience in Ads Manager, not from your Facebook Page, then target ads at the people on your list. Facebook's Custom Audiences tool lets you retarget anyone who has interacted with your business, and a lookalike audience needs a seed of at least 100 users. KlientBoost cites an ideal custom audience of 1,000 to 5,000 users, so a small local list will reach fewer people. Check upload formats and matching rules on Meta's live help page, because the steps change.
 
 <StatRow
-  values="SHA256|10,000|24 hours|$27.39"
-  labels="Hash method Meta supports|Users per API upload request|Typical wait for audience changes to apply|Average Facebook lead-campaign cost per lead"
-  subs="Meta for Developers|Meta for Developers|Meta for Developers|LocaliQ, updated 23 Sep 2026"
-  trends="neutral|neutral|neutral|neutral"
+  values="100|180|42%|3-5x"
+  labels="Users needed to seed a lookalike audience|Days a Meta pixel can retarget site visitors|Marketers using custom audiences to reach new customers|Times better conversion for retargeted service-page visitors"
+  subs="KlientBoost (secondary)|WasteNot (secondary)|Brenton Way citing a 99Firms survey (secondary)|PipelineOn (secondary)"
+  trends="neutral|neutral|up|neutral"
 />
 
-## What Is a Customer List Custom Audience?
+## What Can a Customer-List Audience Do for a Local Business?
 
-It is a set of people you already know, matched to Meta accounts by identifiers such as email and phone. You can then show ads only to them, or exclude them from ads meant for new customers. For a local business, the common uses are win-back offers, new-service announcements and keeping existing clients out of first-visit promotions.
+Custom audiences must be created through Ads Manager rather than from a Facebook Page, according to [AdEspresso](https://adespresso.com/guides/facebook-ads-beginner/facebook-ads-types/) (secondary). The tool lets you retarget people who have interacted with your business, both on your Facebook Page and elsewhere, as [Benchmark Email](https://www.benchmarkemail.com/blog/tools-for-retargeting-ads/) (secondary) describes it.
 
-The list is your data, and Meta's documentation says you are responsible for what you upload, including data from your CRM. Accounts must accept the Custom Audience Terms before an audience can be created. Only upload people who gave you their details for marketing or whose use your local law allows.
+For a local shop or clinic, the practical uses are win-back offers for lapsed clients, announcements for new services, and exclusions so existing clients do not see first-visit promotions. Brolik describes a related option: Customer Value Audiences, where you add lifetime spend or another ranking to a list so Meta can weight higher-value customers, [as its Maximize Your Ad Spend article explains](https://brolik.com/blog/maximize-spend-facebook-lookalike-audiences) (secondary).
 
-## How Do You Prepare the List?
+If you want to compare platforms before committing budget, [Google Ads versus Facebook Ads for local businesses](/blog/google-ads-vs-facebook-ads-local-business) sets out where each channel tends to fit.
 
-Use one row per person. Meta's schema accepts email, phone, first and last name, first initial, gender, date of birth, city, state, zip, country and mobile advertiser ID. Normalise each field the way Meta describes before hashing:
+## How Many Customers Do You Need?
 
-| Field | Rule before hashing |
-| --- | --- |
-| Email | Trim spaces, lowercase |
-| Phone | Remove symbols, letters and leading zeros; add a country code |
-| First / last name | Lowercase, no punctuation |
-| City | Lowercase letters a-z only, no spaces |
-| State | Lowercase two-letter US code |
-| Zip | US: first 5 digits; UK: area/district/sector format |
-| Country | Lowercase two-letter ISO code |
+A lookalike audience needs a custom audience of at least 100 users, according to [KlientBoost](https://www.klientboost.com/facebook/facebook-lookalike-audiences/) (secondary). The same page says the ideal custom audience ranges from 1,000 to 5,000 users, citing a Facebook help article. [Leadsync](https://leadsync.me/blog/facebook-ads-for-contractors/) (secondary) puts the practical floor lower, saying a list of even 100 past customers works.
 
-Meta says to include several keys together (for example first name, last name and email) to improve matching. It states no minimum audience size on that page.
+Those two figures describe different things. The 100-user minimum is the threshold for building a lookalike at all. The 1,000 to 5,000 range is the size KlientBoost calls ideal. A list under 1,000 can still be used, but expect a narrower reach than the ideal range suggests.
 
-## Do You Have to Hash the Data Yourself?
+KlientBoost also notes that a 1% lookalike most closely matches your custom audience, and larger percentages match less closely but reach more people. Lookalikes work best when you already have good customer data, so a clean list matters more than a long one.
 
-In the API, yes: hash with SHA256 and output lowercase hex, since other methods are not supported. External IDs and mobile advertiser IDs are the exceptions. Each request can take up to 10,000 users, so larger files are split, and changes usually take up to 24 hours to apply.
+## Which Lists Should a Local Business Build?
 
-If you upload a file through Ads Manager, normalising correctly is your job. A secondary vendor guide says Ads Manager hashes the file on Meta's side; confirm this on screen. Marketing tools that connect through the API will hash for you.
+Match each list to one goal, and keep the windows short enough to be useful. The table below is a starting checklist, not a Meta rule.
 
-## Which Audiences Should a Local Business Build?
-
-Match each list to one goal.
-
-| Audience | Goal | Example offer (illustrative) |
+| List | Goal | Check before uploading |
 | --- | --- | --- |
-| Customers in the last 90 days | Repeat visit | New service or add-on |
-| Customers not seen for 6+ months | Win-back | A reason to return |
-| Top spenders | Retain | Early access to a slot |
-| Everyone | Exclusion | Keep out of new-customer ads |
+| Clients seen in the last 90 days | Repeat booking | Last visit date is filled in for every row |
+| Clients not seen for 6+ months | Win-back | Consent to contact is recorded |
+| High-spend clients | Retention | Spend column is accurate |
+| All clients | Exclusion | Duplicates are removed |
 
-The 90-day and 6-month cut-offs are examples, not Meta rules. Pick windows that match how often your customers rebook. Our guide to [Meta ads for local businesses](/blog/local-business-meta-ads) covers ad formats, and [Facebook ads versus Google Ads](/blog/google-ads-vs-facebook-ads-local-business) helps decide where the money goes.
+UpSwell's fitness marketing page describes a similar split into new customers, win-backs, loyal customers and at-risk customers, [as a segmentation approach](https://upswellmarketing.com/industry/fitness) (secondary). Adstellar advises retargeting people who engaged with your Page or Instagram profile in the past 30 days, which can be a second audience alongside your client list ([Adstellar](https://www.adstellar.ai/blog/meta-ads-for-local-businesses), secondary).
 
-## What Will It Cost? A Worked Example
+## What Does a Worked Budget Look Like?
 
-All inputs are **assumptions**, except the cost per lead, which is LocaliQ's all-industry average for Facebook lead campaigns (updated 23 September 2026).
+Every input below is an assumption, so swap in your own numbers before deciding anything. The goal is to test whether a win-back campaign can pay for itself.
 
 | Input | Value |
 | --- | --- |
-| Past customers on the list | 800 |
-| Share matched by Meta (assumption) | 50% |
-| Audience size | about 400 |
-| Bookings wanted from win-back | 15 |
-| Share of leads that book (assumption) | 40% |
-| Leads needed | about 38 |
-| Cost per lead (LocaliQ average) | $27.39 |
-| Budget | about $1,030 |
+| Past clients in your export | 800 (assumption) |
+| Share with usable contact details | 60% (assumption) |
+| Matched contacts in the audience | 480 (assumption) |
+| Monthly budget | $600 (assumption) |
+| Share held for testing | 20% = $120 (per Adstellar guidance) |
+| Share for proven audiences | 80% = $480 |
+| Bookings from the campaign | 15 (assumption) |
+| Cost per booking | $40 ($600 divided by 15) |
+| Average booking value | $90 (assumption) |
+| Revenue from 15 bookings | $1,350 (assumption) |
+| Return on spend | 2.25x (assumption-based) |
 
-A $1,030 spend for 15 bookings is about $69 each, which only works if a returning client is worth more than that. Past customers know you, so their real cost per lead may be lower, but LocaliQ publishes no figure for existing-customer lists. Start with a smaller test and compare cost per booking with your margin. See the [Facebook ads budget guide](/blog/facebook-ads-budget-local-business-how-much-to-spend) for the formula.
+The 480 contacts clear the 100-user minimum for a lookalike, but they sit below the 1,000 to 5,000 range KlientBoost calls ideal, so start with retargeting and a small lookalike test. The 20/80 split follows the testing guidance in Adstellar's local Meta Ads guide.
 
-Meta also flags audiences that suggest health conditions or financial status, so avoid building lists around them. Audiences unused in active ad sets for over two years are flagged for deletion.
+If your real booking value is $40 or less, this campaign loses money at these inputs. Run it for two weeks, measure bookings against spend, and only scale if cost per booking sits well below your margin. A useful test design is to split the audience evenly. Meta's A/B testing help page says even splits keep audiences [statistically comparable, while informal testing can lead to overlapping audiences](https://www.facebook.com/business/help/1738164643098669) (primary).
 
-<Callout type="tip" title="Do This Today">
-Export your customer list, delete duplicates and anyone who asked not to be contacted, and add a column with the last visit date.
-</Callout>
+## What Consent and Data Rules Apply?
+
+Google's Customer Match policy requires first-party consent for custom audiences built from its own lead data, as [Google's small business marketing article](https://business.google.com/us/resources/articles/small-business-marketing/) states (primary). The same caution is sensible for a Facebook list: only upload people who gave you their details for marketing or whose use your local law allows.
+
+WasteNot notes that Meta pixel retargeting only reaches users who visited your properties in the last 180 days, and that the pixel must appear in your cookie policy under GDPR when it tracks user activity ([WasteNot](https://www.wastenot.io/blog/retargeting-facebook-ads), secondary). UK businesses should confirm the current UK GDPR wording with a local adviser rather than rely on the older reference.
+
+Remove anyone who has asked not to be contacted before every upload. Keeping a clean suppression list protects the account and your sender reputation.
+
+## How Do You Keep the Audience Fresh?
+
+Adstellar recommends refreshing lookalike audiences quarterly as the customer list grows ([Adstellar](https://www.adstellar.ai/blog/meta-ads-for-local-businesses), secondary). Refresh the seed list too, so people who have since left are dropped and new clients are added.
+
+Watch frequency. Adstellar's ecommerce guide says frequency above 3 to 4 in retargeting signals audience fatigue, and that most ecommerce ads fatigue after 2 to 4 weeks of consistent delivery, especially in retargeting ([Adstellar ecommerce guide](https://www.adstellar.ai/blog/meta-advertising-for-ecommerce-brands), secondary). Those thresholds come from ecommerce, so treat them as a prompt to check, not a local rule.
+
+Rotate creative every few weeks. A small local list has fewer people to show ads to, so the same faces see the same message quickly.
+
+## Do Email Subscribers Work as a Source List?
+
+Email lists often make good seeds, but only when the engagement is healthy. Brolik says a list with 30% or more open rates or 20% or more click rates is strong ([Brolik](https://brolik.com/blog/maximize-spend-facebook-lookalike-audiences), secondary). Cleverly gives reactivation benchmarks: a 12 to 15% open rate is healthy for win-back campaigns, and below 8% signals a subject line or list quality problem ([Cleverly](https://www.cleverly.co/blog/customer-reactivation-campaign-strategies), secondary).
+
+Unsubscribe rate is the other check. Cleverly says an unsubscribe rate above 0.5% means your message does not match the list ([Cleverly](https://www.cleverly.co/blog/customer-reactivation-campaign-strategies), secondary). If your email list fails those tests, clean it before using it as an audience source.
+
+## What Results Have Local Businesses Reported?
+
+ARC's case study for a New York salon recorded 53 appointments from Meta retargeting within 30 days, for the period April 18 to May 17, 2023 ([ARC](https://arccreativeco.com/what-a-salon-booking-costs-on-google-ads/), secondary). That is one business in one period, so use it as a sense of scale, not a forecast.
+
+Brolik reported a 5.05% click-through rate at $0.21 per click and a 1.16% conversion rate for a lookalike built from a client's customer list and prior leads ([Brolik](https://brolik.com/blog/maximize-spend-facebook-lookalike-audiences), secondary). Those are agency results, not guarantees. Compare any figure against your own bookings.
 
 ## FAQ
 
-### Is a Custom Audience legal?
+### Do I need a Facebook Page to create a custom audience?
 
-It depends on how you collected the data and where you operate. Meta makes you responsible for the data and requires you to accept its terms. Ask a local adviser if unsure.
+You create custom audiences in Ads Manager. AdEspresso says custom audiences and catalogs must be made through Ads Manager rather than from a Facebook Page ([AdEspresso](https://adespresso.com/guides/facebook-ads-beginner/facebook-ads-types/), secondary).
 
-### What match rate should I expect?
+### How many customers do I need for a lookalike?
 
-Meta's developer page publishes none. Vendor blogs quote ranges, but they are not Meta figures.
+KlientBoost says the custom audience must contain at least 100 users, and it cites an ideal range of 1,000 to 5,000 users ([KlientBoost](https://www.klientboost.com/facebook/facebook-lookalike-audiences/), secondary).
 
-### How long until the audience is usable?
+### How far back can pixel retargeting reach?
 
-Meta says changes usually take up to 24 hours to apply.
+WasteNot says the Meta pixel only lets you retarget users who visited your properties within the last 180 days ([WasteNot](https://www.wastenot.io/blog/retargeting-facebook-ads), secondary).
 
-### Can I use my email list from Mailchimp?
+### How often should I refresh a lookalike audience?
 
-You can export it and upload it, provided your sign-up terms covered advertising use.
-
-### How big should the list be?
-
-The developer page states no minimum. Small audiences may show little or no match detail.
+Adstellar recommends refreshing lookalike audiences quarterly as your customer list grows ([Adstellar](https://www.adstellar.ai/blog/meta-ads-for-local-businesses), secondary).
 
 ## Sources
 
-- [Meta for Developers: Custom audiences (customer file)](https://developers.facebook.com/docs/marketing-api/audiences/guides/custom-audiences/)
-- [LocaliQ: Facebook advertising benchmarks](https://localiq.com/blog/facebook-advertising-benchmarks/) (updated 23 September 2026)
-- Secondary: vendor blogs on Ads Manager hashing, used only to flag that the click path should be confirmed on screen.
+- [Benchmark Email: Retargeting Ads: Why and How You Should Be Doing it](https://www.benchmarkemail.com/blog/tools-for-retargeting-ads/) (secondary)
+- [KlientBoost: How to Use Facebook Lookalike Audiences](https://www.klientboost.com/facebook/facebook-lookalike-audiences/) (secondary)
+- [Brenton Way: 51 Beauty Salon Marketing Ideas](https://brentonway.com/blog/beauty-salon-marketing-ideas) (secondary)
+- [Adstellar: Meta Ads For Local Businesses](https://www.adstellar.ai/blog/meta-ads-for-local-businesses) (secondary)
+- [Brolik: Maximize Your Ad Spend with Facebook Lookalike Audiences](https://brolik.com/blog/maximize-spend-facebook-lookalike-audiences) (secondary)
+- [Leadsync: Facebook Ads for Contractors](https://leadsync.me/blog/facebook-ads-for-contractors/) (secondary)
+- [Google: Small business marketing articles](https://business.google.com/us/resources/articles/small-business-marketing/) (primary)
+- [PipelineOn: Top High Converting Facebook Ad Examples for Contractors](https://pipelineon.com/blog/high-converting-facebook-ad-examples/) (secondary)
+- [AdEspresso: A Breakdown of Facebook Ad Types](https://adespresso.com/guides/facebook-ads-beginner/facebook-ads-types/) (secondary)
+- [UpSwell Marketing: Fitness Marketing](https://upswellmarketing.com/industry/fitness) (secondary)
+- [WasteNot: 7 best practices for Facebook retargeting ads](https://www.wastenot.io/blog/retargeting-facebook-ads) (secondary)
+- [Meta Business Help: About A/B testing for Meta Ads](https://www.facebook.com/business/help/1738164643098669) (primary)
+- [Adstellar: Meta Advertising For Ecommerce Brands](https://www.adstellar.ai/blog/meta-advertising-for-ecommerce-brands) (secondary)
+- [Cleverly: Customer Reactivation Campaign Strategies](https://www.cleverly.co/blog/customer-reactivation-campaign-strategies) (secondary)
+- [ARC: What a Salon Booking Costs on Google Ads](https://arccreativeco.com/what-a-salon-booking-costs-on-google-ads/) (secondary)
 
-Need help setting it up? See our [Meta Ads service](/services/meta-ads) or [book a free audit](/free-audit).
+Want help turning a customer list into a working audience? Read the [Facebook custom audiences guide](/blog/facebook-custom-audiences), or [book a free audit](/free-audit) and we will check your list and budget.

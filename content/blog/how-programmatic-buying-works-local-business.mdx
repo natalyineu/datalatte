@@ -1,8 +1,8 @@
 ---
-title: "How Programmatic Buying Works for Local Business"
+title: "Programmatic Buying for Local Business: How It Works"
 date: "2026-05-18"
-lastModified: "2026-10-31"
-description: "Programmatic buying auctions each ad impression in real time. How it works, where a local business can buy (Google Display reaches 35M sites) and costs."
+lastModified: "2026-11-11"
+description: "Programmatic buying auctions each ad impression in real time. Learn how it works, where vendors say campaigns start at $50, and how to test costs."
 author: "Nataliia"
 category: "Programmatic Advertising"
 tags: ["programmatic buying", "local business", "online ads", "targeted advertising"]
@@ -11,107 +11,112 @@ image: "https://images.unsplash.com/photo-1596558273770-97f6cc7a5b0c?w=800&q=80&
 readTime: '8 min read'
 ---
 
-Programmatic buying is the automated purchase of ad space, where each ad impression is put up for bid in a real-time auction. IAB Tech Lab, which maintains the OpenRTB standard, describes it as an open protocol for the automated trading of digital media and calls real-time bidding a "programmatic on-the-spot auction". For a local business, that means software, not a sales rep, decides which website, app or video your ad appears on and what you pay.
+Programmatic buying is the automated purchase of ad space. Each ad slot is offered in a real-time auction, and software decides which website, app or video service shows the ad and what the advertiser pays. For a local business, the buyer is usually a platform account rather than a media rep, so the work shifts to choosing the audience, setting the budget and judging the results. Some vendors say campaigns can start at small amounts, but no platform guarantees results at any size.
 
-This guide explains the pieces, who sells access to a small budget and what to test first. Prices vary by platform, and most vendors do not publish them, so none are claimed here.
+This guide covers how a single impression is bought, which platforms let a small team buy, how cost is measured for video and TV, and a worked test budget you can adapt.
 
 <StatRow
-  values="35M|None|100|540"
-  labels="Sites and apps in Google's Display Network|Minimum ad spend StackAdapt states|Members to add or update to keep a Customer Match list eligible|Days before a Customer Match membership expires"
-  subs="Google Ads Help|StackAdapt platform page|Google Ads Help|Google Ads Help"
-  trends="neutral|neutral|neutral|neutral"
+  values="$50|23%|50%|24/7"
+  labels="Campaign start point Adwave states|Lower cost per unique household in HP's Trade Desk campaign|Share of non-live ads Netflix wants to sell programmatically|Availability of Take10's self-serve Ad Portal"
+  subs="Adwave, vendor|HP case study, vendor-reported, as of 2024, secondary|Netflix Q1 2026 earnings, as reported, secondary|Take10 Media, vendor"
+  trends="neutral|down|up|neutral"
 />
 
-## What Happens When Someone Loads a Web Page?
+## How Does One Ad Get Bought in Real Time?
 
-The flow, in plain terms:
+When someone opens a page or app with an ad slot, the publisher offers that slot to an exchange along with basic signals such as location and device. Buyers' systems, called demand-side platforms, decide whether to bid for that person and how much. The highest bid wins and its ad loads. The whole sequence happens while the page loads, which is why buyers talk about impressions rather than placements.
 
-1. A person opens a page or app that has an ad slot.
-2. The publisher's system offers that slot, with signals such as location and device, to an ad exchange.
-3. Buyers' systems, called demand-side platforms (DSPs), decide in an instant whether to bid for that person, and how much.
-4. The highest bid wins and its ad loads.
+For a small business, the practical steps look like this:
 
-OpenRTB is the shared language that lets these systems talk. IAB Tech Lab says real-time bidding supports addressable advertising, meaning ads served to individuals based on demographic, psychographic or behavioral attributes. Its page does not give timing figures.
+1. Pick a platform that buys programmatically on your behalf.
+2. Define who you want to reach, such as people within a set distance of your store.
+3. Set a daily or total budget and a single goal, such as enquiries or visits.
+4. Upload creative sized for the formats the platform supports.
+5. Let the system bid, then review placements and results on a fixed schedule.
 
-## Who Can Buy Programmatic With a Small Budget?
+Most of the real decisions happen in steps 2 and 3. Software handles the auction; your choices determine whether the auction buys anyone worth reaching.
 
-You usually do not buy from an exchange directly. You use a platform that has done it for you.
+## Which Platforms Let a Small Business Buy Programmatically?
 
-| Route | What it is | What the vendor states |
-| --- | --- | --- |
-| Google Display campaigns | Programmatic-style buying inside Google Ads | Reaches 35 million websites and apps; default optimized targeting; learning phase typically 5 to 7 days |
-| StackAdapt | Self-serve DSP | No minimum advertising spend; CPM, CPC and CPE pricing models; display, native, video, CTV, audio and DOOH |
-| Display & Video 360 | Google's platform for managed campaigns | Modules for Campaigns, Audiences, Creatives, Inventory and Insights; no minimum spend stated on the page |
+The main options are self-serve demand-side platforms, ad products inside large platforms, and managed services run by agencies. Amazon's guidance says its DVA+ product combines what used to run through Sponsored TV, Sponsored Display and programmatic buying into one campaign covering streaming TV, online video and display, with audio coming soon, as [Canopy Management describes it](https://canopymanagement.com/amazon-streaming-tv-mid-market/). Check the live product pages before committing, because availability and minimums change.
 
-Our comparison of [programmatic and Google Display ads](/blog/programmatic-vs-google-display-ads-whats-the-difference) explains the differences in more detail, and our [StackAdapt review](/blog/stackadapt-review-local-business-programmatic) covers one DSP.
+Take10 Media states that its self-serve Ad Portal can be used for instant digital buying 24 hours a day, 7 days a week, which is aimed at local out-of-home campaigns. Adwave says programmatic infrastructure serves campaigns starting at $50, a figure from a vendor page rather than an independent benchmark.
 
-## How Does Targeting Work for a Local Business?
+Demand is also moving toward programmatic. Netflix told investors on its first-quarter 2026 earnings call that programmatic buying was on course to exceed 50 percent of its non-live advertising business, [as PPC Land reported](https://ppc.land/netflix-opens-250m-user-inventory-to-trade-desk-buyers-drops-spend-minimums/). For a local advertiser, the lesson is that more inventory is becoming available through automated buying, but access still depends on each platform's rules.
 
-Three signals matter locally:
+## How Is Cost Measured for Video and TV Ads?
 
-- **Location.** Set a radius around your business or a list of areas. Google says radius targets must be at least 1 km, that very small areas may serve intermittently, and that location targeting is best effort, not exact.
-- **Context.** Show ads on pages about topics related to your service.
-- **Your own customer list.** Google's Customer Match lets you upload email addresses to target or exclude your customers. Google's help says memberships expire after 540 days, and a list needs at least 100 members added or updated within that window to stay eligible. Uploads can take up to 48 hours.
+Display and video are usually priced per thousand impressions, known as CPM. Connected TV is often bought on different terms. Amazon describes cost per completed view (CPCV), which measures the price of each completed ad, and says it is used alongside video completion rate (VCR) in programmatic pricing. [Amazon's connected TV guide](https://advertising.amazon.com/library/guides/connected-tv-advertising) is the primary reference for those definitions.
 
-Using a customer list requires permission to use that data under Google's policies. Do not upload addresses you collected without consent.
+Pricing models differ by seller. The TV Agency says Sky Advance, Sky's programmatic platform in the UK, works on a CPM basis, [as described on its UK connected TV page](https://thetvagency.com/insights/connected-tv-ads-in-the-uk/). Ask any vendor which metric you are paying for, and whether a completed view means a full-length play or a percentage of the ad. Comparing a CPM quote with a CPCV quote directly tells you very little.
 
-## What Does It Cost, and What Is a Fair Test?
+Local TV is a different buying model. The [local TV advertising cost guide](/blog/local-tv-advertising-cost-small-business) covers that side, and [geofencing](/blog/geofencing-advertising-local-business-guide) is one way to focus programmatic spend on a service area.
 
-No platform in the table publishes a typical CPM or CPC for small advertisers. StackAdapt lists pricing models but not rates, and Google Display prices depend on the auction. That means you can only learn cost by testing.
+## What Does a Test Budget Look Like?
 
-The worked example below uses a made-up price to show the arithmetic. Every input is an **assumption**.
+No platform in this guide publishes a reliable typical CPM for small advertisers, so cost has to be learned through testing. The table below shows the arithmetic with made-up inputs. Every input is an assumption and should be replaced with your own numbers after the first week.
 
 | Input (assumption) | Value |
 | --- | --- |
-| Test budget | $500 for 30 days |
-| Cost per 1,000 impressions (CPM) | $6 |
-| Impressions | about 83,000 |
+| Test budget | $500 over 30 days |
+| CPM | $6 |
+| Impressions | about 83,333 |
 | Click-through rate | 0.5% |
 | Clicks | about 417 |
 | Landing page conversion rate | 3% |
-| Enquiries | about 12 |
+| Enquiries | about 12.5 |
 | Cost per enquiry | about $40 |
 
-Change the CPM and CTR to your own numbers after the first week. Our [programmatic cost benchmarks article](/blog/how-much-does-programmatic-advertising-cost-real-cpm-benchmarks-2026) discusses what the published ranges do and do not tell you.
+If the CPM were $10 instead, the same budget would buy about 50,000 impressions, around 250 clicks and about 7.5 enquiries, or roughly $67 per enquiry (assumption). A small change in the auction price moves the outcome a lot, which is why the first week should check CPM and click-through rate before you scale.
 
-## Should a Local Business Use Programmatic at All?
+A simple test plan:
 
-Often not first. Programmatic ads reach people who were not searching, so they build awareness more than they capture demand. If your Google Business Profile, Search ads and review count are weak, fix those first. Programmatic makes sense when you have a tested offer, working conversion tracking and a reason to reach a wider audience, such as a new location or a seasonal event.
+1. Set one goal, such as calls or booked appointments, and confirm it is tracked before launch.
+2. Cap spend at an amount you can lose without strain.
+3. Target one area and one audience at a time, so results are readable.
+4. Review at the end of week one and again at day 30.
+5. Change one variable at a time, either creative or audience, never both.
 
-Allow time for learning: Google says a new Display campaign typically needs 5 to 7 days and suggests 7 to 14 days to stabilize after changes before judging performance. Our [accessibility guide to programmatic for small business](/blog/programmatic-advertising-for-small-business-is-it-accessible-now) offers another view.
+## Does Programmatic Beat Other Options for Local Reach?
+
+Vendor case studies suggest it can, under the right conditions. AIDigital reports that HP's Trade Desk campaign had a cost per unique household 23 percent below HP's previous campaign, which had used programmatic guaranteed and private marketplace buying. That is a single vendor-reported result from 2024, not a benchmark for a local shop, so treat it as a reason to test rather than a forecast.
+
+Programmatic also reaches people on sites and apps rather than in search results. The [in-app advertising guide](/blog/in-app-advertising-local-business-guide) explains how mobile inventory differs from web display. Agency guidance such as [GreenBananaSEO's CTV page](https://greenbananaseo.com/ctv-advertising/) lists targeted reach, real-time optimization, cost-effectiveness and scalability as reasons programmatic is useful, but those are claims to verify in your own account, not guarantees.
+
+## When Should a Local Business Hold Off?
+
+Programmatic is a reach tool. If your offer, tracking or reputation is weak, a wider audience will not fix that. A 2018 survey cited by ReferralRock found that 97 percent of consumers look for reviews and recommendations before buying online, [per PowerReviews via ReferralRock](https://referralrock.com/affiliate/affiliate-marketing-for-small-business/). That figure is dated, but the principle holds: people who arrive from an ad will check your profile.
+
+Hold off if you cannot yet measure enquiries, if your Google Business Profile is incomplete or if your reviews are thin. Start with a clear offer and working tracking, then test programmatic in one area. If you want a structured review of those basics first, a [free audit](/free-audit) covers them, or you can look at [Google Ads management](/services/google-ads) for search-led campaigns.
 
 ## FAQ
 
-### What does programmatic mean in advertising?
+### What is programmatic buying in simple terms?
 
-It means ad buying done by software. Each impression is offered in an automated auction and the winning ad loads in a fraction of a second.
+It is ad buying done by software. Each ad slot is offered in an automated auction, and the winning ad loads on the page or app in the moment.
 
-### Is programmatic only for big brands?
+### Can a small business start with a low budget?
 
-No. StackAdapt states it has no minimum advertising spend, and Google Display campaigns can run on a modest daily budget. Results at small budgets depend on tracking and creative, not on the platform alone.
+Some vendors say campaigns can start at small amounts; Adwave states $50 as a starting point. Start with a capped test and judge cost per enquiry rather than impressions alone.
 
 ### How is programmatic different from Facebook ads?
 
-Meta ads run inside Meta's apps. Programmatic ads run across many websites, apps and video or TV services through an exchange.
+Meta's ads run inside Meta's own apps. Programmatic ads run across many websites, apps and video services, with placements chosen by an auction.
 
-### Can I use my customer list?
+### Do I need a customer list to use programmatic?
 
-Yes, on platforms that offer it, such as Google Customer Match, if you have permission to use the data and meet the platform's size and consent rules.
+No. Many platforms also target by location and context. Check each platform's live help pages for the audience options available in your region and plan.
 
 ## Sources
 
-- [OpenRTB, IAB Tech Lab](https://iabtechlab.com/standards/openrtb/)
-- [About Display campaigns, Google Ads Help](https://support.google.com/google-ads/answer/2404190)
-- [Target ads to geographic locations, Google Ads Help](https://support.google.com/google-ads/answer/1722043)
-- [Display & Video 360 overview, Google Help](https://support.google.com/displayvideo/answer/9059464)
-- [StackAdapt platform](https://www.stackadapt.com/platform) (vendor page; no rates published)
-- [About Customer Match, Google Ads Help](https://support.google.com/google-ads/answer/6379332)
-- [Create a Customer Match list by uploading a data file, Google Ads Help](https://support.google.com/google-ads/answer/10589050)
+- [What is connected TV? How CTV advertising works, Amazon Ads](https://advertising.amazon.com/library/guides/connected-tv-advertising) (primary)
+- [Amazon's Streaming TV Pitch to Mid-Market Brands, Canopy Management](https://canopymanagement.com/amazon-streaming-tv-mid-market/) (secondary)
+- [CTV Advertising in 2026: Updated Market Forecast, Adwave](https://adwave.com/resources/ctv-advertising-2026-update) (vendor)
+- [Programmatic DOOH Trends in 2026, Take10 Media](https://take10media.com/blog/self-serve-dooh-trends-2026-local-brands/) (vendor)
+- [Netflix opens 250M-user inventory to Trade Desk buyers, PPC Land](https://ppc.land/netflix-opens-250m-user-inventory-to-trade-desk-buyers-drops-spend-minimums/) (secondary)
+- [8 CTV Advertising Examples With Verified 2026 Results, AIDigital](https://www.aidigital.com/blog/ctv-advertising-examples) (secondary; reports a vendor case study)
+- [Connected TV Ads in the UK, The TV Agency](https://thetvagency.com/insights/connected-tv-ads-in-the-uk/) (secondary)
+- [CTV Advertising: From Screens to Sales, GreenBananaSEO](https://greenbananaseo.com/ctv-advertising/) (secondary)
+- [Affiliate Marketing for Small Businesses, ReferralRock](https://referralrock.com/affiliate/affiliate-marketing-for-small-business/) (secondary; 2018 data)
 
-Pages checked 31 October 2026.
-
-Want a second opinion on whether programmatic fits your business? Get a [free audit](/free-audit) or see our [Google Ads service](/services/google-ads).
-
-## Related guides
-
-- [Yahoo DSP for Local Business: Beyond Google and Meta](/blog/yahoo-dsp-local-business-programmatic)
+Want a second opinion on whether programmatic fits your business? Get a [free audit](/free-audit) or see the [Google Ads service](/services/google-ads).

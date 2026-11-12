@@ -1,8 +1,8 @@
 ---
 title: "AI Loyalty Program for Coffee Shops: What Works"
 date: "2026-05-21"
-lastModified: "2026-10-31"
-description: "What an AI loyalty program means for a coffee shop: Starbucks had 34.3 million active US Rewards members in Q1 2024. Start with POS data and simple rules."
+lastModified: "2026-11-11"
+description: "Loyalty programs can lift retention by 5–30%, per one vendor. Start with POS purchase data, a phone or email at sign-up, and two simple reward rules."
 author: "Nataliia"
 category: "AI & Automation"
 tags: ["ai loyalty program", "coffee shops", "customer retention", "personalization"]
@@ -11,93 +11,112 @@ image: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=800&q=80&
 readTime: "6 min read"
 ---
 
-For an independent coffee shop, an AI loyalty program mostly means using the purchase data your point-of-sale system already records to send the right reward to the right customer. You do not need your own AI model. Start with a visit-based or points program, collect a phone number or email at checkout, and add simple rules such as a nudge to guests who have not visited in a while.
+An AI loyalty program for a coffee shop uses the purchase data your point-of-sale system already records to choose the right reward for each guest. You do not need to build an AI model. Start with a simple visit or points program, collect a phone number or email at checkout, and add a few rules, such as a nudge to guests who have not come in for several weeks. Vendor claims about retention gains vary, so measure your own results.
 
-Starbucks is the large-scale example. In February 2024 Marketing Dive reported that the chain uses its Deep Brew data analytics and AI platform to find Rewards member groups and offer them relevant incentives. That is a company with 34.3 million active US members, not a single-site cafe.
+Large chains run this at scale. Starbucks said it had navigated a one-time transition to its new Starbucks Rewards program and planned its next marketing push around cold drinks, as [Diginomica reported](https://diginomica.com/starbucks-spills-coffee-on-its-digital-strategy-with-loyalty-changes) (secondary).
 
 <StatRow
-  values="34.3M|Up to 5|2|3"
-  labels="Active US Starbucks Rewards members, Q1 2024|Rewards per Toast Loyalty program|Toast earning models: visit or amount|Contact options at sign-up: phone, email or linked card"
-  subs="Marketing Dive, Feb 2024 (secondary)|Toast support|Toast support|Toast support"
-  trends="neutral|neutral|neutral|neutral"
+  values="5–30%|82%|83%|$50–$150"
+  labels="Retention lift claimed for loyalty programs|Restaurant leaders saying loyalty drives repeat visits|Restaurant leaders saying loyalty boosts order size|Monthly budget suggested for most small businesses"
+  subs="Winback Engine vendor claim (secondary)|Square Future of Restaurants 2025 report|Square Future of Restaurants 2025 report|CostBench 2026 (secondary)"
+  trends="neutral|up|up|neutral"
 />
 
-## What Does AI Actually Do in a Loyalty Program?
+## What Does an AI Loyalty Program Actually Do?
 
-In practice it does three jobs: it recognises returning customers, it groups them by behaviour, and it chooses an offer for each group. Starbucks describes the second and third jobs at scale. A small shop can do a manual version with the reports its POS gives.
+In practice it does three jobs. It recognises returning customers, groups them by what they buy, and chooses an offer for each group. A small shop can run a manual version of all three using the reports its point-of-sale system already produces.
 
-Be careful with figures about AI loyalty results. Widely repeated numbers, such as retention gains of 30% or sales gains of 15%, were in the previous version of this page without a primary source, so they have been removed. Starbucks' own earnings materials and the Marketing Dive summary give member counts, not a proven uplift from AI.
+The case for personalised offers rests partly on customer expectations. [The Restaurant HQ](https://www.therestauranthq.com/operations/coffee-shop-marketing/) states that more than 70% of consumers crave personalization from the brands they support, citing McKinsey (secondary).
 
-## What Do You Need Before Adding AI?
+Square's 2025 survey of restaurant leaders is more specific to loyalty. Per [Square's cafe marketing guide](https://squareup.com/ca/en/the-bottom-line/reaching-customers/marketing-plan-for-a-coffee-shop), 82% of those leaders say their program drives repeat visits and 83% say it boosts order size. These are self-reported views from restaurant operators, not coffee-only results, so treat them as direction rather than proof. For the broader approach, see [AI-driven customer retention strategies](/blog/ai-driven-customer-retention-strategies).
 
-You need an identifier for each customer and a program that records every purchase against it. Toast's support documentation shows the building blocks that most POS loyalty tools share:
+## Which Loyalty Structure Should a Coffee Shop Start With?
 
-- **Two earning models:** visit-based, where guests earn at a flat rate per visit, or amount-based, where they earn points per dollar spent.
-- **A sign-up identifier:** points are recorded through a phone number, email address or linked card.
-- **A reward menu:** a Toast program can hold up to five rewards in any combination.
-- **Gaps:** Toast says points cannot be earned or redeemed on DoorDash, Grubhub or Uber Eats orders, so delivery-app customers stay invisible.
+Start with the simplest structure your POS supports. [Square Loyalty](https://squareup.com/us/en/software/loyalty) lets you choose whether customers earn points by visits, by amount spent, or by items or categories purchased. A visit-based scheme is easiest to explain at the counter.
 
-Square documents a similar flow: a customer with a card linked to their Loyalty account sees a reward redemption screen at payment. Square's help page does not state pricing, and third-party price listings disagree, so check your own dashboard before budgeting.
+Tiers add a second layer. Square's VIP example gives Bronze customers 1.5x points, Silver 2x and Gold 3x. A shop could start with one tier and add more only once it can see which guests keep coming back.
 
-## Which Simple Rules Work Like AI?
+Rewards can be simple too. [The Small Business Expo](https://www.thesmallbusinessexpo.com/blog/best-local-advertising-for-small-business-are/) suggests rewards after every fifth visit, and T2's Tea Society includes a free birthday brew as a member benefit, according to [a local marketing guide](https://www.zipzipe.com.au/blog/local-marketing/) (secondary). For low-tech options that need no app, read [coffee shop loyalty program ideas without an app](/blog/coffee-shop-loyalty-program-ideas-without-an-app).
 
-Three rules cover most of what a small cafe needs, and you can run them from a spreadsheet export or your POS reports. These are suggestions to test, not proven results.
+## Which Simple Rules Can Stand In for AI?
 
-| Rule | Data needed | Offer to test |
+Three rules cover most of what a small cafe needs. Each can be run from a spreadsheet export or a standard POS report. Treat them as suggestions to test, not proven results.
+
+The first is a lapsed-guest rule. Filter for members whose last visit was more than a set number of weeks ago, then send a small offer. The second is a usual-order rule. Find the item each member buys most often and offer a free upgrade on it. The third is a slow-daypart rule, which gives bonus points for purchases in your quietest hours.
+
+Review each rule after a month. Keep it only if redemptions rise and the discount does not wipe out the margin on the drinks involved.
+
+## How Much Does Loyalty Software Cost?
+
+Prices change, so check each vendor's live pricing page before you commit. [CostBench's 2026 category listing](https://www.costbench.com/software/loyalty-program/) counts 16 loyalty products. Monthly prices run from $0 to $999 across 12 priced tools, the median is $207 per month, and only 2 of the 16 offer free tiers for small teams or limited use.
+
+Some named examples from the same listings: Marsello is listed at $60–$120 per month, Smile.io at $199–$999, and Yotpo Loyalty has a free plan with paid plans at $89–$169 per user per month. [CostBench's small business guide](https://costbench.com/best/loyalty-program-for-small-business/) recommends budgeting $50–$150 per month for most small businesses.
+
+Square Loyalty offers a free trial lasting 30 days, and Square says the built-in CRM tools it integrates with are free. Enterprise platforms sit well above a single cafe's budget. [Loop's pricing article](https://authors.loop.fans/blog/how-much-does-a-loyalty-program-cost) cites a full destination platform from $5,000 per year, according to the vendor's own pricing page (secondary).
+
+## Is a Lapsed-Guest Offer Worth It?
+
+The table below is a worked example. Every input is an **assumption** for one shop, not a benchmark. The member count, redemption rate and labour figures echo an illustrative cafe model in Loop's article, which the article says is not a typical result.
+
+| Line | Assumption or calculation | Monthly amount |
 | --- | --- | --- |
-| Lapsed guest | Date of last visit | A small reward after a set number of weeks without a visit |
-| Usual order | Item purchased most often | A free upgrade on that item |
-| Slow daypart | Time of purchase | Bonus points in the quiet hours |
+| Members in database | Assumption: 300 | Not a cost |
+| Redemptions | Assumption: 10% of members, so 30 | Not a cost |
+| Free reward cost | 30 redemptions x $2 marginal cost (assumption) | $60 |
+| Staff administration | 2 hours x $25 per hour (assumption) | $50 |
+| Loyalty software | Assumption: $50, the low end of the $50–$150 budget range | $50 |
+| Total monthly cost | Sum of the three costs above | $160 |
+| Extra spend per redeemer | Assumption: $8 beyond the free drink | Not a cost |
+| Extra revenue | 30 redemptions x $8 (assumption) | $240 |
+| Net gain | $240 minus $160 | $80 |
 
-Review each rule after a month. Keep it if redemptions rise and the discount does not erase your margin. Our guide to [loyalty programs without an app](/blog/coffee-shop-loyalty-program-ideas-without-an-app) covers low-tech options, and the [coffee shop loyalty marketing guide](/blog/coffee-shop-loyalty-program-ideas-without-an-app) covers structure and rewards.
+The offer breaks even at about $5.33 of extra spend per redeemer ($160 divided by 30). If only 15 guests redeem, which is 5% of 300 (assumption), costs stay at $130 while extra revenue falls to $120, a net loss of $10. Measure your real redemption rate for at least a month before you scale an offer.
 
-## How Do You Handle Customer Data Responsibly?
+## Where Does the Google Profile Fit?
 
-Tell customers what you collect and why, at sign-up. Privacy law may apply. The California Attorney General says the CCPA gives consumers rights to know, delete, correct and opt out of the sale or sharing of their data, and it applies to for-profit businesses that meet a threshold: over $25 million in annual revenue, handling data of 100,000 or more California residents or households, or earning 50% or more of revenue from selling such data. Many single cafes fall under those thresholds, but UK, EU, Australian and Canadian rules differ, so check your local law.
+A loyalty program brings guests back, but new guests find you on Google first. [Per Diem's coffee shop guide](https://www.tryperdiem.com/blog/google-business-profile-coffee-shop-guide) recommends answering common questions in the profile's Q&A section before customers ask, such as whether you offer free Wi-Fi, dairy-free options or dogs on the patio (secondary).
 
-## The Math: Is a Lapsed-Guest Offer Worth It?
+[BrewRound's 2020 guide](https://brewround.com/blog/coffee-shop-marketing/google-my-business-for-coffee-shops/) says creating a listing is free and needs a free Google account. Google verifies a location by mailing a letter with a code, and the profile does not appear in results until verified. A business can select only one category at first and add more later (secondary, dated 2020, so confirm current steps on Google's help pages). For the local search side, see [coffee shops that dominate Google Maps](/blog/coffee-shops-dominate-google-maps).
 
-All numbers below are **assumptions** for one shop, not benchmarks.
+Answers to repeat questions also cut the volume of messages your staff handle. For a fuller approach, read [AI-driven customer service for local coffee shops](/blog/ai-driven-customer-service-for-local-coffee-shops).
 
-| | Assumption |
-| --- | --- |
-| Members who have not visited in 6 weeks | 200 |
-| Offer | Free drink, cost to you $1.20 |
-| Members who redeem | 10% |
-| Redeemers | 20 |
-| Extra spend per redeemer, beyond the free drink | $4.00 |
-| Cost of free drinks | $24 |
-| Extra revenue | $80 |
+## How Should You Handle Customer Data at Sign-Up?
 
-On these inputs the offer returns $80 in extra sales for $24 in drink cost. If only 3% redeem, the revenue drops to $24 and the offer only breaks even. Measure your real redemption rate before scaling. For email delivery of such an offer, see AI-powered email marketing for coffee shops, and for the wider idea, AI-driven customer loyalty programs.
+Tell guests what you collect and why, at the moment they join. Use their details only for the loyalty rewards and messages they signed up for. Avoid adding them to unrelated lists without a separate opt-in.
+
+Privacy rules differ between US states, the UK, Australia and Canada. Check the guidance your local regulator publishes, and ask an adviser if you collect data from customers outside your own country. Clear notice at sign-up is the simplest habit to build early.
 
 ## FAQ
 
 ### Do I need AI to run a coffee shop loyalty program?
 
-No. A visit-based or points program tied to a phone number or email already records what each customer buys. AI adds automatic grouping and offer selection, which you can approximate with simple rules.
+No. A visit-based or points program tied to a phone number or email already records what each customer buys. Simple rules, such as a lapsed-guest offer, can approximate the grouping and offer selection that AI tools automate.
 
-### What does Starbucks use?
+### How much should a small coffee shop budget for loyalty software?
 
-Marketing Dive reported in February 2024 that Starbucks uses Deep Brew to identify Rewards member cohorts and offer relevant incentives. The article gives member counts but no figure for how much the AI itself adds.
+CostBench recommends $50–$150 per month for most small businesses. Prices change, so check each vendor's current pricing before you sign up.
 
-### How much does a loyalty tool cost?
+### Does Square Loyalty offer a free trial?
 
-It varies by vendor and plan. Toast's pricing is not published on its support pages, and Square's help page gives no price. Check your vendor's current pricing page.
+Yes. Square Loyalty offers a free trial lasting 30 days, according to its product page.
 
-### Can delivery-app orders earn points?
+### Can a loyalty program really raise retention?
 
-Not in Toast. Its support page says points cannot be earned or redeemed on DoorDash, Grubhub or Uber Eats orders. Other vendors may differ.
-
-### Is collecting customer data legal?
-
-Usually yes with notice, but rules differ by country and state. The CCPA, for example, gives California residents rights to know, delete, correct and opt out. Check which law covers your customers.
+A vendor claims loyalty programs can increase retention by 5–30%, but that range is not controlled evidence for coffee shops. Run a test with a comparison group of guests before deciding the program works for you.
 
 ## Sources
 
-- [Marketing Dive: Starbucks Rewards membership and personalization, Feb 1, 2024](https://www.marketingdive.com/news/starbucks-rewards-loyalty-q3-personalization/706322/) (secondary report of Starbucks earnings call)
-- [Toast Support: Get Started With Toast Loyalty](https://support.toasttab.com/en/article/Getting-Started-Toast-Loyalty)
-- [Square Support: Loyalty program overview](https://squareup.com/help/us/en/article/5522-loyalty-program-overview)
-- [California Attorney General: California Consumer Privacy Act](https://oag.ca.gov/privacy/ccpa)
+- [Winback Engine: The Complete Guide to Customer Reactivation for Service Businesses](https://winbackengine.com/blog/customer-reactivation-guide/) (secondary, vendor blog)
+- [Diginomica: How Starbucks spilled coffee on its digital strategy with loyalty changes](https://diginomica.com/starbucks-spills-coffee-on-its-digital-strategy-with-loyalty-changes) (secondary)
+- [Square: Cafe Marketing Ideas: 11 Strategies To Grow Your Coffee Shop](https://squareup.com/ca/en/the-bottom-line/reaching-customers/marketing-plan-for-a-coffee-shop) (cites Square's Future of Restaurants 2025 report)
+- [Square Loyalty](https://squareup.com/us/en/software/loyalty)
+- [The Restaurant HQ: 21 Coffee Shop Marketing Ideas from an Expert](https://www.therestauranthq.com/operations/coffee-shop-marketing/) (secondary)
+- [The Small Business Expo: Best Local Advertising For Small Business](https://www.thesmallbusinessexpo.com/blog/best-local-advertising-for-small-business-are/) (secondary)
+- [ZipZipe: The Ultimate Local Marketing Guide for Australian Businesses](https://www.zipzipe.com.au/blog/local-marketing/) (secondary)
+- [CostBench: Loyalty Program Software Pricing 2026](https://www.costbench.com/software/loyalty-program/) (secondary)
+- [CostBench: Best Loyalty Program for Small Business 2026](https://costbench.com/best/loyalty-program-for-small-business/) (secondary)
+- [Loop: How Much Does a Loyalty Program Cost? (2026)](https://authors.loop.fans/blog/how-much-does-a-loyalty-program-cost) (secondary)
+- [Per Diem: How to Use Google My Business for Your Coffee Shop](https://www.tryperdiem.com/blog/google-business-profile-coffee-shop-guide) (secondary)
+- [BrewRound: Google My Business for Coffee Shops (2020 update)](https://brewround.com/blog/coffee-shop-marketing/google-my-business-for-coffee-shops/) (secondary, dated 2020)
 
-Want a loyalty and email setup for your cafe? See our [email and SMS service](/services/email-sms) or [book a free audit](/free-audit).
+Want a second opinion on your loyalty setup and Google profile? [Book a free audit](/free-audit).
