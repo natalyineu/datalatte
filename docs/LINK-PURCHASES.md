@@ -36,3 +36,23 @@ Search Console, 90 days to 2026-11-10. Pages with impressions and a gap to the t
 ## Collaborator API
 
 The key is stored on the session environment as a network secret for `collaborator.pro` (header `X-Api-Key`). Docs: https://collaborator.pro/api/public/default/docs. `/api/public/creator/list` (catalog with filters) works since 2026-11-12. Array parameters do not filter (302), use plain `keywords=...` and filter countries locally.
+
+## Baseline for tracking (Search Console, 90 days ending 2026-11-08)
+
+Data comes from `data/analytics/gsc-pages-90d.json` and `gsc-query-page-90d.json`, refreshed daily by the "Daily Analytics Fetch" workflow (06:00 UTC).
+
+| Target page | Clicks | Impressions | Avg position | Key queries (impressions, position) |
+|---|---|---|---|---|
+| `/blog/ctv-advertising-platforms-compared-2026` | 2 | 1,220 | 17.3 | best ctv advertising platforms (32, 84.4); top ctv advertising platforms (19, 66.2); best ctv & ott advertising platforms (17, 65.2) |
+| `/blog/digital-audio-advertising-2026-spotify-pandora-podcast-ads` | 4 | 1,443 | 9.2 | audio ads for small business (28, 3.6); what is the minimum spend for audio ads? (26, 7.3) |
+| `/blog/local-seo-audit-tool-review` | 0 | 4,156 | 77.6 | local seo audit (1,498, 86.5); local seo audit tools for agencies (511, 56.3) |
+| `/blog/best-marketing-automation-tools-small-business` | 0 | 2,487 | 36.2 | marketing automation for small business (255, 66.8); best marketing automation for small business (179, 27.6); marketing automation software for small business (157, 25.4) |
+
+Site total: about 32 clicks and 6.8K impressions a week (week of 2026-11-04).
+
+## Check dates
+
+- Each link is live: confirm the link, anchor, dofollow, and `site:` indexing after 3 to 7 days.
+- 2026-11-22: first Search Console check (same date as the rewrite re-check).
+- 2026-12-15: main comparison against the baseline above. Judge by position and impressions of the four pages, not by clicks.
+- Success guess (estimate, not a promise): audio and CTV formats pages reach positions 3 to 7, automation 15 to 25, CTV platforms 30 to 50, local SEO audit 40 to 70.
