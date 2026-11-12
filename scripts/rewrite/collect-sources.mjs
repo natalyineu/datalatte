@@ -28,7 +28,7 @@ async function one(r) {
       const res = await fetch("https://api.apify.com/v2/acts/apify~rag-web-browser/run-sync-get-dataset-items?timeout=100", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ query, maxResults: 4, outputFormats: ["markdown"] }), signal: AbortSignal.timeout(150000) });
       if (!res.ok) { if (res.status === 402) { await new Promise((r) => setTimeout(r, 15000)); } continue; }
       const items = await res.json();
-      const results = items.map((x) => ({ url: x.metadata?.url || x.searchResult?.url || "", title: x.metadata?.title || "", fetchedAt: new Date().toISOString().slice(0, 10), markdown: String(x.markdown || "").slice(0, 7000) })).filter((x) => x.markdown.length > 400);
+      const results = items.map((x) => ({ url: x.metadata?.url || x.searchResult?.url || "", title: x.metadata?.title || "", fetchedAt: new Date().toISOString().slice(0, 10), markdown: String(x.markdown || "").replace(/(pk|sk)\.eyJ[A-Za-z0-9_.-]{20,}/g, "REDACTED_TOKEN").slice(0, 7000) })).filter((x) => x.markdown.length > 400);
       const facts = results.reduce((n, x) => n + (x.markdown.match(/\$\s?\d[\d,.]*|\d+(?:\.\d+)?\s?%|\b20(?:2[3-6])\b/g) || []).length, 0);
       fs.writeFileSync(path.join(dir, r.slug + ".json"), JSON.stringify({ id: r.slug, query, pages: results.length, facts, ready: results.length >= 3 && facts >= 12, results }, null, 1));
       return results.length >= 3 && facts >= 12 ? "ready" : "thin";
