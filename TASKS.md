@@ -24,6 +24,8 @@
 
 - 2026-11-12 Competitor topic monitoring started: `data/competitors/topics-2026-11-12.json` (1,702 topics from AdWave, StackAdapt, Universal Ads, Mountain, Vibe sitemaps vs our slugs; 925 with no close match on our site). Do NOT name Vibe in content (partner). First gap closed: `chatgpt-ads-small-business-guide` (deployed `0ef1b3c`). Next gap topics: agentic/MCP ad buying, generative AI ad creative, retail media for local brands, CTV attribution/brand lift, sports-fan streaming stats, industry ad pages (towing, HVAC, roofing, auto glass, restaurant TV), CTV vs OLV / AVOD-SVOD-TVOD, CTR and conversion rate by industry. Re-run sitemap diff weekly.
 
+- 2026-11-12 DEPLOYED `1067196`: 10 more articles from competitor gap list (call tracking, AI writing tools, RFM, email frequency, CTR/conversion benchmarks, brand lift, sports streaming stats, billboard vs TV, ad frequency, NPS) + earlier ChatGPT ads, MCP ad buying, AI-generated TV ads. Supabase `competitor_topics` (916 gaps, 16 written) and `research_sources.kind='competitor'` drive priorities. Writing pipeline: `scripts/rewrite/new-pack.mjs` -> `scripts/research/extract-facts.mjs` -> `USE_FACTS=1 scripts/rewrite/new-article.mjs` -> `check-article` + `verify-facts.py` + `strip-leaks.py` -> covers/cards -> `link-orphans2.py` -> build -> deploy. Pending: wave 7 (190 rewrites in `data/triage/wave7`), 3 temp Supabase anon policies to drop (`tmp_anon_research_sources`, `tmp_anon_research_facts`, `tmp_anon_competitor_topics`).
+
 ## Waiting on others
 - Spotify $150 (PayPal …CZVT8EVJ6TSQDK24), Biglinko $50 (…FASQSTWT4WX527JW), Vibe $600 (…MVVN4PWCFS7XXG4Z): mark paid in `partner_deals` when received.
 - GSC: re-check rewritten/reopened articles ~2 weeks after the next deploy.
