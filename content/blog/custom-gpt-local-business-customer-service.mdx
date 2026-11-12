@@ -1,8 +1,8 @@
 ---
 title: "Custom GPT for Local Business: System Prompts"
 date: "2026-06-13"
-lastModified: "2026-06-13"
-description: "Build a Custom GPT for customer service ($20/month with ChatGPT Plus), with system prompts for a hair salon, coffee shop and fitness studio."
+lastModified: "2026-11-12"
+description: "Build a Custom GPT for local business customer service with copy-ready system prompts for a salon, coffee shop and studio. Target: 30-second replies."
 author: "Nataliia"
 category: "AI & Automation"
 tags: ["custom gpt", "chatgpt", "ai agents", "customer service", "local business", "chatbot"]
@@ -11,266 +11,214 @@ image: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&q=80&
 readTime: "11 min read"
 ---
 
-A Custom GPT is a version of ChatGPT you configure with specific instructions, knowledge about your business, and defined behaviors. Unlike a generic chatbot, a well-built Custom GPT knows your menu, your prices, your policies, and how you want to communicate.
+A Custom GPT is ChatGPT configured with your own instructions, business facts and tone rules, so it answers customer questions the way your business would. For a local business it works best on prices, hours, services and policies, with a clear handoff to a person for bookings and complaints. This guide gives copy-ready system prompts for a hair salon, a coffee shop and a fitness studio, plus setup steps, a knowledge file layout and a simple cost check. Replace every bracketed placeholder with your own details before publishing.
 
-You can embed it on your website, share a link on Instagram, or use it as an internal tool your staff uses to answer customer questions consistently. And it costs $20/month — the price of a ChatGPT Plus subscription.
+## What Can a Custom GPT Handle for a Local Business?
 
-This guide gives you the exact system prompts, knowledge file format, and setup steps for three business types: a hair salon, a coffee shop, and a fitness studio.
+A well-configured Custom GPT can answer the questions customers ask most often. For a service business, that usually means prices, hours, location, service descriptions, cancellation rules and a link to your booking page. The more of these facts you put in the instructions, the fewer answers the model has to guess.
 
----
+It should not handle everything. A Custom GPT can point customers to a booking link, but it cannot book an appointment on its own unless you connect it to a booking system. Complaints that need empathy and a decision from a manager should go straight to a person. So should anything involving sensitive personal data, such as payment details or medical notes.
 
-## What a Custom GPT Can Handle
+Treat the GPT as a first responder, not a replacement for staff. It handles the repeat questions so your team can focus on the customers in front of them and the calls that need judgment.
 
-For a local service business, a well-configured GPT can handle:
+## How Do You Set Up a Custom GPT Step by Step?
 
-- **Pricing questions**: "How much is a balayage?" / "What's the price for a large cold brew?"
-- **Hours and location**: "Are you open on Sundays?" / "Where are you located?"
-- **Service descriptions**: "What's the difference between highlights and balayage?"
-- **Booking guidance**: "How do I book an appointment?" (with a link to your booking page)
-- **Cancellation policy**: "What happens if I need to cancel?"
-- **Product recommendations**: "What shampoo do you recommend for color-treated hair?"
-- **FAQ responses**: Anything you've pre-loaded in the knowledge file
+Setup takes an afternoon if your prices and policies are already written down. Open ChatGPT, go to My GPTs, and choose Create a GPT. Use the Configure tab rather than the chat-based builder, because it gives you direct control over the instructions and the knowledge file.
 
-What it should NOT handle autonomously:
-- Actual bookings (it can direct to a booking link, not book directly unless you integrate an API)
-- Complaints requiring human empathy and decision-making
-- Anything involving sensitive personal data
+The checklist below covers the order that works best for most small businesses.
 
----
+| Step | What to enter | Check before publishing |
+|---|---|---|
+| 1 | Name and short description | Matches how customers search for you |
+| 2 | Instructions (system prompt) | Every price, hour and policy is filled in |
+| 3 | Knowledge file upload | Prices match the instructions exactly |
+| 4 | Fallback line | Phone number or booking link is included |
+| 5 | Test run | Answers match your current menu and policies |
 
-## Setting Up Your Custom GPT
+Run the test with real questions you have received over email, text or the front desk. If the GPT invents a price or policy during testing, add that item to the instructions and test again.
 
-1. Go to [chat.openai.com](https://chat.openai.com) → click your name → **My GPTs** → **Create a GPT**
-2. Use the **Configure** tab (not the chat-based builder — it gives you more control)
-3. Fill in: Name, Description, Instructions (system prompt), and upload a Knowledge file
+## What Should the Hair Salon System Prompt Include?
 
----
+A salon prompt needs four blocks: the business details, a services and price list, stylist specialties, and the cancellation and deposit rules. Stylist specialties matter because customers often ask who does balayage or men's fades, and the GPT should answer that without guessing.
 
-## System Prompt: Hair Salon
-
-Copy and paste this as your Instructions:
+The prompt below uses placeholders. Fill in your own figures and remove any service you do not offer.
 
 ```
-You are the virtual assistant for [SALON NAME], a hair salon located at [ADDRESS].
-
-Your job is to answer customer questions accurately, warmly, and concisely. You represent the salon professionally.
+You are the virtual assistant for [SALON NAME], a hair salon at [FULL ADDRESS].
+Answer customer questions accurately, warmly and concisely.
 
 ABOUT THE SALON:
-- Name: [SALON NAME]
-- Location: [FULL ADDRESS]
-- Phone: [PHONE NUMBER]
-- Hours: Mon–Fri 9am–7pm, Sat 9am–6pm, Sunday Closed
+- Phone: [PHONE]
+- Hours: [HOURS FOR EACH DAY]
 - Booking: [BOOKING URL]
-- Instagram: @[HANDLE]
+- Instagram: [HANDLE]
 
-SERVICES AND PRICES (use these exact numbers — do not make up prices):
-- Women's haircut: $65–$95 (varies by length and stylist)
-- Men's haircut: $35–$55
-- Balayage: $180–$280 (consult required for exact quote)
-- Full highlights: $150–$220
-- Partial highlights: $110–$160
-- Color correction: from $250 (requires consultation)
-- Blow dry / styling: $45–$65
-- Keratin treatment: $200–$350
-- Deep conditioning treatment: $35
+SERVICES AND PRICES (use these exact figures, never invent prices):
+- Women's haircut: [PRICE RANGE]
+- Men's haircut: [PRICE RANGE]
+- Balayage: [PRICE RANGE], consultation required for exact quote
+- Full highlights: [PRICE RANGE]
+- Blow dry: [PRICE RANGE]
+- Deep conditioning: [PRICE]
 
 STYLISTS:
-- Emma: Specializes in balayage, color correction, and curly hair
-- James: Specializes in men's cuts, fades, and textured styling
-- Maria: Specializes in highlights, extensions, and bridal hair
+- [NAME]: [SPECIALTIES]
+- [NAME]: [SPECIALTIES]
 
 POLICIES:
-- Cancellation: 24 hours notice required. Late cancellations or no-shows may incur a $35 fee.
-- Color services require a deposit of $50 at booking.
-- We recommend a consultation before major color changes.
+- Cancellation: [NOTICE PERIOD] required. [LATE FEE POLICY].
+- Color services: [DEPOSIT POLICY].
 
-TONE GUIDELINES:
-- Warm and professional — not overly casual, not corporate
-- If you don't know the answer, say so and provide the phone number or booking link
-- Always offer the booking link when someone asks about scheduling
-- Do not make up prices or policies not listed above
-- If asked about a stylist availability, direct them to book online or call
-
-When someone is ready to book, always say: "You can book online at [BOOKING URL] or call us at [PHONE]."
+TONE: Warm and professional. Not overly casual, not corporate.
+If you do not know the answer, say so and give the phone number or booking link.
+Do not make up prices or policies that are not listed above.
+For scheduling, always say: "You can book online at [BOOKING URL] or call us at [PHONE]."
 ```
 
----
+The last line matters most. It gives the GPT one fixed way to close every scheduling conversation, so customers always get the same next step.
 
-## System Prompt: Coffee Shop
+## How Should a Coffee Shop Prompt Handle Menu Changes?
+
+A coffee shop menu changes with the seasons, so the prompt should separate the stable facts from the menu section. Hours, address, Wi-Fi rules and dairy-alternative policies rarely change. The menu block changes every season, and it is the part you will edit most often.
+
+Keep the tone neighborhood-friendly. A short prompt with three or four common questions and answers helps the GPT handle the wording customers actually use, such as asking about oat milk or wholesale orders.
 
 ```
-You are the virtual assistant for [COFFEE SHOP NAME], a specialty coffee shop in [CITY].
+You are the virtual assistant for [SHOP NAME], a coffee shop in [CITY].
 
 ABOUT US:
-- Location: [ADDRESS]
-- Hours: Mon–Fri 6:30am–6pm, Sat–Sun 7am–5pm
+- Address: [ADDRESS]
+- Hours: [HOURS FOR EACH DAY]
 - Phone: [PHONE]
 - Online orders: [ORDER URL]
-- WiFi: Available, password posted at the counter
+- Wi-Fi: [FREE OR PAID], password [WHERE CUSTOMERS FIND IT]
 
-MENU HIGHLIGHTS (current seasonal menu — update this section each season):
-Espresso drinks:
-- Espresso: $3.50 / $4.00 (single/double)
-- Americano: $4.00 / $4.50
-- Latte: $5.50 (12oz) / $6.25 (16oz)
-- Cappuccino: $5.25
-- Flat white: $5.50
-- Cortado: $4.75
-- Oat milk / almond milk: +$0.75
-
-Signature drinks:
-- Brown butter latte: $6.50
-- Lavender cold brew: $7.00
-- Salted caramel mocha: $6.75
-- Matcha latte: $6.25
-
-Non-coffee:
-- Chai latte: $5.75
-- Hot chocolate: $5.00
-- Herbal teas: $4.00
-
-Food (rotating selection):
-- Croissants: $4.50
-- Banana bread: $4.00
-- Avocado toast: $9.50
-- Breakfast sandwich: $8.50
+MENU (current season, update each season):
+- Espresso: [PRICE]
+- Latte: [PRICE] for each size
+- Oat or almond milk: [EXTRA CHARGE]
+- Seasonal drink: [PRICE]
+- Food: [ITEM AND PRICE]
 
 COMMON QUESTIONS:
-Q: Do you have oat milk?
-A: Yes, we carry oat milk and almond milk as dairy alternatives (+$0.75).
+Q: Do you have dairy alternatives?
+A: [YOUR ANSWER AND EXTRA CHARGE]
+Q: Do you take catering or bulk orders?
+A: Please call [PHONE] for event and catering orders.
 
-Q: Is your WiFi free?
-A: Yes, WiFi is free for customers. The password is posted at the counter.
-
-Q: Do you do wholesale or bulk orders?
-A: For catering or event orders, please call us directly at [PHONE].
-
-TONE: Friendly, enthusiastic about coffee but not pretentious. This is a neighborhood coffee shop, not a specialty coffee lecture hall.
+TONE: Friendly and relaxed. Enthusiastic about coffee without lecturing.
+If you do not know something, say so and direct the customer to [PHONE].
 ```
 
----
+Put the seasonal menu in the instructions, not only in the knowledge file. Instructions are read more reliably for specific prices, so a price change there takes effect straight away.
 
-## System Prompt: Fitness Studio
+## What Does a Fitness Studio Prompt Need?
+
+A fitness studio prompt has a different job. Customers ask about the class schedule, what to bring, whether a class suits their level, and how to book or cancel. Schedules change weekly, so the prompt should link to the live booking page rather than hard-code every class time.
+
+Cancellation rules are where studios lose money, so state the window clearly. The prompt should also tell the GPT how to handle a first-time visitor, because new students often ask the same orientation questions.
 
 ```
-You are the virtual assistant for [STUDIO NAME], a [yoga/fitness/HIIT] studio in [CITY].
+You are the virtual assistant for [STUDIO NAME], a [STYLE] studio in [CITY].
 
 ABOUT THE STUDIO:
-- Location: [ADDRESS]
+- Address: [ADDRESS]
 - Phone: [PHONE]
-- Schedule and booking: [MINDBODY/VAGARO URL]
-- Instagram: @[HANDLE]
+- Schedule and booking: [LIVE BOOKING URL]
+- Instagram: [HANDLE]
 
-CLASS SCHEDULE (update weekly — or connect to live schedule via API):
-Monday: 6am HIIT, 9am Yoga Flow, 12pm Core & Stretch, 6pm Bootcamp
-Tuesday: 7am Pilates, 10am Beginner Yoga, 5:30pm HIIT, 7pm Yin Yoga
-Wednesday: 6am Bootcamp, 9am Yoga Flow, 12pm Pilates, 6pm Core & Stretch
-Thursday: 7am HIIT, 10am Beginner Yoga, 5:30pm Bootcamp
-Friday: 6am Yoga Flow, 9am HIIT, 12pm Pilates
-Saturday: 8am Outdoor Bootcamp, 10am Slow Flow Yoga
-Sunday: 9am Gentle Yoga, 11am Community Yoga (PWYC)
+TODAY'S SCHEDULE: Direct customers to [LIVE BOOKING URL] for current class times.
 
-PRICING:
-- Single class drop-in: $22
-- 5-class pack: $95 ($19/class)
-- 10-class pack: $175 ($17.50/class)
-- Monthly unlimited: $120/month
-- New student special: 2 weeks unlimited for $30
+PRICING: [CLASS PRICES, PACKS AND MEMBERSHIP, AS PUBLISHED]
 
-WHAT TO BRING:
-- Yoga mat (we have loaners for $2)
-- Water bottle
-- Grip socks for Pilates (required — available for purchase: $12)
-- Comfortable workout clothes
+WHAT TO BRING: [MAT, WATER, FOOTWEAR, CLOTHING RULES]
 
 POLICIES:
-- Classes book up fast — reserve online 24 hours in advance
-- Cancellations: cancel at least 2 hours before class or the session is forfeited
-- First class? Arrive 10 minutes early for a brief orientation
+- Booking: [HOW FAR IN ADVANCE]
+- Cancellation: [CANCELLATION WINDOW AND WHAT HAPPENS AFTER]
+- First class: [ARRIVAL TIME AND ORIENTATION]
 
-TONE: Energetic, encouraging, inclusive. This studio is for all fitness levels — never make people feel intimidated about joining.
+TONE: Energetic, encouraging and inclusive. Make every fitness level feel welcome.
+Never suggest a class is too advanced for someone without checking the class description.
 ```
 
----
+The schedule line is deliberate. Sending customers to the live booking page avoids the GPT quoting a class that was cancelled last week.
 
-## Knowledge File: What to Include
+## What Belongs in the Knowledge File?
 
-Upload a PDF or text file with:
+The knowledge file holds the detail that is too long for the instructions. Upload a PDF or text file that covers the full service or menu list, a set of frequently asked questions, staff bios, location details such as parking and transit access, and any seasonal information like holiday hours.
 
-1. **Full menu / service list** with current prices
-2. **FAQ document** — 20–30 common questions you actually get asked
-3. **Staff bios** (who specializes in what)
-4. **Location details** (parking, public transit access, accessibility)
-5. **Social proof** — 3–5 quotes from real reviews you're proud of
-6. **Seasonal information** — holiday hours, limited-time offers
+Write the FAQ section from questions you have actually been asked. A list of guesses is less useful than a log of what customers asked on the phone last month. Keep the file in plain sentences so the model can match a customer's wording to the right answer.
 
-Update this file whenever prices change or new services launch. The GPT will use this as its knowledge base for anything not covered in the system prompt.
+Update the file whenever prices change or a service launches. Keep prices identical across the instructions and the file. If they disagree, the GPT may quote whichever one it picks up first.
 
----
+## How Fast Should Your Replies Be?
 
-## Embedding on Your Website
+Speed is the main reason a customer-facing GPT is worth building. Customers judge a business by how quickly it answers, and the benchmarks are tight. The figures below come from combined industry benchmarks and from SOCi's 2026 index on AI platform visibility.
 
-Once your Custom GPT is ready:
+<StatRow values="30s|80%|68.3%|1.2%" labels="Live chat reply expectation|AI-handled service interactions by 2029|Business profile accuracy on AI platforms|Locations recommended by ChatGPT" subs="Adwave benchmark (secondary)|Gartner via HubSpot (secondary)|SOCi 2026 Local Visibility Index|SOCi 2026 Local Visibility Index" trends="neutral|up|down|neutral" />
 
-1. In GPT settings, enable **"Anyone with the link"** access
-2. Copy the shareable link
-3. Embed via iframe or a floating button on your site:
+The first figure sets the bar. Adwave's benchmark puts the live chat expectation at a reply under 30 seconds, and email at under 1 hour. A Custom GPT can answer in seconds at any hour, which is the gap it fills. The second figure is a forecast: Gartner expects AI agents to handle at least 80% of customer service interactions by 2029, according to HubSpot's summary.
 
-```html
-<!-- Simple floating chat button -->
-<div style="position: fixed; bottom: 24px; right: 24px; z-index: 9999;">
-  <a href="https://chat.openai.com/g/your-gpt-id" target="_blank"
-     style="background: #5c3317; color: white; padding: 14px 20px; 
-            border-radius: 50px; text-decoration: none; font-family: sans-serif;
-            font-size: 14px; display: flex; align-items: center; gap: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
-    💬 Chat with us
-  </a>
-</div>
-```
+The two SOCi figures are a warning. SOCi reports that business profile accuracy on AI platforms like ChatGPT is 68.3%, and only 1.2% of locations are recommended by ChatGPT. A GPT that answers from your own accurate instructions is one way to make sure the facts customers receive are correct. For more on how AI search finds local businesses, see [AI agents for local business: what they are and how they work](/blog/ai-agents-for-local-business-what-they-are-and-how-they-work).
 
-For a more integrated experience, use the **ChatGPT API** directly with your system prompt and stream responses into your own chat widget. This removes the OpenAI branding and gives you full control over the UI.
+## Can a Custom GPT Connect to Live Data or Book Appointments?
 
----
+By default, a Custom GPT answers only from its instructions and knowledge file. To pull live data, such as stock levels or open appointment slots, you need a connection. OpenAI's custom MCP server support has plan limits. According to Adwave's summary of OpenAI's documentation, custom MCP servers get full write access only on Business and Enterprise workspaces, while Pro users get read and fetch permissions only. On Business, only admins and owners can create and publish custom servers.
 
-## Frequently Asked Questions
+For a single-location business, that usually means the static Custom GPT is enough, with a live booking link doing the scheduling. If you need the assistant to check availability or write to your system, plan the plan tier first. The technical side is covered in [how to build an MCP server with custom data for local business](/blog/build-mcp-server-custom-data-local-business).
 
-**Q: Do customers need a ChatGPT account to use my Custom GPT?**
+Booking itself should stay with your existing tool until you have a tested integration. A wrong booking costs more than a slow answer.
 
-If you share a public link to your Custom GPT, users can access it without creating an account — though they're limited in how many messages they can send without logging in (roughly 2–3 exchanges). For most FAQ use cases, this is enough. For a fully embedded experience without OpenAI branding or account requirements, you'd need to build your own chat widget using the OpenAI API directly — which requires more technical setup but gives full control.
+## What Does a Custom GPT Cost to Run? A Worked Example
 
-**Q: How do I update the GPT when my prices or menu change?**
+The subscription is only part of the cost. The real question is how much staff time the GPT gives back. The example below uses a coffee shop with assumed inputs. Replace them with your own figures before you decide.
 
-Edit the Instructions section (system prompt) directly in My GPTs → click your GPT → Configure. Changes take effect immediately. If prices are in the knowledge file, upload a new version of the file. I recommend keeping prices in the system prompt (not just the knowledge file) because the GPT references instructions more reliably than knowledge file content for frequently-asked specifics.
+Assumptions (all assumption, not sourced): 40 repeat questions a week that a staff member answers by hand; 3 minutes per answer; staff time valued at $18 per hour; ChatGPT subscription at $20 per month. Check the current subscription price on OpenAI's site.
 
-**Q: What if the GPT gets a question it can't answer?**
+Step 1: 40 questions × 3 minutes = 120 minutes a week, or 2 hours.
+Step 2: 2 hours × 4.33 weeks a month (52 weeks ÷ 12) = about 8.7 hours a month.
+Step 3: 8.7 hours × $18 = about $156 of staff time a month.
+Step 4: $156 − $20 subscription = about $136 a month in staff time freed up.
 
-Your system prompt should explicitly handle this: "If you don't know the answer, say so clearly and direct them to call [phone number] or email [email]." A GPT that says "I'm not sure — here's how to reach us directly" is better than one that guesses or makes up information. Never leave this to the default behavior — always define the fallback explicitly.
+This is not cash in the bank. The gain only shows up if the staff reuse those hours for in-shop service, follow-ups or a promotion. Setup time and your own review time sit outside this sum. If your repeat questions are fewer, the case weakens, and a simple FAQ page may do the same job.
 
-**Q: Can I build this without ChatGPT Plus ($20/month)?**
+## How Do You Keep the GPT Accurate Over Time?
 
-Not with Custom GPTs specifically — they require Plus. Alternatives: Anthropic's Claude (has a similar system-prompt-based approach via the API), Google Gemini (has Gems, a similar custom agent feature), or using Groq's free API to build your own chatbot widget with a custom system prompt. The cheapest option: build a simple FAQ chatbot with plain JavaScript that calls the Groq API — total cost under $1/month for most small businesses.
+Accuracy is a maintenance task. Set a fixed review point, such as the first day of each month or the start of each season, and check every price, hour and policy against the live version in your system. A quick review once a season catches most drift.
 
-**Q: How is this different from a regular chatbot like Tidio or Intercom?**
+Log the questions the GPT could not answer. Each gap is a line you should add to the knowledge file. Over a few review cycles the file becomes a record of what your customers actually ask.
 
-Traditional chatbots are rule-based — they follow decision trees you pre-build. If someone asks something outside the tree, they break. Custom GPT uses a language model — it handles the full range of natural language, understands context, and can answer questions you didn't specifically program. The trade-off: traditional chatbots are more predictable and easier to control. GPT-based assistants are more flexible but occasionally mishandle edge cases. For most local business FAQ use cases, the flexibility wins.
+For a wider view of how AI tools fit into your marketing, see [ChatGPT prompts for local business marketing](/blog/chatgpt-prompts-for-local-business-marketing). For a comparison of rule-based chatbots and live staff, see [AI-powered chatbot vs live chat for local business](/blog/ai-powered-chatbot-vs-live-chat-local-business).
 
----
+## FAQ
 
-## Related Articles
+### Do customers need a ChatGPT account to use my Custom GPT?
 
-- [AI Agents for Local Business: What They Are and How They Work](/blog/ai-agents-for-local-business-what-they-are-and-how-they-work)
-- [Make.com AI Agent Workflow for Local Business](/blog/make-com-ai-agent-workflow-local-business)
-- [AI Agent for Customer Service: How It Works for Local Business](/blog/ai-agent-for-customer-service-local-business)
-- [AI Agents for Hair Salons: Automate Bookings and Follow-Ups](/blog/ai-agents-for-hair-salons)
-- [How to Build an AI Agent for Local Business (No-Code Guide)](/blog/how-to-build-ai-agent-local-business-no-code)
+Access rules depend on how you share the GPT and on ChatGPT's current sharing settings, which change over time. Check the sharing options in your GPT settings before you publish a link. If you want a fully branded chat window with no OpenAI interface, you will need to build your own widget on the API, which takes more technical setup.
 
-<Callout type="coffee" title="Want More Local Customers?">
-Nataliia at DataLatte runs data-driven local marketing campaigns for local businesses — coffee shops, salons, pet groomers, and fitness studios. [Book a free 30-minute strategy call](/contact) or explore [Google Ads management](/services/google-ads).
-</Callout>
+### How do I update the GPT when prices change?
 
-## Related guides
+Edit the Instructions section in My GPTs, then open the Configure tab for that GPT. If prices also appear in the knowledge file, upload the new version of that file as well. Keep the two in step so the GPT never quotes conflicting figures.
 
-- [TikTok Marketing for Service Businesses: What to Film](/blog/tiktok-marketing-for-service-businesses)
-- [SEO for Local Service Businesses: 7-Step Playbook](/blog/seo-for-local-service-businesses)
-- Heatmap Tools for Small Business Websites
+### What happens when the GPT gets a question it cannot answer?
+
+Write an explicit fallback line into the instructions. It should say that the GPT does not know, then give your phone number or booking link. Do not leave this to default behavior, because a guessed answer about a price or policy creates problems at the counter.
+
+### Can the GPT handle complaints?
+
+It should not. Complaints need empathy and a decision from a person. Tell the GPT to acknowledge the issue briefly and pass the customer to your phone line or a named contact. Keep this rule visible in the instructions so it applies to every conversation.
+
+### Is a Custom GPT better than a traditional chatbot?
+
+A traditional chatbot follows a decision tree you build in advance, so it is predictable but breaks on unexpected questions. A Custom GPT handles natural wording and context, but it can occasionally misread an edge case. For most local business FAQ use, the flexibility is worth the extra review. For booking-heavy workflows, see [AI chatbot for local business booking and FAQs](/blog/ai-chatbot-for-local-business-booking-and-faqs).
+
+## Sources
+
+- [Customer service excellence response benchmarks, Adwave (secondary)](https://adwave.com/resources/customer-service-excellence)
+- [AI agents for social media, HubSpot, summarizing Gartner's forecast (secondary)](https://blog.hubspot.com/marketing/ai-agents-for-social-media)
+- [AI agents for multi-location marketing, SOCi 2026 Local Visibility Index](https://www.soci.ai/blog/ai-agents-for-multi-location-marketing-5-tasks-you-can-fully-automate-today/)
+- [Advertising on ChatGPT vs with ChatGPT, Adwave, citing OpenAI documentation (secondary)](https://adwave.com/resources/advertising-on-chatgpt-vs-with-chatgpt)
+- [How to advertise from ChatGPT with no ad accounts, Adwave, citing OpenAI documentation (secondary)](https://adwave.com/resources/advertise-from-chatgpt)
+
+Ready to put these answers in front of local customers? [Get a free audit](/free-audit) of your current listings and enquiry flow, or see how we run [Google Ads for local businesses](/services/google-ads).
