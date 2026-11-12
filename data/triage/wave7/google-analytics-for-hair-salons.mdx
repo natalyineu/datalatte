@@ -1,0 +1,130 @@
+---
+title: "Google Analytics for Hair Salons: 4 Events to Track"
+date: "2026-05-25"
+lastModified: "2026-11-12"
+description: "Track four events in Google Analytics 4 in 15 minutes a week to see if your salon website fills chairs. Setup, UTM tags and booking-gap fixes."
+author: "Nataliia"
+category: "Analytics & Tracking"
+tags: ["Google Analytics", "Hair Salons", "Local Business", "Analytics", "Tracking"]
+slug: "google-analytics-for-hair-salons"
+image: "https://images.unsplash.com/photo-1510972021-c0bff01843e3?w=800&q=80&auto=format&fit=crop"
+readTime: '10 min read'
+---
+A salon needs four numbers from Google Analytics: booking-button taps, phone-number taps, completed bookings, and the channel each visitor arrived from. Google Analytics is free, and [LivePlan's marketing ROI guide](https://www.liveplan.com/blog/starting/track-marketing-return-on-investment?srsltid=AYCX9vJq8fma11GMaPD4YN3YLfAa8k1pwzVHyWBYHsxn5Tqiu_np7zmZ) calls it a very powerful tool. It only counts the events you define. GA4 lets you mark important events as conversions, and [Salesforce's small business guide](https://www.salesforce.com/ca/small-business/marketing/smb-marketing-guide/?bc=OTH) says data should take 24 to 48 hours to appear after setup. Check the same four numbers each week.
+
+This guide covers the events, the tagging rules and what GA4 cannot see. The cost figures are assumptions and are labelled as such.
+
+<StatRow
+  values="20|24-48|30-60|4"
+  labels="Conversion goals per account in Google Analytics, per LivePlan|Hours before GA data appears after setup, per Salesforce|Days to keep tracking Google Business Profile metrics after ads start|Items in AdWave's call-tracking launch checklist"
+  subs="LivePlan (secondary)|Salesforce guide (secondary)|AdWave (vendor)|AdWave (vendor)"
+  trends="neutral|neutral|neutral|neutral"
+  source="LivePlan, Salesforce, AdWave"
+/>
+
+## What should a salon track in Google Analytics?
+
+Four events cover most of what a salon needs to know. The booking-button tap shows interest in booking. The phone tap shows calls from mobile visitors. The completed booking shows real revenue, and the enquiry form shows consultations or quote requests.
+
+Google's help page says recommended events are not sent automatically, because they "require additional context to be meaningful" ([Google Analytics Help: Recommended events](https://support.google.com/analytics/answer/9267735)). Your booking and phone taps have to be created on purpose. The Events report suggests events based on data you already collect, so it is a starting point, not a finished setup.
+
+| Event | Why it matters | How to capture it |
+| --- | --- | --- |
+| Booking-button tap | Interest in booking | Custom event on the booking button or link |
+| Phone-number tap | Calls from phones | Custom event on tel links, then tested |
+| Booking completed | Real bookings | Thank-you page or booking platform's event |
+| Enquiry form sent | Consultations and quotes | Form event or thank-you page |
+
+## Why do conversions show nothing until you set them up?
+
+Conversions do not backfill. According to LivePlan, Google Analytics goals "will only start recording conversions once you have set them up," and Google limits conversion goals to 20 per account ([LivePlan](https://www.liveplan.com/blog/starting/track-marketing-return-on-investment?srsltid=AYCX9vJq8fma11GMaPD4YN3YLfAa8k1pwzVHyWBYHsxn5Tqiu_np7zmZ)). Set up the four events above first, then check that they record before you add anything else.
+
+Attribution also needs care. LivePlan notes that Google Analytics assigns a sign-up to the last campaign that brought the user to the website. A client who saw your Instagram post, then searched and clicked a Google ad, will be credited to whichever came last. Read channel numbers as a pattern across weeks, not as a verdict on a single post.
+
+## How do you track phone calls that start on your website?
+
+Phone calls are where GA4 is weakest. AdWave's call-tracking checklist includes loading the DNI script on every major page, verifying analytics events on tel clicks, and making sure CRM fields capture source and outcome ([AdWave: How to track phone calls](https://adwave.com/resources/how-to-track-phone-calls)). Test each step with a real tap from your own phone.
+
+PinkLime's measurement setup for a small business lists call tracking for phone leads as a separate component alongside Google Analytics conversion tracking, Google Ads conversion tracking and a Facebook Pixel ([PinkLime](https://pinklime.io/blog/digital-marketing-small-business-israel)). Calls that never touch your website need call tracking, not a tap event. Google Analytics also cannot directly track Local Services Ads, because those leads come through Google Business Profile rather than your website ([Ryze AI](https://www.get-ryze.ai/blog/google-local-services-ads-reporting-tool)).
+
+If you run Google Ads for your salon, the conversion side is covered in our [hair salon Google Ads guide](/blog/google-ads-for-hair-salons-complete-guide). Google's lead generation guide says tracking starts by defining which behaviours to track as "conversion actions" ([Google Ads: Guide to lead generation](https://business.google.com/us/resources/articles/lead-generation/)).
+
+## How should links be tagged so channels get credit?
+
+Untagged links are hard to read. Google Analytics automatically treats CPM and CPC visitors as paid traffic under the UTM medium parameter, according to LivePlan. Every link you control should carry a source, medium and campaign so the report shows where the visit came from. Use one consistent format for names, so "Instagram" and "instagram" do not become two channels.
+
+| Where the link lives | utm_source | utm_medium | utm_campaign |
+| --- | --- | --- | --- |
+| Instagram bio | instagram | social | bio-link |
+| Facebook page button | facebook | social | page-button |
+| Monthly email | newsletter | email | october-offer |
+| Window poster QR code | poster | qr | window-2026 |
+
+Keep a shared sheet of every tagged link. Our [local business analytics and tracking guide](/blog/local-business-analytics-and-tracking) covers the wider reporting set-up, and the [GA4 setup guide for local businesses](/blog/google-analytics-4-setup-local-business) covers the account steps.
+
+## What does tracking cost, and when does it pay back?
+
+Tracking does not earn money directly. It pays by showing which spend to cut or move. The figures below are illustrative assumptions for a single salon. Replace each one with your own numbers before you rely on the result.
+
+| Input or result (all assumptions) | Tough | Base | Strong |
+| --- | --- | --- | --- |
+| One-off setup: 3 hours at $40/hour | $120 | $120 | $120 |
+| Weekly check: 15 minutes, 4 weeks, at $40/hour | $40 | $40 | $40 |
+| Monthly spend on a channel that books nobody | $0 | $150 | $300 |
+| Monthly saving after you cut it | $0 | $150 | $300 |
+| Net monthly gain after the check | -$40 | $110 | $260 |
+| Months to repay setup | never | 1.1 | 0.5 |
+
+In the Tough column, everything you spend is already working, so tracking only confirms it. The Base and Strong columns assume you were paying for a channel that produced no bookings. The saving is real only if you move that money to something that works and your tracking is accurate.
+
+Repeat business matters as much as new visitors. Winback Engine's table treats hair salon clients who usually visit every 4 to 6 weeks as lapsed after 90 or more days inactive ([Winback Engine](https://winbackengine.com/blog/customer-reactivation-guide/)). Add a booking-complete report by client to your weekly check, so you can see who is drifting away.
+
+## How do you start this week?
+
+1. Confirm the four events exist: booking tap, phone tap, booking complete and enquiry form.
+2. Mark the events you care about as conversions, and keep the list short.
+3. Tag your Instagram, Facebook, email and QR links with one naming format.
+4. Make a test booking and a test phone tap, then check both appear in your reports after the 24 to 48 hour delay.
+5. Pick a fixed weekly slot, such as Monday morning, and compare this week's four numbers with last week's.
+
+If you run ads, keep watching the same Google Business Profile metrics for 30 to 60 days after they start, as AdWave recommends ([AdWave: Google Business Profile insights](https://adwave.com/resources/google-business-profile-insights-what-your-analytics-actually-mean)). Track click-through rate, conversion rate and return on ad spend in both Google Analytics and Google Ads, as [BoostFloral's guide to Google Ads](https://www.boostfloral.com/blogs/using-google-ads-to-market-your-flower-shop-website) suggests.
+
+## FAQ
+
+### Do I need Google Analytics if clients book through an app?
+
+Possibly not for bookings, but you still need a website to measure. If clients only reach an app, GA4 cannot see the booking itself. Ask the app provider what it reports, and keep your own booking-button tap as the number you can measure.
+
+### How long does it take to see data?
+
+Salesforce says data should take 24 to 48 hours to appear in Google Analytics after tracking is set up correctly. Test a booking and a phone tap, then wait before judging the results.
+
+### Why are my GA4 bookings lower than my booking software's count?
+
+GA4 only records what it can see on your website. Bookings completed in an app, on another domain or without tracking will not match. Compare the two over the same weeks and treat the gap as a measurement difference, not a failure.
+
+### Do conversions from before setup appear in reports?
+
+No. LivePlan notes that conversion goals only start recording once they are set up, so there is no history to pull in afterwards.
+
+Want someone to check your tracking? Start with the [free audit](/free-audit), or see how our [Google Ads service](/services/google-ads) handles conversion tracking for salons.
+
+## Sources
+
+- [LivePlan: A Complete Guide to Marketing ROI Tracking](https://www.liveplan.com/blog/starting/track-marketing-return-on-investment?srsltid=AYCX9vJq8fma11GMaPD4YN3YLfAa8k1pwzVHyWBYHsxn5Tqiu_np7zmZ) (secondary)
+- [Google Analytics Help: Recommended events](https://support.google.com/analytics/answer/9267735)
+- [Google Ads: Guide to lead generation for local businesses](https://business.google.com/us/resources/articles/lead-generation/)
+- [AdWave: How to track phone calls](https://adwave.com/resources/how-to-track-phone-calls)
+- [AdWave: Setting up Google Analytics 4, a small business walkthrough](https://adwave.com/resources/setting-up-google-analytics-4-a-small-business-walkthrough)
+- [AdWave: Google Business Profile insights](https://adwave.com/resources/google-business-profile-insights-what-your-analytics-actually-mean)
+- [Salesforce: Small Business Marketing guide](https://www.salesforce.com/ca/small-business/marketing/smb-marketing-guide/?bc=OTH) (secondary)
+- [PinkLime: Digital marketing for small businesses](https://pinklime.io/blog/digital-marketing-small-business-israel)
+- [Ryze AI: Google Local Services Ads reporting tool](https://www.get-ryze.ai/blog/google-local-services-ads-reporting-tool)
+- [Winback Engine: Customer reactivation guide](https://winbackengine.com/blog/customer-reactivation-guide/)
+- [BoostFloral: Google Ads tips for florists](https://www.boostfloral.com/blogs/using-google-ads-to-market-your-flower-shop-website) (secondary)
+
+## Related guides
+
+- [Google Analytics 4 Setup for a Local Business](/blog/google-analytics-4-setup-local-business)
+- [Local Business Analytics and Tracking](/blog/local-business-analytics-and-tracking)
+- [Google Ads for Hair Salons: Complete Guide](/blog/google-ads-for-hair-salons-complete-guide)

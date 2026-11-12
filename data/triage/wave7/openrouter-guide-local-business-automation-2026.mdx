@@ -1,0 +1,141 @@
+---
+title: "OpenRouter Guide for Local Business: Setup and Costs"
+date: "2026-06-13"
+lastModified: "2026-11-12"
+description: "Use OpenRouter's one API key to reach 627 AI models for review replies, social captions and email drafts, with a worked monthly cost example inside."
+author: "Nataliia"
+category: "AI & Automation"
+tags: ["OpenRouter", "AI automation", "local business", "API"]
+slug: "openrouter-guide-local-business-automation-2026"
+noindex: true
+image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80&auto=format&fit=crop"
+readTime: "9 min read"
+---
+
+OpenRouter is an API gateway. One account and one API key give you access to the models listed on its platform, which its [Discover page](https://openrouter.ai/discover) counts at 627. Requests follow the same pattern whichever model you pick, so switching providers means changing one model string. Kilo's documentation says [OpenRouter charges based on the underlying model's pricing](https://kilo.ai/docs/ai-providers/openrouter), so you pay each model's listed rate. For a local business, the practical uses are review replies, social captions and email drafts. Keep a human approval step on anything customers will read.
+
+## What Does OpenRouter Actually Do for a Local Business?
+
+OpenRouter is a routing layer, not a model. Kilo describes it as a platform that gives access to a wide variety of language models from different providers, all through a single API. For a salon or cafe, the benefit is administrative: one key, one dashboard and one place to check spend.
+
+The catalogue is large and uneven in quality. The Discover page lists third-party scores from the Artificial Analysis intelligence index on a 0 to 100 scale. Claude Fable 5.2 from Anthropic scores 65, Gemini 4 Carbon from Google scores 60, GPT-6 Astra from OpenAI scores 57, and Grok 4.7 from SpaceXAI scores 36. The page also notes that Anthropic edges Google by 5 points on that index.
+
+An index score measures general ability on a benchmark. It does not show how a model will handle a harsh review about your flat white. Test candidate models on your own real prompts before you commit.
+
+<StatRow values="627|65|5|22" labels="Models listed on OpenRouter|Claude Fable 5.2 index score (0 to 100)|Anthropic lead over Google (index points)|Free models in a 2026 benchmark" subs="Total listed on OpenRouter Discover page|Third-party Artificial Analysis index, as listed on Discover|Stated on OpenRouter Discover page|Secondary source; last tested 19 Sept 2026, refresh overdue" trends="neutral|up|neutral|neutral" />
+
+## How Do You Make Your First OpenRouter API Call?
+
+Setup takes only a few minutes. Follow these steps:
+
+1. Create an account at [openrouter.ai](https://openrouter.ai).
+2. Create an API key in the dashboard and copy it when it is shown.
+3. Store the key in an environment variable, not in your code or a shared document.
+4. Copy the exact model ID from that model's page on the Discover listing.
+
+OpenRouter's [API reference](https://openrouter.ai/docs/api_reference/overview) documents sampling settings such as `top_k`. That value must fall in the range `[1, Infinity)`, and the page states it is not available for OpenAI models. Leave it out of requests that go to OpenAI models.
+
+```python
+import os
+import requests
+
+API_KEY = os.environ["OPENROUTER_API_KEY"]
+MODEL = "provider/model-id"  # copy the exact ID from the model page
+
+def draft_review_reply(review_text, business_name):
+    response = requests.post(
+        "https://openrouter.ai/api/v1/chat/completions",
+        headers={"Authorization": f"Bearer {API_KEY}"},
+        json={
+            "model": MODEL,
+            "messages": [
+                {"role": "system", "content": f"You are the owner of {business_name}. Reply warmly to Google reviews in under 80 words. Do not add offers, prices or details that are not in this message."},
+                {"role": "user", "content": review_text},
+            ],
+            "max_tokens": 150,
+        },
+        timeout=30,
+    )
+    response.raise_for_status()
+    return response.json()["choices"][0]["message"]["content"]
+
+print(draft_review_reply("Best cortado in town!", "The Daily Grind Cafe"))
+```
+
+To switch models, change only the `MODEL` line. The rest of the script stays the same.
+
+## Which Model Fits Each Local Business Task?
+
+Match the model to the cost of a mistake. A wrong sentence in a public review reply is more expensive than a clumsy caption you can edit in ten seconds.
+
+| Task | What goes wrong if the text is off | Model to test first |
+|---|---|---|
+| Replies to negative reviews | Tone problems or a promise you never authorised | Highest-scoring model you can afford on the index, with human review |
+| Customer emails | Off-brand voice or wrong dates | Mid-range model, with a human check |
+| Social captions from a template | Low stakes and easy to edit | Lower-cost model, generated in batches |
+| Long menus or policy documents | Missed details in long text | Long-context model such as [Gemini Flash](/blog/gemini-flash-api-local-business-automation) |
+
+Free models on OpenRouter carry an endpoint ID ending in `:free`. A secondary benchmark from Vibecoder Journal tested all 22 active free models on 19 September 2026, but it covers coding tasks and says its weekly refresh is overdue. Treat those results as a snapshot and check the live list before relying on any free model.
+
+## What Does a Realistic Monthly Budget Look Like?
+
+This example uses a hair salon with two tasks. Every figure marked assumption is a placeholder, not a published price. Replace it with the rate on your chosen model's page.
+
+- Review model price: $3.00 per million input tokens and $15.00 per million output tokens (assumption).
+- Caption model price: $0.10 per million input tokens and $0.30 per million output tokens (assumption).
+- Review replies: 50 per month, averaging 100 input and 120 output tokens each (assumption).
+- Captions: 30 per month, averaging 50 input and 100 output tokens each (assumption).
+
+| Task | Input tokens | Output tokens | Monthly cost |
+|---|---|---|---|
+| Review replies (50) | 5,000 | 6,000 | $0.105 |
+| Captions (30) | 1,500 | 3,000 | $0.001 |
+| Total | 6,500 | 9,000 | about $0.11 |
+
+At ten times the volume, the same assumptions give about $1.06 per month. At this scale, cost is rarely the constraint. The risk is what gets published. Because OpenRouter bills by the underlying model price, the calculation treats the listed rate as what you pay. Check the live figure on the model page before you budget. For context on other marketing line items, see [how much local SEO costs for a small business](/blog/how-much-does-local-seo-cost-for-a-small-business-honest-pricing-guide).
+
+## How Reliable Are AI-Written Replies Before You Publish Them?
+
+Hightouch, citing Stanford accuracy benchmarks that tested 26 top-tier frontier models, reports hallucination rates ranging from 22% to 94% (secondary source). That range covers models in general, not your business, but it is enough reason to keep a person in the loop. The main danger is invented detail: a discount that does not exist, a wait time you never quoted or a staff name the model guessed.
+
+Use this checklist to reduce that risk:
+
+1. Put verified facts into the prompt, including opening hours, current offers and staff names.
+2. Instruct the model not to add anything that is not in the prompt.
+3. Save each draft to a queue instead of posting it directly.
+4. Read every reply to a negative review before it goes live.
+5. Record which model wrote each draft so you can compare results later.
+
+## How Do You Automate the Nightly Review Workflow?
+
+The script above drafts replies. To run it on a schedule, a workflow tool can handle the trigger, the drafting call and the approval queue. The [n8n beginner guide](/blog/n8n-for-local-business-automation-beginners-guide) covers local business automations built in n8n without much code.
+
+Fetching reviews and posting replies depends on Google Business Profile access, which this article does not cover. Confirm the current requirements on Google's help pages before you build the posting step.
+
+For help connecting review responses to your wider local search plan, see the [local SEO service](/services/local-seo).
+
+## FAQ
+
+### What is OpenRouter?
+
+OpenRouter is an API gateway. It gives you access to the models listed on its platform, which its Discover page counts at 627, through one API. You manage one key and one dashboard instead of separate accounts with each AI provider.
+
+### How is OpenRouter priced?
+
+Kilo's documentation says OpenRouter charges based on the underlying model's pricing. Check the rate on each model's page before you budget, because prices differ by model and can change.
+
+### Can I switch models without rewriting my code?
+
+Yes, for the most part. The request structure stays the same and you change the model string. Remember that some parameters, such as `top_k`, have rules. OpenRouter's API reference says it is not available for OpenAI models, so remove it from those requests.
+
+### Should I send customer data through OpenRouter?
+
+Review OpenRouter's current privacy and logging policies on its website before sending personal information. As a general precaution, leave customer contact details out of prompts. Review replies usually need only the review text and your business name.
+
+## Sources
+
+- [OpenRouter Discover: model listings and Artificial Analysis index scores](https://openrouter.ai/discover) (primary)
+- [OpenRouter API Reference: top_k parameter rules](https://openrouter.ai/docs/api_reference/overview) (primary)
+- [Using OpenRouter with Kilo Code: pricing description](https://kilo.ai/docs/ai-providers/openrouter) (secondary)
+- [Best Free OpenRouter Models for Programming, Vibecoder Journal benchmark](https://vibecoderjournal.com/benchmarks/best-free-openrouter-models/) (secondary)
+- [Evaluating AI agents for marketing campaign automation, Hightouch](https://hightouch.com/blog/ai-agents-marketing-campaign-automation) (secondary)

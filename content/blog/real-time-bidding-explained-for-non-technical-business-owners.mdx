@@ -1,104 +1,124 @@
 ---
 title: "Real-Time Bidding (RTB) Explained for Business Owners"
 date: "2026-05-16"
-lastModified: "2026-11-01"
-description: "Real-time bidding explained: each ad impression is auctioned in 80 to 1,000 milliseconds. How RTB works and how a small business can use it."
+lastModified: "2026-11-12"
+description: "Real-time bidding (RTB) auctions each ad impression in under 1 second. Learn how RTB works, what a small test budget buys, and when to skip it."
 author: "Nataliia"
 category: "Programmatic Advertising"
 tags: ["real time bidding explained", "programmatic advertising", "digital marketing", "Google Ads", "Meta Ads"]
 slug: "real-time-bidding-explained-for-non-technical-business-owners"
-noindex: true
 image: "https://images.unsplash.com/photo-1599058917765-a780eda07a3e?w=800&q=80&auto=format&fit=crop"
 readTime: '7 min read'
 ---
 
-Real-time bidding (RTB) is an automatic auction in which a single ad impression is put up for bid at the moment a page or app loads. The IAB Tech Lab describes it as a way of transacting media that "allows an individual ad impression to be put up for bid in real-time." In Google's version, bidders have between 80 and 1,000 milliseconds to answer, depending on format and auction type.
-
-You do not run an auction yourself. A platform bids for you, using the budget and audience you set. This guide explains the steps, the difference from Google Ads and Meta Ads, and how a small business can use RTB without a large budget.
+Real-time bidding (RTB) is an automated auction that sells a single ad impression the moment someone visits a website or opens an app. Advertisers bid for that impression, the highest bid wins, and the winning ad is shown. StackAdapt describes the process as an instant auction that takes less than a second. A small business does not run these auctions itself. A buying platform bids on its behalf, using the budget, targeting and creative the business sets. This guide covers the steps, the buying models, and how a local business could test RTB on a small budget.
 
 <StatRow
-  values="80-1000 ms|2.6|35M+|$0"
-  labels="Google RTB bidder response window|Latest OpenRTB major version listed (v2.6-202309)|Sites and apps in Google Display reach|Minimum spend stated by StackAdapt and AdRoll"
-  subs="Google Authorized Buyers docs|IAB Tech Lab|Google Ads Help|Vendor pages"
-  trends="neutral|neutral|neutral|neutral"
+  values="under 1 second|2 billion+|89.3%|$500 to $2,000"
+  labels="Length of one RTB auction|Auctions per day, StackAdapt DSP|Share of global display spend automated, 2025 forecast|Typical monthly budget per channel, Meta ads"
+  subs="StackAdapt glossary, vendor|StackAdapt, vendor, as of 2022|eMarketer figure cited by StackAdapt (secondary)|Adwave, vendor (secondary)"
+  trends="neutral|neutral|up|neutral"
 />
 
 ## How Does Real-Time Bidding Work?
 
-Four steps happen in the time it takes a page to load.
+The whole sequence finishes while the page loads. Adwave puts the cycle from ad request to served ad at about 100 milliseconds, and StackAdapt notes that RTB auctions usually finish within one-tenth of a second.
 
-1. A person opens a page or app that sells ad space.
-2. The seller's system sends a bid request describing the impression, such as the placement and available context.
-3. Bidders, which are usually buying platforms acting for advertisers, answer with a bid and an ad.
-4. The highest bid wins and its ad is shown.
+1. A person opens a page or app that has ad space for sale.
+2. The seller's system sends a bid request describing the impression.
+3. Advertisers' buying platforms answer with a bid and an ad.
+4. The highest bidder wins the placement.
 
-Google's documentation describes the same flow: a bid request goes to the bidder, the bidder returns a response with a bid and creative, and the highest bid wins the impression. Responses after the deadline are excluded. The shared language for these messages is OpenRTB, maintained by the IAB Tech Lab; version 2.6 includes features for connected TV.
+StackAdapt says the bid request can include demographic data, location information and browser history. Publishers can set minimum bids and advertisers can set maximum bids. The winning bid also sets the final cost, which depends on how much competition there is for that impression.
+
+## Who Buys and Who Sells in an RTB Auction?
+
+Two kinds of platform make the auction work. Supply-side platforms (SSPs) are used by publishers to sell their ad space automatically to the highest bidders. Demand-side platforms (DSPs) do the buying: they use real-time bidding and machine learning to bid on impressions that match the advertiser's targeting criteria.
+
+A small business usually works with a DSP. The business sets the audience, locations, budget and creative in the platform, and the DSP decides which impressions to bid on. StackAdapt says AI models assess historical and real-time auction data to estimate the clearing price of each impression. It also cites a Google claim, relayed through a secondary blog, that AI-powered bidding can cut cost per acquisition by up to 30%. Treat that figure as a vendor-supported claim, not a guarantee.
 
 ## Is RTB the Same as Programmatic Advertising?
 
-Not exactly. Programmatic advertising is the wider term for automated buying. RTB is one way to buy programmatically, where each impression is auctioned. Our guide to [how programmatic buying works for local businesses](/blog/how-programmatic-buying-works-local-business) explains the other pieces.
+No. Programmatic advertising is the wider term for automated buying and selling of ads. StackAdapt defines it as a subset of digital advertising that uses automated technology and data-driven algorithms to buy and place ads in real time, often across several platforms. RTB is one method within that category, the one where each impression is auctioned.
 
-## How Is RTB Different From Google Ads and Meta Ads?
+For a broader comparison of local-business options, read [display advertising vs programmatic for local business](/blog/display-advertising-vs-programmatic-local-business). It explains where each approach fits.
 
-With Google Ads Search, your bid is only one of six auction factors. Google says that even with a lower bid you can win a higher position through relevance and ad quality. Display campaigns reach people across more than 35 million sites and apps plus YouTube and Gmail, using optimized targeting by default.
+## How Does RTB Differ From Guaranteed and Private Deals?
 
-Google Ads and Meta Ads are closed platforms where you buy from their own inventory. RTB through an independent platform lets you reach inventory on many publishers and TV apps in one buy. Neither is automatically better; the right choice depends on your goal.
+Programmatic buying comes in several models. The main difference is whether the price and volume are agreed in advance.
 
-## Which Platforms Can a Small Business Use?
+| Buying model | How the price is set | Commitment |
+| --- | --- | --- |
+| Real-time bidding (open auction) | Impression by impression; highest bid wins | No upfront commitment or pre-negotiated price |
+| Programmatic guaranteed | Pre-negotiated price | Upfront commitment |
+| Private marketplace (PMP) | Auction among a selected, limited group of buyers | A subset of RTB, with invited buyers only |
 
-Many enterprise platforms are not built for small accounts. Google says new Display & Video 360 accounts begin by contacting its sales team. Others state lower barriers: StackAdapt says it has no minimum advertising spend requirement, and AdRoll says it has no minimum spend and uses CPM-based dynamic pricing. Prices are not published as a fixed rate, so ask each vendor for a quote.
+An open marketplace, also called an open ad exchange, is where these open auctions run. A PMP lets a publisher offer premium inventory to a small group of buyers, so it is still RTB but with a narrower audience of bidders. For a small business, the open auction is the simplest starting point because nothing is committed in advance.
 
-For realistic cost ranges, see our [programmatic advertising cost guide](/blog/how-much-does-programmatic-advertising-cost-real-cpm-benchmarks-2026).
+## Does RTB Work for TV and Other Screens?
 
-## The Math: How Many Impressions Does a Test Buy?
+Yes, in some cases. Adwave describes programmatic connected TV (CTV) as using real-time bidding to place ads on premium streaming channels while the advertiser controls who sees the ad and how much is spent. Adwave also states that bidding decisions for a CTV impression are made in less than 100 milliseconds.
 
-All numbers here are **assumptions**; no standard CPM applies to every campaign.
+Out-of-home screens are also sold this way. StackAdapt says programmatic DOOH inventory can be bought through demand-side platforms, with marketers bidding on digital screens. For a full overview of TV-style buying, see [what CTV advertising is for local business owners](/blog/what-is-ctv-advertising-guide-for-local-business-owners-2026).
 
-| Input | Value |
+## What Does a Small Test Budget Look Like?
+
+All inputs below are **assumptions**, not market rates. Replace them with real quotes from your platform.
+
+| Input or result | Value |
 | --- | --- |
-| Test budget | $500 |
-| Assumed CPM | $10 |
-| Impressions bought | 500 / 10 x 1,000 = 50,000 |
-| Assumed click-through rate | 0.2% |
-| Clicks | 100 |
-| Cost per click | $5.00 |
+| Test budget (assumption) | $500 |
+| CPM, cost per 1,000 impressions (assumption) | $10 |
+| Impressions bought | $500 / $10 x 1,000 = 50,000 |
+| Click-through rate (assumption) | 0.2% |
+| Clicks | 50,000 x 0.2% = 100 |
+| Cost per click | $500 / 100 = $5.00 |
 
-If the same $500 were spent at a $20 CPM, you would get 25,000 impressions. This shows why CPM is the first number to ask a vendor about. Replace the figures with real quotes and your own conversion rate.
+If the same $500 bought impressions at a $20 CPM (assumption), you would get 25,000 impressions and roughly 50 clicks at the same click-through rate. The CPM is therefore the first number to ask a vendor about. Compare the output with your own conversion rate before you decide whether a second test is worth running. For realistic ranges, see the [programmatic advertising cost guide with CPM benchmarks](/blog/how-much-does-programmatic-advertising-cost-real-cpm-benchmarks-2026).
 
-## Is RTB Right for Your Business?
+## Is RTB Right for Your Local Business?
 
-It suits businesses that want to reach people before they search: a new shop, an event, a seasonal offer. It fits poorly when you depend on people who are ready to buy now, because Search ads capture that demand more directly. If your Google Business Profile and website are not ready, fix them first. Our [local business beginner's view on programmatic](/blog/programmatic-advertising-for-small-business-is-it-accessible-now) goes through the decision.
+RTB suits reaching people before they search: a new shop opening, a seasonal offer, or an event. It fits poorly when your customers are ready to buy now, because search ads capture that demand more directly. Builtright Digital reports that paid search can start producing calls and form fills within the first few days, while automated bidding needs a few weeks of consistent data to optimize. That timing matters for a small budget.
+
+Pricing is also a factor. Adwave states that Meta and Instagram ads have no technical monthly minimum, but most small businesses need $500 to $2,000 per month per channel. StackAdapt says it has no minimum spend requirement, while many enterprise platforms are built for larger accounts. Ask each vendor about minimums, pricing and reporting before you sign.
+
+Check your foundations first. If your Google Business Profile, website and contact details are not ready, a paid campaign will send people to a weak page. The [guide on hiring a digital marketing consultant](/blog/how-to-hire-digital-marketing-consultant-local-business) explains how to check a provider's work, and [programmatic advertising for small businesses](/blog/programmatic-advertising-for-small-business-is-it-accessible-now) covers accessibility in more depth.
 
 ## FAQ
 
 ### What does RTB stand for?
 
-Real-time bidding: an auction for one ad impression at the moment it is served.
+RTB stands for real-time bidding. It is an auction for one ad impression, held when the impression becomes available.
 
-### How fast is the auction?
+### How fast is an RTB auction?
 
-In Google's system the bidder waits 80 to 1,000 ms for a response, depending on format and auction type. Late responses are excluded.
+StackAdapt describes RTB as an instant auction that takes less than a second, and states that auctions usually finish within one-tenth of a second. Adwave gives a figure of about 100 milliseconds for the full request-to-served cycle.
 
-### Do I need a developer?
+### Do I need a developer to run RTB?
 
-No. A buying platform handles the bidding. You set budget, audience, location and creative.
+No. A buying platform handles the bidding. You set the budget, audience, locations and creative.
 
 ### Is there a minimum budget?
 
-Some vendors state none (StackAdapt, AdRoll). Others require contact with sales. Ask before you commit.
+It depends on the vendor. StackAdapt states it has no minimum spend requirement. Many enterprise platforms require contact with sales first, so ask before you commit.
 
-### Can I do RTB on a TV screen?
+### Can I run RTB on TV screens?
 
-OpenRTB 2.6 includes features for connected TV, so some TV inventory is sold this way. See our [CTV platforms comparison](/blog/ctv-advertising-platforms-compared-2026).
+Some connected TV inventory is sold through real-time bidding. Adwave describes programmatic CTV as placing ads on premium streaming channels this way.
 
 ## Sources
 
-- [IAB Tech Lab: OpenRTB](https://iabtechlab.com/standards/openrtb/)
-- [Google Authorized Buyers: Real-time bidding protocol](https://developers.google.com/authorized-buyers/rtb/start)
-- [Google Ads Help: How the Google Ads auction works](https://support.google.com/google-ads/answer/6366577)
-- [Google Ads Help: About Display campaigns](https://support.google.com/google-ads/answer/2404190)
-- [Google Display & Video 360 Help: Overview](https://support.google.com/displayvideo/answer/9059464)
-- [StackAdapt: Platform](https://www.stackadapt.com/platform) (vendor page)
-- [AdRoll: Pricing](https://www.adroll.com/pricing) (vendor page)
+- [StackAdapt: What is real-time bidding](https://www.stackadapt.com/resources/blog/what-is-real-time-bidding) (vendor)
+- [StackAdapt: Programmatic advertising glossary](https://www.stackadapt.com/resources/blog/programmatic-advertising-glossary) (vendor)
+- [StackAdapt: What is programmatic advertising](https://www.stackadapt.com/resources/blog/what-is-programmatic-advertising) (vendor)
+- [StackAdapt: AI programmatic advertising bidding](https://www.stackadapt.com/resources/blog/ai-programmatic-advertising-bidding) (vendor; includes an eMarketer figure cited secondhand)
+- [StackAdapt: Programmatic guaranteed](https://www.stackadapt.com/resources/blog/programmatic-guaranteed) (vendor)
+- [StackAdapt: Open marketplace vs private marketplace](https://www.stackadapt.com/resources/blog/open-marketplace-vs-private-marketplace) (vendor)
+- [StackAdapt: What is adtech](https://www.stackadapt.com/resources/blog/what-is-adtech) (vendor)
+- [StackAdapt: Programmatic DOOH](https://www.stackadapt.com/resources/blog/programmatic-dooh) (vendor)
+- [Adwave: Programmatic political advertising](https://adwave.com/resources/programmatic-political-advertising) (vendor)
+- [Adwave: What is connected TV advertising](https://adwave.com/resources/what-is-connected-tv-advertising) (vendor)
+- [Adwave: TV vs digital advertising for small business](https://adwave.com/resources/tv-vs-digital-advertising-small-business) (vendor)
+- [Built-Right Digital: Google Ads for window and door companies](https://builtrightdigital.com/google-ads-window-door-companies/) (secondary)
 
-Want to know whether programmatic fits your budget? See our [Google Ads service](/services/google-ads) or [book a free audit](/free-audit).
+Want to see whether programmatic fits your budget? Read about the [Google Ads service](/services/google-ads) or [book a free audit](/free-audit).

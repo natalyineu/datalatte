@@ -1,104 +1,95 @@
 ---
 title: "Website Design for Restaurants: Orders and Bookings"
 date: "2026-05-21"
-lastModified: "2026-10-31"
-description: "A restaurant site needs a text menu, hours, order and reserve buttons. DoorDash takes 15-30% of delivery orders; your own site pays no commission."
+lastModified: "2026-11-12"
+description: "A restaurant website needs a text menu, hours and an order button. One vendor example cut commission on direct orders from 30% to 6%."
 author: "Nataliia"
 category: "Website & CRO"
 tags: ["website design for restaurants", "restaurant website design", "restaurant online ordering"]
 slug: "website-design-for-restaurants"
-noindex: true
 image: "https://images.unsplash.com/photo-1581094794590-1a8db84bae25?w=800&q=80&auto=format&fit=crop"
 readTime: '8 min read'
+noindex: true
 ---
 
-A restaurant website should put the menu as readable text, opening hours, address, phone, and one clear order or reservation button on the first screen. Link to ordering and booking on your own site where you can, because marketplace orders carry commission.
-
-DoorDash's US Marketplace plans list 15%, 25% or 30% on delivery and 6% on pickup, while orders taken through your own website incur no DoorDash commission, only payment processing fees.
-
-This guide covers the pages and technical basics, plus a worked example comparing a marketplace order with an own-site order.
+A restaurant website should show the menu as readable text, opening hours, address, phone number and one clear order or reservation button on the first screen. Most diners check the menu before they visit, so the menu has to load fast and read well on a phone. Where you can, send ordering and bookings through your own site, because marketplace orders carry commission. The sections below cover the home page, the menu, booking, and a worked example of what commission costs over a month.
 
 <StatRow
-  values="15%|25%|30%|6%"
-  labels="DoorDash Basic delivery commission|DoorDash Plus delivery commission|DoorDash Premier delivery commission|DoorDash pickup commission, all plans"
-  subs="DoorDash merchants page, US|DoorDash merchants page, US|DoorDash merchants page, US|DoorDash merchants page, US"
-  trends="neutral|neutral|neutral|neutral"
+  values="91%|88%|90.8%|6%"
+  labels="Diners who look up menus before visiting|Diners who search online before choosing a restaurant|Online queries that go through Google|Commission on direct orders after adding DoorDash Storefront (was 30%)"
+  subs="Marketing LTB via Adwave, secondary|Marketing LTB via Adwave, secondary|Oberlo via Grubhub, secondary|Adwave Austin Thai example, vendor"
+  trends="neutral|neutral|neutral|down"
 />
 
 ## What should a restaurant home page show?
 
-Follow NN/g's homepage advice: say what you are, show real offerings and put key content above the fold. For a restaurant:
+Keep the first screen simple. State what the restaurant is, show a real photo of the food or room, and put today's hours and a tap-to-call phone number beside the buttons. Grubhub advises restaurants to include as much information as possible in their Google Business Profile, including an address, phone number, website URL, operating hours and photos, so the site and the profile should match. Ordering and reservation buttons belong above the fold, not buried in the footer.
 
-- Cuisine, neighbourhood and a real photo of your food or room.
-- Today's hours and phone that taps to call.
-- Buttons for order online and reserve, if you offer them.
-- A link to the menu, not a PDF only.
+If you have a Google rating, place it near the buttons. Diners who are comparing places will look at reviews as well as the menu. Adwave also advises responding to every review on Google and Yelp within 24-48 hours, which signals that the business is active.
 
-BrightLocal's 2026 survey found 54% of consumers visit a business's website after reading positive reviews, so show your Google rating beside the buttons.
+For a deeper look at placing key content above the fold, see the [above-the-fold design guide for local businesses](/blog/above-the-fold-design-local-business).
 
 ## Why should the menu be text, not a PDF?
 
-Text loads faster, reads on a phone and can be indexed. Google's LocalBusiness structured data supports a menu property with the menu's full URL and a servesCuisine property, and both are used for restaurants. Keep prices current, and keep the web menu and your Google Business Profile menu in sync.
+A text menu loads faster on a phone than a scanned file and is easier for search engines to read. Grubhub notes that optimizing a website for mobile devices can help it appear higher in local search results, and Google has used mobile-first indexing since late 2020, which means it evaluates the mobile version of your site when ranking pages.
 
-Google's Business Profile lets you enter menu items with descriptions and prices, or upload a photo or PDF. Its content guidelines say a Menu URL cannot be a direct link to a third-party ordering or delivery service. See our [restaurant Business Profile guide](/blog/google-my-business-for-restaurants).
+Write each dish as a line of text with a short description and a price. Update prices whenever the menu changes, and keep the web menu and your Google Business Profile menu in sync, since two different prices will confuse guests. A PDF can be an extra download, but it should not be the only menu on the site.
 
-## How does ordering link to Google?
+If you run a cafe or coffee shop, the same logic applies. Our [website design guide for coffee shops](/blog/website-design-for-coffee-shops) covers menu layout for a smaller counter-service format.
 
-Google lets you add custom food-ordering links to your Business Profile that show in Search and Maps, and set one as preferred for pickup, delivery or both. If you turn off "Accept orders on your profile", third-party order links are hidden. Providers must remove third-party links within five business days of a removal request.
+## How much does commission change the cost of an online order?
 
-Point your preferred link at your own ordering page when you have one, and compare costs in our [DoorDash vs Uber Eats fee guide](/blog/doordash-vs-uber-eats-restaurant-fees-local-business).
+Marketplace apps take a share of each order, and that share can change how much a direct order is worth. Adwave's example of an Austin Thai restaurant reports that adding DoorDash Storefront reduced commission on direct orders from 30% to 6%, while keeping the discovery benefits of the marketplace. That figure is one vendor example, so check current rates on your own account before relying on it.
 
-## What about reservations and events?
+The worked example below uses assumed volumes and an assumed order value. The 30% and 6% rates are the Adwave example, and the $30 order value is an assumption.
 
-Show the booking method you actually use: a form, a phone number, or a booking provider link. Keep it one tap from the home page. Put private dining and events on their own page with a request form. Link seasonal offers from your email list.
-
-## How fast should the site be?
-
-Google rates a Largest Contentful Paint of 2.5 seconds or less, INP of 200 ms or less and CLS of 0.1 or less as good. Big food photos are the usual problem: compress them, set dimensions, and do not lazy-load the first image. See our [speed guide](/blog/website-speed-optimization-small-business).
-
-## Worked example: marketplace order or own-site order?
-
-All inputs are **assumptions**. The 25% rate is DoorDash's Plus delivery commission; the 3% card processing rate is an assumed figure.
-
-| Input (assumption) | Marketplace delivery order | Own-site pickup order |
+| Input or result | Marketplace at 30% | Direct at 6% |
 | --- | --- | --- |
-| Order value | $30 | $30 |
-| Commission | 25% = $7.50 (DoorDash Plus plan) | none from DoorDash |
-| Card processing, assumed | not modelled | 3% = $0.90 |
-| Fees in this model | $7.50 | $0.90 |
+| Orders per month (assumption) | 100 | 100 |
+| Average order value (assumption) | $30 | $30 |
+| Commission per order | $9.00 | $1.80 |
+| Commission per month | $900 | $180 |
+| Monthly difference | | $720 saved |
 
-Your own site saves about $6.60 on a $30 order in this model. The comparison is unfair in one way: delivery and pickup are different services, and marketplace processing terms were not checked. It also ignores your own site's monthly ordering software fees, which vary by provider and were not verified. The marketplace also brings new customers who might not find you otherwise. Compare the true cost per new customer for each channel.
+In this model, moving 100 orders a month from the marketplace to your own ordering page keeps about $720 in the business. It does not include payment processing or the cost of ordering software, and the marketplace may still bring new customers you would not reach otherwise. Compare the cost per new customer for each channel before you move orders.
+
+## How should reservations and bookings work?
+
+Show the booking method you actually use, whether that is a form, a phone number or a booking provider link, and keep it one tap from the home page. Put private dining and events on their own page with a request form, so a large-party enquiry does not get lost among standard reservations.
+
+If you take deposits, make the policy clear before the guest pays. Salon Today's 2022 guide describes Fresha Deposits as a way to make sure online bookings are not confirmed until a payment is made, which reduces no-shows for businesses that depend on fixed appointments. Restaurants with set-menu events can use the same approach for prepaid seats.
+
+## How much should you spend driving traffic to the site?
+
+Adwave estimates Google Ads for restaurants costs $300 to $1,500 per month, and it cites WordStream's average cost-per-click for restaurants at $1.84. Marketing LTB reports that restaurant PPC campaigns convert 6-12% of clicks into reservations or orders. Those figures let you estimate what a monthly budget buys.
+
+Take an assumed budget of $600 a month. At $1.84 per click, that buys about 326 clicks. At a 6% conversion rate, that is about 20 orders or bookings, roughly $30 each. At 12%, it is about 39, or about $15 each. The cost per order falls as conversion rises, which is why the landing page matters as much as the ad. For keyword planning, see the [restaurant Google Ads keyword guide](/blog/best-google-ad-keywords-for-restaurants-in-2026).
 
 ## FAQ
 
 ### Do I need online ordering on my own site?
 
-It is optional. The advantage is no marketplace commission; DoorDash states that orders through your own website incur no DoorDash commission, only standard payment processing.
+It is optional. The benefit is that direct orders avoid marketplace commission. The Adwave example shows the rate falling from 30% to 6% on direct orders, but your own rates will depend on your providers.
 
-### Can I link my Google profile to my ordering page?
+### Should the menu be on the home page?
 
-Yes. Google lets you add custom order links and mark one as preferred for pickup, delivery or both.
+Link to it from the home page, and keep the full menu as readable text on its own page. A visitor should reach the menu in one tap.
 
-### Should I use a PDF menu?
+### How do I get more diners to book directly?
 
-Use text on the site. A PDF can be an extra download, but it is harder to read on a phone.
+Show the booking button above the fold, keep the phone number tappable, and make the booking page quick to complete. Our [coffee shop conversion tips](/blog/coffee-shop-website-cro-tips) cover similar layout changes for small food businesses.
 
-### What structured data does a restaurant need?
+### Is TV advertising worth it for a restaurant site?
 
-Use the Restaurant type with name, address, hours, menu URL and cuisine, then test it with Google's Rich Results Test.
-
-### How do I get more diners to book direct?
-
-Show the booking button first and ask guests to review you on Google. See our [Facebook ads guide for restaurants](/blog/facebook-ads-for-restaurants).
+Adwave advises launching TV commercials 2-3 weeks before a promotion begins and mapping key campaigns 6-8 weeks ahead. Pair any TV spend with a promo code, as covered in the [CTV ads guide for restaurants](/blog/ctv-ads-for-restaurants).
 
 ## Sources
 
-- [DoorDash for Merchants: Marketplace plans](https://merchants.doordash.com/en-us/products/marketplace) (US, undated)
-- [Google Search Central: LocalBusiness structured data](https://developers.google.com/search/docs/appearance/structured-data/local-business)
-- [Google Business Profile Help: Manage online ordering options](https://support.google.com/business/answer/10842217)
-- [Google Business Profile Help: Add menu and ordering links](https://support.google.com/business/answer/9455840) (summary from search result)
-- [Nielsen Norman Group: Homepage design principles](https://www.nngroup.com/articles/homepage-design-principles/)
-- [BrightLocal: Local Consumer Review Survey 2026](https://www.brightlocal.com/research/local-consumer-review-survey/)
-- [web.dev: Web Vitals](https://web.dev/articles/vitals)
+- [Adwave: Best advertising for restaurants](https://adwave.com/resources/best-advertising-for-restaurants) (vendor, DoorDash Storefront example)
+- [Adwave: Restaurant TV advertising effectiveness (Q4 2025)](https://adwave.com/resources/restaurant-tv-advertising-effectiveness) (secondary, citing Marketing LTB)
+- [Adwave: Restaurant advertising complete marketing guide](https://adwave.com/resources/restaurant-advertising-complete-marketing-guide) (vendor, citing WordStream for cost-per-click)
+- [Adwave: 10 game-changing restaurant marketing tips for 2026](https://adwave.com/resources/restaurant-marketing-tips) (vendor)
+- [Grubhub: 5 steps to improve your restaurant SEO](https://get.grubhub.com/blog/restaurant-seo/) (secondary, citing Oberlo and Google)
+- [Salon Today: The 2022 Salon Technology Guide](https://www.salontoday.com/articles/the-2022-salon-technology-guide) (secondary, citing Fresha)
 
-Want a restaurant site that drives direct orders? See our [website service](/services/website) or [book a free audit](/free-audit).
+Want a restaurant site that drives direct orders? Start with a [free audit](/free-audit), or see the [local SEO service](/services/local-seo) for profile and menu clean-up.

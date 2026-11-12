@@ -1,0 +1,120 @@
+---
+title: "Llama 4 on Groq: Pricing and Setup Steps"
+date: "2026-06-13"
+lastModified: "2026-11-12"
+description: "Llama 4 Scout lists at $0.11 and Maverick at $0.50 per 1M input tokens on Groq. Here is how to price a drafting workflow and set up the API."
+author: "Nataliia"
+category: "AI & Automation"
+tags: ["Llama 4", "Groq", "free AI", "local business automation"]
+slug: "llama-4-local-business-automation-groq-free"
+image: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&q=80&auto=format&fit=crop"
+readTime: "6 min read"
+---
+
+Groq listed Llama 4 Scout at $0.11 per million input tokens and Llama 4 Maverick at $0.50 per million input tokens, according to a [third-party API guide](https://apidog.com/blog/how-to-use-llama-4-via-api/) (secondary). Those prices are a snapshot, so confirm them before you set a budget. This article covers how a small business could set up a drafting script on Groq's API, what the numbers mean for a month of review replies, and what to check before you build.
+
+This guide is for owners of cafes, salons, groomers and studios who want to draft replies and captions, with a person approving every message before it goes out.
+
+<StatRow
+  values="$0.11|$0.50|625|1.4"
+  labels="Llama 4 Scout input, per 1M tokens|Llama 4 Maverick input, per 1M tokens|Llama API tokens per second, claimed|Developers using Groq, millions, claimed"
+  subs="Apidog guide, secondary|Apidog guide, secondary|Groq and Meta press release, vendor claim|Groq and Meta press release, vendor claim"
+  trends="neutral|neutral|neutral|neutral"
+/>
+
+## What Did Groq Charge for Llama 4?
+
+The [Apidog guide](https://apidog.com/blog/how-to-use-llama-4-via-api/) (secondary) quotes Groq's input pricing as $0.11 per million tokens for Scout and $0.50 per million for Maverick. Output token prices are not covered here, so check Groq's live pricing page before you estimate output costs.
+
+The [Groq and Meta announcement](https://www.prnewswire.com/news-releases/meta-and-groq-collaborate-to-deliver-fast-inference-for-the-official-llama-api-302441674.html) from April 29, 2025 described the Llama API as available to select developers in preview, with broader rollout planned in the coming weeks. That is the most specific launch detail available here, and it does not show how pricing has changed since.
+
+## Is Llama 4 Still Available on Groq?
+
+Availability is the part most likely to have changed, and the launch material cited here is dated April 2025. It does not show whether Scout or Maverick are still served today.
+
+Check Groq's deprecations page in its developer docs before you build anything. If an existing script names a Llama 4 model and returns an error, compare the model ID with the live model list and switch to a model that is currently listed. Preview models can change, so keep them out of any workflow that customers depend on.
+
+## Why Do Owners Look at Groq for Drafting?
+
+The Groq and Meta announcement claims speeds of up to 625 tokens per second for the Llama API on Groq infrastructure. That is a vendor claim, not a measured result for your prompts. Short drafts will rarely feel the difference, so test speed on your own examples rather than relying on the headline figure.
+
+The same announcement says developers need only three lines of code to move from OpenAI to the Llama API on Groq. That matters if an existing script already calls an OpenAI-style client. Groq also states that more than 1.4 million developers use Groq, another vendor claim that should be read as marketing rather than independent data.
+
+## How Do You Set Up a Draft Script?
+
+The setup takes four steps.
+
+1. Create a Groq account and generate an API key in the console.
+2. Install the Groq Python SDK with `pip install groq`.
+3. Store the key in an environment variable, so it never sits in the script or a shared document.
+4. Replace the model name in the script with a current model ID from Groq's live models list.
+
+A minimal draft-a-reply script:
+
+```python
+import os
+from groq import Groq
+
+client = Groq(api_key=os.environ["GROQ_API_KEY"])
+
+review = "Great haircut, but I waited 25 minutes past my slot."
+prompt = (
+    "Write a polite 60-word reply from a salon owner to this Google review. "
+    "Do not promise refunds or discounts. Review: " + review
+)
+
+completion = client.chat.completions.create(
+    model="REPLACE_WITH_CURRENT_MODEL_ID",
+    messages=[{"role": "user", "content": prompt}],
+)
+print(completion.choices[0].message.content)
+```
+
+Read each draft yourself and post it by hand. For a no-code way to connect drafts to a review step, see the [n8n beginners guide](/blog/n8n-for-local-business-automation-beginners-guide).
+
+## Which Tasks Suit a Low-Cost Model?
+
+Short drafts with a human check suit this kind of model best. Review replies, first drafts of social captions, FAQ answers based on your own text, and appointment reminder wording all fit. Anything that sends messages on its own, takes payments or quotes prices needs more care, because a model can state a wrong fact with confidence.
+
+Keep customer names, phone numbers and health details out of prompts unless you have checked the provider's data terms. If that data must stay on your own machine, a [local model setup with Ollama](/blog/ollama-local-llm-small-business-free-setup) keeps it off a hosted API.
+
+## Worked Example: What Does a Month of Review Replies Cost?
+
+The two prices come from the Apidog guide. Everything else is an assumption.
+
+| Input | Value |
+| --- | --- |
+| Replies per month | 100 (assumption) |
+| Input tokens per reply, review plus instructions | 400 (assumption) |
+| Output tokens per reply | 150 (assumption) |
+| Scout input price | $0.11 per 1M (sourced, secondary) |
+| Maverick input price | $0.50 per 1M (sourced, secondary) |
+
+Input comes to 40,000 tokens a month, which is 0.04 million tokens. At Scout's price that is about $0.004. At Maverick's price it is $0.02. Output cost is left out because no output price is sourced here. Add it using the live output rate for your chosen model.
+
+Human time usually costs more than the tokens. If checking each draft takes 2 minutes (assumption), that is 200 minutes a month. At an assumed $20 an hour of owner time, that comes to about $67. The token bill is small next to review time, so the real budget question is how many drafts a person can check properly.
+
+## FAQ
+
+### Is Llama 4 still available on Groq?
+
+The material cited here is dated April 2025 and does not confirm current availability. Check Groq's live deprecations page in its developer docs before you build.
+
+### How much did Llama 4 Scout cost on Groq?
+
+The Apidog guide quotes $0.11 per million input tokens for Scout and $0.50 for Maverick. Output prices are not covered in this article.
+
+### How hard is it to switch from OpenAI to Groq?
+
+Groq says three lines of code are enough to migrate from OpenAI to the Llama API on its infrastructure. That is a vendor claim, so test it against your own script.
+
+### Can AI reply to customer reviews without a person checking?
+
+Use it for drafts only. Read each reply for facts, tone and promises before you post it.
+
+## Sources
+
+- [Meta and Groq Collaborate to Deliver Fast Inference for the Official Llama API](https://www.prnewswire.com/news-releases/meta-and-groq-collaborate-to-deliver-fast-inference-for-the-official-llama-api-302441674.html) (vendor press release, April 29, 2025)
+- [How to Use Llama 4 Maverick and Llama 4 Scout via API](https://apidog.com/blog/how-to-use-llama-4-via-api/) (secondary)
+
+Want help deciding which drafts are worth automating? [Book a free audit](/free-audit).
