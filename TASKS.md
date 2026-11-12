@@ -22,6 +22,8 @@
 - Rules: never delete/close posts that have impressions or are new; focus on pages Google does not index (GSC "Crawled - not indexed"). Never rewrite redirect-source slugs. No partner names (Vibe, Spotify Advertising, Flodesk, AirOps) in new content. Supabase: two TEMP anon policies `tmp_anon_research_sources/facts` still exist — drop them when Nataliia confirms (`drop policy ...`).
 - OpenRouter balance ~ $11 at the time. GSC re-check 2026-11-24 (Nataliia exports Pages report).
 
+- 2026-11-12 Competitor topic monitoring started: `data/competitors/topics-2026-11-12.json` (1,702 topics from AdWave, StackAdapt, Universal Ads, Mountain, Vibe sitemaps vs our slugs; 925 with no close match on our site). Do NOT name Vibe in content (partner). First gap closed: `chatgpt-ads-small-business-guide` (deployed `0ef1b3c`). Next gap topics: agentic/MCP ad buying, generative AI ad creative, retail media for local brands, CTV attribution/brand lift, sports-fan streaming stats, industry ad pages (towing, HVAC, roofing, auto glass, restaurant TV), CTV vs OLV / AVOD-SVOD-TVOD, CTR and conversion rate by industry. Re-run sitemap diff weekly.
+
 ## Waiting on others
 - Spotify $150 (PayPal …CZVT8EVJ6TSQDK24), Biglinko $50 (…FASQSTWT4WX527JW), Vibe $600 (…MVVN4PWCFS7XXG4Z): mark paid in `partner_deals` when received.
 - GSC: re-check rewritten/reopened articles ~2 weeks after the next deploy.
