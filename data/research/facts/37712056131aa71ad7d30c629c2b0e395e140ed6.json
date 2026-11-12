@@ -1,0 +1,48 @@
+{
+ "url": "https://aidoczh.com/langchain/docs/versions/migrating_chains/conversation_retrieval_chain/conversation_retrieval_chain.html",
+ "title": "Migrating from ConversationalRetrievalChain | 🦜️🔗 LangChain",
+ "hash": "0074f13262c4a21b811be40e84e8a19f9fd9a071",
+ "fetchedAt": "2026-11-12",
+ "facts": [
+  {
+   "fact": "The shared setup splits the loaded blog post with RecursiveCharacterTextSplitter using a chunk size of 500 characters.",
+   "value": "500",
+   "unit": "characters",
+   "as_of": "",
+   "quote": "text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=0)",
+   "topic": "other"
+  },
+  {
+   "fact": "The shared setup splits the loaded blog post with RecursiveCharacterTextSplitter using a chunk overlap of 0.",
+   "value": "0",
+   "unit": "characters",
+   "as_of": "",
+   "quote": "chunk_size=500, chunk_overlap=0",
+   "topic": "other"
+  },
+  {
+   "fact": "The question-answering prompt in the migration examples instructs the assistant to answer in at most three sentences.",
+   "value": "3",
+   "unit": "sentences",
+   "as_of": "",
+   "quote": "Use three sentences maximum and keep theanswer concise.",
+   "topic": "other"
+  },
+  {
+   "fact": "The page states that the legacy ConversationalRetrievalChain includes two configurable sets of prompts and LLMs because it hides a full query-rephrasing step.",
+   "value": "2",
+   "unit": "sets of configurable prompts and LLMs",
+   "as_of": "",
+   "quote": "这意味着该类包含两组可配置的提示、LLM等。",
+   "topic": "definition"
+  },
+  {
+   "fact": "The shared setup loads the Lilian Weng blog post on autonomous agents, dated 2023-06-23 in its URL, as the example document source.",
+   "value": "2023-06-23",
+   "unit": "",
+   "as_of": "2023-06-23",
+   "quote": "[Lilian Weng 关于自主代理的博客文章](https://lilianweng.github.io/posts/2023-06-23-agent/)",
+   "topic": "other"
+  }
+ ]
+}

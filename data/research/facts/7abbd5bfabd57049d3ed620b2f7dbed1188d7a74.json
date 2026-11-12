@@ -1,0 +1,136 @@
+{
+ "url": "https://vibecoderjournal.com/benchmarks/best-free-openrouter-models/",
+ "title": "Best Free OpenRouter AI Models for Programming",
+ "hash": "2025ebfcf52d6db6d47a3725b010b58120d31bf0",
+ "fetchedAt": "2026-11-12",
+ "facts": [
+  {
+   "fact": "The page reports a benchmark of all 22 active free OpenRouter models (endpoint IDs ending in :free), using N=100 availability probes and 25 deterministic coding challenges.",
+   "value": "22",
+   "unit": "models",
+   "as_of": "2026-09-19",
+   "quote": "Empirical benchmark of all 22 active free models on OpenRouter (:free) across N=100 availability telemetry probes and 25 deterministic coding challenges.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page states the coding suite contains 25 deterministic programming challenges.",
+   "value": "25",
+   "unit": "tasks",
+   "as_of": "2026-09-19",
+   "quote": "25 deterministic coding challenges.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The availability probe consists of N=100 pings per model.",
+   "value": "100",
+   "unit": "pings",
+   "as_of": "2026-09-19",
+   "quote": "Availability Probe N=100 Pings 24h Diurnal Sampling",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page says the models were last tested on 2026-09-19.",
+   "value": "2026-09-19",
+   "unit": "date",
+   "as_of": "2026-09-19",
+   "quote": "LAST TESTED: 2026-09-19",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page states the data was observed on 19 September 2026, the planned weekly refresh is overdue, and no newer successful run is documented.",
+   "value": "19 September 2026",
+   "unit": "date",
+   "as_of": "2026-09-19",
+   "quote": "Data was observed on 19 September 2026. The planned weekly refresh is overdue and no newer successful run is documented here.",
+   "topic": "other"
+  },
+  {
+   "fact": "The page lists a previously planned retest date of 2026-09-26 and states that no verified rerun exists.",
+   "value": "2026-09-26",
+   "unit": "date",
+   "as_of": "2026-09-19",
+   "quote": "Previously planned: 2026-09-26; no verified rerun",
+   "topic": "other"
+  },
+  {
+   "fact": "The page defines the 'Sweet Spot' quadrant as models with at least 80% availability and at least 18 tasks passed.",
+   "value": "80% availability, 18 passes",
+   "unit": "%",
+   "as_of": "2026-09-19",
+   "quote": "Sweet Spot (≥80% Avail, ≥18 Pass)",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page labels 8 models as 'The Usable Sweet Spot'.",
+   "value": "8",
+   "unit": "models",
+   "as_of": "2026-09-19",
+   "quote": "The Usable Sweet Spot (8)",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In the page's table, LiquidAI LFM2.5-2.6B reported 100% availability (100/100), median latency 0.62s, 11/25 tasks passed (44.0%), and a burst limit of 20 requests.",
+   "value": "100",
+   "unit": "%",
+   "as_of": "2026-09-19",
+   "quote": "100% (100/100) | 0.62s | 11/25 (44.0%)",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In the page's table, NVIDIA Nemotron 3 Ultra reported 48% availability (48/100), median latency 4.6s, 24/25 tasks passed (96.0%), and a burst limit of 4 requests.",
+   "value": "48",
+   "unit": "%",
+   "as_of": "2026-09-19",
+   "quote": "48% (48/100) | 4.6s | 24/25 (96.0%) | **4 reqs**",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In the page's table, NVIDIA Nemotron 3.5 Content Safety reported 2/25 tasks passed (8.0%), 60% availability (60/100), and median latency 0.9s.",
+   "value": "8.0",
+   "unit": "%",
+   "as_of": "2026-09-19",
+   "quote": "60% (60/100) | 0.9s | 2/25 (8.0%) | **6 reqs**",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In the page's table, DeepSeek V4 Flash 0731 reported 84% availability (84/100), median latency 1.84s, 23/25 tasks passed (92.0%), and a burst limit of 11 requests.",
+   "value": "84",
+   "unit": "%",
+   "as_of": "2026-09-19",
+   "quote": "84% (84/100) | 1.84s | 23/25 (92.0%) | **11 reqs**",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In the page's table, Cohere North Mini Code reported 96% availability (96/100), median latency 0.88s, 21/25 tasks passed (84.0%), and a burst limit of 18 requests.",
+   "value": "96",
+   "unit": "%",
+   "as_of": "2026-09-19",
+   "quote": "96% (96/100) | 0.88s | 21/25 (84.0%) | **18 reqs**",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In the page's table, Qwen 3.8 27B reported 92% availability (92/100), median latency 1.42s, 22/25 tasks passed (88.0%), and a burst limit of 14 requests.",
+   "value": "92",
+   "unit": "%",
+   "as_of": "2026-09-19",
+   "quote": "92% (92/100) | 1.42s | 22/25 (88.0%) | **14 reqs**",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In the page's table, NVIDIA Nemotron 3 Super reported 68% availability (68/100), median latency 2.85s, 22/25 tasks passed (88.0%), and a burst limit of 7 requests.",
+   "value": "68",
+   "unit": "%",
+   "as_of": "2026-09-19",
+   "quote": "68% (68/100) | 2.85s | 22/25 (88.0%) | **7 reqs**",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page lists a 1,024k context window for DeepSeek V4 Flash 0731 in its results table.",
+   "value": "1,024k",
+   "unit": "tokens",
+   "as_of": "2026-09-19",
+   "quote": "**1,024k**",
+   "topic": "definition"
+  }
+ ]
+}

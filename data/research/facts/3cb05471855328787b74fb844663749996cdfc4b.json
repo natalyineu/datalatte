@@ -1,0 +1,96 @@
+{
+ "url": "https://apidog.com/blog/how-to-use-llama-4-via-api/",
+ "title": "How to Use Llama 4 Maverick and Llama 4 Scout via API",
+ "hash": "53ef83e91ca20a1b5b242b6229c702ccf738d40a",
+ "fetchedAt": "2026-11-12",
+ "facts": [
+  {
+   "fact": "Meta released the Llama 4 models, Maverick and Scout, on April 5, 2025.",
+   "value": "2025-04-05",
+   "unit": "date",
+   "as_of": "2025-04-05",
+   "quote": "Released on April 5, 2025, these models leverage a Mixture-of-Experts (MoE) architecture",
+   "topic": "definition"
+  },
+  {
+   "fact": "Llama 4 Scout has 17 billion active parameters, 109 billion total parameters, and 16 experts.",
+   "value": "17 billion active, 109 billion total, 16 experts",
+   "unit": "billion parameters, experts",
+   "as_of": "",
+   "quote": "17 billion active, 109 billion total, 16 experts.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Llama 4 Scout has a context window of up to 10 million tokens.",
+   "value": "10000000",
+   "unit": "tokens",
+   "as_of": "",
+   "quote": "Up to 10 million tokens.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The page states that Llama 4 Scout fits on a single NVIDIA H100 GPU when using INT4 quantization.",
+   "value": "1",
+   "unit": "GPU",
+   "as_of": "",
+   "quote": "It fits on a single NVIDIA H100 GPU with INT4 quantization.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Llama 4 Maverick has 17 billion active parameters, 400 billion total parameters, and 128 experts.",
+   "value": "17 billion active, 400 billion total, 128 experts",
+   "unit": "billion parameters, experts",
+   "as_of": "",
+   "quote": "17 billion active, 400 billion total, 128 experts.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Llama 4 Maverick has a context window of up to 1 million tokens.",
+   "value": "1000000",
+   "unit": "tokens",
+   "as_of": "",
+   "quote": "Up to 1 million tokens.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Llama 4 Maverick supports 12 languages.",
+   "value": "12",
+   "unit": "languages",
+   "as_of": "",
+   "quote": "supporting 12 languages (e.g., English, Spanish, Hindi)",
+   "topic": "definition"
+  },
+  {
+   "fact": "Groq lists Llama 4 Scout input pricing at $0.11 per million input tokens.",
+   "value": "0.11",
+   "unit": "$ per million input tokens",
+   "as_of": "",
+   "quote": "Scout: $0.11/M input, Maverick: $0.50/M input",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Groq lists Llama 4 Maverick input pricing at $0.50 per million input tokens.",
+   "value": "0.50",
+   "unit": "$ per million input tokens",
+   "as_of": "",
+   "quote": "Scout: $0.11/M input, Maverick: $0.50/M input",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page says Llama 4 Maverick hosting on local hardware can require NVIDIA H100 DGX systems, which is why it recommends using managed APIs.",
+   "value": "NVIDIA H100 DGX",
+   "unit": "hardware",
+   "as_of": "",
+   "quote": "which often requires significant hardware (e.g., NVIDIA H100 DGX for Maverick)",
+   "topic": "other"
+  },
+  {
+   "fact": "The article is dated 31 January 2026.",
+   "value": "2026-01-31",
+   "unit": "date",
+   "as_of": "2026-01-31",
+   "quote": "31 January 2026",
+   "topic": "other"
+  }
+ ]
+}
