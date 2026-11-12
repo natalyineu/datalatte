@@ -1,8 +1,8 @@
 ---
-title: "AI Appointment Reminder Agent"
+title: "AI Appointment Reminder Agent: Python Script Guide"
 date: "2026-06-13"
-lastModified: "2026-06-13"
-description: "A working Python script that sends AI-personalized appointment reminders via SMS and email. Copy-paste ready — works with Twilio, Resend."
+lastModified: "2026-11-11"
+description: "Build an AI appointment reminder agent in Python that sends SMS via Twilio and email via Resend 48 hours before visits, with a copy-paste script."
 author: "Nataliia"
 category: "AI & Automation"
 tags: ["ai agents", "python", "appointment reminders", "automation", "no-shows", "twilio", "resend"]
@@ -11,279 +11,61 @@ image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&q=80&aut
 readTime: "14 min read"
 ---
 
-No-shows cost the average service business 15–20% of potential revenue. A hair salon with 80 appointments per week and a 15% no-show rate is losing 12 appointments weekly — at $80 average, that's nearly $960 per week in empty chair revenue.
+An AI appointment reminder agent is a small Python program that reads upcoming bookings, drafts a personalised reminder for each client, and sends it by SMS or email at the right time. This guide covers a working setup using Twilio for SMS, Resend for email, and Groq for message drafting. Timing matters as much as wording. Most published guidance points to a reminder 24 to 48 hours ahead, and this script also sends a second reminder about two hours before the visit.
 
-The fix is not complicated. Automated reminders sent 48 hours and 2 hours before an appointment reduce no-shows by 35–45% in most service businesses. This article gives you a complete, working Python script to build this system yourself — no expensive software required.
+## How much do no-shows cost a small business?
 
----
+Lost revenue depends on your own numbers, so the example below uses placeholder inputs. Replace them with your booking data before you rely on the result.
 
-## What This Script Does
+Worked example (all inputs are assumptions):
 
-The script:
-1. Reads upcoming appointments from a CSV (or connects directly to your booking system API)
-2. Generates a personalized message for each client using AI (Groq's LLaMA 3.3)
-3. Sends SMS via Twilio OR email via Resend (or both)
-4. Logs every message sent so you don't double-send
-5. Runs on a schedule via cron or GitHub Actions — no server needed
+- Appointments per week: 80 (assumption)
+- No-show rate: 15% (assumption)
+- Average ticket: $80 (assumption)
 
-Total cost to run: ~$5–15/month for Twilio SMS. Email via Resend is free up to 3,000 sends/month.
+Lost appointments: 80 × 15% = 12 per week. Lost revenue: 12 × $80 = $960 per week.
 
----
+Suppose the reminder cuts no-shows by 35%. That figure comes from SchedulingKit as cited on BookingBee (secondary), and applying it here is an assumption. You would recover 12 × 35% = 4.2 appointments, or about $336 per week. Over 52 weeks that is roughly $17,500 a year. The same SchedulingKit source puts the no-show rate at 20% for salons without automated reminders, so your 15% assumption already sits below that baseline. Treat the 35% result as an upper bound. For more on the operational side, see [how to reduce no-shows in an appointment business](/blog/reduce-no-shows-appointment-business).
 
-## What You'll Need
+## What reminder timing do the sources support?
 
-- Python 3.10+
-- A [Twilio account](https://twilio.com) (free trial gives $15 credit)
-- A [Resend account](https://resend.com) (free up to 3,000 emails/month)
-- A [Groq API key](https://console.groq.com) (free tier available)
-- Your appointment data in CSV format (or a booking system with an API)
+Most guidance clusters around 24 to 48 hours. Lockhart-Meyer recommends a text between 24 and 48 hours before the appointment and says 48 hours works best, arguing that texting the day before is too late (secondary). SalonIQ recommends an SMS two days ahead, and Salonist suggests at least a single reminder a couple of days out (secondary). BuilderGrowthEngine describes automated SMS and email typically sent 24 to 48 hours ahead, with an option to confirm or reschedule (secondary).
 
----
+<StatRow values="14%|20%|35%|24-48h" labels="Attendance improvement from text reminders|No-show rate without automated reminders|No-show cut with automated SMS reminders|Typical reminder lead time" subs="Permanente Journal, cited by Lutily (secondary)|SchedulingKit, cited by BookingBee, as of 2026 (secondary)|SchedulingKit, cited by BookingBee (secondary)|BuilderGrowthEngine FAQ (secondary)" trends="up|neutral|down|neutral" />
 
-## The Complete Script
+Mariana Tek, which covers group fitness, recommends an SMS a few hours before class to reduce no-shows (secondary). The right lead time depends on how far ahead your clients book. The script's two windows, 48 hours and about 2 hours, give clients time to reschedule and catch plans that changed late. Medical practices face the same timing question, covered in [SMS appointment reminders for medical practices](/blog/sms-appointment-reminders-medical).
+
+## How does the script decide when to send a reminder?
+
+Each hourly run loads the appointment list, works out how many hours remain until each visit, and checks whether that number falls inside a reminder window. The core logic is short:
 
 ```python
-#!/usr/bin/env python3
-"""
-Appointment Reminder Agent
-Sends AI-personalized SMS/email reminders 48h and 2h before appointments.
-"""
+def reminder_window(hours_until: float) -> str | None:
+    if 46 <= hours_until <= 50:
+        return "48h"
+    if 1 <= hours_until <= 3:
+        return "2h"
+    return None
 
-import os
-import csv
-import json
-import urllib.request
-import urllib.parse
-from datetime import datetime, timedelta
-from pathlib import Path
-
-# ── Configuration ─────────────────────────────────────────────────────────────
-TWILIO_ACCOUNT_SID = os.environ.get("TWILIO_ACCOUNT_SID", "")
-TWILIO_AUTH_TOKEN  = os.environ.get("TWILIO_AUTH_TOKEN", "")
-TWILIO_FROM_PHONE  = os.environ.get("TWILIO_FROM_PHONE", "")  # e.g. +15551234567
-
-RESEND_API_KEY     = os.environ.get("RESEND_API_KEY", "")
-FROM_EMAIL         = os.environ.get("FROM_EMAIL", "hello@yoursalon.com")
-BUSINESS_NAME      = os.environ.get("BUSINESS_NAME", "Your Salon")
-
-GROQ_API_KEY       = os.environ.get("GROQ_API_KEY", "")
-GROQ_MODEL         = "llama-3.3-70b-versatile"
-
-SENT_LOG_FILE      = "sent_reminders.json"
-APPOINTMENTS_CSV   = "appointments.csv"
-
-# ── Load sent log (avoid double-sending) ──────────────────────────────────────
-def load_sent_log() -> dict:
-    if Path(SENT_LOG_FILE).exists():
-        return json.loads(Path(SENT_LOG_FILE).read_text())
-    return {}
-
-def save_sent_log(log: dict):
-    Path(SENT_LOG_FILE).write_text(json.dumps(log, indent=2))
-
-# ── Read appointments ─────────────────────────────────────────────────────────
-def load_appointments() -> list[dict]:
-    """
-    CSV format expected:
-    client_name, phone, email, service, appointment_datetime, stylist
-    Example:
-    Sarah Johnson, +15551234567, sarah@email.com, Balayage, 2026-06-15 14:00, Emma
-    """
-    appointments = []
-    with open(APPOINTMENTS_CSV) as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            row["appointment_datetime"] = datetime.strptime(
-                row["appointment_datetime"].strip(), "%Y-%m-%d %H:%M"
-            )
-            appointments.append(row)
-    return appointments
-
-# ── AI message generation ─────────────────────────────────────────────────────
-def generate_reminder_message(client: dict, hours_until: int) -> str:
-    """Uses Groq to write a warm, personalized reminder."""
-    
-    urgency = "tomorrow" if hours_until >= 24 else "in about 2 hours"
-    
-    prompt = f"""Write a short, warm appointment reminder SMS for a {client['service']} appointment.
-
-Client: {client['client_name'].split()[0]}  (use first name only)
-Service: {client['service']}
-Appointment: {urgency} at {client['appointment_datetime'].strftime('%I:%M %p')}
-Stylist: {client.get('stylist', 'your stylist')}
-Business: {BUSINESS_NAME}
-
-Rules:
-- Max 160 characters (one SMS)
-- Friendly, not robotic
-- Include the appointment time
-- End with a simple confirmation ask: "Reply YES to confirm or call us to reschedule."
-- No hashtags, no emojis, no exclamation spam
-- Start directly with the message, no preamble"""
-
-    payload = json.dumps({
-        "model": GROQ_MODEL,
-        "messages": [{"role": "user", "content": prompt}],
-        "max_tokens": 100,
-        "temperature": 0.5,
-    }).encode()
-
-    req = urllib.request.Request(
-        "https://api.groq.com/openai/v1/chat/completions",
-        data=payload,
-        headers={
-            "Authorization": f"Bearer {GROQ_API_KEY}",
-            "Content-Type": "application/json",
-        },
-        method="POST",
-    )
-
-    try:
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            data = json.loads(resp.read())
-            return data["choices"][0]["message"]["content"].strip()
-    except Exception as e:
-        # Fallback to template if AI call fails
-        first_name = client['client_name'].split()[0]
-        time_str = client['appointment_datetime'].strftime('%I:%M %p')
-        return (
-            f"Hi {first_name}, reminder: your {client['service']} is {urgency} "
-            f"at {time_str} at {BUSINESS_NAME}. "
-            f"Reply YES to confirm or call us to reschedule."
-        )
-
-# ── Send SMS via Twilio ───────────────────────────────────────────────────────
-def send_sms(to_phone: str, message: str) -> bool:
-    if not all([TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_FROM_PHONE]):
-        print("  ⚠ Twilio credentials not set, skipping SMS")
-        return False
-
-    import base64
-    auth = base64.b64encode(
-        f"{TWILIO_ACCOUNT_SID}:{TWILIO_AUTH_TOKEN}".encode()
-    ).decode()
-
-    payload = urllib.parse.urlencode({
-        "To": to_phone,
-        "From": TWILIO_FROM_PHONE,
-        "Body": message,
-    }).encode()
-
-    url = f"https://api.twilio.com/2010-04-01/Accounts/{TWILIO_ACCOUNT_SID}/Messages.json"
-    req = urllib.request.Request(
-        url, data=payload,
-        headers={"Authorization": f"Basic {auth}", "Content-Type": "application/x-www-form-urlencoded"},
-        method="POST",
-    )
-
-    try:
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            result = json.loads(resp.read())
-            print(f"  ✓ SMS sent to {to_phone} (SID: {result.get('sid', '?')})")
-            return True
-    except Exception as e:
-        print(f"  ✗ SMS failed: {e}")
-        return False
-
-# ── Send email via Resend ─────────────────────────────────────────────────────
-def send_email(to_email: str, client_name: str, message: str, appointment: dict) -> bool:
-    if not RESEND_API_KEY:
-        print("  ⚠ Resend API key not set, skipping email")
-        return False
-
-    first_name = client_name.split()[0]
-    appt_time = appointment["appointment_datetime"].strftime("%A, %B %-d at %I:%M %p")
-
-    html_body = f"""
-    <div style="font-family: Georgia, serif; max-width: 500px; margin: 0 auto; color: #333;">
-      <h2 style="color: #5c3317;">Appointment Reminder — {BUSINESS_NAME}</h2>
-      <p>Hi {first_name},</p>
-      <p>{message}</p>
-      <div style="background: #f9f5f0; border-left: 3px solid #5c3317; padding: 15px; margin: 20px 0;">
-        <strong>Service:</strong> {appointment['service']}<br />
-        <strong>Date & Time:</strong> {appt_time}<br />
-        <strong>With:</strong> {appointment.get('stylist', 'your stylist')}
-      </div>
-      <p>Need to reschedule? Reply to this email or call us.</p>
-      <p>See you soon,<br /><strong>{BUSINESS_NAME}</strong></p>
-    </div>
-    """
-
-    payload = json.dumps({
-        "from": f"{BUSINESS_NAME} <{FROM_EMAIL}>",
-        "to": [to_email],
-        "subject": f"Reminder: Your {appointment['service']} appointment",
-        "html": html_body,
-    }).encode()
-
-    req = urllib.request.Request(
-        "https://api.resend.com/emails",
-        data=payload,
-        headers={"Authorization": f"Bearer {RESEND_API_KEY}", "Content-Type": "application/json"},
-        method="POST",
-    )
-
-    try:
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            result = json.loads(resp.read())
-            print(f"  ✓ Email sent to {to_email} (ID: {result.get('id', '?')})")
-            return True
-    except Exception as e:
-        print(f"  ✗ Email failed: {e}")
-        return False
-
-# ── Main loop ─────────────────────────────────────────────────────────────────
-def main():
-    now = datetime.now()
-    sent_log = load_sent_log()
-    appointments = load_appointments()
-
-    for appt in appointments:
-        appt_dt = appt["appointment_datetime"]
-        hours_until = (appt_dt - now).total_seconds() / 3600
-        client_id = f"{appt['client_name']}_{appt_dt.isoformat()}"
-
-        # Only send at 48h window and 2h window
-        is_48h_window = 46 <= hours_until <= 50
-        is_2h_window  = 1 <= hours_until <= 3
-
-        if not (is_48h_window or is_2h_window):
-            continue
-
-        window_key = "48h" if is_48h_window else "2h"
-        log_key = f"{client_id}_{window_key}"
-
-        if log_key in sent_log:
-            print(f"Already sent {window_key} reminder to {appt['client_name']}, skipping")
-            continue
-
-        print(f"\nSending {window_key} reminder to {appt['client_name']}...")
-
-        # Generate AI message
-        message = generate_reminder_message(appt, hours_until=int(hours_until))
-        print(f"  Message: {message[:80]}...")
-
-        # Send via available channels
-        sms_sent   = send_sms(appt["phone"], message) if appt.get("phone") else False
-        email_sent = send_email(appt["email"], appt["client_name"], message, appt) if appt.get("email") else False
-
-        if sms_sent or email_sent:
-            sent_log[log_key] = {
-                "sent_at": now.isoformat(),
-                "channel": ("sms+email" if sms_sent and email_sent else ("sms" if sms_sent else "email")),
-                "appointment": appt_dt.isoformat(),
-            }
-
-    save_sent_log(sent_log)
-    print(f"\nDone. Processed {len(appointments)} appointments.")
-
-if __name__ == "__main__":
-    main()
+def already_sent(sent_log: dict, client_id: str, window: str) -> bool:
+    return f"{client_id}_{window}" in sent_log
 ```
 
----
+Inside main(), a matched window triggers the message generator. The script then calls send_sms() if the client has a phone number and send_email() if they have an address. A log entry is written only when at least one channel succeeds. A failed send therefore gets retried on the next hourly run, as long as the window is still open. The log is what stops double-sending across runs.
 
-## Sample appointments.csv Format
+## What should the AI-written message say?
+
+The generator sends the client's first name, service, appointment time, stylist, and business name to Groq and asks for a message under 160 characters. The prompt asks for no hashtags, no emojis, and a simple request to reply YES to confirm or call to reschedule. If the API call fails, a plain template takes over, so the client still gets a reminder.
+
+Meevo gives an example of a system that texts a client 24 hours before the appointment so they can confirm or reschedule. That is an illustration, not a measured result (secondary). Whatever the wording, the reschedule path matters most, because its purpose is to surface a change early enough to refill the slot. Read several generated messages before going live, since model output can drift from the tone you want.
+
+## What do you need before running the script?
+
+You need Python 3.10 or later, a Twilio account with an SMS-capable number, a Resend account for email, a Groq API key, and an appointment list in CSV form. Store every key as an environment variable and never hard-code it.
+
+This guide does not quote per-message or per-email rates. Check each provider's live pricing page before you commit. If your booking platform already has automations, check those first. SMMcalc's review of a class booking system notes that GoHighLevel workflows can send SMS 24 hours and 2 hours before a class starts. That describes platform capability, not a measured result (secondary).
+
+A sample CSV looks like this:
 
 ```
 client_name,phone,email,service,appointment_datetime,stylist
@@ -292,133 +74,91 @@ Mike Torres,+15559876543,mike@email.com,Haircut & Beard,2026-06-15 15:30,James
 Lisa Chen,,lisa.chen@gmail.com,Highlights,2026-06-16 11:00,Emma
 ```
 
-Clients without a phone number get email only. Clients without email get SMS only. Clients with both get both.
+Clients without a phone number receive email only, and clients without an email receive SMS only.
 
----
+## How do you run the reminder agent on a schedule?
 
-## Running It Automatically with GitHub Actions
-
-Create `.github/workflows/appointment-reminders.yml`:
+GitHub Actions can run the script every hour, which catches both windows. Store the CSV contents and API keys as repository secrets, then create a workflow file at `.github/workflows/appointment-reminders.yml`:
 
 ```yaml
 name: Appointment Reminders
-
 on:
   schedule:
-    - cron: '0 * * * *'  # Runs every hour — catches both 48h and 2h windows
-
+    - cron: '0 * * * *'
 jobs:
   reminders:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      
       - name: Write appointments CSV
         run: echo '${{ secrets.APPOINTMENTS_CSV }}' > appointments.csv
-      
       - name: Run reminders
         env:
           TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
-          TWILIO_AUTH_TOKEN:  ${{ secrets.TWILIO_AUTH_TOKEN }}
-          TWILIO_FROM_PHONE:  ${{ secrets.TWILIO_FROM_PHONE }}
-          RESEND_API_KEY:     ${{ secrets.RESEND_API_KEY }}
-          GROQ_API_KEY:       ${{ secrets.GROQ_API_KEY }}
-          BUSINESS_NAME:      "DataLatte Salon"
-          FROM_EMAIL:         "hello@yoursalon.com"
+          TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
+          TWILIO_FROM_PHONE: ${{ secrets.TWILIO_FROM_PHONE }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: python3 reminder_agent.py
 ```
 
-Store your API keys as GitHub Secrets. The script runs every hour and sends reminders only when appointments fall in the 46–50h or 1–3h windows.
+## What is the go-live checklist?
 
----
+Work through these steps in order before clients receive live messages.
 
-## Connecting to a Real Booking System
+1. Replace the placeholder CSV with a test file that uses your own phone number and email.
+2. Comment out send_sms() and send_email(), then replace them with print() calls and run the script. Check that each message reads correctly.
+3. Confirm that the window logic fires for an appointment set 48 hours out and one set 2 hours out.
+4. Run the script twice in a row and confirm that the sent log prevents a second message.
+5. Re-enable sending with one channel only, such as email, and check delivery in the provider dashboard.
+6. Enable SMS, then turn on the hourly schedule.
+7. Record your no-show rate for four weeks before launch so you can compare it after.
 
-If you use Vagaro, Booksy, or Square, replace `load_appointments()` with an API call to your booking system. Most platforms offer a REST API. Example for Square:
+## Which reminder impact claims should you trust?
 
-```python
-def load_appointments_from_square() -> list[dict]:
-    """Pull upcoming appointments from Square Appointments API."""
-    tomorrow = (datetime.now() + timedelta(days=3)).strftime("%Y-%m-%dT00:00:00Z")
-    
-    req = urllib.request.Request(
-        f"https://connect.squareup.com/v2/bookings?start_at_min={tomorrow}",
-        headers={
-            "Authorization": f"Bearer {os.environ.get('SQUARE_ACCESS_TOKEN')}",
-            "Square-Version": "2024-01-17",
-        }
-    )
-    
-    with urllib.request.urlopen(req) as resp:
-        data = json.loads(resp.read())
-    
-    appointments = []
-    for booking in data.get("bookings", []):
-        # Map Square booking fields to our format
-        appointments.append({
-            "client_name": booking.get("customer_note", "Valued Client"),
-            "phone": booking.get("seller_note", ""),
-            "email": "",  # Pull from customer profile separately
-            "service": booking["appointment_segments"][0].get("service_variation_id", "Appointment"),
-            "appointment_datetime": datetime.fromisoformat(
-                booking["start_at"].replace("Z", "+00:00")
-            ),
-            "stylist": "your stylist",
-        })
-    
-    return appointments
-```
+Treat vendor figures with care. BonusQR claims automated SMS reminders can reduce costly no-shows by up to 40%, but the claim is unsourced (secondary). GoConverso states that email and SMS reminders reduce no-shows by 60 to 70%, without naming a source for the figure (secondary). The 14% attendance figure traces back to research in The Permanente Journal, as cited by Lutily (secondary), and the 35% reduction traces to SchedulingKit (secondary). Of these, the 14% and 35% figures have a named origin, which makes them more useful for planning than the unsourced claims.
 
----
+Your own baseline matters more than any published number. The worked example above only shows what would happen if the assumed rates held. The no-show rate you measure before and after launch is the number that counts. For what to do when a client does not show, see [the abandoned appointment email win-back guide](/blog/abandoned-appointment-email-win-back-no-shows).
 
-## What Happens After the Reminder
+## What happens when a client replies?
 
-The script handles sending. What it doesn't handle: what happens when someone replies "NO" or "Reschedule."
+The script sends reminders but does not process replies. Inbound texts go to your Twilio number. You can configure a Twilio webhook to forward replies to email or a chat channel, then handle reschedules manually. A second script can parse replies and update the booking, which is more involved and worth building only once the basic reminders are working.
 
-For a basic setup, replies go to your Twilio phone number. You can set up a Twilio webhook to forward replies as emails or Slack messages. For more advanced handling, you'd build a second script that processes inbound messages and updates the appointment.
-
-For most salons, the simple version works fine: send the reminder, monitor replies in Twilio, and handle reschedules manually. The no-show reduction alone is worth it.
-
----
+Log output from each run is also useful for debugging, since it shows which appointments matched a window and which sends failed. Tracking agent behaviour in this way is covered in [how to monitor and debug AI agents for local business](/blog/agentops-monitor-debug-ai-agents-local-business). If you want the reminder flow connected to booking and intake, see [AI agents for appointment booking in local business](/blog/ai-agent-for-appointment-booking-local-business). Once a visit is complete, the same contact list can support review requests, which is covered in [AI agents for Google reviews management](/blog/ai-agent-for-google-reviews-management).
 
 ## Frequently Asked Questions
 
-**Q: Do I need to know Python to use this script?**
+### Does the reminder script cost anything to run?
 
-You need to be comfortable with basic terminal commands — running a Python file, setting environment variables, and editing a CSV. You don't need to understand every line of code. The script is designed to be copy-pasted and configured through environment variables, not edited.
+The script itself is free to copy and run. Twilio and Resend bill for usage, and this guide does not quote their rates. Multiply your expected message count by the live rate on each provider's pricing page. For example, 80 appointments per week with an SMS at each of two windows is 160 messages per week (assumption).
 
-If you get stuck, the most common issue is environment variables not being set correctly. Check that `echo $TWILIO_ACCOUNT_SID` returns your actual SID before running the script.
+### Should reminders go out 24 hours or 48 hours ahead?
 
-**Q: How much does Twilio SMS actually cost?**
+The sources point to a range of 24 to 48 hours, and Lockhart-Meyer favours 48 hours (secondary). The script uses 46 to 50 hours and about 2 hours. If most of your clients book within a day, change the first window to match your typical booking lead time.
 
-Twilio charges $0.0079 per SMS sent in the US (under one cent per message). For a salon with 100 appointments per week, sending two reminders per appointment = 200 messages per week = about $1.60/week, or roughly $7/month. International SMS costs more — UK is about $0.04/message, Australia $0.05/message. Twilio gives you a $15 free trial credit, which covers roughly 1,900 US SMS messages to test with.
+### What if a client has no phone number or email address?
 
-**Q: What if a client's appointment is in a different timezone?**
+The script sends to whichever channel is available. A client with neither receives nothing, so collect at least one contact method when the booking is made.
 
-The script uses your server's local timezone. If you're running it via GitHub Actions (UTC), you need to store appointment times in UTC or add timezone conversion. Add `import pytz` at the top and convert: `appt_dt = appt_dt.replace(tzinfo=pytz.timezone("America/Chicago"))`. Alternatively, store all datetimes in UTC in your CSV and display them in local time in the message by converting when generating the reminder text.
+### Will an AI-written message fix no-shows by itself?
 
-**Q: Can I add a Google review request to the follow-up message?**
+No source measures that. The timing of the message and the option to reschedule are the parts most consistently recommended. Compare your no-show rate before and after launch to see whether the wording is contributing anything.
 
-Yes — add a third window to the script. After `is_2h_window`, add: `is_followup_window = -26 <= hours_until <= -22` (24 hours after the appointment). In the `main()` loop, handle this window with a different message template that thanks the client and includes your Google review link. Use the same sent log pattern to avoid duplicate messages.
+To see where reminders fit in your wider marketing spend, [request a free audit from DataLatte](/free-audit).
 
-**Q: What's the minimum setup to test this without any API keys?**
+## Sources
 
-Comment out the `send_sms()` and `send_email()` calls and replace them with `print(message)`. Run `python3 reminder_agent.py` with a test CSV. You'll see the AI-generated messages in the terminal without sending anything. This costs nothing and lets you validate the message quality before connecting real channels.
-
----
-
-## Related Articles
-
-- [AI Agent for Appointment Booking: How It Works for Local Business](/blog/ai-agent-for-appointment-booking-local-business)
-- [AI Agent for Google Reviews Management: Automate Your Responses](/blog/ai-agent-for-google-reviews-management)
-- Make.com vs Zapier for Local Business: Which Automation Platform Is Better?
-- [AI Agents for Hair Salons: Automate Bookings and Follow-Ups](/blog/ai-agents-for-hair-salons)
-- [How to Build an AI Agent for Local Business (No-Code Guide)](/blog/how-to-build-ai-agent-local-business-no-code)
-
-<Callout type="coffee" title="Want More Local Customers?">
-Nataliia at DataLatte runs data-driven local marketing campaigns for local businesses — coffee shops, salons, pet groomers, and fitness studios. [Book a free 30-minute strategy call](/contact) or explore [Google Ads management](/services/google-ads).
-</Callout>
+- [10 Actionable Hair Salon Marketing Ideas to Keep Your Chairs Full, BonusQR](https://bonusqr.com/article/10-actionable-hair-salon-marketing-ideas-to-keep-your-chairs-full) (secondary)
+- [How Salon Automation Adds Value to Your Beauty Business, Meevo](https://www.meevo.com/blog/salon-automation/) (secondary)
+- [How to Improve Your Salon Rebooking Rate: 8 Ways That Work, Salonist](https://salonist.io/blog/improve-salon-rebooking-rate) (secondary)
+- [Grow your Salon with SMS, SalonIQ](https://www.saloniq.com/article/grow-your-salon-with-sms/) (secondary)
+- [A salon marketing checklist for savvy text messaging, Lockhart-Meyer](https://www.lockhart-meyer.co.uk/a-salon-marketing-checklist-for-savvy-text-messaging/) (secondary)
+- [How to Increase Salon Rebooking Rate (From 33% to 58%), Lutily](https://lutily.com/blog/rebook-before-they-leave) (secondary)
+- [Best Client Communication Tools for Pet Grooming Businesses, BuilderGrowthEngine](https://buildergrowthengine.com/top-client-communication-tools-for-pet-grooming-businesses/) (secondary)
+- [Group Fitness Studio Marketing Strategies That Fill Classes (2026), Mariana Tek](https://www.marianatek.com/blog/group-fitness-studio-marketing-strategies/) (secondary)
+- [Best Online Scheduling System in 2025, GoConverso Docs](https://docs.goconverso.com/en/guides/best-online-scheduling-system) (secondary)
+- [Best Class Booking System Review, SMMcalc.com](https://smmcalc.com/blog/best-class-booking-system/) (secondary)
+- [Front Desk Automation for Salons: Ultimate Guide, BookingBee](https://bookingbee.ai/ultimate-guide-to-front-desk-automation-for-salons/) (secondary)
