@@ -1,0 +1,125 @@
+---
+title: "Best Free OpenRouter Models for Business Automation"
+seoTitle: "Best Free Models on OpenRouter for Business Automation 2026"
+date: "2026-06-13"
+lastModified: "2026-11-12"
+description: "Which free OpenRouter models suit business automation in 2026? See 22 benchmarked :free models, a fallback setup, and when paying beats free."
+author: "Nataliia"
+category: "AI & Automation"
+tags: ["OpenRouter", "free AI models", "business automation", "2026"]
+slug: "best-free-openrouter-models-business-automation"
+image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=80&auto=format&fit=crop"
+readTime: "8 min read"
+---
+
+OpenRouter's free tier lets a small business call models marked with a `:free` suffix through one API, which is enough for batch work such as review replies, social captions and draft emails. The `:free` variant is a free version of a model with its own rate limits, so an automation has to handle limit errors and slow replies. No single free model wins every task, so pick by task. Check the live model list before you commit, because the most recent benchmark of free models was last tested in September 2026.
+
+## What does the :free suffix on OpenRouter mean?
+
+OpenRouter is an AI platform that gives access to a wide variety of language models from different providers through a single API, as [Kilo's OpenRouter documentation](https://kilo.ai/docs/ai-providers/openrouter) describes it. Kilo also states that OpenRouter charges based on the underlying model's pricing.
+
+The [OpenRouter FAQ](https://openrouter.ai/docs/faq) says the `:free` variant is a free version of the model with its own rate limits. That matters more than the price. A free variant can run out of capacity while the paid version of the same model keeps working, so a workflow that assumes every call succeeds will fail quietly on busy days.
+
+Build for that from the start. Log each call, record which model answered, and send anything that failed to a person rather than posting nothing.
+
+## How many free models are there, and how current is the list?
+
+The [OpenRouter Discover page](https://openrouter.ai/discover) says it lists 627 models in total. That is the full catalogue, not the free set, so filter for `:free` IDs yourself.
+
+A third-party benchmark covered all 22 active models ending in `:free`, using 100 availability probes and 25 deterministic coding challenges ([Best Free OpenRouter AI Models for Programming](https://vibecoderjournal.com/benchmarks/best-free-openrouter-models/), secondary). The page was last tested on 2026-09-19. It says its planned weekly refresh is overdue and no newer successful run is documented.
+
+The benchmark measures coding, not marketing copy. It tells you little about whether a model writes a warm review reply, so run your own tests before you rely on any ranking.
+
+## Which free model fits each automation task?
+
+Published results do not rank free models for review replies or captions, so the choice has to come from a short test on your own work. The steps below take about an afternoon.
+
+| Step | What to do | Pass test (suggested) |
+|---|---|---|
+| 1. List candidates | Copy the `:free` IDs you want to test from the live catalogue | Each ID still shows `:free` on the day you test |
+| 2. Build a test set | Use your last 20 real reviews and 20 real customer questions (assumption: you have that many) | Test set covers both good and bad reviews |
+| 3. Score the output | Rate each reply 1 to 5 for tone and factual accuracy | Keep models averaging 4 or higher |
+| 4. Time the batch | Run the test set at a busy hour and an off-peak hour | Batch finishes inside your publishing window |
+| 5. Pick a chain | Set the two best scorers as primary and fallback | Fallback answers the calls the primary fails |
+
+Once you have a chain, match it to the work. Review replies and social captions suit a fast model with a generous limit. Customer FAQ answers need more care, because a wrong price or opening time reaches the customer directly. For multi-step workflows that go beyond one prompt, the [AI agents guide for small business](/blog/best-ai-agents-for-small-business-2026) covers when a single model call is not enough.
+
+## How do you keep a free-tier automation running?
+
+Free-tier reliability comes from three habits: a fallback chain, a pause between calls, and a manual path for anything that fails. The snippet below is a minimal version. Replace the placeholder IDs with `:free` models from the live list at openrouter.ai/discover.
+
+```python
+import openai
+import time
+
+client = openai.OpenAI(
+    base_url="https://openrouter.ai/api/v1",
+    api_key="YOUR_OPENROUTER_KEY",
+)
+
+# Replace with :free model IDs from openrouter.ai/discover
+CHAIN = ["primary-model-id:free", "fallback-model-id:free"]
+
+def draft_reply(prompt):
+    for model in CHAIN:
+        try:
+            resp = client.chat.completions.create(
+                model=model,
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=300,
+            )
+            return {"text": resp.choices[0].message.content, "model": model}
+        except openai.RateLimitError:
+            time.sleep(2)
+        except openai.APIError:
+            continue
+    return None  # route to a person for a manual reply
+```
+
+Add a short pause between items in a batch so you do not exhaust the limit in one burst. Worked example, with inputs labelled as assumptions: a salon receives 150 reviews a month (assumption), and the script waits 1.5 seconds between calls (assumption). The pause alone adds 150 × 1.5 = 225 seconds, or about 3.75 minutes a month. Model response time comes on top of that, so measure it in your own test.
+
+Schedule large batches for quieter hours. Cache answers to questions that repeat, such as opening hours, so they do not trigger a fresh call each time.
+
+## Can free models write customer-facing text safely?
+
+Hightouch reports, citing Stanford's accuracy benchmarks, that hallucination rates across 26 top-tier frontier models ranged from 22% to 94% ([Hightouch, AI agents for marketing campaign automation](https://hightouch.com/blog/ai-agents-marketing-campaign-automation), secondary). That source covers frontier models in general and does not split them into free and paid variants.
+
+A spread that wide means the model choice alone does not guarantee accurate replies. Treat free-model output the same way you would treat a new hire's first drafts. Keep a person in the loop for anything that quotes prices, hours, policies or medical or legal details.
+
+For the tool side of this work, the [marketing automation tools comparison](/blog/best-marketing-automation-tools-small-business-compared) shows which platforms let you add an approval step before anything publishes.
+
+## When does paying beat staying on free models?
+
+Stay on free models when the work is batch-based and a delay of a few minutes is harmless. Move to paid when a customer is waiting on a live reply or a time-sensitive post must go out on schedule.
+
+OpenRouter's FAQ sets out one cost to check. For BYOK usage above the plan's allowance, the fee is 5% of what the same model and provider would normally cost on OpenRouter. Worked example, with the inputs labelled as assumptions: you bring your own provider key and spend $200 a month above the allowance (assumption). The fee is 5% × $200 = $10 a month. Ask whether $10 buys the reliability you need. If a live chatbot is missing replies, it probably does. If the work is overnight batches, it probably does not.
+
+The OpenRouter Discover page also lists scores on the Artificial Analysis intelligence index. Claude Fable 5.2 (Anthropic) is listed at 65, Gemini 4 Carbon (Google) at 60, GPT-6 Astra (OpenAI) at 57 and Grok 4.7 (SpaceXAI) at 36. Those are index scores for models in the catalogue, not a ranking of free models, and the Discover page does not say which of them offer a `:free` variant.
+
+For a broader view of agent frameworks that chain models together, see the [MCP servers setup guide](/blog/best-mcp-servers-local-business-setup-guide). If you would like help designing a review and FAQ workflow for your location, start with a [free audit](/free-audit).
+
+## FAQ
+
+### Are OpenRouter :free models really free?
+
+The `:free` suffix marks a free version of a model with its own rate limits, according to the [OpenRouter FAQ](https://openrouter.ai/docs/faq). Limits are the main constraint, not price. If you bring your own provider key, usage above the plan's allowance carries a fee of 5% of the normal model cost, so check your billing page before you scale.
+
+### Which free model should a small business start with?
+
+No published benchmark ranks free models for review replies, captions or FAQs, so start with a test set of your own work. Use the five-step table above, score each candidate on your reviews and questions, and keep the two highest scorers as your primary and fallback.
+
+### How many free models does OpenRouter have?
+
+The Discover page lists 627 models in total. A third-party benchmark covered 22 active `:free` models, last tested on 2026-09-19, and its refresh was overdue at that point. Check the live list on the day you set up your workflow.
+
+### Can a free model write review replies without a human check?
+
+Not safely for every reply. Hightouch, citing Stanford's benchmarks, reports hallucination rates from 22% to 94% across frontier models. Have a person approve any reply that mentions prices, hours, policies or a specific service detail, especially for negative reviews.
+
+## Sources
+
+- [OpenRouter Discover: model catalogue and Artificial Analysis index scores](https://openrouter.ai/discover)
+- [OpenRouter FAQ: :free variants and BYOK fee](https://openrouter.ai/docs/faq)
+- [Kilo documentation: using OpenRouter with Kilo Code](https://kilo.ai/docs/ai-providers/openrouter) (secondary)
+- [Best Free OpenRouter AI Models for Programming, benchmark page](https://vibecoderjournal.com/benchmarks/best-free-openrouter-models/) (secondary)
+- [Hightouch: evaluating AI agents for marketing campaign automation](https://hightouch.com/blog/ai-agents-marketing-campaign-automation) (secondary)
