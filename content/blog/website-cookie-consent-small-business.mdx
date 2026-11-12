@@ -1,114 +1,151 @@
 ---
 title: "Cookie Consent for Small Business Websites: What to Do"
 date: "2026-05-21"
-lastModified: "2026-10-31"
-description: "Do you need a cookie banner? GDPR fines reach EUR 20M or 4% of turnover; CCPA covers firms over $25M. Banner tools run $0 to $550 a year in 2026."
+lastModified: "2026-11-12"
+description: "Non-essential cookies need consent first for UK and EU visitors. Only 15% of websites were minimally GDPR-compliant in 2025. Check yours today."
 author: Nataliia
 category: Website & CRO
 tags: ["cookie consent", "website compliance", "small business"]
 slug: website-cookie-consent-small-business
-noindex: true
 image: "https://images.unsplash.com/photo-1565299624946-b28f40a04ae4?w=800&q=80&auto=format&fit=crop"
 readTime: "7 min read"
 ---
-Whether you need a cookie banner depends on who visits your site and what runs on it. If you serve visitors in the EU or UK and use analytics or advertising cookies, you need consent before they load. If you only serve US visitors, California's law has size thresholds that many small shops fall under, but you still need a privacy policy and honest disclosure. This is general information, not legal advice.
+You need a cookie banner when visitors from the UK or EU reach your site and it loads non-essential cookies, such as analytics or ad pixels. Under UK PECR, prior consent is required before non-essential cookies are placed or read, and the rejection option must be as prominent as acceptance. Many sites fall short: a 2025 cross-country study found only 15% of websites were minimally GDPR-compliant. US-only sites have lighter rules but still need a privacy policy and honest disclosure. This is general information, not legal advice.
 
-Prices were checked on 31 October 2026. Examples are labelled as assumptions.
+Cookie rules change by country and by tool, so the checks below focus on what you can verify on your own site.
 
 <StatRow
-  values="EUR 20M|4%|$25M|$0"
-  labels="Top GDPR fine cap, or higher of|Of worldwide annual turnover (top tier)|CCPA revenue threshold (one of three tests)|CookieYes Free plan, up to 5,000 pageviews a month"
-  subs="GDPR Art. 83 (secondary text)|GDPR Art. 83 (secondary text)|California Attorney General|CookieYes pricing page"
+  values="67%|15%|65.4%|1 year"
+  labels="Websites showing a consent interface, 2025|Websites minimally GDPR-compliant, 2025|Reject-option sites still collecting data, 2024|Lifespan of the cookieyes-consent cookie"
+  subs="Association for Computing Machinery study via Adwave (secondary)|Same study via Adwave (secondary)|PrivacyTerms report via Adwave (secondary)|CookieYes example via Loopy Loyalty (secondary)"
   trends="neutral|neutral|neutral|neutral"
 />
 
 ## Do You Need a Cookie Banner?
 
-Ask three questions. First, do visitors from the EU or UK reach your site? Second, do you load analytics, advertising pixels or embeds that set cookies? Third, do you sell or share personal data in California?
+Ask three questions. Do visitors from the UK or EU reach your site? Do you load analytics, advertising pixels or embedded tools that set cookies? Do you collect personal data such as emails, bookings or phone numbers? If the first two answers are yes, plan for consent before non-essential cookies load.
+
+Under UK PECR, prior consent is needed before non-essential cookies are placed or read. The ICO says rejection must be as prominent as acceptance, a point the [GDPR guide for local business websites](/blog/local-business-website-gdpr-compliance) covers in more detail.
 
 | Your situation | Likely need |
 | --- | --- |
-| Local shop, EU or UK visitors, uses Google Analytics or Meta Pixel | Consent banner that blocks those tags until accepted |
-| US-only audience, no ad pixels, few cookies | Privacy policy; banner may not be legally required, but check your state |
-| US audience, ad pixels, California visitors, meets a CCPA threshold | Opt-out link and honouring Global Privacy Control |
+| Local shop, UK or EU visitors, uses analytics or ad pixels | Consent banner that blocks those tags until accepted |
+| US-only audience, no ad pixels, few cookies | Privacy policy that lists your tools |
+| US audience with ad pixels and state privacy rules | Check each state's rules and your opt-out options |
 | Site loads only essential cookies | Disclose them in the policy |
 
-The EU rules on device storage are in the ePrivacy rules and GDPR; the UK has its own version. An attempt to load the ICO's cookie guidance timed out when checked, so confirm UK details on ico.org.uk.
+## What Makes a Consent Choice Valid?
 
-## What Does GDPR Say About Consent?
+Where prior consent applies, non-essential categories must stay disabled until the visitor makes the matching affirmative choice. A banner that loads tags first and asks afterwards does not meet that test.
 
-Article 7(1) says the controller must be able to demonstrate that the person consented. Article 7(3) says withdrawing consent must be as easy as giving it. In practice that means a "Reject" or "Manage" choice should be as easy to reach as "Accept", and you should keep a record of choices.
+Reject should be as easy to choose as accept. A "Manage" button alone is weak if "Reject all" is buried. Keep both options on the first layer of the banner.
 
-Fines in Article 83 reach up to EUR 10 million or 2% of worldwide annual turnover for some breaches, and up to EUR 20 million or 4% for breaches of core principles and data subjects' rights, whichever is higher. These are maximums, not typical amounts. The Article text was read on gdpr-info.eu, an unofficial copy, so treat it as secondary and confirm on EUR-Lex.
+Global Privacy Control is not a general substitute for the consent process under EU GDPR, ePrivacy or UK PECR. Honouring the signal is useful, but it does not replace a banner for those visitors.
 
-## Does CCPA Apply to a Small Business?
+Rejecting does not always stop tracking. In a 2024 PrivacyTerms report, summarised by Adwave, 65.4% of websites offering a reject option still collected user data after refusal. Enforcement is also real: Hustler Marketing reports that over 500 small entities were fined by GDPR authorities in 2025 for inadequate consent in automated tools (secondary).
 
-The California Attorney General's page says CCPA applies to for-profit businesses that do business in California and meet any one of three tests: gross annual revenue over $25 million; buying, selling or sharing the personal information of 100,000 or more California residents or households; or deriving 50% or more of annual revenue from selling residents' personal information.
+## Which Cookies Last How Long?
 
-Covered businesses must honour a user-enabled global privacy control as an opt-out request. The page lists no civil penalty amounts for enforcement. Under CCPA the usual approach is opt-out for sale or sharing, not an opt-in banner for every cookie. Other US states have their own laws; check each.
+The table below lists maximum storage durations from third-party cookie pages. Use it as a reference when you audit your tags. Vendors update their cookies, so confirm each one on the vendor's current page.
 
-## How Does Google Consent Mode Fit In?
-
-Consent Mode shares the visitor's choice with Google; it does not provide a banner. Google's documentation says that when visitors deny consent, tags send cookieless pings instead of storing cookies, no Analytics cookies are set or read, and Google uses modelling to fill gaps in Analytics. When ad storage is denied, no new advertising cookies are written. Expect less precise reporting from visitors who decline.
-
-## Which Banner Tool Should You Use?
-
-| Tool | Published price (31 Oct 2026) | Notes |
+| Cookie | What it does (per source) | Maximum storage |
 | --- | --- | --- |
-| CookieYes Free | $0 | 5,000 pageviews a month, 100 pages per scan, 5 scans a month |
-| CookieYes Basic | $100 a year | 100,000 pageviews a month |
-| CookieYes Pro | $250 a year | 300,000 pageviews a month |
-| CookieYes Ultimate | $550 a year | Unlimited pageviews |
-| Complianz Personal | $59 a year | 1 site, WordPress plugin; a free version also exists |
+| CookieConsentBulkSetting (Cookiebot) | Enables cookie consent across multiple websites | 1 year |
+| OptanonConsent | Records whether the visitor accepted the consent box | 1 year |
+| cookie-consent | Stores the consent state for the current domain | 1 day |
+| cookieyes-consent (CookieYes) | Remembers consent preferences | 1 year |
+| buid | Supports the website's login function | 30 days |
+| pscd | Core functionality, visitor attribution, session continuity | 3 months |
+| ajs_group_id (Segment) | Tracks visitor usage and events | 1 year |
+| _calendly_session (Calendly) | Lets the meeting scheduler work on the site | 21 days |
+| pagead/1p-user-list (Google) | Tracks interest in products; described as facilitating referral fees | 6 months |
+| personalization_id (Twitter) | Lets visitors share content to their Twitter profile | 400 days |
+| attribution_user_id (Typeform) | Used with pop-up questionnaires for statistical or marketing purposes | 1 year |
 
-Check which regions each plan supports and whether it blocks tags before consent, not just displays a notice. A banner that shows but does not block is not consent.
+Durations show how long a choice or identifier persists on the visitor's device. Match each cookie to a banner category before you publish, and check the category with a qualified adviser where the purpose is unclear.
 
-## Worked Example: What Does Compliance Cost?
+## How Do Retargeting Pixels and Forms Fit In?
 
-All inputs are **assumptions**.
+Pixel-based retargeting places a pixel on your site that drops an anonymous cookie in the visitor's browser. Ad networks use that cookie to show ads later. Adwave describes the pixel as identifying visitors so they can see ads on other sites and social media until they convert or opt out (secondary). Treat it as a non-essential category.
 
-| Input | Assumption |
+Meta's pixel must be included in your website cookie policy if it tracks user activity under GDPR, according to WasteNot (secondary). Forms and pop-ups set cookies too, so list them in the same audit.
+
+StackAdapt's cookie explainer states that sensitive information, such as an address or phone number, is not stored unless the user gives explicit consent (secondary). Keep that in mind when you design booking or quote forms.
+
+## Does Consent Change Email and Text Marketing?
+
+Consent rules also apply to messages. Textdrip's guidance says a business must obtain the recipient's explicit consent before sending messages, and sending without consent violates compliance rules and can lead to penalties (secondary). For Canadian recipients, Adwave's cold-email guide says CASL generally requires express consent or narrowly defined implied consent before a commercial electronic message is sent (secondary).
+
+Stricter opt-in can help results too. Hustler Marketing reports that GDPR-style opt-in consent can improve email open rates by 20% to 30% (secondary). That is a vendor claim, so test it on your own list. The [A/B testing guide for small business emails](/blog/ab-testing-emails-small-business-guide) explains how to run that comparison.
+
+## How Do You Audit Your Consent Setup?
+
+Work through these steps once a quarter and after adding any new tool.
+
+1. List every tag on the site: analytics, ad pixels, chat widgets, booking embeds and form plugins.
+2. For each tag, note the cookies it sets and the maximum storage from the table above or the vendor's page.
+3. Load the site in a private browser window and leave the banner untouched. Confirm that non-essential tags do not fire.
+4. Click Reject and confirm the same tags stay off. Check again, because the 2024 study suggests some tags keep collecting after refusal.
+5. Check that Reject is as prominent as Accept on both mobile and desktop.
+6. Confirm the visitor's choice is stored and respected on the next page load.
+7. Record the date and any tool versions, then repeat after every change.
+
+Tag-scanning tools can speed this up. The [AI marketing tools guide for small business](/blog/ai-marketing-tools-for-small-business) compares options, but a manual pass is still the reliable check.
+
+## What Does Consent Cost in Reporting?
+
+Declined visitors drop out of analytics, so your reports undercount. The worked example below uses assumed inputs, which you should replace with your own figures.
+
+| Input | Value (assumption) |
 | --- | --- |
-| Site traffic | 20,000 pageviews a month |
-| Tool | CookieYes Basic, $100 a year |
-| Setup time | 2 hours at your own hourly value of $40 = $80 |
-| First-year cost | $180 |
+| Monthly site visits | 4,000 |
+| Share of visitors who decline analytics | 30% |
+| Conversion rate across all visits | 3% |
+| Declined visits per month | 1,200 (4,000 × 30%) |
+| Conversions from declined visits, if the rate is the same | 36 a month (1,200 × 3%) |
 
-At that traffic the free plan's 5,000-pageview cap would be exceeded, which is why the paid plan applies. If a larger share of visitors decline analytics, your reports will undercount, so lean on server-side or sales records for decisions. See our [GDPR guide for local business websites](/blog/local-business-website-gdpr-compliance).
+At these assumptions, about 36 enquiries a month would not appear in analytics. Check totals against booking, call and form logs before cutting spend based on analytics alone. Ongoing checks like these belong in regular site upkeep; the [website maintenance cost guide for small businesses](/blog/website-maintenance-cost-small-business) explains what to budget.
 
-<Callout type="tip" title="Do This Today">
-List every tag on your site (analytics, pixels, chat, embeds). For each one, note whether it sets cookies and whether it runs before consent.
-</Callout>
+## What About US-Only Sites?
+
+If every visitor is in the US, UK and EU consent rules may not apply. You still need a clear privacy policy that lists the tools and tags you run. State laws vary, so check the rules where your customers live.
+
+California's amended Automatic Renewal Law took effect on 1 July 2025 and requires express affirmative consent for automatic renewals (ArentFox Schiff, secondary). If you sell subscriptions or memberships online, check whether it applies to your offer.
 
 ## FAQ
 
-### Do I need a cookie banner if I only have US customers?
+### Do I need a cookie banner if all my customers are in the US?
 
-Not necessarily. CCPA has thresholds and uses opt-out, not a universal banner. Many states differ. Get advice if you advertise with pixels.
+Not always. US rules vary by state and by how you use data, so review your tools against each state's law. Keep a privacy policy either way.
 
-### Will a banner hurt conversions?
+### Does Global Privacy Control replace a banner for EU or UK visitors?
 
-No source verified for this article quantifies the effect, so test it on your own traffic. Keep the banner small and do not block page content.
+No. Global Privacy Control is not a general substitute for the consent process under EU GDPR, ePrivacy or UK PECR.
 
-### Is a free plugin enough?
+### Will a consent banner reduce my conversions?
 
-For a small site, a free tier can work if it blocks tags before consent and fits your traffic. Check the limits above.
+The sources used here do not quantify this. Compare form and call volumes before and after the banner goes live, using the same traffic sources.
 
-### Do I need a privacy policy too?
+### Does rejecting cookies stop all tracking?
 
-If you collect personal data such as emails or bookings, yes. See our [GDPR-compliant email marketing guide](/blog/gdpr-compliant-email-marketing).
+Not by itself. The 2024 PrivacyTerms report, summarised by Adwave, found 65.4% of sites with a reject option still collected data after refusal. Verify your tags in practice.
 
-### Does SSL matter for privacy?
+### Do I need consent to send texts or emails?
 
-It protects data in transit; read our [SSL and HTTPS guide](/blog/website-ssl-https-why-it-matters).
+Usually yes. Text messages need explicit consent before sending, and Canadian commercial messages generally need express or narrowly implied consent under CASL.
+
+If you want an outside check of your tags and forms, [book a free audit](/free-audit).
 
 ## Sources
 
-- [California Attorney General: CCPA](https://oag.ca.gov/privacy/ccpa)
-- [GDPR Article 7: Conditions for consent](https://gdpr-info.eu/art-7-gdpr/) (secondary: unofficial copy of the regulation)
-- [GDPR Article 83: Administrative fines](https://gdpr-info.eu/art-83-gdpr/) (secondary: unofficial copy of the regulation)
-- [Google Analytics Help: Consent mode](https://support.google.com/analytics/answer/9976101)
-- [CookieYes: Pricing](https://www.cookieyes.com/pricing/) (checked 31 Oct 2026)
-- [Complianz: Pricing](https://complianz.io/pricing/) (checked 31 Oct 2026)
-
-Need a compliant, fast site? See our [website service](/services/website) or [book a free audit](/free-audit).
+- [Adwave: Cookie banner compliance](https://adwave.com/resources/cookie-banner-compliance) (secondary: summarises the 2025 Association for Computing Machinery study and the 2024 PrivacyTerms report)
+- [Newcastle University: MKT2009 module page](https://www.ncl.ac.uk/mobility/module/?code=MKT2009) (secondary: third-party cookie duration tables)
+- [Loopy Loyalty Blog](https://blog.loopyloyalty.com/?p=1241) (secondary: CookieYes cookie example)
+- [Adwave: CAN-SPAM and GDPR compliance](https://adwave.com/resources/can-spam-and-gdpr-compliance-what-small-business-owners-must-know) (secondary: cites Hustler Marketing)
+- [Adwave: Cold email compliance](https://adwave.com/resources/cold-email-compliance) (secondary: CASL summary)
+- [Textdrip: 10DLC registration best practices](https://textdrip.com/blog/10dlc-registration-best-practices) (secondary)
+- [ArentFox Schiff: Advertising law compliance in 2026](https://www.afslaw.com/perspectives/the-fine-print/advertising-law-compliance-2026-five-developments-every-advertiser) (secondary: California Automatic Renewal Law summary)
+- [Digistore24 Blog: Organic vs. paid traffic](https://www.digistore24.com/blog/affiliate-marketing-organic-vs-paid-traffic/) (secondary: Google cookie description)
+- [WhatConverts: Pricing](https://www.whatconverts.com/pricing/) (secondary: cookie descriptions)
+- [Seedtag: What are CTV and FAST](https://www.seedtag.com/blog/what-are-ctv-and-fast) (secondary: Typeform cookie description)
+- [WasteNot: Facebook retargeting best practices](https://www.wastenot.io/blog/retargeting-fac

@@ -2,116 +2,118 @@
 title: "Website Accessibility for Small Business: A Checklist"
 seoTitle: "Website Accessibility for Small Business: A Checklist"
 date: "2026-05-12"
-lastModified: "2026-11-01"
-description: "95.9% of home pages have detectable WCAG failures (WebAIM 2026). A checklist of the six most common fixes, plus free tests and what the ADA rule covers."
+lastModified: "2026-11-12"
+description: "A small business accessibility checklist: fix contrast, form labels and keyboard traps first. Targets WCAG 2.2 AA, with a 9 mm touch size and ADA notes."
 author: "Nataliia"
 category: "Website & CRO"
 tags: ["website accessibility", "small business", "disability access"]
 slug: "website-accessibility-small-business"
-noindex: true
 image: "https://images.unsplash.com/photo-1467003909585-2f8a72c4f4a3?w=800&q=80&auto=format&fit=crop"
 readTime: "7 min read"
 ---
-To make a small business website accessible, fix the failures that appear most often: low-contrast text, images without alt text, form fields without labels, empty links and empty buttons. WebAIM's 2026 analysis of one million home pages found detectable WCAG 2 failures on 95.9% of them, averaging 56.1 errors per page. Most of these fixes take minutes each.
-
-WCAG 2.2 sets the contrast minimum for normal text at 4.5:1 (success criterion 1.4.3, Level AA). This guide is general information, not legal advice. Examples are labelled as assumptions.
+To make a small business website accessible, start with the basics: readable text contrast, labelled form fields, meaningful alt text, named links and buttons, and keyboard access. WCAG is built around four principles. For most private-sector sites, WCAG 2.2 Level AA is the right planning target, according to [Adwave's ADA compliance guide](https://adwave.com/resources/website-accessibility-ada-compliance-for-small-business-sites) (secondary). This article is general information, not legal advice. Any example figures are labelled as assumptions.
 
 <StatRow
-  values="95.9%|56.1|83.9%|53.1%"
-  labels="Home pages with detectable WCAG 2 failures|Average detected errors per home page|Home pages with low-contrast text|Home pages with images missing alt text"
-  subs="WebAIM Million 2026|WebAIM Million 2026|WebAIM Million 2026|WebAIM Million 2026"
+  values="31%|24%|85+|9 mm"
+  labels="Mobile sites meeting minimum colour contrast|Pages with detectable skip links|Median Lighthouse Accessibility score|Minimum touch target in W3C mobile guidance"
+  subs="Web Almanac 2025 via Adwave|Web Almanac 2025 via Adwave|Web Almanac 2025 via Adwave, above 85|W3C mobile accessibility mapping via Adwave"
   trends="neutral|neutral|neutral|neutral"
 />
 
-## What Are the Most Common Accessibility Problems?
+## How Do the WCAG Principles Shape a Checklist?
 
-WebAIM's analysis (conducted February 2026) lists the six most common failures by share of home pages. The same list is a good order for your own fixes.
+WCAG sets out the success criteria that accessibility testing is measured against. The Americans with Disabilities Act, enacted in 1990, is the civil-rights law that frames website accessibility obligations in the U.S., as [Adwave's ADA guide](https://adwave.com/resources/website-accessibility-ada-compliance-for-small-business-sites) explains (secondary).
 
-| Failure | Share of home pages | Fix |
-| --- | --- | --- |
-| Low-contrast text | 83.9% | Darken text or lighten the background until it reaches 4.5:1 |
-| Images missing alt text | 53.1% | Describe informative images; leave decorative alt empty |
-| Form inputs missing labels | 51% | Add a visible label tied to each field |
-| Empty links | 46.3% | Add link text or an accessible name, such as a name for a social icon |
-| Empty buttons | 30.6% | Give icon buttons a text label |
-| Missing document language | 13.5% | Set the page language attribute |
+A useful checklist does not start with the standard itself. It starts with what a visitor needs to do: read the text, see the images, fill in a form, and move around the page without a mouse. Each fix below maps to one of those tasks.
 
-These are failures that automated tools can detect. Automated scans cannot judge everything, such as whether alt text is meaningful, so a clean scan does not prove a page is fully accessible.
+Keep the scope in view. A page can meet many criteria and still block a visitor at the booking form, so test the pages where people book, buy or call first.
 
-## How Do You Test Your Own Site?
+## How Common Are Accessibility Gaps?
 
-Start with free checks. Run the WebAIM contrast checker on your text and button colours, and use a browser extension that scans the page. Then test by hand: tab through the page with the keyboard only, zoom to 200%, and read the page with a screen reader for five minutes.
+The 2025 Web Almanac accessibility chapter, as summarised by [Adwave's navigation guide](https://adwave.com/resources/website-navigation-architecture) (secondary), reports three figures. Only 31% of mobile sites meet minimum colour-contrast requirements. Only about 24% of desktop and mobile pages contain detectable skip links. Median Lighthouse Accessibility scores reached above 85.
 
-Look for the points where a visitor could get stuck: a booking form, a menu, a pop-up you cannot close with the keyboard. These matter most for a local business, because the visitor is trying to book or call. Our guide to [website speed](/blog/website-speed-optimization-small-business) and [mobile-first design](/blog/mobile-optimization-local-business) cover related checks.
+The gap is clear. Most sites miss the contrast minimum on mobile, and few offer a skip link that lets a keyboard user jump past the menu. A high Lighthouse score is useful, but it is not proof of full accessibility, because automated checks cannot judge whether alt text is meaningful or whether a form error explains how to fix it.
+
+## Why Does the Mobile Layout Matter for Accessibility?
+
+Mobile and accessibility overlap more than most owners expect. The W3C Mobile Web Best Practices 1.0 contained 60 best practices, and roughly half could be traced to accessibility guidance, according to [Adwave's mobile-first design page](https://adwave.com/resources/mobile-first-website-design) (secondary). That guidance is now a long-standing part of mobile design.
+
+Two specific rules are easy to check. The W3C mobile accessibility mapping recommends a minimum touch target of 9 mm by 9 mm and placing form fields below their labels in portrait orientation. A commonly cited checklist also recommends at least 48px touch targets for buttons and links, so test buttons with a thumb on a real phone.
+
+The business case is also measurable. Studio Mesa's checklist, cited by [Adwave's mobile checklist](https://adwave.com/resources/mobile-website-design-checklist-for-local-businesses) (secondary), states that more than 60% of website traffic now comes from mobile devices. Mozello's launch checklist, cited on the same page, says users are 61% more likely to return to sites with a good mobile experience.
 
 ## Which Fixes Should You Make First?
 
-Work in this order:
+Work in this order, because each step removes a barrier that affects many visitors at once:
 
-1. Text and buttons: fix contrast across the template once.
-2. Forms: label every field and write error messages that say what to fix.
-3. Images: add alt text to photos that carry meaning, such as a menu or a service result.
-4. Links and buttons: replace "click here" with the destination, and name icon-only controls.
-5. Keyboard: make sure focus is visible and nothing traps it.
-6. Media: add captions to video you control.
+1. Text and buttons: fix contrast across the theme once, rather than page by page. Check each text and background pair with a contrast checker.
+2. Forms: label every field with visible text, keep labels above or beside inputs, and write error messages that say what to fix.
+3. Images: write alt text for photos that carry meaning, such as a menu item or a finished job. Leave decorative images with empty alt text.
+4. Links and buttons: replace "click here" with the destination, and give icon-only buttons and social links a text name.
+5. Keyboard: make sure the focus outline is visible and that no pop-up or menu traps focus.
+6. Media: add captions to video you publish.
 
-Soft brand palettes are a frequent cause of contrast problems. Our [colour scheme guide](/blog/website-color-schemes-local-business) shows how to pick colours that stay readable.
+If writing alt text for a large image library is slow, [AI writing tools for small business](/blog/ai-writing-tools-small-business-compared) can draft descriptions. A person still has to check each one for accuracy.
 
-## Does the ADA Require Your Website to Be Accessible?
+## How Do You Test Your Own Site?
 
-The ADA.gov first-steps page for the web rule covers state and local government entities under Title II and requires WCAG 2.1 Level AA. The page says a later 2026 interim final rule extended the compliance dates, so check it for current ones. It does not say whether the rule covers private businesses, which fall under Title III, so ask a lawyer whether your business faces a legal duty or demand letters in your state.
+Start with free checks and then test by hand. Run Lighthouse in your browser's developer tools for an automated accessibility score. Then run the manual tests that automated tools cannot replace.
 
-The legal question is separate from the practical one. Accessible pages work better for older visitors, people on phones in glare and anyone with a temporary injury.
+Tab through the home page and the booking or contact page using only the keyboard. Watch the focus outline and note any place where you cannot tell where you are or cannot reach a control. Zoom the page to 200% and check that nothing overlaps or disappears. Then read the page with a screen reader for a few minutes.
 
-## Do Accessibility Overlays Solve It?
+Slow pages make these tests harder to repeat. If the site feels sluggish, check the hosting first, using this guide to [website hosting for small business](/blog/website-hosting-for-small-business).
 
-Be careful. In April 2025 the FTC approved a final order requiring accessiBe to pay $1 million. The FTC alleged that the company's claims that its accessWidget made websites WCAG-compliant were false, misleading or unsubstantiated, and that it presented paid reviews as independent. The order bars such claims without evidence. It applies to that company, not to every overlay, but it shows why a one-line script is not proof of compliance.
+## Does the ADA Apply to a Private Small Business Site?
 
-## Worked Example: A One-Afternoon Audit
+The DOJ has tied web compliance for government entities to WCAG 2.1 Level AA, with compliance dates of April 26, 2027 for entities serving 50,000 people or more, and April 26, 2028 for smaller public entities and special districts, according to [Adwave's ADA guide](https://adwave.com/resources/website-accessibility-ada-compliance-for-small-business-sites) (secondary). Those dates apply to public bodies, not to a typical local shop or clinic.
 
-All inputs are **assumptions**.
+The ADA statute does not give private businesses the same specific web rule. That leaves a grey area. The practical answer is to use WCAG 2.2 Level AA as your planning target and document the fixes you make. Whether your state creates a legal duty is a question for a lawyer, not a checklist.
 
-| Task | Time assumed |
+## What Should You Check When Redesigning?
+
+A redesign is the best moment to fix accessibility, and it can also remove the traffic you already have. Adwave's redesign checklist says that for some small businesses, 90 days of website and traffic history is enough to set a performance baseline. For home services, healthcare, legal and retail sites, a longer look gives a more accurate baseline, per [Adwave's redesign checklist](https://adwave.com/resources/website-redesign-checklist-when-and-how-to-refresh-your-site) (secondary).
+
+Redirect each old URL to the closest new destination rather than sending everything to the homepage. Do not remove any page that has traffic, rankings, links or conversion history without a replacement plan. The same checklist notes that Core Web Vitals are page-experience signals, and advises testing components in tools like Lighthouse. Budget for upkeep after launch using this [website maintenance cost guide](/blog/website-maintenance-cost-small-business).
+
+## Worked Example: What Does a One-Afternoon Fix Cost?
+
+All inputs below are **assumptions**, chosen to illustrate the calculation. They are not measured costs.
+
+| Task | Time (assumption) |
 | --- | --- |
 | Contrast fix across the theme | 45 minutes |
 | Labels on the booking form | 30 minutes |
 | Alt text for 20 key images | 60 minutes |
 | Name icon buttons and social links | 20 minutes |
 | Keyboard and zoom test | 45 minutes |
+| Total | 3 hours 20 minutes |
 
-That is 3 hours 20 minutes. At your own hourly value, for example $40 an hour, the cost is about $133. It addresses the first five rows of the WebAIM list, which together account for most detected failures.
-
-<Callout type="tip" title="Do This Today">
-Open your home page, press Tab repeatedly and watch the focus outline. If you lose track of where you are, your keyboard users do too.
-</Callout>
+At an assumed hourly value of $40, the labour cost is about $133. The five tasks cover the first five fixes in the list above, which address the most common failures a visitor meets. If you pay a specialist instead, compare that figure with the quote, and consider whether the time is better spent on other work, such as the options in [affordable marketing help for small business](/blog/affordable-marketing-help-small-business-2026).
 
 ## FAQ
 
 ### What WCAG level should a small business aim for?
 
-Level AA is the usual target. The ADA web rule for public entities names WCAG 2.1 Level AA, and WCAG 2.2 adds further criteria.
+WCAG 2.2 Level AA is the planning target Adwave recommends for most private-sector sites. The DOJ uses WCAG 2.1 Level AA for government entities.
 
 ### Is a free scanner enough?
 
-No. Automated tools detect only some problems. Add manual keyboard and screen-reader checks.
+No. Automated tools catch some problems. Add manual keyboard and screen-reader checks, because a clean scan does not prove a page is fully accessible.
 
-### Do I need to fix every PDF and menu?
+### Can I install an accessibility widget instead of fixing the code?
 
-Publish menus as real text where you can, so they are readable by screen readers. See the [FAQ page guide](/blog/website-faq-page-local-business) for how to answer common questions in text.
+A widget does not repair missing labels, empty buttons or keyboard traps in your own templates. Ask any vendor for evidence behind its claims, not just a promise of compliance.
 
-### Can I just install an accessibility widget?
+### Does accessibility help SEO?
 
-Not as proof of compliance. See the FTC action above.
-
-### How does accessibility help SEO?
-
-Clear headings, alt text and link text help machines read the page. No study was verified for ranking impact, so treat it as a likely benefit, not a promise.
+Clear headings, alt text and link text help machines read a page. No verified ranking figure was found for this, so treat it as a likely benefit rather than a guaranteed one.
 
 ## Sources
 
-- [WebAIM: The WebAIM Million (2026)](https://webaim.org/projects/million/)
-- [W3C: WCAG 2.2 quick reference](https://www.w3.org/WAI/WCAG22/quickref/)
-- [ADA.gov: Web rule first steps](https://www.ada.gov/resources/web-rule-first-steps/)
-- [FTC: accessiBe final order](https://www.ftc.gov/node/88115)
+- [Adwave: Website accessibility and ADA compliance for small business sites](https://adwave.com/resources/website-accessibility-ada-compliance-for-small-business-sites) (secondary)
+- [Adwave: Website navigation and architecture](https://adwave.com/resources/website-navigation-architecture) (secondary, citing the 2025 Web Almanac accessibility chapter)
+- [Adwave: Mobile-first website design](https://adwave.com/resources/mobile-first-website-design) (secondary, citing W3C guidance)
+- [Adwave: Mobile website design checklist for local businesses](https://adwave.com/resources/mobile-website-design-checklist-for-local-businesses) (secondary)
+- [Adwave: Website redesign checklist, when and how to refresh your site](https://adwave.com/resources/website-redesign-checklist-when-and-how-to-refresh-your-site) (secondary)
 
-Want your site checked and fixed? See our [website service](/services/website) or [book a free audit](/free-audit).
+To have your site checked against this list, [book a free audit](/free-audit).

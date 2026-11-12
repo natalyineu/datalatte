@@ -1,57 +1,69 @@
 ---
 title: "How to Measure the ROI of a Local Business Website"
 date: "2026-05-21"
-lastModified: "2026-10-31"
-description: "Website ROI = (profit from the site minus its cost) / cost. Track calls, bookings and directions with GA4 key events, UTMs and a worked $ example."
+lastModified: "2026-11-12"
+description: "Calculate local website ROI from profit and cost, then test it on a 14-booking salon example with calls, bookings and directions tracked."
 author: "Nataliia"
 category: "Website & CRO"
 tags: ["local business website", "return on investment", "roi calculation", "small business owners"]
 slug: "website-roi-local-business"
-noindex: true
 image: "https://images.unsplash.com/photo-1534367610401-9f5ed68180aa?w=800&q=80&auto=format&fit=crop"
 readTime: '8 min read'
+noindex: true
 ---
 
-To measure your local business website's ROI, subtract what it costs you (build, hosting, tools, ads, your time) from the profit it brings in, then divide by that cost. The maths is easy. The hard part is knowing which calls, bookings and sales really came from the website, and that takes a few settings in Google Analytics and Google Business Profile.
-
-This guide shows the formula, what to track, and a worked example. No benchmark for typical website ROI is quoted, because none we could verify exists for local businesses.
+To measure a local business website's ROI, take the profit the site brings in, subtract what it costs you, and divide by that cost: ROI = (profit minus cost) / cost. Cost covers the build or monthly plan, hosting, maintenance, any ads that send traffic to the site, and your own time. The hard part is attribution, meaning which calls, bookings and directions really came from the website. This guide covers the formula, the actions worth counting, the tracking steps, and a worked salon example where every input is an assumption.
 
 <StatRow
-  values="3|6 months|5"
-  labels="UTM parameters Google says to always use|Business Profile data window shown in Google Analytics|Business Profile metrics: calls, directions, website clicks, bookings, messages"
-  subs="Google Analytics Help|Google Analytics Help|Google Business Profile Help"
-  trends="neutral|neutral|neutral"
+  values="18|61%|4|8-20x"
+  labels="Full-funnel actions one pixel tracks on an owned website|Chance of returning to a site with a good mobile experience, relative figure|Dollars returned per $1 in one restaurant example|Estimated return on time and tools for local SEO and Business Profile"
+  subs="Universal Ads vendor page|Mozello checklist via Adwave, secondary|Adwave vendor example, not a benchmark|Adwave estimate, 2026"
+  trends="neutral|up|neutral|neutral"
 />
+
+No published benchmark for typical local website ROI is cited here. Compare the site against your own break-even point instead.
 
 ## What is the website ROI formula?
 
-ROI = (profit attributed to the website - website cost) / website cost. Use profit, not revenue. If a booking brings $90 and costs you $40 to deliver, the profit is $50.
+Use this formula: ROI = (profit attributed to the website minus website cost) divided by website cost. Use profit, not revenue. Revenue is the money coming in, while profit is what remains after the cost of delivering the job. If a booking brings $90 and costs $40 to deliver, the profit is $50 (assumption for illustration).
 
-Website cost includes the build or monthly plan, domain and hosting, maintenance, paid ads that send traffic to it and your own time at a fair hourly rate. See our [website maintenance costs](/blog/website-maintenance-cost-small-business) and [hosting guide](/blog/website-hosting-for-small-business) for the usual line items.
+Adwave draws a useful line between two metrics. Return on ad spend measures gross revenue against only the ad spend, while ROI accounts for total cost ([Adwave, how to measure marketing ROI](https://adwave.com/resources/how-to-measure-marketing-roi)). A website carries costs beyond any ad budget, so ROI fits the whole site better.
 
-## Which actions should you count?
+Website cost includes the build or plan, domain and hosting, maintenance, paid traffic and your time at a fair hourly rate. Ad costs are easier to size with a [local ad spend forecast](/blog/local-ad-spend-forecast-2026-small-business), and SEO costs follow the lines in the [local SEO pricing guide](/blog/how-much-does-local-seo-cost-for-a-small-business-honest-pricing-guide).
 
-Count the actions that lead to money, not visits. For most local businesses that is calls, booking-form submissions, direction requests and orders.
+## Which website actions should you count?
 
-Google Analytics defines a key event as "an event that measures an action that's particularly important to the success of your business". Create an event for each action, then mark it as a key event. Google Business Profile reports calls, direction requests, website clicks, bookings and messages. Bookings only appear when handled through a booking provider.
+Count actions that lead to money, not visits. For most local businesses that means calls, booking-form submissions, direction requests and orders. A page view tells you interest, but it does not show a sale.
+
+Google describes Google Analytics as the go-to platform for millions of website and app owners, although it gives no exact count ([Google Analytics](https://developers.google.com/analytics)). Create an event for each action you want to measure and mark the important ones as key events. Menu names change over time, so check Google's current Analytics help pages for the exact steps.
+
+Business Profile insights are a separate data source. Check the performance section of your dashboard for calls, direction requests and website clicks, and keep those numbers apart from events recorded on your own site.
 
 ## How do you know where visitors came from?
 
-Tag the links you control. Google says to always use utm_source, utm_medium and utm_campaign, and warns that missing values show up as "(not set)" in reports. Tag links in emails, social bios, ads and Google Business Profile website links.
+Tag every link you control. Use the same three campaign fields on each link: source, medium and campaign. Put tagged links in email signatures, social bios, ads, and the website link on your Business Profile. Consistent tags matter more than clever names, because a mismatched label splits one channel into several rows.
 
-Link your Business Profile to Google Analytics if you want those metrics in the same reports. Google notes the data goes back only six months, so export it regularly.
+If you run Local Service Ads, Google provides a dashboard that shows leads generated and cost per lead, along with return on investment ([Accrisoft, secondary](https://www.accrisoft.com/blog/2024/06/03/service-industries/do-google-local-service-ads-work/)). Keep those paid leads separate from organic website results so the website figure is not inflated.
 
-Our [marketing ROI tracking guide](/blog/how-to-track-marketing-roi-local-business-guide) covers offline sales and phone calls.
+For more on finding the search traffic that feeds the site, see the [local SEO steps for 2026](/blog/how-to-improve-local-seo-for-your-small-business-15-steps-that-work-in-2026).
 
 ## What about calls and walk-ins?
 
-Calls from the website are easy to count if you track taps on the phone number as an event. Walk-ins are harder. Ask "How did you hear about us?" at checkout or booking and record the answer in a simple sheet. It will not be perfect, but a consistent question beats guessing.
+Calls from the website are easy to count when you track taps on the phone number as an event. Walk-ins are harder. Ask "How did you hear about us?" at booking or checkout and record the answer in a simple sheet. The answers will not be perfect, but a consistent question beats guessing.
 
-Google Business Profile counts calls as taps on the call button, which is not the same as completed conversations. Treat it as demand, not confirmed customers.
+A tap on a call button shows demand, not a completed sale. Treat call counts as leads and only count a booking as revenue once it is paid or confirmed.
+
+## Does mobile performance affect website ROI?
+
+It can. Mozello's website launch checklist, cited by Adwave, says users are 61% more likely to return to sites that provide a good mobile experience ([Adwave, mobile website checklist, secondary](https://adwave.com/resources/mobile-website-design-checklist-for-local-businesses)). Returning visitors are cheaper to convert, so a weak mobile layout raises your cost per booking.
+
+Check the basics on a phone. Adwave's mobile-first guidance sets buttons at a minimum of 9 mm by 9 mm ([Adwave, mobile-first design](https://adwave.com/resources/mobile-first-website-design)). Google also offers a free tool that tests whether a page is mobile-friendly ([Impact BC, secondary](https://www.impactbc.com.sg/ultimate-guide-digital-marketing-success/)).
+
+Write clear booking and call copy too. The [website copy examples for local businesses](/blog/how-to-write-website-copy-local-business-examples) show how to make the next step obvious.
 
 ## Worked example: a salon website
 
-All inputs are **assumptions** for illustration.
+Every input below is an **assumption** for illustration. Replace them with your own figures.
 
 | Input (assumption) | Value |
 | --- | --- |
@@ -61,44 +73,52 @@ All inputs are **assumptions** for illustration.
 | New bookings a month from website forms and taps | 14 |
 | Profit per booking after costs | $38 |
 
-Profit from the website: 14 x $38 = $532. ROI = ($532 - $110) / $110 = 3.84, or 384%. If only 5 bookings can be traced, profit is $190 and ROI is 73%. The result depends on honest attribution, so label which bookings are confirmed and which are estimates.
+Profit from the website is 14 x $38 = $532. ROI = ($532 - $110) / $110 = 3.84, or 384%.
 
-## What mistakes distort website ROI?
+Now test a stricter case. If only 5 of those bookings can be traced to the site, profit falls to 5 x $38 = $190 and ROI = ($190 - $110) / $110 = 0.73, or 73%. The site still pays back, but the gap shows how much attribution matters. Label each booking as confirmed or estimated before you report the result.
+
+## Which mistakes distort website ROI?
 
 - Counting all revenue instead of profit.
-- Crediting the website with customers who would have booked anyway, such as repeat clients on a standing appointment.
-- Ignoring cost of time.
+- Crediting the website with customers who would have booked anyway, such as regulars on a standing appointment.
+- Leaving your own time out of the cost.
 - Judging after one month for a service with a long decision cycle.
 - Mixing paid-ad results into website results without separating the ad cost.
+- Treating a call tap or a page view as a confirmed sale.
 
 ## FAQ
 
 ### What is a good ROI for a small business website?
 
-No verified benchmark exists in the sources reviewed here, so compare the website with your other channels and your own break-even point instead.
+No benchmark for local websites is cited here. Adwave describes a 3:1 to 5:1 return as often considered strong for response-focused TV campaigns ([Adwave, TV advertising ROI](https://adwave.com/resources/tv-advertising-roi-calculation)), but that is a TV figure, not a website one. Any ROI above zero means the site covers its cost, so start with your own break-even point.
 
 ### Should I count Google Business Profile calls?
 
-Count them as demand from your online presence, not as website results. Keep them separate from tracked website events.
+Count them as demand from your online presence, not as tracked website results. Keep them in a separate column so your website figure only includes events recorded on the site.
 
 ### Do I need Google Analytics?
 
-It is the most common free option, but any tool that records events and sources works. The method matters more than the tool.
+It is the platform Google describes as the go-to choice for millions of owners ([Google Analytics](https://developers.google.com/analytics)). Any tool that records events and traffic sources works. The measurement method matters more than the specific tool.
 
 ### How long until a website pays back?
 
-It depends on your costs and booking value. Divide the total upfront cost by monthly profit from the site to get months to payback.
+Divide the total upfront cost by the monthly profit the site generates. For example, a $1,200 build (assumption) that produces $300 of monthly profit (assumption) pays back in 4 months.
 
-### How can I improve website ROI?
+### Can an ad platform guarantee a return?
 
-Raise conversions with a clearer call to action, faster pages and better proof. See our [conversion rate guide](/blog/website-conversion-rate-optimization).
+No. Adwave states that it does not guarantee sales or a return on spend, because results depend on the offer, audience, budget, creative and website ([Adwave](https://adwave.com/resources/cord-cutting-statistics)). Build your forecast on your own tracked data.
 
 ## Sources
 
-- [Google Analytics Help: Key events](https://support.google.com/analytics/answer/9267568)
-- [Google Analytics Help: Campaign URL parameters (UTM)](https://support.google.com/analytics/answer/10917952)
-- [Google Business Profile Help: Performance and insights](https://support.google.com/business/answer/9918094)
-- [Google Analytics Help: Connect Google Business Profile](https://support.google.com/analytics/answer/16930347) (six-month data limit, via search result summary)
-- [PageSpeed Insights: About](https://developers.google.com/speed/docs/insights/v5/about)
+- [Adwave: How to measure marketing ROI](https://adwave.com/resources/how-to-measure-marketing-roi)
+- [Adwave: Preparing a website for advertising](https://adwave.com/resources/prepare-website-for-advertising)
+- [Adwave: TV advertising ROI calculation](https://adwave.com/resources/tv-advertising-roi-calculation)
+- [Adwave: Small business advertising ROI by channel](https://adwave.com/resources/small-business-advertising-roi-by-channel)
+- [Adwave: Mobile-first website design](https://adwave.com/resources/mobile-first-website-design)
+- [Adwave: Mobile website design checklist for local businesses (cites Mozello, secondary)](https://adwave.com/resources/mobile-website-design-checklist-for-local-businesses)
+- [Google Analytics for Developers](https://developers.google.com/analytics)
+- [Universal Ads: TV you can measure](https://www.universalads.com/blog/tv-you-can-measure)
+- [Accrisoft: Do Google Local Service Ads work? (secondary)](https://www.accrisoft.com/blog/2024/06/03/service-industries/do-google-local-service-ads-work/)
+- [Impact BC: Ultimate guide to digital marketing success (secondary)](https://www.impactbc.com.sg/ultimate-guide-digital-marketing-success/)
 
-Want help tracking what your website really earns? See our [analytics service](/services/analytics) or [book a free audit](/free-audit).
+Want help tracking what your website really earns? Run through a [free audit](/free-audit) and we will show you which actions and sources to measure first.

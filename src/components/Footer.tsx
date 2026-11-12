@@ -1,3 +1,4 @@
+import PaymentBadges from "./PaymentBadges";
 import Link from "next/link";
 import CopyEmail from "@/components/advertise/CopyEmail";
 import { Mail, MessageCircle, MapPin, Linkedin, Instagram, Facebook } from "lucide-react";
@@ -201,6 +202,8 @@ export default function Footer() {
             <NewsletterForm source="footer" />
           </div>
         </div>
+
+        <PaymentBadges />
 
         <div className="border-t border-coffee-900 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
           <p>© {new Date().getFullYear()} DataLatte. All rights reserved.</p>

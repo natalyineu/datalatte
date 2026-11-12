@@ -1,41 +1,43 @@
 ---
-title: "Website Design for Vets: What a Clinic Site Needs"
+title: "Vet Clinic Website Design: What Pet Owners Need"
 date: "2026-05-12"
-lastModified: "2026-10-31"
-description: "95 million US households own a pet (APPA). What a vet clinic website needs: booking, services, hours, schema and speed, with a worked $ example."
+lastModified: "2026-11-12"
+description: "A vet clinic site should put hours, phone and booking first. A 2025 US survey found 95% of adults had booked or would book medical visits online."
 author: "Nataliia"
 category: "Website & CRO"
 tags: ["website design", "vet clinic", "pet owners", "online bookings", "local business"]
 slug: "website-design-for-vets"
-noindex: true
 image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80&auto=format&fit=crop"
 readTime: '8 min read'
+noindex: true
 ---
 
-A vet clinic website should let a worried pet owner find your hours, location, services and a way to book or call in a few seconds on a phone. Put the phone number, hours and a booking or request button at the top, list services and new-client steps in plain words, and use VeterinaryCare structured data so search engines know what you are.
+A vet clinic website should let a worried pet owner find the phone number, opening hours and a booking or request button within seconds on a phone. Put those above the fold, describe services and new-client steps in plain language, and explain what happens out of hours. Load quickly on mobile, and track which bookings and calls the site produces.
 
-The audience is large. The American Pet Products Association says 95 million US households own a pet, according to its 2025 National Pet Owners Survey. This guide covers the pages, the technical basics and a worked example.
+Most owners search when a pet is unwell, so the site has to answer three questions fast: is the clinic open, can I book, and what do I do out of hours. The figures below come from adjacent sectors and a 2025 survey of medical appointments, so treat them as directional.
 
 <StatRow
-  values="95M|97%|54%|2.5 s"
-  labels="US households that own a pet (2025 survey)|Consumers who read online reviews for local businesses|Visit the website after reading positive reviews|Good Largest Contentful Paint target"
-  subs="APPA, 2025 National Pet Owners Survey|BrightLocal 2026|BrightLocal 2026|web.dev"
-  trends="up|up|up|neutral"
+  values="95%|92%|67%|27%"
+  labels="US adults who booked or would book a medical appointment online (2025)|Online bookers who plan to book online again (2025)|Bookings made on mobile devices, per a vendor guide|Conversion lift per second of faster mobile load (SOASTA study)"
+  subs="Eliciting Insights, cited by AdWave, secondary|Eliciting Insights, cited by AdWave, secondary|GoConverso Docs, names no source|SOASTA, cited by AdWave in Google playbook, secondary"
+  trends="up|up|neutral|up"
 />
 
-## What should be on a vet clinic home page?
+## What should sit above the fold on a vet clinic home page?
 
-NN/g's homepage principles apply directly: say who you are and what you do, put the most important content above the fold, and show your real offer. For a clinic that means:
+The fold is the part of the page visible without scrolling, and on a phone it is a small area. Use it for the facts an owner needs in the first few seconds. The [above-the-fold design guide](/blog/above-the-fold-design-local-business) covers layout in more depth. For a clinic, the top of the home page should include:
 
-- Clinic name, town and species you treat.
-- Phone number that taps to call, and today's opening hours.
-- A primary button: book, request an appointment or call.
-- What to do out of hours. State your emergency arrangement or the referral clinic you use, if you have one.
-- A real photo of your team or building.
+- Clinic name, town and the species you treat
+- A phone number that dials when tapped, beside today's opening hours
+- One primary button: book, request an appointment or call
+- A line on out-of-hours care, naming your emergency arrangement or the referral clinic you use
+- A real photo of the team or building
 
-BrightLocal found 54% of consumers visit a business's website after reading positive reviews, so put your Google rating and a recent review near the button.
+Reviews belong near the button too. Shoppers in one retail study trusted reviews more when they came from a third party, which is covered in the trust section below. Keep the button label specific, such as "Request a visit", so owners know what happens next.
 
 ## Which pages does a clinic site need?
+
+Most clinic sites need six core pages. Each one answers a single question an owner brings to the site. Keep the navigation short so the phone number and booking button stay visible on every page.
 
 | Page | Purpose |
 | --- | --- |
@@ -44,70 +46,77 @@ BrightLocal found 54% of consumers visit a business's website after reading posi
 | New clients | What to bring, how to transfer records, first visit steps |
 | Team | Names, roles and photos, which builds trust |
 | Contact and location | Map, parking, public transport, hours |
-| FAQ | Prices, payment, cancellations, species seen |
+| FAQ | Payment, cancellations, species seen |
 
-Add one page per service you want to rank for. Our [guide to Google Ads keywords for veterinarians](/blog/best-google-ad-keywords-for-veterinarians-in-2026) shows what owners search.
+Give each service its own section or page if you want to rank for it. The contact page is where an embedded map helps most; the [Google Maps embed guide](/blog/google-maps-embed-local-business-website) explains the setup. For checking every page against a list, use the [local business website checklist](/blog/local-business-website-checklist).
 
-## Should a vet website show prices?
+## Does online booking change how many clients book?
 
-Show what you can. NN/g reports that prospects rank price as their top information need on any site and that hiding costs reads as evasive. Vet bills vary with the animal and findings, so show "from" prices for routine items such as a wellness exam, and explain what changes the total. See our [pricing page guide](/blog/website-pricing-page-local-business). Check any rules your veterinary board has on advertising fees.
+A 2025 Eliciting Insights survey of 384 US adults who had visited a healthcare provider in the previous year found that 95% had booked a medical appointment online or would do so if the option existed. Among people who had already booked online, 92% planned to use online scheduling again. This is a medical survey, not a veterinary one, so it shows appetite rather than clinic demand.
 
-## How do you tell Google what your clinic is?
+The 2024 medical practice study cited by AdWave found that 76.8% of online interactions were new bookings, with 13.1% rescheduling requests and 10.1% cancellations. A clinic should expect a mix of request types and plan staff time for all of them. Some scheduling tools take a payment before confirming a booking, which AdWave's [appointment page guide](https://adwave.com/resources/appointment-booking-page-design) and a [2022 salon technology guide](https://www.salontoday.com/articles/the-2022-salon-technology-guide) both describe. Whether a clinic takes deposits is a policy choice, so check your own rules first.
 
-Google's LocalBusiness structured data guide says to use the most specific subtype possible. Schema.org defines VeterinaryCare as "a vet's office", under MedicalOrganization. Google's page does not list it by name, so test your markup in the Rich Results Test before relying on it.
+## Do reviews and trust signals change decisions?
 
-Include name, address, phone and opening hours; Google supports openingHoursSpecification and a priceRange field. Keep it consistent with your Business Profile. See our [local business schema guide](/blog/local-business-schema-markup-rich-snippets-google).
+AdWave states that over 85% of consumers trust online reviews as much as personal recommendations. That figure comes from a dental clinic article and is not specific to vets, so use it as a prompt to show reviews rather than as a benchmark.
 
-## How fast and accessible should the site be?
+Two retail findings point the same way. Chatmeter summarizes findings that 50% of online shoppers prefer third-party reviews to reviews on a retailer's own site. Baymard Institute's 2017 checkout study found that 19% of online shoppers had abandoned a checkout in the previous three months because they did not trust the site with card details. Neither figure is about veterinary care, but both suggest that visible reviews and clear contact details reduce hesitation. Test placement with the steps in the [A/B testing guide](/blog/a-b-testing-for-local-business).
 
-Owners often search from a phone in a stressful moment. Google rates a Largest Contentful Paint of 2.5 seconds or less as good, with INP at 200 ms or less. Never lazy-load the first-screen image. Text should meet the WCAG contrast ratio of at least 4.5:1. See our [speed guide](/blog/website-speed-optimization-small-business) and [accessibility guide](/blog/website-accessibility-small-business).
+## How fast and mobile-friendly should the site be?
+
+Owners often search from a phone in a stressful moment, so mobile speed matters. A SOASTA study cited in Google's mobile playbook found that mobile pages loading one second faster achieved up to a 27% increase in conversion rates. Treat this as a secondary citation of a 2010s study, and check current guidance on Google's own pages before setting targets.
+
+Google offers a free online tool that lets site owners check whether a website is mobile-friendly. Run your home page and booking page through it after every redesign. The GoConverso guide states that 67% of bookings are made on mobile devices, but it names no source, so use it as a vendor claim rather than a measured rate. Confirm the mobile share in your own analytics.
+
+## How should a clinic track bookings and calls?
+
+AdWave's conversion checklist recommends one primary conversion per site. It says four action types (calls, form leads, bookings and purchases) cover most local and online businesses. A vet clinic should usually pick booking or calls as the primary conversion and track the rest as secondary signals.
+
+Google Analytics is the platform Google describes as the go-to choice for millions of website owners, though Google gives no exact count. Set up call tracking and booking form submissions as conversions so you can see which pages produce them. Analytics and booking tools use cookies, so review consent rules with the [GDPR compliance guide](/blog/local-business-website-gdpr-compliance) before you add them.
 
 ## Worked example: what does online booking add?
 
-All inputs are **assumptions**.
+All inputs below are **assumptions** for illustration. Replace them with your own phone logs and booking form data.
 
 | Input (assumption) | Value |
 | --- | --- |
 | Monthly website visitors | 1,200 |
-| Visitors who book or request today (phone only) | 2% |
-| Visitors who book or request with an online option | 3% |
+| Visitors who request a visit by phone only | 2% |
+| Visitors who request a visit with an online option | 3% |
 | Value of a new-client first visit | $150 |
 
-Today: 1,200 x 2% = 24 new requests, or $3,600. With online booking: 1,200 x 3% = 36 requests, or $5,400. The difference is $1,800 a month. The 1-point lift is invented. Your own phone logs and booking form submissions show whether it holds. Also check that staff can handle the extra requests.
+Phone only: 1,200 x 2% = 24 requests, and 24 x $150 = $3,600 a month. With online booking: 1,200 x 3% = 36 requests, and 36 x $150 = $5,400 a month. The difference is $1,800 a month. The one-point lift is an assumption, so test it before relying on it. Check that staff can handle the extra requests.
+
+For a cost comparison, a UK guide to Facebook ads for private clinics and salons assumes 15 bookings a month at a £30 cost per result, or £450 of ad spend (about £15 a day). That is a guide assumption, not a veterinary benchmark. If you want help setting targets for your area, see [local SEO services](/services/local-seo) or [book a free audit](/free-audit).
 
 ## FAQ
 
-### How much does a vet website cost?
+### Do I need online booking on a vet clinic site?
 
-It depends on the builder and features. Squarespace's published plans run from $19 a month (Basic, billed annually) to $99 a month (Advanced), but booking software, design help and extras may cost more. Get quotes.
+It is not required. If you offer it, link it from the home page and the contact page. The survey figures above suggest many adults would use it, but a medical survey is not proof for your clinic.
 
-### Do I need online booking?
+### Should a clinic take deposits through its booking tool?
 
-It is not required. If you offer it, link it from the home page and your Google Business Profile. Google reports bookings in Profile insights only when handled through a booking provider.
+That is a policy decision. Some tools hold a booking until payment is taken. Check your own rules and local requirements before you set it up.
 
-### What schema should a clinic use?
+### How do I check that the site works on phones?
 
-VeterinaryCare is a schema.org type for a vet's office; confirm it validates in Google's Rich Results Test.
+Use Google's free mobile-friendly tool on your home page and booking page. Then test the booking flow on a real phone.
 
-### How do I handle emergencies on the site?
+### Which conversion should I track first?
 
-State what you do and where owners should go when you are closed. Keep it at the top of the home page and on the contact page.
-
-### How do I get more clinic reviews?
-
-Ask every client the same way and never offer incentives. See our [Google reviews guide](/blog/google-business-profile-reviews).
+Pick one primary conversion. For most clinics that means booking requests or calls, with other actions as secondary signals.
 
 ## Sources
 
-- [APPA: Industry trends and stats](https://www.americanpetproducts.org/industry-trends-and-stats)
-- [Nielsen Norman Group: Homepage design principles](https://www.nngroup.com/articles/homepage-design-principles/)
-- [Nielsen Norman Group: Show prices](https://www.nngroup.com/articles/show-price/)
-- [BrightLocal: Local Consumer Review Survey 2026](https://www.brightlocal.com/research/local-consumer-review-survey/)
-- [Google Search Central: LocalBusiness structured data](https://developers.google.com/search/docs/appearance/structured-data/local-business)
-- [schema.org: VeterinaryCare](https://schema.org/VeterinaryCare)
-- [web.dev: Web Vitals](https://web.dev/articles/vitals)
-- [W3C: Contrast (Minimum)](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html)
-- [Squarespace: Pricing](https://www.squarespace.com/pricing) (no publication date shown)
-- [Google Business Profile Help: Performance and insights](https://support.google.com/business/answer/9918094)
+- [AdWave: Appointment booking page design](https://adwave.com/resources/appointment-booking-page-design) (secondary; cites Eliciting Insights 2025 survey and SOASTA study)
+- [AdWave: Trust signals on website](https://adwave.com/resources/trust-signals-on-website) (secondary; cites Baymard Institute 2017 and Chatmeter)
+- [AdWave: Dental clinic marketing strategies](https://adwave.com/resources/dental-clinic-marketing-strategies) (secondary)
+- [AdWave: Conversion tracking for small business](https://adwave.com/resources/conversion-tracking-for-small-business) (secondary)
+- [GoConverso Docs: Best online scheduling system in 2025](https://docs.goconverso.com/en/guides/best-online-scheduling-system) (vendor)
+- [Salon Today: The 2022 Salon Technology Guide](https://www.salontoday.com/articles/the-2022-salon-technology-guide) (secondary)
+- [Impact BC: Ultimate Guide to Digital Marketing Success](https://www.impactbc.com.sg/ultimate-guide-digital-marketing-success/) (secondary; links Google's mobile-friendly tool)
+- [Bonds & Frazer: Facebook Ads on a Budget (UK)](https://bonsandfrazer.com/insights/facebook-ads-on-a-budget/) (secondary)
+- [Google for Developers: Google Analytics](https://developers.google.com/analytics) (primary)
 
-Want a clinic site that fills the appointment book? See our [website service](/services/website) or [book a free audit](/free-audit).
+Want a clinic site that fills the appointment book? [Book a free audit](/free-audit) or see [local SEO services](/services/local-seo).
