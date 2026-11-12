@@ -1,0 +1,168 @@
+{
+ "url": "https://www.eesel.ai/blog/meta-muse-code-pricing",
+ "title": "Meta Muse Code pricing: what a free coding agent really costs | eesel AI",
+ "hash": "9bd4844f197a33592bed2cdb2380ca34136d9e08",
+ "fetchedAt": "2026-11-06",
+ "facts": [
+  {
+   "fact": "Per eesel's reading of Meta's pricing, Muse Code itself is free and Meta charges for the underlying model, at $1.25 per million input tokens, $0.15 cached, and $4.25 output on muse-spark-1.2.",
+   "value": "1.25 input; 0.15 cached; 4.25 output",
+   "unit": "USD per million tokens",
+   "as_of": "",
+   "quote": "Muse Code costs nothing. Meta charges you for the model underneath it: $1.25 per million input tokens, $0.15 cached, and $4.25 output on `muse-spark-1.2`",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The contributor tier for muse-spark-1.2 is priced at $0.10 input, $0.002 cached, and $0.20 output per million tokens, for users who let Meta train on their code.",
+   "value": "0.10 input; 0.002 cached; 0.20 output",
+   "unit": "USD per million tokens",
+   "as_of": "",
+   "quote": "$0.10 / $0.002 / $0.20 on the contributor tier if you let Meta train on your code",
+   "topic": "pricing"
+  },
+  {
+   "fact": "eesel states that Meta's pricing, product, and billing pages list no seat price, subscription, free tier, or trial credit for Muse Code.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "There is no seat price, no subscription, no free tier, and no trial credit anywhere on Meta's pricing, product, or billing pages.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Muse Code was shipped in beta on 5 August 2026 alongside the Muse Spark 1.2 model.",
+   "value": "5 August 2026",
+   "unit": "date",
+   "as_of": "2026-08-05",
+   "quote": "shipped in beta on 5 August 2026 alongside the Muse Spark 1.2 model",
+   "topic": "other"
+  },
+  {
+   "fact": "Web search grounding is the only add-on meter, charged at $2.50 per 1,000 queries on top of tokens.",
+   "value": "2.50",
+   "unit": "USD per 1,000 queries",
+   "as_of": "",
+   "quote": "There is one genuine add-on meter, web search grounding at **$2.50 per 1,000 queries**",
+   "topic": "pricing"
+  },
+  {
+   "fact": "muse-spark-1.1 is priced the same as muse-spark-1.2, at $1.25 input, $0.15 cached, and $4.25 output per million tokens.",
+   "value": "1.25 input; 0.15 cached; 4.25 output",
+   "unit": "USD per million tokens",
+   "as_of": "",
+   "quote": "1.1 costs exactly what 1.2 costs.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Rate limits apply per team rather than per key.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Rate limits apply per team rather than per key, so extra keys buy you nothing.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Background submissions carry a separate cap of 600 requests per minute.",
+   "value": "600",
+   "unit": "per minute",
+   "as_of": "",
+   "quote": "Background submissions carry a third cap of 600 per minute on top.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Meta's configuration docs state that the default model is muse-spark-1.2.",
+   "value": "muse-spark-1.2",
+   "unit": "",
+   "as_of": "",
+   "quote": "The default model is `muse-spark-1.2`.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Meta's launch blog says Muse Code starts on a contributor tier, which conflicts with the configuration docs on the default model.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "starts on a contributor tier",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Meta states there is no long-context premium, so the same rate applies regardless of how full the context window is.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "There is no long-context premium: you pay the same rate whether your context window is mostly empty or almost full.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Meta says the system prompt and scaffolding tokens it injects into every prompt are not billed.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "those injected tokens are not billed.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Muse Code has no cache-write fee, and caching is automatic.",
+   "value": "0",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "No cache-write fee.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Background responses via background: true are not discounted, and there is no batch discount.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "`background: true` responses exist but are not discounted.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Meta's pricing page states there are no minimums or upfront commitment.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "no minimums or upfront commitment",
+   "topic": "pricing"
+  },
+  {
+   "fact": "eesel claims Muse Code ships with its reasoning effort at the second-highest of seven settings by default.",
+   "value": "2 of 7",
+   "unit": "reasoning setting",
+   "as_of": "",
+   "quote": "at the second-highest reasoning setting of seven",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "eesel says Meta ships no spend cap of any kind for Muse Code, and the only limit in the billing docs is a payment threshold.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Meta ships no spend cap of any kind.",
+   "topic": "rules"
+  },
+  {
+   "fact": "eesel's own support product charges 1 credit per ticket or chat on a fixed monthly price starting at $299/month for 500 credits.",
+   "value": "299",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "from $299/month for 500 credits",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The muse-spark-1.2 context window is 1,048,576 tokens.",
+   "value": "1048576",
+   "unit": "tokens",
+   "as_of": "",
+   "quote": "1,048,576",
+   "topic": "rules"
+  },
+  {
+   "fact": "The article was last edited on August 17, 2026.",
+   "value": "2026-08-17",
+   "unit": "date",
+   "as_of": "2026-08-17",
+   "quote": "Last edited August 17, 2026",
+   "topic": "other"
+  }
+ ]
+}
