@@ -1,0 +1,80 @@
+{
+ "url": "https://resources.rework.com/libraries/growth-frameworks/rfm-analysis",
+ "title": "\"RFM Analysis: Recency, Frequency, Monetary Segmentation Explained\"",
+ "hash": "d1827c89943da239de2e2c28c245f8c258216430",
+ "fetchedAt": "2026-11-12",
+ "facts": [
+  {
+   "fact": "Each RFM score (recency, frequency, monetary) runs from 1 to 5, and the three digits combine into a code that places a customer in a named segment.",
+   "value": "1 to 5",
+   "unit": "score scale",
+   "as_of": "",
+   "quote": "Each score runs from 1 to 5, and the three digits combine into a code that places the customer in a named segment",
+   "topic": "definition"
+  },
+  {
+   "fact": "Braze says the common RFM method splits customers on each metric into five equal groups (quintiles), with the top 20% scoring 5.",
+   "value": "20%",
+   "unit": "%",
+   "as_of": "",
+   "quote": "splits them into five equal groups, quintiles, where the top 20% score 5",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Bloomreach says scoring each RFM metric from 1 to 5 gives 125 possible score combinations.",
+   "value": "125",
+   "unit": "combinations",
+   "as_of": "",
+   "quote": "Scoring each metric from 1 to 5 gives 125 possible score combinations (5 x 5 x 5)",
+   "topic": "definition"
+  },
+  {
+   "fact": "Bloomreach recommends 12 to 24 months or more of purchase data for RFM analysis.",
+   "value": "12 to 24",
+   "unit": "months",
+   "as_of": "",
+   "quote": "Bloomreach recommends 12 to 24 months or more of purchase data",
+   "topic": "rules"
+  },
+  {
+   "fact": "Putler lists 11 RFM segments.",
+   "value": "11",
+   "unit": "segments",
+   "as_of": "",
+   "quote": "Putler lists 11 segments, while Oracle's model uses 6 personas assigned from recency and frequency alone.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Oracle's RFM model uses 6 personas assigned from recency and frequency alone.",
+   "value": "6",
+   "unit": "personas",
+   "as_of": "",
+   "quote": "Oracle's model uses 6 personas assigned from recency and frequency alone",
+   "topic": "definition"
+  },
+  {
+   "fact": "Bloomreach suggests manual frequency bands of 1, 2, 3, 4 and 5 or more orders when frequency quantiles are uneven.",
+   "value": "5",
+   "unit": "orders or more (top band)",
+   "as_of": "",
+   "quote": "suggests manual bands such as 1, 2, 3, 4 and 5 or more orders in that case",
+   "topic": "rules"
+  },
+  {
+   "fact": "Bloomreach says fixed RFM thresholds may need monthly readjustment.",
+   "value": "monthly",
+   "unit": "per month",
+   "as_of": "",
+   "quote": "Bloomreach says fixed thresholds may need monthly readjustment",
+   "topic": "rules"
+  },
+  {
+   "fact": "The article recommends grouping the 125 RFM codes into 6 to 11 named segments, each with a rule on the three scores.",
+   "value": "6 to 11",
+   "unit": "segments",
+   "as_of": "",
+   "quote": "Group them into 6 to 11 segments, each with a rule on the three scores.",
+   "topic": "rules"
+  }
+ ]
+}

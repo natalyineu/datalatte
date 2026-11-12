@@ -1,0 +1,88 @@
+{
+ "url": "https://support.google.com/google-ads/answer/6095883",
+ "title": "Set up Tracking calls to a phone number on a website",
+ "hash": "8009450e9600309d00cb30e1ee783748efbd779c",
+ "fetchedAt": "2026-11-12",
+ "facts": [
+  {
+   "fact": "Google states that a call is tracked as a conversion only when it lasts longer than a minimum length the advertiser sets.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "tracks a call as a conversion when it lasts longer than a minimum length you set",
+   "topic": "definition"
+  },
+  {
+   "fact": "Google says only one phone number can be tracked on a single page using the default JavaScript tag.",
+   "value": "1",
+   "unit": "phone number per page",
+   "as_of": "",
+   "quote": "Note: Only one number can be tracked on a single page using the default Javascript tag.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google says that after linking Google Search Console to Google Ads, the link takes 24 hours to take effect, and call assets must be resubmitted for review.",
+   "value": "24",
+   "unit": "hours",
+   "as_of": "",
+   "quote": "Links take 24 hours to take effect. You’ll need to resubmit your call assets for review after linking.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google says the Google tag cannot verify a domain if it is installed through a tag management system such as Google Tag Manager.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Keep in mind that Google tag can't verify your domain if the tag is installed with a tag management system, such as Google Tag Manager.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google says the phone number entered in Google Tag Manager's website call conversion tag must match the exact digits displayed on the website.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "The phone number you enter needs to have the exact digits it has on your website.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google states that the Google Tag Manager standard website call conversion tag is not compatible with international number formats and can display unintended plus signs on forwarding numbers.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "The Google Tag Manager standard website call conversion tag is not compatible with international number formats.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google says its automated verification system cannot verify a phone number by scanning source code when the website uses Dynamic Number Insertion or third-party call tracking.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "If your website uses Dynamic Number Insertion (DNI) or third-party call tracking, Google’s automated verification system can't verify the phone number by scanning your website's source code.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google does not recommend using Google Tag Manager to install the call conversion tag if the website uses Dynamic Number Insertion or third-party call tracking.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "This option isn’t recommended if your website uses Dynamic Number Insertion (DNI) or third-party call tracking.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google says installing the tag manually is more advanced and recommended only for advertisers comfortable using JavaScript.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "This option is more advanced, and is recommended only if you’re comfortable using JavaScript.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google states that Google forwarding numbers are currently available only in the countries listed on its support page.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Google forwarding numbers are currently available in",
+   "topic": "rules"
+  }
+ ]
+}
