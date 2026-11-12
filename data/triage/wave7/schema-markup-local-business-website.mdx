@@ -1,0 +1,142 @@
+---
+title: "Schema Markup by Page Type for Local Business Sites"
+date: "2026-05-21"
+lastModified: "2026-11-12"
+description: "Which schema goes on which page of a local business site, plus a worked cost example. Only 12.4% of domains used structured data in 2024."
+author: "Nataliia"
+category: "Website & CRO"
+tags: ["schema markup", "local business website", "search engine visibility", "small business owners"]
+slug: "schema-markup-local-business-website"
+image: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=800&q=80&auto=format&fit=crop"
+readTime: '10 min read'
+---
+
+Put the core LocalBusiness block on the page that introduces your business, usually the home page or contact page. Give each physical location its own page with its own details. Other pages need markup only where it matches something a visitor can see, such as a list of frequently asked questions. Adwave's [local schema guide](https://adwave.com/resources/local-schema-markup-helping-google-understand-your-business) calls LocalBusiness the starting point for nearly all local schema. Copying one identical block onto every page adds no new information. This guide maps each page type to its markup, then gives a checklist and a cost example for a five-page site. For the basics, see our [rich snippets overview](/blog/local-business-schema-markup-rich-snippets-google).
+
+## Which page should carry your LocalBusiness markup?
+
+LocalBusiness is the type to start with. Adwave's [voice search guide](https://adwave.com/resources/voice-search-optimization-for-local-businesses) calls it the gold standard for any physical business. Its core fields are business name, address, phone number, opening hours, aggregate rating and price range.
+
+Structured data gives search engines detailed information such as location and services offered, which can enable rich snippets in results, according to [Efficient Media](https://www.efficientmedia.com.au/top-local-seo-sydney-services/). That describes what the markup supplies. It does not guarantee a visual change in search.
+
+Choose one primary home for the block, usually the home page or contact page, and keep the details identical wherever they appear. A checklist in the [Cheers GEO Academy guide](https://www.cheers.tech/geo-academy/is-google-business-profile-enough-for-ai-visibility) marks a local branch as supported only when the Business Profile, page, reviews, citations, schema and third-party mentions all agree. Consistency matters more than volume of markup.
+
+## What belongs on the home page and contact page?
+
+Start with the fields that describe the business as a whole. A coffee shop with one location might use a block like this, with every value replaced by your own:
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Example Corner Coffee",
+  "telephone": "+1-555-0100",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "123 Example Street",
+    "addressLocality": "Springfield",
+    "addressRegion": "IL",
+    "postalCode": "00000",
+    "addressCountry": "US"
+  },
+  "openingHours": "Mo-Fr 07:00-17:00",
+  "priceRange": "$$"
+}
+```
+
+Price range is written as $, $$ or $$$, a notation [Adwave](https://adwave.com/resources/voice-search-optimization-for-local-businesses) uses in its examples. Restaurants can also describe menu, cuisine type and service area, as [Grubhub's restaurant SEO guide](https://get.grubhub.com/blog/restaurant-seo/) lists. Add only the fields that are true and visible on the page.
+
+## How should multi-location and service-area businesses handle location pages?
+
+Give each location its own page with its own address, phone number and hours, and its own markup. Do not copy one location's block across all the others. If you also run a [Google Maps embed](/blog/google-maps-embed-local-business-website) on each location page, make sure the map pin matches the address in the markup.
+
+Service-area businesses need a different approach. Google's service-area guidance says service areas should be set by city, postal code or another area type, not by a radius, as the Cheers guide explains. Name the towns or postal codes you serve on the page, rather than describing a distance around your office.
+
+Verified owners of a Google knowledge panel can also provide or edit details such as address, contact information, business type and photos, according to [Adwave's knowledge panel guide](https://adwave.com/resources/local-knowledge-panel-optimization). Whatever you mark up should match what you edit there. Our [AI visibility guide](/blog/generative-engine-optimization-local-business) covers why the same details matter across tools.
+
+## Should service pages and blog posts have schema?
+
+Service pages do not need a special schema block to do their job. Their main job is clear, visible content that a customer can act on. If you want structured data on a service page, keep it to what the page says in plain text.
+
+FAQ markup is the exception worth considering. FAQ schema is structured code that tells search engines a page contains questions and answers, as [Adwave's FAQ page guide](https://adwave.com/resources/how-to-build-a-faq-page-that-reduces-support-calls) explains. Adwave's [audit checklist](https://adwave.com/resources/local-seo-audit-checklist-15-things-to-fix-today) suggests identifying 8 to 12 of the most common customer questions for this markup. Only mark up questions that appear on the page.
+
+For blog posts, check any automatic article markup your platform adds. The headline, author and date should match the visible post. Hand-writing article markup for every post is rarely worth the time for a small blog.
+
+## Which format should the markup use?
+
+Use JSON-LD. Adwave's [local schema guide](https://adwave.com/resources/local-schema-markup-helping-google-understand-your-business) states that Google officially recommends this format because it is efficient and flexible. It is a block of code in the page head or body, separate from the visible text, which makes it easier to update without touching your layout.
+
+Several free tools can generate or test schema without coding. Adwave's [voice search guide](https://adwave.com/resources/voice-search-optimization-for-local-businesses) names Google's [Rich Results Test](https://search.google.com/test/rich-results) and Merkle's Schema Markup Generator. Whether your website builder lets you paste JSON-LD by hand, and where, varies by product and changes often. Check its current help centre before following any menu path.
+
+## How do you check what your site already outputs?
+
+Start by testing the live page, not your draft. Run the Rich Results Test on the home page and contact page, and note every structured data type it finds. Then compare the name, address, phone and hours in that output with your Business Profile and the visible page.
+
+If a theme and a plugin both output a LocalBusiness block, you may end up with two that disagree. Switch one off. Google Search Console's Enhancements report sorts a site's pages into three buckets: Valid, Valid with warnings, and Error, as [Adwave's schema guide](https://adwave.com/resources/local-schema-markup-helping-google-understand-your-business) describes. Check it after a couple of weeks, and again whenever you change theme, plugins or opening hours.
+
+Keep the test results in a simple note with the date, the page, and the types found. That record shows whether a later change added a duplicate.
+
+## What can schema realistically do for clicks?
+
+The figures below come from secondary sources and should be read as claims to check, not results you can expect. [Adwave](https://adwave.com/resources/local-schema-markup-helping-google-understand-your-business) cites studies showing pages with rich snippets can see an 82% higher click-through rate than pages without them. It also cites unnamed industry benchmarks for a 3 to 5 position improvement from LocalBusiness schema.
+
+<StatRow values="82%|12.4%|2 to 6 months|3 to 5 positions" labels="Higher click-through with rich snippets|Domains using any structured data, 2024|Months to consistent Map Pack visibility|Position gain cited for LocalBusiness schema" subs="Studies cited by Adwave, not guaranteed|Schema.org data cited by Adwave|Vendor's own estimate for new local SEO work|Unnamed industry benchmarks, unverified" trends="up|neutral|neutral|up" />
+
+Only about 12.4% of domains used any structured data as of 2024, per Schema.org data cited by Adwave. That means basic, accurate markup is still uncommon among small sites. Map Pack gains take longer. Adwave's [Map Pack guide](https://adwave.com/resources/local-seo-for-small-business-a-beginners-guide-to-the-map-pack) estimates two to six months for consistent visibility on your most important terms. Plan schema work alongside broader work, such as [15 local SEO steps](/blog/how-to-improve-local-seo-for-your-small-business-15-steps-that-work-in-2026).
+
+## What does a five-page schema check cost?
+
+Below is a worked example for a typical five-page site: home, contact, two services and about. All times and rates are assumptions, with your time at $40 an hour (assumption) and a freelancer at $60 an hour (assumption).
+
+| Task | Time (assumption) | DIY cost | Freelancer cost |
+| --- | --- | --- | --- |
+| Audit current output on 5 pages | 45 min | $30 | $45 |
+| Fix or add home and contact markup | 90 min | $60 | $90 |
+| Add breadcrumbs or FAQ markup via settings | 30 min | $20 | $30 |
+| Re-test and note results | 30 min | $20 | $30 |
+| Total | 3 hours 15 min | $130 | $195 |
+
+Adwave's [pricing note](https://adwave.com/resources/best-advertising-wedding-venues-event-planners) puts simple local SEO audit or schema work at a few hundred dollars per year, which sits close to the freelancer total above. For a broader comparison, see our [local SEO pricing guide](/blog/how-much-does-local-seo-cost-for-a-small-business-honest-pricing-guide).
+
+Break-even depends on what one customer is worth. If one extra customer brings $60 in gross profit (assumption), the DIY route pays for itself after about 3 customers ($130 divided by $60, rounded up). The freelancer route needs about 4 ($195 divided by $60, rounded up). Neither route guarantees that customers arrive.
+
+## What should you do this week?
+
+1. List your site's pages and write beside each one the markup it should have. Most small sites need the core LocalBusiness block on one page and FAQ markup only where questions are visible.
+2. Run the Rich Results Test on your home page and contact page. Write down every structured data type it finds.
+3. Remove duplicates. If a theme and a plugin both output LocalBusiness data, switch one off.
+4. Add or correct the main business block using your platform's method, and make sure its details match your Business Profile.
+5. Re-test, then check Search Console's Enhancements report after a few weeks. Repeat the check whenever you change hours, theme or plugins.
+
+If you want a second opinion on your site, you can start with a [free audit](/free-audit), or see how our [local SEO service](/services/local-seo) handles schema and listing consistency together.
+
+## FAQ
+
+### Should the same schema be on every page?
+
+No. Place the core business block on the page that introduces the business, and give each location its own page with its own details. Copying one identical block across every page adds no information.
+
+### Which schema format does Google recommend?
+
+Adwave states that Google officially recommends JSON-LD for adding schema markup. It is a separate block of code, which makes it easier to update than inline markup.
+
+### How many FAQ questions should I mark up?
+
+Adwave suggests identifying 8 to 12 of the most common customer questions. Only mark up questions that appear visibly on the page, so the markup describes real content.
+
+### Do I need a plugin to add schema?
+
+Not necessarily. A plugin or builder can save time if it outputs correct data from its settings. Check the output with the Rich Results Test either way, because plugins can be misconfigured or conflict with a theme.
+
+### Will schema guarantee rich results or more clicks?
+
+No. The click-through figure cited by Adwave comes from studies, and the position gain comes from unnamed benchmarks. Treat both as context for why accurate markup is worth doing, not as a promised result.
+
+## Sources
+
+- [Adwave: Local schema markup helping Google understand your business (secondary)](https://adwave.com/resources/local-schema-markup-helping-google-understand-your-business)
+- [Adwave: Voice search optimization for local businesses (secondary)](https://adwave.com/resources/voice-search-optimization-for-local-businesses)
+- [Adwave: Local SEO audit checklist, 15 things to fix today (secondary)](https://adwave.com/resources/local-seo-audit-checklist-15-things-to-fix-today)
+- [Adwave: Local knowledge panel optimization (secondary)](https://adwave.com/resources/local-knowledge-panel-optimization)
+- [Adwave: How to build a FAQ page that reduces support calls (secondary)](https://adwave.com/resources/how-to-build-a-faq-page-that-reduces-support-calls)
+- [Adwave: Local SEO for small business, a beginner's guide to the

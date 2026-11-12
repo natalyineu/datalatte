@@ -1,0 +1,141 @@
+---
+title: "Pet Groomer Analytics: What to Track and How"
+date: "2026-05-22"
+lastModified: "2026-11-12"
+description: "Track profile calls, directions, website clicks and booked grooms. Set up GA4 key events, UTM links and call tracking, and review results over 30-60 days."
+author: "Nataliia"
+category: "Analytics & Tracking"
+tags: ["pet groomer analytics tracking", "pet groomer marketing", "pet business growth"]
+slug: "pet-groomer-analytics-tracking"
+image: "https://images.unsplash.com/photo-1588776814546-1ffabb37fcad?w=800&q=80&auto=format&fit=crop"
+readTime: "8 min read"
+---
+
+A pet groomer should track calls, direction requests and website clicks from the Google Business Profile, key actions on the website, and booked grooms. Google Analytics is described as a free tool, and the Facebook tracking pixel is free to create. The hardest part is booked grooms, because many bookings happen by phone or at the front desk and need a manual log. This guide covers setup in order of effort. Worked figures are labelled as assumptions, and sources are listed at the end.
+
+<StatRow
+  values="30-60|20|24-48|4"
+  labels="Days to keep tracking metrics after ads start|Conversion goals allowed per Google Analytics account|Hours before Google Analytics data appears after setup|Items on a call tracking launch checklist"
+  subs="AdWave|LivePlan (secondary)|Salesforce|AdWave"
+  trends="neutral|neutral|neutral|neutral"
+/>
+
+## What Should a Groomer Track Each Month?
+
+Start with four groups: calls, directions and website clicks from your Business Profile, key actions on your website, and bookings from your desk log. AdWave recommends continuing to track the same Google Business Profile metrics for 30-60 days after ads start running. A shorter window makes it hard to tell a real change from normal week-to-week noise.
+
+For paid campaigns, BoostFloral recommends watching click-through rate, conversion rate and return on ad spend in both Google Analytics and Google Ads reports. Those three measures show whether people click, whether they act, and whether the spend pays back.
+
+Keep the monthly view to one page. A short list gets read; a long dashboard usually does not.
+
+## How Do You Set Up Website Events for Bookings?
+
+Tap-to-call and booking links should log an event in your analytics. AdWave's mobile website standard requires each tap-to-call and booking link to do this. Without the event, a click on your booking button looks the same as any other page view.
+
+Set these events up before running ads. Google Analytics goals only record conversions from the point they are set up, and they do not look at historical data. LivePlan also notes that Google limits conversion goals to 20 per account, so pick the actions that matter most. For step-by-step setup, see [local business analytics and tracking](/blog/local-business-analytics-and-tracking).
+
+Allow time for data to appear. Salesforce says it should take 24 to 48 hours to see data in Google Analytics once tracking is set up correctly.
+
+## How Do UTM Links Show Where Grooms Come From?
+
+UTM parameters label where a click came from. Use them on links you control: the website link in an Instagram bio, a newsletter, a flyer QR code, or a paid ad. AdWave's ad analysis method uses UTM parameters, tracking pixels and analytics platforms to trace the customer journey across touchpoints.
+
+Google Analytics automatically classifies CPM and CPC visitors as paid traffic under the UTM medium, so a clear medium on paid links matters. Choose lowercase values and one naming pattern, then stick to it, because "Instagram" and "instagram" can show up as separate sources in reports.
+
+Example link (illustrative, built to this pattern): `?utm_source=instagram&utm_medium=social&utm_campaign=spring-bio-link`
+
+## Can You Track Calls From Listings and Ads?
+
+AdWave identifies four common approaches small businesses use: static numbers, dedicated tracking numbers, dynamic number insertion (a script that swaps in a tracking number per visitor), and website-level event tagging. Each gives a different level of detail about which channel produced a call.
+
+Tap-to-call tracking has a limit. According to AdWave, event tracking on tel: link clicks measures intent to call, not an actual connected call. A dedicated number or call tracking tool is needed to see the call itself.
+
+Call tracking pricing usually comes as per-number, per-minute, per-call, or a platform tier. Compare the vendor pricing pages directly, since prices vary by vendor and plan.
+
+## How Do You Count Bookings You Cannot See Online?
+
+Google Analytics cannot directly track Local Services Ads performance, because leads come through Google My Business rather than your website, according to Ryze. Phone bookings and walk-ins also leave no digital trail. A desk log fills that gap.
+
+Add one question to your booking process: "How did you find us?" Offer fixed choices such as Google search, Google Maps, Instagram, referral and walk-by. Write the answer beside the booking. Customers do not always remember accurately, so treat the log as a rough guide and review it monthly.
+
+A simple spreadsheet works at first. If you later use a tool that stores source fields on each customer, [marketing automation tools compared for small businesses](/blog/best-marketing-automation-tools-small-business-compared) is a useful starting point.
+
+## What Does a Worked Budget Look Like?
+
+AdWave's ROI formula multiplies qualified calls by the conversion rate and average revenue per sale, then compares the result against ad spend and tracking cost. Every input below is an **assumption** for illustration.
+
+| Input | Value (assumption) |
+| --- | --- |
+| Monthly ad spend | $300 |
+| Qualified calls and form leads | 10 |
+| Share of leads that book a groom | 50% |
+| Average revenue per groom | $70 |
+| Tracking cost per month | $20 |
+
+Revenue: 10 × 50% × $70 = $350. Total cost: $300 + $20 = $320. Revenue divided by cost is $350 ÷ $320, about 1.09. Cost per lead is $300 ÷ 10 = $30.
+
+This is revenue, not profit. Subtract product and staff costs before judging the result. Repeat visits would raise the average revenue per client, but this example leaves them out. AdWave notes a $50 test campaign can still teach useful lessons if tracking is clean, so test small before scaling. For low-cost help, see [affordable marketing help for small businesses in 2026](/blog/affordable-marketing-help-small-business-2026).
+
+## Do Facebook and Instagram Ads Need a Pixel?
+
+Groomer to Groomer describes the Facebook tracking pixel as free to create, placed in the source code of every page on the website. LivePlan notes that Facebook pixels track page views by default, and that Facebook offers default events such as "Lead" or "CompleteRegistration" that can fire when someone clicks a button.
+
+Tracking has gaps. AdWave states that Apple's iOS 14.5 App Tracking Transparency changes reduced Meta's ability to track users across apps. StackAdapt advises using marketing mix modelling for higher-level planning and budget allocation over time, especially when user-level tracking is limited.
+
+StackAdapt also warns that platform conversion numbers may not match third-party analytics, because each platform can use different attribution models, lookback windows or tracking methods. Expect small differences and compare trends rather than exact totals.
+
+## How Do You Tell Growth From Seasonality?
+
+Compare the same month across years. AdWave suggests comparing April of this year with April of last year to answer whether the business is growing or only riding the usual seasonal wave. Month-over-month comparisons are useful, but they can mislead in seasonal businesses.
+
+Also record what changed: a new ad, a new listing photo, a price change or a staffing change. Without those notes, a jump in calls cannot be explained later.
+
+Your own history is the baseline. Use it to judge whether a change is worth keeping.
+
+## Which Numbers Go on a Monthly Page?
+
+| Metric | Where it comes from |
+| --- | --- |
+| Profile calls, directions, website clicks | Google Business Profile |
+| Key events such as booking clicks and form submissions | Google Analytics 4 |
+| Tracked call volume | Call tracking number, if used |
+| Bookings by source | Desk log |
+| Ad spend and leads | Google Ads, if you run ads |
+
+Review the list every month, and check the platform's live help page when a metric name or definition changes.
+
+## FAQ
+
+### What should I track first?
+
+Start with calls and bookings, since they sit closest to revenue. Add website key events once the booking link logs an event.
+
+### Do I need Google Analytics to track bookings?
+
+It helps if you have a website. Google Analytics is a free tool, and a booking click only counts once an event or key event is set up for it.
+
+### Why do my call numbers differ from ad platform numbers?
+
+Platforms can use different attribution models, lookback windows and tracking methods, so exact totals rarely match. Compare trends across the same period.
+
+### How long should I wait before judging a campaign?
+
+Keep tracking the same metrics for 30-60 days after ads start, according to AdWave, before deciding whether the change worked.
+
+For help setting this up, [book a free audit](/free-audit).
+
+## Sources
+
+- [AdWave: Google Business Profile insights](https://adwave.com/resources/google-business-profile-insights-what-your-analytics-actually-mean)
+- [AdWave: How to track phone calls](https://adwave.com/resources/how-to-track-phone-calls)
+- [AdWave: Mobile-first website design](https://adwave.com/resources/mobile-first-website-design)
+- [AdWave: Ad analysis examples](https://adwave.com/resources/ad-analysis-examples)
+- [AdWave: How to advertise a small business (cites crowdspring.com, secondary)](https://adwave.com/resources/how-to-advertise-small-business)
+- [AdWave: CTV vs Meta ads comparison](https://adwave.com/resources/ctv-vs-meta-ads-comparison)
+- [Salesforce: Small business marketing guide](https://www.salesforce.com/ca/small-business/marketing/smb-marketing-guide/?bc=OTH)
+- [Get Ryze: Google Local Services Ads reporting tool](https://www.get-ryze.ai/blog/google-local-services-ads-reporting-tool)
+- [LivePlan: Marketing ROI tracking guide (secondary)](https://www.liveplan.com/blog/starting/track-marketing-return-on-investment)
+- [StackAdapt: Demand-side platforms](https://www.stackadapt.com/resources/blog/demand-side-platform)
+- [StackAdapt: AI and predictive analytics in advertising](https://www.stackadapt.com/resources/blog/ai-predictive-analytics-advertising)
+- [Groomer to Groomer: Reaching more customers with Facebook ads (secondary)](https://www.groomertogroomer.com/reaching-more-customers-with-facebook-ads/)
+- [Slamdot: Four Google marketing tools (secondary)](https://www.slamdot.com/blog/catering-marketing-101-four-google-marketing-tools-you-need-to-master/)

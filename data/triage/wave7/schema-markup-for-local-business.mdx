@@ -1,0 +1,136 @@
+---
+title: "Schema Markup for Local Business: Setup Steps"
+date: "2026-05-12"
+lastModified: "2026-11-12"
+description: "Add LocalBusiness schema in 1 hour: fill the template, add it to your homepage, then check it with Google's free Rich Results Test."
+author: "Nataliia"
+category: "Local SEO"
+tags: ["schema markup", "local SEO", "rich snippets"]
+slug: "schema-markup-for-local-business"
+image: "https://images.unsplash.com/photo-1686191082931-7a17cf04ace5?w=800&q=80&auto=format&fit=crop"
+readTime: '10 min read'
+---
+
+To add LocalBusiness schema, write one block of JSON-LD that matches your Google Business Profile, place it on the page that describes your business, and check it with Google's free Rich Results Test. Google says businesses must follow its guidelines to be eligible for Local Business rich results, so accuracy matters more than volume. This walkthrough assumes one location and about one hour of work. For the broader picture, read our [LocalBusiness schema and rich snippets guide](/blog/local-business-schema-markup-rich-snippets-google).
+
+## Why Start With the LocalBusiness Type?
+
+The starting point for pretty much all local schema is the LocalBusiness type, according to [Adwave's local schema guide](https://adwave.com/resources/local-schema-markup-helping-google-understand-your-business) (secondary). Structured data describes location and services so search engines can display rich snippets, as [Efficient Media explains](https://www.efficientmedia.com.au/top-local-seo-sydney-services/) (secondary).
+
+Another vendor guide calls LocalBusiness schema the gold standard for any physical business. It lists business name, address, phone number, opening hours, aggregate rating and price range as the core details ([Adwave on voice search](https://adwave.com/resources/voice-search-optimization-for-local-businesses), secondary).
+
+A more specific subtype of LocalBusiness may fit your business better. Start from the general type, then choose a subtype only if it describes you accurately.
+
+## Which Details Belong in the Markup?
+
+Only use details that your customers can also see on your page and in your listing. If the website and the Business Profile disagree, the markup repeats the mismatch.
+
+Restaurant guidance from Grubhub lists address, hours of operation, menu, cuisine type, star rating, price range and service area as details schema can identify ([Grubhub](https://get.grubhub.com/blog/restaurant-seo/), secondary). Price range is often shown with the notation $, $$, $$$.
+
+Gather these details before writing any code:
+
+1. Copy your exact business name, address and phone number from your Google Business Profile.
+2. Write down opening hours, including any closed days.
+3. List only the social or listing URLs you own.
+4. Decide your price range notation.
+5. Delete any field you cannot fill truthfully.
+
+## What Does a Minimal Template Look Like?
+
+The example below uses placeholder values for a fictional coffee shop. Replace every value with your own details.
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Example Corner Coffee",
+  "url": "https://www.example-cafe.com/",
+  "telephone": "+1-555-010-0199",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "45 Oak Avenue",
+    "addressLocality": "Springfield",
+    "addressRegion": "IL",
+    "postalCode": "62701",
+    "addressCountry": "US"
+  },
+  "openingHours": "Mo-Fr 07:00-17:00, Sa-Su 08:00-15:00"
+}
+```
+
+Keep the JSON valid, including quotation marks and commas. Paste the block exactly as it is into your page's script tag. The `priceRange` value should match the notation you chose, such as $$.
+
+## Where Should the Block Go, and Will It Show?
+
+Put the block on the page that describes the business, usually the home page or contact page. Make sure the same facts appear visibly on that page. Our guide to [above-the-fold design for local businesses](/blog/above-the-fold-design-local-business) covers how to place those details where visitors see them first.
+
+Eligibility and display are not the same thing. Google's guidance says businesses must follow its guidelines to be eligible for Local Business rich results. It also says non-critical issues flagged by the testing tool are not required for eligibility, though fixing them can improve the quality of your structured data.
+
+Treat valid markup as a requirement to meet, not a promise that a rich result will appear.
+
+## How Do You Test It After Publishing?
+
+Paste your code or live URL into Google's [Rich Results Test](https://search.google.com/test/rich-results), which Adwave describes as a free tool from Google ([Adwave](https://adwave.com/resources/local-schema-markup-helping-google-understand-your-business), secondary). Fix critical errors first. Non-critical warnings can wait, as Google's guidance allows.
+
+After the page is live, check Search Console's Enhancements report. According to Adwave, it sorts a site's pages into three buckets: Valid, Valid with warnings, and Error (secondary). Recheck after any change to hours, address, phone number or website theme, since changes can break markup without warning.
+
+## Does Schema Pay Off, and What Does It Cost?
+
+Vendor guides make strong claims. Adwave cites studies showing an 82% higher click-through rate for pages with rich snippets and says local schema can boost impressions in rich results by 17% (both secondary, vendor-cited). It also says an unnamed industry benchmark shows a 3-5 position improvement for LocalBusiness schema users (secondary). Treat these as claims to verify, not forecasts for your site.
+
+<StatRow values="82%|17%|3-5|3" labels="Higher CTR with rich snippets|More rich result impressions|Position gain in local visibility|Search Console report buckets" subs="Vendor-cited studies (secondary)|Vendor-cited claim (secondary)|Unnamed benchmark per vendor (secondary)|Valid, Valid with warnings, Error" trends="up|up|up|neutral" />
+
+Measure before and after your change rather than trusting a single number. Our [A/B testing guide for local businesses](/blog/a-b-testing-for-local-business) explains the basic approach to comparing results.
+
+Here is a worked example. The inputs are assumptions, not sourced figures: your time is worth $40 an hour, setup takes 1 hour, you recheck once a quarter for 30 minutes, and each new customer brings $60 gross profit.
+
+| Route | First-year cost | Extra customers to break even |
+| --- | --- | --- |
+| Do it yourself (assumption) | $120 ($40 setup plus four rechecks at $20) | 2 |
+| Outside help (vendor range) | A few hundred dollars per year | 5 if the price is $300 (assumption) |
+
+The vendor guide says a simple audit or schema work costs a few hundred dollars per year (secondary). The DIY route is cheap, but it still takes your time. None of these figures show that schema alone brings in customers.
+
+## What Should You Do This Week?
+
+Work through these steps in order:
+
+1. Copy your name, address, phone, hours and listing URLs from your Business Profile into a note.
+2. Fill the template with those exact values and remove any field you cannot verify.
+3. Add the block to your home or contact page, or send the code to whoever manages your site.
+4. Run the Rich Results Test on the live page and fix critical errors.
+5. Check the Search Console Enhancements report after a few weeks, then set a quarterly reminder to recheck.
+
+If you want help finding the questions your customers ask most, Adwave suggests identifying 8-12 of the most common ones to build FAQ content (secondary). Use those answers in visible page text, then keep the wording consistent with your listing.
+
+## FAQ
+
+### What is the starting type for local business schema?
+
+According to Adwave, the starting point for nearly all local schema is the LocalBusiness type (secondary). Choose a more specific subtype only if it fits your business.
+
+### Which details does LocalBusiness schema cover?
+
+A vendor guide lists business name, address, phone number, opening hours, aggregate rating and price range as the core details (secondary). Only include fields you can fill accurately.
+
+### Does valid markup guarantee a rich result?
+
+No. Google's guidance says businesses must follow its guidelines to be eligible for Local Business rich results. Eligibility does not guarantee that a result will display.
+
+### Where can I check whether my markup is working?
+
+Use Google's Rich Results Test for a single page, then review the Search Console Enhancements report, which sorts pages into Valid, Valid with warnings and Error (secondary).
+
+## Sources
+
+- [Google Search Central: Local Business structured data](https://developers.google.com/search/docs/appearance/structured-data/local-business) (primary)
+- [Google Rich Results Test](https://search.google.com/test/rich-results) (primary)
+- [Adwave: Local schema markup helping Google understand your business](https://adwave.com/resources/local-schema-markup-helping-google-understand-your-business) (secondary)
+- [Adwave: Voice search optimization for local businesses](https://adwave.com/resources/voice-search-optimization-for-local-businesses) (secondary)
+- [Efficient Media: Top local SEO Sydney strategies](https://www.efficientmedia.com.au/top-local-seo-sydney-services/) (secondary)
+- [Grubhub: 5 steps to improve your restaurant SEO](https://get.grubhub.com/blog/restaurant-seo/) (secondary)
+- [Adwave: Best advertising for wedding venues and event planners](https://adwave.com/resources/best-advertising-wedding-venues-event-planners) (secondary)
+- [Adwave: Local SEO audit checklist](https://adwave.com/resources/local-seo-audit-checklist-15-things-to-fix-today) (secondary)
+
+Want your schema, Business Profile and website checked against each other? See our [local SEO service](/services/local-seo).
