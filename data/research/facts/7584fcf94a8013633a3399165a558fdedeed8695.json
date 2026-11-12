@@ -1,0 +1,88 @@
+{
+ "url": "https://adwave.com/resources/cross-channel-attribution-measuring-tv",
+ "title": "Cross-channel attribution: what it shows and misses",
+ "hash": "5c851754d7e355e12178f58b753177a58e2d4b00",
+ "fetchedAt": "2026-11-12",
+ "facts": [
+  {
+   "fact": "Google's documentation states that data-driven attribution is now the default for most conversion actions in Google Ads.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "says data-driven attribution is now the default for most conversion actions.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google Analytics 4's Attribution reports offer three models: data-driven attribution and two last-click models.",
+   "value": "3",
+   "unit": "models",
+   "as_of": "",
+   "quote": "lists three models in its Attribution reports: data-driven attribution and two last-click models.",
+   "topic": "rules"
+  },
+  {
+   "fact": "In one geo holdout on streaming TV cited by the page from Measured's incrementality research, roughly half of the conversions the ad platform had claimed were actually incremental.",
+   "value": "roughly half",
+   "unit": "share of platform-claimed conversions",
+   "as_of": "",
+   "quote": "roughly half of the conversions the ad platform had claimed were actually incremental",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page states that an incrementality test typically takes several weeks, long enough to cover the lag between seeing an ad and buying.",
+   "value": "several weeks",
+   "unit": "weeks",
+   "as_of": "",
+   "quote": "a test typically takes several weeks",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page says the platform-report reconciliation check described in its process takes about ten minutes for one month of data.",
+   "value": "about ten minutes",
+   "unit": "minutes",
+   "as_of": "",
+   "quote": "You can check this in about ten minutes:",
+   "topic": "other"
+  },
+  {
+   "fact": "The page states that most streaming platforms support geographic targeting exclusions, which makes streaming TV suitable for geo incrementality tests.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Streaming TV suits this because most streaming platforms support geographic targeting exclusions.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Last-touch attribution gives all credit to the final click or view before conversion, and the page says it overvalues the final touchpoint and ignores everything that came before it.",
+   "value": "100%",
+   "unit": "% of credit to final touchpoint",
+   "as_of": "",
+   "quote": "even though it overvalues the final touchpoint and ignores everything that came before it",
+   "topic": "definition"
+  },
+  {
+   "fact": "The page states that multi-touch and data-driven attribution need user-level tracking and therefore cannot follow linear TV or other media they cannot tie to a person.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Needs user-level tracking, so it can’t follow linear TV or other media it can’t tie to a person",
+   "topic": "definition"
+  },
+  {
+   "fact": "The page states that in an incrementality test, the difference in sales between the treatment and holdout groups is the lift the ads caused.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "The difference in sales between the treatment and holdout groups is the lift the ads caused.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The page explains that each ad platform's dashboard counts the conversions its own ads touched, using its own conversion definition and attribution window, so platform totals can overlap.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Each counts the conversions its ads touched, using its own conversion definition and attribution window.",
+   "topic": "definition"
+  }
+ ]
+}
