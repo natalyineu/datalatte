@@ -1,0 +1,83 @@
+{
+ "url": "https://adwave.com/resources/website-security-basics-ssl",
+ "title": "https://adwave.com/resources/website-security-basics-ssl",
+ "hash": "0bbf26b4aeca64ccae32884d8c0de131c0d3e76f",
+ "fetchedAt": "2026-11-12",
+ "full": true,
+ "chars": 16028,
+ "chunks": 2,
+ "facts": [
+  {
+   "fact": "According to a third-party adoption figure cited by Adwave (electroiq.com), 87.6% of websites were using a valid SSL certificate by 2024.",
+   "value": "87.6",
+   "unit": "%",
+   "as_of": "2024",
+   "quote": "By 2024, 87.6% of websites were using a valid SSL certificate, up from 18.5% six years earlier",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "According to the same third-party adoption figure cited by Adwave, 18.5% of websites were using a valid SSL certificate six years before 2024.",
+   "value": "18.5",
+   "unit": "%",
+   "as_of": "six years before 2024",
+   "quote": "up from 18.5% six years earlier",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Adwave's guide describes the SSL digital handshake between browser and server as having five steps.",
+   "value": "5",
+   "unit": "steps",
+   "as_of": "",
+   "quote": "An infographic showing the five steps of the SSL digital handshake process for secure website connection.",
+   "topic": "definition"
+  },
+  {
+   "fact": "A UCC certificate can cover up to 100 domains, according to the Adwave page, which cites an external guide for certificate scope.",
+   "value": "100",
+   "unit": "domains",
+   "as_of": "",
+   "quote": "A **UCC** certificate can cover **up to 100 domains**, which can simplify management for businesses handling multiple sites",
+   "topic": "definition"
+  },
+  {
+   "fact": "A single-domain SSL certificate secures one hostname.",
+   "value": "1",
+   "unit": "hostname",
+   "as_of": "",
+   "quote": "A **single-domain** certificate secures one hostname.",
+   "topic": "definition"
+  },
+  {
+   "fact": "A wildcard SSL certificate covers one domain and all of its subdomains.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "A **wildcard** certificate covers one domain and all its subdomains.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Adwave's checklist recommends five checks to run this week to catch most SSL issues.",
+   "value": "5",
+   "unit": "checks",
+   "as_of": "",
+   "quote": "### Five checks to run this week",
+   "topic": "other"
+  },
+  {
+   "fact": "According to the Adwave page, SSL only protects data in transit and does not protect against phishing, server malware, weak passwords, or vulnerable plugins.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "It only protects data **in transit**. It doesn't stop phishing, server malware, weak passwords, or vulnerable plugins.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The Adwave page says a page can lose the padlock when some images, scripts, or forms still call for HTTP resources, a problem known as mixed content.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "A page can load over HTTPS and still break the padlock if some parts of it, like images, scripts, or forms, still call for HTTP resources.",
+   "topic": "rules"
+  }
+ ]
+}

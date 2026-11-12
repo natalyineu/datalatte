@@ -1,11 +1,14 @@
 {
  "url": "https://adwave.com/resources/cross-channel-attribution-measuring-tv",
  "title": "Cross-channel attribution: what it shows and misses",
- "hash": "5c851754d7e355e12178f58b753177a58e2d4b00",
+ "hash": "4babdf03c4e4bdcacc0e53c9f5deb8b2167ee86e",
  "fetchedAt": "2026-11-12",
+ "full": true,
+ "chars": 11243,
+ "chunks": 2,
  "facts": [
   {
-   "fact": "Google's documentation states that data-driven attribution is now the default for most conversion actions in Google Ads.",
+   "fact": "Google's documentation says data-driven attribution is now the default for most conversion actions in Google Ads.",
    "value": "",
    "unit": "",
    "as_of": "",
@@ -13,31 +16,31 @@
    "topic": "rules"
   },
   {
-   "fact": "Google Analytics 4's Attribution reports offer three models: data-driven attribution and two last-click models.",
+   "fact": "Google Analytics 4 Attribution reports offer three models: data-driven attribution and two last-click models.",
    "value": "3",
    "unit": "models",
    "as_of": "",
    "quote": "lists three models in its Attribution reports: data-driven attribution and two last-click models.",
-   "topic": "rules"
+   "topic": "definition"
   },
   {
-   "fact": "In one geo holdout on streaming TV cited by the page from Measured's incrementality research, roughly half of the conversions the ad platform had claimed were actually incremental.",
+   "fact": "In one geo holdout on streaming TV by Measured's incrementality research, roughly half of the conversions the ad platform had claimed were actually incremental.",
    "value": "roughly half",
    "unit": "share of platform-claimed conversions",
    "as_of": "",
-   "quote": "roughly half of the conversions the ad platform had claimed were actually incremental",
+   "quote": "roughly half of the conversions the ad platform had claimed were actually incremental.",
    "topic": "benchmark"
   },
   {
-   "fact": "The page states that an incrementality test typically takes several weeks, long enough to cover the lag between seeing an ad and buying.",
+   "fact": "An incrementality test typically takes several weeks so that it covers the lag between seeing an ad and buying.",
    "value": "several weeks",
    "unit": "weeks",
    "as_of": "",
-   "quote": "a test typically takes several weeks",
+   "quote": "a test typically takes several weeks, long enough to cover the lag between seeing an ad and buying.",
    "topic": "rules"
   },
   {
-   "fact": "The page says the platform-report reconciliation check described in its process takes about ten minutes for one month of data.",
+   "fact": "The page describes a platform-versus-sales reconciliation check that takes about ten minutes.",
    "value": "about ten minutes",
    "unit": "minutes",
    "as_of": "",
@@ -45,44 +48,76 @@
    "topic": "other"
   },
   {
-   "fact": "The page states that most streaming platforms support geographic targeting exclusions, which makes streaming TV suitable for geo incrementality tests.",
+   "fact": "The page was published on October 17, 2026.",
+   "value": "2026-10-17",
+   "unit": "date",
+   "as_of": "2026-10-17",
+   "quote": "Published Time: 2026-10-17T00:00:00+00:00",
+   "topic": "other"
+  },
+  {
+   "fact": "According to Adwave's pricing page, the daily budget runs from $30 to $10,000.",
+   "value": "$30 to $10,000",
+   "unit": "USD per day",
+   "as_of": "",
+   "quote": "According to [Adwave’s pricing page](https://adwave.com/pricing/), the daily budget runs from $30 to $10,000.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "According to the Adwave page, TikTok starts at $91 per day and must be turned on in Customize and connected to a TikTok account.",
+   "value": "$91",
+   "unit": "USD per day",
+   "as_of": "",
+   "quote": "TikTok starts at $91/day and needs you to turn it on in Customize and connect your TikTok account.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Adwave funds its single cross-channel campaigns from a prepaid wallet.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Streaming TV suits this because most streaming platforms support geographic targeting exclusions.",
-   "topic": "definition"
+   "quote": "runs [a single campaign across eligible channels](https://adwave.com/solutions/omnichannel), funded from a prepaid wallet.",
+   "topic": "pricing"
   },
   {
-   "fact": "Last-touch attribution gives all credit to the final click or view before conversion, and the page says it overvalues the final touchpoint and ignores everything that came before it.",
-   "value": "100%",
-   "unit": "% of credit to final touchpoint",
-   "as_of": "",
-   "quote": "even though it overvalues the final touchpoint and ignores everything that came before it",
-   "topic": "definition"
-  },
-  {
-   "fact": "The page states that multi-touch and data-driven attribution need user-level tracking and therefore cannot follow linear TV or other media they cannot tie to a person.",
+   "fact": "The Adwave FAQ says which channels can run depends on budget and audience size, plus creative, campaign settings, and content eligibility.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Needs user-level tracking, so it can’t follow linear TV or other media it can’t tie to a person",
-   "topic": "definition"
+   "quote": "what can run depends on your budget and audience size, along with your creative, campaign settings, and content eligibility.",
+   "topic": "rules"
   },
   {
-   "fact": "The page states that in an incrementality test, the difference in sales between the treatment and holdout groups is the lift the ads caused.",
+   "fact": "The Adwave FAQ recommends a Lift experiment over assisted conversions when a user needs to measure incremental impact.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "The difference in sales between the treatment and holdout groups is the lift the ads caused.",
-   "topic": "definition"
+   "quote": "recommending the latter when you need to measure incremental impact.",
+   "topic": "rules"
   },
   {
-   "fact": "The page explains that each ad platform's dashboard counts the conversions its own ads touched, using its own conversion definition and attribution window, so platform totals can overlap.",
+   "fact": "On Adwave's How it works page, the final step is tracking campaign activity and website conversions.",
    "value": "",
    "unit": "",
    "as_of": "",
-   "quote": "Each counts the conversions its ads touched, using its own conversion definition and attribution window.",
-   "topic": "definition"
+   "quote": "the final step is tracking campaign activity and website conversions.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Adwave states that it does not guarantee sales or a return on spend.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Adwave does not guarantee sales or a return on spend.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The article advises that a geo or holdout test should run long enough to cover the business's normal sales cycle.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Run a geo or holdout test long enough to cover your normal sales cycle.",
+   "topic": "benchmark"
   }
  ]
 }

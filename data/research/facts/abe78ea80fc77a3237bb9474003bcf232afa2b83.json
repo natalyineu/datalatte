@@ -1,0 +1,195 @@
+{
+ "url": "https://adwave.com/resources/email-reactivation-sequence",
+ "title": "https://adwave.com/resources/email-reactivation-sequence",
+ "hash": "b5f292138b069ff8f19e793a2825b096ba98f1d1",
+ "fetchedAt": "2026-11-12",
+ "full": true,
+ "chars": 20482,
+ "chunks": 3,
+ "facts": [
+  {
+   "fact": "Widely cited win-back benchmarks, as summarized by SendPulse, place recovered inactive subscribers at about 5 to 15%, with stronger programs reaching 10 to 20% or more.",
+   "value": "5 to 15%",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Widely cited win-back benchmarks place recovered inactive subscribers at about **5 to 15%**, with stronger programs reaching **10 to 20% or more**",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Practical guidance commonly places the inactivity trigger for a re-engagement segment between three and six months, depending on send frequency.",
+   "value": "three to six months",
+   "unit": "months",
+   "as_of": "",
+   "quote": "Practical guidance commonly places the trigger somewhere between **three and six months**, depending on send frequency",
+   "topic": "rules"
+  },
+  {
+   "fact": "One deliverability guide recommends enrolling contacts in a reactivation flow after more than four months without an open.",
+   "value": "4",
+   "unit": "months without an open",
+   "as_of": "",
+   "quote": "one deliverability guide recommends enrolling contacts after more than **four months** without an open",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page defines a cool dormant segment as contacts quiet for 60 to 120 days, and a cold segment as contacts inactive for 120 days or longer.",
+   "value": "60 to 120 days (cool); 120 days or longer (cold)",
+   "unit": "days",
+   "as_of": "",
+   "quote": "A cool contact might have gone quiet for **60 to 120 days**, while a cold contact has been inactive for **120 days or longer**.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The page recommends sending the first reactivation email on day 0 and the second diagnostic email around day 7 to non-reactivated subscribers.",
+   "value": "day 0; day 7",
+   "unit": "days",
+   "as_of": "",
+   "quote": "Send the first message on day 0.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page's diagram of subscriber attrition, dropping monthly active subscribers from 40% to 18% over two quarters, is explicitly hypothetical and not a reported business result.",
+   "value": "40% to 18%",
+   "unit": "% monthly active subscribers over two quarters",
+   "as_of": "",
+   "quote": "The graphic below illustrates a hypothetical active-subscriber decline, not a reported business result.",
+   "topic": "other"
+  },
+  {
+   "fact": "MailGenius guidance recommends a clear sunset rule that moves non-responders to inactive status after the reactivation sequence.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Guidance from [MailGenius on win-back campaigns](https://www.mailgenius.com/win-back-campaign/) recommends a clear sunset rule and moving non-responders to inactive status after the sequence.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends sending the final reactivation message around day 14 of the sequence.",
+   "value": "day 14",
+   "unit": "day",
+   "as_of": "",
+   "quote": "Send the final message around day 14. Now you can introduce a concrete incentive, a specific deadline, or a final preference choice.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page states that a structured reactivation sequence can run for roughly 30 days, with early messages separated by 5 to 7 days.",
+   "value": "30 days; 5 to 7 days between early messages",
+   "unit": "days",
+   "as_of": "",
+   "quote": "A structured sequence can run for roughly **30 days**, with early messages separated by **5 to 7 days**, followed by a final notice before inactive contacts are archived.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page attributes its reactivation timing guidance (the sequence length and spacing) to SendPulse's re-engagement sequence recommendations.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "See [SendPulse’s re-engagement sequence recommendations](https://sendpulse.com/blog/re-engagement-email) for timing guidance.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page recommends reporting reactivation campaign results on a 30-day reporting cadence.",
+   "value": "30",
+   "unit": "days",
+   "as_of": "",
+   "quote": "Report results on a **30-day reporting cadence**, then decide whether each segment returns to regular messaging, enters a quarterly win-back cycle, or remains suppressed.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends moving non-responders to suppression or a low-frequency inactive list after the third reactivation email.",
+   "value": "after third email",
+   "unit": "",
+   "as_of": "",
+   "quote": "After the third email, move non-responders to suppression or a low-frequency inactive list.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends that the sequence stop as soon as a contact opens, clicks meaningfully, purchases, replies, updates preferences, unsubscribes, or reaches a suppression condition.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "The sequence should stop as soon as someone opens, clicks meaningfully, purchases, replies, or updates preferences.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends including a one-click unsubscribe and a preference-center link in the final reactivation email.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Include a one-click unsubscribe and a preference-center link.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends verifying SPF, DKIM, and DMARC authentication before launching a reactivation campaign.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Verify **SPF, DKIM, and DMARC**, review blacklist status, and run seed tests across the inboxes customers use.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends sending to a large dormant segment in controlled batches rather than releasing the whole audience at once.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Send to a large dormant segment in controlled batches rather than releasing the whole audience at once.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends that a sunset policy move the sequence's non-responders to suppression, and it cites a 30-day reporting cadence as part of the post-campaign review.",
+   "value": "30-day",
+   "unit": "days",
+   "as_of": "",
+   "quote": "Report results on a **30-day reporting cadence**",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page states that the first reactivation email generally gives the clearest signal, while later touches often deliver diminishing returns.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "The first email generally gives the clearest signal, while later touches often deliver diminishing returns.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page recommends excluding recent buyers and recently reactivated contacts from win-back campaigns, citing the MailGenius win-back checklist.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "excluding recent buyers or recently reactivated contacts",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page describes a 30-day reactivation rollout for email campaigns.",
+   "value": "30",
+   "unit": "days",
+   "as_of": "",
+   "quote": "A workable 30-day rollout",
+   "topic": "other"
+  },
+  {
+   "fact": "The page recommends a reactivation email flow of three emails, ordered as value first, feedback second, and urgency last.",
+   "value": "3",
+   "unit": "emails",
+   "as_of": "",
+   "quote": "Launch the three-email flow with value first, feedback second, and urgency last.",
+   "topic": "other"
+  },
+  {
+   "fact": "The page lays out the reactivation rollout in four weekly phases: diagnosis, delivery, amplification, and decisions.",
+   "value": "4",
+   "unit": "weeks",
+   "as_of": "",
+   "quote": "Week four is for decisions.",
+   "topic": "other"
+  },
+  {
+   "fact": "The page says the reactivation workflow should be stopped for any subscriber who reactivates.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "stop the workflow for anyone who reactivates",
+   "topic": "rules"
+  }
+ ]
+}

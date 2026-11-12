@@ -1,0 +1,139 @@
+{
+ "url": "https://adwave.com/resources/generate-videos-from-claude-mcp",
+ "title": "https://adwave.com/resources/generate-videos-from-claude-mcp",
+ "hash": "472431636ce5bfe7a2de0dbb127e1143a095349a",
+ "fetchedAt": "2026-11-12",
+ "full": true,
+ "chars": 12217,
+ "chunks": 2,
+ "facts": [
+  {
+   "fact": "Wavemaker's MCP access is available on its Pro plan, which the page lists at $99 per month.",
+   "value": "99",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "MCP access is available on the Pro plan ($99/mo) and up.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Wavemaker lets new users create a first video free on the web, with 75 credits to start.",
+   "value": "75",
+   "unit": "credits",
+   "as_of": "",
+   "quote": "create your first video free on the web (75 credits to start)",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Per the page, a video of about 60 seconds costs 150 Wavemaker credits.",
+   "value": "150",
+   "unit": "credits",
+   "as_of": "",
+   "quote": "For reference, a ~60-second video runs 150 credits, and a 1080p export adds 10.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Per the page, a refine operation on an existing Wavemaker video costs 15 credits.",
+   "value": "15",
+   "unit": "credits",
+   "as_of": "",
+   "quote": "a refine runs 15 credits",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The Wavemaker MCP server exposes 13 tools in total.",
+   "value": "13",
+   "unit": "tools",
+   "as_of": "",
+   "quote": "The server exposes 13 tools.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The Wavemaker MCP server is hosted at the URL https://wavemaker.adwave.com/mcp.",
+   "value": "https://wavemaker.adwave.com/mcp",
+   "unit": "",
+   "as_of": "",
+   "quote": "https://wavemaker.adwave.com/mcp",
+   "topic": "definition"
+  },
+  {
+   "fact": "The Wavemaker MCP server authenticates clients with OAuth 2.1 using PKCE.",
+   "value": "OAuth 2.1 with PKCE",
+   "unit": "",
+   "as_of": "",
+   "quote": "It uses OAuth 2.1 with PKCE for authentication",
+   "topic": "rules"
+  },
+  {
+   "fact": "The MCP (Model Context Protocol) is described on the page as an open standard for connecting AI assistants to external tools and data.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "MCP stands for Model Context Protocol, an open standard for connecting AI assistants to external tools and data.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Wavemaker's get_cost_estimate MCP tool returns the credit cost for a given video length or export resolution before any credits are spent.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Returns the credit cost for a given video length or export resolution before you commit.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Adwave says a finished Wavemaker video can run as a streaming TV commercial on 100+ networks starting from $50, plus Google, YouTube, Meta, Reddit, and display.",
+   "value": "50",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "Through Adwave, that same video can run as a real streaming TV commercial on 100+ networks, from $50, plus Google, YouTube, Meta, Reddit, and display.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Adwave says the Wavemaker MCP server exposes 13 tools and has working OAuth.",
+   "value": "13",
+   "unit": "tools",
+   "as_of": "",
+   "quote": "Wavemaker shipped a working 13-tool server with real OAuth, callable today.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Adwave says MCP access requires the Pro plan at $99 per month or higher.",
+   "value": "99",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "MCP access is available on the Pro plan ($99/mo) and above.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Adwave says the free plan includes 75 credits to start for creating a first video on the web.",
+   "value": "75",
+   "unit": "credits",
+   "as_of": "",
+   "quote": "The free plan lets you create your first video on the web (75 credits to start)",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Wavemaker's MCP server authenticates with OAuth 2.1 using PKCE, so users do not paste API keys into config files.",
+   "value": "OAuth 2.1 with PKCE",
+   "unit": "",
+   "as_of": "",
+   "quote": "Wavemaker's MCP server uses OAuth 2.1 with PKCE.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Wavemaker MCP server's get_cost_estimate tool returns the credit cost for a given video length and resolution before generation.",
+   "value": "get_cost_estimate",
+   "unit": "",
+   "as_of": "",
+   "quote": "The `get_cost_estimate` tool lets the assistant tell you the credit cost for a given length and resolution before generating.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The Wavemaker MCP server endpoint is https://wavemaker.adwave.com/mcp.",
+   "value": "https://wavemaker.adwave.com/mcp",
+   "unit": "",
+   "as_of": "",
+   "quote": "Point your MCP client at `https://wavemaker.adwave.com/mcp`, complete the OAuth login",
+   "topic": "definition"
+  }
+ ]
+}

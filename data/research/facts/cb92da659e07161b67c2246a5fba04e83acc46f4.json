@@ -1,0 +1,259 @@
+{
+ "url": "https://adwave.com/resources/video-generation-api-guide",
+ "title": "https://adwave.com/resources/video-generation-api-guide",
+ "hash": "ac018a4d03d9117cff973744847fef9944b502d2",
+ "fetchedAt": "2026-11-12",
+ "full": true,
+ "chars": 13156,
+ "chunks": 2,
+ "facts": [
+  {
+   "fact": "Wavemaker's REST API endpoint is POST /api/v1/videos and is available on the Pro plan ($99/mo) and above.",
+   "value": "99",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "The API lives at `/api/v1/videos` and is available on the **Pro plan ($99/mo) and above**.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Wavemaker's Business plan costs $299/mo and adds webhooks, higher throughput allowances, and up to 4K export.",
+   "value": "299",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "Business ($299/mo) adds webhooks, higher throughput allowances, and up to 4K export if you need it.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Wavemaker's API rate limit is 30 requests per minute.",
+   "value": "30",
+   "unit": "requests per minute",
+   "as_of": "",
+   "quote": "| Rate limit | 30 requests per minute |",
+   "topic": "rules"
+  },
+  {
+   "fact": "Wavemaker streams video render progress updates via Server-Sent Events (SSE).",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "| Progress updates | Server-Sent Events (SSE) progress streaming |",
+   "topic": "other"
+  },
+  {
+   "fact": "On the Business plan, Wavemaker sends HMAC-signed webhooks to notify when a video completes.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "| Completion notification | HMAC-signed webhooks (Business plan) |",
+   "topic": "rules"
+  },
+  {
+   "fact": "Wavemaker's API supports aspect ratios 16:9, 9:16, 1:1, and 4:5, plus 2:3 via the API.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "| Aspect ratios | 16:9, 9:16, 1:1, 4:5, plus 2:3 via API |",
+   "topic": "other"
+  },
+  {
+   "fact": "Generating a Wavemaker video of about 30 seconds costs 75 credits.",
+   "value": "75",
+   "unit": "credits",
+   "as_of": "",
+   "quote": "| ~30-second video | 75 credits |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Generating a Wavemaker video of about 60 seconds costs 150 credits.",
+   "value": "150",
+   "unit": "credits",
+   "as_of": "",
+   "quote": "| ~60-second video | 150 credits |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Editing or refining an existing Wavemaker video costs 15 credits.",
+   "value": "15",
+   "unit": "credits",
+   "as_of": "",
+   "quote": "| Edit / refine an existing video | 15 credits |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Generating a single Wavemaker image costs 3 credits.",
+   "value": "3",
+   "unit": "credits",
+   "as_of": "",
+   "quote": "| Generate a single image | 3 credits |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Exporting a Wavemaker video at 480p is free.",
+   "value": "0",
+   "unit": "credits",
+   "as_of": "",
+   "quote": "| Export at 480p | Free |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Exporting a Wavemaker video at 720p costs 5 credits.",
+   "value": "5",
+   "unit": "credits",
+   "as_of": "",
+   "quote": "| Export at 720p | 5 credits |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Exporting a Wavemaker video at 1080p costs 10 credits.",
+   "value": "10",
+   "unit": "credits",
+   "as_of": "",
+   "quote": "| Export at 1080p | 10 credits |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Exporting a Wavemaker video at 4K costs 25 credits.",
+   "value": "25",
+   "unit": "credits",
+   "as_of": "",
+   "quote": "| Export at 4K | 25 credits |",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The Pro plan includes 2,000 credits per month with 20% rollover, which Wavemaker says covers roughly 26 thirty-second videos.",
+   "value": "2000",
+   "unit": "credits per month",
+   "as_of": "",
+   "quote": "Pro gives you 2,000 credits a month with 20% rollover, which covers roughly 26 thirty-second videos.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The Business plan includes 8,000 credits with 50% rollover.",
+   "value": "8000",
+   "unit": "credits",
+   "as_of": "",
+   "quote": "Business gives you 8,000 credits with 50% rollover.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Wavemaker credit packs start at $9.99 for 100 credits.",
+   "value": "9.99",
+   "unit": "USD for 100 credits",
+   "as_of": "",
+   "quote": "credit packs start at $9.99 for 100 credits",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Wavemaker states that its credit packs never expire.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "**credit packs never expire.**",
+   "topic": "rules"
+  },
+  {
+   "fact": "Wavemaker's MCP server exposes 13 tools, including generate_video, refine_video, scrape_and_analyze, plan_video, and get_cost_estimate.",
+   "value": "13",
+   "unit": "tools",
+   "as_of": "",
+   "quote": "OAuth 2.1 plus PKCE and 13 tools (`generate_video`, `refine_video`, `scrape_and_analyze`, `plan_video`, `get_cost_estimate`, and more)",
+   "topic": "definition"
+  },
+  {
+   "fact": "Adwave says a finished Wavemaker video can run as a streaming TV commercial on 100+ networks, starting from $50.",
+   "value": "50",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "A finished Wavemaker video can run as a real streaming TV commercial on 100+ networks through Adwave, starting from $50",
+   "topic": "pricing"
+  },
+  {
+   "fact": "API access starts on the Wavemaker Pro plan at $99 per month, which includes 2,000 monthly credits, MCP access, and priority generation.",
+   "value": "99",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "API access starts on the Pro plan at $99/mo, which includes 2,000 monthly credits, MCP access, and priority generation.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Webhooks and higher throughput allowances come with the Wavemaker Business plan at $299 per month.",
+   "value": "299",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "Webhooks and higher throughput allowances come with the Business plan at $299/mo.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The Wavemaker API rate limit is 30 requests per minute.",
+   "value": "30",
+   "unit": "requests per minute",
+   "as_of": "",
+   "quote": "What's the rate limit?** 30 requests per minute.",
+   "topic": "rules"
+  },
+  {
+   "fact": "A Wavemaker video of about 30 seconds costs 75 credits to generate.",
+   "value": "75",
+   "unit": "credits",
+   "as_of": "",
+   "quote": "A ~30-second video is 75 credits and a ~60-second video is 150",
+   "topic": "pricing"
+  },
+  {
+   "fact": "A Wavemaker video of about 60 seconds costs 150 credits to generate.",
+   "value": "150",
+   "unit": "credits",
+   "as_of": "",
+   "quote": "a ~60-second video is 150, plus export",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Exporting a Wavemaker video at 1080p costs 10 credits.",
+   "value": "10",
+   "unit": "credits",
+   "as_of": "",
+   "quote": "plus export (1080p is 10 credits, 4K is 25, 480p is free)",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Refining an existing Wavemaker video costs 15 credits.",
+   "value": "15",
+   "unit": "credits",
+   "as_of": "",
+   "quote": "Refining an existing video costs 15 credits.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Wavemaker credit packs start at $9.99 and never expire.",
+   "value": "9.99",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "credit packs start at $9.99 and never expire.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The Wavemaker free plan and Starter plan do not include API access.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "The free and Starter plans don't include API access, though Starter does include API keys for other uses.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Wavemaker's free trial offer lets users create a first video free with 75 credits.",
+   "value": "75",
+   "unit": "credits",
+   "as_of": "",
+   "quote": "[Create your first video free (75 credits)]",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Wavemaker video generation is asynchronous, and rendering a video takes a few minutes.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Asynchronous. Rendering a video takes a few minutes, so you submit a job",
+   "topic": "rules"
+  }
+ ]
+}

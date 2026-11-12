@@ -1,0 +1,179 @@
+{
+ "url": "https://adwave.com/resources/tv-advertising-ab-testing",
+ "title": "https://adwave.com/resources/tv-advertising-ab-testing",
+ "hash": "73799ac96d52d480b4a5366a7f327daf15a8d50b",
+ "fetchedAt": "2026-11-12",
+ "full": true,
+ "chars": 13388,
+ "chunks": 2,
+ "facts": [
+  {
+   "fact": "Historically, one television commercial cost $30,000 to produce, according to the page's account of why TV went untested.",
+   "value": "30000",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "When one commercial cost $30,000 and the only measurement was a ratings estimate, nobody tested anything",
+   "topic": "pricing"
+  },
+  {
+   "fact": "For completion-rate tests, the page recommends a minimum of 5,000-10,000 impressions per variation, with a typical wait of 1-2 weeks, and trusts the result when the gap is 2+ points and stable for a week.",
+   "value": "5,000-10,000",
+   "unit": "impressions per variation",
+   "as_of": "2026-06-24",
+   "quote": "| Completion rate | 5,000-10,000 impressions | 1-2 weeks | Gap is 2+ points and stable for a week |",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "For QR-scan tests, the page recommends a minimum of 30-50 scans combined, a typical wait of 2-4 weeks, and trusts the result when one variation leads 2:1 or better.",
+   "value": "30-50",
+   "unit": "scans combined",
+   "as_of": "2026-06-24",
+   "quote": "| QR scans | 30-50 scans combined | 2-4 weeks | One variation leads 2:1 or better |",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "For branded search lift tests, the page recommends at least 4 weeks of trend data, with a typical wait of 4-6 weeks.",
+   "value": "4+",
+   "unit": "weeks of trend",
+   "as_of": "2026-06-24",
+   "quote": "| Branded search lift | 4+ weeks of trend | 4-6 weeks | Lift tracks one variation's flight weighting |",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "For geo-split business-outcome tests, the page recommends a full quarter of data, with a typical wait of 8-12 weeks.",
+   "value": "8-12",
+   "unit": "weeks",
+   "as_of": "2026-06-24",
+   "quote": "| Business outcomes (geo-split) | Full quarter | 8-12 weeks | Matched-area gap exceeds normal variance |",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page states that at 30,000 monthly impressions, a two-way rotation reaches completion-rate thresholds in two to three weeks, while a four-way split starves every variation.",
+   "value": "30000",
+   "unit": "monthly impressions",
+   "as_of": "2026-06-24",
+   "quote": "at 30,000 monthly impressions, a two-way rotation hits completion-rate thresholds in two to three weeks",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In the page's worked med spa example, the champion spot's completion rate was 93%.",
+   "value": "93",
+   "unit": "%",
+   "as_of": "",
+   "quote": "A med spa's champion spot opens with the owner speaking to camera; completion runs 93%.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In week one of the worked example, the challenger spot had a 95.5% completion rate versus 92.8% for the champion, measured on day seven.",
+   "value": "95.5 vs 92.8",
+   "unit": "% completion",
+   "as_of": "",
+   "quote": "Week one: challenger 95.5%, champion 92.8%, but it's day seven, so nobody calls it.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In week two of the worked example, the challenger completion rate was 95.2% versus 93.0% for the champion, on 9,000 impressions each, a 2.2-point gap.",
+   "value": "95.2 vs 93.0",
+   "unit": "% completion",
+   "as_of": "",
+   "quote": "Week two holds: 95.2% versus 93.0% on 9,000 impressions each, a stable 2.2-point gap that clears the threshold.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In the worked example, QR scans were 19 for the challenger versus 12 for the champion.",
+   "value": "19 vs 12",
+   "unit": "QR scans",
+   "as_of": "",
+   "quote": "QR scans agree directionally (19 versus 12).",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The worked example's rotation split impressions 50/50 across the same five zips.",
+   "value": "50/50",
+   "unit": "% split across five zips",
+   "as_of": "",
+   "quote": "Rotation runs 50/50 across the same five zips.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page gives a 70/30 impression split as an example of an accidental delivery skew that quietly invalidates a comparison.",
+   "value": "70/30",
+   "unit": "% impression split",
+   "as_of": "",
+   "quote": "a 70/30 accidental skew quietly invalidates the comparison",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page's decision rule is to call a winner only when the leading variation clears the threshold table and holds its lead for a full week of stable delivery.",
+   "value": "1",
+   "unit": "week of stable delivery",
+   "as_of": "",
+   "quote": "Call a winner** when the leading variation clears the threshold table and holds its lead for a full week of stable delivery.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Generating a second TV ad variation with Adwave is free and takes about two minutes.",
+   "value": "2",
+   "unit": "minutes",
+   "as_of": "",
+   "quote": "Generating a second variation is free and takes about two minutes with Adwave",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page states that a campaign with 25,000-30,000 monthly impressions supports a clean two-way TV ad test with a two-to-three week read.",
+   "value": "25,000-30,000",
+   "unit": "monthly impressions",
+   "as_of": "",
+   "quote": "A campaign with 25,000-30,000 monthly impressions supports a clean two-way test on a two-to-three week read",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page states that completion-rate TV ad tests typically resolve in one to three weeks once each variation has 5,000-10,000 impressions.",
+   "value": "5,000-10,000",
+   "unit": "impressions per variation",
+   "as_of": "",
+   "quote": "Completion-rate tests typically resolve in one to three weeks once each variation has 5,000-10,000 impressions",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page says response-signal TV ad tests want about a month to run.",
+   "value": "one month",
+   "unit": "month",
+   "as_of": "",
+   "quote": "response-signal tests want a month",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page says geo-split outcome TV ad tests deserve about a quarter to run.",
+   "value": "one quarter",
+   "unit": "quarter",
+   "as_of": "",
+   "quote": "geo-split outcome tests deserve a quarter",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page recommends one test at a time per campaign as the meta-rule for TV ad A/B testing.",
+   "value": "1",
+   "unit": "test per campaign at a time",
+   "as_of": "",
+   "quote": "one test at a time per campaign",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends generating one challenger each month, testing one element.",
+   "value": "1",
+   "unit": "challenger per month",
+   "as_of": "",
+   "quote": "Each month, generate one **challenger** testing one element (two minutes of work).",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page says a tested playbook of market response becomes available after twelve months of the testing cadence.",
+   "value": "12",
+   "unit": "months",
+   "as_of": "",
+   "quote": "Twelve months later you own something no competitor can copy",
+   "topic": "other"
+  }
+ ]
+}

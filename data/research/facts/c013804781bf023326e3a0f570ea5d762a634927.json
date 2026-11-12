@@ -1,0 +1,155 @@
+{
+ "url": "https://adwave.com/resources/video-generation-webhooks",
+ "title": "https://adwave.com/resources/video-generation-webhooks",
+ "hash": "12260414dbb41e1ab00e64df520e8d841f87c22e",
+ "fetchedAt": "2026-11-12",
+ "full": true,
+ "chars": 13405,
+ "chunks": 2,
+ "facts": [
+  {
+   "fact": "Wavemaker video generation typically takes two to five minutes per video, according to the vendor.",
+   "value": "two to five minutes",
+   "unit": "minutes",
+   "as_of": "",
+   "quote": "so most videos take two to five minutes.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Wavemaker's REST API rate limit is 30 requests per minute, which polling for job status consumes.",
+   "value": "30",
+   "unit": "requests per minute",
+   "as_of": "",
+   "quote": "you waste requests against the 30-requests-per-minute limit.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Wavemaker webhooks are available only on the Business plan.",
+   "value": "Business plan",
+   "unit": "",
+   "as_of": "",
+   "quote": "Webhooks are available on the Business plan.",
+   "topic": "rules"
+  },
+  {
+   "fact": "On Wavemaker's Pro plan, the REST API can be paired with SSE progress streaming as an alternative to webhooks, while webhooks require the Business plan.",
+   "value": "Pro plan",
+   "unit": "",
+   "as_of": "",
+   "quote": "On Pro, you can pair the REST API with SSE progress streaming to get most of the way there",
+   "topic": "rules"
+  },
+  {
+   "fact": "Adwave, according to its own page, can run a video as a streaming TV commercial on 100+ networks starting at $30 a day.",
+   "value": "30",
+   "unit": "USD per day",
+   "as_of": "",
+   "quote": "run as a streaming TV commercial on 100+ networks from $30 a day",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Wavemaker signs each webhook by computing an HMAC hash of the raw request body with a shared secret and sending it in a signature header.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Wavemaker computes a hash of the raw request body using that secret and sends the result in a signature header.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Wavemaker's signature header is named X-Wavemaker-Signature.",
+   "value": "X-Wavemaker-Signature",
+   "unit": "",
+   "as_of": "",
+   "quote": "signature = request.headers[\"X-Wavemaker-Signature\"]",
+   "topic": "definition"
+  },
+  {
+   "fact": "Wavemaker treats a webhook delivery as failed and retries it if the receiving endpoint does not return a 2xx response.",
+   "value": "non-2xx",
+   "unit": "",
+   "as_of": "",
+   "quote": "A non-2xx response tells Wavemaker the delivery failed, which triggers a retry (more on that below).",
+   "topic": "rules"
+  },
+  {
+   "fact": "Wavemaker retries failed webhook deliveries later, typically with a backoff.",
+   "value": "backoff",
+   "unit": "",
+   "as_of": "",
+   "quote": "treats the delivery as failed and retries it later, typically with a backoff.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Wavemaker sends a video.completed webhook event when a render finishes and a separate event when it fails.",
+   "value": "video.completed",
+   "unit": "",
+   "as_of": "",
+   "quote": "if event[\"type\"] == \"video.completed\":",
+   "topic": "definition"
+  },
+  {
+   "fact": "Wavemaker video jobs are started by calling the REST API endpoint /api/v1/videos.",
+   "value": "/api/v1/videos",
+   "unit": "",
+   "as_of": "",
+   "quote": "Your service calls the REST API at `/api/v1/videos` to start a render.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Wavemaker's video pipeline includes script, storyboard, generated visuals, voiceover, music, and an AI vision QC pass.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Wavemaker runs a full pipeline (script, storyboard, generated visuals, voiceover, music, and an AI vision QC pass)",
+   "topic": "definition"
+  },
+  {
+   "fact": "Webhooks are included on Wavemaker's Business plan, which the page lists at $299 per month.",
+   "value": "299",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "Webhooks are included on Wavemaker's Business plan ($299/mo)",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The Business plan includes 8,000 credits a month.",
+   "value": "8000",
+   "unit": "credits per month",
+   "as_of": "",
+   "quote": "raises you to 8,000 credits a month, up to 4K export, and 25 seats",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The Pro plan is listed at $99 per month and includes the REST API and SSE progress streaming but not signed webhook callbacks.",
+   "value": "99",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "Pro ($99/mo) gives you the REST API and SSE progress streaming",
+   "topic": "pricing"
+  },
+  {
+   "fact": "New users can create their first video free with 75 credits on Wavemaker.",
+   "value": "75",
+   "unit": "credits",
+   "as_of": "",
+   "quote": "create your first video free (75 credits)",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Adwave distributes a finished video as a streaming TV commercial on 100+ networks starting at $30 a day, according to the vendor.",
+   "value": "30",
+   "unit": "USD per day",
+   "as_of": "",
+   "quote": "runs it as a real streaming TV commercial on 100+ networks from $30 a day",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Wavemaker webhook signatures are verified by computing an HMAC-SHA256 hash of the raw request body with the shared secret, and requests that fail the check should be rejected with a 401.",
+   "value": "401",
+   "unit": "HTTP status code",
+   "as_of": "",
+   "quote": "Compute an HMAC-SHA256 hash of the raw request body using your shared secret",
+   "topic": "rules"
+  }
+ ]
+}

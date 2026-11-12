@@ -1,0 +1,155 @@
+{
+ "url": "https://adwave.com/resources/google-business-profile-api",
+ "title": "https://adwave.com/resources/google-business-profile-api",
+ "hash": "c991da9ae8afa20dd665be2393a6759d864b0a49",
+ "fetchedAt": "2026-11-12",
+ "full": true,
+ "chars": 29525,
+ "chunks": 4,
+ "facts": [
+  {
+   "fact": "Google reorganized Business Profile APIs into a federated model in 2021, replacing the older Google My Business API with separate purpose-built APIs.",
+   "value": "2021",
+   "unit": "year",
+   "as_of": "2021",
+   "quote": "replacing the older Google My Business API with separate purpose-built APIs",
+   "topic": "definition"
+  },
+  {
+   "fact": "According to Google's sunset dates documentation, Google My Business API v4.9 was fully deprecated on April 30, 2022.",
+   "value": "2022-04-30",
+   "unit": "date",
+   "as_of": "2022-04-30",
+   "quote": "Google My Business API v4.9 was fully deprecated on April 30, 2022",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google's Business Profile updates documentation states that Q&A functionality has been discontinued.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Q&A functionality has been discontinued",
+   "topic": "rules"
+  },
+  {
+   "fact": "According to Google Search documentation, FAQ rich results were removed in 2026.",
+   "value": "2026",
+   "unit": "year",
+   "as_of": "2026",
+   "quote": "FAQ rich results in 2026",
+   "topic": "rules"
+  },
+  {
+   "fact": "The adwave.com guide was published on 2026-09-20.",
+   "value": "2026-09-20",
+   "unit": "date",
+   "as_of": "2026-09-20",
+   "quote": "Published Time: 2026-09-20T06:50:33+00:00",
+   "topic": "other"
+  },
+  {
+   "fact": "Google states that verification options can be initiated only by a direct request from the location owner.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "verification options can be initiated only by a direct request from the location owner",
+   "topic": "rules"
+  },
+  {
+   "fact": "According to Google's locations documentation, businesses with more than 10 locations of the same business must be verified individually or through bulk verification.",
+   "value": "10",
+   "unit": "locations",
+   "as_of": "",
+   "quote": "businesses with more than **10 locations** of the same business must be verified individually or through bulk verification",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Business Profile FAQ says developers should check eligibility first, then choose a supported verification method before starting verification.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "check eligibility first, then choose a supported verification method before starting verification",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Business Profile REST reference lists review-related methods that let developers list and batch-get reviews, reply to reviews, create local posts, create media items, and retrieve review media URLs.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "developers can **list and batch-get reviews**, **reply to reviews**, **create local posts**, **create media items**",
+   "topic": "definition"
+  },
+  {
+   "fact": "Google's documentation for the Business Information API states a default limit of 300 requests per minute.",
+   "value": "300",
+   "unit": "requests per minute",
+   "as_of": "",
+   "quote": "Google’s documentation for the Business Information API states a default limit of **300 requests per minute**",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google sets a limit of 10 location edits per minute per Google Business Profile, and Google says this edit cap cannot be increased.",
+   "value": "10",
+   "unit": "edits per minute per profile",
+   "as_of": "",
+   "quote": "location edits are much tighter at **10 edits per minute per Google Business Profile**, and Google says that edit cap can’t be increased",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google's FAQ says quota increase requests may be denied if average usage is below 70% of current limits.",
+   "value": "70",
+   "unit": "% of current limits",
+   "as_of": "",
+   "quote": "may be denied if average usage is below **70%** of current limits",
+   "topic": "rules"
+  },
+  {
+   "fact": "According to Adwave's product information, campaigns on its AI-powered advertising platform start at $30 a day.",
+   "value": "30",
+   "unit": "USD per day",
+   "as_of": "",
+   "quote": "campaigns **starting at $30 a day**, according to Adwave’s product information",
+   "topic": "pricing"
+  },
+  {
+   "fact": "According to Adwave's product information, its platform can place a generated broadcast-ready spot across 100+ premium channels including NBC, Hulu, and ESPN.",
+   "value": "100",
+   "unit": "channels (100+)",
+   "as_of": "",
+   "quote": "place it across **100+ premium channels including NBC, Hulu, and ESPN**",
+   "topic": "other"
+  },
+  {
+   "fact": "Google's Business Profile API policies prohibit using the GoogleLocations endpoint for lead generation or analysis unrelated to existing business relationships, and misuse can lead to immediate revocation of access.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "prohibit using the GoogleLocations endpoint for lead generation or analysis unrelated to existing business relationships",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page states that the Google Business Profile Q&A surface has been discontinued and that no single endpoint replaces it.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "The discontinued Q&A surface creates a real workflow gap.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page advises calling the API to ask which verification methods are available for a location before the authorized owner selects one.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "First, ask the API what methods are available for the location.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page's checklist says the API should be used for managing an existing merchant relationship, not for prospecting.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "are you managing an existing merchant relationship, not using the API for prospecting?",
+   "topic": "rules"
+  }
+ ]
+}

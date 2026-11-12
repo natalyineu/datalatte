@@ -1,0 +1,203 @@
+{
+ "url": "https://adwave.com/resources/email-spf-dkim-dmarc",
+ "title": "https://adwave.com/resources/email-spf-dkim-dmarc",
+ "hash": "8c0ae9a1f7081bd9aec321ab2a8cbeb70b05473b",
+ "fetchedAt": "2026-11-12",
+ "full": true,
+ "chars": 23042,
+ "chunks": 3,
+ "facts": [
+  {
+   "fact": "In a large 2025 global sample, 7.6% of domains enforced DMARC with p=quarantine or p=reject.",
+   "value": "7.6",
+   "unit": "%",
+   "as_of": "2025",
+   "quote": "Only **7.6% of domains** in a large 2025 global sample enforced DMARC with `p=quarantine` or `p=reject`",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In the same large 2025 global sample, 81.6% of domains had no DMARC record at all.",
+   "value": "81.6",
+   "unit": "%",
+   "as_of": "2025",
+   "quote": "while **81.6% had no DMARC record at all**",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "A 2026 measurement of major domains found 52.1% published valid DMARC records.",
+   "value": "52.1",
+   "unit": "%",
+   "as_of": "2026",
+   "quote": "A 2026 measurement of major domains found **52.1% published valid DMARC records**",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In the 2026 measurement of major domains, 22.9% used DMARC enforcement policies.",
+   "value": "22.9",
+   "unit": "%",
+   "as_of": "2026",
+   "quote": "but only **22.9% used enforcement policies**",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "In the 2026 measurement of major domains, 29.2% of domains stayed at p=none.",
+   "value": "29.2",
+   "unit": "%",
+   "as_of": "2026",
+   "quote": "while **29.2% stayed at `p=none`**",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "A separate dataset covering millions of domains reported 30.4% DMARC adoption.",
+   "value": "30.4",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Another dataset covering millions of domains reported **30.4% DMARC adoption** and only **12.8% enforcement**",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The same separate dataset reported 12.8% DMARC enforcement.",
+   "value": "12.8",
+   "unit": "%",
+   "as_of": "",
+   "quote": "and only **12.8% enforcement**",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The SPF hard limit is 10 DNS lookups per SPF evaluation, as described by Adaptive Security.",
+   "value": "10",
+   "unit": "DNS lookups per SPF evaluation",
+   "as_of": "",
+   "quote": "The hard limit is **10 DNS lookups per SPF evaluation**, as described in [Adaptive Security’s SPF, DKIM, and DMARC guide]",
+   "topic": "rules"
+  },
+  {
+   "fact": "According to NIST's technical note, DMARC needs only one aligned SPF or DKIM result to authenticate.",
+   "value": "1",
+   "unit": "aligned result",
+   "as_of": "",
+   "quote": "DMARC needs only **one aligned SPF or DKIM result** for authentication, as documented in [NIST’s technical note on DMARC]",
+   "topic": "rules"
+  },
+  {
+   "fact": "Two separate TXT records beginning with v=spf1 create an invalid SPF configuration, so the mechanisms should be consolidated into one record.",
+   "value": "2",
+   "unit": "TXT records",
+   "as_of": "",
+   "quote": "Two separate TXT records beginning with `v=spf1` create an invalid SPF configuration.",
+   "topic": "rules"
+  },
+  {
+   "fact": "For a self-managed Linux or Mac sending server, RSA-2048 is described as the practical interoperability choice for DKIM keys.",
+   "value": "2048",
+   "unit": "bits",
+   "as_of": "",
+   "quote": "For a self-managed Linux or Mac sending server, RSA-2048 remains the practical interoperability choice.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google Workspace, Microsoft 365, Mailchimp, and SendGrid generally generate the DKIM key pair and provide the selector, DNS name, and TXT value to publish.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Google Workspace, Microsoft 365, Mailchimp, and SendGrid generally generate the key pair and provide the selector, DNS name, and TXT value to publish.",
+   "topic": "other"
+  },
+  {
+   "fact": "Third-party platforms often use DKIM selectors such as s1, k1, m1, or cm, and the exact selector each platform provides must be published.",
+   "value": "s1, k1, m1, cm",
+   "unit": "selector examples",
+   "as_of": "",
+   "quote": "Third-party platforms often use different selectors, such as `s1`, `k1`, `m1`, or `cm`.",
+   "topic": "other"
+  },
+  {
+   "fact": "In a DMARC record, p=none means no enforcement, so receivers may report failures but are not asked to quarantine or reject them.",
+   "value": "p=none",
+   "unit": "policy tag",
+   "as_of": "",
+   "quote": "`p=none` means **no enforcement**.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The DMARC pct tag sets the percentage of failing messages subject to the policy; the example quarantine policy uses pct=10 and the example reject policy uses pct=100.",
+   "value": "10 and 100",
+   "unit": "percent",
+   "as_of": "",
+   "quote": "The `pct` tag throttles the percentage of failing messages subject to the policy.",
+   "topic": "definition"
+  },
+  {
+   "fact": "In DMARC, adkim and aspf default to relaxed alignment (r), while strict alignment is specified with s.",
+   "value": "r (relaxed default); s (strict)",
+   "unit": "alignment mode",
+   "as_of": "",
+   "quote": "The `r` value represents relaxed alignment, which is the default. Strict alignment uses `s`.",
+   "topic": "definition"
+  },
+  {
+   "fact": "DMARC passes when either SPF or DKIM authenticates and aligns with the visible From domain.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "DMARC passes when either SPF or DKIM authenticates and aligns.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Replacing SPF includes with vendor IP addresses can reduce the lookup count, but those addresses can change, so someone must maintain the flattened record.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Replacing includes with vendor IPs can reduce lookups, but those addresses can change.",
+   "topic": "rules"
+  },
+  {
+   "fact": "For most SMBs, aggregate DMARC reporting through the rua tag gives useful visibility without the privacy exposure of failure reports from ruf.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "For most SMBs, aggregate reporting through `rua` provides useful visibility without creating unnecessary privacy exposure.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends collecting DMARC reports at p=none for at least two weeks before changing policy.",
+   "value": "2",
+   "unit": "weeks",
+   "as_of": "",
+   "quote": "Publish `rua=mailto:dmarc-reports@example.com` and collect reports for at least **two weeks**.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends starting quarantine testing with pct=10 (p=quarantine; pct=10).",
+   "value": "10",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Set `p=quarantine; pct=10` and check spam placement at the mailbox providers your customers use.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends raising the DMARC pct value in increments of 25 after each review.",
+   "value": "25",
+   "unit": "percentage points",
+   "as_of": "",
+   "quote": "Raise `pct` in increments of **25** after each review.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page says p=reject should be used only after reports show complete authentication and alignment coverage for at least one full billing cycle.",
+   "value": "1",
+   "unit": "billing cycle",
+   "as_of": "",
+   "quote": "Use `p=reject` only after reports show complete authentication and alignment coverage for at least one full billing cycle.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page states SPF evaluation has a limit of 10 DNS lookups, and exceeding it causes a permanent error.",
+   "value": "10",
+   "unit": "DNS lookups",
+   "as_of": "",
+   "quote": "The evaluation exceeds the **10-DNS-lookup** limit or the record has invalid syntax",
+   "topic": "rules"
+  }
+ ]
+}

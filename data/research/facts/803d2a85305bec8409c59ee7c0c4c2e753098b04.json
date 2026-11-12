@@ -1,0 +1,195 @@
+{
+ "url": "https://adwave.com/resources/backups",
+ "title": "https://adwave.com/resources/backups",
+ "hash": "03e2f077a2c12eb109056531b06ea38a01e2d5a0",
+ "fetchedAt": "2026-11-12",
+ "full": true,
+ "chars": 21965,
+ "chunks": 3,
+ "facts": [
+  {
+   "fact": "The adwave.com guide 'Small Business Backups: The Complete Guide for 2026' was published on June 2, 2026.",
+   "value": "2026-06-02",
+   "unit": "date",
+   "as_of": "2026-06-02",
+   "quote": "Published Time: 2026-06-02T00:00:00+00:00",
+   "topic": "other"
+  },
+  {
+   "fact": "The guide states that sync is not the same as backup because sync works like a mirror that can copy deletions, corruption, or ransomware encryption to every copy.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Sync is not the same as backup. Sync works like a mirror. If a file is deleted, corrupted, or encrypted by ransomware, the mirror can copy the problem too.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The guide defines backup as a copy existing and recovery as being able to put that copy back into use fast enough to keep the business running.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Backup means a copy exists. Recovery means you can put that copy back into use fast enough to keep the business running.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The guide's practical rule says that if losing a file would interrupt sales, billing, delivery, or customer service, a backup copy should be kept that can be restored on demand.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "If losing a file would interrupt sales, billing, delivery, or customer service, keep a backup copy you can restore on demand.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The guide says a useful backup plan should answer three questions: what to protect first, how much recent work the business can afford to lose, and how quickly access is needed again.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "What do we protect first?",
+   "topic": "rules"
+  },
+  {
+   "fact": "According to the guide's summary of Splunk's overview, backup design has moved beyond simple duplication toward adversary-aware recovery, where immutable backups and offline storage are treated as important ransomware defenses.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "emphasizes that backup design has moved beyond simple duplication toward",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The guide defines a hybrid backup as combining local and cloud backup, so one copy is fast to restore and another survives local trouble.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "A **hybrid backup** does both.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The guide notes that local backups are exposed when fire, theft, flood, or ransomware affects the same environment as the original data.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Fire, theft, flood, or ransomware in the same environment can affect both the original and the backup.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The guide states that cloud backup's tradeoffs are that large restores can take longer and recovery depends on the provider setup and internet access.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "large restores can take longer, and recovery depends on your provider setup and internet access.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The 3-2-1 backup rule calls for 3 copies of your data.",
+   "value": "3",
+   "unit": "copies",
+   "as_of": "",
+   "quote": "3 copies of your data",
+   "topic": "rules"
+  },
+  {
+   "fact": "The 3-2-1 backup rule calls for 2 different types or locations of storage.",
+   "value": "2",
+   "unit": "storage types or locations",
+   "as_of": "",
+   "quote": "2 different types or locations of storage",
+   "topic": "rules"
+  },
+  {
+   "fact": "The 3-2-1 backup rule calls for 1 copy kept off-site.",
+   "value": "1",
+   "unit": "copy off-site",
+   "as_of": "",
+   "quote": "1 copy kept off-site",
+   "topic": "rules"
+  },
+  {
+   "fact": "Some businesses extend the 3-2-1 rule to 3-2-1-1, which adds one copy that is isolated or locked against change, according to the page's description.",
+   "value": "1",
+   "unit": "isolated copy",
+   "as_of": "",
+   "quote": "with one copy that is isolated or locked against change",
+   "topic": "rules"
+  },
+  {
+   "fact": "A full backup is a complete copy of every folder, which is the easiest to understand and restore but takes more time and storage.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "A full backup is a complete photocopy of every folder in the cabinet.",
+   "topic": "definition"
+  },
+  {
+   "fact": "An incremental backup copies only what changed since the last backup of any kind.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "An incremental backup copies only what changed since the last backup of any kind.",
+   "topic": "definition"
+  },
+  {
+   "fact": "A differential backup copies what changed since the last full backup.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "A differential backup copies what changed since the last full backup.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The page states that a good backup policy answers five plain-language questions.",
+   "value": "5",
+   "unit": "questions",
+   "as_of": "",
+   "quote": "A good backup policy answers five plain-language questions:",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page presents a practical backup routine with five setup steps, starting with assigning one owner.",
+   "value": "5",
+   "unit": "steps",
+   "as_of": "",
+   "quote": "Set it up in this order:",
+   "topic": "rules"
+  },
+  {
+   "fact": "Adwave recommends running a simple restore test once a month, starting by restoring one non-critical recently backed-up file.",
+   "value": "once a month",
+   "unit": "per month",
+   "as_of": "",
+   "quote": "Try this once a month:",
+   "topic": "rules"
+  },
+  {
+   "fact": "Adwave's simple restore test directs restoring the sample file to a test location rather than over the original.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Restore it to a test location**, not over the original.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Adwave's one-page disaster recovery sheet should include six listed elements: critical systems, backup locations, primary contacts, restore order, access details, and last test date.",
+   "value": "6",
+   "unit": "count",
+   "as_of": "",
+   "quote": "Your one-page document should include:",
+   "topic": "rules"
+  },
+  {
+   "fact": "Adwave states that a successful backup job does not always mean a successful recovery.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "But a successful backup job doesn't always mean a successful recovery.",
+   "topic": "definition"
+  },
+  {
+   "fact": "HYCU's discussion of modern cloud backup strategies, as cited by Adwave, emphasizes routine validation and recovery drills.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "[HYCU's discussion of modern cloud backup strategies](https://www.hycu.com/blog/5-modern-cloud-backup-strategies-data-loss-prevention) emphasizes routine validation and recovery drills",
+   "topic": "other"
+  }
+ ]
+}

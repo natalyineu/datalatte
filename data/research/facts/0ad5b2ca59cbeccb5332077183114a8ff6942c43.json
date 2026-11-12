@@ -1,0 +1,179 @@
+{
+ "url": "https://adwave.com/resources/a-b-testing-low-traffic",
+ "title": "https://adwave.com/resources/a-b-testing-low-traffic",
+ "hash": "d4184f6b01cf38460fc9217d84bf3b420d89a0d4",
+ "fetchedAt": "2026-11-12",
+ "full": true,
+ "chars": 18010,
+ "chunks": 3,
+ "facts": [
+  {
+   "fact": "Henkan Partners' sample-size estimate puts the requirement at about 207,936 visitors per variant to detect a 5% lift at a 3% baseline.",
+   "value": "207936",
+   "unit": "visitors per variant",
+   "as_of": "",
+   "quote": "[Henkan Partners’ sample-size estimates](https://henkanpartners.ai/en/insights/ab-test-sample-size-duration/) put the requirement at about **207,936 visitors per variant** for a 5% lift",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Henkan Partners' sample-size estimate puts the requirement at about 13,911 visitors per variant for a 20% lift at a 3% baseline.",
+   "value": "13911",
+   "unit": "visitors per variant",
+   "as_of": "",
+   "quote": "compared with about **13,911** for a 20% lift and **53,208** for a 10% lift",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page's planning standard is 95% confidence and 80% power.",
+   "value": "95% confidence, 80% power",
+   "unit": "%",
+   "as_of": "",
+   "quote": "The common planning standard of **95%** confidence and **80%** power means an 80% chance of detecting a real difference",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page's practical rule is that if the required per-arm sample divided by eligible weekly traffic per arm exceeds about eight weeks, the test should be skipped, the lift enlarged, or a higher-volume metric chosen.",
+   "value": "8",
+   "unit": "weeks",
+   "as_of": "",
+   "quote": "If the required sample, divided by eligible weekly traffic per arm, exceeds about eight weeks, test a larger change, choose a higher-volume metric, or skip the randomized test.",
+   "topic": "rules"
+  },
+  {
+   "fact": "At a 2% baseline, detecting a 10% relative lift requires about 78,000 visitors per variant, or roughly 157,000 total, under the page's assumptions.",
+   "value": "78000",
+   "unit": "visitors per variant",
+   "as_of": "",
+   "quote": "That requires about 78,000 visitors per variant, or roughly 157,000 total, under the assumptions used for the table below.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "At a 6.6% baseline, detecting a 20% relative lift requires about 5,700 visitors per variant.",
+   "value": "5700",
+   "unit": "visitors per variant",
+   "as_of": "",
+   "quote": "At a 6.6% baseline, a 20% relative lift requires about 5,700 visitors per variant.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Any baseline detecting a 20% lift needs about 400 conversions per variant, per the page's table.",
+   "value": "400",
+   "unit": "conversions per variant",
+   "as_of": "",
+   "quote": "| Any baseline | 20% | About 400 conversions per variant | Count conversions, not visitors |",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Conversion Works' low-traffic framework says to aim at effects of roughly 30% or greater when only about 100 to 500 conversions are available.",
+   "value": "30",
+   "unit": "%",
+   "as_of": "",
+   "quote": "When you only have about **100 to 500 conversions**, a practical low-traffic framework from [Conversion Works](https://conversion-works.co.uk/articles/low-traffic-experimentation) says aim at effects of roughly **30%** or greater.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "A persistent holdout of typically 5% to 10% is recommended so a post-launch drop stays visible.",
+   "value": "5% to 10%",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Keep a persistent holdout, typically **5% to 10%**, so a post-launch drop is still visible.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Practitioner guidance claims sequential methods can shorten experiments by roughly 20% to 50%.",
+   "value": "20% to 50%",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Practitioner guidance claims sequential methods can shorten experiments by roughly **20% to 50%**",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "A Bayesian stop threshold example given is a 95% probability that one version is better.",
+   "value": "95",
+   "unit": "%",
+   "as_of": "",
+   "quote": "a threshold such as a **95%** probability that one version is better.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Humblytics states that detecting a 20% relative lift at 95% significance and 80% power can take approximately 400 conversions per variant.",
+   "value": "400",
+   "unit": "conversions per variant",
+   "as_of": "",
+   "quote": "detecting a **20%** relative lift at **95%** significance and **80%** power can take approximately **400 conversions per variant**",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Adwave states its plan starts at a $30-a-day budget with automatic pacing.",
+   "value": "30",
+   "unit": "USD per day",
+   "as_of": "",
+   "quote": "starts at $30 a day with automatic pacing",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Adwave states its service places broadcast spots across more than 100 channels.",
+   "value": "100",
+   "unit": "channels (more than)",
+   "as_of": "",
+   "quote": "places it across more than 100 channels",
+   "topic": "pricing"
+  },
+  {
+   "fact": "The page's worked example gives roughly 12,900 visitors per variant for a 3% baseline rate and a 20% relative lift, near a 13,911 table value.",
+   "value": "12900",
+   "unit": "visitors per variant",
+   "as_of": "",
+   "quote": "so 16 × 0.03 × 0.97 ÷ 0.006² is roughly 12,900, near the 13,911 table value",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page states that a conventional test design uses 80% power and a 5% two-sided error threshold.",
+   "value": "5",
+   "unit": "% two-sided error threshold",
+   "as_of": "",
+   "quote": "A conventional design uses 80% power and a 5% two-sided error threshold.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends keeping a holdout of 5% to 10% of the audience on the old experience to detect post-launch regression.",
+   "value": "5-10",
+   "unit": "% of audience",
+   "as_of": "",
+   "quote": "5-10% of audience kept on the old version",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page's comparison table says qualitative research usually requires 5-10 interviews plus recordings.",
+   "value": "5-10",
+   "unit": "interviews",
+   "as_of": "",
+   "quote": "Usually 5-10 interviews plus recordings",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page states that splitting traffic in half doubles each arm's wait for results.",
+   "value": "2",
+   "unit": "x wait time",
+   "as_of": "",
+   "quote": "Splitting traffic in half doubles each arm’s wait.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page states that if a decision is reversible and the downside is small, the team should act on a clear directional result; if costly, wait for the planned sample.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "If the decision is reversible and the downside is small, act on a clear directional result. If it is costly, wait for the planned sample.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Adwave states that its TV advertising service starts at $30 a day.",
+   "value": "30",
+   "unit": "USD per day",
+   "as_of": "",
+   "quote": "starting at $30 a day across 100+ channels",
+   "topic": "pricing"
+  }
+ ]
+}

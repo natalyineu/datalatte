@@ -1,0 +1,179 @@
+{
+ "url": "https://adwave.com/resources/generate-videos-in-cursor-mcp",
+ "title": "https://adwave.com/resources/generate-videos-in-cursor-mcp",
+ "hash": "3e90b6beb47e01273209b273ce3d6d6304c9de7b",
+ "fetchedAt": "2026-11-12",
+ "full": true,
+ "chars": 13668,
+ "chunks": 2,
+ "facts": [
+  {
+   "fact": "Wavemaker exposes 13 MCP tools to Cursor, including generate_video, refine_video, scrape_and_analyze, plan_video, compose_video, render_video, generate_and_render, and get_cost_estimate.",
+   "value": "13",
+   "unit": "tools",
+   "as_of": "",
+   "quote": "Wavemaker exposes 13 of them, including `generate_video`, `refine_video`, `scrape_and_analyze`, `plan_video`, `compose_video`, `render_video`, `generate_and_render`, and `get_cost_estimate`.",
+   "topic": "other"
+  },
+  {
+   "fact": "MCP access is a Pro-tier feature; Free and Starter plans do not include it, per Wavemaker's own page.",
+   "value": "Pro",
+   "unit": "plan tier",
+   "as_of": "",
+   "quote": "MCP access is a Pro-tier feature. The Free and Starter plans don't include it.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Wavemaker's Pro plan costs $99 per month and unlocks API and MCP access along with priority generation and custom voice design.",
+   "value": "99",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "Pro ($99/mo) unlocks API and MCP access along with priority generation and custom voice design.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Wavemaker's free web tier gives 75 credits, which the page says is enough for one video.",
+   "value": "75",
+   "unit": "credits",
+   "as_of": "",
+   "quote": "you can still create your first video free on the web (75 credits, enough for one video)",
+   "topic": "pricing"
+  },
+  {
+   "fact": "According to Wavemaker, a roughly 30-second video costs about 75 credits.",
+   "value": "75",
+   "unit": "credits",
+   "as_of": "",
+   "quote": "a roughly 30-second video runs about 75 credits, 60 seconds about 150, an image is 3, and a refine or edit is 15.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "According to Wavemaker, generating an image costs 3 credits.",
+   "value": "3",
+   "unit": "credits",
+   "as_of": "",
+   "quote": "an image is 3, and a refine or edit is 15.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "According to Wavemaker, a refine or edit costs 15 credits.",
+   "value": "15",
+   "unit": "credits",
+   "as_of": "",
+   "quote": "a refine or edit is 15.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Wavemaker prices video exports by resolution: 480p free, 720p 5 credits, 1080p 10 credits, 4K 25 credits.",
+   "value": "480p free, 720p 5, 1080p 10, 4K 25",
+   "unit": "credits",
+   "as_of": "",
+   "quote": "Exports are priced by resolution (480p free, 720p 5 credits, 1080p 10, 4K 25).",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Wavemaker's REST API is available on Pro and up and is built for programmatic generation at 30 requests per minute.",
+   "value": "30",
+   "unit": "requests per minute",
+   "as_of": "",
+   "quote": "The API lives at `/api/v1/videos`, is available on Pro and up, and is built for programmatic generation at 30 requests per minute.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Wavemaker's remote MCP server authenticates with OAuth 2.1 using PKCE, so no API key is pasted into a config file.",
+   "value": "OAuth 2.1 with PKCE",
+   "unit": "",
+   "as_of": "",
+   "quote": "The Wavemaker MCP server uses OAuth 2.1 with PKCE, which means you don't paste an API key into a config file.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Wavemaker's webhooks (HMAC-signed callbacks when a video is ready) are available only on the Business tier.",
+   "value": "Business tier",
+   "unit": "",
+   "as_of": "",
+   "quote": "Webhooks are available on the Business tier.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Wavemaker REST API rate limit is 30 requests per minute.",
+   "value": "30",
+   "unit": "requests per minute",
+   "as_of": "",
+   "quote": "30 requests per minute",
+   "topic": "rules"
+  },
+  {
+   "fact": "Wavemaker's MCP and API access start on the Pro plan at $99 per month, which also includes 2,000 credits a month.",
+   "value": "99",
+   "unit": "USD per month",
+   "as_of": "",
+   "quote": "MCP and API access start on the Pro plan at $99/mo, which also includes 2,000 credits a month",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Wavemaker's Pro plan includes 2,000 credits per month.",
+   "value": "2000",
+   "unit": "credits per month",
+   "as_of": "",
+   "quote": "which also includes 2,000 credits a month",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Wavemaker's Free and Starter tiers do not include MCP access.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "The Free and Starter tiers don't include MCP.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Wavemaker lets new users create a video free on the web with 75 starter credits.",
+   "value": "75",
+   "unit": "starter credits",
+   "as_of": "",
+   "quote": "You can still create a video free on the web with 75 starter credits to try the product before upgrading.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Each Wavemaker refine_video edit costs about 15 credits.",
+   "value": "15",
+   "unit": "credits per refine",
+   "as_of": "",
+   "quote": "Each refine costs about 15 credits and applies the change to your existing video.",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Per Wavemaker's page, video generation takes a couple of minutes.",
+   "value": "a couple",
+   "unit": "minutes",
+   "as_of": "",
+   "quote": "Video generation takes a couple of minutes.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "According to the page, a finished Wavemaker video can run as a streaming TV commercial on 100+ networks through Adwave, starting from $50 (an Adwave service, separate from video generation).",
+   "value": "50",
+   "unit": "USD",
+   "as_of": "",
+   "quote": "can also run as a real streaming TV commercial on 100+ networks through Adwave, from $50",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Wavemaker's MCP server is remote and hosted at https://wavemaker.adwave.com/mcp, so no local server is needed.",
+   "value": "https://wavemaker.adwave.com/mcp",
+   "unit": "",
+   "as_of": "",
+   "quote": "Wavemaker's MCP server is remote, hosted at `https://wavemaker.adwave.com/mcp`.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Wavemaker's MCP uses OAuth 2.1 with PKCE and browser sign-in, while its REST API uses an API key.",
+   "value": "OAuth 2.1 + PKCE",
+   "unit": "",
+   "as_of": "",
+   "quote": "Auth | OAuth 2.1 + PKCE (browser sign-in, auto-refresh) | API key",
+   "topic": "definition"
+  }
+ ]
+}

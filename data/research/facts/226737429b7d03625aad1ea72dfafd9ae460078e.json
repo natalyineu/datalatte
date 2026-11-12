@@ -1,0 +1,163 @@
+{
+ "url": "https://adwave.com/resources/why-your-emails-go-to-spam-and-how-to-fix-deliverability",
+ "title": "https://adwave.com/resources/why-your-emails-go-to-spam-and-how-to-fix-deliverability",
+ "hash": "670be132ef095f8cb1788f0c194522782b299d31",
+ "fetchedAt": "2026-11-12",
+ "full": true,
+ "chars": 27629,
+ "chunks": 4,
+ "facts": [
+  {
+   "fact": "Valimail research, as cited by the page, suggests sender reputation is behind up to 80% of all email deliverability problems.",
+   "value": "80",
+   "unit": "%",
+   "as_of": "",
+   "quote": "suggests is behind up to **80%** of all deliverability problems",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page states that over 70% of small businesses do not have proper email authentication (SPF, DKIM, DMARC) in place, though it gives no source for this figure.",
+   "value": "70",
+   "unit": "%",
+   "as_of": "",
+   "quote": "over **70%** of small businesses don't have proper email authentication in place",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page says that, as of recent updates, Google and Yahoo require SPF, DKIM, and DMARC authentication from bulk senders.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "As of recent updates, major providers like Google and Yahoo demand it from bulk senders.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page defines SPF (Sender Policy Framework) as a public list of the servers and tools authorized to send email from a domain, and an email from an unlisted server fails the check.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Your SPF record is a public list of all the servers and tools (like your email provider) that are authorized to send email from your domain.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The page advises pruning subscribers who have not opened an email in six months, calling them dead weight that should be removed after a failed re-engagement campaign.",
+   "value": "six months",
+   "unit": "months",
+   "as_of": "",
+   "quote": "If someone hasn't opened one of your emails in six months, they're dead weight.",
+   "topic": "rules"
+  },
+  {
+   "fact": "As an illustrative example, the page says that jumping from 1,000 emails a month to 100,000 overnight would trigger provider alarms because providers value consistent sending volume.",
+   "value": "1,000 to 100,000",
+   "unit": "emails per month",
+   "as_of": "",
+   "quote": "If you suddenly go from sending 1,000 emails a month to 100,000 overnight, you’ll set off every alarm bell.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends double opt-in, where a new subscriber must click a confirmation link before being added to the list.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Implement Double Opt-In: When someone subscribes, send a confirmation email with a link they must click.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page states that purchased email lists contain spam traps, outdated addresses, and people who will mark the sender as spam.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Purchased lists are riddled with spam traps, outdated addresses, and people who will mark you as spam in a heartbeat.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page says mailbox providers such as Gmail, Outlook, and Yahoo assign a dynamic reputation score to each sending domain.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Mailbox providers like Gmail, Outlook, and Yahoo assign a dynamic score to your sending domain.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The page lists subject lines beginning with \"Re:\" or \"Fwd:\" to fake a personal connection as a deceptive tactic that can send an email to the spam folder.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Nothing screams \"spam\" faster than starting a subject line with \"Re:\" or \"Fwd:\" to fake a personal connection.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page names \"Free,\" \"$$$,\" \"Act Now,\" \"Limited Time,\" and \"Guaranteed\" as common spam-trigger words that filters flag, especially when stuffed into subject lines or used in all caps.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Words like \"Free,\" \"$$$,\" \"Act Now,\" \"Limited Time,\" and \"Guaranteed\" are classic triggers.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends aiming for at least 60% text and 40% images in an email as a rule of thumb.",
+   "value": "60",
+   "unit": "% text (minimum)",
+   "as_of": "",
+   "quote": "A good rule of thumb is to aim for at least **60%** text to **40%** images.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page states that Validity's Sender Score ranges from 0 to 100, and that a score above 90 is great.",
+   "value": "90",
+   "unit": "score (0-100 scale, above 90 is great)",
+   "as_of": "",
+   "quote": "It gives you a score from 0 to 100. Anything above **90** is great.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page advises paying close attention to a Validity Sender Score that dips below 80.",
+   "value": "80",
+   "unit": "score (0-100 scale)",
+   "as_of": "",
+   "quote": "If you're dipping below **80**, it's time to pay close attention.",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The page says fixing a bad sender reputation can take anywhere from a few weeks to several months, depending on the damage.",
+   "value": "a few weeks to several months",
+   "unit": "duration",
+   "as_of": "",
+   "quote": "it can take anywhere from a few weeks to several months based on how much damage was done.",
+   "topic": "forecast"
+  },
+  {
+   "fact": "The page says a valid DMARC record is a great start even if the policy is set to p=none.",
+   "value": "p=none",
+   "unit": "DMARC policy",
+   "as_of": "",
+   "quote": "For DMARC, just having a valid record is a great start, even if the policy is set to p=none.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page recommends checking sender reputation roughly once a week.",
+   "value": "once a week",
+   "unit": "frequency",
+   "as_of": "",
+   "quote": "maybe a quick check once a week",
+   "topic": "rules"
+  },
+  {
+   "fact": "According to the Adwave article, spam traps are email addresses set up by anti-spam organizations to catch senders who buy lists, and hitting just one can damage a sender's reputation.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "These are pristine-looking email addresses set up by anti-spam organizations specifically to catch senders who buy lists.",
+   "topic": "definition"
+  },
+  {
+   "fact": "According to the Adwave article, invalid addresses in purchased lists cause high bounce rates, which signal to mailbox providers that the sender is risky.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "These cause high bounce rates, which immediately signal to mailbox providers that you're a risky sender.",
+   "topic": "definition"
+  }
+ ]
+}

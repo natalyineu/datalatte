@@ -1,0 +1,227 @@
+{
+ "url": "https://adwave.com/resources/website-navigation-architecture",
+ "title": "https://adwave.com/resources/website-navigation-architecture",
+ "hash": "757ebd37a7f63f5863817e7a2f140ba1a7534dbb",
+ "fetchedAt": "2026-11-12",
+ "full": true,
+ "chars": 18998,
+ "chunks": 3,
+ "facts": [
+  {
+   "fact": "Rosenfeld and Morville's 1998 book brought information architecture into mainstream web practice.",
+   "value": "1998",
+   "unit": "year",
+   "as_of": "1998",
+   "quote": "Rosenfeld and Morville’s 1998 book brought information architecture into mainstream web practice, and by 2002",
+   "topic": "definition"
+  },
+  {
+   "fact": "By 2002 the information architecture discipline was commonly framed around navigation, labeling, content organization, and search, according to a systematic review of IA research.",
+   "value": "2002",
+   "unit": "year",
+   "as_of": "2002",
+   "quote": "by 2002 the discipline was commonly framed around navigation, labeling, content organization, and search",
+   "topic": "definition"
+  },
+  {
+   "fact": "The website navigation architecture guide lists four connected parts: classification logic, hierarchical structure, labeling, and orientation cues.",
+   "value": "4",
+   "unit": "parts",
+   "as_of": "",
+   "quote": "### The Four Connected Parts",
+   "topic": "definition"
+  },
+  {
+   "fact": "The vendor's pattern table recommends a single-level top menu for five to seven clear top items.",
+   "value": "5 to 7",
+   "unit": "top menu items",
+   "as_of": "",
+   "quote": "| Single-level top menu | Five to seven clear top items |",
+   "topic": "rules"
+  },
+  {
+   "fact": "The vendor advises starting with a single-level menu when a site has under 15 pages and one level.",
+   "value": "15",
+   "unit": "pages",
+   "as_of": "",
+   "quote": "If you have under 15 pages and one level, start single-level.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The vendor advises using breadcrumb trails on any site deeper than two levels.",
+   "value": "2",
+   "unit": "levels",
+   "as_of": "",
+   "quote": "| Breadcrumb trail | Orientation on deep pages | Not a primary navigation on its own | Any site deeper than two levels |",
+   "topic": "rules"
+  },
+  {
+   "fact": "The vendor's Twelve Phrase Test has you list the top twelve search phrases a customer would type and confirm each has a page reachable in two clicks.",
+   "value": "12",
+   "unit": "search phrases",
+   "as_of": "",
+   "quote": "Confirm each phrase has a page reachable in two clicks.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Google's 2025 guidance says pages reached from classic or AI search must be easy to move through and clearly distinguish the main content, according to the vendor's summary.",
+   "value": "2025",
+   "unit": "year",
+   "as_of": "2025",
+   "quote": "Google’s 2025 guidance says pages reached from classic or AI search must be easy to move through and clearly distinguish the main content",
+   "topic": "other"
+  },
+  {
+   "fact": "WCAG 2.1 requires repeated navigational mechanisms to remain in the same relative order unless the user initiates a change.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "WCAG 2.1 requires repeated navigational mechanisms to remain in the same relative order unless the user initiates a change",
+   "topic": "rules"
+  },
+  {
+   "fact": "The vendor advises counting pages, counting levels, and naming the top three actions a visitor must take before choosing a navigation pattern.",
+   "value": "3",
+   "unit": "actions",
+   "as_of": "",
+   "quote": "Count your pages, count your levels, and name the **top three actions** a visitor must take.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The 2025 Web Almanac accessibility chapter reports that only 31% of mobile sites meet minimum color-contrast requirements.",
+   "value": "31",
+   "unit": "%",
+   "as_of": "2025",
+   "quote": "only 31% of mobile sites meet minimum color-contrast requirements",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The 2025 Web Almanac accessibility chapter reports that only about 24% of desktop and mobile pages contain detectable skip links.",
+   "value": "24",
+   "unit": "%",
+   "as_of": "2025",
+   "quote": "only about 24% of desktop and mobile pages contain detectable skip links",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The 2025 Web Almanac accessibility chapter reports that median Lighthouse Accessibility scores reached above 85.",
+   "value": "85",
+   "unit": "score",
+   "as_of": "2025",
+   "quote": "median Lighthouse Accessibility scores reached above 85",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The article's working flag is that any navigation label where task success falls below roughly 70% should be rewritten and retested.",
+   "value": "70",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Rewrite any label where success falls below roughly 70%, retest with new participants",
+   "topic": "rules"
+  },
+  {
+   "fact": "The article recommends listing five to eight high-value tasks as the first step of navigation testing.",
+   "value": "5-8",
+   "unit": "tasks",
+   "as_of": "",
+   "quote": "List five to eight high-value tasks",
+   "topic": "rules"
+  },
+  {
+   "fact": "The article recommends about 15 people for an open card sort of services.",
+   "value": "15",
+   "unit": "participants",
+   "as_of": "",
+   "quote": "Ask about 15 people to group and name your services",
+   "topic": "audience"
+  },
+  {
+   "fact": "The article's comparison table lists about 15 participants for a closed card sort.",
+   "value": "15",
+   "unit": "participants",
+   "as_of": "",
+   "quote": "| Closed card sort | Whether users place items in your categories | About 15 | When testing a proposed structure |",
+   "topic": "audience"
+  },
+  {
+   "fact": "The article's comparison table lists 30 or more participants for a tree test.",
+   "value": "30",
+   "unit": "participants",
+   "as_of": "",
+   "quote": "| Tree test | Can users find each task in the hierarchy without visuals | 30 or more | Before visual design is final |",
+   "topic": "audience"
+  },
+  {
+   "fact": "The article's comparison table lists 20 to 30 participants for a first-click test.",
+   "value": "20-30",
+   "unit": "participants",
+   "as_of": "",
+   "quote": "| First-click test | Where users click first on a page | 20 to 30 | Checking labels on landing and service pages |",
+   "topic": "audience"
+  },
+  {
+   "fact": "The article's comparison table lists 5 to 10 participants per audience type for a task completion check on the live site.",
+   "value": "5-10",
+   "unit": "participants per audience type",
+   "as_of": "",
+   "quote": "| Task completion check | Whether visitors finish high-value tasks on the live site | 5 to 10 per audience type | After launch and after each change |",
+   "topic": "audience"
+  },
+  {
+   "fact": "A controlled experiment involving 30 participants and five information-seeking tasks found significant completion-time differences for some tasks between architectures, while SUS scores did not differ significantly.",
+   "value": "30",
+   "unit": "participants",
+   "as_of": "",
+   "quote": "A controlled experiment involving 30 participants and five information-seeking tasks",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Baymard's benchmark found 76% of top-grossing U.S. and European e-commerce sites performed at a mediocre level or worse for homepage and category navigation.",
+   "value": "76",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Baymard’s benchmark found 76% of top-grossing U.S. and European e-commerce sites performed at a “mediocre” level or worse",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "Baymard's newer summary reports mediocre-to-poor navigation performance for 61% of desktop sites.",
+   "value": "61",
+   "unit": "%",
+   "as_of": "",
+   "quote": "mediocre-to-poor performance for **61% of desktop sites and 65% of mobile sites**",
+   "topic": "benchmark"
+  },
+  {
+   "fact": "The article's navigation mistakes table flags a top menu with more than seven items as a sign that pages should be grouped under hub pages.",
+   "value": "7",
+   "unit": "items",
+   "as_of": "",
+   "quote": "| Every page crammed into the top menu | Menu has more than seven items | Group pages under hub pages |",
+   "topic": "rules"
+  },
+  {
+   "fact": "Adwave states it provides 7 installation guides covering Shopify, WordPress, Wix, Squarespace, Webflow, Google Tag Manager, and hand-coded sites.",
+   "value": "7",
+   "unit": "installation guides",
+   "as_of": "",
+   "quote": "we provide **7 installation guides** for Shopify, WordPress, Wix, Squarespace, Webflow, Google Tag Manager, and hand-coded sites",
+   "topic": "other"
+  },
+  {
+   "fact": "Adwave states its website analysis is free with the plan visible before the customer spends.",
+   "value": "free",
+   "unit": "",
+   "as_of": "",
+   "quote": "our website analysis is free with your plan visible before you spend",
+   "topic": "pricing"
+  },
+  {
+   "fact": "Adwave states it can build TV, image, search, and social ads from a customer's website URL.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "we can build TV, image, search, and social ads from your website URL",
+   "topic": "definition"
+  }
+ ]
+}
