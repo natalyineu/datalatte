@@ -12,13 +12,14 @@ const a = process.argv.slice(2); const opt = (n, d) => (a.includes(n) ? a[a.inde
 const LIMIT = +opt("--limit", 1000), MINI = +opt("--min-impr", 10), MAXUSD = +opt("--max-usd", 4.6);
 const csvLine = (l) => { const o = []; let cur = "", q = false; for (const ch of l) { if (ch === '"') q = !q; else if (ch === "," && !q) { o.push(cur); cur = ""; } else cur += ch; } o.push(cur); return o; };
 const rows = fs.readFileSync(path.join(ROOT, "data/triage/triage.csv"), "utf8").trim().split("\n").slice(1).map((l) => { const c = csvLine(l); return { slug: c[0], action: c[1], impr: +c[9], title: c[15] }; });
-const todo = rows.filter((r) => r.action === "REWRITE-P1" && r.impr >= MINI).sort((x, y) => y.impr - x.impr);
+let todo = rows.filter((r) => r.action === "REWRITE-P1" && r.impr >= MINI).sort((x, y) => y.impr - x.impr);
+if (opt("--slugs", "")) { const L = JSON.parse(fs.readFileSync(opt("--slugs", ""), "utf8")); todo = L.map((s) => { const f = path.join(ROOT, "content/blog", s + ".mdx"); const t = fs.existsSync(f) ? (fs.readFileSync(f, "utf8").match(/^title:\s*"(.*)"/m) || [])[1] : ""; return { slug: s, title: t || s.replace(/-/g, " "), impr: 0 }; }); }
 const gq = JSON.parse(fs.readFileSync(path.join(ROOT, "data/analytics/gsc-query-page-90d.json"), "utf8")).rows;
 const top = new Map(); for (const [p, q, , i] of gq) { const s = p.replace(/^\/blog\//, "").replace(/\/$/, ""); if (!top.has(s) || top.get(s)[1] < i) top.set(s, [q, i]); }
 const dir = path.join(ROOT, "data/research"); fs.mkdirSync(dir, { recursive: true });
 const usage = async () => (await (await fetch("https://api.apify.com/v2/users/me/limits")).json()).data.current.monthlyUsageUsd;
 const clean = (t) => t.replace(/\(.*?\)|:.*$|\b20\d\d\b/g, "").replace(/\s+/g, " ").trim();
-let done = 0, ok = 0, skipped = 0; const q = todo.filter((r) => !fs.existsSync(path.join(dir, r.slug + ".json"))).slice(0, LIMIT);
+let done = 0, ok = 0, skipped = 0; const q = todo.filter((r) => opt("--slugs", "") || !fs.existsSync(path.join(dir, r.slug + ".json"))).slice(0, LIMIT);
 console.log("to collect", q.length, "of", todo.length);
 async function one(r) {
   const gsc = top.get(r.slug); const query = (gsc && gsc[0].split(" ").length >= 2 ? gsc[0] : clean(r.title)) || r.slug.replace(/-/g, " ");
