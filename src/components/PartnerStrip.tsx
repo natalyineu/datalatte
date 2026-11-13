@@ -1,25 +1,25 @@
 import Link from "next/link";
-import { Mic2, Tv, Mail, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 const PARTNERS = [
   {
     name: "Spotify Advertising",
     what: "Audio and podcast advertising",
-    Icon: Mic2,
+    logo: "/images/partners/spotify-advertising.png", lw: 626, lh: 142,
     href: "/blog/ctv-advertising-platforms-compared-2026",
     guide: "CTV advertising platforms compared",
   },
   {
     name: "Vibe",
     what: "Connected TV advertising",
-    Icon: Tv,
+    logo: "/images/partners/vibe.svg", lw: 61, lh: 24,
     href: "/blog/how-much-does-ctv-advertising-cost-real-cpm-data",
     guide: "What CTV advertising costs",
   },
   {
     name: "Flodesk",
     what: "Email marketing",
-    Icon: Mail,
+    logo: "/images/partners/flodesk.svg", lw: 991, lh: 209,
     href: "/blog/email-marketing-ideas-for-small-businesses-20-campaigns-that-drive-revenue-2026",
     guide: "20 email campaign ideas",
   },
@@ -40,16 +40,17 @@ export default function PartnerStrip({ detailed = false }: { detailed?: boolean 
         </div>
 
         <ul className="grid gap-4 sm:grid-cols-3">
-          {PARTNERS.map(({ name, what, Icon, href, guide }) => (
+          {PARTNERS.map(({ name, what, logo, lw, lh, href, guide }) => (
             <li key={name}>
               <Link
                 href={href}
                 className="group block h-full bg-white dark:bg-gray-800 rounded-2xl border border-coffee-200 dark:border-gray-700 border-t-4 border-t-coffee-500 p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all"
               >
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-coffee-100 dark:bg-gray-700 text-coffee-700 dark:text-coffee-200">
-                  <Icon size={22} aria-hidden="true" />
+                <span className="flex h-14 items-center">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={logo} alt={name} width={lw} height={lh} loading="lazy" className="h-10 w-auto max-w-[200px] object-contain object-left dark:bg-white dark:rounded-md dark:px-2" />
                 </span>
-                <span className="block mt-4 text-2xl font-extrabold tracking-tight text-coffee-900 dark:text-white">{name}</span>
+                <span className="block mt-3 text-lg font-extrabold tracking-tight text-coffee-900 dark:text-white">{name}</span>
                 <span className="block mt-1 text-sm text-gray-500 dark:text-gray-400">{what}</span>
                 <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-coffee-700 dark:text-coffee-300 group-hover:underline">
                   Featured in: {guide} <ArrowUpRight size={14} aria-hidden="true" />
