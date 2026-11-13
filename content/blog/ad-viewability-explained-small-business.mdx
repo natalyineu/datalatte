@@ -1,0 +1,158 @@
+---
+title: "Ad Viewability Explained for Small Businesses"
+seoTitle: "Ad Viewability Explained for Small Businesses"
+date: "2026-11-13"
+lastModified: "2026-11-13"
+description: "Ad viewability means 50% of a display ad in view for 1 second, or video for 2 seconds. Learn how to check it before paying per impression."
+author: "Nataliia"
+category: "Programmatic Advertising"
+tags: ["ad viewability", "programmatic", "ctv advertising", "display advertising", "small business"]
+slug: "ad-viewability-explained-small-business"
+image: "https://images.unsplash.com/photo-1566577739112-5180d4bf9390?w=800&q=80&auto=format&fit=crop"
+readTime: "8 min read"
+---
+
+Ad viewability is the share of paid impressions that had a real chance of being seen. Under the IAB's definition, a display ad counts as viewable when [at least 50% of it is in view for 1 second](https://www.stackadapt.com/resources/blog/viewability-explained). A video ad counts when at least 50% is in view for 2 consecutive seconds. For a local business paying per thousand impressions, the viewable share decides how much of the budget bought a chance at attention.
+
+<StatRow values="50%|93.2%|10.43%|2 sec" labels="Display ad in view for 1 second|CTV ad viewability, first half of 2022|Industry average fraud rate, 2018 study|Consecutive seconds for a viewable video ad" subs="IAB definition, via StackAdapt (secondary)|Statista, via StackAdapt (secondary)|TAG study, via StackAdapt (secondary)|IAB definition, via StackAdapt (secondary)" trends="neutral|up|down|neutral" />
+
+## What does ad viewability actually mean?
+
+Viewability measures whether an ad had the opportunity to be seen. It does not measure whether a person read it, remembered it or acted on it. An ad loaded at the bottom of a page that nobody scrolled to is a served impression, but it is not a viewable one.
+
+Two organizations sit behind the rules. StackAdapt's explainer notes that the [Media Rating Council (MRC), together with the IAB, compiled viewable impression measurement guidelines](https://www.stackadapt.com/resources/blog/viewability-explained). The MRC [sets minimum standards for what counts as a viewable impression](https://www.stackadapt.com/resources/blog/connected-tv-viewability) in digital advertising.
+
+The concept is not well understood even inside the industry. A third-party eMarketer finding cited by StackAdapt reports that [more than 4 in 10 respondents admitted the industry could do better](https://www.stackadapt.com/resources/blog/viewability-explained) at explaining what viewability is. A small business owner who finds the term confusing is in large company.
+
+One caveat applies to the sources used here. StackAdapt's standards explainer dates from January 2019, so confirm with any vendor that the standard they report against is still the one described above.
+
+## What are the viewability standards for each ad format?
+
+The standard changes with the format. Display gets the shorter clock because a banner can be glanced at quickly. Video gets 2 consecutive seconds, which means the clock restarts if the ad leaves the screen.
+
+The table pairs each format with its standard and the programmatic CPM range [Adwave lists](https://adwave.com/resources/programmatic-political-advertising) (secondary, vendor ranges, not quotes).
+
+| Format | Viewability standard | Programmatic CPM (Adwave, secondary) | What to know |
+|---|---|---|---|
+| Standard display | 50% in view for 1 second | $3-8 | Lowest price, most dependent on page placement |
+| Native display | 50% in view for 1 second | $5-12 | Same display standard applies |
+| Pre-roll online video | 50% in view for 2 consecutive seconds | $15-30 | The video clock must run without a break |
+| YouTube | Video standard, 2 consecutive seconds | $10-25 | Skippable ads can be [skipped after 5 seconds](https://adwave.com/resources/youtube-advertising-for-small-business) |
+| FAST channels (Tubi, Pluto) | Video standard | $12-25 | Streaming inventory on the cheaper end |
+| Mid-tier streaming (Roku Channel, Samsung TV+) | Video standard | $20-35 | Full-screen playback |
+| Premium streaming (Hulu, Peacock) | Video standard | $30-50 | Highest price in the list |
+
+The pattern is that the formats with the highest CPMs are the ones where full-screen playback makes the standard easy to meet.
+
+## Why does viewability matter when paying for impressions?
+
+Most programmatic buys are priced per thousand impressions, known as CPM. The platform counts an impression when the ad is served. Unless the campaign is bought on a viewable-impression basis, an unseen ad is still billed.
+
+Viewability therefore works like a discount applied to the stated CPM. If only part of the impressions are viewable, the real price of each thousand viewable impressions is higher than the rate card suggests.
+
+The formula is simple: cost per thousand viewable impressions equals CPM divided by the viewable rate. A later section works through it with numbers.
+
+Measurement coverage matters as well. StackAdapt gives an illustrative example in which [one partner identifies 60% of all inventory as viewable impressions](https://www.stackadapt.com/resources/blog/viewability-explained). That would leave 40% unmeasurable or unclassified. A report that says 60% viewable might not mean the other 40% was unseen. It might mean it could not be measured.
+
+For a small advertiser, the practical question is which number the report uses as its base: all impressions, or only measured ones.
+
+## How viewable is connected TV compared with display?
+
+Connected TV is the format where the viewability problem mostly shrinks. StackAdapt's CTV article states that ads [play in full-screen mode](https://www.stackadapt.com/resources/blog/connected-tv-viewability), with no scrolling, minimized tabs or distractions. It also notes that many streaming platforms do not allow skipping, so ads are fully viewed.
+
+The cited rates are high. Statista, as cited in the article, puts the global viewability rate of CTV ads at [93.2% in the first half of 2022](https://www.stackadapt.com/resources/blog/connected-tv-viewability). According to IAS, over 90% of CTV impressions meet the MRC standards. StackAdapt itself says rates are often close to 100%, which is a vendor statement and not an independent measurement (secondary).
+
+Completion points the same way. A political advertising guide from Adwave says most CTV inventory is non-skippable, with [completion rates averaging 95% or higher](https://adwave.com/resources/programmatic-political-advertising) (secondary).
+
+Two limits apply. The figures are from 2022 and from vendor-cited summaries, so current numbers should come from the campaign's own report. And YouTube on a TV screen can still be skippable after 5 seconds, so full-screen does not always mean full-length. More on the platform differences is in the [CTV vs OTT explainer](/blog/ctv-vs-ott-advertising-explained).
+
+## Does invalid traffic affect what viewability shows?
+
+Viewability and fraud are separate problems that get mixed up. An impression can be in view and still come from a bot. Invalid traffic reduces the value of the impressions that a viewability report counts as good.
+
+The TAG 2018 fraud benchmark study, cited by StackAdapt, measured general and sophisticated invalid traffic across [75 billion impressions](https://www.stackadapt.com/resources/blog/stackadapt-achieves-lower-fraud-rate) of display and video on desktop, mobile and in-app. It put the industry average overall fraud rate at 10.43%. The average for TAG Certified Channels was 1.68%.
+
+StackAdapt claims its own traffic was 91% cleaner than the industry average. That is a vendor claim from a 2018 post (secondary), and the figures are dated.
+
+The takeaway for a local advertiser is narrow. Viewability alone is not a quality guarantee, so ask a vendor about both viewable rate and invalid traffic filtering. Ask for current numbers, because the sources here describe 2018.
+
+## How can a local advertiser check viewability?
+
+Checking does not require technical skills. It requires asking the right questions before the budget is committed and reading the report once the campaign runs.
+
+Before launch, ask the platform or agency these questions in writing:
+
+- Which viewability standard does the report use, and is it MRC-accredited measurement?
+- Is the viewable rate shown as a share of all impressions or only of measured impressions?
+- Is the buy priced on served impressions or on viewable impressions?
+- How is invalid traffic filtered, and is it reported?
+- Is viewability reported by site, app or placement, or only as one blended number?
+
+After launch, tie the impressions to outcomes the business can see. Viewability says an ad could be seen. Calls, visits and bookings say whether it worked. For Google Ads, call conversions can be set up so that a call [counts only when it lasts longer than a minimum length you set](https://support.google.com/google-ads/answer/6095883), which filters out accidental taps and very short calls.
+
+Website traffic from the campaign can be read in GA4. The [GA4 guide for small businesses](/blog/google-analytics-4-for-small-business) covers that setup.
+
+## What does a worked example look like for a coffee shop?
+
+This example uses assumptions only. None of the inputs are real campaign results.
+
+A coffee shop with one location has a monthly test budget of $600 (assumption). It compares two buys.
+
+| Input | Display banners | Streaming TV |
+|---|---|---|
+| Budget | $600 (assumption) | $600 (assumption) |
+| CPM | $5 (assumption) | $25 (assumption) |
+| Viewable rate | 60% (assumption) | 90% (assumption) |
+
+The CPM figures sit inside the Adwave ranges for [standard display and mid-tier streaming](https://adwave.com/resources/programmatic-political-advertising). The viewable rates are chosen for the illustration.
+
+Display: $600 at a $5 CPM buys 120,000 impressions. At 60% viewable, 72,000 are viewable. Cost per thousand viewable impressions is $600 divided by 72, which is about $8.33.
+
+Streaming: $600 at a $25 CPM buys 24,000 impressions. At 90% viewable, 21,600 are viewable. Cost per thousand viewable impressions is $600 divided by 21.6, which is about $27.78.
+
+Display remains cheaper per viewable thousand in this setup, so viewability does not decide the choice alone. The comparison shows only the true price of a viewable impression. A coffee shop still has to judge which placement drives walk-ins, using the outcome tracking from the previous section. Cost context for streaming is in [how much CTV advertising costs](/blog/how-much-does-ctv-advertising-cost-real-cpm-data), and budget fit is covered in [whether CTV is worth it on a small budget](/blog/is-ctv-advertising-worth-it-small-budget-2026).
+
+## What is a four-week viewability checklist for a first campaign?
+
+A short routine keeps viewability checks from becoming a one-time question that never gets revisited.
+
+| Week | Task | What to look at |
+|---|---|---|
+| Before launch | Send the five questions above to the vendor | Written answers on standard, base and pricing |
+| Week 1 | Confirm creative plays correctly and tracking fires | Test calls, landing page visits in GA4, [creative specs](/blog/ctv-advertising-creative-specs-guide-2026) |
+| Week 2 | Pull the first viewability and invalid traffic report | Measured share versus unmeasured share, results by placement |
+| Week 3 | Calculate cost per thousand viewable impressions | CPM divided by viewable rate for each placement |
+| Week 4 | Compare viewable cost with outcomes | Calls, visits, bookings against spend; cut or shift budget |
+
+The week 3 step is the one most advertisers skip, and it is where a cheap CPM with a low viewable rate can turn out more expensive than it looked. Platform-specific options are compared in [Roku Ads for local business](/blog/roku-ads-local-business).
+
+## FAQ
+
+### What is a good viewability rate?
+
+The sources do not set a target for local advertisers. They do cite benchmarks: CTV viewability in the low 90s, and 93.2% globally for the first half of 2022, per Statista via StackAdapt. Display figures vary by placement, so ask for the vendor's current number and compare it with the campaign's own results.
+
+### Is viewable the same as seen?
+
+No. Viewable means the ad met the in-view standard: 50% in view for 1 second for display, or 2 consecutive seconds for video. It does not prove that a person noticed the ad. That is why outcome tracking such as calls and visits matters alongside the viewability report.
+
+### Do I pay for impressions that are not viewable?
+
+On a standard CPM buy, billing follows served impressions, so unviewable ones are still charged. Some buys are priced on viewable impressions instead. Ask which model applies and get the answer in writing before spending.
+
+### Does connected TV have better viewability than display?
+
+The cited figures say so: CTV viewability is in the low 90s, and ads play full-screen, often without a skip option. The CPMs are also higher, so compare cost per thousand viewable impressions and outcomes, not only viewability.
+
+## Ready to check what a campaign is really delivering?
+
+A review of viewable rate, invalid traffic and outcomes shows whether impressions are turning into customers. Request a [free audit of your current ads](/free-audit), or see how [Google Ads management](/services/google-ads) can help track calls and bookings.
+
+## Sources
+
+- [StackAdapt: Viewability explained](https://www.stackadapt.com/resources/blog/viewability-explained) (secondary, vendor blog, published January 2019)
+- [StackAdapt: lower fraud rate, TAG benchmark](https://www.stackadapt.com/resources/blog/stackadapt-achieves-lower-fraud-rate) (secondary, vendor blog, published December 2018)
+- [StackAdapt: Connected TV viewability](https://www.stackadapt.com/resources/blog/connected-tv-viewability) (secondary, vendor blog, published February 2025)
+- [Adwave: YouTube advertising for small business](https://adwave.com/resources/youtube-advertising-for-small-business) (secondary, vendor blog)
+- [Adwave: Programmatic political advertising guide](https://adwave.com/resources/programmatic-political-advertising) (secondary, vendor guide)
+- [Google Ads Help: Track calls to a phone number on a website](https://support.google.com/google-ads/answer/6095883)
