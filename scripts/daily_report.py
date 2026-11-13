@@ -26,12 +26,14 @@ SCOPES = [
 ]
 
 TODAY      = date.today()
-YESTERDAY  = TODAY - timedelta(days=1)
+# GSC finalises a day only ~2 days later. Ending windows on TODAY-3 keeps both 7-day
+# windows complete, so WoW arrows compare equal-length, full periods (not 5 vs 7 days).
+YESTERDAY  = TODAY - timedelta(days=3)   # = last complete GSC day (name kept for existing code)
 W1_END     = YESTERDAY
 W1_START   = YESTERDAY - timedelta(days=6)
 W2_END     = W1_START - timedelta(days=1)
 W2_START   = W2_END - timedelta(days=6)
-D28_START  = TODAY - timedelta(days=28)
+D28_START  = YESTERDAY - timedelta(days=27)
 D28_PSTART = D28_START - timedelta(days=28)
 D28_PEND   = D28_START - timedelta(days=1)
 
@@ -640,7 +642,7 @@ def build_email(gsc, ga4, rs, ai_recs_raw, ex):
 </td>
 <td align="right" style="padding:18px 20px 14px">
 <p style="margin:0;font-size:12px;font-weight:700;color:#d6deea">{TODAY.strftime('%B %d, %Y')}</p>
-<p style="margin:2px 0 0;font-size:10px;color:#b4c4d8">7d: {W1_START} — {W1_END}</p>
+<p style="margin:2px 0 0;font-size:10px;color:#b4c4d8">7d: {W1_START} — {W1_END} · vs previous 7d</p>
 </td>
 </tr>
 <tr><td colspan="2" height="2" bgcolor="{C_GOLD}" style="font-size:0">&nbsp;</td></tr>
