@@ -418,22 +418,45 @@ async function fetchBing() {
     const rows = ((await res.json()).d || [])
       .map(r => ({ date: new Date(parseInt(String(r.Date).replace(/\D/g, ""), 10)).toISOString().slice(0, 10), clicks: r.Clicks || 0, impressions: r.Impressions || 0 }))
       .sort((a, b) => a.date.localeCompare(b.date));
-    // Top queries / pages (Bing returns per-day rows; aggregate by key over the window it gives us)
+    // Top queries / pages. Bing returns per-day rows → aggregate all-time AND last-7d vs previous-7d (relative to latest data day)
+    const lastDay = rows.length ? rows[rows.length - 1].date : null;
+    const dayMs = 86400000;
+    const dOf = (x) => new Date(parseInt(String(x.Date).replace(/\D/g, ""), 10)).toISOString().slice(0, 10);
     const agg = async (method, keyName) => {
       try {
         const r = await fetch(`https://ssl.bing.com/webmaster/api.svc/json/${method}?apikey=${key}&siteUrl=${site}`);
-        if (!r.ok) return [];
+        if (!r.ok) return { all: [], win: [] };
         const m = new Map();
+        const cut7 = lastDay ? new Date(new Date(lastDay).getTime() - 6 * dayMs).toISOString().slice(0, 10) : "";
+        const cut14 = lastDay ? new Date(new Date(lastDay).getTime() - 13 * dayMs).toISOString().slice(0, 10) : "";
         for (const x of (await r.json()).d || []) {
           const k = x[keyName]; if (!k) continue;
-          const a = m.get(k) || { key: k, impressions: 0, clicks: 0 };
-          a.impressions += x.Impressions || 0; a.clicks += x.Clicks || 0; m.set(k, a);
+          const a = m.get(k) || { key: k, impressions: 0, clicks: 0, i7: 0, c7: 0, ip: 0, cp: 0, posW: 0, posI: 0 };
+          const im = x.Impressions || 0, cl = x.Clicks || 0;
+          a.impressions += im; a.clicks += cl;
+          let d = ""; try { d = dOf(x); } catch {}
+          if (d && d >= cut7) { a.i7 += im; a.c7 += cl; if (x.AvgImpressionPosition > 0) { a.posW += x.AvgImpressionPosition * im; a.posI += im; } }
+          else if (d && d >= cut14) { a.ip += im; a.cp += cl; }
+          m.set(k, a);
         }
-        return [...m.values()].sort((a, b) => b.clicks - a.clicks || b.impressions - a.impressions).slice(0, 25);
-      } catch { return []; }
+        const all = [...m.values()];
+        const clean = (a) => ({ key: a.key, impressions: a.impressions, clicks: a.clicks, i7: a.i7, c7: a.c7, ip: a.ip, cp: a.cp, pos: a.posI ? +(a.posW / a.posI).toFixed(1) : null });
+        return {
+          all: all.sort((a, b) => b.clicks - a.clicks || b.impressions - a.impressions).slice(0, 25).map(clean),
+          win: all.filter(a => a.i7 || a.ip).sort((a, b) => b.c7 - a.c7 || b.i7 - a.i7).slice(0, 40).map(clean),
+        };
+      } catch { return { all: [], win: [] }; }
     };
-    const [queries, pages] = await Promise.all([agg("GetQueryStats", "Query"), agg("GetPageStats", "Query")]);
-    fs.writeFileSync(path.join(OUT_DIR, "bing-latest.json"), JSON.stringify({ fetchedAt: new Date().toISOString(), rows: rows.slice(-400), queries, pages }, null, 2));
+    const [q, pg] = await Promise.all([agg("GetQueryStats", "Query"), agg("GetPageStats", "Query")]);
+    const queries = q.all, pages = pg.all;
+    // Crawl / index health (optional)
+    let crawl = [];
+    try {
+      const r = await fetch(`https://ssl.bing.com/webmaster/api.svc/json/GetCrawlStats?apikey=${key}&siteUrl=${site}`);
+      if (r.ok) crawl = ((await r.json()).d || []).map(x => ({ date: dOf(x), crawled: x.CrawledPages || 0, inIndex: x.InIndex || 0, errors: (x.CrawlErrors || 0), c4xx: x.Code4xx || 0, c5xx: x.Code5xx || 0, blocked: x.BlockedByRobotsTxt || 0 }))
+        .sort((a, b) => a.date.localeCompare(b.date)).slice(-30);
+    } catch {}
+    fs.writeFileSync(path.join(OUT_DIR, "bing-latest.json"), JSON.stringify({ fetchedAt: new Date().toISOString(), rows: rows.slice(-400), queries, pages, queriesWin: q.win, pagesWin: pg.win, crawl }, null, 2));
     console.log(`✓ Bing saved (${rows.length} days)`);
     return rows;
   } catch (e) {

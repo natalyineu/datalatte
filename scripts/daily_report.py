@@ -159,30 +159,6 @@ def fetch_ga4(creds):
         sources=sources, pages=pages, countries=countries, devices=devices, daily=daily_ga,
     )
 
-# ── Resend ────────────────────────────────────────────────────────────────────
-def fetch_resend():
-    def get(path):
-        req = urllib.request.Request(
-            f"https://api.resend.com{path}",
-            headers={"Authorization": f"Bearer {RESEND_API_KEY}",
-                     "User-Agent": "DataLatte-Reporter/1.0"}
-        )
-        with urllib.request.urlopen(req, timeout=10) as r:
-            return json.loads(r.read())
-    try:
-        contacts   = get(f"/audiences/{RESEND_AUDIENCE}/contacts").get("data", [])
-        total      = len(contacts)
-        subscribed = sum(1 for c in contacts if not c.get("unsubscribed"))
-        recent     = sorted(contacts, key=lambda c: c.get("created_at",""), reverse=True)[:4]
-    except Exception:
-        total, subscribed, recent = 0, 0, []
-    try:
-        broadcasts = get("/broadcasts").get("data", [])
-        broadcasts = sorted(broadcasts, key=lambda b: b.get("sent_at") or b.get("created_at",""), reverse=True)[:4]
-    except Exception:
-        broadcasts = []
-    return dict(total=total, subscribed=subscribed, recent=recent, broadcasts=broadcasts)
-
 # ── AI Recommendations via Groq ───────────────────────────────────────────────
 def fetch_ai_recommendations(gsc, ga4, rs, ex=None):
     ctr_w1  = gsc['cl_w1'] / gsc['im_w1'] * 100 if gsc['im_w1'] else 0
@@ -287,12 +263,11 @@ def pc(pos):
     return f'<span style="background:{bg};color:{fg};padding:1px 6px;font-size:11px;font-weight:700">{pos:.1f}</span>'
 
 def mb(val, mx, w=75, c=C_BLUE):
-    """Mini bar chart"""
+    """Mini bar chart (two nested spans, ~150 bytes)"""
     if not mx: return ""
     f = max(2, int(val / mx * w))
-    return (f'<table cellpadding="0" cellspacing="0" style="display:inline-table;vertical-align:middle">'
-            f'<tr><td width="{f}" height="5" bgcolor="{c}" style="font-size:0">&nbsp;</td>'
-            f'<td width="{w-f}" height="5" bgcolor="#dde3ec" style="font-size:0">&nbsp;</td></tr></table>')
+    return (f'<span style="display:inline-block;width:{w}px;height:5px;background:#dde3ec;vertical-align:middle">'
+            f'<span style="display:block;width:{f}px;height:5px;background:{c}"></span></span>')
 
 def fmtd(s):
     m, sec = divmod(int(s), 60)
@@ -304,21 +279,16 @@ def shead(title, sub=""):
             f'font-size:10px;font-weight:800;color:#1a2a3a;letter-spacing:0.08em;'
             f'text-transform:uppercase;border-top:2px solid {C_BLUE}">{title}{s}</td></tr>')
 
+def _pos(i, n):
+    return "l" if i == 0 else ("r" if i == n - 1 else "m")
+
 def th(*cols):
-    cells = "".join(
-        f'<td style="padding:5px {"20px" if i==0 else "10px"} 5px {"20px" if i==0 else ("20px" if i==len(cols)-1 else "10px")};'
-        f'font-size:10px;font-weight:700;color:#4f5d6d;text-transform:uppercase;letter-spacing:0.05em;'
-        f'text-align:{"left" if i==0 else "right"};border-bottom:1px solid #ddd8ce">{c}</td>'
-        for i, c in enumerate(cols))
+    cells = "".join(f'<td class="h {_pos(i, len(cols))}">{c}</td>' for i, c in enumerate(cols))
     return f'<tr bgcolor="#f7f5f0">{cells}</tr>'
 
 def tr(*cols, alt=False):
     bg = ' bgcolor="#f2f0eb"' if alt else ' bgcolor="#faf8f4"'
-    cells = "".join(
-        f'<td style="padding:5px {"20px" if i==0 else "10px"} 5px {"20px" if i==0 else ("20px" if i==len(cols)-1 else "10px")};'
-        f'font-size:11px;color:#2c3e50;text-align:{"left" if i==0 else "right"};'
-        f'border-bottom:1px solid #ede8e0">{c}</td>'
-        for i, c in enumerate(cols))
+    cells = "".join(f'<td class="d {_pos(i, len(cols))}">{c}</td>' for i, c in enumerate(cols))
     return f"<tr{bg}>{cells}</tr>"
 
 def kpi4(items):
@@ -363,7 +333,7 @@ def compute_extras(g):
         waves=X.wave_effect(g['page_date'], YESTERDAY),
         brand=X.brand_split(g['queries_w1']), qtypes=X.query_types(g['queries_w1']),
         devices=X.devices(g['devices_w1'], g['devices_w2']),
-        conv=X.conversions(W1_START, W2_START), bing=X.bing_summary(W1_START, W2_START),
+        biz=X.business(W1_START, W2_START), bing=X.bing_report(),
     )
 
 def block(title, sub, cols, rows_html):
@@ -452,34 +422,135 @@ def render_gsc_extras(g, ex):
     out += block("Devices (GSC)", "7d", ["Device", "Impr", "WoW", "Clicks", "Pos"], rows or tr("—"))
     return out
 
-def render_business(ex):
-    out = ""
-    cv = ex['conv']
-    if cv:
-        out += ('<tr><td colspan="9"><table width="100%" cellpadding="0" cellspacing="0">'
-                + kpi4_light([
-                    ("Form submissions", str(cv['forms']), db(cv['forms'], cv['forms_prev'])),
-                    ("Outreach sent", str(cv['sent']), db(cv['sent'], cv['sent_prev'])),
-                    ("Outreach replies", str(cv['replies']), db(cv['replies'], cv['replies_prev'])),
-                    ("Reply rate", f"{cv['replies']/cv['sent']*100:.0f}%" if cv['sent'] else "—", '<span style="color:#5b6775;font-size:10px">7d</span>'),
-                ]) + '</table></td></tr>')
-        if cv['form_types']:
-            rows = "".join(tr(k, str(v), alt=i % 2 == 0) for i, (k, v) in enumerate(sorted(cv['form_types'].items(), key=lambda x: -x[1])))
-            out += block("Submissions by form", "7d", ["Form", "Count"], rows)
-    else:
-        out += tr("Conversions unavailable (set SUPABASE_SERVICE_ROLE_KEY in workflow)")
+def insight(text):
+    """Tinted one-line conclusion under a section header"""
+    return (f'<tr><td colspan="9" bgcolor="#fdf5e6" style="padding:9px 20px;font-size:12px;color:#3d2c0a;'
+            f'line-height:1.5;border-bottom:1px solid #eadfc8"><b style="color:{C_AMBER}">Вывод.</b> {text}</td></tr>')
+
+def _pct(c, p):
+    return f"{(c - p) / p * 100:+.0f}%" if p else "—"
+
+def render_bing(ex, g):
     bg = ex['bing']
-    if bg:
-        out += ('<tr><td colspan="9"><table width="100%" cellpadding="0" cellspacing="0">'
-                + kpi4_light([
-                    ("Bing impressions", f"{bg['impr']:,}", db(bg['impr'], bg['impr_prev'])),
-                    ("Bing clicks", str(bg['clicks']), db(bg['clicks'], bg['clicks_prev'])),
-                ]) + '</table></td></tr>')
-        rows = "".join(tr(r.get('key', '')[:48], f"{r.get('impressions',0):,}", str(r.get('clicks',0)), alt=i % 2 == 0)
-                       for i, r in enumerate(bg['top_queries']))
-        if rows:
-            out += block("Bing top queries", f"data as of {bg['fetched']}", ["Query", "Impr", "Clicks"], rows)
+    if not bg:
+        return insight("Данные Bing недоступны (нет bing-latest.json).")
+    ctr = bg['clicks'] / bg['impr'] * 100 if bg['impr'] else 0
+    gctr = g['cl_w1'] / g['im_w1'] * 100 if g['im_w1'] else 0
+    mult = ctr / gctr if gctr else 0
+    cr, crp = bg['crawl'], bg['crawl_prev']
+    out = '<tr><td colspan="9"><table width="100%" cellpadding="0" cellspacing="0">' + kpi4_light([
+        ("Impressions 7d", f"{bg['impr']:,}", db(bg['impr'], bg['impr_prev'])),
+        ("Clicks 7d", str(bg['clicks']), db(bg['clicks'], bg['clicks_prev'])),
+        ("CTR", f"{ctr:.1f}%", f'<span style="color:#5b6775;font-size:10px">Google {gctr:.1f}%</span>'),
+        ("Indexed pages", f"{cr['inIndex']:,}" if cr else "—",
+         db(cr['inIndex'], crp['inIndex']) if cr and crp else '<span style="color:#5b6775;font-size:10px">n/a</span>'),
+    ]) + '</table></td></tr>'
+    parts = []
+    if bg['impr']:
+        parts.append(f"CTR в Bing <b>{ctr:.1f}%</b> против {gctr:.1f}% в Google"
+                     + (f" — в <b>{mult:.1f}×</b> выше" if mult >= 1.3 else "") + f"; {bg['clicks']} кликов на {bg['impr']:,} показов.")
+    if bg['impr_prev']:
+        parts.append(f"Показы {_pct(bg['impr'], bg['impr_prev'])}, клики {bg['clicks']} против {bg['clicks_prev']} (7 дней по {bg['last']} к предыдущим 7).")
+    if mult >= 2 and bg['clicks'] >= 5:
+        parts.append("Bing даёт заметно больше кликов на показ: убедитесь, что sitemap отправлен в Bing Webmaster.")
+    if cr and (cr.get('errors') or cr.get('c4xx') or cr.get('c5xx')):
+        parts.append(f"Ошибки краулинга: {cr.get('errors',0)} (4xx: {cr.get('c4xx',0)}, 5xx: {cr.get('c5xx',0)}) — проверить в Bing Webmaster.")
+    out += insight(" ".join(parts) or "Данных за неделю нет.")
+    daily = bg['daily']
+    mx = max((r.get('impressions', 0) for r in daily), default=1)
+    out += block("Bing daily", f"7 days to {bg['last']}", ["Date", "", "Impr", "Clicks"],
+                 "".join(tr(r['date'][5:], mb(r.get('impressions', 0), mx), f"{r.get('impressions',0):,}",
+                            f'<b style="color:{C_GREEN}">{r["clicks"]}</b>' if r.get('clicks') else "·", alt=i % 2 == 0)
+                         for i, r in enumerate(daily)))
+    def row(r, i, name_len=48):
+        k = r['key'].replace("https://datalatte.pro", "") or "/"
+        c = f"{r['c7'] / r['i7'] * 100:.1f}%" if r['i7'] else "—"
+        return tr(k[:name_len], f"{r['i7']:,}", str(r['c7']), c, pc(r['pos']) if r.get('pos') else "—", alt=i % 2 == 0)
+    sub = "7d by clicks" if bg['windowed'] else "all-time by clicks (re-run analytics-fetch for 7d)"
+    out += block("Bing top queries", sub, ["Query", "Impr", "Clicks", "CTR", "Pos"], "".join(row(r, i) for i, r in enumerate(bg['queries'])))
+    out += block("Bing top pages", sub, ["URL", "Impr", "Clicks", "CTR", "Pos"], "".join(row(r, i, 44) for i, r in enumerate(bg['pages'])))
     return out
+
+def render_outreach(ex):
+    bz = ex['biz']
+    if not bz:
+        return insight("Данные CRM недоступны (нужен SUPABASE_SERVICE_ROLE_KEY в workflow).")
+    c, p = bz['cur'], bz['prev']
+    orate = c['opened'] / c['delivered'] * 100 if c['delivered'] else 0
+    brate = c['bounced'] / c['sent'] * 100 if c['sent'] else 0
+    out = '<tr><td colspan="9"><table width="100%" cellpadding="0" cellspacing="0">' + kpi4_light([
+        ("Form leads 7d", str(bz['forms']), db(bz['forms'], bz['forms_prev'])),
+        ("Cold emails 7d", str(c['sent']), db(c['sent'], p['sent'])),
+        ("Replies", str(c['replies']), f'<span style="color:#5b6775;font-size:10px">prev {p["replies"]}</span>'),
+        ("Open rate", f"{orate:.0f}%" if c['delivered'] else "—", f'<span style="color:#5b6775;font-size:10px">bounce {brate:.0f}%</span>'),
+    ]) + '</table></td></tr>'
+    parts = [f"За 7 дней: {bz['forms']} заявок с форм, отправлено {c['sent']} холодных писем"
+             + (f", открыто {orate:.0f}%, ответов {c['replies']}" if c['sent'] else "") + "."]
+    if c['sent'] and brate > 5:
+        parts.append(f"Bounce {brate:.0f}% — выше нормы (5%), список адресов нужно почистить.")
+    if c['sent'] and not c['replies']:
+        parts.append("Ответов нет — проверить тему письма и оффер перед следующей волной.")
+    if bz['deals']:
+        parts.append(f"В работе {len(bz['deals'])} сделок с партнёрами, оплачено {bz['deals_paid']}.")
+    out += insight(" ".join(parts))
+    if bz['campaigns']:
+        rows = "".join(tr(x['name'][:30], str(x['sent']),
+                          f"{x['opened']/x['delivered']*100:.0f}%" if x['delivered'] else "—",
+                          str(x['replies']), str(x['bounced']), alt=i % 2 == 0) for i, x in enumerate(bz['campaigns']))
+        out += block("Campaigns", "14d · latest 5", ["Campaign", "Sent", "Opened", "Replies", "Bounced"], rows)
+    if bz['deals']:
+        rows = "".join(tr(d['partner'][:22], d.get('deal_status') or "—",
+                          f"{d['amount']:,.0f} {d.get('currency') or ''}" if d.get('amount') else "—",
+                          (d.get('next_step') or "—")[:34], alt=i % 2 == 0) for i, d in enumerate(bz['deals']))
+        out += block("Partner deals in progress", "from partner_deals", ["Partner", "Status", "Amount", "Next step"], rows)
+    return out
+
+def build_takeaways(g, a, ex):
+    """Rule-based conclusions shown at the top of the email"""
+    T = []
+    ctr = g['cl_w1'] / g['im_w1'] * 100 if g['im_w1'] else 0
+    T.append(("📈", f"<b>Показы {_pct(g['im_w1'], g['im_w2'])}</b> к прошлой неделе ({g['im_w1']:,} против {g['im_w2']:,}), "
+                    f"клики {g['cl_w1']} против {g['cl_w2']}. CTR {ctr:.2f}%, средняя позиция {g['pos_w1']}."))
+    b = ex['buckets']; tot = max(sum(v['impr'] for v in b.values()), 1)
+    top10 = (b['1–3']['impr'] + b['4–10']['impr']) / tot * 100
+    deep = (b['21–50']['impr'] + b['50+']['impr']) / tot * 100
+    T.append(("🎯", f"В топ-10 только <b>{top10:.0f}%</b> показов, на позициях 21+ — <b>{deep:.0f}%</b>. "
+                    + ("Рост пока «глубокий»: он почти не даёт кликов, значение сейчас у страниц на 8–20." if deep > 45 else "Структура здоровая: большая часть показов в зоне кликов.")))
+    if ex['near']:
+        t = ex['near'][:3]
+        T.append(("⚡", "<b>Ближе всего к топ-10:</b> " + "; ".join(
+            f"{_short(r['keys'][0])} (поз. {r['position']:.0f}, {r['impressions']} показов)" for r in t) + ". Усилить title, FAQ и внутренние ссылки."))
+    if ex['gain']:
+        d = ex['gain'][0]; T.append(("🟢", f"Растёт: {_short(d['url'])} (+{d['delta']} показов)."
+                                   + (f" Падает: {_short(ex['loss'][0]['url'])} ({ex['loss'][0]['delta']})." if ex['loss'] else "")))
+    meas = [w for w in ex['waves'] if not w['pending']]
+    pend = [w for w in ex['waves'] if w['pending']]
+    if meas:
+        w = meas[0]
+        T.append(("🧪", f"Волна {w['date']}: показы/день {w['b_ipd']:.0f} → {w['a_ipd']:.0f}, позиция {w['b_pos']:.0f} → {w['a_pos']:.0f} (страницы волны)."))
+    elif pend:
+        T.append(("🧪", f"Волна {pend[0]['date']} ({pend[0]['new'] + pend[0]['edited']} постов): эффект ещё не измерим, нужно минимум 3 дня после деплоя."))
+    br = ex['brand']; tc = br['brand']['clicks'] + br['nonbrand']['clicks']
+    if tc:
+        T.append(("🏷", f"Бренд даёт <b>{br['brand']['clicks'] / tc * 100:.0f}%</b> кликов ({br['brand']['clicks']} из {tc}); небрендовых: {br['nonbrand']['clicks']}."))
+    try:
+        srcs = sorted(((r.dimension_values[0].value, int(float(r.metric_values[0].value))) for r in a['sources'].rows), key=lambda x: -x[1])
+        org = next((n for k, n in srcs if "Organic Search" in k), 0)
+        T.append(("👥", f"Сессии GA4: <b>{int(a['sess']):,}</b> ({_pct(a['sess'], a['prev_sess'])}). Главный канал — {srcs[0][0]} "
+                        f"({srcs[0][1] / max(a['sess'], 1) * 100:.0f}%), Organic Search — {org / max(a['sess'], 1) * 100:.0f}%."))
+    except Exception:
+        pass
+    bg = ex['bing']
+    if bg and bg['impr']:
+        bctr = bg['clicks'] / bg['impr'] * 100
+        T.append(("🔎", f"Bing: CTR {bctr:.1f}% против {ctr:.1f}% у Google, {bg['clicks']} кликов за 7 дней."))
+    bz = ex['biz']
+    if bz:
+        T.append(("✉", f"Заявки с форм: {bz['forms']}; холодных писем {bz['cur']['sent']}, ответов {bz['cur']['replies']}."))
+    rows = "".join(f'<tr><td style="padding:6px 20px;font-size:12px;color:#1a2a3a;line-height:1.5;border-bottom:1px solid #ede8e0">'
+                   f'{ic}&ensp;{tx}</td></tr>' for ic, tx in T)
+    return (f'<tr><td colspan="9" bgcolor="#fff"><table width="100%" cellpadding="0" cellspacing="0">'
+            f'{shead("Выводы недели", "главное за 30 секунд")}{rows}</table></td></tr>')
 
 # ── Parse AI recommendations ──────────────────────────────────────────────────
 def render_ai_recs(raw_text):
@@ -609,24 +680,17 @@ def build_email(gsc, ga4, rs, ai_recs_raw, ex):
              + tr("Niche pages (/for/*)", mb(g['niche_impr'],  tot_im,60), f"{g['niche_impr']:,}",   str(g['niche_cl']),   alt=True)
              + tr("Service pages",        mb(g['service_impr'],tot_im,60), f"{g['service_impr']:,}", str(g['service_cl']), alt=False))
 
-    # ── Resend broadcasts ──
-    bc_rows = ""
-    for i, b in enumerate(rs['broadcasts']):
-        sent   = b.get("metrics",{}).get("delivered",0)
-        opens  = b.get("metrics",{}).get("opened",0)
-        clicks = b.get("metrics",{}).get("clicked",0)
-        OR_v   = f"{opens/sent*100:.1f}%" if sent else "—"
-        CTR_v  = f"{clicks/sent*100:.1f}%" if sent else "—"
-        dt     = (b.get("sent_at") or b.get("created_at",""))[:10]
-        st     = f'<span style="color:{C_GREEN if b.get("status")=="sent" else C_AMBER};font-weight:700">{b.get("status","")}</span>'
-        bc_rows += tr(b.get("name","")[:36], st, f"{sent:,}", OR_v, CTR_v, dt, alt=i%2==0)
-
     ai_rows = render_ai_recs(ai_recs_raw)
 
-    ret = rs['subscribed']/rs['total']*100 if rs['total'] else 0
-
     return f"""<!DOCTYPE html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+.d{{font-size:11px;color:#2c3e50;border-bottom:1px solid #ede8e0}}
+.h{{font-size:10px;font-weight:700;color:#4f5d6d;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid #ddd8ce}}
+.l{{padding:5px 10px 5px 20px;text-align:left}}
+.m{{padding:5px 10px;text-align:right}}
+.r{{padding:5px 20px 5px 10px;text-align:right}}
+</style></head>
 <body style="margin:0;padding:0;background:{C_BG};font-family:'Helvetica Neue',Helvetica,Arial,sans-serif">
 <table width="100%" cellpadding="0" cellspacing="0" bgcolor="{C_BG}">
 <tr><td align="center" style="padding:20px 0 32px">
@@ -660,6 +724,8 @@ def build_email(gsc, ga4, rs, ai_recs_raw, ex):
 ])}
 </table></td></tr>
 
+{build_takeaways(g, a, ex)}
+
 <!-- === 01 GSC === -->
 {section_divider("01","Google Search Console")}
 
@@ -677,7 +743,7 @@ def build_email(gsc, ga4, rs, ai_recs_raw, ex):
 <!-- Daily trend -->
 <tr><td colspan="9"><table width="100%" cellpadding="0" cellspacing="0">
 {shead("Daily trend","last 7 days")}
-{th("Date","Impr","Impr","Clicks")}
+{th("Date","","Impr","Clicks")}
 {gsc_d}
 </table></td></tr>
 
@@ -770,23 +836,13 @@ def build_email(gsc, ga4, rs, ai_recs_raw, ex):
 {dev_rows}
 </table></td></tr>
 
-<!-- === 03 RESEND === -->
-{section_divider("03","Email Marketing (Resend)")}
+<!-- === 03 BING === -->
+{section_divider("03","Bing Webmaster")}
+{render_bing(ex, g)}
 
-<tr><td colspan="9"><table width="100%" cellpadding="0" cellspacing="0">
-{kpi4_light([
-  ("Total contacts", str(rs['total']),      '<span style="color:#5b6775;font-size:10px">all audiences</span>'),
-  ("Subscribed",     str(rs['subscribed']), '<span style="color:#5b6775;font-size:10px">active</span>'),
-  ("Unsubscribed",   str(rs['total']-rs['subscribed']), '<span style="color:#5b6775;font-size:10px">opted out</span>'),
-  ("Retention",      f"{ret:.0f}%",         '<span style="color:#5b6775;font-size:10px">sub/total</span>'),
-])}
-</table></td></tr>
-
-{'<tr><td colspan="9"><table width="100%" cellpadding="0" cellspacing="0">' + shead("Broadcasts") + th("Name","Status","Delivered","Open rate","CTR","Date") + bc_rows + "</table></td></tr>" if bc_rows else ""}
-
-<!-- === 04 CONVERSIONS & BING === -->
-{section_divider("04","Conversions &amp; Bing")}
-{render_business(ex)}
+<!-- === 04 OUTREACH & LEADS === -->
+{section_divider("04","Leads, outreach &amp; partners")}
+{render_outreach(ex)}
 
 <!-- === 05 AI RECOMMENDATIONS === -->
 {section_divider("05","AI Recommendations")}
@@ -839,8 +895,7 @@ if __name__ == "__main__":
     gsc = fetch_gsc(creds)
     print("📡 GA4...")
     ga4 = fetch_ga4(creds)
-    print("📧 Resend...")
-    rs = fetch_resend()
+    rs = None
     print("📈 Extras...")
     ex = compute_extras(gsc)
     print("🤖 AI recommendations...")
@@ -852,4 +907,3 @@ if __name__ == "__main__":
     )
     print(f"\nGSC 7d: {gsc['cl_w1']} clicks / {gsc['im_w1']:,} impr / pos {gsc['pos_w1']}")
     print(f"GA4 7d: {int(ga4['sess']):,} sessions / {int(ga4['users']):,} users")
-    print(f"Resend: {rs['subscribed']}/{rs['total']} subscribed")

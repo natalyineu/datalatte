@@ -200,46 +200,81 @@ def sitemap_total():
         return 0
 
 
-# ── 9. Conversions (Supabase, optional) ───────────────────────────────────────
-def conversions(w1_start, w2_start):
+# ── 9. Business data from Supabase (optional) ─────────────────────────────────
+def _sb_get(path):
     key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY")
     if not key:
         return None
     base = os.environ.get("SUPABASE_URL") or "https://olsxxfwvwsycwzihbmdn.supabase.co"
+    req = urllib.request.Request(f"{base}/rest/v1/{path}", headers={"apikey": key, "Authorization": f"Bearer {key}"})
+    with urllib.request.urlopen(req, timeout=15) as r:
+        return json.loads(r.read())
 
-    def get(path):
-        req = urllib.request.Request(f"{base}/rest/v1/{path}", headers={"apikey": key, "Authorization": f"Bearer {key}"})
-        with urllib.request.urlopen(req, timeout=15) as r:
-            return json.loads(r.read())
+
+def business(w1_start, w2_start):
+    """Form leads, cold-outreach funnel (last 14d, per campaign) and open partner deals."""
     try:
-        subs = get(f"contact_submissions?select=created_at,form_type&created_at=gte.{w2_start}&limit=1000")
-        out_sent = get(f"outreach_emails?select=sent_at,replied_at&sent_at=gte.{w2_start}&limit=5000")
-        replies = get(f"outreach_emails?select=replied_at&replied_at=gte.{w2_start}&limit=1000")
+        subs = _sb_get(f"contact_submissions?select=created_at,form_type,status&created_at=gte.{w2_start}&limit=1000")
+        if subs is None:
+            return None
+        out = _sb_get(f"outreach_emails?select=campaign,sent_at,status,replied_at,outcome&sent_at=gte.{w2_start}&limit=5000") or []
+        deals = _sb_get("partner_deals?select=partner,deal_status,invoice_status,amount,currency,next_step,updated_at&order=updated_at.desc&limit=50") or []
     except Exception as e:
-        print(f"  ⚠ conversions failed: {e}")
+        print(f"  ⚠ business data failed: {e}")
         return None
     w1 = str(w1_start)
-    cnt = lambda rows, f: sum(1 for r in rows if (r.get(f) or "")[:10] >= w1)
-    types = {}
-    for r in subs:
-        if r["created_at"][:10] >= w1:
-            types[r.get("form_type") or "?"] = types.get(r.get("form_type") or "?", 0) + 1
-    return dict(forms=cnt(subs, "created_at"), forms_prev=len(subs) - cnt(subs, "created_at"), form_types=types,
-                sent=cnt(out_sent, "sent_at"), sent_prev=len(out_sent) - cnt(out_sent, "sent_at"),
-                replies=cnt(replies, "replied_at"), replies_prev=len(replies) - cnt(replies, "replied_at"))
+    real = [r for r in subs if r.get("status") not in ("system", "spam")]
+    f1 = sum(1 for r in real if r["created_at"][:10] >= w1)
+    funnel_rank = {"sent": 0, "delivery_delayed": 0, "delivered": 1, "opened": 2, "clicked": 3}
+    def fun(rows):
+        d = dict(sent=len(rows), delivered=0, opened=0, clicked=0, bounced=0, replies=0)
+        for r in rows:
+            st = r.get("status"); rk = funnel_rank.get(st, -1)
+            if rk >= 1: d["delivered"] += 1
+            if rk >= 2: d["opened"] += 1
+            if rk >= 3: d["clicked"] += 1
+            if st in ("bounced", "failed", "complained"): d["bounced"] += 1
+            if r.get("replied_at"): d["replies"] += 1
+        return d
+    cur = [r for r in out if r["sent_at"][:10] >= w1]
+    prev = [r for r in out if r["sent_at"][:10] < w1]
+    camp = {}
+    for r in out:
+        camp.setdefault(r["campaign"], []).append(r)
+    camps = sorted(({"name": k, "last": max(x["sent_at"] for x in v)[:10], **fun(v)} for k, v in camp.items()),
+                   key=lambda c: c["last"], reverse=True)[:5]
+    closed = ("paid", "skipped", "declined", "lost", "cancelled")
+    open_deals = [d for d in deals if d.get("deal_status") not in closed]
+    unpaid = [d for d in deals if d.get("deal_status") == "paid" and d.get("invoice_status") not in (None, "paid")]
+    return dict(forms=f1, forms_prev=len(real) - f1, cur=fun(cur), prev=fun(prev), campaigns=camps,
+                deals=open_deals[:5], deals_paid=sum(1 for d in deals if d.get("deal_status") == "paid"), unpaid=unpaid)
 
 
-# ── 10. Bing (from data/analytics/bing-latest.json written by analytics-fetch) ─
-def bing_summary(w1_start, w2_start, path=ROOT / "data/analytics/bing-latest.json"):
+# ── 10. Bing (data/analytics/bing-latest.json, written daily by analytics-fetch) ─
+def bing_report(path=ROOT / "data/analytics/bing-latest.json"):
     try:
         b = json.loads(Path(path).read_text())
     except Exception:
         return None
-    rows = b.get("rows") or []
-    s = lambda lo, hi, f: sum(r.get(f, 0) for r in rows if lo <= r["date"] <= hi)
-    w1, w1e = str(w1_start), "9999"
-    w2, w2e = str(w2_start), str(w1_start - timedelta(days=1))
-    return dict(impr=s(w1, w1e, "impressions"), impr_prev=s(w2, w2e, "impressions"),
-                clicks=s(w1, w1e, "clicks"), clicks_prev=s(w2, w2e, "clicks"),
-                top_queries=sorted(b.get("queries") or [], key=lambda x: -x.get("impressions", 0))[:5],
-                fetched=(b.get("fetchedAt") or "")[:10])
+    rows = sorted([r for r in (b.get("rows") or []) if r.get("date")], key=lambda r: r["date"])
+    if not rows:
+        return None
+    last = date.fromisoformat(rows[-1]["date"])
+    def rng(lo, hi): return [r for r in rows if str(lo) <= r["date"] <= str(hi)]
+    w1 = rng(last - timedelta(days=6), last); w2 = rng(last - timedelta(days=13), last - timedelta(days=7))
+    S = lambda rs, f: sum(r.get(f, 0) for r in rs)
+    all_i, all_c = S(rows, "impressions"), S(rows, "clicks")
+    qs = b.get("queriesWin") or []
+    pgs = b.get("pagesWin") or []
+    crawl = b.get("crawl") or []
+    return dict(
+        last=str(last), fetched=(b.get("fetchedAt") or "")[:10],
+        impr=S(w1, "impressions"), impr_prev=S(w2, "impressions"), clicks=S(w1, "clicks"), clicks_prev=S(w2, "clicks"),
+        all_impr=all_i, all_clicks=all_c, daily=w1,
+        windowed=bool(qs),
+        queries=(sorted(qs, key=lambda x: (-x.get("c7", 0), -x.get("i7", 0)))[:8] if qs
+                 else [dict(key=q["key"], i7=q["impressions"], c7=q["clicks"], ip=0, cp=0, pos=None) for q in (b.get("queries") or [])[:8]]),
+        pages=(sorted(pgs, key=lambda x: (-x.get("c7", 0), -x.get("i7", 0)))[:6] if pgs
+               else [dict(key=q["key"], i7=q["impressions"], c7=q["clicks"], ip=0, cp=0, pos=None) for q in (b.get("pages") or [])[:6]]),
+        crawl=crawl[-1] if crawl else None, crawl_prev=crawl[-8] if len(crawl) >= 8 else None,
+    )
