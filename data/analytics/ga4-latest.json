@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-11-13T07:24:11.063Z",
+  "fetchedAt": "2026-11-13T07:25:42.499Z",
   "period": {
     "startDate": "28daysAgo",
     "endDate": "yesterday"
@@ -110,6 +110,11 @@
       "d": "20261012",
       "ch": "Direct",
       "s": 227
+    },
+    {
+      "d": "20261112",
+      "ch": "Direct",
+      "s": 224
     },
     {
       "d": "20261026",
@@ -3567,6 +3572,21 @@
       "metricValues": [
         {
           "value": "234"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "20261112"
+        },
+        {
+          "value": "Direct"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "224"
         }
       ]
     },
