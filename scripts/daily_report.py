@@ -109,12 +109,18 @@ def fetch_gsc(creds):
 # ── GA4 ───────────────────────────────────────────────────────────────────────
 def fetch_ga4(creds):
     from google.analytics.data_v1beta import BetaAnalyticsDataClient
-    from google.analytics.data_v1beta.types import DateRange, Dimension, Metric, RunReportRequest, OrderBy
+    from google.analytics.data_v1beta.types import DateRange, Dimension, Metric, RunReportRequest, OrderBy, Filter, FilterExpression
 
     client = BetaAnalyticsDataClient(credentials=creds)
     prop   = f"properties/{GA4_PROPERTY_ID}"
 
-    def run(dims, mets, start, end, order_met=None, limit=10):
+    # Bot traffic: Singapore sends ~90% of sessions at 98% bounce / 11s. Excluded from all
+    # numbers except the countries table, which stays unfiltered so the spike remains visible.
+    BOT_COUNTRIES = ["Singapore"]
+    bot_filter = FilterExpression(not_expression=FilterExpression(filter=Filter(
+        field_name="country", in_list_filter=Filter.InListFilter(values=BOT_COUNTRIES))))
+
+    def run(dims, mets, start, end, order_met=None, limit=10, filtered=True):
         order = ([OrderBy(metric=OrderBy.MetricOrderBy(metric_name=order_met), desc=True)]
                  if order_met else [])
         return client.run_report(RunReportRequest(
@@ -123,6 +129,7 @@ def fetch_ga4(creds):
             dimensions=[Dimension(name=d) for d in dims],
             metrics=[Metric(name=m) for m in mets],
             order_bys=order, limit=limit,
+            dimension_filter=bot_filter if filtered else None,
         ))
 
     def mv(r, idx): return float(r.rows[0].metric_values[idx].value) if r.rows else 0
@@ -135,11 +142,13 @@ def fetch_ga4(creds):
 
     sources   = run(["sessionDefaultChannelGroup"], ["sessions","bounceRate"], W1_START, W1_END, "sessions", 7)
     pages     = run(["pagePath"], ["screenPageViews","averageSessionDuration","bounceRate"], W1_START, W1_END, "screenPageViews", 8)
-    countries = run(["country"],  ["sessions"], W1_START, W1_END, "sessions", 6)
+    countries = run(["country"],  ["sessions"], W1_START, W1_END, "sessions", 6, filtered=False)
+    all_sess  = mv(run([], ["sessions"], W1_START, W1_END, filtered=False), 0)
     devices   = run(["deviceCategory"], ["sessions","bounceRate"], W1_START, W1_END, "sessions", 3)
     daily_ga  = run(["date"], ["sessions","screenPageViews"], W1_START, W1_END, None, 7)
 
     return dict(
+        bot_sess=max(all_sess-mv(ov_w1,0),0),
         sess=mv(ov_w1,0), users=mv(ov_w1,1), pv=mv(ov_w1,2),
         bounce=mv(ov_w1,3)*100, dur=mv(ov_w1,4), new_u=mv(ov_w1,5), engaged=mv(ov_w1,6),
         prev_sess=mv(ov_w2,0), prev_users=mv(ov_w2,1), prev_pv=mv(ov_w2,2),
@@ -562,6 +571,7 @@ def build_email(gsc, ga4, rs, ai_recs_raw):
 
 <!-- === 02 GA4 === -->
 {section_divider("02","Google Analytics 4")}
+<tr><td colspan="9" style="padding:6px 20px;font-size:11px;color:#8a6a4f">Singapore bot traffic excluded: {int(ga4.get("bot_sess",0)):,} sessions removed from the numbers below (the countries table is unfiltered).</td></tr>
 
 <tr><td colspan="9"><table width="100%" cellpadding="0" cellspacing="0">
 {kpi4_light([
