@@ -1,3 +1,4 @@
+import PartnerStrip from "@/components/PartnerStrip";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, BadgeCheck } from "lucide-react";
@@ -241,6 +242,7 @@ export default function PartnershipsPage() {
           <div className="mt-5"><PhoneWhatsApp /></div>
         </div>
       </section>
+      <PartnerStrip detailed />
     </>
   );
 }

@@ -1,3 +1,4 @@
+import PartnerStrip from "@/components/PartnerStrip";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, BadgeCheck, FileCheck2, Eye } from "lucide-react";
@@ -316,6 +317,7 @@ export default function AdvertisePage() {
           <div className="mt-5"><PhoneWhatsApp /></div>
         </div>
       </section>
+      <PartnerStrip detailed />
     </>
   );
 }

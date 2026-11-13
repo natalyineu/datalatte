@@ -1,3 +1,4 @@
+import PartnerStrip from "@/components/PartnerStrip";
 import type { Metadata } from "next";
 import fs from "fs";
 import path from "path";
@@ -643,6 +644,7 @@ export default function HomePage() {
 
       {/* CTA */}
       <CTABanner />
+      <PartnerStrip />
     </>
   );
 }
