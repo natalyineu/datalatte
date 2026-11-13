@@ -5,7 +5,8 @@ Sends a detailed HTML email every morning via Resend.
 Run: python3 scripts/daily_report.py
 """
 import warnings; warnings.filterwarnings("ignore")
-import json, urllib.request, urllib.error
+import json, sys, urllib.request, urllib.error
+sys.path.insert(0, str(__import__('pathlib').Path(__file__).parent))
 from datetime import date, timedelta
 from pathlib import Path
 
@@ -73,9 +74,15 @@ def fetch_gsc(creds):
     cl_28p, im_28p, _   = totals(D28_PSTART, D28_PEND)
 
     daily        = q(["date"],    YESTERDAY - timedelta(days=13), YESTERDAY, 14)
-    queries_7d   = q(["query"],   W1_START, W1_END, 200)
-    pages_7d     = q(["page"],    W1_START, W1_END, 200)
+    queries_7d   = q(["query"],   W1_START, W1_END, 5000)
+    pages_7d     = q(["page"],    W1_START, W1_END, 5000)
     countries    = q(["country"], D28_START, YESTERDAY, 10)
+    # extras: previous week, per-page daily history (42d), devices
+    queries_w2   = q(["query"],   W2_START, W2_END, 5000)
+    pages_w2     = q(["page"],    W2_START, W2_END, 5000)
+    page_date    = q(["page", "date"], YESTERDAY - timedelta(days=41), YESTERDAY, 25000)
+    devices_w1   = q(["device"],  W1_START, W1_END, 5)
+    devices_w2   = q(["device"],  W2_START, W2_END, 5)
 
     top_queries      = sorted(queries_7d, key=lambda x: x.get("impressions",0), reverse=True)[:8]
     top_pages_impr   = sorted(pages_7d,   key=lambda x: x.get("impressions",0), reverse=True)[:7]
@@ -96,6 +103,8 @@ def fetch_gsc(creds):
         cl_w2=cl_w2, im_w2=im_w2,
         cl_28=cl_28, im_28=im_28, pos_28=round(p_28,1),
         cl_28p=cl_28p, im_28p=im_28p,
+        queries_w1=queries_7d, queries_w2=queries_w2, pages_w1=pages_7d, pages_w2=pages_w2,
+        page_date=page_date, devices_w1=devices_w1, devices_w2=devices_w2,
         daily=daily, top_queries=top_queries,
         top_pages_impr=top_pages_impr, countries=countries_sorted, opps=opps,
         blog_impr=sum(r.get("impressions",0) for r in blog_pages),
@@ -173,7 +182,7 @@ def fetch_resend():
     return dict(total=total, subscribed=subscribed, recent=recent, broadcasts=broadcasts)
 
 # ── AI Recommendations via Groq ───────────────────────────────────────────────
-def fetch_ai_recommendations(gsc, ga4, rs):
+def fetch_ai_recommendations(gsc, ga4, rs, ex=None):
     ctr_w1  = gsc['cl_w1'] / gsc['im_w1'] * 100 if gsc['im_w1'] else 0
     top_opps = [f"  - \"{r['keys'][0]}\" pos {r.get('position',0):.0f}, {r.get('impressions',0)} impr, 0 clicks"
                 for r in gsc['opps'][:4]]
@@ -182,6 +191,11 @@ def fetch_ai_recommendations(gsc, ga4, rs):
     top_p    = [f"  - {r['keys'][0].replace('https://datalatte.pro','')} im={r.get('impressions',0)} cl={r.get('clicks',0)}"
                 for r in gsc['top_pages_impr'][:4]]
 
+    extra_prompt = ""
+    if ex:
+        bk = ex['buckets']; tot = max(sum(v['impr'] for v in bk.values()), 1)
+        extra_prompt = ("Impressions by position: " + ", ".join(f"{k}: {v['impr']/tot*100:.0f}%" for k, v in bk.items()) + "\n"
+            + "Page-1 candidates (pos 8-20):\n" + "\n".join(f"  - {r['keys'][0].replace('https://datalatte.pro','')} pos {r.get('position',0):.0f}, {r.get('impressions',0)} impr" for r in ex['near'][:4]) + "\n")
     prompt = f"""You are a content strategist for DataLatte.pro — a local marketing agency for small businesses (coffee shops, hair salons, pet groomers, fitness studios) in the US, UK, AU, CA.
 
 Here is this week's Google Search Console data ({W1_START} to {W1_END}):
@@ -201,7 +215,7 @@ Content performance (impressions / clicks):
 - Service pages: {gsc['service_impr']} impr / {gsc['service_cl']} clicks
 
 CTR: {ctr_w1:.1f}% (industry avg ~3%). Avg position: {gsc['pos_w1']}.
-
+{extra_prompt}
 Give exactly 4 recommendations focused on CONTENT — what to write or fix this week. For each:
 - Name a specific blog post title or page to improve (based on the queries above)
 - Explain in one sentence why (which query, what opportunity)
@@ -325,6 +339,139 @@ def section_divider(num, title):
             f'<span style="font-size:11px;font-weight:700;color:#8a9aaa;letter-spacing:0.04em;text-transform:uppercase">{title}</span>'
             f'</td></tr>')
 
+# ── Extra sections (see scripts/report_extras.py) ─────────────────────────────
+def compute_extras(g):
+    import report_extras as X
+    sm = X.sitemap_total()
+    gain, loss = X.movers_pages(g['pages_w1'], g['pages_w2'])
+    q_up, q_down = X.movers_queries_pos(g['queries_w1'], g['queries_w2'])
+    return dict(
+        buckets=X.position_buckets(g['queries_w1']), buckets_prev=X.position_buckets(g['queries_w2']),
+        near=X.near_top_pages(g['pages_w1']),
+        gain=gain, loss=loss, q_up=q_up, q_down=q_down,
+        new_pages=X.new_pages(g['page_date'], W1_START, W1_END),
+        coverage=X.coverage(g['page_date'], D28_START, sm),
+        waves=X.wave_effect(g['page_date'], YESTERDAY),
+        brand=X.brand_split(g['queries_w1']), qtypes=X.query_types(g['queries_w1']),
+        devices=X.devices(g['devices_w1'], g['devices_w2']),
+        conv=X.conversions(W1_START, W2_START), bing=X.bing_summary(W1_START, W2_START),
+    )
+
+def block(title, sub, cols, rows_html):
+    return (f'<tr><td colspan="9"><table width="100%" cellpadding="0" cellspacing="0">'
+            f'{shead(title, sub)}{th(*cols)}{rows_html}</table></td></tr>')
+
+def _short(u): return u.replace("https://datalatte.pro", "").replace("https://www.datalatte.pro", "") or "/"
+
+def _arrow(d, rev=False):
+    if not d: return '<span style="color:#aaa">—</span>'
+    good = (d > 0) != rev
+    return f'<span style="color:{C_GREEN if good else C_RED};font-weight:700">{"▲" if d > 0 else "▼"}&thinsp;{abs(d):,.0f}</span>'
+
+def render_gsc_extras(g, ex):
+    out = ""
+    # coverage KPIs
+    c = ex['coverage']
+    pct = c['with_impr'] / c['sitemap'] * 100 if c['sitemap'] else 0
+    new_n = len(ex['new_pages'])
+    out += (f'<tr><td colspan="9"><table width="100%" cellpadding="0" cellspacing="0">'
+            + kpi4_light([
+                ("Pages w/ impressions", f"{c['with_impr']:,}", '<span style="color:#aaa;font-size:10px">28d</span>'),
+                ("Sitemap URLs", f"{c['sitemap']:,}" if c['sitemap'] else "—", '<span style="color:#aaa;font-size:10px">indexable</span>'),
+                ("Coverage", f"{pct:.0f}%" if c['sitemap'] else "—", '<span style="color:#aaa;font-size:10px">seen in search</span>'),
+                ("New in search", str(new_n), '<span style="color:#aaa;font-size:10px">first impr. 7d</span>'),
+            ]) + '</table></td></tr>')
+
+    # 1. position distribution
+    b, bp = ex['buckets'], ex['buckets_prev']
+    tot = max(sum(v['impr'] for v in b.values()), 1)
+    rows = "".join(tr(name, mb(v['impr'], tot, 60, C_GREEN if i < 3 else C_AMBER if i == 3 else C_RED),
+                      f"{v['impr']:,}", f"{v['impr']/tot*100:.0f}%", _arrow(v['impr'] - bp[name]['impr']),
+                      str(v['clicks']), alt=i % 2 == 0)
+                   for i, (name, v) in enumerate(b.items()))
+    out += block("Impressions by position", "7d · where the growth sits", ["Position", "", "Impr", "Share", "WoW", "Clicks"], rows)
+
+    # 2. near-top pages
+    rows = "".join(tr(_short(r['keys'][0])[:46], f"{r.get('impressions',0):,}", str(r.get('clicks',0)),
+                      pc(r.get('position',0)), alt=i % 2 == 0) for i, r in enumerate(ex['near']))
+    out += block("Page-1 candidates", "pages at pos 8–20 · ≥50 impr · push these", ["URL", "Impr", "Clicks", "Pos"],
+                 rows or tr("No pages in range"))
+
+    # 3. movers
+    def mrow(d, i):
+        return tr(_short(d['url'])[:40], f"{d['cur']:,}", _arrow(d['delta']),
+                  pc(d['pos']) if d['pos'] else "—", alt=i % 2 == 0)
+    rows = "".join(mrow(d, i) for i, d in enumerate(ex['gain'])) or tr("—")
+    out += block("Pages gaining", "impressions WoW", ["URL", "Impr", "Δ", "Pos"], rows)
+    rows = "".join(mrow(d, i) for i, d in enumerate(ex['loss'])) or tr("—")
+    out += block("Pages losing", "impressions WoW", ["URL", "Impr", "Δ", "Pos"], rows)
+    rows = ("".join(tr(r['q'][:40], f"{r['impr']:,}", f"{r['pos_prev']:.1f} → {r['pos']:.1f}", _arrow(r['diff']), alt=i % 2 == 0)
+                    for i, r in enumerate(ex['q_up'] + ex['q_down'])))
+    out += block("Query position movers", "≥10 impr both weeks · ▲ = higher rank", ["Query", "Impr", "Pos", "Δ pos"],
+                 rows or tr("No significant moves"))
+
+    # 4. new pages in search
+    rows = "".join(tr(_short(r['url'])[:40], r['first'][5:], f"{r['impr']:,}", pc(r['pos']), alt=i % 2 == 0)
+                   for i, r in enumerate(ex['new_pages'][:6]))
+    out += block("New pages in search", "first impressions in the last 7d", ["URL", "First seen", "Impr", "Pos"],
+                 rows or tr("None this week"))
+
+    # 5. content waves
+    rows = ""
+    for i, w in enumerate(ex['waves'][:5]):
+        subj = w['subject'][:34]
+        n = f"+{w['new']}/✎{w['edited']}"
+        if w['pending']:
+            rows += tr(f"{w['date'][5:]} {subj}", n, "pending", "—", alt=i % 2 == 0)
+        else:
+            rows += tr(f"{w['date'][5:]} {subj}", n, f"{w['b_ipd']:.0f} → {w['a_ipd']:.0f}/d",
+                       f"{w['b_pos']:.0f} → {w['a_pos']:.0f}", alt=i % 2 == 0)
+    out += block("Content waves → effect", "7d before vs after deploy · +new/✎edited", ["Wave", "Posts", "Impr", "Pos"],
+                 rows or tr("No waves (≥10 posts) in 35d"))
+
+    # 6. query mix
+    br, qt = ex['brand'], ex['qtypes']
+    rows = (tr("Brand (datalatte)", f"{br['brand']['impr']:,}", str(br['brand']['clicks']), pc(br['brand']['pos']) if br['brand']['impr'] else "—", alt=False)
+            + tr("Non-brand", f"{br['nonbrand']['impr']:,}", str(br['nonbrand']['clicks']), pc(br['nonbrand']['pos']) if br['nonbrand']['impr'] else "—", alt=True))
+    rows += "".join(tr(f"· {n}", f"{v['impr']:,}", str(v['clicks']), pc(v['pos']) if v['impr'] else "—", alt=i % 2 == 0)
+                    for i, (n, v) in enumerate(qt.items()))
+    out += block("Query mix", "7d · brand vs non-brand, intent", ["Segment", "Impr", "Clicks", "Pos"], rows)
+
+    # 7. devices
+    rows = "".join(tr(d['device'], f"{d['impr']:,}", _arrow(d['impr'] - d['impr_prev']), str(d['clicks']),
+                      pc(d['pos']), alt=i % 2 == 0) for i, d in enumerate(ex['devices']))
+    out += block("Devices (GSC)", "7d", ["Device", "Impr", "WoW", "Clicks", "Pos"], rows or tr("—"))
+    return out
+
+def render_business(ex):
+    out = ""
+    cv = ex['conv']
+    if cv:
+        out += ('<tr><td colspan="9"><table width="100%" cellpadding="0" cellspacing="0">'
+                + kpi4_light([
+                    ("Form submissions", str(cv['forms']), db(cv['forms'], cv['forms_prev'])),
+                    ("Outreach sent", str(cv['sent']), db(cv['sent'], cv['sent_prev'])),
+                    ("Outreach replies", str(cv['replies']), db(cv['replies'], cv['replies_prev'])),
+                    ("Reply rate", f"{cv['replies']/cv['sent']*100:.0f}%" if cv['sent'] else "—", '<span style="color:#aaa;font-size:10px">7d</span>'),
+                ]) + '</table></td></tr>')
+        if cv['form_types']:
+            rows = "".join(tr(k, str(v), alt=i % 2 == 0) for i, (k, v) in enumerate(sorted(cv['form_types'].items(), key=lambda x: -x[1])))
+            out += block("Submissions by form", "7d", ["Form", "Count"], rows)
+    else:
+        out += tr("Conversions unavailable (set SUPABASE_SERVICE_ROLE_KEY in workflow)")
+    bg = ex['bing']
+    if bg:
+        out += ('<tr><td colspan="9"><table width="100%" cellpadding="0" cellspacing="0">'
+                + kpi4_light([
+                    ("Bing impressions", f"{bg['impr']:,}", db(bg['impr'], bg['impr_prev'])),
+                    ("Bing clicks", str(bg['clicks']), db(bg['clicks'], bg['clicks_prev'])),
+                ]) + '</table></td></tr>')
+        rows = "".join(tr(r.get('key', '')[:48], f"{r.get('impressions',0):,}", str(r.get('clicks',0)), alt=i % 2 == 0)
+                       for i, r in enumerate(bg['top_queries']))
+        if rows:
+            out += block("Bing top queries", f"data as of {bg['fetched']}", ["Query", "Impr", "Clicks"], rows)
+    return out
+
 # ── Parse AI recommendations ──────────────────────────────────────────────────
 def render_ai_recs(raw_text):
     if not raw_text:
@@ -361,7 +508,7 @@ def render_ai_recs(raw_text):
     return rows
 
 # ── Build email ───────────────────────────────────────────────────────────────
-def build_email(gsc, ga4, rs, ai_recs_raw):
+def build_email(gsc, ga4, rs, ai_recs_raw, ex):
     g = gsc; a = ga4
     ctr_w1 = g['cl_w1'] / g['im_w1'] * 100 if g['im_w1'] else 0
     ctr_28  = g['cl_28'] / g['im_28'] * 100 if g['im_28'] else 0
@@ -553,6 +700,8 @@ def build_email(gsc, ga4, rs, ai_recs_raw):
 {cl_rows}
 </table></td></tr>
 
+{render_gsc_extras(g, ex)}
+
 <!-- Countries -->
 <tr><td colspan="9"><table width="100%" cellpadding="0" cellspacing="0">
 {shead("Geographic breakdown","28 days · Search Console")}
@@ -626,8 +775,12 @@ def build_email(gsc, ga4, rs, ai_recs_raw):
 
 {'<tr><td colspan="9"><table width="100%" cellpadding="0" cellspacing="0">' + shead("Broadcasts") + th("Name","Status","Delivered","Open rate","CTR","Date") + bc_rows + "</table></td></tr>" if bc_rows else ""}
 
-<!-- === 04 AI RECOMMENDATIONS === -->
-{section_divider("04","AI Recommendations")}
+<!-- === 04 CONVERSIONS & BING === -->
+{section_divider("04","Conversions &amp; Bing")}
+{render_business(ex)}
+
+<!-- === 05 AI RECOMMENDATIONS === -->
+{section_divider("05","AI Recommendations")}
 <tr><td colspan="9" style="padding:4px 0">
 <table width="100%" cellpadding="0" cellspacing="0">
 {ai_rows}
@@ -679,12 +832,14 @@ if __name__ == "__main__":
     ga4 = fetch_ga4(creds)
     print("📧 Resend...")
     rs = fetch_resend()
+    print("📈 Extras...")
+    ex = compute_extras(gsc)
     print("🤖 AI recommendations...")
-    ai_recs = fetch_ai_recommendations(gsc, ga4, rs)
+    ai_recs = fetch_ai_recommendations(gsc, ga4, rs, ex)
     print("🏗  Building & sending...")
     send_email(
         f"DataLatte Report — {TODAY.strftime('%B %d, %Y')}",
-        build_email(gsc, ga4, rs, ai_recs)
+        build_email(gsc, ga4, rs, ai_recs, ex)
     )
     print(f"\nGSC 7d: {gsc['cl_w1']} clicks / {gsc['im_w1']:,} impr / pos {gsc['pos_w1']}")
     print(f"GA4 7d: {int(ga4['sess']):,} sessions / {int(ga4['users']):,} users")
