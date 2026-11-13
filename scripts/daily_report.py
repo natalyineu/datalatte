@@ -262,7 +262,7 @@ C_BG    = "#f0ede7"
 
 def db(cur, prev, rev=False):
     """Delta badge — coloured arrow + %"""
-    if not prev: return '<span style="color:#aaa">—</span>'
+    if not prev: return '<span style="color:#5b6775">—</span>'
     d = (cur - prev) / prev * 100
     up = d > 0
     good = up if not rev else not up
@@ -270,11 +270,18 @@ def db(cur, prev, rev=False):
     sym = "▲" if up else "▼"
     return f'<span style="color:{fg};font-weight:700">{sym}&thinsp;{abs(d):.0f}%</span>'
 
+def db_dark(cur, prev, rev=False):
+    """Delta badge for dark backgrounds (brighter colours)"""
+    if not prev: return '<span style="color:#b4c4d8">—</span>'
+    d = (cur - prev) / prev * 100
+    good = (d > 0) != rev
+    return f'<span style="color:{"#4ade80" if good else "#ff8a80"};font-weight:700">{"▲" if d > 0 else "▼"}&thinsp;{abs(d):.0f}%</span>'
+
 def pc(pos):
     """Position chip"""
-    if pos <= 10:   bg, fg = "#d4edda", C_GREEN
-    elif pos <= 20: bg, fg = "#fff3cd", C_AMBER
-    else:           bg, fg = "#f8d7da", C_RED
+    if pos <= 10:   bg, fg = "#c3e6cb", "#14532d"
+    elif pos <= 20: bg, fg = "#ffe69c", "#7a4a00"
+    else:           bg, fg = "#f5c2c7", "#7f1d1d"
     return f'<span style="background:{bg};color:{fg};padding:1px 6px;font-size:11px;font-weight:700">{pos:.1f}</span>'
 
 def mb(val, mx, w=75, c=C_BLUE):
@@ -290,7 +297,7 @@ def fmtd(s):
     return f"{m}m{sec:02d}s"
 
 def shead(title, sub=""):
-    s = f'&ensp;<span style="font-size:10px;color:#8a9aaa;font-weight:400;text-transform:none;letter-spacing:0">{sub}</span>' if sub else ""
+    s = f'&ensp;<span style="font-size:10px;color:#4f5d6d;font-weight:400;text-transform:none;letter-spacing:0">{sub}</span>' if sub else ""
     return (f'<tr bgcolor="#eef1f6"><td colspan="9" style="padding:9px 20px 8px;'
             f'font-size:12px;font-weight:800;color:#1a2a3a;letter-spacing:0.05em;'
             f'text-transform:uppercase;border-top:2px solid {C_BLUE}">{title}{s}</td></tr>')
@@ -298,7 +305,7 @@ def shead(title, sub=""):
 def th(*cols):
     cells = "".join(
         f'<td style="padding:5px {"20px" if i==0 else "10px"} 5px {"20px" if i==0 else ("20px" if i==len(cols)-1 else "10px")};'
-        f'font-size:11px;font-weight:700;color:#8a9aaa;text-transform:uppercase;letter-spacing:0.03em;'
+        f'font-size:11px;font-weight:700;color:#4f5d6d;text-transform:uppercase;letter-spacing:0.03em;'
         f'text-align:{"left" if i==0 else "right"};border-bottom:1px solid #ddd8ce">{c}</td>'
         for i, c in enumerate(cols))
     return f'<tr bgcolor="#f7f5f0">{cells}</tr>'
@@ -316,7 +323,7 @@ def kpi4(items):
     """Row of 4 KPI cards on dark bg"""
     cells = "".join(
         f'<td align="center" style="padding:14px 6px;border-right:{"1px solid #1e3050" if i<len(items)-1 else "none"};width:{100//len(items)}%">'
-        f'<p style="margin:0;font-size:10px;color:#5a7090;letter-spacing:0.08em;text-transform:uppercase">{lab}</p>'
+        f'<p style="margin:0;font-size:10px;color:#b4c4d8;letter-spacing:0.08em;text-transform:uppercase">{lab}</p>'
         f'<p style="margin:5px 0 3px;font-size:24px;font-weight:900;color:#fff;line-height:1">{val}</p>'
         f'<p style="margin:0;font-size:11px">{badge}</p></td>'
         for i, (lab, val, badge) in enumerate(items))
@@ -326,7 +333,7 @@ def kpi4_light(items):
     """Row of 4 KPI cards on light bg"""
     cells = "".join(
         f'<td align="center" style="padding:12px 6px;border-right:{"1px solid #e4dfd4" if i<len(items)-1 else "none"};width:{100//len(items)}%">'
-        f'<p style="margin:0;font-size:10px;color:#8a9aaa;letter-spacing:0.08em;text-transform:uppercase">{lab}</p>'
+        f'<p style="margin:0;font-size:10px;color:#4f5d6d;letter-spacing:0.08em;text-transform:uppercase">{lab}</p>'
         f'<p style="margin:5px 0 3px;font-size:22px;font-weight:800;color:#1a2a3a;line-height:1">{val}</p>'
         f'<p style="margin:0;font-size:11px">{badge}</p></td>'
         for i, (lab, val, badge) in enumerate(items))
@@ -336,7 +343,7 @@ def section_divider(num, title):
     return (f'<tr><td colspan="9" bgcolor="{C_DARK}" style="padding:10px 20px">'
             f'<span style="font-size:11px;font-weight:900;color:{C_GOLD};letter-spacing:0.06em">'
             f'{num}&ensp;/&ensp;</span>'
-            f'<span style="font-size:11px;font-weight:700;color:#8a9aaa;letter-spacing:0.04em;text-transform:uppercase">{title}</span>'
+            f'<span style="font-size:11px;font-weight:700;color:#d6deea;letter-spacing:0.04em;text-transform:uppercase">{title}</span>'
             f'</td></tr>')
 
 # ── Extra sections (see scripts/report_extras.py) ─────────────────────────────
@@ -364,7 +371,7 @@ def block(title, sub, cols, rows_html):
 def _short(u): return u.replace("https://datalatte.pro", "").replace("https://www.datalatte.pro", "") or "/"
 
 def _arrow(d, rev=False):
-    if not d: return '<span style="color:#aaa">—</span>'
+    if not d: return '<span style="color:#5b6775">—</span>'
     good = (d > 0) != rev
     return f'<span style="color:{C_GREEN if good else C_RED};font-weight:700">{"▲" if d > 0 else "▼"}&thinsp;{abs(d):,.0f}</span>'
 
@@ -376,10 +383,10 @@ def render_gsc_extras(g, ex):
     new_n = len(ex['new_pages'])
     out += (f'<tr><td colspan="9"><table width="100%" cellpadding="0" cellspacing="0">'
             + kpi4_light([
-                ("Pages w/ impressions", f"{c['with_impr']:,}", '<span style="color:#aaa;font-size:10px">28d</span>'),
-                ("Sitemap URLs", f"{c['sitemap']:,}" if c['sitemap'] else "—", '<span style="color:#aaa;font-size:10px">indexable</span>'),
-                ("Coverage", f"{pct:.0f}%" if c['sitemap'] else "—", '<span style="color:#aaa;font-size:10px">seen in search</span>'),
-                ("New in search", str(new_n), '<span style="color:#aaa;font-size:10px">first impr. 7d</span>'),
+                ("Pages w/ impressions", f"{c['with_impr']:,}", '<span style="color:#5b6775;font-size:10px">28d</span>'),
+                ("Sitemap URLs", f"{c['sitemap']:,}" if c['sitemap'] else "—", '<span style="color:#5b6775;font-size:10px">indexable</span>'),
+                ("Coverage", f"{pct:.0f}%" if c['sitemap'] else "—", '<span style="color:#5b6775;font-size:10px">seen in search</span>'),
+                ("New in search", str(new_n), '<span style="color:#5b6775;font-size:10px">first impr. 7d</span>'),
             ]) + '</table></td></tr>')
 
     # 1. position distribution
@@ -452,7 +459,7 @@ def render_business(ex):
                     ("Form submissions", str(cv['forms']), db(cv['forms'], cv['forms_prev'])),
                     ("Outreach sent", str(cv['sent']), db(cv['sent'], cv['sent_prev'])),
                     ("Outreach replies", str(cv['replies']), db(cv['replies'], cv['replies_prev'])),
-                    ("Reply rate", f"{cv['replies']/cv['sent']*100:.0f}%" if cv['sent'] else "—", '<span style="color:#aaa;font-size:10px">7d</span>'),
+                    ("Reply rate", f"{cv['replies']/cv['sent']*100:.0f}%" if cv['sent'] else "—", '<span style="color:#5b6775;font-size:10px">7d</span>'),
                 ]) + '</table></td></tr>')
         if cv['form_types']:
             rows = "".join(tr(k, str(v), alt=i % 2 == 0) for i, (k, v) in enumerate(sorted(cv['form_types'].items(), key=lambda x: -x[1])))
@@ -475,7 +482,7 @@ def render_business(ex):
 # ── Parse AI recommendations ──────────────────────────────────────────────────
 def render_ai_recs(raw_text):
     if not raw_text:
-        return '<tr><td style="padding:12px 20px;font-size:12px;color:#888">AI recommendations unavailable.</td></tr>'
+        return '<tr><td style="padding:12px 20px;font-size:12px;color:#4f5d6d">AI recommendations unavailable.</td></tr>'
 
     tag_cfg = {
         "[NEW POST]":  (C_GREEN,    "✍", "#e8f7ef"),
@@ -520,7 +527,7 @@ def build_email(gsc, ga4, rs, ai_recs_raw, ex):
     gsc_d   = ""
     for i, r in enumerate(daily7):
         cl = int(r.get('clicks',0)); im = int(r.get('impressions',0))
-        cl_s = f'<b style="color:{C_GREEN}">{cl}</b>' if cl else '<span style="color:#ccc">·</span>'
+        cl_s = f'<b style="color:{C_GREEN}">{cl}</b>' if cl else '<span style="color:#8a8f98">·</span>'
         gsc_d += tr(r['keys'][0][5:], mb(im,mx_im), f"{im:,}", cl_s, alt=i%2==0)
 
     # ── GA4 daily ──
@@ -635,11 +642,11 @@ td[style*="font-size:10px"]{{font-size:12px!important}}}}
 <tr>
 <td style="padding:18px 20px 14px">
 <p style="margin:0;font-size:18px;font-weight:900;color:{C_GOLD}">DataLatte</p>
-<p style="margin:2px 0 0;font-size:9px;color:#3a5070;letter-spacing:0.1em;text-transform:uppercase">Performance Intelligence Report</p>
+<p style="margin:2px 0 0;font-size:9px;color:#b4c4d8;letter-spacing:0.1em;text-transform:uppercase">Performance Intelligence Report</p>
 </td>
 <td align="right" style="padding:18px 20px 14px">
-<p style="margin:0;font-size:12px;font-weight:700;color:#8a9aaa">{TODAY.strftime('%B %d, %Y')}</p>
-<p style="margin:2px 0 0;font-size:10px;color:#3a5070">7d: {W1_START} — {W1_END}</p>
+<p style="margin:0;font-size:12px;font-weight:700;color:#d6deea">{TODAY.strftime('%B %d, %Y')}</p>
+<p style="margin:2px 0 0;font-size:10px;color:#b4c4d8">7d: {W1_START} — {W1_END}</p>
 </td>
 </tr>
 <tr><td colspan="2" height="2" bgcolor="{C_GOLD}" style="font-size:0">&nbsp;</td></tr>
@@ -648,12 +655,12 @@ td[style*="font-size:10px"]{{font-size:12px!important}}}}
 <!-- EXECUTIVE OVERVIEW -->
 <tr><td bgcolor="{C_DARK}" style="padding:6px 0 16px">
 <table width="100%" cellpadding="0" cellspacing="0">
-<tr><td style="padding:8px 20px 6px"><p style="margin:0;font-size:9px;color:#3a5070;letter-spacing:0.1em;text-transform:uppercase;font-weight:700">Executive overview — 7-day window</p></td></tr>
+<tr><td style="padding:8px 20px 6px"><p style="margin:0;font-size:9px;color:#b4c4d8;letter-spacing:0.1em;text-transform:uppercase;font-weight:700">Executive overview — 7-day window</p></td></tr>
 {kpi4([
-  ("Impressions", f"{g['im_w1']:,}", db(g['im_w1'],g['im_w2'])+' <span style="color:#3a5070;font-size:10px">WoW</span>'),
-  ("Clicks (GSC)", str(g['cl_w1']),   db(g['cl_w1'],g['cl_w2'])+' <span style="color:#3a5070;font-size:10px">WoW</span>'),
-  ("Sessions (GA4)", f"{int(a['sess']):,}", db(a['sess'],a['prev_sess'])+' <span style="color:#3a5070;font-size:10px">WoW</span>'),
-  ("Avg position", str(g['pos_w1']), f'<span style="color:#3a5070;font-size:10px">target &lt;15</span>'),
+  ("Impressions", f"{g['im_w1']:,}", db_dark(g['im_w1'],g['im_w2'])+' <span style="color:#b4c4d8;font-size:10px">WoW</span>'),
+  ("Clicks (GSC)", str(g['cl_w1']),   db_dark(g['cl_w1'],g['cl_w2'])+' <span style="color:#b4c4d8;font-size:10px">WoW</span>'),
+  ("Sessions (GA4)", f"{int(a['sess']):,}", db_dark(a['sess'],a['prev_sess'])+' <span style="color:#b4c4d8;font-size:10px">WoW</span>'),
+  ("Avg position", str(g['pos_w1']), f'<span style="color:#b4c4d8;font-size:10px">target &lt;15</span>'),
 ])}
 </table></td></tr>
 
@@ -666,7 +673,7 @@ td[style*="font-size:10px"]{{font-size:12px!important}}}}
 {kpi4_light([
   ("7d Impressions", f"{g['im_w1']:,}", db(g['im_w1'],g['im_w2'])),
   ("7d Clicks",      str(g['cl_w1']),   db(g['cl_w1'],g['cl_w2'])),
-  ("7d CTR",         f"{ctr_w1:.1f}%",  '<span style="color:#aaa;font-size:10px">avg 3%</span>'),
+  ("7d CTR",         f"{ctr_w1:.1f}%",  '<span style="color:#5b6775;font-size:10px">avg 3%</span>'),
   ("28d Impressions",f"{g['im_28']:,}",  db(g['im_28'],g['im_28p'])),
 ])}
 </table></td></tr>
@@ -723,11 +730,11 @@ td[style*="font-size:10px"]{{font-size:12px!important}}}}
   ("Sessions",  f"{int(a['sess']):,}",  db(a['sess'],   a['prev_sess'])),
   ("Users",     f"{int(a['users']):,}", db(a['users'],  a['prev_users'])),
   ("Pageviews", f"{int(a['pv']):,}",    db(a['pv'],     a['prev_pv'])),
-  ("Bounce rate",f"{a['bounce']:.1f}%", '<span style="color:#aaa;font-size:10px">7d avg</span>'),
+  ("Bounce rate",f"{a['bounce']:.1f}%", '<span style="color:#5b6775;font-size:10px">7d avg</span>'),
 ])}
 {kpi4_light([
-  ("Avg duration", fmtd(a['dur']),       '<span style="color:#aaa;font-size:10px">per session</span>'),
-  ("New users",    f"{int(a['new_u']):,}",'<span style="color:#aaa;font-size:10px">first visits</span>'),
+  ("Avg duration", fmtd(a['dur']),       '<span style="color:#5b6775;font-size:10px">per session</span>'),
+  ("New users",    f"{int(a['new_u']):,}",'<span style="color:#5b6775;font-size:10px">first visits</span>'),
   ("28d sessions", f"{int(a['sess_28']):,}", db(a['sess_28'],a['prev_sess_28'])),
   ("28d users",    f"{int(a['users_28']):,}",db(a['users_28'],a['prev_users_28'])),
 ])}
@@ -772,10 +779,10 @@ td[style*="font-size:10px"]{{font-size:12px!important}}}}
 
 <tr><td colspan="9"><table width="100%" cellpadding="0" cellspacing="0">
 {kpi4_light([
-  ("Total contacts", str(rs['total']),      '<span style="color:#aaa;font-size:10px">all audiences</span>'),
-  ("Subscribed",     str(rs['subscribed']), '<span style="color:#aaa;font-size:10px">active</span>'),
-  ("Unsubscribed",   str(rs['total']-rs['subscribed']), '<span style="color:#aaa;font-size:10px">opted out</span>'),
-  ("Retention",      f"{ret:.0f}%",         '<span style="color:#aaa;font-size:10px">sub/total</span>'),
+  ("Total contacts", str(rs['total']),      '<span style="color:#5b6775;font-size:10px">all audiences</span>'),
+  ("Subscribed",     str(rs['subscribed']), '<span style="color:#5b6775;font-size:10px">active</span>'),
+  ("Unsubscribed",   str(rs['total']-rs['subscribed']), '<span style="color:#5b6775;font-size:10px">opted out</span>'),
+  ("Retention",      f"{ret:.0f}%",         '<span style="color:#5b6775;font-size:10px">sub/total</span>'),
 ])}
 </table></td></tr>
 
@@ -795,13 +802,13 @@ td[style*="font-size:10px"]{{font-size:12px!important}}}}
 <!-- FOOTER -->
 <tr><td colspan="9" bgcolor="{C_DARK}" style="padding:12px 20px">
 <table width="100%" cellpadding="0" cellspacing="0"><tr>
-<td style="font-size:10px;color:#2a3a4a">
+<td style="font-size:10px;color:#9fb0c4">
 datalatte.pro &ensp;
 <a href="https://datalatte.pro" style="color:{C_GOLD};text-decoration:none">Site</a> &ensp;
 <a href="https://search.google.com/search-console" style="color:{C_GOLD};text-decoration:none">GSC</a> &ensp;
 <a href="https://analytics.google.com" style="color:{C_GOLD};text-decoration:none">GA4</a>
 </td>
-<td align="right" style="font-size:10px;color:#2a3a4a">{TODAY.strftime('%b %d, %Y')} &middot; auto-generated</td>
+<td align="right" style="font-size:10px;color:#9fb0c4">{TODAY.strftime('%b %d, %Y')} &middot; auto-generated</td>
 </tr></table>
 </td></tr>
 
