@@ -44,3 +44,11 @@
 - 2026-11-08 DEPLOYED (commit `c2f1ed230`, author rewritten to personal identity, force-pushed): crawl fix + waves 1–4 live. `/guides/fitness-ai` 200, `/blog?q=*` canonical live, legal pages indexed, 9 posts reopened directly + 7 old slugs found 308-redirecting to renamed canonicals (old files set `noindex: true` as duplicates). IndexNow: 9 URLs submitted. Old Vercel deployment record for superseded commit `58213a413` remains in Vercel dashboard history (delete manually if wanted). GSC re-check ~2026-11-22.
 - Duplicates awaiting 301 decision: `programmatic-advertising-for-local-businesses`, `make-com-vs-zapier-for-local-business-automation`, `microsoft-bing-ads-for-local-business-guide` → `bing-ads-microsoft-advertising-local-business`, `7-best-marketing-automation-platforms...`. 6 orphan hub copies (`coffee-ads`, `fitness-email`, `pet-ai`, `pet-email`, `salon-ai`, `salon-email`). DOOH/CTV city noindex posts skipped — template rewrites, poor ROI.
 - Polish site phases 1–2, waves 7/8/9a/R2 rewrites, Stage A (6 articles reopened), Stage B (117 titles/descriptions), BigStat in ~95 articles, new StatRow design, FAQPage parser fix, Vibe/Spotify/Biglinko placements, `partner_deals` table.
+
+## 2026-11-13 — Wave 7 / 7b / 7c / batch 4 (done)
+- Indexable 1,251+ / noindex ~845. Rewrites from facts library: waves 7, 7b, 7c, 7d deployed (main 24ce1b9). ~115 candidates stay closed (no facts; mostly city pages).
+- Competitor-gap articles: 29 written (batches 1-4); `competitor_topics.status='written'` updated.
+- Footer payment badges (EN+PL). Daily report excludes Singapore bot traffic from GA4.
+- Internal links added to page-1 candidates (online-booking-system-for-salons, new-ctv-ad-formats, programmatic, coffee loyalty, utah, pinterest-vs-instagram).
+- Secrets: GitHub push protection blocks Mapbox-like tokens in scraped pages → redact `(pk|sk).eyJ…` in data/research/*.json before commit.
+- Open: Bing crawl errors 4xx (need export from Bing Webmaster), GSC re-check 2026-11-24, PL translations of top pages, temp Supabase anon policies still to drop, Apify budget used.
