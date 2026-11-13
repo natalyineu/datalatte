@@ -281,7 +281,7 @@ def mb(val, mx, w=75, c=C_BLUE):
     """Mini bar chart"""
     if not mx: return ""
     f = max(2, int(val / mx * w))
-    return (f'<table cellpadding="0" cellspacing="0" style="display:inline-table;vertical-align:middle">'
+    return (f'<table class="bar" cellpadding="0" cellspacing="0" style="display:inline-table;vertical-align:middle">'
             f'<tr><td width="{f}" height="5" bgcolor="{c}" style="font-size:0">&nbsp;</td>'
             f'<td width="{w-f}" height="5" bgcolor="#dde3ec" style="font-size:0">&nbsp;</td></tr></table>')
 
@@ -292,13 +292,13 @@ def fmtd(s):
 def shead(title, sub=""):
     s = f'&ensp;<span style="font-size:10px;color:#8a9aaa;font-weight:400;text-transform:none;letter-spacing:0">{sub}</span>' if sub else ""
     return (f'<tr bgcolor="#eef1f6"><td colspan="9" style="padding:9px 20px 8px;'
-            f'font-size:10px;font-weight:800;color:#1a2a3a;letter-spacing:0.08em;'
+            f'font-size:12px;font-weight:800;color:#1a2a3a;letter-spacing:0.05em;'
             f'text-transform:uppercase;border-top:2px solid {C_BLUE}">{title}{s}</td></tr>')
 
 def th(*cols):
     cells = "".join(
         f'<td style="padding:5px {"20px" if i==0 else "10px"} 5px {"20px" if i==0 else ("20px" if i==len(cols)-1 else "10px")};'
-        f'font-size:10px;font-weight:700;color:#8a9aaa;text-transform:uppercase;letter-spacing:0.05em;'
+        f'font-size:11px;font-weight:700;color:#8a9aaa;text-transform:uppercase;letter-spacing:0.03em;'
         f'text-align:{"left" if i==0 else "right"};border-bottom:1px solid #ddd8ce">{c}</td>'
         for i, c in enumerate(cols))
     return f'<tr bgcolor="#f7f5f0">{cells}</tr>'
@@ -307,7 +307,7 @@ def tr(*cols, alt=False):
     bg = ' bgcolor="#f2f0eb"' if alt else ' bgcolor="#faf8f4"'
     cells = "".join(
         f'<td style="padding:5px {"20px" if i==0 else "10px"} 5px {"20px" if i==0 else ("20px" if i==len(cols)-1 else "10px")};'
-        f'font-size:11px;color:#2c3e50;text-align:{"left" if i==0 else "right"};'
+        f'font-size:13px;color:#2c3e50;text-align:{"left" if i==0 else "right"};'
         f'border-bottom:1px solid #ede8e0">{c}</td>'
         for i, c in enumerate(cols))
     return f"<tr{bg}>{cells}</tr>"
@@ -316,8 +316,8 @@ def kpi4(items):
     """Row of 4 KPI cards on dark bg"""
     cells = "".join(
         f'<td align="center" style="padding:14px 6px;border-right:{"1px solid #1e3050" if i<len(items)-1 else "none"};width:{100//len(items)}%">'
-        f'<p style="margin:0;font-size:9px;color:#5a7090;letter-spacing:0.08em;text-transform:uppercase">{lab}</p>'
-        f'<p style="margin:5px 0 3px;font-size:22px;font-weight:900;color:#fff;line-height:1">{val}</p>'
+        f'<p style="margin:0;font-size:10px;color:#5a7090;letter-spacing:0.08em;text-transform:uppercase">{lab}</p>'
+        f'<p style="margin:5px 0 3px;font-size:24px;font-weight:900;color:#fff;line-height:1">{val}</p>'
         f'<p style="margin:0;font-size:11px">{badge}</p></td>'
         for i, (lab, val, badge) in enumerate(items))
     return f'<tr>{cells}</tr>'
@@ -326,8 +326,8 @@ def kpi4_light(items):
     """Row of 4 KPI cards on light bg"""
     cells = "".join(
         f'<td align="center" style="padding:12px 6px;border-right:{"1px solid #e4dfd4" if i<len(items)-1 else "none"};width:{100//len(items)}%">'
-        f'<p style="margin:0;font-size:9px;color:#8a9aaa;letter-spacing:0.08em;text-transform:uppercase">{lab}</p>'
-        f'<p style="margin:5px 0 3px;font-size:20px;font-weight:800;color:#1a2a3a;line-height:1">{val}</p>'
+        f'<p style="margin:0;font-size:10px;color:#8a9aaa;letter-spacing:0.08em;text-transform:uppercase">{lab}</p>'
+        f'<p style="margin:5px 0 3px;font-size:22px;font-weight:800;color:#1a2a3a;line-height:1">{val}</p>'
         f'<p style="margin:0;font-size:11px">{badge}</p></td>'
         for i, (lab, val, badge) in enumerate(items))
     return f'<tr bgcolor="#f7f5f0" style="border:1px solid #ddd8ce">{cells}</tr>'
@@ -617,11 +617,17 @@ def build_email(gsc, ga4, rs, ai_recs_raw, ex):
     ret = rs['subscribed']/rs['total']*100 if rs['total'] else 0
 
     return f"""<!DOCTYPE html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+@media only screen and (max-width:640px){{.bar{{display:none!important}}
+td{{padding-left:12px!important;padding-right:12px!important}}
+td[style*="font-size:13px"]{{font-size:15px!important}}
+td[style*="font-size:10px"]{{font-size:12px!important}}}}
+</style></head>
 <body style="margin:0;padding:0;background:{C_BG};font-family:'Helvetica Neue',Helvetica,Arial,sans-serif">
 <table width="100%" cellpadding="0" cellspacing="0" bgcolor="{C_BG}">
-<tr><td align="center" style="padding:20px 0 32px">
-<table width="600" cellpadding="0" cellspacing="0" bgcolor="#fff" style="border:1px solid #d4cfc6">
+<tr><td align="center" style="padding:0 0 24px">
+<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#fff" style="width:100%;max-width:640px;border:1px solid #d4cfc6">
 
 <!-- HEADER -->
 <tr><td bgcolor="{C_DARK}" style="padding:0">
