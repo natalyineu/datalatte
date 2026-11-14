@@ -83,6 +83,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Polish site
     ...["/pl", "/pl/uslugi", "/pl/uslugi/google-ads", "/pl/uslugi/meta-ads", "/pl/uslugi/lokalne-seo", "/pl/uslugi/profil-firmy-w-google", "/pl/kontakt", "/pl/o-mnie", "/pl/dla/kawiarni", "/pl/dla/salonow", "/pl/dla/groomerow", "/pl/dla/studiow-fitness", "/pl/darmowy-audyt", "/pl/polityka-prywatnosci", "/pl/blog", ...fs.readdirSync(path.join(process.cwd(), "content/blog-pl")).filter((f) => f.endsWith(".mdx")).map((f) => `/pl/blog/${f.replace(/\.mdx$/, "")}`)].map((p) => ({ url: `${baseUrl}${p}`, lastModified: today, changeFrequency: "monthly" as const, priority: p === "/pl" ? 0.8 : 0.6 })),
     // Niche pages
+    { url: `${baseUrl}/for`,                               lastModified: today,      changeFrequency: "monthly", priority: 0.9 },
     { url: `${baseUrl}/for/coffee-shops`,                  lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/for/hair-salons`,                   lastModified: today,      changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/for/pet-groomers`,                  lastModified: today,      changeFrequency: "monthly", priority: 0.8 },

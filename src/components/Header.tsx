@@ -17,6 +17,7 @@ const niches = [
   { label: "Multi-Location",            href: "/for/multi-location" },
   { label: "Growing Businesses",        href: "/for/medium-business" },
   { label: "Enterprise & Agencies",     href: "/for/enterprise" },
+  { label: "All industries →",          href: "/for" },
 ];
 
 const tools = [

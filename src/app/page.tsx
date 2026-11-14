@@ -1,3 +1,4 @@
+import Segments from "@/components/Segments";
 import PartnerStrip from "@/components/PartnerStrip";
 import type { Metadata } from "next";
 import fs from "fs";
@@ -35,54 +36,11 @@ import AnimatedDashboard from "@/components/AnimatedDashboard";
 export const metadata: Metadata = {
   alternates: { canonical: "https://datalatte.pro", languages: { "en-US": "https://datalatte.pro", pl: "https://datalatte.pro/pl", "x-default": "https://datalatte.pro" } },
   title: {
-    absolute: "DataLatte — Data-Driven Local Marketing for Small Businesses",
+    absolute: "DataLatte — Data-Driven Marketing for Local Businesses & Startups",
   },
   description:
-    "Google Ads, Meta Ads & Local SEO for coffee shops, salons, pet groomers and gyms. Real data, transparent results. Free marketing audit.",
+    "Google Ads, Meta Ads, local SEO and AI automation for local businesses and startups, from cafés and clinics to SaaS. Real data, transparent results. Free audit.",
 };
-
-const niches = [
-  {
-    title: "Coffee Shops",
-    subtitle: "Restaurants & Cafés",
-    href: "/for/coffee-shops",
-    emoji: "☕",
-    color: "from-coffee-700 to-coffee-900",
-    image:
-      "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=600&q=80",
-    kpis: ["Google Maps visibility", "Foot traffic from ads", "Online order growth"],
-  },
-  {
-    title: "Hair & Beauty Salons",
-    subtitle: "Barbershops & Spas",
-    href: "/for/hair-salons",
-    emoji: "✂️",
-    color: "from-gray-700 to-gray-900",
-    image:
-      "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&q=80",
-    kpis: ["New booking requests", "Repeat client retention", "Review growth"],
-  },
-  {
-    title: "Pet Groomers",
-    subtitle: "Dog Walkers & Vets",
-    href: "/for/pet-groomers",
-    emoji: "🐾",
-    color: "from-coffee-600 to-coffee-950",
-    image:
-      "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80",
-    kpis: ["Map pack ranking", "Appointment bookings", "Local reach expansion"],
-  },
-  {
-    title: "Fitness & Yoga Studios",
-    subtitle: "Gyms & Personal Trainers",
-    href: "/for/fitness-studios",
-    emoji: "🧘",
-    color: "from-gray-800 to-gray-950",
-    image:
-      "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80",
-    kpis: ["Trial class sign-ups", "Membership conversions", "Cost per lead"],
-  },
-];
 
 const services = [
   {
@@ -295,59 +253,28 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Niches */}
+      {/* Who we work with */}
       <SectionWrapper className="bg-gray-50 dark:bg-gray-900/40">
         <ScrollReveal>
-        <div className="text-center mb-12">
-          <span className="section-label">Industries We Serve</span>
-          <h2 className="section-title">
-            Marketing built for{" "}
-            <span className="gradient-text">your niche</span>
-          </h2>
-          <p className="section-subtitle mt-4 max-w-2xl mx-auto">
-            Generic marketing advice is everywhere. I specialize in four local business types
-            and know the exact levers that move the needle for each one.
-          </p>
-        </div>
+          <div className="text-center mb-12">
+            <span className="section-label">Who We Work With</span>
+            <h2 className="section-title">
+              Local businesses, startups and{" "}
+              <span className="gradient-text">growing brands</span>
+            </h2>
+            <p className="section-subtitle mt-4 max-w-2xl mx-auto">
+              From a neighborhood café to a funded startup or a multi-location chain: pick your world
+              and see exactly which levers move the needle for it.
+            </p>
+          </div>
         </ScrollReveal>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {niches.map((niche, i) => (
-            <ScrollReveal key={niche.href} delay={i * 0.1} direction="up">
-            <Link
-              href={niche.href}
-              className="niche-card h-72 group block"
-            >
-              <Image
-                src={niche.image}
-                alt={niche.title}
-                fill
-                priority={i === 0}
-                unoptimized={niche.image.startsWith("http")}
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-              />
-              <div className={`absolute inset-0 bg-gradient-to-t ${niche.color} opacity-70 group-hover:opacity-80 transition-opacity`} />
-              <div className="absolute inset-0 p-5 flex flex-col justify-end">
-                <div className="text-3xl mb-2">{niche.emoji}</div>
-                <h3 className="text-white font-bold text-lg leading-tight">{niche.title}</h3>
-                <p className="text-white/70 text-sm mb-3">{niche.subtitle}</p>
-                <ul className="space-y-1">
-                  {niche.kpis.map((kpi) => (
-                    <li key={kpi} className="flex items-center gap-1.5 text-xs text-white/80">
-                      <CheckCircle2 size={11} className="text-coffee-300 shrink-0" />
-                      {kpi}
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-3 flex items-center gap-1 text-white text-sm font-semibold group-hover:gap-2 transition-all">
-                  Learn more <ArrowRight size={13} />
-                </div>
-              </div>
-            </Link>
-            </ScrollReveal>
-          ))}
-        </div>
+        <Segments compact />
+        <p className="mt-10 text-center text-sm text-gray-600 dark:text-gray-400">
+          Not on the list?{" "}
+          <Link href="/for" className="font-semibold text-coffee-700 dark:text-coffee-300 hover:underline">See all industries</Link>
+          {" "}or{" "}
+          <Link href="/contact" className="font-semibold text-coffee-700 dark:text-coffee-300 hover:underline">tell us about your business</Link>.
+        </p>
       </SectionWrapper>
 
       {/* Services */}
