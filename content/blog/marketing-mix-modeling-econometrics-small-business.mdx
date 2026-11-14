@@ -1,0 +1,365 @@
+---
+title: "Marketing Mix Modeling for Small Business: Guide"
+seoTitle: "Marketing Mix Modeling for Small Business: Guide"
+date: "2026-11-14"
+lastModified: "2026-11-14"
+description: "Marketing mix modeling for small business: 2+ years of daily data, 4-8 weeks of modeling, and the lighter holdout tests to try first."
+author: "Nataliia"
+category: "Analytics & Measurement"
+tags: ["marketing mix modeling", "incrementality", "econometrics", "geo holdout", "attribution"]
+slug: "marketing-mix-modeling-econometrics-small-business"
+image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&auto=format&fit=crop"
+readTime: "26 min read"
+---
+
+Marketing mix modeling (MMM) is a statistical analysis of historical sales and marketing activity that estimates how much extra revenue each channel produced. One guide calls it [privacy-friendly and data-driven](https://facebookexperimental.github.io/Robyn/docs/analysts-guide-to-MMM/). For most small businesses it is the wrong first tool. It wants at least [2 years of daily sales data](https://www.attnagency.com/blog/ctv-attribution-incrementality) (secondary), and a simple holdout test answers the "does this channel work" question faster.
+
+<StatRow values="2+ years|$100K+|20+|4-8 weeks" labels="Daily sales history MMM needs|Monthly spend for a powered geo test|Matched market pairs in a geo test|Modeling step in a first MMM" subs="Attn Agency guide (secondary)|Attn Agency guide (secondary)|Attn Agency guide (secondary)|Robyn analyst's guide" trends="neutral|neutral|neutral|neutral" />
+
+## Key findings
+
+- MMM is defined in the [Robyn analyst's guide](https://facebookexperimental.github.io/Robyn/docs/analysts-guide-to-MMM/) as a statistical analysis that quantifies the incremental sales impact and ROI of marketing and non-marketing activities.
+- The same guide gives typical first-study timings of 1-2 weeks for scoping, 4-6 weeks for data collection, 1-2 weeks for data review, 4-8 weeks for modeling and 2-4 weeks for analysis and recommendations.
+- One [vendor guide](https://www.attnagency.com/blog/ctv-attribution-incrementality) (secondary) says an MMM needs daily sales data for 2+ years.
+- The same guide says a geo-holdout test typically needs $100K+ monthly spend for statistical power, 20+ matched market pairs and 6-12 weeks of runtime.
+- In one streaming-TV geo holdout cited by [Adwave](https://adwave.com/resources/cross-channel-attribution-measuring-tv) (secondary), roughly half of the conversions the ad platform claimed were incremental.
+- MMM can be built in-house, bought as SaaS or bought from a third-party vendor. The [Robyn guide](https://facebookexperimental.github.io/Robyn/docs/analysts-guide-to-MMM/) says vendors usually cost the most.
+- A [fitness app guide](https://adwave.com/resources/fitness-app-advertising) (secondary) advises planning for 30-50% of conversions to be unattributed because of iOS attribution limits.
+
+<BigStat value="~50%" label="In one streaming TV geo holdout, roughly half of the conversions the ad platform claimed were actually incremental" note="Measured incrementality research as retold by Adwave. One test, one channel: not a universal ratio." source="Adwave, Cross-channel attribution: what it shows and misses, 17 October 2026 (secondary)" />
+
+## What is marketing mix modeling, and what does it promise?
+
+The [Robyn guide](https://facebookexperimental.github.io/Robyn/docs/analysts-guide-to-MMM/) describes MMM as a "privacy-friendly, highly resilient, data-driven statistical analysis" of the incremental sales impact and ROI of marketing and non-marketing activities. Two phrases matter for a small business. "Non-marketing" means things like seasonality or price changes can sit in the same model. "Incremental" means the aim is sales caused by marketing, not sales that merely sat near an ad.
+
+MMM works on aggregated totals, such as weekly spend by channel against weekly sales. It does not follow individual people. That is why the guide calls it privacy-friendly: no cookie, device ID or click path is required. This makes it sturdy when tracking breaks, and it explains why the method returns whenever platforms lose signal.
+
+The promise is a budget answer. A well-run model should say how much of last year's sales each channel contributed and what a shifted dollar might return. The sources used here do not describe the mathematics, and a small business does not need to master it. What matters is the cost of getting the inputs right, which the later sections price in weeks and data.
+
+Econometrics is the umbrella term for this family of methods: statistics applied to economic data to separate cause from coincidence. In marketing, that means asking whether sales rose because spend rose, or because spring arrived, or because a competitor closed. The method needs variation: periods when spend went up, down or stopped. A business that spends the same amount every week gives the model little to learn from.
+
+<Callout type="tip" title="A working definition">
+MMM answers "how much did each channel add to sales over the past period" using totals. Attribution answers "which touchpoint gets credit for this one conversion" using individual paths. They are different questions, and a small business often only needs the second to be less wrong.
+</Callout>
+
+For the broader measurement picture, [advertising effectiveness measurement for small business](/blog/advertising-effectiveness-measurement-small-business) lays out the options from simple to advanced.
+
+## How is MMM different from attribution?
+
+Attribution assigns credit to touchpoints inside a customer's path. Google's documentation, as relayed by [Adwave](https://adwave.com/resources/cross-channel-attribution-measuring-tv) (secondary), says data-driven attribution is now the default for most conversion actions in Google Ads. Google Analytics 4 lists three models in its Attribution reports: data-driven attribution and two last-click models. Every one of these models starts from tracked conversions.
+
+That starting point is the weakness. Tracked conversions include people who would have bought anyway. A platform can legitimately report a conversion that an ad did not cause. The geo holdout cited above is the reminder: roughly half of what one platform claimed was incremental, which means the other half was credit for sales that would have occurred regardless.
+
+Attribution windows add a second distortion. The [Attn Agency guide](https://www.attnagency.com/blog/ctv-attribution-incrementality) (secondary) lists primary windows by category: 14 days for beauty and skincare, 21 days for apparel and 30 days for home and garden. A short window credits only the quick buyers, a long window credits ads that may have had nothing to do with the sale.
+
+<BarChart title="Primary attribution window by category, days" labels="Beauty and skincare|Apparel|Home and garden" values="14|21|30" unit=" days" maxValue="35" caption="Industry benchmarks listed by Attn Agency, a vendor guide (secondary). Three categories only; local service businesses are not covered." />
+
+The same guide shows how weighting inside a window changes credit. One schedule gives a CTV conversion 100% value on day 1, 50% on day 3, 25% on day 7 and 12.5% on day 14. Another linear example reaches 0% on day 14. Two decay shapes from one page produce different answers for the same sales, which shows that attribution rests on modeller choices.
+
+<AreaChart title="Time-decay credit for one CTV conversion, by day since ad" labels="Day 1|Day 3|Day 7|Day 14" values="100|50|25|12.5" unit="%" xTitle="Days since the ad" caption="Schedule published by Attn Agency (secondary). A second example on the same page uses a linear decay that reaches 0% on day 14." />
+
+MMM sidesteps paths but pays elsewhere: it needs long history and offers coarse answers by channel and week. Neither approach settles causation alone. Experiments (holdouts, geo tests) are the closest thing to a controlled answer, and the strongest setups combine all three. The [cross-channel attribution guide](/blog/cross-channel-attribution-tv-local-business) shows what attribution reports capture and miss for local TV.
+
+<BigStat value="30-50%" label="Plan for roughly a third to a half of conversions being unattributed because of iOS attribution limits" note="Advice for fitness apps, not a measured industry average." source="Adwave, Fitness app advertising guide (secondary)" />
+
+## What data and history does MMM need?
+
+The [Attn Agency guide](https://www.attnagency.com/blog/ctv-attribution-incrementality) (secondary) puts the requirement plainly: daily sales data for 2+ years. That one line rules out most startups younger than two years, and any business whose sales records sit in a drawer rather than a spreadsheet.
+
+The [Robyn guide](https://facebookexperimental.github.io/Robyn/docs/analysts-guide-to-MMM/) treats data work as the heart of an MMM study. It calls data collection "one of the most important but time consuming steps" and data review "one of the most important steps", giving 4-6 weeks and 1-2 weeks respectively for a first study. Data, not modeling, is where small teams stall.
+
+In practical terms, the inputs fall into three groups. Outcome data is sales, orders, bookings or leads, by day. Marketing data is spend and activity by channel, by day or week. Context data covers anything else that moves sales: promotions, price changes, holidays, weather, openings and closures. The guide's definition includes "non-marketing activities", so context belongs in the dataset.
+
+Each group has a typical small-business problem:
+
+- Sales sit in a point-of-sale system with no clean export, or change structure mid-history.
+- Spend sits across card statements, agency invoices and platform dashboards that do not reconcile.
+- Context lives in nobody's notes: when a promotion started, when hours changed, when a nearby road closed.
+
+Data quality decides the outcome more than the modeling tool. Missing days, double-counted orders and undocumented promotions all produce confident but wrong channel estimates. The 1-2 week data review step in the guide exists to catch these before modeling begins.
+
+Variation matters too, though the sources here do not quantify it. A channel never switched off, or never changed in size, leaves the model nothing to compare. Businesses that always spend the same amount on the same channels may learn little from MMM. Running a deliberate test, such as pausing a channel in some areas, creates the variation both MMM and holdouts rely on.
+
+<ProjectionChart title="Months until a young business has 24 months of daily sales history (assumption)" months="24" start="6" rates="1" rateLabels="Months of history added per month" targets="24" targetLabels="2+ years of daily sales (Attn Agency, secondary)" />
+
+The chart assumes a startup with 6 months of clean daily sales today. It reaches the 2-year bar at month 18, which is a calendar wait, not a modeling choice.
+
+<BigStat value="2+ years" label="A marketing mix model needs daily sales data going back at least two years" note="Requirement stated in the MMM section of one vendor guide, aimed at DTC brands with large CTV budgets." source="Attn Agency, CTV attribution and incrementality guide (secondary)" />
+
+## How long does an MMM study take?
+
+The Robyn guide lists approximate timings per step. It adds that these are typical when running a first study and can be shortened for refresh models or by the method of implementation, such as in-house versus partner. The ranges are the best sourced picture of effort available.
+
+| Step | Typical duration, first study |
+|---|---|
+| Define business questions and scope | 1-2 weeks |
+| Data collection | 4-6 weeks |
+| Data review | 1-2 weeks |
+| Modeling | 4-8 weeks (depends on MMM scope) |
+| Analysis and recommendations | 2-4 weeks |
+
+Adding the ends of each range gives 12 weeks at the fastest and 22 weeks at the slowest. That is arithmetic on the guide's figures, not a figure the guide states. The sum matters because it is a quarter to half a year of work before a first decision, and the result describes the past.
+
+<ColumnChart title="Upper end of each MMM step, weeks (first study)" labels="Scoping|Data collection|Data review|Modeling|Analysis" values="2|6|2|8|4" highlights="Modeling" caption="Upper bounds of the ranges in the Robyn analyst's guide. Lower bounds are 1, 4, 1, 4 and 2 weeks. Typical first-study timings, shortened for refresh models." />
+
+Two points follow for a small business. First, most of the time is not modeling: collection, review and scoping together span 6-10 weeks, and a business without tidy records pays most of that time. Second, a refresh is cheaper than a first study, so a model only pays off if it will be rerun on a rhythm, not built once and shelved.
+
+Compare that with a holdout test. Per [Adwave](https://adwave.com/resources/cross-channel-attribution-measuring-tv) (secondary), a test typically takes several weeks, long enough to cover the lag between seeing an ad and buying. The Attn Agency guide sets 6-12 weeks as the minimum for a geo-holdout. Even the slow end of a holdout is shorter than a first MMM, and it answers one question causally instead of many questions loosely.
+
+<BigStat value="4-8 weeks" label="Modeling alone takes one to two months in a first study, before data collection and review are counted" note="Range depends on MMM scope. Data collection adds 4-6 weeks and review 1-2 weeks." source="Robyn, An Analyst's Guide to MMM" />
+
+## Which MMM routes exist: DIY, SaaS or a vendor?
+
+The Robyn guide says there are three widely accepted methods to implement an MMM: DIY, SaaS and third-party vendors. The guide itself comes from the open-source Robyn project, so it is the one open-source option the sources name, and it frames DIY as a route requiring in-house analysts and time.
+
+The guide's comparison of routes has two usable lines. Working with a third-party vendor can allow comparison of results with benchmarks, depending on the vendor. Vendors also charge a fee and are usually the most expensive option compared with the others. The guide does not give a price, and none is invented here.
+
+A vendor-side example shows where the market is heading. Universal Ads' partner announcement ([secondary](https://www.universalads.com/blog/expanded-business-partners-program)) names six new partners as of 2 September 2026: Adrsta, Fospha, Lemonlight, M-Squared, Northbeam and Stella. Fospha is described as bringing daily media mix modeling. M-Squared's causal framework combines MMM, incrementality testing and geospatial analysis. Stella is described as purpose-built for ecommerce and retail brands, combining incrementality testing, MMM and causal analysis for CTV spend.
+
+Those descriptions are marketing copy from a platform's partner program, not independent evaluations. They do show a pattern: vendors increasingly sell MMM bundled with experiments, which echoes the case for combining methods. Pricing, minimum spend and data requirements are not stated in the announcement, so nothing about affordability for a local business can be read from it.
+
+A sensible way to think about the routes:
+
+- DIY suits a team with an analyst who can clean data and interpret model output. It costs time rather than fees.
+- SaaS suits a team that wants a managed interface but still owns its data.
+- A vendor suits a business that has budget, history and no analyst, and wants benchmarks and a report it can act on.
+
+None of these removes the 2-year data bar. The route changes who does the work, not whether the work is needed.
+
+<StackedBar title="Early-stage fitness app paid budgets, shares of the upper monthly ranges" rows="Upper range, $20,000 total" segments="Apple Search Ads ($5,000)|Google App Campaigns ($5,000)|Meta ($10,000)" matrix="25,25,50" caption="Upper ends of the early-stage ranges in Adwave's fitness app guide (secondary): Apple $1,000-$5,000, Google $500-$5,000, Meta $1,000-$10,000 a month. Sum of ranges: $2,500-$20,000. Shares are derived arithmetic." />
+
+The ranges above matter for the verdict. An early-stage app following that guide spends roughly $2,500 to $20,000 a month across three paid channels. That sits well below the $100K+ monthly spend the Attn Agency guide says a geo-holdout needs, and well below the $50K+ monthly CTV spend at which it says incrementality becomes critical.
+
+<BigStat value="$100K+" label="A geo-holdout typically needs more than $100,000 of monthly spend to have enough statistical power" note="Stated for CTV tests by a vendor with DTC clients. Smaller advertisers should expect noisier results." source="Attn Agency, CTV attribution and incrementality guide (secondary)" />
+
+## What are incrementality tests, and how do geo holdouts work?
+
+An incrementality test asks one causal question: how many sales would not have happened without the ads? It answers by withholding ads from some people or places and comparing them with people or places that still see ads. The [Adwave](https://adwave.com/resources/cross-channel-attribution-measuring-tv) article (secondary) recommends running a geo or holdout test long enough to cover the normal sales cycle.
+
+The [Attn Agency guide](https://www.attnagency.com/blog/ctv-attribution-incrementality) (secondary) gives the most detailed design in the sources, written for CTV:
+
+- Choose 20+ matched market pairs.
+- Pause or reduce advertising by 50-80% in the control group.
+- Run for 6-12 weeks minimum for statistical significance.
+- Ensure sufficient statistical power, which it says typically needs $100K+ monthly spend.
+- Determine statistical significance with a p-value below 0.05.
+
+Matched pairs mean two markets that look alike before the test, so a difference afterwards is more likely to come from the ads. For a business with one location, the matching problem is acute: there may be no 20 pairs to draw from. A single-city coffee shop cannot run this design as written.
+
+A lighter variant exists in the sources' language. A "holdout" can be a time-based or audience-based withholding rather than 20 matched cities. The 20+ pairs and $100K+ figures come from a CTV guide for large DTC brands, so they describe a rigorous end of the range, not a minimum for every test. What carries across scales is the logic: a comparison group, a runtime that covers the buying lag and a rule decided before looking at results.
+
+Match quality matters because cross-device measurement is imperfect. The same guide puts typical deterministic cross-device match rates at 40-60%, probabilistic at 60-80% and a combined approach at 70-85%. These apply to linking devices for ad exposure, which is why exposure-based tests lose some people.
+
+<Heatmap title="Typical cross-device match rates, percent" rows="Deterministic|Probabilistic|Combined" cols="Low end|High end" matrix="40,60;60,80;70,85" units="%|%" caption="Ranges stated by Attn Agency (secondary). Applies to linking devices for CTV measurement." />
+
+<BigStat value="20+" label="A geo-holdout design starts with at least twenty matched market pairs" note="Control markets have CTV paused or cut by 50-80% for 6-12 weeks. Design is for large DTC advertisers." source="Attn Agency, CTV attribution and incrementality guide (secondary)" />
+
+## How do exposure-level tests and platform lift experiments fit in?
+
+Geo tests are not the only experiment. The same guide describes an audience-segment test that groups people by how many ads they saw each week: heavy exposure is 8+ impressions per person per week, medium is 4-7 and light is 1-3. The test asks whether results improve as exposure rises, which hints at diminishing returns and a sensible frequency.
+
+<ColumnChart title="Exposure tiers in the audience segment test, lower bound of impressions per person per week" labels="Light|Medium|Heavy" values="1|4|8" caption="Tiers defined by Attn Agency (secondary): light 1-3, medium 4-7, heavy 8 or more. Lower bounds shown." />
+
+A daypart test is another small design. The guide's example cuts late-night CTV spend (11 PM to 1 AM) by 50%. It is a cheap way to see whether a slice of spend matters.
+
+Platforms offer their own versions. The [Adwave](https://adwave.com/resources/cross-channel-attribution-measuring-tv) FAQ recommends a Lift experiment over assisted conversions when a user needs to measure incremental impact. A lift experiment keeps a holdout group inside the platform. Its advantage is convenience: no matching, no geography. Its limit is that the platform runs the test on its own data, so independence is partial.
+
+The same page describes a platform-versus-sales reconciliation check that takes about ten minutes. The idea is to compare what a platform claims with actual sales over the same period. A big gap is not proof of failure, but it flags where a deeper test is warranted. The full steps are on the source page and are not reproduced here.
+
+For TV and other offline-ish channels, [footfall attribution](/blog/footfall-attribution-store-visits-local-business) and [brand lift studies](/blog/brand-lift-studies-small-advertisers) cover related measurement for local advertisers. For smaller digital changes, [A/B testing for local business](/blog/a-b-testing-for-local-business) shows how to run simple comparisons without a geo design.
+
+<BigStat value="10 minutes" label="A reconciliation of platform-reported conversions against actual sales can be done in about ten minutes" note="A sanity check, not an incrementality test. Steps are described on the source page." source="Adwave, Cross-channel attribution: what it shows and misses (secondary)" />
+
+## How do the main measurement methods compare?
+
+The table lines up each method against what it needs. Entries rely on the figures above; where a source gives no number, the cell says so.
+
+| Method | Question it answers | Needs | Time | Main limit |
+|---|---|---|---|---|
+| Platform or GA4 attribution | Which tracked touchpoint gets credit | Tracking in place | Immediate | Credits sales that would have occurred anyway |
+| Reconciliation check | Do platform claims match sales | Sales records and platform reports | About 10 minutes | Flags gaps, does not prove cause |
+| Platform lift experiment | Incremental effect inside one platform | A platform that offers it | Several weeks | The platform measures its own ads |
+| Geo-holdout | Incremental effect by region | 20+ matched pairs, $100K+ monthly spend (vendor guide) | 6-12 weeks | Hard for single-location businesses |
+| Audience exposure test | Response at light, medium, heavy exposure | Frequency data per person | Weeks | Needs person-level exposure data |
+| DIY MMM | Contribution of each channel over time | 2+ years of daily sales, analyst time | 12-22 weeks, first study | Heavy data work, past-looking |
+| SaaS MMM | Same, with a managed tool | Same data, subscription | Not stated | Price not in sources |
+| Vendor MMM | Same, with benchmarks | Same data, fee | Not stated | Usually most expensive route |
+
+The table shows no free lunch. Cheap methods (attribution, reconciliation) give weaker causal answers. The most causal method (geo-holdout) assumes scale and geography a small business may lack. MMM needs the most history.
+
+The routes are complements, not rivals. The vendor language quoted earlier, from M-Squared and Stella, pairs MMM with incrementality testing for that reason. A holdout result can calibrate a model, and a model can show where a holdout is worth running.
+
+<ScoreBreakdown title="Illustrative MMM readiness by business type, points out of 30 (assumption)" rows="Coffee shop|Salon|Pet groomer|Fitness studio|Startup" parts="Sales history|Spend scale|Test feasibility" matrix="6,2,4;6,2,4;5,2,4;6,3,5;3,4,6" caption="Scores are assumptions to illustrate trade-offs, not measurements. Higher means closer to being ready for MMM. Test feasibility rises where markets or audiences can be split." />
+
+## When does a small business need MMM, and when not?
+
+Verdict first: most small businesses do not need MMM. It earns its keep when a business spends across several channels at a scale where a wrong budget split costs real money, has at least two years of clean daily sales, can afford 12-22 weeks of work or a vendor fee and will rerun the model.
+
+The strongest sourced thresholds point to scale. The Attn Agency guide says DTC brands investing $50K+ monthly in CTV need to prove incrementality and true attribution to scale profitably. It adds that its guide rests on $75M+ in annual CTV spend across 200+ DTC campaigns, which is the vendor's own experience and not third-party data. A business spending a few thousand dollars a month sits far from that world.
+
+Signs that MMM is premature:
+
+- Less than two years of daily sales history, or sales data that cannot be exported by day.
+- Spend concentrated in one or two channels, with no variation to learn from.
+- No analyst and no budget for a vendor.
+- A single location, where geo splits and matched pairs are not available.
+
+Signs that MMM is worth scoping:
+
+- Several paid channels plus offline activity, each claiming credit.
+- Meaningful seasonality or promotions that confuse channel reports.
+- Annual budget large enough that a 10% reallocation would pay for the study. This is a decision rule, not a sourced figure.
+- Platform reports and bank deposits keep disagreeing.
+
+Even then, consider the sequence. A reconciliation check costs about ten minutes. A single holdout costs weeks. A first MMM costs roughly a quarter to half a year. The cheaper steps often reveal that the problem is not channel mix at all but tracking, offers or capacity. The [local marketing budget guide](/blog/local-marketing-budget-guide) covers how to set spend before measurement gets complex.
+
+<Callout type="warning" title="Avoid buying MMM to fix thin data">
+A model built on a thin or inconsistent history produces confident-looking channel numbers that rest on little. A refusal to model, until data is clean, is a legitimate outcome of the 1-2 week data review step.
+</Callout>
+
+## If budget is X, which method fits?
+
+The table maps budget and data situations to a starting method. Dollar thresholds that appear in the sources are cited; the rest are decision rules, flagged as judgement.
+
+| Situation | Start with | Why |
+|---|---|---|
+| Spend of a few thousand dollars a month, any history | Reconciliation check, then simple on/off tests ([A/B testing guide](/blog/a-b-testing-for-local-business)) | Early-stage app guides plan $500-$10,000 a month per channel (secondary); a powered geo test is out of reach |
+| Several channels, spend rising, under 2 years of data | Platform lift experiments plus clean daily record-keeping | Builds toward the 2-year history while testing now |
+| Spend near $50K a month on one channel | Geo or holdout test | The vendor guide says incrementality matters at this level (secondary) |
+| $100K+ a month, 20+ comparable markets | Geo-holdout as designed (6-12 weeks) | Stated power threshold (secondary) |
+| 2+ years of daily data, multi-channel, analyst available | DIY MMM, e.g. the Robyn open-source route | Matches the data bar; costs time, not fees |
+| 2+ years of data, no analyst, meaningful budget | Vendor or SaaS MMM | Vendor route is usually most expensive but brings benchmarks |
+| Under 2 years of data, large budget | Holdout tests now, MMM later | History cannot be rushed |
+
+Judgement call: if the cost of a vendor MMM would exceed what a 10% budget shift could plausibly save in a year, skip it. The sources give no price, so the comparison has to be made on actual quotes.
+
+<BigStat value="$50K+" label="DTC brands investing $50,000 or more a month in CTV need to prove incrementality to scale profitably" note="Claim from a vendor with $75M+ in annual CTV spend experience; not a universal threshold." source="Attn Agency, CTV attribution and incrementality guide (secondary)" />
+
+## Worked example: a startup compares a holdout with platform reports
+
+All inputs below are assumptions chosen to show the arithmetic. They are not benchmarks and do not describe a real company.
+
+Assumed startup: a subscription fitness app spending $20,000 a month on paid social. That figure is the top of the combined early-stage ranges in the [fitness app guide](https://adwave.com/resources/fitness-app-advertising) (secondary). The platform reports 400 paid subscribers a month, so the platform cost per subscriber is $50 (assumption), inside the $20-$120 range that guide gives for Meta. The founders suspect part of this is organic demand being claimed by ads.
+
+Assumed test: an 8-week holdout in which ads are cut by 70% in about half of the regions. The Attn Agency guide uses 50-80% cuts, a 6-12 week range and a p-value threshold below 0.05, so the design sits within those bounds, although the matching and power requirements ($100K+ monthly, 20+ pairs) cannot be met at this spend. The read will be noisy.
+
+Assumed result: the holdout implies that about half of platform-reported subscribers were incremental, mirroring the one finding in [Adwave's retelling](https://adwave.com/resources/cross-channel-attribution-measuring-tv) (secondary) but not predicted by it. That means 200 incremental subscribers on $20,000, an incremental cost of $100 per subscriber, double the platform figure.
+
+<StackedBar title="Platform report vs holdout read, paid subscribers per month (assumption)" rows="Platform report (assumption)|Holdout read (assumption)" segments="Incremental|Not incremental" matrix="400,0;200,200" caption="Assumed inputs: $20,000 monthly spend, 400 platform-reported subscribers, a holdout implying 200 incremental. Platform row shows all 400 as claimed." />
+
+What the founders do with this:
+
+1. Compare $100 incremental cost with the lifetime value of a subscriber. If the app's retention and revenue cannot support $100, cut or restructure spend. The sourced claim that a user with 7-day retention is worth 5-10x a user with 1-day retention (secondary) suggests retention data matters here, but it is a vendor claim.
+2. Treat the 50% as a rough estimate with wide error, since power is limited at this spend. Rerun in another quarter before large budget moves.
+3. Record daily subscribers and spend by channel from now on. At 6 months of history today, the 2-year MMM bar arrives in 18 months (see the projection above).
+4. Avoid paying for an MMM yet. Spend is a fraction of the $50K+ and $100K+ levels in the vendor guides.
+
+The example also shows a risk. If the real incremental share were 80%, cutting spend on the strength of a noisy test would lose subscribers. Decisions after a small test should be staged: cut a slice, watch, then cut again. The [guide on when to pause an ad campaign](/blog/when-to-pause-ad-campaign-local-business) covers staged decisions.
+
+## What should each type of business do?
+
+The playbooks below are judgement built on the sourced thresholds, not sourced statistics. None of these businesses is likely to reach the $100K+ monthly spend cited for a powered geo test, so each plays down the model and plays up simple comparisons.
+
+**Coffee shop.** Sales are daily and POS data is usually exportable, which is the hard part of MMM, so keep the export. Marketing is mostly Google Business Profile, local social and some paid. Run a simple on/off test: pause a paid campaign for several weeks, covering the normal sales cycle ([Adwave](https://adwave.com/resources/cross-channel-attribution-measuring-tv), secondary), and compare sales against the same period earlier. Skip MMM. Use [call tracking](/blog/call-tracking-small-business-compared) and review counts as supporting signals.
+
+**Salon.** Bookings are the outcome, and booking software holds the history. Referral and walk-in traffic are hard to attribute. Use a "how did you hear about us" prompt at booking, and reconcile it with ad platform claims using the ten-minute check. A holdout can be run by pausing ads for one service line. MMM is premature.
+
+**Pet groomer.** Single location, local search, repeat clients. The main question is whether paid ads add bookings beyond search and reviews. Pause one paid channel for several weeks and compare bookings. The groomer's [local SEO](/blog/seo-for-local-service-businesses) and [review management](/blog/review-management-software-small-business-compared) are likely stronger levers than any model.
+
+**Fitness studio.** Sign-ups spike seasonally; the fitness-app guide says January is the peak month for fitness app installs at 3-5x baseline (secondary), and a studio likely sees something similar, though that is an inference. Seasonality is exactly what MMM would handle and what simple before/after tests would mistake for ad effects. Compare against the same month last year, and keep a log of promotions.
+
+**Startup.** The most MMM-ready on spend and the least on history. Follow the worked example: log daily sales and spend now, run a holdout, repeat every quarter and revisit MMM when two years of data exist. A startup whose spend crosses $50K a month on one channel should treat incrementality testing as a priority.
+
+<Callout type="example" title="Common thread">
+Across all five, the first step is the same: a clean daily record of sales and spend by channel. It is free, it takes minutes a week and every method above depends on it.
+</Callout>
+
+See also [multi-channel advertising for local business](/blog/multi-channel-advertising-local-business) for how channels interact, and [local lead generation](/blog/local-lead-generation-small-business) for the offer side that no model fixes.
+
+## What is a 90-day plan for measuring marketing properly?
+
+The plan assumes no MMM is bought. It builds the data and the habit of testing that make a later MMM possible. Week counts for holdouts follow the "several weeks" and 6-12 week figures in the sources; the rest is a suggested schedule.
+
+| Weeks | Action | Output |
+|---|---|---|
+| 1-2 | Export sales by day for as long as records exist. List every channel and its monthly spend. Note promotions, price changes and closures. | One clean spreadsheet |
+| 1-2 | Run the platform-versus-sales reconciliation check (about 10 minutes) | A list of channels where claims exceed sales |
+| 3-4 | Check [GA4 setup](/blog/google-analytics-4-for-small-business) and conversion definitions. Understand [sessions versus clicks](/blog/sessions-vs-clicks-whats-the-difference) | Consistent conversion tracking |
+| 3-4 | Pick one channel for a holdout. Decide the comparison group and the success rule before starting | A written test plan |
+| 5-12 | Run the holdout for at least several weeks, covering the normal sales cycle. Keep other changes minimal | Incremental estimate with a stated uncertainty |
+| 9-12 | Read the result, cut or hold budget in stages, document the decision | A reallocation decision |
+| 12-13 | Decide: repeat the test elsewhere, scope an MMM, or keep building history | Next-quarter plan |
+
+Two cautions. If the plan uses view-through numbers, read [view-through versus click-through conversions](/blog/view-through-vs-click-through-conversions-local-business) first, since window choices change the totals. And do not change offers, prices or creative mid-test unless the plan records it, since a change muddies what the test measures.
+
+At day 90 the business has a documented answer for one channel, a clean dataset and a record of how decisions were made. That is more than many MMM engagements start with.
+
+## Which metrics belong in a measurement tracker?
+
+A tracker keeps the plan honest. These columns suit a spreadsheet updated weekly. Use sourced benchmarks only as context.
+
+| Metric | Why track it | Note |
+|---|---|---|
+| Daily sales or bookings | The outcome every method needs | Keep for 2+ years toward MMM readiness |
+| Spend by channel by week | The main input to MMM and holdouts | Reconcile to card statements |
+| Platform-reported conversions | Shows claimed credit | Compare with sales; gaps flag over-claiming |
+| Share unattributed | Shows tracking loss | One app guide plans for 30-50% unattributed (secondary) |
+| Incremental conversions from tests | The causal estimate | Record test dates and design |
+| Cost per incremental conversion | The decision metric | Compare with platform cost per conversion |
+| Context log | Explains spikes and dips | Promotions, closures, price changes, weather |
+| Test confidence | Prevents over-reading | Note p-value rule if used (below 0.05 in the vendor design) |
+| Attribution window used | Keeps comparisons fair | Windows in the sources range 14-30 days by category |
+
+One discipline: write the decision rule before the result arrives. For example, "if incremental cost per conversion exceeds the value of a customer, cut spend by a third". Rules written after results tend to confirm what the team already believed.
+
+Review the tracker monthly, and compare channel-level incremental cost with platform-level cost once a test has run. The gap, if large, is the finding to act on. The [Performance Max guide](/blog/google-performance-max-for-local-business-complete-guide-2026) discusses how automated campaigns can blur channel reporting, which makes holdouts more valuable there.
+
+## What this guide cannot tell you
+
+The sources are a mix of one open-source analyst's guide and several vendor blogs. That shapes what can and cannot be said.
+
+- **Prices.** None of the sources gives a price for DIY, SaaS or vendor MMM. Only the ordering is stated: vendors are usually the most expensive. Quotes must come from the vendors.
+- **Accuracy.** No source here measures how accurate MMM is, or how often it agrees with holdout tests. The claim that platform reporting often shows 40-70% lower CTV conversions than reality is an unsourced claim in a vendor guide, and it points the opposite way from the one holdout finding that roughly half of claimed conversions were incremental. Neither is a general rule.
+- **Small-business thresholds.** The $50K+, $100K+ and 20+ pair figures come from a guide for large DTC brands. Whether a smaller test can be informative at lower spend is not covered, and results will be noisier.
+- **Local businesses.** The sources contain no case study of a coffee shop, salon, groomer or studio running MMM. The playbooks above are reasoned from thresholds, not from observed results.
+- **Vendor quality.** The partner list in the Universal Ads announcement is a platform's own description of partners. It is not a review, and listing a name here is not a recommendation.
+- **Model mechanics.** The sources do not explain the statistics inside an MMM, how to choose variables or how to validate output. A reader attempting DIY would need further technical material.
+- **Predictions.** Nothing here predicts what a given business would find. The worked example is an assumption set.
+
+Seasonality, competitor action and supply limits can all swamp measured effects. A test that coincides with a heatwave, a road closure or a stock-out will be misread by any method. Keep the context log.
+
+If the measurement setup itself is unclear, a short review of tracking and conversion data usually beats buying a model. [DataLatte analytics services](/services/analytics) cover that groundwork, and the [free audit](/free-audit) is a low-effort way to see where the gaps are.
+
+## FAQ
+
+### What is marketing mix modeling in simple terms?
+
+It is a statistical analysis of past sales and marketing activity that estimates how much each channel added to sales. The [Robyn guide](https://facebookexperimental.github.io/Robyn/docs/analysts-guide-to-MMM/) describes it as privacy-friendly and data-driven, covering marketing and non-marketing factors. It works on aggregated totals, not individual customer paths.
+
+### How much data does a small business need for MMM?
+
+One vendor guide ([secondary](https://www.attnagency.com/blog/ctv-attribution-incrementality)) says daily sales data for 2+ years. The Robyn guide gives 4-6 weeks for data collection and 1-2 weeks for data review in a first study, so preparing the data is a major part of the work.
+
+### Is MMM or an incrementality test better for a small business?
+
+For most small businesses an incrementality test, even a simple on/off holdout, answers a narrower question faster. A first MMM takes roughly 12-22 weeks by adding the Robyn guide's step ranges, while a test takes several weeks per [Adwave](https://adwave.com/resources/cross-channel-attribution-measuring-tv) (secondary). MMM suits multi-channel spenders with two years of data.
+
+### How is MMM different from attribution?
+
+Attribution credits touchpoints on tracked paths, such as the data-driven model that is the default for most Google Ads conversion actions. MMM estimates channel contribution from aggregate totals over time. Attribution can credit sales that would have happened anyway, which is what holdouts and MMM try to separate.
+
+### Can a single-location business run a geo holdout?
+
+Not as the vendor guide designs it. That design uses 20+ matched market pairs, 50-80% ad reductions in control markets, 6-12 weeks and $100K+ monthly spend (all [secondary](https://www.attnagency.com/blog/ctv-attribution-incrementality)). A single location can instead pause one channel for several weeks and compare against a prior period, accepting noisier results.
+
+### Is there a free MMM option?
+
+The sources name Robyn, the open-source project behind the analyst's guide, as the DIY route. Software cost aside, DIY still takes analyst time and the 2-year data bar. Vendors charge a fee and are usually the most expensive option, per the same guide.
+
+## Sources
+
+- [An Analyst's Guide to MMM, Robyn](https://facebookexperimental.github.io/Robyn/docs/analysts-guide-to-MMM/)
+- [Connected TV Attribution and Incrementality: Complete Measurement Guide for DTC Brands, Attn Agency](https://www.attnagency.com/blog/ctv-attribution-incrementality) (secondary)
+- [Expanded Business Partners Program, Universal Ads](https://www.universalads.com/blog/expanded-business-partners-program) (secondary)
+- [Cross-channel attribution: what it shows and misses, Adwave](https://adwave.com/resources/cross-channel-attribution-measuring-tv) (secondary)
+- [Fitness app advertising, Adwave](https://adwave.com/resources/fitness-app-advertising) (secondary)

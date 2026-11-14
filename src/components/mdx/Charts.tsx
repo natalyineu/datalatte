@@ -24,9 +24,22 @@ function Frame({ title, caption, children }: { title?: string; caption?: string;
 }
 
 /* 1. Vertical columns (histograms) */
+function wrapLabel(text: string, maxChars: number, maxLines = 4): string[] {
+  const words = text.split(" "), lines: string[] = [];
+  let cur = "";
+  for (const w of words) {
+    if ((cur + " " + w).trim().length <= maxChars) cur = (cur + " " + w).trim();
+    else { if (cur) lines.push(cur); cur = w; }
+  }
+  if (cur) lines.push(cur);
+  if (lines.length > maxLines) { const k = lines.slice(0, maxLines); k[maxLines - 1] = k[maxLines - 1].slice(0, Math.max(1, maxChars - 1)) + "…"; return k; }
+  return lines;
+}
 export function ColumnChart({ lang, title, labels, values, unit = "", highlights = "", caption }: { lang?: string; title?: string; labels: string; values: string; unit?: string; highlights?: string; caption?: string }) {
   const L = list(labels), V = nums(values), H = new Set(list(highlights));
-  const max = Math.max(...V) * 1.15, W = 600, Ht = 250, pad = { l: 8, r: 8, t: 22, b: 44 };
+  const W = 600, bw0 = (W - 16) / L.length, maxChars = Math.max(8, Math.floor((bw0 * 0.9) / 6.4));
+  const nLines = Math.max(1, ...L.map((l) => wrapLabel(l, maxChars).length));
+  const max = Math.max(...V) * 1.15, Ht = 220 + nLines * 15, pad = { l: 8, r: 8, t: 22, b: 14 + nLines * 15 };
   const bw = (W - pad.l - pad.r) / L.length;
   return (
     <Frame title={title} caption={caption}>
@@ -42,7 +55,7 @@ export function ColumnChart({ lang, title, labels, values, unit = "", highlights
             <g key={l}>
               <rect x={x} y={y} width={w} height={h} rx={6} fill={hot ? "#6B3F1F" : "#C07A45"} opacity={hot ? 1 : 0.85} className="mdx-col-grow" style={{ animationDelay: `${i * 70}ms` }} />
               <text x={x + w / 2} y={y - 6} textAnchor="middle" className="fill-gray-800 dark:fill-gray-100" fontSize="13" fontWeight="700">{fmt(V[i], unit, lang)}</text>
-              <text x={x + w / 2} y={Ht - pad.b + 18} textAnchor="middle" className="fill-gray-600 dark:fill-gray-300" fontSize="12">{l}</text>
+              <text x={x + w / 2} y={Ht - pad.b + 18} textAnchor="middle" className="fill-gray-600 dark:fill-gray-300" fontSize="12">{wrapLabel(l, maxChars).map((ln, k) => (<tspan key={k} x={x + w / 2} dy={k === 0 ? 0 : 14}>{ln}</tspan>))}</text>
             </g>
           );
         })}
@@ -120,7 +133,7 @@ export function Heatmap({ lang, title, rows, cols, matrix: m, units = "", captio
   return (
     <Frame title={title} caption={caption}>
       <div className="overflow-x-auto">
-        <div className="grid gap-1 min-w-[460px]" style={{ gridTemplateColumns: `72px repeat(${C.length}, minmax(0,1fr))` }}>
+        <div className="grid gap-1 min-w-[340px]" style={{ gridTemplateColumns: `104px repeat(${C.length}, minmax(0,1fr))` }}>
           <div />
           {C.map((c) => (<div key={c} className="px-1 pb-1 text-center text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">{c}</div>))}
           {R.map((r, i) => (
