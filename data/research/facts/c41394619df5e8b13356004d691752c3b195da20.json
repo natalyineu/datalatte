@@ -1,0 +1,104 @@
+{
+ "url": "https://support.google.com/analytics/answer/10596866",
+ "title": "Get started with attribution - Analytics Help",
+ "hash": "8fe6d43e6c5ee2ca48f1e142d4719787ae977706",
+ "fetchedAt": "2026-11-14",
+ "facts": [
+  {
+   "fact": "Google Analytics Attribution reports offer 3 attribution models: data-driven attribution, paid and organic last click, and Google paid channels last click.",
+   "value": "3",
+   "unit": "models",
+   "as_of": "",
+   "quote": "There are 3 attribution models available in the Attribution reports in Google Analytics properties:",
+   "topic": "definition"
+  },
+  {
+   "fact": "All attribution models in Google Analytics exclude direct visits from receiving attribution credit, unless the path to a key event consists entirely of direct visits.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "All attribution models exclude direct visits from receiving attribution credit, unless the path to key event consists entirely of direct visits.",
+   "topic": "rules"
+  },
+  {
+   "fact": "In data-driven attribution, conversions can be reattributed for up to 7 days after the conversion.",
+   "value": "7",
+   "unit": "days",
+   "as_of": "",
+   "quote": "Conversions can be reattributed for up to 7 days after the conversion.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The first click, linear, time decay, and position-based attribution models were no longer available as of November 2023.",
+   "value": "November 2023",
+   "unit": "date",
+   "as_of": "November 2023",
+   "quote": "The first click, linear, time decay, and position-based attribution models are no longer available as of November 2023.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Under Google's definition, an engaged view in data-driven attribution is counted when a user watches an ad for 30 seconds (or until the end if the ad is less than 30 seconds).",
+   "value": "30",
+   "unit": "seconds",
+   "as_of": "",
+   "quote": "Watches an ad for 30 seconds (or until the end if it is less than 30 seconds)",
+   "topic": "definition"
+  },
+  {
+   "fact": "The paid and organic last click model ignores direct traffic and attributes 100% of the key event value to the last channel the customer clicked through before converting.",
+   "value": "100",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Ignores direct traffic and attributes 100% of the key event value to the last channel that the customer clicked through",
+   "topic": "definition"
+  },
+  {
+   "fact": "The Google paid channels last click model attributes 100% of the key event value to the last Google Ads channel clicked before converting, and falls back to paid and organic last click if there is no Google Ads click in the path.",
+   "value": "100",
+   "unit": "%",
+   "as_of": "",
+   "quote": "Attributes 100% of the key event value to the last Google Ads channel that the customer clicked through before converting.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Paid and organic last click and Last non-direct click are two names for the same attribution model.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "are two names for the same attribution model.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Each data-driven attribution model is specific to each advertiser and each key event.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "is specific to each advertiser and each key event.",
+   "topic": "definition"
+  },
+  {
+   "fact": "The data-driven attribution model incorporates factors such as time from key event, device type, number of ad interactions, order of ad exposure, and type of creative assets.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "The model incorporates factors such as time from key event, device type, number of ad interactions, the order of ad exposure, and the type of creative assets.",
+   "topic": "definition"
+  },
+  {
+   "fact": "Depending on data availability, data-driven attribution models may use aggregate data from Data sharing settings.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Depending on data availability, data-driven attribution models may leverage aggregate data from",
+   "topic": "rules"
+  },
+  {
+   "fact": "A user must have the Marketer role or above at the property level in Google Analytics to select attribution settings.",
+   "value": "Marketer",
+   "unit": "role",
+   "as_of": "",
+   "quote": "at the property level to select the attribution settings.",
+   "topic": "rules"
+  }
+ ]
+}

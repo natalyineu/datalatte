@@ -1,0 +1,104 @@
+{
+ "url": "https://mcpservers.org/servers/redhat-ai-tools/slack-mcp",
+ "title": "Slack MCP Server | Awesome MCP Servers",
+ "hash": "bbce4cc532259125c630344b5e27298b4e0b5a5e",
+ "fetchedAt": "2026-11-12",
+ "facts": [
+  {
+   "fact": "The slack-mcp server provides 21+ tools for Slack interaction, according to the page.",
+   "value": "21+",
+   "unit": "tools",
+   "as_of": "",
+   "quote": "It provides 21+ tools for comprehensive Slack interaction:",
+   "topic": "definition"
+  },
+  {
+   "fact": "The page states that the Slack-reading feature 'List unread direct messages with read markers' works only with browser-session auth and uses Slack's client.counts endpoint, which is not part of the public Web API.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "List unread direct messages with read markers (browser-session auth only; uses Slack's `client.counts` endpoint, which is not part of the public Web API)",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page lists these OAuth scopes for the bot-token setup: channels:read, channels:history, channels:manage, groups:read, groups:history, groups:write, chat:write, reactions:read, reactions:write, search:read, users:read, commands, mpim:write.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Add OAuth scopes: `channels:read`, `channels:history`, `channels:manage`, `groups:read`, `groups:history`, `groups:write`, `chat:write`, `reactions:read`, `reactions:write`, `search:read`, `users:read`, `commands`, `mpim:write`",
+   "topic": "rules"
+  },
+  {
+   "fact": "When SLACK_BOT_TOKEN and SLACK_XOXC_TOKEN/SLACK_XOXD_TOKEN are both set, the bot token takes precedence.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "If both `SLACK_BOT_TOKEN` and `SLACK_XOXC_TOKEN`/`SLACK_XOXD_TOKEN` are set, the bot token takes precedence.",
+   "topic": "rules"
+  },
+  {
+   "fact": "LOGS_CHANNEL_ID is optional; when it is omitted, tool activity is written to stderr instead of being posted to Slack.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "`LOGS_CHANNEL_ID` is optional. When omitted, tool activity is written to **stderr** instead of posted to Slack.",
+   "topic": "rules"
+  },
+  {
+   "fact": "Read-only mode is enabled by setting SLACK_MCP_READ_ONLY to a truthy value of 1, true, yes, or on (case-insensitive), or by passing --read-only at startup.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "set `SLACK_MCP_READ_ONLY` to a truthy value (`1`, `true`, `yes`, or `on`, case-insensitive).",
+   "topic": "rules"
+  },
+  {
+   "fact": "In read-only mode, the tools post_message, send_dm, post_command, add_reaction, and join_channel raise an error.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "tools that mutate Slack state (`post_message`, `send_dm`, `post_command`, `add_reaction`, `join_channel`) raise a clear error.",
+   "topic": "rules"
+  },
+  {
+   "fact": "The setup script's --refresh-tokens flag re-extracts tokens when they expire and skips all other setup steps.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Re-extract tokens when they expire (skips all other steps)",
+   "topic": "rules"
+  },
+  {
+   "fact": "The Linux desktop-app token refresh script requires python3, python3-cryptography, secret-tool (libsecret/gnome-keyring), curl, and jq.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "**Requirements:** `python3`, `python3-cryptography`, `secret-tool` (libsecret/gnome-keyring), `curl`, `jq`",
+   "topic": "rules"
+  },
+  {
+   "fact": "By default, the desktop-app token refresh script writes tokens to ~/.local/share/slack-mcp/tokens.env.",
+   "value": "~/.local/share/slack-mcp/tokens.env",
+   "unit": "file path",
+   "as_of": "",
+   "quote": "(default: `~/.local/share/slack-mcp/tokens.env`)",
+   "topic": "rules"
+  },
+  {
+   "fact": "The page states that this is not an official Red Hat tool.",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "Disclaimer: This is not an official Red Hat tool.",
+   "topic": "other"
+  },
+  {
+   "fact": "The page gives two setup-script URLs that point to different GitHub organizations: one under redhat-ai-tools (the listing's GitHub link) and one under redhat-community-ai-tools (the setup script).",
+   "value": "",
+   "unit": "",
+   "as_of": "",
+   "quote": "python3 <(curl -fsSL https://raw.githubusercontent.com/redhat-community-ai-tools/slack-mcp/main/scripts/setup-slack-mcp.py)",
+   "topic": "other"
+  }
+ ]
+}
