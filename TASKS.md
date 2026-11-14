@@ -5,7 +5,7 @@
 - GSC: re-check rewritten/reopened articles ~2 weeks after the next deploy.
 - Cafés in Poznań: replies to cold emails (mark `skip` on "nie").
 - Link purchase #1: Collaborator deal 2858455, ranktracker.com, status "New task" (2026-11-12). When published: send the URL, check dofollow + both anchors, then log it in `docs/LINK-PURCHASES.md`. Details and plan there.
-- Link purchases #2 and #3 on PRNEWS.io, both "On review" (2026-11-12): #551109 Home Business Magazine Mention (up to 10 business days) → ctv-advertising-platforms-compared-2026; #551110 Rrankvise Article (up to 5 business days) → digital-audio-advertising page. Check dofollow and anchors after publication, log in `docs/LINK-PURCHASES.md`.
+- Link purchases #2 and #3 on PRNEWS.io, both "On review" (2026-11-12): #551109 Home Business Magazine Mention (up to 10 business days) → ctv-advertising-platforms-compared-2026; #551110 Rrankvise Article is PUBLISHED (2026-11-14, link to local-seo-audit-tool-review verified, see docs). Check dofollow and anchors after publication, log in `docs/LINK-PURCHASES.md`.
 
 ## Next (one stage at a time)
 - FAQ for ~55 older posts without an FAQ section (sourced from the article text).
