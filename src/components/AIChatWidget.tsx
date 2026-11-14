@@ -206,7 +206,32 @@ export default function AIChatWidget() {
 
   useEffect(() => { if (open) { setPulse(false); setUnread(0); } }, [open]);
   useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages, loading]);
-  useEffect(() => { if (open) setTimeout(() => inputRef.current?.focus(), 150); }, [open]);
+  useEffect(() => {
+    // Focus the input only on desktop: on phones it pops the keyboard and hides the chat
+    if (open && window.matchMedia("(min-width: 768px)").matches) setTimeout(() => inputRef.current?.focus(), 150);
+  }, [open]);
+
+  // Back button / Escape close the chat instead of leaving the page
+  const pushedRef = useRef(false);
+  useEffect(() => {
+    if (!open) return;
+    window.history.pushState(null, "", window.location.href);
+    pushedRef.current = true;
+    const onPop = () => { pushedRef.current = false; setOpen(false); };
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") closeChat(); };
+    window.addEventListener("popstate", onPop);
+    window.addEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("popstate", onPop);
+      window.removeEventListener("keydown", onKey);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+
+  function closeChat() {
+    if (pushedRef.current) { pushedRef.current = false; window.history.back(); }
+    setOpen(false);
+  }
 
   async function send(text: string) {
     const trimmed = text.trim();
@@ -270,7 +295,7 @@ export default function AIChatWidget() {
         </AnimatePresence>
 
         <motion.button
-          onClick={() => setOpen(v => { if (!v) gtag.chatWidgetOpened(); return !v; })}
+          onClick={() => { if (open) closeChat(); else { gtag.chatWidgetOpened(); setOpen(true); } }}
           className="relative w-10 h-10 md:w-11 md:h-11 bg-coffee-700/85 hover:bg-coffee-800 rounded-full shadow-md hover:shadow-lg transition-all flex items-center justify-center opacity-80 hover:opacity-100"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -304,12 +329,25 @@ export default function AIChatWidget() {
         )}
       </div>
 
-      {/* ── Chat panel ── */}
+      {/* ── Mobile backdrop: tap outside to close ── */}
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed bottom-24 left-4 sm:left-6 z-50 w-[calc(100vw-32px)] sm:w-[400px] flex flex-col bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden dark:bg-gray-900 dark:border-gray-700"
-            style={{ maxHeight: "min(580px, calc(100vh - 110px))" }}
+            className="fixed inset-0 z-40 bg-black/40 md:hidden"
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            onClick={closeChat}
+            aria-hidden="true"
+          />
+        )}
+      </AnimatePresence>
+
+      {/* ── Chat panel (bottom sheet on phones) ── */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            role="dialog"
+            aria-label="Chat with Latte"
+            className="fixed inset-x-0 bottom-0 z-50 w-full max-h-[82dvh] md:max-h-[580px] md:inset-x-auto md:bottom-24 md:left-6 md:w-[400px] flex flex-col bg-white rounded-t-2xl md:rounded-2xl shadow-2xl border border-gray-100 overflow-hidden dark:bg-gray-900 dark:border-gray-700"
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
@@ -328,8 +366,15 @@ export default function AIChatWidget() {
                 <p className="font-bold text-white text-sm leading-tight">Latte</p>
                 <p className="text-coffee-200 text-[11px]">AI Marketing Consultant · Usually replies instantly</p>
               </div>
-              <button onClick={reset} title="New conversation" className="text-coffee-200 hover:text-white transition-colors p-1">
-                <RotateCcw size={14} />
+              <button onClick={reset} title="New conversation" aria-label="New conversation" className="text-coffee-200 hover:text-white transition-colors p-2">
+                <RotateCcw size={16} />
+              </button>
+              <button
+                onClick={closeChat}
+                aria-label="Close chat"
+                className="flex items-center gap-1.5 shrink-0 rounded-full bg-white/20 hover:bg-white/30 active:bg-white/40 text-white pl-3 pr-2.5 h-10 text-sm font-semibold transition-colors"
+              >
+                Close <X size={18} aria-hidden="true" />
               </button>
             </div>
 
