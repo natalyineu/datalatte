@@ -22,7 +22,7 @@ HARD RULES
 COMPONENT CATALOG (props and rules):
 ${COMPONENTS}`;
 async function call(model, user) {
-  const r = await fetch("https://openrouter.ai/api/v1/chat/completions", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ model, messages: [{ role: "system", content: SYS }, { role: "user", content: user }], max_tokens: 20000, temperature: 0.4, usage: { include: true } }), signal: AbortSignal.timeout(1200000) });
+  const r = await fetch("https://openrouter.ai/api/v1/chat/completions", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ model, messages: [{ role: "system", content: SYS }, { role: "user", content: user }], max_tokens: 24000, temperature: 0.4, reasoning: { effort: "low" }, usage: { include: true } }), signal: AbortSignal.timeout(1200000) });
   const j = await r.json(); if (!j.choices?.[0]?.message?.content) throw new Error("empty " + JSON.stringify(j).slice(0, 160)); if (j.choices[0].finish_reason !== "stop") console.error("finish", j.choices[0].finish_reason, j.usage?.completion_tokens); console.error("tokens in", j.usage?.prompt_tokens, "out", j.usage?.completion_tokens); return { text: j.choices[0].message.content, cost: j.usage?.cost || 0, fin: j.choices[0].finish_reason };
 }
 fs.mkdirSync("data/triage/research", { recursive: true }); let total = 0;
