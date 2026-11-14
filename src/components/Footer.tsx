@@ -73,7 +73,7 @@ export default function Footer() {
               <span className="text-coffee-400 text-2xl leading-none">☕</span>
             </Link>
             <p className="text-sm leading-relaxed max-w-xs mb-6">
-              Data-driven local marketing for the businesses that make our neighborhoods great.
+              Data-driven marketing for local businesses, startups and growing brands.
               Brew up better results — without the guesswork.
             </p>
             <div className="space-y-3">

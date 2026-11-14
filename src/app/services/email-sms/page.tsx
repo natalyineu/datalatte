@@ -14,10 +14,10 @@ export const metadata: Metadata = {
   },
   title: "Email & SMS Marketing for Local Businesses",
   description:
-    "Email and SMS marketing for coffee shops, salons, pet groomers, and fitness studios. Build a list, stay top of mind, and turn one-time visitors into loyal regulars.",
+    "Email and SMS marketing for local businesses, startups and growing brands. Build a list, stay top of mind, and turn one-time visitors into loyal regulars.",
   openGraph: {
     title: "Email & SMS Marketing for Local Businesses",
-    description: "Email and SMS marketing for coffee shops, salons, pet groomers, and fitness studios. Build a list, stay top of mind, and turn one-time visitors into loyal regulars.",
+    description: "Email and SMS marketing for local businesses, startups and growing brands. Build a list, stay top of mind, and turn one-time visitors into loyal regulars.",
     url: "https://datalatte.pro/services/email-sms",
     siteName: "DataLatte",
     type: "website",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Email & SMS Marketing for Local Businesses",
-    description: "Email and SMS marketing for coffee shops, salons, pet groomers, and fitness studios. Build a list, stay top of mind, and turn one-time visitors into loyal regulars.",
+    description: "Email and SMS marketing for local businesses, startups and growing brands. Build a list, stay top of mind, and turn one-time visitors into loyal regulars.",
   },
 };
 

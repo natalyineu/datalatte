@@ -43,7 +43,7 @@ const PL = {
 const EN = {
   badge: "Data-Driven Local Marketing",
   h1: ["Digital Marketing for", "Local Businesses,", "Done Right"],
-  p: "Google Ads, Meta Ads, local SEO and marketing automation for coffee shops, hair salons, pet groomers, fitness studios — and growing brands at any scale.",
+  p: "Google Ads, Meta Ads, local SEO and marketing automation for local businesses of every kind — cafés, salons, clinics, studios — plus startups, freelancers and growing brands at any scale.",
   cta: "Get a Free Marketing Audit", ctaHref: "/free-audit",
   how: "See how it works",
   built: <>Built for <strong className="text-white">local businesses</strong> across 4 niches</>,

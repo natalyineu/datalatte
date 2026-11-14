@@ -299,7 +299,7 @@ export default async function BlogPage({
               <span className="gradient-text">explained plainly</span>
             </h1>
             <p className="section-subtitle">
-              Practical tips for coffee shops, hair salons, pet groomers, and fitness studios.
+              Practical marketing guides for local businesses, startups and growing brands.
               No jargon. No fluff. Just tactics that work.
             </p>
           </div>

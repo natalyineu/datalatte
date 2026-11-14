@@ -16,11 +16,12 @@
 - **Auto-deploy**: Every push to `main` → live on datalatte.pro
 
 ## 🎯 Target Audience
-Local small business owners in the US, UK, Australia, Canada, and other English-speaking markets:
-- ☕ Coffee shops & cafés
-- 💇 Hair & beauty salons / barbershops / spas
-- 🐾 Pet groomers, dog walkers & vets
-- 🏋️ Fitness & yoga studios / gyms / personal trainers
+Local businesses, startups and growing brands in the US, UK, Australia, Canada and other English-speaking markets (not only four niches; /for hub lists all 18 industry pages, source of truth `src/lib/segments.ts`):
+- ☕💇🐾🏋️ Core local niches: coffee shops & cafés, hair/beauty salons & barbershops, pet groomers, fitness & yoga studios
+- 🍽️🦷🧼🔧⚡ Other local services: restaurants, dentists, cleaning, plumbers, electricians, nail salons
+- 🚀 Startups, freelancers & consultants, real estate agents
+- 📈 Growing/mid-market businesses, multi-location, enterprise & agencies
+Positioning: "Data-Driven Marketing for Local Businesses & Startups". Partners shown in "Brands we work with" strip (`src/components/PartnerStrip.tsx`).
 
 ## 🛠️ Core Services Offered
 1. Google Ads
